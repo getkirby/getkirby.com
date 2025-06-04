@@ -96,7 +96,7 @@ A tags field stores all selected values in a comma separated list (`value1, valu
 
 ```php
 <ul>
-  <?php foreach ($page->categories()->split() as $category): ?>
+  <?php foreach ($page->tags()->split() as $category): ?>
   <li><?= $category ?></li>
   <?php endforeach ?>
 </ul>
@@ -106,7 +106,7 @@ If you use another separator than the default comma, you have to pass this separ
 
 ```php
 <ul>
-  <?php foreach ($page->categories()->split('|') as $category): ?>
+  <?php foreach ($page->tags()->split('|') as $category): ?>
   <li><?= $category ?></li>
   <?php endforeach ?>
 </ul>

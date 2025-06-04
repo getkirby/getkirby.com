@@ -57,7 +57,7 @@ When creating your own entry, include an `icon` and `label` as well as a `link`.
 return [
   'panel' => [
     'menu' => [
-      'site'
+      'site',
       'notes' => [
         'icon'  => 'pen',
         'label' => 'Notes',

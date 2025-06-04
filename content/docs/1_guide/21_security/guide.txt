@@ -193,6 +193,16 @@ Use very long passwords for the connection to your server and for your Panel log
 
 The Panel also has a built-in **brute-force protection** for the Panel login. It will delay requests with invalid credentials and also block access to the Panel by IP address and by user after 10 login failures within an hour. You can change these defaults with the (link: docs/reference/system/options/auth text: auth options). Please note that Kirby can't protect your SFTP/SSH accounts, also brute-force attacks are only hindered and not prevented entirely. So it's always important to use strong passwords.
 
+## Disable the Vue template compiler
+
+We are in the active process of migrating the Kirby Panel to Vue 3 (with the plan to ship Vue 3 in Kirby 6.0). Until this process is complete, sites with increased security requirements should use the Vue 2 runtime version, which omits the vulnerable Vue template compiler.
+
+In its default configuration, Kirby enables the template compiler, as it is needed for all Panel plugins that have not been precompiled. It is also used for the examples in the Panel lab environment.
+
+<since v="4.7">
+Kirby 4.7 introduces a new `panel.vue.compiler` option that can be set to `false` to disable the template compiler and switch to the Vue 2 runtime version. We recommend to set this option to `false` if your site and the installed plugins do not rely on the Vue template compiler. Should you require the template compiler and are not affected by its [known vulnerabilities](https://www.herodevs.com/vulnerability-directory?framework=Vue+2), you can set the option to `true` to make the warning in the Panel go away. Do this at your own risk!
+</since>
+
 ## Secure data in Git repositories
 
 ### `.gitignore /site/accounts`
@@ -212,7 +222,11 @@ config.mysite.com.php
 
 ## Filter and sanitize inputs
 
-If you work with forms or any other kind of user-generated content on your site, you have to make sure to properly **filter and sanitize any user input**. Even though Kirby does not use a database system and SQL injections are therefore not possible, an attacker could still add malicious input to your text files in order to try to manipulate your site.
+If you work with forms or any other kind of user-generated content on your site, you have to make sure to properly **filter and sanitize any user input**. All data coming from the request could be manipulated by an attacker. Vulnerable ways of processing user input can cause many different types of vulnerabilities.
+
+### Filter and sanitize content to be stored
+
+Even though Kirby does not use a database system and SQL injections are therefore not possible, an attacker could still add malicious input to your text files in order to try to manipulate your site.
 
 You can find more about (link: docs/reference#validators text: Kirby's input validators) in the Reference. They are a good start to check incoming user data. Additionally you should read more about PHP's (link: https://www.php.net/manual/en/book.filter.php text: input filtering functions).
 
@@ -223,6 +237,18 @@ You can find more about (link: docs/reference#validators text: Kirby's input val
 - `$kirby->users()->create()`
 - `$user->update()`
 - `$file->update()`
+
+### Filter and sanitize properties of virtual content
+
+With (link: docs/guide/virtual-content text: virtual content), it is possible to construct page, file and user objects on the fly based on dynamic or external data. This system allows for very flexible and advanced setups and enables integrations between the Kirby core and custom code.
+
+However, keep in mind that Kirby treats a virtual model just like a real model. Properties you set on virtual models are processed by the Kirby core and are used to generate responses for your templates and routes. Therefore you should only pass values as properties to a virtual model that come from a trusted source (like a database under your control) or that have been filtered or sanitized to prevent attacks by malicious actors.
+
+An example for a risk is an attack vector called "path traversal" that allows attackers to access files on your server that should normally not be accessible. You can protect against this attack vector by restricting dynamic user-controlled values for path values to a safe character set (for example by excluding the `/` and `\` characters). This includes the following fields:
+
+- the `filename` of `File` objects,
+- the `num`, `slug`, `dirname`, `root` and `template` of `Page` objects and
+- the `id` of `User` objects.
 
 ## Escape content in your templates and snippets
 

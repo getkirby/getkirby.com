@@ -49,7 +49,7 @@ The upload dialog allows you to preview and edit the filenames of the files to u
 
 (image: uploader.png)
 
-In your file blueprints, you can also set (link: docs/reference/panel/blueprints/file#optimize-uploaded-images-create text: options for optimizing uploaded files). These options will be applied directly after upload, and they are a great way to avoid huge original files in the content folder.
+In your file blueprints, you can also set (link: docs/reference/panel/blueprints/file#optimize-uploaded-images-create text: options for optimizing uploaded files). These options will be applied directly after upload, and they are a great way to avoid huge original files in the content folder, to normalize file formats or to prevent leakage of personal information from image metadata.
 
 ## File blueprints
 

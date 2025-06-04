@@ -14,7 +14,7 @@
 							<?= $release->versionField() ?>
 
 							<?php if ($release->prerelease()->isNotEmpty()): ?>
-							<span class="color-gray-600">Beta</span>
+								<span class="color-gray-600"><?= $release->prerelease() ?></span>
 							<?php endif ?>
 						</h2>
 					</header>

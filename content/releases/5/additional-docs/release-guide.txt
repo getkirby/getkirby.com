@@ -54,6 +54,20 @@ The `$model` value is set to the `File` object when generating a media token for
 </since>
 ```
 
+### Config reference for `content.fileRedirects` option
+
+(link: /docs/reference/system/options/content)
+
+- Change the default to `false`
+- Change the first config example to set `true`
+- New alert box right after the first config example:
+    
+```html
+<alert>
+Setting the option to `true` allows all visitors to download the uploaded file originals in full quality and resolution and with all metadata that the file carries. This can be a copyright, privacy or information security concern. Only set the option to `true` if none of your files require access protection.
+</alert>
+```
+
 ## Cookbook
 
 - New site controller logic replaces the need for <https://getkirby.com/docs/cookbook/development-deployment/shared-controllers>.

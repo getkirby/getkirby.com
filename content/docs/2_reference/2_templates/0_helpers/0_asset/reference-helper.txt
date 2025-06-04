@@ -1,3 +1,11 @@
+Text:
+
+<warning>
+The `asset()` helper has access to the entire file system of your server as it is meant for flexible use and the provided paths can therefore not be validated by Kirby. Be careful about passing dynamic paths to it (especially paths that can be controlled from the request), as this may cause unexpected behavior or be abused by attackers.
+</warning>
+
+----
+
 Examples:
 
 ```php

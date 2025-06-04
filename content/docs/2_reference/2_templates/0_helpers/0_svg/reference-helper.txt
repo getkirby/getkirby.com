@@ -2,6 +2,10 @@ Text:
 
 (screencast: https://www.youtube.com/watch?v=3ioaFfgDRDE title: Working with SVG text: Kirby has a few useful helpers to load and embed logos and icons in your site.)
 
+<warning>
+The `svg()` helper has access to the entire file system of your server as it can receive an absolute file path. Be careful about passing dynamic paths to it (especially paths that can be controlled from the request), as this may cause unexpected behavior or be abused by attackers.
+</warning>
+
 ## With `$file` object
 
 In addition to a string parameter you can also add a file object:

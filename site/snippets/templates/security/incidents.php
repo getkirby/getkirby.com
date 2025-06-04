@@ -40,7 +40,10 @@
 			</td>
 			<td class="whitespace-nowrap">
 				<?php if (empty($incident['cvss']) === false): ?>
-				<a href="https://www.first.org/cvss/calculator/<?= str_replace('.', '-', Str::between($incident['cvss'], ':', '/')) ?>#<?= $incident['cvss'] ?>"><?= $incident['severity'] ?></a>
+				<a href="https://www.first.org/cvss/calculator/<?= str_replace('.', '-', Str::between($incident['cvss'], ':', '/')) ?>#<?= $incident['cvss'] ?>">
+					<?= $incident['severity'] ?>
+					<?php if (empty($incident['score']) === false): ?>(<?= $incident['score'] ?>)<?php endif ?>
+				</a>
 				<?php else: ?>
 				<?= $incident['severity'] ?>
 				<?php endif ?>

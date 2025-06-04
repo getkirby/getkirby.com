@@ -31,7 +31,7 @@ class ReleasesPage extends DefaultPage
 				$releases[] = Str::after($release['ref'], 'refs/tags/');
 			}
 
-		} catch (InvalidArgumentException) {
+		} catch (Throwable) {
 			// no GitHub API key is available
 			return [];
 		}

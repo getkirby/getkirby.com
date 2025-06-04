@@ -63,7 +63,7 @@ To easily loop through your entries and retrieve each entry as field object, you
 
 ```php
 <ul>
-  <?php foreach ($page->myEntries()->toEntries() as $entry): ?>
+  <?php foreach ($page->entries()->toEntries() as $entry): ?>
     <li><?= $entry->upper() ?></li>
   <?php endforeach ?>
 </ul>

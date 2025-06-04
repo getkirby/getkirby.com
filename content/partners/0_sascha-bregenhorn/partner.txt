@@ -36,30 +36,14 @@ Languages: German, English
 
 Description:
 
-I am a full-time designer & developer running a one-man independent studio near Münster, Germany. I offer **web design**, **web development** and also **graphic design** services.
+I am a full-time designer and developer running a one-person independent studio near Münster, Germany. I offer **web design**, **web development**, and also **graphic design** services.
 
-Kirby CMS is my first choice since v1. With v3 in 2019 I stopped offering other content management systems to my clients and started working *exclusively* with Kirby CMS.
+With over **25 years of experience** in the industry—as an intern, employee, employer, freelancer, business owner, and entrepreneur—I’ve worn many different hats. Although I now focus primarily on design and development, my clients benefit from my broad understanding of the industry’s various fields and perspectives.
 
-## Services
+Kirby CMS has been my first choice since version 1. With the release of version 3 in 2019, I stopped offering other content management systems and now work **exclusively** with Kirby CMS.
 
-### Digital
-- Web Design
-- Frontend Development
-- Backend Development
-- Onpage SEO
-
-### Graphic Design
-- Logos
-- Typography
-- Stationary
-- Posters
-- Packaging
-- Editorial
-
-### With Partners
-- Film & Motion
-- Photography
-- Illustration
+**Interested?**
+Take a look at my website and drop me a line: <hi@n2.studio>. I’m excited to hear about your project!
 
 ----
 

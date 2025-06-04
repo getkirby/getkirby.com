@@ -70,6 +70,7 @@ return [
 				$message     = $product->revenueLimit();
 				$passthrough = new Passthrough(
 					discounts:    $price->discounts(),
+					newsletter:   $newsletter,
 					donationOrg:  option('buy.donation.charity'),
 					teamDonation: option('buy.donation.teamAmount') * $quantity
 				);
@@ -100,7 +101,6 @@ return [
 					'customer_country'  => $country,
 					'customer_email'    => $email,
 					'customer_postcode' => $postalCode,
-					'marketing_consent' => $newsletter ? 1 : 0,
 					'passthrough'       => $passthrough,
 					'prices'            => $prices,
 					'quantity'          => $quantity,

@@ -19,26 +19,25 @@ return [
         'pages' => [
 					'label'  => 'Pages',
 					'icon'   => 'page',
-					'query'  => function (string $query, int $limit = 10) {
-            $results = [];
-            $pages   = site()->search($query)->limit($limit);
+					'query'  => function (string|null $query, int $limit, int $page) {
+            $pages = site()->search($query)->paginate($limit, $page);
 
-            foreach ($pages as $page) {
-                $results[] = [
-                    'text'  => $page->title()->value(),
-                    'link'  => $page->panel()->url(),
-                    'info'  => $page->id(),
-                    'image' => $page->panel()->image()
-                ];
-            }
-
-            return $results;
+            return [
+							'results' => $pages->values(fn ($page) => [
+								'image' => $page->panel()->image(),
+								'text' => Escape::html($page->title()->value()),
+								'link' => $page->panel()->url(true),
+								'info' => Escape::html($page->id()),
+								'uuid' => $page->uuid()?->toString(),
+							]),
+							'pagination' => $pages->pagination()->toArray()
+						];
         }
     ]
 ];
 ```
 
-In Vue, the search can then be exectued like this:
+In Vue, the search can then be executed like this:
 
 ```js
 const results = await this.$search('pages');
@@ -55,6 +54,7 @@ A Panel search extension returns results as a simple array with parameters for e
 | `info` | `string` | Optional info text on the right |
 | `link` | `string` | The url/path which will be visited on click |
 | `text` | `string` | The label for the search result |
+| `uuid` | `string` | The UUID of the search result |
 
 ## Custom search type
 
@@ -69,7 +69,7 @@ Kirby::plugin('your-plugin/todos', [
                 'todos' => [
                     'label' => 'Todos',
                     'icon'  => 'check',
-                    'query' => function () {
+                    'query' => function (string|null $query, int $limit, int $page) {
                         // search for $todos here.
                         $results = [];
 
@@ -114,7 +114,7 @@ Kirby::plugin('example/search', [
       return [
         'searches' => [
           'pages' => [
-            'query' => function (string $query) {
+            'query' => function (string|null $query, int $limit, int $page) {
               // run your own search here ...
 
               // example result
@@ -153,13 +153,13 @@ Kirby::plugin('example/search', [
       return [
         'searches' => [
           'pages' => [
-            'query' => function (string $query) use ($kirby) {
+            'query' => function (string|null $query, int $limit, int $page) use ($kirby) {
 
               if ($kirby->user()->isAdmin()) {
                 // return super secret search results for the admin
               }
 
-              return $kirby->core()->area('site')['searches']['pages']['query']($query);
+              return $kirby->core()->area('site')['searches']['pages']['query']($query, $limit, $page);
             }
           ]
         ]

@@ -1,0 +1,67 @@
+Title: Jonas Rebmann
+
+----
+
+Subtitle: Creative Designer & Kirby Developer
+
+----
+
+Plan: regular
+
+----
+
+People: 1
+
+----
+
+Website: https://www.jonasrebmann.de/
+
+----
+
+Location: Bremen, Deutschland
+
+----
+
+Summary: Building custom Kirby websites with a creative focus on telling stories and ideas in engaging and unqiue ways.
+
+----
+
+Discordhandle: jonas_rebmann
+
+----
+
+Languages: German, English
+
+----
+
+Description:
+
+**Hi, I’m Jonas.**
+For over 10 years, I’ve been building custom Kirby websites with a creative focus on telling stories and ideas in engaging and sometimes unexpected ways. The message sticks, helped by the visual language it’s told in.
+
+My projects are easy for everyone to use, thanks to clearly designed user experiences and Kirby backends tailored to each client and their site. I pay close attention to performance, SEO, and clean, efficient code.
+
+As a developer, I always think like a designer, too. Which makes me a strong partner for planning and building bigger projects together.
+
+**Sounds good?**
+Have a look at my website and get in touch! I’m already looking forward to working with you.
+
+----
+
+Expertise:
+
+- Creative Design & Storytelling
+- UI/UX & Interaction Design
+- Web Experiences With Unique Vibes & Aesthetics
+- Custom Kirby Web Development
+- Brand & Communications Design
+- SEO, accessibility & performance built-in
+- Hosting & Support
+
+----
+
+Region: Europe
+
+----
+
+Uuid: CEOhOcAu5eZE0SDo

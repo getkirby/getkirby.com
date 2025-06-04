@@ -475,6 +475,10 @@ return [
 ];
 ```
 
+<warning>
+In this example, we have hardcoded the properties of the `Page` object. This can be useful for fixed pages you don't want to manage via the content folder. However once you start introducing dynamic and especially external data, please ensure that the data is clean to ensure reliability and prevent attacks. With great power comes great responsibility. You can read more about this in our (link: docs/guide/security#filter-and-sanitize-inputs__filter-and-sanitize-properties-of-virtual-content text: security guide).
+</warning>
+
 ## Removing the parent page slug from the URL
 
 Sometimes we want to get rid of part of an URL for cleaner URLs, for example to replace the following URL

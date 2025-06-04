@@ -202,12 +202,12 @@ This is an example of &lpar;glossary: kirbytext) with **benefits**.
 Adds a box with a screencast video:
 
 ```kirbytext
-&lpar;screencast: https://www.youtube.com/watch?v=EDVYjxWMecc title: How to install Kirby in 5 minutes text: We are using PHP's built-in server to create a simple local development environment.)
+&lpar;screencast: https://www.youtube.com/watch?v=us4hwvMJbzs title: How to install Kirby in minutes text: We are using Laravel Herd to create a simple local development environment.)
 ```
 
 #### Example
 
-(screencast: https://www.youtube.com/watch?v=EDVYjxWMecc title: How to install Kirby in 5 minutes text: We are using PHP's built-in server to create a simple local development environment.)
+(screencast: https://www.youtube.com/watch?v=us4hwvMJbzs title: How to install Kirby in minutes text: We are using Laravel Herd to create a simple local development environment.)
 
 ### &lpar;glossary: …)
 

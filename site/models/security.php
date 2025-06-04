@@ -2,14 +2,59 @@
 
 use Kirby\Cms\License;
 use Kirby\Content\Field;
+use Kirby\Github\Github;
+use Kirby\Toolkit\A;
 use Kirby\Toolkit\Collection;
 use Kirby\Toolkit\Str;
 
 class SecurityPage extends DefaultPage
 {
+	/**
+	 * Returns all security advisories in the `getkirby/kirby` GitHub repo
+	 */
 	public function incidents(): array
 	{
-		return array_reverse(parent::incidents()->yaml());
+		$kirby = $this->kirby();
+		$cache = $kirby->cache('github');
+
+		$entry = $cache->get('incidents');
+		if (
+			$entry !== null &&
+			$entry['currentVersion'] === $kirby->version()
+		) {
+			return $entry['incidents'];
+		}
+
+		try {
+			$incidents = [];
+			foreach (Github::request('getkirby/kirby', 'security-advisories')->json() as $advisory) {
+				$cvss = match (true) {
+					$advisory['cvss_severities']['cvss_v4']['score'] !== null => $advisory['cvss_severities']['cvss_v4'],
+					$advisory['cvss_severities']['cvss_v3']['score'] !== null => $advisory['cvss_severities']['cvss_v3'],
+					default => $advisory['cvss']
+				};
+
+				$incidents[] = [
+					'affected'    => Str::replace($advisory['vulnerabilities'][0]['vulnerable_version_range'], [', ', '-'], [' || ', ' - ']),
+					'fixed'       => $advisory['vulnerabilities'][0]['patched_versions'],
+					'description' => $advisory['summary'],
+					'link'        => $advisory['html_url'],
+					'severity'    => $advisory['severity'],
+					'score'       => $cvss['score'],
+					'cve'         => $advisory['cve_id'],
+					'cvss'        => $cvss['vector_string']
+				];
+			}
+		} catch (Throwable) {
+			// no GitHub API key is available
+			return [];
+		}
+
+		$incidents = A::sort($incidents, 'cve', 'desc');
+
+		$cache->set('incidents', ['currentVersion' => $kirby->version(), 'incidents' => $incidents], 10080);
+
+		return $incidents;
 	}
 
 	public function incidentsTable()

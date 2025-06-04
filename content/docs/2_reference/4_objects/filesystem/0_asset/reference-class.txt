@@ -11,6 +11,10 @@ Text:
 
 You can create a new Asset object via the `asset()` helper or via the class constructor:
 
+<warning>
+The `asset()` helper and `Asset` class have access to the entire file system of your server as they are meant for flexible use and the provided paths can therefore not be validated by Kirby. Be careful about passing dynamic paths to it (especially paths that can be controlled from the request), as this may cause unexpected behavior or be abused by attackers.
+</warning>
+
 ### Via the helper
 
 ```php

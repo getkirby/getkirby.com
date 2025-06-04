@@ -75,7 +75,7 @@ class DefaultPage extends Page
 
 ## Page models in the wild
 
-Let's look at a typical use case pf page models: A page model can be used for example to fetch a cover image for a project page. Fetching the right image in the template or snippet can be a couple of lines of code, bloating up your templates and making them harder to read and work with. It is cleaner to seperate this functionality into a page model.
+Let's look at a typical use case of page models: A page model can be used for example to fetch a cover image for a project page. Fetching the right image in the template or snippet can be a couple of lines of code, bloating up your templates and making them harder to read and work with. It is cleaner to seperate this functionality into a page model.
 
 ### The model
 
