@@ -3,13 +3,13 @@
 namespace Kirby\Cms;
 
 use Closure;
+use Kirby\Content\ImmutableMemoryStorage;
 use Kirby\Content\MemoryStorage;
 use Kirby\Content\VersionCache;
 use Kirby\Content\VersionId;
 use Kirby\Exception\DuplicateException;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\LogicException;
-use Kirby\Exception\NotFoundException;
 use Kirby\Filesystem\Dir;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\I18n;
@@ -87,13 +87,14 @@ trait PageActions
 		string|null $languageCode = null
 	): static {
 		// always sanitize the slug
-		$slug = Url::slug($slug);
+		$slug     = Url::slug($slug);
+		$language = Language::ensure($languageCode ?? 'current');
 
 		// in multi-language installations the slug for the non-default
 		// languages is stored in the text file. The changeSlugForLanguage
 		// method takes care of that.
-		if ($this->kirby()->language($languageCode)?->isDefault() === false) {
-			return $this->changeSlugForLanguage($slug, $languageCode);
+		if ($language->isDefault() === false) {
+			return $this->changeSlugForLanguage($slug, $language->code());
 		}
 
 		// if the slug stays exactly the same,
@@ -102,8 +103,14 @@ trait PageActions
 			return $this;
 		}
 
-		$arguments = ['page' => $this, 'slug' => $slug, 'languageCode' => null];
-		return $this->commit('changeSlug', $arguments, function ($oldPage, $slug) {
+		$arguments = [
+			'page'         => $this,
+			'slug'         => $slug,
+			'languageCode' => null,
+			'language'     => $language
+		];
+
+		return $this->commit('changeSlug', $arguments, function ($oldPage, $slug, $languageCode, $language) {
 			$newPage = $oldPage->clone([
 				'slug'     => $slug,
 				'dirname'  => null,
@@ -149,13 +156,7 @@ trait PageActions
 		string $slug,
 		string|null $languageCode = null
 	): static {
-		$language = $this->kirby()->language($languageCode);
-
-		if (!$language) {
-			throw new NotFoundException(
-				message: 'The language: "' . $languageCode . '" does not exist'
-			);
-		}
+		$language = Language::ensure($languageCode ?? 'current');
 
 		if ($language->isDefault() === true) {
 			throw new InvalidArgumentException(
@@ -163,11 +164,23 @@ trait PageActions
 			);
 		}
 
-		$arguments = ['page' => $this, 'slug' => $slug, 'languageCode' => $language->code()];
-		return $this->commit('changeSlug', $arguments, function ($page, $slug, $languageCode) {
+		$arguments = [
+			'page'         => $this,
+			'slug'         => $slug,
+			'languageCode' => $language->code(),
+			'language'     => $language
+		];
+
+		return $this->commit('changeSlug', $arguments, function ($page, $slug, $languageCode, $language) {
 			// remove the slug if it's the same as the folder name
 			if ($slug === $page->uid()) {
 				$slug = null;
+			}
+
+			// make sure to update the slug in the changes version as well
+			// otherwise the new slug would be lost as soon as the changes are saved
+			if ($page->version('changes')->exists($language) === true) {
+				$page->version('changes')->update(['slug' => $slug], $language);
 			}
 
 			return $page->save(['slug' => $slug], $languageCode);
@@ -302,21 +315,24 @@ trait PageActions
 		string $title,
 		string|null $languageCode = null
 	): static {
-		// if the `$languageCode` argument is not set and is not the default language
-		// the `$languageCode` argument is sent as the current language
-		if (
-			$languageCode === null &&
-			$language = $this->kirby()->language()
-		) {
-			if ($language->isDefault() === false) {
-				$languageCode = $language->code();
+		$language = Language::ensure($languageCode ?? 'current');
+
+		$arguments = [
+			'page'         => $this,
+			'title'        => $title,
+			'languageCode' => $languageCode,
+			'language'     => $language
+		];
+
+		return $this->commit('changeTitle', $arguments, function ($page, $title, $languageCode, $language) {
+
+			// make sure to update the title in the changes version as well
+			// otherwise the new title would be lost as soon as the changes are saved
+			if ($page->version('changes')->exists($language) === true) {
+				$page->version('changes')->update(['title' => $title], $language);
 			}
-		}
 
-		$arguments = ['page' => $this, 'title' => $title, 'languageCode' => $languageCode];
-
-		return $this->commit('changeTitle', $arguments, function ($page, $title, $languageCode) {
-			return $page->save(['title' => $title], $languageCode);
+			return $page->save(['title' => $title], $language->code());
 		});
 	}
 
@@ -419,7 +435,7 @@ trait PageActions
 
 		// create the instance without content or translations
 		// to avoid that the page is created in memory storage
-		$page = static::factory([
+		$page = Page::factory([
 			...$props,
 			'content'      => null,
 			'translations' => null
@@ -550,26 +566,35 @@ trait PageActions
 	public function delete(bool $force = false): bool
 	{
 		return $this->commit('delete', ['page' => $this, 'force' => $force], function ($page, $force) {
+			$old = $page->clone();
+
+			// keep the content in iummtable memory storage
+			// to still have access to it in after hooks
+			$page->changeStorage(ImmutableMemoryStorage::class);
+
 			// clear UUID cache
 			$page->uuid()?->clear();
 
 			// delete all files individually
-			foreach ($page->files() as $file) {
+			foreach ($old->files() as $file) {
 				$file->delete();
 			}
 
 			// delete all children individually
-			foreach ($page->children() as $child) {
+			foreach ($old->childrenAndDrafts() as $child) {
 				$child->delete(true);
 			}
 
 			// delete all versions,
 			// the plain text storage handler will then clean
 			// up the directory if it's empty
-			$page->versions()->delete();
+			$old->versions()->delete();
 
-			if ($page->isDraft() === false) {
-				$page->resortSiblingsAfterUnlisting();
+			if (
+				$old->isListed() === true &&
+				$old->blueprint()->num() === 'default'
+			) {
+				$old->resortSiblingsAfterUnlisting();
 			}
 
 			return true;
@@ -742,19 +767,20 @@ trait PageActions
 	 */
 	protected function resortSiblingsAfterListing(int|null $position = null): bool
 	{
-		// get all siblings including the current page
-		$siblings = $this
-			->parentModel()
-			->children()
+		$parent   = $this->parentModel();
+		$siblings = $parent->children();
+
+		// Get all listed siblings including the current page
+		$listed = $siblings
 			->listed()
 			->append($this)
 			->filter(fn ($page) => $page->blueprint()->num() === 'default');
 
-		// get a non-associative array of ids
-		$keys  = $siblings->keys();
+		// Get a non-associative array of ids
+		$keys  = $listed->keys();
 		$index = array_search($this->id(), $keys);
 
-		// if the page is not included in the siblings something went wrong
+		// If the page is not included in the siblings something went wrong
 		if ($index === false) {
 			throw new LogicException(
 				message: 'The page is not included in the sorting index'
@@ -765,8 +791,8 @@ trait PageActions
 			$position = count($keys);
 		}
 
-		// move the current page number in the array of keys
-		// subtract 1 from the num and the position, because of the
+		// Move the current page number in the array of keys.
+		// Subtract 1 from the num and the position, because of the
 		// zero-based array keys
 		$sorted = A::move($keys, $index, $position - 1);
 
@@ -775,11 +801,14 @@ trait PageActions
 				continue;
 			}
 
-			$siblings->get($id)?->changeNum($key + 1);
+			// Apply the new sorting number
+			// and update the new object in the siblings collection
+			$newSibling = $listed->get($id)?->changeNum($key + 1);
+			$siblings->update($newSibling);
 		}
 
-		$parent = $this->parentModel();
-		$parent->children = $parent->children()->sort('num', 'asc');
+		// Update the parent's children collection with the new sorting
+		$parent->children = $siblings->sort('isListed', 'desc', 'num', 'asc');
 		$parent->childrenAndDrafts = null;
 
 		return true;
@@ -792,19 +821,26 @@ trait PageActions
 	{
 		$index    = 0;
 		$parent   = $this->parentModel();
-		$siblings = $parent
-			->children()
+		$siblings = $parent->children();
+
+		// Get all listed siblings excluding the current page
+		$listed = $siblings
 			->listed()
 			->not($this)
 			->filter(fn ($page) => $page->blueprint()->num() === 'default');
 
-		if ($siblings->count() > 0) {
-			foreach ($siblings as $sibling) {
+		if ($listed->count() > 0) {
+			foreach ($listed as $sibling) {
 				$index++;
-				$sibling->changeNum($index);
+
+				// Apply the new sorting number
+				// and update the new object in the siblings collection
+				$newSibling = $sibling->changeNum($index);
+				$siblings->update($newSibling);
 			}
 
-			$parent->children = $siblings->sort('num', 'asc');
+			// Update the parent's children collection with the new sorting
+			$parent->children = $siblings->sort('isListed', 'desc', 'num', 'asc');
 			$parent->childrenAndDrafts = null;
 		}
 

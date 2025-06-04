@@ -19,7 +19,8 @@ use Kirby\Toolkit\Str;
  * @author    Ahmet Bora <ahmet@getkirby.com>
  * @link      https://getkirby.com
  * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
+ * @license   https://getkirby.com/license
+ * @since     5.0.0
  */
 class EntriesField extends FieldClass
 {
@@ -28,6 +29,7 @@ class EntriesField extends FieldClass
 	use Min;
 
 	protected array $field;
+	protected Form $form;
 	protected bool  $sortable = true;
 
 	public function __construct(array $params = [])
@@ -51,19 +53,22 @@ class EntriesField extends FieldClass
 		return $this->form()->fields()->first()->toArray();
 	}
 
-	public function fill(mixed $value = null): void
+	/**
+	 * @psalm-suppress MethodSignatureMismatch
+	 * @todo Remove psalm suppress after https://github.com/vimeo/psalm/issues/8673 is fixed
+	 */
+	public function fill(mixed $value): static
 	{
-		$value = Data::decode($value ?? '', 'yaml');
-		parent::fill($value);
+		$this->value = Data::decode($value ?? '', 'yaml');
+		return $this;
 	}
 
-	public function form(array $values = []): Form
+	public function form(): Form
 	{
-		return new Form([
-			'fields' => [$this->field()],
-			'values' => $values,
-			'model'  => $this->model
-		]);
+		return $this->form ??= new Form(
+			fields: [$this->field()],
+			model: $this->model
+		);
 	}
 
 	public function props(): array
@@ -125,26 +130,36 @@ class EntriesField extends FieldClass
 		];
 	}
 
-	public function toFormValue(bool $default = false): mixed
+	public function toFormValue(): mixed
 	{
-		$value = parent::toFormValue($default) ?? [];
-		$value = A::map(
-			$value,
-			fn ($value) => $this->form([$value])->fields()->first()->toFormValue()
-		);
+		$form  = $this->form();
+		$value = parent::toFormValue() ?? [];
 
-		return Data::decode($value, 'yaml');
+		return A::map(
+			$value,
+			fn ($value) => $form
+				->reset()
+				->fill(input: [$value])
+				->fields()
+				->first()
+				->toFormValue()
+		);
 	}
 
-	public function toStoredValue(bool $default = false): mixed
+	public function toStoredValue(): mixed
 	{
-		$value = parent::toStoredValue($default);
-		$value = A::map(
-			$value,
-			fn ($value) => $this->form([$value])->fields()->first()->toStoredValue()
-		);
+		$form  = $this->form();
+		$value = parent::toStoredValue();
 
-		return Data::encode($value, 'yaml');
+		return A::map(
+			$value,
+			fn ($value) => $form
+				->reset()
+				->submit(input: [$value])
+				->fields()
+				->first()
+				->toStoredValue()
+		);
 	}
 
 	public function validations(): array
@@ -171,8 +186,10 @@ class EntriesField extends FieldClass
 					);
 				}
 
+				$form = $this->form();
+
 				foreach ($value as $index => $val) {
-					$form = $this->form([$val]);
+					$form->reset()->submit(input: [$val]);
 
 					foreach ($form->fields() as $field) {
 						$errors = $field->errors();

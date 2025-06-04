@@ -73,7 +73,7 @@ class File extends Model
 	public function buttons(): array
 	{
 		return ViewButtons::view($this)->defaults(
-			'preview',
+			'open',
 			'settings',
 			'languages'
 		)->render();
@@ -401,7 +401,6 @@ class File extends Model
 		// Additional model information
 		// @deprecated Use the top-level props instead
 		$model = [
-			'content'    => $props['content'],
 			'dimensions' => $file->dimensions()->toArray(),
 			'extension'  => $file->extension(),
 			'filename'   => $file->filename(),

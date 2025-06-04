@@ -5,7 +5,6 @@ namespace Kirby\Cms;
 use Closure;
 use Exception;
 use Kirby\Content\Field;
-use Kirby\Content\VersionId;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\NotFoundException;
 use Kirby\Exception\PermissionException;
@@ -210,7 +209,7 @@ class User extends ModelWithContent
 	 */
 	public function exists(): bool
 	{
-		return $this->version(VersionId::latest())->exists('default');
+		return $this->version('latest')->exists('default');
 	}
 
 	/**
@@ -428,12 +427,21 @@ class User extends ModelWithContent
 	}
 
 	/**
-	 * Returns the root to the media folder for the user
+	 * Returns the absolute path to the media folder for the user
+	 * @internal
+	 */
+	public function mediaDir(): string
+	{
+		return $this->kirby()->root('media') . '/users/' . $this->id();
+	}
+
+	/**
+	 * @see `::mediaDir`
 	 * @internal
 	 */
 	public function mediaRoot(): string
 	{
-		return $this->kirby()->root('media') . '/users/' . $this->id();
+		return $this->mediaDir();
 	}
 
 	/**
@@ -453,7 +461,7 @@ class User extends ModelWithContent
 		string|null $handler = null,
 		string|null $languageCode = null
 	): int|string|false {
-		$modifiedContent = $this->version(VersionId::latest())->modified($languageCode ?? 'current');
+		$modifiedContent = $this->version('latest')->modified($languageCode ?? 'current');
 		$modifiedIndex   = F::modified($this->root() . '/index.php');
 		$modifiedTotal   = max([$modifiedContent, $modifiedIndex]);
 
@@ -547,7 +555,7 @@ class User extends ModelWithContent
 
 		return $this->role =
 			$this->kirby()->roles()->find($name) ??
-			Role::nobody();
+			Role::defaultNobody();
 	}
 
 	/**

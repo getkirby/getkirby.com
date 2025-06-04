@@ -9,9 +9,8 @@ use Kirby\Cms\Page;
 use Kirby\Cms\Site;
 use Kirby\Exception\LogicException;
 use Kirby\Exception\NotFoundException;
-use Kirby\Form\Form;
+use Kirby\Form\Fields;
 use Kirby\Http\Uri;
-use Kirby\Toolkit\Str;
 
 /**
  * The Version class handles all actions for a single
@@ -56,8 +55,8 @@ class Version
 			];
 		}
 
-		// prepare raw content file fields as fields for Content object
-		$fields = $this->prepareFieldsForContent($fields, $language);
+		// remove fields that should not be used for the Content object
+		unset($fields['lock']);
 
 		return new Content(
 			parent: $this->model,
@@ -101,33 +100,19 @@ class Version
 		Language|string $language = 'default'
 	): void {
 		$language = Language::ensure($language);
-		$latest   = $this->model->version(VersionId::latest());
-
-		// if the latest version of the translation does not exist yet,
-		// we have to copy over the content from the default language first.
-		if (
-			$this->isLatest() === false &&
-			$language->isDefault() === false &&
-			$latest->exists($language) === false
-		) {
-			$latest->create(
-				fields: $latest->read(Language::ensure('default')),
-				language: $language
-			);
-		}
 
 		// check if creating is allowed
 		VersionRules::create($this, $fields, $language);
 
 		// track the changes
-		if ($this->id->is(VersionId::changes()) === true) {
+		if ($this->id->is('changes') === true) {
 			(new Changes())->track($this->model);
 		}
 
 		$this->model->storage()->create(
 			versionId: $this->id,
-			language: $language,
-			fields: $this->prepareFieldsBeforeWrite($fields, $language)
+			language:  $language,
+			fields:    $this->prepareFieldsBeforeWrite($fields, $language)
 		);
 
 		// make sure that an older version does not exist in the cache
@@ -156,12 +141,28 @@ class Version
 
 		// untrack the changes if the version does no longer exist
 		// in any of the available languages
-		if ($this->id->is(VersionId::changes()) === true && $this->exists('*') === false) {
+		if (
+			$this->id->is('changes') === true &&
+			$this->exists('*') === false
+		) {
 			(new Changes())->untrack($this->model);
 		}
 
 		// Remove the version from the cache
 		VersionCache::remove($this, $language);
+	}
+
+	/**
+	 * Returns all validation errors for the given language
+	 */
+	public function errors(Language|string $language = 'default'): array
+	{
+		$fields = Fields::for($this->model, $language);
+		$fields->fill(
+			input: $this->content($language)->toArray()
+		);
+
+		return $fields->errors();
 	}
 
 	/**
@@ -208,7 +209,7 @@ class Version
 		}
 
 		if ($version instanceof VersionId) {
-			$version = $this->model->version($version);
+			$version = $this->sibling($version);
 		}
 
 		if ($version->id()->is($this->id) === true) {
@@ -216,37 +217,23 @@ class Version
 		}
 
 		$language = Language::ensure($language);
+		$fields   = Fields::for($this->model, $language);
 
 		// read fields low-level from storage
 		$a = $this->read($language) ?? [];
 		$b = $version->read($language) ?? [];
 
-		// apply same preparation as for content
-		$a = $this->prepareFieldsForContent($a, $language);
-		$b = $this->prepareFieldsForContent($b, $language);
-
-		// remove additional fields that should not be
+		// remove fields that should not be
 		// considered in the comparison
 		unset(
+			$a['lock'],
+			$b['lock'],
 			$a['uuid'],
 			$b['uuid']
 		);
 
-		$a = Form::for(
-			model: $this->model,
-			props: [
-				'language' => $language->code(),
-				'values'   => $a,
-			]
-		)->values();
-
-		$b = Form::for(
-			model: $this->model,
-			props: [
-				'language' => $language->code(),
-				'values'   => $b
-			]
-		)->values();
+		$a = $fields->reset()->fill(input: $a)->toFormValues();
+		$b = $fields->reset()->fill(input: $b)->toFormValues();
 
 		ksort($a);
 		ksort($b);
@@ -268,6 +255,14 @@ class Version
 	public function isLocked(Language|string $language = 'default'): bool
 	{
 		return $this->lock($language)->isLocked();
+	}
+
+	/**
+	 * Checks if there are any validation errors for the given language
+	 */
+	public function isValid(Language|string $language = 'default'): bool
+	{
+		return $this->errors($language) === [];
 	}
 
 	/**
@@ -317,7 +312,7 @@ class Version
 		$fromVersion  = $this;
 		$fromLanguage = Language::ensure($fromLanguage);
 		$toLanguage   = Language::ensure($toLanguage ?? $fromLanguage);
-		$toVersion    = $this->model->version($toVersionId ?? $this->id);
+		$toVersion    = $this->sibling($toVersionId ?? $this->id);
 
 		// check if moving is allowed
 		VersionRules::move(
@@ -357,7 +352,7 @@ class Version
 		// add the editing user
 		if (
 			Lock::isEnabled() === true &&
-			$this->id->is(VersionId::changes()) === true
+			$this->id->is('changes') === true
 		) {
 			$fields['lock'] = $this->model->kirby()->user()?->id();
 
@@ -398,23 +393,6 @@ class Version
 	}
 
 	/**
-	 * Make sure that the Content object receives the right set of fields
-	 * filtering fields used for lower logic (e.g. lock)
-	 */
-	protected function prepareFieldsForContent(
-		array $fields,
-		Language $language
-	): array {
-		unset($fields['lock']);
-
-		if ($this->model instanceof Page) {
-			unset($fields['slug']);
-		}
-
-		return $fields;
-	}
-
-	/**
 	 * Returns a verification token for the authentication
 	 * of draft and version previews
 	 * @internal
@@ -436,29 +414,15 @@ class Version
 			throw new LogicException('Invalid model type');
 		}
 
-		return $this->previewTokenFromUrl($this->model->url())
-			?? throw new LogicException('Cannot produce local preview token for model');
+		return $this->previewTokenFromUrl($this->model->url());
 	}
 
 	/**
 	 * Returns a verification token for the authentication
 	 * of draft and version previews from a raw URL
-	 * if the URL comes from the same site
 	 */
-	protected function previewTokenFromUrl(string $url): string|null
+	protected function previewTokenFromUrl(string $url): string
 	{
-		$localPrefix = $this->model->kirby()->url('base') . '/';
-
-		// normalize homepage URLs to have a trailing slash
-		// to make the following logic work with those as well
-		if ($url . '/' === $localPrefix) {
-			$url .= '/';
-		}
-
-		if (Str::startsWith($url, $localPrefix) === false) {
-			return null;
-		}
-
 		// get rid of all modifiers after the path
 		$uri = new Uri($url);
 		$uri->fragment = null;
@@ -466,13 +430,13 @@ class Version
 		$uri->query    = null;
 
 		$data = [
-			'uri'       => Str::after($uri->toString(), $localPrefix),
+			'url'       => $uri->toString(),
 			'versionId' => $this->id->value()
 		];
 
 		$token = $this->model->kirby()->contentToken(
 			null,
-			json_encode($data)
+			json_encode($data, JSON_UNESCAPED_SLASHES)
 		);
 
 		return substr($token, 0, 10);
@@ -490,9 +454,22 @@ class Version
 		// check if publishing is allowed
 		VersionRules::publish($this, $language);
 
+		$latest  = $this->sibling('latest')->read($language) ?? [];
+		$changes = $this->read($language) ?? [];
+
+		// overwrite all fields that are not in the `changes` version
+		// with a null value. The ModelWithContent::update method will merge
+		// the input with the existing content fields and setting null values
+		// for removed fields will take care of not inheriting old values.
+		foreach ($latest as $key => $value) {
+			if (isset($changes[$key]) === false) {
+				$changes[$key] = null;
+			}
+		}
+
 		// update the latest version
 		$this->model = $this->model->update(
-			input: $this->read($language),
+			input: $changes,
 			languageCode: $language->code(),
 			validate: true
 		);
@@ -577,6 +554,17 @@ class Version
 		}
 
 		$this->update($fields, $language);
+	}
+
+	/**
+	 * Returns a sibling version for the same model
+	 */
+	public function sibling(VersionId|string $id): Version
+	{
+		return new Version(
+			model: $this->model,
+			id: VersionId::from($id)
+		);
 	}
 
 	/**

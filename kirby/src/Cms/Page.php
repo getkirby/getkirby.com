@@ -770,12 +770,21 @@ class Page extends ModelWithContent
 	}
 
 	/**
-	 * Returns the root to the media folder for the page
+	 * Returns the absolute path to the media folder for the page
+	 * @internal
+	 */
+	public function mediaDir(): string
+	{
+		return $this->kirby()->root('media') . '/pages/' . $this->id();
+	}
+
+	/**
+	 * @see `::mediaDir`
 	 * @internal
 	 */
 	public function mediaRoot(): string
 	{
-		return $this->kirby()->root('media') . '/pages/' . $this->id();
+		return $this->mediaDir();
 	}
 
 	/**
@@ -922,7 +931,7 @@ class Page extends ModelWithContent
 		// make sure to convert it to an object no matter what happened
 		$versionId ??= VersionId::$render;
 		$versionId ??= $this->renderVersionFromRequest();
-		$versionId ??= VersionId::latest();
+		$versionId ??= 'latest';
 		$versionId   = VersionId::from($versionId);
 
 		// try to get the page from cache
