@@ -78,7 +78,7 @@ class Parameter
 		$default = str_replace('array (' . PHP_EOL . ')', '[ ]', $default);
 
 		if ($default === null || $default === 'null') {
-			return null;
+			return 'null';
 		}
 
 		return $default;
