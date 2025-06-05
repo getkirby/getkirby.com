@@ -93,3 +93,31 @@ return [
   ]
 ];
 ```
+
+<since v="4.8.0">
+## Access to file originals by URL
+
+Uploaded files can be accessed with URLs of the form `https://example.com/some/page/file.pdf` or `https://example.com/some-site-file.pdf`. This can be useful to share clean links to files that keep working even if the media URL changes, e.g. when moving the site to a different server.
+
+Depending on the nature of your files, you can control this behavior either globally or dynamically per file by setting the `content.fileRedirects` option.
+
+Possible values: `true`| `false` | `Closure` (default: `true`)
+
+```php
+return [
+  'content' => [
+    'fileRedirects' => false
+  ]
+];
+```
+
+You can also dynamically control this behavior, e.g. based on a file field or other custom logic:
+
+```php
+return [
+  'content' => [
+    'fileRedirects' => fn (File $file): bool => $file->public()->toBool()
+  ]
+];
+```
+</since>
