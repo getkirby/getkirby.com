@@ -45,13 +45,13 @@ fields:
     type: textarea
 ```
 
-In your new `/site/pages/blueprints/project.yml` blueprint, remove these lines.
+In your new `/site/blueprints/pages/project.yml` blueprint, remove these lines.
 
 ## Set up a files section
 
 We now recreate the blueprint with a files section for our files and assign a file template:
 
-```yaml "site/pages/blueprints/project.yml"
+```yaml "site/blueprints/pages/project.yml"
 title: Project
 
 icon: 🖼
