@@ -52,7 +52,7 @@ In your new `/site/blueprints/project.yml` blueprint, remove these lines.
 
 We now recreate the blueprint with a files section for our files and assign a file template:
 
-```yaml "site/blueprints/pages/project.yml"
+```yaml "site/blueprints/project.yml"
 title: Project
 
 icon: 🖼
@@ -83,7 +83,7 @@ title: project
 
 accept: image/jpeg, image/png
 
-fields:
+files:
   fields:
     author:
       label: Author
