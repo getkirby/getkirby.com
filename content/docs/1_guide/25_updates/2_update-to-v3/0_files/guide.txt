@@ -33,20 +33,19 @@ It’s probably best to go through an example.
 Let’s assume that in your Kirby 2 project, the children of the projects page use the `project.yml` blueprint. In that file, you have the following file settings:
 
 ```yaml
-files:
-  fields:
-    author:
-      label: Author
-      type: text
-    caption:
-      label: Caption
-      type: text
-    description:
-      label: Description
-      type: textarea
+fields:
+  author:
+    label: Author
+    type: text
+  caption:
+    label: Caption
+    type: text
+  description:
+    label: Description
+    type: textarea
 ```
 
-In your new `/site/blueprints/project.yml` blueprint, remove these lines.
+In your new `/site/blueprints/pages/project.yml` blueprint, remove these lines.
 
 ## Set up a files section
 
@@ -83,7 +82,7 @@ title: project
 
 accept: image/jpeg, image/png
 
-fields:
+files:
   fields:
     author:
       label: Author
