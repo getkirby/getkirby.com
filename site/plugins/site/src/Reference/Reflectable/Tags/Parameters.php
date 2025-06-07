@@ -63,18 +63,16 @@ class Parameters
 	}
 
 	/**
-	 * Removes a parameter by name
-	 *
-	 * @return $this
+	 * Returns a new instance with the parameter filtered by name
 	 */
 	public function not(string $name): static
 	{
-		$this->parameters = A::filter(
-			$this->parameters,
-			fn ($parameter) => $parameter->name !== $name
+		return new static(
+			parameters: A::filter(
+				$this->parameters,
+				fn ($parameter) => $parameter->name !== $name
+			)
 		);
-
-		return $this;
 	}
 
 	public function toArray(): array
