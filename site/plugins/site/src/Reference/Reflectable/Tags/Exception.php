@@ -9,7 +9,7 @@ class Exception
 {
 	public function __construct(
 		public Types $types,
-		public string $description
+		public string|null $description = null
 	) {
 	}
 
@@ -18,7 +18,7 @@ class Exception
 		return $this->description;
 	}
 
-	public static function factory(ThrowsTagValueNode $tag): static|null
+	public static function factory(ThrowsTagValueNode $tag): static
 	{
 		return new static(
 			types:       Types::factory($tag->type),
