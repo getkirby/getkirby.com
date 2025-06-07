@@ -2,5 +2,47 @@
 
 namespace TestTypes;
 
+/**
+ * @template TValue
+ */
 class A {
+	/**
+	 * @param TValue $a
+	 * @return TValue
+	 */
+	public function foo($a)
+	{
+		return $a;
+	}
+}
+
+/**
+ * @template TValue of string
+ * @extends \TestTypes\A<TValue>
+ *
+ */
+class B extends A {
+}
+
+/**
+ * @extends \TestTypes\B<string>
+ */
+class C extends B {
+	/**
+	 * @use \TestTypes\Z<string>
+	 */
+	use Z;
+}
+
+/**
+ * @template TTraitValue
+ */
+trait Z {
+	/**
+	 * @return TTraitValue
+	 */
+	public function bar()
+	{
+		return 'bar';
+	}
 }
