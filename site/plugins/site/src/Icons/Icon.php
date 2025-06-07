@@ -73,6 +73,10 @@ class Icon
 	protected function normalize(SimpleXmlElement $svg): SimpleXmlElement
 	{
 		if ($this->title) {
+			// If the SVG already has a title, remove it
+			if ($svg->title) {
+				unset($svg->title);
+			}
 			$id = Str::uuid();
 			$svg['role'] = 'img';
 			$svg['aria-labelledby'] = $id;
