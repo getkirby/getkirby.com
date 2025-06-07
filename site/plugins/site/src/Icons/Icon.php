@@ -102,7 +102,12 @@ class Icon
 			return null;
 		}
 
-		return $this->normalize($svg)->asXML();
+		// Perform normalization
+		$svg = $this->normalize($svg);
+		$svg = $svg->asXML();
+		$svg = explode("\n", $svg);
+		$svg = array_slice($svg, 1);
+		return implode('', $svg);
 	}
 }
 
