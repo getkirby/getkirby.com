@@ -1,2 +1,5 @@
 # OS files
 .DS_Store
+
+# tests
+.phpunit.cache

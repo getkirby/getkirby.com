@@ -3,7 +3,7 @@
         'name' => 'getkirby/site',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '1ff671197e8999f7450807adc98e95c90db650c6',
+        'reference' => '7a17baea65816ebfb98e136794fae5e44a0530aa',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'caxy/php-htmldiff' => array(
-            'pretty_version' => 'v0.1.16',
-            'version' => '0.1.16.0',
-            'reference' => '5c580b4f09285c078f0c5cb261573412a736a8cb',
+            'pretty_version' => 'v0.1.17',
+            'version' => '0.1.17.0',
+            'reference' => '194feb154e32f585dd2ca8ae6929a53abfcebf9e',
             'type' => 'library',
             'install_path' => __DIR__ . '/../caxy/php-htmldiff',
             'aliases' => array(),
@@ -28,7 +28,7 @@
         'getkirby/site' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '1ff671197e8999f7450807adc98e95c90db650c6',
+            'reference' => '7a17baea65816ebfb98e136794fae5e44a0530aa',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

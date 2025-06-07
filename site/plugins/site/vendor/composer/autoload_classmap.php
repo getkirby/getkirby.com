@@ -29,6 +29,8 @@ return array(
     'Caxy\\HtmlDiff\\Table\\TableRow' => $vendorDir . '/caxy/php-htmldiff/lib/Caxy/HtmlDiff/Table/TableRow.php',
     'Caxy\\HtmlDiff\\Util\\MbStringUtil' => $vendorDir . '/caxy/php-htmldiff/lib/Caxy/HtmlDiff/Util/MbStringUtil.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'Kirby\\Icons\\Icon' => $baseDir . '/src/Icons/Icon.php',
+    'Kirby\\Icons\\SimpleXmlElement' => $baseDir . '/src/Icons/SimpleXmlElement.php',
     'Kirby\\Marsdown\\FileSystem' => $baseDir . '/src/Marsdown/FileSystem.php',
     'Kirby\\Marsdown\\Marsdown' => $baseDir . '/src/Marsdown/Marsdown.php',
     'Kirby\\Reference\\Reflectable\\Doc' => $baseDir . '/src/Reference/Reflectable/Doc.php',

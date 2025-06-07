@@ -14,5 +14,9 @@
 	},
 	"config": {
 		"optimize-autoloader": true
+	},
+	"scripts": {
+		"test": "phpunit",
+		"test:coverage": "XDEBUG_MODE=coverage phpunit --coverage-html=tests/coverage"
 	}
 }

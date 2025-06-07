@@ -62,6 +62,8 @@ class ComposerStaticInit7735eedf59144eaf4d78690a66d8bbdf
         'Caxy\\HtmlDiff\\Table\\TableRow' => __DIR__ . '/..' . '/caxy/php-htmldiff/lib/Caxy/HtmlDiff/Table/TableRow.php',
         'Caxy\\HtmlDiff\\Util\\MbStringUtil' => __DIR__ . '/..' . '/caxy/php-htmldiff/lib/Caxy/HtmlDiff/Util/MbStringUtil.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Kirby\\Icons\\Icon' => __DIR__ . '/../..' . '/src/Icons/Icon.php',
+        'Kirby\\Icons\\SimpleXmlElement' => __DIR__ . '/../..' . '/src/Icons/SimpleXmlElement.php',
         'Kirby\\Marsdown\\FileSystem' => __DIR__ . '/../..' . '/src/Marsdown/FileSystem.php',
         'Kirby\\Marsdown\\Marsdown' => __DIR__ . '/../..' . '/src/Marsdown/Marsdown.php',
         'Kirby\\Reference\\Reflectable\\Doc' => __DIR__ . '/../..' . '/src/Reference/Reflectable/Doc.php',
