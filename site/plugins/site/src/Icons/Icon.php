@@ -11,6 +11,12 @@ use Kirby\Toolkit\Str;
  */
 class Icon
 {
+	/**
+	 * Directory where local icons are stored
+	 * relative to the Kirby root
+	 */
+	public static string $root = 'assets/icons';
+
 	protected static SimpleXmlElement $panel;
 
 	public function __construct(
@@ -24,7 +30,7 @@ class Icon
 	 */
 	public function getFromLocal(): SimpleXmlElement|null
 	{
-		$svg = svg('assets/icons/' . $this->name . '.svg');
+		$svg = svg(static::$root . '/' . $this->name . '.svg');
 
 		if ($svg === false) {
 			return null;
