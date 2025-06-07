@@ -76,16 +76,6 @@ class ReflectableClassMethod extends ReflectableFunction
 		return '$' . Str::camel($class) . '->' . $this->method;
 	}
 
-	public function parameters(): Parameters
-	{
-		return $this->parameters ??= Parameters::factory($this);
-	}
-
-	public function returns(): Returns|null
-	{
-		return $this->returns ??= Returns::factory($this);
-	}
-
 	/**
 	 * Get `@see` tag value which references
 	 * another class method to refer to for more information
