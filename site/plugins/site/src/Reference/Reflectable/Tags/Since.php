@@ -39,4 +39,9 @@ class Since
 			sprintf($format, $this->version)
 		);
 	}
+
+	public function version(): string
+	{
+		return $this->version;
+	}
 }
