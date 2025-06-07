@@ -166,13 +166,13 @@ class Context
 		$this->addPayload($payload);
 
 		// recursively resolve all parent classes
-		if ($extends = $doc->getExtends()) {
-			$this->resolveParent($extends);
+		foreach ($doc->getExtendsTagValues() as $extends) {
+			$this->resolveParent($extends->type);
 		}
 
 		// recursively resolve all used traits
-		if ($uses = $doc->getUses()) {
-			$this->resolveParent($uses);
+		foreach ($doc->getUsesTagValues() as $use) {
+			$this->resolveParent($use->type);
 		}
 
 		return $this->types;

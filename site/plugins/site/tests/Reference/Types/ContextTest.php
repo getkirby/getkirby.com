@@ -31,9 +31,8 @@ class ContextTest extends TestCase
 		$context     = Context::factory($reflectable);
 		$this->assertSame('string', $context->resolve('TValue'));
 
-		// TODO: support resolving trait templates
-		// $reflectable = new ReflectableClassMethod('TestTypes\C', 'bar');
-		// $context     = Context::factory($reflectable);
-		// $this->assertSame('string', $context->resolve('TTraitValue'));
+		$reflectable = new ReflectableClassMethod('TestTypes\C', 'bar');
+		$context     = Context::factory($reflectable);
+		$this->assertSame('string', $context->resolve('TTraitValue'));
 	}
 }

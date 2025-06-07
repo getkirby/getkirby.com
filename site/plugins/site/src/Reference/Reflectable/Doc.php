@@ -25,17 +25,6 @@ use Throwable;
  */
 class Doc extends PhpDocNode
 {
-	public function getExtends(): GenericTypeNode|null
-	{
-		$tags = $this->getExtendsTagValues();
-
-		if (count($tags) === 0) {
-			return null;
-		}
-
-		return $tags[array_key_first($tags)]->type;
-	}
-
 	public function getParamNode(string $name): ParamTagValueNode|null
 	{
 		// PHPStan uses names with a $ prefix
@@ -82,17 +71,6 @@ class Doc extends PhpDocNode
 			$this->children,
 			fn (Node $node) => $node instanceof PhpDocTextNode
 		);
-	}
-
-	public function getUses(): GenericTypeNode|null
-	{
-		$tags = $this->getUsesTagValues();
-
-		if (count($tags) === 0) {
-			return null;
-		}
-
-		return $tags[array_key_first($tags)]->type;
 	}
 
 	public static function factory(Reflector $reflection): static

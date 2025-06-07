@@ -26,11 +26,9 @@ class B extends A {
 
 /**
  * @extends \TestTypes\B<string>
+ * @use \TestTypes\Z<string>
  */
 class C extends B {
-	/**
-	 * @use \TestTypes\Z<string>
-	 */
 	use Z;
 }
 
