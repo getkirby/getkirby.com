@@ -8,8 +8,8 @@ use Kirby\Toolkit\Str;
 class Deprecated
 {
 	public function __construct(
-		public string|null $version,
-		public string|null $description
+		public string|null $version = null,
+		public string|null $description = null
 	) {
 	}
 
