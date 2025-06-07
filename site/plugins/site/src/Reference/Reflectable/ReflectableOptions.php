@@ -45,7 +45,7 @@ class ReflectableOptions extends Reflectable
 				// options are optional and this would
 				// leave the table a lot more cluttered than needed
 				$types = $parameter->types();
-				$types->remove('null');
+				$types = $types->not('null');
 
 				$parameters[$attr] = new Parameter(
 					name:        $attr,

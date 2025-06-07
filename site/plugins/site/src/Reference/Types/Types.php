@@ -120,11 +120,14 @@ class Types
 	/**
 	 * Remove a type from the collection
 	 */
-	public function remove(string $type): void
+	public function not(string $type): static
 	{
-		$this->types = A::filter(
-			$this->types,
-			fn (Type $t) => $t->type !== $type
+		return new static(
+			types: A::filter(
+				$this->types,
+				fn (Type $t) => $t->type !== $type
+			),
+			reflectable: $this->reflectable
 		);
 	}
 
