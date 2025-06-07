@@ -23,6 +23,10 @@ class ContextTest extends TestCase
 
 	public function testResolve(): void
 	{
+		$reflectable = new ReflectableClassMethod('TestTypes\A', 'foo');
+		$context     = Context::factory($reflectable);
+		$this->assertSame('int', $context->resolve('TValue'));
+
 		$reflectable = new ReflectableClassMethod('TestTypes\B', 'foo');
 		$context     = Context::factory($reflectable);
 		$this->assertSame('string', $context->resolve('TValue'));

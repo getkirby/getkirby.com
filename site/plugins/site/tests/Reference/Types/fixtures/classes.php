@@ -10,7 +10,7 @@ class A {
 	 * @param TValue $a
 	 * @return TValue
 	 */
-	public function foo($a)
+	public function foo(int $a)
 	{
 		return $a;
 	}
