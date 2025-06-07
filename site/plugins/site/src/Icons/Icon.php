@@ -6,8 +6,8 @@ use Kirby\Cms\App;
 use Kirby\Toolkit\Str;
 
 /**
- * Provides icon SVG markup from local SVGs
- * or from the Kirby Panel SVG sprite
+ * Renders SVG icons from the Kirby Panel SVG sprite
+ * or local directory, taking a11yn into account
  */
 class Icon
 {
@@ -38,7 +38,7 @@ class Icon
 	 */
 	public function getFromPanel(): SimpleXmlElement|null
 	{
-		// load the Panel SVG sprite
+		// Load the Panel SVG sprite
 		if (isset(static::$panel) === false) {
 			$root  = App::instance()->root();
 			$root .= '/kirby/panel/dist/img/icons.svg';
@@ -47,16 +47,17 @@ class Icon
 			static::$panel = $panel;
 		}
 
-		// find the icon with the correct id
-		$svgs = static::$panel->xpath('//svg:symbol[@id="icon-' . $this->name . '"]');
+		// Find the icon with the correct id
+		$id   = 'icon-' . $this->name;
+		$svgs = static::$panel->xpath('//svg:symbol[@id="' . $id . '"]');
 		$svg  = $svgs[0] ?? null;
 
-		// if the icon is not found, return null
+		// If the icon is not found, return null
 		if ($svg === null) {
 			return null;
 		}
 
-		// if the symbol references another icon, return the SVG of that icon
+		// If the symbol references another icon, return the SVG of that icon
 		if ($use = $svg->use) {
 			$name = Str::after($use['href'], '#icon-');
 			$icon = new Icon($name, $this->title);
@@ -67,22 +68,25 @@ class Icon
 	}
 
 	/**
-	 * Adds necessary attributes to the SVG markup
-	 * for accessibility
+	 * Adds attributes to the SVG markup for a11yn
 	 */
 	protected function normalize(SimpleXmlElement $svg): SimpleXmlElement
 	{
+		// If a title is provided, add it to the SVG
 		if ($this->title) {
 			// If the SVG already has a title, remove it
 			if ($svg->title) {
 				unset($svg->title);
 			}
+
+			// Add the title to the SVG
 			$id = Str::uuid();
 			$svg['role'] = 'img';
 			$svg['aria-labelledby'] = $id;
 			$svg->prependChild('title', $this->title)->addAttribute('id', $id);
 		}
 
+		// If the SVG does not have a title, mark as decorative
 		if (isset($svg->title) === false) {
 			$svg['aria-hidden'] = 'true';
 		}
@@ -95,6 +99,7 @@ class Icon
 	 */
 	public function render(): string|null
 	{
+		// Get the SVG element
 		$svg   = $this->getFromLocal();
 		$svg ??= $this->getFromPanel();
 
