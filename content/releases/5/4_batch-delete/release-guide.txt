@@ -26,7 +26,7 @@ Text:
 
 When managing many pages or files, it can be tedious to delete them one by one. Now you can select multiple pages or files and delete them at once.
 
-To activate the batch selection mode, you need to add`batch: true` to the blueprint definition of your sections.
+To activate the batch selection mode, you need to add `batch: true` to the (link: docs/reference/panel/sections/pages#batch-delete-pages text: pages section) or (link: docs/reference/panel/sections/files#batch-delete-files text: files section) in your blueprint.
 
 ```yml
 gallery:

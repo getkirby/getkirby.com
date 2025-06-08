@@ -262,6 +262,18 @@ By default, Kirby supports (link: docs/guide/files/files#supported-file-types te
 
 To upload file types not supported out of the box by Kirby, you can (link: docs/reference/plugins/extensions/file-types text: register new file types with the `fileTypes` extension) in a plugin.
 
+<since v="5.0.0">
+## Batch delete files
+
+When managing many files, it can be tedious to delete them one by one. Adding `batch: true`, allows you to select multiple files and delete them at once.
+
+```yml
+gallery:
+  type: files
+  batch: true
+```
+</since>
+
 ## Preview images
 
 The (preview) image for each item in the list is by default what is (link: docs/reference/panel/blueprints/file#image-options text: configured in the respective file blueprint). However, you can customize these further for your section with the (link: docs/reference/panel/blueprints/file#image-options text: same options) as in the file blueprint:

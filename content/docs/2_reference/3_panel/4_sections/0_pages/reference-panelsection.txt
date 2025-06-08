@@ -396,6 +396,19 @@ Editors can add new pages to the section with the "Add" button in the top right 
 
 New pages are always added as draft. If the "Add" button showed up in sections that only show listed or unlisted pages, the "Add" button would lead to a confusing interaction for editors, as the new page would not show up in the section.
 
+
+<since v="5.0.0">
+## Batch delete pages
+
+When managing many pages, it can be tedious to delete them one by one. Adding `batch: true`, allows you to select multiple pages and delete them at once.
+
+```yml
+notes:
+  type: pages
+  batch: true
+```
+</since>
+
 ## Sorting
 
 ### `sortBy`

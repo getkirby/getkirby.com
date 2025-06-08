@@ -117,6 +117,7 @@ accept:
 Please only allow all uploads if all Panel users can be trusted completely as it will be possible to upload files that could be used to attack the server or the visitors' browsers.
 </warning>
 
+
 ## En-/disable setting focus in Panel
 
 By default, setting the focus point in the Panel is enabled for all viewable images with a Panel preview and disabled for all other files.
