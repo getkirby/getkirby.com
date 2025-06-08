@@ -665,11 +665,11 @@ already check for `Kirby\Cms\ModelWithContent` child classes with the argument t
   $fields = new Fields(
     fields: [
       'text' => [
-      'label' => 'Text',
-      'type'  => 'text'
-    ]
-  ],
-  model: page('blog/hello-world')
+        'label' => 'Text',
+        'type'  => 'text'
+      ]
+    ],
+    model: page('blog/hello-world')
   );
   ```
 - New `Kirby\Form\Fields::defaults()` method to return all default values for all fields.
