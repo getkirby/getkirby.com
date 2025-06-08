@@ -38,7 +38,8 @@ class ReflectableOptions extends Reflectable
 			// we use the ReflectableFunction class to get the
 			// first parameter of the prop closure
 			$reflectable = new ReflectableFunction($prop);
-			$parameter   = $reflectable->parameters()->toArray()[0] ?? null;
+			$parameter   = $reflectable->parameters()->data
+[0] ?? null;
 
 			if ($parameter !== null) {
 				// we remove null as type as usually all

@@ -19,8 +19,8 @@ class ThrowsTest extends TestCase
 		$reflectable = new ReflectableClassMethod('Throws', 'throws');
 		$throws      = Throws::factory($reflectable);
 		$this->assertInstanceOf(Throws::class, $throws);
-		$this->assertCount(1, $throws->toArray());
-		$this->assertInstanceOf(Exception::class, $throws->toArray()[0]);
+		$this->assertCount(1, $throws);
+		$this->assertInstanceOf(Exception::class, $throws->data[0]);
 
 		$reflectable = new ReflectableClassMethod('Throws', 'throwsNot');
 		$throws      = Throws::factory($reflectable);

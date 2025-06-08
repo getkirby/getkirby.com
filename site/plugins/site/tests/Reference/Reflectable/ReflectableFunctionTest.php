@@ -109,7 +109,7 @@ fooWithDocBlock();
 		$throws      = $reflectable->throws();
 		$this->assertInstanceOf(Throws::class, $throws);
 
-		$exception = $throws->toArray()[0];
+		$exception = $throws->data[0];
 		$this->assertSame('Exception', $exception->types()->toString());
 		$this->assertSame('when foo is not found', $exception->description());
 	}

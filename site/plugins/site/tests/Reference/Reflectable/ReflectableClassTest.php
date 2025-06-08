@@ -44,15 +44,6 @@ new FooWithDocBlock();
 		$this->assertTrue($reflectable->isInternal());
 	}
 
-	public function testIsStatic(): void
-	{
-		$reflectable = new ReflectableClass('Bar\Foo');
-		$this->assertFalse($reflectable->isStatic());
-
-		$reflectable = new ReflectableClass('Bar\FooStatic');
-		$this->assertTrue($reflectable->isStatic());
-	}
-
 	public function testIsTrait(): void
 	{
 		$reflectable = new ReflectableClass('Bar\Foo');
@@ -107,7 +98,7 @@ new FooWithDocBlock();
 		$reflectable = new ReflectableClass('Bar\FooWithDocBlock');
 		$this->assertInstanceOf(Throws::class, $reflectable->throws());
 
-		$exception = $reflectable->throws()->toArray()[0];
+		$exception = $reflectable->throws()->data[0];
 		$this->assertSame('Exception', $exception->types()->toString());
 		$this->assertSame('when foo is not found', $exception->description());
 	}

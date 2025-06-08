@@ -16,9 +16,6 @@ class Foo {
 	}
 }
 
-class FooStatic {
-}
-
 trait FooTrait {
 }
 

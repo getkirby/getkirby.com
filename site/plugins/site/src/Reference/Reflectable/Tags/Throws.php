@@ -4,17 +4,15 @@ namespace Kirby\Reference\Reflectable\Tags;
 
 use Kirby\Reference\Reflectable\Reflectable;
 use Kirby\Toolkit\A;
+use Kirby\Toolkit\Iterator;
 
-class Throws
+/**
+ * Represents a collection of `@throws` tag exceptions
+ *
+ * @extends \Kirby\Toolkit\Iterator<int, \Kirby\Reference\Reflectable\Tags\Exception>
+ */
+class Throws extends Iterator
 {
-	/**
-	 * @param array<Exception> $throws
-	 */
-	public function __construct(
-		protected array $throws
-	) {
-	}
-
 	public static function factory(Reflectable $reflection): static|null
 	{
 		$throws = $reflection->doc()->getThrowsTagValues();
@@ -25,10 +23,5 @@ class Throws
 
 		$throws = A::map($throws, fn ($tag) => Exception::factory($tag));
 		return new static($throws);
-	}
-
-	public function toArray(): array
-	{
-		return $this->throws;
 	}
 }

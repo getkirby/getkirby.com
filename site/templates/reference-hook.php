@@ -11,7 +11,7 @@
 				<th>Parameter</th>
 				<th>Type</th>
 			</thead>
-			<?php foreach ($page->parameters()->toArray() as $parameter): ?>
+			<?php foreach ($page->parameters() as $parameter): ?>
 			<tr>
 				<td><?= $parameter->name() ?></td>
 				<td><?= $parameter->types()->toHtml(fallback: 'mixed') ?></td>

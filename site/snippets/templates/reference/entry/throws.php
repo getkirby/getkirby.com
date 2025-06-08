@@ -13,7 +13,7 @@ $reflection = $page->reflection();
 			</tr>
 		</thead>
 		<tbody>
-			<?php foreach ($throws->toArray() as $exception): ?>
+			<?php foreach ($throws as $exception): ?>
 			<tr>
 				<td><?= $exception->types()->toHtml() ?></td>
 				<td class="text"><?= kti($exception->description()) ?></td>

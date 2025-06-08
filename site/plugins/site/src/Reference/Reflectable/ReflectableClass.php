@@ -38,11 +38,6 @@ class ReflectableClass extends Reflectable
 		return ucfirst($alias);
 	}
 
-	public function isStatic(): bool
-	{
-		return $this->reflection->hasMethod('__construct') === false;
-	}
-
 	/**
 	 * Returns whether the class is a trait
 	 */

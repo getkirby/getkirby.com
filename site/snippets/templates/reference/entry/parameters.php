@@ -7,7 +7,7 @@ $intro         ??= null;
 $reflectable   ??= $page->reflection();
 $parameters    ??= $reflectable?->parameters();
 $hasDescriptions = $parameters?->hasDescriptions() ?? false;
-$parameters      = $parameters?->toArray() ?? [];
+$parameters    ??= [];
 ?>
 
 <?php if (count($parameters) > 0): ?>

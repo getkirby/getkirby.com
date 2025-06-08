@@ -89,18 +89,16 @@ class ParametersTest extends TestCase
 	public function testToArray(): void
 	{
 		$parameters = new Parameters([]);
-		$parameters = $parameters->toArray();
-		$this->assertSame([], $parameters);
+		$this->assertCount(0, $parameters);
 
 		$parameters = new Parameters([
 			new Parameter('a', Types::factory('mixed')),
 			new Parameter('b', Types::factory('mixed')),
 		]);
-		$parameters = $parameters->toArray();
 		$this->assertCount(2, $parameters);
-		$this->assertInstanceOf(Parameter::class, $parameters[0]);
-		$this->assertSame('$a', $parameters[0]->name());
-		$this->assertSame('$b', $parameters[1]->name());
+		$this->assertInstanceOf(Parameter::class, $parameters->data[0]);
+		$this->assertSame('$a', $parameters->data[0]->name());
+		$this->assertSame('$b', $parameters->data[1]->name());
 	}
 
 	public function testToString(): void

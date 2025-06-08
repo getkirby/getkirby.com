@@ -4,22 +4,15 @@ namespace Kirby\Reference\Reflectable\Tags;
 
 use Kirby\Reference\Reflectable\ReflectableFunction;
 use Kirby\Toolkit\A;
+use Kirby\Toolkit\Iterator;
 
-class Parameters
+/**
+ * Represents a collection of parameters of a function or method
+ *
+ * @extends \Kirby\Toolkit\Iterator<int, \Kirby\Reference\Reflectable\Tags\Parameter>
+ */
+class Parameters extends Iterator
 {
-	/**
-	 * @param array<Parameter> $parameters
-	 */
-	public function __construct(
-		public array $parameters
-	) {
-	}
-
-	public function count(): int
-	{
-		return count($this->parameters);
-	}
-
 	public static function factory(
 		ReflectableFunction $reflectable,
 	): static {
@@ -60,7 +53,7 @@ class Parameters
 	public function hasDescriptions(): bool
 	{
 		return count(A::filter(
-			$this->parameters,
+			$this->data,
 			fn ($parameter) => $parameter->hasDescription()
 		)) > 0;
 	}
@@ -71,16 +64,11 @@ class Parameters
 	public function not(string $name): static
 	{
 		return new static(
-			parameters: A::filter(
-				$this->parameters,
+			A::filter(
+				$this->data,
 				fn ($parameter) => $parameter->name !== $name
 			)
 		);
-	}
-
-	public function toArray(): array
-	{
-		return $this->parameters;
 	}
 
 	/**
@@ -90,7 +78,7 @@ class Parameters
 	{
 		return implode(
 			', ',
-			A::map($this->parameters, fn ($parameter) => $parameter->toString())
+			A::map($this->data, fn ($parameter) => $parameter->toString())
 		);
 	}
 }
