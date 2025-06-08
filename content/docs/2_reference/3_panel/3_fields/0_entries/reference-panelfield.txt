@@ -1,0 +1,66 @@
+Title: Entries
+
+----
+
+Intro: The `entries` field allows you to create and manage multiple entries for the same field.
+
+----
+
+Since: 5.0.0
+
+----
+
+Text:
+
+The entries field allows you to create and manage multiple entries for the same field. It offers editors a flexible alternative to the (link: /docs/reference/panel/fields/structure text: structure field) for when they need to handle a list of content that only consists of one field.
+
+(image: entries.png)
+
+## Field properties
+
+Property | Type | Default | Description
+- | - | - | - |
+autofocus | `bool` | - | Sets the focus on this field when the form loads. Only the first field with this property gets focus.
+default | `array` | - | Default value for the field, which will be used when a page/file/user is created
+disabled | `bool` | - | If true, the field is no longer editable and will not be saved
+field | `array` | - | The options for the field to repeat. Supported field types are `color`, `date`, `email`, `number`, `select`, `slug`, `tel`, `text`, `time`, `url`.
+help | | - | Optional help text below the field
+label | | - | The field label can be set as string or associative array with translations
+max | `int` | - | Maximum number of allowed entries
+min | `int` | - | Minimum number of required entries
+required | `bool` | `false` | If true, the field has to be filled in correctly to be saved.
+sortable | `bool` | `true` | Whether you can manually sort the entries in the Panel
+translate | `bool` | `true` | If false, the field will be disabled in non-default languages and cannot be translated. This is only relevant in multi-language setups.
+when |  | - | Conditions when the field will be shown
+width | `string` | `1/1` | The width of the field in the field grid. Available widths: `1/1`, `1/2`, `1/3`, `1/4`, `2/3`, `3/4`
+
+## Usage
+
+```yaml
+entries:
+  type: entries
+  min: 2
+  max: 4
+  required: true
+  field:
+    type: select
+    options:
+      design: Design
+      architecture: Architecture
+      photography: Photography
+      3d: 3D
+      web: Web
+```
+
+
+### In templates/snippets
+
+To easily loop through your entries and retrieve each entry as field object, you can use the new `$field->toEntries()` method:
+
+```php
+<ul>
+  <?php foreach ($page->entries()->toEntries() as $entry): ?>
+    <li><?= $entry->upper() ?></li>
+  <?php endforeach ?>
+</ul>
+```
