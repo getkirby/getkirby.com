@@ -46,7 +46,7 @@ files:
       type: textarea
 ```
 
-In your new `/site/blueprints/project.yml` blueprint, remove these lines.
+In your new `/site/blueprints/pages/project.yml` blueprint, remove these lines.
 
 ## Set up a files section
 
@@ -75,7 +75,7 @@ Now whenever we upload a new file to this new files section, if will be created 
 
 ## Create the file blueprint
 
-But stop. We haven't created a `blueprints/files/project.yml` blueprint yet. Let's do this now.
+But stop. We haven't created a `/site/blueprints/files/project.yml` blueprint yet. Let's do this now.
 
 ```yaml "site/blueprints/files/project.yml"
 
@@ -84,16 +84,15 @@ title: project
 accept: image/jpeg, image/png
 
 fields:
-  fields:
-    author:
-      label: Author
-      type: text
-    caption:
-      label: Caption
-      type: text
-    description:
-      label: Description
-      type: textarea
+  author:
+    label: Author
+    type: text
+  caption:
+    label: Caption
+    type: text
+  description:
+    label: Description
+    type: textarea
 ```
 
 We copy our fields from the old blueprint into the new files blueprint. And since we only want user to upload images to this files section, we add an `accept` option.
