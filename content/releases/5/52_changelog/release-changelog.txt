@@ -572,7 +572,7 @@ Deprecated:
 - `--color-backdrop` CSS property has been deprecated. Use `--overlay-color-back` instead [#6299](https://github.com/getkirby/kirby/pull/6299)
 
 ### Vue components
-- `<k-writer>` will be removed in a future version. Use `<k-writer-input></k-writer-input>` instead [#6172](https://github.com/getkirby/kirby/pull/6172)
+- `<k-writer>` will be removed in a future version. Use `<k-writer-input>` instead [#6172](https://github.com/getkirby/kirby/pull/6172)
 - `<k-bubble>`, `<k-bubbles>` and `<k-bubbles-field-preview>`. Use `<k-tag>`, `<k-tags>` and `<k-tag-field-preview>` instead. [#6569](https://github.com/getkirby/kirby/pull/6569)
 
 ----
@@ -659,19 +659,19 @@ already check for `Kirby\Cms\ModelWithContent` child classes with the argument t
 
 #### `Kirby\Form\Fields` class improvements
 - You can now pass the parent model as second argument to the Fields collection to inject it into any of the given fields.
-		```php
-		use Kirby\Form\Fields;
+  ```php
+  use Kirby\Form\Fields;
 
-		$fields = new Fields(
-			fields: [
-				'text' => [
-					'label' => 'Text',
-					'type'  => 'text'
-				]
-			],
-			model: page('blog/hello-world')
-		);
-		```
+  $fields = new Fields(
+    fields: [
+      'text' => [
+      'label' => 'Text',
+      'type'  => 'text'
+    ]
+  ],
+  model: page('blog/hello-world')
+  );
+  ```
 - New `Kirby\Form\Fields::defaults()` method to return all default values for all fields.
 - New `Kirby\Form\Fields::errors()` method to run validation on all fields and return an array with all errors
 - New `Kirby\Form\Fields::fill($values)` method to set the value for each field in the array
