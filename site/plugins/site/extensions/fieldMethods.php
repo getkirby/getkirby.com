@@ -6,14 +6,23 @@ use Kirby\Toolkit\Obj;
 use Kirby\Toolkit\Str;
 
 return [
+	/**
+	 * Shorten the URL
+	 */
 	'shortUrl' => function ($field) {
 		return $field->value(fn ($value) => Url::short(Url::base($value)));
 	},
+	/**
+	 * Convert glossary tags to plain text
+	 */
 	'stripGlossary' => function ($field) {
 		return $field->value(
 			fn ($value) => str_replace('(glossary:', '(plain:', $value ?? '')
 		);
 	},
+	/**
+	 * Extract headlines from the field value and return a collection of them
+	 */
 	'toToc' => function ($field, string $headline = 'h2') {
 		$value = $field->value() ?? '';
 

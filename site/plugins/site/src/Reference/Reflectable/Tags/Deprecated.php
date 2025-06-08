@@ -5,6 +5,9 @@ namespace Kirby\Reference\Reflectable\Tags;
 use Kirby\Reference\Reflectable\Reflectable;
 use Kirby\Toolkit\Str;
 
+/**
+ * Represents a `@deprecated` tag
+ */
 class Deprecated
 {
 	public function __construct(
@@ -13,6 +16,9 @@ class Deprecated
 	) {
 	}
 
+	/**
+	 * Returns the description of the deprecated tag
+	 */
 	public function description(): string|null
 	{
 		return $this->description;
@@ -42,6 +48,9 @@ class Deprecated
 		);
 	}
 
+	/**
+	 * Returns the version of the deprecated tag
+	 */
 	public function version(): string|null
 	{
 		return $this->version;

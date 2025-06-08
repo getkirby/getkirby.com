@@ -4,6 +4,9 @@ use Kirby\Cms\App;
 use Kirby\Marsdown\Marsdown;
 
 return [
+	/**
+	 * Use our custom Marsdown parser
+	 */
 	'markdown' => function (
 		App $kirby,
 		string $text = null,

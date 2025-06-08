@@ -5,6 +5,9 @@ namespace Kirby\Reference\Reflectable\Tags;
 use Kirby\Reference\Types\Types;
 use PHPStan\PhpDocParser\Ast\PhpDoc\ThrowsTagValueNode;
 
+/**
+ * Represents a single `@throws` tag
+ */
 class Exception
 {
 	public function __construct(
@@ -13,6 +16,9 @@ class Exception
 	) {
 	}
 
+	/**
+	 * Returns the description of the throws tag
+	 */
 	public function description(): string
 	{
 		return $this->description;
@@ -26,6 +32,9 @@ class Exception
 		);
 	}
 
+	/**
+	 * Returns the types of the throws tag
+	 */
 	public function types(): Types
 	{
 		return $this->types;

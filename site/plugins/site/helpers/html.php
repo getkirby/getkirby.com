@@ -7,6 +7,10 @@ use Kirby\Toolkit\Html;
 use Kirby\Toolkit\Str;
 use Kirby\Toolkit\Xml;
 
+/**
+ * Creates an aria-current attribute
+ * if the condition is true
+ */
 function ariaCurrent(
 	bool $condition,
 	mixed $type = true,
@@ -15,6 +19,10 @@ function ariaCurrent(
 	return $condition ? $prefix . attr(['aria-current' => $type]) : null;
 }
 
+/**
+ * Renders an icon from the Kirby Panel SVG sprite
+ * or local directory, with an optional title
+ */
 function icon(
 	string $name,
 	string|null $title = null
@@ -23,6 +31,9 @@ function icon(
 	return $icon->render();
 }
 
+/**
+ * Renders a responsive image
+ */
 function img($file, array $props = [])
 {
 	if (is_string($file) === true) {
@@ -87,6 +98,9 @@ function img($file, array $props = [])
 	return $img;
 }
 
+/**
+ * Encodes an array to JSON
+ */
 function json(array $data, bool $pretty = true): string|false
 {
 	if ($pretty === true) {
@@ -96,6 +110,9 @@ function json(array $data, bool $pretty = true): string|false
 	return json_encode($data);
 }
 
+/**
+ * Renders a required mark or not
+ */
 function required(
 	bool $required,
 	string|null $text = null
@@ -106,11 +123,17 @@ function required(
 	};
 }
 
+/**
+ * Renders an inline type code tag
+ */
 function type(string $type): string
 {
 	return (new Type($type))->toHtml();
 }
 
+/**
+ * Renders a version release link to GitHub
+ */
 function version(string $version, string $format = '%s'): string
 {
 	return Html::a(

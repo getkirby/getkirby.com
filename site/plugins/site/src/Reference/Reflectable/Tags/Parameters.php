@@ -54,6 +54,9 @@ class Parameters
 		return new static(array_values($parameters));
 	}
 
+	/**
+	 * Returns whether any parameter has a description
+	 */
 	public function hasDescriptions(): bool
 	{
 		return count(A::filter(
@@ -80,6 +83,9 @@ class Parameters
 		return $this->parameters;
 	}
 
+	/**
+	 * Returns the string representation of all parameters
+	 */
 	public function toString(): string
 	{
 		return implode(

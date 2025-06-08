@@ -128,7 +128,7 @@ $tags['plain'] = [
 
 /**
  * (docs: some-snippet)
- * Injects shared doc snippets from site/snippets/docs
+ * Inserts shared doc snippets from /site/snippets/docs
  */
 $tags['docs'] = [
 	'attr' => [
@@ -153,8 +153,9 @@ $tags['docs'] = [
 ];
 
 /**
- * Enhanced link tag with support for automatic
- * linking to Reference pages
+ * Renders a link to the Reference page for a class or class method
+ * (class: Kirby\Cms\App)
+ * (class: Kirby\Cms\App method: version)
  */
 $tags['class'] = $tags['method'] = [
 	'attr' => [
@@ -183,13 +184,20 @@ $tags['class'] = $tags['method'] = [
 	}
 ];
 
+/**
+ * Renders a link to the helper function's Reference page
+ * (helper: foo)
+ */
 $tags['helper'] = [
-
 	'html' => function ($tag) {
 		return kirbytag('method', 'Helper::' . $tag->value, ['text' => $tag->value . '()']);
 	}
 ];
 
+/**
+ * Renders a list of fields for a given API model
+ * (api-fields: page)
+ */
 $tags['api-fields'] = [
 	'html' => function ($tag) {
 		$models = $tag->kirby()->api()->models();
@@ -208,6 +216,10 @@ $tags['api-fields'] = [
 	}
 ];
 
+/**
+ * Renders a list of options for a given field
+ * (field-options: select)
+ */
 $tags['field-options'] = [
 	'html' => fn ($tag) => snippet('templates/reference/entry/parameters', [
 		'title'       => false,
@@ -218,6 +230,10 @@ $tags['field-options'] = [
 	], true)
 ];
 
+/**
+ * Renders a list of options for a given section
+ * (section-options: pages)
+ */
 $tags['section-options'] = [
 	'html' => fn ($tag) => snippet('templates/reference/entry/parameters', [
 		'title'       => false,
@@ -228,6 +244,9 @@ $tags['section-options'] = [
 	], true)
 ];
 
+/**
+ * Enhanced video tag
+ */
 $tags['video'] = [
 	'attr' => [
 		'autoplay',

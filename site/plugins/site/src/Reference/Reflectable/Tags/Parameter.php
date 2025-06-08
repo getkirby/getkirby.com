@@ -7,6 +7,10 @@ use Kirby\Reference\Types\Types;
 use PHPStan\PhpDocParser\Ast\PhpDoc\ParamTagValueNode;
 use ReflectionParameter;
 
+/**
+ * Represents a single parameter of a function or method
+ * incl. its types, default value and description
+ */
 class Parameter
 {
 	public function __construct(
@@ -19,11 +23,17 @@ class Parameter
 	) {
 	}
 
+	/**
+	 * Returns the default value of the parameter
+	 */
 	public function default(): string|null
 	{
 		return $this->default;
 	}
 
+	/**
+	 * Returns the description of the parameter
+	 */
 	public function description(): string|null
 	{
 		return $this->description;
@@ -52,7 +62,7 @@ class Parameter
 	}
 
 	/**
-	 * Returns the default value of the parameter
+	 * Retrieves the default value of a parameter
 	 */
 	protected static function factoryDefault(
 		ReflectionParameter|null $parameter = null
@@ -84,21 +94,34 @@ class Parameter
 		return $default;
 	}
 
+	/**
+	 * Returns whether the parameter has a description
+	 */
 	public function hasDescription(): bool
 	{
 		return empty($this->description) !== true;
 	}
 
+	/**
+	 * Returns whether the parameter is required
+	 */
 	public function isRequired(): bool
 	{
 		return $this->isRequired;
 	}
 
+	/**
+	 * Returns whether the parameter is variadic
+	 */
 	public function isVariadic(): bool
 	{
 		return $this->isVariadic;
 	}
 
+	/**
+	 * Returns the name of the parameter
+	 * with a leading $ and a trailing ... if it is variadic
+	 */
 	public function name(): string
 	{
 		$name = '$' . $this->name;
@@ -110,6 +133,10 @@ class Parameter
 		return $name;
 	}
 
+	/**
+	 * Returns the string representation of the parameter
+	 * with the types, the name and the default value
+	 */
 	public function toString(): string
 	{
 		$string = $this->name();
@@ -125,6 +152,9 @@ class Parameter
 		return $string;
 	}
 
+	/**
+	 * Returns the types of the parameter
+	 */
 	public function types(): Types
 	{
 		return $this->types;

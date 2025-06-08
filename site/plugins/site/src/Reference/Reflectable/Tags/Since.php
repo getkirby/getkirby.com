@@ -6,6 +6,9 @@ use Kirby\Cms\App;
 use Kirby\Cms\Html;
 use Kirby\Reference\Reflectable\Reflectable;
 
+/**
+ * Represents a `@since` tag
+ */
 class Since
 {
 	public function __construct(
@@ -32,6 +35,9 @@ class Since
 		return new static(version: $since);
 	}
 
+	/**
+	 * Returns the HTML markup for the since tag
+	 */
 	public function toHtml(string $format = '%s'): string
 	{
 		return Html::a(
@@ -40,6 +46,9 @@ class Since
 		);
 	}
 
+	/**
+	 * Returns the version of the since tag
+	 */
 	public function version(): string
 	{
 		return $this->version;

@@ -24,6 +24,9 @@ class ReflectableCoreComponent extends ReflectableFunction
 		parent::__construct($component);
 	}
 
+	/**
+	 * Returns the path to the source code
+	 */
 	protected function sourcePath(): string
 	{
 		return 'config/components.php';

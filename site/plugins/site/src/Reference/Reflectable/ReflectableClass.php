@@ -22,6 +22,9 @@ class ReflectableClass extends Reflectable
 		$this->reflection = new ReflectionClass($name);
 	}
 
+	/**
+	 * Returns the class alias, if present
+	 */
 	public function alias(): string|null
 	{
 		static $aliases = require App::instance()->root('kirby') . '/config/aliases.php';
@@ -40,16 +43,25 @@ class ReflectableClass extends Reflectable
 		return $this->reflection->hasMethod('__construct') === false;
 	}
 
+	/**
+	 * Returns whether the class is a trait
+	 */
 	public function isTrait(): bool
 	{
 		return $this->reflection->isTrait();
 	}
 
+	/**
+	 * Returns all methods of the class
+	 */
 	public function methods(): array
 	{
 		return $this->reflection->getMethods();
 	}
 
+	/**
+	 * Returns the name of the class
+	 */
 	public function name(bool $short = false): string
 	{
 		return match ($short) {
@@ -58,11 +70,17 @@ class ReflectableClass extends Reflectable
 		};
 	}
 
+	/**
+	 * Returns the line number where the class begins in the source code
+	 */
 	protected function sourceLine(): int|false
 	{
 		return $this->reflection->getStartLine();
 	}
 
+	/**
+	 * Returns the path to the source code of the class
+	 */
 	protected function sourcePath(): string
 	{
 		$path = str_replace('Kirby\\', '', $this->name());

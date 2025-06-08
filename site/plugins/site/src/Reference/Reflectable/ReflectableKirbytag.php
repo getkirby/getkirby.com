@@ -25,11 +25,17 @@ class ReflectableKirbytag extends ReflectableFunction
 		parent::__construct($tag['html']);
 	}
 
+	/**
+	 * Returns the attributes of the KirbyTag
+	 */
 	public function attributes(): array
 	{
 		return $this->attributes;
 	}
 
+	/**
+	 * Returns the line number where the KirbyTag begins in the source code
+	 */
 	protected function sourceLine(): int|null
 	{
 		$line = $this->reflection->getStartLine();
@@ -42,6 +48,9 @@ class ReflectableKirbytag extends ReflectableFunction
 		return $line;
 	}
 
+	/**
+	 * Returns the path to the source code
+	 */
 	protected function sourcePath(): string
 	{
 		return 'config/tags.php';

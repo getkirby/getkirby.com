@@ -2,8 +2,6 @@
 
 namespace Kirby\Reference\Reflectable;
 
-use Kirby\Reference\Reflectable\Tags\Parameters;
-use Kirby\Reference\Reflectable\Tags\Returns;
 use Kirby\Reference\Types\Identifier;
 use Kirby\Toolkit\Str;
 use ReflectionClass;
@@ -28,6 +26,9 @@ class ReflectableClassMethod extends ReflectableFunction
 		$this->reflection = new ReflectionMethod($class, $method);
 	}
 
+	/**
+	 * Returns the name of the method's class
+	 */
 	public function class(
 		bool $short = false,
 		bool $typed = false
@@ -45,6 +46,9 @@ class ReflectableClassMethod extends ReflectableFunction
 		return $class;
 	}
 
+	/**
+	 * Returns the class where the method is defined
+	 */
 	public function inheritedFrom(): Identifier|null
 	{
 		$origin = $this->reflection->getDeclaringClass()->getName();
@@ -56,11 +60,17 @@ class ReflectableClassMethod extends ReflectableFunction
 		return new Identifier($origin);
 	}
 
+	/**
+	 * Returns whether the method is a magic method
+	 */
 	public function isMagic(): bool
 	{
 		return substr($this->method, 0, 2) === '__';
 	}
 
+	/**
+	 * Returns the name of the method incl. the class name
+	 */
 	public function name(): string
 	{
 		$class = $this->classalias ?? $this->class(true);
@@ -77,7 +87,7 @@ class ReflectableClassMethod extends ReflectableFunction
 	}
 
 	/**
-	 * Get `@see` tag value which references
+	 * Returns the `@see` tag value which references
 	 * another class method to refer to for more information
 	 */
 	public function see(): string|null
@@ -99,6 +109,9 @@ class ReflectableClassMethod extends ReflectableFunction
 		return $see;
 	}
 
+	/**
+	 * Returns the path to the source code of the method
+	 */
 	protected function sourcePath(): string
 	{
 		$file = $this->reflection->getFileName();

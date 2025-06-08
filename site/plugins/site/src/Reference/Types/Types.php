@@ -28,6 +28,9 @@ class Types
 	) {
 	}
 
+	/**
+	 * Returns the number of types
+	 */
 	public function count(): int
 	{
 		return count($this->types);

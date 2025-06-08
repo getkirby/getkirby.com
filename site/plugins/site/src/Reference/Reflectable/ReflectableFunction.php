@@ -28,6 +28,10 @@ class ReflectableFunction extends Reflectable
 		$this->reflection = new ReflectionFunction($function);
 	}
 
+	/**
+	 * Returns the string representation of the function call
+	 * incl. all parameters and return type
+	 */
 	public function call(): string
 	{
 		$parameters = $this->parameters()->toString();
@@ -40,26 +44,41 @@ class ReflectableFunction extends Reflectable
 		return $call;
 	}
 
+	/**
+	 * Returns whether the function is static
+	 */
 	public function isStatic(): bool
 	{
 		return $this->reflection->isStatic();
 	}
 
+	/**
+	 * Returns the name of the function
+	 */
 	public function name(): string
 	{
 		return $this->reflection->getName();
 	}
 
+	/**
+	 * Returns the parameters of the function
+	 */
 	public function parameters(): Parameters
 	{
 		return $this->parameters ??= Parameters::factory($this);
 	}
 
+	/**
+	 * Returns the return tag of the function, if present
+	 */
 	public function returns(): Returns|null
 	{
 		return $this->returns ??= Returns::factory($this);
 	}
 
+	/**
+	 * Returns the line number where the function begins in the source code
+	 */
 	protected function sourceLine(): int|null
 	{
 		return $this->reflection->getStartLine();

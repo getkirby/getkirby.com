@@ -19,6 +19,9 @@ class ReflectableHelperFunction extends ReflectableFunction
 		parent::__construct($name);
 	}
 
+	/**
+	 * Returns the path to the source code
+	 */
 	protected function sourcePath(): string
 	{
 		return 'config/helpers.php';

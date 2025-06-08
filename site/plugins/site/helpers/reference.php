@@ -2,6 +2,9 @@
 
 use Kirby\Content\Field;
 
+/**
+ * Reads a CSV file
+ */
 function csv(string $file): array
 {
 	$handle = fopen($file, "r");
@@ -19,6 +22,9 @@ function csv(string $file): array
 	return $lines;
 }
 
+/**
+ * Creates a Field object from a value
+ */
 function field($value): Field
 {
 	if ($value instanceof Field) {

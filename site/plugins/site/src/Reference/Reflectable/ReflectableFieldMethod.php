@@ -19,24 +19,35 @@ class ReflectableFieldMethod extends ReflectableFunction
 		$name = strtolower($name);
 
 		if ($method = Field::$methods[$name] ?? null) {
+			// method is defined in `kirby/config/methods.php`
 			$this->reflection = new ReflectionFunction($method);
 		} else if (method_exists(Field::class, $name) === true) {
+			// method is defined in the `Field` class
 			$this->reflection = new ReflectionMethod(Field::class, $name);
 		} else {
 			throw new Exception('Field method "' . $name . '" not found');
 		}
 	}
 
+	/**
+	 * Returns name aliases of the field method
+	 */
 	public function aliases(): array
 	{
 		return array_keys(Field::$aliases, $this->name);
 	}
 
+	/**
+	 * Returns the name of the field method
+	 */
 	public function name(): string
 	{
 		return '$field->' . $this->name;
 	}
 
+	/**
+	 * Returns the parameters of the field method
+	 */
 	public function parameters(): Parameters
 	{
 		// Kirby automatically inserts $field as first parameter on all methods
@@ -45,6 +56,9 @@ class ReflectableFieldMethod extends ReflectableFunction
 		return $this->parameters ??= Parameters::factory($this)->not('field');
 	}
 
+	/**
+	 * Returns the path to the source code of the field method
+	 */
 	protected function sourcePath(): string
 	{
 		if ($this->reflection instanceof ReflectionMethod) {

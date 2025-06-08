@@ -23,21 +23,33 @@ abstract class Reflectable
 	protected Since|null $since = null;
 	protected Throws|null $throws = null;
 
+	/**
+	 * Returns the name alias of the reflectable
+	 */
 	public function alias(): string|null
 	{
 		return null;
 	}
 
+	/**
+	 * Returns the deprecated tag, if present
+	 */
 	public function deprecated(): Deprecated|null
 	{
 		return $this->deprecated ??= Deprecated::factory($this);
 	}
 
+	/**
+	 * Returns the doc block
+	 */
 	public function doc(): Doc
 	{
 		return $this->doc ??= Doc::factory($this->reflection);
 	}
 
+	/**
+	 * Returns an example code block from the doc block
+	 */
 	public function examples(): string|null
 	{
 		$node = $this->doc()->getTextNodes()[0] ?? null;
@@ -55,14 +67,16 @@ abstract class Reflectable
 		return null;
 	}
 
+	/**
+	 * Returns whether the entity is deprecated
+	 */
 	public function isDeprecated(): bool
 	{
 		return $this->deprecated() !== null;
 	}
 
 	/**
-	 * Object has been marked as internal.
-	 * Used to filter entry from the reference.
+	 * Returns whether the entity has been marked as internal
 	 */
 	public function isInternal(): bool
 	{
@@ -70,19 +84,25 @@ abstract class Reflectable
 	}
 
 	/**
-	 * Get `@see` tag value which references
-	 * another object to refer to for more information
+	 * Returns the `@see` tag value which references
+	 * another entity to refer to for more information
 	 */
 	public function see(): string|null
 	{
 		return $this->doc()->getTagByName('@see')?->value;
 	}
 
+	/**
+	 * Returns the `@since` tag, if present
+	 */
 	public function since(): Since|null
 	{
 		return $this->since ??= Since::factory($this);
 	}
 
+	/**
+	 * Returns the summary/description from the doc block
+	 */
 	public function summary(): string|null
 	{
 		$node = $this->doc()->getTextNodes()[0] ?? null;
@@ -97,7 +117,7 @@ abstract class Reflectable
 	}
 
 	/**
-	 * Get the URL to the source code on GitHub
+	 * Returns the URL to the source code on GitHub
 	 * incl. line number if available
 	 */
 	public function source(): string|null
@@ -116,6 +136,9 @@ abstract class Reflectable
 		return $url;
 	}
 
+	/**
+	 * Returns the `@throws` tags, if present
+	 */
 	public function throws(): Throws|null
 	{
 		return $this->throws ??= Throws::factory($this);

@@ -19,8 +19,7 @@ use Reflector;
 use Throwable;
 
 /**
- * Extended PHPStan PhpDocNode class
- * with some helper methods
+ * Extended PHPStan `PhpDocNode` class with some helper methods
  */
 class Doc extends PhpDocNode
 {

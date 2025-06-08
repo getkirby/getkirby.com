@@ -21,6 +21,9 @@ class Identifier extends Type
 		$this->type = ltrim($this->type, '\\');
 	}
 
+	/**
+	 * Tries to find and return the Reference page for the type
+	 */
 	public function page(): ReferenceClassPage|ReferenceClassMethodPage|ReferenceFieldMethodPage|ReferenceHelperPage|null
 	{
 		//:: or -> separating class and method
@@ -61,6 +64,12 @@ class Identifier extends Type
 		return null;
 	}
 
+	/**
+	 * Returns the HTML markup for the type
+	 *
+	 * @param string|null $text Alternative text to display
+	 * @param bool $linked Whether to link to the Reference page
+	 */
 	public function toHtml(
 		string|null $text = null,
 		bool $linked = true
