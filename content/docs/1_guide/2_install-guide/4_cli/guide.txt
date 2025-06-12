@@ -26,7 +26,7 @@ You will then be prompted to either specify a folder name to install into or to 
 
 2. With specifying a kit name
 
-Alternatively, <ou can directly enter the name of the kit you want to install:
+Alternatively, you can directly enter the name of the kit you want to install:
 
 ```bash
 kirby install:kit <kitname>
