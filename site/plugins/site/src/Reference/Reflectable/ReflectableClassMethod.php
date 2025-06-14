@@ -2,6 +2,7 @@
 
 namespace Kirby\Reference\Reflectable;
 
+use Kirby\Reference\Reflectable\Tags\Since;
 use Kirby\Reference\Types\Identifier;
 use Kirby\Toolkit\Str;
 use ReflectionClass;
@@ -107,6 +108,17 @@ class ReflectableClassMethod extends ReflectableFunction
 		}
 
 		return $see;
+	}
+
+	/**
+	 * Returns the `@since` tag, if present
+	 * taking into account the parent class
+	 */
+	public function since(): Since|null
+	{
+		return parent::since() ?? Since::factory(
+			reflection: new ReflectableClass($this->class)
+		);
 	}
 
 	/**
