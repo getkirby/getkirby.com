@@ -1,0 +1,7 @@
+Title: /users/:id/changes/discard
+----
+Info: POST
+----
+Intro: Discard unsaved changes for user
+----
+Since: 5.0.0

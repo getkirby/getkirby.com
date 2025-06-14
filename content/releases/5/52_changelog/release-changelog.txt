@@ -142,9 +142,9 @@ Enhancements:
 
 ### API
 - New API Routes for saving, publishing and discarding of changes:
-	- POST: `/api/(:lock)/changes/discard`
-	- POST: `/api/(:lock)/changes/publish`
-	- POST:  `/api/(:lock)/changes/save`
+	- POST: `/api/(:id)/changes/discard`
+	- POST: `/api/(:id)/changes/publish`
+	- POST:  `/api/(:id)/changes/save`
 - The `files` and `pages` sections introduce new `delete` API endpoints. Those endpoints can take a set of page or file IDs and will delete each one. Errors will be caught and sent back in the details array of the final thrown exception.
 
 ## Panel

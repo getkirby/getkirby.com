@@ -1,0 +1,7 @@
+Title:  /pages/:id/changes/save
+----
+Info: POST
+----
+Intro: Update unsaved changes for page
+----
+Since: 5.0.0

@@ -1,0 +1,7 @@
+Title:  /site/files/:filename/changes/save
+----
+Info: POST
+----
+Intro: Update unsaved changes for file
+----
+Since: 5.0.0

@@ -1,0 +1,9 @@
+Title: /site/changes/publish
+----
+Info: POST
+----
+Auth: site.update
+----
+Intro: Publish unsaved changes for site
+----
+Since: 5.0.0

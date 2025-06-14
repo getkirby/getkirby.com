@@ -1,0 +1,7 @@
+Title:  /pages/:id/changes/discard
+----
+Info: POST
+----
+Intro: Discard unsaved changes for page
+----
+Since: 5.0.0
