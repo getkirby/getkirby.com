@@ -68,6 +68,8 @@ return [
 ];
 ```
 
+Additionally, you can also pass the `target` and `title` attributes.
+
 ### Open dialogs and drawers
 
 Instead of a link, you can also add either a `dialog` or `drawer` which will then be opened.
