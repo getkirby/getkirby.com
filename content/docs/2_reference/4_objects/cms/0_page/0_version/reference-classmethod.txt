@@ -1,0 +1,9 @@
+Examples:
+
+```php
+// get the latest saved content of a page
+$page->version('latest');
+
+// get all unsaved changes
+$page->version('changes');
+```

@@ -1,0 +1,8 @@
+Examples:
+
+```php
+$page->version('changes')->publish();
+
+// by language
+$page->version('changes')->publish('de');
+```

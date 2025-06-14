@@ -1,0 +1,12 @@
+Examples:
+
+```php
+$page->version('changes')->isValid();
+
+// receive all validation errors
+$page->version('changes')->errors();
+
+// by language
+$page->version('changes')->isValid('de');
+$page->version('changes')->errors('de');
+```

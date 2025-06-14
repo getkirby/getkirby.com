@@ -1,0 +1,16 @@
+Class: Kirby\Content\Version
+
+----
+
+Examples:
+
+
+```php
+// get all unsaved changes of page
+$version = $page->version('changes');
+
+// check if changes exist in a particular language
+$version->exists('de');
+version->exists('current');
+version->exists('default');
+```

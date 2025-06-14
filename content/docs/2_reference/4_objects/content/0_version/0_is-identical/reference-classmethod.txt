@@ -1,0 +1,10 @@
+Examples:
+
+```php
+$latest  = $page->version('latest');
+$changes = $page->version('changes');
+
+if ($latest->isIdentical($changes) === true) {
+  // there are no changes
+}
+```

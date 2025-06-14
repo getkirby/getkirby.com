@@ -1,0 +1,10 @@
+Examples:
+
+```php
+$page->version('changes')->exists();
+
+// check if changes exist in a particular language
+$page->version('changes')->exists('de');
+$page->version('changes')->exists('current');
+$page->version('changes')->exists('default');
+```

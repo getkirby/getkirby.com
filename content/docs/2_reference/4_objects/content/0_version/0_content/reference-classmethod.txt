@@ -1,0 +1,18 @@
+Examples:
+
+```php
+$page->version('latest')->content();
+$page->version('changes')->content();
+
+// getting content in a particular language
+$page->version('changes')->content('de');
+$page->version('changes')->content('current');
+$page->version('changes')->content('default');
+```
+
+This will return regular `Kirby\Content\Content` objects that help to access fields. So for example, if you want to receive the latest or changed text of a page, you can do this:
+
+```php
+$page->version('latest')->content()->get('text');
+$page->version('changes')->content()->get('text');
+```

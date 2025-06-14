@@ -1,0 +1,16 @@
+Examples:
+
+```php
+$page->version('changes')->update([
+  'text' => 'Changed text'
+]);
+
+// by language
+$page->version('changes')->update([
+  'text' => 'Changed text'
+], 'de');
+```
+
+<warning>
+Be careful with this method. It's rather low-level and for more complex fields, you need to use our new Form class and the `Form::toStoredValues()` method to provide valid storable data.
+</warning>

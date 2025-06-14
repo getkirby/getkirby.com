@@ -1,0 +1,10 @@
+Examples:
+
+```php
+$page->version('changes')->modified();
+
+// for a particular language
+$page->version('changes')->modified('de');
+$page->version('changes')->modified('current');
+$page->version('changes')->modified('default');
+```
