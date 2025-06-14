@@ -152,6 +152,7 @@ permissions:
 | `create` | `true`/`false` |
 | `delete` | `true`/`false` |
 | `replace` | `true`/`false` |
+| `sort` | `true`/`false` |
 | `update` | `true`/`false` |
 
 #### Example: Prevent deleting files
