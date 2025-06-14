@@ -1,0 +1,42 @@
+Title: Storage
+
+----
+
+Since: 5.0.0
+
+----
+
+Text:
+
+The `storage` component takes care of providing the default content storage handler for our models (site, pages, files and users).
+
+A new default storage component needs to be a (child) instance of `Kirby\Content\Storage` and can be defined like this:
+
+```php "/site/plugins/snippet-engine/index.php"
+use Kirby\Cms\App;
+use Kirby\Cms\ModelWithContent;
+use Kirby\Content\PlainTextStorage;
+
+class MyCustomStorageClass extends PlainTextStorage
+{
+
+}
+
+// on app initialisation
+$kirby = new App([
+  'components' => [
+    'storage' => function (App $kirby, ModelWithContent $model) {
+        return MyCustomStorageClass($model);
+    ]
+  ]
+]);
+
+// in a plugin
+App::plugin('my/storage', [
+  'components' => [
+    'storage' => function (App $kirby, ModelWithContent $model) {
+        return MyCustomStorageClass($model);
+    ]
+  ]
+]);
+```

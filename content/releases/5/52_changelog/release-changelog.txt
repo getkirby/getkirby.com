@@ -13,12 +13,12 @@ Enhancements:
 ## Core
 - Thumbnails will no longer be regenerated when page sorting changes [#6432](https://github.com/getkirby/kirby/pull/6432)
 - New `files.sort` permission [#1969](https://github.com/getkirby/kirby/issues/1969)
-- New `$app->role()` method that works like `$app->user()` to return a specific role or the role of the current user. [#6874](https://github.com/getkirby/kirby/pull/6874)
+- New (class: Kirby\Cms\App method: role text: $app->role()) method that works like (class: Kirby\Cms\App method: user text: $app->user()) to return a specific role or the role of the current user. [#6874](https://github.com/getkirby/kirby/pull/6874)
 - Support for content representation specific site controllers, e.g. `site.rss.php` [#6950](https://github.com/getkirby/kirby/pull/6950)
 - New `Kirby\Cms\Pages::delete(array $ids)` and `Kirby\Cms\Files::delete(array $ids)` methods to handle batch delete for multiple files in a collection.
 
 ### Versions
-- New `storage` core component which returns the default storage handler for a model [#6867](https://github.com/getkirby/kirby/pull/6867)
+- New (link: docs/reference/plugins/components/storage text:  `storage` core component) which returns the default storage handler for a model [#6867](https://github.com/getkirby/kirby/pull/6867)
 - New (class: Kirby\Cms\ModelWithContent method: version) method to directly access different content versions [#6455](https://github.com/getkirby/kirby/pull/6455)
 
   ```php
@@ -89,7 +89,7 @@ Enhancements:
 - New (class: Kirby\Panel\Panel method: buttons) method that returns all defined buttons from all Panel areas [#6541](https://github.com/getkirby/kirby/pull/6541)
 - New `Kirby\Panel\Ui` namespace with basic `Kirby\Panel\Ui\Component` and `Kirby\Panel\Ui\Button` classes [#6539](https://github.com/getkirby/kirby/pull/6539). Each component renders as an array with a `component`, unique `key` and `props` entries
 - New `Kirby\Panel\Ui\Buttons\ViewButtons` and `Kirby\Panel\Ui\Buttons\ViewButton` classes [#6542](https://github.com/getkirby/kirby/pull/6542), responsible for gathering and transforming view buttons configured in blueprints, config files and/or Panel areas
-- New classes for core view buttons [#6545](https://github.com/getkirby/kirby/pull/6545): `Kirby\Panel\Ui\LanguagesDropdown` and `Kirby\Panel\Ui\PreviewDropdownButton`.
+- New classes for core view buttons [#6545](https://github.com/getkirby/kirby/pull/6545): `Kirby\Panel\Ui\Buttons\LanguagesDropdown` and `Kirby\Panel\Ui\Buttons\PreviewButton`.
 
 ### Data
 - New third `$fail` argument for `Data::read()` and `Data::decode()`. By default, `Data::read()` and `Data::decode()` will throw an exception if the file does not exist or the data cannot be decoded. By setting `$fail` to false, you can circumvent the exception and return an empty array instead. We’ve refactored our parts of the code where we used a try/catch block to achieve the same.
@@ -243,7 +243,7 @@ Bugfixes:
 - Kirby is better at removing failed file uploads from the server tmp directory [#2476](https://github.com/getkirby/kirby/issues/2476)
 - Canceling the file upload dialog now also cancels ongoing uploads [#6421](https://github.com/getkirby/kirby/pull/6421)
 
-### Search 
+### Search
 
 - Panel search now also considers site files [#6710](https://github.com/getkirby/kirby/pull/6710)
 
@@ -284,7 +284,7 @@ Breaking:
 
 - Closures defined for the `content.salt` option will no longer receive a model when generating a salt for preview authentication tokens of drafts and versions as those tokens are now only based on the URI. The salt callback instead receives `null`  and is expected to return a fixed model-independent salt in this case. When generating a salt for a file media token, the file object is still passed as model. [#6836](https://github.com/getkirby/kirby/pull/6836)
 - The `api.methodOverwrite` option has been renamed to `api.methodOverride`
-- The `content.fileRedirects` option is now set to `false` by default to secure all original files in your content folder. 
+- The `content.fileRedirects` option is now set to `false` by default to secure all original files in your content folder.
 
 ### Controllers
 
@@ -320,7 +320,7 @@ Breaking:
 - Cache IDs in the pages cache now include a part for the version ID. Currently this is always `.latest`, e.g. `home.latest.html`. [#6827](https://github.com/getkirby/kirby/pull/6827?new_mergebox=true)
 - Removed internal `$page->isVerified()` method in favor of internal `$page->renderVersionFromRequest()` [#6829](https://github.com/getkirby/kirby/pull/6829)
 
-### Users 
+### Users
 
 - `User::create()` does no longer accept null as argument.
 - Users without a role in their credentials file will now receive the `default` role (if exists), not the `visitor` role anymore [#6656](https://github.com/getkirby/kirby/pull/6656)
@@ -364,7 +364,7 @@ Breaking:
 - `F::read()` no longer supports requesting URLs with protocols such as `http://` and `https://`. Please use the `Remote` class for this purpose. [#7099](https://github.com/getkirby/kirby/pull/7099)
 - `F::read()` no longer silently returns `false` when the file exists but is not readable. Instead it triggers a PHP "Permission denied" warning. [#7099](https://github.com/getkirby/kirby/pull/7099)
 
-### Toolkit 
+### Toolkit
 
 - The `Str::ucfirst()` method no longer lowercases all but the first letter of the text, it only capitalizes the first letter. [#6860](https://github.com/getkirby/kirby/pull/6860)
 - `Str::camel()`, `Str::camelToKebab()`, `Str::float()`, `Str::kebab()`, `Str::kebabToCamel()`, `Str::length()`, `Str::lower()`, `Str::safeTemplate()`, `Str::short()`, `Str::slug()`, `Str::snake()`, `Str::studly()`, `Str::substr()`, `Str::template()`, `Str::ucfirst()`, `Str::ucwords()`, `Str::unhtml()`, `Str::upper()` and `Str::widont()` can no longer be called without a value argument (passing a `null` value still works) [#6401](https://github.com/getkirby/kirby/pull/6401)
@@ -641,7 +641,7 @@ Refactored:
 - New `Kirby\Form\Form::toStoredValues()` to return all values for all fields in a format that can be stored in our text files.
 - The Form class now always passes the injected model to the Fields collection
 - The Form class now uses `Kirby\Form\Field::isSaveable` instead of `Kirby\Form\Field::save` consistently.
-- `Kirby\Form\Form::errors()` is now an alias for `$form->fields()->errors()` 
+- `Kirby\Form\Form::errors()` is now an alias for `$form->fields()->errors()`
 - `Kirby\Form\Form::field($name)` is now an alias for `$form->fields()->find($name)`
 - Removed an unnecessary check for a blueprint method in the `Form::for` method. `Kirby\Cms\ModelWithContent` has a blueprint method by default and we
 already check for `Kirby\Cms\ModelWithContent` child classes with the argument type.
@@ -703,7 +703,7 @@ The new trait classes help reduce code redundancy between `Kirby\Form\Field` and
 
 - Exception classes support named arguments [#6618](https://github.com/getkirby/kirby/pull/6618)
 
-### Hooks 
+### Hooks
 
 - New `Kirby\Cms\Events` class that handles low-level hook execution
 
