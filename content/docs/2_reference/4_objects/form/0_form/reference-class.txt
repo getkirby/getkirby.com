@@ -1,0 +1,436 @@
+Class: Kirby\Form\Form
+
+----
+
+Text:
+
+<since v="5.0.0">
+## Setting up a form
+
+```php
+use Kirby\Form\Form;
+
+$form = new Form(
+    fields: [
+        'name' => [
+            'label' => 'Name',
+            'type'  => 'text'
+        ],
+        'email' => [
+            'label' => 'Email',
+            'type'  => 'email'
+        ],
+        'message' => [
+            'label' => 'Message',
+            'type'  => 'textarea'
+        ]
+    ]
+);
+```
+
+### Setting up a form for a model
+
+If you've already created all the required form fields for a page, user, file or the site in your blueprints, you can simply create a full form with all fields for the model by using the `Form::for()` method.
+
+```php
+use Kirby\Form\Form;
+
+$form = Form::for(
+    model: $page
+);
+
+// inspect all auto-generated form fields
+dump($form->fields());
+```
+
+### Specifying the form language
+
+```php
+$form = Form::for(
+    model: $page,
+    language: 'de'
+);
+```
+
+## Providing initial values
+
+```php
+use Kirby\Form\Form;
+
+$form = new Form(
+    fields: [
+        'name' => [
+            'label' => 'Name',
+            'type'  => 'text'
+        ],
+        'email' => [
+            'label' => 'Email',
+            'type'  => 'email'
+        ],
+        'message' => [
+            'label' => 'Message',
+            'type'  => 'textarea'
+        ]
+    ]
+);
+
+$form->fill([
+    'name'  => 'Peter Griffin',
+    'email' => 'mail@example.com'
+]);
+
+// inspect the existing form values
+dump($form->toFormValues());
+```
+
+### Passing through unknown fields
+
+If you want to pass through values for undefined fields, you can use the passthrough argument. Be careful though because this can be abused to inject unwanted values if you provide dynamic input here.
+
+```php
+use Kirby\Form\Form;
+
+$form = new Form(
+    fields: [
+        'name' => [
+            'label' => 'Name',
+            'type'  => 'text'
+        ],
+        'email' => [
+            'label' => 'Email',
+            'type'  => 'email'
+        ],
+        'message' => [
+            'label' => 'Message',
+            'type'  => 'textarea'
+        ]
+    ]
+);
+
+$input = [
+    'name'   => 'Peter Griffin',
+    'hidden' => 'Some additional info',
+];
+
+$form->fill(
+    input: $input,
+    passthrough: true
+);
+
+dump($form->toFormValues());
+// will only include the `hidden` value
+// if `passthrough` has been set to `true`
+```
+
+### Filling fields with defaults
+
+```php
+$form = new Form(
+  fields: [
+    'a' => [
+      'default' => 'Some default value',
+      'type'    => 'text'
+    ],
+    'b' => [
+	    'type' => 'text',
+    ]
+  ]
+);
+
+$form->fill($form->defaults());
+
+// fill in additional values afterwards to overwrite defaults
+$form->fill([
+  'b' => 'A value for the field without default'
+]);
+
+dump($form->toFormValues());
+// a => 'Some default value'
+// b => 'A value for the field without default'
+```
+
+## Submitting values
+
+```php
+use Kirby\Form\Form;
+
+$form = new Form(
+    fields: [
+        'name' => [
+            'label' => 'Name',
+            'type'  => 'text'
+        ],
+        'email' => [
+            'label' => 'Email',
+            'type'  => 'email'
+        ],
+        'message' => [
+            'label' => 'Message',
+            'type'  => 'textarea'
+        ]
+    ]
+);
+
+$form->submit([
+    'name'    => 'Peter Griffin',
+    'email'   => 'mail@example.com',
+    'message' => 'Hello'
+]);
+```
+
+### Fill vs. Submit
+
+While `::fill()` is all about providing initial form values, the `::submit()` method is used to handle submit requests. Here's a typical form setup in a controller.
+
+```php
+use Kirby\Cms\App;
+use Kirby\Form\Form;
+
+return function (App $kirby) {
+
+    // create a new form with some custom fields
+    $form = new Form(
+        fields: [
+            'name' => [
+                'label' => 'Name',
+                'type'  => 'text'
+            ],
+            'email' => [
+                'label' => 'Email',
+                'type'  => 'email'
+            ],
+            'message' => [
+                'label' => 'Message',
+                'type'  => 'textarea'
+            ]
+        ]
+    );
+
+    // provide initial values, e.g. from a model, session
+    // or any other data source.
+    $form->fill([
+        'name'  => 'Peter Griffin',
+        'email' => 'mail@example.com'
+    ]);
+
+    // fetch the request object
+    $request = $kirby->request();
+
+    // submit new values in a POST request
+    if ($request->is('POST')) {
+        $form->submit($request->data());
+
+        try {
+            $form->validate();
+
+            // store the data, send a message or do anything else here.
+            // E.g. by using `$form->toStoredValues()`. This will include
+            // the initial values and the submitted values.
+
+            // Redirect on success
+            go('/somewhere');
+        } catch (Exception $e) {
+            return [
+                'form'  => $form,
+                'error' => $e->getMessage()
+            ];
+        }
+    }
+
+    return [
+        'form'  => $form,
+        'error' => null
+    ];
+
+}
+```
+
+
+### Submitting closure values
+
+```php
+$form = new Form(
+  fields: [
+    'text' => [
+      'type'  => 'text',
+      'value' => 'Text'
+    ]
+  ],
+);
+
+$form->submit([
+  'text' => function ($value) {
+    return 'Modified ' . $value;
+  },
+]);
+
+dump($form->toFormValues());
+// text => 'Modified Text'
+
+```
+
+### Submitting unknown fields
+
+Just like the `::fill()` method, `::submit()` can also receive values for unknown fields. Again: Be careful though because this can be abused to inject unwanted values if you provide dynamic input here.
+
+```php
+use Kirby\Form\Form;
+
+$form = new Form(
+    fields: [
+        'name' => [
+            'label' => 'Name',
+            'type'  => 'text'
+        ],
+        'email' => [
+            'label' => 'Email',
+            'type'  => 'email'
+        ],
+        'message' => [
+            'label' => 'Message',
+            'type'  => 'textarea'
+        ]
+    ]
+);
+
+$input = [
+    'name'   => 'Peter Griffin',
+    'hidden' => 'Some additional info',
+];
+
+$form->submit(
+    input: $input,
+    passthrough: true
+);
+
+dump($form->toFormValues());
+// will only include the `hidden` value
+// if `passthrough` has been set to `true`
+```
+
+## Resetting form values
+
+Once you've filled the form or submitted values, you might want to reset the values again.
+
+```php
+use Kirby\Form\Form;
+
+$form = new Form(
+  fields: [
+    'text' => [
+      'type' => 'text'
+    ]
+  ]
+);
+
+$form->fill([
+  'text' => 'Some text',
+]);
+
+$form->toFormValue();
+// text => 'Some text'
+
+$form->reset();
+
+$form->toFormValue();
+// text => ''
+```
+
+## Accessing fields
+
+The `Kirby\Form\Form::fields()` method will give you a `Kirby\Form\Fields` collection. You can use this collection to loop through all fields or access individual fields.
+
+```php
+use Kirby\Form\Form;
+
+$form = new Form(
+    fields: [
+        'name' => [
+            'label' => 'Name',
+            'type'  => 'text'
+        ],
+        'email' => [
+            'label' => 'Email',
+            'type'  => 'email'
+        ],
+        'message' => [
+            'label' => 'Message',
+            'type'  => 'textarea'
+        ]
+    ]
+);
+
+// looping through fields
+foreach ($form->fields() as $field) {
+    dump($field->label());
+}
+
+// Accessing a single field
+$form->field('name')->type();
+
+// A missing field will throw an exception
+$form->field('does-not-exist')
+```
+
+## Accessing values
+
+We've already used the `::toFormValues()` method a couple times in the example above. This will give you an array of values that can be used to create the HTML output for each field with the correct value. We use this in the Panel to set the value for each Vue field component. Attention: Some of our core field types (e.g. the blocks field, the files field, the structure field, etc.) might extend the value with additional info that is needed for the Panel.
+
+```php
+use Kirby\Form\Form;
+
+$form = new Form(
+    fields: [
+        'name' => [
+            'label' => 'Name',
+            'type'  => 'text'
+        ],
+        'email' => [
+            'label' => 'Email',
+            'type'  => 'email'
+        ],
+        'message' => [
+            'label' => 'Message',
+            'type'  => 'textarea'
+        ]
+    ]
+);
+
+$form->fill([
+    'name'  => 'Peter Griffin',
+    'email' => 'mail@example.com',
+]);
+
+dump($form->toFormValues());
+```
+
+If you want to store submitted Form values in a text file for example, you can use the `::toStoredValues()` method, which will turn each value into a version that is made to be stored.
+
+```php
+use Kirby\Form\Form;
+
+$form = new Form(
+    fields: [
+        'name' => [
+            'label' => 'Name',
+            'type'  => 'text'
+        ],
+        'email' => [
+            'label' => 'Email',
+            'type'  => 'email'
+        ],
+        'message' => [
+            'label' => 'Message',
+            'type'  => 'textarea'
+        ]
+    ]
+);
+
+$form->submit([
+    'name'  => 'Peter Griffin',
+    'email' => 'mail@example.com',
+]);
+
+dump($form->toStoredValues());
+```
+</since>
