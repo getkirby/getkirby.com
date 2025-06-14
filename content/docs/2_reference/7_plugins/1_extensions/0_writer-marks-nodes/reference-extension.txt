@@ -90,6 +90,10 @@ window.panel.plugin("your/plugin", {
 });
 ```
 
+<since v="5.0.0">
+Writer nodes with `inline: true` in their button definition are displayed as inline buttons in toolbar (instead inside the dropdown).
+</since>
+
 You can also take a look at the (link: https://github.com/getkirby/kirby/blob/main/panel/src/components/Forms/Writer/Nodes text: implementation of the default nodes) as well as (link: https://prosemirror.net/docs/ref/#model.NodeSpec text: ProseMirror's node docs).
 
 ## Using custom marks/nodes in your fields

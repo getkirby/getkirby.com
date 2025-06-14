@@ -66,6 +66,10 @@ return [
 ];
 ```
 
+<since v="5.0.0">
+When generating a salt for preview authentication tokens of drafts and versions, the closure will not receive as model as argument as those tokens are only based on the URI. The salt callback instead receives `null`  and is expected to return a fixed model-independent salt in this case. When generating a salt for a file media token, the file object is still passed as model.
+</since>
+
 ## UUID generation
 
 Kirby generates a (link: docs/guide/uuids text: unique alpha-numerical ID) for each new page and file by default.
@@ -94,14 +98,13 @@ return [
 ];
 ```
 
-<since v="4.8.0">
 ## Access to file originals by URL
 
 Uploaded files can be accessed with URLs of the form `https://example.com/some/page/file.pdf` or `https://example.com/some-site-file.pdf`. This can be useful to share clean links to files that keep working even if the media URL changes, e.g. when moving the site to a different server.
 
 Depending on the nature of your files, you can control this behavior either globally or dynamically per file by setting the `content.fileRedirects` option.
 
-Possible values: `true`| `false` | `Closure` (default: `true`)
+Possible values: `true`| `false` | `Closure` (default: `false`)
 
 ```php
 return [
@@ -120,4 +123,3 @@ return [
   ]
 ];
 ```
-</since>

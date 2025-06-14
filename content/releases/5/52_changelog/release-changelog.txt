@@ -152,7 +152,7 @@ Enhancements:
 - Sections: improved title and info wrapping [#6447](https://github.com/getkirby/kirby/pull/6447)
 - The fields section now passes all values on input of any field instead of updating just the one field (similar to on submit) [#6517](https://github.com/getkirby/kirby/pull/6517)
 - Improved contrast for some theme colors (e.g. `aqua-icon` theme)
-- Writer: nodes with `inline: true` in their button definition are displayed as inline buttons in toolbar (instead inside the dropdown) [#6902](https://github.com/getkirby/kirby/pull/6902)
+- Writer nodes with `inline: true` in their button definition are displayed as inline buttons in toolbar (instead inside the dropdown) [#6902](https://github.com/getkirby/kirby/pull/6902)
 - Page status button uses custom status labels for `title` [#6911](https://github.com/getkirby/kirby/pull/6911)
 
 ### Icons
@@ -300,7 +300,7 @@ Breaking:
 
 ### Models
 
-- `Kirby\Cms\HasMethods::hasMethod()` and `Kirby\Cms\HasMethods::callMethod()` are now protected methods
+- `Kirby\Cms\HasMethods::callMethod()` is now a protected method
 - `Kirby\Cms\ModelWithContent::lock()` will now always return a `Kirby\Content\Lock` object, even if the model is not currently locked. You can check for that case with `ModelWithContent::lock()->isLocked()`
 - `Kirby\Cms\ModelWithContent::version()` and `Kirby\Cms\ModelWithContent::versions()` are no longer available as direct field accessor. You need to use `$model->content()->version()`/`$model->content()->versions()` instead if you are using a field with the name `version`/`versions`.
 - `Kirby\Cms\Page::modified()`, `Kirby\Cms\File::modifiedContent()` and `Kirby\Cms\User::modified()` now use the current language instead of the default language.
