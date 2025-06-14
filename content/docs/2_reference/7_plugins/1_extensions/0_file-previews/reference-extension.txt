@@ -1,0 +1,98 @@
+Title: File previews
+
+----
+
+Since: 5.0.0
+
+----
+
+Text:
+
+Kirby ships with some default Panel file previews for common formats: images, videos, audio or PDFs. But you can also add custom file previews as plugin extensions to customize the preview for these formats or create previews for other file formats.
+
+(video: file-previews.mp4)
+
+Custom file previews consist of two parts:
+- a PHP class defining when to use it and what data to pass to the preview
+- a Vue component to render the preview
+
+
+## Custom `FilePreview` class
+
+For a custom file preview, you need to define a new class that extends `Kirby\Panel\Ui\FilePreview`.
+
+In this example, we're building a custom preview for `.glb` files that are used to display 3D data:
+
+```php
+class GlbFilePreview extends FilePreview
+{
+  public function __construct(
+    public File $file,
+    public string $component = 'k-glb-file-preview'
+  ) {
+  }
+
+  public static function accepts(File $file): bool
+  {
+    return $file->extension() === 'glb';
+  }
+}
+```
+
+This is the minimal setup for a custom class. It defines which Vue component to use, in this case `k-glb-file-preview`. If no component is specified, `k-default-file-preview` will be used. The `::accepts($file)` method is used to determine which preview class is used for the specific file. Kirby will loop through all available preview classes and use the first one that accepts the file.
+
+
+### Register your preview class
+
+To use your custom file preview class, you need to register it as a plugin extension:
+
+```php
+Kirby::plugin('your/plugin', [
+  'filePreviews' => [
+    GlbFilePreview::class
+  ]
+]);
+```
+
+## Vue component
+
+Secondly, we create the Vue component that is used to render the preview. As above, we have named it `k-glb-file-preview`.
+
+By default, file preview components will receive three default props:
+
+| Prop | Description |
+|--|--|
+| `url` | URL to the file |
+| `details` | array with basic file information (ideally used for `<k-file-preview-details>`) |
+| `image` | object with the thumb icon/image also used in sections etc. |
+
+You could provide additional information to your Vue component by extending the (class: Kirby\Panel\Ui\FilePreview method: props text: ::props()) method. We are not using the `image` prop for this example.
+
+
+We use the `<k-file-preview-frame>` component as wrapper for our actual 3D model, which adds a pattern background.
+
+```js
+panel.plugin("getkirby/custom-file-preview", {
+  components: {
+    "k-glb-file-preview": {
+      template: `
+        <figure class="k-default-file-preview k-glb-file-preview">
+          <k-file-preview-frame>
+            <model-viewer :src="url" />
+          </k-file-preview-frame>
+
+          <k-file-preview-details :details="details" />
+        </figure>
+      `,
+      props: {
+        details: Array,
+        url: String,
+      },
+    },
+  }
+});
+```
+
+<info>
+The `<model-viewer>` element is [from a library](https://modelviewer.dev) that helps to actually display the GLB file. For the full code, how it is used, check out the (link: https://github.com/getkirby/sandbox/tree/main/environments/lab/site/plugins/custom-file-preview text: full custom file preview example).
+</info>
