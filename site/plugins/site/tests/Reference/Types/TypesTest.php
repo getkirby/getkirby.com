@@ -42,6 +42,19 @@ class TypesTest extends TestCase
 		$this->assertFalse($types->has('float'));
 	}
 
+	public function testHasWithIdentifierSelf(): void
+	{
+		$types = new Types(
+			types: [
+				new Type('self'),
+			],
+			reflectable: new ReflectableClass('TestTypes\A')
+		);
+
+		$this->assertTrue($types->has('self'));
+		$this->assertFalse($types->has('static'));
+	}
+
 	public function testNot(): void
 	{
 		$types = new Types([
@@ -102,5 +115,8 @@ class TypesTest extends TestCase
 		);
 
 		$this->assertSame('TestTypes\A', $types->toString());
+
+		// Disable self/static replacement
+		$this->assertSame('static|self', $types->toString(replaceSelf: false));
 	}
 }

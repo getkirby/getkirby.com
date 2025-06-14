@@ -95,7 +95,7 @@ class Types
 	 */
 	public function has(string $type): bool
 	{
-		return strpos($this->toString(), $type) !== false;
+		return strpos($this->toString(replaceSelf: false), $type) !== false;
 	}
 
 	/**
@@ -204,12 +204,16 @@ class Types
 	/**
 	 * Convert the types to a string
 	 */
-	public function toString(): string
+	public function toString(bool $replaceSelf = true): string
 	{
 		// Get string representation for each type
 		$types = A::map($this->types, fn (Type $type) => $type->toString());
+
 		// Replace self/static/$this with the actual class name
-		$types = A::map($types, fn ($type) => $this->replaceSelf($type));
+		if ($replaceSelf === true) {
+			$types = A::map($types, fn ($type) => $this->replaceSelf($type));
+		}
+
 		// Remove duplicates
 		$types = array_unique($types);
 		// Combine into a single string
