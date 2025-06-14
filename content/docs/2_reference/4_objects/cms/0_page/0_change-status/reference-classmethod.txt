@@ -8,5 +8,3 @@ Text:
 <info>
 Note that you cannot change the status of a page using this method if you have set permissions that disallow changing the status, e.g. set `status: false` in your blueprint.
 </info>
-
-(docs: immutable-objects)

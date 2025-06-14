@@ -1,8 +1,1 @@
 Auth: pages.changeSlug
-
-----
-Text:
-
-## Details
-
-(docs: immutable-objects)

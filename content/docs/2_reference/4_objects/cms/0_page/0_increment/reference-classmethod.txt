@@ -4,8 +4,6 @@ Auth: pages.update
 
 Examples:
 
-(docs: immutable-objects)
-
 ```php
 <?php $page->increment('likes') ?>
 ```

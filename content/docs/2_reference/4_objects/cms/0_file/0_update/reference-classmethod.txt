@@ -6,8 +6,6 @@ Text:
 
 ## Example
 
-(docs: immutable-objects)
-
 ```php
 if ($file = $page->file('myimage.jpg')) {
 
