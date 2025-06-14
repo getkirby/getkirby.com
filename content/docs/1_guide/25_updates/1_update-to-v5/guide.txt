@@ -1,0 +1,143 @@
+Title: Update to Kirby 5
+
+----
+
+Intro: Learn how to upgrade a Kirby 4 project to (link: releases/5 text: Kirby 5).
+
+----
+
+Text:
+
+
+<warning>
+While we try to make sure that upgrading to Kirby 5 will be rather smooth for you, there are always things that can go wrong during such a process.
+
+Please **make a backup** of your site in any case.
+</warning>
+
+## Requirements
+
+#### PHP
+
+Kirby 4 requires PHP 8.2, 8.3 or 8.4. You can check your current PHP version in the system view in the Panel. If you see **PHP 8.2.\*, PHP 8.3.\* or PHP 8.4.\***, you are already good to go.
+
+If you see **PHP 7.\*, PHP 8.0.\* or PHP 8.1.\***, you need to update your server. Most hosting providers allow changing the PHP version from the admin backend. We recommend to switch to PHP 8.3 because this version is already compatible with Kirby 4.\* and will (link: https://www.php.net/supported-versions.php text: receive security updates for two more years), so you won't have to do another PHP migration until then.
+
+<warning>
+Before you change the PHP version in production, please ensure that your site code is already compatible with the new PHP version.
+
+In any case, we recommend to change the PHP version on a testing or staging server first and verify that everything still works as expected. Performing the PHP update before the Kirby update to 5.0 will make the migration easier.
+</warning>
+
+Your installed plugins and your site code may be affected by breaking changes in PHP itself. You can find out more about this in the official migration guides for (link: https://www.php.net/manual/en/migration82.php text: PHP 8.1 to 8.2), (link: https://www.php.net/manual/en/migration83.php text: PHP 8.2 to 8.3) and (link: https://www.php.net/manual/en/migration84.php text: PHP 8.3 to 8.4).
+
+#### Browser support of the Panel
+
+The Panel in Kirby 5 supports the following modern browser versions:
+
+<div class="table">
+    <table>
+        <tr>
+            <th>Desktop</th>
+            <th>Mobile</th>
+        </tr>
+        <tr>
+            <td class="prose">
+                <ul>
+                    <li>Firefox 110+</li>
+                    <li>Chrome 106+</li>
+                    <li>Safari 16+</li>
+                    <li>Edge 106+</li>
+                    <li>Opera 94+</li>
+                </ul>
+            </td>
+            <td class="prose">
+                <ul>
+                    <li>Mobile Safari 16+</li>
+                    <li>Android Browser 126+</li>
+                    <li>Chrome for Android 126+</li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+</div>
+
+## License upgrade
+
+Kirby 5 is a major release and requires a valid license. Kirby Basic and Kirby Enterprise licenses include three years of free feature upgrades which makes **Kirby 5 a free upgrade for all Kirby Basic and Kirby Enterprise license holders**.
+
+If you have an older license (e.g. for Kirby 3), you can upgrade your license via our (link: https://hub.getkirby.com text: license hub). We offer an attractive upgrade price, no matter if you have a license for Kirby 1, Kirby 2 or Kirby 3.
+
+## For site developers
+
+This guide highlights some key changes required when upgrading to Kirby 5. There might be further smaller breaking changes affecting your specific project. Please have a look at the (link: releases/5/changelog#breaking-changes text: full list of breaking changes).
+
+We try to avoid breaking changes as much as we can. But we also put a lot of effort in keeping our technical debt in Kirby as low as possible. Sometimes such breaking changes are necessary to move forward with a clean code base.
+
+<info>
+Note that the update to Kirby 5.0 will not be successful if your site is affected by a breaking change. In contrast, deprecated code will still work for the moment but will break in a future Kirby version.
+</info>
+
+### Compatible plugins
+
+To see which of the plugins you use already support Kirby 5, have a look at this (link: plugins/supports/5 text: list of Kirby 5 compatible plugins).
+
+If you are using custom private plugins, please also take a look at the (link: #for-plugin-developers text: notes for plugin developers).
+
+### PHP type hints
+
+We have added again more (link: https://www.php.net/manual/en/language.types.declarations.php text: PHP type hints) throughout the system (e.g. for parameters, methods return types), especially around collection classes. This strictness really reduces the risk of errors in our PHP code. As a consequence, when extending core classes, e.g. in a custom page model, you will have to add some of these type hints to your code as well.
+
+If you run into typing error messages, have a close look at the error message, and it will tell you which part is affected, so that you can compare it with the core code and spot what type hints need to be added.
+
+### Site controller
+
+With Kirby 5, the (link: site controller text: docs/guide/templates/controllers#general-site-controller) doesn't function only as a fallback controller anymore. Instead, the data from the site controller and the template-specific controller will be merged and passed to the template.
+
+### `file.sort` permission
+
+Kirby 5 introduces a new `file.sort` permission. If file sorting was previously disabled via the `files.update` permission, the new `file.sort` permission has to be configured accordingly.
+
+### Reserved content fields
+
+Kirby 5 adds additional field names that are now reserved by Kirby:
+- `version`
+- `versions`
+
+If you are using these field names in your content files or for custom page/site/file/user methods, please make sure to rename those.
+
+
+### How to perform the update
+
+Once your site code and plugins have been updated, you can update Kirby itself. Please follow our (link: docs/guide/updates text: general update instructions).
+
+## For plugin developers
+
+This guide highlights some key changes required to add support for Kirby 5 to your plugin and gives you pointers to our new resources for those developing Panel plugins. Please also have a look at the list of (link: releases/5/changelog#breaking-changes text: breaking changes) and (link: releases/5/changelog#deprecated text: deprecations).
+
+### Panel: dark theme
+
+The Kirby 5 Panel comes with a new theme: a dark mode.
+
+(image: dark-mode-dropdown.webp alt: Opened Panel theme dropdown with Lights On, Lights Off and Match system default options)
+
+If you have been using our (link: https://lab.getkirby.com/public/lab/basics/design/colors text: design theme CSS properties), your plugin should support the dark Panel theme out of the box.
+
+If you need to make tweaks to your styling, use the `light-dark()` CSS function to define different colors for light and dark mode:
+
+```css
+background: light-dark(--color-gray-150, --color-gray-850);
+```
+
+### New `panel.content` JavaScript module replaces Vuex `$store`
+
+With Kirby 5's new (link: releases/5/changes text: changes version feature), we have replaced the Vuex content module and the Vuex store completely with a new (link: https://lab.getkirby.com/public/lab/internals/panel/content text: `panel.content` module). If you have used the content store (e.g. `this.$store.getters["content/values"]`), you will need to adapt your code.
+
+
+### Removed `vuelidate` from Panel
+
+We have removed the `vuevalidate` library in Kirby and are using (link: https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Form_validation text: native form validation). If you have made use of `vuelidate`'s functionality in custom Panel fields, please adapt these as well.
+
+### Removed depracted Panel wrappers `<k-inside>` & `<k-outside>`
+
+A common incompatibility between Kirby 5 and plugins is when the plugins use the wrapper components `<k-inside>` or `<k-outside>` for their Panel plugin templates. These components were deprecated in Kirby 4 and have finally been removed in Kirby 5. Please use the new components, `<k-panel-inside>` and `<k-panel-outside>`, instead.

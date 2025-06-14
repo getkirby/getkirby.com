@@ -88,7 +88,7 @@ Note that the update to Kirby 4.0 will not be successful if your site is affecte
 
 ### Compatible plugins
 
-To see which of the plugins you use already support Kirby 4, have a look at this (link: plugins/k4 text: list of Kirby 4 compatible plugins).
+To see which of the plugins you use already support Kirby 4, have a look at this (link: plugins/supports/4 text: list of Kirby 4 compatible plugins).
 
 If you are using custom private plugins, please also take a look at the (link: #for-plugin-developers text: notes for plugin developers).
 
@@ -153,7 +153,7 @@ In v3, the almighty `kirby` user wasn't that almighty but still restricted by th
 
 ### New core file method and reserved files field
 
-Kirby 4 adds a new core file method: `$file->manipulate()`. This means that you can no longer use this method name for custom file methods. Also, the `focus` field name is now reserved by Kirby for file meta data. If you are using this field name in your file meta data or for custom file methods, please need to rename those files or methods.
+Kirby 4 adds a new core file method: `$file->manipulate()`. This means that you can no longer use this method name for custom file methods. Also, the `focus` field name is now reserved by Kirby for file meta data. If you are using this field name in your file meta data or for custom file methods, please make sure to rename those files or methods.
 
 ### Users field
 

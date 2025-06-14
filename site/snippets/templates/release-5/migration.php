@@ -11,7 +11,7 @@
 				<p>Kirby 5 is a major release and might require some changes to existing sites. To ease the transition, we have compiled everything you need to know in a handy guide:</p>
 
 				<p>
-					<mark>Coming soon</mark>
+					<a href="<?= url('docs/guide/updates/update-to-v5') ?>">Migration guide →</a><br>
 				</p>
 			</div>
 
