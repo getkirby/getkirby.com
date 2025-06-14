@@ -38,11 +38,7 @@ Template | Controller
 
 Kirby will automatically load the controller for your template if it can find one.
 
-## General site controller
-
-You can also use a general site controller called `site.php` which you put into your `/site/controllers` folder like any other page controller. Such a general site controller is useful if multiple templates share the same logic, while they don't need any template specific logic. It works like a normal page controller but will only be applied to templates that do not have a specific page controller. It will *not* be loaded in addition to a template-specific controller.
-
-If you want to share logic between multiple templates and still add template specific logic in a dedicated page controller, check out the (link: docs/cookbook/development-deployment/shared-controllers text: Shared controllers recipe).
+If you need a general controller for all pages, you can use a (link: #general-site-controller text: site controller).
 
 
 ## Creating a controller
@@ -209,6 +205,44 @@ return function ($page, $tag) {
 <info>
 The properties defined in the `$data` array are exposed to **templates** as global variables, so in use cases where you **do not** need them in a controller, you can use them directly.
 </info>
+
+<since v="5.0.0">
+## General site controller
+
+You can also add a general site controller called `site.php` which you put into your `/site/controllers` folder like any other page controller. Such a general site controller is useful if multiple templates share the same logic.The `site` controller data will now always be merged as default data with data from page template specific controllers.
+
+```php "site/controller/site.php"
+return function () {
+	return [
+		'brand' => 'Kirby'
+	];
+};
+```
+
+```php "site/controller/campaign.php"
+return function () {
+	return [
+		'testimonial' => 'Max'
+	];
+};
+```
+
+```php "site/template/campaign.php"
+Both are available:
+
+<?= $brand ?>: <?= $testimonial ?>
+```
+
+You can also set a site controller for all content representations of a certain type:
+
+```php "site/controller/site.rss.php"
+return function () {
+	return [
+		'generator' => 'Kirby RSS Feed Generator'
+	];
+};
+```
+</since>
 
 
 ## More information

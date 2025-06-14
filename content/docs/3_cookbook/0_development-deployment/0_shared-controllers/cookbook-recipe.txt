@@ -67,9 +67,9 @@ This is already starting to look ugly and things will only get messier if we sta
 
 Let's do that.
 
-## Setting up the default controller
+## `site` controller
 
-The first thing we need to do is set up our default controller. To do that we'll make use of the `site.php` controller that will also act as a fallback when no controller is found for a particular template.
+The first thing we need to do is set up our site controller. This controller's data is shared among all pages - ideal for us to provide the title to all pages. To do that we'll add a `site.php` to our `site/controllers/` folders:
 
 ```php "/site/controllers/site.php"
 <?php
@@ -86,7 +86,7 @@ return function ($page, $pages, $site, $kirby) {
 };
 ```
 
-Now that the logic to fetch the correct data has been moved inside the controller we can simplify the `header.php` snippet.
+Now that the logic for our data has been moved inside the controller, we can simplify the `header.php` snippet.
 
 ```php "/site/snippets/header.php"
 <!DOCTYPE html>
@@ -103,8 +103,7 @@ Now that the logic to fetch the correct data has been moved inside the controlle
 <body>
 ```
 
-Excellent, this is already looking a lot cleaner. Now we need to implement the different logic to create the `<title>` tag for the homepage. To do that we'll use a `home.php` controller. You'd think that doing something like this would be enough to achieve our goal.
-
+Excellent, this is already looking a lot cleaner. Now we need to implement the different logic to create the `<title>` tag for the homepage. To do that we'll use a `home.php` controller:
 ```php "/site/controllers/home.php"
 <?php
 
@@ -119,72 +118,15 @@ return function ($page, $pages, $site, $kirby) {
 };
 ```
 
-But if we do that and we navigate to our homepage we'll get presented with an error.
+When the data from the site controller and from the home controller is merged, we will end up with the custom `$titleTag` for our home page, but still with the default `$metaDescription` from the site controller.
 
-```
-Undefined variable: metaDescription
-```
+This is a great way for us to define general data in the site controller and custom data in each page's specific controller.
 
-That's because we now have a controller for the homepage, and Kirby will use that instead of our fallback one. An intuitive solution would be to simply copy and paste the same line of code from the `site.php` controller into the `home.php` controller but that goes against the DRY principle.
+## A more complex example
 
-## Setting up the shared controller
+But what if we have data that should be shared between some templates, but not all templates. Here the site controller could not be the right tool as it adds the data to all pages.
 
-This is where the concept of the shared controller becomes useful. Rather than copy and pasting the same code, we'll first use the `$kirby->controller()` method to get the data from the `site.php` controller and store it in a variable.
-
-```php "/site/controllers/home.php"
-# Grab the data from the default controller
-$shared = $kirby->controller('site' , compact('page', 'pages', 'site', 'kirby'));
-```
-
-<info>
-More info on the `controller()` method (link: docs/reference/objects/kirby/controller text: can be found in the docs).
-</info>
-
-Then we'll overwrite the content of our title tag with the different bit of logic we want to use for the homepage.
-
-```php "/site/controllers/home.php"
-# Fetch and store the content for the different title tag
-$titleTag = $site->title() . " | " . $site->tagline();
-```
-
-And finally, we'll merge the content and return it as an array that will then get passed to the template
-
-```php "/site/controllers/home.php"
-# Return the array containing the data that we want to pass to the template
-return A::merge($shared , compact('titleTag'));
-```
-
-Be careful, when merging the two arrays, to pass the `$shared` array as the first parameter to the `A::merge()` function. This is important because otherwise your new data won't overwrite the content coming from the default controller.
-
-## Final shared controller
-
-The final `home.php` controller will look like this:
-
-```php "/site/controllers/home.php"
-<?php
-
-return function ($page, $pages, $site, $kirby) {
-
-  # Grab the data from the default controller
-  $shared = $kirby->controller('site' , compact('page', 'pages', 'site', 'kirby'));
-
-  # Fetch and store the content for the different title tag
-  $titleTag = $site->title() . " | " . $site->tagline();
-
-  # Return the array containing the data that we want to pass to the template
-  return A::merge($shared , compact('titleTag'));
-
-};
-```
-
-And that's it. We now have a place to store all the data that is shared among all our templates and we have a way, using controllers, to overwrite what needs to be overwritten on a template by template basis.
-
-
-## Closing thoughts
-
-In this example we've used the `site.php` controller to share content across the entire site but the same concept can be adapted to share content across a more local scope.
-
-For example, in a blog you could have different controllers for different type of blog posts...
+For example, in a blog you could have different templates/controllers for different blog post types…
 
 ```filesystem
 controllers/
@@ -193,11 +135,43 @@ controllers/
   post-image.php
 ```
 
-...and you can leverage the method described in this guide to share the content of the `post.php` controller with the other controllers.
+…but you want to leverage to share the data of the `post.php` controller with the other controllers.
 
-To do that you need to pass the correct controller name to the `controller()` function and you're done.
+## A shared controller
+
+This is where the concept of the shared controller becomes useful. Rather than copy and pasting the same code, we'll first use the `$kirby->controller()` method to get the data from the `post.php` controller and store it in a variable.
 
 ```php "/site/controllers/post-video.php"
+# Grab the data from the `post` controller
+$post = $kirby->controller('post' , compact('page', 'pages', 'site', 'kirby'));
+```
+
+<info>
+More info on the `controller()` method (link: docs/reference/objects/kirby/controller text: can be found in the docs).
+</info>
+
+Then we'll gather our custom data that we need specifically just for the `post-video` template:
+
+```php
+# Custom content for the video post
+$video = $page->videourl();
+
+```
+
+And finally, we'll merge the data and return it as an array that will then get passed to the template
+
+```php
+# Return the array containing the data that we want to pass to the template
+return A::merge($post , compact('video'));
+```
+
+Be careful, when merging the two arrays, to pass the `$post` array as the first parameter to the `A::merge()` function. This is important because otherwise your new data won't overwrite the content coming from the shared controller.
+
+### Final shared controller
+
+The final `post-video.php` controller will look like this:
+
+```php "/site/controllers/home.php"
 <?php
 
 return function ($page, $pages, $site, $kirby) {
@@ -214,3 +188,4 @@ return function ($page, $pages, $site, $kirby) {
 };
 ```
 
+And that's it. We now have a place to store all the data that is shared among all our various post templates and we have a way, using controllers, to overwrite what needs to be overwritten on a template-by-template basis.
