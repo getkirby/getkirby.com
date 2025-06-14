@@ -17,15 +17,15 @@ Text:
 
 Before you can add new pages via the Panel, you have to set up a (link: docs/reference/panel/sections/pages text: pages section) in your page or site blueprint, with the status set to `draft` or `all`.
 
-Click on the "Add" button in the top right corner of a pages section. Every new page in the Panel is created as a draft first. This prevents accidental publishing of a page that is not ready yet.
+Click on the "Add" button in the top right corner of a pages section. Every new page in the Panel is created as a draft first by default. This prevents accidental publishing of a page that is not ready yet.
 
-(image: Bildschirmfoto2018-07-05um14.34.45.png)
+(image: create-page.png)
 
 Drafts are stored in a `_drafts` subfolder for every page. These drafts are only accessible when you are logged in.
 
 
 <info>
-If you want to automatically publish new pages created via the Panel, you can set up a (link: docs/reference/system/options/hooks text: `page.create:after` hook) in your `config.php` file.
+If you want to automatically publish new pages created via the Panel or add additional fields to the page create dialog, you can do this via the (link: docs/reference/panel/blueprints/page#page-creation-dialog text: `create` option of the page blueprint).
 </info>
 
 ## Duplicate existing pages
