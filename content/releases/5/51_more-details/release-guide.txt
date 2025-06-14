@@ -105,7 +105,7 @@ return [
 
 ## Redis Cache Driver
 
-Redis is one of the most used cache types. We’ve added a brand new Redis cache driver to the core. You can now use it out of the box by setting up the Redis server connection in your config. [#6736](https://github.com/getkirby/kirby/pull/6736)
+Redis is one of the most used cache types. We’ve added a brand new Redis cache driver to the core. You can now use it out of the box by (link: docs/reference/system/options/cache#cache-driver text: setting up the Redis server connection in your config). [#6736](https://github.com/getkirby/kirby/pull/6736)
 
 ```php
 <?php
