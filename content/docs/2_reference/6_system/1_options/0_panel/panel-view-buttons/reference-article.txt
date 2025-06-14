@@ -1,0 +1,160 @@
+Title: panel.viewButtons
+
+----
+
+Since: 5.0.0
+
+----
+
+Intro: Customize the buttons shown on Panel views
+
+----
+
+Text:
+
+With the `panel.viewButtons` config option, you can customize which buttons to show on different views in the Panel (e.g. page, site, file, user, language).
+
+(image: buttons.png)
+
+## Default buttons for a Panel view type
+
+In contrast to (link: docs/reference/panel/blueprints/page#view-buttons text: defining the buttons in a blueprint), the config option defines them not for a specific template but in general as default for the different view types (page, file, site, user, system, ...):
+
+```php "site/config/config.php"
+'panel' => [
+  'viewButtons' => [
+    'site' => [
+      'preview',
+      'analytics' => [
+        'icon' => 'chart',
+        'text' => 'Analytics',
+        'link' => 'https://my-analytics.com/'
+      ]
+    ]
+  ]
+]
+```
+
+The available options are based on the (link: https://lab.getkirby.com/public/lab/docs/k-view-button text: `k-view-button` component). For example, instead of the `link` option, point the `dialog` option to your dialog endpoint to open it when clicking the view button.
+
+You can mix referencing existing view buttons (e.g. `preview` in the above example) as well as custom view buttons.
+
+## Referencing buttons
+
+If you reference a button by name, these could be one of the buttons that Kirby includes by default or one (link: docs/reference/plugins/extensions/panel-view-buttons text: provided by a Panel area extension).
+
+Kirby ships with the following buttons by default:
+
+| Name | Description |
+|--|--|
+| `file.open` | Open file in new tab |
+| `file.settings` | Settings dropdown for the file |
+| `languages` | Dropdown to switch content language |
+| `languages.create` | Create a new language |
+| `language.open` | Opens language URL in new tab |
+| `language.settings` | Settings dropdown for the language |
+| `language.delete` | Deletes the language |
+| `page.open` | Open page in a new tag |
+| `page.preview` | Open preview view for the page |
+| `page.settings` | Settings dropdown for the page |
+| `page.status` | Page status switch dialog |
+| `page.versions` | Dropdown to switch between the page's content versions |
+| `site.open` | Open site in a new tag |
+| `site.preview` | Open preview view for the site |
+| `site.versions` | Dropdown to switch between the site's content versions |
+| `users.create` | Create a new user |
+| `user.settings` | Settings dropdown for the user |
+| `user.theme` | Dropdown to switch user's theme |
+
+<info>
+You can omit the prefix while using the button in the respective view type. For example, when adding the `file.settings` button to a file view, you can simply reference it as `settings` instead of `file.settings`.
+</info>
+
+
+### Referencing buttons from config in a blueprint
+
+The custom view buttons you define in your config file can then also be (link: docs/reference/panel/blueprints/page#view-buttons text: referenced in a blueprint) by name:
+
+```php
+'panel' => [
+  'viewButtons' => [
+    'page' => [
+      'analytics' => [
+        'icon' => 'chart',
+        'text' => 'Analytics',
+        'link' => 'https://my-analytics.com'
+      ]
+    ]
+  ]
+]
+```
+
+```yaml "site/blueprints/pages/note.yml"
+buttons:
+  preview: true
+  analytics: true
+```
+
+### Disable all buttons
+
+```php
+'panel' => [
+  'viewButtons' => [
+    'page' => false
+  ]
+]
+```
+
+## Using the current context
+
+For some buttons, the context in which the button is displayed might be relevant, e.g. the current page where the view button is shown. You have two ways to make use of the context:
+- Using Kirby queries in e.g. the `link` option
+- Accessing the object as callback argument
+
+### Query support
+
+Some of the view button options do offer support for (link: docs/guide/blueprints/query-language text: Kirby queries):
+
+```php
+'panel' => [
+  'viewButtons' => [
+    'page' => [
+      'analytics' => [
+        'icon' => 'chart',
+        'text' => 'Analytics',
+        'link' => 'https://my-analytics.com/{{ page.uuid.id }}'
+      ]
+    ]
+  ]
+]
+```
+
+Query support is available for the `dialog`, `drawer`, `icon`, `link`, `text` and `theme` options.
+
+### Access current object
+
+You can also define your custom view button as a closure and access relevant objects passed as arguments to the function:
+
+```php "site/config/config.php"
+'panel' => [
+  'viewButtons' => [
+    'page' => [
+      'analytics' => function (Kirby\Cms\Page $page) {
+        return [
+          'icon' => 'chart',
+          'text' => 'Analytics',
+          'link' => 'https://my-analytics.com/' . $page->uuid()
+        ];
+      }
+    ]
+  ]
+]
+```
+
+The available objects are
+- `$kirby`
+- `$site`
+- `$user` (current authorized user, if any)
+- `$model` (if used on a model view, incl. the respective alias `$page`, `$file`, `$user`)
+
+On a user view, `$user` will represent the object of the view. On these, you would need to access the currently authorized user via `$kirby->user()`.

@@ -482,6 +482,8 @@ navigation:
   sortBy: title asc
 ```
 
+(docs: panel-view-buttons field: page)
+
 ## Examples
 
 You can find examples of different types of page blueprints in the (link: docs/reference/panel/samples text: samples section).

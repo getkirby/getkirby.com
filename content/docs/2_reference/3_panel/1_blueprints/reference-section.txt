@@ -11,7 +11,7 @@ Blueprints configure what forms look like in Kirby's highly customizable (glossa
 
 ----
 
-Text:
+Text
 
 For examples of common blueprint setups read the (link: docs/reference/panel/samples text: blueprint samples).
 

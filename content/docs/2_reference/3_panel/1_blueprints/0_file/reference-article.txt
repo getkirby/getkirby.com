@@ -291,6 +291,8 @@ With options, you can control all the file actions that should or should not be 
 
 (docs: permissions/option-permissions)
 
+(docs: panel-view-buttons field: file)
+
 ## Examples
 
 You can find examples of file blueprints in the (link: docs/reference/panel/samples/file text: samples section).

@@ -65,6 +65,29 @@ return [
 ];
 ```
 
+<since v="5.0.0">
+## Panel view buttons
+
+You can customize what buttons are shown on the various Panel views. Learn about (link: docs/reference/system/options/panel/panel-view-buttons text: all the options to customize the Panel view buttons).
+
+```php "/site/config/config.php"
+return [
+  'panel' => [
+    'viewButtons' => [
+      'site' => [
+        'preview',
+        'analytics' => [
+          'icon'     => 'chart',
+          'text'     => 'Analytics',
+          'dropdown' => 'https://my-analytics.com/{{ page.uuid.id }}'
+        ]
+      ]
+    ]
+  ]
+];
+```
+</since>
+
 ## Panel search
 
 You can customise both the default search type selected when opening the Panel search dialog as well as how many result items should be shown at once:

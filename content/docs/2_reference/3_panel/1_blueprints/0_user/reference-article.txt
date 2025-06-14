@@ -267,6 +267,8 @@ permissions:
   pages: false
 ```
 
+(docs: panel-view-buttons field: user)
+
 ## Examples
 
 You can find examples of user blueprints in the (link: docs/reference/panel/samples/user text: samples section).

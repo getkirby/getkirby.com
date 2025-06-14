@@ -53,3 +53,5 @@ title: Site
 options:
   preview: https://mycustomdomain.com
 ```
+
+(docs: panel-view-buttons field: site)
