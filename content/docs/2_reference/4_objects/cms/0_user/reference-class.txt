@@ -45,7 +45,7 @@ With the `$user` object in place, you can use the methods of the user class to g
 
 ```php
 if ($user->isAdmin()) {
-  echo "Hey, great, you can do anything you like!"
+  echo "Hey, great, you can do anything you like!";
 }
 ```
 

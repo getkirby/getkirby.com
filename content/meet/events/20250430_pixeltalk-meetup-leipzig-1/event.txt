@@ -1,0 +1,11 @@
+start: 19:00:00
+----
+city: Leipzig
+----
+country: Germany
+----
+issue: 1
+----
+conference: Pixeltalk
+----
+link: https://pixeltalk.io

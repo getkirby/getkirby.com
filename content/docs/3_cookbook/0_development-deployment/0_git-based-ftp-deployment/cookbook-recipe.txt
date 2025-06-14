@@ -96,7 +96,6 @@ The Git queue should now be clear again and all files should have been pushed to
 git status -s
 ```
 
-
 ## Deployment to staging
 Whenever we push something to GitHub, we want GitHub to FTP the changes to our staging system. To make this happen, we need a workflow file. The file and its folders need to be placed in the root of your project `~/Projects/example`. Create a folder called `.github` with a subfolder called `workflows` and a yml file called `staging.yml` in it.
 
@@ -139,16 +138,17 @@ steps:
 ```
 
 and the second action is the (link:https://github.com/SamKirkland/FTP-Deploy-Action text:FTP-Deploy-Action) by (link:https://github.com/SamKirkland text:SamKirkland).
-You just need to replace the access data with the FTP data of your staging server.
+
+You need to add keys to the secrets section in your project. To add secrets go to the Settings tab in your project then select Secrets. Add new secrets for `ftp_server_staging`, `ftp_user_staging` and `ftp_password_staging`
 
 ```yml
 steps:
   - name: FTP Deployment
     uses: SamKirkland/FTP-Deploy-Action@4.3.3
     with:
-      server: staging.example.com
-      username: your staging ftp-user
-      password: your staging ftp-password
+      server: ${{ secrets.ftp_server_staging }}
+      username: ${{ secrets.ftp_user_staging }}
+      password: ${{ secrets.ftp_password_staging }}
       protocol: ftps
 ```
 <info>
@@ -175,13 +175,12 @@ jobs:
       - name: FTP Deployment
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
-          server: staging.example.com
-          username: your staging ftp-user
-          password: your staging ftp-password
+          server: ${{ secrets.ftp_server_staging }}
+          username: ${{ secrets.ftp_user_staging }}
+          password: ${{ secrets.ftp_password_staging }}
           protocol: ftps
 ```
 Now all we need to do is commit and push that file to GitHub, and we have a fully functional action that will automatically deploy your files to your staging environment once they are pushed to GitHub.
-
 
 ### Commit and push the file
 
@@ -201,9 +200,6 @@ Once the file is pushed to GitHub the action starts immediately. You can check t
 The initial deployment can take a while, depending on the size of your project, it can take up to 60 minutes.  During the first run, a file called `.ftp-deploy-sync-state.json` will be created on the staging server. Once this file is available, subsequents runs will only take a few seconds.
 </warning>
 
-
-
-
 ## Deployment to production
 Typically, the staging server is used to preview and test your latest code changes. After approval by your customer (or by you), the updated files can be deployed to your production environment.
 
@@ -221,16 +217,16 @@ on:
       - '*'
 ```
 
-We also need to update the FTP settings.
+We also need to update the FTP settings and add additional secrets for `ftp_server_production`, `ftp_user_production` and `ftp_password_production`
 
 ```yml
 steps:
   - name: FTP Deployment
     uses: SamKirkland/FTP-Deploy-Action@4.3.3
     with:
-      server: www.example.com
-      username: your production ftp-user
-      password: your production ftp-password
+      server: ${{ secrets.ftp_server_production }}
+      username: ${{ secrets.ftp_user_production }}
+      password: ${{ secrets.ftp_password_production }}
       protocol: ftps
 ```
 The rest of the file can be the same as in the staging workflow file.
@@ -254,9 +250,9 @@ jobs:
       - name: FTP Deployment
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
-          server: www.example.com
-          username: your production ftp-user
-          password: your production ftp-password
+          server: ${{ secrets.ftp_server_production }}
+          username: ${{ secrets.ftp_user_production }}
+          password: ${{ secrets.ftp_password_production }}
           protocol: ftps
 ```
 

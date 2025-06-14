@@ -66,9 +66,9 @@ You can extend Kirby to (link: docs/reference/plugins/extensions/writer-marks-no
 
 ## Nodes
 
-Apart from paragraph nodes, the writer field supports headings and lists. You can fine-tune the writer field from your blueprint by defining the available block formats (nodes).
+Apart from paragraph nodes, the writer field supports lists, headings, horizontal rules and quotes. You can fine-tune the writer field from your blueprint by defining the available block formats (nodes).
 
-The writer field supports the following marks by default:
+The writer field supports the following nodes by default:
 
 - `paragraph`
 - `bulletList`
