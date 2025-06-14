@@ -35,7 +35,7 @@ Plugin licenses are now shown in the plugins table with an additional column to 
 
 - New `Kirby\Plugin\License` class
 - New `Kirby\Plugin\LicenseStatus` class
-- New `k-table-license-cell` and `k-table-license-status-cell` components
+- New (link: https://lab.getkirby.com/public/lab/docs/k-table-license-cell text: `k-table-license-cell`) and (link: https://lab.getkirby.com/public/lab/docs/k-table-license-status-cell text: `k-table-license-status-cell`) components
 
 ### Defining a plugin license as simple array
 
@@ -88,7 +88,7 @@ class MyCustomLicense extends License
   ){
     $this->name = 'My Custom License';
     $this->link = '<https://mylicenseshop.com>';
-    $this->status = LicenseStatus(
+    $this->status = new LicenseStatus(
       value: 'missing',
       theme: 'negative',
       label: 'Get a license please',

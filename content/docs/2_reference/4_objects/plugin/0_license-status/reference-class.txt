@@ -1,0 +1,15 @@
+Class: Kirby\Plugin\LicenseStatus
+
+----
+
+Examples:
+
+```php
+$status = new LicenseStatus(
+  value: 'missing',
+  theme: 'negative',
+  label: 'Get a license please',
+  icon: 'alert',
+  dialog: 'my/dialog/endpoint'
+)
+```

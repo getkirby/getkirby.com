@@ -1,0 +1,34 @@
+Class: Kirby\Plugin\License
+
+----
+
+Examples:
+
+```php
+use Kirby\Plugin\License;
+use Kirby\Plugin\LicenseStatus;
+use Kirby\Plugin\Plugin;
+
+class MyCustomLicense extends License
+{
+  public function __construct(
+    protected Plugin $plugin
+  ){
+    $this->name = 'My Custom License';
+    $this->link = '<https://mylicenseshop.com>';
+    $this->status = new LicenseStatus(
+      value: 'missing',
+      theme: 'negative',
+      label: 'Get a license please',
+      icon: 'alert',
+      dialog: 'my/dialog/endpoint'
+    )
+  }
+}
+
+App::plugin(
+  name: 'my/plugin',
+  extends: [...],
+  license: fn (Plugin $plugin) => new MyCustomLicense($plugin)
+);
+```

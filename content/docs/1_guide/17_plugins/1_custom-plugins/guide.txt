@@ -154,6 +154,56 @@ The fields in the example `composer.json` above are just the basic metadata fiel
 
 Note that the `name` inside the `composer.json` file is only the name of the Composer package. If needed, it can differ from the name you give your plugin when registering it with `Kirby::plugin()`, which will be used when getting plugin data.
 
+<since v="5.0.0">
+### Plugin licenses
+
+You can add information about your plugin license which is then shown in the plugins table on the Panel system view with an additional column to indicate its status. Licenses can link to their license document, a custom license shop or open a custom dialog to activate the license.
+
+(image: plugin-licenses.png)
+
+This is great if you want to point to your own license document.
+
+```php
+App::plugin(
+  name: 'my/plugin',
+  extends: [...],
+  license: [
+    'name'   => 'Custom license',
+    'link'   => 'https://mylicenseshop.com',
+    'status' => 'active',
+  ]
+);
+```
+
+#### Setting a custom status
+
+```php
+App::plugin(
+  name: 'my/plugin',
+  extends: [...],
+  license: [
+    'name' => 'Custom license',
+    'status' => [
+      'value' => 'missing',
+      'theme' => 'negative',
+      'label' => 'Get a license please',
+      'icon'  => 'alert'
+      'link'  => 'https://mylicenseshop.com',
+    ]
+  ]
+);
+```
+You can also pass a (class: Kirby\Plugin\License text: license object) to return a custom status:
+
+```php
+App::plugin(
+  name: 'my/plugin',
+  extends: [...],
+  license: fn (Plugin $plugin) => new MyCustomLicense($plugin)
+);
+```
+</since>
+
 ### Named arguments
 
 Instead of providing all the information in the `composer.json` file, you can pass the same information also as `info` argument:
