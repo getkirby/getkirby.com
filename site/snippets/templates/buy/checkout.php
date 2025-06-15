@@ -286,7 +286,7 @@
 
 					<div v-if="product === '<?= $basic->value() ?>'" class="field">
 						<p class="font-bold">Confirm the revenue limit</p>
-						<p class="info mb-1">
+						<p class="info mb-3">
 							<mark>End customers must not exceed a total annual revenue/funding of
 							<strong><?= $revenueLimit ?><span v-if="locale.revenueLimit.length" v-text="locale.revenueLimit"></span></strong></mark>
 							to be eligible for the Kirby Basic license. <a class="underline" href="#revenue-limit">Read more…</a>
