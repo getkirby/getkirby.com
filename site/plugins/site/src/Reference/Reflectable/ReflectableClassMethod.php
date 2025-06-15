@@ -62,11 +62,41 @@ class ReflectableClassMethod extends ReflectableFunction
 	}
 
 	/**
+	 * Returns whether the method or parent class is deprecated
+	 */
+	public function isDeprecated(): bool
+	{
+		return
+			parent::isDeprecated() ||
+			(new ReflectableClass($this->class))->isDeprecated();
+	}
+
+	/**
+	 * Returns whether the method or parent class has been marked as internal
+	 */
+	public function isInternal(): bool
+	{
+		return
+			parent::isInternal() ||
+			(new ReflectableClass($this->class))->isInternal();
+	}
+
+	/**
 	 * Returns whether the method is a magic method
 	 */
 	public function isMagic(): bool
 	{
 		return substr($this->method, 0, 2) === '__';
+	}
+
+	/**
+	 * Returns whether the method or parent class has been marked as unstable
+	 */
+	public function isUnstable(): bool
+	{
+		return
+			parent::isUnstable() ||
+			(new ReflectableClass($this->class))->isUnstable();
 	}
 
 	/**

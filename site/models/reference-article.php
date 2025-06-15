@@ -62,6 +62,11 @@ class ReferenceArticlePage extends DefaultPage
 		return $this->reflection()?->isInternal() ?? false;
 	}
 
+	public function isUnstable(): bool
+	{
+		return $this->reflection()?->isUnstable() ?? false;
+	}
+
 	public function metadata(): array
 	{
 		return [

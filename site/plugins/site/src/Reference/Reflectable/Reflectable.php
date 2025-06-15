@@ -84,6 +84,14 @@ abstract class Reflectable
 	}
 
 	/**
+	 * Returns whether the entity has been marked as unstable
+	 */
+	public function isUnstable(): bool
+	{
+		return $this->doc()->getTagByName('@unstable') !== null;
+	}
+
+	/**
 	 * Returns the `@see` tag value which references
 	 * another entity to refer to for more information
 	 */

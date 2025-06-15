@@ -121,6 +121,10 @@ html {
 	overflow: hidden;
 }
 
+.reference-entries-unstable {
+	color: var(--color-gray-400);
+}
+
 /* Section filter */
 .reference-section-filter .filter-input {
 	position: relative;
@@ -204,8 +208,7 @@ html {
 	margin-right: var(--spacing-3);
 }
 
-.reference-meta :not(.since) a,
-.reference-meta :not(.since) code {
+.reference-meta :not(.since) :where(a, code) {
 	display: inline-flex;
 	align-items: center;
 	font-family: var(--font-mono);
@@ -241,11 +244,7 @@ html {
 
 @media screen and (max-width: 42rem) {
 	.parameters,
-	.parameters thead,
-	.parameters tbody,
-	.parameters th,
-	.parameters tr,
-	.parameters td {
+	.parameters :where(thead, tbody, th, tr, td) {
 		display: block;
 	}
 

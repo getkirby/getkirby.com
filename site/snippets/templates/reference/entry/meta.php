@@ -85,13 +85,13 @@ $source     = $page->source();
 </div>
 <?php endif ?>
 
-<!-- Internal notice -->
-<?php if ($page->isInternal() === true): ?>
+<!-- Unstable notice -->
+<?php if ($page->isUnstable() === true): ?>
 <div class="prose">
 	<div class="box box--warning">
 		<?php snippet('kirbytext/box', [
 			'type' => 'lab',
-			'text' => '`' . $page->title() . '` has been <b>marked as internal</b>. It might be changed in a future Kirby major or minor release without being considered a breaking change. Use with caution.'
+			'text' => '`' . $page->title() . '` has been <b>marked as unstable</b>. It might be changed in a future Kirby major or minor release without being considered a breaking change. Use with caution.'
 		]) ?>
 	</div>
 </div>
