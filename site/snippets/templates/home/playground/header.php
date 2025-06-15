@@ -2,9 +2,9 @@
 	<div class="playground-header-title mb-12">
 		<h1 class="h1">Kirby is the CMS<br>that adapts to you</h1>
 		<nav class="auto-fit" style="--min: 9rem; --gap: var(--spacing-3); max-width: 24rem;">
-			<a class="btn btn--outlined" href="/releases/4">
+			<a class="btn btn--outlined" href="/releases/5">
 				<?= icon('spaceship') ?>
-				New in v4
+				New in v5
 			</a>
 			<a class="btn btn--filled" href="/try">
 				<?= icon('download') ?>
