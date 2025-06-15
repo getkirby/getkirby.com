@@ -1,7 +1,7 @@
 <div class="container">
 	<?php snippet('layouts/topbar', [
-		'icon'   => '👀',
-		'title'  => 'Get a glimpse of Kirby 5',
+		'icon'   => '🎉',
+		'title'  => 'Kirby 5 is here!',
 		'button' => 'Learn more',
 		'link'   => '/releases/5',
 		'active' => $page->is('releases/5')
