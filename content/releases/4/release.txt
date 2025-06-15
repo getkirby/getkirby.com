@@ -1,6 +1,6 @@
 title: Kirby 4
 ----
-Subtitle: A new era
+Subtitle:
 ----
 Version: 4
 ----
