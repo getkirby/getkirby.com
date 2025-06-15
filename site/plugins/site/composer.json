@@ -7,7 +7,8 @@
 	},
 	"require": {
 		"phpdocumentor/reflection-docblock": "^5.3.0",
-		"caxy/php-htmldiff": "^0.1.15"
+		"caxy/php-htmldiff": "^0.1.15",
+		"league/html-to-markdown": "^5.1.1"
 	},
 	"replace": {
 		"ezyang/htmlpurifier": "*"
