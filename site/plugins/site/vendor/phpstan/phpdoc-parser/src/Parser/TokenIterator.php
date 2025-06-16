@@ -3,6 +3,7 @@
 namespace PHPStan\PhpDocParser\Parser;
 
 use LogicException;
+use PHPStan\PhpDocParser\Ast\Comment;
 use PHPStan\PhpDocParser\Lexer\Lexer;
 use function array_pop;
 use function assert;
@@ -15,19 +16,20 @@ class TokenIterator
 {
 
 	/** @var list<array{string, int, int}> */
-	private $tokens;
+	private array $tokens;
 
-	/** @var int */
-	private $index;
+	private int $index;
 
-	/** @var int[] */
-	private $savePoints = [];
+	/** @var list<Comment> */
+	private array $comments = [];
+
+	/** @var list<array{int, list<Comment>}> */
+	private array $savePoints = [];
 
 	/** @var list<int> */
-	private $skippedTokenTypes = [Lexer::TOKEN_HORIZONTAL_WS];
+	private array $skippedTokenTypes = [Lexer::TOKEN_HORIZONTAL_WS];
 
-	/** @var string|null */
-	private $newline = null;
+	private ?string $newline = null;
 
 	/**
 	 * @param list<array{string, int, int}> $tokens
@@ -154,8 +156,7 @@ class TokenIterator
 			}
 		}
 
-		$this->index++;
-		$this->skipIrrelevantTokens();
+		$this->next();
 	}
 
 
@@ -168,8 +169,7 @@ class TokenIterator
 			$this->throwError($tokenType, $tokenValue);
 		}
 
-		$this->index++;
-		$this->skipIrrelevantTokens();
+		$this->next();
 	}
 
 
@@ -180,12 +180,20 @@ class TokenIterator
 			return false;
 		}
 
-		$this->index++;
-		$this->skipIrrelevantTokens();
+		$this->next();
 
 		return true;
 	}
 
+	/**
+	 * @return list<Comment>
+	 */
+	public function flushComments(): array
+	{
+		$res = $this->comments;
+		$this->comments = [];
+		return $res;
+	}
 
 	/** @phpstan-impure */
 	public function tryConsumeTokenType(int $tokenType): bool
@@ -200,10 +208,47 @@ class TokenIterator
 			}
 		}
 
-		$this->index++;
-		$this->skipIrrelevantTokens();
+		$this->next();
 
 		return true;
+	}
+
+
+	/**
+	 * @deprecated Use skipNewLineTokensAndConsumeComments instead (when parsing a type)
+	 */
+	public function skipNewLineTokens(): void
+	{
+		if (!$this->isCurrentTokenType(Lexer::TOKEN_PHPDOC_EOL)) {
+			return;
+		}
+
+		do {
+			$foundNewLine = $this->tryConsumeTokenType(Lexer::TOKEN_PHPDOC_EOL);
+		} while ($foundNewLine === true);
+	}
+
+
+	public function skipNewLineTokensAndConsumeComments(): void
+	{
+		if ($this->currentTokenType() === Lexer::TOKEN_COMMENT) {
+			$this->comments[] = new Comment($this->currentTokenValue(), $this->currentTokenLine(), $this->currentTokenIndex());
+			$this->next();
+		}
+
+		if (!$this->isCurrentTokenType(Lexer::TOKEN_PHPDOC_EOL)) {
+			return;
+		}
+
+		do {
+			$foundNewLine = $this->tryConsumeTokenType(Lexer::TOKEN_PHPDOC_EOL);
+			if ($this->currentTokenType() !== Lexer::TOKEN_COMMENT) {
+				continue;
+			}
+
+			$this->comments[] = new Comment($this->currentTokenValue(), $this->currentTokenLine(), $this->currentTokenIndex());
+			$this->next();
+		} while ($foundNewLine === true);
 	}
 
 
@@ -282,7 +327,7 @@ class TokenIterator
 
 	public function pushSavePoint(): void
 	{
-		$this->savePoints[] = $this->index;
+		$this->savePoints[] = [$this->index, $this->comments];
 	}
 
 
@@ -294,9 +339,9 @@ class TokenIterator
 
 	public function rollback(): void
 	{
-		$index = array_pop($this->savePoints);
-		assert($index !== null);
-		$this->index = $index;
+		$savepoint = array_pop($this->savePoints);
+		assert($savepoint !== null);
+		[$this->index, $this->comments] = $savepoint;
 	}
 
 
@@ -311,7 +356,7 @@ class TokenIterator
 			$this->currentTokenOffset(),
 			$expectedTokenType,
 			$expectedTokenValue,
-			$this->currentTokenLine()
+			$this->currentTokenLine(),
 		);
 	}
 
