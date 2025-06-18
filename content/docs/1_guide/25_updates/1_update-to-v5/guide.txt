@@ -64,7 +64,7 @@ The Panel in Kirby 5 supports the following modern browser versions:
 
 ## Notes on licensing
 
-Kirby Basic and Kirby Enterprise licenses include three years of free feature upgrades, which makes **Kirby 5 a free upgrade for everyone with a valid Kirby 4 license**.
+Kirby Basic and Kirby Enterprise licenses include three years of free feature upgrades, which makes **Kirby 5 a free upgrade for everyone with a valid Kirby 4 license**. Kirby 5 will automatically detect your Basic or Enterprise license, there is nothing else you need to do.
 
 If you have an older license (e.g. for Kirby 3), you can upgrade your license via our (link: https://hub.getkirby.com text: license hub). We offer an attractive upgrade price, no matter if you have a license for Kirby 1, Kirby 2 or Kirby 3.
 
