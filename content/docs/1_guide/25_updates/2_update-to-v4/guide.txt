@@ -10,7 +10,9 @@ Text:
 
 
 <warning>
-While we try to make sure that upgrading to Kirby 4 will be rather smooth for you, there are always things that can go wrong during such a process. Please **make a backup** of your site in any case.
+While we try to make sure that upgrading to Kirby 4 will be rather smooth for you, there are always things that can go wrong during such a process.
+
+Please **make a backup** of your site in any case.
 </warning>
 
 ## Requirements
@@ -33,7 +35,7 @@ In any case, we recommend to change the PHP version on a testing or staging serv
 
 Kirby has supported PHP 8.1 since Kirby 3.6.1 and PHP 8.2 since Kirby 3.9.0. So updating your PHP version won't break the Kirby core if you are using a Kirby version that is newer than that.
 
-However your installed plugins and your site code may be affected by breaking changes in PHP itself. You can find out more about this in the official migration guides for (link: https://www.php.net/manual/en/migration81.php text: PHP 8.0 to 8.1), (link: https://www.php.net/manual/en/migration82.php text: PHP 8.1 to 8.2) and (link: https://www.php.net/manual/en/migration83.php text: PHP 8.2 to 8.3).
+However your installed plugins and your site code may be affected by breaking changes and deprecations in PHP itself. You can find out more about this in the official migration guides for (link: https://www.php.net/manual/en/migration81.php text: PHP 8.0 to 8.1), (link: https://www.php.net/manual/en/migration82.php text: PHP 8.1 to 8.2) and (link: https://www.php.net/manual/en/migration83.php text: PHP 8.2 to 8.3).
 
 #### Browser support of the Panel
 

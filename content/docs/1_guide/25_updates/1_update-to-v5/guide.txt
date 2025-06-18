@@ -29,7 +29,7 @@ Before you change the PHP version in production, please ensure that your site co
 In any case, we recommend to change the PHP version on a testing or staging server first and verify that everything still works as expected. Performing the PHP update before the Kirby update to 5.0 will make the migration easier.
 </warning>
 
-Your installed plugins and your site code may be affected by breaking changes in PHP itself. You can find out more about this in the official migration guides for (link: https://www.php.net/manual/en/migration82.php text: PHP 8.1 to 8.2), (link: https://www.php.net/manual/en/migration83.php text: PHP 8.2 to 8.3) and (link: https://www.php.net/manual/en/migration84.php text: PHP 8.3 to 8.4).
+Your installed plugins and your site code may be affected by breaking changes and deprecations in PHP itself. You can find out more about this in the official migration guides for (link: https://www.php.net/manual/en/migration82.php text: PHP 8.1 to 8.2), (link: https://www.php.net/manual/en/migration83.php text: PHP 8.2 to 8.3) and (link: https://www.php.net/manual/en/migration84.php text: PHP 8.3 to 8.4).
 
 #### Browser support of the Panel
 
