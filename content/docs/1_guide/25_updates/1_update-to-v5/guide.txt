@@ -143,6 +143,6 @@ If your plugin uses a custom Vuex module, it will be affected by the removal of 
 
 We have removed the `vuevalidate` library in Kirby and are using (link: https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Form_validation text: native form validation). If you have made use of `vuelidate`'s functionality in custom Panel fields, please adapt these as well.
 
-### Removed depracted Panel wrappers `<k-inside>` & `<k-outside>`
+### Removed deprecated Panel wrappers `<k-inside>` & `<k-outside>`
 
 A common incompatibility between Kirby 5 and plugins is when the plugins use the wrapper components `<k-inside>` or `<k-outside>` for their Panel plugin templates. These components were deprecated in Kirby 4 and have finally been removed in Kirby 5. Please use the new components, `<k-panel-inside>` and `<k-panel-outside>`, instead.
