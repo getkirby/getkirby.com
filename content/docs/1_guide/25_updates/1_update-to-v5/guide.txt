@@ -133,10 +133,11 @@ If you need to make tweaks to your styling, use the `light-dark()` CSS function 
 background: light-dark(--color-gray-150, --color-gray-850);
 ```
 
-### New `panel.content` JavaScript module replaces Vuex `$store`
+### Removed support for Vuex
 
 With Kirby 5's new (link: releases/5/changes text: changes version feature), we have replaced the Vuex content module and the Vuex store completely with a new (link: https://lab.getkirby.com/public/lab/internals/panel/content text: `panel.content` module). If you have used the content store (e.g. `this.$store.getters["content/values"]`), you will need to adapt your code.
 
+If your plugin uses a custom Vuex module, it will be affected by the removal of the Vuex library from Kirby's source bundle. Instead of keeping local state inside the Panel frontend, we recommend to pass all data from the backend right when it is needed. This can be done via the (link: releases/3.6/fiber text: Fiber architecture) that was originally introduced with Kirby 3.6 and extended with many more features in the last years.
 
 ### Removed `vuelidate` from Panel
 
