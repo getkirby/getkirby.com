@@ -164,32 +164,34 @@ In your `config.php`:
 
 ```php "/site/config.php"
 'hooks' => [
-  'page.create:after' => function ($page) {
-    $builder = $page->blueprint()->subpage_builder();
-    if(!empty($builder)) {
+    'page.create:after' => function ($page) {
+        $builder = $page->blueprint()->subpage_builder();
+        if (!empty($builder)) {
+            foreach($builder as $build) {
+                $missing = A::missing($build, array('title', 'template', 'uid'));
+                if(!empty($missing)) {
+                    continue;
+                }
 
-      foreach($builder as $build) {
-        $missing = A::missing($build, array('title', 'template', 'uid'));
-        if(!empty($missing)) continue;
-          try {
-            $subPage = $page->createChild([
-              'content'  => ['title' => $build['title']],
-              'slug'     => $build['uid'],
-              'template' => $build['template'],
-            ]);
+                try {
+                    $subPage = $page->createChild([
+                        'content'  => ['title' => $build['title']],
+                        'slug'     => $build['uid'],
+                        'template' => $build['template'],
+                    ]);
+                } catch (Exception $error) {
+                    throw new Exception($error);
+                }
 
-          } catch (Exception $error) {
-            throw new Exception($error);
-          }
-          if($subPage) {
-            $subPage->publish();
-            if(isset($build['num'])) $subPage->changeSort($build['num']);
-          }
-
-         }
+                if($subPage) {
+                    $subPage->publish();
+                    if(isset($build['num'])) {
+                        $subPage->changeSort($build['num']);
+                    }
+                }
+            }
+        }
     }
-
-  }
 ]
 ```
 
@@ -224,7 +226,7 @@ In addition to `Config::set()`, the standard way of adding options is now to use
 ```php "/site/config/config.php"
 <?php
 return [
-    'debug'  => true,
+    'debug' => true,
     'someOtherSetting' => 'something'
 ];
 ```
@@ -283,7 +285,7 @@ The ways to (link: docs/guide/templates/controllers#arguments-from-the-router te
 
 return function ($site, $pages, $page, $args) {
 
-  // $args contains all arguments from the current route
+    // $args contains all arguments from the current route
 
 };
 ```
@@ -295,7 +297,7 @@ to
 
 return function ($kirby) {
 
-  $args = $kirby->route()->arguments();
+    $args = $kirby->route()->arguments();
     // contains all arguments from the current route
 
 };
