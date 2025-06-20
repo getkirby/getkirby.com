@@ -1,8 +1,8 @@
 <?php return array(
     'root' => array(
         'name' => 'getkirby/cms',
-        'pretty_version' => '5.0.0-rc.4',
-        'version' => '5.0.0.0-RC4',
+        'pretty_version' => '5.0.0-rc.6',
+        'version' => '5.0.0.0-RC6',
         'reference' => null,
         'type' => 'kirby-cms',
         'install_path' => __DIR__ . '/../../',
@@ -38,17 +38,17 @@
             'dev_requirement' => false,
         ),
         'filp/whoops' => array(
-            'pretty_version' => '2.18.0',
-            'version' => '2.18.0.0',
-            'reference' => 'a7de6c3c6c3c022f5cfc337f8ede6a14460cf77e',
+            'pretty_version' => '2.18.3',
+            'version' => '2.18.3.0',
+            'reference' => '59a123a3d459c5a23055802237cb317f609867e5',
             'type' => 'library',
             'install_path' => __DIR__ . '/../filp/whoops',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
         'getkirby/cms' => array(
-            'pretty_version' => '5.0.0-rc.4',
-            'version' => '5.0.0.0-RC4',
+            'pretty_version' => '5.0.0-rc.6',
+            'version' => '5.0.0.0-RC6',
             'reference' => null,
             'type' => 'kirby-cms',
             'install_path' => __DIR__ . '/../../',
