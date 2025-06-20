@@ -214,7 +214,7 @@
 			]) ?>
 		<?php endif ?>
 		<?php snippet('templates/partners/plugin-cards', [
-			'plugins' => $plugins->not($hero ?? null),
+			'plugins' => $plugins->not($hero ?? []),
 			'columns' => 3,
 			'gap'     => 24
 		]) ?>
