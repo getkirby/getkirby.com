@@ -111,7 +111,7 @@ Kirby 4 contains some features out of the box that were previously provided by p
 
 ### PHP type hints
 
-We have added a lot more (link: https://www.php.net/manual/en/language.types.declarations.php text: PHP type hints) throughout the system (e.g. for parameters, methods return types). This strictness really reduces the risk of errors in our PHP code. As a consequence, when extending core classes, e.g. in a custom page model, you will have to add some of these type hints to your code as well.
+We have added a lot more (link: https://www.php.net/manual/en/language.types.declarations.php text: PHP type hints) throughout the system (e.g. for parameters, method return types). This strictness really reduces the risk of errors in our PHP code. As a consequence, when extending core classes, e.g. in a custom page model, you will have to add some of these type hints to your code as well.
 
 A common example for an error you might see with your v3 code in v4 is
 

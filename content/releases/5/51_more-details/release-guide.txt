@@ -93,7 +93,7 @@ return function () {
 
 ## First day of the week
 
-first day of the week is chosen based on user language or `date.weekday` config option (`0` for Sunday … `6` for Saturday):
+The first day of the week is chosen based on user language or `date.weekday` config option (`0` for Sunday … `6` for Saturday):
 
 ```php "site/config/config.php"
 return [
@@ -127,7 +127,7 @@ return [
 Redis supports multiple logical databases per Redis instance. If you store multiple caches in Redis, it is strongly recommended to choose a unique `database` number for each. This ensures that each cache gets its own independent namespace and can be flushed independently. You can read more about the concept of Redis databases in the [Redis documentation for the `SELECT` command](https://redis.io/docs/latest/commands/select/).
 
 ## Improved UUID handling
-When duplicating a page, all UUIDs within the copied page, its files and children that point to an object that got copied as - well will be replaced with the UUID of the copied version.
+When duplicating a page, all UUIDs within the copied page, its files and children that point to an object that got copied will be replaced with the UUID of the copied version.
 
 If not copying files, any UUID pointing to a file within the copied page gets removed. [#6567](https://github.com/getkirby/kirby/pull/6567)
 

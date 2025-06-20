@@ -72,7 +72,7 @@ App::plugin(
 );
 ```
 
-### A Custom license for your plugin
+### A custom license for your plugin
 
 You can also pass a license object. Extend our `Kirby\Plugin\License` class to return a custom status, theme, icon and label, depending on the state of your plugin’s license. You can also set a link or your custom dialog's/drawer's endpoint. This is great if you are working with a proprietary license for your plugin, which might still need to purchased/activated by the user.
 
@@ -85,7 +85,7 @@ class MyCustomLicense extends License
 {
   public function __construct(
     protected Plugin $plugin
-  ){
+  ) {
     $this->name = 'My Custom License';
     $this->link = '<https://mylicenseshop.com>';
     $this->status = new LicenseStatus(

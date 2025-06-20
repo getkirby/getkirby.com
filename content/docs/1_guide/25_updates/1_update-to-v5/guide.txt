@@ -86,13 +86,13 @@ If you are using custom private plugins, please also take a look at the (link: #
 
 ### PHP type hints
 
-We have added again more (link: https://www.php.net/manual/en/language.types.declarations.php text: PHP type hints) throughout the system (e.g. for parameters, methods return types), especially around collection classes. This strictness really reduces the risk of errors in our PHP code. As a consequence, when extending core classes, e.g. in a custom page model, you will have to add some of these type hints to your code as well.
+We have again added more (link: https://www.php.net/manual/en/language.types.declarations.php text: PHP type hints) throughout the system (e.g. for parameters, method return types), especially around collection classes. This strictness really reduces the risk of errors in our PHP code. As a consequence, when extending core classes, you will have to add some of these type hints to your code as well.
 
 If you run into typing error messages, have a close look at the error message, and it will tell you which part is affected, so that you can compare it with the core code and spot what type hints need to be added.
 
 ### Site controller
 
-With Kirby 5, the (link: site controller text: docs/guide/templates/controllers#general-site-controller) doesn't function only as a fallback controller anymore. Instead, the data from the site controller and the template-specific controller will be merged and passed to the template.
+With Kirby 5, the (link: docs/guide/templates/controllers#general-site-controller text: site controller) doesn't function only as a fallback controller anymore. Instead, the data from the site controller and the template-specific controller will be merged and passed to the template.
 
 ### `file.sort` permission
 
@@ -141,7 +141,7 @@ If your plugin uses a custom Vuex module, it will be affected by the removal of 
 
 ### Removed `vuelidate` from Panel
 
-We have removed the `vuevalidate` library in Kirby and are using (link: https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Form_validation text: native form validation). If you have made use of `vuelidate`'s functionality in custom Panel fields, please adapt these as well.
+We have removed the `vuelidate` library in Kirby and are using (link: https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Form_validation text: native form validation). If you have made use of `vuelidate`'s functionality in custom Panel fields, please adapt these as well.
 
 ### Removed deprecated Panel wrappers `<k-inside>` & `<k-outside>`
 

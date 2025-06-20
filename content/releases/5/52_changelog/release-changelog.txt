@@ -11,9 +11,9 @@ In addition to all the features listed separately on the (link: /releases/5 text
 Enhancements:
 
 ## Core
-- Thumbnails will no longer be regenerated when page sorting changes [#6432](https://github.com/getkirby/kirby/pull/6432)
+- Thumbnails will no longer be regenerated when the page's sorting number changes [#6432](https://github.com/getkirby/kirby/pull/6432)
 - New `files.sort` permission [#1969](https://github.com/getkirby/kirby/issues/1969)
-- New (class: Kirby\Cms\App method: role text: $app->role()) method that works like (class: Kirby\Cms\App method: user text: $app->user()) to return a specific role or the role of the current user. [#6874](https://github.com/getkirby/kirby/pull/6874)
+- New (class: Kirby\Cms\App method: role text: $app->role()) method that works like (class: Kirby\Cms\App method: user text: $app->user()) to return a specific role or the role of the current user [#6874](https://github.com/getkirby/kirby/pull/6874)
 - Support for content representation specific site controllers, e.g. `site.rss.php` [#6950](https://github.com/getkirby/kirby/pull/6950)
 - New `Kirby\Cms\Pages::delete(array $ids)` and `Kirby\Cms\Files::delete(array $ids)` methods to handle batch delete for multiple files in a collection.
 
@@ -35,7 +35,7 @@ Enhancements:
 
 - New (class: Kirby\Cms\ModelWithContent method: versions) method to get a collection of all versions (currently `changes` and `latest`) [#7059](https://github.com/getkirby/kirby/pull/7059)
 
-- (class: Kirby\Cms\Page method: previewUrl) and (class: Kirby\Cms\Site method: previewUrl) now accept a version id to specify which version you want to preview.
+- (class: Kirby\Cms\Page method: previewUrl) and (class: Kirby\Cms\Site method: previewUrl) now accept a version ID to specify which version you want to preview.
 
   ```php
   $page->previewUrl('latest') // default
@@ -187,7 +187,7 @@ We’ve added the following new icons:
 - New `<k-view-button>` component [#6540](https://github.com/getkirby/kirby/pull/6540)
 - New `<k-form-controls>` component [#6512](https://github.com/getkirby/kirby/pull/6512) with a new dropdown to give information about the author and last modification of the page, site, user or file.
 - New `<k-languages-dropdown>` component
-- `<k-dropdown-content>` exposes `items` in scoped default slot and  has new `item` scoped slot
+- `<k-dropdown-content>` exposes `items` in scoped default slot and has new `item` scoped slot
 
 ### Events
 - `beforeunload` is now available as a global event, which you can listen to:
