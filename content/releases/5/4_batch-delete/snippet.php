@@ -22,9 +22,21 @@
 		<?php snippet('templates/release-4/teaser', ['section' => $section]) ?>
 	</div>
 	<figure class="release-box bg-light grid place-items-center" style="grid-area: screenshot">
-		<?php snippet('templates/release-4/image', [
+		<?= img($section->image('batch-delete.jpg'), [
 			'alt' => 'A screenshot of the fields section. Batch selection mode has been activated and multiple files are selected. A delete button at the top can delete all the selected files at once.',
-			'img' => $section->image('batch-delete.jpg')->resize(850)
+			'src' => [
+				'width' => 520
+			],
+			'lazy' => true,
+			// sizes generated with https://ausi.github.io/respimagelint/
+			'sizes' => '(min-width: 1540px) 600px, (min-width: 1280px) calc(33.33vw + 93px), (min-width: 1160px) calc(100vw - 192px), (min-width: 480px) calc(100vw - 96px), 90vw',
+			'srcset' => [
+				270,
+				637,
+				936,
+				1200,
+				1374
+			]
 		]) ?>
 	</figure>
 	<figure class="release-code-box text-lg" style="grid-area: code">

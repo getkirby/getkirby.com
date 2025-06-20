@@ -116,7 +116,7 @@
 					'sizes' => '(min-width: 1540px) 400px, (min-width: 1280px) calc(22.08vw + 64px), (min-width: 1160px) calc(50vw - 108px), (min-width: 640px) calc(50vw - 60px), (min-width: 480px) calc(100vw - 96px), 90vw',
 					'srcset' => [
 						400,
-						800
+						688
 					]
 				]) ?>
 			</figure>
