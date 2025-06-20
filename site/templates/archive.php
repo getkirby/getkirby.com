@@ -20,11 +20,11 @@
 					<p><?= $version['title'] . ' ' . ($version['description'] ?? null) ?> </p>
 				</div>
 				<div class="columns" style="--columns: 2">
-					<a aria-label="Visit the <?= $version['title'] ?> docs" href="<?= $version['link'] ?>" class="btn <?= $version === end($versions) ? 'btn--filled' : 'btn--outlined' ?>">
+					<a aria-label="Visit the <?= $version['title'] ?> docs" href="<?= $version['link'] ?>" class="btn <?= $version === $versions[0] ? 'btn--filled' : 'btn--outlined' ?>">
 						<?= icon('book') ?>
 						Docs
 					</a>
-					<a aria-label="The Kirby <?= $version['mainVersion'] ?> repository on GitHub" href="<?= $version['repo'] ?>" class="btn <?= $version === end($versions) ? 'btn--filled' : 'btn--outlined' ?>">
+					<a aria-label="The Kirby <?= $version['mainVersion'] ?> repository on GitHub" href="<?= $version['repo'] ?>" class="btn <?= $version === $versions[0] ? 'btn--filled' : 'btn--outlined' ?>">
 						<?= icon('github') ?>
 						Source
 					</a>
