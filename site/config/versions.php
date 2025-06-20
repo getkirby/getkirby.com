@@ -7,7 +7,7 @@ return [
 		'mainVersion' => '1',
 		'since'       => '2012-2014',
 		'description' => 'has reached its end of life and is no longer supported by us.',
-		'link'        => 'https://k1.getkirby.com',
+		'link'        => 'https://v11.getkirby.com',
 		'repo'        => 'https://github.com/getkirby-v1',
 	],
 	'2' => [
@@ -16,7 +16,7 @@ return [
 		'mainVersion' => '2',
 		'since'       => '2014-2020',
 		'description' => 'has reached its end of life and is no longer supported by us.',
-		'link'        => 'https://k2.getkirby.com',
+		'link'        => 'https://v25.getkirby.com',
 		'repo'        => 'https://github.com/getkirby-v2',
 	],
 	'3.5' => [
@@ -79,7 +79,7 @@ return [
 		'mainVersion' => '4',
 		'since'       => 'Nov 2023',
 		'description' => 'is not the most current version of Kirby and should not be used for new projects.',
-		'link'        => 'https://getkirby.com/docs',
+		'link'        => 'https://v40.getkirby.com/docs',
 		'repo'        => 'https://github.com/getkirby',
 	],
 	'5' => [
