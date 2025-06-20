@@ -51,19 +51,11 @@ The new preview view for pages and the site is located at `/panel/pages/(:any)/c
 
 It can be accessed with the new preview button for the site and pages.
 
-(image: preview-dropdown.png class: screenshot-sm)
-
-… or through the page context menu …
-
-(image: page-menu.png class: screenshot-sm)
-
 Get more details about the changes for the current page, file or user, by accessing the new info dropdown next to the form buttons:
 
 (image: changes-info-dropdown.png class: screenshot-sm)
 
 This dropdown will also show more information when the content is locked because another editor is currently working on it.
-
-(image: changes-info-dropdown-locked.png class: screenshot-sm)
 
 ## Changes dialog
 
