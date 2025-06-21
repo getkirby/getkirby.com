@@ -221,7 +221,7 @@ Bugfixes:
 - `User::delete()` will now properly call `file.delete` hooks for deleted user files
 - Fixed invalid parent query in `Kirby\Cms\FileBlueprint` tests [#7167](https://github.com/getkirby/kirby/pull/7167)
 - URLs like `https://example.com/some-invalid-page/some-site-file.pdf` are no longer resolved to an existing site file [#7217](https://github.com/getkirby/kirby/pull/7217)
-- The `Kirby\Http\Uri` class now properly serializes URIs of the form /subfolder/. [#7255](https://github.com/getkirby/kirby/pull/7255)
+- The `Kirby\Http\Uri` class now properly serializes URIs of the form `/subfolder/`. [#7255](https://github.com/getkirby/kirby/pull/7255)
 
 ## Panel
 
@@ -241,7 +241,7 @@ Bugfixes:
 ### Uploads
 
 - Kirby is better at removing failed file uploads from the server tmp directory [#2476](https://github.com/getkirby/kirby/issues/2476)
-- Canceling the file upload dialog now also cancels ongoing uploads [#6421](https://github.com/getkirby/kirby/pull/6421)
+- Cancelling the file upload dialog now also cancels ongoing uploads [#6421](https://github.com/getkirby/kirby/pull/6421)
 
 ### Search
 
@@ -534,19 +534,19 @@ Deprecated:
 
 ### Plugins
 
-- `Kirby\Cms\Plugin` is deprecated. Use `Kirby\Plugin\Plugin` instead
-- `Kirby\Cms\PluginAsset` is deprecated. Use `Kirby\Plugin\Asset` instead
-- `Kirby\Cms\PluginAssets` is deprecated. Use `Kirby\Plugin\Assets` instead
+- `Kirby\Cms\Plugin` is deprecated. Use `Kirby\Plugin\Plugin` instead.
+- `Kirby\Cms\PluginAsset` is deprecated. Use `Kirby\Plugin\Asset` instead.
+- `Kirby\Cms\PluginAssets` is deprecated. Use `Kirby\Plugin\Assets` instead.
 
 ### Forms
 
-- `Kirby\Form\Field::formFields()` is deprecated. Use `::siblings()` instead
-- `Kirby\Form\Field::data()` is deprecated. Use `::toStoredValue()` instead
-- `Kirby\Form\Field::save()` is deprecated. Use `::isSaveable()` instead
-- `Kirby\Form\Field::value()` is deprecated. Use `::toFormValue()` instead
-- `Kirby\Form\FieldClass::data()` is deprecated. Use `::toStoredValue()` instead
-- `Kirby\Form\FieldClass::save()` is deprecated. Use `::isSaveable()` instead
-- `Kirby\Form\FieldClass::value()` is deprecated. Use `::toFormValue()` instead
+- `Kirby\Form\Field::formFields()` is deprecated. Use `::siblings()` instead.
+- `Kirby\Form\Field::data()` is deprecated. Use `::toStoredValue()` instead.
+- `Kirby\Form\Field::save()` is deprecated. Use `::isSaveable()` instead.
+- `Kirby\Form\Field::value()` is deprecated. Use `::toFormValue()` instead.
+- `Kirby\Form\FieldClass::data()` is deprecated. Use `::toStoredValue()` instead.
+- `Kirby\Form\FieldClass::save()` is deprecated. Use `::isSaveable()` instead.
+- `Kirby\Form\FieldClass::value()` is deprecated. Use `::toFormValue()` instead.
 - `Kirby\Form\Form::content()` is deprecated. Use `::toStoredValues()` instead. [#7166](https://github.com/getkirby/kirby/pull/7166)
 - `Kirby\Form\Form::data()` is deprecated. Use `::toStoredValues()` instead. [#7166](https://github.com/getkirby/kirby/pull/7166)
 - `Kirby\Form\Form::strings()` is deprecated. Use `::toStoredValues()` instead. [#7166](https://github.com/getkirby/kirby/pull/7166)
@@ -631,7 +631,7 @@ Refactored:
 ### Languages
 
 - Refactored `Kirby\Cms\LanguageRules` [#6659](https://github.com/getkirby/kirby/pull/6659)
-- New `Language::single()` method to create a Language placeholder object in single language installations [#6448](https://github.com/getkirby/kirby/pull/6448)
+- New `Language::single()` method to create a `Language` placeholder object in single language installations [#6448](https://github.com/getkirby/kirby/pull/6448)
 
 ### Forms
 
@@ -645,7 +645,7 @@ Refactored:
 - `Kirby\Form\Form::field($name)` is now an alias for `$form->fields()->find($name)`
 - Removed an unnecessary check for a blueprint method in the `Form::for` method. `Kirby\Cms\ModelWithContent` has a blueprint method by default and we
 already check for `Kirby\Cms\ModelWithContent` child classes with the argument type.
-- Refactored language handling in the `Kirby\Form\Form` class with the new `Kirby\Cms\Language::ensure()` method. #7132
+- Refactored language handling in the `Kirby\Form\Form` class with the new `Kirby\Cms\Language::ensure()` method. [#7132](https://github.com/getkirby/kirby/pull/7132)
 - Use named parameters for Form construction throughout our entire code base [#7174](https://github.com/getkirby/kirby/pull/7174)
 
 #### `Kirby\Form\Field` class improvements
