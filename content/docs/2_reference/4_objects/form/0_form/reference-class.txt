@@ -308,6 +308,30 @@ dump($form->toFormValues());
 // if `passthrough` has been set to `true`
 ```
 
+### Submitting any value
+
+Sometimes, you need to make sure that all values are submitted, even if the field is disabled or not translatable. The `$force` parameter for the submit method can help here.
+
+```php
+use Kirby\Form\Form;
+
+$form = new Form(
+    fields: [
+        'text' => [
+            'type' => 'text',
+            'disabled' => true
+        ]
+    ]
+);
+
+$form->submit(
+    input: [
+        'text' => 'This will be submitted'
+    ],
+    force: true
+);
+```
+
 ## Resetting form values
 
 Once you've filled the form or submitted values, you might want to reset the values again.
