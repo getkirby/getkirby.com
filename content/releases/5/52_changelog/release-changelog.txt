@@ -210,6 +210,10 @@ We’ve added the following new icons:
 - New async `TextareaInput.restoreSelection()` method
 - New `panel.upload.announce()` method, which sends the success notification and `model.update` event after uploads have successfully completed.
 
+### Lab
+- Overview is filterable via a search input [#7293](https://github.com/getkirby/kirby/pull/7293)
+- Internal components are hidden from docs; unstable components are marked as such [#7295](https://github.com/getkirby/kirby/pull/7295)
+
 ----
 
 Bugfixes:
@@ -227,6 +231,8 @@ Bugfixes:
 - The `Kirby\Http\Uri` class now properly serializes URIs of the form `/subfolder/`. [#7255](https://github.com/getkirby/kirby/pull/7255)
 
 ## Panel
+
+- Dialogs: `Cmd+S` doesn't re-submit the dialog when its already submitting [#7258](https://github.com/getkirby/kirby/issues/7258)
 
 ### Fields
 
@@ -315,7 +321,6 @@ Breaking:
 - Removed `Kirby\Cms\ContentLock` and `Kirby\Cms\ContentLocks` as well as `Kirby\Cms\App::locks()`
 - `$kirby->contentToken()` only accepts `object|null` for the `$model` parameter instead of `mixed`. [#6822](https://github.com/getkirby/kirby/pull/6822)
 - Renamed `token` query param for preview URLs to `_token` [#6823](https://github.com/getkirby/kirby/pull/6823)
-- `Kirby\Content\Content::update()` is actively deprecated and must no longer be used. It will throw an exception to find usage early on.
 
 ### Pages
 
