@@ -18,9 +18,11 @@ Enhancements:
 - New `Kirby\Cms\Pages::delete(array $ids)` and `Kirby\Cms\Files::delete(array $ids)` methods to handle batch delete for multiple files in a collection.
 - Add root for plugin licenses (`$kirby->root('licenses')`)
 - New protected `IsFile::assetFactory()` method to create a new asset instance based on the file type, but without adding it to the property cache. This enhancement is related to the bug fix for [#7289](https://github.com/getkirby/kirby/issues/7289)
+- Harden preview token verification to mitigate guessing the preview token with a timing attack
+- Preview authentication tokens of drafts and (new in Kirby 5) versions have been shortened to 10 characters to make the preview URLs more manageable.
 
 ### Versions
-- New (link: docs/reference/plugins/components/storage text:  `storage` core component) which returns the default storage handler for a model [#6867](https://github.com/getkirby/kirby/pull/6867)
+- New (link: docs/reference/plugins/components/storage text: `storage` core component) which returns the default storage handler for a model [#6867](https://github.com/getkirby/kirby/pull/6867)
 - New (class: Kirby\Cms\ModelWithContent method: version) method to directly access different content versions [#6455](https://github.com/getkirby/kirby/pull/6455)
 
   ```php
@@ -44,6 +46,8 @@ Enhancements:
   $page->previewUrl('changes')
   ```
 
+- It is now possible to override the version ID in `$page->render()` with the new `$versionId` parameter.
+- New `Kirby\Content\VersionId::render()` method to atomically set the render version during a render operation
 - The (class: Kirby\Cms\ModelWithContent method: lock) method returns the new, improved `Kirby\Content\Lock` class, which replaces `Kirby\Cms\ContentLock`
 
   ```php
@@ -156,6 +160,7 @@ Enhancements:
 - Improved contrast for some theme colors (e.g. `aqua-icon` theme)
 - Writer nodes with `inline: true` in their button definition are displayed as inline buttons in toolbar (instead inside the dropdown) [#6902](https://github.com/getkirby/kirby/pull/6902)
 - Page status button uses custom status labels for `title` [#6911](https://github.com/getkirby/kirby/pull/6911)
+- Resetting the password without knowledge of the current password is now only possible after logging in in password reset mode [#7186](https://github.com/getkirby/kirby/pull/7186)
 
 ### Icons
 
@@ -296,7 +301,7 @@ Breaking:
 
 - Closures defined for the `content.salt` option will no longer receive a model when generating a salt for preview authentication tokens of drafts and versions as those tokens are now only based on the URI. The salt callback instead receives `null`  and is expected to return a fixed model-independent salt in this case. When generating a salt for a file media token, the file object is still passed as model. [#6836](https://github.com/getkirby/kirby/pull/6836)
 - The `api.methodOverwrite` option has been renamed to `api.methodOverride`
-- The `content.fileRedirects` option is now set to `false` by default to secure all original files in your content folder.
+- The `content.fileRedirects` option is now set to `false` by default. This protects uploaded file originals from unauthorized downloads. If you rely on the `https://example.com/some/page/file.pdf` or `https://example.com/some-site-file.pdf` routes, you can set the option to `true` or to a closure to control access dynamically per file.
 
 ### Controllers
 
@@ -623,6 +628,7 @@ Refactored:
 - `Page::__construct`, `Site::__construct`, `User::__construct` and `File::__construct` call `parent::__construct` after setting the props [#6499](https://github.com/getkirby/kirby/pull/6499)
 - Simplify `ModelWithContent::writeContent` by using the new `Version::save()` method. [#6505](https://github.com/getkirby/kirby/pull/6505)
 - Simplify `ModelWithContent::content` by using `Language::ensure()` and `Version::content()` [#6505](https://github.com/getkirby/kirby/pull/6505)
+- Consolidate duplicated logic from `$page->previewUrl()` and `$site->previewUrl()` in `$version->url()` (with aliases to the existing methods)
 
 #### Pages
 - Template name is always lowercase in the `Page::setTemplate()` method
