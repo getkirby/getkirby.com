@@ -108,7 +108,7 @@ If you are using these field names in your content files or for custom page/site
 
 ### Refactored form classes
 
-The new changes feature builds on a fully refactored `Form` package. The refactoring comes with several (link: releases/5/changelog#core__forms text: breaking changes) and deprecations. If you have been using the `Form` classes for your own forms, you will need to adapt these uses. The new (link: docs/reference/objects/form/form text: form documentation) includes several practical examples for common use cases.
+The new changes feature builds on a fully refactored `Form` package. The refactoring comes with several (link: releases/5/changelog#breaking-changes__core__forms text: breaking changes) and (link: releases/5/changelog#deprecated__core__forms text: deprecations). If you have been using the `Form` classes for your own forms, you will need to adapt these uses. The new (link: docs/reference/objects/form/form text: form documentation) includes several practical examples for common use cases.
 
 
 ### How to perform the update
