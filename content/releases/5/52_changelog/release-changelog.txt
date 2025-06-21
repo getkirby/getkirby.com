@@ -196,6 +196,7 @@ We’ve added the following new icons:
     // do something before the window/tab closes.
   });
 	```
+- The upload module now sends a `file.upload.error` event for every file that could not be uploaded.
 
 ### Helpers
 - New `this.$helper.throttle` JS helper [#6708](https://github.com/getkirby/kirby/pull/6708)
@@ -206,6 +207,8 @@ We’ve added the following new icons:
 	```
 - New `uploadAsChunks` JS helper function [#6421](https://github.com/getkirby/kirby/pull/6421)
 - New `this.$helper.object.filter(object, predicate)` [#6902](https://github.com/getkirby/kirby/pull/6902)
+- New async `TextareaInput.restoreSelection()` method
+- New `panel.upload.announce()` method, which sends the success notification and `model.update` event after uploads have successfully completed.
 
 ----
 
@@ -575,6 +578,10 @@ Deprecated:
 - `<k-writer>` will be removed in a future version. Use `<k-writer-input>` instead [#6172](https://github.com/getkirby/kirby/pull/6172)
 - `<k-bubble>`, `<k-bubbles>` and `<k-bubbles-field-preview>`. Use `<k-tag>`, `<k-tags>` and `<k-tag-field-preview>` instead. [#6569](https://github.com/getkirby/kirby/pull/6569)
 
+### Panel JS API
+
+- `TextareaInput.restoreSelectionCallback()` has been deprecated. Use `TextareaInput.restoreSelection()` instead.
+
 ----
 
 Refactored:
@@ -589,6 +596,7 @@ Refactored:
 	- `str_starts_with()`
 	- `str_ends_with()`
 - Normalize timezone during unit tests [#7248](https://github.com/getkirby/kirby/pull/7248)
+- Move trait template annotations to class doc [#7272](https://github.com/getkirby/kirby/pull/7272)
 
 ### Model improvements
 
@@ -604,10 +612,7 @@ Refactored:
 - New `Page::normalizeProps()`, `File::normalizeProps()` and `User::normalizeProps()`
 - Unit tests for Models have been reorganized and cleaned up
 - Use `ModelWithContent::version()` in the core where it makes sense [#6455](https://github.com/getkirby/kirby/pull/6455)
-- `Page::__construct` calls `parent::__construct` after setting the props [#6499](https://github.com/getkirby/kirby/pull/6499)
-- `Site::__construct` calls `parent::__construct` after setting the props [#6499](https://github.com/getkirby/kirby/pull/6499)
-- `User::__construct` calls `parent::__construct` after setting the props [#6499](https://github.com/getkirby/kirby/pull/6499)
-- `File::__construct` calls `parent::__construct` after setting the props [#6499](https://github.com/getkirby/kirby/pull/6499)
+- `Page::__construct`, `Site::__construct`, `User::__construct` and `File::__construct` call `parent::__construct` after setting the props [#6499](https://github.com/getkirby/kirby/pull/6499)
 - Simplify `ModelWithContent::writeContent` by using the new `Version::save()` method. [#6505](https://github.com/getkirby/kirby/pull/6505)
 - Simplify `ModelWithContent::content` by using `Language::ensure()` and `Version::content()` [#6505](https://github.com/getkirby/kirby/pull/6505)
 
@@ -782,3 +787,12 @@ The new trait classes help reduce code redundancy between `Kirby\Form\Field` and
 	- Moves some refactoring/clean up changes from [#7104](https://github.com/getkirby/kirby/pull/7104) up to v5
     - Renames some helper functions to `resolve*`
     - Exposes these for kirbyup and other tools
+- Removed unnecessary complete handler in `FilesSection`. The upload module already takes care of the notifications and events.
+- `TextareaInput.selectionRange` and `TextareaInput.restoreSelection()` are used to replace the old `restoreSelectionCallback` method in dialog events for better async control.
+- Various `TextareaInput` methods have been turned into async methods for more stable async/await control throughout all `TextareaInput` methods:
+  - insert
+  - insertFile
+  - insertUpload
+  - prepend
+  - toggle
+  - wrap
