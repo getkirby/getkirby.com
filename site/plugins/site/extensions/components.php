@@ -9,12 +9,18 @@ return [
 	 */
 	'markdown' => function (
 		App $kirby,
-		string $text = null,
+		string|null $text = null,
 		array $options = []
 	) {
 		static $parser;
+		static $config;
 
-		$parser ??= new Marsdown();
+		// if the config options have changed or the component is called for the first time,
+		// (re-)initialize the parser object
+		if ($config !== $options) {
+			$parser = new Marsdown($options);
+			$config = $options;
+		}
 
 		if (($options['inline'] ?? false) === true) {
 			return @$parser->line($text);

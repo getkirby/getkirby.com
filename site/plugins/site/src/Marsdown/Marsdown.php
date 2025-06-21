@@ -14,7 +14,7 @@ class Marsdown extends ParsedownExtra
 	/**
 	 * Extend Parsedown's constructor
 	 */
-	public function __construct()
+	public function __construct(protected array $options = [])
 	{
 		parent::__construct();
 
@@ -373,6 +373,10 @@ class Marsdown extends ParsedownExtra
 			default:
 				return $Block;
 				break;
+		}
+
+		if (isset($this->options['idPrefix'])) {
+			$slug = $this->options['idPrefix'] . '__' . $slug;
 		}
 
 		return [
