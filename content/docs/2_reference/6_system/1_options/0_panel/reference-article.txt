@@ -187,17 +187,20 @@ return [
 return [
   'panel' => [
     'favicon' => [
-      'apple-touch-icon' => [
+      [
+        'rel'  => 'apple-touch-icon',
         'type' => 'image/png',
-        'url'  =>  'assets/apple-touch-icon.png',
+        'href' => 'assets/apple-touch-icon.png',
       ],
-      'shortcut icon' => [
+      [
+        'rel'  => 'shortcut icon',
         'type' => 'image/svg+xml',
-        'url'  => 'assets/favicon.svg',
+        'href' => 'assets/favicon.svg',
       ],
-      'alternate icon' => [
+      [
+        'rel'  => 'icon',
         'type' => 'image/png',
-        'url'  => 'assets/favicon.png',
+        'href' => 'assets/favicon.png',
       ]
     ]
   ]
