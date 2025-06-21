@@ -16,6 +16,8 @@ Enhancements:
 - New (class: Kirby\Cms\App method: role text: $app->role()) method that works like (class: Kirby\Cms\App method: user text: $app->user()) to return a specific role or the role of the current user [#6874](https://github.com/getkirby/kirby/pull/6874)
 - Support for content representation specific site controllers, e.g. `site.rss.php` [#6950](https://github.com/getkirby/kirby/pull/6950)
 - New `Kirby\Cms\Pages::delete(array $ids)` and `Kirby\Cms\Files::delete(array $ids)` methods to handle batch delete for multiple files in a collection.
+- Add root for plugin licenses (`$kirby->root('licenses')`)
+- New protected `IsFile::assetFactory()` method to create a new asset instance based on the file type, but without adding it to the property cache. This enhancement is related to the bug fix for [#7289](https://github.com/getkirby/kirby/issues/7289)
 
 ### Versions
 - New (link: docs/reference/plugins/components/storage text:  `storage` core component) which returns the default storage handler for a model [#6867](https://github.com/getkirby/kirby/pull/6867)
@@ -229,6 +231,7 @@ Bugfixes:
 - Fixed invalid parent query in `Kirby\Cms\FileBlueprint` tests [#7167](https://github.com/getkirby/kirby/pull/7167)
 - URLs like `https://example.com/some-invalid-page/some-site-file.pdf` are no longer resolved to an existing site file [#7217](https://github.com/getkirby/kirby/pull/7217)
 - The `Kirby\Http\Uri` class now properly serializes URIs of the form `/subfolder/`. [#7255](https://github.com/getkirby/kirby/pull/7255)
+- `F::type()` does no longer interpret `.tmp` as valid file extension, but uses mime detection to get the correct type.
 
 ## Panel
 
