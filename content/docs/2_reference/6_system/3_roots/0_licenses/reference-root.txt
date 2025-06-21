@@ -1,0 +1,9 @@
+Title: licenses
+
+----
+
+Since: 5.0.0
+
+----
+
+Intro: Returns the root of the licenses folder (currently only used for plugin licenses).
