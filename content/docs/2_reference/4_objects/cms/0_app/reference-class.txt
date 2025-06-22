@@ -12,7 +12,7 @@ Text:
 
 The `$kirby` class is accessible in Kirby's templates/snippets etc. through the `$kirby` variable.
 
-In any situation, you can define a `$kirby` object using the `kirby()` helper:
+In any situation, you can define a `$kirby` object using the (method: Helper::kirby() text: kirby()) helper:
 
 ```php
 $kirby = kirby();
