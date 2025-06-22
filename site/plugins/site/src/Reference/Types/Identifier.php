@@ -13,6 +13,7 @@ class Identifier extends Type
 {
 	public function __construct(
 		public string $type,
+		public string|null $alias = null
 	) {
 		$this->type = ltrim($this->type, '\\');
 	}

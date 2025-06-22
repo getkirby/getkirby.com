@@ -3,6 +3,9 @@
 namespace Kirby\Reference\Types;
 
 use Kirby\Cms\Html;
+use Kirby\Reference\Reflectable\Reflectable;
+use Kirby\Reference\Reflectable\ReflectableClass;
+use Kirby\Reference\Reflectable\ReflectableClassMethod;
 
 /**
  * A single type
@@ -22,9 +25,6 @@ class Type
 		'true'      => 'bool',
 		'array'     => 'array',
 		'object'    => 'object',
-		'static'    => 'object',
-		'self'      => 'object',
-		'$this'     => 'object',
 		'iterable'  => 'object',
 		'resource'  => 'object',
 		'null'      => 'null',
@@ -34,11 +34,15 @@ class Type
 	];
 
 	public function __construct(
-		public string $type
+		public string $type,
+		public string|null $alias = null
 	) {
 	}
 
-	public static function factory(string $type): static {
+	public static function factory(
+		string $type,
+		Reflectable|null $reflectable = null
+	): static {
 		// generic simple types
 		if (static::generic($type) !== null) {
 			return new static($type);
@@ -50,7 +54,17 @@ class Type
 		}
 
 		// identifier types (class names, interfaces, traits)
-		return new Identifier($type);
+		if (in_array($type, ['self', 'static', '$this']) === true) {
+			if ($reflectable instanceof ReflectableClass) {
+				$alias = $type;
+				$type  = $reflectable->name(short: false);
+			} else if ($reflectable instanceof ReflectableClassMethod) {
+				$alias = $type;
+				$type  = $reflectable->class;
+			}
+		}
+
+		return new Identifier($type, $alias ?? null);
 	}
 
 	/**
@@ -83,6 +97,11 @@ class Type
 		}
 
 		return null;
+	}
+
+	public function is(string $type): bool
+	{
+		return $this->type === $type || $this->alias === $type;
 	}
 
 	/**

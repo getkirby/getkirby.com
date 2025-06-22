@@ -44,10 +44,8 @@ class TypesTest extends TestCase
 
 	public function testHasWithIdentifierSelf(): void
 	{
-		$types = new Types(
-			types: [
-				new Type('self'),
-			],
+		$types = Types::factory(
+			types: 'self',
 			reflectable: new ReflectableClass('TestTypes\A')
 		);
 
@@ -79,11 +77,8 @@ class TypesTest extends TestCase
 
 		// Replace self/static/$this with the actual class name
 		// and ensure duplicates are removed
-		$types = new Types(
-			types: [
-				new Type('static'),
-				new Type('string'),
-			],
+		$types = Types::factory(
+			types: 'static|string',
 			reflectable: new ReflectableClass('TestTypes\A')
 		);
 		$this->assertSame('<code class="type type-class">TestTypes\A</code><span class="px-1 color-gray-400" aria-hidden="true">|</span><span class="sr-only">or</span><code class="type type-string">string</code>', $types->toHtml());
@@ -106,17 +101,11 @@ class TypesTest extends TestCase
 
 		// Replace self/static/$this with the actual class name
 		// and ensure duplicates are removed
-		$types = new Types(
-			types: [
-				new Type('static'),
-				new Type('self'),
-			],
+		$types = Types::factory(
+			types: 'static|self',
 			reflectable: new ReflectableClass('TestTypes\A')
 		);
 
 		$this->assertSame('TestTypes\A', $types->toString());
-
-		// Disable self/static replacement
-		$this->assertSame('static|self', $types->toString(replaceSelf: false));
 	}
 }

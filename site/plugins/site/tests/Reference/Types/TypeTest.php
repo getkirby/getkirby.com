@@ -36,9 +36,7 @@ class TypeTest extends TestCase
 	{
 		return [
 			['integer', 'int'],
-			['$this', 'object'],
-			['self', 'object'],
-			['static', 'object'],
+			['object', 'object'],
 			['"foo"', 'string'],
 			['[1, 2, 3]', 'array']
 		];
@@ -48,6 +46,22 @@ class TypeTest extends TestCase
 	public function testGeneric(string $type, string $expected): void
 	{
 		$this->assertSame($expected, Type::generic($type));
+	}
+
+	public function testIs(): void
+	{
+		$type = Type::factory('string');
+		$this->assertTrue($type->is('string'));
+		$this->assertFalse($type->is('int'));
+
+		$type = Type::factory('Kirby\Cms\App');
+		$this->assertTrue($type->is('Kirby\Cms\App'));
+		$this->assertFalse($type->is('static'));
+		$this->assertFalse($type->is('string'));
+
+		$type = new Identifier('Kirby\Cms\App', 'static');
+		$this->assertTrue($type->is('static'));
+		$this->assertFalse($type->is('self'));
 	}
 
 	public function testToHtml(): void

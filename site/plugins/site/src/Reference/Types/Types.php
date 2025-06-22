@@ -52,8 +52,12 @@ class Types
 		// expect a pipe-separated list of exact types
 		if (is_string($types) === true) {
 			$types = Str::split($types, '|');
-			$types = A::map($types, fn ($type) => Type::factory($type));
-			return new static($types);
+			return new static(
+				types: A::map(
+					$types,
+					fn ($type) => Type::factory($type, $reflectable)
+				)
+			);
 		}
 
 		if ($types instanceof ReflectionUnionType) {
@@ -85,7 +89,10 @@ class Types
 
 		// Create a new Type instance for each type string
 		$types = array_unique($types);
-		$types = A::map($types, fn ($type) => Type::factory($type));
+		$types = A::map(
+			$types,
+			fn ($type) => Type::factory($type, $reflectable)
+		);
 
 		return new static($types, $reflectable);
 	}
@@ -93,9 +100,9 @@ class Types
 	/**
 	 * Check if the types contain a specific type
 	 */
-	public function has(string $type): bool
+	public function has(string $needle): bool
 	{
-		return strpos($this->toString(replaceSelf: false), $type) !== false;
+		return A::some($this->types, fn (Type $type) => $type->is($needle));
 	}
 
 	/**
@@ -135,46 +142,6 @@ class Types
 	}
 
 	/**
-	 * Replace self/static/$this with the actual class name
-	 */
-	protected function replaceSelf(
-		string $string,
-		bool $html = false,
-		bool $linked = true
-	): string {
-		if ($this->reflectable === null) {
-			return $string;
-		}
-
-		// Get the class name
-		if ($this->reflectable instanceof ReflectableClass) {
-			$type = $this->reflectable->name(short: false);
-		} else if ($this->reflectable instanceof ReflectableClassMethod) {
-			$type = $this->reflectable->class;
-		}
-
-		$type    = Type::factory($type ?? 'static');
-		$needles = ['static', 'self', '$this'];
-
-		// If HTML is requested, wrap the needles in code tags
-		if ($html === true) {
-			$needles = A::map(
-				$needles,
-				fn ($needle) => Html::tag('code', $needle, [
-					'class' => 'type type-object'
-				])
-			);
-		}
-
-		$result = match ($html) {
-			true  => $type->toHtml(linked: $linked),
-			false => $type->toString()
-		};
-
-		return str_replace($needles, $result, $string);
-	}
-
-	/**
 	 * Convert the types to HTML
 	 * with links to the reference page for objects
 	 */
@@ -199,12 +166,6 @@ class Types
 			return Type::factory($fallback)->toHtml(linked: $linked);
 		}
 
-		// Replace self/static/$this with the actual class name
-		$types = A::map(
-			$types,
-			fn ($type) => $this->replaceSelf($type,  html: true, linked: $linked)
-		);
-
 		// Remove duplicates
 		$types = array_unique($types);
 
@@ -215,15 +176,10 @@ class Types
 	/**
 	 * Convert the types to a string
 	 */
-	public function toString(bool $replaceSelf = true): string
+	public function toString(): string
 	{
 		// Get string representation for each type
 		$types = A::map($this->types, fn (Type $type) => $type->toString());
-
-		// Replace self/static/$this with the actual class name
-		if ($replaceSelf === true) {
-			$types = A::map($types, fn ($type) => $this->replaceSelf($type));
-		}
 
 		// Remove duplicates
 		$types = array_unique($types);

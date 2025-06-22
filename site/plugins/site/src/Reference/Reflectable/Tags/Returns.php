@@ -56,8 +56,7 @@ class Returns
 	 */
 	public function isImmutable(): bool
 	{
-		return $this->types->has('static') ||
-			   $this->types->has('self');
+		return $this->types->has('static') || $this->types->has('self');
 	}
 
 	/**
