@@ -21,7 +21,7 @@ class ReferenceClassMethodPage extends ReferenceArticlePage
 	public static function findByNames(
 		ReferenceClass $page,
 		array $methods
-	): ReferenceClassMethodPage|null {
+	): static|null {
 		// until we reach end of methods chain
 		while (count($methods) > 0) {
 			// try to find method page

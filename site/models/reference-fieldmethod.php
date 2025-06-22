@@ -17,6 +17,7 @@ class ReferenceFieldMethodPage extends ReferenceArticlePage
 	public static function findByName(
 		string $name
 	): ReferenceFieldMethodPage|null {
+		$name    = Field::$aliases[$name] ?? $name;
 		$methods = page('docs/reference/templates/field-methods');
 		return $methods->find(Str::kebab($name));
 	}

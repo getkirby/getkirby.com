@@ -70,7 +70,7 @@ class ReferenceClassPage extends ReferenceSectionPage
 		);
 	}
 
-	public static function findByName(string $class): Page|null
+	public static function findByName(string $class): static|null
 	{
 		$class = ltrim($class, '\\');
 		$class = ReferenceClassAliasesPage::resolve($class);
