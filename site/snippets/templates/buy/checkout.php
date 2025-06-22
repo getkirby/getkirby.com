@@ -48,10 +48,12 @@
 	justify-content: space-between;
 	background: rgba(255,255,255, .25);
 }
-.checkout .help {
-	font-size: var(--text-xs);
+.checkout :where(.info, .help) {
 	padding-top: var(--spacing-1);
 	color: var(--color-gray-700);
+}
+.checkout .help {
+	font-size: var(--text-xs);
 }
 .checkout .buttons {
 	margin-top: var(--spacing-8);
@@ -283,16 +285,19 @@
 					</div>
 
 					<div v-if="product === '<?= $basic->value() ?>'" class="field">
-						<label class="font-bold flex items-center" style="gap: var(--spacing-2)">
-							<input id="limit" type="checkbox" name="limit" required>
-							<span>Confirm the revenue limit <abbr title="Required" aria-hidden>*</abbr></span>
-						</label>
-						<p class="help">
+						<p class="font-bold">Confirm the revenue limit</p>
+						<p class="info mb-3">
 							<mark>End customers must not exceed a total annual revenue/funding of
 							<strong><?= $revenueLimit ?><span v-if="locale.revenueLimit.length" v-text="locale.revenueLimit"></span></strong></mark>
-							to be eligible for this license.
-							<button type="button" class="underline" @click="product = '<?= $enterprise->value() ?>'">Switch to Enterprise</button> to remove the revenue limit.
+							to be eligible for the Kirby Basic license. <a class="underline" href="#revenue-limit">Read more…</a>
 						</p>
+						<label class="flex items-baseline" style="gap: var(--spacing-2)">
+							<input id="limit" type="checkbox" name="limit" required>
+							<span>
+								I have read and understood this restriction <abbr title="Required" aria-hidden>*</abbr><br>
+								<button type="button" class="underline" @click="product = '<?= $enterprise->value() ?>'">Switch to Enterprise</button> to remove the revenue limit.
+							</span>
+						</label>
 					</div>
 				</div>
 				<div class="buttons">
