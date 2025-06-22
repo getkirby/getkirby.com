@@ -44,6 +44,11 @@ class Type
 			return new static($type);
 		}
 
+		// assume, it’s a chain
+		if (preg_match('/' . Chain::SEPARATORS . '/', $type) === 1) {
+			return new Chain($type);
+		}
+
 		// identifier types (class names, interfaces, traits)
 		return new Identifier($type);
 	}

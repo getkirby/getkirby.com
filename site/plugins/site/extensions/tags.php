@@ -4,6 +4,7 @@ use Kirby\Cms\Html;
 use Kirby\Cms\Section;
 use Kirby\Form\Field;
 use Kirby\Reference\Reflectable\ReflectableOptions;
+use Kirby\Reference\Types\Chain;
 use Kirby\Reference\Types\Identifier;
 use Kirby\Toolkit\Str;
 
@@ -157,30 +158,39 @@ $tags['docs'] = [
  * (class: Kirby\Cms\App)
  * (class: Kirby\Cms\App method: version)
  */
-$tags['class'] = $tags['method'] = [
+$tags['class'] = [
 	'attr' => [
 		'method',
 		'text'
 	],
 	'html' => function ($tag) {
-		$type = rtrim($tag->value, '()');
+		$type = $tag->attr('class');
 		$text = $tag->attr('text');
 
 		// (class: foo method: bar)
-		if ($tag->attr('class') && $tag->attr('method')) {
-			$type .= '::' . $tag->attr('method');
-
-			if ($text === null) {
-				$parts = Str::split($tag->attr('class'), '\\');
-				$name  = array_pop($parts);
-				$text  = $name . '->' . $tag->attr('method') . '()';
-			}
+		if ($tag->attr('method')) {
+			$method = rtrim($tag->attr('method'), '()') . '()';
+			$type  .= '::' . $method;
+			return (new Chain($type))->toHtml(text: $text);
 		}
 
-		$text ??= $type . '()';
+		return (new Identifier($type))->toHtml(text: $text);
+	}
+];
 
-		$type = new Identifier($type);
-		return $type->toHtml(text: $text, linked: true);
+/**
+ * Renders a link to the Reference page for a class method
+ * (method: Kirby\Cms\App::version)
+ */
+$tags['method'] = [
+	'attr' => [
+		'text'
+	],
+	'html' => function ($tag) {
+		$method = rtrim($tag->attr('method'), '()') . '()';
+		$text   = $tag->attr('text');
+
+		return (new Chain($method))->toHtml(text: $text);
 	}
 ];
 

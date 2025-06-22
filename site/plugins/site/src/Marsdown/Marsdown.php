@@ -442,7 +442,12 @@ class Marsdown extends ParsedownExtra
 		return [
 			[
 				'rawHtml' => Types::factory($text)->toHtml(
-					linked: count(array_intersect(['Url', 'Link'], $nonNestables)) === 0
+					// Use text as provided
+					text: $text,
+					// Don't link if the code is  already nested in alink
+					linked:
+						in_array('Url', $nonNestables) === false &&
+						in_array('Link', $nonNestables) === false
 				)
 			]
 		];

@@ -91,6 +91,12 @@ An extended version of `Type` that takes care of classes etc. as type.
 
 The `::toHtml()` method in this case can optionally try to add a link to the Reference page for this type. This is also used for the inline code type parsing of our Marsdown component to add links to inline code elements e.g. referencing a class method (linking to the class method's Reference page).
 
+#### `Chain`
+
+An extended version of `Type` that represents a chain call, usually a base class and one or more chained method calls on the base object. 
+
+It takes care of resolving the chained call, providing the link and color etc. for the last item in the chain as well as ensuring the correct notation of the chained call (taking short handles for special classes like `$page` into account.)
+
 #### `Types`
 
 Represent a collection of `Type` objects. This takes care of some heavy-lifting to normalize the reflection information to the way we want to display it in the Reference. Among others to

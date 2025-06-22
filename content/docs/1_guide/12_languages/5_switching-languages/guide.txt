@@ -34,7 +34,7 @@ The first option is to redirect users to the home page when they select another 
 
 ## Switch B
 
-The second option is to redirect users to the same page in the selected language. This can be done by using `$page->url($language->code())` for the link.
+The second option is to redirect users to the same page in the selected language. This can be done by using (method: Kirby\Cms\Page::url text: $page->url($language->code())) for the link.
 
 ```php
 <nav class="languages">

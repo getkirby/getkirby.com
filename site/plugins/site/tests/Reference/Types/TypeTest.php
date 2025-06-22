@@ -18,6 +18,18 @@ class TypeTest extends TestCase
 		$type = Type::factory('stdClass');
 		$this->assertInstanceOf(Identifier::class, $type);
 		$this->assertSame('stdClass', $type->type);
+
+		$type = Type::factory('Kirby\Cms\App');
+		$this->assertInstanceOf(Identifier::class, $type);
+		$this->assertSame('Kirby\Cms\App', $type->type);
+
+		$type = Type::factory('Kirby\Cms\App::user');
+		$this->assertInstanceOf(Chain::class, $type);
+		$this->assertSame('Kirby\Cms\App::user', $type->type);
+
+		$type = Type::factory('Kirby\Cms\App->user');
+		$this->assertInstanceOf(Chain::class, $type);
+		$this->assertSame('Kirby\Cms\App->user', $type->type);
 	}
 
 	public static function genericProvider(): array

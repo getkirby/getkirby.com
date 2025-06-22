@@ -180,12 +180,13 @@ class Types
 	 */
 	public function toHtml(
 		bool $linked = true,
+		string|null $text = null,
 		string|null $fallback = null
 	): string {
 		// Get HTML representation for each type
 		$types = A::map(
 			$this->types,
-			fn (Type $type) => $type->toHtml(linked: $linked)
+			fn (Type $type) => $type->toHtml(linked: $linked, text: $text)
 		);
 
 		// If there are no types, use the fallback (as type HTML itself)
@@ -195,8 +196,10 @@ class Types
 
 		// Replace self/static/$this with the actual class name
 		$types = A::map($types, fn ($type) => $this->replaceSelf($type,  html: true, linked: $linked));
+
 		// Remove duplicates
 		$types = array_unique($types);
+
 		// Combine into a single string
 		return implode('<span class="px-1 color-gray-400" aria-hidden="true">|</span><span class="sr-only">or</span>', $types);
 	}
@@ -216,6 +219,7 @@ class Types
 
 		// Remove duplicates
 		$types = array_unique($types);
+
 		// Combine into a single string
 		return implode('|', $types);
 	}

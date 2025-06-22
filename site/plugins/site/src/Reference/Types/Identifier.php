@@ -3,11 +3,7 @@
 namespace Kirby\Reference\Types;
 
 use Kirby\Cms\Html;
-use Kirby\Toolkit\A;
-use ReferenceClassMethodPage;
 use ReferenceClassPage;
-use ReferenceFieldMethodPage;
-use ReferenceHelperPage;
 use ReflectionClass;
 
 /**
@@ -22,49 +18,6 @@ class Identifier extends Type
 	}
 
 	/**
-	 * Tries to find and return the Reference page for the type
-	 */
-	public function page(): ReferenceClassPage|ReferenceClassMethodPage|ReferenceFieldMethodPage|ReferenceHelperPage|null
-	{
-		//:: or -> separating class and method
-		$chain  = preg_split('/::|->/', $this->type);
-		$class  = array_shift($chain);
-
-		if (count($chain) > 0) {
-			// Remove leading $
-			$class = ltrim($class, '$');
-
-			if (strtolower($class) === 'field') {
-				return ReferenceFieldMethodPage::findByName($chain[0]);
-			}
-
-			if (strtolower($class) === 'helper') {
-				return ReferenceHelperPage::findByName($chain[0]);
-			}
-		}
-
-		// Get page for base class/object
-		if ($page = ReferenceClassPage::findByName($class)) {
-
-			// If type is only the class, return the page
-			if (count($chain) === 0) {
-				return $page;
-			}
-
-			// Clean up method names
-			$methods = A::map(
-				$chain,
-				fn ($method) => preg_replace('/\(.*\)$/', '', $method)
-			);
-
-			// If method page can be found by chain, return that page
-			return ReferenceClassMethodPage::findByNames($page, $methods);
-		}
-
-		return null;
-	}
-
-	/**
 	 * Returns the HTML markup for the type
 	 *
 	 * @param string|null $text Alternative text to display
@@ -74,32 +27,22 @@ class Identifier extends Type
 		string|null $text = null,
 		bool $linked = true
 	): string {
-		$text ??= $this->type;
+		if ($page = $this->toPage()) {
+			$text ??= $this->toString();
+			$tag    = Html::tag('code', $text, ['class' => 'type type-class']);
 
-		// assume, it’s a class or class method name
-		// (starting with a letter, \ or $)
-		if (preg_match('/^[A-Z\\\$]/', $this->type) === 1) {
-
-			// check if reference page for class or class method exists
-			if ($page = $this->page()) {
-				$tag = Html::tag('code', $text, [
-					'class' => 'type type-' . match (true) {
-						$page instanceof ReferenceClassMethodPage => 'method',
-						default                                   => 'class'
-					}
-				]);
-
-				if ($linked === true) {
-					$tag = Html::a(
-						$page->url(),
-						[$tag],
-						['class' => 'type-link']
-					);
-				}
-
-				return $tag;
+			if ($linked === true) {
+				$tag = Html::a(
+					$page->url(),
+					[$tag],
+					['class' => 'type-link']
+				);
 			}
+
+			return $tag;
 		}
+
+		$text ??= $this->type;
 
 		// Some class exists in PHP in the global namespace.
 		// The second check is done to ensure correct case,
@@ -114,5 +57,22 @@ class Identifier extends Type
 		}
 
 		return Html::tag('code', $text, ['class' => 'type']);
+	}
+
+	/**
+	 * Returns the page for the identifier
+	 */
+	public function toPage(): ReferenceClassPage|null
+	{
+		$class = ltrim($this->type, '$');
+		return ReferenceClassPage::findByName($class);
+	}
+
+	/**
+	 * Return the identifier as a string
+	 */
+	public function toString(): string
+	{
+		return $this->toPage()?->name(short: false) ?? $this->type;
 	}
 }
