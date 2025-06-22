@@ -4,31 +4,38 @@
 .type-link {
 	text-decoration: none !important;
 }
-.type.type-string {
+.type:is(.type-string) {
 	background: var(--color-green-400);
 }
-.type.type-int {
+.type:is(.type-int) {
 	background: var(--color-orange-400);
 }
-.type.type-float,
-.type.type-number {
+.type:is(.type-float, .type-number) {
 	background: var(--color-red-400);
 }
-.type.type-bool,
-.type.type-boolean {
+.type:is(.type-bool, .type-boolean) {
 	background: var(--color-purple-400);
 }
-.type.type-array,
-.type.type-callable {
+.type:is(.type-array, .type-callable) {
 	background: var(--color-aqua-400);
 }
-.type.type-object,
-.type.type-class {
+.type:is(.type-object, .type-class) {
 	background: var(--color-yellow-400);
 }
-.type.type-method {
+.type:is(.type-method) {
 	background: var(--color-blue-400);
 }
-.box--info .type.type-method {
-	background: var(--color-blue-400);
+
+/* Override for info boxes */
+.box--success .type:is(.type-string) {
+	background: var(--color-green-500);
+}
+.box--alert .type:is(.type-float, .type-number) {
+	background: var(--color-red-500);
+}
+.box--info .type:is(.type-method) {
+	background: var(--color-blue-500);
+}
+.box--warning .type:is(.type-int) {
+	background: var(--color-orange-500);
 }
