@@ -40,6 +40,18 @@ class ReleasePage extends DefaultPage
 		return $this->deprecated();
 	}
 
+	public function docs(): Field
+	{
+		$link = $this->kirby()->option('versions')[$this->versionField()->value()]['link'] ?? null;
+
+		return parent::docs()->or($link);
+	}
+
+	public function isLatestMajor(): bool
+	{
+		return (int)$this->kirby()->version() === $this->versionField()->toInt();
+	}
+
 	public function latestRelease(): string|null
 	{
 		// first try the latest stable release
@@ -113,11 +125,10 @@ class ReleasePage extends DefaultPage
 
 	public function tryLink(): Field
 	{
-		$field   = parent::tryLink();
-		$version = $this->versionField();
+		$field = parent::tryLink();
 
 		// never link to downloads of previous major releases
-		if (Str::before($this->kirby()->version(), '.') > $version) {
+		if ($this->isLatestMajor() === false) {
 			return $field;
 		}
 

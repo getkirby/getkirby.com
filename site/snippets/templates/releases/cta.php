@@ -1,17 +1,14 @@
 <?php
 
-$version = $page->versionField();
-$docs    = $kirby->option('versions')[$version->value()]['link'] ?? '/docs';
-
 $buttons = [
 	[
 		'text' => 'Docs',
-		'link' => $page->docs()->or($docs),
+		'link' => $page->docs()->or('/docs'),
 		'icon' => 'book'
 	],
 ];
 
-if ((int)$kirby->version() === $version->toInt()) {
+if ($page->isLatestMajor()) {
 	$buttons[] = [
 		'text' => 'Try now',
 		'link' => $page->tryLink()->or('/try'),
