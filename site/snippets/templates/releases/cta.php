@@ -2,7 +2,7 @@
 
 $buttons = [
 	[
-		'text' => 'Docs',
+		'text' => $page->isLatestMajor() ? 'Docs' : 'Archived docs',
 		'link' => $page->docs()->or('/docs'),
 		'icon' => 'book'
 	],
