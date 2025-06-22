@@ -8,8 +8,6 @@ ogimage: opengraph.png
 ----
 Description: Kirby 4 is all about a new editing experience for users, with a brand new, stunning Panel design.
 ----
-Docs: /docs
-----
 Cover: - kirby-4-0.png
 ----
 MigrationGuides:

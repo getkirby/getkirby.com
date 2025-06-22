@@ -13,17 +13,8 @@
 		<p class="h1 color-gray-600">Calumma</p>
 	</div>
 
-	<?php snippet('cta', [
-		'buttons' => [
-			[
-				'text' => 'Try now',
-				'link' => '/try',
-				'icon' => 'download',
-				'style' => 'outlined'
-			],
-		],
-		'center' => false,
-		'mb' => 0
+	<?php snippet('templates/releases/cta', [
+		'options' => ['center' => false, 'mb' => 0]
 	]) ?>
 
 </header>
