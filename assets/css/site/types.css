@@ -4,7 +4,7 @@
 .type-link {
 	text-decoration: none !important;
 }
-.type:is(.type-string) {
+.type:is(.type-string, .type-vue) {
 	background: var(--color-green-400);
 }
 .type:is(.type-int) {
@@ -27,7 +27,7 @@
 }
 
 /* Override for info boxes */
-.box--success .type:is(.type-string) {
+.box--success .type:is(.type-string, .type-vue) {
 	background: var(--color-green-500);
 }
 .box--alert .type:is(.type-float, .type-number) {

@@ -39,7 +39,7 @@ class GlbFilePreview extends FilePreview
 }
 ```
 
-This is the minimal setup for a custom class. It defines which Vue component to use, in this case `k-glb-file-preview`. If no component is specified, `k-default-file-preview` will be used. The `::accepts($file)` method is used to determine which preview class is used for the specific file. Kirby will loop through all available preview classes and use the first one that accepts the file.
+This is the minimal setup for a custom class. It defines which Vue component to use, in this case `k-glb-file-preview`. If no component is specified, `<k-default-file-preview>` will be used. The (method: Kirby\Panel\Ui\FilePreview::accepts text: ::accepts($file)) method is used to determine which preview class is used for the specific file. Kirby will loop through all available preview classes and use the first one that accepts the file.
 
 
 ### Register your preview class
@@ -66,7 +66,7 @@ By default, file preview components will receive three default props:
 | `details` | array with basic file information (ideally used for `<k-file-preview-details>`) |
 | `image` | object with the thumb icon/image also used in sections etc. |
 
-You could provide additional information to your Vue component by extending the (class: Kirby\Panel\Ui\FilePreview method: props text: ::props()) method. We are not using the `image` prop for this example.
+You could provide additional information to your Vue component by extending the (method: Kirby\Panel\Ui\FilePreview::props text: ::props()) method. We are not using the `image` prop for this example.
 
 
 We use the `<k-file-preview-frame>` component as wrapper for our actual 3D model, which adds a pattern background.

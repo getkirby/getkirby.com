@@ -76,7 +76,7 @@ For some buttons, the context in which the button is displayed might be relevant
 
 ## Custom Vue component
 
-By default, custom view buttons are rendered with the (link: https://lab.getkirby.com/public/lab/docs/k-view-button text: `k-view-button` component).
+By default, custom view buttons are rendered with the `<k-view-button>` component.
 
 If you need more interactivity or want to render a more complex UI, you can create your own Vue component:
 

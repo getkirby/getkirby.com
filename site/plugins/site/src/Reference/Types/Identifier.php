@@ -44,6 +44,21 @@ class Identifier extends Type
 
 		$text ??= $this->type;
 
+		// Handle Vue components and link to Lab
+		if (preg_match('/^<(k-[a-z\-]+)>$/', $this->type, $matches) === 1) {
+			$tag = Html::tag('code', $text, ['class' => 'type type-vue']);
+
+			if ($linked === true) {
+				$tag =  Html::a(
+					'https://lab.getkirby.com/public/lab/docs/' . $matches[1],
+					[$tag],
+					['class' => 'type-link']
+				);
+			}
+
+			return $tag;
+		}
+
 		// Some class exists in PHP in the global namespace.
 		// The second check is done to ensure correct case,
 		// as `class_exists()` is not case-sensitive.
