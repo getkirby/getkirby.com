@@ -22,6 +22,8 @@ return [
 		'pattern' => 'docs/cookbook/content-representations/load-more-with-ajax',
 		'action'  => fn () => go('docs/cookbook/content-representations/ajax-load-more')
 	],
+
+	// August 2024
 	[
 		'pattern' => 'docs/cookbook/setup/ddev',
 		'action'  => fn () => go('docs/cookbook/development-deployment/ddev')
@@ -51,5 +53,11 @@ return [
 	[
 		'pattern' => 'made-with-kirby-and-love',
 		'action'  => fn () => go('/')
+	],
+
+	// June 2025
+	[
+		'pattern' => 'buzz/v5-alpha',
+		'action'  => fn () => go('releases/5')
 	],
 ];
