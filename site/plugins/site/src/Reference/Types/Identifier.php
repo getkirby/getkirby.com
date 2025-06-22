@@ -65,7 +65,10 @@ class Identifier extends Type
 	public function toPage(): ReferenceClassPage|null
 	{
 		$class = ltrim($this->type, '$');
-		return ReferenceClassPage::findByName($class);
+		return ReferenceClassPage::findByName(
+			class: $class,
+			aliases: str_starts_with($this->type, '$') === true
+		);
 	}
 
 	/**

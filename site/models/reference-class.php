@@ -70,10 +70,15 @@ class ReferenceClassPage extends ReferenceSectionPage
 		);
 	}
 
-	public static function findByName(string $class): static|null
-	{
+	public static function findByName(
+		string $class,
+		bool $aliases = false
+	): static|null {
 		$class = ltrim($class, '\\');
-		$class = ReferenceClassAliasesPage::resolve($class);
+
+		if ($aliases === true) {
+			$class = ReferenceClassAliasesPage::resolve($class);
+		}
 
 		// don't even start to look if the class does not exist in Kirby
 		if (class_exists($class) === false) {

@@ -51,7 +51,7 @@ class IdentifierTest extends TestCase
 		$page       = $identifier->toPage();
 		$this->assertNull($page);
 
-		$identifier = new Identifier('Page');
+		$identifier = new Identifier('$page');
 		$page       = $identifier->toPage();
 		$this->assertInstanceOf(ReferenceClassPage::class, $page);
 		$this->assertSame('docs/reference/objects/cms/page', $page->id());
@@ -62,6 +62,6 @@ class IdentifierTest extends TestCase
 		$identifier = new Identifier('\Kirby\Cms\App');
 		$this->assertSame('Kirby\Cms\App', $identifier->toString());
 
-		$identifier = new Identifier('Page');
+		$identifier = new Identifier('$page');
 		$this->assertSame('Kirby\Cms\Page', $identifier->toString());
 	}}

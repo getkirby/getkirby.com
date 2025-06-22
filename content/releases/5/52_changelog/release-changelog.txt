@@ -13,17 +13,17 @@ Enhancements:
 ## Core
 - Thumbnails will no longer be regenerated when the page's sorting number changes [#6432](https://github.com/getkirby/kirby/pull/6432)
 - New `files.sort` permission [#1969](https://github.com/getkirby/kirby/issues/1969)
-- New (class: Kirby\Cms\App method: role text: $app->role()) method that works like (class: Kirby\Cms\App method: user text: $app->user()) to return a specific role or the role of the current user [#6874](https://github.com/getkirby/kirby/pull/6874)
+- New `$kirby->role()` method that works like `$kirby->user()` to return a specific role or the role of the current user [#6874](https://github.com/getkirby/kirby/pull/6874)
 - Support for content representation specific site controllers, e.g. `site.rss.php` [#6950](https://github.com/getkirby/kirby/pull/6950)
 - New `Kirby\Cms\Pages::delete(array $ids)` and `Kirby\Cms\Files::delete(array $ids)` methods to handle batch delete for multiple files in a collection.
 - Add root for plugin licenses (`$kirby->root('licenses')`)
-- New protected `IsFile::assetFactory()` method to create a new asset instance based on the file type, but without adding it to the property cache. This enhancement is related to the bug fix for [#7289](https://github.com/getkirby/kirby/issues/7289)
+- New protected `Kirby\Filesystem\IsFile::assetFactory()` method to create a new asset instance based on the file type, but without adding it to the property cache. This enhancement is related to the bug fix for [#7289](https://github.com/getkirby/kirby/issues/7289)
 - Harden preview token verification to mitigate guessing the preview token with a timing attack
 - Preview authentication tokens of drafts and (new in Kirby 5) versions have been shortened to 10 characters to make the preview URLs more manageable.
 
 ### Versions
 - New (link: docs/reference/plugins/components/storage text: `storage` core component) which returns the default storage handler for a model [#6867](https://github.com/getkirby/kirby/pull/6867)
-- New (class: Kirby\Cms\ModelWithContent method: version) method to directly access different content versions [#6455](https://github.com/getkirby/kirby/pull/6455)
+- New (method: Kirby\Cms\ModelWithContent::version) method to directly access different content versions [#6455](https://github.com/getkirby/kirby/pull/6455)
 
   ```php
   // Accessing different versions
