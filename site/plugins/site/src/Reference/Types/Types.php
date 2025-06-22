@@ -184,10 +184,15 @@ class Types
 		string|null $fallback = null
 	): string {
 		// Get HTML representation for each type
-		$types = A::map(
-			$this->types,
-			fn (Type $type) => $type->toHtml(linked: $linked, text: $text)
-		);
+		$types = [];
+		$texts = Str::split($text, '|');
+
+		foreach ($this->types as $index => $type) {
+			$types[] = $type->toHtml(
+				text: $texts[$index] ?? null,
+				linked: $linked
+			);
+		}
 
 		// If there are no types, use the fallback (as type HTML itself)
 		if (count($types) === 0 && $fallback !== null) {
@@ -195,7 +200,10 @@ class Types
 		}
 
 		// Replace self/static/$this with the actual class name
-		$types = A::map($types, fn ($type) => $this->replaceSelf($type,  html: true, linked: $linked));
+		$types = A::map(
+			$types,
+			fn ($type) => $this->replaceSelf($type,  html: true, linked: $linked)
+		);
 
 		// Remove duplicates
 		$types = array_unique($types);
