@@ -27,7 +27,20 @@ fields:
 
 (field-options: slug)
 
-## Sync option
+## `allow` option
+
+By default, the slug field will strip out or replace any non-alphabetic, non-numeric character with a simple dash. You can define a custom set of allowed characters with the `allow` option:
+
+```yaml
+fields:
+  className:
+    label: Class Name
+    type: slug
+    sync: title
+    allow: a-z_
+```
+
+## `sync` option
 
 You can sync the slug field with another field. Whenever the editor types something into the synced field, the slug field will update with a sluggified version of the input:
 
@@ -38,7 +51,6 @@ fields:
     type: slug
     sync: title
 ```
-<info>
 Please note that when your field to sync uses camelCase, you still have to reference the field with all lowercase letters:
 
 ```yaml
@@ -52,9 +64,23 @@ fields:
 ```
 
 The same applies for the `wizard` option below.
-</info>
 
-## Wizard option
+The slug field also works within blocks or structure field items to sync fields within a block/structure field item:
+
+```yaml
+fields:
+  structure:
+  type: structure
+  fields:
+    text:
+      type: text
+    slug:
+      type: slug
+      sync: text
+```
+
+
+## `wizard` option
 
 If you don't want to automatically sync the slug field with the other field, you can also to do this manually when you click a button. The `wizard` option accepts a `field` to sync with and a `text` attribute for the button text.
 
@@ -69,33 +95,6 @@ fields:
 ```
 
 (image: slug-field-wizard-option.png)
-
-## Allow option
-
-By default, the slug field will strip out or replace any non-alphabetic, non-numeric character with a simple dash. You can define additional allowed characters with the allow option:
-
-```yaml
-fields:
-  className:
-    label: Class Name
-    type: slug
-    sync: title
-    allow: _
-```
-
-<info>
-The slug field also works within blocks or structure field items to sync fields within a block/structure field item.
-```yaml
-fields:
-  structure:
-  type: structure
-  fields:
-    text:
-      type: text
-    slug:
-      type: slug
-      sync: text
-</info>
 
 
 ## How to use in templates/snippets
