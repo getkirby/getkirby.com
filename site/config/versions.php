@@ -79,7 +79,7 @@ return [
 		'mainVersion' => '4',
 		'since'       => 'Nov 2023 - June 2025',
 		'description' => 'is not the most current version of Kirby and should not be used for new projects.',
-		'link'        => 'https://v40.getkirby.com/docs',
+		'link'        => 'https://v4.getkirby.com/docs',
 		'repo'        => 'https://github.com/getkirby',
 	],
 	'5' => [
