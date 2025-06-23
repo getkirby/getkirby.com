@@ -39,23 +39,21 @@
 		>
 			<?php foreach ($discounts as $volume => $discount): ?>
 				<li class="block p-12 bg-light rounded text-center" >
-					<article>
-						<h3 class="mb text-sm">
-							<?= $volume ?>+ licenses
-						</h3>
-						<div class="mb-6">
-							<p class="h2">
-								Save <?= $discount ?>%
-							</p>
-							<?php if ($sale->isActive()): ?>
-								<p class="sale text-sm">on top!</p>
-							<?php endif ?>
-						</div>
+					<h3 class="mb text-sm">
+						<?= $volume ?>+ licenses
+					</h3>
+					<div class="mb-6">
+						<p class="h2">
+							Save <?= $discount ?>%
+						</p>
+						<?php if ($sale->isActive()): ?>
+							<p class="sale text-sm">on top!</p>
+						<?php endif ?>
+					</div>
 
-						<button class="btn btn--filled mb-3" @click.prevent="openCheckout(product, <?= $volume ?>)" name="volume" value="<?= $volume ?>">
-							<?= icon('cart') ?> Buy now
-						</button>
-					</article>
+					<button class="btn btn--filled mb-3" @click.prevent="openCheckout(product, <?= $volume ?>)" name="volume" value="<?= $volume ?>">
+						<?= icon('cart') ?> Buy now
+					</button>
 				</li>
 			<?php endforeach ?>
 		</ul>
