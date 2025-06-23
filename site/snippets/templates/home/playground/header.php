@@ -55,6 +55,10 @@
 						</button>
 					<?php endif ?>
 				</form>
+
+				<div class="playground-header-figure-loader">
+					<?= icon('loader') ?>
+				</div>
 			</figure>
 			<div class="playground-header-menu">
 				<div class="sticky" style="--top: var(--spacing-2)">

@@ -34,6 +34,10 @@ export class Playground {
 		return this.$el.querySelector(".playground-header-figure-wrapper img");
 	}
 
+	get figure() {
+		return this.$el.querySelector(".playground-header-figure");
+	}
+
 	async loadHtml(link) {
 		const response = await fetch(link, {
 			cache: "no-store",
@@ -43,9 +47,7 @@ export class Playground {
 		const doc = parser.parseFromString(body, "text/html");
 
 		// load the new image as hidden before it gets injected
-		doc
-			.querySelector(".playground-header-figure-wrapper")
-			.classList.add("loading");
+		this.figure.classList.add("loading");
 
 		return doc;
 	}
@@ -61,7 +63,7 @@ export class Playground {
 
 	async switchTo(link, target) {
 		// fade out the old image
-		this.wrapper.classList.add("loading");
+		this.figure.classList.add("loading");
 
 		// preload the new image
 		this.preload(target);
@@ -79,7 +81,7 @@ export class Playground {
 		// fade in the image once loaded
 		this.image.addEventListener("load", function () {
 				// let the browser render the image first to reduce flickering issues
-				setTimeout(() => this.parentNode.classList.remove("loading"), 10);
+				setTimeout(() => this.figure.classList.remove("loading"), 10);
 			});
 
 		// reactivate code highlighting
