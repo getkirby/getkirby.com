@@ -1,5 +1,5 @@
 .search .search-button {
-	padding: .5rem .75rem;
+	padding: 0.5rem 0.75rem;
 }
 
 .search-dialog {
@@ -14,13 +14,29 @@
 .search-input {
 	border-bottom: 1px solid var(--color-light);
 }
-.search-input > figure {
+
+.search-input-icon {
 	position: absolute;
 	top: 0;
 	left: 0;
 	height: 3rem;
 	width: 2.5rem;
 }
+.search-input-icon svg:nth-child(2) {
+	animation: Spin 0.9s linear infinite;
+}
+@keyframes Spin {
+	100% {
+		transform: rotate(360deg);
+	}
+}
+form:not([data-fetching]) .search-input-icon svg:last-child {
+	display: none;
+}
+form[data-fetching] .search-input-icon svg:first-child {
+	display: none;
+}
+
 .search-input input {
 	padding: 0 var(--spacing-3) 0 2.5rem;
 	height: 3rem;
@@ -49,7 +65,7 @@
 .search-input-area > button > span::after {
 	position: absolute;
 	top: 50%;
-	right: .5rem;
+	right: 0.5rem;
 	content: "";
 	margin-top: -3px;
 	border-top: 4px solid #000;
@@ -68,7 +84,7 @@
 	--arrow: var(--spacing-1);
 	position: absolute;
 	top: calc(var(--arrow) * -1);
-	left: 50% ;
+	left: 50%;
 	transform: translateX(-50%);
 	content: "";
 	border-bottom: var(--arrow) solid var(--menu-dropdown-bg);
@@ -150,8 +166,9 @@
 	align-items: center;
 }
 .search-footer a svg {
+	width: auto;
 	height: 1rem;
-	margin-left: .75rem;
+	margin-left: 0.75rem;
 }
 
 .search-result:focus-within,
