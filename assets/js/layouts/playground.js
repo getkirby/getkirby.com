@@ -39,10 +39,6 @@ export class Playground {
 		return this.$el.querySelector(".playground-header-figure");
 	}
 
-	get image() {
-		return this.wrapper.querySelector("img");
-	}
-
 	async loadHtml(link) {
 		const response = await fetch(link, {
 			cache: "no-store",
@@ -75,15 +71,16 @@ export class Playground {
 	async replaceImage(target) {
 		return new Promise((resolve) => {
 			const theme = this.theme.charAt(0).toUpperCase() + this.theme.slice(1);
+			const oldImage = this.wrapper.querySelector("img:last-child");
 
 			// clone image, replace src and srcset
 			// and add it to the wrapper
-			const image = this.image.cloneNode(true);
-			image.src = target.dataset[`image${theme}Src`];
-			image.srcset = target.dataset[`image${theme}Srcset`];
+			const newImage = oldImage.cloneNode(true);
+			newImage.src = target.dataset[`image${theme}Src`];
+			newImage.srcset = target.dataset[`image${theme}Srcset`];
 
 			// when new image is loaded…
-			image.onload = async () => {
+			newImage.onload = async () => {
 				// wait briefly to prevent flickering
 				await new Promise((resolve) => {
 					setTimeout(() => {
@@ -92,19 +89,18 @@ export class Playground {
 				});
 
 				// fade out old image
-				const old = this.wrapper.querySelector("img:first-child");
-				old.style.opacity = 0;
+				oldImage.style.opacity = 0;
 
 				// remove old image after fade out is complete
 				setTimeout(() => {
-					old.remove();
-				}, 800);
+					oldImage.remove();
+				}, 700);
 
 				resolve();
 			};
 
 			// append new image behind current image
-			this.wrapper.appendChild(image);
+			this.wrapper.appendChild(newImage);
 		});
 	}
 
