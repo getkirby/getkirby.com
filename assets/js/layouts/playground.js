@@ -117,11 +117,12 @@ export class Playground {
 
 		target.setAttribute("aria-current", "true");
 
-		// replace the playground content
-		await this.replaceContent(link);
-
-		// replace the playground image
-		await this.replaceImage(target);
+		await Promise.all([
+			// replace the playground image
+			this.replaceImage(target),
+			// replace the playground content
+			this.replaceContent(link),
+		]);
 
 		// update figure data-theme to show/hide correct theme toggle
 		// and stop loader animation
