@@ -19,6 +19,7 @@
 					class="playground-header-figure-wrapper"
 					style="--aspect-ratio: <?= $storyImage->width() . '/' . $storyImage->height() ?>"
 					data-image="<?= $story->uid() . '/' . $storyImage->mediaHash() ?>"
+					data-theme="<?= $theme ?>"
 				>
 					<?= img($storyImage, [
 						'alt' => $storyImage->alt()->or('Panel screenshot for: ' . $story->title()),
@@ -42,14 +43,40 @@
 						]
 					]) ?>
 				</span>
+
+				<form autocomplete="off" class="playground-theme-toggle">
+					<?php if ($theme === 'dark'): ?>
+						<button name="theme" value="light" title="Switch to light mode">
+							<?= icon('sun') ?>
+						</button>
+					<?php else: ?>
+						<button name="theme" value="dark" title="Switch to dark mode">
+							<?= icon('moon') ?>
+						</button>
+					<?php endif ?>
+				</form>
+
+				<div class="playground-header-figure-loader">
+					<?= icon('loader') ?>
+				</div>
 			</figure>
 			<div class="playground-header-menu">
-				<ul class="font-mono text-sm pt-6 sticky" style="--top: var(--spacing-2)">
-					<?php foreach ($stories as $option): ?>
-					<li><a <?php e($story === $option, 'aria-current="true"') ?> href="?your=<?= $option->slug() ?>" data-image="<?= $option->uid() . '/' . $option->images()->findBy('name', 'panel')->mediaHash() ?>"><?= $option->title() ?></a></li>
-					<?php endforeach ?>
-					<li><a class="font-bold more" href="/love">Your ideas &rarr;</a></li>
-				</ul>
+				<div class="sticky" style="--top: var(--spacing-2)">
+					<ul class="font-mono text-sm pt-6 mb-6">
+						<?php foreach ($stories as $option): ?>
+						<li>
+							<a
+								<?php e($story === $option, 'aria-current="true"') ?>
+								href="?your=<?= $option->slug() ?>&theme=<?= $theme ?>"
+								data-image="<?= $option->uid() . '/' . $option->images()->findBy('name', $storyImageName)->mediaHash() ?>"
+							>
+								<?= $option->title() ?>
+							</a>
+						</li>
+						<?php endforeach ?>
+						<li><a class="font-bold more" href="/love">Your ideas &rarr;</a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>
