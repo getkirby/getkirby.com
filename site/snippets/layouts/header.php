@@ -1,3 +1,4 @@
+<?php if ($kirby->option('archived') !== true): ?>
 <div class="container">
 	<?php snippet('layouts/topbar', [
 		'icon'   => '🎉',
@@ -7,6 +8,7 @@
 		'active' => $page->is('releases/5')
 	]) ?>
 </div>
+<?php endif ?>
 
 <header class="header">
 	<?php snippet('layouts/skipper') ?>
