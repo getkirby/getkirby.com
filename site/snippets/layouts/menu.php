@@ -53,6 +53,8 @@
 							'Quicktips'   => page('docs/quicktips'),
 							'Screencasts' => 'https://www.youtube.com/kirbycasts',
 							'Glossary'    => page('docs/glossary'),
+							'-',
+							'Archive'     => page('docs/archive'),
 						]
 					]) ?>
 				</ul>
