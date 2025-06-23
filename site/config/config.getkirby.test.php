@@ -17,8 +17,7 @@ return [
 		]
 	],
 	'thumbs' => [
-		'driver' => 'im',
-		'bin' => '/opt/homebrew/bin/convert'
+		// 'bin' => '/usr/local/bin/convert'
 	],
 	'hub' => [
 		'url' => 'https://hub.getkirby.test'
