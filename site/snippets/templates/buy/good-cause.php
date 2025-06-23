@@ -24,7 +24,7 @@
 					<figure>
 						<span class="block shadow-2xl mb-3" style="--aspect-ratio: 3/4">
 							<?= img($image = $case->image(), [
-								'alt' => 'Screenshot of the ' . $image->alt() . ' website',
+								'alt' => $image->alt()->or('Screenshot of the ' . $case->title() . ' website'),
 								'src' => [
 									'width' => 300
 								],
