@@ -10,6 +10,24 @@ export class Playground {
 				this.switchTo(link, e.target);
 			}
 		});
+
+		document.addEventListener("submit", async (e) => {
+			const form = e.target.closest(".playground-header-figure form");
+
+			if (!form) {
+				return;
+			}
+
+			e.preventDefault();
+
+			const theme = form.querySelector("button").value;
+			const link  = this.$el.querySelector(".playground-header-menu a[aria-current]");
+			const url   = new URL(link.href);
+			url.searchParams.set("theme", theme);
+
+			await this.switchTo(url.toString(), link);
+
+		});
 	}
 
 	get image() {
@@ -17,7 +35,9 @@ export class Playground {
 	}
 
 	async loadHtml(link) {
-		const response = await fetch(link);
+		const response = await fetch(link, {
+			cache: "no-store",
+		});
 		const body = await response.text();
 		const parser = new DOMParser();
 		const doc = parser.parseFromString(body, "text/html");

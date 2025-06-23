@@ -96,6 +96,17 @@
 	transition: opacity 0.2s;
 }
 
+.playground-theme-toggle {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	color: white;
+}
+.playground-theme-toggle button {
+	padding: 1rem;
+	border-radius: var(--rounded);
+}
+
 /** Mobile */
 @media screen and (max-width: 50rem) {
 	.playground-header-menu a[aria-current]::before {
