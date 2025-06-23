@@ -39,16 +39,16 @@
 						<ul class="footer-menu-2">
 							<?php snippet('layouts/menu-items', [
 								'items' => [
-									'For developers'         => page('for/developers'),
-									'For designers'          => page('for/designers'),
-									'For content creators'   => page('for/creators'),
-									'For clients & agencies' => page('for/clients'),
-									'For artists'            => page('for/artists'),
-									'For events'             => page('for/events'),
-									'For education'          => page('for/education'),
-									'For hospitality'        => page('for/hospitality'),
-									'Showcase'               => page('love'),
-									'Releases'               => page('releases'),
+									'For developers'         => '/for/developers',
+									'For designers'          => '/for/designers',
+									'For content creators'   => '/for/creators',
+									'For clients & agencies' => '/for/clients',
+									'For artists'            => '/for/artists',
+									'For events'             => '/for/events',
+									'For education'          => '/for/education',
+									'For hospitality'        => '/for/hospitality',
+									'Showcase'               => '/love',
+									'Releases'               => '/releases',
 									'Feedback'               => 'https://feedback.getkirby.com',
 								]
 							]) ?>
@@ -76,9 +76,9 @@
 							<?php snippet('layouts/menu-items', [
 								'items' => [
 									'Plugins'     => 'https://plugins.getkirby.com',
-									'Themes'      => page('themes'),
-									'Newsletter'  => page('kosmos'),
-									'Buzz'        => page('buzz'),
+									'Themes'      => '/themes',
+									'Newsletter'  => '/kosmos',
+									'Buzz'        => '/buzz',
 									'Pixels'      => 'https://pixels.getkirby.com',
 									'License Hub' => 'https://hub.getkirby.com',
 								]
@@ -90,7 +90,7 @@
 						<ul class="footer-menu-2">
 							<?php snippet('layouts/menu-items', [
 								'items' => [
-									'Get together'  => page('meet'),
+									'Get together'  => '/meet',
 									'Support forum' => 'https://forum.getkirby.com',
 									'Discord chat'  => 'https://chat.getkirby.com',
 									'Community map' => 'https://community.getkirby.com',
@@ -105,12 +105,12 @@
 						<ul class="footer-menu-2">
 							<?php snippet('layouts/menu-items', [
 								'items' => [
-									'Security' => page('security'),
-									'Privacy'  => page('privacy'),
-									'License'  => page('license'),
-									'Presskit' => page('press'),
-									'Team'     => page('team'),
-									'Contact'  => page('contact'),
+									'Security' => '/security',
+									'Privacy'  => '/privacy',
+									'License'  => '/license',
+									'Presskit' => '/press',
+									'Team'     => '/team',
+									'Contact'  => '/contact',
 								]
 							]) ?>
 						</ul>
