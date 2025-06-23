@@ -98,13 +98,15 @@
 
 .playground-theme-toggle {
 	position: absolute;
-	bottom: 0;
-	right: 0;
+	top: 1rem;
+	right: 1rem;
 	color: white;
 }
 .playground-theme-toggle button {
-	padding: 1rem;
+	padding: .25rem;
 	border-radius: var(--rounded);
+	background: rgba(0,0,0, .5);
+	border-radius: 50%;
 }
 
 /** Mobile */
