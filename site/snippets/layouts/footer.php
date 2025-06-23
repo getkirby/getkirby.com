@@ -32,6 +32,27 @@
 					🇪🇺 Made in Europe
 				</p>
 			</div>
+			<?php if ($kirby->option('archived') === true): ?>
+			<div class="max-w-xs">
+				<p class="font-bold mb-1">Archived Docs</p>
+				<p class="mb-6">
+					These docs are no longer maintained. Please check out <a class="underline" href="https://getkirby.com">getkirby.com</a> for more information and the latest version of Kirby.
+				</p>
+				<p class="font-bold mb-1">About</p>
+				<ul class="footer-menu-2">
+					<?php snippet('layouts/menu-items', [
+						'items' => [
+							'Security' => page('security'),
+							'Privacy'  => page('privacy'),
+							'License'  => page('license'),
+							'Presskit' => page('press'),
+							'Team'     => page('team'),
+							'Contact'  => page('contact'),
+						]
+					]) ?>
+				</ul>
+			</div>
+			<?php else: ?>
 			<nav aria-label="Footer menu" class="footer-menu">
 				<ul class="footer-menu-1 columns" style="--columns-sm: 2; --columns-md: 3; --columns: 3; --column-gap: var(--spacing-8); --row-gap: var(--spacing-6)">
 					<li>
@@ -132,6 +153,7 @@
 					</li>
 				</ul>
 			</nav>
+			<?php endif ?>
 		</div>
 	</div>
 </footer>
