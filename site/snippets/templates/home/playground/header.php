@@ -14,42 +14,54 @@
 	</div>
 	<div class="w-full">
 		<div class="playground-header-layout">
-			<figure class="playground-header-figure">
+			<figure class="playground-header-figure" data-theme="light">
 				<span
 					class="playground-header-figure-wrapper"
 					style="--aspect-ratio: <?= $storyImage->width() . '/' . $storyImage->height() ?>"
-					data-image="<?= $story->uid() . '/' . $storyImage->mediaHash() ?>"
 				>
 					<?= img($storyImage, [
 						'alt' => $storyImage->alt()->or('Panel screenshot for: ' . $story->title()),
-						'src' => [
-							'width' => 1520
-						],
+						'src' => $story->storyImageSrcSize(),
 						'lazy' => false,
 						'fetchpriority' => 'high',
 						// sizes generated with https://ausi.github.io/respimagelint/
 						'sizes' => '(min-width: 1860px) 1520px, (min-width: 820px) calc(92.16vw - 176px), 100vw',
-						'srcset' => [
-							400,
-							600,
-							800,
-							1000,
-							1200,
-							1520,
-							2000,
-							2400,
-							3040
-						]
+						'srcset' => $story->storyImageSrcsetSizes()
 					]) ?>
 				</span>
+
+				<div class="playground-theme-toggle">
+					<button data-theme="light" title="Switch to light mode">
+						<?= icon('sun') ?>
+					<button data-theme="dark" title="Switch to dark mode">
+						<?= icon('moon') ?>
+					</button>
+				</div>
+
+				<div class="playground-header-figure-loader">
+					<?= icon('loader') ?>
+				</div>
 			</figure>
 			<div class="playground-header-menu">
-				<ul class="font-mono text-sm pt-6 sticky" style="--top: var(--spacing-2)">
-					<?php foreach ($stories as $option): ?>
-					<li><a <?php e($story === $option, 'aria-current="true"') ?> href="?your=<?= $option->slug() ?>" data-image="<?= $option->uid() . '/' . $option->images()->findBy('name', 'panel')->mediaHash() ?>"><?= $option->title() ?></a></li>
-					<?php endforeach ?>
-					<li><a class="font-bold more" href="/love">Your ideas &rarr;</a></li>
-				</ul>
+				<div class="sticky" style="--top: var(--spacing-2)">
+					<ul class="font-mono text-sm pt-6 mb-6">
+						<?php foreach ($stories as $option): ?>
+						<li>
+							<a
+								<?php e($story === $option, 'aria-current="true"') ?>
+								href="?your=<?= $option->slug() ?>"
+								data-image-light-src="<?= $option->storyImageLightSrc() ?>"
+								data-image-light-srcset="<?= $option->storyImageLightSrcset() ?>"
+								data-image-dark-src="<?= $option->storyImageDarkSrc() ?>"
+								data-image-dark-srcset="<?= $option->storyImageDarkSrcset() ?>"
+							>
+								<?= $option->title() ?>
+							</a>
+						</li>
+						<?php endforeach ?>
+						<li><a class="font-bold more" href="/love">Your ideas &rarr;</a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>

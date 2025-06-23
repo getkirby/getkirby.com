@@ -1,69 +1,136 @@
 export class Playground {
 	constructor() {
 		this.$el = document.querySelector(".playground");
+		this.theme = "light";
 
-		document.addEventListener("click", (e) => {
-			const link = e.target.closest(".playground-header-menu a:not(.more)");
+		// event listeners for menu items
+		const links = this.$el.querySelectorAll(
+			".playground-header-menu a:not(.more)"
+		);
 
-			if (link) {
+		for (const link of links) {
+			link.addEventListener("click", (e) => {
 				e.preventDefault();
 				this.switchTo(link, e.target);
-			}
-		});
+			});
+		}
+
+		// event listeners for theme toggles
+		const toggles = this.$el.querySelectorAll(
+			".playground-theme-toggle button"
+		);
+
+		for (const toggle of toggles) {
+			toggle.addEventListener("click", (e) => {
+				e.preventDefault();
+
+				// update theme
+				this.theme = e.target.closest("button").dataset.theme;
+
+				// reload current menu item with updated theme
+				const link = this.$el.querySelector(
+					".playground-header-menu a[aria-current]"
+				);
+				this.switchTo(link.href, link);
+			});
+		}
+	}
+	get figure() {
+		return this.$el.querySelector(".playground-header-figure");
 	}
 
 	get image() {
-		return this.$el.querySelector(".playground-header-figure-wrapper img");
+		return this.wrapper.querySelector("img");
 	}
 
 	async loadHtml(link) {
-		const response = await fetch(link);
+		const response = await fetch(link, {
+			cache: "no-store",
+		});
 		const body = await response.text();
 		const parser = new DOMParser();
 		const doc = parser.parseFromString(body, "text/html");
 
 		// load the new image as hidden before it gets injected
-		doc
-			.querySelector(".playground-header-figure-wrapper")
-			.classList.add("loading");
+		this.figure.classList.add("loading");
 
 		return doc;
 	}
 
-	preload(target) {
-		const newUrl = this.image.currentSrc.replace(
-			this.wrapper.dataset.image,
-			target.dataset.image
-		);
+	async replaceContent(link) {
+		const doc = await this.loadHtml(link);
 
-		new Image().src = newUrl;
-	}
-
-	async switchTo(link, target) {
-		// fade out the old image
-		this.wrapper.classList.add("loading");
-
-		// preload the new image
-		this.preload(target);
-
-		// since our CSS transition to fade out the image takes 200ms,
-		// ensure that we wait that long, even if the fetch request is faster
-		const [doc] = await Promise.all([
-			this.loadHtml(link),
-			new Promise((resolve) => setTimeout(resolve, 200)),
-		]);
-
-		// replace the playground
-		this.$el.innerHTML = doc.querySelector(".playground").innerHTML;
-
-		// fade in the image once loaded
-		this.image.addEventListener("load", function () {
-				// let the browser render the image first to reduce flickering issues
-				setTimeout(() => this.parentNode.classList.remove("loading"), 10);
-			});
+		this.$el.querySelector(".playground-backend").innerHTML = doc.querySelector(
+			".playground-backend"
+		).innerHTML;
+		this.$el.querySelector(".playground-filesystem").innerHTML =
+			doc.querySelector(".playground-filesystem").innerHTML;
+		this.$el.querySelector(".playground-medium").innerHTML =
+			doc.querySelector(".playground-medium").innerHTML;
 
 		// reactivate code highlighting
 		Prism.highlightAll();
+	}
+
+	async replaceImage(target) {
+		return new Promise((resolve) => {
+			const theme = this.theme.charAt(0).toUpperCase() + this.theme.slice(1);
+
+			// clone image, replace src and srcset
+			// and add it to the wrapper
+			const image = this.image.cloneNode(true);
+			image.src = target.dataset[`image${theme}Src`];
+			image.srcset = target.dataset[`image${theme}Srcset`];
+
+			// when new image is loaded…
+			image.onload = async () => {
+				// wait briefly to prevent flickering
+				await new Promise((resolve) => {
+					setTimeout(() => {
+						resolve();
+					}, 50);
+				});
+
+				// fade out old image
+				const old = this.wrapper.querySelector("img:first-child");
+				old.style.opacity = 0;
+
+				// remove old image after fade out is complete
+				setTimeout(() => {
+					old.remove();
+				}, 800);
+
+				resolve();
+			};
+
+			// append new image behind current image
+			this.wrapper.appendChild(image);
+		});
+	}
+
+	async switchTo(link, target) {
+		// start loader animation
+		this.figure.classList.add("loading");
+
+		// update active menu item
+		const links = this.$el.querySelectorAll(".playground-header-menu a");
+
+		for (const link of links) {
+			link.removeAttribute("aria-current");
+		}
+
+		target.setAttribute("aria-current", "true");
+
+		// replace the playground content
+		await this.replaceContent(link);
+
+		// replace the playground image
+		await this.replaceImage(target);
+
+		// update figure data-theme to show/hide correct theme toggle
+		// and stop loader animation
+		this.figure.dataset.theme = this.theme;
+		this.figure.classList.remove("loading");
 	}
 
 	get wrapper() {
