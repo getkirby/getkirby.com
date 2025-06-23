@@ -30,7 +30,7 @@ Subheading: The edge of nowhere
 
 &minus;---
 
-Date: 2021-04-12
+Date: 2025-06-24
 
 &minus;---
 
@@ -70,7 +70,7 @@ Api:
   "content": {
     "title": "Exploring the universe",
     "subheading": "The edge of nowhere",
-    "date": "2021-04-12",
+    "date": "2025-06-24",
     "author": "demo@devi.to",
     "tags": "universe, sky",
     "text": "Far far away …"
