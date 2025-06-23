@@ -1,5 +1,0 @@
-Title: Can I install it on a test server?
-----
-Text:
-
-Yes, you can install Kirby on a private test server for free and check all requirements there.

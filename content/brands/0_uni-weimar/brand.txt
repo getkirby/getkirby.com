@@ -1,9 +1,0 @@
-Title: Bauhaus Universität Weimar
-
-----
-
-Tag: edu
-
-----
-
-Height: 3rem

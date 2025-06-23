@@ -1,5 +1,0 @@
-Caption:
-
-**Block settings**
-
-Define your own block settings with custom fields and even tabs to get the most out of your blocks.

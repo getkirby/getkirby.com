@@ -1,9 +1,0 @@
-Title: University of Pennsylvania
-
-----
-
-Tag: edu
-
-----
-
-Height: 2.75rem

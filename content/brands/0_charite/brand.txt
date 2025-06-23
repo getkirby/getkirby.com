@@ -1,5 +1,0 @@
-Title: Charité
-
-----
-
-Featured: true

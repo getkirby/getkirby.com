@@ -1,7 +1,0 @@
-Title: What kind of personal data do you store?
-----
-Text:
-
-We store your email address, license keys and registered domains on our license server. We also have access to your invoice data from Paddle and your forum account on Discourse if you are registered there. For newsletter subscribers we store the email address and optional name at our email provider (previously CampaignMonitor, for new and confirmed subscriptions Newstroll).
-
-You can read more in our (link: privacy text: privacy policy).

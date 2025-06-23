@@ -1,9 +1,0 @@
-Title: Kirby End User License Agreement
-
-----
-
-Description: The terms and conditions for using Kirby CMS.
-
-----
-
-Priority: 0.5

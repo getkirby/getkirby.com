@@ -1,9 +1,0 @@
-Title: Fisherman's Friend
-
-----
-
-Featured: true
-
-----
-
-Height: 4rem

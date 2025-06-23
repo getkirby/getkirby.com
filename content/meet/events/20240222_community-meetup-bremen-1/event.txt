@@ -1,9 +1,0 @@
-start: 18:00:00
-----
-city: Bremen
-----
-country: Germany
-----
-issue: 1
-----
-link: https://bremen.design/event/kirby-get-together-bremen-1

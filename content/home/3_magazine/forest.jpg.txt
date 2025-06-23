@@ -1,5 +1,0 @@
-Title: A night in the forest
-----
-Date: 2020-12-12
-----
-Template: article

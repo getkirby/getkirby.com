@@ -1,7 +1,0 @@
-Title: When can I expect a reply?
-----
-Text:
-
-We immediately forward your project to the developers and agencies in our Kirby partner network. Usually you can expect a qualified reply within 1-2 weeks from one or multiple partner. If you haven't received any reply after this, you may approach individual partners directly.
-
-Feel free to also post on the (link: https://forum.getkirby.com text: forum) if that is the case.

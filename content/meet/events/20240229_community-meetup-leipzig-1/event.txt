@@ -1,9 +1,0 @@
-start: 18:00:00
-----
-city: Leipzig
-----
-country: Germany
-----
-issue: 1
-----
-link: https://www.meetup.com/kirby-cms-community-leipzig/events/299077975/

@@ -1,5 +1,0 @@
-Title: Site
-
-----
-
-Link: docs/guide/security#secure-your-server__block-access-to-sensitive-folders-and-files

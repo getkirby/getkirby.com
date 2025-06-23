@@ -1,9 +1,0 @@
-Title: Tincon
-
-----
-
-Tag: event
-
-----
-
-Height: 1.5rem

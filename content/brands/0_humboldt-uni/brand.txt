@@ -1,9 +1,0 @@
-Title: Humboldt Universität Berlin
-
-----
-
-Tag: edu
-
-----
-
-Height: 5rem

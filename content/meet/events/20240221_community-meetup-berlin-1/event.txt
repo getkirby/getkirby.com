@@ -1,9 +1,0 @@
-start: 19:00:00
-----
-city: Berlin
-----
-country: Germany
-----
-issue: 1
-----
-link: https://www.meetup.com/kirby-cms-community-berlin/events/298502725/

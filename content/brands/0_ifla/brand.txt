@@ -1,8 +1,0 @@
-Title: IFLA World Congress
-
-----
-
-Tag: event
-----
-
-Height: 2.5rem

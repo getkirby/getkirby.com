@@ -1,7 +1,0 @@
-Title: Can I edit templates in the online demo?
-----
-Text:
-
-No, you cannot edit any of the configuration files, templates, snippets or any other part of the online demo code. The online demo is all about exploring the Panel without having to install Kirby first.
-
-You can find the code for our online demo on GitHub and install it locally if you want to dive deeper: https://github.com/getkirby/demokit

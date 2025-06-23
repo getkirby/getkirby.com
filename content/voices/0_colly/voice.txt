@@ -1,9 +1,0 @@
-Title: Simon Collison
-----
-Username: colly
-----
-Text: Switching my sites to Kirby has transformed how I feel about them. I've rediscovered the ”designers who hack” spirit … I feel like I can build anything.
-----
-Website: https://colly.com
-----
-Bio: Designer, writer, speaker & event director

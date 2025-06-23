@@ -1,9 +1,0 @@
-Title: Ludwig-Maximilians-Universität München
-
-----
-
-Tag: edu
-
-----
-
-Height: 4rem

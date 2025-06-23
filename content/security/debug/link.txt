@@ -1,5 +1,0 @@
-Title: HTTPS
-
-----
-
-Link: docs/guide/security#switch-off-debug-mode
