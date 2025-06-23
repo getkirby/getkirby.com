@@ -1,20 +1,20 @@
 {
-  "name": "getkirby.com",
-  "description": "The entire getkirby.com website.",
-  "scripts": {
-    "build": "node ./build.mjs"
-  },
-  "devDependencies": {
-    "esbuild": "^0.21.4"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/getkirby/getkirby.com.git"
-  },
-  "author": "The Kirby Team <mail@getkirby.com>",
-  "license": "UNLICENSED",
-  "bugs": {
-    "url": "https://github.com/getkirby/getkirby.com/issues"
-  },
-  "homepage": "https://github.com/getkirby/getkirby.com#readme"
+	"name": "getkirby.com",
+	"description": "The entire getkirby.com website.",
+	"scripts": {
+		"build": "node ./build.mjs"
+	},
+	"devDependencies": {
+		"esbuild": "^0.25.5"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/getkirby/getkirby.com.git"
+	},
+	"author": "The Kirby Team <mail@getkirby.com>",
+	"license": "UNLICENSED",
+	"bugs": {
+		"url": "https://github.com/getkirby/getkirby.com/issues"
+	},
+	"homepage": "https://github.com/getkirby/getkirby.com#readme"
 }
