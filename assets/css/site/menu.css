@@ -47,17 +47,24 @@
 	cursor: pointer;
 }
 
-.menu-2 .is-external {
-	position: relative;
-	padding-right: 3rem;
+.menu-2 a {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: var(--spacing-6);
+	width: 100%;
 }
-.menu-2 .is-external::after {
-	position: absolute;
-	content: "→";
-	top: 50%;
-	right: 0.75rem;
-	transform: translateY(-50%) rotate(-45deg);
+
+.menu-external-icon {
+	display: none;
+}
+.menu-2 .menu-external-icon {
+	display: inline;
 	color: var(--color-gray-400);
+}
+.menu-2 .menu-external-icon svg {
+	width: 15px;
+	height: 15px;
 }
 
 /** Small **/
