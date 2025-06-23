@@ -1,13 +1,15 @@
-<div class="faq">
+<ul class="faq">
 	<?php foreach ($questions as $question): ?>
-	<details class="details" id="<?= $question->slug() ?>">
-		<summary class="py-3 border-top"><?= $question->title()->kti()->widont() ?></summary>
-		<div class="py-3 prose text-base">
-			<?= $question->text()->kt() ?>
-		</div>
-	</details>
+	<li>
+		<details class="details" id="<?= $question->slug() ?>">
+			<summary class="py-3 border-top"><?= $question->title()->kti()->widont() ?></summary>
+			<div class="py-3 prose text-base">
+				<?= $question->text()->kt() ?>
+			</div>
+		</details>
+	</li>
 	<?php endforeach ?>
-</div>
+</ul>
 
 <script>
 function openFaqById(hash) {
