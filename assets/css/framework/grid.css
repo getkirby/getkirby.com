@@ -54,6 +54,8 @@
 	display: grid;
 	grid-column-gap: var(--column-gap);
 	grid-row-gap: var(--row-gap);
+}
+.auto-fill {
 	grid-template-columns: repeat(auto-fill, minmax(var(--min), var(--max)));
 }
 .auto-fit {

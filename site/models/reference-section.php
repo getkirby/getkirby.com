@@ -13,6 +13,14 @@ class ReferenceSectionPage extends ReferenceArticlePage
 	}
 
 	/**
+	 * Default minimum width for section grid items
+	 */
+	public function sectionGridMinWidth(): string
+	{
+		return '15rem';
+	}
+
+	/**
 	 * If a dedicated template exist, use it.
 	 * Otherwise fall back to `reference-section` template.
 	 */

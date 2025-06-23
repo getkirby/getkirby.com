@@ -133,6 +133,14 @@ class ReferenceClassPage extends ReferenceSectionPage
 		);
 	}
 
+	/**
+	 * Default minimum width for section grid items
+	 */
+	public function sectionGridMinWidth(): string
+	{
+		return '18rem';
+	}
+
 	public function title(): Field
 	{
 		$name = $this->name(short: true);

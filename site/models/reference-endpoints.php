@@ -18,4 +18,12 @@ class ReferenceEndpointsPage extends ReferenceSectionPage
 			]
 		]);
 	}
+
+	/**
+	 * Default minimum width for section grid items
+	 */
+	public function sectionGridMinWidth(): string
+	{
+		return '28rem';
+	}
 }
