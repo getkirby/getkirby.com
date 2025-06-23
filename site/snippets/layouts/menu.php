@@ -4,6 +4,26 @@
 		<?= icon('menu') ?>
 	</label>
 	<nav aria-label="Main menu">
+		<?php if ($kirby->option('archived') === true): ?>
+		<ul class="menu-1">
+			<li class="has-submenu">
+				<a href="<?= page('docs/guide')->menuUrl() ?>">Archived Docs</a>
+				<ul class="menu-2">
+					<?php snippet('layouts/menu-items', [
+						'items' => [
+							'Guide'       => page('docs/guide'),
+							'Reference'   => page('docs/reference'),
+							'Cookbook'    => page('docs/cookbook'),
+							'Quicktips'   => page('docs/quicktips'),
+							'Screencasts' => 'https://www.youtube.com/kirbycasts',
+							'Glossary'    => page('docs/glossary'),
+						]
+					]) ?>
+				</ul>
+			</li>
+			<li><a href="https://getkirby.com">Latest Version ↗</a></li>
+		</ul>
+		<?php else: ?>
 		<ul class="menu-1">
 			<li class="has-submenu">
 				<a href="<?= page('for/developers')->menuUrl() ?>">The CMS</a>
@@ -83,5 +103,6 @@
 				<a href="<?= page('buy')->menuUrl() ?>">Buy</a>
 			</li>
 		</ul>
+		<?php endif ?>
 	</nav>
 </div>
