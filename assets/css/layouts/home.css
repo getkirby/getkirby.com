@@ -88,12 +88,57 @@
 }
 .playground-header-figure-wrapper {
 	display: block;
-	opacity: 1;
-	transition: opacity 0.4s;
 }
-.playground-header-figure-wrapper.loading {
-	opacity: 0;
-	transition: opacity 0.2s;
+.playground-header-figure-wrapper img {
+	position: absolute;
+	inset: 0;
+	z-index: 2;
+	transition: opacity 0.7s;
+}
+.playground-header-figure-wrapper img:nth-child(2) {
+	z-index: 1;
+}
+
+.playground-header-figure-loader {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	background: rgba(0, 0, 0, 0.5);
+	color: white;
+	padding: 0.25rem;
+	border-radius: 50%;
+	display: none;
+	z-index: 3;
+}
+.playground-header-figure.loading .playground-header-figure-loader {
+	display: block;
+}
+
+.playground-theme-toggle {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	color: white;
+	z-index: 3;
+}
+.playground-theme-toggle button {
+	padding: 0.25rem;
+	border-radius: var(--rounded);
+	background: rgba(0, 0, 0, 0.5);
+	border-radius: 50%;
+}
+/* Hide theme toggle when theme is currently set */
+.playground-header-figure[data-theme="light"]
+	.playground-theme-toggle
+	button[data-theme="light"],
+.playground-header-figure[data-theme="dark"]
+	.playground-theme-toggle
+	button[data-theme="dark"] {
+	display: none;
+}
+/* Hide theme toggle when loading */
+.playground-header-figure.loading .playground-theme-toggle button {
+	display: none;
 }
 
 /** Mobile */
