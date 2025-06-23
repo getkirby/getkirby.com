@@ -7,11 +7,11 @@ Subtitle: A whole new editing experience
 
 Teaser:
 
-Kirby 5 redefines collaboration with powerful new preview and change-tracking tools. Editors can now see fully rendered previews of content changes before saving, even if the changes were made by another user. Sharing the preview links with their team or externals for instant feedback is a breeze.
+Kirby 5 redefines collaboration on unsaved changes and adds a powerful preview mode. Editors can view fully rendered previews of their edits, even before saving and even if made by someone else. Sharing preview links with your team or externals for instant feedback is a breeze.
 
-The new preview view offers side-by-side comparisons or full-width previews of unsaved changes vs. published content. Now, it's easy to track all edits shared with the whole team through the “Changes” dialog. All enabled by storing changes directly on the server instead of your local browser.
+The new preview view supports side-by-side comparisons or full-width previews of unsaved changes vs. published content. Unpublished edits are easily tracked via the “Changes” dialog. All enabled by storing changes directly on the server instead of your local browser.
 
-Plus, the enhanced form controls dropdown provides status updates, including when content is locked by another editor, keeping everyone on the same page.
+Plus, the improved form controls dropdown provides status updates, including when content is locked by another editor, keeping everyone on the same page.
 
 ----
 
@@ -83,11 +83,11 @@ All the features above are powered by our brand new PHP Versions API. While a lo
 // get the latest saved content of a page
 $page->version('latest');
 
-// get all unsaved changes 
+// get all unsaved changes
 $page->version('changes');
 ```
 
-Those methods return a new `Kirby\Content\Version` object with quite some handy additional methods: 
+Those methods return a new `Kirby\Content\Version` object with quite some handy additional methods:
 
 ### Check if a there are changes
 
@@ -100,9 +100,9 @@ $page->version('changes')->exists('current');
 $page->version('changes')->exists('default');
 ```
 
-### Getting versioned content 
+### Getting versioned content
 
-```php 
+```php
 $page->version('latest')->content();
 $page->version('changes')->content();
 
@@ -112,7 +112,7 @@ $page->version('changes')->content('current');
 $page->version('changes')->content('default');
 ```
 
-This will return regular `Kirby\Content\Content` objects that help to access fields. So for example, if you want to receive the latest or changed text of a page, you can do this: 
+This will return regular `Kirby\Content\Content` objects that help to access fields. So for example, if you want to receive the latest or changed text of a page, you can do this:
 
 ```php
 $page->version('latest')->content()->get('text');
@@ -199,7 +199,7 @@ $page->version('changes')->delete('de');
 $page->version('changes')->url();
 ```
 
-## New Panel JS Content API 
+## New Panel JS Content API
 
 For Panel plugins, we provide an entirely new content API, which makes it super easy to fetch versions of the content, see if there are any diffs and more.
 
