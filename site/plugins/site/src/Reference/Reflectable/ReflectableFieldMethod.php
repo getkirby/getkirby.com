@@ -5,6 +5,7 @@ namespace Kirby\Reference\Reflectable;
 use Exception;
 use Kirby\Content\Field;
 use Kirby\Reference\Reflectable\Tags\Parameters;
+use Kirby\Reference\Types\Identifier;
 use ReflectionFunction;
 use ReflectionMethod;
 
@@ -35,6 +36,20 @@ class ReflectableFieldMethod extends ReflectableFunction
 	public function aliases(): array
 	{
 		return array_keys(Field::$aliases, $this->name);
+	}
+
+	/**
+	 * TODO: cleaner implementation, this is a quick fix
+	 */
+	public function class(
+		bool $short = false
+	): string|Identifier {
+		$class = match ($short) {
+			true  => 'Field',
+			false => 'Kirby\Content\Field',
+		};
+
+		return $class;
 	}
 
 	/**
