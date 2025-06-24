@@ -12,13 +12,15 @@
 			<?php if ($avatar = $partner->avatar()): ?>
 				<?= img($avatar, [
 					'src' => [
-						'width' => 70
+						'width'  => 70,
+						'height' => 70,
+						'crop'   => true,
 					],
 					// sizes generated with https://ausi.github.io/respimagelint/
 					'sizes' => '(min-width: 1440px) 70px, (min-width: 960px) 5vw, (min-width: 640px) 8vw, 18vw',
 					'srcset' => [
-						70,
-						140,
+						['width' => 70, 'height' => 70, 'crop' => true],
+						['width' => 140, 'height' => 140, 'crop' => true],
 					]
 				]) ?>
 			<?php endif ?>
