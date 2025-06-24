@@ -17,10 +17,11 @@ class ReflectableFieldMethod extends ReflectableClassMethod
 	public function __construct(
 		public string $method
 	) {
-		$this->class  = Field::class;
-		$this->method = strtolower($method);
+		$this->class = Field::class;
+		$method      = Field::$methods[$this->method] ?? null;
+		$method    ??= Field::$methods[strtolower($this->method)] ?? null;
 
-		if ($method = Field::$methods[$this->method] ?? null) {
+		if ($method !== null) {
 			// method is defined in `kirby/config/methods.php`
 			$this->reflection = new ReflectionFunction($method);
 		} else if (method_exists(Field::class, $this->method) === true) {
