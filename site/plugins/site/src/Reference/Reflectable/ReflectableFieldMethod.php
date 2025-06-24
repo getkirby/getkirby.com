@@ -12,21 +12,22 @@ use ReflectionMethod;
 /**
  * Reflectable for a field method
  */
-class ReflectableFieldMethod extends ReflectableFunction
+class ReflectableFieldMethod extends ReflectableClassMethod
 {
 	public function __construct(
-		public string $name
+		public string $method
 	) {
-		$name = strtolower($name);
+		$this->class  = Field::class;
+		$this->method = strtolower($method);
 
-		if ($method = Field::$methods[$name] ?? null) {
+		if ($method = Field::$methods[$this->method] ?? null) {
 			// method is defined in `kirby/config/methods.php`
 			$this->reflection = new ReflectionFunction($method);
-		} else if (method_exists(Field::class, $name) === true) {
+		} else if (method_exists(Field::class, $this->method) === true) {
 			// method is defined in the `Field` class
-			$this->reflection = new ReflectionMethod(Field::class, $name);
+			$this->reflection = new ReflectionMethod(Field::class, $this->method);
 		} else {
-			throw new Exception('Field method "' . $name . '" not found');
+			throw new Exception('Field method "' . $this->method . '" not found');
 		}
 	}
 
@@ -35,29 +36,7 @@ class ReflectableFieldMethod extends ReflectableFunction
 	 */
 	public function aliases(): array
 	{
-		return array_keys(Field::$aliases, $this->name);
-	}
-
-	/**
-	 * TODO: cleaner implementation, this is a quick fix
-	 */
-	public function class(
-		bool $short = false
-	): string|Identifier {
-		$class = match ($short) {
-			true  => 'Field',
-			false => 'Kirby\Content\Field',
-		};
-
-		return $class;
-	}
-
-	/**
-	 * Returns the name of the field method
-	 */
-	public function name(): string
-	{
-		return '$field->' . $this->name;
+		return array_keys(Field::$aliases, $this->method);
 	}
 
 	/**

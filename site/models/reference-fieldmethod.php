@@ -34,7 +34,7 @@ class ReferenceFieldMethodPage extends ReferenceArticlePage
 	public function reflection(): ReflectableFieldMethod
 	{
 		return $this->reflection ??= new ReflectableFieldMethod(
-			name: $this->name()
+			method: $this->name()
 		);
 	}
 
