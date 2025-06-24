@@ -68,7 +68,7 @@ class ReferenceClassMethodPage extends ReferenceArticlePage
 	 */
 	protected function originalPage(): ReferenceClassMethodPage|null
 	{
-		$originalParent = $this->reflection()->inheritedFrom()?->page();
+		$originalParent = $this->reflection()->inheritedFrom()?->toPage();
 		return $originalParent?->children()->find($this->name());
 	}
 
