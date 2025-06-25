@@ -40,27 +40,24 @@ export class Playground {
 	}
 
 	async loadHtml(link) {
-		const response = await fetch(link, {
-			cache: "no-store",
-		});
+		const response = await fetch(link);
 		const body = await response.text();
 		const parser = new DOMParser();
-		const doc = parser.parseFromString(body, "text/html");
-
-		// load the new image as hidden before it gets injected
-		this.figure.classList.add("loading");
-
-		return doc;
+		return parser.parseFromString(body, "text/html");
 	}
 
 	replaceContent(doc) {
-		this.$el.querySelector(".playground-backend").innerHTML = doc.querySelector(
-			".playground-backend"
-		).innerHTML;
-		this.$el.querySelector(".playground-filesystem").innerHTML =
-			doc.querySelector(".playground-filesystem").innerHTML;
-		this.$el.querySelector(".playground-medium").innerHTML =
-			doc.querySelector(".playground-medium").innerHTML;
+		const oldBackend = this.$el.querySelector(".playground-backend");
+		const oldFilesystem = this.$el.querySelector(".playground-filesystem");
+		const oldMedium = this.$el.querySelector(".playground-medium");
+
+		const newBackend = doc.querySelector(".playground-backend");
+		const newFilesystem = doc.querySelector(".playground-filesystem");
+		const newMedium = doc.querySelector(".playground-medium");
+
+		oldBackend.innerHTML = newBackend.innerHTML;
+		oldFilesystem.innerHTML = newFilesystem.innerHTML;
+		oldMedium.innerHTML = newMedium.innerHTML;
 
 		// reactivate code highlighting
 		Prism.highlightAll();
