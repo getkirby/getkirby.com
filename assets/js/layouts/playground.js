@@ -11,7 +11,7 @@ export class Playground {
 		for (const link of links) {
 			link.addEventListener("click", (e) => {
 				e.preventDefault();
-				this.switchTo(link, e.target);
+				this.switchTo(e.target, link);
 			});
 		}
 
@@ -28,10 +28,10 @@ export class Playground {
 				this.theme = e.target.closest("button").dataset.theme;
 
 				// reload current menu item with updated theme
-				const link = this.$el.querySelector(
+				const current = this.$el.querySelector(
 					".playground-header-menu a[aria-current]"
 				);
-				this.switchTo(link.href, link);
+				this.switchTo(current);
 			});
 		}
 	}
@@ -99,14 +99,12 @@ export class Playground {
 		});
 	}
 
-	async switchTo(link, target) {
+	async switchTo(target, link) {
 		// start loader animation
 		this.figure.classList.add("loading");
 
 		// update active menu item
-		const links = this.$el.querySelectorAll(".playground-header-menu a");
-
-		for (const link of links) {
+		for (const link of this.$el.querySelectorAll(".playground-header-menu a")) {
 			link.removeAttribute("aria-current");
 		}
 
@@ -114,13 +112,16 @@ export class Playground {
 
 		const [doc] = await Promise.all([
 			// load the playground content
-			this.loadHtml(link),
+			link ? this.loadHtml(link) : null,
 			// replace the playground image
 			this.replaceImage(target),
 		]);
 
 		// replace the playground content
-		this.replaceContent(doc);
+		// (if no link was provided, we only replace the image)
+		if (doc) {
+			this.replaceContent(doc);
+		}
 
 		// update figure data-theme to show/hide correct theme toggle
 		// and stop loader animation
