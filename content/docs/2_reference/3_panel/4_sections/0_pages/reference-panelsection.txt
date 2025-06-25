@@ -219,7 +219,7 @@ columns:
   date:
     label: Date
     value: "on {{ page.date.toDate('d.m.Y') }}"
-		type: text
+    type: text
 ```
 
 If the page actually has a `date` field of type `date`, Kirby will automatically use the date field preview component for this column. However, this will clash with your custom value. This is why we also set `type: text`.
