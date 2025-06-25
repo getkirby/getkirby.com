@@ -1,0 +1,66 @@
+Title: bytepark GmbH
+
+----
+
+Subtitle: Digital Agency
+
+----
+
+Summary: We specialize in the development, implementation and long-term, secure operation of sustainable digital landscapes.
+
+----
+
+Description: We are an established boutique digital agency with over 20 years of market experience and more than 500 successfully completed digital projects. Our clients include SMEs as well as large enterprises across various industries. We specialize in the development, implementation and long-term, secure operation of sustainable digital landscapes — enabling you to focus on what you do best. We combine the expertise of our proven core team with a strong network of trusted partners to offer you outstanding customised and sustainable solutions.
+
+----
+
+Plan: regular
+
+----
+
+People: 4+
+
+----
+
+Website: https://www.bytepark.de
+
+----
+
+Location: Berlin, Germany
+
+----
+
+Region: Europe
+
+----
+
+Contactlink: 
+
+----
+
+Languages: German, English
+
+----
+
+Expertise:
+
+- Consulting
+- Product management
+- Project management
+- Frontend development
+- Backend development
+- CMS integration (Kirby and other)
+- UX design
+- UI design
+- Hosting and domains
+- Application Management
+- Cloud IT infrastructure
+- SEO and SEA
+
+----
+
+Discordhandle: bytepark
+
+----
+
+Uuid: injchahuwmvsgexr
