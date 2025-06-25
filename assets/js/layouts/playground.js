@@ -1,6 +1,6 @@
 export class Playground {
 	isUpdating = false;
-	pendingUpdates = [];
+	pendingUpdate = null;
 	theme = "light";
 
 	constructor() {
@@ -8,7 +8,7 @@ export class Playground {
 		for (const link of this.links) {
 			link.addEventListener("click", (e) => {
 				e.preventDefault();
-				this.switchTo(e.target, link);
+				this.switchTo({ target: e.target, link });
 			});
 		}
 
@@ -21,9 +21,11 @@ export class Playground {
 				this.theme = e.target.closest("button").dataset.theme;
 
 				// reload current menu item with updated theme
-				this.switchTo(
-					[...this.links].find((link) => link.hasAttribute("aria-current"))
-				);
+				this.switchTo({
+					target: [...this.links].find((link) =>
+						link.hasAttribute("aria-current")
+					),
+				});
 			});
 		}
 	}
@@ -88,10 +90,11 @@ export class Playground {
 		Prism.highlightAll();
 	}
 
-	async switchTo(target, link) {
+	async switchTo({ target, link }) {
 		// if we're already updating, add the update to the queue
 		if (this.isUpdating) {
-			return this.pendingUpdates.push({ target, link });
+			this.pendingUpdate = { target, link };
+			return;
 		}
 
 		// start loader animation
@@ -131,9 +134,9 @@ export class Playground {
 		this.isUpdating = false;
 
 		// run any pending update
-		if (this.pendingUpdates.length > 0) {
-			const { target, link } = this.pendingUpdates.shift();
-			this.switchTo(target, link);
+		if (this.pendingUpdate) {
+			this.switchTo(this.pendingUpdate);
+			this.pendingUpdate = null;
 		}
 	}
 
