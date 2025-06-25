@@ -53,9 +53,7 @@ export class Playground {
 		return doc;
 	}
 
-	async replaceContent(link) {
-		const doc = await this.loadHtml(link);
-
+	replaceContent(doc) {
 		this.$el.querySelector(".playground-backend").innerHTML = doc.querySelector(
 			".playground-backend"
 		).innerHTML;
@@ -117,12 +115,15 @@ export class Playground {
 
 		target.setAttribute("aria-current", "true");
 
-		await Promise.all([
+		const [doc] = await Promise.all([
+			// load the playground content
+			this.loadHtml(link),
 			// replace the playground image
 			this.replaceImage(target),
-			// replace the playground content
-			this.replaceContent(link),
 		]);
+
+		// replace the playground content
+		this.replaceContent(doc);
 
 		// update figure data-theme to show/hide correct theme toggle
 		// and stop loader animation
