@@ -6,11 +6,11 @@ return function (App $kirby) {
 	$events   = collection('events');
 	$upcoming = $events->filterBy('isUpcoming', true);
 
-	// expire the cache 2h after the next upcoming event starts
+	// expire the Kirby and CDN caches 2h after the next upcoming event starts
 	if ($next = $upcoming->sortBy('date', 'asc')->first()) {
 		$time = $next->expiryTime();
 		$kirby->response()->expires($time);
-		$kirby->response()->header('Expires', gmdate('D, d M Y H:i:s T', $time));
+		$kirby->response()->header('Cache-Control', 's-maxage=' . ($time - time()));
 	}
 
 	if ($city = get('city')) {

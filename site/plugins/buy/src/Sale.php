@@ -88,10 +88,10 @@ class Sale
 			return;
 		}
 
-		// expire the cache on the next opportunity
+		// expire the Kirby and CDN caches on the next opportunity
 		$timestamp = min($expires);
 		kirby()->response()->expires($timestamp);
-		kirby()->response()->header('Expires', gmdate('D, d M Y H:i:s T', $timestamp));
+		kirby()->response()->header('Cache-Control', 's-maxage=' . ($timestamp - time()));
 	}
 
 	/**
