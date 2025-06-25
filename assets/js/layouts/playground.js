@@ -47,6 +47,30 @@ export class Playground {
 		return parser.parseFromString(body, "text/html");
 	}
 
+	async loadImage(target) {
+		return new Promise((resolve) => {
+			const theme = this.theme.charAt(0).toUpperCase() + this.theme.slice(1);
+			const oldImage = this.wrapper.querySelector("img:last-child");
+
+			// clone image, replace src and srcset
+			// and add it to the wrapper
+			const newImage = oldImage.cloneNode(true);
+			newImage.src = target.dataset[`image${theme}Src`];
+			newImage.srcset = target.dataset[`image${theme}Srcset`];
+
+			// when new image is loaded…
+			newImage.onload = async () => {
+				// wait briefly to prevent flickering
+				await new Promise((resolve) => setTimeout(resolve, 50));
+
+				resolve(oldImage);
+			};
+
+			// append new image behind current image
+			this.wrapper.appendChild(newImage);
+		});
+	}
+
 	replaceContent(doc) {
 		const oldBackend = this.$el.querySelector(".playground-backend");
 		const oldFilesystem = this.$el.querySelector(".playground-filesystem");
@@ -64,37 +88,6 @@ export class Playground {
 		Prism.highlightAll();
 	}
 
-	async replaceImage(target) {
-		return new Promise((resolve) => {
-			const theme = this.theme.charAt(0).toUpperCase() + this.theme.slice(1);
-			const oldImage = this.wrapper.querySelector("img:last-child");
-
-			// clone image, replace src and srcset
-			// and add it to the wrapper
-			const newImage = oldImage.cloneNode(true);
-			newImage.src = target.dataset[`image${theme}Src`];
-			newImage.srcset = target.dataset[`image${theme}Srcset`];
-
-			// when new image is loaded…
-			newImage.onload = async () => {
-				// wait briefly to prevent flickering
-				await new Promise((resolve) => setTimeout(resolve, 50));
-
-				// fade out old image
-				oldImage.style.opacity = 0;
-
-				// remove old image after fade out is complete
-				setTimeout(() => {
-					oldImage.remove();
-					resolve();
-				}, 700);
-			};
-
-			// append new image behind current image
-			this.wrapper.appendChild(newImage);
-		});
-	}
-
 	async switchTo(target, link) {
 		// if we're already updating, add the update to the queue
 		if (this.isUpdating) {
@@ -109,11 +102,11 @@ export class Playground {
 		this.links.forEach((link) => link.removeAttribute("aria-current"));
 		target.setAttribute("aria-current", "true");
 
-		const [doc] = await Promise.all([
+		const [doc, oldImage] = await Promise.all([
 			// load the playground content
 			link ? this.loadHtml(link) : null,
-			// replace the playground image
-			this.replaceImage(target),
+			// load and insert the playground image
+			this.loadImage(target),
 		]);
 
 		// replace the playground content
@@ -121,6 +114,15 @@ export class Playground {
 		if (doc) {
 			this.replaceContent(doc);
 		}
+
+		// fade out old image
+		oldImage.style.opacity = 0;
+
+		// wait until fade out is complete
+		await new Promise((resolve) => setTimeout(resolve, 600));
+
+		// remove old image
+		oldImage.remove();
 
 		// update figure data-theme to show/hide correct theme toggle
 		// and stop loader animation
