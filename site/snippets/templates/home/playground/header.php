@@ -49,7 +49,7 @@
 						<li>
 							<a
 								<?php e($story === $option, 'aria-current="true"') ?>
-								href="/home.plygrnd?your=<?= $option->slug() ?>"
+								href="/home.partial?your=<?= $option->slug() ?>"
 								data-image-light-src="<?= $option->storyImageLightSrc() ?>"
 								data-image-light-srcset="<?= $option->storyImageLightSrcset() ?>"
 								data-image-dark-src="<?= $option->storyImageDarkSrc() ?>"
