@@ -1,16 +1,11 @@
 export class Playground {
+	isUpdating = false;
+	pendingUpdates = [];
+	theme = "light";
+
 	constructor() {
-		this.$el = document.querySelector(".playground");
-		this.theme = "light";
-		this.isUpdating = false;
-		this.pendingUpdates = [];
-
-		// event listeners for menu items
-		const links = this.$el.querySelectorAll(
-			".playground-header-menu a:not(.more)"
-		);
-
-		for (const link of links) {
+		// event listeners for menu links
+		for (const link of this.links) {
 			link.addEventListener("click", (e) => {
 				e.preventDefault();
 				this.switchTo(e.target, link);
@@ -18,11 +13,7 @@ export class Playground {
 		}
 
 		// event listeners for theme toggles
-		const toggles = this.$el.querySelectorAll(
-			".playground-theme-toggle button"
-		);
-
-		for (const toggle of toggles) {
+		for (const toggle of this.toggles) {
 			toggle.addEventListener("click", (e) => {
 				e.preventDefault();
 
@@ -30,15 +21,23 @@ export class Playground {
 				this.theme = e.target.closest("button").dataset.theme;
 
 				// reload current menu item with updated theme
-				const current = this.$el.querySelector(
-					".playground-header-menu a[aria-current]"
+				this.switchTo(
+					[...this.links].find((link) => link.hasAttribute("aria-current"))
 				);
-				this.switchTo(current);
 			});
 		}
 	}
+
+	get $el() {
+		return document.querySelector(".playground");
+	}
+
 	get figure() {
 		return this.$el.querySelector(".playground-header-figure");
+	}
+
+	get links() {
+		return this.$el.querySelectorAll(".playground-header-menu a:not(.more)");
 	}
 
 	async loadHtml(link) {
@@ -79,11 +78,7 @@ export class Playground {
 			// when new image is loaded…
 			newImage.onload = async () => {
 				// wait briefly to prevent flickering
-				await new Promise((resolve) => {
-					setTimeout(() => {
-						resolve();
-					}, 50);
-				});
+				await new Promise((resolve) => setTimeout(resolve, 50));
 
 				// fade out old image
 				oldImage.style.opacity = 0;
@@ -101,22 +96,17 @@ export class Playground {
 	}
 
 	async switchTo(target, link) {
+		// if we're already updating, add the update to the queue
 		if (this.isUpdating) {
-			this.pendingUpdates.push({ target, link });
-			return;
+			return this.pendingUpdates.push({ target, link });
 		}
-
-		console.log(this.isUpdating, this.pendingUpdates);
 
 		// start loader animation
 		this.isUpdating = true;
 		this.figure.classList.add("loading");
 
 		// update active menu item
-		for (const link of this.$el.querySelectorAll(".playground-header-menu a")) {
-			link.removeAttribute("aria-current");
-		}
-
+		this.links.forEach((link) => link.removeAttribute("aria-current"));
 		target.setAttribute("aria-current", "true");
 
 		const [doc] = await Promise.all([
@@ -138,10 +128,15 @@ export class Playground {
 		this.figure.classList.remove("loading");
 		this.isUpdating = false;
 
+		// run any pending update
 		if (this.pendingUpdates.length > 0) {
 			const { target, link } = this.pendingUpdates.shift();
 			this.switchTo(target, link);
 		}
+	}
+
+	get toggles() {
+		return this.$el.querySelectorAll(".playground-theme-toggle button");
 	}
 
 	get wrapper() {
