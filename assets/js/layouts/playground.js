@@ -101,16 +101,16 @@ export class Playground {
 		this.isUpdating = true;
 		this.figure.classList.add("loading");
 
-		// update active menu item
-		this.links.forEach((link) => link.removeAttribute("aria-current"));
-		target.setAttribute("aria-current", "true");
-
 		const [doc, oldImage] = await Promise.all([
 			// load the playground content
 			link ? this.loadHtml(link) : null,
 			// load and insert the playground image
 			this.loadImage(target),
 		]);
+
+		// update active menu item
+		this.links.forEach((link) => link.removeAttribute("aria-current"));
+		target.setAttribute("aria-current", "true");
 
 		// replace the playground content
 		// (if no link was provided, we only replace the image)
