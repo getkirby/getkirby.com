@@ -2,6 +2,8 @@ export class Playground {
 	constructor() {
 		this.$el = document.querySelector(".playground");
 		this.theme = "light";
+		this.isUpdating = false;
+		this.pendingUpdates = [];
 
 		// event listeners for menu items
 		const links = this.$el.querySelectorAll(
@@ -89,9 +91,8 @@ export class Playground {
 				// remove old image after fade out is complete
 				setTimeout(() => {
 					oldImage.remove();
+					resolve();
 				}, 700);
-
-				resolve();
 			};
 
 			// append new image behind current image
@@ -100,7 +101,15 @@ export class Playground {
 	}
 
 	async switchTo(target, link) {
+		if (this.isUpdating) {
+			this.pendingUpdates.push({ target, link });
+			return;
+		}
+
+		console.log(this.isUpdating, this.pendingUpdates);
+
 		// start loader animation
+		this.isUpdating = true;
 		this.figure.classList.add("loading");
 
 		// update active menu item
@@ -127,6 +136,12 @@ export class Playground {
 		// and stop loader animation
 		this.figure.dataset.theme = this.theme;
 		this.figure.classList.remove("loading");
+		this.isUpdating = false;
+
+		if (this.pendingUpdates.length > 0) {
+			const { target, link } = this.pendingUpdates.shift();
+			this.switchTo(target, link);
+		}
 	}
 
 	get wrapper() {
