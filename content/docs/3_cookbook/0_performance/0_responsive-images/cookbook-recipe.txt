@@ -135,7 +135,7 @@ If you are wondering now why you should use this longer syntax when both return 
 <?php if ($image = $page->image('flower-power.jpg')): ?>
     <img
         alt="<?= $image->alt() ?>"
-        src="<?= $image->thumb(['width' => 300, 'height' => 300, 'quality' => 80, 'crop' => 'center', 'quality' => 80])->url() ?>"
+        src="<?= $image->thumb(['width' => 300, 'height' => 300, 'quality' => 80, 'crop' => 'center'])->url() ?>"
         srcset="<?= $image->srcset(
             [
                 '300w'  => ['width' => 300, 'height' => 300, 'crop' => 'center', 'quality' => 80],
@@ -163,7 +163,7 @@ With the `w` value after the image name, we tell the browser the physical width 
 
 **The density descriptor: `x`**
 
-Another possibility is to specify an `x` value instead of the `w` value.  It represents the device pixel ratio (DPR) at which an image should be rendered, and is only used for images that should always berendered at a fixed size, e.g. 150 pixels, regardless of the viewport (for example, a logo, icon, or user avatar).
+Another possibility is to specify an `x` value instead of the `w` value.  It represents the device pixel ratio (DPR) at which an image should be rendered, and is only used for images that should always be rendered at a fixed size, e.g. 150 pixels, regardless of the viewport (for example, a logo, icon, or user avatar).
 
 However, since devices have different DPRs, we provide different image sizes for a given DPR to ensure that the image always looks good.
 
@@ -265,7 +265,7 @@ With this information, the browser is now ready to do its calculations: With a v
 
 When creating different sizes and ratios of your images, it can be important to make sure that the essential items of the images don't get cut off or stay in the center of the image.
 
-You can pass a general focus area in your template code to the `->srcset()` method, like
+You can pass a general focus area in your template code to the `->srcset()` method, like this:
 
 ```php
 <?= $image->srcset(
@@ -373,14 +373,14 @@ Let's look at the HTML version first to see what this actually looks like:
         srcset="flower-power-300.avif 300px,
                 flower-power-600.avif 600px,
                 flower-power-900.avif 900px"
-        sizes="(min-width: 640px) 300nw, 100vw"
+        sizes="(min-width: 640px) 300px, 100vw"
         type="image/avif"
     >
     <source
         srcset="flower-power-300.webp 300px,
                 flower-power-600.webp 600px,
                 flower-power900.webp 900px"
-        sizes="(min-width: 640px) 300px, 100%"
+        sizes="(min-width: 640px) 300px, 100vw"
         type="image/webp"
     >
     <img
