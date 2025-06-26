@@ -143,7 +143,8 @@ article[data-loading] .price[data-sale] {
 	</section>
 
 	<footer class="h2">
-		Manage your existing licenses in our <a href="https://hub.getkirby.com"><span class="link">license&nbsp;hub</span> &rarr;</a>
+		Manage your existing licenses in our <a href="https://hub.getkirby.com"><span class="link">license&nbsp;hub</span>
+		<span aria-hidden="true">&rarr;</span></a>
 	</footer>
 </article>
 

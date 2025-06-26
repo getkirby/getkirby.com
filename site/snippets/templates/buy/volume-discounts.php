@@ -16,7 +16,11 @@
 }
 </style>
 
-<section class="volume-discounts mb-42" id="volume-discounts" :data-product="product">
+<section
+	id="volume-discounts"
+	:data-product="product"
+	class="volume-discounts mb-42"
+>
 	<form method="POST" target="_blank" action="<?= url('buy/volume') ?>">
 		<header class="flex items-baseline justify-between mb-6">
 			<h2 class="h2">Volume discounts</h2>
@@ -28,28 +32,30 @@
 				</div>
 			</fieldset>
 		</header>
-		<div class="columns rounded overflow-hidden" style="--columns-md: 3; --columns: 3; --gap: var(--spacing-3)">
-			<?php foreach ($discounts as $volume => $discount): ?>
-				<div class="block p-12 bg-light rounded text-center" >
-					<article>
-						<h3 class="mb text-sm">
-							<?= $volume ?>+ licenses
-						</h3>
-						<div class="mb-6">
-							<p class="h2">
-								Save <?= $discount ?>%
-							</p>
-							<?php if ($sale->isActive()): ?>
-								<p class="sale text-sm">on top!</p>
-							<?php endif ?>
-						</div>
 
-						<button class="btn btn--filled mb-3" @click.prevent="openCheckout(product, <?= $volume ?>)" name="volume" value="<?= $volume ?>">
-							<?= icon('cart') ?> Buy now
-						</button>
-					</article>
-				</div>
+		<ul
+			class="columns rounded overflow-hidden"
+			style="--columns-md: 3; --columns: 3; --gap: var(--spacing-3)"
+		>
+			<?php foreach ($discounts as $volume => $discount): ?>
+				<li class="block p-12 bg-light rounded text-center" >
+					<h3 class="mb text-sm">
+						<?= $volume ?>+ licenses
+					</h3>
+					<div class="mb-6">
+						<p class="h2">
+							Save <?= $discount ?>%
+						</p>
+						<?php if ($sale->isActive()): ?>
+							<p class="sale text-sm">on top!</p>
+						<?php endif ?>
+					</div>
+
+					<button class="btn btn--filled mb-3" @click.prevent="openCheckout(product, <?= $volume ?>)" name="volume" value="<?= $volume ?>">
+						<?= icon('cart') ?> Buy now
+					</button>
+				</li>
 			<?php endforeach ?>
-		</div>
+		</ul>
 	</form>
 </section>
