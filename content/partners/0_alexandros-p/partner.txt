@@ -1,0 +1,66 @@
+Title: Alexandros Papadopoulos
+
+----
+
+Subtitle: Design & Development
+
+----
+
+Summary: I craft thoughtful, visually engaging websites that bring ideas and content to life. By focusing on speed, accessibility, and sustainability, I build clean, efficient websites that perform beautifully and are easy to maintain.
+
+----
+
+Description:
+
+I'm Alexandros Papadopoulos, a freelance web designer and developer based in Kavala, Greece.
+
+I design websites with a clear purpose — to communicate ideas and content in ways that are both meaningful and visually engaging. On the development side, I am a strong advocate of the web platform. I favor lean, vanilla front-end solutions and focus on building fast, accessible, and sustainable websites. For content management, I use Kirby exclusively — its flexibility, performance, and supportive community make it a perfect fit for my workflow.
+
+I'm always interested in new ideas, collaborations, and conversations. Feel free to reach out!
+
+----
+
+Plan: regular
+
+----
+
+People: 1
+
+----
+
+Website: https://alexandros-p.com/
+
+----
+
+Location: Kavala, Greece
+
+----
+
+Region: Europe
+
+----
+
+Contactlink: hello@alexandros-p.com
+
+----
+
+Languages: English, Greek
+
+----
+
+Expertise:
+
+\- Website design 
+\- Front-end development
+\- Kirby implementations
+\- Sustainability
+\- Accessibility
+\- Performance
+
+----
+
+Discordhandle: alexandros_pap
+
+----
+
+Uuid: tiu454hybuzuaz9b
