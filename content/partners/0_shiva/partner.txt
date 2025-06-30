@@ -1,0 +1,75 @@
+Title: Shivlal Sheladiya
+
+----
+
+Subtitle: Designer & Kirby Developer
+
+
+----
+
+Summary: 
+
+----
+
+Description:
+
+With 10+ years of global experience, I specialize in crafting responsive, user-centric websites and web applications. I’ve collaborated with diverse clients and companies worldwide, delivering tailored solutions in front-end and back-end development. Passionate about leveraging cutting-edge technologies like HTML/CSS, JavaScript, Kirby CMS, WordPress, Next.JS, PHP and modern frameworks to solve complex challenges and drive business growth. Let’s connect to discuss your next project!
+
+Kirby Services:
+\* Custom Kirby Implementations
+\* Converting design files into a functional website
+\* Block Plugin Development
+\* Panel Fields Setup and Design
+\* Version Upgrade
+
+Standards Included:
+\* Responsive Web Design
+\* Page Speed Optimization
+\* SEO friendly websites
+\* GDPR compliance websites
+\* Secure websites
+
+----
+
+Plan: regular
+
+----
+
+People: 1
+
+----
+
+
+
+Location: Surat, India
+
+----
+
+Region: Asia
+
+----
+
+Contactlink: shiv.sheladiya@gmail.com
+
+----
+
+Languages: English, Hindi
+
+----
+
+Expertise:
+
+Kirby development
+Kirby Version upgrade
+UI & Web Design
+Accessibility
+Performance optimizations
+Animations (with GSAP)
+
+----
+
+Discordhandle: shivlalsheladiya_21461
+
+----
+
+Uuid: tbgrnirn0xo5n1cy
