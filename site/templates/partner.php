@@ -118,6 +118,7 @@
 						</dd>
 					</div>
 					<?php endif ?>
+                    <?php if ($page->website()->isNotEmpty()): ?>
 					<div>
 						<dt title="Website"><?= icon('url') ?></dt>
 						<dd>
@@ -126,6 +127,7 @@
 							</a>
 						</dd>
 					</div>
+                    <?php endif ?>
 				</dl>
 			</div>
 
