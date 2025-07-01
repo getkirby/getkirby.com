@@ -4,7 +4,7 @@ Title: Panel Created
 
 Text:
 
-The created plugin type for the Panel runs plugin code directly after the Vue instance has been loaded and gives access to the instance. You can use this to create your own modules for Vuex, add additional routes, register additional global events and more.
+The created plugin type for the Panel runs plugin code directly after the Vue instance has been loaded and gives access to the instance. You can use this to add additional routes, register additional global events and more.
 
 ```js
 panel.plugin("my/plugin", {
