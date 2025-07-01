@@ -117,7 +117,7 @@ Returning nothing or `false` is interpreted as a 404. It suggests that the model
 Returning true is interpreted as a success and will automatically close the dialog.
 
 `return [ ... ]`
-By returning an array, you gain more control of what happens when the dialog closes. You can pass data to the event, dispatch Vuex events and more.
+By returning an array, you gain more control of what happens when the dialog closes by passing data to the event:
 
 ```php
 return [
