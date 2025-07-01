@@ -1,0 +1,13 @@
+Title: Kirby 5.0
+
+----
+
+Category: Release show
+
+----
+
+Intro: Recording of the Kirby 5 launch live stream from July 1, 2025 with Bastian and Marc. See what's new in Kirby 5!
+
+----
+
+Video: https://www.youtube.com/live/L_ZiO5bIEts
