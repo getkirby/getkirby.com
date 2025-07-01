@@ -49,7 +49,7 @@ Region: Asia
 
 ----
 
-Contactlink: shiv.sheladiya@gmail.com
+Contactlink: mailto:shiv.sheladiya@gmail.com
 
 ----
 

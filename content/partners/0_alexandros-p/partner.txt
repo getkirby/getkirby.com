@@ -40,7 +40,7 @@ Region: Europe
 
 ----
 
-Contactlink: hello@alexandros-p.com
+Contactlink: mailto:hello@alexandros-p.com
 
 ----
 
