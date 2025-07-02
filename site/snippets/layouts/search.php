@@ -3,27 +3,6 @@ $area  = $area ?? 'all';
 $areas = option('search.areas');
 ?>
 
-<style>
-.search-input figure svg:nth-child(2) {
-	animation: Spin .9s linear infinite;
-}
-@keyframes Spin {
-	100% {
-		transform: rotate(360deg);
-	}
-}
-form:not([data-fetching]) .search-input figure svg:last-child {
-	display: none;
-}
-form[data-fetching] .search-input figure svg:first-child {
-	display: none;
-}
-
-.search-footer svg {
-	width: auto;
-}
-</style>
-
 <div class="search">
 	<button class="search-button" type="button" data-area="<?= $area ?? 'all' ?>" aria-label="Search">
 		<?= icon('search') ?>
@@ -33,10 +12,10 @@ form[data-fetching] .search-input figure svg:first-child {
 		<form class="relative bg-white shadow-xl" action="/search">
 			<!-- Input -->
 			<div class="search-input relative flex items-stretch">
-				<figure class="grid place-items-center">
+				<div class="search-input-icon grid place-items-center">
 					<?= icon('search') ?>
 					<?= icon('loader') ?>
-				</figure>
+				</div>
 				<input
 					type="text"
 					name="q"
@@ -64,7 +43,7 @@ form[data-fetching] .search-input figure svg:first-child {
 					<li class="search-result">
 						<a class="leading-snug" href="">
 							<div>
-								<h3 class="search-title font-bold text-sm"></h3>
+								<div class="search-title font-bold text-sm"></div>
 								<div class="search-byline text-xs color-gray-700"></div>
 								<div class="search-link text-xs font-mono color-gray-600"></div>
 							</div>
@@ -81,8 +60,12 @@ form[data-fetching] .search-input figure svg:first-child {
 						View all <span class="search-more-count mx-1"></span> results &rsaquo;
 					</a>
 				</div>
-				<a class="ml-auto color-gray-600" href="https://algolia.com">
-					Search by <?= icon('algolia', 'Algolia') ?>
+				<a
+					href="https://algolia.com"
+					aria-label="Search by Algolia"
+					class="ml-auto color-gray-600"
+				>
+					Search by <?= icon('algolia') ?>
 				</a>
 			</div>
 		</form>

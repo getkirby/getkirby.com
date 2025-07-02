@@ -10,20 +10,20 @@
 	margin-right: var(--spacing-2);
 }
 
-.topbar-link > * {
+.topbar-link {
+	display: flex;
+	gap: var(--spacing-2);
+	align-items: center;
+}
+.topbar-link > :first-child {
 	display: none;
 }
-.topbar-link::after {
-	display: inline-block;
-	padding-left: var(--spacing-2);
-	content: "→";
-}
-.topbar-link[data-active="true"]::after {
-	content: "↓";
+.topbar-link > :last-child {
+	width: 1ch;
 }
 
 @media screen and (min-width: 35rem) {
-	.topbar-link > * {
+	.topbar-link > :first-child {
 		display: inline;
 	}
 }

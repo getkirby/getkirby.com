@@ -8,25 +8,39 @@
 			<div class="footer-info mb-6">
 				<p class="font-bold mb-1">Kirby</p>
 				<p class="mb-3">The CMS that adapts to any project. Made for developers, designers, creators and clients.</p>
-				<nav aria-label="Kirby on the web" class="social mb-3">
-					<a rel="me" href="<?= option('github.url') ?>">
-						<?= icon('github', 'GitHub') ?>
-					</a>
-					<a rel="me" href="https://mastodon.social/@getkirby">
-						<?= icon('mastodon', 'Mastodon') ?>
-					</a>
-					<a rel="me" href="https://bsky.app/profile/getkirby.com">
-						<?= icon('bluesky', 'Bluesky') ?>
-					</a>
-					<a rel="me" href="https://linkedin.com/company/getkirby">
-						<?= icon('linkedin', 'LinkedIn') ?>
-					</a>
-					<a rel="me" href="https://videos.getkirby.com">
-						<?= icon('youtube', 'YouTube') ?>
-					</a>
-					<a rel="me" href="https://chat.getkirby.com">
-						<?= icon('discord', 'Discord') ?>
-					</a>
+				<nav aria-label="Kirby on the web" class="mb-3">
+					<ul class="social">
+						<li>
+							<a rel="me" href="<?= option('github.url') ?>" aria-label="GitHub">
+								<?= icon('github') ?>
+							</a>
+						</li>
+						<li>
+							<a rel="me" href="https://mastodon.social/@getkirby" aria-label="Mastodon">
+								<?= icon('mastodon') ?>
+							</a>
+						</li>
+						<li>
+							<a rel="me" href="https://bsky.app/profile/getkirby.com" aria-label="Bluesky">
+								<?= icon('bluesky') ?>
+							</a>
+						</li>
+						<li>
+							<a rel="me" href="https://linkedin.com/company/getkirby" aria-label="LinkedIn">
+								<?= icon('linkedin') ?>
+							</a>
+						</li>
+						<li>
+							<a rel="me" href="https://videos.getkirby.com" aria-label="YouTube">
+								<?= icon('youtube') ?>
+							</a>
+						</li>
+						<li>
+							<a rel="me" href="https://chat.getkirby.com" aria-label="Discord">
+								<?= icon('discord') ?>
+							</a>
+						</li>
+					</ul>
 				</nav>
 				<p class="mb-3 color-gray-700 flex items-center">
 					🇪🇺 Made in Europe
