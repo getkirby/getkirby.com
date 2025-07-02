@@ -56,4 +56,14 @@ $messages = [
 ];
 ```
 
+If your site is set up to support multiple languages, you use (link: https://getkirby.com/docs/guide/languages/custom-language-variables text: custom language variables) to translate the messages. Reference your translations using the (link: https://getkirby.com/docs/reference/templates/helpers/t text: `t()`-method.) We recommend you set a fallback when using `t()`.
+
+```php
+$messages = [
+    'fname' => t('fname', 'Please enter a valid first name'),
+    'lname' => t('lname', 'Please enter a valid last name'),
+    'email' => t('email', 'Please enter a valid email address')
+];
+```
+
 You can find an example of `invalid()` used to create pages from frontend in (link: https://getkirby.com/docs/cookbook/forms/creating-pages-from-frontend text: this recipe).
