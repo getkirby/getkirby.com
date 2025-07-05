@@ -32,10 +32,12 @@ If you are using custom private plugins, please also take a look at the (link: r
 
 ## Perform the update to Kirby 3.9
 
-To perform the update, please ((link: docs/guide/quickstart#updates text: as usual)):
+Once your site code and plugins have been updated, you can update Kirby itself. Please follow our general update instructions:
 
-- replace the `kirby` folder with the new one (either from the (link: https://github.com/getkirby/kirby/archive/main.zip text: ZIP download), via Composer or in the Git submodule) and
-- delete the `media` folder.
+- (link: docs/guide/install-guide/installation-via-download#updating-your-installation text: Update via download)
+- (link: docs/guide/install-guide/composer#updating-kirby text: Update via Composer)
+- (link: docs/guide/install-guide/git#updating-kirby text: Update via Git)
+- (link: docs/guide/install-guide/cli#updating-via-the-cli text: Update via Kirby CLI)
 
 <warning>
 We recommend to perform the update on a local development server first.

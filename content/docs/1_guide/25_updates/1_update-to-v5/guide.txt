@@ -113,7 +113,12 @@ The new changes feature builds on a fully refactored `Form` package. The refacto
 
 ### How to perform the update
 
-Once your site code and plugins have been updated, you can update Kirby itself. Please follow our (link: docs/guide/updates text: general update instructions).
+Once your site code and plugins have been updated, you can update Kirby itself. Please follow our general update instructions:
+
+- (link: docs/guide/install-guide/installation-via-download#updating-your-installation text: Update via download)
+- (link: docs/guide/install-guide/composer#updating-kirby text: Update via Composer)
+- (link: docs/guide/install-guide/git#updating-kirby text: Update via Git)
+- (link: docs/guide/install-guide/cli#updating-via-the-cli text: Update via Kirby CLI)
 
 ## For plugin developers
 
