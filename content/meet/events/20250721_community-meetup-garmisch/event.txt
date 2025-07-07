@@ -1,0 +1,11 @@
+start: 18:00:00
+----
+city: Garmisch-Partenkirchen
+----
+country: Germany
+----
+conference: Dev Meetup Garmisch
+----
+issue: 1
+----
+link: https://garmisch.dev/#anmeldung
