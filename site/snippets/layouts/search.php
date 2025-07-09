@@ -81,9 +81,6 @@ form[data-fetching] .search-input figure svg:first-child {
 						View all <span class="search-more-count mx-1"></span> results &rsaquo;
 					</a>
 				</div>
-				<a class="ml-auto color-gray-600" href="https://algolia.com">
-					Search by <?= icon('algolia', 'Algolia') ?>
-				</a>
 			</div>
 		</form>
 	</dialog>

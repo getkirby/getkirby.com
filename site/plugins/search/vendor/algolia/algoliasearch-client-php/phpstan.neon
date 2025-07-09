@@ -1,4 +1,0 @@
-parameters:
-  excludePaths:
-    - vendor/*
-  level: max

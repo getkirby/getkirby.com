@@ -44,7 +44,6 @@
 				<p class="mb-6">
 					Use <kbd class="text-sm bg-light p-1 rounded" title="Alternatively, Cmd + k or Ctrl + k">/</kbd> anywhere on the site to open the search dialog.
 				</p>
-				<p>Our search is powered by <a class="underline" href="https://algolia.com">Algolia</a></p>
 				<p>It's a great solution if you want to integrate meaningful search features in your Kirby site.</p>
 			</footer>
 		</div>
