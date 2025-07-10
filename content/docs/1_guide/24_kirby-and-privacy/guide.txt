@@ -43,7 +43,7 @@ User data gets stored in account files within the `site/accounts` directory. Kir
 
 The user credentials are transmitted via HTTP. Therefore, we strongly recommend to use TLS encryption for your sites to protect the passwords and other personal data of your visitors and users.
 
-The Panel also stores unsaved changes in `localStorage` in the user’s browser. `localStorage` only gets cleared when a user saves the changes or deliberately signs out of the Panel.
+In versions 3 and 4 of Kirby, the Panel stores unsaved changes in the `localStorage` of the user’s browser. `localStorage` only gets cleared when a user either saves/discards the changes or deliberately signs out of the Panel. From version 5 onwards, Kirby stores those unsaved changes on the server in the content directory.
 
 ### Brute-force protection
 
