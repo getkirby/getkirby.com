@@ -1,0 +1,36 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * CLI script to re-index the Kirby Loupe SQLite local index
+ *
+ * @author Ahmet Bora <ahmet@getkirby.com>
+ */
+
+// check if we are indeed on the command line
+if (php_sapi_name() !== 'cli') {
+    die();
+}
+
+define('KIRBY_HELPER_VIDEO', false);
+
+// load Kirby
+require __DIR__ . '/../kirby/bootstrap.php';
+
+$props = [
+    'roots' => [
+        'index'   => __DIR__ . '/..',
+        'content' => __DIR__ . '/../content',
+        'site'    => __DIR__ . '/../site',
+    ],
+];
+
+// initialize Kirby and site
+echo "\033[1mLoading Kirby...\033[0m\n";
+$kirby = new Kirby($props);
+
+// re-index using the Loupe plugin
+echo "\033[1mReindexing using the Loupe plugin...\033[0m\n";
+loupe()->index()->generate();
+
+echo "\033[32mSuccessfully indexed the Kirby site.\033[0m\n";
