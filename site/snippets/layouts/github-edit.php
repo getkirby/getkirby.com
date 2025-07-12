@@ -3,7 +3,10 @@
 
 	<p class="prose text-sm mb-6 max-w-xs">
 		Did you find an error? Help us improve our docs and edit this page on GitHub. Make sure to check out
-		<a href="/styleguide">our styleguide &rarr;</a>
+		<a href="/styleguide">
+			our styleguide
+			<span aria-hidden="true">&rarr;</span>
+		</a>
 	</p>
 
 	<?php if (F::exists($page->root() . '/' . $page->intendedTemplate() . '.txt')): ?>

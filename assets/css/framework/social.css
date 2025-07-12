@@ -2,7 +2,7 @@
 	display: flex;
 	align-items: center;
 }
-.social a {
+.social li {
 	display: grid;
 	place-items: center;
 	width: var(--spacing-10);
