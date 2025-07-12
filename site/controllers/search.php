@@ -3,22 +3,35 @@
 use Kirby\Cms\App;
 
 return function (App $kirby) {
-	$query   = trim(get('q', ''));
-	$area    = trim(get('area', ''));
+	$query = trim(get('q', ''));
+	$area = trim(get('area', ''));
 	$results = null;
 
-	if (empty($query) === false) {
-		$params = [
-			'hitsPerPage'           => (int)get('limit', 50),
-			'attributesToHighlight' => false,
-			'attributesToSnippet'   => '*'
-		];
+	if ($query !== '') {
+		// search using Loupe if documents are archived, otherwise use Algolia
+		if (option('archived', false) === true) {
+			$params = [
+				'limit' => (int)get('limit', 50)
+			];
 
-		if (empty($area) == false && $area !== 'all') {
-			$params['filters'] = 'area:' . $area;
+			if ($area !== '' && $area !== 'all') {
+				$params['filter'] = "area = '$area'";
+			}
+
+			$results = loupe()->query($query, param('page') ?? 1, $params);
+		} else {
+			$params = [
+				'hitsPerPage'           => (int)get('limit', 50),
+				'attributesToHighlight' => false,
+				'attributesToSnippet'   => '*'
+			];
+
+			if ($area !== '' && $area !== 'all') {
+				$params['filters'] = 'area:' . $area;
+			}
+
+			$results = algolia()->query($query, param('page') ?? 1, $params);
 		}
-
-		$results = algolia()->query($query, param('page') ?? 1, $params);
 	}
 
 	return [

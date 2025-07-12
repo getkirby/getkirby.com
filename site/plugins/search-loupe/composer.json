@@ -1,0 +1,14 @@
+{
+  "name": "getkirby/loupe",
+  "autoload": {
+    "psr-4": {
+      "Kirby\\Search\\Loupe\\": "src/"
+    }
+  },
+  "require": {
+    "loupe/loupe": "^0.12.6"
+  },
+  "config": {
+    "optimize-autoloader": true
+  }
+}
