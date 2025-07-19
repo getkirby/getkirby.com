@@ -106,6 +106,14 @@ Kirby 5 adds additional field names that are now reserved by Kirby:
 
 If you are using these field names in your content files or for custom page/site/file/user methods, please make sure to rename those.
 
+### Virtual pages
+
+Due to our new Versions architecture, virtual pages might need changes.
+
+For virtual pages with mixed content from disk and a virtual source, there’s a forum thread to help you out: https://forum.getkirby.com/t/content-loss-on-pages-with-virtual-data/34215/3
+
+For virtual pages from a database, there’s a new Database Storage plugin: https://github.com/getkirby/database-storage/
+
 ### Refactored form classes
 
 The new changes feature builds on a fully refactored `Form` package. The refactoring comes with several (link: releases/5/changelog#breaking-changes__core__forms text: breaking changes) and (link: releases/5/changelog#deprecated__core__forms text: deprecations). If you have been using the `Form` classes for your own forms, you will need to adapt these uses. The new (link: docs/reference/objects/form/form text: form documentation) includes several practical examples for common use cases.
