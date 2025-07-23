@@ -1,7 +1,7 @@
 ## Guide
 
 <?php foreach (collection('guides')->group('category') as $category => $item): ?>
-## <?= option('categories')[$category] ?? ucfirst($category) ?>
+### <?= option('categories')[$category] ?? ucfirst($category) ?>
 
 
 <?php foreach ($item as $guide): ?>
