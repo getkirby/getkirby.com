@@ -1,5 +1,6 @@
 <?php
 
+use Kirby\Cms\App;
 use Kirby\Cms\Html;
 use Kirby\Cms\Section;
 use Kirby\Form\Field;
@@ -8,7 +9,20 @@ use Kirby\Reference\Types\Chain;
 use Kirby\Reference\Types\Identifier;
 use Kirby\Toolkit\Str;
 
-$tags = [];
+$coreTags = App::instance()->core()->kirbyTags();
+
+$tags = [
+	'link' => [
+		...$coreTags['link'],
+		'html' => function ($tag) use ($coreTags) {
+			if (($tag->options['kirbytags'] ?? true) === false) {
+				return '[' . ($tag->text() ?? $tag->value()) . '](' . url($tag->value()) . ')';
+			}
+
+			return $coreTags['link']['html']($tag);
+		}
+	],
+];
 
 /**
  * (snippet: snippet/to/render/the/children)
@@ -62,6 +76,13 @@ $tags['image'] = [
 	],
 	'html' => function ($tag) {
 		if ($file = $tag->file($tag->value)) {
+
+			if (($tag->options['kirbytags'] ?? true) === false) {
+				// markdown image syntax
+				return '![' . ($tag->caption ?? $file->caption()->or($tag->alt)) . '](' . $file->url() . ')';
+			}
+
+
 			return snippet('kirbytext/image', [
 				'file'    => $file,
 				'class'   => $tag->class,
@@ -82,7 +103,13 @@ $tags['screencast'] = [
 		'text',
 	],
 	'html' => function ($tag) {
-		return snippet('kirbytext/screencast', [
+		$snippet = 'kirbytext/screencast';
+
+		if (($tag->options['kirbytags'] ?? true) === false) {
+			$snippet = 'kirbytext/screencast.md';
+		}
+
+		return snippet($snippet, [
 			'url'    => $tag->value,
 			'poster' => $tag->poster ? $tag->file($tag->poster) : $tag->file('youtube.jpg'),
 			'title'  => $tag->title ?? null,
@@ -112,7 +139,13 @@ $tags['glossary'] = [
 $tags['reference'] = [
 	'html' => function ($tag) {
 		if ($page = page('docs/reference/' . $tag->value())) {
-			return snippet('kirbytext/reference', [
+			$snippet = 'kirbytext/reference';
+
+			if (($tag->options['kirbytags'] ?? true) === false) {
+				$snippet = 'kirbytext/reference.md';
+			}
+
+			return snippet($snippet, [
 				'entries' => $page->children()->listed()
 			], true);
 		}
@@ -146,6 +179,10 @@ $tags['docs'] = [
 		];
 
 		$snippet = snippet('docs/' . $tag->value, $data, true);
+
+		if (($tag->options['kirbytags'] ?? true) === false) {
+			return kirbytagsToMarkdown($snippet);
+		}
 
 		return kirbytext($snippet, [
 			'parent' => $tag->parent()
