@@ -1,11 +1,19 @@
 <?php
 
+use Kirby\Cms\App;
 use Kirby\Http\Url;
+use Kirby\Text\KirbyTags;
 use Kirby\Toolkit\Collection;
 use Kirby\Toolkit\Obj;
 use Kirby\Toolkit\Str;
 
 return [
+	'convertToMarkdown' => function ($field) {
+		return $field->value(function ($value)	{
+			return kirbytagsToMarkdown($value);
+		});
+	},
+
 	/**
 	 * Shorten the URL
 	 */

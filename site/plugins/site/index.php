@@ -5,6 +5,7 @@ use Kirby\Cms\App;
 require_once __DIR__ . '/vendor/autoload.php';
 
 require_once __DIR__ . '/helpers/html.php';
+require_once __DIR__ . '/helpers/kirbytagsToMarkdown.php';
 require_once __DIR__ . '/helpers/reference.php';
 
 // make default page model and reference page models available for extension
