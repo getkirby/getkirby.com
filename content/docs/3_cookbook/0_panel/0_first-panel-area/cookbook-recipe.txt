@@ -134,11 +134,11 @@ Inside `MovieReviews.vue`, we use Kirby's `k-inside`, `k-view` and `k-header` co
 
 ```html "/site/plugins/moviereviews/src/components/MovieReviews.vue"
 <template>
-  <k-inside>
+  <k-panel-inside>
     <k-view class="k-moviereview-view">
       <k-header>Movie reviews</k-header>
     </k-view>
-  </k-inside>
+  </k-panel-inside>
 </template>
 
 <script>
@@ -174,7 +174,7 @@ All that's left now, is create the component for our API data. Kirby's ready to 
 
 ```html "/site/plugins/moviereviews/src/components/MovieReviews.vue"
 <template>
-  <k-inside>
+  <k-panel-inside>
     <k-view class="k-moviereview-view">
       <k-header>Movie reviews</k-header>
       <k-items v-if="reviews.length" :items="reviews" :layout="layout" :size="size">
@@ -194,7 +194,7 @@ All that's left now, is create the component for our API data. Kirby's ready to 
       </k-items>
       <div v-else>No items available</div>
     </k-view>
-  </k-inside>
+  </k-panel-inside>
 </template>
 
 <script>
