@@ -48,4 +48,7 @@ return [
 
 		return $headlines;
 	},
+	'unhtml' => function ($field) {
+		return $field->value(fn ($value) => Str::unhtml($value));
+	},
 ];
