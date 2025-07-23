@@ -2,23 +2,14 @@
 
 return [
 	[
-		'pattern' => 'docs/(:all).md',
-		'action'  => function ($path) {
-			$page = page('docs/' . $path);
-
-			if ($page === null) {
-				return page('error');
-			}
-			
-			snippet('docs/llms/page-content-md', compact('page'));
-			exit;
-		}
-	],
-	[
 		'pattern' => 'docs/guide/(:any)/(:any)',
 		'action'  => function ($parent, $slug) {
+			if (str_ends_with($slug, '.md')) {
+				$slug = substr($slug, 0, -3);
+			}
+
 			if ($page = page('docs/guide/' . $parent . '/' . $slug)) {
-				return $page;
+				return $this->next();
 			}
 
 			if ($page = page('docs/guide/' . $parent)) {

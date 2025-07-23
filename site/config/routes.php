@@ -2,6 +2,13 @@
 
 return [
 	[
+		'pattern' => '(:all).md',
+		'action'  => function ($path) {
+			kirby()->response()->type('text/plain');
+			return $this->next($path);
+		}
+	],
+	[
 		// blocks all requests to *.html and returns 404
 		'pattern' => '(:all)\.html',
 		'action'  => function () {
@@ -58,20 +65,21 @@ return [
 	[
 		'pattern' => 'llms.txt',
 		'action'  => function () {
-			$ignore   = [];
 			$sections = [
 				'guide',
 				'reference',
 				'cookbook',
 				'quicktips'
 			];
-			$docs     = page('docs')
+
+			$docs = page('docs')
 				->children()
 				->find(...$sections)
 				->listed();
 
-			snippet('docs/llms/index', compact('docs', 'ignore'));
-			exit;
+			kirby()->response()->type('text/plain');
+
+			return snippet('docs/llms/index', ['docs' => $docs], true);
 		}
 	],
 ];
