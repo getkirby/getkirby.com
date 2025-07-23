@@ -39,6 +39,25 @@ class DefaultPage extends Page
 	}
 
 	/**
+	 * URL for the Markdown version of the page
+	 */
+	public function markdownUrl(): string
+	{
+		$markdown = [
+			'cookbook-recipe',
+			'guide',
+			'reference-article',
+			'quicktip',
+		];
+
+		if (in_array($this->intendedTemplate()->name(), $markdown)) {
+			return $this->menuUrl() . '.md';
+		}
+
+		return $this->menuUrl();
+	}
+
+	/**
 	 * Final URL after redirects to be used in menus;
 	 * fallback if the page model doesn't override it
 	 */
