@@ -147,7 +147,7 @@ $post = $kirby->controller('post' , compact('page', 'pages', 'site', 'kirby'));
 ```
 
 <info>
-More info on the `controller()` method (link: docs/reference/objects/kirby/controller text: can be found in the docs).
+More info on the `controller()` method (link: docs/reference/objects/cms/app/controller text: can be found in the docs).
 </info>
 
 Then we'll gather our custom data that we need specifically just for the `post-video` template:
