@@ -5,7 +5,7 @@
 
 
 <?php foreach ($item as $guide): ?>
-- [<?= $guide->title()->unhtml() ?>](<?= $guide->menuUrl() ?>.md)
+- [<?= $guide->title()->unhtml() ?>](<?= $guide->markdownUrl() ?>)
 <?php endforeach ?>
 
 <?php endforeach ?>

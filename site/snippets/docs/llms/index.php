@@ -1,27 +1,3 @@
-<?php
-/**
- * @var \Kirby\Cms\Pages $docs
- * @var array $ignore
- */
-header('Content-Type: text/plain; charset=UTF-8');
-
-function printLinks($pages, array $ignore = []): void
-{
-	foreach ($pages as $page) {
-		if (in_array($page->intendedTemplate()->name(), $ignore)) {
-			continue;
-		}
-
-		echo '- [' . Str::unhtml($page->title()->value()) . '](' . $page->menuUrl() . '.md)' . PHP_EOL;
-		$children = $page->children()->listed();
-		if ($children->count()) {
-			printLinks($children);
-		}
-	}
-}
-
-?>
-
 # <?= site()->title() ?> Docs
 
 > The official Kirby CMS documentation for <?= site()->title() ?>, covering Guides, Reference, Cookbook and Quicktips.

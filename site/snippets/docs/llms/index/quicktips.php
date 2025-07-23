@@ -1,5 +1,5 @@
 ## Quicktips
 
 <?php foreach ($docs->children()->listed() as $child): ?>
-- [<?= $child->title()->unhtml() ?>](<?= $child->menuUrl() ?>.md)
+- [<?= $child->title()->unhtml() ?>](<?= $child->markdownUrl() ?>)
 <?php endforeach ?>
