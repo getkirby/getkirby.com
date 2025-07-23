@@ -211,7 +211,7 @@ The properties defined in the `$data` array are exposed to **templates** as glob
 
 You can also add a general site controller called `site.php` which you put into your `/site/controllers` folder like any other page controller. Such a general site controller is useful if multiple templates share the same logic.The `site` controller data will now always be merged as default data with data from page template specific controllers.
 
-```php "site/controller/site.php"
+```php "site/controllers/site.php"
 return function () {
 	return [
 		'brand' => 'Kirby'
@@ -219,7 +219,7 @@ return function () {
 };
 ```
 
-```php "site/controller/campaign.php"
+```php "site/controllers/campaign.php"
 return function () {
 	return [
 		'testimonial' => 'Max'
@@ -235,7 +235,7 @@ Both are available:
 
 You can also set a site controller for all content representations of a certain type:
 
-```php "site/controller/site.rss.php"
+```php "site/controllers/site.rss.php"
 return function () {
 	return [
 		'generator' => 'Kirby RSS Feed Generator'
