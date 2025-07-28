@@ -130,18 +130,31 @@ abstract class Reflectable
 	 */
 	public function source(): string|null
 	{
-		if (method_exists($this, 'sourcePath') === false) {
+		$path = $this->sourcePath();
+
+		if ($path === null) {
 			return null;
 		}
 
+		$line = $this->sourceLine();
 		$url  = option('github.url') . '/kirby/tree/' . App::version();
-		$url .= '/' . $this->sourcePath();
+		$url .= '/' . $path;
 
-		if (method_exists($this, 'sourceLine') === true) {
-			$url .= '#L' . $this->sourceLine();
+		if ($line !== null) {
+			$url .= '#L' . $line;
 		}
 
 		return $url;
+	}
+
+	protected function sourceLine(): int|null
+	{
+		return null;
+	}
+
+	protected function sourcePath(): string|null
+	{
+		return null;
 	}
 
 	/**

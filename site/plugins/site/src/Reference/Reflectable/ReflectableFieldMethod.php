@@ -54,7 +54,7 @@ class ReflectableFieldMethod extends ReflectableClassMethod
 	/**
 	 * Returns the path to the source code of the field method
 	 */
-	protected function sourcePath(): string
+	protected function sourcePath(): string|null
 	{
 		if ($this->reflection instanceof ReflectionMethod) {
 			return 'src/Content/Field.php';

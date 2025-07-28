@@ -81,6 +81,7 @@ class ReflectableFunction extends Reflectable
 	 */
 	protected function sourceLine(): int|null
 	{
-		return $this->reflection->getStartLine();
+		$line = $this->reflection->getStartLine();
+		return $line === false ? null : $line;
 	}
 }

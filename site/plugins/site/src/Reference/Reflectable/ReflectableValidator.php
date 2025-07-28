@@ -41,7 +41,7 @@ class ReflectableValidator extends ReflectableFunction
 	/**
 	 * Returns the path to the source code
 	 */
-	protected function sourcePath(): string
+	protected function sourcePath(): string|null
 	{
 		return 'src/Toolkit/V.php';
 	}

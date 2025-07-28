@@ -154,9 +154,14 @@ class ReflectableClassMethod extends ReflectableFunction
 	/**
 	 * Returns the path to the source code of the method
 	 */
-	protected function sourcePath(): string
+	protected function sourcePath(): string|null
 	{
 		$file = $this->reflection->getFileName();
+
+		if ($file === false) {
+			return null;
+		}
+
 		$path = Str::from($file, 'src/');
 		return $path;
 	}

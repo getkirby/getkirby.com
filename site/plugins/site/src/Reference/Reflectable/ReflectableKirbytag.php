@@ -39,6 +39,11 @@ class ReflectableKirbytag extends ReflectableFunction
 	protected function sourceLine(): int|null
 	{
 		$line = $this->reflection->getStartLine();
+
+		if ($line === false) {
+			return null;
+		}
+
 		$line -= 2;
 
 		if (count($this->attributes) > 0) {
@@ -51,7 +56,7 @@ class ReflectableKirbytag extends ReflectableFunction
 	/**
 	 * Returns the path to the source code
 	 */
-	protected function sourcePath(): string
+	protected function sourcePath(): string|null
 	{
 		return 'config/tags.php';
 	}

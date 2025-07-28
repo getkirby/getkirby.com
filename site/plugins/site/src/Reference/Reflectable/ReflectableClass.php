@@ -68,15 +68,16 @@ class ReflectableClass extends Reflectable
 	/**
 	 * Returns the line number where the class begins in the source code
 	 */
-	protected function sourceLine(): int|false
+	protected function sourceLine(): int|null
 	{
-		return $this->reflection->getStartLine();
+		$line = $this->reflection->getStartLine();
+		return $line === false ? null : $line;
 	}
 
 	/**
 	 * Returns the path to the source code of the class
 	 */
-	protected function sourcePath(): string
+	protected function sourcePath(): string|null
 	{
 		$path = str_replace('Kirby\\', '', $this->name());
 		$path = str_replace('\\', '/', $path);
