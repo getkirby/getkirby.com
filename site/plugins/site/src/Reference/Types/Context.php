@@ -11,6 +11,7 @@ use Kirby\Reference\Reflectable\ReflectableFunction;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\Str;
 use PHPStan\PhpDocParser\Ast\Type\GenericTypeNode;
+use PHPStan\PhpDocParser\Ast\Type\UnionTypeNode;
 use ReflectionClass;
 use ReflectionFunctionAbstract;
 
@@ -186,7 +187,18 @@ class Context
 	{
 		$payload = A::map(
 			$reference->genericTypes,
-			fn ($type) => $this->types[$type->name] ?? $type->name
+			function ($type) {
+				if ($type instanceof UnionTypeNode) {
+					$type = $type->types;
+				}
+
+				$type = A::map(
+					A::wrap($type),
+					fn ($t) => $this->types[$t->name] ?? $t->name
+				);
+
+				return implode('|', $type);
+			}
 		);
 
 		$reflection  = new ReflectionClass($reference->type->name);
