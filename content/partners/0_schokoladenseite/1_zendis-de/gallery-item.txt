@@ -1,0 +1,13 @@
+Title: zendis.de
+
+----
+
+Info: Zentrum für Digitale Souveränität der Öffentlichen Verwaltung GmbH (ZenDiS)
+
+----
+
+Link: https://www.zendis.de
+
+----
+
+Uuid: j13y23cdqnr1n6ri
