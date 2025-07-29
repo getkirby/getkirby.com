@@ -109,10 +109,14 @@ Possible values: `true`| `false` | `Closure` (default: `false`)
 ```php
 return [
   'content' => [
-    'fileRedirects' => false
+    'fileRedirects' => true
   ]
 ];
 ```
+
+<alert>
+Setting the option to `true` allows all visitors to download the uploaded file originals in full quality and resolution and with all metadata that the file carries. This can be a copyright, privacy or information security concern. Only set the option to `true` if none of your files require access protection.
+</alert>
 
 You can also dynamically control this behavior, e.g. based on a file field or other custom logic:
 
