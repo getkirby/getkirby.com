@@ -7,7 +7,7 @@ Intro: Learn how you can customise the Panel look via CSS.
 
 ----
 
-Read: docs/guide/panel/customizing-panel
+Read: docs/quicktips/customizing-panel
 
 ----
 
