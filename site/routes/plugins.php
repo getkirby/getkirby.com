@@ -24,14 +24,19 @@ return [
 			$url = $plugins . '/' . $path . '.json';
 
 			if (kirby()->request()->header('X-Pull') === option('keys.keycdn')) {
-				return Response::json(
-					Remote::get($url)->json(), headers: [
-						// keep the data in the client cache for a day,
-						// but refresh the data in the CDN cache every half an hour;
-						// if getkirby.com is not reachable, continue to serve the data for two days
-						'Cache-Control' => 'public, max-age=86400, s-maxage=1800, stale-if-error=172800'
-					]
-				);
+				$json    = Remote::get($url)->json();
+				$headers = [
+					// keep the data in the client cache for a day,
+					// but refresh the data in the CDN cache every half an hour;
+					// if getkirby.com is not reachable, continue to serve the data for two days
+					'Cache-Control' => 'public, max-age=86400, s-maxage=1800, stale-if-error=172800'
+				];
+
+				if (is_array($json) === true) {
+					return Response::json($json, headers: $headers);
+				}
+
+				return new Response('Plugin not found', 'text/plain', 404, $headers);
 			}
 
 			go($url);
