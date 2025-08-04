@@ -65,6 +65,7 @@ Kirby::plugin(
 		…
 	]
 );
+```
 
 ## Extensions
 
