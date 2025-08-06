@@ -52,6 +52,11 @@ class ReflectableFunction extends Reflectable
 		return $this->reflection->isStatic();
 	}
 
+	public function mutationDescription(): string|null
+	{
+		return null;
+	}
+
 	/**
 	 * Returns the name of the function
 	 */
