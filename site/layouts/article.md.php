@@ -1,7 +1,7 @@
 # <?= $page->title()->unhtml() . PHP_EOL ?>
-<?php if ($page->intro()->isNotEmpty()): ?>
+<?php if ($slots->intro() || $page->intro()->isNotEmpty()): ?>
 
-<?= $page->intro()->convertToMarkdown() . PHP_EOL ?>
+<?= $slots->intro() ?? $page->intro()->convertToMarkdown() . PHP_EOL ?>
 
 ****
 <?php endif ?>

@@ -21,10 +21,13 @@ class ReferenceRootPage extends ReferenceArticlePage
 		]);
 	}
 
-	public function setup(): string
+	public function setup(): Field
 	{
-		$text = $this->parent()->custom()->kt()->value();
-		return str_replace('{{ root }}', parent::title(), $text);
+		$title = parent::title();
+
+		return $this->parent()->custom()->value(function ($value) use ($title) {
+			return str_replace('{{ root }}', $title, $value);
+		});
 	}
 
 	public function template(): Template

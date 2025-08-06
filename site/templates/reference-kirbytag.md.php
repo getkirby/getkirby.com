@@ -1,9 +1,14 @@
-<?php layout('article.md') ?>
-<?php if (count($attributes) > 0): ?>
-## Attributes
+<?php
 
-In addition to the main `<?= $page->slug() ?>` option, the tag supports the following attributes: <?= implode(', ', array_map(fn ($attribute) => "`{$attribute}`", $attributes)) ?>
+layout('article.md');
 
+$attributes = snippet('templates/reference/attributes.md', return: true);
+$text       = $page->text()->convertToMarkdown();
 
-<?php endif ?>
-<?= $page->text()->convertToMarkdown() ?>
+echo cleanUpMarkdown(<<<MARKDOWN
+
+$attributes
+
+$text
+
+MARKDOWN);
