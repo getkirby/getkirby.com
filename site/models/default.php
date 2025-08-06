@@ -43,18 +43,12 @@ class DefaultPage extends Page
 	 */
 	public function markdownUrl(): string
 	{
-		$markdown = [
-			'cookbook-recipe',
-			'guide',
-			'reference-article',
-			'quicktip',
-		];
-
-		if (in_array($this->intendedTemplate()->name(), $markdown)) {
+		try {
+			$this->representation('md');
 			return $this->menuUrl() . '.md';
+		} catch (Exception $e) {
+			return $this->menuUrl();
 		}
-
-		return $this->menuUrl();
 	}
 
 	/**
