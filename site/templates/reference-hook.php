@@ -3,7 +3,7 @@
 <div class="prose">
 	<?= $page->example()->kt() ?>
 
-	<?php if ($page->parameters()->count() > 0): ?>
+	<?php if ($parameters->count() > 0): ?>
 	<h2 id="parameters"><a href="#parameters">Parameters</a></h2>
 	<div class="table">
 		<table>
@@ -11,7 +11,7 @@
 				<th>Parameter</th>
 				<th>Type</th>
 			</thead>
-			<?php foreach ($page->parameters() as $parameter): ?>
+			<?php foreach ($parameters as $parameter): ?>
 			<tr>
 				<td><?= $parameter->name() ?></td>
 				<td><?= $parameter->types()->toHtml(fallback: 'mixed') ?></td>
