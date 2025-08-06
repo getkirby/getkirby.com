@@ -1,4 +1,4 @@
-# <?= $page->title() . PHP_EOL ?>
+# <?= $page->title()->unhtml() . PHP_EOL ?>
 <?php if ($page->intro()->isNotEmpty()): ?>
 
 <?= $page->intro()->convertToMarkdown() . PHP_EOL ?>
@@ -12,7 +12,9 @@
 ****
 <?php endif ?>
 
-<?php if ($page->text()->isNotEmpty()): ?>
+<?php if ($slot != ''): ?>
+<?= $slot ?>
+<?php elseif ($page->text()->isNotEmpty()): ?>
 <?= $page->text()->convertToMarkdown() ?>
 <?php endif ?>
 
