@@ -56,6 +56,9 @@ return [
 
 		return $headlines;
 	},
+	'ucfirst' => function ($field) {
+		return $field->value(fn ($value) => Str::ucfirst($value));
+	},
 	'unhtml' => function ($field) {
 		return $field->value(fn ($value) => Str::unhtml($value));
 	},
