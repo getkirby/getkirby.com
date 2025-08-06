@@ -10,11 +10,10 @@
 #### <?= $subchild->title()->unhtml() . PHP_EOL ?>
 
 <?php if ($subchild->hasChildren()): ?>
-<?php foreach ($subchild->children()->filter('intendedTemplate', '!=', 'separator')->listed() as $subsubchild): ?>
-- [<?= $subsubchild->title()->unhtml() ?>](<?= $subsubchild->markdownUrl() ?>)
-<?php endforeach ?>
+<?= markdownLinkList($subchild->children()->filter('intendedTemplate', '!=', 'separator')->listed()) ?>
 <?php else: ?>
-- [<?= $subchild->title()->unhtml() ?>](<?= $subchild->markdownUrl() ?>)
+<?= markdownLink($subchild->title()->unhtml(), $subchild->markdownUrl()) ?>
+
 <?php endif ?>
 
 <?php endforeach ?>

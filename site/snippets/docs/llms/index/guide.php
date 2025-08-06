@@ -1,11 +1,9 @@
 ## Guide
 
-<?php foreach (collection('guides')->group('category') as $category => $item): ?>
+<?php foreach (collection('guides')->group('category') as $category => $items): ?>
 ### <?= option('categories')[$category] ?? ucfirst($category) ?>
 
 
-<?php foreach ($item as $guide): ?>
-- [<?= $guide->title()->unhtml() ?>](<?= $guide->markdownUrl() ?>)
-<?php endforeach ?>
+<?= markdownLinkList($items) ?>
 
 <?php endforeach ?>

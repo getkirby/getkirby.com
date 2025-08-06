@@ -1,6 +1,8 @@
 <?php
 
 use Kirby\Cms\App;
+use Kirby\Cms\Page;
+use Kirby\Cms\Pages;
 use Kirby\Text\KirbyTags;
 use Kirby\Toolkit\A;
 
@@ -54,11 +56,20 @@ function kirbytagsToMarkdown(string|null $text): string
 	return cleanUpMarkdown($text);
 }
 
+function markdownLink(string $text, string $url): string
+{
+	return '[' . $text . '](' . $url . ')';
+}
+
+function markdownLinkList(Pages|array $items): string
+{
+	return implode(PHP_EOL, A::map([...$items], fn (Page $page) => '- ' . markdownLink($page->title()->unhtml(), $page->markdownUrl()))) . PHP_EOL;
+}
+
 function markdownList(array $items): string
 {
 	return implode(PHP_EOL, A::map($items, fn ($item) => '- ' . $item)) . PHP_EOL;
 }
-
 
 function markdownTable(array $columns, array $rows): string
 {
