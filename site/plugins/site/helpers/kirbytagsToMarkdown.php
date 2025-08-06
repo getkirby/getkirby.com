@@ -35,6 +35,9 @@ function kirbytagsToMarkdown(string $text): string
 		return trim($tabs);
 	}, $text);
 
+	// convert (\file: something) into (file: something)
+	$text = $text = preg_replace('/\\(\\\\([^:]+):/', '($1:', $text);
+
 	// replace three consecutive newlines with two
 	$text = preg_replace('/\n\n\n/', "\n\n", $text);
 
