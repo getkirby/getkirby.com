@@ -2,9 +2,22 @@
 
 use Kirby\Cms\App;
 use Kirby\Text\KirbyTags;
+use Kirby\Toolkit\A;
 
-function kirbytagsToMarkdown(string $text): string
+function cleanUpMarkdown(string|null $text): string
 {
+	$text ??= '';
+
+	// replace three consecutive newlines with two
+	$text = preg_replace('/\n\n\n/', "\n\n", $text);
+
+	return trim($text);
+}
+
+function kirbytagsToMarkdown(string|null $text): string
+{
+	$text ??= '';
+
 	$kirby = App::instance();
 
 	$data['kirby']  ??= $kirby;
@@ -38,8 +51,35 @@ function kirbytagsToMarkdown(string $text): string
 	// convert (\file: something) into (file: something)
 	$text = $text = preg_replace('/\\(\\\\([^:]+):/', '($1:', $text);
 
-	// replace three consecutive newlines with two
-	$text = preg_replace('/\n\n\n/', "\n\n", $text);
+	return cleanUpMarkdown($text);
+}
 
-	return $text;
+function markdownList(array $items): string
+{
+	return implode(PHP_EOL, A::map($items, fn ($item) => '- ' . $item)) . PHP_EOL;
+}
+
+
+function markdownTable(array $columns, array $rows): string
+{
+	$table[] = markdownTableheader($columns);
+
+	foreach ($rows as $row) {
+		$table[] = markdownTableRow($row);
+	}
+
+	return implode(PHP_EOL, $table);
+}
+
+function markdownTableHeader(array $columns): string
+{
+	$rows[] = markdownTableRow($columns);
+	$rows[] = markdownTableRow(array_fill(0, count($columns), '----'));
+
+	return implode(PHP_EOL, $rows);
+}
+
+function markdownTableRow(array $cells): string
+{
+	return '| ' . implode(' | ', $cells) . ' |';
 }
