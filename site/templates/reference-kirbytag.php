@@ -1,10 +1,5 @@
 <?php layout('reference') ?>
 
-<?php
-$reflection = $page->reflection();
-$attributes = $reflection->attributes();
-?>
-
 <div class="prose">
 	<?php if (count($attributes) > 0): ?>
 	<h2 id="attributes"><a href="#attributes">Attributes</a></h2>
