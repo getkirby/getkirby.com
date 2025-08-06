@@ -52,7 +52,7 @@ class Optimizer
 		}
 
 		$root = static::root($path);
-		if (file_exists($root) === true) {
+		if (file_exists($root ?? '') === true) {
 			$version = filemtime($root);
 
 			if ($this->cdn === false) {
