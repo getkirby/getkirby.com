@@ -120,6 +120,14 @@ class Type
 	}
 
 	/**
+	 * Return the type as a markdown code tag
+	 */
+	public function toMarkdown(): string
+	{
+		return '`' . $this->type . '`';
+	}
+
+	/**
 	 * Return the type as a string
 	 */
 	public function toString(): string
