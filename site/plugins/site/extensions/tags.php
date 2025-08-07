@@ -16,7 +16,11 @@ $tags = [
 		...$coreTags['link'],
 		'html' => function ($tag) use ($coreTags) {
 			if (($tag->options['kirbytags'] ?? true) === false) {
-				return '[' . ($tag->text() ?? $tag->value()) . '](' . url($tag->value()) . ')';
+				if ($page = page($tag->value())) {
+					return markdownLink($tag->text() ?? $tag->value(), $page->markdownUrl());
+				}
+
+				return markdownLink($tag->text() ?? $tag->value(), url($tag->value()));
 			}
 
 			return $coreTags['link']['html']($tag);
