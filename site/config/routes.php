@@ -2,13 +2,6 @@
 
 return [
 	[
-		'pattern' => '(:all).md',
-		'action'  => function ($path) {
-			kirby()->response()->type('text/plain');
-			return $this->next($path);
-		}
-	],
-	[
 		// blocks all requests to *.html and returns 404
 		'pattern' => '(:all)\.html',
 		'action'  => function () {
