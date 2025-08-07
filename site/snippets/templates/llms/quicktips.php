@@ -1,3 +1,4 @@
 ## Quicktips
 
 <?= markdownLinkList(collection('quicktips')) ?>
+

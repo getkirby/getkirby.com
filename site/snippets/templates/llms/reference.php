@@ -1,12 +1,12 @@
 ## Reference
 
-<?php foreach ($docs->children()->listed() as $child): ?>
+<?php foreach ($docs->children()->listed()->not('docs/reference/tools') as $child): ?>
 <?php if ($child->slug() === 'objects'): ?>
-<?php snippet('docs/llms/index/reference/objects', ['children' => $child->childrenUnfiltered()]) ?>
+<?php snippet('templates/llms/reference/objects') ?>
 <?php else: ?>
 ### <?= $child->title()->unhtml() . PHP_EOL ?>
 
-<?php foreach ($child->children()->filter('intendedTemplate', '!=', 'separator')->listed() as $subchild): ?>
+<?php foreach ($child->children()->filter('intendedTemplate', '!=', 'separator')->not('docs/reference/panel/samples')->listed() as $subchild): ?>
 #### <?= $subchild->title()->unhtml() . PHP_EOL ?>
 
 <?php if ($subchild->hasChildren()): ?>

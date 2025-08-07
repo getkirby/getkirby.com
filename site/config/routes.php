@@ -55,24 +55,4 @@ return [
 			go('https://pixels.getkirby.com');
 		}
 	],
-	[
-		'pattern' => 'llms.txt',
-		'action'  => function () {
-			$sections = [
-				'guide',
-				'reference',
-				'cookbook',
-				'quicktips'
-			];
-
-			$docs = page('docs')
-				->children()
-				->find(...$sections)
-				->listed();
-
-			kirby()->response()->type('text/plain');
-
-			return snippet('docs/llms/index', ['docs' => $docs], true);
-		}
-	],
 ];
