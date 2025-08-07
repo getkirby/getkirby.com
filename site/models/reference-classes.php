@@ -69,11 +69,6 @@ class ReferenceClassesPage extends ReferenceSectionPage
 		return $this->children = Pages::factory($children, $this);
 	}
 
-	public function childrenUnfiltered(): Pages
-	{
-		return parent::children();
-	}
-
 	protected function childrenFromSrcFolder(
 		string $namespace,
 		string $root
