@@ -9,9 +9,7 @@ use Kirby\Toolkit\Str;
 
 return [
 	'convertToMarkdown' => function ($field) {
-		return $field->value(function ($value)	{
-			return kirbytagsToMarkdown($value);
-		});
+		return $field->value(fn ($value) => kirbytagsToMarkdown($value));
 	},
 
 	/**
