@@ -9,7 +9,7 @@
 <?php foreach ($child->children()->filter('intendedTemplate', '!=', 'separator')->not('docs/reference/panel/samples')->listed() as $subchild): ?>
 #### <?= $subchild->title()->unhtml() . PHP_EOL ?>
 
-<?php if ($subchild->hasChildren()): ?>
+<?php if ($subchild->hasChildren() && $subchild->slug() !== 'icons'): ?>
 <?= markdownLinkList($subchild->children()->filter('intendedTemplate', '!=', 'separator')->listed()) ?>
 <?php else: ?>
 <?= markdownLink($subchild->title()->unhtml(), $subchild->markdownUrl()) ?>
