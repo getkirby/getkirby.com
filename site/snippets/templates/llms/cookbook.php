@@ -1,8 +1,8 @@
-## Cookbook
+<?php
 
-<?php foreach (collection('cookbook/categories') as $child): ?>
-### <?= $child->title()->unhtml() . PHP_EOL ?>
+echo markdownHeading('Cookbook', 2);
 
-<?= markdownLinkList($child->children()->listed()) ?>
-
-<?php endforeach ?>
+foreach (collection('cookbook/categories') as $child) {
+    echo markdownHeading($child->title()->unhtml(), 3);
+    echo markdownLinkList($child->children()->listed());
+}

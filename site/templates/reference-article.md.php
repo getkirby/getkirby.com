@@ -1,1 +1,1 @@
-<?php layout('article.md');
+<?php layout('reference.md');

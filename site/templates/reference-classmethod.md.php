@@ -1,6 +1,6 @@
 <?php
 
-layout('article.md');
+layout('reference.md');
 
 $call  = snippet('templates/reference/entry/call.md', return: true);
 $class = snippet('templates/reference/entry/class.md', return: true);

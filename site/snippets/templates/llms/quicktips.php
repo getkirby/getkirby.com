@@ -1,4 +1,5 @@
-## Quicktips
+<?php
 
-<?= markdownLinkList(collection('quicktips')) ?>
+echo markdownHeading('Quicktips', 2);
+echo markdownLinkList(collection('quicktips'));
 

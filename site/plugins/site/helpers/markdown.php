@@ -56,6 +56,21 @@ function kirbytagsToMarkdown(string|null $text): string
 	return cleanUpMarkdown($text);
 }
 
+function markdownBreak(): string
+{
+	return PHP_EOL . PHP_EOL;
+}
+
+function markdownHeading(string $text, int $level = 1): string
+{
+	return str_repeat('#', $level) . ' ' . $text . markdownBreak();
+}
+
+function markdownHorizontalRule(): string
+{
+	return markdownBreak() . '****' . markdownBreak();
+}
+
 function markdownLink(string $text, string $url): string
 {
 	return '[' . $text . '](' . $url . ')';
@@ -63,12 +78,23 @@ function markdownLink(string $text, string $url): string
 
 function markdownLinkList(Pages|array $items): string
 {
-	return implode(PHP_EOL, A::map([...$items], fn (Page $page) => '- ' . markdownLink($page->title()->unhtml(), $page->markdownUrl()))) . PHP_EOL;
+	return implode(PHP_EOL, A::map([...$items], fn (Page $page) => '- ' . markdownLink($page->title()->unhtml(), $page->markdownUrl()))) . markdownBreak();
 }
 
 function markdownList(array $items): string
 {
-	return implode(PHP_EOL, A::map($items, fn ($item) => '- ' . $item)) . PHP_EOL;
+	// remove empty items
+	$items = array_filter($items, fn ($item) => $item !== null && $item !== '');
+
+	// convert items to markdown list items
+	$items = A::map($items, fn ($item) => markdownListItem($item));
+
+	return trim(implode('', $items)) . markdownBreak();
+}
+
+function markdownListItem(string $item): string
+{
+	return '- ' . $item . PHP_EOL;
 }
 
 function markdownTable(array $columns, array $rows): string

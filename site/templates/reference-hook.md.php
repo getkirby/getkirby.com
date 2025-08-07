@@ -1,6 +1,6 @@
 <?php
 
-layout('article.md');
+layout('reference.md');
 
 $example = $page->example()->convertToMarkdown();
 $details = $page->details()->convertToMarkdown();

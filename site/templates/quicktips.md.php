@@ -1,3 +1,5 @@
-# Quicktips
+<?php
 
-<?= markdownLinkList(collection('quicktips')) ?>
+layout('article.md');
+
+echo markdownLinkList(collection('quicktips'));

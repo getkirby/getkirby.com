@@ -1,6 +1,6 @@
 <?php
 
-layout('article.md');
+layout('reference.md');
 
 $attributes = snippet('templates/reference/attributes.md', return: true);
 $text       = $page->text()->convertToMarkdown();

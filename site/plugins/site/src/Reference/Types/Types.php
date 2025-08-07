@@ -189,8 +189,15 @@ class Types
 		// Remove duplicates
 		$types = array_unique($types);
 
+		if (count($types) === 1) {
+			return $types[0];
+		}
+
+		// get the last item and remove it from the array
+		$last = array_pop($types);
+
 		// Combine into a single string
-		return implode(', ', $types);
+		return implode(', ', $types) . ' or ' . $last;
 	}
 
 	/**

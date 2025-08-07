@@ -1,8 +1,8 @@
 <?php
 
-layout('article.md');
+layout('reference.md');
 
-$entries = snippet('templates/reference/section.md', $entries, return: true);
+$entries = trim(snippet('templates/reference/section.md', ['section' => $page], return: true));
 $text    = $page->text()->convertToMarkdown();
 
 echo cleanUpMarkdown(<<<MARKDOWN

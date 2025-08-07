@@ -1,3 +1,4 @@
-## Glossary
+<?php
 
-<?= markdownLinkList($docs->children()) ?>
+echo markdownHeading('Glossary', 2);
+echo markdownLinkList($docs->children());

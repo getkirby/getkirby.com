@@ -7,6 +7,9 @@ if ($slots->intro() || $page->intro()->isNotEmpty()) {
     echo markdownHorizontalRule();
 }
 
+echo trim(snippet('templates/reference/entry/meta.md', return: true));
+echo markdownBreak();
+
 if ($page->screencast()->isNotEmpty()) {
     echo $page->screencast()->convertToMarkdown();
     echo markdownHorizontalRule();

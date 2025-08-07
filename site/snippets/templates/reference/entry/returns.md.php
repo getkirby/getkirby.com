@@ -5,7 +5,7 @@ use Kirby\Reference\Reflectable\ReflectableFunction;
 $reflection = $page->reflection();
 $returns    = $reflection->returns();
 
-if ($reflection instanceof ReflectableFunction === false || $returns?->isVoid() === true) {
+if ($reflection instanceof ReflectableFunction === false || $returns === null || $returns?->isVoid() === true) {
 	return;
 }
 
