@@ -61,6 +61,11 @@ function markdownBreak(): string
 	return PHP_EOL . PHP_EOL;
 }
 
+function markdownCodeBlock(string $code, string $language = 'php'): string
+{
+	return '```' . $language . PHP_EOL . $code . PHP_EOL . '```' . markdownBreak();
+}
+
 function markdownHeading(string $text, int $level = 1): string
 {
 	return str_repeat('#', $level) . ' ' . $text . markdownBreak();
@@ -69,6 +74,11 @@ function markdownHeading(string $text, int $level = 1): string
 function markdownHorizontalRule(): string
 {
 	return markdownBreak() . '****' . markdownBreak();
+}
+
+function markdownImage(string $url, string $alt = ''): string
+{
+	return '![' . $alt . '](' . $url . ')';
 }
 
 function markdownLink(string $text, string $url): string
