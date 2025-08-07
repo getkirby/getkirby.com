@@ -1,11 +1,14 @@
-## <?= $title . PHP_EOL ?>
+<?php
 
-<?php if ($text): ?>
-<?= $text . PHP_EOL ?>
-<?php endif ?>
+echo markdownHeading($title, 2);
 
-<?php if ($poster): ?>
-![](<?= $poster->url() ?>)
-<?php endif ?>
+if ($text) {
+    echo $text . markdownBreak();
+}
 
-[Watch the screencast](<?= $url ?>)
+if ($poster) {
+    echo markdownImage($poster->url());
+    echo markdownBreak();
+}
+
+echo markdownLink('Watch the screencast', $url);
