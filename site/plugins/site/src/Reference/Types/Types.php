@@ -176,6 +176,33 @@ class Types
 	/**
 	 * Convert the types to a string
 	 */
+	public function toMarkdown(string|null $fallback = null): string
+	{
+		// If there are no types, use the fallback (as type HTML itself)
+		if (count($this->types) === 0 && $fallback !== null) {
+			return Type::factory($fallback)->toMarkdown();
+		}
+
+		// Get string representation for each type
+		$types = A::map($this->types, fn (Type $type) => $type->toMarkdown());
+
+		// Remove duplicates
+		$types = array_unique($types);
+
+		if (count($types) === 1) {
+			return $types[0];
+		}
+
+		// get the last item and remove it from the array
+		$last = array_pop($types);
+
+		// Combine into a single string
+		return implode(', ', $types) . ' or ' . $last;
+	}
+
+	/**
+	 * Convert the types to a string
+	 */
 	public function toString(): string
 	{
 		// Get string representation for each type

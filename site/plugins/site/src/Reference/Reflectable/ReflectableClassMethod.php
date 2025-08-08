@@ -99,6 +99,23 @@ class ReflectableClassMethod extends ReflectableFunction
 			(new ReflectableClass($this->class))->isUnstable();
 	}
 
+	public function mutationDescription(): string|null
+	{
+		$returns = $this->returns();
+
+		if ($this->isStatic() === true || $returns?->isVoid() === true) {
+			return null;
+		}
+
+		$object = '$' . strtolower($this->class(true));
+
+		if ($returns->isImmutable() === true) {
+			return 'This method does not modify the existing `' . $object . '` object but returns a new object with the changes applied. (link: docs/guide/templates/php-api#immutable-objects text: Learn more →)';
+		}
+
+		return 'This method modifies the existing `' . $object . '` object it is applied to and returns it again.';
+	}
+
 	/**
 	 * Returns the name of the method incl. the class name
 	 */

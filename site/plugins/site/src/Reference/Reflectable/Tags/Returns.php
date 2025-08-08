@@ -41,6 +41,11 @@ class Returns
 		return new static($types, $description);
 	}
 
+	public function headline(): string
+	{
+		return 'Return ' . ($this->types->count() > 1 ? 'types' : 'type');
+	}
+
 	/**
 	 * Returns whether the return type
 	 * implies that the function is mutable (`$this`)

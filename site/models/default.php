@@ -39,6 +39,19 @@ class DefaultPage extends Page
 	}
 
 	/**
+	 * URL for the Markdown version of the page
+	 */
+	public function markdownUrl(): string
+	{
+		try {
+			$this->representation('md');
+			return $this->menuUrl() . '.md';
+		} catch (Exception $e) {
+			return $this->menuUrl();
+		}
+	}
+
+	/**
 	 * Final URL after redirects to be used in menus;
 	 * fallback if the page model doesn't override it
 	 */

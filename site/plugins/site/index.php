@@ -5,6 +5,7 @@ use Kirby\Cms\App;
 require_once __DIR__ . '/vendor/autoload.php';
 
 require_once __DIR__ . '/helpers/html.php';
+require_once __DIR__ . '/helpers/markdown.php';
 require_once __DIR__ . '/helpers/reference.php';
 
 // make default page model and reference page models available for extension
@@ -16,5 +17,11 @@ require_once __DIR__ . '/../../models/reference-section.php';
 App::plugin('getkirby/site', [
 	'components'   => include __DIR__ . '/extensions/components.php',
 	'fieldMethods' => include __DIR__ . '/extensions/fieldMethods.php',
-	'tags'         => include __DIR__ . '/extensions/tags.php'
+	'fileTypes'    => [
+		'md' => [
+			'type' => 'document',
+			'mime' => 'text/markdown',
+		],
+	],
+	'tags' => include __DIR__ . '/extensions/tags.php',
 ]);

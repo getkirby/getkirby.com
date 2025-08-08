@@ -47,6 +47,14 @@ class Since
 	}
 
 	/**
+	 * Returns the markdown link for the since tag
+	 */
+	public function toMarkdown(string $format = '%s'): string
+	{
+		return markdownLink(sprintf($format, $this->version), option('github.url') . '/kirby/releases/tag/' . $this->version);
+	}
+
+	/**
 	 * Returns the version of the since tag
 	 */
 	public function version(): string

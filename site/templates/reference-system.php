@@ -5,7 +5,7 @@
 	<?= $page->example()->kt() ?>
 
 	<h2 id="custom-setup"><a href="#custom-setup">Custom setup</a></h2>
-	<?= $page->setup() ?>
+	<?= $page->setup()->kt() ?>
 
 	<?= $page->text()->kt() ?>
 </div>

@@ -4,8 +4,12 @@ return [
 	[
 		'pattern' => 'docs/guide/(:any)/(:any)',
 		'action'  => function ($parent, $slug) {
+			if (str_ends_with($slug, '.md')) {
+				$slug = substr($slug, 0, -3);
+			}
+
 			if ($page = page('docs/guide/' . $parent . '/' . $slug)) {
-				return $page;
+				return $this->next();
 			}
 
 			if ($page = page('docs/guide/' . $parent)) {

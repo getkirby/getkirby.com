@@ -21,10 +21,11 @@ class ReferenceUrlPage extends ReferenceArticlePage
 		]);
 	}
 
-	public function setup(): string
+	public function setup(): Field
 	{
-		$text = $this->parent()->custom()->kt()->value();
-		return str_replace('{{ url }}', $this->slug(), $text);
+		return $this->parent()->custom()->value(function ($value) {
+			return str_replace('{{ url }}', $this->slug(), $value);
+		});
 	}
 
 	public function template(): Template
