@@ -203,7 +203,7 @@ class GetAddToCartRateResponse extends AbstractModel implements ModelInterface, 
     /**
      * Sets rate.
      *
-     * @param float $rate Add-to-cart rate, calculated as number of tracked searches with at least one add-to-cart event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
+     * @param float $rate Add-to-cart rate: calculated as the number of tracked searches with at least one add-to-cart event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
      *
      * @return self
      */
@@ -265,7 +265,7 @@ class GetAddToCartRateResponse extends AbstractModel implements ModelInterface, 
     /**
      * Gets dates.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\DailyAddToCartRates[]
+     * @return DailyAddToCartRates[]
      */
     public function getDates()
     {
@@ -275,7 +275,7 @@ class GetAddToCartRateResponse extends AbstractModel implements ModelInterface, 
     /**
      * Sets dates.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\DailyAddToCartRates[] $dates daily add-to-cart rates
+     * @param DailyAddToCartRates[] $dates daily add-to-cart rates
      *
      * @return self
      */

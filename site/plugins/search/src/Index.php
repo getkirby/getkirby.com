@@ -2,21 +2,22 @@
 
 namespace Kirby\Search;
 
+use Generator;
 use Kirby\Cms\App;
-use Kirby\Cms\Page;
 use Kirby\Cms\Pages;
 
 /**
- * Kirby Search Index
+ * Search Index
  *
- * @author Lukas Bestle <lukas@getkirby.com>
- * @author Nico Hoffmann <nico@getkirby.com>
- * @license MIT
- * @link https://getkirby.com
+ * @package   Kirby Search
+ * @author    Lukas Bestle <lukas@getkirby.com>,
+ *            Nico Hoffmann <nico@getkirby.com>
+ * @link      https://getkirby.com
+ * @license   MIT
  */
-class Index
+abstract class Index
 {
-	protected Pages $entries;
+	protected Pages $index;
 
 	public function __construct(protected Search $search)
 	{
@@ -24,34 +25,26 @@ class Index
 
 	/**
 	 * Retrieve all indexable pages as entries
+	 * @return \Generator|\Kirby\Search\Entry[]
 	 */
-	protected function entries(): Pages
+	protected function entries(): Generator
 	{
-		return $this->entries ??= App::instance()
-			->site()
-			->index()
-			// inject the plugins from the collection that fetches from plugins.getkirby.com
-			->merge(App::instance()->collection('plugins'))
-			->map(fn (Page $page) => new Entry($page, $this->search))
-			->filter(fn (Entry $entry) => $entry->isIndexable());
+		foreach ($this->index() as $page) {
+			$entry = new Entry($page, $this->search);
+
+			if ($entry->isIndexable() === true) {
+				yield $entry;
+			}
+		}
 	}
 
 	/**
 	 * Indexes everything and replaces the current index
-	 *
-	 * Uses atomical re-indexing: https://www.algolia.com/doc/api-reference/api-methods/replace-all-objects/
 	 */
-	public function generate(): void
-	{
-		$entries = $this->entries()->map(fn ($entry) => $entry->toData());
-		$this->search->algolia->replaceAllObjects($this->search->options['index'], $entries);
-	}
+	abstract public function generate(): void;
 
-	/**
-	 * Returns the number of indexable pages/entries
-	 */
-	public function count(): int
+	protected function index(): Pages
 	{
-		return $this->entries()->count();
+		return $this->index ??= App::instance()->site()->index();
 	}
 }

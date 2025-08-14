@@ -317,7 +317,7 @@ class TopSearchWithAnalytics extends AbstractModel implements ModelInterface, \A
     /**
      * Sets clickThroughRate.
      *
-     * @param float $clickThroughRate Click-through rate, calculated as number of tracked searches with at least one click event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
+     * @param float $clickThroughRate Click-through rate: calculated as the number of tracked searches with at least one click event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
      *
      * @return self
      */
@@ -355,7 +355,7 @@ class TopSearchWithAnalytics extends AbstractModel implements ModelInterface, \A
     /**
      * Gets clickPositions.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\ClickPosition[]
+     * @return ClickPosition[]
      */
     public function getClickPositions()
     {
@@ -365,7 +365,7 @@ class TopSearchWithAnalytics extends AbstractModel implements ModelInterface, \A
     /**
      * Sets clickPositions.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\ClickPosition[] $clickPositions list of positions in the search results and clicks associated with this search
+     * @param ClickPosition[] $clickPositions list of positions in the search results and clicks associated with this search
      *
      * @return self
      */
@@ -389,7 +389,7 @@ class TopSearchWithAnalytics extends AbstractModel implements ModelInterface, \A
     /**
      * Sets conversionRate.
      *
-     * @param float $conversionRate Conversion rate, calculated as number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
+     * @param float $conversionRate Conversion rate: calculated as the number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
      *
      * @return self
      */
