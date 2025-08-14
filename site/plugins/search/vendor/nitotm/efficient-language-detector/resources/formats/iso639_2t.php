@@ -1,0 +1,72 @@
+<?php
+/**
+ * @copyright 2024 Nito T.M.
+ * @license https://www.apache.org/licenses/LICENSE-2.0 Apache-2.0
+ * @author Nito T.M. (https://github.com/nitotm)
+ * @package nitotm/efficient-language-detector
+ */
+
+// ISO 639-2T code of the 60 languages available. Order is IMPORTANT
+// ELD also returns 'und' for undetermined
+return [
+    'amh',
+    'ara',
+    'aze',
+    'bel',
+    'bul',
+    'ben',
+    'cat',
+    'ces',
+    'dan',
+    'deu',
+    'ell',
+    'eng',
+    'spa',
+    'est',
+    'eus',
+    'fas',
+    'fin',
+    'fra',
+    'guj',
+    'heb',
+    'hin',
+    'hrv',
+    'hun',
+    'hye',
+    'isl',
+    'ita',
+    'jpn',
+    'kat',
+    'kan',
+    'kor',
+    'kur',
+    'lao',
+    'lit',
+    'lav',
+    'mal',
+    'mar',
+    'msa',
+    'nld',
+    'nor',
+    'ori',
+    'pan',
+    'pol',
+    'por',
+    'ron',
+    'rus',
+    'slk',
+    'slv',
+    'sqi',
+    'srp',
+    'swe',
+    'tam',
+    'tel',
+    'tha',
+    'tgl',
+    'tur',
+    'ukr',
+    'urd',
+    'vie',
+    'yor',
+    'zho'
+];

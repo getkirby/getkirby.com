@@ -24,6 +24,7 @@ class RunSourcePayload extends AbstractModel implements ModelInterface, \ArrayAc
         'indexToExclude' => 'string[]',
         'entityIDs' => 'string[]',
         'entityType' => '\Algolia\AlgoliaSearch\Model\Ingestion\EntityType',
+        'runMetadata' => 'array<string,mixed>',
     ];
 
     /**
@@ -36,6 +37,7 @@ class RunSourcePayload extends AbstractModel implements ModelInterface, \ArrayAc
         'indexToExclude' => null,
         'entityIDs' => null,
         'entityType' => null,
+        'runMetadata' => null,
     ];
 
     /**
@@ -49,6 +51,7 @@ class RunSourcePayload extends AbstractModel implements ModelInterface, \ArrayAc
         'indexToExclude' => 'indexToExclude',
         'entityIDs' => 'entityIDs',
         'entityType' => 'entityType',
+        'runMetadata' => 'runMetadata',
     ];
 
     /**
@@ -61,6 +64,7 @@ class RunSourcePayload extends AbstractModel implements ModelInterface, \ArrayAc
         'indexToExclude' => 'setIndexToExclude',
         'entityIDs' => 'setEntityIDs',
         'entityType' => 'setEntityType',
+        'runMetadata' => 'setRunMetadata',
     ];
 
     /**
@@ -73,6 +77,7 @@ class RunSourcePayload extends AbstractModel implements ModelInterface, \ArrayAc
         'indexToExclude' => 'getIndexToExclude',
         'entityIDs' => 'getEntityIDs',
         'entityType' => 'getEntityType',
+        'runMetadata' => 'getRunMetadata',
     ];
 
     /**
@@ -100,6 +105,9 @@ class RunSourcePayload extends AbstractModel implements ModelInterface, \ArrayAc
         }
         if (isset($data['entityType'])) {
             $this->container['entityType'] = $data['entityType'];
+        }
+        if (isset($data['runMetadata'])) {
+            $this->container['runMetadata'] = $data['runMetadata'];
         }
     }
 
@@ -188,7 +196,7 @@ class RunSourcePayload extends AbstractModel implements ModelInterface, \ArrayAc
     /**
      * Sets indexToInclude.
      *
-     * @param null|string[] $indexToInclude list of index names to include in reidexing/update
+     * @param null|string[] $indexToInclude list of index names to include in reindex/update
      *
      * @return self
      */
@@ -212,7 +220,7 @@ class RunSourcePayload extends AbstractModel implements ModelInterface, \ArrayAc
     /**
      * Sets indexToExclude.
      *
-     * @param null|string[] $indexToExclude list of index names to exclude in reidexing/update
+     * @param null|string[] $indexToExclude list of index names to exclude in reindex/update
      *
      * @return self
      */
@@ -236,7 +244,7 @@ class RunSourcePayload extends AbstractModel implements ModelInterface, \ArrayAc
     /**
      * Sets entityIDs.
      *
-     * @param null|string[] $entityIDs list of entityID to update
+     * @param null|string[] $entityIDs list of entityIDs to update
      *
      * @return self
      */
@@ -267,6 +275,30 @@ class RunSourcePayload extends AbstractModel implements ModelInterface, \ArrayAc
     public function setEntityType($entityType)
     {
         $this->container['entityType'] = $entityType;
+
+        return $this;
+    }
+
+    /**
+     * Gets runMetadata.
+     *
+     * @return null|array<string,mixed>
+     */
+    public function getRunMetadata()
+    {
+        return $this->container['runMetadata'] ?? null;
+    }
+
+    /**
+     * Sets runMetadata.
+     *
+     * @param null|array<string,mixed> $runMetadata additional information that will be passed to the created runs
+     *
+     * @return self
+     */
+    public function setRunMetadata($runMetadata)
+    {
+        $this->container['runMetadata'] = $runMetadata;
 
         return $this;
     }
