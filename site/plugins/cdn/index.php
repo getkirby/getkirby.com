@@ -55,7 +55,7 @@ App::plugin('getkirby/cdn', [
 		'url' => function (App $kirby, $path, $options): string {
 			static $original;
 
-			if (preg_match('!assets\/!', $path ?? '')) {
+			if (str_starts_with($path ?? '', 'assets')) {
 				$cdn       = $kirby->option('cdn', false) !== false;
 				$optimizer = new Optimizer($cdn);
 

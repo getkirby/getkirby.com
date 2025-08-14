@@ -203,7 +203,7 @@ class GetPurchaseRateResponse extends AbstractModel implements ModelInterface, \
     /**
      * Sets rate.
      *
-     * @param float $rate Purchase rate, calculated as number of tracked searches with at least one purchase event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
+     * @param float $rate Purchase rate: calculated as the number of tracked searches with at least one purchase event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
      *
      * @return self
      */
@@ -265,7 +265,7 @@ class GetPurchaseRateResponse extends AbstractModel implements ModelInterface, \
     /**
      * Gets dates.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\DailyPurchaseRates[]
+     * @return DailyPurchaseRates[]
      */
     public function getDates()
     {
@@ -275,7 +275,7 @@ class GetPurchaseRateResponse extends AbstractModel implements ModelInterface, \
     /**
      * Sets dates.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\DailyPurchaseRates[] $dates daily purchase rates
+     * @param DailyPurchaseRates[] $dates daily purchase rates
      *
      * @return self
      */

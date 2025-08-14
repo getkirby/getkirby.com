@@ -14,7 +14,7 @@ on:
       - site/config/search.php
       - site/models/**
       - site/plugins/**
-      - scripts/algolia-index
+      - scripts/search-index
 
 jobs:
   algolia:
@@ -37,7 +37,7 @@ jobs:
           ini-values: memory_limit=-1
 
       - name: Update the Algolia index
-        run: scripts/algolia-index
+        run: scripts/search-index
         env:
           ALGOLIA_KEY: ${{ secrets.ALGOLIA_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

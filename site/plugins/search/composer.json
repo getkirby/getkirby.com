@@ -6,7 +6,8 @@
 		}
 	},
 	"require": {
-		"algolia/algoliasearch-client-php": "^4.0"
+		"algolia/algoliasearch-client-php": "^4.0",
+		"loupe/loupe": "^0.12.6"
 	},
 	"config": {
 		"optimize-autoloader": true

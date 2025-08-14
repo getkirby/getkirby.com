@@ -89,13 +89,11 @@ export default class {
 		);
 		const { results, pagination } = await response.json();
 
-		console.log("/search.json?" + new URLSearchParams(params).toString());
-
 		// Show View all item if there are any hits and
 		// there are more hits than those displayed in the popup.
-		this.total = pagination.total;
+		this.total = pagination?.total ?? 0;
 
-		return results.data;
+		return results.data ?? [];
 	}
 
 	render() {

@@ -55,7 +55,6 @@ class SearchParams extends AbstractModel implements ModelInterface, \ArrayAccess
         'enableABTest' => 'bool',
         'attributesToRetrieve' => 'string[]',
         'ranking' => 'string[]',
-        'customRanking' => 'string[]',
         'relevancyStrictness' => 'int',
         'attributesToHighlight' => 'string[]',
         'attributesToSnippet' => 'string[]',
@@ -71,7 +70,6 @@ class SearchParams extends AbstractModel implements ModelInterface, \ArrayAccess
         'disableTypoToleranceOnAttributes' => 'string[]',
         'ignorePlurals' => '\Algolia\AlgoliaSearch\Model\Search\IgnorePlurals',
         'removeStopWords' => '\Algolia\AlgoliaSearch\Model\Search\RemoveStopWords',
-        'keepDiacriticsOnCharacters' => 'string',
         'queryLanguages' => '\Algolia\AlgoliaSearch\Model\Search\SupportedLanguage[]',
         'decompoundQuery' => 'bool',
         'enableRules' => 'bool',
@@ -139,7 +137,6 @@ class SearchParams extends AbstractModel implements ModelInterface, \ArrayAccess
         'enableABTest' => null,
         'attributesToRetrieve' => null,
         'ranking' => null,
-        'customRanking' => null,
         'relevancyStrictness' => null,
         'attributesToHighlight' => null,
         'attributesToSnippet' => null,
@@ -155,7 +152,6 @@ class SearchParams extends AbstractModel implements ModelInterface, \ArrayAccess
         'disableTypoToleranceOnAttributes' => null,
         'ignorePlurals' => null,
         'removeStopWords' => null,
-        'keepDiacriticsOnCharacters' => null,
         'queryLanguages' => null,
         'decompoundQuery' => null,
         'enableRules' => null,
@@ -224,7 +220,6 @@ class SearchParams extends AbstractModel implements ModelInterface, \ArrayAccess
         'enableABTest' => 'enableABTest',
         'attributesToRetrieve' => 'attributesToRetrieve',
         'ranking' => 'ranking',
-        'customRanking' => 'customRanking',
         'relevancyStrictness' => 'relevancyStrictness',
         'attributesToHighlight' => 'attributesToHighlight',
         'attributesToSnippet' => 'attributesToSnippet',
@@ -240,7 +235,6 @@ class SearchParams extends AbstractModel implements ModelInterface, \ArrayAccess
         'disableTypoToleranceOnAttributes' => 'disableTypoToleranceOnAttributes',
         'ignorePlurals' => 'ignorePlurals',
         'removeStopWords' => 'removeStopWords',
-        'keepDiacriticsOnCharacters' => 'keepDiacriticsOnCharacters',
         'queryLanguages' => 'queryLanguages',
         'decompoundQuery' => 'decompoundQuery',
         'enableRules' => 'enableRules',
@@ -308,7 +302,6 @@ class SearchParams extends AbstractModel implements ModelInterface, \ArrayAccess
         'enableABTest' => 'setEnableABTest',
         'attributesToRetrieve' => 'setAttributesToRetrieve',
         'ranking' => 'setRanking',
-        'customRanking' => 'setCustomRanking',
         'relevancyStrictness' => 'setRelevancyStrictness',
         'attributesToHighlight' => 'setAttributesToHighlight',
         'attributesToSnippet' => 'setAttributesToSnippet',
@@ -324,7 +317,6 @@ class SearchParams extends AbstractModel implements ModelInterface, \ArrayAccess
         'disableTypoToleranceOnAttributes' => 'setDisableTypoToleranceOnAttributes',
         'ignorePlurals' => 'setIgnorePlurals',
         'removeStopWords' => 'setRemoveStopWords',
-        'keepDiacriticsOnCharacters' => 'setKeepDiacriticsOnCharacters',
         'queryLanguages' => 'setQueryLanguages',
         'decompoundQuery' => 'setDecompoundQuery',
         'enableRules' => 'setEnableRules',
@@ -392,7 +384,6 @@ class SearchParams extends AbstractModel implements ModelInterface, \ArrayAccess
         'enableABTest' => 'getEnableABTest',
         'attributesToRetrieve' => 'getAttributesToRetrieve',
         'ranking' => 'getRanking',
-        'customRanking' => 'getCustomRanking',
         'relevancyStrictness' => 'getRelevancyStrictness',
         'attributesToHighlight' => 'getAttributesToHighlight',
         'attributesToSnippet' => 'getAttributesToSnippet',
@@ -408,7 +399,6 @@ class SearchParams extends AbstractModel implements ModelInterface, \ArrayAccess
         'disableTypoToleranceOnAttributes' => 'getDisableTypoToleranceOnAttributes',
         'ignorePlurals' => 'getIgnorePlurals',
         'removeStopWords' => 'getRemoveStopWords',
-        'keepDiacriticsOnCharacters' => 'getKeepDiacriticsOnCharacters',
         'queryLanguages' => 'getQueryLanguages',
         'decompoundQuery' => 'getDecompoundQuery',
         'enableRules' => 'getEnableRules',
@@ -554,9 +544,6 @@ class SearchParams extends AbstractModel implements ModelInterface, \ArrayAccess
         if (isset($data['ranking'])) {
             $this->container['ranking'] = $data['ranking'];
         }
-        if (isset($data['customRanking'])) {
-            $this->container['customRanking'] = $data['customRanking'];
-        }
         if (isset($data['relevancyStrictness'])) {
             $this->container['relevancyStrictness'] = $data['relevancyStrictness'];
         }
@@ -601,9 +588,6 @@ class SearchParams extends AbstractModel implements ModelInterface, \ArrayAccess
         }
         if (isset($data['removeStopWords'])) {
             $this->container['removeStopWords'] = $data['removeStopWords'];
-        }
-        if (isset($data['keepDiacriticsOnCharacters'])) {
-            $this->container['keepDiacriticsOnCharacters'] = $data['keepDiacriticsOnCharacters'];
         }
         if (isset($data['queryLanguages'])) {
             $this->container['queryLanguages'] = $data['queryLanguages'];
@@ -1282,7 +1266,7 @@ class SearchParams extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Gets naturalLanguages.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\SupportedLanguage[]
+     * @return null|SupportedLanguage[]
      */
     public function getNaturalLanguages()
     {
@@ -1292,7 +1276,7 @@ class SearchParams extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Sets naturalLanguages.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\SupportedLanguage[] $naturalLanguages ISO language codes that adjust settings that are useful for processing natural language queries (as opposed to keyword searches):  - Sets `removeStopWords` and `ignorePlurals` to the list of provided languages. - Sets `removeWordsIfNoResults` to `allOptional`. - Adds a `natural_language` attribute to `ruleContexts` and `analyticsTags`.
+     * @param null|SupportedLanguage[] $naturalLanguages ISO language codes that adjust settings that are useful for processing natural language queries (as opposed to keyword searches):  - Sets `removeStopWords` and `ignorePlurals` to the list of provided languages. - Sets `removeWordsIfNoResults` to `allOptional`. - Adds a `natural_language` attribute to `ruleContexts` and `analyticsTags`.
      *
      * @return self
      */
@@ -1587,30 +1571,6 @@ class SearchParams extends AbstractModel implements ModelInterface, \ArrayAccess
     public function setRanking($ranking)
     {
         $this->container['ranking'] = $ranking;
-
-        return $this;
-    }
-
-    /**
-     * Gets customRanking.
-     *
-     * @return null|string[]
-     */
-    public function getCustomRanking()
-    {
-        return $this->container['customRanking'] ?? null;
-    }
-
-    /**
-     * Sets customRanking.
-     *
-     * @param null|string[] $customRanking Attributes to use as [custom ranking](https://www.algolia.com/doc/guides/managing-results/must-do/custom-ranking/). Attribute names are case-sensitive.  The custom ranking attributes decide which items are shown first if the other ranking criteria are equal.  Records with missing values for your selected custom ranking attributes are always sorted last. Boolean attributes are sorted based on their alphabetical order.  **Modifiers**  - `asc(\"ATTRIBUTE\")`.   Sort the index by the values of an attribute, in ascending order.  - `desc(\"ATTRIBUTE\")`.   Sort the index by the values of an attribute, in descending order.  If you use two or more custom ranking attributes, [reduce the precision](https://www.algolia.com/doc/guides/managing-results/must-do/custom-ranking/how-to/controlling-custom-ranking-metrics-precision/) of your first attributes, or the other attributes will never be applied.
-     *
-     * @return self
-     */
-    public function setCustomRanking($customRanking)
-    {
-        $this->container['customRanking'] = $customRanking;
 
         return $this;
     }
@@ -1976,33 +1936,9 @@ class SearchParams extends AbstractModel implements ModelInterface, \ArrayAccess
     }
 
     /**
-     * Gets keepDiacriticsOnCharacters.
-     *
-     * @return null|string
-     */
-    public function getKeepDiacriticsOnCharacters()
-    {
-        return $this->container['keepDiacriticsOnCharacters'] ?? null;
-    }
-
-    /**
-     * Sets keepDiacriticsOnCharacters.
-     *
-     * @param null|string $keepDiacriticsOnCharacters Characters for which diacritics should be preserved.  By default, Algolia removes diacritics from letters. For example, `é` becomes `e`. If this causes issues in your search, you can specify characters that should keep their diacritics.
-     *
-     * @return self
-     */
-    public function setKeepDiacriticsOnCharacters($keepDiacriticsOnCharacters)
-    {
-        $this->container['keepDiacriticsOnCharacters'] = $keepDiacriticsOnCharacters;
-
-        return $this;
-    }
-
-    /**
      * Gets queryLanguages.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\SupportedLanguage[]
+     * @return null|SupportedLanguage[]
      */
     public function getQueryLanguages()
     {
@@ -2012,7 +1948,7 @@ class SearchParams extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Sets queryLanguages.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\SupportedLanguage[] $queryLanguages Languages for language-specific query processing steps such as plurals, stop-word removal, and word-detection dictionaries.  This setting sets a default list of languages used by the `removeStopWords` and `ignorePlurals` settings. This setting also sets a dictionary for word detection in the logogram-based [CJK](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/#normalization-for-logogram-based-languages-cjk) languages. To support this, you must place the CJK language **first**.  **You should always specify a query language.** If you don't specify an indexing language, the search engine uses all [supported languages](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/), or the languages you specified with the `ignorePlurals` or `removeStopWords` parameters. This can lead to unexpected search results. For more information, see [Language-specific configuration](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/).
+     * @param null|SupportedLanguage[] $queryLanguages Languages for language-specific query processing steps such as plurals, stop-word removal, and word-detection dictionaries.  This setting sets a default list of languages used by the `removeStopWords` and `ignorePlurals` settings. This setting also sets a dictionary for word detection in the logogram-based [CJK](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/#normalization-for-logogram-based-languages-cjk) languages. To support this, you must place the CJK language **first**.  **You should always specify a query language.** If you don't specify an indexing language, the search engine uses all [supported languages](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/), or the languages you specified with the `ignorePlurals` or `removeStopWords` parameters. This can lead to unexpected search results. For more information, see [Language-specific configuration](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/).
      *
      * @return self
      */
@@ -2290,7 +2226,7 @@ class SearchParams extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Gets alternativesAsExact.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\AlternativesAsExact[]
+     * @return null|AlternativesAsExact[]
      */
     public function getAlternativesAsExact()
     {
@@ -2300,7 +2236,7 @@ class SearchParams extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Sets alternativesAsExact.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\AlternativesAsExact[] $alternativesAsExact Determine which plurals and synonyms should be considered an exact matches.  By default, Algolia treats singular and plural forms of a word, and single-word synonyms, as [exact](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/#exact) matches when searching. For example:  - \"swimsuit\" and \"swimsuits\" are treated the same - \"swimsuit\" and \"swimwear\" are treated the same (if they are [synonyms](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/#regular-synonyms)).  - `ignorePlurals`.   Plurals and similar declensions added by the `ignorePlurals` setting are considered exact matches.  - `singleWordSynonym`.   Single-word synonyms, such as \"NY\" = \"NYC\", are considered exact matches.  - `multiWordsSynonym`.   Multi-word synonyms, such as \"NY\" = \"New York\", are considered exact matches.
+     * @param null|AlternativesAsExact[] $alternativesAsExact Determine which plurals and synonyms should be considered an exact matches.  By default, Algolia treats singular and plural forms of a word, and single-word synonyms, as [exact](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/#exact) matches when searching. For example:  - \"swimsuit\" and \"swimsuits\" are treated the same - \"swimsuit\" and \"swimwear\" are treated the same (if they are [synonyms](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/#regular-synonyms)).  - `ignorePlurals`.   Plurals and similar declensions added by the `ignorePlurals` setting are considered exact matches.  - `singleWordSynonym`.   Single-word synonyms, such as \"NY\" = \"NYC\", are considered exact matches.  - `multiWordsSynonym`.   Multi-word synonyms, such as \"NY\" = \"New York\", are considered exact matches.
      *
      * @return self
      */
@@ -2314,7 +2250,7 @@ class SearchParams extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Gets advancedSyntaxFeatures.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\AdvancedSyntaxFeatures[]
+     * @return null|AdvancedSyntaxFeatures[]
      */
     public function getAdvancedSyntaxFeatures()
     {
@@ -2324,7 +2260,7 @@ class SearchParams extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Sets advancedSyntaxFeatures.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\AdvancedSyntaxFeatures[] $advancedSyntaxFeatures Advanced search syntax features you want to support.  - `exactPhrase`.   Phrases in quotes must match exactly.   For example, `sparkly blue \"iPhone case\"` only returns records with the exact string \"iPhone case\".  - `excludeWords`.   Query words prefixed with a `-` must not occur in a record.   For example, `search -engine` matches records that contain \"search\" but not \"engine\".  This setting only has an effect if `advancedSyntax` is true.
+     * @param null|AdvancedSyntaxFeatures[] $advancedSyntaxFeatures Advanced search syntax features you want to support.  - `exactPhrase`.   Phrases in quotes must match exactly.   For example, `sparkly blue \"iPhone case\"` only returns records with the exact string \"iPhone case\".  - `excludeWords`.   Query words prefixed with a `-` must not occur in a record.   For example, `search -engine` matches records that contain \"search\" but not \"engine\".  This setting only has an effect if `advancedSyntax` is true.
      *
      * @return self
      */
@@ -2420,7 +2356,7 @@ class SearchParams extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Sets responseFields.
      *
-     * @param null|string[] $responseFields Properties to include in the API response of `search` and `browse` requests.  By default, all response properties are included. To reduce the response size, you can select, which attributes should be included.  You can't exclude these properties: `message`, `warning`, `cursor`, `serverUsed`, `indexUsed`, `abTestVariantID`, `parsedQuery`, or any property triggered by the `getRankingInfo` parameter.  Don't exclude properties that you might need in your search UI.
+     * @param null|string[] $responseFields Properties to include in the API response of search and browse requests.  By default, all response properties are included. To reduce the response size, you can select which properties should be included.  An empty list may lead to an empty API response (except properties you can't exclude).  You can't exclude these properties: `message`, `warning`, `cursor`, `abTestVariantID`, or any property added by setting `getRankingInfo` to true.  Your search depends on the `hits` field. If you omit this field, searches won't return any results. Your UI might also depend on other properties, for example, for pagination. Before restricting the response size, check the impact on your search experience.
      *
      * @return self
      */
