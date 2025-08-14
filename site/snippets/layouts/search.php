@@ -1,6 +1,6 @@
 <?php
-$area  = $area ?? 'all';
-$areas = option('search.areas');
+$area ??= 'all';
+$areas  = $kirby->option('search.areas')($kirby);
 ?>
 
 <style>
@@ -25,7 +25,7 @@ form[data-fetching] .search-input figure svg:first-child {
 </style>
 
 <div class="search">
-	<button class="search-button" type="button" data-area="<?= $area ?? 'all' ?>" aria-label="Search">
+	<button class="search-button" type="button" data-area="<?= $area ?>" aria-label="Search">
 		<?= icon('search') ?>
 	</button>
 
