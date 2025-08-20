@@ -23,8 +23,11 @@ class Transformation extends AbstractModel implements ModelInterface, \ArrayAcce
         'transformationID' => 'string',
         'authenticationIDs' => 'string[]',
         'code' => 'string',
+        'type' => '\Algolia\AlgoliaSearch\Model\Ingestion\TransformationType',
+        'input' => '\Algolia\AlgoliaSearch\Model\Ingestion\TransformationInput',
         'name' => 'string',
         'description' => 'string',
+        'owner' => 'string',
         'createdAt' => 'string',
         'updatedAt' => 'string',
     ];
@@ -38,8 +41,11 @@ class Transformation extends AbstractModel implements ModelInterface, \ArrayAcce
         'transformationID' => null,
         'authenticationIDs' => null,
         'code' => null,
+        'type' => null,
+        'input' => null,
         'name' => null,
         'description' => null,
+        'owner' => null,
         'createdAt' => null,
         'updatedAt' => null,
     ];
@@ -54,8 +60,11 @@ class Transformation extends AbstractModel implements ModelInterface, \ArrayAcce
         'transformationID' => 'transformationID',
         'authenticationIDs' => 'authenticationIDs',
         'code' => 'code',
+        'type' => 'type',
+        'input' => 'input',
         'name' => 'name',
         'description' => 'description',
+        'owner' => 'owner',
         'createdAt' => 'createdAt',
         'updatedAt' => 'updatedAt',
     ];
@@ -69,8 +78,11 @@ class Transformation extends AbstractModel implements ModelInterface, \ArrayAcce
         'transformationID' => 'setTransformationID',
         'authenticationIDs' => 'setAuthenticationIDs',
         'code' => 'setCode',
+        'type' => 'setType',
+        'input' => 'setInput',
         'name' => 'setName',
         'description' => 'setDescription',
+        'owner' => 'setOwner',
         'createdAt' => 'setCreatedAt',
         'updatedAt' => 'setUpdatedAt',
     ];
@@ -84,8 +96,11 @@ class Transformation extends AbstractModel implements ModelInterface, \ArrayAcce
         'transformationID' => 'getTransformationID',
         'authenticationIDs' => 'getAuthenticationIDs',
         'code' => 'getCode',
+        'type' => 'getType',
+        'input' => 'getInput',
         'name' => 'getName',
         'description' => 'getDescription',
+        'owner' => 'getOwner',
         'createdAt' => 'getCreatedAt',
         'updatedAt' => 'getUpdatedAt',
     ];
@@ -113,11 +128,20 @@ class Transformation extends AbstractModel implements ModelInterface, \ArrayAcce
         if (isset($data['code'])) {
             $this->container['code'] = $data['code'];
         }
+        if (isset($data['type'])) {
+            $this->container['type'] = $data['type'];
+        }
+        if (isset($data['input'])) {
+            $this->container['input'] = $data['input'];
+        }
         if (isset($data['name'])) {
             $this->container['name'] = $data['name'];
         }
         if (isset($data['description'])) {
             $this->container['description'] = $data['description'];
+        }
+        if (isset($data['owner'])) {
+            $this->container['owner'] = $data['owner'];
         }
         if (isset($data['createdAt'])) {
             $this->container['createdAt'] = $data['createdAt'];
@@ -199,6 +223,9 @@ class Transformation extends AbstractModel implements ModelInterface, \ArrayAcce
         if (!isset($this->container['createdAt']) || null === $this->container['createdAt']) {
             $invalidProperties[] = "'createdAt' can't be null";
         }
+        if (!isset($this->container['updatedAt']) || null === $this->container['updatedAt']) {
+            $invalidProperties[] = "'updatedAt' can't be null";
+        }
 
         return $invalidProperties;
     }
@@ -266,6 +293,8 @@ class Transformation extends AbstractModel implements ModelInterface, \ArrayAcce
      * Gets code.
      *
      * @return string
+     *
+     * @deprecated
      */
     public function getCode()
     {
@@ -275,13 +304,63 @@ class Transformation extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Sets code.
      *
-     * @param string $code the source code of the transformation
+     * @param string $code It is deprecated. Use the `input` field with proper `type` instead to specify the transformation code.
      *
      * @return self
+     *
+     * @deprecated
      */
     public function setCode($code)
     {
         $this->container['code'] = $code;
+
+        return $this;
+    }
+
+    /**
+     * Gets type.
+     *
+     * @return null|TransformationType
+     */
+    public function getType()
+    {
+        return $this->container['type'] ?? null;
+    }
+
+    /**
+     * Sets type.
+     *
+     * @param null|TransformationType $type type
+     *
+     * @return self
+     */
+    public function setType($type)
+    {
+        $this->container['type'] = $type;
+
+        return $this;
+    }
+
+    /**
+     * Gets input.
+     *
+     * @return null|TransformationInput
+     */
+    public function getInput()
+    {
+        return $this->container['input'] ?? null;
+    }
+
+    /**
+     * Sets input.
+     *
+     * @param null|TransformationInput $input input
+     *
+     * @return self
+     */
+    public function setInput($input)
+    {
+        $this->container['input'] = $input;
 
         return $this;
     }
@@ -335,6 +414,30 @@ class Transformation extends AbstractModel implements ModelInterface, \ArrayAcce
     }
 
     /**
+     * Gets owner.
+     *
+     * @return null|string
+     */
+    public function getOwner()
+    {
+        return $this->container['owner'] ?? null;
+    }
+
+    /**
+     * Sets owner.
+     *
+     * @param null|string $owner owner of the resource
+     *
+     * @return self
+     */
+    public function setOwner($owner)
+    {
+        $this->container['owner'] = $owner;
+
+        return $this;
+    }
+
+    /**
      * Gets createdAt.
      *
      * @return string
@@ -361,7 +464,7 @@ class Transformation extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Gets updatedAt.
      *
-     * @return null|string
+     * @return string
      */
     public function getUpdatedAt()
     {
@@ -371,7 +474,7 @@ class Transformation extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Sets updatedAt.
      *
-     * @param null|string $updatedAt date of last update in RFC 3339 format
+     * @param string $updatedAt date of last update in RFC 3339 format
      *
      * @return self
      */

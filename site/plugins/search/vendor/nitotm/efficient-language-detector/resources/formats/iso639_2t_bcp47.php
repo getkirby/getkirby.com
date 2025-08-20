@@ -1,0 +1,72 @@
+<?php
+/**
+ * @copyright 2024 Nito T.M.
+ * @license https://www.apache.org/licenses/LICENSE-2.0 Apache-2.0
+ * @author Nito T.M. (https://github.com/nitotm)
+ * @package nitotm/efficient-language-detector
+ */
+
+// ISO 639-2T code with IETF BCP 47 script name tag of the 60 languages available. Order is IMPORTANT
+// ELD also returns 'und' for undetermined
+return [
+    'amh',
+    'ara',
+    'aze-Latn',
+    'bel',
+    'bul',
+    'ben',
+    'cat',
+    'ces',
+    'dan',
+    'deu',
+    'ell',
+    'eng',
+    'spa',
+    'est',
+    'eus',
+    'fas',
+    'fin',
+    'fra',
+    'guj',
+    'heb',
+    'hin',
+    'hrv',
+    'hun',
+    'hye',
+    'isl',
+    'ita',
+    'jpn',
+    'kat',
+    'kan',
+    'kor',
+    'kur-Arab',
+    'lao',
+    'lit',
+    'lav',
+    'mal',
+    'mar',
+    'msa-Latn',
+    'nld',
+    'nor',
+    'ori',
+    'pan',
+    'pol',
+    'por',
+    'ron',
+    'rus',
+    'slk',
+    'slv',
+    'sqi',
+    'srp-Cyrl',
+    'swe',
+    'tam',
+    'tel',
+    'tha',
+    'tgl',
+    'tur',
+    'ukr',
+    'urd',
+    'vie',
+    'yor',
+    'zho'
+];
