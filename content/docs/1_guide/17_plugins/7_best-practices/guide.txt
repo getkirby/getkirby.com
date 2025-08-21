@@ -107,9 +107,13 @@ Add a good description to your plugin repo so that people looking for a specific
 
 On GitHub, you can tag your plugins. Don't forget to add the following tags in addition to those that describe the purpose of your plugin:
 
-- kirby3
+- kirby5
 - kirby-cms
 - kirby-plugin
+
+<info>
+Tags like `kirby3`, `kirby4` and `kirby5` are also automatically picked up by our (link: https://plugins.getkirby.com text: plugin directory) as the Kirby versions that your plugin supports.
+</info>
 
 ## Versioning
 
