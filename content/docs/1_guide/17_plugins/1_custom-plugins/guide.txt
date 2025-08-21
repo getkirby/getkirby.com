@@ -42,7 +42,7 @@ Kirby::plugin('my-name/hello-world', [
 
 ### Plugin name
 
-Each plugin must have a unique name. We follow the typical Composer package name scheme here, so your plugin name must follow the format `{your-name-or-alias}/{plugin-name}`.
+Each plugin must have a unique name. We follow the typical package name scheme here that is known from package managers such as Composer or npm, so your plugin name must follow the format `{your-name-or-alias}/{plugin-name}`.
 
 You are totally free to use whatever alias you like. Something like `superwoman/superplugin` is totally fine. The alias and plugin names must only contain characters from a-z, numbers and dashes though.
 
@@ -55,6 +55,20 @@ The plugin name can later be used to find a specific plugin:
 It is also used to identify your plugin during the update check. If you publish your plugin, the name needs to match the path in our (link: https://plugins.getkirby.com text: plugin repository). It does *not* need to match the Composer package name of your plugin.
 
 **Example:** If your Composer package name is `superwoman/kirby-superplugin`, the plugin name you pass to `Kirby::plugin()` should be `superwoman/superplugin` as above.
+
+<info>
+Within the Kirby ecosystem, it is clear that your plugin is for Kirby. So please *don't* use the `kirby-` prefix in the plugin name that you pass to `Kirby::plugin()`.
+
+We also advise against including the supported Kirby version number in the name of your repository, your Composer package name or your Kirby plugin name. With Kirby's yearly major releases, this would make your plugin name outdated pretty quickly – even though your plugin will likely support following major versions of Kirby just fine.
+
+To summarize:
+
+|   | Name for `Kirby::plugin()` | Name for `composer.json` |
+| - | -------------------------- | ------------------------ |
+| ✅ | `superwoman/superplugin` | `superwoman/kirby-superplugin` |
+| ❌ | `superwoman/kirby-superplugin` | `superwoman/kirby-superplugin` |
+| ❌ | `superwoman/kirby5-superplugin` | `superwoman/kirby5-superplugin` |
+</info>
 
 ### Named arguments
 
@@ -157,7 +171,9 @@ $kirby->plugin('superwoman/superplugin')->authors();
 
 The fields in the example `composer.json` above are just the basic metadata fields. Composer is also a tool that's useful to install plugins. How to setup your plugin for that is explained in our (link: #setup-of-published-plugins text: plugin setup articles).
 
+<info>
 Note that the `name` inside the `composer.json` file is only the name of the Composer package. If needed, it can differ from the name you give your plugin when registering it with `Kirby::plugin()`, which will be used when getting plugin data.
+</info>
 
 <since v="5.0.0">
 ### Plugin licenses
