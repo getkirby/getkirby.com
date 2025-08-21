@@ -141,5 +141,4 @@ Once your plugin is ready, you can publish it with the following steps:
 1. Push your code to your Git repository.
 2. Create a Git tag with the version number of your release.
 3. Publish your plugin on [Packagist](https://packagist.org) to enable installation via Composer (only needed once, Packagist will pick up new Git tags automatically after that).
-4. If you want to advertise your plugin in the [plugin directory](https://plugin.getkirby.com), send us an email to <support@getkirby.com> with a link to your Git repository and a cover (cover image in 2:1 format or a short code snippet).
-5. Tell everybody about it on the (link: https://forum.getkirby.com text: forum) in the plugins category.
+4. (link: docs/guide/plugins/best-practices#promote-your-plugin text: Promote your plugin in our plugin directory and the forum)
