@@ -47,7 +47,7 @@ The `composer create-project` command creates a `vendor` directory and a `compos
 
 ### Your plugin's Git repo
 
-Your plugin needs to live inside its own **Git repository**. This is required for the Git submodule installation method. Where that Git repo lives does not matter. Most Kirby plugins are published on [GitHub](https://github.com), which makes collaboration with other users (e.g. bug reports, pull requests, forks of your plugin) easier. However it's also possible to set your Git repo up at a different provider like [GitLab](https://about.gitlab.com) or on your own [Gitea server](https://gitea.io/en-us/).
+Your plugin needs to live inside its own **Git repository**. This is required for the Git submodule installation method. Where that Git repo lives does not matter. Most Kirby plugins are published on [GitHub](https://github.com), which makes collaboration with other users (e.g. bug reports, pull requests, forks of your plugin) easier. However it's also possible to set your Git repo up at a different provider like [GitLab](https://about.gitlab.com) or on your own [Forgejo server](https://forgejo.org/).
 
 ### Basic files for configuration and documentation
 
