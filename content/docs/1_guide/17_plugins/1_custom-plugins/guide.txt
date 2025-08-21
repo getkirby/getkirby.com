@@ -58,11 +58,15 @@ It is also used to identify your plugin during the update check. If you publish 
 
 ### Named arguments
 
+As soon as your plugin gets more complex and may need to provide additional information (see below), it can make sense to use PHP's named arguments to make your plugin registration more clear:
+
 ```php "/site/plugins/your-plugin/index.php"
 Kirby::plugin(
 	name: 'my-name/hello-world',
 	extends: [
-		…
+		'snippets'  => […],
+		'templates' => […],
+		'hooks'     => […]
 	]
 );
 ```
