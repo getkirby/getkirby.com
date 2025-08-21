@@ -93,7 +93,9 @@ Comments help you and your users to understand your code even years later and th
 
 ## Naming
 
-While you are free to name your plugin whatever you like, it makes sense to give your repo a name that immediately makes it clear that your plugin is for the Kirby CMS. Most developers name their repos `kirby3-pluginname` or `kirby-pluginname`.
+While you are free to name your plugin whatever you like, it makes sense to give your repo a name that immediately makes it clear that your plugin is for the Kirby CMS.
+
+Most developers name their repos `kirby-pluginname`. The repo name should *not* include the supported Kirby version number. (link: docs/guide/plugins/custom-plugins#kirby-plugin-one-ring-to-rule-them-all__plugin-name text: Read more on the recommended naming syntax →).
 
 The plugin name itself ideally reveals the purpose of the plugin.
 
