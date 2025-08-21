@@ -8,7 +8,7 @@ Category: Extending kirby
 
 Text:
 
-Thanks to our developer community, the Kirby ecosystem has a large number of (link: plugins text: free and paid plugins), that extend the functionality of Kirby. There are also several (link: plugins/getkirby text: official Kirby plugins) maintained by the Kirby team.
+Thanks to our developer community, the Kirby ecosystem has a large number of (link: plugins text: free and paid plugins) that extend the functionality of Kirby. There are also several (link: plugins/getkirby text: official Kirby plugins) maintained by the Kirby team.
 
 Once you have found one or more plugins that meet your needs, you will need to install them. Some plugins also require additional configuration options or some setup. All this information can be found in the documentation of the respective plugin.
 
@@ -23,7 +23,7 @@ Download the plugin via the download link and unzip. Then put the unzipped folde
 ```filesystem
 site/
   plugins/
-    pluginname/
+    plugin-name/
       composer.json
       index.php
       index.js
@@ -38,25 +38,25 @@ There may be more files and folders in the downloaded plugin folder, or some of 
 If you use (link: https://git-scm.com/ text: Git) to version control your project, you can install plugins that are available from an online service like GitHub as a Git submodule:
 
 ```bash
-git submodule add https://github.com/developername/plugin-name.git site/plugins/plugin-name
+git submodule add https://github.com/developer-name/plugin-name.git site/plugins/plugin-name
 ```
 
 === Composer
 
-Many Kirby plugins also support installation via (link: https://getcomposer.org/ text: Composer), which must be installed on your system. This installation method works best if (link: docs/guide/install-guide/composer text: your project is managed via Composer) as well. Then you can run the following command from the root of your project:
+Many Kirby plugins also support installation via (link: https://getcomposer.org/ text: Composer), which is a PHP package manager that must be installed on your system. This installation method works best if (link: docs/guide/install-guide/composer text: your project is managed via Composer) as well. Then you can run the following command from the root of your project:
 
 ```bash
-composer require developername/pluginname
+composer require developer-name/plugin-name
 ```
 
 This will automatically add the plugin to your `composer.json` and install the plugin in the `/site/plugins` folder.
 
 === Kirby CLI
 
-The Kirby CLI helps you to simplify common tasks with your Kirby installations. It also has a command to download and install plugins from a Git repo link:
+The Kirby CLI helps you to make common tasks with your Kirby installations simpler. It also has a command to download and install plugins from a Git repo link:
 
 ```bash
-kirby plugin:install https://github.com/developername/plugin-name.git
+kirby plugin:install https://github.com/developer-name/plugin-name.git
 ```
 
 (…tabs)

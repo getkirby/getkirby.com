@@ -142,7 +142,7 @@ If it is free but you want people to donate, add a link to the platform where yo
 ## Promote your plugin
 
 - If applicable, publish a site showcasing your plugin with a live demo. On request, we will provide a free Kirby license for this purpose. Please send an email to <support@getkirby.com> with some details on your plugin and the intended contents of the site. If you already have the site ready, feel free to send us the link for a quicker review process.
-- Create an new topic in the (link: https://forum.getkirby.com/c/plugins text: plugins category on the forum), ping @texnixe to make sure she'll mention it in the next Kosmos issue.
-- Submit it to the (link: https://plugins.getkirby.com text: Kirby plugins directory), currently by sending an email to <support@getkirby.com> with a link to your Git repository and a cover (cover image in 2:1 format or a short code snippet). But we will add a submit form in the future.
+- Create a new topic in the (link: https://forum.getkirby.com/c/plugins text: plugins category on the forum), ping @texnixe to make sure she'll mention it in the next Kosmos issue.
+- Submit it to the (link: https://plugins.getkirby.com text: Kirby plugin directory), currently by sending an email to <support@getkirby.com> with a link to your Git repository and a cover (cover image in 2:1 format or a short code snippet). But we will add a submit form in the future.
 - Post about your plugin, mentioning @getkirby where applicable.
 - …
