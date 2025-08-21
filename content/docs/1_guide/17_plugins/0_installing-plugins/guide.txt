@@ -8,7 +8,7 @@ Category: Extending kirby
 
 Text:
 
-Thanks to our developer community, the Kirby ecosystem has a large number of (link: plugins text: free and paid plugins) that extend the functionality of Kirby. There are also several (link: plugins/getkirby text: official Kirby plugins) maintained by the Kirby team.
+Thanks to our developer community, the Kirby ecosystem has a large number of (link: https://plugins.getkirby.com text: free and paid plugins) that extend the functionality of Kirby. There are also several (link: https://plugins.getkirby.com/developers/getkirby text: official Kirby plugins) maintained by the Kirby team.
 
 Once you have found one or more plugins that meet your needs, you will need to install them. Some plugins also require additional configuration options or some setup. All this information can be found in the documentation of the respective plugin.
 

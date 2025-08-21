@@ -52,7 +52,7 @@ The plugin name can later be used to find a specific plugin:
 <?= $kirby->plugin('superwoman/superplugin')->version() ?>
 ```
 
-It is also used to identify your plugin during the update check. If you publish your plugin, the name needs to match the path in our (link: plugins text: plugin repository). It does *not* need to match the Composer package name of your plugin.
+It is also used to identify your plugin during the update check. If you publish your plugin, the name needs to match the path in our (link: https://plugins.getkirby.com text: plugin repository). It does *not* need to match the Composer package name of your plugin.
 
 **Example:** If your Composer package name is `superwoman/kirby-superplugin`, the plugin name you pass to `Kirby::plugin()` should be `superwoman/superplugin` as above.
 
