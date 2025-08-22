@@ -35,7 +35,7 @@ If you want to extend Kirby in more meaningful ways such as by **extending Kirby
 All plugins are registered with Kirby's static `Kirby::plugin()` method. It doesn't matter if you want to create just a simple (link: docs/reference/plugins/extensions/kirbytags text: KirbyTag plugin) or a (link: docs/reference/plugins/extensions/fields text: custom field) for the Panel. `Kirby::plugin()` is your way to go.
 
 ```php "/site/plugins/your-plugin/index.php"
-Kirby::plugin('my-name/hello-world', [
+Kirby::plugin('my-name/my-plugin', [
   …
 ]);
 ```
@@ -44,17 +44,17 @@ Kirby::plugin('my-name/hello-world', [
 
 Each plugin must have a unique name. We follow the typical package name scheme here that is known from package managers such as Composer or npm, so your plugin name must follow the format `{your-name-or-alias}/{plugin-name}`.
 
-You are totally free to use whatever alias you like. Something like `superwoman/superplugin` is totally fine. The alias and plugin names must only contain characters from a-z, numbers and dashes though.
+You are totally free to use whatever alias you like. Something like `my-name/my-plugin` is totally fine. The alias and plugin names must only contain characters from a-z, numbers and dashes though.
 
 The plugin name can later be used to find a specific plugin:
 
 ```php
-<?= $kirby->plugin('superwoman/superplugin')->version() ?>
+<?= $kirby->plugin('my-name/my-plugin')->version() ?>
 ```
 
 It is also used to identify your plugin during the update check. If you publish your plugin, the name needs to match the path in our (link: https://plugins.getkirby.com text: plugin repository). It does *not* need to match the Composer package name of your plugin.
 
-**Example:** If your Composer package name is `superwoman/kirby-superplugin`, the plugin name you pass to `Kirby::plugin()` should be `superwoman/superplugin` as above.
+**Example:** If your Composer package name is `my-name/kirby-my-plugin`, the plugin name you pass to `Kirby::plugin()` should be `my-name/my-plugin` as above.
 
 <info>
 Within the Kirby ecosystem, it is clear that your plugin is for Kirby. So please *don't* use the `kirby-` prefix in the plugin name that you pass to `Kirby::plugin()`.
@@ -65,9 +65,9 @@ To summarize:
 
 |   | Name for `Kirby::plugin()` | Name for `composer.json` |
 | - | -------------------------- | ------------------------ |
-| ✅ | `superwoman/superplugin` | `superwoman/kirby-superplugin` |
-| ❌ | `superwoman/kirby-superplugin` | `superwoman/kirby-superplugin` |
-| ❌ | `superwoman/kirby5-superplugin` | `superwoman/kirby5-superplugin` |
+| ✅ | `my-name/my-plugin` | `my-name/kirby-my-plugin` |
+| ❌ | `my-name/kirby-my-plugin` | `my-name/kirby-my-plugin` |
+| ❌ | `my-name/kirby5-my-plugin` | `my-name/kirby5-my-plugin` |
 </info>
 
 ### Named arguments
@@ -76,7 +76,7 @@ As soon as your plugin gets more complex and may need to provide additional info
 
 ```php "/site/plugins/your-plugin/index.php"
 Kirby::plugin(
-	name: 'my-name/hello-world',
+	name: 'my-name/my-plugin',
 	extends: [
 		'snippets'  => […],
 		'templates' => […],
@@ -94,7 +94,7 @@ Your plugin can define any number of extensions for Kirby. Extensions can be blu
 You can start simple by extending just one thing…
 
 ```php
-Kirby::plugin('superwoman/superplugin', [
+Kirby::plugin('my-name/my-plugin', [
   'snippets' => [
     'header' => __DIR__ . '/snippets/header.php'
   ]
@@ -106,7 +106,7 @@ Kirby::plugin('superwoman/superplugin', [
 …or get more complex by extending multiple parts at once.
 
 ```php
-Kirby::plugin('superwoman/superplugin', [
+Kirby::plugin('my-name/my-plugin', [
   'snippets' => [
     'header' => __DIR__ . '/snippets/header.php'
   ],
@@ -134,7 +134,7 @@ If you need to register extensions based on a config option, site content or eve
 If your plugin only defines Panel extensions or custom CSS for the Panel, your `index.php` only needs to define the name of your plugin and nothing else:
 
 ```php
-Kirby::plugin('superwoman/superplugin', []);
+Kirby::plugin('my-name/my-plugin', []);
 ```
 
 <info>
@@ -145,10 +145,16 @@ Please make sure to pass the empty array as the second argument. If you omit it,
 
 To store more information about your plugin, you can add a `composer.json` to your plugin folder. We recommend to use composer's `composer init` command to simplify this step. All information in the `composer.json` can later be queried from your plugin:
 
+```php "index.php"
+Kirby::plugin('my-name/my-plugin', [
+  …
+]);
+```
+
 ```js "composer.json"
 {
-    "name": "superwoman/superplugin",
-    "description": "Superwoman Demo Plugin",
+    "name": "my-name/kirby-my-plugin",
+    "description": "Demo Plugin",
     "version": "1.0.0",
     "license": "MIT",
     "authors": [
@@ -162,10 +168,10 @@ To store more information about your plugin, you can add a `composer.json` to yo
 
 ```php
 // somewhere in Kirby
-$kirby->plugin('superwoman/superplugin')->version();
-$kirby->plugin('superwoman/superplugin')->description();
-$kirby->plugin('superwoman/superplugin')->license();
-$kirby->plugin('superwoman/superplugin')->authors();
+$kirby->plugin('my-name/my-plugin')->version();
+$kirby->plugin('my-name/my-plugin')->description();
+$kirby->plugin('my-name/my-plugin')->license();
+$kirby->plugin('my-name/my-plugin')->authors();
 // etc.
 ```
 
@@ -186,7 +192,7 @@ This is great if you want to point to your own license document.
 
 ```php
 App::plugin(
-  name: 'my/plugin',
+  name: 'my-name/my-plugin',
   extends: [...],
   license: [
     'name'   => 'Custom license',
@@ -200,7 +206,7 @@ App::plugin(
 
 ```php
 App::plugin(
-  name: 'my/plugin',
+  name: 'my-name/my-plugin',
   extends: [...],
   license: [
     'name' => 'Custom license',
@@ -218,7 +224,7 @@ You can also pass a (class: Kirby\Plugin\License text: license object) to return
 
 ```php
 App::plugin(
-  name: 'my/plugin',
+  name: 'my-name/my-plugin',
   extends: [...],
   license: fn (Plugin $plugin) => new MyCustomLicense($plugin)
 );
@@ -231,7 +237,7 @@ Instead of providing all the information in the `composer.json` file, you can pa
 
 ```php "/site/plugins/your-plugin/index.php"
 Kirby::plugin(
-	name: 'my-name/hello-world',
+	name: 'my-name/my-plugin',
 	extends: [
 		…
 	],
@@ -245,7 +251,7 @@ Moreover, you can provide the version directly as `version` argument:
 
 ```php
 Kirby::plugin(
-	name: 'my-name/hello-world',
+	name: 'my-name/my-plugin',
 	extends: [
 		…
 	],
@@ -272,7 +278,7 @@ Each plugin can have its own `assets` folder with any number of additional asset
 
 ### Asset URLs
 
-Each asset in the `assets` folder of your plugin will be available at `/media/plugins/superwoman/superplugin/`.
+Each asset in the `assets` folder of your plugin will be available at `/media/plugins/my-name/my-plugin/`.
 
 The URL path is constructed with the name from your plugin definition and has nothing to do with the folder name of the plugin.
 
@@ -281,7 +287,7 @@ The URL path is constructed with the name from your plugin definition and has no
 Your plugins can define their own set of options:
 
 ```php "/site/plugins/your-plugin/index.php"
-Kirby::plugin('superwoman/superplugin', [
+Kirby::plugin('my-name/my-plugin', [
   'options' => [
     'apiKey' => 'default-api-key'
   ]
@@ -290,27 +296,27 @@ Kirby::plugin('superwoman/superplugin', [
 
 The values which you set for those options will be the default values. They can be overridden in the config file of the site.
 
-Each of your plugin's options is automatically prefixed. The prefix is created from your plugin's name: `superwoman/superplugin` becomes `superwoman.superplugin`.
+Each of your plugin's options is automatically prefixed. The prefix is created from your plugin's name: `my-name/my-plugin` becomes `my-name.my-plugin`.
 
 This will avoid any collisions with core options or options from other plugins.
 
 Those options can be used anywhere in Kirby like this:
 
 ```php
-$kirby->option('superwoman.superplugin.apiKey');
+$kirby->option('my-name.my-plugin.apiKey');
 
 ```
 Or with the option helper:
 
 ```php
-option('superwoman.superplugin.apiKey');
+option('my-name.my-plugin.apiKey');
 ```
 
 Options also need to be prefixed to be set in the config:
 
 ```php "/site/config/config.php"
 return [
-  'superwoman.superplugin.apiKey' => 'my-custom-key'
+  'my-name.my-plugin.apiKey' => 'my-custom-key'
 ];
 ```
 
