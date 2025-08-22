@@ -11,50 +11,122 @@ use Kirby\Toolkit\Str;
 
 $coreTags = App::instance()->core()->kirbyTags();
 
-$tags = [
-	'link' => [
-		...$coreTags['link'],
-		'html' => function ($tag) use ($coreTags) {
-			if (($tag->options['kirbytags'] ?? true) === false) {
-				if ($page = page($tag->value())) {
-					return markdownLink($tag->text() ?? $tag->value(), $page->markdownUrl());
-				}
+$tags = [];
 
-				return markdownLink($tag->text() ?? $tag->value(), url($tag->value()));
-			}
+/**
+ * Renders a list of fields for a given API model
+ * (api-fields: page)
+ */
+$tags['api-fields'] = [
+	'html' => function ($tag) {
+		$models = $tag->kirby()->api()->models();
+		$model  = $models[$tag->value] ?? [];
+		$fields = array_keys($model['fields'] ?? []);
 
-			return $coreTags['link']['html']($tag);
+		if (empty($fields) === true) {
+			return '';
 		}
-	],
+
+		$fields = array_map(function ($field) {
+			return '`' . $field . '`';
+		}, $fields);
+
+		return '- ' . implode(PHP_EOL . '- ', $fields);
+	}
 ];
 
 /**
- * (snippet: snippet/to/render/the/children)
+ * Renders a link to the Reference page for a class or class method
+ * (class: Kirby\Cms\App)
+ * (class: Kirby\Cms\App method: version)
  */
-$tags['snippet'] = [
-	'html' => fn ($tag) => snippet($tag->value(), [], true)
-];
-
-/**
- * (quote: Lorem Ipsum author: Homer Simpson)
- */
-$tags['quote'] = [
+$tags['class'] = [
 	'attr' => [
-		'author',
-		'link'
+		'method',
+		'text'
 	],
 	'html' => function ($tag) {
-		$html = '<blockquote><p class="mb-1">' . $tag->value() . '</p>';
+		$type = $tag->attr('class');
+		$text = $tag->attr('text');
 
-		if ($author = $tag->author()) {
-			if ($link = $tag->link()) {
-				$author = '<a href="' . $link .'" class="link">' . $author . '</a>';
-			}
-
-			$html .= '<footer>– ' . $author . '</footer>';
+		// (class: foo method: bar)
+		if ($tag->attr('method')) {
+			$method = rtrim($tag->attr('method'), '()') . '()';
+			$type  .= '::' . $method;
+			return (new Chain($type))->toHtml(text: $text);
 		}
 
-		return $html. '</blockquote>';
+		return (new Identifier($type))->toHtml(text: $text);
+	}
+];
+
+/**
+ * (docs: some-snippet)
+ * Inserts shared doc snippets from /site/snippets/docs
+ */
+$tags['docs'] = [
+	'attr' => [
+		'field',
+		'vars'
+	],
+	'html' => function ($tag) {
+		parse_str($tag->attr('vars', ''), $vars);
+
+		$data = [
+			'page'  => $tag->parent(),
+			'field' => $tag->attr('field'),
+			...$vars
+		];
+
+		$snippet = snippet('docs/' . $tag->value, $data, true);
+
+		if (($tag->options['kirbytags'] ?? true) === false) {
+			return kirbytagsToMarkdown($snippet);
+		}
+
+		return kirbytext($snippet, [
+			'parent' => $tag->parent()
+		]);
+	}
+];
+
+/**
+ * Renders a list of options for a given field
+ * (field-options: select)
+ */
+$tags['field-options'] = [
+	'html' => fn ($tag) => snippet('templates/reference/entry/parameters', [
+		'title'       => false,
+		'reflectable' => ReflectableOptions::factory(
+			type: Field::class,
+			name: $tag->value
+		)
+	], true)
+];
+
+/**
+ * (glossary: panel)
+ */
+$tags['glossary'] = [
+	'attr' => [
+		'text'
+	],
+	'html' => function ($tag) {
+		if ($term = page('docs/glossary/' . $tag->value)) {
+			$title = $term->entry()->stripGlossary()->kti();
+
+			return '<abbr title="' . Str::unhtml($title) . '"><a href="' . $term->parent()->url() . '/#' . $term->slug() . '">' . ($tag->text ?? $term->title()) . '</a></abbr>';
+		}
+	}
+];
+
+/**
+ * Renders a link to the helper function's Reference page
+ * (helper: foo)
+ */
+$tags['helper'] = [
+	'html' => function ($tag) {
+		return kirbytag('method', 'Helper::' . $tag->value, ['text' => $tag->value . '()']);
 	}
 ];
 
@@ -98,6 +170,93 @@ $tags['image'] = [
 ];
 
 /**
+ * Core (link:) tag with support for Marsdown magic
+ */
+$tags['link'] = [
+	...$coreTags['link'],
+	'html' => function ($tag) use ($coreTags) {
+		if (($tag->options['kirbytags'] ?? true) === false) {
+			if ($page = page($tag->value())) {
+				return markdownLink($tag->text() ?? $tag->value(), $page->markdownUrl());
+			}
+
+			return markdownLink($tag->text() ?? $tag->value(), url($tag->value()));
+		}
+
+		return $coreTags['link']['html']($tag);
+	}
+];
+
+/**
+ * Renders a link to the Reference page for a class method
+ * (method: Kirby\Cms\App::version)
+ */
+$tags['method'] = [
+	'attr' => [
+		'text'
+	],
+	'html' => function ($tag) {
+		$method = rtrim($tag->attr('method'), '()') . '()';
+		$text   = $tag->attr('text');
+
+		return (new Chain($method))->toHtml(text: $text);
+	}
+];
+
+/**
+ * Used for replacing nested glossary tags
+ */
+$tags['plain'] = [
+	'attr' => [
+		'text'
+	],
+	'html' => fn ($tag) => $tag->text ?? $tag->value
+];
+
+/**
+ * (quote: Lorem Ipsum author: Homer Simpson)
+ */
+$tags['quote'] = [
+	'attr' => [
+		'author',
+		'link'
+	],
+	'html' => function ($tag) {
+		$html = '<blockquote><p class="mb-1">' . $tag->value() . '</p>';
+
+		if ($author = $tag->author()) {
+			if ($link = $tag->link()) {
+				$author = '<a href="' . $link .'" class="link">' . $author . '</a>';
+			}
+
+			$html .= '<footer>– ' . $author . '</footer>';
+		}
+
+		return $html. '</blockquote>';
+	}
+];
+
+/**
+ * (reference: templates/field-methods)
+ * Renders a grid of all children of the reference page
+ */
+$tags['reference'] = [
+	'html' => function ($tag) {
+		if ($page = page('docs/reference/' . $tag->value())) {
+			$snippet = 'kirbytext/reference';
+
+			if (($tag->options['kirbytags'] ?? true) === false) {
+				$snippet = 'kirbytext/reference.md';
+			}
+
+			return snippet($snippet, [
+				'entries' => $page->children()->listed()
+			], true);
+		}
+	}
+];
+
+/**
  * (screencast: https://www.youtube.com/watch?v=EDVYjxWMecc poster: youtube.jpg title: How to install Kirby in 5 minutes)
  */
 $tags['screencast'] = [
@@ -123,165 +282,6 @@ $tags['screencast'] = [
 ];
 
 /**
- * (glossary: panel)
- */
-$tags['glossary'] = [
-	'attr' => ['text'],
-	'html' => function ($tag) {
-		if ($term = page('docs/glossary/' . $tag->value)) {
-			$title = $term->entry()->stripGlossary()->kti();
-
-			return '<abbr title="' . Str::unhtml($title) . '"><a href="' . $term->parent()->url() . '/#' . $term->slug() . '">' . ($tag->text ?? $term->title()) . '</a></abbr>';
-		}
-	}
-];
-
-/**
- * (reference: templates/field-methods)
- * Renders a grid of all children of the reference page
- */
-$tags['reference'] = [
-	'html' => function ($tag) {
-		if ($page = page('docs/reference/' . $tag->value())) {
-			$snippet = 'kirbytext/reference';
-
-			if (($tag->options['kirbytags'] ?? true) === false) {
-				$snippet = 'kirbytext/reference.md';
-			}
-
-			return snippet($snippet, [
-				'entries' => $page->children()->listed()
-			], true);
-		}
-	}
-];
-
-/**
- * Used for replacing nested glossary tags
- */
-$tags['plain'] = [
-	'attr' => ['text'],
-	'html' => fn ($tag) => $tag->text ?? $tag->value
-];
-
-/**
- * (docs: some-snippet)
- * Inserts shared doc snippets from /site/snippets/docs
- */
-$tags['docs'] = [
-	'attr' => [
-		'field',
-		'vars'
-	],
-	'html' => function ($tag) {
-		parse_str($tag->attr('vars', ''), $vars);
-
-		$data = [
-			'page'  => $tag->parent(),
-			'field' => $tag->attr('field'),
-			...$vars
-		];
-
-		$snippet = snippet('docs/' . $tag->value, $data, true);
-
-		if (($tag->options['kirbytags'] ?? true) === false) {
-			return kirbytagsToMarkdown($snippet);
-		}
-
-		return kirbytext($snippet, [
-			'parent' => $tag->parent()
-		]);
-	}
-];
-
-/**
- * Renders a link to the Reference page for a class or class method
- * (class: Kirby\Cms\App)
- * (class: Kirby\Cms\App method: version)
- */
-$tags['class'] = [
-	'attr' => [
-		'method',
-		'text'
-	],
-	'html' => function ($tag) {
-		$type = $tag->attr('class');
-		$text = $tag->attr('text');
-
-		// (class: foo method: bar)
-		if ($tag->attr('method')) {
-			$method = rtrim($tag->attr('method'), '()') . '()';
-			$type  .= '::' . $method;
-			return (new Chain($type))->toHtml(text: $text);
-		}
-
-		return (new Identifier($type))->toHtml(text: $text);
-	}
-];
-
-/**
- * Renders a link to the Reference page for a class method
- * (method: Kirby\Cms\App::version)
- */
-$tags['method'] = [
-	'attr' => [
-		'text'
-	],
-	'html' => function ($tag) {
-		$method = rtrim($tag->attr('method'), '()') . '()';
-		$text   = $tag->attr('text');
-
-		return (new Chain($method))->toHtml(text: $text);
-	}
-];
-
-/**
- * Renders a link to the helper function's Reference page
- * (helper: foo)
- */
-$tags['helper'] = [
-	'html' => function ($tag) {
-		return kirbytag('method', 'Helper::' . $tag->value, ['text' => $tag->value . '()']);
-	}
-];
-
-/**
- * Renders a list of fields for a given API model
- * (api-fields: page)
- */
-$tags['api-fields'] = [
-	'html' => function ($tag) {
-		$models = $tag->kirby()->api()->models();
-		$model  = $models[$tag->value] ?? [];
-		$fields = array_keys($model['fields'] ?? []);
-
-		if (empty($fields) === true) {
-			return '';
-		}
-
-		$fields = array_map(function ($field) {
-			return '`' . $field . '`';
-		}, $fields);
-
-		return '- ' . implode(PHP_EOL . '- ', $fields);
-	}
-];
-
-/**
- * Renders a list of options for a given field
- * (field-options: select)
- */
-$tags['field-options'] = [
-	'html' => fn ($tag) => snippet('templates/reference/entry/parameters', [
-		'title'       => false,
-		'reflectable' => ReflectableOptions::factory(
-			type: Field::class,
-			name: $tag->value
-		)
-	], true)
-];
-
-/**
  * Renders a list of options for a given section
  * (section-options: pages)
  */
@@ -293,6 +293,13 @@ $tags['section-options'] = [
 			name: $tag->value
 		)
 	], true)
+];
+
+/**
+ * (snippet: snippet/to/render/the/children)
+ */
+$tags['snippet'] = [
+	'html' => fn ($tag) => snippet($tag->value(), [], true)
 ];
 
 /**
