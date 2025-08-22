@@ -67,7 +67,7 @@ To summarize:
 | - | -------------------------- | ------------------------ |
 | ✅ | `my-name/my-plugin` | `my-name/kirby-my-plugin` |
 | ❌ | `my-name/kirby-my-plugin` | `my-name/kirby-my-plugin` |
-| ❌ | `my-name/kirby5-my-plugin` | `my-name/kirby5-my-plugin` |
+| ❌ | `my-name/kirby(kirby-version: major)-my-plugin` | `my-name/kirby(kirby-version: major)-my-plugin` |
 </info>
 
 ### Named arguments
