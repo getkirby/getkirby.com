@@ -103,11 +103,11 @@ The most basic form for a Kirby plugin looks like this:
 *Both* the `type` field and the `getkirby/composer-installer` dependency are **required** for your plugin to work, otherwise it won't be loaded correctly by Kirby.
 </warning>
 
-The Composer installer will install your plugin to `site/plugins/{{ name }}` by default, so in this example to `site/plugins/pluginkit`. If your Composer package name differs from the name of your plugin (e.g. if it is `superwoman/kirby-plugin-superplugin`), you can override the plugin name in your `composer.json`:
+The Composer installer will install your plugin to `site/plugins/{{ name }}` by default, so in this example to `site/plugins/pluginkit`. If your Composer package name differs from the name of your plugin (e.g. if it is `superwoman/kirby-superplugin`), you can override the plugin name in your `composer.json`:
 
 ```js "composer.json"
 {
-    "name": "superwoman/kirby-plugin-superplugin",
+    "name": "superwoman/kirby-superplugin",
     ...
     "type": "kirby-plugin",
     ...

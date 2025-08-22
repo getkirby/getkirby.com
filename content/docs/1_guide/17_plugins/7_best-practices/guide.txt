@@ -68,9 +68,9 @@ Always add a composer.json file with basic information about your plugin, includ
 
 ```js "composer.json"
 {
-    "name": "superwoman/superplugin",
+    "name": "superwoman/kirby-superplugin",
     "description": "Superwoman Demo Plugin",
-    "homepage:": "https://github.com/yourname/yourplugin"
+    "homepage:": "https://github.com/yourname/kirby-yourplugin"
     "version": "1.0.0",
     "license": "MIT",
     "authors": [
@@ -80,8 +80,8 @@ Always add a composer.json file with basic information about your plugin, includ
         }
     ],
 	  "support": {
-	    "docs": "https://github.com/yourname/yourplugin/blob/main/README.md",
-	    "source": "https://github.com/yourname/yourplugin"
+	    "docs": "https://github.com/yourname/kirby-yourplugin/blob/main/README.md",
+	    "source": "https://github.com/yourname/kirby-yourplugin"
 	  }
 }
 ```
