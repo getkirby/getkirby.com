@@ -170,6 +170,30 @@ $tags['image'] = [
 ];
 
 /**
+ * (kirby-version: major offset: -1)
+ */
+$tags['kirby-version'] = [
+	'attr' => [
+		'offset'
+	],
+	'html' => function ($tag) {
+		list($major, $minor, $patch) = explode('.', App::version());
+
+		// optional relative offsets for major-only versions
+		if ($tag->value() === 'major') {
+			return $major + ($tag->offset() ?? 0);
+		}
+
+		// treat the version parts as placeholders in the input string
+		return str_replace(
+			['major', 'minor', 'patch'],
+			[$major, $minor, $patch],
+			$tag->value()
+		);
+	}
+];
+
+/**
  * Core (link:) tag with support for Marsdown magic
  */
 $tags['link'] = [
