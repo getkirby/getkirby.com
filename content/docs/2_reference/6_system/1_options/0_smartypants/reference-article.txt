@@ -16,6 +16,10 @@ return [
 ];
 ```
 
+<warning>
+Warning: There's currently an (link: https://github.com/getkirby/kirby/issues/6344 text: unresolved issue) with the SmartyPants library. Using quotes in KirbyTag attributes can break HTML output.
+</warning>
+
 ## Custom replacements
 
 You can also override each of the default replacements:
