@@ -47,7 +47,7 @@ The `composer create-project` command creates a `vendor` directory and a `compos
 
 ### Your plugin's Git repo
 
-Your plugin needs to live inside its own **Git repository**. This is required for the Git submodule installation method. Where that Git repo lives does not matter. Most Kirby plugins are published on [GitHub](https://github.com), which makes collaboration with other users (e.g. bug reports, pull requests, forks of your plugin) easier. However it's also possible to set your Git repo up at a different provider like [GitLab](https://about.gitlab.com) or on your own [Gitea server](https://gitea.io/en-us/).
+Your plugin needs to live inside its own **Git repository**. This is required for the Git submodule installation method. Where that Git repo lives does not matter. Most Kirby plugins are published on [GitHub](https://github.com), which makes collaboration with other users (e.g. bug reports, pull requests, forks of your plugin) easier. However it's also possible to set your Git repo up at a different provider like [GitLab](https://about.gitlab.com) or on your own [Forgejo server](https://forgejo.org/).
 
 ### Basic files for configuration and documentation
 
@@ -103,11 +103,11 @@ The most basic form for a Kirby plugin looks like this:
 *Both* the `type` field and the `getkirby/composer-installer` dependency are **required** for your plugin to work, otherwise it won't be loaded correctly by Kirby.
 </warning>
 
-The Composer installer will install your plugin to `site/plugins/{{ name }}` by default, so in this example to `site/plugins/pluginkit`. If your Composer package name differs from the name of your plugin (e.g. if it is `superwoman/kirby-plugin-superplugin`), you can override the plugin name in your `composer.json`:
+The Composer installer will install your plugin to `site/plugins/{{ name }}` by default, so in this example to `site/plugins/pluginkit`. If your Composer package name differs from the name of your plugin (e.g. if it is `superwoman/kirby-superplugin`), you can override the plugin name in your `composer.json`:
 
 ```js "composer.json"
 {
-    "name": "superwoman/kirby-plugin-superplugin",
+    "name": "superwoman/kirby-superplugin",
     ...
     "type": "kirby-plugin",
     ...
@@ -141,5 +141,4 @@ Once your plugin is ready, you can publish it with the following steps:
 1. Push your code to your Git repository.
 2. Create a Git tag with the version number of your release.
 3. Publish your plugin on [Packagist](https://packagist.org) to enable installation via Composer (only needed once, Packagist will pick up new Git tags automatically after that).
-4. If you want to advertise your plugin in the [plugin directory](https://plugin.getkirby.com), send us an email to <support@getkirby.com> with a link to your Git repository and a cover (cover image in 2:1 format or a short code snippet).
-5. Tell everybody about it on the (link: https://forum.getkirby.com text: forum) in the plugins category.
+4. (link: docs/guide/plugins/best-practices#promote-your-plugin text: Promote your plugin in our plugin directory and the forum)

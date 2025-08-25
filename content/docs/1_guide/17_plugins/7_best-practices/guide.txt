@@ -68,9 +68,9 @@ Always add a composer.json file with basic information about your plugin, includ
 
 ```js "composer.json"
 {
-    "name": "superwoman/superplugin",
+    "name": "superwoman/kirby-superplugin",
     "description": "Superwoman Demo Plugin",
-    "homepage:": "https://github.com/yourname/yourplugin"
+    "homepage:": "https://github.com/yourname/kirby-yourplugin"
     "version": "1.0.0",
     "license": "MIT",
     "authors": [
@@ -80,8 +80,8 @@ Always add a composer.json file with basic information about your plugin, includ
         }
     ],
 	  "support": {
-	    "docs": "https://github.com/yourname/yourplugin/blob/main/README.md",
-	    "source": "https://github.com/yourname/yourplugin"
+	    "docs": "https://github.com/yourname/kirby-yourplugin/blob/main/README.md",
+	    "source": "https://github.com/yourname/kirby-yourplugin"
 	  }
 }
 ```
@@ -93,7 +93,9 @@ Comments help you and your users to understand your code even years later and th
 
 ## Naming
 
-While you are free to name your plugin whatever you like, it makes sense to give your repo a name that immediately makes it clear that your plugin is for the Kirby CMS. Most developers name their repos `kirby3-pluginname` or `kirby-pluginname`.
+While you are free to name your plugin whatever you like, it makes sense to give your repo a name that immediately makes it clear that your plugin is for the Kirby CMS.
+
+Most developers name their repos `kirby-pluginname`. The repo name should *not* include the supported Kirby version number. (link: docs/guide/plugins/custom-plugins#kirby-plugin-one-ring-to-rule-them-all__plugin-name text: Read more on the recommended naming syntax →).
 
 The plugin name itself ideally reveals the purpose of the plugin.
 
@@ -105,9 +107,13 @@ Add a good description to your plugin repo so that people looking for a specific
 
 On GitHub, you can tag your plugins. Don't forget to add the following tags in addition to those that describe the purpose of your plugin:
 
-- kirby3
+- kirby(kirby-version: major)
 - kirby-cms
 - kirby-plugin
+
+<info>
+Tags like `kirby(kirby-version: major offset: -2)`, `kirby(kirby-version: major offset: -1)` and `kirby(kirby-version: major)` are also automatically picked up by our (link: https://plugins.getkirby.com text: plugin directory) as the Kirby versions that your plugin supports.
+</info>
 
 ## Versioning
 
@@ -142,7 +148,7 @@ If it is free but you want people to donate, add a link to the platform where yo
 ## Promote your plugin
 
 - If applicable, publish a site showcasing your plugin with a live demo. On request, we will provide a free Kirby license for this purpose. Please send an email to <support@getkirby.com> with some details on your plugin and the intended contents of the site. If you already have the site ready, feel free to send us the link for a quicker review process.
-- Create an new topic in the (link: https://forum.getkirby.com/c/plugins text: plugins category on the forum), ping @texnixe to make sure she'll mention it in the next Kosmos issue.
-- Submit it to the (link: https://plugins.getkirby.com text: Kirby plugins directory), currently by sending an email to <support@getkirby.com> with a link to your Git repository and a cover (cover image in 2:1 format or a short code snippet). But we will add a submit form in the future.
+- Create a new topic in the (link: https://forum.getkirby.com/c/plugins text: plugins category on the forum), ping @texnixe to make sure she'll mention it in the next Kosmos issue.
+- Submit it to the (link: https://plugins.getkirby.com text: Kirby plugin directory), currently by sending an email to <support@getkirby.com> with a link to your Git repository and a cover (cover image in 2:1 format or a short code snippet). But we will add a submit form in the future.
 - Post about your plugin, mentioning @getkirby where applicable.
 - …
