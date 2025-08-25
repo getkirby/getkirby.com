@@ -26,7 +26,7 @@ $options = [
   'grayscale'  => false,
   'height'     => null,
   'quality'    => 90,
-	'sharpen'    => false,
+  'sharpen'    => false,
   'width'      => null,
 ];
 ```
