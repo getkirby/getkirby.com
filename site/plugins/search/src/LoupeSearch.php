@@ -22,43 +22,43 @@ class LoupeSearch extends Search
 {
 	public Loupe $loupe;
 
-    public function __construct()
-    {
-        parent::__construct();
+	public function __construct()
+	{
+		parent::__construct();
 
-        $this->options = $this->kirby->option('search.providers.loupe', []);
+		$this->options = $this->kirby->option('search.providers.loupe', []);
 
-        if ($this->options === []) {
-            throw new Exception('Please configure the Loupe search plugin in your Kirby configuration.');
-        }
+		if ($this->options === []) {
+			throw new Exception('Please configure the Loupe search plugin in your Kirby configuration.');
+		}
 
 		$config = Configuration::create()
-            ->withPrimaryKey('objectID')
-            ->withSearchableAttributes($this->options['searchable'] ?? ['*'])
-            ->withFilterableAttributes($this->options['filterable'] ?? [])
-            ->withSortableAttributes($this->options['sortable'] ?? []);
+			->withPrimaryKey('objectID')
+			->withSearchableAttributes($this->options['searchable'] ?? ['*'])
+			->withFilterableAttributes($this->options['filterable'] ?? [])
+			->withSortableAttributes($this->options['sortable'] ?? []);
 
-        $this->loupe = (new LoupeFactory())->create(
+		$this->loupe = (new LoupeFactory())->create(
 			$this->kirby->root('logs') . '/loupe',
 			$config
 		);
-    }
+	}
 
-    /**
-     * Get the index instance
-     */
-    public function index(): LoupeIndex
-    {
-        return $this->index ??= new LoupeIndex($this);
-    }
+	/**
+	 * Get the index instance
+	 */
+	public function index(): LoupeIndex
+	{
+		return $this->index ??= new LoupeIndex($this);
+	}
 
-    /**
-     * Perform a search query
-     */
-    public function query(
-        string|null $query = null,
-        array $options = []
-    ): Results {
+	/**
+	 * Perform a search query
+	 */
+	public function query(
+		string|null $query = null,
+		array $options = []
+	): Results {
 		$options = [
 			...$this->options['options'] ?? [],
 			...$options,
@@ -66,33 +66,33 @@ class LoupeSearch extends Search
 			'query' => $query
 		];
 
-        if ($query === null || $query === '') {
-            return Results::from([], $options['page'], $options['limit']);
-        }
+		if ($query === null || $query === '') {
+			return Results::from([], $options['page'], $options['limit']);
+		}
 
-        // Create search parameters
-        $params = SearchParameters::create()
-            ->withQuery($query)
-            ->withHitsPerPage($options['limit'])
-            ->withPage($options['page']);
+		// Create search parameters
+		$params = SearchParameters::create()
+			->withQuery($query)
+			->withHitsPerPage($options['limit'])
+			->withPage($options['page']);
 
-        // Add filters if provided
-        if (empty($options['filter']) === false) {
-            $params = $params->withFilter($options['filter']);
-        }
+		// Add filters if provided
+		if (empty($options['filter']) === false) {
+			$params = $params->withFilter($options['filter']);
+		}
 
-        // Add attributes to retrieve if specified
-        if (empty($options['attributes_to_retrieve']) === false) {
-            $params = $params->withAttributesToRetrieve($options['attributes_to_retrieve']);
-        }
+		// Add attributes to retrieve if specified
+		if (empty($options['attributes_to_retrieve']) === false) {
+			$params = $params->withAttributesToRetrieve($options['attributes_to_retrieve']);
+		}
 
-        $results = $this->loupe->search($params);
+		$results = $this->loupe->search($params);
 
-        return Results::from(
+		return Results::from(
 			hits: $results->getHits(),
 			page: $results->getPage(),
 			total: $results->getTotalHits(),
 			limit: $results->getHitsPerPage()
 		);
-    }
+	}
 }

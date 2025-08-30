@@ -1,7 +1,5 @@
 <?php
 
-use Kirby\Cms\App;
-use Kirby\Search\AlgoliaSearch;
 use Kirby\Search\LoupeSearch;
 use Kirby\Search\Results;
 use Kirby\Search\Search;
@@ -25,7 +23,7 @@ function search(
 		if ($area !== '' && $area !== 'all') {
 			$options['filter'] = "area = '$area'";
 		}
-	} else{
+	} else {
 		$options['hitsPerPage']           = $limit;
 		$options['attributesToHighlight'] = false;
 		$options['attributesToSnippet']   = '*';

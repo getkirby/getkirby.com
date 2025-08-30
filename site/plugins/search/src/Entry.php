@@ -140,7 +140,7 @@ class Entry
 					=> $this->toDataFromFieldMethod($name, $method),
 				// no or invalid operation, convert to string
 				default
-					=> (string)$this->page->$name()
+				=> (string)$this->page->$name()
 			};
 		}
 
@@ -152,7 +152,7 @@ class Entry
 	 * to be included in the index for the field
 	 */
 	protected function toDataFromFieldMethod(
-		string       $name,
+		string $name,
 		string|array $method
 	): string {
 		$field = $this->page->$name();

@@ -11,5 +11,8 @@
 	},
 	"config": {
 		"optimize-autoloader": true
+	},
+	"scripts": {
+		"fix": "php-cs-fixer fix"
 	}
 }
