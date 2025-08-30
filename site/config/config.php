@@ -2,7 +2,6 @@
 
 return [
 	'api'        => false,
-	'archived'   => true,
 	'buy'        => require __DIR__ . '/buy.php',
 	'categories' => require __DIR__ . '/categories.php',
 	'debug'      => false,
