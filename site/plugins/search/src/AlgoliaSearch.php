@@ -46,7 +46,6 @@ class AlgoliaSearch extends Search
 	 * a paginated collection of results
 	 *
 	 * @param string|null $query Search query
-	 * @param int $page Pagination page to return (starts at 1, not 0!)
 	 * @param array $options Search parameters to override the default settings
 	 *                       See https://www.algolia.com/doc/api-client/methods/search/
 	 */

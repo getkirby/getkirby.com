@@ -19,23 +19,23 @@ class LoupeIndex extends Index
 	 */
 	protected Search $search;
 
-    /**
-     * Generate the complete search index
-     * This will create/replace the SQLite database
-     */
-    public function generate(): void
-    {
-        $this->search->loupe->deleteAllDocuments();
+	/**
+	 * Generate the complete search index
+	 * This will create/replace the SQLite database
+	 */
+	public function generate(): void
+	{
+		$this->search->loupe->deleteAllDocuments();
 
-        $documents = [];
+		$documents = [];
 
-        foreach ($this->entries() as $entry) {
-            $documents[] = $entry->toData();
+		foreach ($this->entries() as $entry) {
+			$documents[] = $entry->toData();
 
 			if (count($documents) % 200 === 0) {
 				$this->search->loupe->addDocuments($documents);
 				$documents = [];
 			}
-        }
-    }
+		}
+	}
 }
