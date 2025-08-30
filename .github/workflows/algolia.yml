@@ -14,11 +14,11 @@ on:
       - site/config/search.php
       - site/models/**
       - site/plugins/**
-      - scripts/search-index
+      - scripts/algolia-index
 
 jobs:
-  search:
-    name: Update search index
+  algolia:
+    name: Update Algolia index
     runs-on: ubuntu-latest
 
     steps:
@@ -36,8 +36,8 @@ jobs:
           coverage: none
           ini-values: memory_limit=-1
 
-      - name: Update the search index
-        run: scripts/search-index
+      - name: Update the Algolia index
+        run: scripts/algolia-index
         env:
           ALGOLIA_KEY: ${{ secrets.ALGOLIA_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

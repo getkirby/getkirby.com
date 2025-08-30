@@ -1,0 +1,51 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * CLI script to re-index the Kirby Algolia index
+ *
+ * @author Lukas Bestle <lukas@getkirby.com>
+ * @author Ahmet Bora <ahmet@getkirby.com>
+ */
+
+use Kirby\Cms\App;
+use Kirby\Search\AlgoliaSearch;
+
+// check if we are indeed on the command line
+if (php_sapi_name() !== 'cli') {
+  die();
+}
+
+define('KIRBY_HELPER_VIDEO', false);
+
+// load Kirby
+require __DIR__ . '/../kirby/bootstrap.php';
+
+$props = [
+  'roots' => [
+      'index'   => __DIR__ . '/..',
+      'content' => __DIR__ . '/../content',
+      'site'    => __DIR__ . '/../site',
+  ],
+];
+
+// override the configured read-only API key with a custom
+// key if passed as an environment variable
+if ($algolia = getenv('ALGOLIA_KEY')) {
+  $props['options'] = [
+    'keys' => [
+      'algolia' => $algolia
+    ]
+  ];
+}
+
+// initialize Kirby and site
+echo "\033[1mLoading Kirby...\033[0m\n";
+$kirby = new App($props);
+
+// re-index using the Search plugin
+echo "\033[1mReindexing using the Algolia search plugin...\033[0m\n";
+$search = AlgoliaSearch::instance();
+$search->index()->generate();
+
+echo "\033[32mSuccessfully indexed the Kirby site.\033[0m\n";
