@@ -2,20 +2,20 @@
 <?php
 
 /**
- * CLI script to re-index the Kirby Algolia or Loupe index
+ * CLI script to re-index the Kirby Loupe index
  *
  * @author Lukas Bestle <lukas@getkirby.com>
  * @author Ahmet Bora <ahmet@getkirby.com>
  */
 
 use Kirby\Cms\App;
-use Kirby\Search\Search;
+use Kirby\Search\LoupeSearch;
 
 // check if we are indeed on the command line
 if (php_sapi_name() !== 'cli') {
   die();
 }
-
+ini_set('memory_limit', '2048M');
 define('KIRBY_HELPER_VIDEO', false);
 
 // load Kirby
@@ -29,23 +29,13 @@ $props = [
   ],
 ];
 
-// override the configured read-only API key with a custom
-// key if passed as an environment variable
-if ($algolia = getenv('ALGOLIA_KEY')) {
-  $props['options'] = [
-    'keys' => [
-      'algolia' => $algolia
-    ]
-  ];
-}
-
 // initialize Kirby and site
 echo "\033[1mLoading Kirby...\033[0m\n";
 $kirby = new App($props);
 
 // re-index using the Search plugin
-echo "\033[1mReindexing using the Search plugin...\033[0m\n";
-$search = Search::instance();
+echo "\033[1mReindexing using the Loupe search plugin...\033[0m\n";
+$search = LoupeSearch::instance();
 $search->index()->generate();
 
 echo "\033[32mSuccessfully indexed the Kirby site.\033[0m\n";
