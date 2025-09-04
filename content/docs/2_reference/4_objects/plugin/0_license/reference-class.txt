@@ -26,7 +26,7 @@ class MyCustomLicense extends License
   }
 }
 
-App::plugin(
+Kirby::plugin(
   name: 'my/plugin',
   extends: [...],
   license: fn (Plugin $plugin) => new MyCustomLicense($plugin)

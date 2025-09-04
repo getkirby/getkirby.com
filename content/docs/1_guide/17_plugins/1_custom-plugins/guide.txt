@@ -191,7 +191,7 @@ You can add information about your plugin license which is then shown in the plu
 This is great if you want to point to your own license document.
 
 ```php
-App::plugin(
+Kirby::plugin(
   name: 'my-name/my-plugin',
   extends: [...],
   license: [
@@ -205,7 +205,7 @@ App::plugin(
 #### Setting a custom status
 
 ```php
-App::plugin(
+Kirby::plugin(
   name: 'my-name/my-plugin',
   extends: [...],
   license: [
@@ -223,7 +223,7 @@ App::plugin(
 You can also pass a (class: Kirby\Plugin\License text: license object) to return a custom status:
 
 ```php
-App::plugin(
+Kirby::plugin(
   name: 'my-name/my-plugin',
   extends: [...],
   license: fn (Plugin $plugin) => new MyCustomLicense($plugin)

@@ -14,7 +14,7 @@ Kirby 5 empowers plugin developers to better manage and display their licenses. 
 Plugin:
 
 ```php
-App::plugin(
+Kirby::plugin(
   name: 'plugin-factory/plugin-a',
   extends: [...],
   license: [
@@ -42,7 +42,7 @@ Plugin licenses are now shown in the plugins table with an additional column to 
 This is great if you want to point to your own license document.
 
 ```php
-App::plugin(
+Kirby::plugin(
   name: 'my/plugin',
   extends: [...],
   license: [
@@ -56,7 +56,7 @@ App::plugin(
 ### Setting a custom status
 
 ```php
-App::plugin(
+Kirby::plugin(
   name: 'my/plugin',
   extends: [...],
   license: [
@@ -98,7 +98,7 @@ class MyCustomLicense extends License
   }
 }
 
-App::plugin(
+Kirby::plugin(
   name: 'my/plugin',
   extends: [...],
   license: fn (Plugin $plugin) => new MyCustomLicense($plugin)
