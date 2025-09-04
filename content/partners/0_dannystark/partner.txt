@@ -1,0 +1,76 @@
+Title: Danny Stark
+
+----
+
+Subtitle: Freelancer Designer & Developer
+
+----
+
+Summary:
+
+Web developer from Rostock with 10+ years of experience.
+I create clean, low-maintenance Kirby websites that simply work.
+Focused on SMEs, IT partners, and real estate projects.
+
+----
+
+Description:
+
+I’m Danny Stark, a web developer from Rostock who believes websites should work for people, not the other way around. With more than 10 years of experience, I create clean, low-maintenance websites that simply do their job.
+
+I’m not just a developer – I’m a partner who listens, understands your needs, and delivers solutions that make sense. No jargon, no unnecessary complexity, just straightforward collaboration.
+
+### Services & Solutions
+**Custom Development:** Tailored Kirby websites with clean, maintainable code and long-term stability. Perfect for businesses with specific requirements and a clear vision.
+**Standardized Packages:** Ready-to-use website structures for SMEs – fast, solid, and budget-friendly. Ideal when you need to be online quickly without compromising quality.
+
+### Agency Partner
+I work with agencies and IT service providers as a reliable development partner – expanding their portfolio without the need for in-house developer resources.
+- Direct communication and transparent agreements
+- Specialized in real estate and tech projects
+
+Looking for a reliable partner for your next Kirby project? Let’s talk.
+
+----
+
+Plan: regular
+
+----
+
+People: 1
+
+----
+
+Website: https://dannystark.de
+
+----
+
+Location: Rostock, Germany
+
+----
+
+Region: Europe
+
+----
+
+Contactlink: mailto:hello@dannystark.de
+
+----
+
+Languages: German, English
+
+----
+
+Expertise:
+
+- Kirby CMS development
+- Website maintenance & support packages
+- Performance optimization & monitoring
+- GDPR-compliant solutions
+- Hosting setup & management
+- Migration from other systems to Kirby
+- White-label development for agencies
+
+----
+
+Uuid: xqivrbilfhuv6dv8
