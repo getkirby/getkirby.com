@@ -138,6 +138,17 @@ fields:
     default: now
 ```
 
+Or using a combination of the current date but a specific time:
+
+```yaml
+fields:
+  published:
+    label: Published on
+    type: date
+    time: true
+    default: today 20:15
+```
+
 You can even do date/or date-time calculations:
 
 ```yaml
