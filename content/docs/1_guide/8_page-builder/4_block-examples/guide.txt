@@ -165,7 +165,7 @@ panel.plugin("cookbook/block-factory", {
 
 ### Editable preview
 
-For the editable plugin, we replace `<div v-html="content.text"></div>`, with a `k-writer` component:
+For the editable plugin, we replace `<div v-html="content.text"></div>`, with a `k-writer-input` component:
 
 ```js
 panel.plugin("cookbook/block-factory", {
@@ -178,7 +178,7 @@ panel.plugin("cookbook/block-factory", {
       },
       template: `
         <div :class="'k-block-type-box box-' + content.boxtype">
-          <k-writer
+          <k-writer-input
             class="label"
             ref="textbox"
             :marks="textField.marks"
@@ -252,7 +252,7 @@ panel.plugin("cookbook/block-factory", {
 
 ### Editable preview
 
-The editable version of the accordion preview is similar to the box block preview, with the difference that we now use to `k-writer` components for the `summary` and `details` fields.
+The editable version of the accordion preview is similar to the box block preview, with the difference that we now use to `k-writer-input` components for the `summary` and `details` fields.
 
 ```js "/site/plugins/block-factory/index.js"
 panel.plugin("cookbook/block-factory", {
@@ -270,7 +270,7 @@ panel.plugin("cookbook/block-factory", {
         <div @dblclick="open">
           <details>
             <summary>
-              <k-writer
+              <k-writer-input
                 ref="summary"
                 :inline="true"
                 marks="false"
@@ -279,7 +279,7 @@ panel.plugin("cookbook/block-factory", {
                 @input="update({ summary: $event })"
               />
             </summary>
-            <k-writer
+            <k-writer-input
                 ref="details"
                 :inline="detailsField.inline || false"
                 :marks="detailsField.marks"
@@ -398,7 +398,7 @@ panel.plugin("cookbook/block-factory", {
       template: `
         <div>
           <h2 class="k-block-type-faq-heading">
-            <k-writer
+            <k-writer-input
               ref="heading"
               :inline="headingField.inline"
               :marks="headingField.marks"
@@ -410,7 +410,7 @@ panel.plugin("cookbook/block-factory", {
           <div v-if="items.length">
             <details v-for="(item, index) in items" :key="index">
               <summary>
-                <k-writer
+                <k-writer-input
                   ref="question"
                   :inline="true"
                   :marks="faqQuestionField.marks"
@@ -418,7 +418,7 @@ panel.plugin("cookbook/block-factory", {
                   @input="updateItem(content, index, 'question', $event)"
                 />
               </summary>
-              <k-writer
+              <k-writer-input
                 class="label"
                 ref="answer"
                 :marks="faqAnswerField.marks"
@@ -531,7 +531,7 @@ panel.plugin("cookbook/block-factory", {
       template: `
         <div @dblclick="open">
           <h2 class="k-block-type-faq-heading">
-            <k-writer
+            <k-writer-input
               ref="heading"
               :inline="headingField.inline"
               :marks="headingField.marks"
@@ -547,7 +547,7 @@ panel.plugin("cookbook/block-factory", {
               :key="index"
             >
             <summary>
-              <k-writer
+              <k-writer-input
                 ref="summary"
                 :inline="true"
                 :marks="false"
@@ -556,7 +556,7 @@ panel.plugin("cookbook/block-factory", {
               />
             </summary>
             <div>
-              <k-writer
+              <k-writer-input
                 ref="details"
                 :marks="true"
                 :value="item.content.details"
@@ -823,7 +823,7 @@ panel.plugin("cookbook/block-factory", {
       },
       template: `
         <blockquote class="k-block-type-testimonial-quote" @dblclick="open">
-          <k-writer
+          <k-writer-input
             ref="quote"
             :inline="true"
             :marks="false"
@@ -933,7 +933,7 @@ details summary {
   font-weight: 600;
 }
 
-details summary .k-writer {
+details summary .k-writer-input {
   display: inline-block;
   width: calc(100% - 2rem);
 }
