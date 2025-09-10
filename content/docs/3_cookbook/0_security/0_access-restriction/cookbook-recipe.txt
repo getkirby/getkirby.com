@@ -208,14 +208,16 @@ As soon as the user logged in, we display a logout link in the menu or somewhere
 
 ```php "/site/snippets/header.php"
 <nav id="menu" class="menu">
+	<ul>
   <?php foreach ($site->children()->listed() as $item): ?>
-    <?= $item->title()->link() ?>
+    <li><?= $item->title()->link() ?></li>
   <?php endforeach ?>
   <?php if ($user = $kirby->user()): ?>
     <li>
       <a href="<?= url('logout') ?>">Logout</a>
     </li>
   <?php endif ?>
+  </ul>
 </nav>
 ```
 
