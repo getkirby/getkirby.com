@@ -203,7 +203,7 @@ class GetNoResultsRateResponse extends AbstractModel implements ModelInterface, 
     /**
      * Sets rate.
      *
-     * @param float $rate no results rate, calculated as number of searches with zero results divided by the total number of searches
+     * @param float $rate no results rate: calculated as the number of searches with zero results divided by the total number of searches
      *
      * @return self
      */
@@ -265,7 +265,7 @@ class GetNoResultsRateResponse extends AbstractModel implements ModelInterface, 
     /**
      * Gets dates.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\DailyNoResultsRates[]
+     * @return DailyNoResultsRates[]
      */
     public function getDates()
     {
@@ -275,7 +275,7 @@ class GetNoResultsRateResponse extends AbstractModel implements ModelInterface, 
     /**
      * Sets dates.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\DailyNoResultsRates[] $dates daily no results rates
+     * @param DailyNoResultsRates[] $dates daily no results rates
      *
      * @return self
      */
