@@ -22,8 +22,8 @@ return [
 	'pppFactors' => (@include __DIR__ . '/buy.ppp.php') ?: [],
 	'revenueLimit' => 1000000,
 	'sale' => [
-		'start'    => '2025-06-23',
-		'end'      => '2025-07-07',
+		'start'    => '2025-09-15',
+		'end'      => '2025-09-29',
 		'discount' => 20
 	],
 	'quantities' => [
