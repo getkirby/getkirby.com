@@ -54,10 +54,17 @@ if (empty($argv[1]) === false) {
  */
 function worldBankRequest(string $country, int $count): array
 {
-	[$meta, $data] = Remote::get(
+	$response = Remote::get(
 		"https://api.worldbank.org/v2/country/$country/indicator/PA.NUS.PPPC.RF?format=json&mrnev=$count&per_page=500",
 		['timeout' => 20]
 	)->json();
+
+	// errors are returned as a HTTP 200 response with a message key in the first object
+	if (count($response) === 1 && isset($response[0]['message']) === true) {
+		throw new Exception('Response error ' . $response[0]['message'][0]['id'] . ': ' . $response[0]['message'][0]['value']);
+	}
+
+	[$meta, $data] = $response;
 
 	// a page size of 500 should be enough; if it isn't, something is going wrong
 	if ($meta['pages'] > 1) {
