@@ -13,38 +13,47 @@ use Kirby\Http\Remote;
 
 require_once dirname(__DIR__, 4) . '/kirby/bootstrap.php';
 
-$data = worldBankRequest('all', 1);
+$baselineRaw     = worldBankRequest('DE', 3);
+$allCountriesRaw = worldBankRequest('all', 1);
 
-// convert the API response to a simple associative array (country -> value)
-$rawFactors = [];
-foreach ($data as $entry) {
+// determine the German PPP factors for comparative lookup of the last years
+$baselineFactors = [];
+foreach ($baselineRaw as $entry) {
+	$baselineFactors[(int)$entry['date']] = $entry['value'];
+}
+
+// collect country factors relative to baseline prices
+// into an associative array (country -> value)
+$factors = [];
+foreach ($allCountriesRaw as $entry) {
+	$year = (int)$entry['date'];
+
 	// filter out data points older than 3 years
-	if ((int)$entry['date'] < (int)date('Y') - 3) {
+	if ($year < (int)date('Y') - 3) {
 		continue;
 	}
 
-	$rawFactors[$entry['country']['id']] = $entry['value'];
+	// values in the dataset are relative to US prices,
+	// we need to adjust them to German prices by comparing
+	// to the German PPP factor of the same statistical year
+	$factor = $entry['value'] / $baselineFactors[$year];
+
+	// only keep the lowest-PPP countries
+	if ($factor > 0.4) {
+		continue;
+	}
+
+	$factors[$entry['country']['id']] = $factor;
 }
 
 // sort by country code
-ksort($rawFactors);
-
-// convert raw values to factors relative to German prices
-// and only keep the lowest-PPP countries
-$filteredFactors = [];
-foreach ($rawFactors as $country => $rawValue) {
-	$factor = $rawValue / $rawFactors['DE'];
-
-	if ($factor < 0.4) {
-		$filteredFactors[$country] = $factor;
-	}
-}
+ksort($factors);
 
 // export to a PHP array
 if (empty($argv[1]) === false) {
-	PHP::write($argv[1], $filteredFactors);
+	PHP::write($argv[1], $factors);
 } else {
-	echo PHP::encode($filteredFactors);
+	echo PHP::encode($factors);
 }
 
 /**
