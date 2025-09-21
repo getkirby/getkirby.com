@@ -13,15 +13,7 @@ use Kirby\Http\Remote;
 
 require_once dirname(__DIR__, 4) . '/kirby/bootstrap.php';
 
-[$meta, $data] = Remote::get(
-	'https://api.worldbank.org/v2/country/all/indicator/PA.NUS.PPPC.RF?format=json&mrnev=1&per_page=500',
-	['timeout' => 20]
-)->json();
-
-// a page size of 500 should be enough; if it isn't, something is going wrong
-if ($meta['pages'] > 1) {
-	throw new Exception('Too many results: ' . $meta['total']);
-}
+$data = worldBankRequest('all', 1);
 
 // convert the API response to a simple associative array (country -> value)
 $rawFactors = [];
@@ -53,4 +45,24 @@ if (empty($argv[1]) === false) {
 	PHP::write($argv[1], $filteredFactors);
 } else {
 	echo PHP::encode($filteredFactors);
+}
+
+/**
+ * Requests the PPP factors from the World Bank API
+ * Docs see https://datahelpdesk.worldbank.org/knowledgebase/articles/898581-api-basic-call-structures
+ * and https://datahelpdesk.worldbank.org/knowledgebase/articles/898599-indicator-api-queries
+ */
+function worldBankRequest(string $country, int $count): array
+{
+	[$meta, $data] = Remote::get(
+		"https://api.worldbank.org/v2/country/$country/indicator/PA.NUS.PPPC.RF?format=json&mrnev=$count&per_page=500",
+		['timeout' => 20]
+	)->json();
+
+	// a page size of 500 should be enough; if it isn't, something is going wrong
+	if ($meta['pages'] > 1) {
+		throw new Exception("Too many results for request $country/$count: " . $meta['total']);
+	}
+
+	return $data;
 }
