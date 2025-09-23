@@ -39,7 +39,7 @@ foreach ($allCountriesRaw as $entry) {
 	$factor = $entry['value'] / $baselineFactors[$year];
 
 	// only keep the lowest-PPP countries
-	if ($factor > 0.4) {
+	if ($factor > 0.6) {
 		continue;
 	}
 
