@@ -14,6 +14,7 @@ return [
         'durationNormal' => 7200,            // default: 2 hours
         'durationLong'   => 1209600,         // default: 2 weeks
         'timeout'        => 1800,            // default: half an hour
+        'cookieDomain'   => 'getkirby.com',  // default: automatic browser behavior
         'cookieName'     => 'kirby_session',
         'gcInterval'     => 100              // default: cleanup every ~100 requests
     ]
@@ -43,6 +44,18 @@ If you leave a Panel window open, the session never expires, even without clicki
 ## `cookieName`
 
 The name of the session cookie
+
+<since v="5.1.0">
+## `cookieDomain`
+
+The topmost-level domain on which the session cookie should be sent.
+
+<info>
+You can read more about the behavior of the `domain` attribute for cookies in the [MDN docs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Cookies#define_where_cookies_are_sent).
+
+Note that setting the `cookieDomain` option disables Kirby setting the `path` attribute to the cookie (relevant in subfolder setups).
+</info>
+</since>
 
 ## `gcInterval`
 
