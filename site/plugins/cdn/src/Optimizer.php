@@ -15,8 +15,9 @@ use Kirby\Cms\App;
  */
 class Optimizer
 {
-	public function __construct(public readonly bool $cdn)
-	{
+	public function __construct(
+		public readonly bool $cdn
+	) {
 	}
 
 	/**
@@ -51,8 +52,7 @@ class Optimizer
 			$path = ltrim(substr($path, strlen(url())), '/');
 		}
 
-		$root = static::root($path);
-		if (file_exists($root ?? '') === true) {
+		if ($root = static::root($path)) {
 			$version = filemtime($root);
 
 			if ($this->cdn === false) {
@@ -77,7 +77,7 @@ class Optimizer
 		$kirby = App::instance();
 		$root  = $kirby->root('index') . '/' . $path;
 
-		if (is_file($root)) {
+		if (is_file($root) === true) {
 			return $root;
 		}
 
