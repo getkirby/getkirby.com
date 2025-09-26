@@ -88,6 +88,23 @@ return [
 ```
 </since>
 
+<since v="5.1.0">
+## Panel theme
+
+Set the default Panel theme that is used when the user has not set any custom setting in their account view via the `panel.theme` config option.
+
+Supported values: `light`, `dark` or `system` (default, matches the user's operating system)
+
+```php "/site/config/config.php"
+return [
+  'panel' => [
+    'theme' => 'light'
+  ]
+];
+```
+
+</since>
+
 ## Panel search
 
 You can customise both the default search type selected when opening the Panel search dialog as well as how many result items should be shown at once:
@@ -259,14 +276,13 @@ return [
 Only allow embedding if you fully control the domains you allowlisted. Otherwise your site may be vulnerable against clickjacking attacks. Read more at [OWASP](https://owasp.org/www-community/attacks/Clickjacking).
 </warning>
 
-<since v="4.7">
 ## Disable the Vue template compiler
 
 We are in the active process of migrating the Kirby Panel to Vue 3 (with the plan to ship Vue 3 in Kirby 6.0). Until this process is complete, sites with increased security requirements should use the Vue 2 runtime version, which omits the vulnerable Vue template compiler.
 
 In its default configuration, Kirby enables the template compiler, as it is needed for all Panel plugins that have not been precompiled. It is also used for the examples in the Panel lab environment.
 
-Kirby 4.7 introduces a new `panel.vue.compiler` option that can be set to `false` to disable the template compiler and switch to the Vue 2 runtime version. We recommend to set this option to `false` if your site and the installed plugins do not rely on the Vue template compiler. Should you require the template compiler and are not affected by its [known vulnerabilities](https://www.herodevs.com/vulnerability-directory?framework=Vue+2), you can set the option to `true` to make the warning in the Panel go away. Do this at your own risk!
+The `panel.vue.compiler` option can be set to `false` to disable the template compiler and switch to the Vue 2 runtime version. We recommend to set this option to `false` if your site and the installed plugins do not rely on the Vue template compiler. Should you require the template compiler and are not affected by its [known vulnerabilities](https://www.herodevs.com/vulnerability-directory?framework=Vue+2), you can set the option to `true` to make the warning in the Panel go away. Do this at your own risk!
 
 ```php
 return [
@@ -277,4 +293,3 @@ return [
   ]
 ];
 ```
-</since>
