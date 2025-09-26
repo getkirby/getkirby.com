@@ -6,8 +6,12 @@ namespace Algolia\AlgoliaSearch\Api;
 
 use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Configuration\QuerySuggestionsConfig;
+use Algolia\AlgoliaSearch\Model\QuerySuggestions\BaseResponse;
+use Algolia\AlgoliaSearch\Model\QuerySuggestions\ConfigStatus;
 use Algolia\AlgoliaSearch\Model\QuerySuggestions\Configuration;
+use Algolia\AlgoliaSearch\Model\QuerySuggestions\ConfigurationResponse;
 use Algolia\AlgoliaSearch\Model\QuerySuggestions\ConfigurationWithIndex;
+use Algolia\AlgoliaSearch\Model\QuerySuggestions\LogFile;
 use Algolia\AlgoliaSearch\ObjectSerializer;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
@@ -21,12 +25,17 @@ use GuzzleHttp\Psr7\Query;
  */
 class QuerySuggestionsClient
 {
-    public const VERSION = '4.12.0';
+    public const VERSION = '4.30.0';
 
     /**
      * @var ApiWrapperInterface
      */
     protected $api;
+
+    /**
+     * @var IngestionClient
+     */
+    protected $ingestionTransporter;
 
     /**
      * @var QuerySuggestionsConfig
@@ -68,7 +77,9 @@ class QuerySuggestionsClient
             self::getClusterHosts($config)
         );
 
-        return new static($apiWrapper, $config);
+        $client = new static($apiWrapper, $config);
+
+        return $client;
     }
 
     /**
@@ -82,9 +93,9 @@ class QuerySuggestionsClient
             // If a list of hosts was passed, we ignore the cache
             $clusterHosts = ClusterHosts::create($hosts);
         } else {
-            $url = null !== $config->getRegion() && '' !== $config->getRegion() ?
-                str_replace('{region}', $config->getRegion(), 'query-suggestions.{region}.algolia.com') :
-                '';
+            $url = null !== $config->getRegion() && '' !== $config->getRegion()
+                ? str_replace('{region}', $config->getRegion(), 'query-suggestions.{region}.algolia.com')
+                : '';
             $clusterHosts = ClusterHosts::create($url);
         }
 
@@ -115,13 +126,13 @@ class QuerySuggestionsClient
      * Required API Key ACLs:
      *  - editSettings
      *
-     * @param array $configurationWithIndex configurationWithIndex (required)
+     * @param array|ConfigurationWithIndex $configurationWithIndex configurationWithIndex (required)
      *
      * @see ConfigurationWithIndex
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\BaseResponse|array<string, mixed>
+     * @return array<string, mixed>|BaseResponse
      */
     public function createConfig($configurationWithIndex, $requestOptions = [])
     {
@@ -141,9 +152,9 @@ class QuerySuggestionsClient
     }
 
     /**
-     * This method allow you to send requests to the Algolia REST API.
+     * This method lets you send requests to the Algolia REST API.
      *
-     * @param string $path           Path of the endpoint, anything after \"/1\" must be specified. (required)
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -180,9 +191,9 @@ class QuerySuggestionsClient
     }
 
     /**
-     * This method allow you to send requests to the Algolia REST API.
+     * This method lets you send requests to the Algolia REST API.
      *
-     * @param string $path           Path of the endpoint, anything after \"/1\" must be specified. (required)
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -219,9 +230,9 @@ class QuerySuggestionsClient
     }
 
     /**
-     * This method allow you to send requests to the Algolia REST API.
+     * This method lets you send requests to the Algolia REST API.
      *
-     * @param string $path           Path of the endpoint, anything after \"/1\" must be specified. (required)
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $body           Parameters to send with the custom request. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -259,9 +270,9 @@ class QuerySuggestionsClient
     }
 
     /**
-     * This method allow you to send requests to the Algolia REST API.
+     * This method lets you send requests to the Algolia REST API.
      *
-     * @param string $path           Path of the endpoint, anything after \"/1\" must be specified. (required)
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $body           Parameters to send with the custom request. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -307,7 +318,7 @@ class QuerySuggestionsClient
      * @param string $indexName      Query Suggestions index name. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\BaseResponse|array<string, mixed>
+     * @return array<string, mixed>|BaseResponse
      */
     public function deleteConfig($indexName, $requestOptions = [])
     {
@@ -343,7 +354,7 @@ class QuerySuggestionsClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\ConfigurationResponse[]|array<string, mixed>
+     * @return array<string, mixed>|ConfigurationResponse[]
      */
     public function getAllConfigs($requestOptions = [])
     {
@@ -364,7 +375,7 @@ class QuerySuggestionsClient
      * @param string $indexName      Query Suggestions index name. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\ConfigurationResponse|array<string, mixed>
+     * @return array<string, mixed>|ConfigurationResponse
      */
     public function getConfig($indexName, $requestOptions = [])
     {
@@ -401,7 +412,7 @@ class QuerySuggestionsClient
      * @param string $indexName      Query Suggestions index name. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\ConfigStatus|array<string, mixed>
+     * @return array<string, mixed>|ConfigStatus
      */
     public function getConfigStatus($indexName, $requestOptions = [])
     {
@@ -438,7 +449,7 @@ class QuerySuggestionsClient
      * @param string $indexName      Query Suggestions index name. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\LogFile|array<string, mixed>
+     * @return array<string, mixed>|LogFile
      */
     public function getLogFile($indexName, $requestOptions = [])
     {
@@ -472,19 +483,19 @@ class QuerySuggestionsClient
      * Required API Key ACLs:
      *  - editSettings
      *
-     * @param string $indexName     Query Suggestions index name. (required)
-     * @param array  $configuration configuration (required)
-     *                              - $configuration['sourceIndices'] => (array) Algolia indices from which to get the popular searches for query suggestions. (required)
-     *                              - $configuration['languages'] => (array)
-     *                              - $configuration['exclude'] => (array)
-     *                              - $configuration['enablePersonalization'] => (bool) Whether to turn on personalized query suggestions.
-     *                              - $configuration['allowSpecialCharacters'] => (bool) Whether to include suggestions with special characters.
+     * @param string              $indexName     Query Suggestions index name. (required)
+     * @param array|Configuration $configuration configuration (required)
+     *                                           - $configuration['sourceIndices'] => (array) Algolia indices from which to get the popular searches for query suggestions. (required)
+     *                                           - $configuration['languages'] => (array)
+     *                                           - $configuration['exclude'] => (array)
+     *                                           - $configuration['enablePersonalization'] => (bool) Whether to turn on personalized query suggestions.
+     *                                           - $configuration['allowSpecialCharacters'] => (bool) Whether to include suggestions with special characters.
      *
      * @see Configuration
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\BaseResponse|array<string, mixed>
+     * @return array<string, mixed>|BaseResponse
      */
     public function updateConfig($indexName, $configuration, $requestOptions = [])
     {

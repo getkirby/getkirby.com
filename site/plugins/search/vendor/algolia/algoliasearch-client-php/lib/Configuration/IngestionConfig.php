@@ -10,6 +10,8 @@ class IngestionConfig extends ConfigWithRegion
 {
     protected $clientName = 'Ingestion';
 
+    private $defaultWaitTaskTimeBeforeRetry = 5000; // 5 sec in milliseconds
+
     public static function create($appId, $apiKey, $region = null)
     {
         $allowedRegions = ['eu', 'us'];
@@ -19,12 +21,17 @@ class IngestionConfig extends ConfigWithRegion
             || (null !== $region && !in_array($region, $allowedRegions, true))
         ) {
             throw new AlgoliaException(
-                '`region` is required and must be one of the following: '.
-                    implode(', ', $allowedRegions)
+                '`region` is required and must be one of the following: '
+                    .implode(', ', $allowedRegions)
             );
         }
 
         return parent::create($appId, $apiKey, $region);
+    }
+
+    public function getWaitTaskTimeBeforeRetry()
+    {
+        return $this->config['waitTaskTimeBeforeRetry'];
     }
 
     public function getDefaultConfiguration()
@@ -38,6 +45,7 @@ class IngestionConfig extends ConfigWithRegion
             'writeTimeout' => 25,
             'connectTimeout' => 25,
             'defaultHeaders' => [],
+            'waitTaskTimeBeforeRetry' => $this->defaultWaitTaskTimeBeforeRetry,
         ];
     }
 }

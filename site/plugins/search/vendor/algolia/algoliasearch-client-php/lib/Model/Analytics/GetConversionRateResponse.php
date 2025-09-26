@@ -203,7 +203,7 @@ class GetConversionRateResponse extends AbstractModel implements ModelInterface,
     /**
      * Sets rate.
      *
-     * @param float $rate Conversion rate, calculated as number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
+     * @param float $rate Conversion rate: calculated as the number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
      *
      * @return self
      */
@@ -265,7 +265,7 @@ class GetConversionRateResponse extends AbstractModel implements ModelInterface,
     /**
      * Gets dates.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\DailyConversionRates[]
+     * @return DailyConversionRates[]
      */
     public function getDates()
     {
@@ -275,7 +275,7 @@ class GetConversionRateResponse extends AbstractModel implements ModelInterface,
     /**
      * Sets dates.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\DailyConversionRates[] $dates daily conversion rates
+     * @param DailyConversionRates[] $dates daily conversion rates
      *
      * @return self
      */

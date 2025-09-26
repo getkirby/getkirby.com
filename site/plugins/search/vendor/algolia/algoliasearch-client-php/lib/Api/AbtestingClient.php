@@ -6,8 +6,13 @@ namespace Algolia\AlgoliaSearch\Api;
 
 use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Configuration\AbtestingConfig;
+use Algolia\AlgoliaSearch\Model\Abtesting\ABTest;
+use Algolia\AlgoliaSearch\Model\Abtesting\ABTestResponse;
 use Algolia\AlgoliaSearch\Model\Abtesting\AddABTestsRequest;
 use Algolia\AlgoliaSearch\Model\Abtesting\EstimateABTestRequest;
+use Algolia\AlgoliaSearch\Model\Abtesting\EstimateABTestResponse;
+use Algolia\AlgoliaSearch\Model\Abtesting\ListABTestsResponse;
+use Algolia\AlgoliaSearch\Model\Abtesting\ScheduleABTestResponse;
 use Algolia\AlgoliaSearch\Model\Abtesting\ScheduleABTestsRequest;
 use Algolia\AlgoliaSearch\ObjectSerializer;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
@@ -22,12 +27,17 @@ use GuzzleHttp\Psr7\Query;
  */
 class AbtestingClient
 {
-    public const VERSION = '4.12.0';
+    public const VERSION = '4.30.0';
 
     /**
      * @var ApiWrapperInterface
      */
     protected $api;
+
+    /**
+     * @var IngestionClient
+     */
+    protected $ingestionTransporter;
 
     /**
      * @var AbtestingConfig
@@ -69,7 +79,9 @@ class AbtestingClient
             self::getClusterHosts($config)
         );
 
-        return new static($apiWrapper, $config);
+        $client = new static($apiWrapper, $config);
+
+        return $client;
     }
 
     /**
@@ -83,9 +95,9 @@ class AbtestingClient
             // If a list of hosts was passed, we ignore the cache
             $clusterHosts = ClusterHosts::create($hosts);
         } else {
-            $url = null !== $config->getRegion() && '' !== $config->getRegion() ?
-                str_replace('{region}', $config->getRegion(), 'analytics.{region}.algolia.com') :
-                'analytics.algolia.com';
+            $url = null !== $config->getRegion() && '' !== $config->getRegion()
+                ? str_replace('{region}', $config->getRegion(), 'analytics.{region}.algolia.com')
+                : 'analytics.algolia.com';
             $clusterHosts = ClusterHosts::create($url);
         }
 
@@ -116,16 +128,16 @@ class AbtestingClient
      * Required API Key ACLs:
      *  - editSettings
      *
-     * @param array $addABTestsRequest addABTestsRequest (required)
-     *                                 - $addABTestsRequest['name'] => (string) A/B test name. (required)
-     *                                 - $addABTestsRequest['variants'] => (array) A/B test variants. (required)
-     *                                 - $addABTestsRequest['endAt'] => (string) End date and time of the A/B test, in RFC 3339 format. (required)
+     * @param AddABTestsRequest|array $addABTestsRequest addABTestsRequest (required)
+     *                                                   - $addABTestsRequest['name'] => (string) A/B test name. (required)
+     *                                                   - $addABTestsRequest['variants'] => (array) A/B test variants. (required)
+     *                                                   - $addABTestsRequest['endAt'] => (string) End date and time of the A/B test, in RFC 3339 format. (required)
      *
      * @see AddABTestsRequest
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Abtesting\ABTestResponse|array<string, mixed>
+     * @return ABTestResponse|array<string, mixed>
      */
     public function addABTests($addABTestsRequest, $requestOptions = [])
     {
@@ -145,9 +157,9 @@ class AbtestingClient
     }
 
     /**
-     * This method allow you to send requests to the Algolia REST API.
+     * This method lets you send requests to the Algolia REST API.
      *
-     * @param string $path           Path of the endpoint, anything after \"/1\" must be specified. (required)
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -184,9 +196,9 @@ class AbtestingClient
     }
 
     /**
-     * This method allow you to send requests to the Algolia REST API.
+     * This method lets you send requests to the Algolia REST API.
      *
-     * @param string $path           Path of the endpoint, anything after \"/1\" must be specified. (required)
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -223,9 +235,9 @@ class AbtestingClient
     }
 
     /**
-     * This method allow you to send requests to the Algolia REST API.
+     * This method lets you send requests to the Algolia REST API.
      *
-     * @param string $path           Path of the endpoint, anything after \"/1\" must be specified. (required)
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $body           Parameters to send with the custom request. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -263,9 +275,9 @@ class AbtestingClient
     }
 
     /**
-     * This method allow you to send requests to the Algolia REST API.
+     * This method lets you send requests to the Algolia REST API.
      *
-     * @param string $path           Path of the endpoint, anything after \"/1\" must be specified. (required)
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $body           Parameters to send with the custom request. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -311,7 +323,7 @@ class AbtestingClient
      * @param int   $id             Unique A/B test identifier. (required)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Abtesting\ABTestResponse|array<string, mixed>
+     * @return ABTestResponse|array<string, mixed>
      */
     public function deleteABTest($id, $requestOptions = [])
     {
@@ -345,15 +357,15 @@ class AbtestingClient
      * Required API Key ACLs:
      *  - analytics
      *
-     * @param array $estimateABTestRequest estimateABTestRequest (required)
-     *                                     - $estimateABTestRequest['configuration'] => (array)  (required)
-     *                                     - $estimateABTestRequest['variants'] => (array) A/B test variants. (required)
+     * @param array|EstimateABTestRequest $estimateABTestRequest estimateABTestRequest (required)
+     *                                                           - $estimateABTestRequest['configuration'] => (array)  (required)
+     *                                                           - $estimateABTestRequest['variants'] => (array) A/B test variants. (required)
      *
      * @see EstimateABTestRequest
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Abtesting\EstimateABTestResponse|array<string, mixed>
+     * @return array<string, mixed>|EstimateABTestResponse
      */
     public function estimateABTest($estimateABTestRequest, $requestOptions = [])
     {
@@ -381,7 +393,7 @@ class AbtestingClient
      * @param int   $id             Unique A/B test identifier. (required)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Abtesting\ABTest|array<string, mixed>
+     * @return ABTest|array<string, mixed>
      */
     public function getABTest($id, $requestOptions = [])
     {
@@ -421,7 +433,7 @@ class AbtestingClient
      * @param string $indexSuffix    Index name suffix. Only A/B tests for indices ending with this string are included in the response. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Abtesting\ListABTestsResponse|array<string, mixed>
+     * @return array<string, mixed>|ListABTestsResponse
      */
     public function listABTests($offset = null, $limit = null, $indexPrefix = null, $indexSuffix = null, $requestOptions = [])
     {
@@ -455,17 +467,17 @@ class AbtestingClient
      * Required API Key ACLs:
      *  - editSettings
      *
-     * @param array $scheduleABTestsRequest scheduleABTestsRequest (required)
-     *                                      - $scheduleABTestsRequest['name'] => (string) A/B test name. (required)
-     *                                      - $scheduleABTestsRequest['variants'] => (array) A/B test variants. (required)
-     *                                      - $scheduleABTestsRequest['scheduledAt'] => (string) Date and time when the A/B test is scheduled to start, in RFC 3339 format. (required)
-     *                                      - $scheduleABTestsRequest['endAt'] => (string) End date and time of the A/B test, in RFC 3339 format. (required)
+     * @param array|ScheduleABTestsRequest $scheduleABTestsRequest scheduleABTestsRequest (required)
+     *                                                             - $scheduleABTestsRequest['name'] => (string) A/B test name. (required)
+     *                                                             - $scheduleABTestsRequest['variants'] => (array) A/B test variants. (required)
+     *                                                             - $scheduleABTestsRequest['scheduledAt'] => (string) Date and time when the A/B test is scheduled to start, in RFC 3339 format. (required)
+     *                                                             - $scheduleABTestsRequest['endAt'] => (string) End date and time of the A/B test, in RFC 3339 format. (required)
      *
      * @see ScheduleABTestsRequest
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Abtesting\ScheduleABTestResponse|array<string, mixed>
+     * @return array<string, mixed>|ScheduleABTestResponse
      */
     public function scheduleABTest($scheduleABTestsRequest, $requestOptions = [])
     {
@@ -493,7 +505,7 @@ class AbtestingClient
      * @param int   $id             Unique A/B test identifier. (required)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Abtesting\ABTestResponse|array<string, mixed>
+     * @return ABTestResponse|array<string, mixed>
      */
     public function stopABTest($id, $requestOptions = [])
     {

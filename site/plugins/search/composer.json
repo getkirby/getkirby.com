@@ -6,9 +6,13 @@
 		}
 	},
 	"require": {
-		"algolia/algoliasearch-client-php": "^4.0"
+		"algolia/algoliasearch-client-php": "^4.30",
+		"loupe/loupe": "^0.12.13"
 	},
 	"config": {
 		"optimize-autoloader": true
+	},
+	"scripts": {
+		"fix": "php-cs-fixer fix"
 	}
 }

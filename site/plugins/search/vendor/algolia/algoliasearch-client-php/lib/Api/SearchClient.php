@@ -5,6 +5,7 @@
 namespace Algolia\AlgoliaSearch\Api;
 
 use Algolia\AlgoliaSearch\Algolia;
+use Algolia\AlgoliaSearch\Configuration\IngestionConfig;
 use Algolia\AlgoliaSearch\Configuration\SearchConfig;
 use Algolia\AlgoliaSearch\Exceptions\ExceededRetriesException;
 use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
@@ -12,29 +13,64 @@ use Algolia\AlgoliaSearch\Exceptions\ValidUntilNotFoundException;
 use Algolia\AlgoliaSearch\Iterators\ObjectIterator;
 use Algolia\AlgoliaSearch\Iterators\RuleIterator;
 use Algolia\AlgoliaSearch\Iterators\SynonymIterator;
+use Algolia\AlgoliaSearch\Model\Search\AddApiKeyResponse;
 use Algolia\AlgoliaSearch\Model\Search\ApiKey;
 use Algolia\AlgoliaSearch\Model\Search\AssignUserIdParams;
 use Algolia\AlgoliaSearch\Model\Search\BatchAssignUserIdsParams;
 use Algolia\AlgoliaSearch\Model\Search\BatchDictionaryEntriesParams;
 use Algolia\AlgoliaSearch\Model\Search\BatchParams;
+use Algolia\AlgoliaSearch\Model\Search\BatchResponse;
 use Algolia\AlgoliaSearch\Model\Search\BatchWriteParams;
 use Algolia\AlgoliaSearch\Model\Search\BrowseParams;
+use Algolia\AlgoliaSearch\Model\Search\BrowseResponse;
+use Algolia\AlgoliaSearch\Model\Search\CreatedAtResponse;
+use Algolia\AlgoliaSearch\Model\Search\DeleteApiKeyResponse;
 use Algolia\AlgoliaSearch\Model\Search\DeleteByParams;
+use Algolia\AlgoliaSearch\Model\Search\DeletedAtResponse;
+use Algolia\AlgoliaSearch\Model\Search\DeleteSourceResponse;
 use Algolia\AlgoliaSearch\Model\Search\DictionarySettingsParams;
+use Algolia\AlgoliaSearch\Model\Search\GetApiKeyResponse;
+use Algolia\AlgoliaSearch\Model\Search\GetDictionarySettingsResponse;
+use Algolia\AlgoliaSearch\Model\Search\GetLogsResponse;
 use Algolia\AlgoliaSearch\Model\Search\GetObjectsParams;
+use Algolia\AlgoliaSearch\Model\Search\GetObjectsResponse;
 use Algolia\AlgoliaSearch\Model\Search\GetTaskResponse;
+use Algolia\AlgoliaSearch\Model\Search\GetTopUserIdsResponse;
+use Algolia\AlgoliaSearch\Model\Search\HasPendingMappingsResponse;
 use Algolia\AlgoliaSearch\Model\Search\IndexSettings;
+use Algolia\AlgoliaSearch\Model\Search\Languages;
+use Algolia\AlgoliaSearch\Model\Search\ListApiKeysResponse;
+use Algolia\AlgoliaSearch\Model\Search\ListClustersResponse;
+use Algolia\AlgoliaSearch\Model\Search\ListIndicesResponse;
+use Algolia\AlgoliaSearch\Model\Search\ListUserIdsResponse;
+use Algolia\AlgoliaSearch\Model\Search\MultipleBatchResponse;
 use Algolia\AlgoliaSearch\Model\Search\OperationIndexParams;
+use Algolia\AlgoliaSearch\Model\Search\RemoveUserIdResponse;
+use Algolia\AlgoliaSearch\Model\Search\ReplaceSourceResponse;
 use Algolia\AlgoliaSearch\Model\Search\Rule;
+use Algolia\AlgoliaSearch\Model\Search\SaveObjectResponse;
+use Algolia\AlgoliaSearch\Model\Search\SaveSynonymResponse;
 use Algolia\AlgoliaSearch\Model\Search\SearchDictionaryEntriesParams;
+use Algolia\AlgoliaSearch\Model\Search\SearchDictionaryEntriesResponse;
 use Algolia\AlgoliaSearch\Model\Search\SearchForFacetValuesRequest;
+use Algolia\AlgoliaSearch\Model\Search\SearchForFacetValuesResponse;
 use Algolia\AlgoliaSearch\Model\Search\SearchMethodParams;
 use Algolia\AlgoliaSearch\Model\Search\SearchParams;
+use Algolia\AlgoliaSearch\Model\Search\SearchResponse;
+use Algolia\AlgoliaSearch\Model\Search\SearchResponses;
 use Algolia\AlgoliaSearch\Model\Search\SearchRulesParams;
+use Algolia\AlgoliaSearch\Model\Search\SearchRulesResponse;
 use Algolia\AlgoliaSearch\Model\Search\SearchSynonymsParams;
+use Algolia\AlgoliaSearch\Model\Search\SearchSynonymsResponse;
 use Algolia\AlgoliaSearch\Model\Search\SearchUserIdsParams;
+use Algolia\AlgoliaSearch\Model\Search\SearchUserIdsResponse;
+use Algolia\AlgoliaSearch\Model\Search\SettingsResponse;
 use Algolia\AlgoliaSearch\Model\Search\Source;
 use Algolia\AlgoliaSearch\Model\Search\SynonymHit;
+use Algolia\AlgoliaSearch\Model\Search\UpdateApiKeyResponse;
+use Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse;
+use Algolia\AlgoliaSearch\Model\Search\UpdatedAtWithObjectIdResponse;
+use Algolia\AlgoliaSearch\Model\Search\UserId;
 use Algolia\AlgoliaSearch\ObjectSerializer;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
@@ -49,12 +85,17 @@ use GuzzleHttp\Psr7\Query;
  */
 class SearchClient
 {
-    public const VERSION = '4.12.0';
+    public const VERSION = '4.30.0';
 
     /**
      * @var ApiWrapperInterface
      */
     protected $api;
+
+    /**
+     * @var IngestionClient
+     */
+    protected $ingestionTransporter;
 
     /**
      * @var SearchConfig
@@ -93,7 +134,23 @@ class SearchClient
             self::getClusterHosts($config)
         );
 
-        return new static($apiWrapper, $config);
+        $client = new static($apiWrapper, $config);
+
+        if (null !== $config->getTransformationRegion()) {
+            $ingestionConfig = IngestionConfig::create($config->getAppId(), $config->getAlgoliaApiKey(), $config->getTransformationRegion());
+
+            if ($hosts = $config->getHosts()) {
+                if ($config->getHasFullHosts()) {
+                    $ingestionConfig = $ingestionConfig->setFullHosts($hosts);
+                } else {
+                    $ingestionConfig = $ingestionConfig->setHosts($hosts);
+                }
+            }
+
+            $client->ingestionTransporter = IngestionClient::createWithConfig($ingestionConfig);
+        }
+
+        return $client;
     }
 
     /**
@@ -143,21 +200,21 @@ class SearchClient
      * Required API Key ACLs:
      *  - admin
      *
-     * @param array $apiKey apiKey (required)
-     *                      - $apiKey['acl'] => (array) Permissions that determine the type of API requests this key can make. The required ACL is listed in each endpoint's reference. For more information, see [access control list](https://www.algolia.com/doc/guides/security/api-keys/#access-control-list-acl). (required)
-     *                      - $apiKey['description'] => (string) Description of an API key to help you identify this API key.
-     *                      - $apiKey['indexes'] => (array) Index names or patterns that this API key can access. By default, an API key can access all indices in the same application.  You can use leading and trailing wildcard characters (`*`):  - `dev_*` matches all indices starting with \"dev_\". - `*_dev` matches all indices ending with \"_dev\". - `*_products_*` matches all indices containing \"_products_\".
-     *                      - $apiKey['maxHitsPerQuery'] => (int) Maximum number of results this API key can retrieve in one query. By default, there's no limit.
-     *                      - $apiKey['maxQueriesPerIPPerHour'] => (int) Maximum number of API requests allowed per IP address or [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/) per hour.  If this limit is reached, the API returns an error with status code `429`. By default, there's no limit.
-     *                      - $apiKey['queryParameters'] => (string) Query parameters to add when making API requests with this API key.  To restrict this API key to specific IP addresses, add the `restrictSources` parameter. You can only add a single source, but you can provide a range of IP addresses.  Creating an API key fails if the request is made from an IP address outside the restricted range.
-     *                      - $apiKey['referers'] => (array) Allowed HTTP referrers for this API key.  By default, all referrers are allowed. You can use leading and trailing wildcard characters (`*`):  - `https://algolia.com/_*` allows all referrers starting with \"https://algolia.com/\" - `*.algolia.com` allows all referrers ending with \".algolia.com\" - `*algolia.com*` allows all referrers in the domain \"algolia.com\".  Like all HTTP headers, referrers can be spoofed. Don't rely on them to secure your data. For more information, see [HTTP referrer restrictions](https://www.algolia.com/doc/guides/security/security-best-practices/#http-referrers-restrictions).
-     *                      - $apiKey['validity'] => (int) Duration (in seconds) after which the API key expires. By default, API keys don't expire.
+     * @param ApiKey|array $apiKey apiKey (required)
+     *                             - $apiKey['acl'] => (array) Permissions that determine the type of API requests this key can make. The required ACL is listed in each endpoint's reference. For more information, see [access control list](https://www.algolia.com/doc/guides/security/api-keys/#access-control-list-acl). (required)
+     *                             - $apiKey['description'] => (string) Description of an API key to help you identify this API key.
+     *                             - $apiKey['indexes'] => (array) Index names or patterns that this API key can access. By default, an API key can access all indices in the same application.  You can use leading and trailing wildcard characters (`*`):  - `dev_*` matches all indices starting with \"dev_\". - `*_dev` matches all indices ending with \"_dev\". - `*_products_*` matches all indices containing \"_products_\".
+     *                             - $apiKey['maxHitsPerQuery'] => (int) Maximum number of results this API key can retrieve in one query. By default, there's no limit.
+     *                             - $apiKey['maxQueriesPerIPPerHour'] => (int) Maximum number of API requests allowed per IP address or [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/) per hour.  If this limit is reached, the API returns an error with status code `429`. By default, there's no limit.
+     *                             - $apiKey['queryParameters'] => (string) Query parameters to add when making API requests with this API key.  To restrict this API key to specific IP addresses, add the `restrictSources` parameter. You can only add a single source, but you can provide a range of IP addresses.  Creating an API key fails if the request is made from an IP address outside the restricted range.
+     *                             - $apiKey['referers'] => (array) Allowed HTTP referrers for this API key.  By default, all referrers are allowed. You can use leading and trailing wildcard characters (`*`):  - `https://algolia.com/_*` allows all referrers starting with \"https://algolia.com/\" - `*.algolia.com` allows all referrers ending with \".algolia.com\" - `*algolia.com*` allows all referrers in the domain \"algolia.com\".  Like all HTTP headers, referrers can be spoofed. Don't rely on them to secure your data. For more information, see [HTTP referrer restrictions](https://www.algolia.com/doc/guides/security/security-best-practices/#http-referrers-restrictions).
+     *                             - $apiKey['validity'] => (int) Duration (in seconds) after which the API key expires. By default, API keys don't expire.
      *
      * @see ApiKey
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\AddApiKeyResponse|array<string, mixed>
+     * @return AddApiKeyResponse|array<string, mixed>
      */
     public function addApiKey($apiKey, $requestOptions = [])
     {
@@ -187,7 +244,7 @@ class SearchClient
      * @param array  $body           The record. A schemaless object with attributes that are useful in the context of search and discovery. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UpdatedAtWithObjectIdResponse|array<string, mixed>
+     * @return array<string, mixed>|UpdatedAtWithObjectIdResponse
      */
     public function addOrUpdateObject($indexName, $objectID, $body, $requestOptions = [])
     {
@@ -242,15 +299,15 @@ class SearchClient
      * Required API Key ACLs:
      *  - admin
      *
-     * @param array $source Source to add. (required)
-     *                      - $source['source'] => (string) IP address range of the source. (required)
-     *                      - $source['description'] => (string) Source description.
+     * @param array|Source $source Source to add. (required)
+     *                             - $source['source'] => (string) IP address range of the source. (required)
+     *                             - $source['description'] => (string) Source description.
      *
      * @see Source
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\CreatedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|CreatedAtResponse
      */
     public function appendSource($source, $requestOptions = [])
     {
@@ -275,15 +332,17 @@ class SearchClient
      * Required API Key ACLs:
      *  - admin
      *
-     * @param string $xAlgoliaUserID     Unique identifier of the user who makes the search request. (required)
-     * @param array  $assignUserIdParams assignUserIdParams (required)
-     *                                   - $assignUserIdParams['cluster'] => (string) Cluster name. (required)
+     * @param string                   $xAlgoliaUserID     Unique identifier of the user who makes the search request. (required)
+     * @param array|AssignUserIdParams $assignUserIdParams assignUserIdParams (required)
+     *                                                     - $assignUserIdParams['cluster'] => (string) Cluster name. (required)
      *
      * @see AssignUserIdParams
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\CreatedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|CreatedAtResponse
+     *
+     * @deprecated
      */
     public function assignUserId($xAlgoliaUserID, $assignUserIdParams, $requestOptions = [])
     {
@@ -313,15 +372,15 @@ class SearchClient
     /**
      * Adds, updates, or deletes records in one index with a single API request.  Batching index updates reduces latency and increases data integrity.  - Actions are applied in the order they're specified. - Actions are equivalent to the individual API requests of the same name.  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/en-us/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia).
      *
-     * @param string $indexName        Name of the index on which to perform the operation. (required)
-     * @param array  $batchWriteParams batchWriteParams (required)
-     *                                 - $batchWriteParams['requests'] => (array)  (required)
+     * @param string                 $indexName        Name of the index on which to perform the operation. (required)
+     * @param array|BatchWriteParams $batchWriteParams batchWriteParams (required)
+     *                                                 - $batchWriteParams['requests'] => (array)  (required)
      *
      * @see BatchWriteParams
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\BatchResponse|array<string, mixed>
+     * @return array<string, mixed>|BatchResponse
      */
     public function batch($indexName, $batchWriteParams, $requestOptions = [])
     {
@@ -361,16 +420,18 @@ class SearchClient
      * Required API Key ACLs:
      *  - admin
      *
-     * @param string $xAlgoliaUserID           Unique identifier of the user who makes the search request. (required)
-     * @param array  $batchAssignUserIdsParams batchAssignUserIdsParams (required)
-     *                                         - $batchAssignUserIdsParams['cluster'] => (string) Cluster name. (required)
-     *                                         - $batchAssignUserIdsParams['users'] => (array) User IDs to assign. (required)
+     * @param string                         $xAlgoliaUserID           Unique identifier of the user who makes the search request. (required)
+     * @param array|BatchAssignUserIdsParams $batchAssignUserIdsParams batchAssignUserIdsParams (required)
+     *                                                                 - $batchAssignUserIdsParams['cluster'] => (string) Cluster name. (required)
+     *                                                                 - $batchAssignUserIdsParams['users'] => (array) User IDs to assign. (required)
      *
      * @see BatchAssignUserIdsParams
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\CreatedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|CreatedAtResponse
+     *
+     * @deprecated
      */
     public function batchAssignUserIds($xAlgoliaUserID, $batchAssignUserIdsParams, $requestOptions = [])
     {
@@ -403,16 +464,16 @@ class SearchClient
      * Required API Key ACLs:
      *  - editSettings
      *
-     * @param array $dictionaryName               Dictionary type in which to search. (required)
-     * @param array $batchDictionaryEntriesParams batchDictionaryEntriesParams (required)
-     *                                            - $batchDictionaryEntriesParams['clearExistingDictionaryEntries'] => (bool) Whether to replace all custom entries in the dictionary with the ones sent with this request.
-     *                                            - $batchDictionaryEntriesParams['requests'] => (array) List of additions and deletions to your dictionaries. (required)
+     * @param array                              $dictionaryName               Dictionary type in which to search. (required)
+     * @param array|BatchDictionaryEntriesParams $batchDictionaryEntriesParams batchDictionaryEntriesParams (required)
+     *                                                                         - $batchDictionaryEntriesParams['clearExistingDictionaryEntries'] => (bool) Whether to replace all custom entries in the dictionary with the ones sent with this request.
+     *                                                                         - $batchDictionaryEntriesParams['requests'] => (array) List of additions and deletions to your dictionaries. (required)
      *
      * @see BatchDictionaryEntriesParams
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|UpdatedAtResponse
      */
     public function batchDictionaryEntries($dictionaryName, $batchDictionaryEntriesParams, $requestOptions = [])
     {
@@ -452,14 +513,14 @@ class SearchClient
      * Required API Key ACLs:
      *  - browse
      *
-     * @param string $indexName    Name of the index on which to perform the operation. (required)
-     * @param array  $browseParams browseParams (optional)
+     * @param string             $indexName    Name of the index on which to perform the operation. (required)
+     * @param array|BrowseParams $browseParams browseParams (optional)
      *
      * @see BrowseParams
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\BrowseResponse|array<string, mixed>
+     * @return array<string, mixed>|BrowseResponse
      */
     public function browse($indexName, $browseParams = null, $requestOptions = [])
     {
@@ -496,7 +557,7 @@ class SearchClient
      * @param string $indexName      Name of the index on which to perform the operation. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|UpdatedAtResponse
      */
     public function clearObjects($indexName, $requestOptions = [])
     {
@@ -534,7 +595,7 @@ class SearchClient
      * @param bool   $forwardToReplicas Whether changes are applied to replica indices. (optional)
      * @param array  $requestOptions    the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|UpdatedAtResponse
      */
     public function clearRules($indexName, $forwardToReplicas = null, $requestOptions = [])
     {
@@ -576,7 +637,7 @@ class SearchClient
      * @param bool   $forwardToReplicas Whether changes are applied to replica indices. (optional)
      * @param array  $requestOptions    the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|UpdatedAtResponse
      */
     public function clearSynonyms($indexName, $forwardToReplicas = null, $requestOptions = [])
     {
@@ -609,9 +670,9 @@ class SearchClient
     }
 
     /**
-     * This method allow you to send requests to the Algolia REST API.
+     * This method lets you send requests to the Algolia REST API.
      *
-     * @param string $path           Path of the endpoint, anything after \"/1\" must be specified. (required)
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -648,9 +709,9 @@ class SearchClient
     }
 
     /**
-     * This method allow you to send requests to the Algolia REST API.
+     * This method lets you send requests to the Algolia REST API.
      *
-     * @param string $path           Path of the endpoint, anything after \"/1\" must be specified. (required)
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -687,9 +748,9 @@ class SearchClient
     }
 
     /**
-     * This method allow you to send requests to the Algolia REST API.
+     * This method lets you send requests to the Algolia REST API.
      *
-     * @param string $path           Path of the endpoint, anything after \"/1\" must be specified. (required)
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $body           Parameters to send with the custom request. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -727,9 +788,9 @@ class SearchClient
     }
 
     /**
-     * This method allow you to send requests to the Algolia REST API.
+     * This method lets you send requests to the Algolia REST API.
      *
-     * @param string $path           Path of the endpoint, anything after \"/1\" must be specified. (required)
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $body           Parameters to send with the custom request. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -775,7 +836,7 @@ class SearchClient
      * @param string $key            API key. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\DeleteApiKeyResponse|array<string, mixed>
+     * @return array<string, mixed>|DeleteApiKeyResponse
      */
     public function deleteApiKey($key, $requestOptions = [])
     {
@@ -809,22 +870,22 @@ class SearchClient
      * Required API Key ACLs:
      *  - deleteIndex
      *
-     * @param string $indexName      Name of the index on which to perform the operation. (required)
-     * @param array  $deleteByParams deleteByParams (required)
-     *                               - $deleteByParams['facetFilters'] => (array)
-     *                               - $deleteByParams['filters'] => (string) Filter expression to only include items that match the filter criteria in the response.  You can use these filter expressions:  - **Numeric filters.** `<facet> <op> <number>`, where `<op>` is one of `<`, `<=`, `=`, `!=`, `>`, `>=`. - **Ranges.** `<facet>:<lower> TO <upper>` where `<lower>` and `<upper>` are the lower and upper limits of the range (inclusive). - **Facet filters.** `<facet>:<value>` where `<facet>` is a facet attribute (case-sensitive) and `<value>` a facet value. - **Tag filters.** `_tags:<value>` or just `<value>` (case-sensitive). - **Boolean filters.** `<facet>: true | false`.  You can combine filters with `AND`, `OR`, and `NOT` operators with the following restrictions:  - You can only combine filters of the same type with `OR`.   **Not supported:** `facet:value OR num > 3`. - You can't use `NOT` with combinations of filters.   **Not supported:** `NOT(facet:value OR facet:value)` - You can't combine conjunctions (`AND`) with `OR`.   **Not supported:** `facet:value OR (facet:value AND facet:value)`  Use quotes around your filters, if the facet attribute name or facet value has spaces, keywords (`OR`, `AND`, `NOT`), or quotes. If a facet attribute is an array, the filter matches if it matches at least one element of the array.  For more information, see [Filters](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/).
-     *                               - $deleteByParams['numericFilters'] => (array)
-     *                               - $deleteByParams['tagFilters'] => (array)
-     *                               - $deleteByParams['aroundLatLng'] => (string) Coordinates for the center of a circle, expressed as a comma-separated string of latitude and longitude.  Only records included within a circle around this central location are included in the results. The radius of the circle is determined by the `aroundRadius` and `minimumAroundRadius` settings. This parameter is ignored if you also specify `insidePolygon` or `insideBoundingBox`.
-     *                               - $deleteByParams['aroundRadius'] => (array)
-     *                               - $deleteByParams['insideBoundingBox'] => (array)
-     *                               - $deleteByParams['insidePolygon'] => (array) Coordinates of a polygon in which to search.  Polygons are defined by 3 to 10,000 points. Each point is represented by its latitude and longitude. Provide multiple polygons as nested arrays. For more information, see [filtering inside polygons](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas). This parameter is ignored if you also specify `insideBoundingBox`.
+     * @param string               $indexName      Name of the index on which to perform the operation. (required)
+     * @param array|DeleteByParams $deleteByParams deleteByParams (required)
+     *                                             - $deleteByParams['facetFilters'] => (array)
+     *                                             - $deleteByParams['filters'] => (string) Filter expression to only include items that match the filter criteria in the response.  You can use these filter expressions:  - **Numeric filters.** `<facet> <op> <number>`, where `<op>` is one of `<`, `<=`, `=`, `!=`, `>`, `>=`. - **Ranges.** `<facet>:<lower> TO <upper>` where `<lower>` and `<upper>` are the lower and upper limits of the range (inclusive). - **Facet filters.** `<facet>:<value>` where `<facet>` is a facet attribute (case-sensitive) and `<value>` a facet value. - **Tag filters.** `_tags:<value>` or just `<value>` (case-sensitive). - **Boolean filters.** `<facet>: true | false`.  You can combine filters with `AND`, `OR`, and `NOT` operators with the following restrictions:  - You can only combine filters of the same type with `OR`.   **Not supported:** `facet:value OR num > 3`. - You can't use `NOT` with combinations of filters.   **Not supported:** `NOT(facet:value OR facet:value)` - You can't combine conjunctions (`AND`) with `OR`.   **Not supported:** `facet:value OR (facet:value AND facet:value)`  Use quotes around your filters, if the facet attribute name or facet value has spaces, keywords (`OR`, `AND`, `NOT`), or quotes. If a facet attribute is an array, the filter matches if it matches at least one element of the array.  For more information, see [Filters](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/).
+     *                                             - $deleteByParams['numericFilters'] => (array)
+     *                                             - $deleteByParams['tagFilters'] => (array)
+     *                                             - $deleteByParams['aroundLatLng'] => (string) Coordinates for the center of a circle, expressed as a comma-separated string of latitude and longitude.  Only records included within a circle around this central location are included in the results. The radius of the circle is determined by the `aroundRadius` and `minimumAroundRadius` settings. This parameter is ignored if you also specify `insidePolygon` or `insideBoundingBox`.
+     *                                             - $deleteByParams['aroundRadius'] => (array)
+     *                                             - $deleteByParams['insideBoundingBox'] => (array)
+     *                                             - $deleteByParams['insidePolygon'] => (array) Coordinates of a polygon in which to search.  Polygons are defined by 3 to 10,000 points. Each point is represented by its latitude and longitude. Provide multiple polygons as nested arrays. For more information, see [filtering inside polygons](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas). This parameter is ignored if you also specify `insideBoundingBox`.
      *
      * @see DeleteByParams
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|UpdatedAtResponse
      */
     public function deleteBy($indexName, $deleteByParams, $requestOptions = [])
     {
@@ -867,7 +928,7 @@ class SearchClient
      * @param string $indexName      Name of the index on which to perform the operation. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\DeletedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|DeletedAtResponse
      */
     public function deleteIndex($indexName, $requestOptions = [])
     {
@@ -896,7 +957,7 @@ class SearchClient
     }
 
     /**
-     * Deletes a record by its object ID.  To delete more than one record, use the [`batch` operation](#tag/Records/operation/batch). To delete records matching a query, use the [`deleteByQuery` operation](#tag/Records/operation/deleteBy).
+     * Deletes a record by its object ID.  To delete more than one record, use the [`batch` operation](#tag/Records/operation/batch). To delete records matching a query, use the [`deleteBy` operation](#tag/Records/operation/deleteBy).
      *
      * Required API Key ACLs:
      *  - deleteObject
@@ -905,7 +966,7 @@ class SearchClient
      * @param string $objectID       Unique record identifier. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\DeletedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|DeletedAtResponse
      */
     public function deleteObject($indexName, $objectID, $requestOptions = [])
     {
@@ -959,7 +1020,7 @@ class SearchClient
      * @param bool   $forwardToReplicas Whether changes are applied to replica indices. (optional)
      * @param array  $requestOptions    the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|UpdatedAtResponse
      */
     public function deleteRule($indexName, $objectID, $forwardToReplicas = null, $requestOptions = [])
     {
@@ -1015,7 +1076,7 @@ class SearchClient
      * @param string $source         IP address range of the source. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\DeleteSourceResponse|array<string, mixed>
+     * @return array<string, mixed>|DeleteSourceResponse
      */
     public function deleteSource($source, $requestOptions = [])
     {
@@ -1054,7 +1115,7 @@ class SearchClient
      * @param bool   $forwardToReplicas Whether changes are applied to replica indices. (optional)
      * @param array  $requestOptions    the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\DeletedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|DeletedAtResponse
      */
     public function deleteSynonym($indexName, $objectID, $forwardToReplicas = null, $requestOptions = [])
     {
@@ -1107,7 +1168,7 @@ class SearchClient
      * @param string $key            API key. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\GetApiKeyResponse|array<string, mixed>
+     * @return array<string, mixed>|GetApiKeyResponse
      */
     public function getApiKey($key, $requestOptions = [])
     {
@@ -1144,7 +1205,7 @@ class SearchClient
      * @param int   $taskID         Unique task identifier. (required)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\GetTaskResponse|array<string, mixed>
+     * @return array<string, mixed>|GetTaskResponse
      */
     public function getAppTask($taskID, $requestOptions = [])
     {
@@ -1180,7 +1241,7 @@ class SearchClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|array<string,\Algolia\AlgoliaSearch\Model\Search\Languages>
+     * @return array<string, mixed>|array<string,Languages>
      */
     public function getDictionaryLanguages($requestOptions = [])
     {
@@ -1200,7 +1261,7 @@ class SearchClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\GetDictionarySettingsResponse|array<string, mixed>
+     * @return array<string, mixed>|GetDictionarySettingsResponse
      */
     public function getDictionarySettings($requestOptions = [])
     {
@@ -1224,7 +1285,7 @@ class SearchClient
      * @param array  $type           Type of log entries to retrieve. By default, all log entries are retrieved. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\GetLogsResponse|array<string, mixed>
+     * @return array<string, mixed>|GetLogsResponse
      */
     public function getLogs($offset = null, $length = null, $indexName = null, $type = null, $requestOptions = [])
     {
@@ -1316,14 +1377,14 @@ class SearchClient
      * Required API Key ACLs:
      *  - search
      *
-     * @param array $getObjectsParams Request object. (required)
-     *                                - $getObjectsParams['requests'] => (array)  (required)
+     * @param array|GetObjectsParams $getObjectsParams Request object. (required)
+     *                                                 - $getObjectsParams['requests'] => (array)  (required)
      *
      * @see GetObjectsParams
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\GetObjectsResponse|array<string, mixed>
+     * @return array<string, mixed>|GetObjectsResponse
      */
     public function getObjects($getObjectsParams, $requestOptions = [])
     {
@@ -1352,7 +1413,7 @@ class SearchClient
      * @param string $objectID       Unique identifier of a rule object. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\Rule|array<string, mixed>
+     * @return array<string, mixed>|Rule
      */
     public function getRule($indexName, $objectID, $requestOptions = [])
     {
@@ -1399,14 +1460,15 @@ class SearchClient
      * Retrieves an object with non-null index settings.
      *
      * Required API Key ACLs:
-     *  - search
+     *  - settings
      *
      * @param string $indexName      Name of the index on which to perform the operation. (required)
+     * @param int    $getVersion     When set to 2, the endpoint will not include `synonyms` in the response. This parameter is here for backward compatibility. (optional, default to 1)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SettingsResponse|array<string, mixed>
+     * @return array<string, mixed>|SettingsResponse
      */
-    public function getSettings($indexName, $requestOptions = [])
+    public function getSettings($indexName, $getVersion = null, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
@@ -1419,6 +1481,10 @@ class SearchClient
         $queryParameters = [];
         $headers = [];
         $httpBody = null;
+
+        if (null !== $getVersion) {
+            $queryParameters['getVersion'] = $getVersion;
+        }
 
         // path params
         if (null !== $indexName) {
@@ -1440,7 +1506,7 @@ class SearchClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\Source[]|array<string, mixed>
+     * @return array<string, mixed>|Source[]
      */
     public function getSources($requestOptions = [])
     {
@@ -1462,7 +1528,7 @@ class SearchClient
      * @param string $objectID       Unique identifier of a synonym object. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SynonymHit|array<string, mixed>
+     * @return array<string, mixed>|SynonymHit
      */
     public function getSynonym($indexName, $objectID, $requestOptions = [])
     {
@@ -1515,7 +1581,7 @@ class SearchClient
      * @param int    $taskID         Unique task identifier. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\GetTaskResponse|array<string, mixed>
+     * @return array<string, mixed>|GetTaskResponse
      */
     public function getTask($indexName, $taskID, $requestOptions = [])
     {
@@ -1566,7 +1632,9 @@ class SearchClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\GetTopUserIdsResponse|array<string, mixed>
+     * @return array<string, mixed>|GetTopUserIdsResponse
+     *
+     * @deprecated
      */
     public function getTopUserIds($requestOptions = [])
     {
@@ -1587,7 +1655,9 @@ class SearchClient
      * @param string $userID         Unique identifier of the user who makes the search request. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UserId|array<string, mixed>
+     * @return array<string, mixed>|UserId
+     *
+     * @deprecated
      */
     public function getUserId($userID, $requestOptions = [])
     {
@@ -1624,7 +1694,9 @@ class SearchClient
      * @param bool  $getClusters    Whether to include the cluster's pending mapping state in the response. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\HasPendingMappingsResponse|array<string, mixed>
+     * @return array<string, mixed>|HasPendingMappingsResponse
+     *
+     * @deprecated
      */
     public function hasPendingMappings($getClusters = null, $requestOptions = [])
     {
@@ -1648,7 +1720,7 @@ class SearchClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\ListApiKeysResponse|array<string, mixed>
+     * @return array<string, mixed>|ListApiKeysResponse
      */
     public function listApiKeys($requestOptions = [])
     {
@@ -1668,7 +1740,9 @@ class SearchClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\ListClustersResponse|array<string, mixed>
+     * @return array<string, mixed>|ListClustersResponse
+     *
+     * @deprecated
      */
     public function listClusters($requestOptions = [])
     {
@@ -1690,7 +1764,7 @@ class SearchClient
      * @param int   $hitsPerPage    Number of hits per page. (optional, default to 100)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\ListIndicesResponse|array<string, mixed>
+     * @return array<string, mixed>|ListIndicesResponse
      */
     public function listIndices($page = null, $hitsPerPage = null, $requestOptions = [])
     {
@@ -1720,7 +1794,9 @@ class SearchClient
      * @param int   $hitsPerPage    Number of hits per page. (optional, default to 100)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\ListUserIdsResponse|array<string, mixed>
+     * @return array<string, mixed>|ListUserIdsResponse
+     *
+     * @deprecated
      */
     public function listUserIds($page = null, $hitsPerPage = null, $requestOptions = [])
     {
@@ -1743,14 +1819,14 @@ class SearchClient
     /**
      * Adds, updates, or deletes records in multiple indices with a single API request.  - Actions are applied in the order they are specified. - Actions are equivalent to the individual API requests of the same name.  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/en-us/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia).
      *
-     * @param array $batchParams batchParams (required)
-     *                           - $batchParams['requests'] => (array)  (required)
+     * @param array|BatchParams $batchParams batchParams (required)
+     *                                       - $batchParams['requests'] => (array)  (required)
      *
      * @see BatchParams
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\MultipleBatchResponse|array<string, mixed>
+     * @return array<string, mixed>|MultipleBatchResponse
      */
     public function multipleBatch($batchParams, $requestOptions = [])
     {
@@ -1775,17 +1851,17 @@ class SearchClient
      * Required API Key ACLs:
      *  - addObject
      *
-     * @param string $indexName            Name of the index on which to perform the operation. (required)
-     * @param array  $operationIndexParams operationIndexParams (required)
-     *                                     - $operationIndexParams['operation'] => (array)  (required)
-     *                                     - $operationIndexParams['destination'] => (string) Index name (case-sensitive). (required)
-     *                                     - $operationIndexParams['scope'] => (array) **Only for copying.**  If you specify a scope, only the selected scopes are copied. Records and the other scopes are left unchanged. If you omit the `scope` parameter, everything is copied: records, settings, synonyms, and rules.
+     * @param string                     $indexName            Name of the index on which to perform the operation. (required)
+     * @param array|OperationIndexParams $operationIndexParams operationIndexParams (required)
+     *                                                         - $operationIndexParams['operation'] => (array)  (required)
+     *                                                         - $operationIndexParams['destination'] => (string) Index name (case-sensitive). (required)
+     *                                                         - $operationIndexParams['scope'] => (array) **Only for copying.**  If you specify a scope, only the selected scopes are copied. Records and the other scopes are left unchanged. If you omit the `scope` parameter, everything is copied: records, settings, synonyms, and rules.
      *
      * @see OperationIndexParams
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|UpdatedAtResponse
      */
     public function operationIndex($indexName, $operationIndexParams, $requestOptions = [])
     {
@@ -1820,7 +1896,7 @@ class SearchClient
     }
 
     /**
-     * Adds new attributes to a record, or updates existing ones.  - If a record with the specified object ID doesn't exist,   a new record is added to the index **if** `createIfNotExists` is true. - If the index doesn't exist yet, this method creates a new index. - You can use any first-level attribute but not nested attributes.   If you specify a nested attribute, this operation replaces its first-level ancestor.  To update an attribute without pushing the entire record, you can use these built-in operations. These operations can be helpful if you don't have access to your initial data.  - Increment: increment a numeric attribute - Decrement: decrement a numeric attribute - Add: append a number or string element to an array attribute - Remove: remove all matching number or string elements from an array attribute made of numbers or strings - AddUnique: add a number or string element to an array attribute made of numbers or strings only if it's not already present - IncrementFrom: increment a numeric integer attribute only if the provided value matches the current value, and otherwise ignore the whole object update. For example, if you pass an IncrementFrom value of 2 for the version attribute, but the current value of the attribute is 1, the engine ignores the update. If the object doesn't exist, the engine only creates it if you pass an IncrementFrom value of 0. - IncrementSet: increment a numeric integer attribute only if the provided value is greater than the current value, and otherwise ignore the whole object update. For example, if you pass an IncrementSet value of 2 for the version attribute, and the current value of the attribute is 1, the engine updates the object. If the object doesn't exist yet, the engine only creates it if you pass an IncrementSet value greater than 0.  You can specify an operation by providing an object with the attribute to update as the key and its value being an object with the following properties:  - _operation: the operation to apply on the attribute - value: the right-hand side argument to the operation, for example, increment or decrement step, value to add or remove.  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/en-us/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia).
+     * Adds new attributes to a record, or updates existing ones.  - If a record with the specified object ID doesn't exist,   a new record is added to the index **if** `createIfNotExists` is true. - If the index doesn't exist yet, this method creates a new index. - You can use any first-level attribute but not nested attributes.   If you specify a nested attribute, this operation replaces its first-level ancestor.  To update an attribute without pushing the entire record, you can use these built-in operations. These operations can be helpful if you don't have access to your initial data.  - Increment: increment a numeric attribute - Decrement: decrement a numeric attribute - Add: append a number or string element to an array attribute - Remove: remove all matching number or string elements from an array attribute made of numbers or strings - AddUnique: add a number or string element to an array attribute made of numbers or strings only if it's not already present - IncrementFrom: increment a numeric integer attribute only if the provided value matches the current value, and otherwise ignore the whole object update. For example, if you pass an IncrementFrom value of 2 for the version attribute, but the current value of the attribute is 1, the engine ignores the update. If the object doesn't exist, the engine only creates it if you pass an IncrementFrom value of 0. - IncrementSet: increment a numeric integer attribute only if the provided value is greater than the current value, and otherwise ignore the whole object update. For example, if you pass an IncrementSet value of 2 for the version attribute, and the current value of the attribute is 1, the engine updates the object. If the object doesn't exist yet, the engine only creates it if you pass an IncrementSet value greater than 0.  You can specify an operation by providing an object with the attribute to update as the key and its value being an object with the following properties:  - _operation: the operation to apply on the attribute - value: the right-hand side argument to the operation, for example, increment or decrement step, value to add or remove.  When updating multiple attributes or using multiple operations targeting the same record, you should use a single partial update for faster processing.  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/en-us/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia).
      *
      * Required API Key ACLs:
      *  - addObject
@@ -1831,7 +1907,7 @@ class SearchClient
      * @param bool   $createIfNotExists  Whether to create a new record if it doesn't exist. (optional, default to true)
      * @param array  $requestOptions     the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UpdatedAtWithObjectIdResponse|array<string, mixed>
+     * @return array<string, mixed>|UpdatedAtWithObjectIdResponse
      */
     public function partialUpdateObject($indexName, $objectID, $attributesToUpdate, $createIfNotExists = null, $requestOptions = [])
     {
@@ -1893,7 +1969,9 @@ class SearchClient
      * @param string $userID         Unique identifier of the user who makes the search request. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\RemoveUserIdResponse|array<string, mixed>
+     * @return array<string, mixed>|RemoveUserIdResponse
+     *
+     * @deprecated
      */
     public function removeUserId($userID, $requestOptions = [])
     {
@@ -1930,7 +2008,7 @@ class SearchClient
      * @param array $source         Allowed sources. (required)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\ReplaceSourceResponse|array<string, mixed>
+     * @return array<string, mixed>|ReplaceSourceResponse
      */
     public function replaceSources($source, $requestOptions = [])
     {
@@ -1958,7 +2036,7 @@ class SearchClient
      * @param string $key            API key. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\AddApiKeyResponse|array<string, mixed>
+     * @return AddApiKeyResponse|array<string, mixed>
      */
     public function restoreApiKey($key, $requestOptions = [])
     {
@@ -1996,7 +2074,7 @@ class SearchClient
      * @param array  $body           The record. A schemaless object with attributes that are useful in the context of search and discovery. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SaveObjectResponse|array<string, mixed>
+     * @return array<string, mixed>|SaveObjectResponse
      */
     public function saveObject($indexName, $body, $requestOptions = [])
     {
@@ -2036,22 +2114,22 @@ class SearchClient
      * Required API Key ACLs:
      *  - editSettings
      *
-     * @param string $indexName Name of the index on which to perform the operation. (required)
-     * @param string $objectID  Unique identifier of a rule object. (required)
-     * @param array  $rule      rule (required)
-     *                          - $rule['objectID'] => (string) Unique identifier of a rule object. (required)
-     *                          - $rule['conditions'] => (array) Conditions that trigger a rule.  Some consequences require specific conditions or don't require any condition. For more information, see [Conditions](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#conditions).
-     *                          - $rule['consequence'] => (array)  (required)
-     *                          - $rule['description'] => (string) Description of the rule's purpose to help you distinguish between different rules.
-     *                          - $rule['enabled'] => (bool) Whether the rule is active.
-     *                          - $rule['validity'] => (array) Time periods when the rule is active.
+     * @param string     $indexName Name of the index on which to perform the operation. (required)
+     * @param string     $objectID  Unique identifier of a rule object. (required)
+     * @param array|Rule $rule      rule (required)
+     *                              - $rule['objectID'] => (string) Unique identifier of a rule object. (required)
+     *                              - $rule['conditions'] => (array) Conditions that trigger a rule.  Some consequences require specific conditions or don't require any condition. For more information, see [Conditions](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#conditions).
+     *                              - $rule['consequence'] => (array)  (required)
+     *                              - $rule['description'] => (string) Description of the rule's purpose to help you distinguish between different rules.
+     *                              - $rule['enabled'] => (bool) Whether the rule is active.
+     *                              - $rule['validity'] => (array) Time periods when the rule is active.
      *
      * @see Rule
      *
      * @param bool  $forwardToReplicas Whether changes are applied to replica indices. (optional)
      * @param array $requestOptions    the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|UpdatedAtResponse
      */
     public function saveRule($indexName, $objectID, $rule, $forwardToReplicas = null, $requestOptions = [])
     {
@@ -2116,7 +2194,7 @@ class SearchClient
      * @param bool   $clearExistingRules Whether existing rules should be deleted before adding this batch. (optional)
      * @param array  $requestOptions     the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|UpdatedAtResponse
      */
     public function saveRules($indexName, $rules, $forwardToReplicas = null, $clearExistingRules = null, $requestOptions = [])
     {
@@ -2164,24 +2242,24 @@ class SearchClient
      * Required API Key ACLs:
      *  - editSettings
      *
-     * @param string $indexName  Name of the index on which to perform the operation. (required)
-     * @param string $objectID   Unique identifier of a synonym object. (required)
-     * @param array  $synonymHit synonymHit (required)
-     *                           - $synonymHit['objectID'] => (string) Unique identifier of a synonym object. (required)
-     *                           - $synonymHit['type'] => (array)  (required)
-     *                           - $synonymHit['synonyms'] => (array) Words or phrases considered equivalent.
-     *                           - $synonymHit['input'] => (string) Word or phrase to appear in query strings (for [`onewaysynonym`s](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/one-way-synonyms/)).
-     *                           - $synonymHit['word'] => (string) Word or phrase to appear in query strings (for [`altcorrection1` and `altcorrection2`](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-alternative-corrections/)).
-     *                           - $synonymHit['corrections'] => (array) Words to be matched in records.
-     *                           - $synonymHit['placeholder'] => (string) [Placeholder token](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-placeholders/) to be put inside records.
-     *                           - $synonymHit['replacements'] => (array) Query words that will match the [placeholder token](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-placeholders/).
+     * @param string           $indexName  Name of the index on which to perform the operation. (required)
+     * @param string           $objectID   Unique identifier of a synonym object. (required)
+     * @param array|SynonymHit $synonymHit synonymHit (required)
+     *                                     - $synonymHit['objectID'] => (string) Unique identifier of a synonym object. (required)
+     *                                     - $synonymHit['type'] => (array)  (required)
+     *                                     - $synonymHit['synonyms'] => (array) Words or phrases considered equivalent.
+     *                                     - $synonymHit['input'] => (string) Word or phrase to appear in query strings (for [`onewaysynonym`s](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/one-way-synonyms/)).
+     *                                     - $synonymHit['word'] => (string) Word or phrase to appear in query strings (for [`altcorrection1` and `altcorrection2`](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-alternative-corrections/)).
+     *                                     - $synonymHit['corrections'] => (array) Words to be matched in records.
+     *                                     - $synonymHit['placeholder'] => (string) [Placeholder token](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-placeholders/) to be put inside records.
+     *                                     - $synonymHit['replacements'] => (array) Query words that will match the [placeholder token](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-placeholders/).
      *
      * @see SynonymHit
      *
      * @param bool  $forwardToReplicas Whether changes are applied to replica indices. (optional)
      * @param array $requestOptions    the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SaveSynonymResponse|array<string, mixed>
+     * @return array<string, mixed>|SaveSynonymResponse
      */
     public function saveSynonym($indexName, $objectID, $synonymHit, $forwardToReplicas = null, $requestOptions = [])
     {
@@ -2246,7 +2324,7 @@ class SearchClient
      * @param bool   $replaceExistingSynonyms Whether to replace all synonyms in the index with the ones sent with this request. (optional)
      * @param array  $requestOptions          the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|UpdatedAtResponse
      */
     public function saveSynonyms($indexName, $synonymHit, $forwardToReplicas = null, $replaceExistingSynonyms = null, $requestOptions = [])
     {
@@ -2289,20 +2367,20 @@ class SearchClient
     }
 
     /**
-     * Sends multiple search requests to one or more indices.  This can be useful in these cases:  - Different indices for different purposes, such as, one index for products, another one for marketing content. - Multiple searches to the same index—for example, with different filters.
+     * Sends multiple search requests to one or more indices.  This can be useful in these cases:  - Different indices for different purposes, such as, one index for products, another one for marketing content. - Multiple searches to the same index—for example, with different filters.  Use the helper `searchForHits` or `searchForFacets` to get the results in a more convenient format, if you already know the return type you want.
      *
      * Required API Key ACLs:
      *  - search
      *
-     * @param array $searchMethodParams Muli-search request body. Results are returned in the same order as the requests. (required)
-     *                                  - $searchMethodParams['requests'] => (array)  (required)
-     *                                  - $searchMethodParams['strategy'] => (array)
+     * @param array|SearchMethodParams $searchMethodParams Muli-search request body. Results are returned in the same order as the requests. (required)
+     *                                                     - $searchMethodParams['requests'] => (array)  (required)
+     *                                                     - $searchMethodParams['strategy'] => (array)
      *
      * @see SearchMethodParams
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SearchResponses|array<string, mixed>
+     * @return array<string, mixed>|SearchResponses
      */
     public function search($searchMethodParams, $requestOptions = [])
     {
@@ -2327,18 +2405,18 @@ class SearchClient
      * Required API Key ACLs:
      *  - settings
      *
-     * @param array $dictionaryName                Dictionary type in which to search. (required)
-     * @param array $searchDictionaryEntriesParams searchDictionaryEntriesParams (required)
-     *                                             - $searchDictionaryEntriesParams['query'] => (string) Search query. (required)
-     *                                             - $searchDictionaryEntriesParams['page'] => (int) Page of search results to retrieve.
-     *                                             - $searchDictionaryEntriesParams['hitsPerPage'] => (int) Number of hits per page.
-     *                                             - $searchDictionaryEntriesParams['language'] => (array)
+     * @param array                               $dictionaryName                Dictionary type in which to search. (required)
+     * @param array|SearchDictionaryEntriesParams $searchDictionaryEntriesParams searchDictionaryEntriesParams (required)
+     *                                                                           - $searchDictionaryEntriesParams['query'] => (string) Search query. (required)
+     *                                                                           - $searchDictionaryEntriesParams['page'] => (int) Page of search results to retrieve.
+     *                                                                           - $searchDictionaryEntriesParams['hitsPerPage'] => (int) Number of hits per page.
+     *                                                                           - $searchDictionaryEntriesParams['language'] => (array)
      *
      * @see SearchDictionaryEntriesParams
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SearchDictionaryEntriesResponse|array<string, mixed>
+     * @return array<string, mixed>|SearchDictionaryEntriesResponse
      */
     public function searchDictionaryEntries($dictionaryName, $searchDictionaryEntriesParams, $requestOptions = [])
     {
@@ -2378,18 +2456,18 @@ class SearchClient
      * Required API Key ACLs:
      *  - search
      *
-     * @param string $indexName                   Name of the index on which to perform the operation. (required)
-     * @param string $facetName                   Facet attribute in which to search for values.  This attribute must be included in the `attributesForFaceting` index setting with the `searchable()` modifier. (required)
-     * @param array  $searchForFacetValuesRequest searchForFacetValuesRequest (optional)
-     *                                            - $searchForFacetValuesRequest['params'] => (string) Search parameters as a URL-encoded query string.
-     *                                            - $searchForFacetValuesRequest['facetQuery'] => (string) Text to search inside the facet's values.
-     *                                            - $searchForFacetValuesRequest['maxFacetHits'] => (int) Maximum number of facet values to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).
+     * @param string                            $indexName                   Name of the index on which to perform the operation. (required)
+     * @param string                            $facetName                   Facet attribute in which to search for values.  This attribute must be included in the `attributesForFaceting` index setting with the `searchable()` modifier. (required)
+     * @param array|SearchForFacetValuesRequest $searchForFacetValuesRequest searchForFacetValuesRequest (optional)
+     *                                                                       - $searchForFacetValuesRequest['params'] => (string) Search parameters as a URL-encoded query string.
+     *                                                                       - $searchForFacetValuesRequest['facetQuery'] => (string) Text to search inside the facet's values.
+     *                                                                       - $searchForFacetValuesRequest['maxFacetHits'] => (int) Maximum number of facet values to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).
      *
      * @see SearchForFacetValuesRequest
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SearchForFacetValuesResponse|array<string, mixed>
+     * @return array<string, mixed>|SearchForFacetValuesResponse
      */
     public function searchForFacetValues($indexName, $facetName, $searchForFacetValuesRequest = null, $requestOptions = [])
     {
@@ -2438,20 +2516,20 @@ class SearchClient
      * Required API Key ACLs:
      *  - settings
      *
-     * @param string $indexName         Name of the index on which to perform the operation. (required)
-     * @param array  $searchRulesParams searchRulesParams (optional)
-     *                                  - $searchRulesParams['query'] => (string) Search query for rules.
-     *                                  - $searchRulesParams['anchoring'] => (array)
-     *                                  - $searchRulesParams['context'] => (string) Only return rules that match the context (exact match).
-     *                                  - $searchRulesParams['page'] => (int) Requested page of the API response.  Algolia uses `page` and `hitsPerPage` to control how search results are displayed ([paginated](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/)).  - `hitsPerPage`: sets the number of search results (_hits_) displayed per page. - `page`: specifies the page number of the search results you want to retrieve. Page numbering starts at 0, so the first page is `page=0`, the second is `page=1`, and so on.  For example, to display 10 results per page starting from the third page, set `hitsPerPage` to 10 and `page` to 2.
-     *                                  - $searchRulesParams['hitsPerPage'] => (int) Maximum number of hits per page.  Algolia uses `page` and `hitsPerPage` to control how search results are displayed ([paginated](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/)).  - `hitsPerPage`: sets the number of search results (_hits_) displayed per page. - `page`: specifies the page number of the search results you want to retrieve. Page numbering starts at 0, so the first page is `page=0`, the second is `page=1`, and so on.  For example, to display 10 results per page starting from the third page, set `hitsPerPage` to 10 and `page` to 2.
-     *                                  - $searchRulesParams['enabled'] => (bool) If `true`, return only enabled rules. If `false`, return only inactive rules. By default, _all_ rules are returned.
+     * @param string                  $indexName         Name of the index on which to perform the operation. (required)
+     * @param array|SearchRulesParams $searchRulesParams searchRulesParams (optional)
+     *                                                   - $searchRulesParams['query'] => (string) Search query for rules.
+     *                                                   - $searchRulesParams['anchoring'] => (array)
+     *                                                   - $searchRulesParams['context'] => (string) Only return rules that match the context (exact match).
+     *                                                   - $searchRulesParams['page'] => (int) Requested page of the API response.  Algolia uses `page` and `hitsPerPage` to control how search results are displayed ([paginated](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/)).  - `hitsPerPage`: sets the number of search results (_hits_) displayed per page. - `page`: specifies the page number of the search results you want to retrieve. Page numbering starts at 0, so the first page is `page=0`, the second is `page=1`, and so on.  For example, to display 10 results per page starting from the third page, set `hitsPerPage` to 10 and `page` to 2.
+     *                                                   - $searchRulesParams['hitsPerPage'] => (int) Maximum number of hits per page.  Algolia uses `page` and `hitsPerPage` to control how search results are displayed ([paginated](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/)).  - `hitsPerPage`: sets the number of search results (_hits_) displayed per page. - `page`: specifies the page number of the search results you want to retrieve. Page numbering starts at 0, so the first page is `page=0`, the second is `page=1`, and so on.  For example, to display 10 results per page starting from the third page, set `hitsPerPage` to 10 and `page` to 2.
+     *                                                   - $searchRulesParams['enabled'] => (bool) If `true`, return only enabled rules. If `false`, return only inactive rules. By default, _all_ rules are returned.
      *
      * @see SearchRulesParams
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SearchRulesResponse|array<string, mixed>
+     * @return array<string, mixed>|SearchRulesResponse
      */
     public function searchRules($indexName, $searchRulesParams = null, $requestOptions = [])
     {
@@ -2485,14 +2563,14 @@ class SearchClient
      * Required API Key ACLs:
      *  - search
      *
-     * @param string $indexName    Name of the index on which to perform the operation. (required)
-     * @param array  $searchParams searchParams (optional)
+     * @param string             $indexName    Name of the index on which to perform the operation. (required)
+     * @param array|SearchParams $searchParams searchParams (optional)
      *
      * @see SearchParams
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SearchResponse|array<string, mixed>
+     * @return array<string, mixed>|SearchResponse
      */
     public function searchSingleIndex($indexName, $searchParams = null, $requestOptions = [])
     {
@@ -2526,18 +2604,18 @@ class SearchClient
      * Required API Key ACLs:
      *  - settings
      *
-     * @param string $indexName            Name of the index on which to perform the operation. (required)
-     * @param array  $searchSynonymsParams Body of the `searchSynonyms` operation. (optional)
-     *                                     - $searchSynonymsParams['query'] => (string) Search query.
-     *                                     - $searchSynonymsParams['type'] => (array)
-     *                                     - $searchSynonymsParams['page'] => (int) Page of search results to retrieve.
-     *                                     - $searchSynonymsParams['hitsPerPage'] => (int) Number of hits per page.
+     * @param string                     $indexName            Name of the index on which to perform the operation. (required)
+     * @param array|SearchSynonymsParams $searchSynonymsParams Body of the `searchSynonyms` operation. (optional)
+     *                                                         - $searchSynonymsParams['query'] => (string) Search query.
+     *                                                         - $searchSynonymsParams['type'] => (array)
+     *                                                         - $searchSynonymsParams['page'] => (int) Page of search results to retrieve.
+     *                                                         - $searchSynonymsParams['hitsPerPage'] => (int) Number of hits per page.
      *
      * @see SearchSynonymsParams
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SearchSynonymsResponse|array<string, mixed>
+     * @return array<string, mixed>|SearchSynonymsResponse
      */
     public function searchSynonyms($indexName, $searchSynonymsParams = null, $requestOptions = [])
     {
@@ -2571,17 +2649,19 @@ class SearchClient
      * Required API Key ACLs:
      *  - admin
      *
-     * @param array $searchUserIdsParams searchUserIdsParams (required)
-     *                                   - $searchUserIdsParams['query'] => (string) Query to search. The search is a prefix search with [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/) enabled. An empty query will retrieve all users. (required)
-     *                                   - $searchUserIdsParams['clusterName'] => (string) Cluster name.
-     *                                   - $searchUserIdsParams['page'] => (int) Page of search results to retrieve.
-     *                                   - $searchUserIdsParams['hitsPerPage'] => (int) Number of hits per page.
+     * @param array|SearchUserIdsParams $searchUserIdsParams searchUserIdsParams (required)
+     *                                                       - $searchUserIdsParams['query'] => (string) Query to search. The search is a prefix search with [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/) enabled. An empty query will retrieve all users. (required)
+     *                                                       - $searchUserIdsParams['clusterName'] => (string) Cluster name.
+     *                                                       - $searchUserIdsParams['page'] => (int) Page of search results to retrieve.
+     *                                                       - $searchUserIdsParams['hitsPerPage'] => (int) Number of hits per page.
      *
      * @see SearchUserIdsParams
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SearchUserIdsResponse|array<string, mixed>
+     * @return array<string, mixed>|SearchUserIdsResponse
+     *
+     * @deprecated
      */
     public function searchUserIds($searchUserIdsParams, $requestOptions = [])
     {
@@ -2606,14 +2686,14 @@ class SearchClient
      * Required API Key ACLs:
      *  - editSettings
      *
-     * @param array $dictionarySettingsParams dictionarySettingsParams (required)
-     *                                        - $dictionarySettingsParams['disableStandardEntries'] => (array)  (required)
+     * @param array|DictionarySettingsParams $dictionarySettingsParams dictionarySettingsParams (required)
+     *                                                                 - $dictionarySettingsParams['disableStandardEntries'] => (array)  (required)
      *
      * @see DictionarySettingsParams
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|UpdatedAtResponse
      */
     public function setDictionarySettings($dictionarySettingsParams, $requestOptions = [])
     {
@@ -2638,15 +2718,15 @@ class SearchClient
      * Required API Key ACLs:
      *  - editSettings
      *
-     * @param string $indexName     Name of the index on which to perform the operation. (required)
-     * @param array  $indexSettings indexSettings (required)
+     * @param string              $indexName     Name of the index on which to perform the operation. (required)
+     * @param array|IndexSettings $indexSettings indexSettings (required)
      *
      * @see IndexSettings
      *
      * @param bool  $forwardToReplicas Whether changes are applied to replica indices. (optional)
      * @param array $requestOptions    the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|UpdatedAtResponse
      */
     public function setSettings($indexName, $indexSettings, $forwardToReplicas = null, $requestOptions = [])
     {
@@ -2690,22 +2770,22 @@ class SearchClient
      * Required API Key ACLs:
      *  - admin
      *
-     * @param string $key    API key. (required)
-     * @param array  $apiKey apiKey (required)
-     *                       - $apiKey['acl'] => (array) Permissions that determine the type of API requests this key can make. The required ACL is listed in each endpoint's reference. For more information, see [access control list](https://www.algolia.com/doc/guides/security/api-keys/#access-control-list-acl). (required)
-     *                       - $apiKey['description'] => (string) Description of an API key to help you identify this API key.
-     *                       - $apiKey['indexes'] => (array) Index names or patterns that this API key can access. By default, an API key can access all indices in the same application.  You can use leading and trailing wildcard characters (`*`):  - `dev_*` matches all indices starting with \"dev_\". - `*_dev` matches all indices ending with \"_dev\". - `*_products_*` matches all indices containing \"_products_\".
-     *                       - $apiKey['maxHitsPerQuery'] => (int) Maximum number of results this API key can retrieve in one query. By default, there's no limit.
-     *                       - $apiKey['maxQueriesPerIPPerHour'] => (int) Maximum number of API requests allowed per IP address or [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/) per hour.  If this limit is reached, the API returns an error with status code `429`. By default, there's no limit.
-     *                       - $apiKey['queryParameters'] => (string) Query parameters to add when making API requests with this API key.  To restrict this API key to specific IP addresses, add the `restrictSources` parameter. You can only add a single source, but you can provide a range of IP addresses.  Creating an API key fails if the request is made from an IP address outside the restricted range.
-     *                       - $apiKey['referers'] => (array) Allowed HTTP referrers for this API key.  By default, all referrers are allowed. You can use leading and trailing wildcard characters (`*`):  - `https://algolia.com/_*` allows all referrers starting with \"https://algolia.com/\" - `*.algolia.com` allows all referrers ending with \".algolia.com\" - `*algolia.com*` allows all referrers in the domain \"algolia.com\".  Like all HTTP headers, referrers can be spoofed. Don't rely on them to secure your data. For more information, see [HTTP referrer restrictions](https://www.algolia.com/doc/guides/security/security-best-practices/#http-referrers-restrictions).
-     *                       - $apiKey['validity'] => (int) Duration (in seconds) after which the API key expires. By default, API keys don't expire.
+     * @param string       $key    API key. (required)
+     * @param ApiKey|array $apiKey apiKey (required)
+     *                             - $apiKey['acl'] => (array) Permissions that determine the type of API requests this key can make. The required ACL is listed in each endpoint's reference. For more information, see [access control list](https://www.algolia.com/doc/guides/security/api-keys/#access-control-list-acl). (required)
+     *                             - $apiKey['description'] => (string) Description of an API key to help you identify this API key.
+     *                             - $apiKey['indexes'] => (array) Index names or patterns that this API key can access. By default, an API key can access all indices in the same application.  You can use leading and trailing wildcard characters (`*`):  - `dev_*` matches all indices starting with \"dev_\". - `*_dev` matches all indices ending with \"_dev\". - `*_products_*` matches all indices containing \"_products_\".
+     *                             - $apiKey['maxHitsPerQuery'] => (int) Maximum number of results this API key can retrieve in one query. By default, there's no limit.
+     *                             - $apiKey['maxQueriesPerIPPerHour'] => (int) Maximum number of API requests allowed per IP address or [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/) per hour.  If this limit is reached, the API returns an error with status code `429`. By default, there's no limit.
+     *                             - $apiKey['queryParameters'] => (string) Query parameters to add when making API requests with this API key.  To restrict this API key to specific IP addresses, add the `restrictSources` parameter. You can only add a single source, but you can provide a range of IP addresses.  Creating an API key fails if the request is made from an IP address outside the restricted range.
+     *                             - $apiKey['referers'] => (array) Allowed HTTP referrers for this API key.  By default, all referrers are allowed. You can use leading and trailing wildcard characters (`*`):  - `https://algolia.com/_*` allows all referrers starting with \"https://algolia.com/\" - `*.algolia.com` allows all referrers ending with \".algolia.com\" - `*algolia.com*` allows all referrers in the domain \"algolia.com\".  Like all HTTP headers, referrers can be spoofed. Don't rely on them to secure your data. For more information, see [HTTP referrer restrictions](https://www.algolia.com/doc/guides/security/security-best-practices/#http-referrers-restrictions).
+     *                             - $apiKey['validity'] => (int) Duration (in seconds) after which the API key expires. By default, API keys don't expire.
      *
      * @see ApiKey
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UpdateApiKeyResponse|array<string, mixed>
+     * @return array<string, mixed>|UpdateApiKeyResponse
      */
     public function updateApiKey($key, $apiKey, $requestOptions = [])
     {
@@ -2884,8 +2964,75 @@ class SearchClient
     }
 
     /**
+     * Helper: Similar to the `replaceAllObjects` method but requires a Push connector (https://www.algolia.com/doc/guides/sending-and-managing-data/send-and-update-your-data/connectors/push/) to be created first, in order to transform records before indexing them to Algolia. The `region` must have been passed to the client instantiation method.
+     *
+     * @param string $indexName      the `indexName` to replace `objects` in
+     * @param array  $objects        the array of `objects` to store in the given Algolia `indexName`
+     * @param array  $batchSize      The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
+     * @param array  $requestOptions Request options
+     * @param mixed  $scopes
+     */
+    public function replaceAllObjectsWithTransformation($indexName, $objects, $batchSize = 1000, $scopes = ['settings', 'rules', 'synonyms'], $requestOptions = [])
+    {
+        if (null == $this->ingestionTransporter) {
+            throw new \InvalidArgumentException('`setTransformationRegion` must have been called before calling this method.');
+        }
+
+        $tmpIndexName = $indexName.'_tmp_'.rand(10000000, 99999999);
+
+        try {
+            $copyOperationResponse = $this->operationIndex(
+                $indexName,
+                [
+                    'operation' => 'copy',
+                    'destination' => $tmpIndexName,
+                    'scope' => $scopes,
+                ],
+                $requestOptions
+            );
+
+            $watchResponses = $this->ingestionTransporter->chunkedPush($tmpIndexName, $objects, 'addObject', true, $batchSize, $indexName, $requestOptions);
+
+            $this->waitForTask($tmpIndexName, $copyOperationResponse['taskID']);
+
+            $copyOperationResponse = $this->operationIndex(
+                $indexName,
+                [
+                    'operation' => 'copy',
+                    'destination' => $tmpIndexName,
+                    'scope' => $scopes,
+                ],
+                $requestOptions
+            );
+
+            $this->waitForTask($tmpIndexName, $copyOperationResponse['taskID']);
+
+            $moveOperationResponse = $this->operationIndex(
+                $tmpIndexName,
+                [
+                    'operation' => 'move',
+                    'destination' => $indexName,
+                ],
+                $requestOptions
+            );
+
+            $this->waitForTask($tmpIndexName, $moveOperationResponse['taskID']);
+
+            return [
+                'copyOperationResponse' => $copyOperationResponse,
+                'watchResponses' => $watchResponses,
+                'moveOperationResponse' => $moveOperationResponse,
+            ];
+        } catch (\Throwable $e) {
+            $this->deleteIndex($tmpIndexName);
+
+            throw $e;
+        }
+    }
+
+    /**
      * Helper: Replace all objects in an index using a temporary one.
-     * See https://api-clients-automation.netlify.app/docs/add-new-api-client#5-helpers for implementation details.
+     * See https://api-clients-automation.netlify.app/docs/custom-helpers/#replaceallobjects for implementation details.
      *
      * @param string $indexName      the `indexName` to replace `objects` in
      * @param array  $objects        the array of `objects` to store in the given Algolia `indexName`
@@ -2952,13 +3099,34 @@ class SearchClient
      *
      * @param string $indexName      the `indexName` to replace `objects` in
      * @param array  $objects        the array of `objects` to store in the given Algolia `indexName`
-     * @param array  $batchSize      The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
-     * @param array  $requestOptions Request options
      * @param bool   $waitForTasks   Whether or not we should wait until every `batch` tasks has been processed, this operation may slow the total execution time of this method but is more reliable
+     * @param int    $batchSize      The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
+     * @param array  $requestOptions Request options
      */
-    public function saveObjects($indexName, $objects, $batchSize = 1000, $requestOptions = [], $waitForTasks = false)
+    public function saveObjects($indexName, $objects, $waitForTasks = false, $batchSize = 1000, $requestOptions = [])
     {
         return $this->chunkedBatch($indexName, $objects, 'addObject', $waitForTasks, $batchSize, $requestOptions);
+    }
+
+    /**
+     * Helper: Similar to the `saveObjects` method but requires a Push connector
+     * (https://www.algolia.com/doc/guides/sending-and-managing-data/send-and-update-your-data/connectors/push/)
+     * to be created first, in order to transform records before indexing them to Algolia. The
+     * `region` must have been passed to the client instantiation method.
+     *
+     * @param string $indexName      the `indexName` to replace `objects` in
+     * @param array  $objects        the array of `objects` to store in the given Algolia `indexName`
+     * @param bool   $waitForTasks   Whether or not we should wait until every `batch` tasks has been processed, this operation may slow the total execution time of this method but is more reliable
+     * @param int    $batchSize      The size of the chunk of `objects`. The number of `push` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
+     * @param array  $requestOptions Request options
+     */
+    public function saveObjectsWithTransformation($indexName, $objects, $waitForTasks = false, $batchSize = 1000, $requestOptions = [])
+    {
+        if (null == $this->ingestionTransporter) {
+            throw new \InvalidArgumentException('`setTransformationRegion` must have been called before calling this method.');
+        }
+
+        return $this->ingestionTransporter->chunkedPush($indexName, $objects, 'addObject', $waitForTasks, $batchSize, $requestOptions);
     }
 
     /**
@@ -2966,11 +3134,11 @@ class SearchClient
      *
      * @param string $indexName      the `indexName` to delete `objectIDs` from
      * @param array  $objectIDs      the `objectIDs` to delete
-     * @param array  $batchSize      The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
-     * @param array  $requestOptions Request options
      * @param bool   $waitForTasks   Whether or not we should wait until every `batch` tasks has been processed, this operation may slow the total execution time of this method but is more reliable
+     * @param int    $batchSize      The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
+     * @param array  $requestOptions Request options
      */
-    public function deleteObjects($indexName, $objectIDs, $batchSize = 1000, $requestOptions = [], $waitForTasks = false)
+    public function deleteObjects($indexName, $objectIDs, $waitForTasks = false, $batchSize = 1000, $requestOptions = [])
     {
         $objects = [];
 
@@ -2987,13 +3155,35 @@ class SearchClient
      * @param string $indexName         the `indexName` to replace `objects` in
      * @param array  $objects           the array of `objects` to store in the given Algolia `indexName`
      * @param bool   $createIfNotExists To be provided if non-existing objects are passed, otherwise, the call will fail..
-     * @param array  $batchSize         The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
-     * @param array  $requestOptions    Request options
      * @param bool   $waitForTasks      Whether or not we should wait until every `batch` tasks has been processed, this operation may slow the total execution time of this method but is more reliable
+     * @param int    $batchSize         The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
+     * @param array  $requestOptions    Request options
      */
-    public function partialUpdateObjects($indexName, $objects, $createIfNotExists, $batchSize = 1000, $requestOptions = [], $waitForTasks = false)
+    public function partialUpdateObjects($indexName, $objects, $createIfNotExists, $waitForTasks = false, $batchSize = 1000, $requestOptions = [])
     {
         return $this->chunkedBatch($indexName, $objects, (true == $createIfNotExists) ? 'partialUpdateObject' : 'partialUpdateObjectNoCreate', $waitForTasks, $batchSize, $requestOptions);
+    }
+
+    /**
+     * Helper: Similar to the `partialUpdateObjects` method but requires a Push connector
+     * (https://www.algolia.com/doc/guides/sending-and-managing-data/send-and-update-your-data/connectors/push/)
+     * to be created first, in order to transform records before indexing them to Algolia. The
+     * `region` must have been passed to the client instantiation method.
+     *
+     * @param string $indexName         the `indexName` to replace `objects` in
+     * @param array  $objects           the array of `objects` to store in the given Algolia `indexName`
+     * @param bool   $createIfNotExists To be provided if non-existing objects are passed, otherwise, the call will fail..
+     * @param bool   $waitForTasks      Whether or not we should wait until every `batch` tasks has been processed, this operation may slow the total execution time of this method but is more reliable
+     * @param int    $batchSize         The size of the chunk of `objects`. The number of `push` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
+     * @param array  $requestOptions    Request options
+     */
+    public function partialUpdateObjectsWithTransformation($indexName, $objects, $createIfNotExists, $waitForTasks = false, $batchSize = 1000, $requestOptions = [])
+    {
+        if (null == $this->ingestionTransporter) {
+            throw new \InvalidArgumentException('`setTransformationRegion` must have been called before calling this method.');
+        }
+
+        return $this->ingestionTransporter->chunkedPush($indexName, $objects, (true == $createIfNotExists) ? 'partialUpdateObject' : 'partialUpdateObjectNoCreate', $waitForTasks, $batchSize, $requestOptions);
     }
 
     /**
@@ -3003,7 +3193,7 @@ class SearchClient
      * @param array  $objects        the array of `objects` to store in the given Algolia `indexName`
      * @param array  $action         the `batch` `action` to perform on the given array of `objects`, defaults to `addObject`
      * @param bool   $waitForTasks   whether or not we should wait until every `batch` tasks has been processed, this operation may slow the total execution time of this method but is more reliable
-     * @param array  $batchSize      The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
+     * @param int    $batchSize      The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
      * @param array  $requestOptions Request options
      */
     public function chunkedBatch(

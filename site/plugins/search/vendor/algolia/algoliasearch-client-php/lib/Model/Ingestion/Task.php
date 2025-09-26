@@ -26,10 +26,12 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
         'cron' => 'string',
         'lastRun' => 'string',
         'nextRun' => 'string',
+        'owner' => 'string',
         'input' => '\Algolia\AlgoliaSearch\Model\Ingestion\TaskInput',
         'enabled' => 'bool',
         'failureThreshold' => 'int',
         'action' => '\Algolia\AlgoliaSearch\Model\Ingestion\ActionType',
+        'subscriptionAction' => '\Algolia\AlgoliaSearch\Model\Ingestion\ActionType',
         'cursor' => 'string',
         'notifications' => '\Algolia\AlgoliaSearch\Model\Ingestion\Notifications',
         'policies' => '\Algolia\AlgoliaSearch\Model\Ingestion\Policies',
@@ -49,10 +51,12 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
         'cron' => null,
         'lastRun' => null,
         'nextRun' => null,
+        'owner' => null,
         'input' => null,
         'enabled' => null,
         'failureThreshold' => null,
         'action' => null,
+        'subscriptionAction' => null,
         'cursor' => null,
         'notifications' => null,
         'policies' => null,
@@ -73,10 +77,12 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
         'cron' => 'cron',
         'lastRun' => 'lastRun',
         'nextRun' => 'nextRun',
+        'owner' => 'owner',
         'input' => 'input',
         'enabled' => 'enabled',
         'failureThreshold' => 'failureThreshold',
         'action' => 'action',
+        'subscriptionAction' => 'subscriptionAction',
         'cursor' => 'cursor',
         'notifications' => 'notifications',
         'policies' => 'policies',
@@ -96,10 +102,12 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
         'cron' => 'setCron',
         'lastRun' => 'setLastRun',
         'nextRun' => 'setNextRun',
+        'owner' => 'setOwner',
         'input' => 'setInput',
         'enabled' => 'setEnabled',
         'failureThreshold' => 'setFailureThreshold',
         'action' => 'setAction',
+        'subscriptionAction' => 'setSubscriptionAction',
         'cursor' => 'setCursor',
         'notifications' => 'setNotifications',
         'policies' => 'setPolicies',
@@ -119,10 +127,12 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
         'cron' => 'getCron',
         'lastRun' => 'getLastRun',
         'nextRun' => 'getNextRun',
+        'owner' => 'getOwner',
         'input' => 'getInput',
         'enabled' => 'getEnabled',
         'failureThreshold' => 'getFailureThreshold',
         'action' => 'getAction',
+        'subscriptionAction' => 'getSubscriptionAction',
         'cursor' => 'getCursor',
         'notifications' => 'getNotifications',
         'policies' => 'getPolicies',
@@ -162,6 +172,9 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
         if (isset($data['nextRun'])) {
             $this->container['nextRun'] = $data['nextRun'];
         }
+        if (isset($data['owner'])) {
+            $this->container['owner'] = $data['owner'];
+        }
         if (isset($data['input'])) {
             $this->container['input'] = $data['input'];
         }
@@ -173,6 +186,9 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
         }
         if (isset($data['action'])) {
             $this->container['action'] = $data['action'];
+        }
+        if (isset($data['subscriptionAction'])) {
+            $this->container['subscriptionAction'] = $data['subscriptionAction'];
         }
         if (isset($data['cursor'])) {
             $this->container['cursor'] = $data['cursor'];
@@ -265,6 +281,9 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
         }
         if (!isset($this->container['createdAt']) || null === $this->container['createdAt']) {
             $invalidProperties[] = "'createdAt' can't be null";
+        }
+        if (!isset($this->container['updatedAt']) || null === $this->container['updatedAt']) {
+            $invalidProperties[] = "'updatedAt' can't be null";
         }
 
         return $invalidProperties;
@@ -426,6 +445,30 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
     }
 
     /**
+     * Gets owner.
+     *
+     * @return null|string
+     */
+    public function getOwner()
+    {
+        return $this->container['owner'] ?? null;
+    }
+
+    /**
+     * Sets owner.
+     *
+     * @param null|string $owner owner of the resource
+     *
+     * @return self
+     */
+    public function setOwner($owner)
+    {
+        $this->container['owner'] = $owner;
+
+        return $this;
+    }
+
+    /**
      * Gets input.
      *
      * @return null|TaskInput
@@ -517,6 +560,30 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
     public function setAction($action)
     {
         $this->container['action'] = $action;
+
+        return $this;
+    }
+
+    /**
+     * Gets subscriptionAction.
+     *
+     * @return null|ActionType
+     */
+    public function getSubscriptionAction()
+    {
+        return $this->container['subscriptionAction'] ?? null;
+    }
+
+    /**
+     * Sets subscriptionAction.
+     *
+     * @param null|ActionType $subscriptionAction subscriptionAction
+     *
+     * @return self
+     */
+    public function setSubscriptionAction($subscriptionAction)
+    {
+        $this->container['subscriptionAction'] = $subscriptionAction;
 
         return $this;
     }
@@ -620,7 +687,7 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
     /**
      * Gets updatedAt.
      *
-     * @return null|string
+     * @return string
      */
     public function getUpdatedAt()
     {
@@ -630,7 +697,7 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
     /**
      * Sets updatedAt.
      *
-     * @param null|string $updatedAt date of last update in RFC 3339 format
+     * @param string $updatedAt date of last update in RFC 3339 format
      *
      * @return self
      */

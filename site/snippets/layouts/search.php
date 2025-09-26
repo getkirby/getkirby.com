@@ -1,6 +1,6 @@
 <?php
-$area  = $area ?? 'all';
-$areas = option('search.areas');
+$area ??= 'all';
+$areas  = $kirby->option('search.areas')($kirby);
 ?>
 
 <style>
@@ -25,7 +25,7 @@ form[data-fetching] .search-input figure svg:first-child {
 </style>
 
 <div class="search">
-	<button class="search-button" type="button" data-area="<?= $area ?? 'all' ?>" aria-label="Search">
+	<button class="search-button" type="button" data-area="<?= $area ?>" aria-label="Search">
 		<?= icon('search') ?>
 	</button>
 
@@ -81,9 +81,15 @@ form[data-fetching] .search-input figure svg:first-child {
 						View all <span class="search-more-count mx-1"></span> results &rsaquo;
 					</a>
 				</div>
-				<a class="ml-auto color-gray-600" href="https://algolia.com">
-					Search by <?= icon('algolia', 'Algolia') ?>
+				<?php if (option('archived', false) === false): ?>
+				<a
+					href="https://algolia.com"
+					aria-label="Search by Algolia"
+					class="ml-auto color-gray-600"
+				>
+					Search by <?= icon('algolia') ?>
 				</a>
+				<?php endif ?>
 			</div>
 		</form>
 	</dialog>
