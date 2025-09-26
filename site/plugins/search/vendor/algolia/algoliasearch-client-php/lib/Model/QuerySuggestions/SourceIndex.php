@@ -290,7 +290,7 @@ class SourceIndex extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Gets facets.
      *
-     * @return null|Facet[]
+     * @return null|\Algolia\AlgoliaSearch\Model\QuerySuggestions\Facet[]
      */
     public function getFacets()
     {
@@ -300,7 +300,7 @@ class SourceIndex extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Sets facets.
      *
-     * @param null|Facet[] $facets facets
+     * @param null|\Algolia\AlgoliaSearch\Model\QuerySuggestions\Facet[] $facets facets
      *
      * @return self
      */

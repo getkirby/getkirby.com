@@ -5,22 +5,20 @@
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
 /**
- * RunOutcome Class Doc Comment.
+ * DockerImageType Class Doc Comment.
  *
  * @category Class
  *
- * @description Task run outcome.
+ * @description Image type.
  */
-class RunOutcome
+class DockerImageType
 {
     /**
      * Possible values of this enum.
      */
-    public const SUCCESS = 'success';
+    public const CUSTOM = 'custom';
 
-    public const FAILURE = 'failure';
-
-    public const PROCESSING = 'processing';
+    public const AIRBYTE = 'airbyte';
 
     /**
      * Gets allowable values of the enum.
@@ -30,9 +28,8 @@ class RunOutcome
     public static function getAllowableEnumValues()
     {
         return [
-            self::SUCCESS,
-            self::FAILURE,
-            self::PROCESSING,
+            self::CUSTOM,
+            self::AIRBYTE,
         ];
     }
 }

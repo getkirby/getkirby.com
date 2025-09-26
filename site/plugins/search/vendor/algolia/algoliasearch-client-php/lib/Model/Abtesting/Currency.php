@@ -24,7 +24,6 @@ class Currency extends AbstractModel implements ModelInterface, \ArrayAccess, \J
         'revenue' => 'float',
         'mean' => 'float',
         'standardDeviation' => 'float',
-        'winsorizedAmount' => 'float',
     ];
 
     /**
@@ -37,7 +36,6 @@ class Currency extends AbstractModel implements ModelInterface, \ArrayAccess, \J
         'revenue' => 'double',
         'mean' => 'double',
         'standardDeviation' => 'double',
-        'winsorizedAmount' => 'double',
     ];
 
     /**
@@ -51,7 +49,6 @@ class Currency extends AbstractModel implements ModelInterface, \ArrayAccess, \J
         'revenue' => 'revenue',
         'mean' => 'mean',
         'standardDeviation' => 'standardDeviation',
-        'winsorizedAmount' => 'winsorizedAmount',
     ];
 
     /**
@@ -64,7 +61,6 @@ class Currency extends AbstractModel implements ModelInterface, \ArrayAccess, \J
         'revenue' => 'setRevenue',
         'mean' => 'setMean',
         'standardDeviation' => 'setStandardDeviation',
-        'winsorizedAmount' => 'setWinsorizedAmount',
     ];
 
     /**
@@ -77,7 +73,6 @@ class Currency extends AbstractModel implements ModelInterface, \ArrayAccess, \J
         'revenue' => 'getRevenue',
         'mean' => 'getMean',
         'standardDeviation' => 'getStandardDeviation',
-        'winsorizedAmount' => 'getWinsorizedAmount',
     ];
 
     /**
@@ -105,9 +100,6 @@ class Currency extends AbstractModel implements ModelInterface, \ArrayAccess, \J
         }
         if (isset($data['standardDeviation'])) {
             $this->container['standardDeviation'] = $data['standardDeviation'];
-        }
-        if (isset($data['winsorizedAmount'])) {
-            $this->container['winsorizedAmount'] = $data['winsorizedAmount'];
         }
     }
 
@@ -275,30 +267,6 @@ class Currency extends AbstractModel implements ModelInterface, \ArrayAccess, \J
     public function setStandardDeviation($standardDeviation)
     {
         $this->container['standardDeviation'] = $standardDeviation;
-
-        return $this;
-    }
-
-    /**
-     * Gets winsorizedAmount.
-     *
-     * @return null|float
-     */
-    public function getWinsorizedAmount()
-    {
-        return $this->container['winsorizedAmount'] ?? null;
-    }
-
-    /**
-     * Sets winsorizedAmount.
-     *
-     * @param null|float $winsorizedAmount the amount of revenue for this currency that was removed after capping purchase amounts to the 95th percentile
-     *
-     * @return self
-     */
-    public function setWinsorizedAmount($winsorizedAmount)
-    {
-        $this->container['winsorizedAmount'] = $winsorizedAmount;
 
         return $this;
     }

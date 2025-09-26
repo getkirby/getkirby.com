@@ -12,7 +12,7 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  *
  * @category Class
  *
- * @description URL for an image to show inside a banner.
+ * @description url for a search banner image.
  */
 class BannerImageUrl extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

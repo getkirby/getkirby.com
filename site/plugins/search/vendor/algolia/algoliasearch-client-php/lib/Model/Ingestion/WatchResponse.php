@@ -21,11 +21,9 @@ class WatchResponse extends AbstractModel implements ModelInterface, \ArrayAcces
      */
     protected static $modelTypes = [
         'runID' => 'string',
-        'eventID' => 'string',
         'data' => 'object[]',
         'events' => '\Algolia\AlgoliaSearch\Model\Ingestion\Event[]',
         'message' => 'string',
-        'createdAt' => 'string',
     ];
 
     /**
@@ -35,11 +33,9 @@ class WatchResponse extends AbstractModel implements ModelInterface, \ArrayAcces
      */
     protected static $modelFormats = [
         'runID' => null,
-        'eventID' => null,
         'data' => null,
         'events' => null,
         'message' => null,
-        'createdAt' => null,
     ];
 
     /**
@@ -50,11 +46,9 @@ class WatchResponse extends AbstractModel implements ModelInterface, \ArrayAcces
      */
     protected static $attributeMap = [
         'runID' => 'runID',
-        'eventID' => 'eventID',
         'data' => 'data',
         'events' => 'events',
         'message' => 'message',
-        'createdAt' => 'createdAt',
     ];
 
     /**
@@ -64,11 +58,9 @@ class WatchResponse extends AbstractModel implements ModelInterface, \ArrayAcces
      */
     protected static $setters = [
         'runID' => 'setRunID',
-        'eventID' => 'setEventID',
         'data' => 'setData',
         'events' => 'setEvents',
         'message' => 'setMessage',
-        'createdAt' => 'setCreatedAt',
     ];
 
     /**
@@ -78,11 +70,9 @@ class WatchResponse extends AbstractModel implements ModelInterface, \ArrayAcces
      */
     protected static $getters = [
         'runID' => 'getRunID',
-        'eventID' => 'getEventID',
         'data' => 'getData',
         'events' => 'getEvents',
         'message' => 'getMessage',
-        'createdAt' => 'getCreatedAt',
     ];
 
     /**
@@ -102,9 +92,6 @@ class WatchResponse extends AbstractModel implements ModelInterface, \ArrayAcces
         if (isset($data['runID'])) {
             $this->container['runID'] = $data['runID'];
         }
-        if (isset($data['eventID'])) {
-            $this->container['eventID'] = $data['eventID'];
-        }
         if (isset($data['data'])) {
             $this->container['data'] = $data['data'];
         }
@@ -113,9 +100,6 @@ class WatchResponse extends AbstractModel implements ModelInterface, \ArrayAcces
         }
         if (isset($data['message'])) {
             $this->container['message'] = $data['message'];
-        }
-        if (isset($data['createdAt'])) {
-            $this->container['createdAt'] = $data['createdAt'];
         }
     }
 
@@ -179,8 +163,8 @@ class WatchResponse extends AbstractModel implements ModelInterface, \ArrayAcces
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['runID']) || null === $this->container['runID']) {
-            $invalidProperties[] = "'runID' can't be null";
+        if (!isset($this->container['message']) || null === $this->container['message']) {
+            $invalidProperties[] = "'message' can't be null";
         }
 
         return $invalidProperties;
@@ -200,7 +184,7 @@ class WatchResponse extends AbstractModel implements ModelInterface, \ArrayAcces
     /**
      * Gets runID.
      *
-     * @return string
+     * @return null|string
      */
     public function getRunID()
     {
@@ -210,37 +194,13 @@ class WatchResponse extends AbstractModel implements ModelInterface, \ArrayAcces
     /**
      * Sets runID.
      *
-     * @param string $runID universally unique identifier (UUID) of a task run
+     * @param null|string $runID universally unique identifier (UUID) of a task run
      *
      * @return self
      */
     public function setRunID($runID)
     {
         $this->container['runID'] = $runID;
-
-        return $this;
-    }
-
-    /**
-     * Gets eventID.
-     *
-     * @return null|string
-     */
-    public function getEventID()
-    {
-        return $this->container['eventID'] ?? null;
-    }
-
-    /**
-     * Sets eventID.
-     *
-     * @param null|string $eventID universally unique identifier (UUID) of an event
-     *
-     * @return self
-     */
-    public function setEventID($eventID)
-    {
-        $this->container['eventID'] = $eventID;
 
         return $this;
     }
@@ -258,7 +218,7 @@ class WatchResponse extends AbstractModel implements ModelInterface, \ArrayAcces
     /**
      * Sets data.
      *
-     * @param null|object[] $data This field is always null when used with the Push endpoint. When used for a source discover or source validate run, it will include the sampled data of the source.
+     * @param null|object[] $data when used with discovering or validating sources, the sampled data of your source is returned
      *
      * @return self
      */
@@ -272,7 +232,7 @@ class WatchResponse extends AbstractModel implements ModelInterface, \ArrayAcces
     /**
      * Gets events.
      *
-     * @return null|Event[]
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\Event[]
      */
     public function getEvents()
     {
@@ -282,7 +242,7 @@ class WatchResponse extends AbstractModel implements ModelInterface, \ArrayAcces
     /**
      * Sets events.
      *
-     * @param null|Event[] $events in case of error, observability events will be added to the response
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\Event[] $events in case of error, observability events will be added to the response, if any
      *
      * @return self
      */
@@ -296,7 +256,7 @@ class WatchResponse extends AbstractModel implements ModelInterface, \ArrayAcces
     /**
      * Gets message.
      *
-     * @return null|string
+     * @return string
      */
     public function getMessage()
     {
@@ -306,37 +266,13 @@ class WatchResponse extends AbstractModel implements ModelInterface, \ArrayAcces
     /**
      * Sets message.
      *
-     * @param null|string $message a message describing the outcome of the operation that has been ran (push, discover or validate) run
+     * @param string $message a message describing the outcome of a validate run
      *
      * @return self
      */
     public function setMessage($message)
     {
         $this->container['message'] = $message;
-
-        return $this;
-    }
-
-    /**
-     * Gets createdAt.
-     *
-     * @return null|string
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['createdAt'] ?? null;
-    }
-
-    /**
-     * Sets createdAt.
-     *
-     * @param null|string $createdAt date of creation in RFC 3339 format
-     *
-     * @return self
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->container['createdAt'] = $createdAt;
 
         return $this;
     }

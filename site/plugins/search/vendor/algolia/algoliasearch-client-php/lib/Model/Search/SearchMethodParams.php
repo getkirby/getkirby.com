@@ -168,7 +168,7 @@ class SearchMethodParams extends AbstractModel implements ModelInterface, \Array
     /**
      * Gets requests.
      *
-     * @return SearchQuery[]
+     * @return \Algolia\AlgoliaSearch\Model\Search\SearchQuery[]
      */
     public function getRequests()
     {
@@ -178,7 +178,7 @@ class SearchMethodParams extends AbstractModel implements ModelInterface, \Array
     /**
      * Sets requests.
      *
-     * @param SearchQuery[] $requests requests
+     * @param \Algolia\AlgoliaSearch\Model\Search\SearchQuery[] $requests requests
      *
      * @return self
      */

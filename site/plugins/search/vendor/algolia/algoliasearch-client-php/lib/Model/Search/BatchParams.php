@@ -162,7 +162,7 @@ class BatchParams extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Gets requests.
      *
-     * @return MultipleBatchRequest[]
+     * @return \Algolia\AlgoliaSearch\Model\Search\MultipleBatchRequest[]
      */
     public function getRequests()
     {
@@ -172,7 +172,7 @@ class BatchParams extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Sets requests.
      *
-     * @param MultipleBatchRequest[] $requests requests
+     * @param \Algolia\AlgoliaSearch\Model\Search\MultipleBatchRequest[] $requests requests
      *
      * @return self
      */

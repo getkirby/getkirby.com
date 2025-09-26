@@ -43,7 +43,7 @@ class SearchResult extends AbstractModel implements ModelInterface, \ArrayAccess
         'renderingContent' => '\Algolia\AlgoliaSearch\Model\Search\RenderingContent',
         'serverTimeMS' => 'int',
         'serverUsed' => 'string',
-        'userData' => 'mixed',
+        'userData' => 'object',
         'queryID' => 'string',
         'automaticInsights' => 'bool',
         'page' => 'int',
@@ -406,6 +406,9 @@ class SearchResult extends AbstractModel implements ModelInterface, \ArrayAccess
         if (!isset($this->container['exhaustiveFacetsCount']) || null === $this->container['exhaustiveFacetsCount']) {
             $invalidProperties[] = "'exhaustiveFacetsCount' can't be null";
         }
+        if (!isset($this->container['processingTimeMS']) || null === $this->container['processingTimeMS']) {
+            $invalidProperties[] = "'processingTimeMS' can't be null";
+        }
         if (!isset($this->container['hits']) || null === $this->container['hits']) {
             $invalidProperties[] = "'hits' can't be null";
         }
@@ -684,7 +687,7 @@ class SearchResult extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Gets facetsStats.
      *
-     * @return null|array<string,FacetStats>
+     * @return null|array<string,\Algolia\AlgoliaSearch\Model\Search\FacetStats>
      */
     public function getFacetsStats()
     {
@@ -694,7 +697,7 @@ class SearchResult extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Sets facetsStats.
      *
-     * @param null|array<string,FacetStats> $facetsStats statistics for numerical facets
+     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Search\FacetStats> $facetsStats statistics for numerical facets
      *
      * @return self
      */
@@ -828,7 +831,7 @@ class SearchResult extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Gets processingTimeMS.
      *
-     * @return null|int
+     * @return int
      */
     public function getProcessingTimeMS()
     {
@@ -838,7 +841,7 @@ class SearchResult extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Sets processingTimeMS.
      *
-     * @param null|int $processingTimeMS time the server took to process the request, in milliseconds
+     * @param int $processingTimeMS time the server took to process the request, in milliseconds
      *
      * @return self
      */
@@ -996,7 +999,7 @@ class SearchResult extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Gets userData.
      *
-     * @return null|mixed
+     * @return null|object
      */
     public function getUserData()
     {
@@ -1006,7 +1009,7 @@ class SearchResult extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Sets userData.
      *
-     * @param null|mixed $userData An object with custom data.  You can store up to 32kB as custom data.
+     * @param null|object $userData An object with custom data.  You can store up to 32kB as custom data.
      *
      * @return self
      */
@@ -1164,7 +1167,7 @@ class SearchResult extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Gets hits.
      *
-     * @return Hit[]
+     * @return \Algolia\AlgoliaSearch\Model\Search\Hit[]
      */
     public function getHits()
     {
@@ -1174,7 +1177,7 @@ class SearchResult extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Sets hits.
      *
-     * @param Hit[] $hits Search results (hits).  Hits are records from your index that match the search criteria, augmented with additional attributes, such as, for highlighting.
+     * @param \Algolia\AlgoliaSearch\Model\Search\Hit[] $hits Search results (hits).  Hits are records from your index that match the search criteria, augmented with additional attributes, such as, for highlighting.
      *
      * @return self
      */
@@ -1236,7 +1239,7 @@ class SearchResult extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Gets facetHits.
      *
-     * @return FacetHits[]
+     * @return \Algolia\AlgoliaSearch\Model\Search\FacetHits[]
      */
     public function getFacetHits()
     {
@@ -1246,7 +1249,7 @@ class SearchResult extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Sets facetHits.
      *
-     * @param FacetHits[] $facetHits matching facet values
+     * @param \Algolia\AlgoliaSearch\Model\Search\FacetHits[] $facetHits matching facet values
      *
      * @return self
      */

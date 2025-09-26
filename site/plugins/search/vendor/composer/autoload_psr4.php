@@ -6,22 +6,10 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Wamania\\Snowball\\' => array($vendorDir . '/wamania/php-stemmer/src'),
-    'Toflar\\StateSetIndex\\' => array($vendorDir . '/toflar/state-set-index/src'),
-    'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
     'Psr\\SimpleCache\\' => array($vendorDir . '/psr/simple-cache/src'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/src'),
-    'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-factory/src', $vendorDir . '/psr/http-message/src'),
-    'Psr\\Cache\\' => array($vendorDir . '/psr/cache/src'),
-    'Nitotm\\Eld\\' => array($vendorDir . '/nitotm/efficient-language-detector/src'),
-    'Loupe\\Matcher\\' => array($vendorDir . '/loupe/matcher/src'),
-    'Loupe\\Loupe\\' => array($vendorDir . '/loupe/loupe/src'),
-    'Location\\' => array($vendorDir . '/mjaschen/phpgeo/src'),
+    'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src', $vendorDir . '/psr/http-factory/src'),
     'Kirby\\Search\\' => array($baseDir . '/src'),
-    'Joomla\\String\\' => array($vendorDir . '/joomla/string/src'),
     'GuzzleHttp\\Psr7\\' => array($vendorDir . '/guzzlehttp/psr7/src'),
-    'Doctrine\\Deprecations\\' => array($vendorDir . '/doctrine/deprecations/src'),
-    'Doctrine\\DBAL\\' => array($vendorDir . '/doctrine/dbal/src'),
-    'Doctrine\\Common\\Lexer\\' => array($vendorDir . '/doctrine/lexer/src'),
     'Algolia\\AlgoliaSearch\\' => array($vendorDir . '/algolia/algoliasearch-client-php/lib'),
 );

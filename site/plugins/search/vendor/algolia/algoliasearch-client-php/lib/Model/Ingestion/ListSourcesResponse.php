@@ -171,7 +171,7 @@ class ListSourcesResponse extends AbstractModel implements ModelInterface, \Arra
     /**
      * Gets sources.
      *
-     * @return Source[]
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\Source[]
      */
     public function getSources()
     {
@@ -181,7 +181,7 @@ class ListSourcesResponse extends AbstractModel implements ModelInterface, \Arra
     /**
      * Sets sources.
      *
-     * @param Source[] $sources sources
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\Source[] $sources sources
      *
      * @return self
      */

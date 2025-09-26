@@ -20,6 +20,9 @@ class SourceUpdateDocker extends AbstractModel implements ModelInterface, \Array
      * @var string[]
      */
     protected static $modelTypes = [
+        'registry' => '\Algolia\AlgoliaSearch\Model\Ingestion\DockerRegistry',
+        'image' => 'string',
+        'version' => 'string',
         'configuration' => 'object',
     ];
 
@@ -29,6 +32,9 @@ class SourceUpdateDocker extends AbstractModel implements ModelInterface, \Array
      * @var string[]
      */
     protected static $modelFormats = [
+        'registry' => null,
+        'image' => null,
+        'version' => null,
         'configuration' => null,
     ];
 
@@ -39,6 +45,9 @@ class SourceUpdateDocker extends AbstractModel implements ModelInterface, \Array
      * @var string[]
      */
     protected static $attributeMap = [
+        'registry' => 'registry',
+        'image' => 'image',
+        'version' => 'version',
         'configuration' => 'configuration',
     ];
 
@@ -48,6 +57,9 @@ class SourceUpdateDocker extends AbstractModel implements ModelInterface, \Array
      * @var string[]
      */
     protected static $setters = [
+        'registry' => 'setRegistry',
+        'image' => 'setImage',
+        'version' => 'setVersion',
         'configuration' => 'setConfiguration',
     ];
 
@@ -57,6 +69,9 @@ class SourceUpdateDocker extends AbstractModel implements ModelInterface, \Array
      * @var string[]
      */
     protected static $getters = [
+        'registry' => 'getRegistry',
+        'image' => 'getImage',
+        'version' => 'getVersion',
         'configuration' => 'getConfiguration',
     ];
 
@@ -74,6 +89,15 @@ class SourceUpdateDocker extends AbstractModel implements ModelInterface, \Array
      */
     public function __construct(?array $data = null)
     {
+        if (isset($data['registry'])) {
+            $this->container['registry'] = $data['registry'];
+        }
+        if (isset($data['image'])) {
+            $this->container['image'] = $data['image'];
+        }
+        if (isset($data['version'])) {
+            $this->container['version'] = $data['version'];
+        }
         if (isset($data['configuration'])) {
             $this->container['configuration'] = $data['configuration'];
         }
@@ -155,6 +179,78 @@ class SourceUpdateDocker extends AbstractModel implements ModelInterface, \Array
     public function valid()
     {
         return 0 === count($this->listInvalidProperties());
+    }
+
+    /**
+     * Gets registry.
+     *
+     * @return null|DockerRegistry
+     */
+    public function getRegistry()
+    {
+        return $this->container['registry'] ?? null;
+    }
+
+    /**
+     * Sets registry.
+     *
+     * @param null|DockerRegistry $registry registry
+     *
+     * @return self
+     */
+    public function setRegistry($registry)
+    {
+        $this->container['registry'] = $registry;
+
+        return $this;
+    }
+
+    /**
+     * Gets image.
+     *
+     * @return null|string
+     */
+    public function getImage()
+    {
+        return $this->container['image'] ?? null;
+    }
+
+    /**
+     * Sets image.
+     *
+     * @param null|string $image docker image name
+     *
+     * @return self
+     */
+    public function setImage($image)
+    {
+        $this->container['image'] = $image;
+
+        return $this;
+    }
+
+    /**
+     * Gets version.
+     *
+     * @return null|string
+     */
+    public function getVersion()
+    {
+        return $this->container['version'] ?? null;
+    }
+
+    /**
+     * Sets version.
+     *
+     * @param null|string $version docker image version
+     *
+     * @return self
+     */
+    public function setVersion($version)
+    {
+        $this->container['version'] = $version;
+
+        return $this;
     }
 
     /**

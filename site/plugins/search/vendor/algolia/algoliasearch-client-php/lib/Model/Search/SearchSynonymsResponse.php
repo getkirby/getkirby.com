@@ -171,7 +171,7 @@ class SearchSynonymsResponse extends AbstractModel implements ModelInterface, \A
     /**
      * Gets hits.
      *
-     * @return SynonymHit[]
+     * @return \Algolia\AlgoliaSearch\Model\Search\SynonymHit[]
      */
     public function getHits()
     {
@@ -181,7 +181,7 @@ class SearchSynonymsResponse extends AbstractModel implements ModelInterface, \A
     /**
      * Sets hits.
      *
-     * @param SynonymHit[] $hits matching synonyms
+     * @param \Algolia\AlgoliaSearch\Model\Search\SynonymHit[] $hits matching synonyms
      *
      * @return self
      */

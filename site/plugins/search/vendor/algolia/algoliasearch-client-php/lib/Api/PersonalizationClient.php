@@ -6,10 +6,7 @@ namespace Algolia\AlgoliaSearch\Api;
 
 use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Configuration\PersonalizationConfig;
-use Algolia\AlgoliaSearch\Model\Personalization\DeleteUserProfileResponse;
-use Algolia\AlgoliaSearch\Model\Personalization\GetUserTokenResponse;
 use Algolia\AlgoliaSearch\Model\Personalization\PersonalizationStrategyParams;
-use Algolia\AlgoliaSearch\Model\Personalization\SetPersonalizationStrategyResponse;
 use Algolia\AlgoliaSearch\ObjectSerializer;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
@@ -23,17 +20,12 @@ use GuzzleHttp\Psr7\Query;
  */
 class PersonalizationClient
 {
-    public const VERSION = '4.26.0';
+    public const VERSION = '4.12.0';
 
     /**
      * @var ApiWrapperInterface
      */
     protected $api;
-
-    /**
-     * @var IngestionClient
-     */
-    protected $ingestionTransporter;
 
     /**
      * @var PersonalizationConfig
@@ -75,9 +67,7 @@ class PersonalizationClient
             self::getClusterHosts($config)
         );
 
-        $client = new static($apiWrapper, $config);
-
-        return $client;
+        return new static($apiWrapper, $config);
     }
 
     /**
@@ -119,9 +109,9 @@ class PersonalizationClient
     }
 
     /**
-     * This method lets you send requests to the Algolia REST API.
+     * This method allow you to send requests to the Algolia REST API.
      *
-     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param string $path           Path of the endpoint, anything after \"/1\" must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -158,9 +148,9 @@ class PersonalizationClient
     }
 
     /**
-     * This method lets you send requests to the Algolia REST API.
+     * This method allow you to send requests to the Algolia REST API.
      *
-     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param string $path           Path of the endpoint, anything after \"/1\" must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -197,9 +187,9 @@ class PersonalizationClient
     }
 
     /**
-     * This method lets you send requests to the Algolia REST API.
+     * This method allow you to send requests to the Algolia REST API.
      *
-     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param string $path           Path of the endpoint, anything after \"/1\" must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $body           Parameters to send with the custom request. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -237,9 +227,9 @@ class PersonalizationClient
     }
 
     /**
-     * This method lets you send requests to the Algolia REST API.
+     * This method allow you to send requests to the Algolia REST API.
      *
-     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param string $path           Path of the endpoint, anything after \"/1\" must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $body           Parameters to send with the custom request. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -285,7 +275,7 @@ class PersonalizationClient
      * @param string $userToken      Unique identifier representing a user for which to fetch the personalization profile. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|DeleteUserProfileResponse
+     * @return \Algolia\AlgoliaSearch\Model\Personalization\DeleteUserProfileResponse|array<string, mixed>
      */
     public function deleteUserProfile($userToken, $requestOptions = [])
     {
@@ -321,7 +311,7 @@ class PersonalizationClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|PersonalizationStrategyParams
+     * @return \Algolia\AlgoliaSearch\Model\Personalization\PersonalizationStrategyParams|array<string, mixed>
      */
     public function getPersonalizationStrategy($requestOptions = [])
     {
@@ -342,7 +332,7 @@ class PersonalizationClient
      * @param string $userToken      Unique identifier representing a user for which to fetch the personalization profile. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|GetUserTokenResponse
+     * @return \Algolia\AlgoliaSearch\Model\Personalization\GetUserTokenResponse|array<string, mixed>
      */
     public function getUserTokenProfile($userToken, $requestOptions = [])
     {
@@ -376,16 +366,16 @@ class PersonalizationClient
      * Required API Key ACLs:
      *  - recommendation
      *
-     * @param array|PersonalizationStrategyParams $personalizationStrategyParams personalizationStrategyParams (required)
-     *                                                                           - $personalizationStrategyParams['eventsScoring'] => (array) Scores associated with each event.  The higher the scores, the higher the impact of those events on the personalization of search results. (required)
-     *                                                                           - $personalizationStrategyParams['facetsScoring'] => (array) Scores associated with each facet.  The higher the scores, the higher the impact of those events on the personalization of search results. (required)
-     *                                                                           - $personalizationStrategyParams['personalizationImpact'] => (int) Impact of personalization on the search results.  If set to 0, personalization has no impact on the search results. (required)
+     * @param array $personalizationStrategyParams personalizationStrategyParams (required)
+     *                                             - $personalizationStrategyParams['eventsScoring'] => (array) Scores associated with each event.  The higher the scores, the higher the impact of those events on the personalization of search results. (required)
+     *                                             - $personalizationStrategyParams['facetsScoring'] => (array) Scores associated with each facet.  The higher the scores, the higher the impact of those events on the personalization of search results. (required)
+     *                                             - $personalizationStrategyParams['personalizationImpact'] => (int) Impact of personalization on the search results.  If set to 0, personalization has no impact on the search results. (required)
      *
      * @see PersonalizationStrategyParams
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|SetPersonalizationStrategyResponse
+     * @return \Algolia\AlgoliaSearch\Model\Personalization\SetPersonalizationStrategyResponse|array<string, mixed>
      */
     public function setPersonalizationStrategy($personalizationStrategyParams, $requestOptions = [])
     {

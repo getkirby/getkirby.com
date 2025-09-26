@@ -194,7 +194,7 @@ class BatchDictionaryEntriesParams extends AbstractModel implements ModelInterfa
     /**
      * Gets requests.
      *
-     * @return BatchDictionaryEntriesRequest[]
+     * @return \Algolia\AlgoliaSearch\Model\Search\BatchDictionaryEntriesRequest[]
      */
     public function getRequests()
     {
@@ -204,7 +204,7 @@ class BatchDictionaryEntriesParams extends AbstractModel implements ModelInterfa
     /**
      * Sets requests.
      *
-     * @param BatchDictionaryEntriesRequest[] $requests list of additions and deletions to your dictionaries
+     * @param \Algolia\AlgoliaSearch\Model\Search\BatchDictionaryEntriesRequest[] $requests list of additions and deletions to your dictionaries
      *
      * @return self
      */

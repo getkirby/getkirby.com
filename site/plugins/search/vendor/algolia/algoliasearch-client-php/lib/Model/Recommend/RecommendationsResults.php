@@ -43,7 +43,7 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
         'renderingContent' => '\Algolia\AlgoliaSearch\Model\Recommend\RenderingContent',
         'serverTimeMS' => 'int',
         'serverUsed' => 'string',
-        'userData' => 'mixed',
+        'userData' => 'object',
         'queryID' => 'string',
         'automaticInsights' => 'bool',
         'page' => 'int',
@@ -379,6 +379,9 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
     {
         $invalidProperties = [];
 
+        if (!isset($this->container['processingTimeMS']) || null === $this->container['processingTimeMS']) {
+            $invalidProperties[] = "'processingTimeMS' can't be null";
+        }
         if (!isset($this->container['hits']) || null === $this->container['hits']) {
             $invalidProperties[] = "'hits' can't be null";
         }
@@ -652,7 +655,7 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
     /**
      * Gets facetsStats.
      *
-     * @return null|array<string,FacetStats>
+     * @return null|array<string,\Algolia\AlgoliaSearch\Model\Recommend\FacetStats>
      */
     public function getFacetsStats()
     {
@@ -662,7 +665,7 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
     /**
      * Sets facetsStats.
      *
-     * @param null|array<string,FacetStats> $facetsStats statistics for numerical facets
+     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Recommend\FacetStats> $facetsStats statistics for numerical facets
      *
      * @return self
      */
@@ -796,7 +799,7 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
     /**
      * Gets processingTimeMS.
      *
-     * @return null|int
+     * @return int
      */
     public function getProcessingTimeMS()
     {
@@ -806,7 +809,7 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
     /**
      * Sets processingTimeMS.
      *
-     * @param null|int $processingTimeMS time the server took to process the request, in milliseconds
+     * @param int $processingTimeMS time the server took to process the request, in milliseconds
      *
      * @return self
      */
@@ -964,7 +967,7 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
     /**
      * Gets userData.
      *
-     * @return null|mixed
+     * @return null|object
      */
     public function getUserData()
     {
@@ -974,7 +977,7 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
     /**
      * Sets userData.
      *
-     * @param null|mixed $userData An object with custom data.  You can store up to 32kB as custom data.
+     * @param null|object $userData An object with custom data.  You can store up to 32kB as custom data.
      *
      * @return self
      */
@@ -1132,7 +1135,7 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
     /**
      * Gets hits.
      *
-     * @return RecommendationsHit[]
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\RecommendationsHit[]
      */
     public function getHits()
     {
@@ -1142,7 +1145,7 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
     /**
      * Sets hits.
      *
-     * @param RecommendationsHit[] $hits hits
+     * @param \Algolia\AlgoliaSearch\Model\Recommend\RecommendationsHit[] $hits hits
      *
      * @return self
      */

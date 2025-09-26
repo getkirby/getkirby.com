@@ -162,7 +162,7 @@ class DockerStreamsInput extends AbstractModel implements ModelInterface, \Array
     /**
      * Gets streams.
      *
-     * @return DockerStreams[]
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\DockerStreams[]
      */
     public function getStreams()
     {
@@ -172,7 +172,7 @@ class DockerStreamsInput extends AbstractModel implements ModelInterface, \Array
     /**
      * Sets streams.
      *
-     * @param DockerStreams[] $streams streams
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\DockerStreams[] $streams streams
      *
      * @return self
      */

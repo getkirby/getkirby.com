@@ -179,7 +179,7 @@ class SearchForFacetValuesResponse extends AbstractModel implements ModelInterfa
     /**
      * Gets facetHits.
      *
-     * @return FacetHits[]
+     * @return \Algolia\AlgoliaSearch\Model\Search\FacetHits[]
      */
     public function getFacetHits()
     {
@@ -189,7 +189,7 @@ class SearchForFacetValuesResponse extends AbstractModel implements ModelInterfa
     /**
      * Sets facetHits.
      *
-     * @param FacetHits[] $facetHits matching facet values
+     * @param \Algolia\AlgoliaSearch\Model\Search\FacetHits[] $facetHits matching facet values
      *
      * @return self
      */

@@ -25,7 +25,6 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
         'url' => 'string',
         'projectKey' => 'string',
         'fallbackIsInStockValue' => 'bool',
-        'productQueryPredicate' => 'string',
         'customFields' => 'string[]',
         'storeHash' => 'string',
         'channel' => '\Algolia\AlgoliaSearch\Model\Ingestion\BigCommerceChannel',
@@ -41,7 +40,10 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
         'table' => 'string',
         'tablePrefix' => 'string',
         'customSQLRequest' => 'string',
+        'imageType' => '\Algolia\AlgoliaSearch\Model\Ingestion\DockerImageType',
+        'registry' => '\Algolia\AlgoliaSearch\Model\Ingestion\DockerRegistry',
         'image' => 'string',
+        'version' => 'string',
         'configuration' => 'object',
         'featureFlags' => 'array<string,mixed>',
         'shopURL' => 'string',
@@ -58,7 +60,6 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
         'url' => null,
         'projectKey' => null,
         'fallbackIsInStockValue' => null,
-        'productQueryPredicate' => null,
         'customFields' => null,
         'storeHash' => null,
         'channel' => null,
@@ -74,7 +75,10 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
         'table' => null,
         'tablePrefix' => null,
         'customSQLRequest' => null,
+        'imageType' => null,
+        'registry' => null,
         'image' => null,
+        'version' => null,
         'configuration' => null,
         'featureFlags' => null,
         'shopURL' => null,
@@ -92,7 +96,6 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
         'url' => 'url',
         'projectKey' => 'projectKey',
         'fallbackIsInStockValue' => 'fallbackIsInStockValue',
-        'productQueryPredicate' => 'productQueryPredicate',
         'customFields' => 'customFields',
         'storeHash' => 'storeHash',
         'channel' => 'channel',
@@ -108,7 +111,10 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
         'table' => 'table',
         'tablePrefix' => 'tablePrefix',
         'customSQLRequest' => 'customSQLRequest',
+        'imageType' => 'imageType',
+        'registry' => 'registry',
         'image' => 'image',
+        'version' => 'version',
         'configuration' => 'configuration',
         'featureFlags' => 'featureFlags',
         'shopURL' => 'shopURL',
@@ -125,7 +131,6 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
         'url' => 'setUrl',
         'projectKey' => 'setProjectKey',
         'fallbackIsInStockValue' => 'setFallbackIsInStockValue',
-        'productQueryPredicate' => 'setProductQueryPredicate',
         'customFields' => 'setCustomFields',
         'storeHash' => 'setStoreHash',
         'channel' => 'setChannel',
@@ -141,7 +146,10 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
         'table' => 'setTable',
         'tablePrefix' => 'setTablePrefix',
         'customSQLRequest' => 'setCustomSQLRequest',
+        'imageType' => 'setImageType',
+        'registry' => 'setRegistry',
         'image' => 'setImage',
+        'version' => 'setVersion',
         'configuration' => 'setConfiguration',
         'featureFlags' => 'setFeatureFlags',
         'shopURL' => 'setShopURL',
@@ -158,7 +166,6 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
         'url' => 'getUrl',
         'projectKey' => 'getProjectKey',
         'fallbackIsInStockValue' => 'getFallbackIsInStockValue',
-        'productQueryPredicate' => 'getProductQueryPredicate',
         'customFields' => 'getCustomFields',
         'storeHash' => 'getStoreHash',
         'channel' => 'getChannel',
@@ -174,7 +181,10 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
         'table' => 'getTable',
         'tablePrefix' => 'getTablePrefix',
         'customSQLRequest' => 'getCustomSQLRequest',
+        'imageType' => 'getImageType',
+        'registry' => 'getRegistry',
         'image' => 'getImage',
+        'version' => 'getVersion',
         'configuration' => 'getConfiguration',
         'featureFlags' => 'getFeatureFlags',
         'shopURL' => 'getShopURL',
@@ -208,9 +218,6 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
         }
         if (isset($data['fallbackIsInStockValue'])) {
             $this->container['fallbackIsInStockValue'] = $data['fallbackIsInStockValue'];
-        }
-        if (isset($data['productQueryPredicate'])) {
-            $this->container['productQueryPredicate'] = $data['productQueryPredicate'];
         }
         if (isset($data['customFields'])) {
             $this->container['customFields'] = $data['customFields'];
@@ -257,8 +264,17 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
         if (isset($data['customSQLRequest'])) {
             $this->container['customSQLRequest'] = $data['customSQLRequest'];
         }
+        if (isset($data['imageType'])) {
+            $this->container['imageType'] = $data['imageType'];
+        }
+        if (isset($data['registry'])) {
+            $this->container['registry'] = $data['registry'];
+        }
         if (isset($data['image'])) {
             $this->container['image'] = $data['image'];
+        }
+        if (isset($data['version'])) {
+            $this->container['version'] = $data['version'];
         }
         if (isset($data['configuration'])) {
             $this->container['configuration'] = $data['configuration'];
@@ -348,6 +364,12 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
         }
         if (!isset($this->container['tablePrefix']) || null === $this->container['tablePrefix']) {
             $invalidProperties[] = "'tablePrefix' can't be null";
+        }
+        if (!isset($this->container['imageType']) || null === $this->container['imageType']) {
+            $invalidProperties[] = "'imageType' can't be null";
+        }
+        if (!isset($this->container['registry']) || null === $this->container['registry']) {
+            $invalidProperties[] = "'registry' can't be null";
         }
         if (!isset($this->container['image']) || null === $this->container['image']) {
             $invalidProperties[] = "'image' can't be null";
@@ -494,30 +516,6 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
     }
 
     /**
-     * Gets productQueryPredicate.
-     *
-     * @return null|string
-     */
-    public function getProductQueryPredicate()
-    {
-        return $this->container['productQueryPredicate'] ?? null;
-    }
-
-    /**
-     * Sets productQueryPredicate.
-     *
-     * @param null|string $productQueryPredicate Predicate to filter out specific products when indexing. For more information, see [Query Predicate](https://docs.commercetools.com/api/predicates/query).
-     *
-     * @return self
-     */
-    public function setProductQueryPredicate($productQueryPredicate)
-    {
-        $this->container['productQueryPredicate'] = $productQueryPredicate;
-
-        return $this;
-    }
-
-    /**
      * Gets customFields.
      *
      * @return null|string[]
@@ -592,7 +590,7 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Gets productMetafields.
      *
-     * @return null|BigCommerceMetafield[]
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\BigCommerceMetafield[]
      */
     public function getProductMetafields()
     {
@@ -602,7 +600,7 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Sets productMetafields.
      *
-     * @param null|BigCommerceMetafield[] $productMetafields productMetafields
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\BigCommerceMetafield[] $productMetafields productMetafields
      *
      * @return self
      */
@@ -616,7 +614,7 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Gets variantMetafields.
      *
-     * @return null|BigCommerceMetafield[]
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\BigCommerceMetafield[]
      */
     public function getVariantMetafields()
     {
@@ -626,7 +624,7 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Sets variantMetafields.
      *
-     * @param null|BigCommerceMetafield[] $variantMetafields variantMetafields
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\BigCommerceMetafield[] $variantMetafields variantMetafields
      *
      * @return self
      */
@@ -688,7 +686,7 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Gets mapping.
      *
-     * @return null|array<string,MappingTypeCSV>
+     * @return null|array<string,\Algolia\AlgoliaSearch\Model\Ingestion\MappingTypeCSV>
      */
     public function getMapping()
     {
@@ -698,7 +696,7 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Sets mapping.
      *
-     * @param null|array<string,MappingTypeCSV> $mapping key-value pairs of column names and their expected types
+     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Ingestion\MappingTypeCSV> $mapping key-value pairs of column names and their expected types
      *
      * @return self
      */
@@ -878,6 +876,54 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
     }
 
     /**
+     * Gets imageType.
+     *
+     * @return DockerImageType
+     */
+    public function getImageType()
+    {
+        return $this->container['imageType'] ?? null;
+    }
+
+    /**
+     * Sets imageType.
+     *
+     * @param DockerImageType $imageType imageType
+     *
+     * @return self
+     */
+    public function setImageType($imageType)
+    {
+        $this->container['imageType'] = $imageType;
+
+        return $this;
+    }
+
+    /**
+     * Gets registry.
+     *
+     * @return DockerRegistry
+     */
+    public function getRegistry()
+    {
+        return $this->container['registry'] ?? null;
+    }
+
+    /**
+     * Sets registry.
+     *
+     * @param DockerRegistry $registry registry
+     *
+     * @return self
+     */
+    public function setRegistry($registry)
+    {
+        $this->container['registry'] = $registry;
+
+        return $this;
+    }
+
+    /**
      * Gets image.
      *
      * @return string
@@ -890,13 +936,37 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Sets image.
      *
-     * @param string $image name of the connector
+     * @param string $image docker image name
      *
      * @return self
      */
     public function setImage($image)
     {
         $this->container['image'] = $image;
+
+        return $this;
+    }
+
+    /**
+     * Gets version.
+     *
+     * @return null|string
+     */
+    public function getVersion()
+    {
+        return $this->container['version'] ?? null;
+    }
+
+    /**
+     * Sets version.
+     *
+     * @param null|string $version docker image version
+     *
+     * @return self
+     */
+    public function setVersion($version)
+    {
+        $this->container['version'] = $version;
 
         return $this;
     }

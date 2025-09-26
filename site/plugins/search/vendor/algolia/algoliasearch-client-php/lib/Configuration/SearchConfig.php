@@ -26,42 +26,9 @@ class SearchConfig extends Configuration
         return $this->config['waitTaskTimeBeforeRetry'];
     }
 
-    /**
-     * Sets the max retries value used in the Search helpers (e.g. replaceAllobjects).
-     *
-     * @param number $maxRetries the user agent of the api client
-     *
-     * @return $this
-     */
-    public function setMaxRetries($maxRetries)
-    {
-        $this->config['defaultMaxRetries'] = $maxRetries;
-
-        return $this;
-    }
-
     public function getDefaultMaxRetries()
     {
         return $this->config['defaultMaxRetries'];
-    }
-
-    /**
-     * Sets the region of the current algolia application to the configuration, this is required to be called if you wish to leverage the transformation pipeline (via the *WithTransformation methods).
-     *
-     * @param string $region the user agent of the api client
-     *
-     * @return $this
-     */
-    public function setTransformationRegion($region)
-    {
-        $this->config['region'] = $region;
-
-        return $this;
-    }
-
-    public function getTransformationRegion()
-    {
-        return $this->config['region'];
     }
 
     public function getDefaultConfiguration()
@@ -75,7 +42,6 @@ class SearchConfig extends Configuration
             'writeTimeout' => 30,
             'connectTimeout' => 2,
             'defaultHeaders' => [],
-            'region' => null,
             'waitTaskTimeBeforeRetry' => $this->defaultWaitTaskTimeBeforeRetry,
             'defaultMaxRetries' => $this->defaultMaxRetries,
             'defaultForwardToReplicas' => null,

@@ -160,7 +160,7 @@ class GetTopHitsResponse extends AbstractModel implements ModelInterface, \Array
     /**
      * Gets hits.
      *
-     * @return TopHitWithRevenueAnalytics[]
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\TopHitWithRevenueAnalytics[]
      */
     public function getHits()
     {
@@ -170,7 +170,7 @@ class GetTopHitsResponse extends AbstractModel implements ModelInterface, \Array
     /**
      * Sets hits.
      *
-     * @param TopHitWithRevenueAnalytics[] $hits most frequent search results with click, conversion, and revenue metrics
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\TopHitWithRevenueAnalytics[] $hits most frequent search results with click, conversion, and revenue metrics
      *
      * @return self
      */

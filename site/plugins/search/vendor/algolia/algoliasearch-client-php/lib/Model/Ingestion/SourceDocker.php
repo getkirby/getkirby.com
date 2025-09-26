@@ -20,7 +20,10 @@ class SourceDocker extends AbstractModel implements ModelInterface, \ArrayAccess
      * @var string[]
      */
     protected static $modelTypes = [
+        'imageType' => '\Algolia\AlgoliaSearch\Model\Ingestion\DockerImageType',
+        'registry' => '\Algolia\AlgoliaSearch\Model\Ingestion\DockerRegistry',
         'image' => 'string',
+        'version' => 'string',
         'configuration' => 'object',
     ];
 
@@ -30,7 +33,10 @@ class SourceDocker extends AbstractModel implements ModelInterface, \ArrayAccess
      * @var string[]
      */
     protected static $modelFormats = [
+        'imageType' => null,
+        'registry' => null,
         'image' => null,
+        'version' => null,
         'configuration' => null,
     ];
 
@@ -41,7 +47,10 @@ class SourceDocker extends AbstractModel implements ModelInterface, \ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
+        'imageType' => 'imageType',
+        'registry' => 'registry',
         'image' => 'image',
+        'version' => 'version',
         'configuration' => 'configuration',
     ];
 
@@ -51,7 +60,10 @@ class SourceDocker extends AbstractModel implements ModelInterface, \ArrayAccess
      * @var string[]
      */
     protected static $setters = [
+        'imageType' => 'setImageType',
+        'registry' => 'setRegistry',
         'image' => 'setImage',
+        'version' => 'setVersion',
         'configuration' => 'setConfiguration',
     ];
 
@@ -61,7 +73,10 @@ class SourceDocker extends AbstractModel implements ModelInterface, \ArrayAccess
      * @var string[]
      */
     protected static $getters = [
+        'imageType' => 'getImageType',
+        'registry' => 'getRegistry',
         'image' => 'getImage',
+        'version' => 'getVersion',
         'configuration' => 'getConfiguration',
     ];
 
@@ -79,8 +94,17 @@ class SourceDocker extends AbstractModel implements ModelInterface, \ArrayAccess
      */
     public function __construct(?array $data = null)
     {
+        if (isset($data['imageType'])) {
+            $this->container['imageType'] = $data['imageType'];
+        }
+        if (isset($data['registry'])) {
+            $this->container['registry'] = $data['registry'];
+        }
         if (isset($data['image'])) {
             $this->container['image'] = $data['image'];
+        }
+        if (isset($data['version'])) {
+            $this->container['version'] = $data['version'];
         }
         if (isset($data['configuration'])) {
             $this->container['configuration'] = $data['configuration'];
@@ -147,6 +171,12 @@ class SourceDocker extends AbstractModel implements ModelInterface, \ArrayAccess
     {
         $invalidProperties = [];
 
+        if (!isset($this->container['imageType']) || null === $this->container['imageType']) {
+            $invalidProperties[] = "'imageType' can't be null";
+        }
+        if (!isset($this->container['registry']) || null === $this->container['registry']) {
+            $invalidProperties[] = "'registry' can't be null";
+        }
         if (!isset($this->container['image']) || null === $this->container['image']) {
             $invalidProperties[] = "'image' can't be null";
         }
@@ -169,6 +199,54 @@ class SourceDocker extends AbstractModel implements ModelInterface, \ArrayAccess
     }
 
     /**
+     * Gets imageType.
+     *
+     * @return DockerImageType
+     */
+    public function getImageType()
+    {
+        return $this->container['imageType'] ?? null;
+    }
+
+    /**
+     * Sets imageType.
+     *
+     * @param DockerImageType $imageType imageType
+     *
+     * @return self
+     */
+    public function setImageType($imageType)
+    {
+        $this->container['imageType'] = $imageType;
+
+        return $this;
+    }
+
+    /**
+     * Gets registry.
+     *
+     * @return DockerRegistry
+     */
+    public function getRegistry()
+    {
+        return $this->container['registry'] ?? null;
+    }
+
+    /**
+     * Sets registry.
+     *
+     * @param DockerRegistry $registry registry
+     *
+     * @return self
+     */
+    public function setRegistry($registry)
+    {
+        $this->container['registry'] = $registry;
+
+        return $this;
+    }
+
+    /**
      * Gets image.
      *
      * @return string
@@ -181,13 +259,37 @@ class SourceDocker extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Sets image.
      *
-     * @param string $image name of the connector
+     * @param string $image docker image name
      *
      * @return self
      */
     public function setImage($image)
     {
         $this->container['image'] = $image;
+
+        return $this;
+    }
+
+    /**
+     * Gets version.
+     *
+     * @return null|string
+     */
+    public function getVersion()
+    {
+        return $this->container['version'] ?? null;
+    }
+
+    /**
+     * Sets version.
+     *
+     * @param null|string $version docker image version
+     *
+     * @return self
+     */
+    public function setVersion($version)
+    {
+        $this->container['version'] = $version;
 
         return $this;
     }

@@ -168,7 +168,7 @@ class ListIndicesResponse extends AbstractModel implements ModelInterface, \Arra
     /**
      * Gets items.
      *
-     * @return FetchedIndex[]
+     * @return \Algolia\AlgoliaSearch\Model\Search\FetchedIndex[]
      */
     public function getItems()
     {
@@ -178,7 +178,7 @@ class ListIndicesResponse extends AbstractModel implements ModelInterface, \Arra
     /**
      * Sets items.
      *
-     * @param FetchedIndex[] $items all indices in your Algolia application
+     * @param \Algolia\AlgoliaSearch\Model\Search\FetchedIndex[] $items all indices in your Algolia application
      *
      * @return self
      */

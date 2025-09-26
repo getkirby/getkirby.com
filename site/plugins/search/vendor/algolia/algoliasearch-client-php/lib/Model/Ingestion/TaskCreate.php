@@ -25,7 +25,6 @@ class TaskCreate extends AbstractModel implements ModelInterface, \ArrayAccess, 
         'sourceID' => 'string',
         'destinationID' => 'string',
         'action' => '\Algolia\AlgoliaSearch\Model\Ingestion\ActionType',
-        'subscriptionAction' => '\Algolia\AlgoliaSearch\Model\Ingestion\ActionType',
         'cron' => 'string',
         'enabled' => 'bool',
         'failureThreshold' => 'int',
@@ -44,7 +43,6 @@ class TaskCreate extends AbstractModel implements ModelInterface, \ArrayAccess, 
         'sourceID' => null,
         'destinationID' => null,
         'action' => null,
-        'subscriptionAction' => null,
         'cron' => null,
         'enabled' => null,
         'failureThreshold' => null,
@@ -64,7 +62,6 @@ class TaskCreate extends AbstractModel implements ModelInterface, \ArrayAccess, 
         'sourceID' => 'sourceID',
         'destinationID' => 'destinationID',
         'action' => 'action',
-        'subscriptionAction' => 'subscriptionAction',
         'cron' => 'cron',
         'enabled' => 'enabled',
         'failureThreshold' => 'failureThreshold',
@@ -83,7 +80,6 @@ class TaskCreate extends AbstractModel implements ModelInterface, \ArrayAccess, 
         'sourceID' => 'setSourceID',
         'destinationID' => 'setDestinationID',
         'action' => 'setAction',
-        'subscriptionAction' => 'setSubscriptionAction',
         'cron' => 'setCron',
         'enabled' => 'setEnabled',
         'failureThreshold' => 'setFailureThreshold',
@@ -102,7 +98,6 @@ class TaskCreate extends AbstractModel implements ModelInterface, \ArrayAccess, 
         'sourceID' => 'getSourceID',
         'destinationID' => 'getDestinationID',
         'action' => 'getAction',
-        'subscriptionAction' => 'getSubscriptionAction',
         'cron' => 'getCron',
         'enabled' => 'getEnabled',
         'failureThreshold' => 'getFailureThreshold',
@@ -134,9 +129,6 @@ class TaskCreate extends AbstractModel implements ModelInterface, \ArrayAccess, 
         }
         if (isset($data['action'])) {
             $this->container['action'] = $data['action'];
-        }
-        if (isset($data['subscriptionAction'])) {
-            $this->container['subscriptionAction'] = $data['subscriptionAction'];
         }
         if (isset($data['cron'])) {
             $this->container['cron'] = $data['cron'];
@@ -313,30 +305,6 @@ class TaskCreate extends AbstractModel implements ModelInterface, \ArrayAccess, 
     public function setAction($action)
     {
         $this->container['action'] = $action;
-
-        return $this;
-    }
-
-    /**
-     * Gets subscriptionAction.
-     *
-     * @return null|ActionType
-     */
-    public function getSubscriptionAction()
-    {
-        return $this->container['subscriptionAction'] ?? null;
-    }
-
-    /**
-     * Sets subscriptionAction.
-     *
-     * @param null|ActionType $subscriptionAction subscriptionAction
-     *
-     * @return self
-     */
-    public function setSubscriptionAction($subscriptionAction)
-    {
-        $this->container['subscriptionAction'] = $subscriptionAction;
 
         return $this;
     }

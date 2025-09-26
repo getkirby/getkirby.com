@@ -2,22 +2,21 @@
 
 namespace Kirby\Search;
 
-use Generator;
 use Kirby\Cms\App;
+use Kirby\Cms\Page;
 use Kirby\Cms\Pages;
 
 /**
- * Search Index
+ * Kirby Search Index
  *
- * @package   Kirby Search
- * @author    Lukas Bestle <lukas@getkirby.com>,
- *            Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
- * @license   MIT
+ * @author Lukas Bestle <lukas@getkirby.com>
+ * @author Nico Hoffmann <nico@getkirby.com>
+ * @license MIT
+ * @link https://getkirby.com
  */
-abstract class Index
+class Index
 {
-	protected Pages $index;
+	protected Pages $entries;
 
 	public function __construct(protected Search $search)
 	{
@@ -25,26 +24,34 @@ abstract class Index
 
 	/**
 	 * Retrieve all indexable pages as entries
-	 * @return \Generator|\Kirby\Search\Entry[]
 	 */
-	protected function entries(): Generator
+	protected function entries(): Pages
 	{
-		foreach ($this->index() as $page) {
-			$entry = new Entry($page, $this->search);
-
-			if ($entry->isIndexable() === true) {
-				yield $entry;
-			}
-		}
+		return $this->entries ??= App::instance()
+			->site()
+			->index()
+			// inject the plugins from the collection that fetches from plugins.getkirby.com
+			->merge(App::instance()->collection('plugins'))
+			->map(fn (Page $page) => new Entry($page, $this->search))
+			->filter(fn (Entry $entry) => $entry->isIndexable());
 	}
 
 	/**
 	 * Indexes everything and replaces the current index
+	 *
+	 * Uses atomical re-indexing: https://www.algolia.com/doc/api-reference/api-methods/replace-all-objects/
 	 */
-	abstract public function generate(): void;
-
-	protected function index(): Pages
+	public function generate(): void
 	{
-		return $this->index ??= App::instance()->site()->index();
+		$entries = $this->entries()->map(fn ($entry) => $entry->toData());
+		$this->search->algolia->replaceAllObjects($this->search->options['index'], $entries);
+	}
+
+	/**
+	 * Returns the number of indexable pages/entries
+	 */
+	public function count(): int
+	{
+		return $this->entries()->count();
 	}
 }

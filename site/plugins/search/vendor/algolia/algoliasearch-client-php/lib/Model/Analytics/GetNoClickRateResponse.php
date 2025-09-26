@@ -203,7 +203,7 @@ class GetNoClickRateResponse extends AbstractModel implements ModelInterface, \A
     /**
      * Sets rate.
      *
-     * @param float $rate no click rate: calculated as the number of tracked searches without clicks divided by the number of tracked searches
+     * @param float $rate no click rate, calculated as number of tracked searches without any click divided by the number of tracked searches
      *
      * @return self
      */
@@ -265,7 +265,7 @@ class GetNoClickRateResponse extends AbstractModel implements ModelInterface, \A
     /**
      * Gets dates.
      *
-     * @return DailyNoClickRates[]
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\DailyNoClickRates[]
      */
     public function getDates()
     {
@@ -275,7 +275,7 @@ class GetNoClickRateResponse extends AbstractModel implements ModelInterface, \A
     /**
      * Sets dates.
      *
-     * @param DailyNoClickRates[] $dates daily no click rates
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\DailyNoClickRates[] $dates daily no click rates
      *
      * @return self
      */

@@ -186,7 +186,7 @@ class ConsequenceQueryObject extends AbstractModel implements ModelInterface, \A
     /**
      * Gets edits.
      *
-     * @return null|Edit[]
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\Edit[]
      */
     public function getEdits()
     {
@@ -196,7 +196,7 @@ class ConsequenceQueryObject extends AbstractModel implements ModelInterface, \A
     /**
      * Sets edits.
      *
-     * @param null|Edit[] $edits changes to make to the search query
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\Edit[] $edits changes to make to the search query
      *
      * @return self
      */

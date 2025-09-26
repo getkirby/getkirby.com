@@ -173,7 +173,7 @@ class ListTasksResponse extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Gets tasks.
      *
-     * @return Task[]
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\Task[]
      */
     public function getTasks()
     {
@@ -183,7 +183,7 @@ class ListTasksResponse extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Sets tasks.
      *
-     * @param Task[] $tasks tasks
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\Task[] $tasks tasks
      *
      * @return self
      */

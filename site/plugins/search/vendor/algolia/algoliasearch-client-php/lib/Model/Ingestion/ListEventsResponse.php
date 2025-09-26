@@ -182,7 +182,7 @@ class ListEventsResponse extends AbstractModel implements ModelInterface, \Array
     /**
      * Gets events.
      *
-     * @return Event[]
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\Event[]
      */
     public function getEvents()
     {
@@ -192,7 +192,7 @@ class ListEventsResponse extends AbstractModel implements ModelInterface, \Array
     /**
      * Sets events.
      *
-     * @param Event[] $events events
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\Event[] $events events
      *
      * @return self
      */

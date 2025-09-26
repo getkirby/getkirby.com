@@ -27,7 +27,7 @@ class RecommendationsRequest extends AbstractModel implements ModelInterface, \A
         'model' => '\Algolia\AlgoliaSearch\Model\Recommend\LookingSimilarModel',
         'objectID' => 'string',
         'fallbackParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\FallbackParams',
-        'facetName' => 'string',
+        'facetName' => 'mixed',
         'facetValue' => 'string',
     ];
 
@@ -404,7 +404,7 @@ class RecommendationsRequest extends AbstractModel implements ModelInterface, \A
     /**
      * Gets facetName.
      *
-     * @return string
+     * @return mixed
      */
     public function getFacetName()
     {
@@ -414,7 +414,7 @@ class RecommendationsRequest extends AbstractModel implements ModelInterface, \A
     /**
      * Sets facetName.
      *
-     * @param string $facetName facet attribute for which to retrieve trending facet values
+     * @param mixed $facetName facet attribute for which to retrieve trending facet values
      *
      * @return self
      */

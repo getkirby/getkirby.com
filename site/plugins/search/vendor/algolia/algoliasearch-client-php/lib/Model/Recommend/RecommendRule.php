@@ -348,7 +348,7 @@ class RecommendRule extends AbstractModel implements ModelInterface, \ArrayAcces
     /**
      * Gets validity.
      *
-     * @return null|TimeRange[]
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\TimeRange[]
      */
     public function getValidity()
     {
@@ -358,7 +358,7 @@ class RecommendRule extends AbstractModel implements ModelInterface, \ArrayAcces
     /**
      * Sets validity.
      *
-     * @param null|TimeRange[] $validity time periods when the rule is active
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\TimeRange[] $validity time periods when the rule is active
      *
      * @return self
      */

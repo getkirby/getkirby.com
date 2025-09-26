@@ -205,7 +205,7 @@ class ConfigurationWithIndex extends AbstractModel implements ModelInterface, \A
     /**
      * Gets sourceIndices.
      *
-     * @return SourceIndex[]
+     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndex[]
      */
     public function getSourceIndices()
     {
@@ -215,7 +215,7 @@ class ConfigurationWithIndex extends AbstractModel implements ModelInterface, \A
     /**
      * Sets sourceIndices.
      *
-     * @param SourceIndex[] $sourceIndices algolia indices from which to get the popular searches for query suggestions
+     * @param \Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndex[] $sourceIndices algolia indices from which to get the popular searches for query suggestions
      *
      * @return self
      */

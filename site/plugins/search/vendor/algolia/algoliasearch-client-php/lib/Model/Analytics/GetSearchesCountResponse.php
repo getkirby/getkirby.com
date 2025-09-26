@@ -195,7 +195,7 @@ class GetSearchesCountResponse extends AbstractModel implements ModelInterface, 
     /**
      * Gets dates.
      *
-     * @return DailySearches[]
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\DailySearches[]
      */
     public function getDates()
     {
@@ -205,7 +205,7 @@ class GetSearchesCountResponse extends AbstractModel implements ModelInterface, 
     /**
      * Sets dates.
      *
-     * @param DailySearches[] $dates daily number of searches
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\DailySearches[] $dates daily number of searches
      *
      * @return self
      */

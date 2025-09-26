@@ -20,8 +20,6 @@ class RecordType
 
     public const VARIANT = 'variant';
 
-    public const COLLECTION = 'collection';
-
     /**
      * Gets allowable values of the enum.
      *
@@ -32,7 +30,6 @@ class RecordType
         return [
             self::PRODUCT,
             self::VARIANT,
-            self::COLLECTION,
         ];
     }
 }

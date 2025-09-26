@@ -47,8 +47,6 @@ Icon
 /site/plugins/*/vendor/**/php4/*
 /site/plugins/ray
 
-.php-cs-fixer.cache
-
 # Dist cruft
 # ---------------
 /kirby/panel/dist/ui.json

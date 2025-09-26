@@ -145,7 +145,16 @@ class TimeRange extends AbstractModel implements ModelInterface, \ArrayAccess, \
      */
     public function listInvalidProperties()
     {
-        return [];
+        $invalidProperties = [];
+
+        if (!isset($this->container['from']) || null === $this->container['from']) {
+            $invalidProperties[] = "'from' can't be null";
+        }
+        if (!isset($this->container['until']) || null === $this->container['until']) {
+            $invalidProperties[] = "'until' can't be null";
+        }
+
+        return $invalidProperties;
     }
 
     /**
@@ -162,7 +171,7 @@ class TimeRange extends AbstractModel implements ModelInterface, \ArrayAccess, \
     /**
      * Gets from.
      *
-     * @return null|int
+     * @return int
      */
     public function getFrom()
     {
@@ -172,7 +181,7 @@ class TimeRange extends AbstractModel implements ModelInterface, \ArrayAccess, \
     /**
      * Sets from.
      *
-     * @param null|int $from when the rule should start to be active, in Unix epoch time
+     * @param int $from when the rule should start to be active, in Unix epoch time
      *
      * @return self
      */
@@ -186,7 +195,7 @@ class TimeRange extends AbstractModel implements ModelInterface, \ArrayAccess, \
     /**
      * Gets until.
      *
-     * @return null|int
+     * @return int
      */
     public function getUntil()
     {
@@ -196,7 +205,7 @@ class TimeRange extends AbstractModel implements ModelInterface, \ArrayAccess, \
     /**
      * Sets until.
      *
-     * @param null|int $until when the rule should stop to be active, in Unix epoch time
+     * @param int $until when the rule should stop to be active, in Unix epoch time
      *
      * @return self
      */

@@ -12,7 +12,7 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  *
  * @category Class
  *
- * @description Link for a banner defined in the Merchandising Studio.
+ * @description link for a banner defined in merchandising studio.
  */
 class BannerLink extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

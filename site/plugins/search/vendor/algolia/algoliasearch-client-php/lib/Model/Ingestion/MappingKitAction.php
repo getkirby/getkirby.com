@@ -264,7 +264,7 @@ class MappingKitAction extends AbstractModel implements ModelInterface, \ArrayAc
     /**
      * Gets fieldDirectives.
      *
-     * @return MappingFieldDirective[]
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\MappingFieldDirective[]
      */
     public function getFieldDirectives()
     {
@@ -274,7 +274,7 @@ class MappingKitAction extends AbstractModel implements ModelInterface, \ArrayAc
     /**
      * Sets fieldDirectives.
      *
-     * @param MappingFieldDirective[] $fieldDirectives fieldDirectives
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\MappingFieldDirective[] $fieldDirectives fieldDirectives
      *
      * @return self
      */

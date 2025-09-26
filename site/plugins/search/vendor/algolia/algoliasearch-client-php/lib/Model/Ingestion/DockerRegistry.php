@@ -5,22 +5,20 @@
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
 /**
- * RunOutcome Class Doc Comment.
+ * DockerRegistry Class Doc Comment.
  *
  * @category Class
  *
- * @description Task run outcome.
+ * @description Container registry name from where to pull the image.
  */
-class RunOutcome
+class DockerRegistry
 {
     /**
      * Possible values of this enum.
      */
-    public const SUCCESS = 'success';
+    public const DOCKERHUB = 'dockerhub';
 
-    public const FAILURE = 'failure';
-
-    public const PROCESSING = 'processing';
+    public const GHCR = 'ghcr';
 
     /**
      * Gets allowable values of the enum.
@@ -30,9 +28,8 @@ class RunOutcome
     public static function getAllowableEnumValues()
     {
         return [
-            self::SUCCESS,
-            self::FAILURE,
-            self::PROCESSING,
+            self::DOCKERHUB,
+            self::GHCR,
         ];
     }
 }

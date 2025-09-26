@@ -160,7 +160,7 @@ class GetSearchesNoResultsResponse extends AbstractModel implements ModelInterfa
     /**
      * Gets searches.
      *
-     * @return DailySearchesNoResults[]
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\DailySearchesNoResults[]
      */
     public function getSearches()
     {
@@ -170,7 +170,7 @@ class GetSearchesNoResultsResponse extends AbstractModel implements ModelInterfa
     /**
      * Sets searches.
      *
-     * @param DailySearchesNoResults[] $searches searches without results
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\DailySearchesNoResults[] $searches searches without results
      *
      * @return self
      */

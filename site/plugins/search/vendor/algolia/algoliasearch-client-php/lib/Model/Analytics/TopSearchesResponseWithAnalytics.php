@@ -160,7 +160,7 @@ class TopSearchesResponseWithAnalytics extends AbstractModel implements ModelInt
     /**
      * Gets searches.
      *
-     * @return TopSearchWithAnalytics[]
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\TopSearchWithAnalytics[]
      */
     public function getSearches()
     {
@@ -170,7 +170,7 @@ class TopSearchesResponseWithAnalytics extends AbstractModel implements ModelInt
     /**
      * Sets searches.
      *
-     * @param TopSearchWithAnalytics[] $searches most popular searches and their associated click and conversion metrics
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\TopSearchWithAnalytics[] $searches most popular searches and their associated click and conversion metrics
      *
      * @return self
      */

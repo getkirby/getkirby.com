@@ -160,7 +160,7 @@ class InsightsEvents extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Gets events.
      *
-     * @return EventsItems[]
+     * @return \Algolia\AlgoliaSearch\Model\Insights\EventsItems[]
      */
     public function getEvents()
     {
@@ -170,7 +170,7 @@ class InsightsEvents extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Sets events.
      *
-     * @param EventsItems[] $events Click and conversion events.  **All** events must be valid, otherwise the API returns an error.
+     * @param \Algolia\AlgoliaSearch\Model\Insights\EventsItems[] $events Click and conversion events.  **All** events must be valid, otherwise the API returns an error.
      *
      * @return self
      */

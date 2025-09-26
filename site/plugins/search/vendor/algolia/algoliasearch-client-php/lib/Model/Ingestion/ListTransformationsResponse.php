@@ -173,7 +173,7 @@ class ListTransformationsResponse extends AbstractModel implements ModelInterfac
     /**
      * Gets transformations.
      *
-     * @return Transformation[]
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\Transformation[]
      */
     public function getTransformations()
     {
@@ -183,7 +183,7 @@ class ListTransformationsResponse extends AbstractModel implements ModelInterfac
     /**
      * Sets transformations.
      *
-     * @param Transformation[] $transformations transformations
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\Transformation[] $transformations transformations
      *
      * @return self
      */

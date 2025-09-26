@@ -264,7 +264,7 @@ class SourceBigCommerce extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Gets productMetafields.
      *
-     * @return null|BigCommerceMetafield[]
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\BigCommerceMetafield[]
      */
     public function getProductMetafields()
     {
@@ -274,7 +274,7 @@ class SourceBigCommerce extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Sets productMetafields.
      *
-     * @param null|BigCommerceMetafield[] $productMetafields productMetafields
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\BigCommerceMetafield[] $productMetafields productMetafields
      *
      * @return self
      */
@@ -288,7 +288,7 @@ class SourceBigCommerce extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Gets variantMetafields.
      *
-     * @return null|BigCommerceMetafield[]
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\BigCommerceMetafield[]
      */
     public function getVariantMetafields()
     {
@@ -298,7 +298,7 @@ class SourceBigCommerce extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Sets variantMetafields.
      *
-     * @param null|BigCommerceMetafield[] $variantMetafields variantMetafields
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\BigCommerceMetafield[] $variantMetafields variantMetafields
      *
      * @return self
      */

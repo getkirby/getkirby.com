@@ -6,12 +6,6 @@ namespace Algolia\AlgoliaSearch\Api;
 
 use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Configuration\MonitoringConfig;
-use Algolia\AlgoliaSearch\Model\Monitoring\IncidentsResponse;
-use Algolia\AlgoliaSearch\Model\Monitoring\IndexingTimeResponse;
-use Algolia\AlgoliaSearch\Model\Monitoring\InfrastructureResponse;
-use Algolia\AlgoliaSearch\Model\Monitoring\InventoryResponse;
-use Algolia\AlgoliaSearch\Model\Monitoring\LatencyResponse;
-use Algolia\AlgoliaSearch\Model\Monitoring\StatusResponse;
 use Algolia\AlgoliaSearch\ObjectSerializer;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
@@ -25,17 +19,12 @@ use GuzzleHttp\Psr7\Query;
  */
 class MonitoringClient
 {
-    public const VERSION = '4.26.0';
+    public const VERSION = '4.12.0';
 
     /**
      * @var ApiWrapperInterface
      */
     protected $api;
-
-    /**
-     * @var IngestionClient
-     */
-    protected $ingestionTransporter;
 
     /**
      * @var MonitoringConfig
@@ -74,9 +63,7 @@ class MonitoringClient
             self::getClusterHosts($config)
         );
 
-        $client = new static($apiWrapper, $config);
-
-        return $client;
+        return new static($apiWrapper, $config);
     }
 
     /**
@@ -117,9 +104,9 @@ class MonitoringClient
     }
 
     /**
-     * This method lets you send requests to the Algolia REST API.
+     * This method allow you to send requests to the Algolia REST API.
      *
-     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param string $path           Path of the endpoint, anything after \"/1\" must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -156,9 +143,9 @@ class MonitoringClient
     }
 
     /**
-     * This method lets you send requests to the Algolia REST API.
+     * This method allow you to send requests to the Algolia REST API.
      *
-     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param string $path           Path of the endpoint, anything after \"/1\" must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -195,9 +182,9 @@ class MonitoringClient
     }
 
     /**
-     * This method lets you send requests to the Algolia REST API.
+     * This method allow you to send requests to the Algolia REST API.
      *
-     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param string $path           Path of the endpoint, anything after \"/1\" must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $body           Parameters to send with the custom request. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -235,9 +222,9 @@ class MonitoringClient
     }
 
     /**
-     * This method lets you send requests to the Algolia REST API.
+     * This method allow you to send requests to the Algolia REST API.
      *
-     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
+     * @param string $path           Path of the endpoint, anything after \"/1\" must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $body           Parameters to send with the custom request. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -280,7 +267,7 @@ class MonitoringClient
      * @param string $clusters       Subset of clusters, separated by commas. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|IncidentsResponse
+     * @return \Algolia\AlgoliaSearch\Model\Monitoring\IncidentsResponse|array<string, mixed>
      */
     public function getClusterIncidents($clusters, $requestOptions = [])
     {
@@ -314,7 +301,7 @@ class MonitoringClient
      * @param string $clusters       Subset of clusters, separated by commas. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|StatusResponse
+     * @return \Algolia\AlgoliaSearch\Model\Monitoring\StatusResponse|array<string, mixed>
      */
     public function getClusterStatus($clusters, $requestOptions = [])
     {
@@ -347,7 +334,7 @@ class MonitoringClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|IncidentsResponse
+     * @return \Algolia\AlgoliaSearch\Model\Monitoring\IncidentsResponse|array<string, mixed>
      */
     public function getIncidents($requestOptions = [])
     {
@@ -365,7 +352,7 @@ class MonitoringClient
      * @param string $clusters       Subset of clusters, separated by commas. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|IndexingTimeResponse
+     * @return \Algolia\AlgoliaSearch\Model\Monitoring\IndexingTimeResponse|array<string, mixed>
      */
     public function getIndexingTime($clusters, $requestOptions = [])
     {
@@ -399,7 +386,7 @@ class MonitoringClient
      * @param string $clusters       Subset of clusters, separated by commas. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|LatencyResponse
+     * @return \Algolia\AlgoliaSearch\Model\Monitoring\LatencyResponse|array<string, mixed>
      */
     public function getLatency($clusters, $requestOptions = [])
     {
@@ -434,7 +421,7 @@ class MonitoringClient
      * @param array $period         Period over which to aggregate the metrics:  - `minute`. Aggregate the last minute. 1 data point per 10 seconds. - `hour`. Aggregate the last hour. 1 data point per minute. - `day`. Aggregate the last day. 1 data point per 10 minutes. - `week`. Aggregate the last week. 1 data point per hour. - `month`. Aggregate the last month. 1 data point per day. (required)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|InfrastructureResponse
+     * @return \Algolia\AlgoliaSearch\Model\Monitoring\InfrastructureResponse|array<string, mixed>
      */
     public function getMetrics($metric, $period, $requestOptions = [])
     {
@@ -516,7 +503,7 @@ class MonitoringClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|InventoryResponse
+     * @return \Algolia\AlgoliaSearch\Model\Monitoring\InventoryResponse|array<string, mixed>
      */
     public function getServers($requestOptions = [])
     {
@@ -533,7 +520,7 @@ class MonitoringClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|StatusResponse
+     * @return \Algolia\AlgoliaSearch\Model\Monitoring\StatusResponse|array<string, mixed>
      */
     public function getStatus($requestOptions = [])
     {

@@ -162,7 +162,7 @@ class ListUserIdsResponse extends AbstractModel implements ModelInterface, \Arra
     /**
      * Gets userIDs.
      *
-     * @return UserId[]
+     * @return \Algolia\AlgoliaSearch\Model\Search\UserId[]
      */
     public function getUserIDs()
     {
@@ -172,7 +172,7 @@ class ListUserIdsResponse extends AbstractModel implements ModelInterface, \Arra
     /**
      * Sets userIDs.
      *
-     * @param UserId[] $userIDs user IDs
+     * @param \Algolia\AlgoliaSearch\Model\Search\UserId[] $userIDs user IDs
      *
      * @return self
      */

@@ -48,7 +48,7 @@ class Log extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSe
         'answerCode' => null,
         'queryBody' => null,
         'answer' => null,
-        'url' => 'uri-reference',
+        'url' => 'uri',
         'ip' => 'ipv4',
         'queryHeaders' => null,
         'sha1' => null,
@@ -635,7 +635,7 @@ class Log extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSe
     /**
      * Gets innerQueries.
      *
-     * @return null|LogQuery[]
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\LogQuery[]
      */
     public function getInnerQueries()
     {
@@ -645,7 +645,7 @@ class Log extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSe
     /**
      * Sets innerQueries.
      *
-     * @param null|LogQuery[] $innerQueries queries performed for the given request
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\LogQuery[] $innerQueries queries performed for the given request
      *
      * @return self
      */

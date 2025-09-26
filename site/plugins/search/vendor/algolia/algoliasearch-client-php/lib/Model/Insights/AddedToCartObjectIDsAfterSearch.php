@@ -484,7 +484,7 @@ class AddedToCartObjectIDsAfterSearch extends AbstractModel implements ModelInte
     /**
      * Gets objectData.
      *
-     * @return null|ObjectDataAfterSearch[]
+     * @return null|\Algolia\AlgoliaSearch\Model\Insights\ObjectDataAfterSearch[]
      */
     public function getObjectData()
     {
@@ -494,7 +494,7 @@ class AddedToCartObjectIDsAfterSearch extends AbstractModel implements ModelInte
     /**
      * Sets objectData.
      *
-     * @param null|ObjectDataAfterSearch[] $objectData Extra information about the records involved in a purchase or add-to-cart events.  If provided, it must be the same length as `objectIDs`.
+     * @param null|\Algolia\AlgoliaSearch\Model\Insights\ObjectDataAfterSearch[] $objectData Extra information about the records involved in a purchase or add-to-cart events.  If provided, it must be the same length as `objectIDs`.
      *
      * @return self
      */
