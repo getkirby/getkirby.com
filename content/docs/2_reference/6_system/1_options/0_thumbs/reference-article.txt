@@ -85,19 +85,70 @@ This is only recommended if you really find yourself converting 90% of your file
 
 ## Thumbs driver
 
-Kirby comes with drivers for GD Lib (`gd`) and ImageMagick (`im`), which can be used out of the box. The default thumbs driver is `gd`.
+Kirby comes with drivers for GD Lib (`gd`) and Imagick (`imagick`, since v5.1.0), which can be used out of the box. The default thumbs driver is `gd`.
 
 You can also define your own custom thumbs drivers.
 
 ```php
 return [
   'thumbs' => [
-    'driver' => 'im'
+    'driver' => 'imagick'
   ]
 ];
 ```
 
+<warning>
+The old ImageMagick (`im`) driver has been deprecated and will be removed in a future major release. Use the `imagick` driver instead.
+</warning>
+
+<since v="5.1.0">
+### Additional options for the Imagick driver
+
+#### `interlace`
+
+JPEGs can be set to interlace mode with this option
+
+```php
+return [
+  'thumbs' => [
+    'driver'    => 'imagick',
+    'interlace' => true
+  ]
+];
+```
+
+#### `profiles`
+
+Which image profiles to preserve when resizing the thumb. By default, the `icc` and `icm` profiles are preserved.
+
+```php
+return [
+  'thumbs' => [
+    'driver'   => 'imagick',
+    'profiles' => ['icc']
+  ]
+];
+```
+
+#### `threads`
+
+If you are converting a lot of big images with Imagick it can get slow.
+
+Use this option to configure the threads Imagick can use to benefit from capable hardware. (default is 1)
+
+```php
+return [
+  'thumbs' => [
+    'driver' => 'imagick',
+    'threads' => 2
+  ]
+];
+```
+</since>
+
 ### Additional options for the ImageMagick driver
+
+All of the above options for the Imagick driver as well as:
 
 #### `bin`
 
@@ -107,35 +158,7 @@ If the ImageMagick convert binary is not correctly linked, you can set the absol
 return [
   'thumbs' => [
     'driver' => 'im',
-    'bin' => 'convert'
-  ]
-];
-```
-
-#### `interlace`
-
-JPEGs can be set to interlace mode with this option
-
-```php
-return [
-  'thumbs' => [
-    'driver' => 'im',
-    'interlace' => true
-  ]
-];
-```
-
-#### `threads`
-
-If you are converting a lot of big images with ImageMagick it can get slow.
-
-Use this option to configure the threads ImageMagick can use to benefit from capable hardware. (default is 1)
-
-```php
-return [
-  'thumbs' => [
-    'driver' => 'im',
-    'threads' => 2
+    'bin'    => 'convert'
   ]
 ];
 ```
