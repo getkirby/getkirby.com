@@ -1,0 +1,8 @@
+Text:
+
+## Examples
+
+```php
+$page->children()->join(' | ', fn ($child) => $child->venue());
+$page->children()->join(as: fn ($child) => snippet('child', ['page' => $child], return: true));
+```
