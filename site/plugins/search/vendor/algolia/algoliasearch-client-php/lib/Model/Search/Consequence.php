@@ -26,7 +26,7 @@ class Consequence extends AbstractModel implements ModelInterface, \ArrayAccess,
         'promote' => '\Algolia\AlgoliaSearch\Model\Search\Promote[]',
         'filterPromotes' => 'bool',
         'hide' => '\Algolia\AlgoliaSearch\Model\Search\ConsequenceHide[]',
-        'userData' => 'mixed',
+        'userData' => 'object',
     ];
 
     /**
@@ -212,7 +212,7 @@ class Consequence extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Gets promote.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\Promote[]
+     * @return null|Promote[]
      */
     public function getPromote()
     {
@@ -222,7 +222,7 @@ class Consequence extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Sets promote.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\Promote[] $promote Records you want to pin to a specific position in the search results.  You can promote up to 300 records, either individually, or as groups of up to 100 records each.
+     * @param null|Promote[] $promote Records you want to pin to a specific position in the search results.  You can promote up to 300 records, either individually, or as groups of up to 100 records each.
      *
      * @return self
      */
@@ -260,7 +260,7 @@ class Consequence extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Gets hide.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\ConsequenceHide[]
+     * @return null|ConsequenceHide[]
      */
     public function getHide()
     {
@@ -270,7 +270,7 @@ class Consequence extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Sets hide.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\ConsequenceHide[] $hide records you want to hide from the search results
+     * @param null|ConsequenceHide[] $hide records you want to hide from the search results
      *
      * @return self
      */
@@ -284,7 +284,7 @@ class Consequence extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Gets userData.
      *
-     * @return null|mixed
+     * @return null|object
      */
     public function getUserData()
     {
@@ -294,7 +294,7 @@ class Consequence extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Sets userData.
      *
-     * @param null|mixed $userData A JSON object with custom data that will be appended to the `userData` array in the response. This object isn't interpreted by the API and is limited to 1&nbsp;kB of minified JSON.
+     * @param null|object $userData A JSON object with custom data that will be appended to the `userData` array in the response. This object isn't interpreted by the API and is limited to 1&nbsp;kB of minified JSON.
      *
      * @return self
      */

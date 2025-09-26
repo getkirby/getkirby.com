@@ -1,10 +1,10 @@
 <?php
-$area  = $area ?? 'all';
-$areas = option('search.areas');
+$area ??= 'all';
+$areas  = $kirby->option('search.areas')($kirby);
 ?>
 
 <div class="search">
-	<button class="search-button" type="button" data-area="<?= $area ?? 'all' ?>" aria-label="Search">
+	<button class="search-button" type="button" data-area="<?= $area ?>" aria-label="Search">
 		<?= icon('search') ?>
 	</button>
 
@@ -60,6 +60,7 @@ $areas = option('search.areas');
 						View all <span class="search-more-count mx-1"></span> results &rsaquo;
 					</a>
 				</div>
+				<?php if (option('archived', false) === false): ?>
 				<a
 					href="https://algolia.com"
 					aria-label="Search by Algolia"
@@ -67,6 +68,7 @@ $areas = option('search.areas');
 				>
 					Search by <?= icon('algolia') ?>
 				</a>
+				<?php endif ?>
 			</div>
 		</form>
 	</dialog>
