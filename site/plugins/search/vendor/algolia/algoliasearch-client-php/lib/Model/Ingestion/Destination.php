@@ -25,6 +25,7 @@ class Destination extends AbstractModel implements ModelInterface, \ArrayAccess,
         'destinationID' => 'string',
         'type' => '\Algolia\AlgoliaSearch\Model\Ingestion\DestinationType',
         'name' => 'string',
+        'owner' => 'string',
         'input' => '\Algolia\AlgoliaSearch\Model\Ingestion\DestinationInput',
         'createdAt' => 'string',
         'updatedAt' => 'string',
@@ -41,6 +42,7 @@ class Destination extends AbstractModel implements ModelInterface, \ArrayAccess,
         'destinationID' => null,
         'type' => null,
         'name' => null,
+        'owner' => null,
         'input' => null,
         'createdAt' => null,
         'updatedAt' => null,
@@ -58,6 +60,7 @@ class Destination extends AbstractModel implements ModelInterface, \ArrayAccess,
         'destinationID' => 'destinationID',
         'type' => 'type',
         'name' => 'name',
+        'owner' => 'owner',
         'input' => 'input',
         'createdAt' => 'createdAt',
         'updatedAt' => 'updatedAt',
@@ -74,6 +77,7 @@ class Destination extends AbstractModel implements ModelInterface, \ArrayAccess,
         'destinationID' => 'setDestinationID',
         'type' => 'setType',
         'name' => 'setName',
+        'owner' => 'setOwner',
         'input' => 'setInput',
         'createdAt' => 'setCreatedAt',
         'updatedAt' => 'setUpdatedAt',
@@ -90,6 +94,7 @@ class Destination extends AbstractModel implements ModelInterface, \ArrayAccess,
         'destinationID' => 'getDestinationID',
         'type' => 'getType',
         'name' => 'getName',
+        'owner' => 'getOwner',
         'input' => 'getInput',
         'createdAt' => 'getCreatedAt',
         'updatedAt' => 'getUpdatedAt',
@@ -119,6 +124,9 @@ class Destination extends AbstractModel implements ModelInterface, \ArrayAccess,
         }
         if (isset($data['name'])) {
             $this->container['name'] = $data['name'];
+        }
+        if (isset($data['owner'])) {
+            $this->container['owner'] = $data['owner'];
         }
         if (isset($data['input'])) {
             $this->container['input'] = $data['input'];
@@ -212,6 +220,9 @@ class Destination extends AbstractModel implements ModelInterface, \ArrayAccess,
         if (!isset($this->container['createdAt']) || null === $this->container['createdAt']) {
             $invalidProperties[] = "'createdAt' can't be null";
         }
+        if (!isset($this->container['updatedAt']) || null === $this->container['updatedAt']) {
+            $invalidProperties[] = "'updatedAt' can't be null";
+        }
 
         return $invalidProperties;
     }
@@ -300,6 +311,30 @@ class Destination extends AbstractModel implements ModelInterface, \ArrayAccess,
     }
 
     /**
+     * Gets owner.
+     *
+     * @return null|string
+     */
+    public function getOwner()
+    {
+        return $this->container['owner'] ?? null;
+    }
+
+    /**
+     * Sets owner.
+     *
+     * @param null|string $owner owner of the resource
+     *
+     * @return self
+     */
+    public function setOwner($owner)
+    {
+        $this->container['owner'] = $owner;
+
+        return $this;
+    }
+
+    /**
      * Gets input.
      *
      * @return DestinationInput
@@ -350,7 +385,7 @@ class Destination extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Gets updatedAt.
      *
-     * @return null|string
+     * @return string
      */
     public function getUpdatedAt()
     {
@@ -360,7 +395,7 @@ class Destination extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Sets updatedAt.
      *
-     * @param null|string $updatedAt date of last update in RFC 3339 format
+     * @param string $updatedAt date of last update in RFC 3339 format
      *
      * @return self
      */

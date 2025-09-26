@@ -6,8 +6,14 @@ namespace Algolia\AlgoliaSearch\Api;
 
 use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Configuration\RecommendConfig;
+use Algolia\AlgoliaSearch\Model\Recommend\DeletedAtResponse;
 use Algolia\AlgoliaSearch\Model\Recommend\GetRecommendationsParams;
+use Algolia\AlgoliaSearch\Model\Recommend\GetRecommendationsResponse;
+use Algolia\AlgoliaSearch\Model\Recommend\GetRecommendTaskResponse;
+use Algolia\AlgoliaSearch\Model\Recommend\RecommendRule;
+use Algolia\AlgoliaSearch\Model\Recommend\RecommendUpdatedAtResponse;
 use Algolia\AlgoliaSearch\Model\Recommend\SearchRecommendRulesParams;
+use Algolia\AlgoliaSearch\Model\Recommend\SearchRecommendRulesResponse;
 use Algolia\AlgoliaSearch\ObjectSerializer;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
@@ -21,12 +27,17 @@ use GuzzleHttp\Psr7\Query;
  */
 class RecommendClient
 {
-    public const VERSION = '4.12.0';
+    public const VERSION = '4.30.0';
 
     /**
      * @var ApiWrapperInterface
      */
     protected $api;
+
+    /**
+     * @var IngestionClient
+     */
+    protected $ingestionTransporter;
 
     /**
      * @var RecommendConfig
@@ -65,7 +76,9 @@ class RecommendClient
             self::getClusterHosts($config)
         );
 
-        return new static($apiWrapper, $config);
+        $client = new static($apiWrapper, $config);
+
+        return $client;
     }
 
     /**
@@ -120,7 +133,7 @@ class RecommendClient
      * @param array  $recommendRule  recommendRule (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\RecommendUpdatedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|RecommendUpdatedAtResponse
      */
     public function batchRecommendRules($indexName, $model, $recommendRule = null, $requestOptions = [])
     {
@@ -164,9 +177,9 @@ class RecommendClient
     }
 
     /**
-     * This method allow you to send requests to the Algolia REST API.
+     * This method lets you send requests to the Algolia REST API.
      *
-     * @param string $path           Path of the endpoint, anything after \"/1\" must be specified. (required)
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -203,9 +216,9 @@ class RecommendClient
     }
 
     /**
-     * This method allow you to send requests to the Algolia REST API.
+     * This method lets you send requests to the Algolia REST API.
      *
-     * @param string $path           Path of the endpoint, anything after \"/1\" must be specified. (required)
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -242,9 +255,9 @@ class RecommendClient
     }
 
     /**
-     * This method allow you to send requests to the Algolia REST API.
+     * This method lets you send requests to the Algolia REST API.
      *
-     * @param string $path           Path of the endpoint, anything after \"/1\" must be specified. (required)
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $body           Parameters to send with the custom request. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -282,9 +295,9 @@ class RecommendClient
     }
 
     /**
-     * This method allow you to send requests to the Algolia REST API.
+     * This method lets you send requests to the Algolia REST API.
      *
-     * @param string $path           Path of the endpoint, anything after \"/1\" must be specified. (required)
+     * @param string $path           Path of the endpoint, for example `1/newFeature`. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $body           Parameters to send with the custom request. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -332,7 +345,7 @@ class RecommendClient
      * @param string $objectID       Unique record identifier. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\DeletedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|DeletedAtResponse
      */
     public function deleteRecommendRule($indexName, $model, $objectID, $requestOptions = [])
     {
@@ -401,7 +414,7 @@ class RecommendClient
      * @param string $objectID       Unique record identifier. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\RecommendRule|array<string, mixed>
+     * @return array<string, mixed>|RecommendRule
      */
     public function getRecommendRule($indexName, $model, $objectID, $requestOptions = [])
     {
@@ -470,7 +483,7 @@ class RecommendClient
      * @param int    $taskID         Unique task identifier. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\GetRecommendTaskResponse|array<string, mixed>
+     * @return array<string, mixed>|GetRecommendTaskResponse
      */
     public function getRecommendStatus($indexName, $model, $taskID, $requestOptions = [])
     {
@@ -534,14 +547,14 @@ class RecommendClient
      * Required API Key ACLs:
      *  - search
      *
-     * @param array $getRecommendationsParams getRecommendationsParams (required)
-     *                                        - $getRecommendationsParams['requests'] => (array) Recommendation request with parameters depending on the requested model. (required)
+     * @param array|GetRecommendationsParams $getRecommendationsParams getRecommendationsParams (required)
+     *                                                                 - $getRecommendationsParams['requests'] => (array) Recommendation request with parameters depending on the requested model. (required)
      *
      * @see GetRecommendationsParams
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\GetRecommendationsResponse|array<string, mixed>
+     * @return array<string, mixed>|GetRecommendationsResponse
      */
     public function getRecommendations($getRecommendationsParams, $requestOptions = [])
     {
@@ -566,23 +579,23 @@ class RecommendClient
      * Required API Key ACLs:
      *  - settings
      *
-     * @param string $indexName                  Name of the index on which to perform the operation. (required)
-     * @param array  $model                      [Recommend model](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). (required)
-     * @param array  $searchRecommendRulesParams searchRecommendRulesParams (optional)
-     *                                           - $searchRecommendRulesParams['query'] => (string) Search query.
-     *                                           - $searchRecommendRulesParams['context'] => (string) Only search for rules with matching context.
-     *                                           - $searchRecommendRulesParams['page'] => (int) Requested page of the API response.  Algolia uses `page` and `hitsPerPage` to control how search results are displayed ([paginated](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/)).  - `hitsPerPage`: sets the number of search results (_hits_) displayed per page. - `page`: specifies the page number of the search results you want to retrieve. Page numbering starts at 0, so the first page is `page=0`, the second is `page=1`, and so on.  For example, to display 10 results per page starting from the third page, set `hitsPerPage` to 10 and `page` to 2.
-     *                                           - $searchRecommendRulesParams['hitsPerPage'] => (int) Maximum number of hits per page.  Algolia uses `page` and `hitsPerPage` to control how search results are displayed ([paginated](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/)).  - `hitsPerPage`: sets the number of search results (_hits_) displayed per page. - `page`: specifies the page number of the search results you want to retrieve. Page numbering starts at 0, so the first page is `page=0`, the second is `page=1`, and so on.  For example, to display 10 results per page starting from the third page, set `hitsPerPage` to 10 and `page` to 2.
-     *                                           - $searchRecommendRulesParams['enabled'] => (bool) Whether to only show rules where the value of their `enabled` property matches this parameter. If absent, show all rules, regardless of their `enabled` property.
-     *                                           - $searchRecommendRulesParams['filters'] => (string) Filter expression. This only searches for rules matching the filter expression.
-     *                                           - $searchRecommendRulesParams['facets'] => (array) Include facets and facet values in the response. Use `['*']` to include all facets.
-     *                                           - $searchRecommendRulesParams['maxValuesPerFacet'] => (int) Maximum number of values to return for each facet.
+     * @param string                           $indexName                  Name of the index on which to perform the operation. (required)
+     * @param array                            $model                      [Recommend model](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). (required)
+     * @param array|SearchRecommendRulesParams $searchRecommendRulesParams searchRecommendRulesParams (optional)
+     *                                                                     - $searchRecommendRulesParams['query'] => (string) Search query.
+     *                                                                     - $searchRecommendRulesParams['context'] => (string) Only search for rules with matching context.
+     *                                                                     - $searchRecommendRulesParams['page'] => (int) Requested page of the API response.  Algolia uses `page` and `hitsPerPage` to control how search results are displayed ([paginated](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/)).  - `hitsPerPage`: sets the number of search results (_hits_) displayed per page. - `page`: specifies the page number of the search results you want to retrieve. Page numbering starts at 0, so the first page is `page=0`, the second is `page=1`, and so on.  For example, to display 10 results per page starting from the third page, set `hitsPerPage` to 10 and `page` to 2.
+     *                                                                     - $searchRecommendRulesParams['hitsPerPage'] => (int) Maximum number of hits per page.  Algolia uses `page` and `hitsPerPage` to control how search results are displayed ([paginated](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/)).  - `hitsPerPage`: sets the number of search results (_hits_) displayed per page. - `page`: specifies the page number of the search results you want to retrieve. Page numbering starts at 0, so the first page is `page=0`, the second is `page=1`, and so on.  For example, to display 10 results per page starting from the third page, set `hitsPerPage` to 10 and `page` to 2.
+     *                                                                     - $searchRecommendRulesParams['enabled'] => (bool) Whether to only show rules where the value of their `enabled` property matches this parameter. If absent, show all rules, regardless of their `enabled` property.
+     *                                                                     - $searchRecommendRulesParams['filters'] => (string) Filter expression. This only searches for rules matching the filter expression.
+     *                                                                     - $searchRecommendRulesParams['facets'] => (array) Include facets and facet values in the response. Use `['*']` to include all facets.
+     *                                                                     - $searchRecommendRulesParams['maxValuesPerFacet'] => (int) Maximum number of values to return for each facet.
      *
      * @see SearchRecommendRulesParams
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\SearchRecommendRulesResponse|array<string, mixed>
+     * @return array<string, mixed>|SearchRecommendRulesResponse
      */
     public function searchRecommendRules($indexName, $model, $searchRecommendRulesParams = null, $requestOptions = [])
     {

@@ -203,7 +203,7 @@ class GetClickThroughRateResponse extends AbstractModel implements ModelInterfac
     /**
      * Sets rate.
      *
-     * @param float $rate Click-through rate, calculated as number of tracked searches with at least one click event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
+     * @param float $rate Click-through rate: calculated as the number of tracked searches with at least one click event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
      *
      * @return self
      */
@@ -265,7 +265,7 @@ class GetClickThroughRateResponse extends AbstractModel implements ModelInterfac
     /**
      * Gets dates.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\DailyClickThroughRates[]
+     * @return DailyClickThroughRates[]
      */
     public function getDates()
     {
@@ -275,7 +275,7 @@ class GetClickThroughRateResponse extends AbstractModel implements ModelInterfac
     /**
      * Sets dates.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\DailyClickThroughRates[] $dates daily click-through rates
+     * @param DailyClickThroughRates[] $dates daily click-through rates
      *
      * @return self
      */

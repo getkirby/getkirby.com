@@ -8,24 +8,29 @@ use Kirby\Toolkit\Collection;
 use Kirby\Toolkit\Obj;
 
 /**
- * Kirby Search Results
+ * Search results
  *
- * @author Nico Hoffmann <nico@getkirby.com>
- * @license MIT
- * @link https://getkirby.com
+ * @package   Kirby Search
+ * @author    Nico Hoffmann <nico@getkirby.com>
+ * @link      https://getkirby.com
+ * @license   MIT
  */
 class Results extends Collection
 {
-	public static function from(array $response): static
-	{
+	public static function from(
+		array $hits,
+		int $page = 1,
+		int $limit = 20,
+		int $total = 0
+	): static {
 		// Convert the hits to Obj objects
-		$hits    = A::map($response['hits'], fn ($hit) => new Obj($hit));
+		$hits    = A::map($hits, fn ($hit) => new Obj($hit));
 		$results = new static($hits);
 
 		$results->pagination = new Pagination([
-			'page'  => ($response['page'] ?? 0) + 1,
-			'total' => $response['nbHits'] ?? 0,
-			'limit' => $response['hitsPerPage'] ?? 20,
+			'page'  => $page,
+			'total' => $total,
+			'limit' => $limit,
 		]);
 
 		return $results;

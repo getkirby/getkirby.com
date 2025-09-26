@@ -2,28 +2,32 @@
 
 namespace Kirby\Search;
 
+use Kirby\Cms\App;
 use Kirby\Cms\Page;
 use Kirby\Content\Field;
 
 /**
- * Represents an entry (page) to be indexed
+ * Represents a search entry (page) to be indexed
  *
- * @author Lukas Bestle <lukas@getkirby.com>
- * @author Nico Hoffmann <nico@getkirby.com>
- * @license MIT
- * @link https://getkirby.com
+ * @package   Kirby Search
+ * @author    Lukas Bestle <lukas@getkirby.com>,
+ *            Nico Hoffmann <nico@getkirby.com>
+ * @link      https://getkirby.com
+ * @license   MIT
  */
 class Entry
 {
+	protected App $kirby;
 	public function __construct(
-		protected Page   $page,
+		protected Page $page,
 		protected Search $search
 	) {
+		$this->kirby = App::instance();
 	}
 
 	protected function fields(): array
 	{
-		$fields    = $this->search->options['fields'] ?? ['title', 'url'];
+		$fields    = $this->kirby->option('search.fields', ['title', 'url']);
 		$templates = $this->templates();
 		$template  = $this->template();
 
@@ -69,12 +73,6 @@ class Entry
 	 */
 	public function isIndexable(): bool
 	{
-		// if (method_exists($this->page, 'isSearchable') === true) {
-		//     if ($this->page->isSearchable() === false) {
-		//         return false;
-		//     }
-		// }
-
 		$templates = $this->templates();
 		$template  = $this->template();
 
@@ -119,7 +117,7 @@ class Entry
 	 */
 	protected function templates(): array
 	{
-		return $this->search->options['templates'] ?? [];
+		return $this->kirby->option('search.templates', []);
 	}
 
 	/**
@@ -136,10 +134,10 @@ class Entry
 			$data[$name] = match (true) {
 				// custom function
 				is_callable($method)
-				=> $method($this->page),
+					=> $method($this->page),
 				// field method with/without parameters
 				is_string($method) || is_array($method)
-				=> $this->toDataFromFieldMethod($name, $method),
+					=> $this->toDataFromFieldMethod($name, $method),
 				// no or invalid operation, convert to string
 				default
 				=> (string)$this->page->$name()
@@ -154,7 +152,7 @@ class Entry
 	 * to be included in the index for the field
 	 */
 	protected function toDataFromFieldMethod(
-		string       $name,
+		string $name,
 		string|array $method
 	): string {
 		$field = $this->page->$name();
