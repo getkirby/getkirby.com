@@ -223,6 +223,20 @@ fields:
 
 The structure field tries to create the best possible preview for the field in its table view. If you are using fields provided by a plugin in the structure field, the preview of these can be customized with a (link: docs/reference/plugins/extensions/field-previews text: field preview extension).
 
+<since v="5.1.0">
+## Batch delete
+
+You can activate the batch delete mode for structure fields by using the `batch` option in your blueprint:
+
+
+```yaml
+fields:
+  structure:
+	  batch: true
+```
+
+</since>
+
 ## How to use in templates/snippets
 
 To access a structure field in your templates, you can use the [`yaml()`](/docs/reference/templates/field-methods/yaml) and [`toStructure()`](/docs/reference/templates/field-methods/to-structure) methods.
