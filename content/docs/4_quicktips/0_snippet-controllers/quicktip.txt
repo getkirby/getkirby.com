@@ -1,0 +1,117 @@
+Title: Snippet controllers
+
+----
+
+Published: 2025-09-26
+
+----
+
+Description: Move your snippet logic to controllers
+
+----
+
+Authors: - authors/nico-hoffmann
+
+----
+
+Tags: templates
+
+----
+
+Text:
+
+With Kirby 5.1, you can create a small plugin that enables support for snippets and block controllers:
+- Add a snippet controller for e.g. `site/snippets/header.php` to `site/controllers/snippets/header.php`
+- Add a block controller for e.g. the `video` block to `site/controllers/snippets/blocks/video.php` (since blocks are also just snippets).
+
+The plugin extends the core `Kirby\Template\Snippet` class to add support for controllers:
+
+```php "site/plugins/snippet-controllers/index.php"
+<?php
+
+use Kirby\Cms\App;
+use Kirby\Template\Snippet;
+use Kirby\Toolkit\Str;
+
+class SnippetWithController extends Snippet
+{
+  // cache for controllers
+  protected static $controllers = [];
+
+  /**
+   * Loads a controller for the snippet, if available,
+   * and merges $data with the returned data from
+   * the controller
+   */
+  public static function controller(
+    string|null $file,
+    array $data = []
+  ): array {
+    if (
+      $file === null ||
+      str_starts_with($file, static::root()) === false
+    ) {
+      return $data;
+    }
+
+    // use cached controller
+    if (isset(static::$controllers[$file]) === true) {
+      return array_replace_recursive(
+        $data,
+        static::$controllers[$file]
+      );
+    }
+
+    // get controller name/path within root directory
+    $name = ltrim(Str::before(Str::after($file, static::root()), '.php'), '/');
+
+    // if the snippet has a name, we can load the controller
+    // and merge the data with the controller's data
+    if ($name !== null) {
+      $data = array_replace_recursive(
+        $data,
+        static::$controllers[$file] = App::instance()->controller('snippets/' . $name, $data)
+      );
+    }
+
+    return $data;
+  }
+
+  public static function factory(
+    string|array|null $name,
+    array $data = [],
+    bool $slots = false
+  ): static|string {
+    $file = $name !== null ? static::file($name) : null;
+    $data = static::controller($file, $data);
+    return parent::factory($name, $data, $slots);
+  }
+
+  public function render(array $data = [], array $slots = []): string
+  {
+    $data = array_replace_recursive(
+      static::controller($this->file, $data),
+      $data
+    );
+
+    return parent::render($data, $slots);
+  }
+}
+
+App::plugin('getkirby/snippet-controllers', [
+  'components' => [
+    'snippet' => function (
+      App $kirby,
+      string|array|null $name,
+      array $data = [],
+      bool $slots = false
+    ): Snippet|string {
+      return SnippetWithController::factory($name, $data, $slots);
+    },
+  ]
+]);
+```
+
+<warning>
+As there can be many snippet calls within a single request, checking for the existence of a controller for each of these can impact your site's performance significantly. Use with caution
+</warning>
