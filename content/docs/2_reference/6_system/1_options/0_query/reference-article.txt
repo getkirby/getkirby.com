@@ -1,0 +1,314 @@
+Intro: Options for the Kirby query language
+
+----
+
+Read: docs/guide/blueprints/query-language
+
+----
+
+Text:
+
+## Runner
+
+The `query.runner` option allows you to define which runner classes are used to parse and interpret the Kirby query language.
+
+<since v="5.1.0">
+Kirby offers a new runner for its query syntax based on parsing the query as abstract syntax tree. This runner is more reliable and efficient than the rudimentary legacy runner. It also offers (link: docs/guide/blueprints/query-language#advanced-query-syntax__operators text: additional features). The new runner is currently in its beta phase:
+
+```php "site/config/config.php"
+use Kirby\Query\Runners\DefaultRunner;
+
+return [
+  'query' => [
+    'runner' => DefaultRunner::class
+  ]
+];
+```
+</since>
+
+### Custom query runner
+
+If you want to create your own Kirby query language runner, you can do this by defining your custom classes. The main class needs to extend the abstract `Kirby\Query\Runners\Runner` class. If you would like to use the same AST parsing, also provide a class extending `Kirby\Query\Visitors\Visitor` and make use of it in your runner class. To activate your custom runner class, set the `query.runner` config option to your custom class' name.
+
+#### Example: Runner that transpiles Kirby queries to PHP files
+
+```php
+<?php
+
+namespace Kirby\Query\Runners;
+
+use ArrayAccess;
+use Closure;
+use Kirby\Cms\App;
+use Kirby\Filesystem\F;
+use Kirby\Query\AST\Node;
+use Kirby\Query\Parser\Parser;
+use Kirby\Query\Query;
+use Kirby\Query\Visitors\Transpiler;
+
+/**
+ * Runner that caches the AST as a PHP file
+ */
+class Transpiled extends Runner
+{
+	public function __construct(
+		protected string $root,
+		public array $global = [],
+		protected Closure|null $interceptor = null,
+		protected ArrayAccess|array &$cache = []
+	) {
+	}
+
+	public function comments(string $query): string
+	{
+		$comments = array_map(
+			fn ($line) => "// $line",
+			explode("\n", $query)
+		);
+
+		return join("\n", $comments);
+	}
+
+	public function file(string $query): string
+	{
+		return $this->root . '/' . crc32($query) . '.php';
+	}
+
+	public static function for(Query $query): static
+	{
+		return new static(
+			root:        App::instance()->root('cache') . '/.queries',
+			global:      $query::$entries,
+			interceptor: $query->intercept(...),
+			cache:       $query::$cache
+		);
+	}
+
+	public function mappings(Transpiler $visitor): string
+	{
+		$mappings = array_map(
+			fn ($key, $value) => "$key = $value;",
+			array_keys($visitor->mappings),
+			$visitor->mappings
+		);
+
+		return join("\n", $mappings) . "\n";
+	}
+
+	public function representation(
+		Transpiler $visitor,
+		string $query,
+		Node $ast
+	): string {
+		$body     = $ast->resolve($visitor);
+		$uses     = $this->uses($visitor);
+		$comments = $this->comments($query);
+		$mappings = $this->mappings($visitor);
+		$closure  = "return function(array \$context, array \$functions, Closure \$intercept) {\n$mappings\nreturn $body;\n};";
+
+		return "<?php\n$uses\n$comments\n$closure";
+	}
+
+	protected function resolver(string $query): Closure
+	{
+		if (isset($this->cache[$query]) === true) {
+			return $this->cache[$query];
+		}
+
+		$file = $this->file($query);
+
+		if (file_exists($file) === true) {
+			return $this->cache[$query] = include $file;
+		}
+
+		$parser = new Parser($query);
+		$ast    = $parser->parse();
+
+		$visitor = new Transpiler($this->global);
+		$code    = $this->representation($visitor, $query, $ast);
+
+		F::write($file, $code);
+
+		return $this->cache[$query] = include $file;
+	}
+
+	public function run(string $query, array $context = []): mixed
+	{
+		$entry = Scope::get($query, $context, $this->global, false);
+
+		if ($entry !== false) {
+			return $entry;
+		}
+
+		return $this->resolver($query)(
+			$context,
+			$this->global,
+			$this->interceptor ?? fn ($obj) => $obj
+		);
+	}
+
+	public function uses(Transpiler $visitor): string
+	{
+		$uses = array_map(
+			fn ($class) => "use $class;",
+			array_keys($visitor->uses)
+		);
+
+		return join("\n", $uses) . "\n";
+	}
+}
+
+```
+
+```php
+<?php
+
+namespace Kirby\Query\Visitors;
+
+use Exception;
+use Kirby\Query\AST\ClosureNode;
+use Kirby\Query\Runners\Scope;
+
+/**
+ * Generates PHP code representation for query AST
+ */
+class Transpiler extends Visitor
+{
+	public array $uses = [];
+	public array $mappings = [];
+
+	public function arguments(array $arguments): string
+	{
+		return join(', ', $arguments);
+	}
+
+	public function arithmetic(
+		string $left,
+		string $operator,
+		string $right
+	): string {
+		return "($left $operator $right)";
+	}
+
+	public function arrayList(array $elements): string
+	{
+		return '[' . join(', ', $elements) . ']';
+	}
+
+	public function closure(ClosureNode $node): string
+	{
+		$this->uses[Scope::class] = true;
+
+		$args = array_map(static::phpName(...), $node->arguments);
+		$args = join(', ', $args);
+
+		$context = [
+			...$this->context,
+			...array_fill_keys($node->arguments, true)
+		];
+
+		$visitor = new static($this->global, $context);
+		$code    = $node->body->resolve($visitor);
+
+		$this->uses     += $visitor->uses;
+		$this->mappings += $visitor->mappings;
+
+		return "fn($args) => $code";
+	}
+
+	public function coalescence(string $left, string $right): string
+	{
+		return "($left ?? $right)";
+	}
+
+	public function comparison(
+		string $left,
+		string $operator,
+		string $right
+	): string {
+		return "($left $operator $right)";
+	}
+
+	public function function(
+		string $name,
+		string|null $arguments = null
+	): string {
+		if (isset($this->functions[$name]) === false) {
+			throw new Exception("Invalid global function: $name");
+		}
+
+		$name = var_export($name, true);
+		return "\$functions[$name]($arguments)";
+	}
+
+	public function intercept(string $value): string
+	{
+		return "(\$intercept($value))";
+	}
+
+	public function literal(mixed $value): string
+	{
+		return var_export($value, true);
+	}
+
+	public function logical(
+		string $left,
+		string $operator,
+		string $right
+	): string {
+		return "($left $operator $right)";
+	}
+
+	public function memberAccess(
+		string $object,
+		string $member,
+		string|null $arguments = null,
+		bool $nullSafe = false
+	): string {
+		$this->uses[Scope::class] = true;
+
+		$params = array_filter([
+			$this->intercept($object),
+			$member,
+			$nullSafe ? 'true' : 'false',
+			$arguments
+		]);
+
+		return 'Scope::access(' . implode(', ', $params) . ')';
+	}
+
+	public static function phpName(string $name): string
+	{
+		return '$_' . crc32($name);
+	}
+
+	public function ternary(
+		string $condition,
+		string|null $true,
+		string $false
+	): string {
+		if ($true === null) {
+			return "($condition ?: $false)";
+		}
+
+		return "($condition ? $true : $false)";
+	}
+
+	public function variable(string $name): string
+	{
+		$key = static::phpName($name);
+
+		if (isset($this->context[$name]) === true) {
+			return $key;
+		}
+
+		if (isset($this->mappings[$key]) === false) {
+			$name = var_export($name, true);
+			$this->uses[Scope::class] = true;
+			$this->mappings[$key] = "Scope::get($name, \$context, \$functions)";
+		}
+
+		return $key;
+	}
+}
+```
