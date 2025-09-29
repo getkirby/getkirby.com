@@ -1,0 +1,9 @@
+start: 18:00:00
+----
+city: Berlin
+----
+country: Germany
+----
+conference: Beyond Tellerrand
+----
+link: https://beyondtellerrand.com/events/berlin-2025/side-events
