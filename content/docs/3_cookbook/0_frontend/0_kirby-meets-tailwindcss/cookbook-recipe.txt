@@ -22,7 +22,7 @@ Tags: CSS, integrations
 
 Text:
 
-This is a walkthrough on how to install and use Tailwind CSS V3 with Kirby.
+This is a walkthrough on how to install and use Tailwind CSS v4 with Kirby.
 
 
 ## Preparation
@@ -51,16 +51,16 @@ site/
 src/
 ```
 
-## Configuration
-Also in the projects's root, we create a `package.json` file which controls the build process. This file contains two build scripts, one for development (*watch*) and one for live mode (*build*).
+## Build configuration
+Also in the projects's root, we create a `package.json` file which controls the build process. This file contains two scripts, one for development (*watch*) and one for live mode (*build*).
 
 ```js "/package.json"
 {
-    "name": "projectname",
-	"scripts": {
-		"watch": "npx tailwindcss -i ./src/css/tailwind.css -o ./assets/css/styles.css --content './site/**/*.php' -w",
-        "build": "npx tailwindcss -i ./src/css/tailwind.css -o ./assets/css/styles.css --content './site/**/*.php' -m"
-	}
+  "name": "projectname",
+  "scripts": {
+    "watch": "npx @tailwindcss/cli -i ./src/tailwind.css -o ./assets/css/styles.css -w",
+    "build": "npx @tailwindcss/cli -i ./src/tailwind.css -o ./assets/css/styles.css -m"
+  }
 }
 ```
 
@@ -69,55 +69,58 @@ Also in the projects's root, we create a `package.json` file which controls the 
 Use `watch` to observe changes and generate a CSS file on change
 Use `build` to generate a final minified CSS file
 
-- `-i ./src/css/tailwind.css`: input file with Tailwind's css classes
-- `-o ../assets/css/styles.css`: output file which will be generated
-- `--content '../site/**/*.php'`: folder to watch for Tailwind's classes
+- `-i ./src/tailwind.css`: input file with Tailwind's configuration
+- `-o ./assets/css/styles.css`: output file which will be generated
 - `-w`: defines watch mode
 - `-m`: minify output file
 
 
 
-## CSS Styles
+## Tailwind configuration
 
-After creating the build configuration, we create a subfolder `/css` in the `/src` folder and inside that folder a file called `tailwind.css`. Inside that file we use the `@tailwind` directive to inject Tailwind’s `base`, `components`, and `utilities` styles.
-```css "/src/css/tailwind.css"
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+After creating the build configuration, we create a file called `tailwind.css` in the `/src` folder. This file is used to configure and customize Tailwind CSS.
+```css "/src/tailwind.css"
+@import "tailwindcss";
 ```
 
 Our `/src` folder should look like follows and we are ready to install Tailwind CSS.
 ```filesystem
 src/
-  css/
-    tailwind.css
+  tailwind.css
 ```
+
+### Optional configuration
+
+The above `tailwind.css` file is everything that is needed to run Tailwind CSS, but you can adjust it to your needs. As an example:
+
+
+```css "/src/tailwind.css"
+
+/* Import a CSS file, which will be included in the final output file */
+@import "./font-roboto.css";
+
+@import "tailwindcss";
+
+/* Exclude the 'vendor' directory from beeing scanned */
+@source "../vendor";
+
+/* Adjusting variables and adding custom styles */
+@theme {
+	--font-sans: "Roboto", "sans-serif";
+	--color-primary: rgb(238, 208, 99);
+	/* ... */
+}
+```
+
+<info>More details on how to customize Tailwind CSS can be found on the (link: https://tailwindcss.com/docs/configuration text: in the Tailwind CSS docs).</info>
 
 
 ## Install Tailwind CSS
 Open the terminal window again (and leave it open), change to the project folder and type the following command:
 ```bash
-npm install tailwindcss@latest
+npm install tailwindcss @tailwindcss/cli
 ```
 By executing the command above a `node_modules` folder with the required dependencies and the file `package-lock.json` will be automatically created in the project root.
-
-
-
-## Config Tailwind CSS (optional)
-If you want to customize your Tailwind installation, you can create an additional config file `tailwind.config.js` in the project root. This file will then be automatically processed at build time if it exists.
-
-
-```js "/tailwind.config.js"
-module.exports = {
-  darkMode: 'class',
-  theme: {
-    extend: {},
-  },
-  variants: {},
-  plugins: [],
-}
-```
-<info>More details on how to customize Tailwind CSS can be found on the (link: https://tailwindcss.com/docs/configuration text: in the Tailwind CSS docs).</info>
 
 
 ## Build
@@ -133,7 +136,7 @@ Use `build` to generate a final minified CSS file:
 npm run build
 ```
 
-Both scripts scan all php files inside the `/site` folder for Tailwind CSS classes and write them to the CSS file `styles.css`.
+Both scripts scan all files for Tailwind CSS classes and write them to the `styles.css` CSS file.
 
 <info>
 If it doesn't exist, the `/assets/` folder structure will be created by the script automatically.
