@@ -1,0 +1,39 @@
+Title: Good Cause Licenses
+
+----
+
+Ogtitle:
+
+----
+
+Description:
+
+----
+
+Priority: 0.9
+
+----
+
+Intro:
+
+We care about a better society and the future of our planet. We offer free or discounted licenses for students, selected educational projects, social and environmental organizations, charities and non-profits with insufficient funding.
+
+----
+
+Text:
+
+## Students & teachers
+
+Students and academic staff members are eligible to use Kirby for free, upon verification of their university/college domain email or student ID card.
+
+## Universities & educational organisations
+
+Universities and accredited educational institutions can take advantage of our 50% discount for development of internal projects and applications. Please contact us.
+
+## Non-profit organisations
+
+Registered non-profit organizations can apply for a free license or discount, depending on their business model. Please contact us and let us know about the project and your funding situation.
+
+## Religious projects & political parties
+
+Our good cause license program does not apply to religious organisations, churches or political parties.
