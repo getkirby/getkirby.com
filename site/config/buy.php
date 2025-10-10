@@ -4,10 +4,12 @@ return [
 	'products' => [
 		'basic' => [
 			'product' => 824338,
+			'nudge'   => 59,
 			'regular' => 99,
 		],
 		'enterprise' => [
 			'product' => 824340,
+			'nudge'   => 249,
 			'regular' => 349,
 		],
 		'partner-certified' => [

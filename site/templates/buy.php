@@ -178,6 +178,7 @@ createApp({
 			basic: {
 				regular: <?= $basic->price('EUR')->regular() ?>,
 				sale: <?= $basic->price('EUR')->sale() ?>,
+				upgrade: <?= $basic->price('EUR')->upgrade()->default() ?>,
 			},
 			donation: {
 				customer: <?= $basic->price('EUR')->customerDonation() ?>,
@@ -186,6 +187,7 @@ createApp({
 			enterprise: {
 				regular: <?= $enterprise->price('EUR')->regular() ?>,
 				sale: <?= $enterprise->price('EUR')->sale() ?>,
+				upgrade: <?= $enterprise->price('EUR')->upgrade()->default() ?>,
 			}
 		},
 		revenueLimit: "",
