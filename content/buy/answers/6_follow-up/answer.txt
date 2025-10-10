@@ -4,7 +4,7 @@ Text:
 
 When you reach the end of your license's update period, you have two options:
 
-1. You can buy an upgrade of your license, adding additional years of feature updates. This will not happen automatically though. We leave it up to you to decide. **Upgrades for three more years will be €59 (excl. VAT) for Kirby Basic and €249 (excl. VAT) for Kirby Enterprise.**
+1. You can buy an upgrade of your license, adding additional years of feature updates. This will not happen automatically though. We leave it up to you to decide. **Upgrades for three more years are currently <span v-text="locale.currencySign + amountDisplay(locale.prices.basic.upgrade)">€(buy-price: basic price: upgrade)</span> (excl. VAT) for Kirby Basic and <span v-text="locale.currencySign + amountDisplay(locale.prices.enterprise.upgrade)">€(buy-price: enterprise price: upgrade)</span> (excl. VAT) for Kirby Enterprise.**
 2. Otherwise, you can keep using the latest Kirby version that was released during the 3 years and keep it running for as long as you like at no extra costs. Only when you'd want to use newer releases with new features and improvements, you'll need to upgrade your license and go with option 1.
 
 You can also pause and upgrade to another round of updates any time later. Technically, this would probably count as a third option.
