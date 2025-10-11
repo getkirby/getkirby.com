@@ -42,7 +42,7 @@
 						</li>
 					</ul>
 				</nav>
-				<p class="mb-3 color-gray-700 flex items-center">
+				<p class="mb-3 color-gray-700 flex">
 					🇪🇺 Made in Europe
 				</p>
 			</div>
