@@ -156,20 +156,12 @@
 							<?php endif ?>
 								<div style="--aspect-ratio: 3/4" class="bg-light mb-6 shadow-lg">
 									<?php if ($image = $project->image()): ?>
-										<?= $image->name() === 'example' ? $image : img($image, [
-											'alt' => '',
-											'src' => [
-												'width' => 702
-											],
-											// sizes generated with https://ausi.github.io/respimagelint/
-											'sizes' => '(min-width: 1520px) 352px, (min-width: 1160px) calc(27.35vw - 58px), (min-width: 640px) calc(33.4vw - 97px), (min-width: 480px) calc(100vw - 96px), 90vw',
-											'srcset' => [
-												352,
-												550,
-												702,
-												1100,
-											]
-										]) ?>
+                                    <img
+                                        alt=""
+                                        sizes = '(min-width: 1520px) 352px, (min-width: 1160px) calc(27.35vw - 58px), (min-width: 640px) calc(33.4vw - 97px), (min-width: 480px) calc(100vw - 96px), 90vw'
+                                        src="<?= $image->url() ?>"
+                                        width="702"
+                                    >
 									<?php endif ?>
 								</div>
 								<figcaption class="font-mono text-sm mb-3">
