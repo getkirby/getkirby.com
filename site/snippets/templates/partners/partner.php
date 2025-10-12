@@ -10,19 +10,7 @@
 					 style="--columns: 4; --columns-sm: 4; --gap: var(--spacing-6)">
 		<figure style="--span: 1; --aspect-ratio: 1/1; overflow: hidden">
 			<?php if ($avatar = $partner->avatar()): ?>
-				<?= img($avatar, [
-					'src' => [
-						'width'  => 70,
-						'height' => 70,
-						'crop'   => true,
-					],
-					// sizes generated with https://ausi.github.io/respimagelint/
-					'sizes' => '(min-width: 1440px) 70px, (min-width: 960px) 5vw, (min-width: 640px) 8vw, 18vw',
-					'srcset' => [
-						['width' => 70, 'height' => 70, 'crop' => true],
-						['width' => 140, 'height' => 140, 'crop' => true],
-					]
-				]) ?>
+                <img src="<?= $avatar->url() ?>">
 			<?php endif ?>
 		</figure>
 		<header style="--span: 3; --span-sm: 3">

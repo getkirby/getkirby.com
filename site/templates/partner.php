@@ -61,22 +61,10 @@
 <div class="partner-grid columns mb-24">
 	<figure style="--aspect-ratio: 3/2;" class="partner-hero rounded overflow-hidden mb-3">
 		<?php if ($image = $page->card()): ?>
-			<?= img($image, [
-				'alt' => '',
-				'src' => [
-					'width' => 1000
-				],
-				'lazy' => false,
-				// sizes generated with https://ausi.github.io/respimagelint/
-				'sizes' => '(min-width: 1520px) 768px, (min-width: 1160px) calc(55vw - 57px), (min-width: 1040px) calc(67vw - 132px), (min-width: 480px) calc(100vw - 96px), 90vw',
-				'srcset' => [
-					300,
-					500,
-					768,
-					1000,
-					1536
-				]
-			]) ?>
+        <img
+            alt=""
+            src="<?= $image->url() ?>"
+        >
 		<?php elseif ($image = $page->avatar()): ?>
 			<span class="p-6 bg-light">
 				<img
