@@ -1,0 +1,98 @@
+Title: Tobias Möritz
+
+----
+
+Plan: certified
+
+----
+
+People: 1
+
+----
+
+Subtitle: Independent Designer & Kirby Developer
+
+----
+
+Website: https://moeritz.io/
+
+----
+
+Location: Hamburg, Germany
+
+----
+
+Region: Europe
+
+----
+
+Summary: Building marvelous web experiences at the intersection of design & development - together with selected agencies, promising early-stage startups and purpose-driven businesses.
+
+----
+
+Contactlink: mailto:kirby@moeritz.io
+
+----
+
+Languages: English, German
+
+----
+
+Description:
+
+I am an Independent Digital Designer, Web Developer and Frontend Magician based in Hamburg, Germany. I work with selected agencies, promising early-stage startups and purpose-driven businesses from all around the world, helping them to create marvelous web experiences with confidence.
+
+## Building sh\*t that works
+Design & Development go hand in hand. When working that way, results are clearer, faster & more accessible. I connect both chaotic creative processes with systematic building and a state-of-the-art technical background that sets a strong focus on clear, understandable design & accessibility.
+
+I don't pitch or ask for business, I am building lasting relationships with the teams I work with  - Aiming to understand their needs, adapt to them, and align around shared values, by being honest & transparent. Delivering a cutting-edge, tailored web experience that balance the team's goals with the needs of their users in the end.
+
+Over the years, I've developed an extensive network of multidisciplinary expert partners who can help to build a team that excels at building your experience.
+
+## Why I **❤️ Kirby**
+Kirby CMS enables me to develop exceptional, scalable websites that can be tailored to your needs while allowing quick iteration cycles and providing an easy-to-understand content editing experience.
+
+My approach to most Kirby sites is to provide the most flexibility needed by utilizing the Blocks or Layout editor for most pages, connected with a Content-first strategy that offer a flexible way to edit structured content. With its plugin system, I can take the extra mile and extend Kirby with custom functionality, connect your site to third-parties or make the editing experience just a little bit better.
+
+Want a technical deep-dive? Take a look at [my Kirby Baukasten starterkit](https://github.com/tobimori/kirby-baukasten), which serves as the battle-tested foundation for all of my projects.
+
+I'm also the developer of [Kirby SEO](/plugins/tobimori/seo), which powers the SEO needs of [many Kirby sites](https://github.com/tobimori/kirby-seo/blob/main/docs/index.md#used-by) and is regularly used by other developers and agencies around the world.
+
+## Say hi!
+Interested in working with me? Or just a Nigerian prince that wants to make me rich? Send me a message at [kirby@moeritz.io](mailto:kirby@moeritz.io).
+
+----
+
+Expertise:
+
+- Tailored Kirby Web Development
+- Custom Kirby Plugin Development
+- UI & Web Design
+- Corporate Sites
+- API & Third-party Integrations
+- Interactive User Experiences
+- Animation Development (GSAP, Three.js)
+- Kirby as Headless CMS
+- Multilingual Websites
+- Hosting, Support & Maintenance
+
+----
+
+Uuid: my524jZfcX9Zob80
+
+----
+
+Text:
+
+----
+
+Plugindeveloper: tobimori
+
+----
+
+Plugins:
+- dreamform
+- seo
+- icon-field
+- tailwind-merge
+
