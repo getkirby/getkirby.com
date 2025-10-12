@@ -23,6 +23,7 @@ return [
 		'url' => 'https://hub.getkirby.test'
 	],
 	'partnerhub' => [
-		'url' => 'http://partners.test/partners.json',
+		'url'        => 'http://partners.test/partners.json',
+		'partnerUrl' => 'http://partners.test/partners/'
 	]
 ];

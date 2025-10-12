@@ -161,7 +161,7 @@ class PartnerPage extends DefaultPage
 		}
 		
 		$gallery = [];
-		$request = Remote::get('http://partners.test/partners/' . $this->slug() . '.json');
+		$request = Remote::get(option('partnerhub.partnerUrl') . $this->slug() . '.json');
 		
 		if ($request->code() === 200) {
 			$gallery = $request->json(true);
