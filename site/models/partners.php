@@ -6,6 +6,17 @@ use Kirby\Uuid\Uuid;
 
 class PartnersPage extends DefaultPage
 {
+	static $subpages = null;
+	
+	public function subpages(): Pages
+	{
+		if (static::$subpages) {
+			return static::$subpages;
+		}
+		
+		return static::$subpages = Pages::factory($this->inventory()['children'], $this);
+	}
+	
 	public function children(): Pages
 	{
 		if ($this->children instanceof Pages) {
@@ -48,7 +59,7 @@ class PartnersPage extends DefaultPage
 				]
 		);
 
-		return $this->children = Pages::factory($partners, $this);
+		return $this->children = $this->subpages()->add(Pages::factory($partners, $this));
 	}
 	
 	public function getImages(array $partner)
