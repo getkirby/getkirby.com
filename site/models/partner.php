@@ -148,4 +148,9 @@ class PartnerPage extends DefaultPage
 	{
 		return $this->images()->findBy('name', 'stripe') ?? $this->card();
 	}
+	
+	public function isListed(): bool
+	{
+		return true;
+	}
 }
