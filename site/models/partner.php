@@ -153,4 +153,53 @@ class PartnerPage extends DefaultPage
 	{
 		return true;
 	}
+	
+	public function children(): Pages
+	{
+		if ($this->children instanceof Pages) {
+			return $this->children;
+		}
+		
+		$gallery = [];
+		$request = Remote::get('http://partners.test/partners/' . $this->slug() . '.json');
+		
+		if ($request->code() === 200) {
+			$gallery = $request->json(true);
+		}
+
+		$gallery = A::map(
+			$gallery,
+			fn ($galleryItem) => [
+				'slug'     => $slug = Str::slug($galleryItem['title']),
+				'parent'   => $this,
+				'url'      => $this->url() . '/' . $slug,
+				'model'    => 'gallery-item',
+				'template' => 'gallery-items',
+				'content'  => [
+					'title' => $galleryItem['title'],
+					'info'  => $galleryItem['info'],
+					'link'  => $galleryItem['link'],
+				
+				],
+				'files'   => $this->getImages($galleryItem),
+			]
+		);
+		
+		return $this->children = Pages::factory($gallery, $this);
+	}
+	
+	public function getImages(array $galleryItem)
+	{
+		$files = [];
+		
+		$file = $galleryItem['image'] ?? null;
+		$file = [
+			'filename' => baseName($file),
+			'url'      => $file,
+		];
+		
+		$files[] = $file;
+		
+		return $files;
+	}
 }
