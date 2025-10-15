@@ -1,0 +1,93 @@
+Title: Bee business
+
+----
+
+Subtitle: Web Developer
+
+----
+
+Summary: Crafting accessible, high-performance web experiences at the intersection of design and development. I analyze, design & build scalable digital solutions – partnering with agencies, startups and purpose-driven organizations to create SEO-optimized products that deliver real impact.
+
+----
+
+Description:
+
+I am **Fernando Gutiérrez.**
+I have over 24 years of experience solving technological problems and developing digital solutions for companies in various industries.
+
+It's not just about programming, but about finding the right tool for each project, ensuring that every solution is efficient and scalable.
+
+With **Bee business**, I help transform ideas into functional digital products that are clear and aligned with each client's objectives.
+
+## Web development and optimization of digital tools
+Create and optimize websites, e-commerce platforms, and web applications. Each project is focused on delivering smooth, secure, and high-performance experiences for your users on any device.
+
+## Personalized strategic consulting
+I advise you on improving your digital presence through strategies in SEO, accessibility, usability, and security. I will collaborate to identify opportunities and develop a clear action plan aligned with your business objectives, maintaining simplicity and efficiency at every stage.
+
+----
+
+Owner: 
+
+----
+
+Signuppage: - page://hd0fzaia44kefjwj
+
+----
+
+Plan: regular
+
+----
+
+People: 1
+
+----
+
+Website: https://beeb.mx
+
+----
+
+Location: Guadalajara, México
+
+----
+
+Region: Middle America
+
+----
+
+Contactlink: https://beeb.mx
+
+----
+
+Languages: English, Spanish
+
+----
+
+Expertise:
+
+- Web development
+- Web optimizations
+- SEO-friendly websites
+- Accessible and usable websites
+- Third-party integrations
+- Kirby plugin development
+- Web design
+- UI/UX design
+- Landing pages
+- Corporate websites
+- Entertainment websites
+- Platform websites
+- Web applications
+- Personalized strategies
+
+----
+
+Pluginpage: https://plugins.getkirby.com/beebmx
+
+----
+
+Discordhandle: beebmx
+
+----
+
+Uuid: shtkxqhl6zb3no04
