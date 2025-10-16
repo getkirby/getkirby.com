@@ -33,12 +33,15 @@ class PartnersPage extends DefaultPage
 		$partners = A::map(
 			array_keys($partners),
 			fn ($partner) => [
-					'slug'     => $partner,
-					'parent'   => $this,
-					'url'      => $this->url() . '/' . $partner,
-					'model'    => 'partner',
-					'template' => 'partner',
-					'content' => [
+				'slug'     => $partner,
+				'parent'   => $this,
+				'url'      => $this->url() . '/' . $partner,
+				'model'    => 'partner',
+				'template' => 'partner',
+				'isDraft'  => false,
+				'num'      => ($partners[$partner]['isPreview'] ?? false) === false ? 0 : null,
+				'isListed' => ($partners[$partner]['isPreview'] ?? false) === false,
+				'content' => [
 						'title'       => $partners[$partner]['title'],
 						'plan'        => $partners[$partner]['plan'],
 						'summary'     => $partners[$partner]['summary'],
@@ -49,13 +52,13 @@ class PartnersPage extends DefaultPage
 						'region'      => $partners[$partner]['region'],
 						'subtitle'    => $partners[$partner]['subtitle'],
 						'location'    => $partners[$partner]['location'] ?? null,
-						'uuid'        => Uuid::generate(),
+						'token'       => $partners[$partner]['token'],
 						'card'        => $partners[$partner]['card'] ?? null,
-						'stripe'        => $partners[$partner]['stripe'] ?? null,
-						'avatar'        => $partners[$partner]['avatar'] ?? null,
+						'stripe'      => $partners[$partner]['stripe'] ?? null,
+						'avatar'      => $partners[$partner]['avatar'] ?? null,
 					
 					],
-					'files'   => $this->getImages($partners[$partner]),
+				'files'   => $this->getImages($partners[$partner]),
 				]
 		);
 

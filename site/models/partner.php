@@ -148,21 +148,17 @@ class PartnerPage extends DefaultPage
 	{
 		return $this->images()->findBy('name', 'stripe') ?? $this->card();
 	}
-	
-	public function isListed(): bool
-	{
-		return true;
-	}
-	
+
 	public function children(): Pages
 	{
 		if ($this->children instanceof Pages) {
 			return $this->children;
 		}
-		
+		// How can we pass a param to this path depending on request params
+		// And make sure that it is not cached?
 		$gallery = [];
 		$request = Remote::get(option('partnerhub.partnerUrl') . $this->slug() . '.json');
-		
+
 		if ($request->code() === 200) {
 			$gallery = $request->json(true);
 		}
@@ -179,12 +175,12 @@ class PartnerPage extends DefaultPage
 					'title' => $galleryItem['title'],
 					'info'  => $galleryItem['info'],
 					'link'  => $galleryItem['link'],
-				
+
 				],
 				'files'   => $this->getImages($galleryItem),
 			]
 		);
-		
+
 		return $this->children = Pages::factory($gallery, $this);
 	}
 	
