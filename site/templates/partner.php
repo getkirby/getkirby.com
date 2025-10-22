@@ -1,7 +1,6 @@
 <?php
-
 if ($page->status() !== 'listed' &&
-    get('token') !== $page->token()->value()
+    get('preview') !== $page->preview()->value()
 ) {
     go($page->parent());
 }
