@@ -22,26 +22,27 @@ class PartnersPage extends DefaultPage
 		}
 		
 		$partners = [];
-		$request  = Remote::get(
-			option('partnerhub.url') . '?apiToken=' .
-			option('keys.partnerAccessToken'));
+		try {
+			$request = Remote::get(
+				option('partnerhub.url') . '?apiToken=' .
+				option('keys.partnerAccessToken'));
 	
-		if ($request->code() === 200) {
-			$partners = $request->json(true);
-		}
-		
-		$partners = A::map(
-			array_keys($partners),
-			fn ($partner) => [
-				'slug'     => $partner,
-				'parent'   => $this,
-				'url'      => $this->url() . '/' . $partner,
-				'model'    => 'partner',
-				'template' => 'partner',
-				'isDraft'  => false,
-				'num'      => ($partners[$partner]['isPreview'] ?? false) === false ? 0 : null,
-				'isListed' => ($partners[$partner]['isPreview'] ?? false) === false,
-				'content' => [
+			if ($request->code() === 200) {
+				$partners = $request->json(true);
+			}
+			
+			$partners = A::map(
+				array_keys($partners),
+				fn($partner) => [
+					'slug'     => $partner,
+					'parent'   => $this,
+					'url'      => $this->url() . '/' . $partner,
+					'model'    => 'partner',
+					'template' => 'partner',
+					'isDraft'  => false,
+					'num'      => ($partners[$partner]['isPreview'] ?? false) === false ? 0 : null,
+					'isListed' => ($partners[$partner]['isPreview'] ?? false) === false,
+					'content'  => [
 						'title'       => $partners[$partner]['title'],
 						'plan'        => $partners[$partner]['plan'],
 						'summary'     => $partners[$partner]['summary'],
@@ -52,15 +53,16 @@ class PartnersPage extends DefaultPage
 						'region'      => $partners[$partner]['region'],
 						'subtitle'    => $partners[$partner]['subtitle'],
 						'location'    => $partners[$partner]['location'] ?? null,
-						'token'       => $partners[$partner]['token'],
+						'preview'     => $partners[$partner]['token'],
 						'card'        => $partners[$partner]['card'] ?? null,
 						'stripe'      => $partners[$partner]['stripe'] ?? null,
 						'avatar'      => $partners[$partner]['avatar'] ?? null,
 					
 					],
-				'files'   => $this->getImages($partners[$partner]),
+					'files'    => $this->getImages($partners[$partner]),
 				]
-		);
+			);
+		} catch (Exception $e) {}
 
 		return $this->children = $this->subpages()->add(Pages::factory($partners, $this));
 	}
