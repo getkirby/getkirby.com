@@ -1,8 +1,6 @@
 <?php
 
 use Kirby\Cms\Pages;
-use Kirby\Cms\Url;
-use Kirby\Uuid\Uuid;
 
 class PartnersPage extends DefaultPage
 {
@@ -24,8 +22,8 @@ class PartnersPage extends DefaultPage
 		}
 		
 		$partners = [];
-		$request  = Remote::get(option('partnerhub.url'));
-		
+		$request  = Remote::get(option('partnerhub.url') . '?apiToken=' . option('keys.partner_access_token'));
+	
 		if ($request->code() === 200) {
 			$partners = $request->json(true);
 		}
@@ -65,17 +63,18 @@ class PartnersPage extends DefaultPage
 		return $this->children = $this->subpages()->add(Pages::factory($partners, $this));
 	}
 	
-	public function getImages(array $partner)
+	public function getImages(array $partner): array
 	{
 		$files = [];
 		
 		foreach (array_filter(
 			 [
-			     $partner['card'] ?? null,
-			     $partner['stripe'] ?? null,
-			     $partner['avatar'] ?? null
+				$partner['card'] ?? null,
+				$partner['stripe'] ?? null,
+				$partner['avatar'] ?? null
 			 ]
-            ) as $file) {
+		) as $file) {
+			
 			$file = [
 				'filename' => baseName($file),
 				'url'      => $file,
