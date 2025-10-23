@@ -19,8 +19,8 @@ return [
 		]
 	],
 	'partnerhub' => [
-		'url'        => 'https://partners.getkirby.com/partners.json',
-		'partnerUrl' => 'https://partners.getkirby.com/partners/'
+		'url'        => 'https://partnerhub.getkirby.com/partners.json',
+		'partnerUrl' => 'https://partnerhub.getkirby.com/partners/'
 	
 	]
 ];
