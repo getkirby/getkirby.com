@@ -1,0 +1,9 @@
+start: 19:45:00
+----
+city: Berlin
+----
+country: Germany
+----
+conference: Beyond Tellerrand
+----
+link: https://www.meetup.com/kirby-cms-community-berlin/events/311640278/
