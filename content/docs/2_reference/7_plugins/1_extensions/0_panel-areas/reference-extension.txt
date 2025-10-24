@@ -48,8 +48,11 @@ Kirby::plugin('yourname/todos', [
         // show / hide from the menu
         'menu' => true,
 
-        // link to the main area view
+        // link to the main area view (can also be an absolute URL)
         'link' => 'todos',
+
+        // optional; to open the link in a new tab
+        'target' => '_blank',
 
         // views
         'views' => [
