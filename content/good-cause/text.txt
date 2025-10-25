@@ -47,7 +47,7 @@ We provide free licenses for sites showcasing a Kirby extension (plugin or theme
 
 ### Universities & educational organizations
 
-Universities and accredited educational institutions are eligible for a 50% discount when using Kirby for internal projects and applications. If the institution/organization qualifies for Kirby Basic, we also do offer discounts for selected public sites.
+Universities and accredited educational institutions are eligible for a 50% discount when using Kirby for internal projects and applications. If the institution/organization qualifies for Kirby Basic, we also offer discounts for selected public sites.
 
 Research projects are eligible only if they lack sufficient funding and operate under Open Access rules (or equivalent). Please let us know about the project and your funding situation.
 
