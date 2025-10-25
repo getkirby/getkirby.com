@@ -16,24 +16,51 @@ Priority: 0.9
 
 Intro:
 
-We care about a better society and the future of our planet. We offer free or discounted licenses for students, selected educational projects, social and environmental organizations, charities and non-profits with insufficient funding.
+We care about a better society and the future of our planet. We offer free or discounted licenses for selected individuals and organizations with insufficient funding (link: license/#free-licenses__free-licenses-on-request text: according to our license terms).
 
 ----
 
 Text:
 
-## Students & teachers
+## Free licenses
+### Students & educators
 
-Students and academic staff members are eligible to use Kirby for free, upon verification of their university/college domain email or student ID card.
+Students and academic staff members can receive a free Kirby license, upon verification of their school/college/university domain email address or student ID card. The license must *not* be used for other than personal and/or teaching projects.
 
-## Universities & educational organisations
+This also applies to universities, colleges or schools who want to use Kirby in the classroom or for student-related educational projects.
 
-Universities and accredited educational institutions can take advantage of our 50% discount for development of internal projects and applications. Please contact us.
+(email: licensing@getkirby.com?subject=Free license for a student or teacher text: Contact us class: btn btn--filled)
 
-## Non-profit organisations
+<info>
+For classroom use (in a course or workshop), we are happy to provide a free license for each student. Please send us a list of student email addresses so we can create the licenses in bulk (please ensure consent of your students) or ask the students to get in contact directly.
+</info>
 
-Registered non-profit organizations can apply for a free license or discount, depending on their business model. Please contact us and let us know about the project and your funding situation.
 
-## Religious projects & political parties
+### Plugin and theme sites
 
-Our good cause license program does not apply to religious organisations, churches or political parties.
+We provide free licenses for sites showcasing a Kirby extension (plugin or theme).
+
+(email: licensing@getkirby.com?subject=Free license for a plugin or theme site text: Contact us class: btn btn--filled)
+
+
+## Discounted licenses
+
+### Universities & educational organizations
+
+Universities and accredited educational institutions are eligible for a 50% discount when using Kirby for internal projects and applications. If the institution/organization qualifies for Kirby Basic, we also do offer discounts for selected public sites.
+
+Research projects are eligible only if they lack sufficient funding and operate under Open Access rules (or equivalent). Please let us know about the project and your funding situation.
+
+(email: licensing@getkirby.com?subject=Discounted license for education/research text: Contact us class: btn btn--filled)
+
+### Non-profit organizations & projects
+
+Non-profit organizations can apply for a free license or discount, depending on their business model. Please let us know about the project and your funding situation.
+
+(email: licensing@getkirby.com?subject=Free/discounted license for a non-profit organization text: Contact us class: btn btn--filled)
+
+<info>
+Our good cause license program does *not* apply to religious organizations, churches or political parties.
+</info>
+
+
