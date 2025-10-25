@@ -1,7 +1,7 @@
-<div class="product p-6 rounded-xl flex flex-column justify-between" style="gap: 4rem" data-product="<?= $product->value() ?>">
-	<header>
+<div class="p-6 product rounded-xl flex flex-column justify-between" data-product="<?= $product->value() ?>">
+	<header class="mb-3">
 		<h2>
-			<?= $product->label() ?>
+			Kirby <?= $product->label() ?>
 
 			<?php if ($sale->isActive()): ?>
 			<span class="price px-1" data-regular>
@@ -20,7 +20,7 @@
 		</a>
 
 		<?php if ($product === Kirby\Buy\Product::Basic): ?>
-		<details class="revenue text-sm color-gray-700">
+		<details class="revenue text-sm color-gray-700 mb-6">
 			<summary>
 				<?= $description ?>
 				<mark><?= $limit ?> <span aria-hidden="true">&rarr;</span></mark>
@@ -38,10 +38,11 @@
 			</div>
 		</details>
 		<?php else: ?>
-		<p class="description text-sm color-gray-700"><?= $description ?> <mark><?= $limit ?></mark></p>
+		<p class="description text-sm color-gray-700 mb-6">
+			<?= $description ?> <mark><?= $limit ?></mark>
+		</p>
 		<?php endif ?>
 	</header>
-
 
 	<footer>
 		<p>

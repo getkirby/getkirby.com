@@ -1,10 +1,10 @@
-Title: What does the **revenue limit for Kirby Basic** mean?
+Title: Which **license type** (Basic or Enterprise) do I need?
 ----
 Text:
 
-The **Basic license** at its discounted price is only available for projects of individuals, companies and organizations whose **total yearly revenue or funding is below (revenue-limit: verbose)<span v-cloak v-if="locale.revenueLimit.length" v-text="locale.revenueLimit"></span>**.
+The **Enterprise license** is our standard license for companies and organizations of any size. The Enterprise license **does not have a revenue limit** and can be purchased at regular price.
 
-If your revenue or funding is above the limit, you need to purchase an **Enterprise license** at regular price. The Enterprise license **does not have a revenue limit**.
+The **Basic license** at its discounted price is only available for projects of individuals, companies and organizations whose **total yearly revenue or funding is below (revenue-limit: verbose)<span v-cloak v-if="locale.revenueLimit.length" v-text="locale.revenueLimit"></span>**.
 
 Revenue means all net sales or net turnover (*not* profit) you made through any means and not just limited to the website itself. Should you not have any sales (e.g. as a foundation, association or public authority), your ongoing funding/yearly budget is considered instead.
 

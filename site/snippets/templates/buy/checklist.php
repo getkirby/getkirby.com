@@ -1,5 +1,5 @@
 <p class="sr-only">Your advantages:</p>
-<ul class="checklist mb-6">
+<ul class="checklist mb-3">
 	<?php if ($versionIncluded !== null): ?>
 	<li>
 		<?= icon('check') ?>
