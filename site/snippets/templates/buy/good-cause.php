@@ -12,7 +12,7 @@
 		<p>We care about a better society and the future of our planet. We offer free or discounted licenses to <strong>students, selected educational projects, social and environmental organizations, charities and non-profits</strong> with insufficient funding.</p>
 	</div>
 
-	<a class="btn btn--filled mb-12" href="/good-cause">
+	<a class="btn btn--filled mb-12" href="<?= url('good-cause') ?>">
 		<?= icon('heart') ?>
 		Learn more
 	</a>
