@@ -96,6 +96,9 @@ img {
 .max-w-xl {
 	max-width: 36rem;
 }
+.max-w-2xl {
+	max-width: 48rem;
+}
 
 .rounded-xl {
 	border-radius: var(--spacing-2);

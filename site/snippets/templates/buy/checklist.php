@@ -1,5 +1,5 @@
 <p class="sr-only">Your advantages:</p>
-<ul class="checklist mb-6">
+<ul class="checklist">
 	<?php if ($versionIncluded !== null): ?>
 	<li>
 		<?= icon('check') ?>
@@ -16,10 +16,6 @@
 	</li>
 	<li>
 		<?= icon('check') ?>
-		No subscription
-	</li>
-	<li>
-		<?= icon('check') ?>
-		No hidden costs
+		No subscription, no hidden costs
 	</li>
 </ul>

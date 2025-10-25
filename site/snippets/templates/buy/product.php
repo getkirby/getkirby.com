@@ -1,7 +1,7 @@
-<div class="product p-6 rounded-xl flex flex-column justify-between" style="gap: 4rem" data-product="<?= $product->value() ?>">
-	<header>
+<div class="product rounded-xl flex flex-column justify-between" data-product="<?= $product->value() ?>">
+	<header class="p-6">
 		<h2>
-			<?= $product->label() ?>
+			Kirby <?= $product->label() ?>
 
 			<?php if ($sale->isActive()): ?>
 			<span class="price px-1" data-regular>
@@ -20,7 +20,7 @@
 		</a>
 
 		<?php if ($product === Kirby\Buy\Product::Basic): ?>
-		<details class="revenue text-sm color-gray-700">
+		<details class="revenue text-sm color-gray-700 mb-6">
 			<summary>
 				<?= $description ?>
 				<mark><?= $limit ?> <span aria-hidden="true">&rarr;</span></mark>
@@ -38,12 +38,15 @@
 			</div>
 		</details>
 		<?php else: ?>
-		<p class="description text-sm color-gray-700"><?= $description ?> <mark><?= $limit ?></mark></p>
+		<p class="description text-sm color-gray-700 mb-6">
+			<?= $description ?> <mark><?= $limit ?></mark>
+		</p>
 		<?php endif ?>
+
+		<?php snippet('templates/buy/checklist') ?>
 	</header>
 
-
-	<footer>
+	<footer class="p-6">
 		<p>
 			<a href="/buy/<?= $product->value() ?>" @click.prevent="openCheckout('<?= $product->value() ?>', 1)" target="_blank" class="btn btn--filled mb-1 w-100%">
 				<?= icon('cart') ?>
