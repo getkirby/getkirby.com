@@ -6,7 +6,7 @@ article[data-loading] .price[data-sale] {
 }
 
 .checklist {
-	font-size: var(--text-base);
+	font-size: var(--text-sm);
 }
 .checklist li {
 	display: flex;
@@ -57,16 +57,13 @@ article[data-loading] .price[data-sale] {
 	color: var(--color-yellow-500);
 }
 
-.product[data-product="basic"] {
-	border: 1px solid var(--color-gray-250);
+.product {
+	background: var(--color-white);
+	box-shadow: var(--shadow-xl);
+	border: 1px solid var(--color-gray-300);
 }
 .product[data-product="basic"] .price[data-sale] {
 	color: var(--color-yellow-700);
-}
-
-.product[data-product="enterprise"] {
-	background: var(--color-white);
-	box-shadow: var(--shadow-xl);
 }
 
 .product[data-product="enterprise"] .description mark {
@@ -99,41 +96,28 @@ article[data-loading] .price[data-sale] {
 }
 </style>
 
+<?php snippet('templates/buy/header') ?>
+
 <article v-scope data-loading @mounted="mounted">
 	<?php snippet('templates/buy/checkout') ?>
 
 	<div v-else>
-		<div class="columns mb-42" style="--columns-sm: 1; --columns-md: 1; --columns-lg: 2; --gap: var(--spacing-3)">
-			<div>
-				<h1 class="h1 max-w-xl mb-12">
-					The transparency of <a href="<?= option('github.url') ?>">open&#8209;source</a> meets a fair pricing&nbsp;model
-				</h1>
-
-				<?php if ($sale->isActive()): ?>
-					<div class="h3 sale mb-6">
-						<?= $sale->text() ?>
-					</div>
-				<?php endif ?>
-
-				<?php snippet('templates/buy/checklist') ?>
-
-			</div>
-			<div class="columns" style="--columns: 2; --gap: var(--spacing-6)">
-				<?php snippet('templates/buy/product', [
-					'product'     => $basic,
-					'description' => 'A discounted license for individuals and small teams with a',
-					'limit'       => 'total annual revenue/funding of less than ' . $revenueLimit
-				]) ?>
-				<?php snippet('templates/buy/product', [
-					'product'     => $enterprise,
-					'description' => 'The standard license for companies and organizations of any size.',
-					'limit'       => 'No&nbsp;revenue limit.'
-				]) ?>
-				<p class="text-xs text-center mb-6 color-gray-700" style="--span: 2">
-					Prices + VAT if applicable. With your purchase you agree to our <a class="underline" href="<?= url('license') ?>">License terms</a>
-				</p>
-			</div>
+		<div class="columns" style="--columns: 2; --gap: var(--spacing-6)">
+			<?php snippet('templates/buy/product', [
+				'product'     => $basic,
+				'description' => 'A discounted license for individuals and small teams with a',
+				'limit'       => 'total annual revenue/funding of less than ' . $revenueLimit
+			]) ?>
+			<?php snippet('templates/buy/product', [
+				'product'     => $enterprise,
+				'description' => 'The standard license for companies and organizations of any size.',
+				'limit'       => 'No&nbsp;revenue limit.'
+			]) ?>
+			<p class="text-xs text-center mb-6 color-gray-700" style="--span: 2">
+				Prices + VAT if applicable. With your purchase you agree to our <a class="underline" href="<?= url('license') ?>">License terms</a>
+			</p>
 		</div>
+
 		<?php snippet('templates/buy/volume-discounts') ?>
 	</div>
 

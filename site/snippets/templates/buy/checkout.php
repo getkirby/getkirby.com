@@ -4,6 +4,7 @@
 	border-radius: var(--rounded);
 	box-shadow: var(--shadow-2xl);
 	background: var(--color-gray-200);
+	border: 1px solid var(--color-gray-300);
 	font-size: var(--text-sm);
 }
 
