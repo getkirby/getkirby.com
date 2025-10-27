@@ -102,7 +102,7 @@ The above `tailwind.css` file is everything that is needed to run Tailwind CSS, 
 @import "tailwindcss";
 
 /* Exclude the 'vendor' directory from beeing scanned */
-@source "../vendor";
+@source not "../vendor";
 
 /* Adjusting variables and adding custom styles */
 @theme {
