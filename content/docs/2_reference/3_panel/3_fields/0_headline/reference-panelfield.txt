@@ -38,29 +38,3 @@ fields:
 ## Field properties
 
 (field-options: headline)
-
-## Hiding the headline numbers
-
-```yaml
-fields:
-  pageSettings:
-    label: Page Settings
-    type: headline
-    numbered: false
-  type:
-    label: Page type
-    type: text
-  state:
-    label: Draft
-    type: toggle
-  content:
-    label: Content
-    type: headline
-    numbered: false
-  text:
-    label: Text
-    type: textarea
-```
-
-You can also just hide the numbers of one or a few headlines on a page, those headlines are then skipped when counting through. The others will get numbers like normal.
-
