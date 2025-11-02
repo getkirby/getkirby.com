@@ -137,10 +137,8 @@ article[data-loading] .price[data-sale] {
 		<?php snippet('templates/buy/volume-discounts') ?>
 	</div>
 
-	<section class="mb-42 columns columns--reverse" style="--columns: 2; --columns-md: 1; --gap: var(--spacing-36)">
-		<?php snippet('templates/buy/good-cause') ?>
-		<?php snippet('templates/buy/faq') ?>
-	</section>
+	<?php snippet('templates/buy/good-cause') ?>
+	<?php snippet('templates/buy/faq') ?>
 
 	<footer class="h2">
 		Manage your existing licenses in our <a href="https://hub.getkirby.com"><span class="link">license&nbsp;hub</span>
