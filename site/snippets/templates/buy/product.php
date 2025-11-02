@@ -1,4 +1,4 @@
-<div class="p-6 product rounded-xl flex flex-column justify-between" data-product="<?= $product->value() ?>">
+<div class="product p-6 rounded-xl flex flex-column justify-between" data-product="<?= $product->value() ?>">
 	<header class="mb-3">
 		<h2>
 			Kirby <?= $product->label() ?>

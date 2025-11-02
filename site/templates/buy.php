@@ -58,7 +58,7 @@ article[data-loading] .price[data-sale] {
 }
 
 .product {
-	border: 1px solid var(--color-gray-300);
+	border: 1px solid var(--color-gray-250);
 }
 .product[data-product="basic"] .price[data-sale] {
 	color: var(--color-yellow-700);
@@ -104,7 +104,7 @@ article[data-loading] .price[data-sale] {
 	<?php snippet('templates/buy/checkout') ?>
 
 	<div v-else>
-		<div class="columns mb-12" style="--columns: 3; --gap: var(--spacing-6)">
+		<div class="columns mb-12" style="--columns: 3; --columns-md: 1; --gap: var(--spacing-6)">
 			<div class="py-6">
 				<?php snippet('templates/buy/checklist') ?>
 
@@ -124,7 +124,8 @@ article[data-loading] .price[data-sale] {
 				'description' => 'The standard license for companies and organizations of any size.',
 				'limit'       => 'No&nbsp;revenue limit.'
 			]) ?>
-			<p class="text-xs text-center mb-6 color-gray-700" style="grid-column: 2 / span 2">
+
+			<p class="text-xs text-center mb-6 color-gray-700" style="--span: 2 / -1; --span-md: 1">
 				Prices + VAT if applicable. With your purchase you agree to our <a class="underline" href="<?= url('license') ?>">License terms</a>
 			</p>
 		</div>
