@@ -1,0 +1,19 @@
+Title: Plugin and theme sites
+
+----
+
+Link: buy#good-cause
+
+----
+
+Type: free
+
+----
+
+Text:
+
+We provide free licenses for sites showcasing a Kirby extension (plugin or theme).
+
+----
+
+Subject: Free license for a plugin or theme site
