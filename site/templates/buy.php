@@ -107,10 +107,6 @@ article[data-loading] .price[data-sale] {
 		<div class="columns mb-12" style="--columns: 3; --columns-md: 1; --gap: var(--spacing-6)">
 			<div class="py-6">
 				<?php snippet('templates/buy/checklist') ?>
-
-				<a href="#revenue-limit" class="text-sm color-gray-600">
-					&rarr; Which license type do I need?
-				</a>
 			</div>
 
 			<?php snippet('templates/buy/product', [
