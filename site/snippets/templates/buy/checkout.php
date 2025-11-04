@@ -202,8 +202,13 @@
 					</table>
 				</div>
 
-				<?php if ($donation['customerAmount'] > 0): ?>
 				<div>
+					<h2 class="font-bold">Volume discounts</h2>
+					<p class="mb-3 help">
+						Purchase 5, 10 or 15+ licenses and save 5%, 10% or 15% on your license fees.
+					</p>
+
+					<?php if ($donation['customerAmount'] > 0): ?>
 					<h2 class="font-bold">Support a good cause</h2>
 					<p class="mb-3 help">
 						For every license purchased, we donate <span class="whitespace-nowrap">€<?= $donation['teamAmount'] ?></span><span class="whitespace-nowrap" v-if="locale.currencySign !== '€'" v-text="' (~ ' + locale.currencySign + locale.prices.donation.team + ')'"></span> to
@@ -217,8 +222,8 @@
 						<span v-text="donationText">Donate an additional €<?= $donation['customerAmount'] ?> per license 💛</span>
 						<?php endif ?>
 					</label>
+					<?php endif ?>
 				</div>
-				<?php endif ?>
 			</div>
 			<div class="checkout-form">
 				<div>
