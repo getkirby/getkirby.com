@@ -1,17 +1,18 @@
+<?php snippet('layouts/skipper') ?>
+
 <?php if ($kirby->option('archived') !== true): ?>
-<div class="container">
-	<?php snippet('layouts/topbar', [
-		'icon'   => '🎉',
-		'title'  => 'Kirby 5 is here!',
-		'button' => 'Learn more',
-		'link'   => '/releases/5',
-		'active' => $page->is('releases/5')
-	]) ?>
-</div>
+	<div class="container">
+		<?php snippet('layouts/topbar', [
+			'icon'   => '🎉',
+			'title'  => 'Kirby 5 is here!',
+			'button' => 'Learn more',
+			'link'   => '/releases/5',
+			'active' => $page->is('releases/5')
+		]) ?>
+	</div>
 <?php endif ?>
 
 <header class="header">
-	<?php snippet('layouts/skipper') ?>
 	<div class="container">
 		<div class="header-content relative flex items-center">
 			<?php snippet('layouts/logo') ?>
