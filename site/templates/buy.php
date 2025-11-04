@@ -6,7 +6,7 @@ article[data-loading] .price[data-sale] {
 }
 
 .checklist {
-	font-size: var(--text-base);
+	font-size: var(--text-lg);
 }
 .checklist li {
 	display: flex;
@@ -57,7 +57,7 @@ article[data-loading] .price[data-sale] {
 	color: var(--color-yellow-500);
 }
 
-.product[data-product="basic"] {
+.product {
 	border: 1px solid var(--color-gray-250);
 }
 .product[data-product="basic"] .price[data-sale] {
@@ -68,7 +68,6 @@ article[data-loading] .price[data-sale] {
 	background: var(--color-white);
 	box-shadow: var(--shadow-xl);
 }
-
 .product[data-product="enterprise"] .description mark {
 	background: var(--color-green-300);
 }
@@ -99,48 +98,39 @@ article[data-loading] .price[data-sale] {
 }
 </style>
 
+<?php snippet('templates/buy/header') ?>
+
 <article v-scope data-loading @mounted="mounted">
 	<?php snippet('templates/buy/checkout') ?>
 
 	<div v-else>
-		<div class="columns mb-42" style="--columns-sm: 1; --columns-md: 1; --columns-lg: 2; --gap: var(--spacing-3)">
-			<div>
-				<h1 class="h1 max-w-xl mb-12">
-					The transparency of <a href="<?= option('github.url') ?>">open&#8209;source</a> meets a fair pricing&nbsp;model
-				</h1>
-
-				<?php if ($sale->isActive()): ?>
-					<div class="h3 sale mb-6">
-						<?= $sale->text() ?>
-					</div>
-				<?php endif ?>
-
+		<div class="columns mb-12" style="--columns: 3; --columns-md: 1; --gap: var(--spacing-6)">
+			<div class="py-6">
 				<?php snippet('templates/buy/checklist') ?>
+			</div>
 
-			</div>
-			<div class="columns" style="--columns: 2; --gap: var(--spacing-6)">
-				<?php snippet('templates/buy/product', [
-					'product'     => $basic,
-					'description' => 'A discounted license for individuals and small teams with a',
-					'limit'       => 'total annual revenue/funding of less than ' . $revenueLimit
-				]) ?>
-				<?php snippet('templates/buy/product', [
-					'product'     => $enterprise,
-					'description' => 'The standard license for companies and organizations of any size.',
-					'limit'       => 'No&nbsp;revenue limit.'
-				]) ?>
-				<p class="text-xs text-center mb-6 color-gray-700" style="--span: 2">
-					Prices + VAT if applicable. With your purchase you agree to our <a class="underline" href="<?= url('license') ?>">License terms</a>
-				</p>
-			</div>
+			<?php snippet('templates/buy/product', [
+				'product'     => $basic,
+				'description' => 'A discounted license for individuals and small teams with a',
+				'limit'       => 'total annual revenue/funding of less than ' . $revenueLimit
+			]) ?>
+
+			<?php snippet('templates/buy/product', [
+				'product'     => $enterprise,
+				'description' => 'The standard license for companies and organizations of any size.',
+				'limit'       => 'No&nbsp;revenue limit.'
+			]) ?>
+
+			<p class="text-xs text-center mb-6 color-gray-700" style="--span: 2 / -1; --span-md: 1">
+				Prices + VAT if applicable. With your purchase you agree to our <a class="underline" href="<?= url('license') ?>">License terms</a>
+			</p>
 		</div>
+
 		<?php snippet('templates/buy/volume-discounts') ?>
 	</div>
 
-	<section class="mb-42 columns columns--reverse" style="--columns: 2; --columns-md: 1; --gap: var(--spacing-36)">
-		<?php snippet('templates/buy/good-cause') ?>
-		<?php snippet('templates/buy/faq') ?>
-	</section>
+	<?php snippet('templates/buy/good-cause') ?>
+	<?php snippet('templates/buy/faq') ?>
 
 	<footer class="h2">
 		Manage your existing licenses in our <a href="https://hub.getkirby.com"><span class="link">license&nbsp;hub</span>

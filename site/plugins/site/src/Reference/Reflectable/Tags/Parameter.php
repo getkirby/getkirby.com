@@ -19,7 +19,8 @@ class Parameter
 		public string|null $default = null,
 		public string|null $description = null,
 		public bool $isRequired = false,
-		public bool $isVariadic = false
+		public bool $isVariadic = false,
+		public string $prefix = '$'
 	) {
 	}
 
@@ -120,11 +121,11 @@ class Parameter
 
 	/**
 	 * Returns the name of the parameter
-	 * with a leading $ and a trailing ... if it is variadic
+	 * with a leading $ and … if it is variadic
 	 */
 	public function name(): string
 	{
-		$name = '$' . $this->name;
+		$name = $this->prefix . $this->name;
 
 		if ($this->isVariadic() === true) {
 			$name = '...' . $name;

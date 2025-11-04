@@ -53,7 +53,8 @@ class ReflectableOptions extends Reflectable
 					types:       $types,
 					default:     $parameter->default(),
 					description: $reflectable->summary(),
-					isRequired:  $parameter->isRequired()
+					isRequired:  $parameter->isRequired(),
+					prefix:      '' // suppress the leading $
 				);
 			}
 		}
