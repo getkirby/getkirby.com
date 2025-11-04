@@ -138,7 +138,7 @@ class FileSystem
 
 				if ($hasChildren) {
 					$html .= '<details open>';
-					$html .= '<summary tabindex="-1">';
+					$html .= '<summary>';
 					$html .= static::renderLabel($filename, $icon);
 					$html .= '</summary>';
 					$html .= static::renderBlock($children, $level + 1);
