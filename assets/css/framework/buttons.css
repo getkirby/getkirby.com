@@ -40,6 +40,7 @@ button {
 	border-color: var(--btn-filled-bg);
 	background: var(--btn-filled-bg);
 	color: var(--btn-filled-color) !important;
+	outline-offset: 0.25rem;
 }
 .btn--filled svg {
 	color: var(--color-yellow-600);
