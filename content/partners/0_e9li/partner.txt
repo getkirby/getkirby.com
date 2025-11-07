@@ -28,7 +28,7 @@ Languages: German, English, Russian
 
 Description:
 
-I have been a full-stack developer since 1996 with a passion for developing web applications as well as iOS and macOS applications.
+I have been a full-stack developer since 1996 with a passion for developing web applications and backends.
 
 When I got to know Kirby, I immediately fell in love with its simplicity and flexibility.
 
@@ -38,12 +38,10 @@ I am looking forward to exciting projects.
 
 Expertise:
 
-- Custom Kirby implementations
+- Custom Kirby implementations
 - Custom Kirby plugins
 - Front- and Backend development
-- Web applications with Symfony or Swift Vapor
-- iOS and macOS applications in Swift
-
+- Web applications and backends with Symfony, Rust or Phoenix Framework (Elixir)
 ----
 
 Region: Europe
