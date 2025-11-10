@@ -2,7 +2,7 @@ Title: Plugins
 
 ----
 
-Category: Extending kirby
+Category: Extending Kirby
 
 ----
 
