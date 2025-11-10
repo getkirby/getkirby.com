@@ -175,7 +175,7 @@ function video(
 		'rel'      => 0,
 	], [
 		...$attr,
-		'referrerpolicy' => 'no-referrer'
+		'referrerpolicy' => 'strict-origin-when-cross-origin'
 	]);
 
 	return snippet('video', compact('attr', 'iframe', 'url', 'poster'), true);

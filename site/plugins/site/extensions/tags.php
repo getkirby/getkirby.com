@@ -335,6 +335,7 @@ $tags['video'] = [
 		'caption',
 		'controls',
 		'class',
+		'disablepictureinpicture',
 		'height',
 		'loop',
 		'muted',
@@ -377,12 +378,15 @@ $tags['video'] = [
 
 		// don't use attributes that iframe doesn't support
 		if ($isProviderVideo === false) {
-			// converts tag attributes to supported formats (listed below) to output correct html
-			// booleans: autoplay, controls, loop, muted
-			// strings : poster, preload
-			// for ex  : `autoplay` will not work if `false` is a `string` instead of a `boolean`
+			// convert tag attributes to supported formats (bool, string)
+			// to output correct html attributes
+			//
+			// for ex:
+			// `autoplay` will not work if `false` is a string
+			// instead of a boolean
 			$attrs['autoplay']    = $autoplay = Str::toType($tag->autoplay, 'bool');
 			$attrs['controls']    = Str::toType($tag->controls ?? true, 'bool');
+			$attrs['disablepictureinpicture'] = Str::toType($tag->disablepictureinpicture ?? false, 'bool');
 			$attrs['loop']        = Str::toType($tag->loop, 'bool');
 			$attrs['muted']       = Str::toType($tag->muted ?? $autoplay, 'bool');
 			$attrs['playsinline'] = Str::toType($tag->playsinline ?? $autoplay, 'bool');
@@ -394,11 +398,11 @@ $tags['video'] = [
 		if ($isLocalVideo === true) {
 			// handles local video file
 			if ($tag->file = $tag->file($tag->value)) {
-				$video = Html::video(
-					$tag->file->url(),
-					$tag->kirby()->option('kirbytext.video.options', []),
-					$attrs
-				);
+				$source = Html::tag('source', '', [
+					'src'  => $tag->file->url(),
+					'type' => $tag->file->mime()
+				]);
+				$video = Html::tag('video', [$source], $attrs);
 			}
 		} else {
 			$video = video(
