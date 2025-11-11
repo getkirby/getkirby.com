@@ -1,0 +1,9 @@
+title: Kirby Konf 2026
+----
+start: 10:00:00
+----
+customdate: 25-26 September 2026
+----
+country: Germany
+----
+link: https://konf.getkirby.com
