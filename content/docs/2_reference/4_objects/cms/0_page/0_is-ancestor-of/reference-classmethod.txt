@@ -1,6 +1,6 @@
 Examples:
 
 ```php
-<?php if ($page->isAncestorOf('some-child-page')): ?>
+<?php if ($page->isAncestorOf(page('some-child-page'))): ?>
 This page is an ancestor of the given page.
 <?php endif ?>
