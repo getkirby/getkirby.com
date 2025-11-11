@@ -24,6 +24,3 @@
 .details[open] summary::after {
 	background-image: url("../../icons/minus.svg");
 }
-.details summary:focus {
-	outline: 0;
-}

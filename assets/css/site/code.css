@@ -35,7 +35,7 @@
 	opacity: 0;
 	transition: opacity 0.2s;
 }
-.code-toolbar:hover .toolbar {
+.code-toolbar:is(:hover, :focus-within) .toolbar {
 	opacity: 1;
 }
 [data-no-copy] .code-toolbar .toolbar {
@@ -52,7 +52,6 @@
 	cursor: pointer;
 	transition: background-color 0.2s;
 	border-radius: var(--rounded-sm);
-	outline: none;
 }
 .code-toolbar button:hover {
 	background-color: var(--color-gray-800);
@@ -60,6 +59,6 @@
 .code-toolbar button > svg {
 	width: 12px;
 	height: 12px;
-  margin-right: var(--spacing-1);
-  fill: var(--color-white);
+	margin-right: var(--spacing-1);
+	fill: var(--color-white);
 }

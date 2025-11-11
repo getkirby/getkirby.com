@@ -40,7 +40,6 @@
 	flex-shrink: 0;
 }
 .filesystem summary {
-	outline: none;
 	list-style: none;
 }
 .filesystem summary::-webkit-details-marker {
