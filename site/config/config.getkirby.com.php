@@ -18,7 +18,7 @@ return [
 			'password' => (require __DIR__ . '/keys.php')['fastmail'],
 		]
 	],
-	'partnerhub' => [
+	'partners' => [
 		'url'        => 'https://partners.getkirby.com/partners.json',
 		'partnerUrl' => 'https://partners.getkirby.com/partners/'
 	

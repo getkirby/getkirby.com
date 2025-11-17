@@ -24,7 +24,7 @@ class PartnersPage extends DefaultPage
 		$partners = [];
 		try {
 			$request = Remote::get(
-				option('partnerhub.url') . '?apiToken=' .
+				option('partners.url') . '?apiToken=' .
 				option('keys.partnerAccessToken'));
 	
 			if ($request->code() === 200) {

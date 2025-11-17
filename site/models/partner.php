@@ -157,7 +157,7 @@ class PartnerPage extends DefaultPage
 		// How can we pass a param to this path depending on request params
 		// And make sure that it is not cached?
 		$gallery = [];
-		$request = Remote::get(option('partnerhub.partnerUrl') . $this->slug() . '.json');
+		$request = Remote::get(option('partners.partnerUrl') . $this->slug() . '.json');
 
 		if ($request->code() === 200) {
 			$gallery = $request->json(true);
