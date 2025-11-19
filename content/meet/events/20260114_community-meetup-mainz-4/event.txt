@@ -1,0 +1,9 @@
+start: 19:00:00
+----
+city: Mainz
+----
+country: Germany
+----
+issue: 4
+----
+link: https://www.3st.de/en/kirby-meetup-mainz
