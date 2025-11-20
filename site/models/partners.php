@@ -59,35 +59,10 @@ class PartnersPage extends DefaultPage
 						'avatar'      => $partners[$partner]['avatar'] ?? null,
 					
 					],
-					'files'    => $this->getImages($partners[$partner]),
 				]
 			);
 		} catch (Exception $e) {}
 
 		return $this->children = $this->subpages()->add(Pages::factory($partners, $this));
-	}
-	
-	public function getImages(array $partner): array
-	{
-		$files = [];
-		
-		foreach (array_filter(
-			 [
-				$partner['card'] ?? null,
-				$partner['stripe'] ?? null,
-				$partner['avatar'] ?? null
-			 ]
-		) as $file) {
-			
-			$file = [
-				'filename' => baseName($file),
-				'url'      => $file,
-			];
-			
-			$files[] = $file;
-			
-		}
-
-		return $files;
 	}
 }

@@ -66,10 +66,22 @@ if ($page->status() !== 'listed' &&
 <div class="partner-grid columns mb-24">
 	<figure style="--aspect-ratio: 3/2;" class="partner-hero rounded overflow-hidden mb-3">
 		<?php if ($image = $page->card()): ?>
-        <img
-            alt=""
-            src="<?= $image->url() ?>"
-        >
+			<?= img($image, [
+				'alt' => '',
+				'src' => [
+					'width' => 1000
+				],
+				'lazy' => false,
+				// sizes generated with https://ausi.github.io/respimagelint/
+				'sizes' => '(min-width: 1520px) 768px, (min-width: 1160px) calc(55vw - 57px), (min-width: 1040px) calc(67vw - 132px), (min-width: 480px) calc(100vw - 96px), 90vw',
+				'srcset' => [
+					300,
+					500,
+					768,
+					1000,
+					1536
+				]
+			]) ?>
 		<?php elseif ($image = $page->avatar()): ?>
 			<span class="p-6 bg-light">
 				<img
@@ -161,12 +173,20 @@ if ($page->status() !== 'listed' &&
 							<?php endif ?>
 								<div style="--aspect-ratio: 3/4" class="bg-light mb-6 shadow-lg">
 									<?php if ($image = $project->image()): ?>
-                                    <img
-                                        alt=""
-                                        sizes = '(min-width: 1520px) 352px, (min-width: 1160px) calc(27.35vw - 58px), (min-width: 640px) calc(33.4vw - 97px), (min-width: 480px) calc(100vw - 96px), 90vw'
-                                        src="<?= $image->url() ?>"
-                                        width="702"
-                                    >
+										<?= $image->name() === 'example' ? $image : img($image, [
+											'alt' => '',
+											'src' => [
+												'width' => 702
+											],
+											// sizes generated with https://ausi.github.io/respimagelint/
+											'sizes' => '(min-width: 1520px) 352px, (min-width: 1160px) calc(27.35vw - 58px), (min-width: 640px) calc(33.4vw - 97px), (min-width: 480px) calc(100vw - 96px), 90vw',
+											'srcset' => [
+												352,
+												550,
+												702,
+												1100,
+											]
+										]) ?>
 									<?php endif ?>
 								</div>
 								<figcaption class="font-mono text-sm mb-3">
