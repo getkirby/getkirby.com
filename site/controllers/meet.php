@@ -1,8 +1,9 @@
 <?php
 
 use Kirby\Cms\App;
+use Kirby\Cms\Page;
 
-return function (App $kirby) {
+return function (App $kirby, Page $page) {
 	$events   = collection('events');
 	$upcoming = $events->filterBy('isUpcoming', true);
 
@@ -22,5 +23,7 @@ return function (App $kirby) {
 	return [
 		'events'   => $events,
 		'upcoming' => $upcoming->sortBy('num', 'asc'),
-		'past'     => $events->filterBy('isUpcoming', false),	];
+		'past'     => $events->filterBy('isUpcoming', false),
+		'gallery'  => $page->gallery()
+	];
 };
