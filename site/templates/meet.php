@@ -27,7 +27,7 @@
 	<?php snippet('templates/meet/upcoming', ['events' => $upcoming]) ?>
 	<?php snippet('templates/meet/map') ?>
 	<?php snippet('templates/meet/how-to') ?>
-	<?php snippet('templates/meet/gallery', ['gallery' => $gallery]) ?>
+	<?php snippet('templates/meet/gallery', ['gallery' => $page->gallery()]) ?>
 	<?php snippet('templates/meet/past', ['events' => $past]) ?>
 </article>
 

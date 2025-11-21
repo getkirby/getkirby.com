@@ -22,7 +22,5 @@ return function (App $kirby) {
 	return [
 		'events'   => $events,
 		'upcoming' => $upcoming->sortBy('num', 'asc'),
-		'past'     => $events->filterBy('isUpcoming', false),
-		'gallery'  => $events->images()->shuffle(),
-	];
+		'past'     => $events->filterBy('isUpcoming', false),	];
 };
