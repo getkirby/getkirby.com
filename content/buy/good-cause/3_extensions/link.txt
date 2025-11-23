@@ -16,4 +16,4 @@ We provide free licenses for sites showcasing a Kirby extension (plugin or theme
 
 ----
 
-Subject: Free license for a plugin or theme site
+Subject: Free license for a plugin/theme site

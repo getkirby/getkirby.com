@@ -1,5 +1,5 @@
 
-Title: Students & educators
+Title: Students
 
 ----
 
@@ -13,14 +13,10 @@ Type: free
 
 Text:
 
-Students and academic staff members can receive a free Kirby license, upon verification of their school/college/university domain email address or student ID card. The license must *not* be used for other than personal and/or teaching projects.
+Students can receive a free Kirby license upon verification of their school/college/university domain email address or student ID card.
 
-This also applies to universities, colleges or schools who want to use Kirby in the classroom or for student-related educational projects.
-
-<info>
-For classroom use (in a course or workshop), we are happy to provide a free license for each student. Please send us a list of student email addresses so we can create the licenses in bulk (please ensure consent of your students) or ask the students to get in contact directly.
-</info>
+The license must *not* be used for anything other than personal and/or university/student projects.
 
 ----
 
-Subject: Free license for a student or educator
+Subject: Free license for a student
