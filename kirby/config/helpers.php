@@ -550,9 +550,9 @@ if (Helpers::hasOverride('t') === false) { // @codeCoverageIgnore
 	 * Returns translate string for key from translation file
 	 */
 	function t(
-		string|array $key,
-		string|null $fallback = null,
-		string|null $locale = null
+		array|string $key = null,
+        array|string $fallback = null,
+        string $locale = null
 	): string|array|Closure|null {
 		return I18n::translate($key, $fallback, $locale);
 	}
