@@ -28,11 +28,11 @@ return function (App $kirby, Page $page) {
 			$previousUseErrors = libxml_use_internal_errors(true);
 
 			$introDiffObj = new HtmlDiff($page->prev()->intro()->kt(), $page->intro()->kt());
-			$introDiffObj->getConfig()->setPurifierEnabled(false)->setKeepNewLines(true);
+			$introDiffObj->getConfig()->setKeepNewLines(true);
 			$diff['intro'] = $introDiffObj->build();
 
 			$textDiffObj = new HtmlDiff($page->prev()->text()->kt(), $page->text()->kt());
-			$textDiffObj->getConfig()->setPurifierEnabled(false)->setKeepNewLines(true);
+			$textDiffObj->getConfig()->setKeepNewLines(true);
 			$diff['text'] = $textDiffObj->build();
 
 			libxml_clear_errors();
