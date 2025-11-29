@@ -1,0 +1,17 @@
+Title: EULA 2025-11-29: Summary of changes
+
+----
+
+Intro:
+
+We have published more detailed information on the causes we support with free or discounted Kirby licenses on our (link: buy#good-cause text: "Buy" page). This information supersedes the list of good causes in the EULA.
+
+In particular, we have changed the following:
+
+----
+
+Text:
+
+## Editorial changes
+
+- We replaced the list of purposes for free or discounted licenses with a link to the canonical information source on our website.
