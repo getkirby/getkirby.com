@@ -47,6 +47,7 @@ class PartnersPage extends DefaultPage
 						'plan'        => $partners[$partner]['plan'],
 						'summary'     => $partners[$partner]['summary'],
 						'description' => $partners[$partner]['description'],
+						'expertise'   => $partners[$partner]['expertise'],
 						'people'      => $partners[$partner]['people'],
 						'test'        => $partners[$partner]['card'],
 						'languages'   => $partners[$partner]['languages'],
