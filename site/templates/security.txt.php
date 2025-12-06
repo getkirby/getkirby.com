@@ -8,22 +8,22 @@ Encryption: https://getkirby.com/pgp.asc
 Preferred-Languages: en
 Acknowledgments: https://getkirby.com/security#past-security-incidents
 Policy: https://getkirby.com/security#reporting-a-vulnerability
-Expires: 2026-01-01T12:00:00.000Z
+Expires: 2027-01-01T12:00:00.000Z
 -----BEGIN PGP SIGNATURE-----
 
-iQKTBAEBCgB9FiEEuBUhCqAlKL6Zbc2gwN3Pl5VS7dEFAmdUfRBfFIAAAAAALgAo
+iQKTBAEBCgB9FiEEuBUhCqAlKL6Zbc2gwN3Pl5VS7dEFAmk0MT5fFIAAAAAALgAo
 aXNzdWVyLWZwckBub3RhdGlvbnMub3BlbnBncC5maWZ0aGhvcnNlbWFuLm5ldEI4
 MTUyMTBBQTAyNTI4QkU5OTZEQ0RBMEMwRERDRjk3OTU1MkVERDEACgkQwN3Pl5VS
-7dFBfA//XPl6Qht1/MPxHqVqPayk7T+bFSYAA2DV4+i5iom5UBITDgfFjvUPSu/u
-x9y9RnHm2T1xZCZmG5fodI0+0LHmVfMb5x7Bw53BneiHyJdrZfYUCXaIKJJbONL+
-tk/dFzoRBl/bnXO6WhJeROMVo9Y8f9nrG2mJHhMMOKdDWJCeEieKnnUo2oqXqZ2p
-P81szTOEohTSHE+zG5JDVG4hMmcg9lBeUAiSieEBfFb2goGQ/VK5M+TcuKquwBJm
-u+L/5H6RqP3hvI0uslSFQ9YTuj+n+cXtnf7px6Hph55KMsx7gvqjJuzytwYLiVkb
-Q+Jnv9Z7L2o3d0F3gIoDvI9LwEjmvzvBh9JumPRjVbE6Z84anzaxZ2qFcWTBPW85
-K3NatU0FuqaoAXstgbeNIiifzlN/yV5WwhRLFuadW1Brgk/lbXtFqVQ8z8iAeZLT
-1RESELHSoHSKKDNJnBso36mrEL27Yx0QAoTg/H8aCHpFvgV0zb9Hk1/UWlH0PKV4
-UT0VvpcpgW8yQCM29QoA50q4s5mhOOdUtlxIne8oHI9e+UvqmbNPtbbIuRDm1C0v
-cRq70/ZwDwDWfgbPcRWD3wCMAPHhUME2Ai8ct+tWQkrCXVLjB3QFbYRqeVw8b88u
-Ij8LLFuAxrikQimXiPuwXCImUdjyoLQ5J+QeO++SZ5pq7EBcWq0=
-=XuYB
+7dEvPQ//fEHq2HZKMf7g1GlfF15QSjHQMhuNXy3gSjUxK6wPexSZbW3rsPjQ7hWL
+bI8MVmMwnOqlHpew6FpbEtwvstCT9gsGRgTMM2XGmSH+QKkSIsjOh9EKQnIi1Muz
+m1nVFF8du55/9qfB6xj2cuKXcsz6zVlUsNvn6U9vKtY5NwDUZPgBewA3koMuYfk6
+H7rsqpGPuiidSlBO3BGIzQlAzdLqLmTd6OGjEdfXdF4ZoMWL0+Crm8tuV/z7qDEE
+ZKGk1TeYGUX3UEOuco53r9ZW+JBiQftPjefrhVqb73PC4dIeHy0h+Ijxe3ufVi+r
+KeamHa+3nZOxeXNPRS3qpnM+S3m37SP180uy7SZohbHgp9rai0/T22he0K+x5/Bp
+qhCEdIVGmev22truEmW84DpcDvmqe4aIpgTPpfwOGwA9RAOvdzGlpGV+dXhpaIy+
+rq376+4Jp4E6Ghz/NKrPnuaxyhEOJRWQE60NVU65wcj+oa5FtiO4ljbWcu5jVFlJ
+IU9Xh/Tkp3PdAIvuQ0kOFmPEgQ2fGVfc5BzOYkOnxrztqrl6BhQTnUuUtw9qA6UE
+BUKg7njKiKSmAqW60tSNw9WKyyiGlVr7f0DOZxO3l22fwUpSj/GWC+ebQzjL4F7F
+EX1U18gt/xcLdG0+LaMxSD5eSzfucfQgcsBw3F75tLql6e9jOik=
+=iIqn
 -----END PGP SIGNATURE-----
