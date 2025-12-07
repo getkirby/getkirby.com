@@ -1,0 +1,95 @@
+Title: Kosmos Episode 96
+
+----
+
+Date: 24.06.2025
+
+----
+
+Tags:
+
+----
+
+Comments: off
+
+----
+
+Cover: changes-optimized.jpg
+
+----
+
+Kosmos-Subscription: on
+
+----
+Text:
+
+Summer is here, not just in the calendars of the Northern Hemisphere, but also in very real terms. But while that means it's hot outside (and our brains are slowly starting to melt), there's even hotter news: The long wait is over and — drum roll — we're proud to present Kirby 5.
+
+## Kirby 5 is here
+
+(image: changes-optimized.jpg)
+
+Here’s what’s new and hot in Kirby 5:
+
+* Preview of changes
+* Dark mode
+* Entries field
+* Batch delete of pages and files in sections
+* Built-in Panel file previews for audio, video and PDF, plus custom previews for special formats
+* Chunked uploads for comfortable handling of large files
+* Panel view buttons — the magic wand for custom workflows
+* Plugin licenses right in the Panel
+* PHP 8.4 support
+* ⚡️ And a lot of other bigger and smaller features and enhancements...
+
+Head over to the [Kirby 5 release page](https://getkirby.com) to check out all the details. In the next couple of days, there will be short videos explaining all features in detail — stay tuned!
+
+
+## Kirby 4.8
+
+As the final feature update for Kirby 4, we have released [Kirby 4.8.0](https://github.com/getkirby/kirby/releases) — which comes with several enhancements (like a new option to disable clean file redirects) and bug fixes.
+
+## New plugins
+
+We’ve also got some fantastic new plugins for you — check out these fresh additions to our directory:
+
+* [Kirby ATAI](https://github.com/getkirby/atai) — A Kirby field plugin to generate alternative text for images using alttext.ai
+* [Bloggerrolle](https://github.com/uberblogr/bloggerrolle) — Pings bloggerrolle.de and/or uberblogr.de whenever you publish a page
+* [Kirby Posse](https://github.com/getkirby/kirby-posse) — Automatically cross-post your newly published content to Mastodon and Bluesky
+* [Kirby Loupe](https://github.com/getkirby/kirby-loupe) — A thin wrapper around [Loupe](https://github.com/getkirby/loupe), an SQLite-based, PHP-only full-text search engine
+* [Kirby Tiptap](https://github.com/getkirby/tiptap) — A powerful, user-friendly Tiptap field for Kirby
+* [Kirby Handle](https://github.com/getkirby/kirby-handle) — Automatically transform social handles into links to their corresponding profiles
+* [Kirby Content Watch](https://github.com/getkirby/kirby-content-watch) — Keep track of what has been changed and by whom
+* [Typo, Search & Paste](https://github.com/getkirby/typo-search-paste) — Provides a searchable interface for special characters
+
+## Meetups
+
+**Kirby Meetup Leipzig, Germany • №2**
+Wed, June 25, 2025 at 19:00 CEST
+
+Topic: Accessibility – What is your current status? A relaxed exchange on design and technical solutions for barrier-free websites with Kirby and Co.
+
+## Made with Kirby
+
+(image: stresstest.png)
+
+[stresstest.world](https://stresstest.world)
+
+## Articles, videos and more
+
+* [5 ways to deploy Kirby CMS](https://www.deployhq.com) compares the pros and cons of deploying Kirby on a VPS, DeployHQ, Managed Hosting, Dokku or as GitHub Pages.
+* [Learning Kirby with Claude.ai](https://www.runbikeco.de) tells the story of building a map-based feature using AI despite minimal PHP experience — showing how AI can help get a quick start when used wisely alongside human review.
+
+## Tools
+
+* [Quarkdown](https://quarkdown.com) — A flexible, Markdown-based typesetting system to turn a single project into both a print-ready book and an interactive presentation
+* [Crosspost](https://github.com/crosspost-js) — A JavaScript utility to post your articles across multiple social networks
+* [snapDOM](https://github.com/snapdom/snapdom) — A lightweight, dependency-free library for capturing DOM elements as SVG or image outputs while preserving styles, fonts, and pseudo-elements
+
+## This & That
+
+* Stefan Judis explores the practice of websites [opting out of the Internet Archive](https://www.stefanjudis.com) — questioning whether it’s appropriate for public web content to be excluded from historical preservation
+* [Getting creative with HTML `<dialog>`](https://css-tricks.com) by Andy Clarke — shows how `<dialog>` can go beyond utilitarian use by combining accessibility with brand-aligned design
+* [Why percentage-based heights often fail](https://www.joshwcomeau.com) by Josh W. Comeau — explains how height calculations in CSS depend on both parent and child elements, and offers solutions using Flexbox or Grid
+* [Where to set focus when opening a modal dialog](https://adrianroselli.com) by Adrian Roselli — argues that focus placement depends on context, content and user expectations for accessibility
+

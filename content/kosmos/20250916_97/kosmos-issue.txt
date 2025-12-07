@@ -1,0 +1,101 @@
+Title: Kosmos Episode 97
+
+----
+
+Date: 16.09.2025
+
+----
+
+Tags:
+
+----
+
+Comments: off
+
+----
+
+Cover:
+
+----
+
+Kosmos-Subscription: on
+
+----
+Text:
+
+
+The sun’s setting on the slow summer days, and we’re back with charged batteries, ready to dive into a new season of shiny Kirby features, interesting tools, and inspiring reads. Let’s get into it!
+
+## Kirby 5.1 is here
+
+Kirby 5.1 comes with a big bunch of nice new features and improvements, and as always, we fixed some bugs on the way.
+
+* Navigation for the preview view
+* Improved Kirby query language
+* Batch delete for structures
+* Searchable info in multiselect fields
+* Stats field as companion to the stats section
+* Imagick thumb driver
+* and more…
+
+Head over to the [changelog](https://github.com/getkirby/kirby/blob/develop/CHANGELOG.md) for a complete overview.
+
+
+## New plugins
+
+We’ve also got some fantastic new plugins for you — check out these fresh additions to our directory:
+
+* [Kirby Multilist](https://github.com/getkirby/kit) — helps to deal with long lists containing multiple fields. Some field types can be edited directly from within the structure table without opening the drawer.
+* [Journey Journal](https://github.com/markrogoyski/journey-journal) — transforms your site into a travel‑journal or adventure blog with interactive maps, photos, and storytelling layouts.
+* [X‑Ray](https://plugins.getkirby.com/x-ray) — provides a comprehensive overview of the content present on your site and individual pages.
+* [PHP Git Deploy](https://github.com/ianschoon/php-git-deploy) — a simple PHP webhook deployment system for GitHub repositories with SSH authentication and post‑deployment commands.
+* [Kirby FTP Backup](https://github.com/getkirby/ftp-backup) — zips up your Kirby site content and uploads backups to your FTP server, with options for scheduled cron jobs and manual backups.
+* [Mapnotator](https://github.com/getkirby/mapnotator) — annotate maps and generate GeoJSON in Kirby by drawing markers, paths, and shapes.
+
+## Meetups
+
+[Kirby Meetup Berlin, Germany • №9](https://www.meetup.com/de-DE/Kirby-Meetup/)
+Wed, September 24, 2025 at 19:00 CEST
+
+If you work with Kirby CMS let's meet up, celebrate the release of Kirby 5 and get to know each other! This time Basics09 invites us again to their studio close to U Schlesisches Tor.
+
+## Made with Kirby
+
+(image: planqc.jpg)
+[planqc](https://planqc.eu)
+
+## Certified partners
+
+(columns…)
+
+(image: stripe.png)
+
+++++
+
+[schokoladenseite.net](https://getkirby.com)
+
+**Visual Kommunikation GmbH** — Hamburg, Germany
+
+(…columns)
+
+## Articles, videos and more
+
+* Kevin Gimbel shares [how he set up automated backups for his Kirby content](https://kevingimbel.de) using [restic](https://github.com/restic/restic) and Hetzner’s S3‑compatible object storage.
+* Maurice Renck shows [how to automate note-taking in Kirby CMS](https://maurice-renck.de) via Signal messages processed and published as notes, with hashtags controlling visibility.
+
+## Tools
+
+* [VERT](https://vert.sh) — an open-source file converter that runs entirely in your browser, for images, audio, and documents.
+* [Logoipsum](https://logoipsum.com) — provides placeholder logos in SVG and PNG formats for design projects.
+* [Git GPT commit](https://github.com/getkirby/git-gpt-commit) — a CLI tool using GPT‑4 to generate smart, context-aware Git commit messages.
+
+## This & That
+
+* Adrian Roselli critiques [horizontal-scrolling containers](https://adrianroselli.com/horizontal-scrolling-containers) for accessibility issues.
+* Josh W. Comeau [demystifies the SVG `<path>` element](https://www.joshwcomeau.com).
+* Frank Taylor dives into [how the CSS `hyphens` property works](https://blog.frankmtaylor.com).
+* Ahmad Shadeed explores the [CSS Anchor Positioning module](https://ishadeed.com).
+* A post on dev.to discusses [why to use PHP enums](https://dev.to).
+* Christian Heilmann demonstrates how to [repurpose GitHub Pages as a URL shortener](https://christianheilmann.com).
+* [WCAG in Plain English](https://aaardvarkaccessibility.com) makes accessibility guidelines easier to understand for beginners.
+

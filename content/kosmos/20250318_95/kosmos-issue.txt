@@ -1,0 +1,105 @@
+Title: Kosmos Episode 95
+
+----
+
+Date: 18.03.2025
+
+----
+
+Tags:
+
+----
+
+Comments: off
+
+----
+
+Cover: windenergie-monitor.jpg
+
+----
+
+Kosmos-Subscription: on
+
+----
+Text:
+
+Here’s the content from that newsletter converted to Markdown — footer, legal disclaimers and subscription-details removed, leaving just the main content + links.
+
+---
+
+Welcome to the second edition of Kosmos in 2025! As spring makes its long-awaited arrival in our corner of the world, we're enjoying the warmth of sunny days. For me, it’s the perfect time to extend my cycling tours without the discomfort of frozen hands and feet — wonderful! And just like the season’s change, our spring sale is here to brighten your day and your wallet.
+
+But as always, there's more to this newsletter than business, so enjoy new plugins, interesting articles and videos, and maybe you even find a meeting near you to network with other Kirby enthusiasts.
+
+
+## Kirby 5 Beta 4
+
+In February, we released Kirby 5 Beta 3. Since then, we unfortunately ran into some issues which are currently delaying the final release. Details in the [forum post](https://forum.getkirby.com).
+
+Today, we’re releasing **Beta 4**, bringing us a big step closer to release: [Kirby 5 Beta 4 release](https://github.com/getkirby/kirby/releases/tag/5.0.0-beta.4)
+
+## New plugins
+
+Check out some fresh additions to our directory:
+
+* [API Pages](https://github.com/getkirby/kit) — quickly set up virtual Pages from external APIs, with customizable source URL, headers, entry points and mapping.
+* [Kirby Viewmode](https://github.com/getkirby/kirby-viewmode) — display pages in different view modes; more details in Flo Kosiol’s [related article](https://flokosiol.de).
+* A solution for synchronizing Markdown files with your website: [Integrating Obsidian and Kirby CMS](https://maurice-renck.de) — enabling smooth writing workflows with synced text, metadata, and page statuses.
+
+## Meetups
+
+Save the dates for upcoming Kirby meetups:
+
+* [Kirby Meetup Karlsruhe, Germany • №2](https://kirby-ka.carrd.co) — Thu, April 10, 2025 at 19:00 CEST
+  *Topic:* Retrofitting Kirby to an existing static website
+* [Kirby Meetup Gosport, UK • №1](https://www.oddcircles.com) — Sat, June 21, 2025 at 18:00 GMT
+
+## Made with Kirby
+
+(image: windenergie-monitor.jpg)
+[Goal 100](https://goal100.org)
+
+## Articles, videos and more
+
+* A short article & podcast by *Konzentrik* describing their local setup for effective Kirby CMS development.
+* A German video: *“Ist das der WordPress Killer auf den wir alle gewartet haben? Kirby CMS”* — comparing Kirby to WordPress and exploring why it could be the game-changer many await.
+* A video by Justus Kraft showcasing one of the favorite Kirby 5 features: custom view buttons. Also — a series about building a site with Kirby; currently Episode 1 and Episode 2 available.
+* Thomas Günther’s article about creating a simple plugin for testing UI components — a dedicated “playground” route helps test reusable UI elements and variations efficiently.
+* For Laravel Herd users: upgrade to the latest version — then you can install either the **Starterkit** or **Plainkit** via Herd using these links:
+
+    * Starterkit: `https://herd.laravel.com/new/getkirby/starterkit`
+    * Plainkit: `https://herd.laravel.com/new/getkirby/plainkit`
+
+## Certified partners
+
+In each Kosmos edition, we highlight agencies and freelancers in our partner network. Today’s partners:
+
+(columns…)
+
+(image: vml.jpg)
+(link: https://getkirby.com/partners/vml text: VML)
+
+++++
+
+(image: lukas-kleinschmidt.png)
+(link: https://getkirby.com/partners/lukas-kleinschmidt text: Lukas Kleinschmidt)
+
+(…columns)
+
+If you’d like to join this partner network, submit your application through the [application form](https://getkirby.com).
+
+In recent months, there have already been three “Office Hours” events with our certified partners — always well attended and beneficial for participants.
+
+## Tools
+
+* [GoAccess](https://goaccess.io) — an open-source, real-time web log analyzer & interactive viewer that runs in terminal on *nix systems or via the browser.
+* [Typesense](https://typesense.org) — a powerful, open-source search tool; positioned as a simpler alternative to services like Algolia or Elasticsearch, offering fast and intuitive search capabilities.
+
+## This & That
+
+* Addy Osmani discusses the “70% problem” in AI-assisted coding — why AI helps rapid prototyping, but human judgment remains vital in production-ready software.
+* Episode 883 of the Syntax podcast explains web performance metrics (like Largest Contentful Paint) and covers tools/strategies to optimize scores.
+* The “Complete Guide to ARIA Live Regions for Developers” helps master ARIA live regions to build more accessible web experiences with practical examples.
+* Ahmad Shadeed shows how to leverage relative colors in CSS for dynamic color changes, with attention to accessibility.
+* Conor McCarthy explores how preloading fonts can improve Core Web Vitals — focusing on how font loading impacts LCP and CLS.
+
