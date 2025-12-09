@@ -122,6 +122,7 @@ npm install tailwindcss @tailwindcss/cli
 ```
 By executing the command above a `node_modules` folder with the required dependencies and the file `package-lock.json` will be automatically created in the project root.
 
+<info>Tailwind CLI expects <b>a git repository initialized</b> in the project root in order to collect classes from source files.</info>
 
 ## Build
 Now we have a fully functional basic setup and are ready to generate our CSS file. Make sure you are in the project root folder and start the `watch` or the `build` script as follows:
