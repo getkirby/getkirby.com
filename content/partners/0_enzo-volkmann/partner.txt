@@ -1,0 +1,132 @@
+Title: Enzo Volkmann
+
+----
+
+Subtitle: Freelancer
+
+----
+
+Summary: Freelance web developer with over 10 years of experience. Websites, process design and digitalization, full stack and custom web development.
+
+----
+
+Description:
+
+I am a freelance web developer with over 10 years of experience, based in Kassel, Germany.
+
+I am not a salesperson quickly looking for the next deal, I rather
+see myself as a reliable and long-term technical partner for my clients.
+
+I enjoy diving into the businesses of my clients, understanding
+their processes and building efficient digital solutions that work.
+
+### Webdesign & Website development
+
+I create websites for people and businesses across all sectors.
+With the power of Kirby, I can create tailor-made sites that
+are not only performant and nice to look at, but also easy and intuitive to maintain.
+
+I strive to build clean, fast, accessible sites that work well
+for humans and robots. I care about the details of the web-platform
+and like to use them as intended and as best as possible; resulting in a high-quality site.
+
+I can help you with content-migration, user-onboarding and support too.
+
+`#kirby` `#multi-language` `#roles-and-permissions` `#technical-seo` `#tailwind` `#vite` `#deployment` `#ftp` `#backups` `...`
+
+### Digitalization and Application Development
+
+I help you bring your processes into the digital world.
+Over the years, I have designed, developed (and still maintain) several
+business-apps that are used and trusted day-in and day-out; handling
+hundreds of users, thousands of clients and millions of Euros.
+
+That also includes custom development with Kirby as a platform
+that goes beyond the classic website use-case.
+
+I believe that many businesses can profit from custom software that
+exactly matches their needs and processes. More ownership and privacy, less dependencies. And often more affordable than you think.
+
+I work with a data-driven approach, focusing on a functional and
+well-designed data-model that matches and represents your business.
+On top of that, a modern and safe web-app architecture is built.
+
+`#process-design` `#architecture` `#typescript` `#monorepo` `#nx` `#angular` `#nestjs` `#hono` `#node` `#bun` `#postgres` `#graphile` `#test-containers` `#docker` `#kubernetes` `#graphql` `#rest` `#websockets` `#jobqueues` `#legacy-integrations` `#git` `...`
+
+### Custom Web Development
+
+Sometimes, you don't need a whole new site or app. I develop custom
+integrations to connect legacy systems; enhance a web-shop with a
+configurator or help building your own custom software-library...
+
+No matter the problem or idea, the web-platform offers the tools to build it.
+
+`#apis` `#automation` `#webcomponents` `#dataprocessing` `...`
+
+
+### AI
+
+I help you integrate AI into your digital products, with custom
+agents, tools and domain-knowledge that enable real benefits.
+
+I use AI for productivity in my daily work, but I reject the idea
+of "vibe-coding". I see real benefits by carefully defining tasks,
+critical checking and automated test-suites that ensure high-quality and safe code.
+
+`#genkit` `#mastra` `...`
+
+----
+
+Owner: - user://L12ajmcN
+
+----
+
+Signuppage: - page://6raj9b1ntj1thghd
+
+----
+
+Plan: certified
+
+----
+
+People: 1
+
+----
+
+Website: https://www.volkmann-design-code.de/
+
+----
+
+Location: Kassel, Germany
+
+----
+
+Region: Europe
+
+----
+
+Contactlink: 
+
+----
+
+Languages: German, English
+
+----
+
+Expertise:
+
+- Fullstack Web Development
+- Kirby Website & Plugin Development
+- Webdesign, UI/UX Design
+- Custom Components & Integrations
+- Consulting and Digitalization
+- Hosting & Cloud
+- White-label development for agencies
+
+----
+
+Discordhandle: enzovolkmann_56171
+
+----
+
+Uuid: yafkx7qlpwggmqbn
