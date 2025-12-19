@@ -13,5 +13,6 @@
 }
 .event h3 {
 	font-weight: var(--font-bold);
+	max-width: 70%;
 }
 </style>
