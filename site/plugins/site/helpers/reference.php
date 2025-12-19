@@ -10,7 +10,7 @@ function csv(string $file): array
 	$handle = fopen($file, "r");
 	$lines  = [];
 
-	while(($line = fgetcsv($handle)) !== false) {
+	while(($line = fgetcsv($handle, escape: '\\')) !== false) {
 		$lines[] = $line;
 	}
 

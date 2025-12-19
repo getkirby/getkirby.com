@@ -19,7 +19,7 @@ Please **make a backup** of your site in any case.
 
 #### PHP
 
-Kirby 5 requires PHP 8.2, 8.3 or 8.4. You can check your current PHP version in the system view in the Panel. If you see **PHP 8.2.\*, PHP 8.3.\* or PHP 8.4.\***, you are already good to go.
+Kirby 5 requires PHP 8.2, 8.3 or 8.4. You can check your current PHP version in the system view in the Panel. If you see **PHP 8.2.\*, PHP 8.3.\* or PHP 8.4.\***, you are already good to go. Since Kirby 5.2.1 also PHP 8.5 is supported.
 
 If you see **PHP 7.\*, PHP 8.0.\* or PHP 8.1.\***, you need to update your server. Most hosting providers allow changing the PHP version from the admin backend. We recommend to switch to PHP 8.3 because this version is already compatible with Kirby 4.\* and will (link: https://www.php.net/supported-versions.php text: receive security updates for two more years), so you won't have to do another PHP migration until then.
 
