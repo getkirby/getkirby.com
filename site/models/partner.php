@@ -217,4 +217,10 @@ class PartnerPage extends DefaultPage
 		
 		return $this->files = $collection;
 	}
+	
+	public function getChanges(): self
+	{
+		$this->setContent($this->changes()->value());
+		return $this;
+	}
 }
