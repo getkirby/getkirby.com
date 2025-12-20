@@ -3,6 +3,9 @@
 		<header class="flex justify-between items-center mb-6">
 			<h2 class="h2">Past events</h2>
 		</header>
-		<?php snippet('templates/meet/events', ['events' => $events]) ?>
+		<?php snippet('templates/meet/events', [
+			'events'  => $events,
+			'columns' => 2
+		]) ?>
 	</section>
 <?php endif ?>
