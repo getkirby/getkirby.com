@@ -21,14 +21,26 @@ return function (Page $page) {
 	}
 
 	$zones = $allowedHosts = ['zone1', 'zone2'];
+	$allowedTypes          = ['staging'];
 
 	foreach ($zones as $zone) {
-		$allowedHosts[] = 'staging.' . $zone;
+		foreach ($allowedTypes as $type) {
+			$allowedHosts[] = $type . '.' . $zone;
+		}
 	}
 
-	if (in_array($demo = param('demo'), $allowedHosts) === true) {
+	$demo = param('demo');
+	if (in_array($demo, $allowedHosts) === true) {
 		$detectHost = false;
 		$host       = 'https://' . $demo . '.trykirby.com';
+	} elseif (in_array($demo, $allowedTypes) === true) {
+		$detectHost = true;
+		$host       = 'https://' . $demo . '.zone1.trykirby.com';
+
+		// override the subdomains for the detection
+		foreach ($zones as $i => $zone) {
+			$zones[$i] = $demo . '.' . $zone;
+		}
 	} else {
 		$detectHost = true;
 		$host       = 'https://zone1.trykirby.com';
