@@ -30,7 +30,7 @@ return [
 	],
 	'quantities' => [
 		'min' => 1,
-		'max' => 100,
+		'max' => 20,
 	],
 	'volume' => [
 		5  => 5,

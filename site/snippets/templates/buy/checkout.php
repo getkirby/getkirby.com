@@ -177,7 +177,7 @@
 						<tr v-if="discountRate">
 							<th>
 								<p>Volume Discount (-{{ discountRate }}%)</p>
-								<p v-if="quantity >= 50" class="text-xs color-gray-700">Please <a class="underline" href="mailto:support@getkirby.com">contact us</a> for <span class="whitespace-nowrap">high-volume</span> discounts</p>
+								<p v-if="quantity >= <?= option('buy.quantities.max') ?>" class="text-xs color-gray-700">Please <a class="underline" href="mailto:support@getkirby.com">contact us</a> for <span class="whitespace-nowrap">high-volume</span> discounts</p>
 							</th>
 							<td>{{ amount(discountAmount) }}</td>
 						</tr>
