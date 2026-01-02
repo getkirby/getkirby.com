@@ -1,0 +1,126 @@
+Title: Kosmos Episode 98
+
+----
+
+Date: 09.12.2025
+
+----
+
+Tags:
+
+----
+
+Comments: off
+
+----
+
+Cover:
+
+----
+
+Kosmos-Subscription: on
+
+----
+
+Text:
+
+Somehow, here we are again — another year almost over. This time of the year always feels like an in-between state to me: the old hasn’t quite passed, and the new hasn’t fully begun. But it's also the time to reflect what's happened, and make plans for what’s ahead (like planning new bicycle trips 🚲). And with that spirit of looking ahead, it’s the perfect moment to share with you our latest Kirby release, a first sneak peek of Kirby 6 for plugin devs, and lots of other news.
+
+
+## Kirby 5.2.0 is here
+
+[Kirby 5.2](https://github.com/getkirby/kirby/releases/tag/5.2.0) comes with a pretty long changelog. Here are the highlights:
+
+*   🐘 PHP 8.5 support
+*   📻 CORS support
+*   ☑️ New `batch` select mode for the checkboxes field
+*   ↕️ Collapse / expand all blocks
+*   📂 New `create` option for the files section
+*   🏷️ Better auto-labels in the Panel
+*   ⚡️ Big performance boost for forms
+
+Head over to the [changelog](https://github.com/getkirby/kirby/releases/tag/5.2.0) to explore the full list.
+
+## Kirby Konf: Save the date
+
+Nine months from now, the first-ever Kirby Conference will take place! We don’t have all the details yet, but you can **save the date: September 25–26 in Mainz, Germany**.
+
+If the date and location work for you, and you’re interested in attending, sign up to be among the first to have the chance to get tickets once they go on sale: [https://konf.getkirby.com/](https://konf.getkirby.com/ "https://konf.getkirby.com/").
+
+
+## Kirby 6 developer preview
+
+We are planning to release Kirby 6 in the second half of 2026, but we need support from our plugin developer community early on. That's why we give you early access to [Kirby 6.0.0-alpha.1](https://github.com/getkirby/kirby/releases/tag/6.0.0-alpha.1) today, and would like your feedback regarding any issues you run into.
+
+One of the biggest (and long-awaited) changes in Kirby 6 is the upgrade of the Panel from Vue 2 to Vue 3. While this brings major improvements and new possibilities, it also means that all Panel plugins will need to be recompiled for compatibility, and some might even need changes under the hood.
+
+**Note:** This developer preview does not include any visible interface changes or new features. It is intended only for plugin developers. Versions with features relevant to the broader community will begin rolling out in 2026.
+
+
+## Meetups
+
+📆 [Kirby Meetup Mainz, Germany • №4](https://www.3st.de/en/kirby-meetup-mainz)
+
+_Wed, January 14, 2026 at 19:00 CEST_
+
+We’re meeting at our agency at the Zollhafen in Mainz for the fourth time to chat about the Kirby CMS. Whether you’ve been working with Kirby for years, have only a little experience, or are simply curious—come join us!
+
+📆 [Kirby Meetup Berlin, Germany • №10](https://www.meetup.com/kirby-cms-community-berlin/events/312297544/)
+
+_Wed, January 21, 2026 at 19:00 CEST_
+
+If you work with Kirby CMS, let’s meet up, get to know each other, and share what we’ve learned! Basics09 is once again hosting us in their studio near U Schlesisches Tor.
+
+
+## CLI 1.9.0
+
+[Kirby CLI 1.9](https://github.com/getkirby/cli/releases/tag/1.9.0) introduces several new improvements:
+
+*   Dry-run mode for the `content:clean`command
+    Preview changes before applying them
+*   UUID duplicate checker 
+    Easily identify and resolve conflicting UUIDs
+*   PHP 8.5 support Ensuring compatibility with the latest PHP version
+
+
+## Made with Kirby
+
+(image: lassemajasdetektivbyra.se.png)
+[LasseMajas Detektivbyrå](https://www.lassemajasdetektivbyra.se/)
+
+
+## New plugins
+
+We’ve also got some fantastic new plugins for you. Check out these fresh additions to our directory:
+
+*   [Kirby Kart](https://plugins.getkirby.com/bnomei/kart) lets you sell with ease, offering a smooth shopping cart and checkout experience. Manage orders and inventory right from the Kirby Panel, and connect effortlessly with a variety of payment providers for a fully streamlined storefront.
+*   [Kirby Scheduler](https://plugins.getkirby.com/beebmx/scheduler) offers a fresh approach to managing scheduled tasks on your server.
+*   [Callouts](https://plugins.getkirby.com/jakub-pelak/callouts) lets you use GitHub-style callout blocks (like \[!WARNING\] or \[!NOTE\]) directly in Markdown or KirbyText. The plugin automatically transforms them into beautifully styled HTML callout elements on your site.
+*   [Kirby Locale](https://plugins.getkirby.com/grommasdietz/kirby-locale) provides locale utilities for Kirby CMS, adding a Writer mark and an optional dialog field, so that editors can tag language-specific fragments and store per-page title locales.
+*   [Multidomain Router](https://plugins.getkirby.com/gerritvanaaken/multidomain-router): A Kirby plugin for routing and managing multiple domains in a single Kirby installation.
+*   The [Avalex plugin](https://plugins.getkirby.com/avalexgmbh/avalex) for Kirby CMS automatically embeds and keeps legal texts (like imprint and privacy policy) up‑to‑date on your website. 
+
+
+## Articles, videos and more
+
+In [Building a component‑based style guide for Kirby CMS (Part 1),](https://flokosiol.de/articles/component-based-styleguide-kirby-cms-1-frontend) Flo Kosiol shows how to set up reusable snippet‑based frontend components and a dedicated overview page within Kirby to streamline UI development.
+
+[Quicktip](https-getkirby-com-docs-quicktips-snippet-controllers): Kirby 5.1 lets you add controllers to snippets, giving each snippet its own modular logic and data handling.
+
+
+## This & That
+
+In [When AI will browse the web for me](https://www.stefanjudis.com/notes/when-ai-will-browse-the-web-for-me), Stefan Judis argues that as AI‑powered browsers and agents become more common, we risk losing direct access to the open web. Unseen filtering, corporate agendas, and algorithmic curation gradually replaces the “raw” web and undermines diversity of voices.
+
+[Auth0: An Accessible Guide to  – Authentication Without Frustration](https://auth0.com/blog/an-accessible-guide-to-wcag-3-3-8-authentication-without-frustration/) shows how login flows can unintentionally exclude users with cognitive disabilities and recommends designing authentication that doesn’t rely on memory, transcription, or puzzles.
+
+Adrian Roselli argues that no website or technology can ever be truly “[accessible to everyone](https://adrianroselli.com/2025/12/you-cant-make-something-accessible-to-everyone.html),” because people’s needs and contexts vary too much. Accessibility should therefore always be seen as a best-effort compromise rather than an absolute guarantee.
+
+Agung Putra Pasaribu compares [PHP’s built-in json\_decode() with the JSON Machine library](https://agungpp.medium.com/decoding-large-json-files-efficiently-in-php-json-decode-vs-streaming-with-json-machine-b90273e09aba) for handling large JSON files. It shows that while json\_decode() is faster, streaming with JSON Machine drastically reduces memory usage, making it ideal for processing big data efficiently.
+
+The first part of [A pracmatic guide to modern CSS colours](https://piccalil.li/blog/a-pragmatic-guide-to-modern-css-colours-part-one/) explores how modern CSS color syntax and new color spaces create a more flexible and intuitive way to define colors on the web. The [second part](https://piccalil.li/blog/a-pragmatic-guide-to-modern-css-colours-part-two/) shows how these capabilities come together in practical design systems, from theming workflows to more accessible, consistent color palettes.
+
+[Field Sizing in CSS](https://ishadeed.com/article/field-sizing/) introduces the new \`field-sizing: content\` property, which allows form fields to automatically adjust to their content for more flexible layouts.
+
+[PHP 8.5: The Silent Revolution That Transforms Your Code](https://nicolas-dabene.fr/en/articles/2025/11/16/php-8-5-silent-revolution-transforms-your-code/) explains how PHP 8.5 delivers over 40 practical improvements: From a new pipe operator and \`clone with\` syntax to mandatory OPcache and better error backtraces, it makes code more expressive, efficient, and secure without breaking backward compatibility.
+
