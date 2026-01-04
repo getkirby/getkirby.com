@@ -22,6 +22,7 @@ Kirby::plugin('my/api', [
     'routes' => [
       [
         'pattern' => 'my-endpoint',
+        'method' => 'GET', // optional, defaults to 'GET'
         'action'  => function () {
           return [
             'hello' => 'world'
