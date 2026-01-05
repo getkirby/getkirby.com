@@ -224,7 +224,7 @@ if ($items->isNotEmpty()):
 <nav aria-label="breadcrumb">
   <ol>
     <?php foreach($site->breadcrumb() as $crumb): ?>
-    <li<?php e($crumb->isActive(), ' aria-current="location"') ?>><a href="<?= $crumb->url() ?>"><?= $crumb->title()->html() ?></a></li>
+    <li<?php e($crumb->isActive(), ' aria-current="page"') ?>><a href="<?= $crumb->url() ?>"><?= $crumb->title()->html() ?></a></li>
     <?php endforeach; ?>
   </ol>
 </nav>
