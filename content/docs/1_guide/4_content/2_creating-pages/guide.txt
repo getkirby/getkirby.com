@@ -48,7 +48,7 @@ A simple folder structure could look like this:
   /home/
     home.txt
   /projects/
-    project.txt
+    projects.txt
   /blog/
     blog.txt
   /contact/
