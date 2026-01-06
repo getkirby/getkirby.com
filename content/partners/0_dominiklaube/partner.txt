@@ -28,21 +28,13 @@ Languages: German, English
 
 Description:
 
-With over 14 years of professional experience, I work with service providers and product vendors who delight their customers with quality. Together, we elevate and refine their online presence, ensuring the success of their digital projects step by step. Collaboration is key.
+For 15 years, I have been helping service and product providers showcase their quality online. I work with companies across B2B industries like technical services and sustainable production, as well as B2C sectors such as food, events, and hospitality. Together, we craft digital experiences that do more than look good—they tell your story, transport emotion, and build lasting trust.
 
-**I am the RIGHT person for your project if:**
-... _you want a website_ that presents your company in a valuable and authentic way
-... your website should become an essential marketing and sales tool for your company
-... _you want to get insights_ about your website visitors and optimize your offer accordingly
-... _you want to switch_ to an easy-to-use, privacy-friendly and secure CMS
-_... you need proven guidance_ in the digital jungle of countless opinions and possibilities
-... _you are looking for an expert_ who will provide you with honest and reliable support in achieving your business goals
+My passion lies in powerful imagery paired with solid technical foundations. Design and emotion catch attention; performance, structure, and automation make it work. Every project is built to high technical standards: fast-loading pages, optimized for search appearance and visibility, and smart automation flows that save time.
 
-**I'm the WRONG person for your project if:**
-... you just want to be online with your business somehow by someone
-... you consider online marketing and branding to be rather unimportant for your company
+Guided by strong values — honesty, craftsmanship, and long-term impact — I help transform your website into a strategic business asset. Step by step, we refine your online presence into something meaningful, measurable, and future-proof. True collaboration is at the heart of my work.
 
-Do not hesitate to **_[contact me](https://www.dominiklaube.com)_** if you want an online presence that attracts your audience.
+Do not hesitate to **_[contact me](https://www.dominiklaube.com)_** if you want a website that attracts your audience.
 _Thanks, Dominik_
 
 ----
@@ -51,9 +43,9 @@ Expertise:
 
 - customized kirby development for digital brand experiences and business processes
 - clean, usable and brand-authentic webdesign
-- truly responsive websites paired with payment integrations, third-party interfaces and automations
-- improving user experience, conversions and sales through web analytics
-- organic website visitor growth strategies and lead generation
+- responsive websites paired with payment integrations, third-party interfaces and automations
+- improving user experience and conversions through web analytics
+- organic website visitor growth strategies
 
 ----
 
