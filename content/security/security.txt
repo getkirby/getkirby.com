@@ -79,6 +79,10 @@ There MUST be a separate entry with the `status` value `active-support`, `securi
 There MUST be exactly one entry with the `status` value `latest`. It MUST be the first entry in the list.
 There SHOULD be exactly one entry with the `status` value `no-vulnerabilities`. It MUST be the second entry in the list.
 
+The `initialRelease` field of each version entry SHOULD be set to a date value parseable by PHP that marks the date of initial license-relevant release of the major version if the major version follows the Kirby 4+ license model, applied in accordance to major versions before Kirby 4.
+
+The `endOfActiveSupport` and `endOfLife` fields of each version entry SHOULD be set to the respective date values parseable by PHP that mark the first day the version was or will be out of support.
+
 #### Possible `status` values
 
 ##### `latest`
@@ -100,15 +104,11 @@ This marks a version range that receives functionality updates, enhancements and
 
 The `latest` field of the `active-support` entry MUST be set to the latest version that can be updated to for free from any version in the version range. It SHOULD be set to `{{ latest }}`, which will be auto-populated with the Kirby version of the getkirby.com site.
 
-The `initialRelease` field of the `active-support` entry SHOULD be set to a date value parseable by PHP that marks the date of initial license-relevant release of the major version if the major version follows the Kirby 4+ license model.
-
 ##### `security-support`
 
 This marks a version range that only receives security updates.
 
 The `latest` field of the `security-support` entry MUST be set to the latest version that can be updated to for free from any version in the version range.
-
-The `initialRelease` field of the `security-support` entry SHOULD be set to a date value parseable by PHP that marks the date of initial license-relevant release of the major version if the major version follows the Kirby 4+ license model.
 
 `security-support` entries MAY also have a `status-link` field that points to an URL with more information on the support status of this version range. The status link defaults to an empty value (no link).
 

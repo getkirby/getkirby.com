@@ -139,10 +139,12 @@ class SecurityPage extends DefaultPage
 			};
 
 			$versions[$constraint] = [
-				'status'         => $version['status'],
-				'description'    => $description,
-				'latest'         => $version['latest'],
-				'initialRelease' => $version['initialRelease']
+				'status'             => $version['status'],
+				'description'        => $description,
+				'latest'             => $version['latest'],
+				'initialRelease'     => $version['initialRelease'],
+				'endOfActiveSupport' => $version['endOfActiveSupport'],
+				'endOfLife'          => $version['endOfLife'],
 			];
 		}
 
