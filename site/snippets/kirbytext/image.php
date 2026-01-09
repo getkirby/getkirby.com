@@ -14,10 +14,17 @@ echo Html::figure(
 			$link ?? $file->url(),
 			[
 				img($file, [
+					'src'   => [
+						'width' => 924
+					],
 					'alt'   => $alt ?? $file->alt()->or($caption),
 					'class' => 'rounded',
-					'src'   => [
-						'width' => 960
+					'srcset' => [
+						462,
+						690,
+						924,
+						1380,
+						1848,
 					],
 				])
 			],
