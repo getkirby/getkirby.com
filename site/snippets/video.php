@@ -4,7 +4,7 @@
 			'src' => [
 				'width' => 616
 			],
-			'lazy' => $attr['lazy'] ?? false,
+			'lazy' => ($attr['loading'] ?? null) === 'lazy',
 			// sizes generated with https://ausi.github.io/respimagelint/
 			'sizes' => '(min-width: 1520px) 616px, (min-width: 1160px) 42.06vw, (min-width: 960px) calc(50vw - 56px), (min-width: 780px) calc(75vw - 84px), (min-width: 480px) calc(100vw - 96px), 90vw',
 			'srcset' => [
