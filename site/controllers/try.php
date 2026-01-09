@@ -21,7 +21,7 @@ return function (Page $page) {
 	}
 
 	$zones = $allowedHosts = ['zone1', 'zone2'];
-	$allowedTypes          = ['staging'];
+	$allowedTypes          = ['next', 'staging'];
 
 	foreach ($zones as $zone) {
 		foreach ($allowedTypes as $type) {
