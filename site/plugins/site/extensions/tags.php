@@ -300,7 +300,8 @@ $tags['screencast'] = [
 			'url'    => $tag->value,
 			'poster' => $tag->poster ? $tag->file($tag->poster) : $tag->file('youtube.jpg'),
 			'title'  => $tag->title ?? null,
-			'text'   => $tag->text ?? null
+			'text'   => $tag->text ?? null,
+			'lazy'   => $tag->data['field']->key() !== 'screencast'
 		], true);
 	}
 ];
