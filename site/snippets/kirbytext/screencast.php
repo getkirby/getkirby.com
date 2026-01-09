@@ -8,7 +8,7 @@
 	</header>
 	<figure class="video">
 		<?= video($url, $poster, [], [
-			'loading' => 'lazy'
+			'loading' => $lazy ? 'lazy' : null
 		]) ?>
 	</figure>
 </article>
