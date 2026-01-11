@@ -73,6 +73,11 @@ return function (App $kirby, Page $page) {
 			// there will be a redirect to Paddle)
 			Time::validate($timestamp);
 
+			$page->validateReferences($plan, $references);
+			$page->validateWebsite($website);
+			$page->validateEmail($email);
+			$page->validateBusinessType($businessType);
+
 			// submit form values to Airtable
 			$response = Remote::post('https://api.airtable.com/v0/appeeHREbUMMaZGRP/tblrKOCF0cGAZmUQR', [
 				'data' => json_encode([
