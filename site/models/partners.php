@@ -58,6 +58,7 @@ class PartnersPage extends DefaultPage
 						'card'        => $partners[$partner]['card'] ?? null,
 						'stripe'      => $partners[$partner]['stripe'] ?? null,
 						'avatar'      => $partners[$partner]['avatar'] ?? null,
+						'changes'     => $partners[$partner]['changes'] ?? null,
 					
 					],
 				]
