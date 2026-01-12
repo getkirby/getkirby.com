@@ -1,8 +1,8 @@
 <?php
 if ($page->status() !== 'listed' &&
-    get('preview') !== $page->preview()->value()
+	get('preview') !== $page->preview()->value()
 ) {
-    go($page->parent());
+	go($page->parent());
 }
 ?>
 <?php layout() ?>
@@ -123,7 +123,7 @@ if ($page->status() !== 'listed' &&
 						</dd>
 					</div>
 					<?php endif ?>
-                    <?php if ($page->website()->isNotEmpty()): ?>
+					<?php if ($page->website()->isNotEmpty()): ?>
 					<div>
 						<dt title="Website"><?= icon('url') ?></dt>
 						<dd>
@@ -132,7 +132,7 @@ if ($page->status() !== 'listed' &&
 							</a>
 						</dd>
 					</div>
-                    <?php endif ?>
+					<?php endif ?>
 				</dl>
 			</div>
 
