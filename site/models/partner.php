@@ -15,95 +15,95 @@ class PartnerPage extends DefaultPage
 	{
 		return $this->images()->findBy('name', 'avatar');
 	}
-	
+
 	public function country(): Field
 	{
 		$location = $this->location()->value();
-		
+
 		if ($position = mb_strrpos($location, ',')) {
 			return parent::country()->value(
 				trim(Str::substr($location, $position + 1))
 			);
 		}
-		
+
 		return parent::country()->value($location);
 	}
-	
+
 	public function isCertified(): bool
 	{
 		return $this->plan()->value() === 'certified';
 	}
-	
+
 	public function i(): Field
 	{
 		return parent::i()->value($this->isSoloPartner() ? 'i' : 'we');
 	}
-	
+
 	public function isSoloPartner(): bool
 	{
 		return $this->people()->value() === '1';
 	}
-	
+
 	public function languages(bool $formatted = false): Field
 	{
 		$languages = parent::languages();
-		
+
 		if ($formatted === false) {
 			return $languages;
 		}
-		
+
 		$string = $languages->value();
-		
+
 		if ($lastComma = mb_strrpos($string, ',')) {
 			$string =
 				mb_substr($string, 0, $lastComma) . ' &' .
 				mb_substr($string, $lastComma + 1);
 		}
-		
+
 		return $languages->value($string);
 	}
-	
+
 	public function me(): Field
 	{
 		return parent::me()->value($this->isSoloPartner() ? 'me' : 'us');
 	}
-	
+
 	public function metadata(): array
 	{
 		return [
 			'ogimage' => $this->card(),
 		];
 	}
-	
+
 	public function card(): File|null
 	{
 		return $this->images()->findBy('name', 'card');
 	}
-	
+
 	public function my(): Field
 	{
 		return parent::my()->value($this->isSoloPartner() ? 'my' : 'our');
 	}
-	
+
 	public function peopleLabel(): string
 	{
 		if ($this->people()->toInt() > 1) {
 			return $this->people() . ' people';
 		}
-		
+
 		return '1 person';
 	}
-	
+
 	public function plugins(): Pages|null
 	{
 		$id       = $this->plugindeveloper()->or($this->slug());
 		$url      = 'https://plugins.getkirby.com/' . $id;
 		$response = Remote::get($url . '.json');
-		
+
 		if ($response->code() !== 200) {
 			return null;
 		}
-		
+
 		$json      = $response->json();
 		$developer = new Page([
 			'slug'    => $id,
@@ -112,7 +112,7 @@ class PartnerPage extends DefaultPage
 				'title' => $json['name'],
 			],
 		]);
-		
+
 		if (parent::plugins()->isNotEmpty() === true) {
 			$plugins = A::map(
 				parent::plugins()->yaml(),
@@ -120,7 +120,7 @@ class PartnerPage extends DefaultPage
 			);
 			$plugins = array_filter($plugins);
 		}
-		
+
 		$plugins ??= A::slice($json['plugins'] ?? [], 0, 5);
 		$plugins = A::map(
 			array_keys($plugins),
@@ -141,15 +141,15 @@ class PartnerPage extends DefaultPage
 				] : [],
 			])
 		);
-		
+
 		return new Pages($plugins);
 	}
-	
+
 	public function stripe(): File|null
 	{
 		return $this->images()->findBy('name', 'stripe') ?? $this->card();
 	}
-	
+
 	public function children(): Pages
 	{
 		if ($this->children instanceof Pages) {
@@ -158,12 +158,16 @@ class PartnerPage extends DefaultPage
 		// How can we pass a param to this path depending on request params
 		// And make sure that it is not cached?
 		$gallery = [];
-		$request = Remote::get(option('partners.partnerUrl') . $this->slug() . '.json');
-		
+
+		$request = Remote::get(option('partners.partnerUrl') .
+			$this->slug() . '.json' .
+			'?apiToken=' . option('keys.partnerAccessToken')
+		);
+
 		if ($request->code() === 200) {
 			$gallery = $request->json(true);
 		}
-		
+
 		$gallery = A::map(
 			$gallery,
 			fn($galleryItem) => [
@@ -177,14 +181,14 @@ class PartnerPage extends DefaultPage
 					'info'  => $galleryItem['info'],
 					'link'  => $galleryItem['link'],
 					'image' => $galleryItem['image'],
-				
+
 				],
 			]
 		);
-		
+
 		return $this->children = Pages::factory($gallery, $this);
 	}
-	
+
 	/**
 	 * @throws \Kirby\Exception\InvalidArgumentException
 	 */
@@ -193,9 +197,9 @@ class PartnerPage extends DefaultPage
 		if ($this->files !== null) {
 			return $this->files;
 		}
-		
+
 		$collection = new Files([], $this);
-		
+
 		foreach (array_filter(
 			[
 				 $this->content()->get('card')->value(),
@@ -203,21 +207,21 @@ class PartnerPage extends DefaultPage
 				 $this->content()->get('avatar')->value(),
 			]
 		) as $file) {
-			
+
 			$file = [
 				'filename' => baseName($file),
 				'url'      => $file,
 				'parent'   => $this,
 			];
-			
+
 			$image = new VirtualFile($file);
 			$collection->append($image->id(), $image);
-			
+
 		}
-		
+
 		return $this->files = $collection;
 	}
-	
+
 	public function getChanges(): self
 	{
 		$this->setContent($this->changes()->value());
