@@ -8,6 +8,10 @@ return [
 	'features'   => require __DIR__ . '/features.php',
 	'github'     => ['url' => 'https://github.com/getkirby'],
 	'hub'        => ['url' => 'https://hub.getkirby.com'],
+	'partners' => [
+		'url'        => 'https://partners.getkirby.com/partners.json',
+		'partnerUrl' => 'https://partners.getkirby.com/partners/'
+	],
 	'keys'       => file_exists(__DIR__ . '/keys.php') ? require __DIR__ . '/keys.php' : require __DIR__ . '/keys.sample.php',
 	'meta'       => require __DIR__ . '/meta.php',
 	'newstroll'  => ['list' => 110866],
