@@ -30,11 +30,11 @@ class PartnersPage extends DefaultPage
 				option('keys.partnerAccessToken'));
 
 			if ($request->code() === 200) {
-				$partners = $request->json(true);
+				$data = $request->json(true);
 			}
 
 			$partners = A::map(
-				array_keys($partners),
+				array_keys($data),
 				fn($partner) => [
 					'slug'     => $partner,
 					'parent'   => $this,
@@ -42,25 +42,25 @@ class PartnersPage extends DefaultPage
 					'model'    => 'partner',
 					'template' => 'partner',
 					'isDraft'  => false,
-					'num'      => ($partners[$partner]['isPreview'] ?? false) === false ? 0 : null,
-					'isListed' => ($partners[$partner]['isPreview'] ?? false) === false,
+					'num'      => ($data[$partner]['isPreview'] ?? false) === false ? 0 : null,
+					'isListed' => ($data[$partner]['isPreview'] ?? false) === false,
 					'content'  => [
-						'title'       => $partners[$partner]['title'],
-						'plan'        => $partners[$partner]['plan'],
-						'summary'     => $partners[$partner]['summary'],
-						'description' => $partners[$partner]['description'],
-						'expertise'   => $partners[$partner]['expertise'],
-						'people'      => $partners[$partner]['people'],
-						'test'        => $partners[$partner]['card'],
-						'languages'   => $partners[$partner]['languages'],
-						'region'      => $partners[$partner]['region'],
-						'subtitle'    => $partners[$partner]['subtitle'],
-						'location'    => $partners[$partner]['location'] ?? null,
-						'preview'     => $partners[$partner]['token'],
-						'card'        => $partners[$partner]['card'] ?? null,
-						'stripe'      => $partners[$partner]['stripe'] ?? null,
-						'avatar'      => $partners[$partner]['avatar'] ?? null,
-						'changes'     => $partners[$partner]['changes'] ?? null,
+						'title'       => $data[$partner]['title'],
+						'plan'        => $data[$partner]['plan'],
+						'summary'     => $data[$partner]['summary'],
+						'description' => $data[$partner]['description'],
+						'expertise'   => $data[$partner]['expertise'],
+						'people'      => $data[$partner]['people'],
+						'test'        => $data[$partner]['card'],
+						'languages'   => $data[$partner]['languages'],
+						'region'      => $data[$partner]['region'],
+						'subtitle'    => $data[$partner]['subtitle'],
+						'location'    => $data[$partner]['location'] ?? null,
+						'preview'     => $data[$partner]['token'],
+						'card'        => $data[$partner]['card'] ?? null,
+						'stripe'      => $data[$partner]['stripe'] ?? null,
+						'avatar'      => $data[$partner]['avatar'] ?? null,
+						'changes'     => $data[$partner]['changes'] ?? null,
 					],
 				]
 			);
