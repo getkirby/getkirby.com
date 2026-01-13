@@ -1,0 +1,54 @@
+Title: Simon Emge
+
+----
+
+Subtitle: Freelancer
+
+----
+
+Plan: regular
+
+----
+
+People: 1
+
+----
+
+Website: https://simonemge.com
+
+----
+
+Location: Frankfurt/Main, Germany
+
+----
+
+Summary: Graphic design office in Frankfurt am Main, Germany. In close collaboration with our clients we achieve consistency and authenticity in our designs.
+
+----
+
+Discordhandle: simonemge
+
+----
+
+Languages: English, German
+
+----
+
+Description:
+I am a graphic designer in Frankfurt am Main. In close collaboration with my clients I achieve consistency and authenticity in my designs. I work at the intersection of culture and visual language.
+
+----
+
+Expertise:
+
+- Graphic Design
+- UX/UI
+- Coding
+
+----
+
+Region: Europe
+
+----
+
+Uuid: YDe6HVlwCXzuHyar
