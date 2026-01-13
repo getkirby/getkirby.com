@@ -1,5 +1,6 @@
 <?php
-if ($page->status() !== 'listed' &&
+if (
+	$page->status() !== 'listed' &&
 	get('preview') !== $page->preview()->value()
 ) {
 	go($page->parent());

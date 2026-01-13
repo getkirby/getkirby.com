@@ -1,36 +1,38 @@
 <?php
 
 use Kirby\Cms\Pages;
+use Kirby\Http\Remote;
+use Kirby\Toolkit\A;
 
 class PartnersPage extends DefaultPage
 {
 	static $subpages = null;
-	
+
 	public function subpages(): Pages
 	{
 		if (static::$subpages) {
 			return static::$subpages;
 		}
-		
+
 		return static::$subpages = Pages::factory($this->inventory()['children'], $this);
 	}
-	
+
 	public function children(): Pages
 	{
 		if ($this->children instanceof Pages) {
 			return $this->children;
 		}
-		
+
 		$partners = [];
 		try {
 			$request = Remote::get(
 				option('partners.url') . '?apiToken=' .
 				option('keys.partnerAccessToken'));
-	
+
 			if ($request->code() === 200) {
 				$partners = $request->json(true);
 			}
-			
+
 			$partners = A::map(
 				array_keys($partners),
 				fn($partner) => [
@@ -59,11 +61,10 @@ class PartnersPage extends DefaultPage
 						'stripe'      => $partners[$partner]['stripe'] ?? null,
 						'avatar'      => $partners[$partner]['avatar'] ?? null,
 						'changes'     => $partners[$partner]['changes'] ?? null,
-					
 					],
 				]
 			);
-		} catch (Exception $e) {}
+		} catch (Exception) {}
 
 		return $this->children = $this->subpages()->add(Pages::factory($partners, $this));
 	}

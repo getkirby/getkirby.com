@@ -43,11 +43,11 @@ App::plugin('getkirby/cdn', [
 		},
 		'file::version' => function (App $kirby, $file, $options) {
 			static $original;
-			
+
 			if ($file instanceof VirtualFile && $kirby->option('cdn', false) === false) {
 				return $file;
 			}
-			
+
 			if ($kirby->option('cdn', false) !== false) {
 				return new FileVersion([
 					'modifications' => $options,

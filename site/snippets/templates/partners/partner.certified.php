@@ -18,26 +18,26 @@
 		<figure>
 			<div style="--aspect-ratio: 2/1" class="mb-3">
 
-                <?php if ($image = $partner->stripe()): ?>
-	                <?= img($image, [
-		                'src' => [
-			                'width'  => 352,
-			                'height' => 176,
-			                'crop'   => true,
-		                ],
-		                'lazy' => $lazy,
-		                // sizes generated with https://ausi.github.io/respimagelint/
-		                'sizes' => '(min-width: 1520px) 352px, (min-width: 1160px) calc(27.35vw - 58px), (min-width: 960px) calc(33.33vw - 96px), (min-width: 640px) calc(50vw - 96px), (min-width: 480px) calc(100vw - 96px), 90vw',
-		                'srcset' => [
-			                ['width' => 352, 'height' => 176, 'crop' => true],
-			                ['width' => 500, 'height' => 250, 'crop' => true],
-			                ['width' => 704, 'height' => 352, 'crop' => true],
-			                ['width' => 1000, 'height' => 500, 'crop' => true],
-		                ]
-	                ]) ?>
-				
+				<?php if ($image = $partner->stripe()): ?>
+					<?= img($image, [
+						'src' => [
+							'width'  => 352,
+							'height' => 176,
+							'crop'   => true,
+						],
+						'lazy' => $lazy,
+						// sizes generated with https://ausi.github.io/respimagelint/
+						'sizes' => '(min-width: 1520px) 352px, (min-width: 1160px) calc(27.35vw - 58px), (min-width: 960px) calc(33.33vw - 96px), (min-width: 640px) calc(50vw - 96px), (min-width: 480px) calc(100vw - 96px), 90vw',
+						'srcset' => [
+							['width' => 352, 'height' => 176, 'crop' => true],
+							['width' => 500, 'height' => 250, 'crop' => true],
+							['width' => 704, 'height' => 352, 'crop' => true],
+							['width' => 1000, 'height' => 500, 'crop' => true],
+						]
+					]) ?>
+
 				<?php elseif ($image = $partner->avatar()): ?>
-                    <span class="p-6 bg-light">
+					<span class="p-6 bg-light">
 						<?= img($image, [
 							'src' => [
 								'width'  => 187,

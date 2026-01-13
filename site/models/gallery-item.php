@@ -1,13 +1,16 @@
 <?php
 
-class GalleryItemPage extends \Kirby\Cms\Page
+use Kirby\Cms\Files;
+use Kirby\Cms\Page;
+
+class GalleryItemPage extends Page
 {
 	public function files(): Files
 	{
 		if ($this->files !== null) {
 			return $this->files;
 		}
-		
+
 		$collection   = new Files([], $this);
 		$galleryImage = $this->content()->get('image')->value();
 		$file         = [
@@ -15,9 +18,9 @@ class GalleryItemPage extends \Kirby\Cms\Page
 			'url'      => $galleryImage,
 			'parent'   => $this,
 		];
-		
+
 		$image = new VirtualFile($file);
-		
+
 		$collection->append($image->id(), $image);
 
 		return $this->files = $collection;
