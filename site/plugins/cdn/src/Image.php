@@ -22,7 +22,6 @@ class Image
 {
 	protected App $app;
 	protected array $options;
-	protected string $root;
 	protected string $url;
 
 	/**
@@ -30,25 +29,49 @@ class Image
 	 * @param array $options Kirby thumb options
 	 */
 	public function __construct(
-		string|Asset|File $file,
+		protected string|Asset|File $file,
 		array $options = []
 	) {
 		if (is_object($file) === true) {
-			$this->app  = $file->kirby();
-			$this->root = $file->root();
-			$this->url  = $file->mediaUrl();
+			$this->app = $file->kirby();
+			$this->url = $file->mediaUrl();
+			$root      = $file->root();
 		} else {
-			$this->app  = App::instance();
-			$this->root = $this->app->root('index') . '/' . $file;
-			$this->url  = $file;
+			$this->app = App::instance();
+			$this->url = $file;
+			$root      = $this->app->root('index') . '/' . $file;
 		}
 
 		$darkroom = Darkroom::factory(
 			'im',
 			$this->app->option('thumbs', [])
 		);
+		$optionsProcessed = $darkroom->preprocess($root, $options);
 
-		$this->options = $darkroom->preprocess($this->root, $options);
+		// cannot determine the size in `$darkroom->preprocess()`
+		// if file is not present in the filesystem
+		if ($file instanceof VirtualFile) {
+			$optionsProcessed['sourceWidth']  = $file->width();
+			$optionsProcessed['sourceHeight'] = $file->height();
+
+			$dimensions      = $file->dimensions();
+			$thumbDimensions = $dimensions->thumb($options);
+
+			$optionsProcessed['width']  = $thumbDimensions->width();
+			$optionsProcessed['height'] = $thumbDimensions->height();
+
+			// scale ratio compared to the source dimensions
+			$optionsProcessed['scaleWidth'] = Focus::ratio(
+				$optionsProcessed['width'],
+				$optionsProcessed['sourceWidth']
+			);
+			$optionsProcessed['scaleHeight'] = Focus::ratio(
+				$optionsProcessed['height'],
+				$optionsProcessed['sourceHeight']
+			);
+		}
+
+		$this->options = $optionsProcessed;
 	}
 
 	/**
@@ -84,6 +107,10 @@ class Image
 	 */
 	public function url(): string
 	{
+		if ($this->file instanceof VirtualFile) {
+			return $this->file->url() . $this->query();
+		}
+
 		return $this->app->option('cdn.domain') . '/' . $this->path() . $this->query();
 	}
 

@@ -1,5 +1,6 @@
 <?php
 
+use Kirby\Cdn\VirtualFile;
 use Kirby\Cms\Files;
 use Kirby\Cms\Page;
 use Kirby\Cms\Pages;

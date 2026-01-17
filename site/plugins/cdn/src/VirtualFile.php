@@ -1,8 +1,20 @@
 <?php
 
+namespace Kirby\Cdn;
+
 use Kirby\Cms\File;
 use Kirby\Image\Dimensions;
 
+/**
+ * A file that comes from an external API and
+ * is virtually mirrored through the CDN
+ *
+ * @package   Kirby Cdn
+ * @author    Sonja Broda <sonja@getkirby.com>
+ * @link      https://getkirby.com
+ * @copyright Bastian Allgeier
+ * @license   https://opensource.org/licenses/MIT
+ */
 class VirtualFile extends File
 {
 	public function dimensions(): Dimensions
@@ -20,7 +32,7 @@ class VirtualFile extends File
 
 	public function isResizable(): bool
 	{
-		return false;
+		return $this->kirby()->option('cdn', false) !== false;
 	}
 
 	public function width(): int
