@@ -1,5 +1,7 @@
 <?php
 
+use Kirby\Cms\Files;
+use Kirby\Cms\Page;
 use Kirby\Cms\Pages;
 use Kirby\Http\Remote;
 use Kirby\Toolkit\A;
@@ -57,15 +59,41 @@ class PartnersPage extends DefaultPage
 						'subtitle'    => $data[$partner]['subtitle'],
 						'location'    => $data[$partner]['location'] ?? null,
 						'preview'     => $data[$partner]['token'],
-						'card'        => $data[$partner]['card'] ?? null,
-						'stripe'      => $data[$partner]['stripe'] ?? null,
-						'avatar'      => $data[$partner]['avatar'] ?? null,
 						'changes'     => $data[$partner]['changes'] ?? null,
 					],
+					'files' => [
+						$data[$partner]['card'] ?? null,
+						$data[$partner]['stripe'] ?? null,
+						$data[$partner]['avatar'] ?? null,
+					]
 				]
 			);
 		} catch (Exception) {}
 
 		return $this->children = $this->subpages()->add(Pages::factory($partners, $this));
+	}
+
+	/**
+	 * Creates a collection of `VirtualFile` objects from array data that comes
+	 * from the partners API's `apiArray()` file method
+	 */
+	public static function virtualFileFactory(array $files, Page $parent): Files
+	{
+		$collection = new Files([], $parent);
+
+		foreach (array_filter($files) as $file) {
+			$file = VirtualFile::factory([
+				'filename'   => basename($file['url']),
+				'url'        => $file['url'],
+				'width'      => $file['width'],
+				'height'     => $file['height'],
+				'parent'     => $parent,
+				'collection' => $collection
+			]);
+
+			$collection->data[$file->id()] = $file;
+		}
+
+		return $collection;
 	}
 }

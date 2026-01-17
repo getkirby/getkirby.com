@@ -1,28 +1,16 @@
 <?php
 
-use Kirby\Cms\Files;
 use Kirby\Cms\Page;
 
 class GalleryItemPage extends Page
 {
-	public function files(): Files
+	protected function setFiles(array|null $files = null): static
 	{
-		if ($this->files !== null) {
-			return $this->files;
+		if (is_array($files)) {
+			$this->files = PartnersPage::virtualFileFactory($files, $this);
+			return $this;
 		}
 
-		$collection   = new Files([], $this);
-		$galleryImage = $this->content()->get('image')->value();
-		$file         = [
-			'filename' => baseName($galleryImage),
-			'url'      => $galleryImage,
-			'parent'   => $this,
-		];
-
-		$image = new VirtualFile($file);
-
-		$collection->append($image->id(), $image);
-
-		return $this->files = $collection;
+		return parent::setFiles($files);
 	}
 }

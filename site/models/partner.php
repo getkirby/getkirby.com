@@ -179,47 +179,25 @@ class PartnerPage extends DefaultPage
 				'content'  => [
 					'title' => $galleryItem['title'],
 					'info'  => $galleryItem['info'],
-					'link'  => $galleryItem['link'],
-					'image' => $galleryItem['image'],
-
+					'link'  => $galleryItem['link']
 				],
+				'files' => [
+					$galleryItem['image']
+				]
 			]
 		);
 
 		return $this->children = Pages::factory($gallery, $this);
 	}
 
-	/**
-	 * @throws \Kirby\Exception\InvalidArgumentException
-	 */
-	public function files(): Files
+	protected function setFiles(array|null $files = null): static
 	{
-		if ($this->files !== null) {
-			return $this->files;
+		if (is_array($files)) {
+			$this->files = PartnersPage::virtualFileFactory($files, $this);
+			return $this;
 		}
 
-		$collection = new Files([], $this);
-
-		foreach (array_filter(
-			[
-				 $this->content()->get('card')->value(),
-				 $this->content()->get('stripe')->value(),
-				 $this->content()->get('avatar')->value(),
-			]
-		) as $file) {
-
-			$file = [
-				'filename' => baseName($file),
-				'url'      => $file,
-				'parent'   => $this,
-			];
-
-			$image = new VirtualFile($file);
-			$collection->append($image->id(), $image);
-
-		}
-
-		return $this->files = $collection;
+		return parent::setFiles($files);
 	}
 
 	public function getChanges(): self
