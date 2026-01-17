@@ -89,9 +89,9 @@ stats:
       info: +112.5%
 ```
 
-### Links
+### Links, dialogs or drawers
 
-Reports can have a link to a source or more details. Links can be absolute or relative.
+Reports can link to a URL or open a dialog/drawer for more details.
 
 ```yaml
 stats:
@@ -101,6 +101,12 @@ stats:
       value: €29,682
       info: +112.5%
       link: /revenue
+    - label: Orders
+      value: 265
+      dialog: orders/details
+    - label: Top customers
+      value: 12
+      drawer: customers/top
 ```
 
 ### Icons

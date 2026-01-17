@@ -55,7 +55,7 @@ default | `array` | - | Default value for the field, which will be used when a p
 empty | `string` | - | Customize the default text when the blocks field is empty
 help | | - | Optional help text below the field
 label | | - | The field label can be set as string or associative array with translations
-reports | `array` | - | Array or query string for reports. Each report needs a `label` and `value` and can have additional `info`, `link`, `icon` and `theme` settings.
+reports | `array` | - | Array or query string for reports. Each report needs a `label` and `value` and can have additional `info`, `link`, `dialog`, `drawer`, `icon` and `theme` settings.
 size | `string` | `large` | The size of the report cards. Available sizes: `tiny`, `small`, `medium`, `large`
 when |  | - | Conditions when the field will be shown
 width | `string` | `1/1` | The width of the field in the field grid. Available widths: `1/1`, `1/2`, `1/3`, `1/4`, `2/3`, `3/4`
@@ -89,9 +89,9 @@ stats:
       info: +112.5%
 ```
 
-### Links
+### Links, dialogs or drawers
 
-Reports can have a link to a source or more details. Links can be absolute or relative.
+Reports can link to a URL or open a dialog/drawer for more details.
 
 ```yaml
 stats:
@@ -101,6 +101,12 @@ stats:
       value: €29,682
       info: +112.5%
       link: /revenue
+    - label: Orders
+      value: 265
+      dialog: orders/details
+    - label: Top customers
+      value: 12
+      drawer: customers/top
 ```
 
 ### Icons
