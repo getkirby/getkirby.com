@@ -10,8 +10,18 @@ function csv(string $file): array
 	$handle = fopen($file, "r");
 	$lines  = [];
 
-	while(($line = fgetcsv($handle, escape: '\\')) !== false) {
+	if ($handle === false) {
+		return $lines;
+	}
+
+	while (($line = fgetcsv($handle, escape: '\\')) !== false) {
 		$lines[] = $line;
+	}
+
+	fclose($handle);
+
+	if (count($lines) === 0) {
+		return $lines;
 	}
 
 	$lines[0] = str_replace("\xEF\xBB\xBF", '', $lines[0]);
