@@ -12,15 +12,25 @@ return [
 	'pages' => [
 		'active' => true,
 		'type'   => 'file',
-		'ignore' => [
-			'buy',
-			'features-for-clients',
-			'home',
-			'love',
-			'partners',
-			'scenario-education',
-			'themes',
-		]
+		'ignore' => function ($page) {
+			$ignore = [
+				'buy',
+				'features-for-clients',
+				'home',
+				'love',
+				'partners',
+				'scenario-education',
+				'themes',
+			];
+
+			if (in_array($page->id(), $ignore, true)) {
+				return true;
+			}
+
+			if ($page instanceof PartnerPage) {
+				return true;
+			}
+		}
 	],
 	'reference' => [
 		'active' => true,
