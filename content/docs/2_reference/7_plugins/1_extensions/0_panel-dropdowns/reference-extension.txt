@@ -9,10 +9,11 @@ Our action dropdowns for pages, files and users are all loaded on request. This 
 As part of your (link: docs/reference/plugins/extensions/panel-areas text: Panel area extension), you can also define custom dropdowns easily on the backend and use them in your Panel frontend code with a simple single call.
 
 ```html
-<k-dropdown>
-    <k-button @click="$refs.options.toggle()">Options</k-button>
-    <k-dropdown-content :options="$dropdown('pages/projects+project-a')">
-</k-dropdown>
+<k-button @click="$refs.options.toggle()">Options</k-button>
+<k-dropdown-content
+  ref="options"
+  :options="$dropdown('pages/projects+project-a')"
+/>
 ```
 
 The backend code for this is very straightforward as well and is defined as part of our areas
@@ -102,10 +103,8 @@ Kirby::plugin('your-plugin/todos', [
 Your dropdown options can then be loaded in your Vue code like this:
 
 ```html
-<k-dropdown>
-    <k-button icon="cog" @click="$refs.options.toggle()">Options</k-button>
-    <k-dropdown-content ref="options" :options="$dropdown('todos/the-todo-id')" />
-</k-dropdown>
+<k-button icon="cog" @click="$refs.options.toggle()">Options</k-button>
+<k-dropdown-content ref="options" :options="$dropdown('todos/the-todo-id')" />
 ```
 
 ## Extending dropdowns
