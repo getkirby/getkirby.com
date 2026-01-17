@@ -20,6 +20,16 @@ Text:
 
 (docs: requirements/php-versions)
 
+<since v="5.2.0">
+<warning>
+You can temporarily disable the PHP version check by defining `KIRBY_PHP_VERSION_CHECK` to `false` in your `index.php`. This is risky and not recommended in production as PHP releases can include breaking changes with security impact.
+
+```php
+define('KIRBY_PHP_VERSION_CHECK', false);
+```
+</warning>
+</since>
+
 ## PHP Extensions
 
 ### Required Extensions
