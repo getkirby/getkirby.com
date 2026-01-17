@@ -147,7 +147,7 @@ function version(string $version, string $format = '%s'): string
  */
 function video(
 	string $url,
-	File $poster,
+	File|null $poster,
 	array $options = [],
 	array $attr = [],
 ): string|null {
