@@ -131,6 +131,10 @@ Some of the view button options do offer support for (link: docs/guide/blueprint
 
 Query support is available for the `dialog`, `drawer`, `icon`, `link`, `text` and `theme` options.
 
+<since v="5.2.0">
+If you pass `options` as a string, it also supports Kirby queries, which can be useful when loading dropdown options dynamically.
+</since>
+
 ### Access current object
 
 You can also define your custom view button as a closure and access relevant objects passed as arguments to the function:
