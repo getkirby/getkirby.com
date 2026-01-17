@@ -44,6 +44,10 @@ return [
 ];
 ```
 
+## Cross-Origin Resource Sharing
+
+For browser-based requests from another origin, configure Cross-Origin Resource Sharing via the (link: docs/reference/system/options/cors text: `cors` option).
+
 ## Allow insecure requests
 
 By default authentication via (link: docs/guide/api/authentication#http-basic-auth text: basic auth) is only permitted when https is enabled. In rare cases (e.g. during local development), it might be necessary to allow basic auth even when https is not enabled.
@@ -71,7 +75,6 @@ return [
   ]
 ];
 ```
-
 
 ## Custom API elements
 

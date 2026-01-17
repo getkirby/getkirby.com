@@ -42,6 +42,8 @@ With Kirby, you have several options to run in "headless" mode.
 
 The following is an introduction to each of these options and an overview of their uses.
 
+If your frontend lives on another origin, you may need to configure the (link: docs/reference/system/options/cors text: `cors` option) to access APIs from the browser.
+
 <info>
 The technologies and approaches we describe here have very valid uses as we showed above.
 
@@ -116,7 +118,7 @@ KQL allows access to *all* content of your Kirby site. Before you disable authen
 
 ### Documentation
 
-(link: https://github.com/getkirby/kql/#kirby-ql text: KQL Readme)
+(link: https://plugins.getkirby.com/getkirby/kql text: KQL)
 (link: https://kql.getkirby.com/ text: KQL Playground)
 
 ## Custom routes

@@ -22,6 +22,8 @@ Session-based authentication requires CSRF token validation. The CSRF token has 
 
 Sessions also require a correct session cookie for every request. Therefore, session-based authentication works best when you make API calls from the frontend of the same site/domain.
 
+If your frontend runs on another origin, you will likely need to configure the (link: docs/reference/system/options/cors text: `cors` option).
+
 ### Example
 
 Here is a small JavaScript example using the fetch API. This setup assumes that it is running on the same server as the API and that you have access to our `csrf()` helper (e.g. in a template).
@@ -93,4 +95,3 @@ $response = Remote::get('https://yoursite.com/api/pages/example', [
 
 $page = json_decode($response->content())->data;
 ```
-

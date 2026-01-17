@@ -1,0 +1,91 @@
+Intro: Configure CORS headers for cross-origin requests
+
+----
+
+Since: 5.2.0
+
+----
+
+Text:
+
+CORS (Cross-Origin Resource Sharing) is a browser security mechanism that controls whether JavaScript running on one origin (domain) can make requests to another origin. Without CORS, browsers block cross-origin requests even if the server would otherwise respond. You likely need to configure CORS if:
+
+- You run a (link: docs/guide/beyond-kirby text: headless setup) where a separate frontend app retrieves its content from a Kirby installation on another origin.
+- You want to access the Kirby (link: docs/guide/api text: REST API), (link: docs/guide/templates/content-representations text: content representations) or (link: https://plugins.getkirby.com/getkirby/kql text: KQL) from a different domain in the browser.
+
+Automatic CORS support makes it easy to access the Kirby API, content representations or KQL from other origins in headless setups.
+
+## How to get started
+
+For a simple setup, set the `cors` config option to `true` to enable CORS with sensible defaults .When enabled, CORS preflight `OPTIONS` requests return a `204 No Content` response with CORS headers. CORS headers (incl. `Vary`) are injected into responses without overriding custom headers set by plugins or user code.
+
+
+### `Vary` header management:
+- Wildcard origins (`*`): No `Vary: Origin` header is added.
+- Specific origins: `Vary: Origin` is added automatically.
+- Header reflection: `Vary: Access-Control-Request-Headers` is added when reflection is enabled.
+- Auth/cookie tracking: `Vary: Authorization` and `Vary: Cookie` are added when responses use authentication or cookies.
+- Smart merging: `Vary` values are combined without duplication.
+
+## Configuration
+
+CORS can be enabled in three ways:
+
+```php
+return [
+  'cors' => true
+];
+```
+
+With custom configuration options:
+
+```php
+return [
+  'cors' => [
+    'allowOrigin'      => 'https://example.com',
+    'allowCredentials' => true
+  ]
+];
+```
+
+As a callback closure that returns configuration options:
+
+```php
+return [
+  'cors' => function ($kirby) {
+    $origin = $kirby->request()->header('Origin');
+
+    if (in_array($origin, ['https://app1.com', 'https://app2.com'])) {
+      return [
+        'allowOrigin'      => $origin,
+        'allowCredentials' => true,
+        'allowMethods'     => ['GET', 'POST']
+      ];
+    }
+
+    return ['allowOrigin' => '*'];
+  }
+];
+```
+
+Setting `cors` to an empty array (`[]`) is equivalent to `true` and enables CORS with defaults. To disable CORS, use `false` or omit the option entirely.
+
+### Available options
+
+| Option | Type | Default | Description |
+| --- | --- | --- | --- |
+| `allowOrigin` | `string|array` | `*` | Allowed origins (e.g. `*`, `https://example.com` or `['https://app1.com', 'https://app2.com']`) |
+| `allowMethods` | `string|array` | `'GET'`, `'HEAD'`, `'PUT'`, `'POST'`, `'DELETE'`, `'PATCH'` | Allowed HTTP methods for preflight requests |
+| `allowHeaders` | `string|array|bool` | `[]` | Allowed request headers. `[]` omits the `Access-Control-Allow-Headers` header, `true` reflects `Access-Control-Request-Headers`, a string/array allowlists specific headers |
+| `maxAge` | `int` | `null` | Preflight cache duration in seconds |
+| `allowCredentials` | `bool` | `false` | Allow requests with credentials; cannot be used with wildcard origin |
+| `exposeHeaders` | `string|array` | `[]` | Response headers exposed to the browser |
+
+## Security considerations
+
+- Only enable CORS when needed and restrict origins, methods and headers to the minimum required.
+- `allowCredentials: true` lets browsers include cookies and HTTP authentication, so only use it for fully trusted origins.
+
+<warning>
+If you set `allowCredentials` to `true`, you must use a specific `allowOrigin` value. The wildcard origin `*` is not allowed with credentials.
+</warning>
