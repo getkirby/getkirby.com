@@ -91,6 +91,20 @@ You can inject information from the current page into the label with template pl
 label: "{{ page.title }} Gallery"
 ```
 
+
+<since v="5.2.0">
+## Upload button
+
+You can disable the upload button in a files section with the `create` option. This is useful for query-based sections where uploads wouldn't show up in the list.
+
+```yaml
+files:
+  type: files
+  query: page.files
+  create: false
+```
+</since>
+
 ## Layout
 
 The files can either be displayed as a simple list or as cards with preview images. The list view is the default view.
