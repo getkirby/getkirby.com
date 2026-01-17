@@ -16,6 +16,7 @@ return [
 	'hub'       => '',
 	'keycdn'    => '',
 	'newstroll' => '',
+	'partnerAccessToken' => '',
 	'paddle'    => [
 		'id'    => 1,
 		'auth'  => '',

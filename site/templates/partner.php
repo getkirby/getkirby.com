@@ -1,3 +1,11 @@
+<?php
+if (
+	$page->status() !== 'listed' &&
+	get('preview') !== $page->preview()->value()
+) {
+	go($page->parent());
+}
+?>
 <?php layout() ?>
 
 <style>
@@ -48,7 +56,6 @@
 	color: var(--color-gray-700);
 }
 </style>
-
 <header class="mb-12">
 	<h1 class="h1 mb-1">
 		<?= $page->title() ?>
@@ -57,7 +64,6 @@
 		<?= $page->subtitle() ?>
 	</p>
 </header>
-
 <div class="partner-grid columns mb-24">
 	<figure style="--aspect-ratio: 3/2;" class="partner-hero rounded overflow-hidden mb-3">
 		<?php if ($image = $page->card()): ?>
@@ -118,7 +124,7 @@
 						</dd>
 					</div>
 					<?php endif ?>
-                    <?php if ($page->website()->isNotEmpty()): ?>
+					<?php if ($page->website()->isNotEmpty()): ?>
 					<div>
 						<dt title="Website"><?= icon('url') ?></dt>
 						<dd>
@@ -127,7 +133,7 @@
 							</a>
 						</dd>
 					</div>
-                    <?php endif ?>
+					<?php endif ?>
 				</dl>
 			</div>
 

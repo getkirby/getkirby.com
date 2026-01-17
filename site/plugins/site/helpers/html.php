@@ -51,7 +51,10 @@ function img($file, array $props = [])
 		$height = $thumb->height();
 	}
 
-	if (empty($props['srcset']) === false) {
+	if (
+		empty($props['srcset']) === false &&
+		$file->isResizable() === true
+	) {
 		$srcset = $file->srcset($props['srcset']);
 	}
 

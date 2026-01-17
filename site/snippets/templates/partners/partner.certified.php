@@ -17,6 +17,7 @@
 		</h3>
 		<figure>
 			<div style="--aspect-ratio: 2/1" class="mb-3">
+
 				<?php if ($image = $partner->stripe()): ?>
 					<?= img($image, [
 						'src' => [
@@ -34,6 +35,7 @@
 							'1000w' => ['width' => 1000, 'height' => 500, 'crop' => true],
 						]
 					]) ?>
+
 				<?php elseif ($image = $partner->avatar()): ?>
 					<span class="p-6 bg-light">
 						<?= img($image, [

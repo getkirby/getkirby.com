@@ -3,7 +3,8 @@
 load([
 	'kirby\\cdn\\fileversion' => __DIR__ . '/src/FileVersion.php',
 	'kirby\\cdn\\image'       => __DIR__ . '/src/Image.php',
-	'kirby\\cdn\\optimizer'   => __DIR__ . '/src/Optimizer.php'
+	'kirby\\cdn\\optimizer'   => __DIR__ . '/src/Optimizer.php',
+	'kirby\\cdn\\virtualfile' => __DIR__ . '/src/VirtualFile.php'
 ]);
 
 use Kirby\Cdn\FileVersion;
@@ -39,6 +40,10 @@ App::plugin('getkirby/cdn', [
 		},
 		'file::version' => function (App $kirby, $file, $options) {
 			static $original;
+
+			if ($file->isResizable() === false) {
+				return $file;
+			}
 
 			if ($kirby->option('cdn', false) !== false) {
 				return new FileVersion([
