@@ -1,0 +1,137 @@
+Title: Panel drawers
+
+----
+
+Text:
+
+As part of your (link: docs/reference/plugins/extensions/panel-areas text: Panel area extension), you can also define custom drawers for the Panel as well as extend or modify the Panel's default drawers.
+
+## Supported UI components
+
+All reuse the same drawer components:
+
+| Component name | Usage |
+| --- | --- |
+| (link: https://lab.getkirby.com/public/lab/docs/k-form-drawer text: `k-form-drawer`) | For drawers with form fields |
+| (link: https://lab.getkirby.com/public/lab/docs/k-text-drawer text: `k-text-drawer`) | For drawers with a custom text message |
+
+## Drawer definition
+
+Drawers are defined as a part of areas:
+
+```php
+Kirby::plugin('yourname/todos', [
+  'areas' => [
+    'todos' => function ($kirby) {
+      return [
+        // ... other code for custom Panel area
+        'drawers' => [
+
+          // the key of the drawer defines its routing pattern
+          'todos/create' => [
+            // drawer callback functions
+            'load'   => function () {},
+            'submit' => function () {}
+          ]
+        ]
+      ];
+    }
+  ]
+]);
+```
+
+### `load` callback
+
+The `load` function is called when the drawer is opened. It needs to return an array that specifies the UI component (see above) to be used for the drawer as well as all props that should be passed to the UI component, e.g. field definitions and values for a form drawer.
+
+```php
+Kirby::plugin('yourname/todos', [
+  'areas' => [
+    'todos' => function ($kirby) {
+      return [
+        'drawers' => [
+          'todos/create' => [
+            // the load event is creating a GET route at
+            // `/panel/drawers/{pattern}`;
+            // it returns the setup for the drawer, including
+            // used component, buttons, props, etc.
+            'load' => function () {
+              return [
+                // what drawer component to use
+                'component' => 'k-form-drawer',
+                'props' => [
+                  // field definition for the form drawer
+                  'fields' => [ ... ],
+                  // the prefilled model data
+                  'value' => [ ... ]
+                ]
+              ];
+            },
+            // ...
+          ]
+        ]
+      ];
+    }
+  ]
+]);
+```
+
+### `submit` callback
+
+The `submit` function is called once the drawer is submitted and defines the actions triggered by the event but also the response the Panel will receive.
+
+```php
+Kirby::plugin('yourname/todos', [
+  'areas' => [
+    'todos' => function ($kirby) {
+      return [
+        'drawers' => [
+          'todos/create' => [
+            // ...
+
+            // the submit event is creating a POST route at
+            // `/panel/drawers/{pattern}`;
+            // the submit button of the drawer is automatically
+            // wired to fire the POST request with the form
+            // data or whatever data the drawer provides
+            'submit' => function () {
+              // create todo
+              return true;
+            }
+          ]
+        ]
+      ];
+    }
+  ]
+]);
+```
+
+The drawer's `submit` callback has multiple ways to interact with the component presented in the Panel via its response:
+
+`return void|null|false`
+Returning nothing or `false` is interpreted as a 404. It suggests that the model could not be found.
+
+`return true`
+Returning true is interpreted as a success and will automatically close the drawer.
+
+`return [ ... ]`
+By returning an array, you gain more control of what happens when the drawer closes by passing data to the event:
+
+```php
+return [
+  'event' => 'todo.create',
+  'data'  => [
+    // some data for the event
+  ],
+];
+```
+
+`throw new Exception`
+Any exception is interpreted as an error and will show the error message box in the drawer containing the exception message
+
+`Panel::go()`
+You can redirect the Panel to a different location after submitting the drawer by calling:
+
+```php
+Panel::go('some/path');
+```
