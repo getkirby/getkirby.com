@@ -135,3 +135,28 @@ You can redirect the Panel to a different location after submitting the drawer b
 ```php
 Panel::go('some/path');
 ```
+
+<since v="5.1.0">
+### Controller classes
+
+Instead of defining the drawer directly as an array with `load` and `submit` keys, you can pass a controller class name or a closure that returns an object with `load` and `submit` methods. If the named class defines a static `::for()` method, Kirby will call it to create the instance.
+
+```php
+Kirby::plugin('yourname/todos', [
+  'areas' => [
+    'todos' => function () {
+      return [
+        'drawers' => [
+          'todos/create' => [
+            'controller' => TodoCreateDrawerController::class
+          ],
+          'todos/edit' => [
+            'controller' => fn () => new TodoEditDrawerController()
+          ]
+        ]
+      ];
+    }
+  ]
+]);
+```
+</since>
