@@ -45,7 +45,6 @@ return [
 	[
 		'pattern' => 'partners/preview/changes/(:any)',
 		'action' => function ($slug) {
-
 			$preview = page('partners')->children()->findBy('slug', $slug);
 
 			if (!$preview || get('preview') !== $preview->preview()->value()) {
@@ -55,8 +54,6 @@ return [
 			if ($page = $preview->getChanges()) {
 				return $page;
 			}
-			
-
 		}
 	]
 ];
