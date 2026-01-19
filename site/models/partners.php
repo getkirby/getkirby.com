@@ -63,6 +63,7 @@ class PartnersPage extends DefaultPage
 						'preview'         => $data[$partner]['token'],
 						'changes'         => $data[$partner]['changes'] ?? null,
 						'pluginDeveloper' => $data[$partner]['pluginDeveloper'] ?? null,
+						'showPlugins'     => $data[$partner]['showPlugins'] ?? true,
 					],
 					'files' => [
 						$data[$partner]['card'] ?? null,
