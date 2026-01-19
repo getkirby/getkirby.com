@@ -25,6 +25,8 @@ There are a large number of endpoints, split into the following areas:
 
 Every API request requires authentication. We offer session-based authentication or HTTP Basic auth. (link: docs/guide/api/authentication text: Read more ›)
 
+If your frontend runs on a different origin, you likely need to use the (link: docs/reference/system/options/cors text: `cors` option).
+
 ## Language
 In a (link: docs/guide/languages text: multi-language site) it is necessary to specify the language for which you want to use the API. This is done by sending an `X-Language` header containing the desired language code with your request.
 

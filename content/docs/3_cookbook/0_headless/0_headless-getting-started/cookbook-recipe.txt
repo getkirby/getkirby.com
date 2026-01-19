@@ -33,7 +33,9 @@ This guide will explain how to set Kirby up for headless use on a basic level. T
 
 - To work locally, you will also need a local web server capable of using SSL such as Laraval Valet or MAMP.
 
-- Make sure to install the [KQL Plugin](https://github.com/getkirby/kql). This gives us a lot of flexability in fetching data from Kirby.
+- Make sure to install the [KQL Plugin](https://github.com/getkirby/kql). This gives us a lot of flexibility in fetching data from Kirby.
+
+- If you plan to to run your headless frontend on another origin than your Kirby installation, you may need to configure the (link: docs/reference/system/options/cors text: `cors` option).
 
 ## Enabling BasicAuth
 
@@ -229,4 +231,4 @@ You should now be able visit it in a browser after mapping it to a local test do
 
 ## Closing
 
-Whilst this simple example isn't terribly pretty, it will hopefully get you started with using Kirby as a headless CMS. Have a go at changing the query to see what else you can display! From here there are quite a lot possibilites. This guide is just the tip of the iceberg and should give you the basis to start exploring.
+Whilst this simple example isn't terribly pretty, it will hopefully get you started with using Kirby as a headless CMS. Have a go at changing the query to see what else you can display! From here there are quite a lot possibilities. This guide is just the tip of the iceberg and should give you the basis to start exploring.
