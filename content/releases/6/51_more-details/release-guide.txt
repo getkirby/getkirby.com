@@ -1,0 +1,71 @@
+Title: And so much more
+
+----
+
+Subtitle: Details that deliver
+
+----
+
+Features:
+-
+  icon: sliders
+	headline: Picker customization
+	text: Customize picker dialogs for files, pages and users with options like size and layout.
+	link: "/releases/6/more-details#picker-customization"
+-
+  icon: link
+	headline: Panel URL access
+	text: The Panel URL is available inside the Panel as `this.$panel.urls.panel`.
+	link: "/releases/6/more-details#panel-url-access"
+-
+  icon: alert
+	headline: Required PHP extensions
+	text: Installations now verify required PHP extensions and block setup if one is missing.
+	link: "/releases/6/more-details#required-php-extensions"
+-
+  icon: edit
+	headline: Unsaved changes highlight
+	text: Field labels get highlighted when a field has unsaved changes.
+	link: "/releases/6/more-details#unsaved-changes-highlight"
+-
+  icon: sort
+	headline: Better drag sorting
+	text: Improved drag sorting in list layouts for pages and files.
+	link: "/releases/6/more-details#better-drag-sorting"
+-
+  icon: code
+	headline: Debug editor URL
+	text: Error responses include the editor URL in debug mode for easier troubleshooting.
+	link: "/releases/6/more-details#debug-editor-url"
+
+----
+
+Text:
+
+## Picker customization
+
+The `picker` option for `files`, `pages` and `users` fields lets you tune picker dialogs (e.g. `size`, `layout`). [#7687](https://github.com/getkirby/kirby/pull/7687)
+
+## Panel URL access
+
+The Panel URL is now available inside the Panel as `this.$panel.urls.panel`. [#7800](https://github.com/getkirby/kirby/pull/7800)
+
+```js
+const panelUrl = this.$panel.urls.panel;
+```
+
+## Required PHP extensions
+
+On installation, all required PHP extensions are checked and installation is blocked if one is missing. The system view also shows an alert if an extension is missing. [#7812](https://github.com/getkirby/kirby/pull/7812)
+
+## Unsaved changes highlight
+
+Field labels get highlighted when a field has unsaved changes, making it easier to spot what still needs saving. [#7794](https://github.com/getkirby/kirby/pull/7794)
+
+## Better drag sorting
+
+Drag sorting in list layout has been improved for pages and files sections. [#7349](https://github.com/getkirby/kirby/issues/7349)
+
+## Debug editor URL
+
+Error responses from the backend now include the `editor` URL when debug mode is enabled. [#7782](https://github.com/getkirby/kirby/pull/7782)
