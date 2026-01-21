@@ -1,0 +1,22 @@
+Title: Better Panel error handling
+----
+Subtitle: Clearer diagnostics and validation
+----
+Teaser:
+
+Kirby 6 improves Panel error handling with new components for trace output and validation issues, making debugging and form feedback easier to read.
+----
+Intro:
+
+Error dialogs now provide richer details without losing context, and validation issues are shown in a structured list that can also be reused elsewhere in the Panel.
+----
+Text:
+
+- New `<k-error-trace>` component for PHP stack traces
+- New `k-validation-issues` component for post-submit validation lists
+- New `k-request-error-dialog` component
+- New `<k-validation-error-dialog>` for better readability of field validation problems
+
+(image: image 1.png)
+(image: image 2.png)
+(image: image 3.png)

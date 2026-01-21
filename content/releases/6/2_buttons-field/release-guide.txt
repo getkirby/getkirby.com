@@ -1,0 +1,40 @@
+Title: Buttons field
+----
+Subtitle: Action buttons inside blueprints
+----
+Teaser:
+
+A new `buttons` field lets you render a list of buttons that open links, dialogs, or drawers directly from a blueprint.
+----
+Intro:
+
+Use the `buttons` field when you want quick actions in a form, like opening external dashboards or triggering custom Panel dialogs.
+----
+Text:
+
+(image: image.png)
+
+```yaml
+simple:
+  type: buttons
+  buttons:
+    - text: Button A
+      link: <https://getkirby.com>
+    - text: Button B
+      link: <https://getkirby.com>
+    - text: Button C
+      link: <https://getkirby.com>
+
+icons:
+  type: buttons
+  buttons:
+    - text: Button A
+      icon: heart
+      link: <https://getkirby.com>
+    - text: Button B
+      icon: star
+      link: <https://getkirby.com>
+    - text: Button C
+      icon: badge
+      link: <https://getkirby.com>
+```
