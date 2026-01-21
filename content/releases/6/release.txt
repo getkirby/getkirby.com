@@ -1,0 +1,13 @@
+title: Kirby 6
+----
+Subtitle: Alpha 2
+----
+Version: 6
+----
+Prerelease: alpha.2
+----
+ogimage:
+----
+Description: Kirby 6.0.0-alpha.2 release notes and changelog.
+----
+Cover:

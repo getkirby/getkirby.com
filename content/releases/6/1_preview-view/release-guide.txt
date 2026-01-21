@@ -1,0 +1,20 @@
+Title: Preview view
+----
+Subtitle: Live editing next to your site
+----
+Teaser:
+
+Kirby 6 adds a live preview mode that keeps your content editor and your rendered page in sync, even across multiple browser windows.
+----
+Intro:
+
+With the new preview view, you can work on content and immediately see the result next to it. Navigation stays synchronized, and you can test different viewport sizes without leaving the Panel.
+----
+Text:
+
+- Preview view syncs navigation in the browser(s)
+- Open the preview in a second browser window and still see a live preview of your changes
+- Preview your site in different viewport widths in the preview view
+- New `panel.preview.sizes` option to define custom viewport sizes
+
+(video: live-preview.mp4 controls: true class: video rounded shadow-xl bg-light)

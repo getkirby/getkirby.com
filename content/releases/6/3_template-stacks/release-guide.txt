@@ -1,0 +1,46 @@
+Title: Template stacks
+----
+Subtitle: Push output and render it anywhere
+----
+Teaser:
+
+Template stacks let snippets and templates push output into a named stack and render it in a different place, like collecting CSS in the page head.
+----
+Intro:
+
+Stacks are independent from render order, so snippets can push content before or after the stack is rendered. You can also push directly, dedupe identical entries, or return the stack as a string.
+----
+Text:
+
+```php
+<head>
+  <style>
+    <?= stack('style') ?>
+  </style>
+</head>
+
+// snippet
+<?php push('style') ?>
+body {
+  background: red;
+}
+<?php endpush(); ?>
+```
+
+Direct push:
+
+```php
+<?php push('head', '<link rel="stylesheet" href="/assets/css/foo.css">') ?>
+```
+
+Unique pushes:
+
+```php
+<?php push('head', '<link rel="stylesheet" href="/assets/css/foo.css">', unique: true) ?>
+```
+
+Return instead of echo:
+
+```php
+<?php $styles = stack('head', return: true); ?>
+```
