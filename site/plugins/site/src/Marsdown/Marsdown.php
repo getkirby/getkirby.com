@@ -36,7 +36,7 @@ class Marsdown extends ParsedownExtra
 		return $attributes;
 	}
 
-	protected function blockGroups(array $Line, array $Block = null)
+	protected function blockGroups(array $Line, array|null $Block = null)
 	{
 		if (preg_match('!^\((columns|tabs)…\)$!', $Line['text'], $matches)) {
 			return [
@@ -130,7 +130,7 @@ class Marsdown extends ParsedownExtra
 	/**
 	 * Parse Kirby's text boxes
 	 */
-	protected function blockBox(array $Line, array $Block = null)
+	protected function blockBox(array $Line, array|null $Block = null)
 	{
 		if (preg_match('!<(success|info|warning|alert|since)(.*?)>!', $Line['text'], $matches)) {
 

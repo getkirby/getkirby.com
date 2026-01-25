@@ -37,9 +37,9 @@ class Subscriptions
 	public function list(
 		int $offset = 0,
 		int $limit = 1000,
-		string $status = null,
-		int $group = null,
-		string $email = null
+		string|null $status = null,
+		int|null $group = null,
+		string|null $email = null
 	): array {
 		return $this->client->get('subscription', [
 			'offset'    => $offset,
@@ -52,9 +52,9 @@ class Subscriptions
 
 	public function update(
 		string $id,
-		string $status = null,
+		string|null $status = null,
 		array $personalizations = [],
-		string $surname = null
+		string|null $surname = null
 	): array {
 		return $this->client->put('subscription/' . $id, [
 			...$personalizations,

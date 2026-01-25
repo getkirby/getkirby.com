@@ -8,7 +8,7 @@ class Groups
 	{
 	}
 
-	public function list(string $title = null): array
+	public function list(string|null $title = null): array
 	{
 		return $this->client->get('group', ['title' => $title]);
 	}
