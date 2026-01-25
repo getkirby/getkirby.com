@@ -690,7 +690,7 @@ With (link: https://docs.docker.com/compose/ text: Docker Compose) we can define
 
 Using Docker Compose gives us the advantage to start and stop multiple containers with a single command, to define dependencies between such containers, to define the network in which these containers run and more, all in a single `.yml` file that contains a few simple commands.
 
-For example, if you were to use a CMS that required a database, you would start a web server in one container, and a MySQL database in a second container and maybe also phpMyAdmin in a third. Or you could spin up a tool like (link: https://github.com/mailhog/MailHog text: MailHog) in a container that would catch emails sent from forms for local testing. And this last option is exactly what we want to do here.
+For example, if you were to use a CMS that required a database, you would start a web server in one container, and a MySQL database in a second container and maybe also phpMyAdmin in a third. Or you could spin up a tool like (link: https://github.com/axllent/mailpit text: MailPit) in a container that would catch emails sent from forms for local testing. And this last option is exactly what we want to do here.
 
 ### Create docker-compose.yml file
 
@@ -793,9 +793,9 @@ Note that unlike `docker stop`, `docker-compose down` not only stops but also re
 We've come a long way by now. As our last exercise with Docker, let's add another service that we can then use together with Kirby to test sending emails from forms, for example.
 
 
-### Add MailHog service
+### Add MailPit service
 
-MailHog is a tool that intercepts outgoing mail, see our (link: docs/cookbook/forms/using-mailhog-for-email-testing text: MailHog recipe). All that we have to change to make this work is the `docker-compose.yml` file:
+MailPit is a tool that intercepts outgoing mail, see our (link: docs/cookbook/forms/using-mailpit-for-email-testing text: MailPit recipe). All that we have to change to make this work is the `docker-compose.yml` file:
 
 ```yaml
 version: '3'
@@ -810,17 +810,19 @@ services:
       - ./starterkit:/var/www/html/
     env_file:
       - ./id.env
-  mailhog:
-      container_name: mailhog
-      image: mailhog/mailhog:latest
-      restart: always
-      hostname: mailhog
+  mailpit:
+      container_name: mailpit
+      image: axllent/mailpit:latest
+      restart: unless-stopped
+      hostname: mailpit
+      volumes:
+        - ./data:/data
       ports:
         - "1025:1025"
         - "8025:8025"
 ```
 
-We give the `mailhog` service an alias with `hostname: mailhog`, so that we can use this name when setting the email transport configuration for Kirby in the next step.
+We give the `mailpit` service an alias with `hostname: mailpit`, so that we can use this name when setting the email transport configuration for Kirby in the next step.
 
 When we now start up the containers again with…
 
@@ -828,17 +830,17 @@ When we now start up the containers again with…
 docker-compose up -d
 ```
 
-…Docker will pull the latest MailHog image and start up both containers.
+…Docker will pull the latest MailPit image and start up both containers.
 
 <info>
 If you get an error message because your local ports 1025 and 8025 are used by other services, you can of course change them to something else.
 </info>
 
-If you now visit `localhost:8025` (or another port you've chosen) in a browser, the MailHog web interface should load and be ready to serve as an inbox for your locally sent mail once we have set up the email transport configuration.
+If you now visit `localhost:8025` (or another port you've chosen) in a browser, the MailPit web interface should load and be ready to serve as an inbox for your locally sent mail once we have set up the email transport configuration.
 
 ### Sending mail
 
-Let's quickly test if we can use the MailHog container to intercept mail we send from our Starterkit.
+Let's quickly test if we can use the MailPit container to intercept mail we send from our Starterkit.
 
 #### Add transport configuration in `config.php`
 
@@ -850,7 +852,7 @@ In our config file, we need to add the following (link: docs/reference/system/op
   'transport' => [
     'type' => 'smtp',
     // use the hostname defined in the docker compose file
-    'host' => 'mailhog',
+    'host' => 'mailpit',
     // the ports needs to be the port inside the container,
     // i.e. 1025 no matter what you use locally
     'port' => 1025,
@@ -886,7 +888,7 @@ Instead of setting up a form, we simply add a route that tries to send an email 
 ],
 ```
 
-In your browser, visit `http://localhost/send-me-an-email`. Once the email is successfully sent, you should see it arrive in the MailHog inbox at `http://localhost:8025`.
+In your browser, visit `http://localhost/send-me-an-email`. Once the email is successfully sent, you should see it arrive in the MailPit inbox at `http://localhost:8025`.
 
 I had originally planned to throw a database and phpMyAdmin into the mix, but since this recipe already got quite long, I leave it to you to work that out for yourself if you need it, or we will cover it in another recipe if your are interested.
 

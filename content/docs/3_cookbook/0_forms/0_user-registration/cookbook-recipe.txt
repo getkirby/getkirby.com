@@ -60,7 +60,7 @@ return [
 ];
 ```
 <info>
-To test locally whether sending the login code via email works, you can use (link: docs/cookbook/forms/using-mailhog-for-email-testing text: MailHog) or a similar tool.
+To test locally whether sending the login code via email works, you can use (link: docs/cookbook/forms/using-mailpit-for-email-testing text: MailPit) or a similar tool.
 </info>
 
 In our first example, we will let the (glossary: Panel) handle the login code verification, and add a login page in the second example, where we handle everything on the frontend.
