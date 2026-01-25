@@ -194,29 +194,27 @@ The product data itself we display in a table.
 
 ```html "/site/plugins/products/src/components/Products.vue"
 <template>
-  <k-inside>
-    <k-view>
-      <k-header>Products</k-header>
-      <table class="k-products">
-        <tr>
-          <th>Title</th>
-          <th class="k-product-type">Type</th>
-          <th>Description</th>
-          <th class="k-product-price">Price</th>
-          <th class="k-product-options"></th>
-        </tr>
-        <tr v-for="(product, id) in products" :key="id">
-          <td>{{ product.title }}</td>
-          <td class="k-product-type">{{ product.type }}</td>
-          <td>{{ product.description }}</td>
-          <td class="k-product-price">{{ price(product.price) }}</td>
-          <td class="k-product-options">
-            <k-options-dropdown :options="'products/' + id" />
-          </td>
-        </tr>
-      </table>
-    </k-view>
-  </k-inside>
+  <k-panel-inside>
+    <k-header>Products</k-header>
+    <table class="k-products">
+      <tr>
+        <th>Title</th>
+        <th class="k-product-type">Type</th>
+        <th>Description</th>
+        <th class="k-product-price">Price</th>
+        <th class="k-product-options"></th>
+      </tr>
+      <tr v-for="(product, id) in products" :key="id">
+        <td>{{ product.title }}</td>
+        <td class="k-product-type">{{ product.type }}</td>
+        <td>{{ product.description }}</td>
+        <td class="k-product-price">{{ price(product.price) }}</td>
+        <td class="k-product-options">
+          <k-options-dropdown :options="'products/' + id" />
+        </td>
+      </tr>
+    </table>
+  </k-panel-inside>
 </template>
 
 <script>
@@ -730,38 +728,36 @@ Let's first add an `add` button to our view in the `k-header` component. The `k-
 
 ```html "/site/plugins/products/src/components/Products.vue"
 <template>
-  <k-inside>
-    <k-view>
-      <k-header>
-        Products
-        <k-button-group slot="left">
-          <k-button
-            text="New product"
-            icon="add"
-            @click="$dialog('products/create')"
-          />
-        </k-button-group>
-      </k-header>
-      <table class="k-products">
-        <tr>
-          <th>Title</th>
-          <th class="k-product-type">Type</th>
-          <th>Description</th>
-          <th class="k-product-price">Price</th>
-          <th class="k-product-options"></th>
-        </tr>
-        <tr v-for="(product, id) in products" :key="id">
-          <td>{{ product.title }}</td>
-          <td class="k-product-type">{{ product.type }}</td>
-          <td>{{ product.description }}</td>
-          <td class="k-product-price">{{ price(product.price) }}</td>
-          <td class="k-product-options">
-            <k-options-dropdown :options="'products/' + id" />
-          </td>
-        </tr>
-      </table>
-    </k-view>
-  </k-inside>
+  <k-panel-inside>
+    <k-header>
+      Products
+      <k-button-group slot="left">
+        <k-button
+          text="New product"
+          icon="add"
+          @click="$dialog('products/create')"
+        />
+      </k-button-group>
+    </k-header>
+    <table class="k-products">
+      <tr>
+        <th>Title</th>
+        <th class="k-product-type">Type</th>
+        <th>Description</th>
+        <th class="k-product-price">Price</th>
+        <th class="k-product-options"></th>
+      </tr>
+      <tr v-for="(product, id) in products" :key="id">
+        <td>{{ product.title }}</td>
+        <td class="k-product-type">{{ product.type }}</td>
+        <td>{{ product.description }}</td>
+        <td class="k-product-price">{{ price(product.price) }}</td>
+        <td class="k-product-options">
+          <k-options-dropdown :options="'products/' + id" />
+        </td>
+      </tr>
+    </table>
+  </k-panel-inside>
 </template>
 ```
 
@@ -1055,37 +1051,35 @@ And finally create the view for our single product, in which we basically use al
 
 ```html
 <template>
-  <k-inside>
-    <k-view>
-      <k-header>
-        {{ product.title }}
-        <k-button-group slot="left">
-          <k-button
-            text="Edit"
-            icon="edit"
-            @click="$dialog('products/' + product.id + '/update')"
-          />
-          <k-button
-            text="Delete"
-            icon="trash"
-            @click="$dialog('products/' + product.id + '/delete')"
-          />
-        </k-button-group>
-      </k-header>
-      <table class="k-products">
-        <tr>
-          <th class="k-product-type">Type</th>
-          <th>Description</th>
-          <th class="k-product-price">Price</th>
-        </tr>
-        <tr>
-          <td class="k-product-type">{{ product.type }}</td>
-          <td>{{ product.description }}</td>
-          <td class="k-product-price">{{ price(product.price) }}</td>
-        </tr>
-      </table>
-    </k-view>
-  </k-inside>
+  <k-panel-inside>
+    <k-header>
+      {{ product.title }}
+      <k-button-group slot="left">
+        <k-button
+          text="Edit"
+          icon="edit"
+          @click="$dialog('products/' + product.id + '/update')"
+        />
+        <k-button
+          text="Delete"
+          icon="trash"
+          @click="$dialog('products/' + product.id + '/delete')"
+        />
+      </k-button-group>
+    </k-header>
+    <table class="k-products">
+      <tr>
+        <th class="k-product-type">Type</th>
+        <th>Description</th>
+        <th class="k-product-price">Price</th>
+      </tr>
+      <tr>
+        <td class="k-product-type">{{ product.type }}</td>
+        <td>{{ product.description }}</td>
+        <td class="k-product-price">{{ price(product.price) }}</td>
+      </tr>
+    </table>
+  </k-panel-inside>
 </template>
 
 <script>
