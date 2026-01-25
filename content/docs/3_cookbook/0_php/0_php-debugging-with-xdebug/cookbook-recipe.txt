@@ -2,7 +2,7 @@ Title: Debugging with Xdebug
 
 ----
 
-Published: 2021-01-04
+Published: 2025-01-25
 
 ----
 
@@ -40,7 +40,11 @@ This recipe was tested on Mac OS Big Sur and Ubuntu 20.04 with (link: https://la
 ## Installing Xdebug
 
 <info>
-In some development environments like MAMP Pro, Xdebug comes bundled, so you don't have to install it separately. See end of this recipe.
+Note: In some development environments, Xdebug already comes bundled, so you don't have to install anything.
+
+- *Laravel Herd*: In the free version, you need to (link: https://herd.laravel.com/docs/macos/debugging/xdebug text: enable it manually). The Pro Version can (link: https://herd.laravel.com/docs/macos/debugging/xdebug-detection text: detect it automatically).
+- *DDEV*: (link: https://docs.ddev.com/en/stable/users/debugging-profiling/step-debugging/ text: Xdebug is integrated)
+- *MAMP Pro*: Xdebug comes bundled, but (link: https://documentation.mamp.info/en/MAMP-PRO-Mac/Settings/Languages/PHP/ text: needs to be enabled)
 </info>
 
 ### Check if Xdebug is already installed
@@ -53,11 +57,11 @@ php -v
 on the command line. If Xdebug is installed, this command will output something like:
 
 ```
-PHP 8.0.0 (cli) (built: Nov 30 2020 13:51:52) ( NTS )
+PHP 8.3.30 (cli) (built: Jan 17 2026 00:18:43) (NTS clang 15.0.0)
 Copyright (c) The PHP Group
-Zend Engine v4.0.0-dev, Copyright (c) Zend Technologies
-    with Xdebug v3.0.1, Copyright (c) 2002-2020, by Derick Rethans
-    with Zend OPcache v8.0.0, Copyright (c), by Zend Technologies
+Zend Engine v4.3.30, Copyright (c) Zend Technologies
+    with Xdebug v3.5.0, Copyright (c) 2002-2025, by Derick Rethans
+    with Zend OPcache v8.3.30, Copyright (c), by Zend Technologies
 ```
 
 ### Installation instructions
@@ -114,18 +118,6 @@ After adding these settings, restart your webserver again.
 
 You can find a description for all config settings in the (link: https://xdebug.org/docs/all_settings text: Xdebug docs).
 
-<warning>
-From Xdebug 2 to Xdebug 3, the naming of config settings has changed. The above settings are the Xdebug settings for Xdebug 3.x. If you are running Xdebug 2.x, you have to either update or use the equivalent Xdebug 2.x settings.
-
-```ini
-zend_extension=path/to/where/you/installed/xdebug.so
-xdebug.remote_enable=true
-xdebug.remote_host=localhost
-xdebug.remote_port = 9000
-xdebug.remote_handler=dbgp
-xdebug.remote_autostart = 1
-```
-</warning>
 
 
 <info>
@@ -305,12 +297,6 @@ When in debug mode, you get a debug toolbar for controlling the execution of the
 5. Restart: Restart debugging
 6. Stop: Stop debugging
 
-## MAMP Pro
-
-If you use MAMP Pro, the only difference to the steps above is that you enable Xdebug in PHP Settings, then add the configuration settings in the `.ini` file for the selected PHP version, which you can also access via the settings.
-
-In this recipe, we cannot cover all operating systems, development environments or IDEs. Please use a search engine to find relevant, up-to-date articles for your specific setup or post your question on our (link: https://forum.getkirby.com text: forum).
-
 
 ## Resources
 
@@ -318,3 +304,4 @@ In this recipe, we cannot cover all operating systems, development environments 
 - (link: https://www.jetbrains.com/help/phpstorm/configuring-xdebug.html text: Configure Xdebug in PHPStorm)
 - (link: https://www.youtube.com/watch?v=114XVdpV4ow text: Derick Rethans about Xdebug 3)
 - (link: https://www.youtube.com/watch?v=VRAySYr2q-U text: XAMPP (PHP8), Xdebug 3 and PHPStorm)
+- (link: https://www.youtube.com/watch?v=ssZH94UfY6A text: Debugging with PhpStorm: Xdebug starter guide)
