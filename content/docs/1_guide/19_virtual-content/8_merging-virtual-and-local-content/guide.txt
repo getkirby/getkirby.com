@@ -12,143 +12,286 @@ Intro: Combine virtual content with content from the file system
 
 Text:
 
-In this example, let us look at how we can combine "virtual" content with content from the file system.
+Mixing different content sources is also possible in Kirby. Let us look at how we can combine "virtual" content (data from a database, an API, etc.) with content from corresponding page folders that actually live in the file system.
 
-We will extend the (link: docs/guide/virtual-content/content-from-csv text: Content from a spreadsheet) example with content we actually add in the `content` folder, let's say because we want to add an image to each animal and some additional content.
+This example builds on our previous guide, (link: docs/guide/virtual-content/content-from-csv text: Content from a spreadsheet), so make sure to check that out first. Here, we want to mix the data from the `animals` spreadsheet with content we add in the `/content/animals` folder, for example because we want to add an image and some additional information for each animal.
 
-To this end, we add new subpages to the `/animals` parent page, using the same slugs that we generated in the `animals.php` model.
+To this end, we add new child pages to the `/animals` parent page, using the same slugs we generated in the `animals.php` model.
 
-Your content structure should then look something like this.
-
+Your content structure should then look something like this:
 
 ```filesystem
 content/
     animals/
         animals.txt
         animals.csv
-        0_potus-flavus/
+        0_potos-flavus/
             animal.txt
-            potus-flavus.jpg
+            potos-flavus.jpg
         0_sauromalus-obesus/
             animal.txt
             sauromalus-obesus.jpg
 ```
 <info>
-Make sure to prepend the folder number, because we also use the number in our model.
+Make sure to prepend the folder number, because we also use the number in our page model.
 </info>
 
-However, if we now try to fetch these newly added images in the `animal.php` template, this will have no effect. We first have to extend our model.
+However, if we now try to fetch these newly added images in the `animal.php` template, this will have no effect. Moreover, we need to make sure that we don't accidentally save virtual content in file system when we save non-virtual content via the Panel. We therefore have to extend our model. However, since Kirby 5, we also need a plugin that provides a new storage handler.
+
+## How mixed content works
+
+Conceptually, this setup combines two layers of content:
+
+- Virtual content, which is generated dynamically (in this example from a CSV file) and exists only in memory.
+- File-based content, which lives in the file system and can include files like images as well as editable fields.
+
+When a page is requested, Kirby first reads the content stored on disk and then merges it with the virtual content provided by the page model. Virtual fields complement file-based fields, but are never written back to the file system.
+
+This allows you to enrich virtual pages with assets and editable metadata, while still keeping the original data source as the single source of truth.
+
+
+## MixedStorage plugin
+In the `plugins folder, create a new folder called `mixed-storage`. Inside this folder, create an `index.php` file, a folder called `src`, and inside the `src` folder a file called `MixedStorage.php`.
+
+The file system in `/plugins` should now look like this:
+
+```filesystem
+plugins/
+    mixed-storage/
+        index.php
+        src/
+            MixedStorage.php
+```
+
+Inside `index.php`, paste the following code:
+
+```php "/site/plugins/mixed-storage/index.php"
+<?php
+
+load([
+	'kirby\\content\\mixedstorage\\mixedstorage' => __DIR__ . '/src/MixedStorage.php',
+]);
+```
+This file simply loads the `MixedStorage` class.
+
+Inside `MixedStorage.php`, paste the following code:
+
+```php "/site/plugins/mixed-storage/src/MixedStorage.php"
+<?php
+namespace Kirby\Content\MixedStorage;
+
+use Kirby\Cms\Language;
+use Kirby\Content\PlainTextStorage;
+use Kirby\Content\VersionId;
+use Kirby\Exception\Exception;
+use Kirby\Toolkit\A;
+
+class MixedStorage extends PlainTextStorage
+{
+	protected array $virtual = [];
+
+	/**
+	 * Read the original content from disk and merge it with the virtual content
+	 */
+	public function read(VersionId $versionId, Language $language): array
+	{
+		$content = parent::read($versionId, $language);
+
+		return [
+			...$this->readVirtual($versionId, $language),
+			...$content,
+		];
+	}
+
+	/**
+	 * Check if the page exists on disk and otherwise check if there is any virtual content
+	 */
+	public function exists(VersionId $versionId, Language $language): bool
+	{
+		return parent::exists($versionId, $language) || $this->readVirtual($versionId, $language) !== [];
+	}
+
+	/**
+	 * Read virtual content for a given version and language from our
+	 * in-memory storage array
+	 */
+	public function readVirtual(VersionId $versionId, Language $language): array
+	{
+		return $this->virtual[$versionId->value()][$language->code()] ?? [];
+	}
+
+	/**
+	 * Write virtual content for a given version and language to our
+	 * in-memory storage array
+	 */
+	public function writeVirtual(VersionId $versionId, Language $language, array $data): void
+	{
+		$this->virtual[$versionId->value()][$language->code()] = $data;
+	}
+
+	/**
+	 * Make sure to store only non-virtual data in the file system
+	 * @param VersionId $versionId
+	 * @param Language $language
+	 * @param array $fields
+	 * @return void
+	 * @throws Exception
+	 */
+	public function write(VersionId $versionId, Language $language, array $fields): void
+	{
+		// Get keys of virtual fields
+		$virtualKeys = array_keys($this->readVirtual($versionId, $language));
+
+		// Remove virtual fields
+		$fields = A::without($fields, $virtualKeys);
+
+		// Call parent method with only real fields
+		parent::write($versionId, $language, $fields);
+	}
+}
+```
+
+This plugin can now be used whenever we need to mix content from the file system with other data sources on a page.
+
+## Page model
 
 ```php "/site/models/animals.php"
 <?php
 
+use Kirby\Content\MixedStorage\MixedStorage;
+use Kirby\Cms\Language;
+use Kirby\Cms\Pages;
+use Kirby\Content\Storage;
+use Kirby\Content\VersionId;
+use Kirby\Toolkit\A;
+use Kirby\Uuid\Uuid;
+
 class AnimalsPage extends Page
 {
-    static $subpages = null;
+	public function children(): Pages
+	{
+		if ($this->children instanceof Pages) {
+			return $this->children;
+		}
 
-    public function subpages()
-    {
-        if (static::$subpages) {
-            return static::$subpages;
-        }
+		$csv   = csv($this->root() . '/animals.csv', ';');
+		$pages = new Pages();
 
-        return static::$subpages = Pages::factory($this->inventory()['children'], $this);
-    }
+		foreach ($csv as $animal) {
+			$slug = Str::slug($animal['Scientific Name']);
 
-    public function children()
-    {
-        if ($this->children instanceof Pages) {
-            return $this->children;
-        }
+			// No need to check for existing pages here. We can
+			// simply assume that some of them already exist on disk
+			// while others do not yet exist.
+			$page = Page::factory([
+				'slug'     => $slug,
+				'template' => 'animal',
+				'model'    => 'animal',
+				'parent'   => $this,
+				'num'      => 0,
+			]);
 
-        $csv      = csv($this->root() . '/animals.csv', ';');
-        $children = array_map(function ($animal) {
+			// Switch to the new storage handler to keep all default
+			// features for pages on disk while also adding the virtual content layer
+			$page->changeStorage(MixedStorage::class);
 
-            $slug = Str::slug($animal['Scientific Name']);
-            $page = $this->subpages()->find($slug);
+			// Write virtual content to our in-memory storage array
+			$page->storage()->writeVirtual(
+				versionId: VersionId::latest(),
+				language: Language::ensure('default'),
+				data: [
+					'title'       => $animal['Scientific Name'],
+					'commonName'  => $animal['Common Name'],
+					'description' => $animal['Description'],
+					'uuid'        => Uuid::generate(),
+				]
+			);
 
-            return [
-                'slug'     => $slug,
-                'template' => 'animal',
-                'model'    => 'animal',
-                'num'      => 0,
-                'files'    => $page ? $page->files()->toArray() : null,
-                'content'  => [
-                    'title'       => $animal['Scientific Name'],
-                    'commonName'  => $animal['Common Name'],
-                    'description' => $animal['Description'],
-                    'somefield'   => $page ? $page->somefield()->value() : null
-                ]
-            ];
-        }, $csv);
+			$pages->add($page);
+		}
 
-        return $this->children = Pages::factory($children, $this);
-    }
-
+		return $this->children = $pages;
+	}
 }
 ```
+## Blueprints
 
-First, we add a new `subpages` method that creates a new Pages object from the page's inventory array:
+To be able to see all content in the Panel, we add two blueprints, `animals.yml` for the overview page, and `animal.yml` for the individual child pages:
 
-```php
-    public function subpages()
-{
-    if (static::$subpages) {
-        return static::$subpages;
-    }
+```yaml "/site/blueprints/pages/animals.yml"
+title: Animals
 
-    return static::$subpages = Pages::factory($this->inventory()['children'], $this);
-}
-```
-This method will fetch all pages that actually exist in the filesystem.
-
-Within the closure of the `array_map` method, we now try to find a page with each slug:
-
-```php
-$slug = Str::slug($animal['Scientific Name']);
-$page = $this->subpages()->find($slug);
+sections:
+  pages:
+    type: pages
+    template: animal
 ```
 
-In the return array, we add the files and additional content if the page exists:
+```yaml "/site/blueprints/pages/animal.yml"
+title: Animal
 
-```php
-return [
-    'slug'     => $slug,
-    'template' => 'animal',
-    'model'    => 'animal',
-    'num'      => 0,
-    // add files
-    'files'    => $page ? $page->files()->toArray() : null,
-    'content'  => [
-        'title'       => $animal['Scientific Name'],
-        'commonName'  => $animal['Common Name'],
-        'description' => $animal['Description'],
-        // add additional fields
-        'habitat'     => $page ? $page->habitat()->value() : null,
-        'diet'        => $page ? $page->diet()->value() : null,
-    ]
-];
+num: alpha
+
+options:
+  changeTitle: false
+  changeSlug: false
+  duplicate: false
+  move: false
+  changeStatus: false
+columns:
+  main:
+    width: 2/3
+    fields:
+      commonName:
+        type: text
+        disabled: true
+      description:
+        type: textarea
+        disabled: true
+      wikiLink:
+        type: url
+  sidebar:
+    width: 1/3
+    sections:
+      files:
+        type: files
+
+
+
 ```
+Since we set the `title` and `slug` from virtual content, it is important to disallow changing these values in the `options` section of the blueprint. Also, changing the page status, duplicating, or moving the page does not make sense, since we are dealing with a read-only source for the virtual content, and there might not even be a "real" (i.e. file system) page for each virtual page. We also set the numbering schema to `alpha` as in our page model.
 
-And finally, we modify our subpage template to fetch the additonal content:
+We also disable the virtual fields in the blueprint, so that editors know they cannot change these fields.
+
+Depending on your page model, adapt these settings as needed. You can also add extra methods to your child page model to handle custom logic.
+
+## Child template
+Finally, let's modify our child template to fetch the additional content:
 
 ```php "/site/templates/animal.php"
 <?php snippet('header') ?>
 
-<article class="animal">
-  <h1 class="animal-scientific-name"><?= $page->title() ?></h1>
-  <p class="animal-common-name">Common name: <?= $page->commonName() ?></p>
-  <?php if ($image = $page->image()): ?>
-    <div class="animal-picture">
+  <article class="animal">
+    <h1
+      class="animal-scientific-name"><?= $page->title() ?></h1>
+    <p class="animal-common-name">Common
+      name: <?= $page->commonName() ?></p>
+    <?php if ($image = $page->image()): ?>
+      <div class="animal-picture">
         <?= $image ?>
+      </div>
+    <?php endif ?>
+    <div class="animal-description">
+      <?= $page->description()->kt() ?>
+      <?= $page->habitat()->kt() ?>
+      <?php if ($page->wikiLink()->isNotEmpty()): ?>
+        <p>
+          Read more about this interesting animal:
+          <a href="<?= $page->wikiLink() ?>"><?= $page->wikiLink() ?></a>
+        </p>
+      <?php endif ?>
     </div>
-  <?php endif ?>
-  <div class="animal-description">
-    <?= $page->description()->kt() ?>
-    <?= $page->habitat()->kt() ?>
-    <?= $page->diet()->kt() ?>
-  </div>
-</article>
+  </article>
 
 <?php snippet('footer') ?>
 ```
