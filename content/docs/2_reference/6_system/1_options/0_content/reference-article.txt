@@ -44,7 +44,7 @@ return [
 
 ## Salt for drafts and media files
 
-URLs of page drafts and media files contain a hashed token that should be hard to guess. The token is based on the filesystem path of the page/file by default, but you can define your own salt that will be used instead:
+URLs of page drafts and media files contain a hashed token that should be hard to guess. Generating the token requires a salt string that should be stable and consistent on the server, but still independent from other sites or setups and ideally private. The salt is set to the filesystem path of the content root by default, but you can define your own salt that will be used instead:
 
 ```php
 return [
