@@ -54,6 +54,8 @@ class PartnersPage extends DefaultPage
 						'summary'         => $data[$partner]['summary'],
 						'description'     => $data[$partner]['description'],
 						'expertise'       => $data[$partner]['expertise'],
+						'website'         => $data[$partner]['website'],
+						'contactLink'     => $data[$partner]['contactLink'],
 						'people'          => $data[$partner]['people'],
 						'test'            => $data[$partner]['card'],
 						'languages'       => $data[$partner]['languages'],
