@@ -26,7 +26,7 @@ Please be aware that you need to know what you are doing in order to install stu
 
 ## Install Dropbox on your server
 
-Dropbox offers a very nice (link: https://www.dropbox.com/install?os=lnx text: client for Linux). Installing it on your server is pretty straight forward. Just follow the (link: https://www.dropbox.com/install?os=lnx text: instructions on the Dropbox site).
+Dropbox offers a very nice (link: https://www.dropbox.com/install-linux?_tk=install_view text: client for Linux). Installing it on your server is pretty straight forward. Just follow the (link: https://www.dropbox.com/install-linux?_tk=install_view text: instructions on the Dropbox site).
 
 ## Create a new Dropbox account
 
