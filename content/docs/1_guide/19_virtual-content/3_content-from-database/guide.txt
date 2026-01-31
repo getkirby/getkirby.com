@@ -17,7 +17,7 @@ Content can also come from a database. This is particularly useful if you alread
 
 This guide covers the basic steps, such as establishing a connection to the database, accessing one or more tables, and converting database entries into children of a parent page in read-only mode. In this setup, the pages are generated dynamically from the database and cannot be modified through the Panel or written to the file system.
 
-To add advanced functionality (editing, adding, deleting pages, etc.), please refer to our (link: text: work-in-progress plugin).
+To add advanced functionality (editing, adding, deleting pages, etc.), please refer to our (link: https://github.com/getkirby/database-storage text: our database storage plugin (currently in alpha)).
 
 Our example assumes a database table called `comments` with the following schema:
 
