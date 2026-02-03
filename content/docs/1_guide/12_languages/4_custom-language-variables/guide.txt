@@ -81,14 +81,14 @@ If you stored your language variables in separate files as described in (link: d
 Those translated variables can be fetched in your template, plugins or snippets with the `t()` helper:
 
 ```php
-<input type="submit" value="<?php echo t('change') ?>" />
+<input type="submit" value="<?= t('change') ?>" />
 ```
 
 You can provide a fallback if the language variable is not defined:
 
 
 ```php
-<input type="submit" value="<?php echo t('change', 'Change') ?>" />
+<input type="submit" value="<?= t('change', 'Change') ?>" />
 ```
 
 ## More information
