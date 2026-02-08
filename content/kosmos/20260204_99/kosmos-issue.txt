@@ -1,0 +1,143 @@
+Title: Kosmos Episode 99
+
+----
+
+Date: 04.02.2026
+
+----
+
+Tags:
+
+----
+
+Comments: off
+
+----
+
+Cover:
+
+----
+
+Kosmos-Subscription: on
+
+----
+
+Text:
+
+
+Hello and welcome to our first Kosmos edition of 2026. After a refreshing holiday break (already weeks ago), we’re back with renewed energy and motivation to move Kirby forward. Kirby 6 is making great progress, while Kirby 5 continues to receive bug fixes and new features.
+
+Meanwhile, our Kirby Konf, still in the early planning stages, is beginning to take shape on the horizon. The first Kirby meetups have already taken place, with new locations and dates up in [our calendar](https://getkirby.com/calendar). It's going to be an exciting year, so stay tuned!
+
+## Kirby 5.2.3
+
+Kirby 5.2.3 is all about bug fixes that bring our issue counter down quite a bit, but mainly will make your dev lives easier and your clients happier😉.
+
+Download the release: [https://github.com/getkirby/kirby/releases/tag/5.2.3](https://github.com/getkirby/kirby/releases/tag/5.2.3)
+
+## Kirby 5.3.0-rc.1
+
+The next big batch of fixes will follow in Kirby 5.3.0, which will be released next week. But contrary to 5.2.3 above, 5.3.0 will also come with a couple of nice features and enhancements, like icons for checkbox options, multiple new Vue components for the Panel, performance improvements, and more.
+
+As always, if you find the time, it would be great if you can help to test the release candidate: [https://github.com/getkirby/kirby/releases/tag/5.3.0-rc.1](https://github.com/getkirby/kirby/releases/tag/5.3.0-rc.1)
+
+## Kirby 6.0.0-alpha.2
+
+And here is our second alpha release of Kirby 6. The final release is planned for the second half of 2026 and will be a free upgrade for all Kirby 4 and Kirby 5 license holders.
+
+Highlights:
+
+* ✍️ Live editor
+* 📄 Simplified blueprint definition
+* 🥞 New template stacks
+* 🔘New buttons field
+
+Discover more cool features of Kirby 6: [https://github.com/getkirby/kirby/releases/tag/6.0.0-alpha.2](https://github.com/getkirby/kirby/releases/tag/6.0.0-alpha.2)
+
+## Kirby Konf
+
+In January, just before the Kirby meetup in Mainz, we explored and secured the venue for our first Kirby Konf. By now, it's less than 8 months until September 25th, and there is a lot to organize, from ticketing system, to beverage prices, audio equipment, insurance, the list goes on.
+
+We already have a few ideas for the schedule, but since this is a community event with and for you, we'd like to hear your expectations. Join the [discussion on Discord](https://discord.com/channels/525634039965679616/1460596276101120023).
+
+We’ll keep you updated on [https://konf.getkirby.com](https://konf.getkirby.com)
+
+## Meetups
+
+**[Kirby Meetup Bremen, Germany • №5](https://bremen.design/events/kirby-get-together-5)**
+Fri March 13, 2026 at 18:00 CET
+
+**[Kirby Meetup Karlsruhe, Germany • №4](https://kirby-ka.carrd.co/)**
+Thu April 16, 2026 at 19:00 CET
+
+## Made with Kirby
+
+(image: 1_seashepherd.fr.png)
+[Sea Shepherd France](https://seashepherd.fr/)
+
+
+## New plugins
+
+We’ve also got some fantastic new plugins for you. Check out these fresh additions to our directory:
+
+- [Kirby MCP](https://plugins.getkirby.com/bnomei/kirby-mcp) is a CLI-first MCP server for Composer-based Kirby projects that enables IDEs and AI agents to inspect project code, interact with a real Kirby runtime, and rely on a bundled Kirby knowledge base with an online documentation fallback. It protects against potentially risky actions and uses lightweight runtime wrappers in your project to ensure reliable runtime introspection.
+
+- [Kirby Alter](https://plugins.getkirby.com/medienbaecker/alter) offers both a Panel view and a Kirby CLI command for generating and reviewing image `alt` text across your site.
+
+- [Kirby Help View](https://github.com/medienbaecker/kirby-help-view) features a custom Panel area where you can provide site-specific help for your customers. Help articles can be organized into categories and nested for easy navigation.
+
+- The [Multi-domain Router](https://plugins.getkirby.com/gerritvanaaken/multidomain-router) plugin enables routing and management of multiple domains within a single Kirby installation. It maps requests to domain-specific content folders and automatically adjusts rendered URLs to use relative links within a domain and absolute links across domains.
+
+- [Kirby Editor](https://plugins.getkirby.com/plain-solutions/kirby-editor) is a built-in file explorer for Kirby CMS with project-wide file access, file previews, and an integrated file tree field.
+
+## Kirby Partners
+
+We truly believe that our partner program is all about building a strong network of reliable agencies and freelancers for Kirby. Here are our newcomers…
+
+(columns…)
+(image: enzo-volkmann.jpg)
+**[Enzo Volkmann](https://getkirby.com/partners/enzo-volkmann)**
+Freelancer
+
+++++
+(image: arno-schlipf.png)
+
+**[Arno Schlipf](https://getkirby.com/partners/arno-schlipf)**
+Freelance Designer and Developer
+
+(…columns)
+
+## Kirby Kosmos
+
+moinframe aka Justus Kraft published some new videos in his Kirby series within the last two weeks:
+
+* [Add custom icons to the panel in Kirby CMS](https://www.youtube.com/watch?v=17)
+* [Kirby Kart — Adding a shop to your Kirby CMS website](https://www.youtube.com/watch?v=18)
+* [Add type support by using PHPDoc blocks in Kirby CMS](https://www.youtube.com/watch?v=19)
+
+
+## Tools
+
+[Taphouse](https://taphouse.multimodalsolutions.gr/) is a graphical interface for Homebrew, designed for users who prefer managing packages visually rather than through the command line.
+
+[Cloudflare Telescope](https://github.com/cloudflare/telescope) is an open-source tool for cross-browser web performance testing. It captures raw diagnostics like HAR files, videos, and filmstrips across Chrome, Firefox, Safari, and Edge under customizable conditions.
+
+## A11Y
+
+In [Can you make toast messages accessible?](https://adamsilver.io/blog/can-you-make-toast-messages-accessible), Adam Silver argues that typical “toast” notifications (short, auto-disappearing messages layered over a UI) are problematic for accessibility and usability, because they often vanish too quickly, hide underlying content, and are easy to miss.
+
+While nesting interactive controls in HTML should be avoided for accessibility reasons, certain [CSS techniques help create the appearance of nested interactions](https://piccalil.li/blog/accessible-faux-nested-interactive-controls/) without actually nesting interactive elements in the DOM.
+
+The BIK seal is widely recognized as evidence that a website meets BITV 2.0, EN 301 549 and WCAG 2.1 Level AA. However, [they now stated that accessibility widgets disqualify websites from obtaining this certification](https://chrisyoong.com/blog/germany-rejects-accessibility-overlays-for-eaa-compliance).
+
+[WCAG 2.4.9 Link Purpose (Link Only)](https://www.w3.org/WAI/WCAG22/Understanding/link-purpose-link-only) is an accessibility success criterion that should be pretty easy to conform to, but is time and again sacrificed for banal "Read more" links. Dennis Deacon explains the success criteria.
+
+In [Did you know some ARIA roles remove child semantics?](https://www.maxdesign.com.au/articles/aria-roles-semantics.html), the authors explain how certain ARIA roles can override native HTML semantics, to the point of removing the meaning of child elements unless appropriate ARIA roles are added. It emphasizes that ARIA should be used carefully, and only when native HTML semantics are insufficient. 
+
+## This & That
+
+Anil Dash tells the story of [how Markdown evolved](https://www.anildash.com/2026/01/09/how-markdown-took-over-the-world/) from a simple plain-text formatting solution created for a personal blog into a technology used across the internet.
+
+The [vtbag site](https://vtbag.dev/) collects tools, tips, and tricks related to the View Transition API.
+
+In [Ad Blockers helped kill the open web](https://christianheilmann.com/2025/12/17/ad-blockers-helped-kill-the-open-web/), Christian Heilmann argues that the widespread use of ad blockers led to more aggressive advertising and closed platforms. While they improve the individual browsing experience and protect privacy, they render the open web unusable or unsustainable.
