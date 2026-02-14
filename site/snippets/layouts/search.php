@@ -4,7 +4,12 @@ $areas  = $kirby->option('search.areas')($kirby);
 ?>
 
 <div class="search">
-	<button class="search-button" type="button" data-area="<?= $area ?>" aria-label="Search">
+	<button
+		class="search-button"
+		aria-label="Search"
+		type="button"
+		data-area="<?= $area ?>"
+	>
 		<?= icon('search') ?>
 	</button>
 
@@ -17,6 +22,7 @@ $areas  = $kirby->option('search.areas')($kirby);
 					<?= icon('loader') ?>
 				</div>
 				<input
+					aria-label="Search"
 					type="text"
 					name="q"
 					value="<?= $q ?? null ?>"
