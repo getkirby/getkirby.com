@@ -313,7 +313,7 @@
 			</p>
 		</form>
 
-		<button type="reset" @click="closeCheckout" aria-label="Close checkout">
+		<button type="button" @click="closeCheckout" aria-label="Close checkout">
 			<?= icon('cancel-small') ?>
 		</button>
 	</div>
