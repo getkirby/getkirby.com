@@ -49,9 +49,10 @@ class PartnerPage extends DefaultPage
 				'model'    => 'gallery-item',
 				'template' => 'gallery-items',
 				'content'  => [
-					'title' => $galleryItem['title'],
-					'info'  => $galleryItem['info'],
-					'link'  => $galleryItem['link']
+					'title'    => $galleryItem['title'],
+					'info'     => $galleryItem['info'],
+					'link'     => $galleryItem['link'],
+                    'showCase' => $galleryItem['showCase']
 				],
 				'files' => [
 					$galleryItem['image']
