@@ -13,4 +13,9 @@ class GalleryItemPage extends Page
 
 		return parent::setFiles($files);
 	}
+	
+	public function url( $options = null): string
+	{
+		return $this->link()->value();
+	}
 }
