@@ -137,7 +137,7 @@
 	color: var(--color-icon) !important;
 }
 
-.checkout button[type="reset"] {
+.checkout button.close {
 	position: absolute;
 	right: -.5rem;
 	top: -.5rem;
@@ -313,7 +313,12 @@
 			</p>
 		</form>
 
-		<button type="button" @click="closeCheckout" aria-label="Close checkout">
+		<button
+			aria-label="Close checkout"
+			class="close"
+			type="button"
+			@click="closeCheckout"
+		>
 			<?= icon('cancel-small') ?>
 		</button>
 	</div>
