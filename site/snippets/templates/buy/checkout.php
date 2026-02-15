@@ -222,6 +222,8 @@
 			</div>
 			<div class="checkout-form">
 				<div>
+					<span role="status" aria-live="polite" aria-atomic="true" class="sr-only"></span>
+
 					<fieldset class="checkout-fieldset checkout-identity">
 						<legend>Your details</legend>
 						<div class="fields">
