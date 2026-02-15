@@ -136,21 +136,6 @@
 .checkout .btn.btn--filled svg {
 	color: var(--color-icon) !important;
 }
-
-.checkout button.close {
-	position: absolute;
-	right: -.5rem;
-	top: -.5rem;
-	background: var(--color-black);
-	border-radius: 50%;
-	width: 1.25rem;
-	height: 1.25rem;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	box-shadow: var(--shadow);
-	color: var(--color-white);
-}
 </style>
 
 <div id="checkout" class="checkout mb-42" v-cloak :data-product="product" v-if="checkoutIsOpen">
@@ -315,7 +300,7 @@
 
 		<button
 			aria-label="Close checkout"
-			class="close"
+			class="dialog-close"
 			type="button"
 			@click="closeCheckout"
 		>

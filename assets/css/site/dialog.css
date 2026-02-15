@@ -81,6 +81,21 @@ body:has(.dialog[open]) {
 	cursor: pointer;
 }
 
+.dialog-close {
+	position: absolute;
+	right: -0.5rem;
+	top: -0.5rem;
+	background: var(--color-black);
+	border-radius: 50%;
+	width: 1.25rem;
+	height: 1.25rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: var(--shadow);
+	color: var(--color-white);
+}
+
 .dialog .buttons {
 	margin-top: var(--spacing-8);
 	display: flex;

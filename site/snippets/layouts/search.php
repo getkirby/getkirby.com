@@ -13,7 +13,11 @@ $areas  = $kirby->option('search.areas')($kirby);
 		<?= icon('search') ?>
 	</button>
 
-	<dialog class="overlay search-dialog">
+	<dialog
+		aria-label="Search"
+		aria-modal="true"
+		class="overlay search-dialog"
+	>
 		<form class="relative bg-white shadow-xl" action="/search">
 			<!-- Input -->
 			<div class="search-input relative flex items-stretch">
@@ -76,6 +80,14 @@ $areas  = $kirby->option('search.areas')($kirby);
 				</a>
 				<?php endif ?>
 			</div>
+
+			<button
+				aria-label="Close search"
+				class="dialog-close"
+				type="button"
+			>
+				<?= icon('cancel-small') ?>
+			</button>
 		</form>
 	</dialog>
 </div>

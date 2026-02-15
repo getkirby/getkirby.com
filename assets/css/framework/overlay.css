@@ -21,4 +21,8 @@ dialog.overlay {
 }
 dialog.overlay[open] {
 	display: grid;
+	background: transparent;
+}
+dialog.overlay::backdrop {
+	background: var(--overlay-color-back);
 }

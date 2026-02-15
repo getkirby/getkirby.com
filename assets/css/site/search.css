@@ -37,6 +37,7 @@ form[data-fetching] .search-input-icon svg:first-child {
 	display: none;
 }
 
+
 .search-input input {
 	padding: 0 var(--spacing-3) 0 2.5rem;
 	height: 3rem;

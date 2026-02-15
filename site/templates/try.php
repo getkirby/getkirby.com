@@ -113,7 +113,12 @@
 	<?php snippet('templates/home/brands') ?>
 </article>
 
-<dialog id="loader" class="overlay">
+<dialog
+	id="loader"
+	aria-label="Preparing your demo"
+	aria-modal="true"
+	class="overlay"
+>
 	<div class="bg-white rounded text-center shadow-xl p-12">
 		<p class="font-bold">We are preparing your demo 🎉</p>
 		<p>This can take a few seconds. Please don't close this window!<br>You will be redirected automatically ...</p>
@@ -186,8 +191,10 @@ function processResultsIfReady() {
 <?php endif ?>
 
 // loading overlay when the demo form is submitted
+const loader = document.querySelector("#loader");
+loader.addEventListener("cancel", (e) => e.preventDefault());
 document.querySelector("#demo").addEventListener("submit", (e) => {
-	document.querySelector("#loader").show();
+	loader.showModal();
 	document.body.style.cursor = "progress";
 });
 </script>

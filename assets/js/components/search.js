@@ -10,6 +10,7 @@ export default class {
 		this.$form = this.$dialog.querySelector("form");
 		this.$area = new AreaSelector(this);
 		this.$input = this.$form.querySelector("input[name=q]");
+		this.$close = this.$form.querySelector(".dialog-close");
 		this.$results = this.$form.querySelector(".search-results ul");
 		this.$result = this.$form.querySelector(".search-results template");
 		this.$more = this.$form.querySelector(".search-more a");
@@ -23,6 +24,12 @@ export default class {
 		for (const btn of this.$btn) {
 			btn.addEventListener("click", () => this.open(btn));
 		}
+
+		this.$close.addEventListener("click", () => this.close());
+
+		// Prevent native ESC from closing the dialog so our two-step
+		// clear-then-close logic in onEscape() stays in control.
+		this.$dialog.addEventListener("cancel", (e) => e.preventDefault());
 
 		this.$dialog.addEventListener("click", this.onBlur.bind(this));
 		this.$input.addEventListener(
@@ -48,7 +55,7 @@ export default class {
 	}
 
 	open(btn) {
-		this.$dialog.show();
+		this.$dialog.showModal();
 		document.documentElement.style.overflow = "hidden";
 		this.$area.select(btn.dataset.area);
 		this.$input.focus();
