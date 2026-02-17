@@ -1,0 +1,117 @@
+Title: Instant page factory
+
+----
+
+Published: 2026-02-17
+
+----
+
+Description: Publish short-form content in seconds
+
+----
+
+Authors: - authors/sonja-broda
+
+----
+
+Tags: content, configuration, panel
+
+----
+
+Text:
+
+## Short-form pages in seconds
+
+Creating pages in the Panel usually means: Click the `Add` button above a pages section, fill in a title and optionally customize the slug, land on the draft page, then start editing. That’s perfect for long-form content, but a tad cumbersome for content like:
+
+* Short blog notes
+* Status updates
+* Bookmarks / link collections
+* Event announcements
+* Short reviews
+* …
+
+For these content types, turn the creation dialog itself into a mini “page factory”.
+
+## Enter the `create` blueprint option
+
+The (link: docs/reference/panel/blueprints/page#page-creation-dialog text: create option) in page blueprints lets you:
+
+- Define additional fields directly in the creation dialog
+- Optionally skip adding a title and/or slug
+- Skip the redirect after creation
+- Automatically publish the page
+
+Here is an example for a `bookmark` type of page as child of a `bookmarks` parent:
+
+```yaml "/site/blueprints/pages/bookmark.yml"
+title: Bookmark
+
+create:
+  title: "{{ page.date.toDate('Y-m-d }}" # create title from date
+  slug: "{{ page.link.slug }}"           # create slug from link
+  status: listed                         # publish directly
+  redirect: false                        # stay where you are
+  fields:
+    - date
+    - link
+    - summary 
+
+
+fields:
+  date:
+    type: date
+    default: now
+    time: true
+  link:
+    type: url
+  summary:
+    type: textarea
+```
+
+Since the `textarea` field is not supported in the `create` dialog by default, we need to add it to the allowed fields in our main `index.php`
+
+```php "index.php"
+<?php
+
+use Kirby\Panel\PageCreateDialog;
+
+require 'kirby/bootstrap.php';
+
+Kirby\Panel\PageCreateDialog::$fieldTypes[] = 'textarea' // textarea field added
+
+echo (new Kirby)->render();
+```
+
+
+Now the `Add` button opens a compact dialog with exactly the fields you need. On submit, the page is created and published, and you can start creating the next page. Pretty fast, isn't it?
+
+---
+
+## Bonus: Sidebar menu item
+
+To make the experience even faster and smoother, add a (link: docs/reference/system/options/panel/panel-menu text: custom Panel menu) item that opens the creation dialog directly:
+
+In your `config.php`, add:
+
+```yaml "/site/config/config.php"
+<?php
+return [
+	// …other settings
+	'panel' => [
+  		'menu' => [
+			'site',
+			'users',
+			// …
+			'bookmarks' => [
+				'icon'  => 'pen',
+				'label' => 'New bookmark',
+				'link'  => 'dialogs/pages/create?parent=pages/bookmarks&template=bookmark',
+			],
+		]
+	]
+];
+```
+
+This gives you a one-click entry point in the sidebar from everywhere without having to navigate the Panel.
+
