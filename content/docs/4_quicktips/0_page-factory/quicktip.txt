@@ -94,7 +94,7 @@ To make the experience even faster and smoother, add a (link: docs/reference/sys
 
 In your `config.php`, add:
 
-```yaml "/site/config/config.php"
+```php "/site/config/config.php"
 <?php
 return [
 	// …other settings
