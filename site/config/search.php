@@ -37,6 +37,7 @@ return [
 
 			return match ($page->intendedTemplate()->name()) {
 				'cookbook-recipe' => 'cookbook',
+				'quicktip'        => 'cookbook',
 				'guide'           => 'guide',
 				'kosmos-issue'    => 'kosmos',
 				'plugin'          => 'plugin',
@@ -70,6 +71,7 @@ return [
 		'guide',
 		'kosmos-issue',
 		'plugin',
+		'quicktip',
 		'reference-article',
 		'reference-block',
 		'reference-class',
