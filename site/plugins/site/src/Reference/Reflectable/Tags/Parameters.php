@@ -38,9 +38,14 @@ class Parameters extends Iterator
 			);
 		}
 
-		// Remove the `args` parameter if
-		// parameters have been documented in the doc block
-		if (count($parameters) > 1) {
+		// Remove the `args` parameter if it's the only native parameter
+		// and additional parameters have been documented in the doc block
+		$native = array_map(
+			fn ($p) => $p->getName(),
+			$reflectable->reflection->getParameters()
+		);
+
+		if (count($parameters) > 1 && $native === ['args']) {
 			unset($parameters['args']);
 		}
 
