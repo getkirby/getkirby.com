@@ -78,7 +78,7 @@ use Kirby\Panel\PageCreateDialog;
 
 require 'kirby/bootstrap.php';
 
-Kirby\Panel\PageCreateDialog::$fieldTypes[] = 'textarea'; // textarea field added
+PageCreateDialog::$fieldTypes[] = 'textarea'; // textarea field added
 
 echo (new Kirby)->render();
 ```
