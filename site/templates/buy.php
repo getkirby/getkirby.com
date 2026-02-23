@@ -283,10 +283,18 @@ createApp({
 		}
 	},
 	async changeCountry(event) {
+		const select = event.target;
+		const status = document.querySelector('.checkout-form [role="status"]');
 		this.locale       = await this.fetchPrices(this.form.country);
 		this.form.country = this.locale.country;
 
 		window.localStorage.setItem("country", this.locale.country);
+		select.focus();
+
+		status.textContent = "";
+		setTimeout(() => {
+			status.textContent = "The checkout form has been adjusted to your country selection.";
+		}, 100);
 	},
 	closeCheckout() {
 		this.checkoutIsOpen = false;
