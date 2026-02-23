@@ -12,16 +12,17 @@ Intro: Enrich your site with content fetched from any API
 
 Text:
 
-For this example, we use a freely accessible API, in this case the (link: https://developer.nytimes.com/docs/movie-reviews-api/1/overview text: New York Times Movie Review API). To follow this example, create an account and an example app (link: https://developer.nytimes.com/get-started text: by following the instructions).
+For this example, we use a freely accessible API, in this case the (link: https://developer.nytimes.com/docs/articlesearch-product/1/overview text: NYT Article Search API). To follow this example, create an account and an example app (link: https://developer.nytimes.com/get-started text: by following the instructions).
 
 First, create a parent page, e.g. `reviews` in the `/content` folder and inside it, a `reviews.txt` text file.
 
 ```kirbycontent "/content/reviews/reviews.txt"
 Title: Movie reviews
 \----
-Intro: This page lists all available movie reviews from the NYT movie review API.
+Intro: This page lists all available movie reviews from the NYT Article Search API.
 ```
-This page will serve as our model for child pages.
+
+This page will serve as our model for the child pages.
 
 ## The page model
 
@@ -43,32 +44,34 @@ class ReviewsPage extends Page
         $results = [];
         $pages   = [];
         $apiKey  = 'put-your-api-key-here';
-        $request = Remote::get('https://api.nytimes.com/svc/movies/v2/reviews/picks.json?api-key=' . $apiKey);
+        $request = Remote::get(
+            'https://api.nytimes.com/svc/search/v2/articlesearch.json?' .
+            'fq=typeOfMaterials:Review%20AND%20section.name:Movies&sort=newest&' .
+            'api-key=' . $apikey
+        );
 
         if ($request->code() === 200) {
-            $results = $request->json(false)->results;
+            $results = $request->json(true)['response']['docs'] ?? [];
         }
 
-        foreach ($results as $key => $review) {
-            $pages[] = [
-                'slug'     => Str::slug($review->display_title),
-                'num'      => $key+1,
-                'template' => 'review',
-                'model'    => 'review',
-                'content'  => [
-                    'title'    => $review->display_title,
-                    'headline' => $review->headline,
-                    'byline'   => $review->byline,
-                    'summary'  => $review->summary_short,
-                    'date'     => $review->publication_date,
-                    'link'     => $review->link->url,
-                    'linkText' => $review->link->suggested_link_text,
-                    'cover'    => $review->multimedia->src,
-                    'uuid'     => Uuid::generate(),
-
-                ]
-            ];
-        }
+		foreach ($results as $key => $review) {
+			$pages[] = [
+				'slug'     => Str::slug($review['headline']['main']),
+				'num'      => $key+1,
+				'template' => 'review',
+				'model'    => 'review',
+				'content'  => [
+					'title'    => $review['headline']['main'],
+					'byline'   => $review['byline']['original'],
+					'summary'  => $review['snippet'],
+					'date'     => $review['pub_date'],
+					'link'     => $review['web_url'],
+					'linkText' => $review['headline']['main'],
+					'cover'    => $review['multimedia']['default']['url'],
+					'uuid'     => Uuid::generate(),
+				]
+			];
+		}
 
         return $this->children = Pages::factory($pages, $this);
     }
@@ -121,16 +124,17 @@ For the children themselves, you can create their own `review.php` template to a
 <main>
   <article class="review">
     <header>
-      <h1><?= $page->title() ?></h1>
+      <h1><?= $page->title() ?><br>
+          <?= $page->byline() ?>
+      </h1>
       <time><?= $page->date()->toDate('d F Y') ?></time>
     </header>
 
-    <h2><?= $page->headline() ?></h2>
-    <p>by <?= $page->byline() ?></p>
     <?= $page->summary() ?>
+    <p><a href="<?= $page->link() ?>">Visit original review</a></p>
 
     <?php if ($page->cover()->isNotEmpty()): ?>
-    <img src="<?= $page->cover() ?>" alt="">
+      <img src="<?= $page->cover() ?>" alt="">
     <?php endif ?>
   </article>
 </main>
