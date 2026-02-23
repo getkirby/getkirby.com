@@ -130,8 +130,6 @@ The following themes are available:
 
 - `info` (default)
 - `positive`
-- `positive`
-- `negative`
 - `negative`
 - `notice`
 - `warning`
