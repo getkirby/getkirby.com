@@ -79,7 +79,7 @@ Kirby::plugin('cookbook/moviereviews', [
               );
 
               if ($request->code() === 200) {
-                  $reviews = $request->json(false)->results;
+                  $reviews = $request->json(true)['response']['docs'] ?? [];
               }
 
               return [
