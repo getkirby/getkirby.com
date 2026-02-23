@@ -41,7 +41,7 @@ return [
 		'teamAmount'     => 1,
 		'customerAmount' => 1,
 		'charity' => 'Future Cleantech Architects',
-		'purpose' => 'to close the remaining innovation gaps to reach net-zero emissions by 2050.',
+		'purpose' => 'to close the remaining innovation gaps to reach net-zero emissions by 2050',
 		'link'    => 'https://fcarchitects.org'
 	]
 ];
