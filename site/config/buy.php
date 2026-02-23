@@ -40,8 +40,8 @@ return [
 	'donation' => [
 		'teamAmount'     => 1,
 		'customerAmount' => 1,
-		'charity' => 'Against Malaria Foundation',
-		'purpose' => 'to help fund anti-malaria nets and protect people worldwide from malaria',
-		'link'    => 'https://www.againstmalaria.com'
+		'charity' => 'Future Cleantech Architects',
+		'purpose' => 'to close the remaining innovation gaps to reach net-zero emissions by 2050.',
+		'link'    => 'https://fcarchitects.org'
 	]
 ];
