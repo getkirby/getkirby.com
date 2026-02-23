@@ -20,18 +20,18 @@
 				<?php if ($image = $partner->stripe()): ?>
 					<?= img($image, [
 						'src' => [
-							'width'  => 352,
-							'height' => 176,
+							'width'  => 364,
+							'height' => 182,
 							'crop'   => true,
 						],
 						'lazy' => $lazy,
 						// sizes generated with https://ausi.github.io/respimagelint/
-						'sizes' => '(min-width: 1520px) 352px, (min-width: 1160px) calc(27.35vw - 58px), (min-width: 960px) calc(33.33vw - 96px), (min-width: 640px) calc(50vw - 96px), (min-width: 480px) calc(100vw - 96px), 90vw',
+						'sizes' => '(min-width: 1520px) 364px, (min-width: 1160px) calc(27.35vw - 58px), (min-width: 960px) calc(33.33vw - 96px), (min-width: 640px) calc(50vw - 96px), (min-width: 480px) calc(100vw - 96px), 90vw',
 						'srcset' => [
-							'352w'  => ['width' => 352, 'height' => 176, 'crop' => true],
-							'500w'  => ['width' => 500, 'height' => 250, 'crop' => true],
-							'704w'  => ['width' => 704, 'height' => 352, 'crop' => true],
-							'1000w' => ['width' => 1000, 'height' => 500, 'crop' => true],
+							'364w'  => ['width' => 364, 'height' => 182, 'crop' => true],
+							'546w'  => ['width' => 546, 'height' => 273, 'crop' => true],
+							'728w'  => ['width' => 728, 'height' => 364, 'crop' => true],
+							'1092w' => ['width' => 1092, 'height' => 546, 'crop' => true],
 						]
 					]) ?>
 				<?php elseif ($image = $partner->avatar()): ?>
