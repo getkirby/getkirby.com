@@ -2,7 +2,7 @@ Title: Installing plugins
 
 ----
 
-Category: Extending kirby
+Category: Extending Kirby
 
 ----
 
