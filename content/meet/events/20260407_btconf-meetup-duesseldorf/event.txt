@@ -1,0 +1,9 @@
+start: 16:15:00
+----
+city: Düsseldorf
+----
+country: Germany
+----
+conference: Beyond Tellerrand
+----
+link: https://beyondtellerrand.com/events/dusseldorf-2026/side-events/kirby-meeting
