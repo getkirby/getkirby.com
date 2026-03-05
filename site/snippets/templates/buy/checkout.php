@@ -214,7 +214,7 @@
 						<div class="fields">
 							<div class="field">
 								<label class="label" for="email">Email <abbr title="Required" aria-hidden>*</abbr></label>
-								<input id="email" name="email" class="input" type="email" required v-model="form.email" placeholder="mail@example.com">
+								<input id="email" name="email" class="input" type="email" autocomplete="email" required v-model="form.email" placeholder="mail@example.com">
 							</div>
 
 							<div class="fieldgroup">
@@ -249,17 +249,17 @@
 
 							<div class="field" v-if="vatIdExists">
 								<label class="label" for="street">Street <abbr title="Required" aria-hidden>*</abbr></label>
-								<input id="street" name="street" class="input" type="text" v-model="form.street" :required="vatIdExists">
+								<input id="street" name="street" autocomplete="address-line1" class="input" type="text" v-model="form.street" :required="vatIdExists">
 							</div>
 
 							<div class="field" v-if="vatIdExists">
 								<label class="label" for="city">Town/City <abbr title="Required" aria-hidden>*</abbr></label>
-								<input id="city" name="city" class="input" type="text" v-model="form.city" :required="vatIdExists">
+								<input id="city" name="city" autocomplete="address-level2" class="input" type="text" v-model="form.city" :required="vatIdExists">
 							</div>
 
 							<div class="field" v-if="vatIdExists">
 								<label class="label" for="state">State/County <abbr title="Required" aria-hidden>*</abbr></label>
-								<input id="state" name="state" class="input" type="text" v-model="form.state" :required="vatIdExists">
+								<input id="state" name="state" autocomplete="address-level1" class="input" type="text" v-model="form.state" :required="vatIdExists">
 							</div>
 						</div>
 					</fieldset>
