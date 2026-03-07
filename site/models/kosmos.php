@@ -74,7 +74,10 @@ class KosmosPage extends DefaultPage
 				'width'      => $file['width'],
 				'height'     => $file['height'],
 				'parent'     => $parent,
-				'collection' => $collection
+				'collection' => $collection,
+				'content'    => [
+					'isCover' => $file['cover']
+				]
 			]);
 			
 			$collection->data[$file->id()] = $file;

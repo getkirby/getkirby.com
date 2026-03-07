@@ -17,6 +17,6 @@ class EpisodePage extends Page
 	
 	public function cover()
 	{
-		return parent::cover()->toFile() ?? $this->files()->first();
+		return $this->files()->filterBy('isCover', true)?->first() ?? $this->files()->first();
 	}
 }
