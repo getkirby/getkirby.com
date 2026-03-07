@@ -1,5 +1,5 @@
 <?php
-$items        = $page->text()->toToc($tag ?? 'h2');
+$items        = $items ?? $page->text()->toToc($tag ?? 'h2');
 $hasResources = $page->resources()->isNotEmpty();
 $limit        = $hasResources ? 1 : 2;
 ?>

@@ -1,8 +1,7 @@
 <?php
 layout('article') ?>
 
-<?php
-slot('sidebar') ?>
+<?php slot('sidebar') ?>
 <style>
     .with-sidebar {
         grid-gap: 9rem;
@@ -37,26 +36,25 @@ slot('sidebar') ?>
 		endif ?>
     </div>
 </nav>
-<?php
-endslot() ?>
+<?php endslot() ?>
 
-<?php
-slot('header') ?>
+<?php slot('header') ?>
 <header class="mb-12">
     <h1 class="h1 mb-1">Episode <?= $page->slug() ?></h1>
     <date><?= $page->date()->toDate('d M Y') ?></date>
 </header>
-<?php
-endslot() ?>
+<?php endslot() ?>
 
-<?php
-slot('toc') ?>
-<?php
-snippet('toc', ['title' => 'In this episode']) ?>
-<?php
-endslot() ?>
-<?php
-slot() ?>
+<?php slot('toc') ?>
+<?php snippet(
+        'toc',
+        [
+            'title' => 'In this episode',
+            'items' => $page->layouts()->toBlocks()->filterBy('type', 'heading')
+        ]) ?>
+<?php endslot() ?>
+
+<?php slot() ?>
 <?php
 foreach ($page->layouts()->toLayouts() as $layout): ?>
     <section class="prose mb-24" id="<?= $layout->id() ?>">
