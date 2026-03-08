@@ -91,6 +91,11 @@ $kirby->email([
 
 
 ## Formats
+
+<info>
+Like all other template names, also email template names must be lowercase.
+</info>
+
 ### Plain Text
 
 ```php
