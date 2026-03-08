@@ -34,6 +34,10 @@ In our Starterkit, we offer a flat setup that installs all folders directly in t
 
 Some websites have sensitive files that must not be served by the web server (Nginx, Apache, etc) but instead must be served securely by the application (Kirby) or not at all. For proper security, this means the sensitive files must not be hosted in the document root, but instead must be outside the reach of the web server. The common way to do this is to put directories of sensitive files one level *above* the document root (at the same level as the document root) so that the web server cannot accidentlly serve them.
 
+<warning>
+If you are using Git and switch to the private folder setup, make sure to adapt your `.gitignore` file to match your new structure, so as not to accidentally push sensitive information. In the example below, this affects in particular the locations of the `media` folder, as well as the `accounts`, `cache`, and `sessions` folder.
+</warning>
+
 ### `index.php`
 
 The key to this setup is the `index.php` in the `public` folder:
