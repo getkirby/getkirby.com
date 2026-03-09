@@ -2,7 +2,7 @@
 
 use Kirby\Cms\Page;
 
-class EpisodePage extends Page
+class KosmosIssueVirtualPage extends Page
 {
 	protected function setFiles(array|null $files = null): static
 	{
