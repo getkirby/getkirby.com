@@ -7,26 +7,26 @@ use Kirby\Cms\Pages;
 
 class KosmosPage extends DefaultPage
 {
-	static $subpages = null;
-	
+	protected static Pages|null $subpages = null;
+
 	public function subpages(): Pages
 	{
 		if (static::$subpages) {
 			return static::$subpages;
 		}
-		
+
 		return static::$subpages = Pages::factory($this->inventory()['children'], $this);
 	}
-	
+
 	public function children(): Pages
 	{
 		if ($this->children instanceof Pages) {
 			return $this->children;
 		}
-		
-		$data = [];
+
+		$data   = [];
 		$issues = [];
-		
+
 		try {
 			$request = Remote::get(option('kosmosApi'));
 
@@ -50,15 +50,16 @@ class KosmosPage extends DefaultPage
 						'date'    => $data[$issue]['date'] ?? null,
 						'title'   => $data[$issue]['title'] ?? null
 					],
-					'files' => array_values($data[$issue]['files'])
+					'files'    => array_values($data[$issue]['files'])
 				]
 			);
-			
-		} catch (Exception) {}
-		
+
+		} catch (Exception) {
+		}
+
 		return $this->children = $this->subpages()->add(Pages::factory($issues, $this));
 	}
-	
+
 	/**
 	 * Creates a collection of `VirtualFile` objects from array data that comes
 	 * from the partners API's `apiArray()` file method
@@ -66,23 +67,25 @@ class KosmosPage extends DefaultPage
 	public static function virtualFileFactory(array $files, Page $parent): Files
 	{
 		$collection = new Files([], $parent);
-		
+
 		foreach (array_filter($files) as $file) {
-			$file = VirtualFile::factory([
-				'filename'   => basename($file['url']),
-				'url'        => $file['url'],
-				'width'      => $file['width'],
-				'height'     => $file['height'],
-				'parent'     => $parent,
-				'collection' => $collection,
-				'content'    => [
-					'isCover' => $file['cover']
-				]
-			]);
-			
+			$file = VirtualFile::factory(
+				[
+					 'filename'   => basename($file['url']),
+					 'url'        => $file['url'],
+					 'width'      => $file['width'],
+					 'height'     => $file['height'],
+					 'parent'     => $parent,
+					 'collection' => $collection,
+					 'content'    => [
+						 'isCover' => $file['cover']
+					 ]
+ 				]
+			);
+
 			$collection->data[$file->id()] = $file;
 		}
-		
+
 		return $collection;
 	}
 }
