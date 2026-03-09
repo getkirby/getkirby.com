@@ -51,7 +51,7 @@ This allows you to enrich virtual pages with assets and editable metadata, while
 
 
 ## MixedStorage plugin
-In the `plugins folder, create a new folder called `mixed-storage`. Inside this folder, create an `index.php` file, a folder called `src`, and inside the `src` folder a file called `MixedStorage.php`.
+In the `plugins` folder, create a new folder called `mixed-storage`. Inside this folder, create an `index.php` file, a folder called `src`, and inside the `src` folder a file called `MixedStorage.php`.
 
 The file system in `/plugins` should now look like this:
 
