@@ -1,5 +1,4 @@
-<?php
-layout('article') ?>
+<?php layout('article') ?>
 
 <?php slot('sidebar') ?>
 <style>
@@ -15,25 +14,19 @@ layout('article') ?>
     </div>
 
     <div class="sticky" style="--top: var(--spacing-12)">
-		<?php
-		if ($prev = $page->prevListed()): ?>
+		<?php if ($prev = $page->prevListed()): ?>
             <section class="mb-12">
                 <h2 class="h2 mb-6">Previous</h2>
-				<?php
-				snippet('templates/kosmos/issue', ['issue' => $prev]) ?>
+				<?php snippet('templates/kosmos/issue', ['issue' => $prev]) ?>
             </section>
-		<?php
-		endif ?>
+		<?php endif ?>
 		
-		<?php
-		if ($next = $page->nextListed()): ?>
+		<?php if ($next = $page->nextListed()): ?>
             <section class="mb-12">
                 <h2 class="h2 mb-6">Next</h2>
-				<?php
-				snippet('templates/kosmos/issue', ['issue' => $next]) ?>
+				<?php snippet('templates/kosmos/issue', ['issue' => $next]) ?>
             </section>
-		<?php
-		endif ?>
+		<?php endif ?>
     </div>
 </nav>
 <?php endslot() ?>
@@ -55,29 +48,21 @@ layout('article') ?>
 <?php endslot() ?>
 
 <?php slot() ?>
-<?php
-foreach ($page->layouts()->toLayouts() as $layout): ?>
+<?php foreach ($page->layouts()->toLayouts() as $layout): ?>
     <section class="prose mb-24" id="<?= $layout->id() ?>">
-		<?php
-		foreach ($layout->columns() as $column): ?>
+		<?php foreach ($layout->columns() as $column): ?>
             <div class="column" style="--span:<?= $column->span() ?>">
                 <div class="blocks">
 					<?= $column->blocks() ?>
                 </div>
             </div>
-		<?php
-		endforeach ?>
+		<?php endforeach ?>
     </section>
-<?php
-endforeach ?>
-<?php
-endslot() ?>
-<?php
-slot('footer') ?>
+<?php endforeach ?>
+<?php endslot() ?>
+<?php slot('footer') ?>
 <footer>
     <h2 class="h2 mb-6">Join 3,500+ readers</h2>
-	<?php
-	snippet('templates/kosmos/form') ?>
+	<?php snippet('templates/kosmos/form') ?>
 </footer>
-<?php
-endslot() ?>
+<?php endslot() ?>
