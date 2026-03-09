@@ -358,3 +358,49 @@ fields:
       - layout/fieldsets
       - layout/settings
 ```
+
+## Reusing and extending `status` definitions
+
+If you want to reuse the same `status` definition in multiple blueprints, you can also define them once, then extend in your blueprints. Of course, you can define multiple status definitions if needed, in this case, create them with different file names.
+
+```yaml "/site/blueprints/options/status.yml"
+draft:
+  label: Draft
+  text: Work in progress
+unlisted:
+  label: Unlisted
+  text: Needs to be reviewed by admin
+listed:
+  label: Approved
+  text: Ready for publication on the website 
+```
+
+Then in the extending blueprint:
+
+```yaml
+status:
+  extends: options/status
+```
+
+## Reusing and extending the `options` property
+
+The `options` blueprint property can also be reused across multiple blueprints like this:
+
+```yaml "/site/blueprints/options/options.yml"
+changeTemplate:
+  editor: false
+delete: 
+  editor: false
+# …  
+```
+
+Then in the extending blueprint:
+
+```yaml
+options:
+  extends: options/options
+```
+
+<info>
+For more complex setups, a (link: docs/reference/plugins/extensions/blueprints#callback-definition text: PHP blueprint) could be a better alternative, particularly if you want to extend elements that are not extendable via `extends`. PHP blueprints are also a great choice if you needs to add elements conditionally, e.g. based on user role, config options etc.
+</info>
