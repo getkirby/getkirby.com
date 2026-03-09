@@ -28,7 +28,7 @@ class KosmosPage extends DefaultPage
 		$issues = [];
 		
 		try {
-			$request = Remote::get('http://kosmos.test/kosmos.json');
+			$request = Remote::get(option('kosmosApi'));
 
 			if ($request->code() === 200) {
 				$data = $request->json(true);

@@ -1,14 +1,14 @@
 <?php
 
 return [
-	'cache' => [
+	'cache'     => [
 		'github' => [
 			'active' => true,
 			'type'   => 'file'
 		],
 	],
-	'debug' => true,
-	'email' => [
+	'debug'     => true,
+	'email'     => [
 		'transport' => [
 			'type'     => 'smtp',
 			'host'     => 'localhost',
@@ -16,14 +16,16 @@ return [
 			'security' => false
 		]
 	],
-	'thumbs' => [
+	'thumbs'    => [
 		// 'bin' => '/usr/local/bin/convert'
 	],
-	'hub' => [
+	'hub'       => [
 		'url' => 'https://hub.getkirby.test'
 	],
-	'partners' => [
+	'partners'  => [
 		'url'        => 'http://partners.test/partners.json',
 		'partnerUrl' => 'http://partners.test/partners/'
-	]
+	],
+	'kosmosApi' => 'http://kosmos.test/kosmos.json',
+
 ];
