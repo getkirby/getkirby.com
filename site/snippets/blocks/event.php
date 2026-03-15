@@ -5,7 +5,6 @@
 use Kirby\Cms\Block;
 
 ?>
-
 <p>
 	<strong>
 		<a href="<?= $block->link()->value() ?>"><?= $block->title()->value() ?></a>

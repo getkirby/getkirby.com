@@ -27,5 +27,4 @@ return [
 		'partnerUrl' => 'http://partners.test/partners/'
 	],
 	'kosmosApi' => 'http://kosmos.test/kosmos.json',
-
 ];
