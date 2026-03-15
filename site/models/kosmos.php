@@ -62,7 +62,7 @@ class KosmosPage extends DefaultPage
 
 	/**
 	 * Creates a collection of `VirtualFile` objects from array data that comes
-	 * from the partners API's `apiArray()` file method
+	 * from the Kosmos API's `apiArray()` file method
 	 */
 	public static function virtualFileFactory(array $files, Page $parent): Files
 	{
