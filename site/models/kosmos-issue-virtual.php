@@ -12,7 +12,6 @@ class KosmosIssueVirtualPage extends Page
 	protected function setFiles(array|null $files = null): static
 	{
 		if (is_array($files)) {
-
 			$this->files = KosmosPage::virtualFileFactory($files, $this);
 			return $this;
 		}
