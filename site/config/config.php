@@ -27,5 +27,5 @@ return [
 		'locking' => false,
 		'uuid'    => false
 	],
-	'kosmos'     => 'https://kosmos.getkirby.com/kosmos.json',
+	'kosmosApi'  => 'https://kosmos.getkirby.com/kosmos.json',
 ];
