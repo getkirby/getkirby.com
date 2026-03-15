@@ -101,7 +101,7 @@ All emails sent to and from the getkirby.com domain (except newsletters) are pro
 
 https://getkirby.com/kosmos
 
-If you sign up to our newsletter, your data is being collected by our newsletter service Newstroll.
+If you sign up to our newsletter, your data is being collected by our newsletter service Mailcoach.
 
 [Read more ›](#newsletter)
 
