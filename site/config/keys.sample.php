@@ -15,7 +15,6 @@ return [
 	'hooks'     => '',
 	'hub'       => '',
 	'keycdn'    => '',
-	'newstroll' => '',
 	'partnerAccessToken' => '',
 	'paddle'    => [
 		'id'    => 1,
@@ -30,5 +29,12 @@ return [
 			'clientId'     => '',
 			'clientSecret' => '',
 		]
-	]
+	],
+	'mailcoach'          => [
+		'emailList_uuid' => '',
+		'api_domain'     => '',
+		'api_key'        => '',
+		'api_url'        => '',
+		'form_url'       => '',
+	],
 ];
