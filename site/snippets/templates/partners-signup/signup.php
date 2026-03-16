@@ -89,6 +89,11 @@
 [v-cloak] {
 	display: none !important;
 }
+
+.offset {
+	position:absolute;
+	left:-9999px;
+}
 </style>
 
 <div v-scope id="signup" class="signup bg-white rounded" @mounted="mounted">
@@ -100,7 +105,11 @@
 		@submit="submit"
 	>
 		<input type="hidden" name="timestamp" :value="locale.timestamp">
-
+		<div class="offset">
+			<label for="date_of_birth">Date of birth</label>
+			<input type="text" name="date_of_birth" autocomple="off" class="offset" tabindex="-1">
+		</div>
+		<input type="hidden" name="csrf" value="<?= csrf() ?>">
 		<div>
 			<fieldset class="mb-6">
 				<legend class="label">Partnership</legend>

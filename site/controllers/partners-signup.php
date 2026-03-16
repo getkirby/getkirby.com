@@ -18,7 +18,6 @@ return function (App $kirby, Page $page) {
 		$peopleNum    = max(1, min(4, (int)$people));
 		$plan         = get('plan');
 		$renew        = get('renew');
-
 		$businessName = get('businessName');
 		$businessType = get('businessType');
 		$location     = get('location');
@@ -73,13 +72,26 @@ return function (App $kirby, Page $page) {
 			// there will be a redirect to Paddle)
 			Time::validate($timestamp);
 
+			if (get('date_of_birth')) {
+				http_response_code(200);
+				exit('OK');
+			}
+
+			if ((!$token = get('csrf')) || csrf($token) === false) {
+				http_response_code(200);
+				exit('OK');
+			}
+
+			$page->validatePlan($plan);
 			$page->validateReferences($plan, $references);
 			$page->validateWebsite($website);
 			$page->validateEmail($email);
 			$page->validateBusinessType($businessType);
+			$page->validateProjects($projects, $plan);
+			$page->validateDownloadLink($downloadLink);
 
 			// submit form values to Airtable
-			$response = Remote::post('https://api.airtable.com/v0/appeeHREbUMMaZGRP/tblrKOCF0cGAZmUQR', [
+			$response = Remote::post('http://partners.test/signup', [
 				'data' => json_encode([
 					'fields' => [
 						'Name'                    => $businessName,
@@ -101,15 +113,15 @@ return function (App $kirby, Page $page) {
 						'Review project download' => $downloadLink,
 						'Notes'                   => $notes,
 					]
-				]),
+				], JSON_THROW_ON_ERROR),
 				'headers' => [
-					'Authorization' => 'Bearer ' . option('keys.airtable'),
+					'Authorization' => 'Bearer ' . option('keys.signupToken'),
 					'Content-Type'  => 'application/json',
 				]
 			])->json();
 
 			if (isset($response['error']) === true) {
-				throw new Exception($response['error']['message'] . '(' . $response['error']['type'] . ')');
+				throw new Exception($response['error']);
 			}
 
 			// Send a Discord webhook on success

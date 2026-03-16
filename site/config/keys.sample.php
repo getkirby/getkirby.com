@@ -30,5 +30,7 @@ return [
 			'clientId'     => '',
 			'clientSecret' => '',
 		]
-	]
+	],
+	'signupToken' => '...',
+
 ];
