@@ -6,7 +6,7 @@
 }
 </style>
 
-<section id="good-cause" class="mb-24 columns" style="--columns: 2; --columns-md: 1; --column-gap: var(--spacing-24); --row-gap: var(--spacing-6)">
+<section id="good-cause" class="mb-36 columns" style="--columns: 2; --columns-md: 1; --column-gap: var(--spacing-24); --row-gap: var(--spacing-6)">
 	<div>
 		<h2 class="h2 mb-6">For a good cause? <mark class="px-1 rounded">We’ve got your back.</mark></h2>
 
