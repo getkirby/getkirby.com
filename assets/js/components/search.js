@@ -239,8 +239,8 @@ export default class {
 class AreaSelector {
 	constructor(parent) {
 		this.$parent = parent;
-		this.$el = parent.$form.querySelector(".search-input > nav");
-		this.$btn = parent.$form.querySelector(".search-input > nav > button");
+		this.$el = parent.$form.querySelector(".search-input-area");
+		this.$btn = parent.$form.querySelector(".search-input-area > button");
 		this.$label = this.$btn.querySelector("[data-area]");
 		this.$dropdown = this.$el.querySelector("ul");
 		this.$options = this.$dropdown.querySelectorAll("[data-area]");

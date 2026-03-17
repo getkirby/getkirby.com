@@ -33,7 +33,7 @@ $areas  = $kirby->option('search.areas')($kirby);
 					placeholder="Search for anything …"
 					autocomplete="off"
 				>
-				<nav class="search-input-area grid relative place-items-center flex-shrink-0 text-sm leading-tight">
+				<div class="search-input-area grid relative place-items-center flex-shrink-0 text-sm leading-tight">
 					<button type="button" class="flex items-center">
 						<span class="block search-area" data-area="<?= $area ?>"><?= $areas[$area] ?? $area ?></span>
 					</button>
@@ -43,7 +43,7 @@ $areas  = $kirby->option('search.areas')($kirby);
 						<?php endforeach ?>
 					</ul>
 					<input name="area" type="hidden" value="<?= $area ?>">
-				</nav>
+				</div>
 			</div>
 
 			<!-- Results -->
