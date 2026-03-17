@@ -390,7 +390,8 @@ class Marsdown extends ParsedownExtra
 					'handler' => $Block['element']['handler'],
 					'nonNestables' => ['Url', 'Link'],
 					'attributes' => [
-						'href' => '#' . $slug
+						'href'     => '#' . $slug,
+						'tabindex' => '-1'
 					]
 				]
 			]
