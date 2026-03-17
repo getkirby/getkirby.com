@@ -1,6 +1,6 @@
 <div class="menu ml-auto">
 	<input id="menu-check" type="checkbox">
-	<label tabindex="0" class="menu-toggle" for="menu-check" aria-label="Show / hide menu">
+	<label tabindex="0" class="menu-toggle" for="menu-check" aria-label="Menu">
 		<?= icon('menu') ?>
 	</label>
 	<nav aria-label="Main menu">
