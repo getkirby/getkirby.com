@@ -91,7 +91,7 @@ return function (App $kirby, Page $page) {
 			$page->validateDownloadLink($downloadLink);
 
 			// submit form values to Airtable
-			$response = Remote::post('http://partners.test/signup', [
+			$response = Remote::post(option('partners.signupUrl'), [
 				'data' => json_encode([
 					'fields' => [
 						'Name'                    => $businessName,
