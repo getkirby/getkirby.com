@@ -30,7 +30,7 @@ class PartnersPage extends DefaultPage
 		try {
 			$request = Remote::get(
 				option('partners.url') . '?apiToken=' .
-				option('keys.partnerAccessToken')
+				option('keys.partners.accessToken')
 			);
 
 			if ($request->code() === 200) {

@@ -115,7 +115,7 @@ return function (App $kirby, Page $page) {
 					]
 				], JSON_THROW_ON_ERROR),
 				'headers' => [
-					'Authorization' => 'Bearer ' . option('keys.signupToken'),
+					'Authorization' => 'Bearer ' . option('keys.partners.signupToken'),
 					'Content-Type'  => 'application/json',
 				]
 			])->json();
