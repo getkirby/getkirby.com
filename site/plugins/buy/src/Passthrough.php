@@ -4,6 +4,9 @@ namespace Kirby\Buy;
 
 use Kirby\Toolkit\Str;
 
+/**
+ * Helper class to handle Paddle passthrough data
+ */
 class Passthrough
 {
 	public function __construct(
