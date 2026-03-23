@@ -11,7 +11,7 @@ return [
 	'partners' => [
 		'url'        => 'https://partners.getkirby.com/partners.json',
 		'partnerUrl' => 'https://partners.getkirby.com/partners/',
-		'signupUrl'  => 'http://partners.getkirby.com/signup'
+		'signupUrl'  => 'https://partners.getkirby.com/signup'
 	],
 	'keys'       => file_exists(__DIR__ . '/keys.php') ? require __DIR__ . '/keys.php' : require __DIR__ . '/keys.sample.php',
 	'meta'       => require __DIR__ . '/meta.php',
