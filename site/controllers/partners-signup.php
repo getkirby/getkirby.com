@@ -90,7 +90,7 @@ return function (App $kirby, Page $page) {
 			$page->validateProjects($projects, $plan);
 			$page->validateDownloadLink($downloadLink);
 
-			// submit form values to Airtable
+			// submit form values to the partner hub
 			$response = Remote::post(option('partners.signupUrl'), [
 				'data' => json_encode([
 					'fields' => [
