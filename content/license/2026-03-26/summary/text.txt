@@ -1,0 +1,22 @@
+Title: EULA 2026-03-26: Summary of changes
+
+----
+
+Intro:
+
+This change to our EULA incorporates community feedback and answers to questions we have received.
+
+In particular, we have changed the following:
+
+----
+
+Text:
+
+## Improvements
+
+- Our "open source exit promise" ensures that Kirby's source code will be available under the terms of a free and open source (FOSS) license when Kirby is no longer actively maintained. To strengthen and reinforce this promise, we have added a fixed time span of one year without stable releases that will now define the moment for an automatic license conversion to the MIT license.
+
+## Clarifications
+
+- We clarified the clause on license reassignment. This clause intends to allow reuse of licenses for follow-up projects for the same end customer (client). It was not and is not allowed to reassign licenses to different clients.
+- Purchased licenses need to be activated to the project URL as soon as the project is launched. This was already a requirement before. We have now added this requirement to the EULA summary and made it clear that not activating a license within one week of the project launch equals unlicensed use of Kirby.
