@@ -107,7 +107,7 @@
 		<input type="hidden" name="timestamp" :value="locale.timestamp">
 		<div class="offset">
 			<label for="date_of_birth">Date of birth</label>
-			<input type="text" name="date_of_birth" autocomple="off" class="offset" tabindex="-1">
+			<input type="text" name="date_of_birth" autocomplete="off" class="offset" tabindex="-1">
 		</div>
 		<input type="hidden" name="csrf" value="<?= csrf() ?>">
 		<div>
