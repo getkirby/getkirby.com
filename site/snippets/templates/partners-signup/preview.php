@@ -214,14 +214,9 @@
 	>
 		<label>
 			<span :style="labelStyle(form.summary)">
-				Tell the audience about yourself in 140 characters or less. Describe your strengths as company and let them know why they should choose you.
+				Short description about yourself in 140 characters or less: your strengths as company and why the audience should choose you.
 			</span>
-			<textarea
-				name="summary"
-				rows="2"
-				maxlength="140"
-				v-model="form.summary"
-			></textarea>
+
 		</label>
 	</p>
 </article>

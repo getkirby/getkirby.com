@@ -303,7 +303,6 @@ createApp({
 		businessName: "",
 		businessType: "",
 		location: "",
-		summary: "",
 
 		// business info
 		website: "",
