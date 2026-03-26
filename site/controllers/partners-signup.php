@@ -18,11 +18,9 @@ return function (App $kirby, Page $page) {
 		$peopleNum    = max(1, min(4, (int)$people));
 		$plan         = get('plan');
 		$renew        = get('renew');
-
 		$businessName = get('businessName');
 		$businessType = get('businessType');
 		$location     = get('location');
-		$summary      = get('summary');
 		$website      = get('website');
 		$address      = get('address');
 		$projects     = (int)get('projects');
@@ -73,43 +71,56 @@ return function (App $kirby, Page $page) {
 			// there will be a redirect to Paddle)
 			Time::validate($timestamp);
 
+			if (get('date_of_birth')) {
+				http_response_code(200);
+				exit('OK');
+			}
+
+			if ((!$token = get('csrf')) || csrf($token) === false) {
+				http_response_code(200);
+				exit('OK');
+			}
+
+			$page->validatePlan($plan);
 			$page->validateReferences($plan, $references);
 			$page->validateWebsite($website);
 			$page->validateEmail($email);
 			$page->validateBusinessType($businessType);
+			$page->validateProjects($projects, $plan);
+			$page->validateDownloadLink($downloadLink);
 
-			// submit form values to Airtable
-			$response = Remote::post('https://api.airtable.com/v0/appeeHREbUMMaZGRP/tblrKOCF0cGAZmUQR', [
+			// submit form values to the partner hub
+			$response = Remote::post(option('partners.signupUrl'), [
 				'data' => json_encode([
 					'fields' => [
-						'Name'                    => $businessName,
-						'Status'                  => 'Send notification of receipt',
-						'Plan'                    => $plan,
-						'People'                  => $people,
-						'Price'                   => $visitor->currencySign() . $localizedPrice,
-						'Checkout'                => $product->checkout('buy', $checkoutData),
-						'Business type'           => $businessType,
-						'Own website'             => $website,
-						'Contact person'          => $name,
-						'Email'                   => $email,
-						'Discord'                 => $discord,
-						'Listing location'        => $location,
-						'Address'                 => $address,
-						'Listing description'     => $summary,
-						'Number of projects'      => $projects,
-						'References'              => $references,
-						'Review project download' => $downloadLink,
-						'Notes'                   => $notes,
+						'title'         => $businessName,
+						'partnerstatus' => 'open',
+						'plan'          => $plan,
+						'people'        => $people,
+						'price'         => $visitor->currencySign() . $localizedPrice,
+						'checkout'      => $product->checkout('buy', $checkoutData),
+						'business'      => $businessType,
+						'website'       => $website,
+						'contact'       => $name,
+						'email'         => $email,
+						'discord'       => $discord,
+						'location'      => $location,
+						'address'       => $address,
+						'projects'      => $projects,
+						'references'    => $references,
+						'reviewRef'     => $downloadLink,
+						'notes'         => $notes,
+						'created'       => date('Y-m-d H:i:s'),
 					]
-				]),
+				], JSON_THROW_ON_ERROR),
 				'headers' => [
-					'Authorization' => 'Bearer ' . option('keys.airtable'),
+					'Authorization' => 'Bearer ' . option('keys.partners.signupToken'),
 					'Content-Type'  => 'application/json',
 				]
 			])->json();
 
 			if (isset($response['error']) === true) {
-				throw new Exception($response['error']['message'] . '(' . $response['error']['type'] . ')');
+				throw new Exception($response['error']);
 			}
 
 			// Send a Discord webhook on success

@@ -24,7 +24,9 @@ return [
 	],
 	'partners'  => [
 		'url'        => 'http://partners.test/partners.json',
-		'partnerUrl' => 'http://partners.test/partners/'
+		'partnerUrl' => 'http://partners.test/partners/',
+		'signupUrl'  => 'http://partners.test/signup'
+
 	],
 	'kosmosApi' => 'http://kosmos.test/kosmos.json',
 ];
