@@ -57,6 +57,28 @@ this.command("insert", (input, selection) =>
 )
 ```
 
+### Button label translation
+You can translate the button label by using the label getter:
+
+```js "site/plugins/your-plugin/index.js"
+panel.plugin("getkirby/custom-textarea-buttons", {
+  textareaButtons: {
+    highlight: {
+      get label() {
+        return panel.$t("highlight");
+      },
+      icon: "wand",
+      click: function () {
+        this.command("toggle", "<mark>", "</mark>")
+      },
+      shortcut: "m",
+    },
+  }
+});
+```
+
+(link: docs/reference/plugins/extensions/translations text: Read more about plugin translations.)
+
 ## Shortcut
 
 Each button can also define a `shortcut` which will trigger the button's `click` handler when the shortcut is pressed together with the `Cmd`/`Ctrl` key inside the textarea.
