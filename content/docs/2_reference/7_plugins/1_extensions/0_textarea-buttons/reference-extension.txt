@@ -58,7 +58,7 @@ this.command("insert", (input, selection) =>
 ```
 
 ### Button label translation
-You can translate the button label by using the label getter:
+You can translate the button label by defining it in the label getter. The getter ensures that the translation is already loaded when the label is rendered:
 
 ```js "site/plugins/your-plugin/index.js"
 panel.plugin("getkirby/custom-textarea-buttons", {
@@ -85,4 +85,4 @@ Each button can also define a `shortcut` which will trigger the button's `click`
 
 ## Use in the field
 
-Your new textare button won't automatically be included in the textarea's toolbar. To add it, (link: docs/reference/panel/fields/textarea#toolbar__customizing-the-toolbar text: use the `buttons` option).
+Your new textarea button won't automatically be included in the textarea's toolbar. To add it, (link: docs/reference/panel/fields/textarea#toolbar__customizing-the-toolbar text: use the `buttons` option).
