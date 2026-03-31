@@ -348,11 +348,15 @@ category:
     value: "{{ item.name.slug }}"
 ```
 
-With this simple addition, the API URL will always refer to the main URL of the site. You can also access the configuration instead to get even more flexibility
+With this simple addition, the API URL will always refer to the main URL of the site. You can also access the configuration instead to get even more flexibility:
 
 ```yaml
 url: "{{ kirby.option('optionApiUrl') }}/companies.json"
 ```
+
+<alert>
+Make sure to only use values inside the string template for the URL that can be fully trusted. If attackers with malicious intent have control over the data source for the URL, they can perform a server-side request forgery (SSRF) attack that could leak internal data from files on the server or from other servers in the same network that should normally be protected by a firewall.
+</alert>
 
 ## Translating options
 
