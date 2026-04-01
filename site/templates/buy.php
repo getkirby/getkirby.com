@@ -103,30 +103,26 @@ article[data-loading] .price[data-sale] {
 <article v-scope data-loading @mounted="mounted">
 	<?php snippet('templates/buy/checkout') ?>
 
-	<div v-else>
-		<div class="columns mb-12" style="--columns: 3; --columns-md: 1; --gap: var(--spacing-6)">
-			<div class="py-6">
-				<?php snippet('templates/buy/checklist') ?>
-			</div>
-
-			<?php snippet('templates/buy/product', [
-				'product'     => $basic,
-				'description' => 'A discounted license for individuals and small teams with a',
-				'limit'       => 'total annual revenue/funding of less than ' . $revenueLimit
-			]) ?>
-
-			<?php snippet('templates/buy/product', [
-				'product'     => $enterprise,
-				'description' => 'The standard license for companies and organizations of any size.',
-				'limit'       => 'No&nbsp;revenue limit.'
-			]) ?>
-
-			<p class="text-xs text-center mb-6 color-gray-700" style="--span: 2 / -1; --span-md: 1">
-				Prices + VAT if applicable. With your purchase you agree to our <a class="underline" href="<?= url('license') ?>">License terms</a>
-			</p>
+	<div v-else class="columns mb-36" style="--columns: 3; --columns-md: 1; --gap: var(--spacing-6)">
+		<div class="py-6">
+			<?php snippet('templates/buy/checklist') ?>
 		</div>
 
-		<?php snippet('templates/buy/volume-discounts') ?>
+		<?php snippet('templates/buy/product', [
+			'product'     => $basic,
+			'description' => 'A discounted license for individuals and small teams with a',
+			'limit'       => 'total annual revenue/funding of less than ' . $revenueLimit
+		]) ?>
+
+		<?php snippet('templates/buy/product', [
+			'product'     => $enterprise,
+			'description' => 'The standard license for companies and organizations of any size.',
+			'limit'       => 'No&nbsp;revenue limit.'
+		]) ?>
+
+		<p class="text-xs text-center mb-6 color-gray-700" style="--span: 2 / -1; --span-md: 1">
+			Prices + VAT if applicable. With your purchase you agree to our <a class="underline" href="<?= url('license') ?>">License terms</a>
+		</p>
 	</div>
 
 	<?php snippet('templates/buy/good-cause') ?>
