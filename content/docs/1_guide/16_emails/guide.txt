@@ -112,6 +112,10 @@ $kirby->email([
 Welcome to Newsletter No. <?= $num ?>!
 ```
 
+<info>
+PHP may swallow a newline if a printed variable like `<?= $variable ?>` is placed at the end of a line. This is especially noticeable in plain-text email templates, so don't rely on an end-of-line `<?= ... ?>` alone when a preserved line break is important.
+</info>
+
 ### HTML & Plain Text
 
 ```php "/site/templates/emails/media.html.php"
