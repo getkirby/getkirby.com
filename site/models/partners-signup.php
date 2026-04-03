@@ -23,7 +23,6 @@ class PartnersSignupPage extends Page
 				throw new Exception('At least one of the URLs provided is not valid');
 			}
 		}
-
 	}
 
 	/**
@@ -56,6 +55,34 @@ class PartnersSignupPage extends Page
 		if (is_numeric($businessType) || preg_match('/^[0-9_\-@#$]/', $businessType)) {
 			throw new Exception('Please provide a valid business name');
 		}
-
 	}
+
+	public function validatePlan(string $plan): void
+	{
+		if (in_array($plan, ['regular', 'certified']) === false) {
+			throw new Exception('Please provide a valid plan');
+		}
+	}
+
+	public function validateDownloadLink(?string $link): void
+	{
+		if ($link && $link !== '' && V::url($link) === false) {
+			throw new Exception('Please provide a valid download URL or leave the field empty');
+		}
+	}
+
+	public function validateProjects(int $projects, $plan): void
+	{
+		$rules = [
+			'regular'   => 2,
+			'certified' => 4,
+		];
+
+		if ($projects < $rules[$plan]) {
+			throw new Exception(
+			'The number of projects does not match the minimum number of required projects for the selected plan'
+			);
+		}
+	}
+
 }
