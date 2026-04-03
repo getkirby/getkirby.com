@@ -101,7 +101,7 @@ All emails sent to and from the getkirby.com domain (except newsletters) are pro
 
 https://getkirby.com/kosmos
 
-If you sign up to our newsletter, your data is being collected by our newsletter service Newstroll.
+If you sign up to our newsletter, your data is being collected by our newsletter service Mailcoach.
 
 [Read more ›](#newsletter)
 
@@ -434,21 +434,19 @@ Fastmail is GDPR compliant. You can find the privacy policy of Fastmail here: <h
 
 ## Newsletter
 
-You can sign up to our monthly Kirby Kosmos newsletter to receive updates about Kirby, plugins, themes and other news around Kirby and the web. We never sign you up automatically. You have to use the sign up form on our website or during the Paddle checkout and confirm your subscription with the double-opt in process. To sign up we require and verify your email address and you can provide an optional name.
+You can sign up to our monthly Kirby Kosmos newsletter to receive updates about Kirby, plugins, themes and other news around Kirby and the web. We never sign you up automatically. You can sign up via the signup form on our website, or by activating the newletter checkbox during the Paddle checkout. You then need to confirm your subscription with the double-opt in process. To sign up, we require and verify your email address and you can provide an optional name.
 
-All subscriber data is collected by the German newsletter service Newstroll:
+All subscriber data is collected by the European newsletter service Mailcoach:
 
-*NEWSTROLL
-Marco Ahrendt
-Maustäle 18
-72793 Pfullingen
-Germany*
+*Mailcoach by Spatie BV
+Kruikstraat 22/12
+2018 Antwerp
+Belgium*
 
-Newstroll offers analytics tools to check if newsletters have been opened and links have been clicked. We have disabled tracking on the subscriber level and only get access to the analytics for the entire list of subscribers. We only use those analytics to check how interesting and relevant our newsletters are over time. We never use them to analyze individual subscribers.
 
-You can unsubscribe from our newsletter at any time. This can be done by using the unsubscribe link in every newsletter or by sending an email to <support@getkirby.com> and we will handle it for you.
+You can unsubscribe from our newsletter at any time using the unsubscribe link in every newsletter, or by sending an email to <support@getkirby.com> and we will handle it for you.
 
-Newstroll complies with GDPR. You can find our more about their privacy policy on their site (German): https://www.newstroll.de/datenschutz/
+Mailcoach is fully compliant with GDPR. You can find our more about their privacy policy on their site: https://www.mailcoach.app/privacy-policy/
 
 ## Your Kirby installation
 

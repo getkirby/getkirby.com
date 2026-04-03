@@ -3,19 +3,6 @@
 use Kirby\Cms\Page;
 use Kirby\Http\Remote;
 
-function customerSubscribe(string $email, bool $hasNewsletter): bool
-{
-	try {
-		newstroll()->subscriptions()->create(
-			$email,
-			option('newstroll.list'),
-			$hasNewsletter ? 'confirmed' : 'pending'
-		);
-		return true;
-	} catch (Throwable $e) {
-		return false;
-	}
-}
 
 function customerTransfer(
 	string $email,

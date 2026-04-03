@@ -14,7 +14,6 @@ return [
 	],
 	'keys'       => file_exists(__DIR__ . '/keys.php') ? require __DIR__ . '/keys.php' : require __DIR__ . '/keys.sample.php',
 	'meta'       => require __DIR__ . '/meta.php',
-	'newstroll'  => ['list' => 110866],
 	'panel'      => false,
 	'cookbook'   => require __DIR__ . '/cookbook.php',
 	'routes'     => require __DIR__ . '/routes.php',
