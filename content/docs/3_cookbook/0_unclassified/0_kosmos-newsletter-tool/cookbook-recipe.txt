@@ -88,11 +88,11 @@ fields:
     options:
       type: query
       query: site.categories.toBlocks
-      text: "{{item.icon}} {{item.category.value}}"
+      text: "{{ item.icon }} {{ item.category.value }}"
       value: "{{ item.id }}"
   summary:
     type: textarea
-    help: Add {{link}} as a placeholder that will be auto-replaced with the url from the link field
+    help: Add {{ link }} as a placeholder that will be auto-replaced with the url from the link field
 ```
 
 It uses a custom `create` dialog to create new bookmarks quickly, with as much content as time and mood allow at the moment of creating a new entry:
@@ -133,27 +133,16 @@ use Kirby\Cms\Layout;
 use Kirby\Cms\Layouts;
 use Kirby\Cms\Page;
 use Kirby\Cms\Pages;
-use Kirby\Http\Response;
-use Kirby\Toolkit\A;
 use Kirby\Toolkit\Str;
-use Kirby\Uuid\Uuid;
 
 class BookmarksPage extends Page
 {
 
 	/**
-	 * @param Page $parent
-	 * @param int $issue
 	 * @throws ErrorException
 	 */
 	public function createIssue(Page $parent, int $issue): void
 	{
-		/**
-		 * @var Kirby\Cms\Page $bookmark
-		 * @var Kirby\Cms\Page $parent
-		 * @var int $issue
-		 * @var Kirby\Cms\Page $kosmos
-		 */
 		if (($kosmos = $parent->childrenAndDrafts()->find('kosmos/' . Str::slug($issue))) &&
 			$kosmos->isDraft() === false) {
 			throw new ErrorException('Published Kosmos issue exists and cannot be overwritten');
@@ -179,7 +168,10 @@ class BookmarksPage extends Page
 					['text' => $this->heading($type), 'level' => 'h2']
 				);
 
-				// Create markdown blocks for individual bookmarks
+				$category  = $this->site()->categories()->toBlocks()->findBy('id', $type);
+				$blockType = $category?->category()->value() === 'event' ? 'event' : 'markdown';
+
+				// Create blocks for individual bookmarks
 				foreach ($items as $bookmark) {
 					if ($cover = $bookmark->cover()->toFile()) {
 						$blocks = $this->addBlock(
@@ -191,16 +183,14 @@ class BookmarksPage extends Page
 						);
 					}
 
-					$blockType = $type === 'b59bbed2-9d79-4642-a003-2f1c2507a1b9' ? 'event' : 'markdown';
-
 					if ($blockType === 'event') {
 						$blocks = $this->addBlock(
 							$blocks,
 							'event',
 							[
 								'date'  => $bookmark->date()->value(),
-								'link'  => $bookmark->link()->value,
-								'title' => $bookmark->title()->value,
+								'link'  => $bookmark->link()->value(),
+								'title' => $bookmark->title()->value(),
 							]
 						);
 					} else {
@@ -209,9 +199,8 @@ class BookmarksPage extends Page
 							'markdown',
 							['text' => Str::template(
 								$bookmark->summary()->value(),
-								['link' => $bookmark->link()->value(),]
-							),
-							]
+								['link' => $bookmark->link()->value()]
+							)]
 						);
 					}
 				}
@@ -243,13 +232,9 @@ class BookmarksPage extends Page
 		return $blocks->add($block);
 	}
 
-	/**
-	 * @param array $array
-	 * @return Layout
-	 */
 	private function createLayout(array $array): Layout
 	{
-		return new Kirby\Cms\Layout([
+		return new Layout([
 			'columns' => [
 				[
 					'width'  => '1/1',
@@ -259,10 +244,6 @@ class BookmarksPage extends Page
 		]);
 	}
 
-	/**
-	 * @param int $issue
-	 * @return Pages
-	 */
 	private function bookmarks(int $issue): Pages
 	{
 		return $this
@@ -272,10 +253,6 @@ class BookmarksPage extends Page
 			->filterBy('ready', true);
 	}
 
-	/**
-	 * @param string $typeId
-	 * @return string
-	 */
 	private function heading(string $typeId): string
 	{
 		$categories = $this->site()->categories()->toBlocks();
@@ -290,10 +267,8 @@ class BookmarksPage extends Page
 			try {
 				$kosmos->update([
 					'title'   => 'Kosmos ' . $issue,
-					'layouts' => json_encode
-					($layouts->toArray(), JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR),
-					'created' => date('Y-m-d', time()),
-
+					'layouts' => json_encode($layouts->toArray(), JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR),
+					'created' => date('Y-m-d'),
 				]);
 				return true;
 			} catch (Exception $e) {
@@ -308,9 +283,8 @@ class BookmarksPage extends Page
 				'content'  => [
 					'title'   => 'Kosmos ' . $issue,
 					'layouts' => json_encode($layouts->toArray(), JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR),
-					'created' => date('Y-m-d', time()),
+					'created' => date('Y-m-d'),
 				],
-
 			]);
 			return true;
 		} catch (Exception $e) {
