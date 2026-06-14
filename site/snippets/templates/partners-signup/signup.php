@@ -112,7 +112,7 @@
 							v-model="form.plan"
 							value="regular"
 							:disabled="view === 'details' && form.plan !== 'regular'"
-							<?php if ($plan !== 'certified'): ?>checked<?php endif ?>
+							<?php if (($data['plan'] ?? 'certified') !== 'certified'): ?>checked<?php endif ?>
 						/>
 						Regular partner
 					</label>
@@ -123,7 +123,7 @@
 							v-model="form.plan"
 							value="certified"
 							:disabled="view === 'details' && form.plan !== 'certified'"
-							<?php if ($plan === 'certified'): ?>checked<?php endif ?>
+							<?php if (($data['plan'] ?? 'certified') === 'certified'): ?>checked<?php endif ?>
 						/>
 						Certified partner
 					</label>
@@ -184,7 +184,7 @@
 				<h3 class="label">Your listing</h3>
 				<div class="rounded bg-light" style="padding: 2px">
 					<?php snippet('templates/partners-signup/preview', [
-						'plan'  => $plan,
+						'plan'  => $data['plan'] ?? 'certified',
 						'renew' => $renew
 					]) ?>
 				</div>
@@ -197,7 +197,7 @@
 		>
 			<div>
 				<?php snippet('templates/partners-signup/info', [
-					'plan'   => $plan,
+					'plan'   => $data['plan'] ?? 'certified',
 					'people' => $people ?? 1,
 					'renew'  => $renew
 				]) ?>
@@ -231,7 +231,7 @@
 			class="flex flex-column justify-between right-column"
 		>
 			<div>
-				<?php snippet('templates/partners-signup/form', ['plan' => $plan]) ?>
+				<?php snippet('templates/partners-signup/form', ['plan' => $data['plan'] ?? 'certified']) ?>
 			</div>
 
 			<div class="submit-buttons">
@@ -288,7 +288,7 @@ createApp({
 	form: {
 		// plan
 		people: "<?= $people ?? '1' ?>",
-		plan: "<?= $plan ?>",
+		plan: "<?= $data['plan'] ?? 'certified' ?>",
 
 		// listing fields
 		businessName: "<?= esc($data['title'] ?? '', 'js') ?>",

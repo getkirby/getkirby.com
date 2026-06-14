@@ -16,9 +16,9 @@ return function (App $kirby, Page $page) {
 		$timestamp    = get('timestamp');
 		$people       = get('people');
 		$peopleNum    = max(1, min(4, (int)$people));
-		$plan         = get('plan');
 		$renew        = get('renew');
 		$data         = [
+			'plan'       => get('plan') ?? 'certified',
 			'title'      => get('businessName'),
 			'business'   => get('businessType'),
 			'location'   => get('location'),
@@ -35,7 +35,7 @@ return function (App $kirby, Page $page) {
 
 		try {
 			// generate checkout link data
-			$product = Product::from('partner-' . $plan);
+			$product = Product::from('partner-' . $data['plan']);
 			$price   = $product->price();
 
 			$eurPrice       = $product->price('EUR')->regular($peopleNum);
@@ -79,26 +79,33 @@ return function (App $kirby, Page $page) {
 				exit('OK');
 			}
 
-			$page->validatePlan($plan);
-			$page->validateReferences($plan, $data['references']);
-			$page->validateWebsite($data['website']);
-			$page->validateEmail($data['email']);
-			$page->validateBusinessType($data['business']);
-			$page->validateProjects($data['projects'], $plan);
-			$page->validateDownloadLink($data['reviewRef']);
+			$errors   = $page->validate($data);
+			$messages = $page->getMessages();
+
+			if (count($errors)) {
+				foreach ($errors as $key => $value) {
+					// Clear form data for invalid fields
+					unset($data[$key]);
+				}
+
+				throw new Exception(
+					"This form contains the following errors:\n" .implode("\n", $messages)
+				);
+			}
+
+
 
 			// submit form values to the partner hub
 			$response = Remote::post(option('partners.signupUrl'), [
 				'data' => json_encode([
 					  'fields' => [
 						  'partnerstatus' => 'open',
-						  'plan'          => $plan,
 						  'people'        => $people,
 						  'price'         => $visitor->currencySign() . $localizedPrice,
 						  'checkout'      => $product->checkout('buy', $checkoutData),
 						  'created'       => date('Y-m-d H:i:s'),
 						  'ip'            => $kirby->visitor()->ip(hash: true),
-						  ... $data
+						  ...$data
 					  ]
 				  ], JSON_THROW_ON_ERROR),
 				'headers' => [
@@ -150,12 +157,12 @@ return function (App $kirby, Page $page) {
 	}
 
 	// prefill form for renewals
-	if ($renew = param('renew')) {
-		if ($partner = page('partners')->find($renew)) {
+	if (($renew = param('renew')) &&
+		($partner = page('partners')->find($renew))) {
 			$plan   = $partner->plan()->value();
 			$people = $partner->people()->value();
-		}
 	}
+
 	/**
 	 * @var Page|null $renew
 	 */
