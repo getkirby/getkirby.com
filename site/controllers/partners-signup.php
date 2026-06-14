@@ -18,18 +18,20 @@ return function (App $kirby, Page $page) {
 		$peopleNum    = max(1, min(4, (int)$people));
 		$plan         = get('plan');
 		$renew        = get('renew');
-		$businessName = get('businessName');
-		$businessType = get('businessType');
-		$location     = get('location');
-		$website      = get('website');
-		$address      = get('address');
-		$projects     = (int)get('projects');
-		$references   = get('references');
-		$downloadLink = get('downloadLink');
-		$name         = get('name');
-		$email        = get('email');
-		$discord      = get('discord');
-		$notes        = get('notes');
+		$data         = [
+			'title'      => get('businessName'),
+			'business'   => get('businessType'),
+			'location'   => get('location'),
+			'website'    => get('website'),
+			'address'    => get('address'),
+			'projects'   => get('projects'),
+			'references' => get('references'),
+			'reviewRef'  => get('downloadLink'),
+			'contact'    => get('name'),
+			'email'      => get('email'),
+			'discord'    => get('discord'),
+			'notes'      => get('notes'),
+		];
 
 		try {
 			// generate checkout link data
@@ -78,38 +80,27 @@ return function (App $kirby, Page $page) {
 			}
 
 			$page->validatePlan($plan);
-			$page->validateReferences($plan, $references);
-			$page->validateWebsite($website);
-			$page->validateEmail($email);
-			$page->validateBusinessType($businessType);
-			$page->validateProjects($projects, $plan);
-			$page->validateDownloadLink($downloadLink);
+			$page->validateReferences($plan, $data['references']);
+			$page->validateWebsite($data['website']);
+			$page->validateEmail($data['email']);
+			$page->validateBusinessType($data['business']);
+			$page->validateProjects($data['projects'], $plan);
+			$page->validateDownloadLink($data['reviewRef']);
 
 			// submit form values to the partner hub
 			$response = Remote::post(option('partners.signupUrl'), [
 				'data' => json_encode([
-					'fields' => [
-						'title'         => $businessName,
-						'partnerstatus' => 'open',
-						'plan'          => $plan,
-						'people'        => $people,
-						'price'         => $visitor->currencySign() . $localizedPrice,
-						'checkout'      => $product->checkout('buy', $checkoutData),
-						'business'      => $businessType,
-						'website'       => $website,
-						'contact'       => $name,
-						'email'         => $email,
-						'discord'       => $discord,
-						'location'      => $location,
-						'address'       => $address,
-						'projects'      => $projects,
-						'references'    => $references,
-						'reviewRef'     => $downloadLink,
-						'notes'         => $notes,
-						'created'       => date('Y-m-d H:i:s'),
-						'ip'            => $kirby->visitor()->ip(hash: true),
-					]
-				], JSON_THROW_ON_ERROR),
+					  'fields' => [
+						  'partnerstatus' => 'open',
+						  'plan'          => $plan,
+						  'people'        => $people,
+						  'price'         => $visitor->currencySign() . $localizedPrice,
+						  'checkout'      => $product->checkout('buy', $checkoutData),
+						  'created'       => date('Y-m-d H:i:s'),
+						  'ip'            => $kirby->visitor()->ip(hash: true),
+						  ... $data
+					  ]
+				  ], JSON_THROW_ON_ERROR),
 				'headers' => [
 					'Authorization' => 'Bearer ' . option('keys.partners.signupToken'),
 					'Content-Type'  => 'application/json',
@@ -176,5 +167,6 @@ return function (App $kirby, Page $page) {
 		'questions' => $page->find('answers')->children(),
 		'regular'   => Product::PartnerRegular,
 		'renew'     => $partner ?? null,
+		'data'      => $data ?? [],
 	];
 };

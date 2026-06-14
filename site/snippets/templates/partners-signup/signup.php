@@ -100,15 +100,7 @@
 		@submit="submit"
 	>
 		<input type="hidden" name="timestamp" :value="locale.timestamp">
-		<div style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0;">
-			<label for="date_of_birth">Date of birth</label>
-			<input
-				type="text"
-				aria-hidden="true"
-				tabindex="-1"
-				name="date_of_birth"
-			>
-		</div>
+
 		<div>
 			<fieldset class="mb-6">
 				<legend class="label">Partnership</legend>
@@ -299,24 +291,24 @@ createApp({
 		plan: "<?= $plan ?>",
 
 		// listing fields
-		businessName: "",
-		businessType: "",
-		location: "",
+		businessName: "<?= esc($data['title'] ?? '', 'js') ?>",
+		businessType: "<?= esc($data['business'] ?? '', 'js') ?>",
+		location: "<?= esc($data['location'] ?? '', 'js') ?>",
 
 		// business info
-		website: "",
-		address: "",
-		projects: "",
-		references: "",
-		downloadLink: "",
+		website: "<?= esc($data['website'] ?? '', 'js') ?>",
+		address: "<?= esc($data['address'] ?? '', 'js') ?>",
+		projects: "<?= esc($data['projects'] ?? '', 'js') ?>",
+		references: "<?= esc($data['references'] ?? '', 'js') ?>",
+		downloadLink: "<?= esc($data['reviewRef'] ?? '', 'js') ?>",
 
 		// contact info
-		name: "",
-		email: "",
-		discord: "",
+		name: "<?= esc($data['contact'] ?? '', 'js') ?>",
+		email: "<?= esc($data['email'] ?? '', 'js') ?>",
+		discord: "<?= esc($data['discord'] ?? '', 'js') ?>",
 
 		// notes
-		notes: "",
+		notes: "<?= esc($data['notes'] ?? '', 'js') ?>",
 	},
 
 	// dynamic props
