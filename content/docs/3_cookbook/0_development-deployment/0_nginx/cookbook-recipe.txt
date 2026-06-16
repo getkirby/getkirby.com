@@ -58,7 +58,7 @@ server {
   add_header X-Content-Type-Options nosniff;
 
   rewrite ^/(content|site|kirby)/(.*)$ /error last;
-  rewrite ^/\.(?!well-known/) /error last;
+  rewrite /\.(?!well-known/) /error last;
   rewrite ^/(?!app\.webmanifest)[^/]+$ /index.php last;
 
   location / {
