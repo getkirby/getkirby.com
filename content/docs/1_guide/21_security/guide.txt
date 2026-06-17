@@ -206,13 +206,17 @@ The Panel also has a built-in **brute-force protection** for the Panel login. It
 Kirby internally relies on the following values:
 
 - The (link: docs/reference/system/options/content#salt-for-drafts-and-media-files text: `content.salt` option) is used to generate secure preview and media URLs that should not be guessable by external visitors.
-- The (link: docs/reference/system/options/cookie#cookie-key text: `Kirby\Http\Cookie::$key` option) is used to sign (or authenticate) cookie values to prevent easy tampering with cookie values set by the backend.
+- The (link: docs/reference/system/options/cookie#cookie-key text: `cookie.key` option) is used to sign (or authenticate) cookie values to prevent easy tampering with cookie values set by the backend.
+
+<since v="5.4.4">
+The `cookie.key` option was added in Kirby 5.4.5 and 4.9.4. In previous releases, the cookie key needed to be set via the `Kirby\Http\Cookie::$key` property.
+</since>
 
 Kirby cannot set secure defaults for these options. This is because there is no install step during which Kirby could generate and persist random values and because config files are typically kept in version control and cannot be written by the system without causing merge conflicts.
 
 Without secure random values for these options, attackers can access media files and previews of drafts and changes without authorization.
 
-**We therefore recommend to set the `content.salt` and `Kirby\Http\Cookie::$key` options to long random strings for all of your sites.**
+**We therefore recommend to set the `content.salt` and `cookie.key` options to long random strings for all of your sites.**
 
 ## Disable the Vue template compiler
 
