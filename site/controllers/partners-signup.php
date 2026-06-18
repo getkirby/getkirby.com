@@ -6,14 +6,12 @@ use Kirby\Buy\Product;
 use Kirby\Cms\App;
 use Kirby\Cms\Page;
 use Kirby\Discord\Discord;
-use Kirby\Honey\Time;
 use Kirby\Http\Remote;
 
 return function (App $kirby, Page $page) {
 	// submitted form
 	if ($kirby->request()->is('POST') === true) {
 		$visitor      = Paddle::visitor();
-		$timestamp    = get('timestamp');
 		$people       = get('people');
 		$peopleNum    = max(1, min(4, (int)$people));
 		$renew        = get('renew');
@@ -67,11 +65,6 @@ return function (App $kirby, Page $page) {
 				go($checkout);
 				return;
 			}
-
-			// prevent submissions faster than 1 minute (spam protection)
-			// (only needed for new applications because otherwise
-			// there will be a redirect to Paddle)
-			Time::validate($timestamp);
 
 			// check anti-spam honeypot
 			if (get('date_of_birth')) {
