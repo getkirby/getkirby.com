@@ -168,6 +168,22 @@ Check if your provider/system administrator has disabled (link: https://wiki.apa
 Options -Indexes
 ```
 
+### Prevent override of the `SERVER_NAME`
+
+To construct site URLs, Kirby by default relies on the `SERVER_NAME` that is configured for the web server.
+
+Some web servers allow requests to override the `SERVER_NAME` from the HTTP `Host` request header. This must **not** be allowed as it can be abused by attackers.
+
+In Apache you can prevent this behavior with the following option:
+
+```
+UseCanonicalName On
+```
+
+With other web servers like nginx or Caddy, make sure that you don't set the `SERVER_NAME` variable to an untrusted value coming from the request.
+
+In case you cannot update your web server configuration, please ensure to set a fixed valid and trusted URL in the (link: docs/reference/system/options/url#hard-coded-base-url text: Kirby configuration).
+
 ### Disable MIME type detection
 
 If a file has an unknown file type, the Apache server does not attach a `Content-Type` header to the file response by default. Browsers then try to auto-detect the file type, which can cause vulnerabilities from malicious file uploads.
