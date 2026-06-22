@@ -99,7 +99,7 @@ class PartnersSignupPage extends Page
 		return true;
 	}
 
-	public function validateProjects(int $projects, $plan): string|bool
+	public function validateProjects(int $projects, string $plan): string|bool
 	{
 		$rules = [
 			'regular'   => 2,

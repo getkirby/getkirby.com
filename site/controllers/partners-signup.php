@@ -24,7 +24,7 @@ return function (App $kirby, Page $page) {
 			'location'   => get('location'),
 			'website'    => get('website'),
 			'address'    => get('address'),
-			'projects'   => (int) get('projects'),
+			'projects'   => (int)get('projects'),
 			'references' => get('references'),
 			'reviewRef'  => get('downloadLink'),
 			'contact'    => get('name'),
@@ -89,7 +89,7 @@ return function (App $kirby, Page $page) {
 				}
 
 				throw new Exception(
-					"This form contains the following errors:\n" . 	implode("\n" , $messages)
+					"This form contains the following errors:\n" . implode("\n" , $messages)
 				);
 			}
 
@@ -161,8 +161,8 @@ return function (App $kirby, Page $page) {
 		($renew = param('renew')) &&
 		($partner = page('partners')->find($renew))
 	) {
-			$plan   = $partner->plan()->value();
-			$people = $partner->people()->value();
+		$plan   = $partner->plan()->value();
+		$people = $partner->people()->value();
 	}
 
 	/**
