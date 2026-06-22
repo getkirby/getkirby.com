@@ -296,8 +296,8 @@ createApp({
 	// user-generated props
 	form: {
 		// plan
-		people: "<?= $people ?? '1' ?>",
-		plan: "<?= $data['plan'] ?? 'certified' ?>",
+		people: "<?= esc($people ?? '1', 'js') ?>",
+		plan: "<?= esc($data['plan'] ?? 'certified', 'js') ?>",
 
 		// listing fields
 		businessName: "<?= esc($data['title'] ?? '', 'js') ?>",
