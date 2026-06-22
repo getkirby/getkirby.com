@@ -169,7 +169,7 @@ class PartnerPage extends DefaultPage
 			$plugins = array_filter($plugins);
 		}
 
-		$plugins ??= A::slice($json['plugins'] ?? [], 0, 5);
+		$plugins ??= $json['plugins'] ?? [];
 		$plugins   = A::map(
 			array_keys($plugins),
 			fn($plugin) => new Page([
