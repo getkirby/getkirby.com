@@ -112,15 +112,4 @@ class PartnersSignupPage extends Page
 
 		return true;
 	}
-
-	public function getMessages(): array
-	{
-		return $this->messages;
-	}
-
-	private function resetMessages(): void
-	{
-		$this->messages = [];
-	}
-
 }
