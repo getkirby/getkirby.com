@@ -79,17 +79,16 @@ return function (App $kirby, Page $page) {
 				exit('OK');
 			}
 
-			$errors   = $page->validate($data);
-			$messages = $page->getMessages();
+			$errors = $page->validate($data);
 
 			if (count($errors)) {
-				foreach ($errors as $key => $value) {
+				foreach ($errors as $field => $message) {
 					// Clear form data for invalid fields
-					unset($data[$key]);
+					unset($data[$field]);
 				}
 
 				throw new Exception(
-					"This form contains the following errors:\n" . implode("\n" , $messages)
+					"This form contains the following errors:\n" . implode("\n" , array_values($errors))
 				);
 			}
 
