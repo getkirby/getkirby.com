@@ -24,7 +24,7 @@ return function (App $kirby, Page $page) {
 			'location'   => get('location'),
 			'website'    => get('website'),
 			'address'    => get('address'),
-			'projects'   => get('projects'),
+			'projects'   => (int) get('projects'),
 			'references' => get('references'),
 			'reviewRef'  => get('downloadLink'),
 			'contact'    => get('name'),
@@ -89,7 +89,7 @@ return function (App $kirby, Page $page) {
 				}
 
 				throw new Exception(
-					"This form contains the following errors:\n" .implode("\n", $messages)
+					"This form contains the following errors:\n" . 	implode("\n" , $messages)
 				);
 			}
 
@@ -98,16 +98,16 @@ return function (App $kirby, Page $page) {
 			// submit form values to the partner hub
 			$response = Remote::post(option('partners.signupUrl'), [
 				'data' => json_encode([
-					  'fields' => [
-						  'partnerstatus' => 'open',
-						  'people'        => $people,
-						  'price'         => $visitor->currencySign() . $localizedPrice,
-						  'checkout'      => $product->checkout('buy', $checkoutData),
-						  'created'       => date('Y-m-d H:i:s'),
-						  'ip'            => $kirby->visitor()->ip(hash: true),
-						  ...$data
-					  ]
-				  ], JSON_THROW_ON_ERROR),
+					'fields' => [
+						'partnerstatus' => 'open',
+						'people'        => $people,
+						'price'         => $visitor->currencySign() . $localizedPrice,
+						'checkout'      => $product->checkout('buy', $checkoutData),
+						'created'       => date('Y-m-d H:i:s'),
+						'ip'            => $kirby->visitor()->ip(hash: true),
+						...$data
+					]
+				], JSON_THROW_ON_ERROR),
 				'headers' => [
 					'Authorization' => 'Bearer ' . option('keys.partners.signupToken'),
 					'Content-Type'  => 'application/json',
@@ -157,8 +157,10 @@ return function (App $kirby, Page $page) {
 	}
 
 	// prefill form for renewals
-	if (($renew = param('renew')) &&
-		($partner = page('partners')->find($renew))) {
+	if (
+		($renew = param('renew')) &&
+		($partner = page('partners')->find($renew))
+	) {
 			$plan   = $partner->plan()->value();
 			$people = $partner->people()->value();
 	}
