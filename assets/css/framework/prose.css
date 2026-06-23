@@ -128,13 +128,15 @@
 	font-size: 1.5em;
 	line-height: 1.15em;
 }
-.prose * + h2 {
+.prose * + h2,
+.prose * + .since:has(> div > h2:first-child) {
 	margin-top: 2.5em;
 }
 .prose h3 {
 	font-size: 1.25em;
 }
-.prose * + h3 {
+.prose * + h3,
+.prose * + .since:has(> div > h3:first-child) {
 	margin-top: 2.25em;
 }
 .prose h2 + h3 {
@@ -143,7 +145,8 @@
 .prose h4 {
 	font-size: 1.1em;
 }
-.prose * + h4 {
+.prose * + h4,
+.prose * + .since:has(> div > h4:first-child) {
 	margin-top: 2em;
 }
 .prose h4 + * {
@@ -152,7 +155,8 @@
 .prose h5 {
 	font-size: 1em;
 }
-.prose * + h5 {
+.prose * + h5,
+.prose * + .since:has(> div > h5:first-child) {
 	margin-top: 2em;
 }
 
