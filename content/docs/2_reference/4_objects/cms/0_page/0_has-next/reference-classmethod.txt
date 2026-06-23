@@ -8,6 +8,8 @@ if ($page->hasNext()) {
 
 ### With collection as argument
 
+By default, this method checks the page's siblings collection. Collection operations such as sorting, filtering, adding or merging return a new collection and don't change the page's sibling context. Pass the resulting collection to check whether there is a next page in that specific collection.
+
 ```php
 $collection = $page->siblings()->sortBy('date', 'desc');
 
