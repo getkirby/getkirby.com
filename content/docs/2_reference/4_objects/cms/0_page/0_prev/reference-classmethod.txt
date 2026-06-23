@@ -8,6 +8,8 @@ Examples:
 
 ### With collection as argument
 
+By default, this method uses the page's siblings collection. Collection operations such as sorting, filtering, adding or merging return a new collection and don't change the page's sibling context. Pass the resulting collection to get the previous page in that specific collection.
+
 ```php
 <?php
 $collection = $page->siblings()->listed()->sortBy('date', 'desc');

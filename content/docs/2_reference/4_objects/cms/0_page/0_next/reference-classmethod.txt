@@ -6,7 +6,9 @@ Examples:
 <?php endif ?>
 ```
 
-### Pass a collection
+### With collection as argument
+
+By default, this method uses the page's siblings collection. Collection operations such as sorting, filtering, adding or merging return a new collection and don't change the page's sibling context. Pass the resulting collection to get the next page in that specific collection.
 
 ```php
 <?php
