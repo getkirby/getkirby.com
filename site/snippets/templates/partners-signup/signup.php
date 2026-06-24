@@ -109,6 +109,7 @@
 				name="date_of_birth"
 			>
 		</div>
+
 		<div>
 			<fieldset class="mb-6">
 				<legend class="label">Partnership</legend>
@@ -120,7 +121,7 @@
 							v-model="form.plan"
 							value="regular"
 							:disabled="view === 'details' && form.plan !== 'regular'"
-							<?php if ($plan !== 'certified'): ?>checked<?php endif ?>
+							<?php if (($data['plan'] ?? 'certified') !== 'certified'): ?>checked<?php endif ?>
 						/>
 						Regular partner
 					</label>
@@ -131,7 +132,7 @@
 							v-model="form.plan"
 							value="certified"
 							:disabled="view === 'details' && form.plan !== 'certified'"
-							<?php if ($plan === 'certified'): ?>checked<?php endif ?>
+							<?php if (($data['plan'] ?? 'certified') === 'certified'): ?>checked<?php endif ?>
 						/>
 						Certified partner
 					</label>
@@ -192,7 +193,7 @@
 				<h3 class="label">Your listing</h3>
 				<div class="rounded bg-light" style="padding: 2px">
 					<?php snippet('templates/partners-signup/preview', [
-						'plan'  => $plan,
+						'plan'  => $data['plan'] ?? 'certified',
 						'renew' => $renew
 					]) ?>
 				</div>
@@ -205,7 +206,7 @@
 		>
 			<div>
 				<?php snippet('templates/partners-signup/info', [
-					'plan'   => $plan,
+					'plan'   => $data['plan'] ?? 'certified',
 					'people' => $people ?? 1,
 					'renew'  => $renew
 				]) ?>
@@ -239,7 +240,7 @@
 			class="flex flex-column justify-between right-column"
 		>
 			<div>
-				<?php snippet('templates/partners-signup/form', ['plan' => $plan]) ?>
+				<?php snippet('templates/partners-signup/form', ['plan' => $data['plan'] ?? 'certified']) ?>
 			</div>
 
 			<div class="submit-buttons">
@@ -295,28 +296,28 @@ createApp({
 	// user-generated props
 	form: {
 		// plan
-		people: "<?= $people ?? '1' ?>",
-		plan: "<?= $plan ?>",
+		people: "<?= esc($people ?? '1', 'js') ?>",
+		plan: "<?= esc($data['plan'] ?? 'certified', 'js') ?>",
 
 		// listing fields
-		businessName: "",
-		businessType: "",
-		location: "",
+		businessName: "<?= esc($data['title'] ?? '', 'js') ?>",
+		businessType: "<?= esc($data['business'] ?? '', 'js') ?>",
+		location: "<?= esc($data['location'] ?? '', 'js') ?>",
 
 		// business info
-		website: "",
-		address: "",
-		projects: "",
-		references: "",
-		downloadLink: "",
+		website: "<?= esc($data['website'] ?? '', 'js') ?>",
+		address: "<?= esc($data['address'] ?? '', 'js') ?>",
+		projects: "<?= esc($data['projects'] ?? '', 'js') ?>",
+		references: "<?= esc($data['references'] ?? '', 'js') ?>",
+		downloadLink: "<?= esc($data['reviewRef'] ?? '', 'js') ?>",
 
 		// contact info
-		name: "",
-		email: "",
-		discord: "",
+		name: "<?= esc($data['contact'] ?? '', 'js') ?>",
+		email: "<?= esc($data['email'] ?? '', 'js') ?>",
+		discord: "<?= esc($data['discord'] ?? '', 'js') ?>",
 
 		// notes
-		notes: "",
+		notes: "<?= esc($data['notes'] ?? '', 'js') ?>",
 	},
 
 	// dynamic props

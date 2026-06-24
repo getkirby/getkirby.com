@@ -16,24 +16,26 @@ return function (App $kirby, Page $page) {
 		$timestamp    = get('timestamp');
 		$people       = get('people');
 		$peopleNum    = max(1, min(4, (int)$people));
-		$plan         = get('plan');
 		$renew        = get('renew');
-		$businessName = get('businessName');
-		$businessType = get('businessType');
-		$location     = get('location');
-		$website      = get('website');
-		$address      = get('address');
-		$projects     = (int)get('projects');
-		$references   = get('references');
-		$downloadLink = get('downloadLink');
-		$name         = get('name');
-		$email        = get('email');
-		$discord      = get('discord');
-		$notes        = get('notes');
+		$data         = [
+			'plan'       => get('plan') ?? 'certified',
+			'title'      => get('businessName'),
+			'business'   => get('businessType'),
+			'location'   => get('location'),
+			'website'    => get('website'),
+			'address'    => get('address'),
+			'projects'   => (int)get('projects'),
+			'references' => get('references'),
+			'reviewRef'  => get('downloadLink'),
+			'contact'    => get('name'),
+			'email'      => get('email'),
+			'discord'    => get('discord'),
+			'notes'      => get('notes'),
+		];
 
 		try {
 			// generate checkout link data
-			$product = Product::from('partner-' . $plan);
+			$product = Product::from('partner-' . $data['plan']);
 			$price   = $product->price();
 
 			$eurPrice       = $product->price('EUR')->regular($peopleNum);
@@ -77,37 +79,32 @@ return function (App $kirby, Page $page) {
 				exit('OK');
 			}
 
-			$page->validatePlan($plan);
-			$page->validateReferences($plan, $references);
-			$page->validateWebsite($website);
-			$page->validateEmail($email);
-			$page->validateBusinessType($businessType);
-			$page->validateProjects($projects, $plan);
-			$page->validateDownloadLink($downloadLink);
+			$errors = $page->validate($data);
+
+			if (count($errors)) {
+				foreach ($errors as $field => $message) {
+					// Clear form data for invalid fields
+					unset($data[$field]);
+				}
+
+				throw new Exception(
+					"This form contains the following errors:\n" . implode("\n" , array_values($errors))
+				);
+			}
+
+
 
 			// submit form values to the partner hub
 			$response = Remote::post(option('partners.signupUrl'), [
 				'data' => json_encode([
 					'fields' => [
-						'title'         => $businessName,
 						'partnerstatus' => 'open',
-						'plan'          => $plan,
 						'people'        => $people,
 						'price'         => $visitor->currencySign() . $localizedPrice,
 						'checkout'      => $product->checkout('buy', $checkoutData),
-						'business'      => $businessType,
-						'website'       => $website,
-						'contact'       => $name,
-						'email'         => $email,
-						'discord'       => $discord,
-						'location'      => $location,
-						'address'       => $address,
-						'projects'      => $projects,
-						'references'    => $references,
-						'reviewRef'     => $downloadLink,
-						'notes'         => $notes,
 						'created'       => date('Y-m-d H:i:s'),
 						'ip'            => $kirby->visitor()->ip(hash: true),
+						...$data
 					]
 				], JSON_THROW_ON_ERROR),
 				'headers' => [
@@ -159,12 +156,14 @@ return function (App $kirby, Page $page) {
 	}
 
 	// prefill form for renewals
-	if ($renew = param('renew')) {
-		if ($partner = page('partners')->find($renew)) {
-			$plan   = $partner->plan()->value();
-			$people = $partner->people()->value();
-		}
+	if (
+		($renew = param('renew')) &&
+		($partner = page('partners')->find($renew))
+	) {
+		$plan   = $partner->plan()->value();
+		$people = $partner->people()->value();
 	}
+
 	/**
 	 * @var Page|null $renew
 	 */
@@ -176,5 +175,6 @@ return function (App $kirby, Page $page) {
 		'questions' => $page->find('answers')->children(),
 		'regular'   => Product::PartnerRegular,
 		'renew'     => $partner ?? null,
+		'data'      => $data ?? [],
 	];
 };
