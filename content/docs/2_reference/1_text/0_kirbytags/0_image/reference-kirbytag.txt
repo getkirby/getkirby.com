@@ -37,6 +37,16 @@ You can customize the defaults of this tag's attributes via the (link: docs/refe
 (\image: myawesomepicture.jpg)
 ```
 
+### Image from the site files
+
+To embed an image stored directly in the `/content` folder, use only its filename. The `/content` part of the path is assumed:
+
+```kirbytext
+(\image: myawesomepicture.jpg)
+```
+
+Kirby first searches the current page for the file. If the page has a file with the same filename, it takes precedence over the site file.
+
 ### Image of another internal page
 
 ```kirbytext
