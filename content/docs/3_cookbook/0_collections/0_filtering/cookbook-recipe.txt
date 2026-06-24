@@ -272,15 +272,21 @@ $events = page('events')
 ```
 ## Filtering by the `pages`, `files` or `users` field
 
-The (link: docs/reference/panel/fields/pages text: `pages`), (link: docs/reference/panel/fields/files text: `files`) and (link: docs/reference/panel/fields/users text: `users`) fields store their content in `yaml` format. Also, these fields can contain one or multiple entries. Using the simple `filterby()` method is therefore not useful to filter a collection by these field types and we have to use the [`filter()`](/docs/reference/objects/pages/filter) method.
+The (link: docs/reference/panel/fields/pages text: `pages`), (link: docs/reference/panel/fields/files text: `files`) and (link: docs/reference/panel/fields/users text: `users`) fields store one or multiple entries in `yaml` format. Using the simple `filterBy()` method is therefore not useful to filter a collection by these field types and we have to use the [`filter()`](/docs/reference/objects/pages/filter) method.
 
 Let's first understand what these fields store in the content files:
 
-- The `pages` field stores a single or multiple (link: docs/reference/objects/page/id text: page ids)
-- The `files` field stores a single or multiple (link: docs/reference/objects/file/id text: file ids)
-- The `users` field stores a single or multiple (link: docs/reference/objects/user/email text: user emails)
+By default, every selected page, file or user is referenced by its UUID. You can set the `store` option to `id` to store IDs instead:
 
-Now We can  use this information to filter pages or other collections by content stored in these fields.
+```yaml
+related:
+  type: pages
+  store: id
+```
+
+If (link: docs/reference/system/options/content#uuid-generation text: UUIDs are disabled globally), Kirby automatically stores IDs instead.
+
+The `toPages()`, `toFiles()` and `toUsers()` field methods used in the following examples support both UUIDs and IDs.
 
 ### Examples
 
@@ -324,4 +330,3 @@ While these examples showcase pages collections, the same syntax can be applied 
 ## Filtering using the search method
 
 Another option of filtering collections is by using the `search()` method. There is another cookbook recipe on (link: ./search text: how to add a search to your site).
-
