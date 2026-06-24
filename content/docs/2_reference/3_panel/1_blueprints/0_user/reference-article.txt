@@ -119,6 +119,67 @@ image:
   back: "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);"
 ```
 
+## Options
+
+With options, you can control which actions are available for users with this role. Options can be set for all users or individually per user role.
+
+Role-specific options take precedence over the corresponding (link: #permissions text: permissions). If no option matches, Kirby falls back to the permissions of the current user.
+
+| Option | Value |
+|----    | ---- |
+| `access` | `true`/`false` |
+| `changeEmail` | `true`/`false` |
+| `changeLanguage` | `true`/`false` |
+| `changeName` | `true`/`false` |
+| `changePassword` | `true`/`false` |
+| `changeRole` | `true`/`false` |
+| `create` | `true`/`false` |
+| `delete` | `true`/`false` |
+| `list` | `true`/`false` |
+| `update` | `true`/`false` |
+
+(docs: permissions/option-permissions)
+
+### Creating users with a role
+
+To only allow managers to create users with the `assistant` role:
+
+```yaml "/site/blueprints/users/assistant.yml"
+title: Assistant
+
+options:
+  create:
+    "*": false
+    manager: true
+```
+
+### Changing roles
+
+When changing a user's role, Kirby checks:
+
+1. The current role's `options.changeRole`
+2. The new role's `options.create`
+
+To allow managers to change assistants to editors:
+
+```yaml "/site/blueprints/users/assistant.yml"
+title: Assistant
+
+options:
+  changeRole:
+    "*": false
+    manager: true
+```
+
+```yaml "/site/blueprints/users/editor.yml"
+title: Editor
+
+options:
+  create:
+    "*": false
+    manager: true
+```
+
 ## Permissions
 
 The `permissions` option can be used to restrict access to certain actions for the particular role. By default, all actions are allowed and you can deny them by passing `false`.
