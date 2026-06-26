@@ -60,7 +60,7 @@ return [
 			$postalCode = get('postalCode');
 			$state      = get('state');
 			$street     = get('street');
-			$quantity   = Product::restrictQuantity(get('quantity', 1));
+			$quantity   = Product::restrictQuantity((int)get('quantity', 1));
 			$vatId      = get('vatId');
 
 			try {
