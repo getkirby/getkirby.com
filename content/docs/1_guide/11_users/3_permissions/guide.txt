@@ -114,6 +114,31 @@ options:
     editor: true
 ```
 
+The `options` feature works the same way across all blueprint types (site, pages, files and users).
+
+### User options
+
+In the context of user roles, there are two users to keep in mind: The acting user who performs an action and the target user account (model) on which the action is performed. Like with the other models, the options you define in a role blueprint refer to options that are available for target user accounts of that role:
+
+```yaml "/site/blueprints/users/admin.yml"
+options:
+  # only allow admin users to change admin emails and passwords
+  changeEmail:
+    *: false
+    admin: true
+  changePassword:
+    *: false
+    admin: true
+```
+
+```yaml "/site/blueprints/users/editor.yml"
+options:
+  # only allow managers to delete editors
+  update:
+    *: false
+    manager: true
+```
+
 ## Controlling permissions with hooks
 
 If the blueprint-based permission settings are too limiting for your project, you can get more flexibility by creating your own permission checks with `before` hooks for various actions.
