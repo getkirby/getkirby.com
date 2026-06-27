@@ -55,7 +55,7 @@ If you use the (link: docs/reference/templates/helpers/csrf text: `csrf()` helpe
 
 ### Licensing
 
-To activate your license, the Kirby backend connects to our licensing server **once** to verify your license. When you activate your license or license upgrade, the following information is transmitted to the server:
+To activate your license, the Kirby backend connects to our licensing server to verify your license. This happens **a single time** for paid licenses. When you activate your license or license upgrade, the following information is transmitted to the server:
 
 - the entered license code,
 - the email address connected to the license code and
@@ -69,7 +69,7 @@ If you don't want Kirby to connect to our server, you can activate your license 
 
 #### Development licenses
 
-A (link: license text: free development license) allows you to run an installation for development that is not publicly accessible. Unlike a paid license, which is only activated once, a development license is automatically **renewed regularly**. For this, the Kirby backend connects to our license hub at (link: https://hub.getkirby.com text: hub.getkirby.com) from time to time to renew the development license.
+A (link: license#free-licenses__usage-for-a-development-installation text: free development license) allows you to run an installation for development that is not publicly accessible. Unlike a paid license, which is only activated once, a development license is automatically **renewed regularly**. For this, the Kirby backend connects to our license hub at (link: https://hub.getkirby.com text: hub.getkirby.com) from time to time to renew the development license.
 
 Because a development license may only be used for installations that are not publicly accessible, our hub may also check whether your installation can be reached from the public internet when it renews the license. For this check, the hub connects to the index URL of your installation. No personal or site data beyond the information listed above is transmitted in the process.
 

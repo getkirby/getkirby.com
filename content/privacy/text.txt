@@ -45,6 +45,8 @@ In addition, we use YouTube and CARTO to display videos and maps with your conse
 
 If you voluntarily contribute website content such as plugin profiles, cookbook recipes or an entry on our community map, we use the personal data in such content for display on this website according to the respective purpose.
 
+In our licensing hub we keep licensing information to enable license activations and upgrades and to check the license status of Kirby projects.
+
 [Read more ›](#website)
 
 ### Personal Demo
@@ -141,7 +143,9 @@ Please tell us first, so we have a chance to address your concerns. If we fail i
 
 Our license hub at <https://hub.getkirby.com> keeps the information about Kirby licenses. We only store the information that is necessary to enable license activations and upgrades and to check the license status of Kirby projects. Specifically we store the customer's email address, the order number(s), the license type(s) and license code(s), the dates of purchase and first activation, the activated website domain(s) and upgrade status.
 
-For development licenses, our license hub also processes data when a Kirby installation renews its development license, which happens regularly. During these renewals we receive the development license code, the email address connected to the license and the domain of the installation. To make sure that development licenses are only used for installations that are not publicly accessible (as required by our (link: license text: license terms)), our hub may also check whether the installation is publicly reachable by connecting to its domain.
+We collect this data during the checkout and activation processes. We delete the data as soon as it is no longer needed for the mentioned purposes (for example when a license is terminated).
+
+Development licenses are not stored on our hub server, but dynamically processed during issuing and the automated regular renewal. During these issue and renewal actions we receive and process the domain of the installation only. To make sure that development licenses are only used for installations that are not publicly accessible (as required by our (link: license text: license terms)), our hub may also check whether the installation is publicly reachable by connecting to its domain. We only log the status result and never store any personal data that may be contained in the web response.
 
 The basis for data processing is Art. 6 (1) (b) GDPR, which allows the processing of data to fulfill a contract or for measures preliminary to a contract.
 
