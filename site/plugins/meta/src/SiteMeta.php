@@ -33,6 +33,7 @@ class SiteMeta
 	public static function sitemap(): Response
 	{
 		$kirby   = App::instance();
+		$site    = $kirby->site();
 		$sitemap = [];
 		$cache   = $kirby->cache('pages');
 		$id      = 'sitemap.xml';
@@ -48,7 +49,7 @@ class SiteMeta
 				$pages = $pages();
 			}
 
-			foreach ($kirby->site()->index() as $item) {
+			foreach ($site->index() as $item) {
 
 				if (in_array($item->intendedTemplate()->name(), $templates) === true) {
 					continue;
@@ -58,10 +59,18 @@ class SiteMeta
 					continue;
 				}
 
+				$url = $item->url();
+
+				// skip all remaining external links that weren't filtered
+				// out by template already
+				if (str_starts_with($url, $site->url()) === false) {
+					continue;
+				}
+
 				$meta = $item->meta();
 
 				$sitemap[] = '<url>';
-				$sitemap[] = '  <loc>' . Xml::encode($item->url()) . '</loc>';
+				$sitemap[] = '  <loc>' . Xml::encode($url) . '</loc>';
 				$sitemap[] = '  <priority>' . number_format($meta->priority(), 1, '.', '') . '</priority>';
 
 				$changefreq = $meta->changefreq();

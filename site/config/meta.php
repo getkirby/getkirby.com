@@ -14,11 +14,27 @@ return [
 			return $pages;
 		},
 		'templates' => [
+			'answer',
+			'answers',
+			'brand',
+			'brands',
 			'error',
+			'event',
+			'gallery-item',
+			'home-story',
+			'legacy',
 			'link',
+			'partners-lead-success',
+			'partners-signup-success',
 			'reference-classes',
 			'reference-shortlink',
-			'separator'
+			'search',
+			'separator',
+			'theme',
+			'theme-developer',
+			'voice',
+			'voices',
+			'year',
 		]
 	],
 ];
