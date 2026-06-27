@@ -34,7 +34,7 @@ if ($deprecated = $page->deprecated()) {
 	}
 
 	if ($description = $deprecated->description()) {
-		$html[] = $description->convertToMarkdown();
+		$html[] = kirbytagsToMarkdown($description);
 	}
 
 	$html[] = '</deprecation-warning>';

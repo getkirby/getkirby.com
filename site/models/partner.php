@@ -47,7 +47,7 @@ class PartnerPage extends DefaultPage
 				'parent'   => $this,
 				'url'      => $this->url() . '/' . $slug,
 				'model'    => 'gallery-item',
-				'template' => 'gallery-items',
+				'template' => 'gallery-item',
 				'content'  => [
 					'title'    => $galleryItem['title'],
 					'info'     => $galleryItem['info'],

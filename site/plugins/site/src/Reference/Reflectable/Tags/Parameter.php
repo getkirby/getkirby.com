@@ -84,7 +84,13 @@ class Parameter
 
 		// get the default value and clean it up
 		$default = $parameter->getDefaultValue();
-		$default = var_export($default, true);
+
+		if (is_object($default)) {
+			$default = 'new ' . get_class($default) . '()';
+		} else {
+			$default = var_export($default, true);
+		}
+
 		$default = str_replace('NULL', 'null', $default);
 		$default = str_replace('array (' . PHP_EOL . ')', '[ ]', $default);
 
