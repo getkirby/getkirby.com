@@ -26,7 +26,9 @@ class PartnersPage extends DefaultPage
 			return $this->children;
 		}
 
+		$data     = [];
 		$partners = [];
+
 		try {
 			$request = Remote::get(
 				option('partners.url') . '?apiToken=' .
