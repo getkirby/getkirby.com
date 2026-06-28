@@ -5,7 +5,7 @@ Title: Kirby End User License Agreement
 Validity:
 
 **Effective since:** Publication on the Kirby website on July 2, 2026
-This version applies to all licenses that were purchased on or after November 28, 2023. The version (link: license/2023-11-28 text: 2023-11-28) is still valid for Extension Demos (sites showcasing a plugin or theme) that were set up before November 12, 2024.
+This version applies to all licenses that were purchased on or after November 28, 2023.
 
 ----
 
