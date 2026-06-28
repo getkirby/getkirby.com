@@ -134,7 +134,7 @@ options:
 ```yaml "/site/blueprints/users/editor.yml"
 options:
   # only allow managers to delete editors
-  update:
+  delete:
     *: false
     manager: true
 ```
