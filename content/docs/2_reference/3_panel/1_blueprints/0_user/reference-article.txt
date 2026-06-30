@@ -189,11 +189,11 @@ The `permissions` option can be used to restrict access to certain actions for t
 | Option | Value |
 |----    | ---- |
 | `account` | `true`/`false` |
+| `languages` | `true`/`false` |
 | `panel` | `true`/`false` |
-| `users` | `true`/`false`|
 | `site` | `true`/`false` |
 | `system`| `true`/`false` |
-| `languages` | `true`/`false` |
+| `users` | `true`/`false`|
 
 #### Example: Prevent accessing user management and settings
 
@@ -204,14 +204,16 @@ permissions:
     users: false
 ```
 
-
 ### `files`
 
 | Option | Value |
 |----    | ---- |
+| `access` | `true`/`false` |
 | `changeName` | `true`/`false` |
+| `changeTemplate` | `true`/`false` |
 | `create` | `true`/`false` |
 | `delete` | `true`/`false` |
+| `list` | `true`/`false` |
 | `replace` | `true`/`false` |
 | `sort` | `true`/`false` |
 | `update` | `true`/`false` |
@@ -228,6 +230,7 @@ permissions:
 
 | Option | Value |
 |----    | ---- |
+| `access` | `true`/`false` |
 | `changeSlug` | `true`/`false` |
 | `changeStatus` | `true`/`false` |
 | `changeTemplate` | `true`/`false` |
@@ -235,9 +238,9 @@ permissions:
 | `create` | `true`/`false` |
 | `delete` | `true`/`false` |
 | `duplicate` | `true`/`false` |
+| `list` | `true`/`false` |
 | `move` | `true`/`false` |
 | `preview` | `true`/`false` |
-| `read` | `true`/`false` |
 | `sort` | `true`/`false` |
 | `update` | `true`/`false` |
 
@@ -255,6 +258,8 @@ permissions:
 
 | Option | Value |
 |----    | ---- |
+| `access` | `true`/`false` |
+| `changeTitle` | `true`/`false` |
 | `update` | `true`/`false` |
 
 ### `users`
@@ -267,16 +272,17 @@ users: false
 
 It is also possible to set the `users` options individually.
 
-
-
 | Option | Value |
 |----    | ---- |
+| `access` | `true`/`false` |
 | `changeEmail` | `true`/`false` |
 | `changeLanguage` | `true`/`false` |
 | `changeName` | `true`/`false` |
 | `changePassword` | `true`/`false` |
+| `changeRole` | `true`/`false` |
 | `create` | `true`/`false` |
 | `delete` | `true`/`false` |
+| `list` | `true`/`false` |
 | `update` | `true`/`false` |
 
 #### Example:
@@ -297,15 +303,15 @@ This option refers to each user with this role.
 
 | Option | Value |
 |----    | ---- |
+| `access` | `true`/`false` |
 | `changeEmail` | `true`/`false` |
 | `changeLanguage` | `true`/`false` |
 | `changeName` | `true`/`false` |
 | `changePassword` | `true`/`false` |
 | `changeRole` | `true`/`false` |
-| `create` | `true`/`false` |
 | `delete` | `true`/`false` |
+| `list` | `true`/`false` |
 | `update` | `true`/`false` |
-
 
 #### Example
 
@@ -322,6 +328,7 @@ permissions:
 ```
 
 ### Using wildcards
+
 It's also possible to restrict access to entire blocks by just passing `false` to the block:
 
 ```yaml
