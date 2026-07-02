@@ -145,6 +145,8 @@ Our license hub at <https://hub.getkirby.com> keeps the information about Kirby 
 
 We collect this data during the checkout and activation processes. We delete the data as soon as it is no longer needed for the mentioned purposes (for example when a license is terminated).
 
+Development licenses are not stored on our hub server, but dynamically processed during issuing and the automated regular renewal. During these issue and renewal actions we receive and process the domain of the installation only. To make sure that development licenses are only used for installations that are not publicly accessible (as required by our (link: license text: license terms)), our hub may also check whether the installation is publicly reachable by connecting to its domain. We only log the status result and never store any personal data that may be contained in the web response.
+
 The basis for data processing is Art. 6 (1) (b) GDPR, which allows the processing of data to fulfill a contract or for measures preliminary to a contract.
 
 ### Contributed content
@@ -461,4 +463,4 @@ We try to keep our privacy policy as transparent and easy to understand as possi
 ## Updates
 
 We will regularly check and update this privacy policy if necessary.
-**Last update: June 6, 2026**
+**Last update: July 2, 2026**

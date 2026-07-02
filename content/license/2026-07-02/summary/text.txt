@@ -1,0 +1,23 @@
+Title: EULA 2026-07-02: Summary of changes
+
+----
+
+Intro:
+
+This change to our EULA reflects the development license activation that was introduced in Kirby 5.5.
+
+In particular, we have changed the following:
+
+----
+
+Text:
+
+## Changes
+
+- We now allow in Kirby to activate a **free development license**. Kirby activates this license through the Panel or our (link: https://hub.getkirby.com text: license hub) and renews it regularly and automatically.
+- Because a Development Installation must only be accessible by a restricted number of users, we clarified that we may check during the renewal whether an installation is publicly accessible. If it is, it does not qualify as a Development Installation and requires a paid license.
+- We added the development license activation and renewal to the list of licensing features that may not be altered or circumvented.
+
+## Privacy
+
+- The regular renewal means that a Development Installation contacts our license hub from time to time. You can find details on the transmitted data in our (link: docs/guide/kirby-and-privacy text: privacy guide) and our (link: privacy text: privacy policy).
