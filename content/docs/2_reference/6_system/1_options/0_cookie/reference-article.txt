@@ -2,17 +2,21 @@ Intro: Configure the behavior of HTTP cookies
 
 ----
 
+Since: 5.4.5
+
+----
+
 Text:
 
 ## Cookie key
 
 Values of HTTP cookies set by the Kirby backend are signed (or authenticated) to prevent easy tampering. Generating these signatures (so-called HMACs) requires a key that should be stable and consistent on the server, but still independent from other sites or setups and ideally private and hard to guess. The key is set to a fixed string by default, so you should define your own key that will be used instead:
 
-```php "/site/config/config.php"
-Kirby\Http\Cookie::$key = '...';
-
+```php
 return [
-	// additional options
+  'cookie' => [
+    'key' => '...'
+  ]
 ];
 ```
 
