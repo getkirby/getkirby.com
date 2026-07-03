@@ -22,6 +22,35 @@ We have developed a **Panel Lab** where you can find documentation on all  compo
 
 ## Access the Panel Lab locally
 
-<info>
-We will soon publish instructions how to enable the Lab inside the Panel of your local Kirby installation. This will allow you to have the docs right at your side when developing, but also adding your own Lab examples to prototype your plugins.
-</info>
+The Panel Lab is Kirby's interactive reference for all our `k-` UI components. The same playground published at (link: https://lab.getkirby.com text: lab.getkirby.com). It also ships inside Kirby and runs in your own Panel at https://your-site.test/panel/lab.
+
+The Lab has two tabs:
+
+- **Examples** for the interactive component demos
+- **Docs** for the generated reference (props, slots, events, methods) for every UI component
+
+### Why the Lab is empty
+
+To keep the distributed package small, the example files (`panel/lab`) and the generated component docs (`panel/dist/ui`) are excluded from Kirby's release archive. In a fresh install the Lab will therefore show:
+
+> The default Lab examples are not installed. / The UI docs are not installed.
+
+<since v="5.5.0">
+### Install the examples and docs
+
+The examples and docs are built automatically and attached to every GitHub release as a  single ZIP, so you can add them to your local installation:
+
+1. (link: https://release.getkirby.com text: Open the release) that matches your installed Kirby version.
+2. Under assets, download `lab-<version>.zip` (e.g. `lab-5.5.0.zip`).
+3. Extract it. You'll get two folders: `ui` and `lab`.
+4. Move them into your Kirby core's Panel directory:
+   - `ui` → `kirby/panel/dist/ui`
+   - `lab` → `kirby/panel/lab`
+5. Reload `/panel/lab/docs`. The Examples Docs tabs are now populated.
+
+Both `ui` and `lab` are new folders that don't exist in a default install, so you're only adding files. Don't drop the ZIP contents directly into `kirby/panel/`. That folder already contains the built Panel in `dist/`, which must stay untouched. Always place the `ui` folder inside the existing `dist` folder.
+
+Always download the ZIP from the release that matches your installed Kirby version, so the examples and docs reflect the components you actually have.
+
+If the examples don't render and you see "The Vue template compiler must be enabled to show lab examples"* make sure you haven't disabled the `panel.vue.compiler` option in your config.
+</since>
