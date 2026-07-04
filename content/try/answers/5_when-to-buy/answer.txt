@@ -2,4 +2,4 @@ Title: When do I need to buy a license?
 ----
 Text:
 
-Make sure that Kirby works for you first. We want you to be happy. Once your project is ready to be launched, buy a license and activate your installation on your live server.
+Make sure that Kirby works for you first. We want you to be happy. You can develop your project locally or on a private test server for free, for as long as you need. Once your project is ready to be launched publicly, buy a license and activate your installation on your live server.
