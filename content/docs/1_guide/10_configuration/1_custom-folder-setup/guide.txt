@@ -67,6 +67,10 @@ echo $kirby->render();
 Note that the path to `/vendor/autoload.php` might vary depending on your setup, for example when you install Kirby with Composer.
 </info>
 
+<info>
+The (link: https://github.com/getkirby/cli text: Kirby CLI) – and tools built on it, such as the Kirby MCP server – locate your project by looking for an `index.php` in the folders `.`, `www`, `public` or `public_html`, relative to both the current working directory and the Composer project root (the directory that contains `vendor/`). If your document root uses a different name (for example `root`), the CLI won't detect your installation. Either name the public folder one of the above, or add a small proxy `index.php` in the Composer project root that forwards to the real one, e.g. `require __DIR__ . '/root/index.php';`.
+</info>
+
 ###  Shared storage folder
 
 This example does not only use a public folder setup, it also places accounts, cache and sessions folders in a shared storage folder. This can be a useful pattern to keep track of those additional folders that need to be writable by Kirby.
