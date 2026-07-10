@@ -22,7 +22,7 @@ We have developed a **Panel Lab** where you can find documentation on all  compo
 
 ## Access the Panel Lab locally
 
-The Panel Lab is Kirby's interactive reference for all our `k-` UI components. The same playground published at (link: https://lab.getkirby.com text: lab.getkirby.com). It also ships inside Kirby and runs in your own Panel at https://your-site.test/panel/lab.
+The Panel Lab is Kirby's interactive reference for all our `k-` UI components. The same playground published at (link: https://lab.getkirby.com text: lab.getkirby.com). It also ships inside Kirby and runs in your own Panel at `https://your-site.test/panel/lab.
 
 The Lab has two tabs:
 
@@ -35,13 +35,13 @@ To keep the distributed package small, the example files (`panel/lab`) and the g
 
 > The default Lab examples are not installed. / The UI docs are not installed.
 
-<since v="5.5.0">
+<since v="5.5.1">
 ### Install the examples and docs
 
 The examples and docs are built automatically and attached to every GitHub release as a  single ZIP, so you can add them to your local installation:
 
 1. (link: https://release.getkirby.com text: Open the release) that matches your installed Kirby version.
-2. Under assets, download `lab-<version>.zip` (e.g. `lab-5.5.0.zip`).
+2. Under assets, download `lab-<version>.zip` (e.g. `lab-5.5.1.zip`).
 3. Extract it. You'll get two folders: `ui` and `lab`.
 4. Move them into your Kirby core's Panel directory:
    - `ui` → `kirby/panel/dist/ui`
