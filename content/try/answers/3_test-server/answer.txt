@@ -2,4 +2,8 @@ Title: Can I install it on a test server?
 ----
 Text:
 
-Yes, you can install Kirby on a private test server for free and check all requirements there. "Private" means the site must not be publicly accessible, for example a server in a network with restricted access or a staging site protected by a password that only a few people know. As soon as your site goes public, you need to (link: buy text: buy a license).
+Yes, you can install Kirby on a private test server for free and check all requirements there. "Private" means the site must not be publicly accessible, for example a server in a network with restricted access or a staging site protected by a password that only a few people know.
+
+<since v="5.5.0">
+On such a server you can activate Kirby as a **development site** with a free (link: license#free-licenses__usage-for-a-development-installation text: development license) by confirming that you comply with the license terms. Kirby then regularly checks that your development site stays inaccessible from the public internet. As soon as your site goes public, you need to (link: buy text: buy a license).
+</since>

@@ -2,4 +2,8 @@ Title: Can I disable the activation banner in the Panel?
 ----
 Text:
 
-Yes, you can disable the banner by purchasing and activating a license 😉
+Yes. On a public server, purchase and activate a license to remove the banner. 😉
+
+<since v="5.5.0">
+On a private development or test server, you can also remove it by activating a free (link: license#free-licenses__usage-for-a-development-installation text: development license).
+</since>
