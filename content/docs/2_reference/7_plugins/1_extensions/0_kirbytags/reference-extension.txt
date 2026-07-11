@@ -157,7 +157,7 @@ $tag->parent()->file('content.jpg')
 ### Options
 
 ```php
-$tag->option('some.option')
+$tag->kirby()->option('some.option')
 ```
 
 ### The KirbyTag type
