@@ -96,7 +96,7 @@ function worldBankRequest(string $country, int $count): array
 {
 	$response = Remote::get(
 		"https://api.worldbank.org/v2/country/$country/indicator/PA.NUS.PPPC.RF?format=json&mrnev=$count&per_page=500",
-		['timeout' => 20]
+		['timeout' => 60]
 	);
 
 	// some errors are not properly handled by the API and
