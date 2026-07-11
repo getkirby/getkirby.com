@@ -13,37 +13,41 @@ use Kirby\Http\Remote;
 
 require_once dirname(__DIR__, 4) . '/kirby/bootstrap.php';
 
-$baselineRaw     = worldBankRequestLoop('DE', 3);
-$allCountriesRaw = worldBankRequestLoop('all', 1);
-
-// determine the German PPP factors for comparative lookup of the last years
-$baselineFactors = [];
-foreach ($baselineRaw as $entry) {
-	$baselineFactors[(int)$entry['date']] = $entry['value'];
-}
-
-// collect country factors relative to baseline prices
-// into an associative array (country -> value)
 $factors = [];
-foreach ($allCountriesRaw as $entry) {
-	$year = (int)$entry['date'];
 
-	// filter out data points older than 3 years
-	if ($year < (int)date('Y') - 3) {
-		continue;
+// go back at most three years and fill up the factors, starting with the
+// most recent year (the previous year looking from today)
+for ($year = (int)date('Y') - 1; $year > (int)date('Y') - 4; $year--) {
+	$data = worldBankRequestLoop($year);
+
+	// find the German factor for this year to use it as a baseline
+	$countries   = array_column($data, 'countryiso3code');
+	$baselineKey = array_search('DEU', $countries) ?: throw new Exception("Could not find baseline for $year");
+	$baseline    = $data[$baselineKey];
+
+	foreach ($data as $entry) {
+		// skip countries we already have a (more recent) factor for
+		if (array_key_exists($entry['country']['id'], $factors)) {
+			continue;
+		}
+
+		// skip countries that don't (yet) have a factor for the given year
+		if ($entry['value'] === null) {
+			continue;
+		}
+
+		// values in the dataset are relative to US prices,
+		// we need to adjust them to German prices by comparing
+		// to the German PPP factor of the same statistical year
+		$factor = $entry['value'] / $baseline['value'];
+
+		// only keep the lowest-PPP countries
+		if ($factor > 0.6) {
+			continue;
+		}
+
+		$factors[$entry['country']['id']] = $factor;
 	}
-
-	// values in the dataset are relative to US prices,
-	// we need to adjust them to German prices by comparing
-	// to the German PPP factor of the same statistical year
-	$factor = $entry['value'] / $baselineFactors[$year];
-
-	// only keep the lowest-PPP countries
-	if ($factor > 0.6) {
-		continue;
-	}
-
-	$factors[$entry['country']['id']] = $factor;
 }
 
 // sort by country code
@@ -61,11 +65,11 @@ if (empty($argv[1]) === false) {
  * until one succeeds (the API often times out or returns temporary
  * errors that are fixed with another identical request)
  */
-function worldBankRequestLoop(string $country, int $count): array
+function worldBankRequestLoop(int $year): array
 {
 	for ($i = 0; $i <= 5; $i++) {
 		try {
-			return worldBankRequest($country, $count);
+			return worldBankRequest($year);
 		} catch (Throwable $e) {
 			// give up after five tries
 			if ($i > 4) {
@@ -92,10 +96,10 @@ function worldBankRequestLoop(string $country, int $count): array
  * Docs see https://datahelpdesk.worldbank.org/knowledgebase/articles/898581-api-basic-call-structures
  * and https://datahelpdesk.worldbank.org/knowledgebase/articles/898599-indicator-api-queries
  */
-function worldBankRequest(string $country, int $count): array
+function worldBankRequest(int $year): array
 {
 	$response = Remote::get(
-		"https://api.worldbank.org/v2/country/$country/indicator/PA.NUS.PPPC.RF?format=json&mrnev=$count&per_page=500",
+		"https://api.worldbank.org/v2/country/all/indicator/PA.NUS.PPPC.RF?format=json&date=$year&per_page=500",
 		['timeout' => 60]
 	);
 
@@ -116,7 +120,7 @@ function worldBankRequest(string $country, int $count): array
 
 	// a page size of 500 should be enough; if it isn't, something is going wrong
 	if ($meta['pages'] > 1) {
-		throw new Exception("Too many results for request $country/$count: " . $meta['total']);
+		throw new Exception("Too many results for request $year: " . $meta['total']);
 	}
 
 	return $data;
