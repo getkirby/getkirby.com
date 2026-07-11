@@ -99,7 +99,7 @@ function worldBankRequestLoop(int $year): array
 function worldBankRequest(int $year): array
 {
 	$response = Remote::get(
-		"https://api.worldbank.org/v2/country/all/indicator/PA.NUS.PPPC.RF?format=json&date=$year&per_page=500",
+		"https://api.worldbank.org/v2/country/all/indicator/PA.NUS.GDP.PLI?format=json&date=$year&per_page=500",
 		['timeout' => 60]
 	);
 
