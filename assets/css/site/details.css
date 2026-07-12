@@ -1,14 +1,14 @@
-.details summary {
+.details > summary {
 	position: relative;
 	list-style: none;
 }
 .details > * {
 	padding-left: 1.75rem;
 }
-.details summary::-webkit-details-marker {
+.details > summary::-webkit-details-marker {
 	display: none;
 }
-.details summary::after {
+.details > summary::after {
 	position: absolute;
 	top: 0;
 	margin-top: 1rem;
@@ -21,6 +21,6 @@
 	border-radius: var(--rounded);
 	background: var(--color-gray-200) url("../../icons/plus.svg") no-repeat center center;
 }
-.details[open] summary::after {
+.details[open] > summary::after {
 	background-image: url("../../icons/minus.svg");
 }
