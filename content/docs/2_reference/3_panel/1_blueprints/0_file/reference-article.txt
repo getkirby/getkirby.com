@@ -141,6 +141,9 @@ create:
   height: 500
   crop: true
 ```
+<info>
+`create` uses the thumbs-pipeline, so it accepts all `thumbs`-options (like `quality`, `sharpen`, `grayscale`, etc.)
+</info>
 
 ### Convert image formats on upload
 
