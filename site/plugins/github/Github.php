@@ -83,13 +83,24 @@ class Github
 		string $method = 'get',
 		array $payload = []
 	): Remote {
+		return static::requestRaw(
+			'https://api.github.com/repos/' . Url::path($repo) . '/' . $endpoint,
+			$method,
+			$payload
+		);
+	}
+
+	public static function requestRaw(
+		string $url,
+		string $method = 'get',
+		array $payload = []
+	): Remote {
 		$key = option('keys.github') ?: getenv('GITHUB_TOKEN');
 
 		if ($key === null || $key === '') {
 			throw new InvalidArgumentException('Missing GitHub API token');
 		}
 
-		$repo    = Url::path($repo);
 		$headers = [
 			'Authorization'        => 'token ' . $key,
 			'User-Agent'           => 'Kirby',
@@ -98,7 +109,7 @@ class Github
 		];
 
 		return Remote::$method(
-			'https://api.github.com/repos/' . $repo . '/' . $endpoint,
+			$url,
 			[
 				'headers' => $headers,
 				...$payload
