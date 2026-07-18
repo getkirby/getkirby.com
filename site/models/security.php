@@ -27,7 +27,7 @@ class SecurityPage extends DefaultPage
 
 		try {
 			$incidents = [];
-			foreach (Github::request('getkirby/kirby', 'security-advisories')->json() as $advisory) {
+			foreach (Github::requestCollection('getkirby/kirby', 'security-advisories') as $advisory) {
 				$cvss = match (true) {
 					$advisory['cvss_severities']['cvss_v4']['score'] !== null => $advisory['cvss_severities']['cvss_v4'],
 					$advisory['cvss_severities']['cvss_v3']['score'] !== null => $advisory['cvss_severities']['cvss_v3'],
