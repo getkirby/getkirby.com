@@ -77,7 +77,6 @@ class Github
 		);
 	}
 
-
 	public static function request(
 		string $repo,
 		string $endpoint,
@@ -94,7 +93,7 @@ class Github
 		$headers = [
 			'Authorization'        => 'token ' . $key,
 			'User-Agent'           => 'Kirby',
-			'Accept:'              => 'application/vnd.github+json',
+			'Accept'               => 'application/vnd.github+json',
 			'X-GitHub-Api-Version' => '2022-11-28'
 		];
 
