@@ -1,0 +1,5 @@
+{
+    "require": {
+        "goedemiddag/link-header-parser": "^1.0"
+    }
+}

@@ -27,7 +27,7 @@ class SecurityPage extends DefaultPage
 
 		try {
 			$incidents = [];
-			foreach (Github::request('getkirby/kirby', 'security-advisories')->json() as $advisory) {
+			foreach (Github::requestCollection('getkirby/kirby', 'security-advisories') as $advisory) {
 				$cvss = match (true) {
 					$advisory['cvss_severities']['cvss_v4']['score'] !== null => $advisory['cvss_severities']['cvss_v4'],
 					$advisory['cvss_severities']['cvss_v3']['score'] !== null => $advisory['cvss_severities']['cvss_v3'],
@@ -41,7 +41,7 @@ class SecurityPage extends DefaultPage
 					'link'        => $advisory['html_url'],
 					'severity'    => $advisory['severity'],
 					'score'       => $cvss['score'],
-					'cve'         => $advisory['cve_id'],
+					'cve'         => $advisory['cve_id'] ?? 'Pending',
 					'cvss'        => $cvss['vector_string']
 				];
 			}
@@ -51,6 +51,13 @@ class SecurityPage extends DefaultPage
 		}
 
 		$incidents = A::sort($incidents, 'cve', 'desc');
+
+		// after the entries have been sorted, replace pending CVE IDs with `null` again
+		foreach ($incidents as $key => $incident) {
+			if ($incident['cve'] === 'Pending') {
+				$incidents[$key]['cve'] = null;
+			}
+		}
 
 		$cache->set('incidents', ['currentVersion' => $kirby->version(), 'incidents' => $incidents], 10080);
 

@@ -1,0 +1,65 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "5c1fde66485e3c21c992b40a3177d9b8",
+    "packages": [
+        {
+            "name": "goedemiddag/link-header-parser",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/goedemiddag/link-header-parser.git",
+                "reference": "bf88780ec97e56b2723a1ab143920e4d435476cd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/goedemiddag/link-header-parser/zipball/bf88780ec97e56b2723a1ab143920e4d435476cd",
+                "reference": "bf88780ec97e56b2723a1ab143920e4d435476cd",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.3"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.29",
+                "phpstan/phpstan": "^2.1",
+                "phpunit/phpunit": "^12.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Goedemiddag\\LinkHeaderParser\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dick van der Heiden",
+                    "email": "dick@goedemiddag.nl"
+                }
+            ],
+            "description": "Package for parsing the Link HTTP header",
+            "homepage": "https://github.com/goedemiddag/link-header-parser",
+            "support": {
+                "issues": "https://github.com/goedemiddag/link-header-parser/issues",
+                "source": "https://github.com/goedemiddag/link-header-parser/tree/v1.0.0"
+            },
+            "time": "2026-05-09T09:54:14+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {},
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {},
+    "platform-dev": {},
+    "plugin-api-version": "2.9.0"
+}

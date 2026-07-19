@@ -2,10 +2,14 @@
 
 namespace Kirby\Github;
 
+use Generator;
 use InvalidArgumentException;
+use Goedemiddag\LinkHeaderParser\LinkHeaderFactory;
 use Kirby\Exception\Exception;
 use Kirby\Http\Remote;
 use Kirby\Http\Url;
+
+@include_once __DIR__ . '/vendor/autoload.php';
 
 class Github
 {
@@ -77,10 +81,43 @@ class Github
 		);
 	}
 
-
 	public static function request(
 		string $repo,
 		string $endpoint,
+		string $method = 'get',
+		array $payload = []
+	): Remote {
+		return static::requestRaw(
+			'https://api.github.com/repos/' . Url::path($repo) . '/' . $endpoint,
+			$method,
+			$payload
+		);
+	}
+
+	public static function requestCollection(
+		string $repo,
+		string $endpoint
+	): Generator {
+		// start with a plain direct request
+		$url = 'https://api.github.com/repos/' . Url::path($repo) . '/' . $endpoint;
+
+		// follow `next` pagination links from the responses until we have reached the end
+		do {
+			$response = static::requestRaw($url);
+
+			// provide each item to the calling method via `Generator`
+			foreach ($response->json() as $item) {
+				yield $item;
+			}
+
+			// extract the next pagination page if there is one
+			$links = LinkHeaderFactory::fromHeader($response->headers()['link'] ?? '');
+			$url   = $links->getLink('next')?->uri;
+		} while ($url !== null);
+	}
+
+	public static function requestRaw(
+		string $url,
 		string $method = 'get',
 		array $payload = []
 	): Remote {
@@ -90,16 +127,15 @@ class Github
 			throw new InvalidArgumentException('Missing GitHub API token');
 		}
 
-		$repo    = Url::path($repo);
 		$headers = [
 			'Authorization'        => 'token ' . $key,
 			'User-Agent'           => 'Kirby',
-			'Accept:'              => 'application/vnd.github+json',
+			'Accept'               => 'application/vnd.github+json',
 			'X-GitHub-Api-Version' => '2022-11-28'
 		];
 
 		return Remote::$method(
-			'https://api.github.com/repos/' . $repo . '/' . $endpoint,
+			$url,
 			[
 				'headers' => $headers,
 				...$payload
