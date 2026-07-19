@@ -76,10 +76,24 @@ You can install Kirby in a few quick steps in different ways. More instructions 
 
 (image: starterkit.png)
 
-<info>
-When copying files to a remote server via (S)FTP, make sure to copy the `.htaccess` file as well. By default, files starting with a dot are invisible in the filesystem, so make sure enable the display of invisible files before copying.
-</info>
+## Web server configuration
 
+Kirby needs a few rewrite rules to route all requests through its front controller and to block access to the `content`, `site` and `kirby` folders. On Apache, the shipped `.htaccess` file takes care of this. Other web servers have to be configured manually:
+
+(tabs…)
+=== Apache
+
+(docs: server-config/apache)
+
+=== nginx
+
+(docs: server-config/nginx)
+
+=== Caddy
+
+(docs: server-config/caddy)
+
+(…tabs)
 
 ## Create your first account
 

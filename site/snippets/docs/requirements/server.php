@@ -1,4 +1,4 @@
-Apache works out of the box. (link: docs/cookbook/development-deployment/nginx text: nginx), (link: docs/cookbook/development-deployment/caddy text: Caddy) and (link: docs/cookbook/development-deployment/ddev text: DDEV) work with our Cookbook recipes. Other servers can be used by advanced users.
+Apache works out of the box. For nginx and Caddy, see our (link: docs/guide/quickstart#web-server-configuration text: config examples). (link: docs/cookbook/development-deployment/ddev text: DDEV) works with our Cookbook recipe. Other servers can be used by advanced users.
 
 If you want to use PHP's built-in server, you have to start it up with Kirby's router:
 
