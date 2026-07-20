@@ -42,7 +42,7 @@ for ($year = (int)date('Y') - 1; $year > (int)date('Y') - 4; $year--) {
 		$factor = $entry['value'] / $baseline['value'];
 
 		// only keep the lowest-PPP countries
-		if ($factor > 0.6) {
+		if ($factor > 0.7) {
 			continue;
 		}
 
