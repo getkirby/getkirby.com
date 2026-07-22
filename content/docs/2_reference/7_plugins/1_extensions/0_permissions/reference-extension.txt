@@ -6,6 +6,26 @@ Text:
 
 If you want to make the permissions for different actions of your plugin configurable by user role, you can register the available actions with the `permissions` extension.
 
+## Custom Panel areas
+
+If your plugin registers a Panel area, it automatically gets an `access.<areaId>` permission. You do not need the `permissions` extension for that.
+
+```php "/site/plugins/todos/index.php"
+Kirby::plugin('my/todos', [
+    'areas' => [
+        'todos' => fn () => [ /* ... */ ]
+    ]
+]);
+```
+
+```yaml "/site/blueprints/users/editor.yml"
+permissions:
+  access:
+    todos: false
+```
+
+Use the `permissions` extension only for actions inside your plugin (create, delete, publish …), not for access to the area itself.
+
 ## PHP definition
 
 Each available action needs to be set with the default permission value. The default value is used if the user's role does not specify the permissions for that action.
@@ -27,6 +47,8 @@ All permissions of the Kirby core are set to `true` by default. Only use the def
 ## Usage in the user blueprint
 
 The permissions can now be set in the user blueprint for each role (just like the (link: docs/guide/users/permissions text: core permissions)).
+
+Your permissions are grouped under a category named after the plugin, with the slash replaced by a dot: `my/permissionPlugin` becomes `my.permissionPlugin`. Use exactly that key in the user blueprint.
 
 ```yaml "/site/blueprints/users/editor.yml"
 title: Editor
