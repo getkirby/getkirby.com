@@ -195,13 +195,27 @@ The `permissions` option can be used to restrict access to certain actions for t
 | `system`| `true`/`false` |
 | `users` | `true`/`false`|
 
-#### Example: Prevent accessing user management and settings
+#### Example: Prevent accessing user management and system settings
 
 ```yaml
 permissions:
   access:
-    settings: false
+    system: false
     users: false
+```
+
+<info>
+`access.settings` was renamed to `access.system` in Kirby 3.6. The old key no longer has any effect.
+</info>
+
+#### Custom Panel areas
+
+Plugins that register a Panel area automatically add an `access.<areaId>` key, so custom areas can be restricted the same way as core ones:
+
+```yaml
+permissions:
+  access:
+    todos: false
 ```
 
 ### `files`
@@ -214,6 +228,7 @@ permissions:
 | `create` | `true`/`false` |
 | `delete` | `true`/`false` |
 | `list` | `true`/`false` |
+| `read` | `true`/`false` |
 | `replace` | `true`/`false` |
 | `sort` | `true`/`false` |
 | `update` | `true`/`false` |
@@ -223,6 +238,23 @@ permissions:
 ```yaml
 permissions:
   files:
+    delete: false
+```
+
+### `languages`
+
+| Option | Value |
+|----    | ---- |
+| `create` | `true`/`false` |
+| `delete` | `true`/`false` |
+| `update` | `true`/`false` |
+
+#### Example: Prevent creating and deleting languages
+
+```yaml
+permissions:
+  languages:
+    create: false
     delete: false
 ```
 
@@ -241,6 +273,7 @@ permissions:
 | `list` | `true`/`false` |
 | `move` | `true`/`false` |
 | `preview` | `true`/`false` |
+| `read` | `true`/`false` |
 | `sort` | `true`/`false` |
 | `update` | `true`/`false` |
 
@@ -260,6 +293,7 @@ permissions:
 |----    | ---- |
 | `access` | `true`/`false` |
 | `changeTitle` | `true`/`false` |
+| `preview` | `true`/`false` |
 | `update` | `true`/`false` |
 
 ### `users`
