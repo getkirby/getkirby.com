@@ -22,7 +22,7 @@ return [
 					'basic' => [
 						'regular' => $basic->price()->regular(),
 						'sale'    => $basic->price()->sale(),
-						'upgrade' => $basic->price()->upgrade()->default()
+						'upgrade' => $basic->price()->upgrade()
 					],
 					'donation' => [
 						'customer' => $basic->price()->customerDonation(),
@@ -31,7 +31,7 @@ return [
 					'enterprise' => [
 						'regular' => $enterprise->price()->regular(),
 						'sale'    => $enterprise->price()->sale(),
-						'upgrade' => $enterprise->price()->upgrade()->default()
+						'upgrade' => $enterprise->price()->upgrade()
 					],
 				],
 				'revenueLimit' => $visitor->currency() !== 'EUR' ? ' (' . $visitor->revenueLimit() . ')' : '',

@@ -21,7 +21,7 @@ App::plugin('getkirby/buy', [
 
 				return match($tag->attr('price')) {
 					'sale'    => $price->sale(),
-					'upgrade' => $price->upgrade()->default(),
+					'upgrade' => $price->upgrade(),
 					default   => $price->regular(),
 				};
 			}
