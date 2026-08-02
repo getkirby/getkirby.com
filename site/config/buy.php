@@ -4,21 +4,32 @@ return [
 	'products' => [
 		'basic' => [
 			'product' => 824338,
-			'nudge'   => 59,
-			'regular' => 99,
+			'upgrade' => 860756,
+			'prices'  => [
+				'upgrade' => 59,
+				'regular' => 99,
+			],
 		],
 		'enterprise' => [
 			'product' => 824340,
-			'nudge'   => 249,
-			'regular' => 349,
+			'upgrade' => 860757,
+			'convert' => 868406,
+			'prices'  => [
+				'upgrade' => 249,
+				'regular' => 349,
+			],
 		],
 		'partner-certified' => [
 			'product' => 822284,
-			'regular' => 499,
+			'prices'  => [
+				'regular' => 499,
+			],
 		],
 		'partner-regular' => [
 			'product' => 824333,
-			'regular' => 99,
+			'prices'  => [
+				'regular' => 99,
+			],
 		],
 	],
 	'pppFactors' => (@include __DIR__ . '/buy.ppp.php') ?: [],

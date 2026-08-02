@@ -200,11 +200,14 @@ class Price
 	}
 
 	/**
-	 * Gets the upgrade prices object
+	 * Gets the upgrade price
 	 */
-	public function upgrade(): Upgrade
+	public function upgrade(): int
 	{
-		return new Upgrade($this);
+		return $this->convert(
+			option('buy.products.' . $this->product->value . '.prices.upgrade'),
+			adjust: $this->product->adjustForPPP()
+		);
 	}
 
 	/**

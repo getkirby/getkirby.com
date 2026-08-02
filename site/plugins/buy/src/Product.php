@@ -32,7 +32,6 @@ enum Product: string
 			'buy'     => $this->productId(),
 			'upgrade' => $this->upgradeId(),
 			'convert' => $this->upgradeId('convert'),
-			'free'    => $this->upgradeId('free'),
 		};
 
 		return Paddle::checkout($product, $payload);
@@ -73,7 +72,7 @@ enum Product: string
 	 */
 	public function rawPrice(): float
 	{
-		return option('buy.products.' . $this->value . '.regular');
+		return option('buy.products.' . $this->value . '.prices.regular');
 	}
 
 	/**
@@ -103,7 +102,6 @@ enum Product: string
 	public function upgradeId(string|null $type = null): int
 	{
 		return match ($type) {
-			'free'    => option('buy.products.' . $this->value . '.free'),
 			'convert' => option('buy.products.' . $this->value . '.convert'),
 			default   => option('buy.products.' . $this->value . '.upgrade')
 		};
