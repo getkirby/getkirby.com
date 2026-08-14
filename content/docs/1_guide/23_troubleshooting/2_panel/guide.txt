@@ -40,3 +40,14 @@ Check if you have are sending Cache-Control headers or have set Expires HTTP hea
 ## File editing issues
 
 When you get an "Unauthenticated" error when trying to access or edit files in the Panel, check if Varnish cache is activated on the server. This may result in (wrong) requests getting cached and resulting in such issues. When you run into such issues, disable Varnish cache.
+
+## Forgot password
+
+If you have locked yourself out of your Panel account and have no other admin account that allows you to reset the password, but still have direct access to your server (e.g. via SFTP), you can regain access via different ways:
+
+- You can update the Kirby configuration in `site/config/config.php` to (link: docs/reference/system/options/auth#login-methods__password-reset text: enable password reset).
+- You can delete your user account from `site/accounts`. Afterwards you can either manually upload a new user account you created locally in a test installation or you can temporarily enable (link: docs/reference/system/options/panel#allow-the-panel-to-be-installed-on-a-remote-server text: remote installation) to create a new account directly on the server.
+
+<info>
+The Kirby team does *not* have access to your server and cannot help you with resetting your password. Kirby is sold as self-hosted software and not as a hosted subscription.
+</info>
