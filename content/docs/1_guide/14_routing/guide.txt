@@ -502,16 +502,23 @@ return [
     'routes' => [
         [
             'pattern' => '(:any)',
-            'action'  => function($uid) {
-                $page = page($uid);
-                if (!$page) $page = page('blog/' . $uid);
-                if (!$page) $page = site()->errorPage();
-                return site()->visit($page);
+            'action'  => function ($uid) {
+                if ($page = page('blog/' . $uid)) {
+                    return site()->visit($page);
+                }
+
+                // let Kirby handle all other URLs
+                $this->next();
             }
         ],
         [
             'pattern' => 'blog/(:any)',
-            'action'  => function($uid) {
+            'action'  => function ($uid) {
+                // don't redirect previews from the Panel
+                if (get('_token')) {
+                    $this->next();
+                }
+
                 go($uid);
             }
         ]
@@ -520,7 +527,11 @@ return [
 ```
 Replace `blog` with the slug of the parent page you want to remove from the URL.
 
-Additionally, you can overwrite the `$page->url()` in a (link: docs/guide/templates/page-models text: page model) to return the desired target URL when you use this method.
+<info>
+Previews of drafts and unsaved changes are authenticated with a `_token` query string parameter. The redirect would drop that token, so the routes pass such requests on with (method: Kirby\Http\Route::next text: $this->next()) and let Kirby take care of them.
+</info>
+
+Additionally, you can overwrite the `$page->url()` in a (link: docs/guide/templates/page-models text: page model) to return the desired target URL when you use this method. Previews of drafts will then no longer work though, as drafts can only be found by their original URL.
 
 ## Accessing parameters and query strings
 
