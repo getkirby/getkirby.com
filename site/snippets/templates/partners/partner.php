@@ -3,7 +3,7 @@
 	href="<?= $partner->url() ?>"
 	data-region="<?= $partner->region() ?>"
 	data-languages="<?= implode(',', $partner->languages()->split(',')) ?>"
-	data-people="<?= $partner->people() ?>"
+	data-people="<?= ($partner->people()->value() === '1') ? '1' : '2+' ?>"
 >
 <?php endif ?>
 	<article class="columns items-center"

@@ -1,7 +1,7 @@
 <article
 	data-region="<?= $partner->region() ?>"
 	data-languages="<?= implode(',', $partner->languages()->split(',')) ?>"
-	data-people="<?= $partner->people() ?>"
+	data-people="<?= ($partner->people()->value() === '1') ? '1' : '2+' ?>"
 >
 	<button type="button" onclick="infoDialog.showModal()">
 		<p class="flex items-center text-xs" style="gap: var(--spacing-1)">

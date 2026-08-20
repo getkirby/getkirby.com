@@ -22,13 +22,20 @@ return function (App $kirby, Page $page) {
 			'default'  => 'Any team size',
 			'multiple' => false,
 			'text'     => function ($value) {
-				return $value->value() === '1' ? '1 person' : $value . ' people';
-			}
+				return $value === '1' ? 'Solo' :  'Team';
+			},
+			'options' => [
+				'1',
+				'2+',
+			]
 		],
 	];
 
 	// collect all possible options, alphabetically sorted
 	foreach ($filters as $field => $config) {
+		if ($field === 'people') {
+			continue;
+		}
 		$options = $partners->pluck(
 			$config['field'] ?? $field,
 			$config['multiple'] ? ',' : null,
