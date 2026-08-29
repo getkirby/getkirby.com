@@ -281,7 +281,9 @@ trait FieldMethods
 			return $fallback;
 		}
 
-		return $this->value($fallback);
+		$field = clone $this;
+		$field->value = $fallback;
+		return $field;
 	}
 
 	/**
