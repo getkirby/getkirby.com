@@ -2,25 +2,28 @@
 
 namespace Kirby\Reference\Reflectable;
 
+use Kirby\Blueprint\Section;
 use Kirby\Reference\Reflectable\Tags\Parameter;
 use Kirby\Reference\Reflectable\Tags\Parameters;
 
 /**
- * Reflectable for field or section options
+ * Reflectable for the blueprint options of a panel section
+ *
+ * @todo Remove together with the sections reference once
+ *       sections have been removed from the core
  */
-class ReflectableOptions extends Reflectable
+class ReflectableSectionOptions extends Reflectable
 {
 	public function __construct(
-		public string $type,
 		public string $name,
 		public Parameters $parameters
 	) {
 	}
 
-	public static function factory(string $type, string $name): static
+	public static function factory(string $name): static
 	{
 		// load props from definition
-		$definition = $type::setup($name);
+		$definition = Section::setup($name);
 		$props      = $definition['props'] ?? [];
 		$parameters = [];
 
@@ -38,8 +41,7 @@ class ReflectableOptions extends Reflectable
 			// we use the ReflectableFunction class to get the
 			// first parameter of the prop closure
 			$reflectable = new ReflectableFunction($prop);
-			$parameter   = $reflectable->parameters()->data
-[0] ?? null;
+			$parameter   = $reflectable->parameters()->data[0] ?? null;
 
 			if ($parameter !== null) {
 				// we remove null as type as usually all
@@ -63,7 +65,6 @@ class ReflectableOptions extends Reflectable
 		ksort($parameters);
 
 		return new static(
-			type: $type,
 			name: $name,
 			parameters: new Parameters($parameters)
 		);

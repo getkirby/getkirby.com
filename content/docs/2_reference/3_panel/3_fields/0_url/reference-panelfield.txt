@@ -29,10 +29,6 @@ fields:
     type: url
 ```
 
-## Field properties
-
-(field-options: url)
-
 ## How to use in templates/snippets
 
 Output the field value as simple string:

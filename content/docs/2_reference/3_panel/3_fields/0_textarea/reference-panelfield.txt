@@ -23,10 +23,6 @@ fields:
     type: textarea
 ```
 
-## Field properties
-
-(field-options: textarea)
-
 ## Sizes
 
 In some section layouts, a small textarea looks lost. The `size` option sets an initial default height for empty textareas before auto-sizing kicks in. Available sizes:

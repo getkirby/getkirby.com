@@ -27,10 +27,6 @@ fields:
     type: users
 ```
 
-## Field properties
-
-(field-options: users)
-
 ## Default values
 
 You can set a user email or user UUID as default value:

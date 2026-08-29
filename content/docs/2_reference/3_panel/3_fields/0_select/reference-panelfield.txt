@@ -29,10 +29,6 @@ fields:
       web: Web
 ```
 
-## Field properties
-
-(field-options: select)
-
 ## Default value
 
 ```yaml

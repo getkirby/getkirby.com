@@ -23,10 +23,6 @@ fields:
     type: date
 ```
 
-## Field properties
-
-(field-options: date)
-
 ## Display format
 
 You can define the format of the date via the `display` option:

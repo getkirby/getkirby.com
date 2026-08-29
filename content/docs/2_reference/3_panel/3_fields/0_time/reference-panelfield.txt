@@ -21,10 +21,6 @@ fields:
     type: time
 ```
 
-## Field properties
-
-(field-options: time)
-
 ## Display format
 
 You can define the format of the time via the `display` option:

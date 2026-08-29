@@ -10,10 +10,6 @@ Text:
 
 (image: color.png)
 
-## Field properties
-
-(field-options: color)
-
 ## Usage
 
 ```yaml

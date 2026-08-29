@@ -25,10 +25,6 @@ fields:
     type: writer
 ```
 
-## Field properties
-
-(field-options: writer)
-
 ## Marks
 
 The writer field supports the following marks by default:

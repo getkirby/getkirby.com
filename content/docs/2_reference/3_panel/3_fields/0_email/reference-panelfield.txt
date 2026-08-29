@@ -23,10 +23,6 @@ fields:
     type: email
 ```
 
-## Field properties
-
-(field-options: email)
-
 ## Use in templates: Encode email field output
 
 Unlike the (link: docs/reference/text/kirbytags/email text: email KirbyTag), the email field does not encode your email addresses to prevent misuse by spam bots. If you want to make use of Kirby's built-in email obfuscation, you have several options:

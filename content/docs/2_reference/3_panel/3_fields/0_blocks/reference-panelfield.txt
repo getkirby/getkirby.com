@@ -28,25 +28,6 @@ fields:
     type: blocks
 ```
 
-## Field properties
-
-Property | Type | Default | Description
-- | - | - | - |
-autofocus | `bool` | - | Sets the focus on this field when the form loads. Only the first field with this property gets focus.
-default | `array` | - | Default value for the field, which will be used when a page/file/user is created
-disabled | `bool` | - | If true, the field is no longer editable and will not be saved
-empty | `string` | - | Customize the default text when the blocks field is empty
-fieldsets | `array` | - | Defines the allowed block types in the blocks field. See below.
-help | | - | Optional help text below the field
-label | | - | The field label can be set as string or associative array with translations
-max | `int` | - | Maximum number of allowed blocks
-min | `int` | - | Minimum number of required blocks
-pretty | `bool` | `false` | Saves pretty printed JSON in text files
-required | `bool` | `false` | If true, the field has to be filled in correctly to be saved.
-translate | `bool` | `true` | If false, the field will be disabled in non-default languages and cannot be translated. This is only relevant in multi-language setups.
-when |  | - | Conditions when the field will be shown
-width | `string` | `1/1` | The width of the field in the field grid. Available widths: `1/1`, `1/2`, `1/3`, `1/4`, `2/3`, `3/4`
-
 ## Defining Fieldsets
 
 By default, the block selector shows a single list of available block types in alphabetical order.

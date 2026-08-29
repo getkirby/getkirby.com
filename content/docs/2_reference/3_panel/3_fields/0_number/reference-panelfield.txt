@@ -23,10 +23,6 @@ fields:
     type: number
 ```
 
-## Field properties
-
-(field-options: number)
-
 ## Decimals
 
 Decimals can be used by adding the `step` option.

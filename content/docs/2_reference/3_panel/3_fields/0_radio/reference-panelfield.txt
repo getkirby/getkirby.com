@@ -27,10 +27,6 @@ fields:
       web: Web
 ```
 
-## Field properties
-
-(field-options: radio)
-
 ## Default value
 
 By default, the first item in the list of options is preselected. To change the default value:

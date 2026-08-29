@@ -43,19 +43,6 @@ fields:
         info: n/a
 ```
 
-## Field properties
-
-Property | Type | Default | Description
-- | - | - | - |
-default | `array` | - | Default value for the field, which will be used when a page/file/user is created
-empty | `string` | - | Customize the default text when the blocks field is empty
-help | | - | Optional help text below the field
-label | | - | The field label can be set as string or associative array with translations
-reports | `array` | - | Array or query string for reports. Each report needs a `label` and `value` and can have additional `info`, `link`, `dialog`, `drawer`, `icon` and `theme` settings.
-size | `string` | `large` | The size of the report cards. Available sizes: `tiny`, `small`, `medium`, `large`
-when |  | - | Conditions when the field will be shown
-width | `string` | `1/1` | The width of the field in the field grid. Available widths: `1/1`, `1/2`, `1/3`, `1/4`, `2/3`, `3/4`
-
 ## Reports
 
 You can add as many reports to your stats field as needed. Each report can be customized to fit your data.

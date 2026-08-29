@@ -27,10 +27,6 @@ fields:
     type: pages
 ```
 
-## Field properties
-
-(field-options: pages)
-
 
 ## Limit the selection
 

@@ -23,10 +23,6 @@ fields:
     type: files
 ```
 
-## Field properties
-
-(field-options: files)
-
 ## Limit the number of files
 
 ### Min and max files

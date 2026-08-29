@@ -30,10 +30,6 @@ fields:
       Your admin
 ```
 
-## Field properties
-
-(field-options: info)
-
 ## Using `KirbyText`
 
 In addition to markdown, you can use `KirbyText` in your info text, even including images:

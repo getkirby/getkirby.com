@@ -53,10 +53,6 @@ addresses:
 
 If you need to store a single object instead of a list of objects, take a look at the (link: docs/reference/panel/fields/object text: object field).
 
-## Field properties
-
-(field-options: structure)
-
 ## Fields
 
 You can define any number of fields and use the same (link: docs/reference/panel/fields text: field types listed):

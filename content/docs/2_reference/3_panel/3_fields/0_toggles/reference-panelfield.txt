@@ -26,10 +26,6 @@ fields:
       - justify
 ```
 
-## Field properties
-
-(field-options: toggles)
-
 ## Labels only
 
 Toggles can be defined with simple values or value & text options. They are a great alternative for the radio buttons.

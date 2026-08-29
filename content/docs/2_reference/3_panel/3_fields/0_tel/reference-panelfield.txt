@@ -23,10 +23,6 @@ fields:
     type: tel
 ```
 
-## Field properties
-
-(field-options: tel)
-
 ## How to use in templates/snippets
 
 Just printing the phone number:

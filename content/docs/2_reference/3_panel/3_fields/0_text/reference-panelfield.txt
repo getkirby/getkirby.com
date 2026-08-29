@@ -23,10 +23,6 @@ fields:
     type: text
 ```
 
-## Field properties
-
-(field-options: text)
-
 (docs: panel-field-max-and-min field: text)
 
 ## How to use in templates/snippets

@@ -82,10 +82,15 @@ class Parameter
 			return null;
 		}
 
-		// get the default value and clean it up
-		$default = $parameter->getDefaultValue();
+		return static::formatDefault($parameter->getDefaultValue());
+	}
 
-		if (is_object($default)) {
+	/**
+	 * Turns a default value into its readable string representation
+	 */
+	public static function formatDefault(mixed $default = null): string
+	{
+		if (is_object($default) === true) {
 			$default = 'new ' . get_class($default) . '()';
 		} else {
 			$default = var_export($default, true);
@@ -93,10 +98,6 @@ class Parameter
 
 		$default = str_replace('NULL', 'null', $default);
 		$default = str_replace('array (' . PHP_EOL . ')', '[ ]', $default);
-
-		if ($default === null || $default === 'null') {
-			return 'null';
-		}
 
 		return $default;
 	}

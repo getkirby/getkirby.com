@@ -23,10 +23,6 @@ fields:
     type: slug
 ```
 
-## Field properties
-
-(field-options: slug)
-
 ## `allow` option
 
 By default, the slug field will strip out or replace any non-alphabetic, non-numeric character with a simple dash. You can define a custom set of allowed characters with the `allow` option:

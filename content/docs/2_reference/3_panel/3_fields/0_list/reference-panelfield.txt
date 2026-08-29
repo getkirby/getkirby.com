@@ -21,10 +21,6 @@ fields:
     type: list
 ```
 
-## Field properties
-
-(field-options: list)
-
 ## Choosing available marks
 
 The list field supports the following marks by default:

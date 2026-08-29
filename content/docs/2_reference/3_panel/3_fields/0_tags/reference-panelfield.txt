@@ -23,10 +23,6 @@ fields:
     type: tags
 ```
 
-## Field properties
-
-(field-options: tags)
-
 
 ## Autocomplete
 

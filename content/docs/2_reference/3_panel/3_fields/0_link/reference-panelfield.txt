@@ -10,10 +10,6 @@ Text:
 
 (image: link.png)
 
-## Field properties
-
-(field-options: link)
-
 ## Example
 
 ```yaml

@@ -26,10 +26,6 @@ fields:
       before: $
 ```
 
-## Field properties
-
-(field-options: range)
-
 ## `before` & `after` values
 
 The range field can show additional text before or after the input. This is great when you need a price field for example:

@@ -31,10 +31,6 @@ fields:
       web: Web
 ```
 
-## Field properties
-
-(field-options: multiselect)
-
 (docs: panel-field-options field: multiselect)
 
 ## Customize search behavior

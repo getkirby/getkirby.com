@@ -46,10 +46,6 @@ contact:
 
 If you need to store a list of multiple objects, take a look at the (link: docs/reference/panel/fields/structure text: structure field).
 
-## Field properties
-
-(field-options: object)
-
 ## Fields
 
 You can define any number of fields and use the same (link: docs/reference/panel/fields text: field types listed):

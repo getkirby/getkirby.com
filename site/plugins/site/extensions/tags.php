@@ -1,10 +1,8 @@
 <?php
 
-use Kirby\Blueprint\Section;
 use Kirby\Cms\App;
 use Kirby\Cms\Html;
-use Kirby\Form\Field;
-use Kirby\Reference\Reflectable\ReflectableOptions;
+use Kirby\Reference\Reflectable\ReflectableSectionOptions;
 use Kirby\Reference\Types\Chain;
 use Kirby\Reference\Types\Identifier;
 use Kirby\Toolkit\Str;
@@ -88,20 +86,6 @@ $tags['docs'] = [
 			'parent' => $tag->parent()
 		]);
 	}
-];
-
-/**
- * Renders a list of options for a given field
- * (field-options: select)
- */
-$tags['field-options'] = [
-	'html' => fn ($tag) => snippet('templates/reference/entry/parameters', [
-		'title'       => false,
-		'reflectable' => ReflectableOptions::factory(
-			type: Field::class,
-			name: $tag->value
-		)
-	], true)
 ];
 
 /**
@@ -311,13 +295,18 @@ $tags['screencast'] = [
  * (section-options: pages)
  */
 $tags['section-options'] = [
-	'html' => fn ($tag) => snippet('templates/reference/entry/parameters', [
-		'title'       => false,
-		'reflectable' => ReflectableOptions::factory(
-			type: Section::class,
-			name: $tag->value
-		)
-	], true)
+	'html' => function ($tag) {
+		$snippet = 'templates/reference/entry/parameters';
+
+		if (($tag->data['kirbytags'] ?? true) === false) {
+			$snippet .= '.md';
+		}
+
+		return snippet($snippet, [
+			'title'       => false,
+			'reflectable' => ReflectableSectionOptions::factory($tag->value)
+		], true);
+	}
 ];
 
 /**

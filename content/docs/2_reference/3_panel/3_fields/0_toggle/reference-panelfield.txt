@@ -24,10 +24,6 @@ fields:
       - "yes"
 ```
 
-## Field properties
-
-(field-options: toggle)
-
 ## Simple toggle field translated
 
 ```yaml
