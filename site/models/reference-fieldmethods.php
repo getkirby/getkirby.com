@@ -2,6 +2,7 @@
 
 use Kirby\Cms\Pages;
 use Kirby\Content\Field;
+use Kirby\Content\FieldMethods;
 use Kirby\Reference\Reflectable\ReflectableFieldMethod;
 use Kirby\Toolkit\Str;
 
@@ -15,7 +16,7 @@ class ReferenceFieldMethodsPage extends ReferenceSectionPage
 
 		$children = [];
 		$pages    = parent::children();
-		$methods  = $this->getNativeMethods();
+		$methods  = $this->getNativeMethods($pages);
 
 		foreach ($methods as $name => $reflection) {
 			$children[] = [
@@ -31,15 +32,26 @@ class ReferenceFieldMethodsPage extends ReferenceSectionPage
 		return $this->children = Pages::factory($children, $this)->sortBy('title', 'asc');
 	}
 
-	protected function getNativeMethods(): array
+	protected function getNativeMethods(Pages $pages): array
 	{
 		$methods    = [];
 		$reflection = new ReflectionClass(Field::class);
+		$trait      = (new ReflectionClass(FieldMethods::class))->getFileName();
 
 		foreach ($reflection->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
 			$name = $method->getName();
 
 			if (substr($name, 0, 1) === '_') {
+				continue;
+			}
+
+			// everything the `Field` class picks up beyond its
+			// `FieldMethods` trait is only a field method if it
+			// has been documented manually
+			if (
+				$method->getFileName() !== $trait &&
+				$pages->find(Str::kebab($name)) === null
+			) {
 				continue;
 			}
 
