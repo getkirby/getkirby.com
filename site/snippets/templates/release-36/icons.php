@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var Kirby\Cms\App $kirby
+ * @var Kirby\Cms\Page $page
+ */
+?>
 <section id="icons">
 
 	<?php snippet('templates/features/intro', [

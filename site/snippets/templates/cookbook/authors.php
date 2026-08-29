@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var Kirby\Cms\Pages $authors
+ */
+?>
 <?php if ($authors->count()): ?>
 	<section id="authors">
 		<header class="prose mb-6">

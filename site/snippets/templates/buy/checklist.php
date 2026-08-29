@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var string|null $versionIncluded
+ */
+?>
 <p class="sr-only">Your advantages:</p>
 <ul class="checklist">
 	<?php if ($versionIncluded !== null): ?>

@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var BuzzEntryPage $page
+ * @var Kirby\Cms\Pages $authors
+ */
+?>
 <?php layout() ?>
 
 <header class="mb-12 max-w-xl">

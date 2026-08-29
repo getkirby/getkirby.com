@@ -1,4 +1,8 @@
 <?php
+/**
+ * @var ReferenceKirbytagPage $page
+ * @var array $attributes
+ */
 
 if (count($attributes) === 0) {
 	return;

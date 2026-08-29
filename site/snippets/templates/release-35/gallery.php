@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var array $images
+ */
+?>
 <ul class="columns" style="--columns: 3">
 	<?php foreach ($images as $filename): ?>
 	<?php

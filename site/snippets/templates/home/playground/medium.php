@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var HomeStoryPage $story
+ */
+?>
 <section id="medium" class="playground-medium columns">
 
 	<header class="playground-medium-header h2 max-w-xs">

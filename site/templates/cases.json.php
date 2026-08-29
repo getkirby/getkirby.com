@@ -1,4 +1,7 @@
 <?php
+/**
+ * @var DefaultPage $page
+ */
 
 $cases = [];
 

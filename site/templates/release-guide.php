@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var ReleaseGuidePage $page
+ */
+?>
 <?php layout('release-guide') ?>
 
 <?php slot('sidebar') ?>

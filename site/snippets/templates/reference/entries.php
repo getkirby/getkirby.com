@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var Kirby\Cms\Pages $entries
+ */
+?>
 <nav class="reference-entries reference-panel">
 	<ul>
 		<?php foreach ($entries->filterBy('isEntry', true) as $entry): ?>

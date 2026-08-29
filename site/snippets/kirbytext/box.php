@@ -1,4 +1,9 @@
 <?php
+/**
+ * @var string|null $icon
+ * @var string $text
+ * @var string $type
+ */
 $icon ??= match ($type) {
 	'success' => 'smile',
 	default   => $type

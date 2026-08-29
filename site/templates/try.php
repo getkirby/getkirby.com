@@ -1,3 +1,12 @@
+<?php
+/**
+ * @var bool $detectHost
+ * @var string $host
+ * @var string|null $message
+ * @var string|null $status
+ * @var array $zones
+ */
+?>
 <?php layout() ?>
 
 <article>

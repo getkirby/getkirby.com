@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var ReferenceRootPage|ReferenceUrlPage $page
+ */
+?>
 <?php layout('reference') ?>
 
 <div class="prose">

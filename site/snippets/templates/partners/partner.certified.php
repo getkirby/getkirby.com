@@ -1,3 +1,10 @@
+<?php
+/**
+ * @var bool $lazy
+ * @var PartnerPage $partner
+ * @var bool $placeholder
+ */
+?>
 <article
 	data-region="<?= $partner->region() ?>"
 	data-languages="<?= implode(',', $partner->languages()->split(',')) ?>"

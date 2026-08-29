@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var Kirby\Cms\Page $page
+ */
+?>
 <style>
 .template-select {
 	background: none;

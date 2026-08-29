@@ -1,4 +1,11 @@
 <?php
+/**
+ * @var ReferenceArticlePage $page
+ * @var string|null $intro
+ * @var Kirby\Reference\Reflectable\Tags\Parameters|array $parameters
+ * @var Kirby\Reference\Reflectable\Reflectable|null $reflectable
+ * @var string|null $title
+ */
 
 use Kirby\Toolkit\Str;
 

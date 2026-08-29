@@ -1,4 +1,7 @@
 <?php
+/**
+ * @var ReferenceClassMethodPage $page
+ */
 
 layout('reference.md');
 

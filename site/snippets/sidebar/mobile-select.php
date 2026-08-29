@@ -1,3 +1,11 @@
+<?php
+/**
+ * @var bool $children
+ * @var bool $hasCategories
+ * @var Kirby\Cms\Pages|Kirby\Toolkit\Collection $menu
+ * @var string|null $placeholder
+ */
+?>
 <div class="sidebar-mobile-select">
 	<label for="mobile-menu">
 		<?= $placeholder ?? 'Select a page …' ?>

@@ -1,4 +1,7 @@
 <?php
+/**
+ * @var ReferenceArticlePage $page
+ */
 
 $parameters = snippet('templates/reference/entry/parameters.md', return: true);
 $returns    = snippet('templates/reference/entry/returns.md', return: true);

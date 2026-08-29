@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var PartnerPage $partner
+ * @var bool $placeholder
+ */
+?>
 <?php if (($placeholder ?? false) !== true): ?>
 <a
 	href="<?= $partner->url() ?>"

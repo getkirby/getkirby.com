@@ -1,4 +1,7 @@
 <?php
+/**
+ * @var ReferenceComponentPage $page
+ */
 
 layout('reference.md');
 

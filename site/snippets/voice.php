@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var Kirby\Cms\Page $voice
+ */
+?>
 <blockquote class="voice">
 	<p class="mb-3 text-lg leading-snug">
 		<?= $voice->text()->widont() ?>

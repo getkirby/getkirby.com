@@ -1,4 +1,7 @@
 <?php
+/**
+ * @var Kirby\Cms\App $kirby
+ */
 
 echo markdownHeading('Reference', 2);
 echo snippet('templates/reference/groups.md', [

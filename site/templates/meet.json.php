@@ -1,7 +1,7 @@
 <?php
 /**
- * @var \Kirby\Cms\Pages $upcoming
- * @var \Kirby\Cms\Pages $past
+ * @var Kirby\Cms\Pages $past
+ * @var Kirby\Cms\Pages $upcoming
  */
 
 $since = param('since');

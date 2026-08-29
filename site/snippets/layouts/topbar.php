@@ -1,3 +1,12 @@
+<?php
+/**
+ * @var bool $active
+ * @var string $button
+ * @var string $icon
+ * @var string $link
+ * @var string $title
+ */
+?>
 <a href="<?= $link ?>" class="topbar">
 	<span class="topbar-title">
 		<span class="topbar-icon" aria-hidden="true"><?= $icon ?></span>

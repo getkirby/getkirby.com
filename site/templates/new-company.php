@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var DefaultPage $page
+ * @var string|false $email
+ */
+?>
 <?php layout() ?>
 
 <style>

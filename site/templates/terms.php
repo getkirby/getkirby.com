@@ -1,3 +1,11 @@
+<?php
+/**
+ * @var TermsPage $page
+ * @var string|null $introDiff
+ * @var Kirby\Cms\Pages $siblings
+ * @var string|null $textDiff
+ */
+?>
 <?php layout('article') ?>
 
 <?php slot('header') ?>

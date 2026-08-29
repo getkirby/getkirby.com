@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var string|null $title
+ */
+?>
 <section id="kosmos" class="columns" style="--columns-md: 1; --columns: 2; --gap: var(--spacing-12)">
 	<div class="columns" style="--columns-sm: 1; --columns-md: 2; --columns-lg: 1; --column-gap: var(--spacing-12)">
 		<?php snippet('hgroup', [

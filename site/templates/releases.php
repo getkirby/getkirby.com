@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var Kirby\Cms\Pages $releases
+ */
+?>
 <?php layout() ?>
 
 <article>

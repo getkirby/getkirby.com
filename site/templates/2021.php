@@ -1,3 +1,14 @@
+<?php
+/**
+ * @var DefaultPage $page
+ * @var Kirby\Cms\Pages $authors
+ * @var array $contributors
+ * @var Kirby\Cms\Pages $issues
+ * @var Kirby\Cms\Pages $plugins
+ * @var Kirby\Cms\Pages $recipes
+ * @var array $releases
+ */
+?>
 <?php layout() ?>
 
 <style>

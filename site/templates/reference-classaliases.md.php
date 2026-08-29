@@ -1,4 +1,7 @@
 <?php
+/**
+ * @var ReferenceClassAliasesPage $page
+ */
 
 layout('reference.md');
 

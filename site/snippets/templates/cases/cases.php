@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var Kirby\Cms\Pages $cases
+ * @var int $columns
+ */
+?>
 <ul class="cases columns mb-24" style="--columns-sm: 1; --columns-md: 2; --columns-lg: <?= $columns ?? 3 ?>; --gap: var(--container-padding)">
 	<?php foreach ($cases as $case): ?>
 	<li>

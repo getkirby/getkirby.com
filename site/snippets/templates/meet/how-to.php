@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var MeetPage $page
+ */
+?>
 <section class="howto mb-24">
 	<h2 class="h2 mb-6">Want to host a meetup?</h2>
 	<div class="howto-instructions prose text-lg">

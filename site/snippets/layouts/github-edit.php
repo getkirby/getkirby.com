@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var Kirby\Cms\App $kirby
+ * @var Kirby\Cms\Page $page
+ */
+?>
 <?php if ($kirby->option('archived') !== true): ?>
 	<hr class="hr mb-6">
 

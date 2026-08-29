@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var Kirby\Cms\Page $page
+ */
+?>
 <style>
 .v37-system-grid {
 	display: grid;

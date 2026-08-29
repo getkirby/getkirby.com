@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var Kirby\Cms\App $kirby
+ * @var bool $separator
+ */
+?>
 <footer class="footer text-sm">
 	<div class="container mb-24">
 		<?php if ($separator ?? true): ?>

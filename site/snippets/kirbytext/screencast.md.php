@@ -1,4 +1,10 @@
 <?php
+/**
+ * @var Kirby\Cms\File|null $poster
+ * @var string|null $text
+ * @var string|null $title
+ * @var string $url
+ */
 
 echo markdownHeading($title, 2);
 

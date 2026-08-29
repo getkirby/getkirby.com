@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var string|null $field
+ */
+?>
 ## Dynamic options
 
 Our options (link: docs/guide/blueprints/query-language text: query syntax) offers a very powerful way of converting pages, files, users, page values and even items in structure fields into automatically generated option lists.

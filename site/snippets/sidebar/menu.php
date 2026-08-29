@@ -1,4 +1,9 @@
 <?php
+/**
+ * @var string|null $marginBottom
+ * @var Kirby\Cms\Pages $menu
+ * @var bool $open
+ */
 extract([
 	'open' => $open ?? false
 ])

@@ -1,4 +1,9 @@
 <?php
+/**
+ * @var Kirby\Cms\App $kirby
+ * @var string|null $area
+ * @var string|null $q
+ */
 $area ??= 'all';
 $areas  = $kirby->option('search.areas')($kirby);
 ?>

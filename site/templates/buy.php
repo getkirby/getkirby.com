@@ -1,3 +1,11 @@
+<?php
+/**
+ * @var Kirby\Buy\Product $basic
+ * @var array $discountsReversed
+ * @var Kirby\Buy\Product $enterprise
+ * @var string $revenueLimit
+ */
+?>
 <?php layout() ?>
 
 <style>

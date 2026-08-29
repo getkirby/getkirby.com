@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var Kirby\Cms\Pages $recipes
+ * @var string|null $tag
+ */
+?>
 <?php layout('cookbook') ?>
 
 <?php slot('h1') ?>

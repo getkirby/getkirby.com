@@ -1,3 +1,13 @@
+<?php
+/**
+ * @var Kirby\Cms\App $kirby
+ * @var Kirby\Buy\Product $certified
+ * @var array $data
+ * @var string|null $people
+ * @var Kirby\Buy\Product $regular
+ * @var PartnerPage|null $renew
+ */
+?>
 <style>
 .signup {
 	background: var(--color-gray-200);

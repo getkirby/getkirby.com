@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var Kirby\Cms\Page $case
+ */
+?>
 <article class="overflow-hidden columns" style="--columns-md: 2; --columns: 3;">
 	<div class="highlight">
 		<h2 class="h2 mb-12">Made with Kirby</h2>

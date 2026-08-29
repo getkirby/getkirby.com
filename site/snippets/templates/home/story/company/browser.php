@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var HomeStoryPage $story
+ */
+?>
 <div class="text-sm">
 	H&C
 </div>

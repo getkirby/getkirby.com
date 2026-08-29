@@ -1,3 +1,10 @@
+<?php
+/**
+ * @var DefaultPage $page
+ * @var Kirby\Cms\Pages $quicktips
+ * @var Kirby\Cms\Pages $recipes
+ */
+?>
 <?php layout('cookbook') ?>
 
 <?php slot('hero') ?>

@@ -1,3 +1,10 @@
+<?php
+/**
+ * @var ReferenceIconPage $page
+ * @var array $colors
+ * @var array $sizes
+ */
+?>
 <?php layout('reference') ?>
 
 <div class="prose mb-12">

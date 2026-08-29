@@ -1,4 +1,11 @@
 <?php
+/**
+ * @var string|null $alt
+ * @var string|null $caption
+ * @var string|null $class
+ * @var Kirby\Cms\File $file
+ * @var string|null $link
+ */
 
 extract([
 	'alt'     => $alt ?? null,

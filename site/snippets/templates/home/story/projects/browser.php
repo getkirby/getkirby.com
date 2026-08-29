@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var HomeStoryPage $story
+ */
+?>
 <div class="columns" style="--columns: 2; --gap: var(--spacing-6)">
 	<div>
 		<div class="text-base mb-3">

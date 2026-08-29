@@ -1,4 +1,8 @@
 <?php
+/**
+ * @var ReferenceHookPage $page
+ * @var Kirby\Reference\Reflectable\Tags\Parameters $parameters
+ */
 
 layout('reference.md');
 

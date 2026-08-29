@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var Kirby\Cms\Pages $events
+ */
+?>
 <?php if ($events->count() > 0): ?>
 	<section class="events mb-24">
 		<header class="flex justify-between items-center mb-6">

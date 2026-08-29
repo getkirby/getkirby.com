@@ -1,3 +1,12 @@
+<?php
+/**
+ * @var bool $lazy
+ * @var Kirby\Cms\File|null $poster
+ * @var string|null $text
+ * @var string|null $title
+ * @var string $url
+ */
+?>
 <article class="screencast mb-6 bg-black color-white grid">
 	<header class="p-6">
 		<a href="https://videos.getkirby.com" class="h6 block mb-3">Screencast</a>

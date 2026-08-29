@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var KosmosIssuePage $page
+ */
+?>
 <?php slot('sidebar') ?>
 <style>
 	.with-sidebar {

@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var Kirby\Cms\Page $brand
+ * @var string|null $class
+ */
+?>
 <li class="brand <?= $brand->slug() ?> <?= $class ?? null ?>" title="<?= $brand->title() ?>">
 	<?= $brand->image()->read() ?>
 

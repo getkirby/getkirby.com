@@ -1,4 +1,7 @@
 <?php
+/**
+ * @var ReferenceRootPage|ReferenceUrlPage $page
+ */
 
 layout('reference.md');
 

@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var HomeStoryPage $story
+ */
+?>
 <section id="filesystem" class="playground-filesystem">
 	<div class="playground-filesystem-layout">
 		<header class="playground-filesystem-header h2 max-w-xs">

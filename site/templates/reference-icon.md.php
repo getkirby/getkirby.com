@@ -1,4 +1,7 @@
 <?php
+/**
+ * @var ReferenceIconPage $page
+ */
 
 layout('reference.md');
 

@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var HomeStoryPage $story
+ */
+?>
 <div class="text-base mb-3">Our app is quite good</div>
 
 <div class="columns text-3xs color-gray-400 mb-3" style="--columns: 3">

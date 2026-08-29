@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var Kirby\Cms\Page $page
+ */
+?>
 <style>
 	.v38-object-field-intro,
 	.v38-object-field-examples {

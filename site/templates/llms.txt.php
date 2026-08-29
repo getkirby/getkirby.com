@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var Kirby\Cms\Site $site
+ * @var Kirby\Cms\Pages $docs
+ */
+?>
 # <?= $site->title() ?> Docs
 
 > The official Kirby CMS documentation for <?= $site->title() ?>, covering Guides, Reference, Cookbook and Quicktips.

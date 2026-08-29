@@ -1,3 +1,12 @@
+<?php
+/**
+ * @var array $features
+ * @var string|null $intro
+ * @var string|null $text
+ * @var string $title
+ * @var string|null $voice
+ */
+?>
 <?php snippet('templates/features/intro', [
 	'title' => $title,
 	'intro' => $intro,

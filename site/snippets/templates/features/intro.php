@@ -1,3 +1,10 @@
+<?php
+/**
+ * @var string|null $intro
+ * @var string|null $text
+ * @var string $title
+ */
+?>
 <?php snippet('hgroup', [
 	'title'    => $title,
 	'subtitle' => $intro ?? null,

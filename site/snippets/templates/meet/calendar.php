@@ -1,4 +1,8 @@
-<?php /** @var $event \Kirby\Cms\Page */ ?>
+<?php
+/**
+ * @var EventPage $event
+ */
+?>
 BEGIN:VEVENT
 UID:meetup-<?= $event->slug() . "\r\n" ?>
 SUMMARY:<?= $event->foldTitle() . "\r\n" ?>

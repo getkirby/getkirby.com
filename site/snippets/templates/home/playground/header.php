@@ -1,3 +1,10 @@
+<?php
+/**
+ * @var Kirby\Cms\Pages $stories
+ * @var HomeStoryPage $story
+ * @var Kirby\Cms\File $storyImage
+ */
+?>
 <header class="playground-header">
 	<div class="playground-header-title mb-12">
 		<h1 class="h1">Kirby is the CMS<br>that adapts to you</h1>

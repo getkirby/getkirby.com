@@ -1,4 +1,8 @@
 <?php
+/**
+ * @var array $features
+ * @var string|null $subtitle
+ */
 extract([
 	'features' => $features ?? array_fill(0, 3, array_fill(0, 5, 'foo'))
 ])

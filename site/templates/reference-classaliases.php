@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var ReferenceClassAliasesPage $page
+ */
+?>
 <?php layout('reference') ?>
 
 <div class="mb-24">

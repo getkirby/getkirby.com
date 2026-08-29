@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var Kirby\Cms\Pages $causes
+ * @var string $headline
+ */
+?>
 <?php if ($causes->count() > 0): ?>
 <h4 class="h4 mb-3"><?= $headline ?></h4>
 <ul class="mb-6">

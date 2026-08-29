@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var QuicktipPage $page
+ * @var Kirby\Cms\Pages $authors
+ */
+?>
 <?php layout('cookbook') ?>
 
 <?php slot('h1') ?>

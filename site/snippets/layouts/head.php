@@ -1,4 +1,9 @@
 <?php
+/**
+ * @var Kirby\Cms\Site $site
+ * @var Kirby\Cms\Page $page
+ * @var Kirby\Meta\PageMeta $meta
+ */
 extract([
 	'meta' => $page->meta()
 ]);

@@ -1,4 +1,8 @@
 <?php
+/**
+ * @var Kirby\Cms\Page $page
+ * @var Kirby\Cms\Pages|null $siblings
+ */
 $siblings = $siblings ?? $page->siblings();
 if ($siblings->isNotEmpty()): ?>
 <nav class="prevnext">

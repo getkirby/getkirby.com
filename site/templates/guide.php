@@ -1,3 +1,10 @@
+<?php
+/**
+ * @var Kirby\Toolkit\Collection $menu
+ * @var Kirby\Cms\Pages $prevnext
+ * @var Kirby\Cms\Pages $resources
+ */
+?>
 <?php layout('article') ?>
 
 <?php slot('sidebar') ?>

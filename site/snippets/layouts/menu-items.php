@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var array $items
+ */
+?>
 <?php foreach ($items as $label => $target): ?>
 	<?php if ($target instanceof \Kirby\Cms\Page): ?>
 	<li><a href="<?= $target->menuUrl() ?>"><?= $label ?></a></li>

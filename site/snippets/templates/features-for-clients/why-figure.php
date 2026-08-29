@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var Kirby\Cms\Page $page
+ */
+?>
 <style>
 .why svg {
 	width: 64px;

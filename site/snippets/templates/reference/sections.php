@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var Kirby\Cms\Pages $sections
+ */
+?>
 <?php foreach ($sections as $section):
 
 if ($section->intendedTemplate()->name() === 'reference-quicklink') {

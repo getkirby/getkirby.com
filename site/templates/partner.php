@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var PartnerPage $page
+ */
+?>
 <?php layout() ?>
 
 <style>

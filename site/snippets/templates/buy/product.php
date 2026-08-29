@@ -1,3 +1,12 @@
+<?php
+/**
+ * @var string $description
+ * @var string $limit
+ * @var Kirby\Buy\Product $product
+ * @var string $revenueLimit
+ * @var Kirby\Buy\Sale $sale
+ */
+?>
 <div class="product p-6 rounded-xl flex flex-column justify-between" data-product="<?= $product->value() ?>">
 	<header class="mb-3">
 		<h2>

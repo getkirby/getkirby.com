@@ -1,3 +1,11 @@
+<?php
+/**
+ * @var bool $hasCategories
+ * @var string|null $link
+ * @var Kirby\Cms\Pages|Kirby\Toolkit\Collection $menu
+ * @var string|null $title
+ */
+?>
 <nav class="sidebar" aria-labelledby="sidebar-title">
 	<header class="sidebar-header mb-12">
 		<?php if ($title ?? null): ?>

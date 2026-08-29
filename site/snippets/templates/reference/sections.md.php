@@ -1,4 +1,8 @@
 <?php
+/**
+ * @var int $headingLevel
+ * @var Kirby\Cms\Pages $sections
+ */
 
 $sections = $sections->filter(function ($section) {
 	return $section->children()->listed()->count() > 0 && $section->id() !== 'docs/reference/panel/samples';

@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var DefaultPage $page
+ */
+?>
 <?php layout() ?>
 
 <article class="buzz">

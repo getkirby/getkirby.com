@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var Kirby\Cms\Page $page
+ */
+?>
 <style>
 .v37-stats-grid {
 	display: grid;

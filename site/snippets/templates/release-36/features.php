@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var Kirby\Cms\Page $page
+ */
+?>
 <div class="columns pt-6" style="--columns: 4; --gap: var(--spacing-2)">
 	<?php foreach ($page->children()->listed() as $feature): ?>
 	<a class="flex items-center bg-white p-3 shadow text-sm" href="<?= $feature->url() ?>">

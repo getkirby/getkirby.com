@@ -1,6 +1,6 @@
 <?php
 /**
- * @var \Kirby\Cms\Pages $upcoming
+ * @var Kirby\Cms\Pages $upcoming
  */
 
 header('Content-Type: application/rss+xml; charset=UTF-8');

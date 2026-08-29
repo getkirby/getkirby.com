@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var Kirby\Cms\Page $page
+ * @var Kirby\Cms\Pages $resources
+ */
+?>
 <?php if ($resources->count() > 0): ?>
 <aside class="mb-24">
 	<?php if ($page->text()->isNotEmpty()): ?>

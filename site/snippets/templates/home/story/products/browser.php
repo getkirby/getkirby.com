@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var HomeStoryPage $story
+ */
+?>
 <div class="text-base mb-3">Salt & Pepper</div>
 
 <div class="columns">

@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var array $messages
+ */
+?>
 <style>
 .security-messages.table table {
 	min-width: 36rem;

@@ -1,3 +1,16 @@
+<?php
+/**
+ * @var array $features
+ * @var string|null $figure
+ * @var string|null $footer
+ * @var string $id
+ * @var string|null $intro
+ * @var bool $reverse
+ * @var string|null $text
+ * @var string $title
+ * @var string|null $voice
+ */
+?>
 <section id="<?= $id ?>" class="features-section<?= ($reverse ?? false) ? ' features-section--reverse' : '' ?>">
 	<header class="features-section-header max-w-xl">
 		<h2 class="h2"><?= widont($title) ?></h2>

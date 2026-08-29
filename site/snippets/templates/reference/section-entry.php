@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var ReferenceArticlePage $entry
+ */
+?>
 <div class="flex items-center mr-1">
 	<?php snippet(
 		'templates/reference/entry/decoration',

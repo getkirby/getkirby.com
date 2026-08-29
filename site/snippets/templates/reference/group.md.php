@@ -1,4 +1,8 @@
 <?php
+/**
+ * @var Kirby\Cms\Page $group
+ * @var int $headingLevel
+ */
 
 echo markdownHeading($group->title(), $headingLevel ??= 2);
 echo snippet(

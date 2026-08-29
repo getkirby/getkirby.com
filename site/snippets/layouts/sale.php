@@ -1,4 +1,8 @@
 <?php
+/**
+ * @var Kirby\Cms\App $kirby
+ * @var Kirby\Cms\Page $page
+ */
 $sale = new Kirby\Buy\Sale();
 ?>
 

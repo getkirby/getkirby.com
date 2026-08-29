@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var array $incidents
+ */
+?>
 <style>
 .security-incidents.table table {
 	min-width: 36rem;

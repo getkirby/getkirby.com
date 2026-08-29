@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var ReferenceBlockPage $page
+ */
+?>
 <?php layout('reference') ?>
 
 <div class="prose">

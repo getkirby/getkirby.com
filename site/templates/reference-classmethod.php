@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var ReferenceClassMethodPage $page
+ */
+?>
 <?php layout('reference') ?>
 
 <div class="prose">

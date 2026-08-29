@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var ReferenceHookPage $page
+ * @var Kirby\Reference\Reflectable\Tags\Parameters $parameters
+ */
+?>
 <?php layout('reference') ?>
 
 <div class="prose">

@@ -1,3 +1,16 @@
+<?php
+/**
+ * @var string $budget
+ * @var string $company
+ * @var string $contact
+ * @var string $customer
+ * @var string $email
+ * @var string $language
+ * @var string $name
+ * @var string $partner
+ * @var string $project
+ */
+?>
 Name:
 <?= $name . "\n" ?>
 

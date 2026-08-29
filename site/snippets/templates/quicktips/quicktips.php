@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var Kirby\Cms\Pages $quicktips
+ */
+?>
 <style>
 .quicktips li {
 	background: var(--color-white);

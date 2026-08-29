@@ -1,4 +1,7 @@
 <?php
+/**
+ * @var ReferenceKirbytagPage $page
+ */
 
 layout('reference.md');
 

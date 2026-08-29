@@ -1,4 +1,7 @@
 <?php
+/**
+ * @var ReferenceArticlePage $page
+ */
 
 use Kirby\Toolkit\A;
 

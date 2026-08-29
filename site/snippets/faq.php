@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var Kirby\Cms\Pages $questions
+ */
+?>
 <ul class="faq">
 	<?php foreach ($questions as $question): ?>
 	<li>

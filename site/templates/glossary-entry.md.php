@@ -1,4 +1,7 @@
 <?php
+/**
+ * @var GlossaryEntryPage $page
+ */
 
 layout('article.md');
 

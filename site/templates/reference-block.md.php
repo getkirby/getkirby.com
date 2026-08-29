@@ -1,4 +1,7 @@
 <?php
+/**
+ * @var ReferenceBlockPage $page
+ */
 
 layout('reference.md');
 

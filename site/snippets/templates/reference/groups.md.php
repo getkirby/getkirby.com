@@ -1,4 +1,8 @@
 <?php
+/**
+ * @var Kirby\Cms\Pages $groups
+ * @var int $headingLevel
+ */
 
 $groups = $groups->toArray(function ($group) use ($headingLevel) {
 	return trim(

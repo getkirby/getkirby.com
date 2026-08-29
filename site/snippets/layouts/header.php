@@ -1,3 +1,10 @@
+<?php
+/**
+ * @var Kirby\Cms\App $kirby
+ * @var Kirby\Cms\Page $page
+ * @var string|null $search
+ */
+?>
 <?php snippet('layouts/skipper') ?>
 
 <?php if ($kirby->option('archived') !== true): ?>

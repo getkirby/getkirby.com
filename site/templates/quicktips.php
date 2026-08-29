@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var Kirby\Cms\Pages $quicktips
+ */
+?>
 <?php layout('cookbook') ?>
 
 <?php slot('h1') ?>

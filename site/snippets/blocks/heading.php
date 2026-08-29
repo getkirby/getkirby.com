@@ -1,6 +1,7 @@
 <?php
-
-/** @var Block $block */
+/**
+ * @var Kirby\Cms\Block $block
+ */
 
 use Kirby\Cms\Block;
 

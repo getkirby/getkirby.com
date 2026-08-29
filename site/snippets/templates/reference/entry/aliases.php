@@ -1,4 +1,7 @@
 <?php
+/**
+ * @var ReferenceArticlePage $page
+ */
 $aliases = $page->reflection()->aliases();
 ?>
 <?php if (count($aliases) > 0): ?>

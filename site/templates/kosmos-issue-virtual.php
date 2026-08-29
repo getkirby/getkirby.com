@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var KosmosIssueVirtualPage $page
+ */
+?>
 <?php layout('article') ?>
 
 <?php snippet('kosmos/sidebar') ?>

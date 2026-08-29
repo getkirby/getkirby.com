@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var Kirby\Cms\Page $page
+ */
+?>
 <?php if ($section = $page->find('changes/plugins')): ?>
 	<section id="changes-plugins" class="mb-42">
 

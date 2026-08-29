@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var int $mb
+ * @var Kirby\Cms\Page $section
+ */
+?>
 <?php if (($snippet = $section->root() . '/section.php') && file_exists($snippet)): ?>
 		<?php require_once $snippet ?>
 

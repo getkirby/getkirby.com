@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var ReferenceSectionPage $page
+ */
+?>
 <div class="reference-menu">
   <button class="btn">
     <?= icon('dashboard') ?> Reference

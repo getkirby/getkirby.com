@@ -1,4 +1,7 @@
 <?php
+/**
+ * @var ReferenceArticlePage $page
+ */
 
 use Kirby\Cms\App;
 use Kirby\Reference\Reflectable\ReflectableClass;

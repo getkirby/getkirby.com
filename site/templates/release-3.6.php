@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var ReleasePage $page
+ */
+?>
 <?php layout() ?>
 <?= css('assets/css/layouts/features.css') ?>
 <?= css('assets/css/layouts/releases.css') ?>

@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var ReferenceFieldMethodPage $page
+ */
+?>
 <?php layout('reference') ?>
 
 <div class="prose">

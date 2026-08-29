@@ -1,3 +1,11 @@
+<?php
+/**
+ * @var string $headline
+ * @var Kirby\Cms\File|null $image
+ * @var string|null $link
+ * @var string $text
+ */
+?>
 <article>
 	<header class="mb-3">
 		<h2 class="h3"><?= $headline ?></h2>

@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var Kirby\Cms\Page $page
+ */
+?>
 <section id="image-options" class="mb-42">
 	<div class="columns" style="--columns: 2; --gap: var(--spacing-24)">
 		<div>

@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var ReleasePage $page
+ */
+?>
 <?php layout() ?>
 
 <style>

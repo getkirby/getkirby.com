@@ -1,3 +1,10 @@
+<?php
+/**
+ * @var int|string|null $people
+ * @var string $plan
+ * @var PartnerPage|null $renew
+ */
+?>
 <section class="mb-6">
 	<h3 class="font-bold mb-1">What you get</h3>
 

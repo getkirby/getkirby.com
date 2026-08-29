@@ -1,4 +1,7 @@
 <?php
+/**
+ * @var ReferenceValidatorPage $page
+ */
 
 layout('reference.md');
 

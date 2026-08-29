@@ -1,3 +1,10 @@
+<?php
+/**
+ * @var Kirby\Cms\App $kirby
+ * @var Kirby\Cms\Page $page
+ * @var string|null $link
+ */
+?>
 <a class="logo" href="<?= $link ?? '/' ?>">
 	<?= icon('icon') ?>
 </a>

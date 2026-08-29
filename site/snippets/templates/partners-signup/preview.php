@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var string $plan
+ * @var PartnerPage|null $renew
+ */
+?>
 <?php if ($renew): ?>
 <article
 	v-if="form.plan === 'certified'"

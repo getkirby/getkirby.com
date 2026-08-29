@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var Kirby\Cms\App $kirby
+ * @var Kirby\Cms\Page $page
+ */
+?>
 <style>
 .v37-ui-grid {
 	display: grid;

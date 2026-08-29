@@ -1,3 +1,10 @@
+<?php
+/**
+ * @var string|false $email
+ * @var array $error
+ * @var bool $hasData
+ */
+?>
 <!-- Form -->
 <form id="form" method="POST" action="#form" class="form pt-6 mb-36">
 	<header class="mb-3 flex flex-wrap justify-between items-baseline">

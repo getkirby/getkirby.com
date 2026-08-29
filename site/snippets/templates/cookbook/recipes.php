@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var Kirby\Cms\Pages $recipes
+ */
+?>
 <ul class="auto-fill auto-rows-fr" style="--min: 16rem; --gap: var(--spacing-6)">
 	<?php foreach ($recipes as $recipe): ?>
 	<li>

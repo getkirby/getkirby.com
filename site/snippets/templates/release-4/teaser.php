@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var Kirby\Cms\Page $section
+ */
+?>
 <div class="prose">
 	<?= $section->teaser()->kt() ?>
 

@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var Kirby\Cms\Page $section
+ */
+?>
 <?php if (($snippet = $section->root() . '/snippet.php') && file_exists($snippet)): ?>
 	<section id="<?= $section->slug() ?>" class="mb-42">
 		<?php snippet('hgroup', [

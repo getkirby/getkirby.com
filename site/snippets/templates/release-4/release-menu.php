@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var Kirby\Cms\Pages $sections
+ */
+?>
 <nav class="release-menu">
 	<ul class="font-mono text-sm pt-6 sticky" style="--top: var(--spacing-2)">
 		<?php foreach ($sections as $section): ?>

@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var Kirby\Cms\App $kirby
+ */
+?>
 <?php layout('scenarios') ?>
 
 <?php

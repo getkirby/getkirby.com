@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var Kirby\Cms\Page $page
+ */
+?>
 <nav aria-label="Cookbook menu">
 	<div class="sidebar cookbook-sidebar sticky" style="--top: var(--spacing-6)">
 		<header class="sidebar-header mb-12">

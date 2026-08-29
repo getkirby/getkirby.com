@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var bool $children
+ * @var Kirby\Cms\Pages $items
+ */
+?>
 <?php foreach ($items as $item): ?>
 	<option value="<?= $item->url() ?>">
 		<?= $item->title() ?>

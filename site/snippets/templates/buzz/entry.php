@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var BuzzEntryPage $entry
+ * @var bool $lazy
+ */
+?>
 <?php if($entry->video()->isNotEmpty()): ?>
 	<div class="buzz-entry">
 		<article>

@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var string $version
+ */
+?>
 <info>
 We try to avoid breaking changes as much as we can. But we also put a lot of effort in keeping our technical debt in Kirby as low as possible. Sometimes such breaking changes are necessary to move forward with a clean code base.
 

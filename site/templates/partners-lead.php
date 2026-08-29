@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var DefaultPage $page
+ * @var string|null $message
+ */
+?>
 <?php layout() ?>
 
 <article>

@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var Kirby\Cms\Pages $plugins
+ */
+?>
 <?php foreach ($plugins as $plugin): ?>
 	<article class="mb-6">
 		<a href="<?= $plugin->url() ?>" class="bg-dark shadow-xl color-gray-400 rounded overflow-hidden shadow columns" style="--columns: 3; --gap: 0">

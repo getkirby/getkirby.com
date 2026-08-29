@@ -1,4 +1,9 @@
 <?php
+/**
+ * @var string|null $label
+ * @var string $text
+ * @var string|null $version
+ */
 $current = version_compare($version, kirby()->version(), '>=');
 ?>
 

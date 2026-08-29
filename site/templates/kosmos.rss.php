@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var KosmosPage $page
+ * @var Kirby\Cms\Pages $issues
+ */
+?>
 <?php snippet('rss/header', [
 	'description' => 'This is the archive of our monthly newsletter – Kirby Kosmos',
 	'modified'    => $issues->last()->date()->toDate('r'),

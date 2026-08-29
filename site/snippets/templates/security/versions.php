@@ -1,4 +1,7 @@
 <?php
+/**
+ * @var Kirby\Toolkit\Collection $versions
+ */
 
 $minDate = new DateTime('January 1 - 3 years');
 $maxDate = new DateTime('January 1 + 4 years');

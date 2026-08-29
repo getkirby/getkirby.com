@@ -1,3 +1,12 @@
+<?php
+/**
+ * @var string|null $area
+ * @var array $areas
+ * @var Kirby\Cms\Pagination|null $pagination
+ * @var string $query
+ * @var Kirby\Search\Results|array $results
+ */
+?>
 <?php layout() ?>
 
 <style>

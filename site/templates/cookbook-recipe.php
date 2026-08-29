@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var CookbookRecipePage $page
+ * @var Kirby\Cms\Pages $authors
+ */
+?>
 <?php layout('cookbook') ?>
 
 <?php slot('hero') ?>

@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var string|null $field
+ */
+?>
 ## Pagination
 Options in the <?= $field ?> picker are paginated. You can set the number of items per pagination page in the picker using the `limit` property. The default setting is `20`.
 

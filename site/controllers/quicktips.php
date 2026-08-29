@@ -3,7 +3,7 @@
 use Kirby\Cms\Page;
 use Kirby\Toolkit\Str;
 
-return function (Page $page, $tag) {
+return function (Page $page, string|null $tag = null) {
 
 	$quicktips = $page->children()->listed()->sortBy('title');
 	$tags      = $page->children()->listed()->pluck('tags', ',', true);

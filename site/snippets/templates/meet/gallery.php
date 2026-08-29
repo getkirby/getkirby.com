@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var Kirby\Cms\Files $gallery
+ */
+?>
 <section class="mb-24">
 	<h2 class="h2 mb-6">Shake it like a polaroid picture</h2>
 	<ul class="album-gallery">

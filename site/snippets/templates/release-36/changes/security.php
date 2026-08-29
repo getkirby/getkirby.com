@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var Kirby\Cms\Page $page
+ */
+?>
 <?php if ($section = $page->find('changes/security')): ?>
 	<section id="changes-security" class="mb-42">
 

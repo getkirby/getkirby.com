@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var KosmosPage $page
+ */
+?>
 <?php layout() ?>
 
 <style>

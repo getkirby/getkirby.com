@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var ReferenceClassesPage $page
+ */
+?>
 <?php layout('reference') ?>
 
 <?php foreach ($page->children()->unlisted()  as $namespace): ?>

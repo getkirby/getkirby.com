@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var ReferenceValidatorPage $page
+ */
+?>
 <?php layout('reference') ?>
 
 <div class="prose">

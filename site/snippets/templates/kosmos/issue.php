@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var KosmosIssuePage $issue
+ */
+?>
 <article>
 	<a class="bg-black block leading-tight rounded overflow-hidden" href="<?= $issue->url() ?>">
 		<figure>

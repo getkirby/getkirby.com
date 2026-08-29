@@ -1,3 +1,11 @@
+<?php
+/**
+ * @var Kirby\Buy\Product $basic
+ * @var array $donation
+ * @var Kirby\Buy\Product $enterprise
+ * @var string $revenueLimit
+ */
+?>
 <style>
 .checkout .dialog {
 	position: relative;

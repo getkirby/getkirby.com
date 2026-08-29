@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var array $tags
+ */
+?>
 <?php use Kirby\Http\Uri; ?>
 <nav aria-label="Cookbook menu">
 	<div class="sidebar cookbook-sidebar sticky" style="--top: var(--spacing-6)">

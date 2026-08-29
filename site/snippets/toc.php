@@ -1,4 +1,10 @@
 <?php
+/**
+ * @var Kirby\Cms\Page $page
+ * @var Kirby\Toolkit\Collection $items
+ * @var string $tag
+ * @var string|null $title
+ */
 $items      ??= $page->text()->toToc($tag ?? 'h2');
 $hasResources = $page->resources()->isNotEmpty();
 $limit        = $hasResources ? 1 : 2;

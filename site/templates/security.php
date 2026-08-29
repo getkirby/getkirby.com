@@ -1,4 +1,7 @@
 <?php
+/**
+ * @var Kirby\Cms\App $kirby
+ */
 
 // expire the Kirby and CDN caches daily at midnight to refresh the "today" marker in the security calendar
 $expiryTime = strtotime('tomorrow 0:00Z');

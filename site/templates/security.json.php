@@ -1,4 +1,8 @@
 <?php
+/**
+ * @var Kirby\Cms\App $kirby
+ * @var SecurityPage $page
+ */
 
 $data = [
 	'latest'    => $kirby->version(),

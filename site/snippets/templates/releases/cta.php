@@ -1,4 +1,8 @@
 <?php
+/**
+ * @var ReleasePage $page
+ * @var array $options
+ */
 
 $buttons = [
 	[

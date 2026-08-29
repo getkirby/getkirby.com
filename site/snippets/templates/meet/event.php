@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var EventPage $event
+ */
+?>
 <a target="_blank" href="<?= $event->link() ?>" class="event">
 	<h3 class="truncate" title="<?= $event->shortTitle() ?>">
 		<?= $event->icon() ?> <?= $event->shortTitle() ?>

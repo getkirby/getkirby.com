@@ -1,4 +1,8 @@
 <?php
+/**
+ * @var string|null $exclude
+ * @var string|null $field
+ */
 
 use Kirby\Filesystem\F;
 

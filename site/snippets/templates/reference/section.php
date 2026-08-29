@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var ReferenceSectionPage $page
+ * @var Kirby\Cms\Pages $item
+ */
+?>
 <ul
 	class="reference-section mb-12 auto-fill"
 	style="--min: <?= $page->sectionGridMinWidth() ?>; --row-gap: 0; --column-gap: var(--spacing-3)"

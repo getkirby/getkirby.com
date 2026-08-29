@@ -1,5 +1,7 @@
 <?php
-/** @var $upcoming \Kirby\Cms\Pages */
+/**
+ * @var Kirby\Cms\Pages $upcoming
+ */
 header('Content-type: text/calendar; charset=utf-8');
 header('Content-Disposition: attachment; filename=kirby-meetups.ics');
 ?>

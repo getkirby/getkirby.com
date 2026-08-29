@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var Kirby\Toolkit\Collection $menu
+ */
+?>
 <?php foreach ($menu as $category => $items): ?>
 <section class="sidebar-group">
 	<h2><?= option('categories')[$category] ?? ucfirst($category) ?></h2>

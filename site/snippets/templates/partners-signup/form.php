@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var string $plan
+ */
+?>
 <fieldset class="checkout-fieldset">
 	<legend>Your business</legend>
 	<div class="fields">

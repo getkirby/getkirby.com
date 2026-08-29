@@ -1,3 +1,11 @@
+<?php
+/**
+ * @var PartnersSignupPage $page
+ * @var string|null $message
+ * @var string|null $people
+ * @var PartnerPage|null $renew
+ */
+?>
 <?php layout() ?>
 
 <article>

@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var ReleasePage $page
+ * @var Kirby\Cms\Pages $sections
+ */
+?>
 <?php layout() ?>
 <?= css('assets/css/layouts/features.css') ?>
 <?= css('assets/css/layouts/releases.css') ?>

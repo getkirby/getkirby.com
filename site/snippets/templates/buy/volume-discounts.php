@@ -1,3 +1,11 @@
+<?php
+/**
+ * @var Kirby\Buy\Product $basic
+ * @var array $discounts
+ * @var Kirby\Buy\Product $enterprise
+ * @var Kirby\Buy\Sale $sale
+ */
+?>
 <style>
 .volume-toggles {
 	display: flex;

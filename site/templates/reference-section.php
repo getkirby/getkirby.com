@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var ReferenceSectionPage $page
+ * @var Kirby\Cms\Pages $entries
+ */
+?>
 <?php layout('reference') ?>
 
 <!-- Enforce empty default ToC slot -->

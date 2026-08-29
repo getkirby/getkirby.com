@@ -1,3 +1,11 @@
+<?php
+/**
+ * @var Kirby\Cms\Pages $cases
+ * @var int $columns
+ * @var int $limit
+ * @var string $title
+ */
+?>
 <section id="cases" class="mb-42">
 	<h2 class="h2 mb-12"><?= $title ?></h2>
 	<?php snippet('templates/cases/cases', [

@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var ReferenceKirbytagPage $page
+ */
+?>
 <?php layout('reference') ?>
 
 <div class="prose">

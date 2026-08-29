@@ -1,4 +1,7 @@
 <?php
+/**
+ * @var ReferenceArticlePage $page
+ */
 
 if (!$throws = $page->reflection()->throws()) {
 	return;

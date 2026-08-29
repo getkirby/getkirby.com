@@ -1,4 +1,8 @@
 <?php
+/**
+ * @var int $headingLevel
+ * @var Kirby\Cms\Pages $sections
+ */
 
 foreach ($sections->unlisted() as $section) {
 	echo markdownHeading($section->title(), $headingLevel ?? 3);

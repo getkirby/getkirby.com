@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var BuzzEntryPage $entry
+ */
+?>
 <header class="mb-12">
 	<p class="font-mono text-xs mb-1">
 		<?php e($entry->isExternalLink(), '🔗') ?>

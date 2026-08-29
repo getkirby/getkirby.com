@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var Kirby\Cms\Page $page
+ */
+?>
 <section id="cardlets" class="mb-42">
 	<?php snippet('templates/features/intro', [
 		'title' => 'Cardlets',

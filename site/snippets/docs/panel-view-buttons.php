@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var string|null $field
+ */
+?>
 <since v="5.0.0">
 ## View buttons
 

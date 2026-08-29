@@ -1,4 +1,7 @@
 <?php
+/**
+ * @var Kirby\Cms\App $kirby
+ */
 
 layout('article.md');
 

@@ -1,3 +1,11 @@
+<?php
+/**
+ * @var MeetPage $page
+ * @var Kirby\Cms\Files $gallery
+ * @var Kirby\Cms\Pages $past
+ * @var Kirby\Cms\Pages $upcoming
+ */
+?>
 <?php layout() ?>
 <?php snippet('templates/meet/events.css') ?>
 

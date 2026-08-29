@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var array $feature
+ */
+?>
 <h3 class="font-bold">
 	<?php if ($feature['link'] ?? null): ?>
 	<a href="<?= $feature['link'] ?>"><?= $feature['title'] ?> &rarr;</a>

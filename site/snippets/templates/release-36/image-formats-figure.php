@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var Kirby\Cms\Page $page
+ */
+?>
 <div class="columns mb-6" style="--columns: 3">
 	<figure>
 		<div class="bg-black" style="--aspect-ratio: 1024/1536">

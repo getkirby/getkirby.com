@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var Kirby\Cms\Page $page
+ */
+?>
 <section class="mb-42">
 	<?php snippet('templates/features/triptych', ['features' => [
 		[

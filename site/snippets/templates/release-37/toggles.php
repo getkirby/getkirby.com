@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var Kirby\Cms\Page $page
+ */
+?>
 <section id="toggles-field" class="mb-42">
 	<?php snippet('hgroup', [
 		'title'    => 'New toggles field',

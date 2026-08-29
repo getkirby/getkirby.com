@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var string $id
+ * @var array $tabs
+ */
+?>
 <nav role="tablist">
 	<?php foreach ($tabs as $key => $tab): ?>
 	<button

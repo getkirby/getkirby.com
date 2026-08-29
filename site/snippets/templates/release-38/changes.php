@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var Kirby\Cms\Page $page
+ */
+?>
 <section id="changes" class="mb-42">
 
 	<?php snippet('hgroup', [

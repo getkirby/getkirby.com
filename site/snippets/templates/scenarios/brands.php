@@ -1,3 +1,11 @@
+<?php
+/**
+ * @var int $columns
+ * @var int $limit
+ * @var string $tag
+ * @var string|null $title
+ */
+?>
 <section id="brands" class="mb-42">
 	<?php if ($title ?? null): ?>
 	<h2 class="h2 mb-12"><?= $title ?></h2>

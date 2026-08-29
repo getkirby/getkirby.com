@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var string|null $alt
+ * @var Kirby\Cms\File|null $image
+ */
+?>
 <figure>
 	<a href="<?= $image->url() ?>" data-lightbox>
 		<img alt="<?= $alt ?? '' ?>" src="<?= $image->url() ?>">

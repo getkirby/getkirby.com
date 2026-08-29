@@ -1,3 +1,9 @@
+<?php
+/**
+ * @var Kirby\Cms\App $kirby
+ * @var string $timestamp
+ */
+?>
 <style>
 .lead {
 	background: var(--color-gray-200);

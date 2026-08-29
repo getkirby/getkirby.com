@@ -1,3 +1,12 @@
+<?php
+/**
+ * @var PartnersPage $page
+ * @var Kirby\Cms\Pages $certified
+ * @var array $filters
+ * @var Kirby\Cms\Pages $partners
+ * @var Kirby\Cms\Pages $regular
+ */
+?>
 <?php layout() ?>
 
 <style>
