@@ -10,11 +10,10 @@ use Kirby\Cms\User;
 use Kirby\Cms\Users;
 
 /**
- * @package   Kirby Panel
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
+ *
+ * @extends \Kirby\Panel\Collector\ModelsCollector<\Kirby\Cms\Pages>
  */
 class PagesCollector extends ModelsCollector
 {

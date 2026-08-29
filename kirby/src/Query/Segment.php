@@ -12,13 +12,10 @@ use Kirby\Toolkit\Str;
  * The Segment class represents a single
  * part of a chained query
  *
- * @package   Kirby Query
- * @author    Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  *
- * @todo Deprecate in v6
+ * @deprecated 6.0.0 Will be removed in Kirby 7
  */
 class Segment
 {

@@ -15,9 +15,6 @@ use Stringable;
  * interface around arrays of arrays or objects,
  * with advanced filters, sorting, navigation and more.
  *
- * @package   Kirby Toolkit
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  *
@@ -358,7 +355,7 @@ class Collection extends Iterator implements Stringable
 	/**
 	 * Find one or multiple elements by id
 	 *
-	 * @param string ...$keys
+	 * @param string|list<string> ...$keys One or more keys, or a single array of keys
 	 * @return TValue|static
 	 */
 	public function find(...$keys)
@@ -384,6 +381,7 @@ class Collection extends Iterator implements Stringable
 		}
 
 		$collection = clone $this;
+		/** @var array<string, TValue> $result */
 		$collection->data = $result;
 		return $collection;
 	}
@@ -750,7 +748,6 @@ class Collection extends Iterator implements Stringable
 	 *
 	 * @param int $offset The index to start from
 	 * @return static|$this
-	 * @psalm-return ($offset is 0 ? $this : static)
 	 */
 	public function offset(int $offset): static
 	{
@@ -963,7 +960,6 @@ class Collection extends Iterator implements Stringable
 	 * @param int $offset The optional index to start the slice from
 	 * @param int|null $limit The optional number of elements to return
 	 * @return $this|static
-	 * @psalm-return ($offset is 0 && $limit is null ? $this : static)
 	 */
 	public function slice(
 		int $offset = 0,
@@ -1161,10 +1157,12 @@ class Collection extends Iterator implements Stringable
 
 	/**
 	 * Converts the object into a JSON string
+	 *
+	 * @throws \JsonException for invalid JSON
 	 */
 	public function toJson(): string
 	{
-		return json_encode($this->toArray());
+		return json_encode($this->toArray(), JSON_THROW_ON_ERROR);
 	}
 
 	/**

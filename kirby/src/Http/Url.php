@@ -8,9 +8,6 @@ use Whoops\Handler\PrettyPageHandler;
 /**
  * Static URL tools
  *
- * @package   Kirby Http
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
@@ -69,8 +66,11 @@ class Url
 	 * a file at the given line number
 	 * @since 5.3.0
 	 */
-	public static function editor(string|false $editor, string|null $file, int $line = 0): string|null
-	{
+	public static function editor(
+		string|false $editor,
+		string|null $file,
+		int $line = 0
+	): string|null {
 		if ($editor === false || $file === null) {
 			return null;
 		}
@@ -78,7 +78,8 @@ class Url
 		$handler = new PrettyPageHandler();
 		$handler->setEditor($editor);
 
-		return $handler->getEditorHref($file, $line);
+		$href = $handler->getEditorHref($file, $line);
+		return is_string($href) ? $href : null;
 	}
 
 	/**
@@ -100,7 +101,7 @@ class Url
 	 */
 	public static function home(): string
 	{
-		return static::$home;
+		return static::$home ?? '/';
 	}
 
 	/**
@@ -135,6 +136,8 @@ class Url
 
 	/**
 	 * Checks if an URL is absolute
+	 *
+	 * @psalm-assert-if-true non-empty-string $url
 	 */
 	public static function isAbsolute(string|null $url = null): bool
 	{

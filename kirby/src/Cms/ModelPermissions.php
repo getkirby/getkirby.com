@@ -8,21 +8,29 @@ use Kirby\Toolkit\A;
 /**
  * ModelPermissions
  *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
+ *
+ * @template TModel of \Kirby\Cms\ModelWithContent|\Kirby\Cms\Language
  */
 abstract class ModelPermissions
 {
-	protected const CATEGORY = 'model';
+	protected const string CATEGORY = 'model';
 	protected array $options;
 
 	public static array $cache = [];
 
-	public function __construct(protected ModelWithContent|Language $model)
+	/**
+	 * @var TModel
+	 */
+	protected ModelWithContent|Language $model;
+
+	/**
+	 * @param TModel $model
+	 */
+	public function __construct(ModelWithContent|Language $model)
 	{
+		$this->model   = $model;
 		$this->options = match (true) {
 			$model instanceof ModelWithContent => $model->blueprint()->options(),
 			default                            => []
@@ -47,10 +55,12 @@ abstract class ModelPermissions
 	 * Can be overridden by specific child classes
 	 * to return a model-specific value used to
 	 * cache a once determined permission in memory
+	 *
 	 * @codeCoverageIgnore
 	 */
-	protected static function cacheKey(ModelWithContent|Language $model): string
-	{
+	protected static function cacheKey(
+		ModelWithContent|Language $model
+	): string {
 		return '';
 	}
 
@@ -116,7 +126,12 @@ abstract class ModelPermissions
 		}
 
 		$permissions = $user->role()->permissions();
-		return $permissions->for(static::category($this->model), $action, $default);
+
+		return $permissions->for(
+			category: static::category($this->model),
+			action:   $action,
+			default:  $default
+		);
 	}
 
 	/**
@@ -130,7 +145,7 @@ abstract class ModelPermissions
 	): bool {
 		$role     = $model->kirby()->role()?->id() ?? '__none__';
 		$category = static::category($model);
-		$cacheKey = $category . '.' . $action . '/' . static::cacheKey($model) . '/' . $role . '/' . ($default === true ? 'true' : 'false');
+		$cacheKey = $category . '.' . $action . '/' . static::cacheKey($model) . '/' . $role;
 
 		if (isset(static::$cache[$cacheKey]) === true) {
 			return static::$cache[$cacheKey];
@@ -140,7 +155,7 @@ abstract class ModelPermissions
 			throw new LogicException('Cannot use permission cache for dynamically-determined permission');
 		}
 
-		return static::$cache[$cacheKey] = $model->permissions()->can($action, $default);
+		return static::$cache[$cacheKey] = $model->permissions()->can($action, $role, $default);
 	}
 
 	/**

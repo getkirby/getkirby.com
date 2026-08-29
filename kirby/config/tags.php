@@ -212,7 +212,7 @@ return [
 			// if value is a UUID, resolve to page/file model
 			// and use the URL as value
 			if (Uuid::is($link, ['page', 'file']) === true) {
-				$link = Uuid::for($link)?->toUrl();
+				$link = Uuid::from($link)?->toUrl();
 			}
 
 			// broken link: handle inline instead of turning the

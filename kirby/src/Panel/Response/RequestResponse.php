@@ -1,0 +1,31 @@
+<?php
+
+namespace Kirby\Panel\Response;
+
+use Kirby\Data\Json;
+
+/**
+ * @copyright Bastian Allgeier
+ * @license   https://getkirby.com/license
+ * @since     6.0.0
+ */
+class RequestResponse extends JsonResponse
+{
+	/**
+	 * Returns the data as JSON
+	 * Request responses are not wrapped in a custom namespace
+	 */
+	public function body(): string
+	{
+		return Json::encode($this->data(), $this->pretty());
+	}
+
+	/**
+	 * Returns the full data array
+	 * without additional information
+	 */
+	public function data(): array
+	{
+		return $this->data;
+	}
+}

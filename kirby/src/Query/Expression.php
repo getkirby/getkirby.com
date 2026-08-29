@@ -9,16 +9,16 @@ use Kirby\Toolkit\A;
  * The Expression class adds support for simple shorthand
  * comparisons (`a ? b : c`, `a ?: c` and `a ?? b`)
  *
- * @package   Kirby Query
- * @author    Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  *
- * @todo Deprecate in v6
+ * @deprecated 6.0.0 Will be removed in Kirby 7
  */
 class Expression
 {
+	/**
+	 * @param list<string|Argument> $parts
+	 */
 	public function __construct(
 		public array $parts
 	) {
@@ -41,6 +41,7 @@ class Expression
 		// turn all non-operator parts into an Argument
 		// which takes care of converting string, arrays booleans etc.
 		// into actual types and treats all other parts as their own queries
+		/** @var list<string|Argument> $parts */
 		$parts = A::map(
 			$parts,
 			fn ($part) => match ($part) {

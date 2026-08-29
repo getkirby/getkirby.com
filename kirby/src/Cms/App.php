@@ -5,6 +5,7 @@ namespace Kirby\Cms;
 use Closure;
 use Exception as GlobalException;
 use Generator;
+use Kirby\Api\Api;
 use Kirby\Content\Storage;
 use Kirby\Content\VersionCache;
 use Kirby\Data\Data;
@@ -23,9 +24,12 @@ use Kirby\Http\Route;
 use Kirby\Http\Router;
 use Kirby\Http\Uri;
 use Kirby\Http\Visitor;
+use Kirby\Panel\Panel;
+use Kirby\Query\Query;
 use Kirby\Session\AutoSession;
 use Kirby\Session\Session;
 use Kirby\Template\Snippet;
+use Kirby\Template\Stack;
 use Kirby\Template\Template;
 use Kirby\Text\KirbyTag;
 use Kirby\Text\KirbyTags;
@@ -46,9 +50,6 @@ use Throwable;
  * aspects of your site, like the options, urls,
  * roots, languages, roles, etc.
  *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
@@ -60,7 +61,7 @@ class App
 	use AppTranslations;
 	use AppUsers;
 
-	public const CLASS_ALIAS = 'kirby';
+	public const string CLASS_ALIAS = 'kirby';
 
 	protected static App|null $instance = null;
 	protected static string|null $version = null;
@@ -78,6 +79,7 @@ class App
 	protected bool|null $multilang = null;
 	protected string|null $nonce = null;
 	protected array $options;
+	protected Panel|null $panel = null;
 	protected string|null $path = null;
 	protected Request|null $request = null;
 	protected Responder|null $response = null;
@@ -105,8 +107,14 @@ class App
 
 		// start with fresh caches
 		Snippet::$cache = [];
+		Stack::reset();
 		VersionCache::reset();
 		ModelPermissions::$cache = [];
+
+		// start with a fresh Query runner option
+		Query::$runner = null;
+
+		// reset the UUIDs option cache
 		Uuids::$enabled = null;
 
 		// register all roots to be able to load stuff afterwards
@@ -465,7 +473,7 @@ class App
 		if (strpos($name, '/') === false) {
 			$site   = $this->controllerLookup('site', $contentType);
 			$site ??= $this->controllerLookup('site');
-			$data   = (array)$site?->call($this, $arguments) ?? [];
+			$data   = (array)$site?->call($this, $arguments);
 		}
 
 		// try to find a specific representation controller
@@ -476,7 +484,7 @@ class App
 
 		return [
 			...$data,
-			...(array)$controller?->call($this, $arguments) ?? []
+			...(array)$controller?->call($this, $arguments)
 		];
 	}
 
@@ -487,7 +495,7 @@ class App
 		string $name,
 		string $contentType = 'html'
 	): Controller|null {
-		if ($contentType !== null && $contentType !== 'html') {
+		if ($contentType !== 'html') {
 			$name .= '.' . $contentType;
 		}
 
@@ -611,7 +619,7 @@ class App
 				Str::substr($acceptedLocale, 0, $precision);
 
 			// Find exact locale matches (e.g. en_GB => en_GB)
-			if ($language = $languages->filter(fn ($language) => $match($language, 5))?->first()) {
+			if ($language = $languages->filter(fn ($language) => $match($language, 5))->first()) {
 				return $language;
 			}
 
@@ -621,7 +629,7 @@ class App
 			}
 
 			// Find broad locale matches (e.g. en_GB => en)
-			if ($language = $languages->filter(fn ($language) => $match($language, 2))?->first()) {
+			if ($language = $languages->filter(fn ($language) => $match($language, 2))->first()) {
 				return $language;
 			}
 		}
@@ -658,9 +666,9 @@ class App
 		bool $drafts = true
 	): File|null {
 		// find by global UUID
-		if (Uuid::is($path, 'file') === true) {
-			// prefer files of parent, when parent given
-			return Uuid::for($path, $parent?->files())->model();
+		// and prefer files of parent, when parent given
+		if ($uuid = Uuid::from($path, 'file', $parent?->files())) {
+			return $uuid->model();
 		}
 
 		$parent ??= $this->site();
@@ -964,11 +972,13 @@ class App
 	/**
 	 * Parses Markdown
 	 */
-	public function markdown(string|null $text = null, array|null $options = null): string
-	{
+	public function markdown(
+		string|null $text = null,
+		array|null $options = null
+	): string {
 		// merge global options with local options
 		$options = [
-			...$this->options['markdown'] ?? [],
+			...(array)($this->options['markdown'] ?? []),
 			...$options ?? []
 		];
 
@@ -979,23 +989,23 @@ class App
 	 * Yields all models (site, pages, files and users) of this site
 	 * @since 4.0.0
 	 *
-	 * @return \Generator|\Kirby\Cms\ModelWithContent[]
+	 * @return \Generator<string, \Kirby\Cms\ModelWithContent>
 	 */
 	public function models(): Generator
 	{
 		$site = $this->site();
 
 		yield from $site->files();
-		yield $site;
+		yield '' => $site;
 
 		foreach ($site->index(true) as $page) {
 			yield from $page->files();
-			yield $page;
+			yield $page->id() => $page;
 		}
 
 		foreach ($this->users() as $user) {
 			yield from $user->files();
-			yield $user;
+			yield $user->id() => $user;
 		}
 	}
 
@@ -1184,19 +1194,29 @@ class App
 	}
 
 	/**
+	 * Returns the Panel object
+	 * @since 6.0.0
+	 */
+	public function panel(): Panel
+	{
+		return $this->panel ??= new Panel($this);
+	}
+
+	/**
 	 * Returns the request path
 	 */
 	public function path(): string
 	{
 		if (is_string($this->path) === true) {
-			return $this->path;
+			return $this->path; // @codeCoverageIgnore
 		}
 
 		$current = $this->request()->path()->toString();
 		$index   = $this->environment()->baseUri()->path()->toString();
 		$path    = Str::afterStart($current, $index);
 
-		return $this->setPath($path)->path;
+		$this->setPath($path);
+		return $path;
 	}
 
 	/**
@@ -1590,6 +1610,7 @@ class App
 	public function smartypants(string|null $text = null): string
 	{
 		$options = $this->option('smartypants', []);
+		$text  ??= '';
 
 		if ($options === false) {
 			return $text;
@@ -1600,7 +1621,7 @@ class App
 		}
 
 		if ($this->multilang() === true) {
-			$languageSmartypants = $this->language()->smartypants() ?? [];
+			$languageSmartypants = $this->language()->smartypants();
 
 			if ($languageSmartypants !== []) {
 				$options = [...$options, ...$languageSmartypants];

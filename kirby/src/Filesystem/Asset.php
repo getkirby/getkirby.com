@@ -5,8 +5,6 @@ namespace Kirby\Filesystem;
 use Kirby\Cms\FileModifications;
 use Kirby\Cms\HasMethods;
 use Kirby\Exception\BadMethodCallException;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Toolkit\Str;
 
 /**
  * Anything in your public path can be converted
@@ -14,9 +12,6 @@ use Kirby\Toolkit\Str;
  * methods as for any other Kirby files. Pass a
  * relative path to the class to create the asset.
  *
- * @package   Kirby Filesystem
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
@@ -37,16 +32,6 @@ class Asset
 	 */
 	public function __construct(string $path)
 	{
-		// protect against path traversal outside the index root:
-		// we cannot use `F::realpath(in: $indexRoot)` because the asset file
-		// may not actually exist; we also cannot make the check depend on the
-		// existence of the file because that would leak information about
-		// whether the requested file exists on the server;
-		// `../` and `..\` sequences are fishy enough to to prevent them entirely
-		if (Str::contains(Str::replace($path, '\\', '/'), '../') === true) {
-			throw new InvalidArgumentException('Received unexpected asset path');
-		}
-
 		$this->root = $this->kirby()->root('index') . '/' . $path;
 		$this->url  = $this->kirby()->url('base') . '/' . $path;
 
@@ -90,6 +75,7 @@ class Asset
 	 */
 	public function id(): string
 	{
+		/** @var string */
 		return $this->root();
 	}
 

@@ -23,9 +23,6 @@ use Kirby\Exception\LogicException;
  *    `initialize` method that defines which keys
  *    are available.
  *
- * @package   Kirby Cms
- * @author    Lukas Bestle <lukas@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  *
@@ -161,7 +158,7 @@ abstract class LazyCollection extends Collection
 	/**
 	 * Find one or multiple elements by id
 	 *
-	 * @param string ...$keys
+	 * @param string|list<string> ...$keys
 	 * @return TValue|static
 	 */
 	public function find(...$keys)
@@ -227,7 +224,7 @@ abstract class LazyCollection extends Collection
 
 	/**
 	 * Returns an iterator for the elements
-	 * @return \Iterator<TKey, TValue>
+	 * @return \Iterator<string, TValue>
 	 */
 	public function getIterator(): Iterator
 	{
@@ -239,13 +236,17 @@ abstract class LazyCollection extends Collection
 				$value = $this->hydrateElement($key);
 			}
 
+			if ($value === null) {
+				continue;
+			}
+
 			yield $key => $value;
 		}
 	}
 
 	/**
 	 * Checks by key if an element is included
-	 * @param TKey $key
+	 * @param string|TValue $key
 	 */
 	public function has(mixed $key): bool
 	{
@@ -283,6 +284,8 @@ abstract class LazyCollection extends Collection
 	 * and returns the hydrated object value (or `null` if the
 	 * element does not exist in the collection); to be
 	 * implemented in each specific collection
+	 *
+	 * @return TValue|null
 	 */
 	abstract protected function hydrateElement(string $key): object|null;
 
@@ -488,7 +491,6 @@ abstract class LazyCollection extends Collection
 	 * @param int $offset The optional index to start the slice from
 	 * @param int|null $limit The optional number of elements to return
 	 * @return $this|static
-	 * @psalm-return ($offset is 0 && $limit is null ? $this : static)
 	 */
 	public function slice(
 		int $offset = 0,

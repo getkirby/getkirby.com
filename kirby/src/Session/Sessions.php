@@ -5,28 +5,21 @@ namespace Kirby\Session;
 use Kirby\Exception\Exception;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\LogicException;
-use Kirby\Http\Cookie;
-use Kirby\Http\Request;
-use Kirby\Toolkit\Str;
 use Throwable;
 
 /**
  * Sessions - Base class for all session fiddling
  *
- * @package   Kirby Session
- * @author    Lukas Bestle <lukas@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
 class Sessions
 {
-	protected SessionStore $store;
-	protected string $mode;
-	protected string|null $cookieDomain;
-	protected string $cookieName;
-
 	protected array $cache = [];
+	protected Cookie $cookie;
+	protected Header $header;
+	protected string $mode;
+	protected SessionStore $store;
 
 	/**
 	 * Creates a new Sessions instance
@@ -47,10 +40,13 @@ class Sessions
 			default                        => new FileSessionStore($store),
 		};
 
-		$this->mode         = $options['mode']         ?? 'cookie';
-		$this->cookieDomain = $options['cookieDomain'] ?? null;
-		$this->cookieName   = $options['cookieName']   ?? 'kirby_session';
-		$gcInterval         = $options['gcInterval']   ?? 100;
+		$gcInterval   = $options['gcInterval'] ?? 100;
+		$this->mode   = $options['mode'] ?? 'cookie';
+		$this->header = new Header();
+		$this->cookie = new Cookie(
+			name:   $options['cookieName']   ?? 'kirby_session',
+			domain: $options['cookieDomain'] ?? null
+		);
 
 		// validate options
 		if (in_array($this->mode, ['cookie', 'header', 'manual'], true) === false) {
@@ -87,6 +83,44 @@ class Sessions
 	}
 
 	/**
+	 * Deletes all expired sessions
+	 *
+	 * If the `gcInterval` is configured, this is done automatically
+	 * on init of the Sessions object.
+	 */
+	public function collectGarbage(): void
+	{
+		$this->store()->collectGarbage();
+	}
+
+	/**
+	 * Returns the session cookie instance
+	 * @since 6.0.0
+	 */
+	public function cookie(): Cookie
+	{
+		return $this->cookie;
+	}
+
+	/**
+	 * Getter for the cookie domain
+	 * @deprecated 6.0.0 Use `::cookie()->domain()` instead.
+	 */
+	public function cookieDomain(): string|null
+	{
+		return $this->cookie->domain();
+	}
+
+	/**
+	 * Getter for the cookie name
+	 * @deprecated 6.0.0 Use `::cookie()->name()` instead.
+	 */
+	public function cookieName(): string
+	{
+		return $this->cookie->name();
+	}
+
+	/**
 	 * Creates a new empty session
 	 *
 	 * @param array $options Optional additional options:
@@ -105,21 +139,6 @@ class Sessions
 	}
 
 	/**
-	 * Returns the specified Session object
-	 *
-	 * @param string $token Session token, either including or without the key
-	 * @param string|null $mode Optional transmission mode override
-	 */
-	public function get(string $token, string|null $mode = null): Session
-	{
-		return $this->cache[$token] ??= new Session(
-			$this,
-			$token,
-			['mode' => $mode ?? $this->mode]
-		);
-	}
-
-	/**
 	 * Returns the current session based on the configured token transmission mode:
 	 * - In `cookie` mode: Gets the session from the cookie
 	 * - In `header` mode: Gets the session from the `Authorization` request header
@@ -132,8 +151,8 @@ class Sessions
 	public function current(): Session|null
 	{
 		$token = match ($this->mode) {
-			'cookie' => $this->tokenFromCookie(),
-			'header' => $this->tokenFromHeader(),
+			'cookie' => $this->cookie()->get(),
+			'header' => $this->header()->get(),
 			'manual' => throw new LogicException(
 				key: 'session.sessions.manualMode',
 				fallback: 'Cannot automatically get current session in manual mode',
@@ -167,8 +186,8 @@ class Sessions
 	 */
 	public function currentDetected(): Session|null
 	{
-		$header = $this->tokenFromHeader();
-		$cookie = $this->tokenFromCookie();
+		$header = $this->header()->get();
+		$cookie = $this->cookie()->get();
 
 		// prefer header token over cookie token
 		$token = $header ?? $cookie;
@@ -190,38 +209,35 @@ class Sessions
 	}
 
 	/**
+	 * Returns the specified Session object
+	 *
+	 * @param string $token Session token, either including or without the key
+	 * @param string|null $mode Optional transmission mode override
+	 */
+	public function get(string $token, string|null $mode = null): Session
+	{
+		return $this->cache[$token] ??= new Session(
+			$this,
+			$token,
+			['mode' => $mode ?? $this->mode]
+		);
+	}
+
+	/**
+	 * Returns the session header instance
+	 * @since 6.0.0
+	 */
+	public function header(): Header
+	{
+		return $this->header;
+	}
+
+	/**
 	 * Getter for the session store instance
 	 */
 	public function store(): SessionStore
 	{
 		return $this->store;
-	}
-
-	/**
-	 * Getter for the cookie domain
-	 */
-	public function cookieDomain(): string|null
-	{
-		return $this->cookieDomain;
-	}
-
-	/**
-	 * Getter for the cookie name
-	 */
-	public function cookieName(): string
-	{
-		return $this->cookieName;
-	}
-
-	/**
-	 * Deletes all expired sessions
-	 *
-	 * If the `gcInterval` is configured, this is done automatically
-	 * on init of the Sessions object.
-	 */
-	public function collectGarbage(): void
-	{
-		$this->store()->collectGarbage();
 	}
 
 	/**
@@ -234,41 +250,5 @@ class Sessions
 	public function updateCache(Session $session): void
 	{
 		$this->cache[$session->token()] = $session;
-	}
-
-	/**
-	 * Returns the auth token from the cookie
-	 */
-	protected function tokenFromCookie(): string|null
-	{
-		$value = Cookie::get($this->cookieName());
-
-		if (is_string($value) === false) {
-			return null;
-		}
-
-		return $value;
-	}
-
-	/**
-	 * Returns the auth token from the Authorization header
-	 */
-	protected function tokenFromHeader(): string|null
-	{
-		$request = new Request();
-		$headers = $request->headers();
-
-		// check if the header exists at all
-		if ($header = $headers['Authorization'] ?? null) {
-			// check if the header uses the "Session" scheme
-			if (Str::startsWith($header, 'Session ', true) !== true) {
-				return null;
-			}
-
-			// return the part after the scheme
-			return substr($header, 8);
-		}
-
-		return null;
 	}
 }

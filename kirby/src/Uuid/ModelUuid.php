@@ -5,13 +5,12 @@ namespace Kirby\Uuid;
 /**
  * Base for UUIDs for models where id string
  * is stored in the content, such as pages and files
- * @since 3.8.0
  *
- * @package   Kirby Uuid
- * @author    Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
+ * @since     3.8.0
+ *
+ * @method \Kirby\Cms\ModelWithContent|null model(bool $lazy = false)
  */
 abstract class ModelUuid extends Uuid
 {
@@ -80,7 +79,7 @@ abstract class ModelUuid extends Uuid
 		// check for an empty content array
 		// and read content from file again,
 		// just to be sure we don't lose content
-		if (empty($data) === true) {
+		if ($data === []) {
 			usleep(1000);
 			$data = $this->model->version()->read('default');
 		}

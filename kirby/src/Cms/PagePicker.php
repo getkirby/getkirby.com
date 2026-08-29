@@ -11,16 +11,13 @@ use Kirby\Exception\PermissionException;
  * model for the API calls for the
  * page picker component in the panel.
  *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
+ *
+ * @deprecated 6.0.0 Use `Kirby\Panel\Controller\Dialog\PagePickerDialogController` instead
  */
 class PagePicker extends Picker
 {
-	// TODO: null only due to our Properties setters,
-	// remove once our implementation is better
 	protected Pages|null $items = null;
 	protected Pages|null $itemsForQuery = null;
 	protected Page|Site|null $parent = null;
@@ -232,7 +229,7 @@ class PagePicker extends Picker
 	public function start(): Page|Site
 	{
 		if (empty($this->options['query']) === false) {
-			return $this->itemsForQuery()?->parent() ?? $this->site;
+			return $this->itemsForQuery()->parent() ?? $this->site;
 		}
 
 		return $this->site;

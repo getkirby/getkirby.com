@@ -10,9 +10,6 @@ namespace Kirby\Cms;
  * is the heart and soul of our yaml conversion
  * method for pages.
  *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  *
@@ -20,7 +17,7 @@ namespace Kirby\Cms;
  */
 class Structure extends Items
 {
-	public const ITEM_CLASS = StructureObject::class;
+	public const string ITEM_CLASS = StructureObject::class;
 
 	/**
 	 * All registered structure methods

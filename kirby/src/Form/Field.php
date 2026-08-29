@@ -5,6 +5,7 @@ namespace Kirby\Form;
 use Closure;
 use Kirby\Cms\HasSiblings;
 use Kirby\Exception\InvalidArgumentException;
+use Kirby\Form\Field\BaseField;
 use Kirby\Toolkit\BlockCollectionAccess;
 use Kirby\Toolkit\Component;
 use Kirby\Toolkit\I18n;
@@ -14,9 +15,6 @@ use Kirby\Toolkit\I18n;
  * array of properties and methods and converts them
  * to a usable field option array for the API.
  *
- * @package   Kirby Form
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  *
@@ -26,7 +24,9 @@ class Field extends Component
 {
 	use HasSiblings;
 	use Mixin\Api;
+	use Mixin\DefaultValue;
 	use Mixin\Model;
+	use Mixin\Required;
 	use Mixin\Translatable;
 	use Mixin\Validation;
 	use Mixin\When;
@@ -48,6 +48,8 @@ class Field extends Component
 	 * Registry for all component types
 	 */
 	public static array $types = [];
+
+	protected mixed $value = null;
 
 	/**
 	 * @throws \Kirby\Exception\InvalidArgumentException
@@ -80,6 +82,11 @@ class Field extends Component
 
 		// set the siblings collection
 		$this->siblings = $siblings ?? new Fields([$this]);
+	}
+
+	public function api(): array
+	{
+		return $this->routes();
 	}
 
 	/**
@@ -186,7 +193,7 @@ class Field extends Component
 				},
 				'default' => function () {
 					/** @var \Kirby\Form\Field $this */
-					if ($this->default === null) {
+					if (isset($this->default) === false) {
 						return;
 					}
 
@@ -225,14 +232,17 @@ class Field extends Component
 	 */
 	public function dialogs(): array
 	{
-		if (
-			isset($this->options['dialogs']) === true &&
-			$this->options['dialogs'] instanceof Closure
-		) {
+		if (isset($this->options['dialogs']) === false) {
+			return [];
+		}
+
+		if ($this->options['dialogs'] instanceof Closure) {
 			return $this->options['dialogs']->call($this);
 		}
 
-		return [];
+		throw new InvalidArgumentException(
+			message: 'Dialogs of field "' . $this->name() . '" must be defined as a closure'
+		);
 	}
 
 	/**
@@ -240,14 +250,17 @@ class Field extends Component
 	 */
 	public function drawers(): array
 	{
-		if (
-			isset($this->options['drawers']) === true &&
-			$this->options['drawers'] instanceof Closure
-		) {
+		if (isset($this->options['drawers']) === false) {
+			return [];
+		}
+
+		if ($this->options['drawers'] instanceof Closure) {
 			return $this->options['drawers']->call($this);
 		}
 
-		return [];
+		throw new InvalidArgumentException(
+			message: 'Drawers of field "' . $this->name() . '" must be defined as a closure'
+		);
 	}
 
 	/**
@@ -271,12 +284,14 @@ class Field extends Component
 		string $type,
 		array $attrs = [],
 		Fields|null $siblings = null
-	): static|FieldClass {
+	): static|BaseField {
 		$field = static::$types[$type] ?? null;
 
-		if (is_string($field) && class_exists($field) === true) {
-			$attrs['siblings'] = $siblings;
-			return new $field($attrs);
+		if (
+			is_string($field) &&
+			is_subclass_of($field, BaseField::class) === true
+		) {
+			return $field::factory($attrs, $siblings);
 		}
 
 		return new static($type, $attrs, $siblings);
@@ -342,6 +357,16 @@ class Field extends Component
 	}
 
 	/**
+	 * The field's unique id is the same as its name
+	 * @see self::name()
+	 * @since 6.0.0
+	 */
+	public function id(): string
+	{
+		return $this->name();
+	}
+
+	/**
 	 * Checks if the field is disabled
 	 */
 	public function isDisabled(): bool
@@ -373,7 +398,7 @@ class Field extends Component
 	}
 
 	/**
-	 * Returns field api routes
+	 * Returns field API routes
 	 */
 	public function routes(): array
 	{

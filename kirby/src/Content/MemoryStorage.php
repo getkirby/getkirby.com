@@ -7,9 +7,6 @@ use Kirby\Cms\Language;
 use Kirby\Cms\ModelWithContent;
 
 /**
- * @package   Kirby Content
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
@@ -63,7 +60,13 @@ class MemoryStorage extends Storage
 			return null;
 		}
 
-		return $this->cache->modified($this->cacheId($versionId, $language));
+		$modified = $this->cache->modified($this->cacheId($versionId, $language));
+
+		if ($modified === false) {
+			return null; // @codeCoverageIgnore
+		}
+
+		return $modified;
 	}
 
 	/**

@@ -17,9 +17,6 @@ use ZipArchive;
  * level, like creating, reading,
  * deleting, copying or validatings files.
  *
- * @package   Kirby Filesystem
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
@@ -511,6 +508,7 @@ class F
 	 *
 	 * @param 'date'|'intl'|'strftime'|null $handler Custom date handler or `null`
 	 *                                               for the globally configured one
+	 * @return ($format is null ? int|false : string|false)
 	 */
 	public static function modified(
 		string $file,
@@ -608,16 +606,14 @@ class F
 			$size = static::size($size);
 		}
 
-		// make sure it's an int
-		$size = (int)$size;
-
 		// avoid errors for invalid sizes
 		if ($size <= 0) {
 			return '0 KB';
 		}
 
 		// the math magic
-		$size = round($size / 1024 ** ($unit = floor(log($size, 1024))), 2);
+		$unit = (int)floor(log($size, 1024));
+		$size = round($size / 1024 ** $unit, 2);
 
 		// format the number if requested
 		if ($locale !== false) {
@@ -749,13 +745,7 @@ class F
 				throw new Exception(sprintf('The parent directory does not exist: "%s"', $in));
 			}
 
-			// require a path separator boundary so that a
-			// sibling file or directory sharing the same
-			// name prefix (e.g. `/site2` for the parent `/site`)
-			// cannot pass the containment check
-			$parent = rtrim($parent, '/\\');
-
-			if (str_starts_with($realpath, $parent . DIRECTORY_SEPARATOR) === false) {
+			if (str_starts_with($realpath, $parent) === false) {
 				throw new Exception('The file is not within the parent directory');
 			}
 		}
@@ -766,8 +756,6 @@ class F
 	/**
 	 * Returns the relative path of the file
 	 * starting after $in
-	 *
-	 * @SuppressWarnings(PHPMD.CountInLoopExpression)
 	 */
 	public static function relativepath(
 		string $file,
@@ -851,7 +839,7 @@ class F
 		$basename  = static::safeBasename($string);
 		$extension =  static::safeExtension($string);
 
-		if (empty($extension) === false) {
+		if ($extension !== '') {
 			$extension = '.' . $extension;
 		}
 
@@ -900,7 +888,7 @@ class F
 		$name      = static::name($path);
 		$extension = static::extension($path);
 		$glob      = $dir . '/' . $name . $pattern . '.' . $extension;
-		return glob($glob);
+		return glob($glob) ?: [];
 	}
 
 	/**

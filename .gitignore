@@ -47,6 +47,35 @@ Icon
 /site/plugins/*/vendor/**/php4/*
 /site/plugins/ray
 
+# Vendor cruft
+# ---------------
+# Mirrors the vendor rules in the Kirby core repo, which is how the
+# bundled kirby/vendor used to arrive pre-stripped before we switched
+# to a Composer install.
+
+/vendor/**/.*
+/vendor/**/test/*
+/vendor/**/tests/*
+/vendor/**/*.md
+!/vendor/**/COPYRIGHT.md
+!/vendor/**/LICENSE.md
+/vendor/**/*.dist
+/vendor/**/*.txt
+/vendor/**/*.xml
+/vendor/**/*.yml
+/vendor/**/*.yaml
+/vendor/**/COMMITMENT
+/vendor/**/readme.php
+/vendor/**/VERSION
+/vendor/**/docs/*
+/vendor/**/example/*
+/vendor/**/examples/*
+/vendor/**/php4/*
+/vendor/**/*.pubkey
+/vendor/**/*.asc
+/vendor/**/*.sh
+/vendor/getkirby/composer-installer
+
 .php-cs-fixer.cache
 
 # Dist cruft

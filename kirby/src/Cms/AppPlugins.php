@@ -3,6 +3,10 @@
 namespace Kirby\Cms;
 
 use Closure;
+use Kirby\Auth\Challenges;
+use Kirby\Auth\Methods;
+use Kirby\Blueprint\PageBlueprint;
+use Kirby\Blueprint\Section;
 use Kirby\Content\Field;
 use Kirby\Exception\DuplicateException;
 use Kirby\Filesystem\Asset;
@@ -11,7 +15,6 @@ use Kirby\Filesystem\F;
 use Kirby\Filesystem\Mime;
 use Kirby\Form\Field as FormField;
 use Kirby\Image\Image;
-use Kirby\Plugin\License;
 use Kirby\Plugin\Plugin;
 use Kirby\Text\KirbyTag;
 use Kirby\Toolkit\A;
@@ -21,9 +24,6 @@ use Kirby\Toolkit\V;
 /**
  * AppPlugins
  *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
@@ -46,6 +46,7 @@ trait AppPlugins
 		'areas' => [],
 		'assetMethods' => [],
 		'authChallenges' => [],
+		'authMethods' => [],
 		'blockMethods' => [],
 		'blockModels' => [],
 		'blocksMethods' => [],
@@ -165,9 +166,21 @@ trait AppPlugins
 	 */
 	protected function extendAuthChallenges(array $challenges): array
 	{
-		return $this->extensions['authChallenges'] = Auth::$challenges = [
-			...Auth::$challenges,
+		return $this->extensions['authChallenges'] = Challenges::$challenges = [
+			...Challenges::$challenges,
 			...$challenges
+		];
+	}
+
+	/**
+	 * Registers additional authentication methods
+	 * @since 6.0.0
+	 */
+	protected function extendAuthMethods(array $methods): array
+	{
+		return $this->extensions['authMethods'] = Methods::$methods = [
+			...Methods::$methods,
+			...$methods
 		];
 	}
 
@@ -550,7 +563,7 @@ trait AppPlugins
 	protected function extendRoutes(array|Closure $routes): array
 	{
 		if ($routes instanceof Closure) {
-			$routes = $routes($this);
+			$routes = (array)$routes($this);
 		}
 
 		return $this->extensions['routes'] = [
@@ -816,16 +829,15 @@ trait AppPlugins
 
 		// aliases
 		KirbyTag::$aliases = $this->core->kirbyTagAliases();
-		Field::$aliases    = $this->core->fieldMethodAliases();
 
 		// blueprint presets
 		PageBlueprint::$presets = $this->core->blueprintPresets();
 
 		$this->extendAuthChallenges($this->core->authChallenges());
+		$this->extendAuthMethods($this->core->authMethods());
 		$this->extendCacheTypes($this->core->cacheTypes());
 		$this->extendComponents($this->core->components());
 		$this->extendBlueprints($this->core->blueprints());
-		$this->extendFieldMethods($this->core->fieldMethods());
 		$this->extendFields($this->core->fields());
 		$this->extendFilePreviews($this->core->filePreviews());
 		$this->extendSections($this->core->sections());

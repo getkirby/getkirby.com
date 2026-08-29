@@ -5,15 +5,14 @@ namespace Kirby\Cms;
 /**
  * LanguagePermissions
  *
- * @package   Kirby Cms
- * @author    Ahmet Bora <ahmet@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
+ *
+ * @extends \Kirby\Cms\ModelPermissions<\Kirby\Cms\Language>
  */
 class LanguagePermissions extends ModelPermissions
 {
-	protected const CATEGORY = 'languages';
+	protected const string CATEGORY = 'languages';
 
 	protected function canDelete(): bool
 	{

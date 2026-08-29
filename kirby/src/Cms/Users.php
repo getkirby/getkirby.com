@@ -16,14 +16,11 @@ use Kirby\Uuid\HasUuids;
  * all collections, you can filter, modify,
  * convert or check the users collection.
  *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  *
- * @template TUser of \Kirby\Cms\User
- * @extends \Kirby\Cms\LazyCollection<TUser>
+ * @template TValue of \Kirby\Cms\User
+ * @extends \Kirby\Cms\LazyCollection<TValue>
  */
 class Users extends LazyCollection
 {
@@ -32,7 +29,7 @@ class Users extends LazyCollection
 	/**
 	 * Creates a new Collection with the given objects
 	 *
-	 * @param iterable<TUser> $objects
+	 * @param iterable<TValue> $objects
 	 * @param string|null $root Directory to dynamically load user
 	 *                          objects from during hydration
 	 * @param array $inject Props to inject into hydrated user objects
@@ -61,7 +58,7 @@ class Users extends LazyCollection
 	 * an entire second collection to the
 	 * current collection
 	 *
-	 * @param \Kirby\Cms\Users<TUser>|TUser|string $object
+	 * @param \Kirby\Cms\Users<TValue>|TValue|string $object
 	 * @return $this
 	 * @throws \Kirby\Exception\InvalidArgumentException When no `User` or `Users` object or an ID of an existing user is passed
 	 */
@@ -129,7 +126,7 @@ class Users extends LazyCollection
 	/**
 	 * Finds a user in the collection by ID or email address
 	 * @internal Use `$users->find()` instead
-	 * @return TUser|null
+	 * @return TValue|null
 	 */
 	public function findByKey(string $key): User|null
 	{
@@ -181,6 +178,7 @@ class Users extends LazyCollection
 		}
 
 		// create user model based on role
+		/** @var TValue $user */
 		$user = User::factory([
 			'id'          => $key,
 			'model'       => $credentials['role'] ?? null,
@@ -236,6 +234,7 @@ class Users extends LazyCollection
 
 	/**
 	 * Shortcut for `$users->filter('role', 'admin')`
+	 * @return static<TValue>
 	 */
 	public function role(string $role): static
 	{

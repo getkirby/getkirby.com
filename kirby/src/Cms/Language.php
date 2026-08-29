@@ -22,9 +22,6 @@ use Stringable;
  * get translation strings and many
  * more things.
  *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  *
@@ -37,7 +34,7 @@ class Language implements Stringable
 	/**
 	 * Short human-readable version used in template queries
 	 */
-	public const CLASS_ALIAS = 'language';
+	public const string CLASS_ALIAS = 'language';
 
 	/**
 	 * The parent Kirby instance
@@ -108,6 +105,7 @@ class Language implements Stringable
 	 */
 	public function baseUrl(): string
 	{
+		/** @var string $kirbyUrl */
 		$kirbyUrl    = $this->kirby()->url();
 		$languageUrl = $this->url();
 
@@ -441,7 +439,7 @@ class Language implements Stringable
 	{
 		$path = $this->path();
 
-		if (empty($path) === true) {
+		if ($path === '') {
 			return '(:all)';
 		}
 

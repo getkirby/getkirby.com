@@ -2,6 +2,12 @@
 
 namespace Kirby\Form\Mixin;
 
+/**
+ * Provides the `max` prop for the maximum number of allowed items
+ *
+ * @copyright Bastian Allgeier
+ * @license   https://getkirby.com/license
+ */
 trait Max
 {
 	/**
@@ -12,10 +18,5 @@ trait Max
 	public function max(): int|null
 	{
 		return $this->max;
-	}
-
-	protected function setMax(int|null $max = null)
-	{
-		$this->max = $max;
 	}
 }

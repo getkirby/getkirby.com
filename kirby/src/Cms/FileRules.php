@@ -13,9 +13,6 @@ use Kirby\Toolkit\V;
 /**
  * Validators for all file actions
  *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
@@ -177,8 +174,8 @@ class FileRules
 		static::validMime($file, $upload->mime());
 
 		if (
-			(string)$upload->mime() !== (string)$file->mime() &&
-			(string)$upload->extension() !== (string)$file->extension()
+			$upload->mime() !== $file->mime() &&
+			$upload->extension() !== $file->extension()
 		) {
 			throw new InvalidArgumentException(
 				key: 'file.mime.differs',
@@ -214,7 +211,7 @@ class FileRules
 		// make it easier to compare the extension
 		$extension = strtolower($extension);
 
-		if (empty($extension) === true) {
+		if ($extension === '') {
 			throw new InvalidArgumentException(
 				key: 'file.extension.missing',
 				data: ['filename' => $file->filename()]
@@ -278,7 +275,7 @@ class FileRules
 		$filename = strtolower($filename);
 
 		// check for missing filenames
-		if (empty($filename)) {
+		if ($filename === '') {
 			throw new InvalidArgumentException(
 				key: 'file.name.missing'
 			);
@@ -311,7 +308,7 @@ class FileRules
 		// make it easier to compare the mime
 		$mime = strtolower($mime ?? '');
 
-		if (empty($mime)) {
+		if ($mime === '') {
 			throw new InvalidArgumentException(
 				key: 'file.mime.missing',
 				data: ['filename' => $file->filename()]

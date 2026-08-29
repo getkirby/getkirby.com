@@ -3,7 +3,7 @@
 	"description": "The Kirby core",
 	"license": "proprietary",
 	"type": "kirby-cms",
-	"version": "5.5.3",
+	"version": "6.0.0-alpha.3",
 	"keywords": [
 		"kirby",
 		"cms",
@@ -24,7 +24,7 @@
 		"source": "https://github.com/getkirby/kirby"
 	},
 	"require": {
-		"php": "~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0",
+		"php": "~8.3.0 || ~8.4.0 || ~8.5.0",
 		"ext-ctype": "*",
 		"ext-curl": "*",
 		"ext-dom": "*",
@@ -49,9 +49,6 @@
 		"symfony/polyfill-intl-idn": "1.38.1",
 		"symfony/polyfill-mbstring": "1.38.2",
 		"symfony/yaml": "7.4.14"
-	},
-	"replace": {
-		"symfony/polyfill-php72": "*"
 	},
 	"suggest": {
 		"ext-apcu": "Support for the Apcu cache driver",
@@ -96,16 +93,16 @@
 			"@analyze:psalm"
 		],
 		"analyze:composer": "composer validate --strict --no-check-version --no-check-all",
-		"analyze:composer:unused": "./scripts/cpx icanhazstring/composer-unused:0.9.6 --no-progress",
-		"analyze:psalm": "./scripts/cpx vimeo/psalm:6.16.1",
+		"analyze:composer:unused": "cpx icanhazstring/composer-unused:0.9.6 --no-progress",
+		"analyze:psalm": "cpx vimeo/psalm:6.16.1",
 		"build": "./scripts/build",
 		"ci": [
 			"@fix",
 			"@analyze",
 			"@test"
 		],
-		"fix": "./scripts/cpx friendsofphp/php-cs-fixer:3.95.1 fix",
-		"test": "./scripts/cpx phpunit/phpunit:11.5.55",
+		"fix": "cpx friendsofphp/php-cs-fixer:3.95.3 fix",
+		"test": "cpx brianium/paratest:7.20.0",
 		"test:coverage": [
 			"@putenv XDEBUG_MODE=coverage",
 			"@test --coverage-html=tests/coverage"

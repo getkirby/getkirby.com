@@ -5,21 +5,24 @@ namespace Kirby\Cms;
 /**
  * FilePermissions
  *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
+ *
+ * @extends \Kirby\Cms\ModelPermissions<\Kirby\Cms\File>
  */
 class FilePermissions extends ModelPermissions
 {
-	protected const CATEGORY = 'files';
+	protected const string CATEGORY = 'files';
 
 	/**
 	 * Used to cache once determined permissions in memory
+	 *
+	 * @param \Kirby\Cms\File $model
+	 * @psalm-suppress MoreSpecificImplementedParamType
 	 */
-	protected static function cacheKey(ModelWithContent|Language $model): string
-	{
+	protected static function cacheKey(
+		ModelWithContent|Language $model
+	): string {
 		return $model->template() ?? '__none__';
 	}
 

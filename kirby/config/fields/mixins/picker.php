@@ -1,5 +1,9 @@
 <?php
 
+use Kirby\Cms\ModelWithContent;
+use Kirby\Data\Data;
+use Kirby\Exception\Exception;
+use Kirby\Toolkit\A;
 use Kirby\Toolkit\I18n;
 use Kirby\Toolkit\Str;
 use Kirby\Uuid\Uuids;
@@ -93,6 +97,45 @@ return [
 	'methods' => [
 		'emptyValue' => function () {
 			return [];
+		},
+		'getIdFromArray' => function (array $array) {
+			return $array['uuid'] ?? $array['id'] ?? null;
+		},
+		'toFormValues' => function ($value = null) {
+			$items = [];
+
+			foreach (Data::decode($value, 'yaml') as $id) {
+				if (is_array($id) === true) {
+					$id = $this->getIdFromArray($id);
+				}
+
+				if ($id !== null && ($model = $this->toModel($id))) {
+					$items[] = $this->toItem($model);
+				}
+			}
+
+			return $items;
+		},
+		'toItem' => function (ModelWithContent $model) {
+			return $model->panel()->pickerData([
+				'image'  => $this->image,
+				'info'   => $this->info ?? false,
+				'layout' => $this->layout,
+				'model'  => $this->model(),
+				'text'   => $this->text,
+			]);
+		},
+		'toItems' => function (array $models) {
+			return A::map($models, $this->toItem(...));
+		},
+		'toModel' => function (string $id) {
+			throw new Exception(message: 'toModel() is not implemented on ' . $this->type() . ' field');
+		},
+		'toStoredValues' => function ($value = null) {
+			return A::map(
+				$value ?? [],
+				fn (array $item) => $item[$this->store]
+			);
 		}
 	]
 ];

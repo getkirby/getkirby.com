@@ -7,6 +7,7 @@ use Kirby\Exception\InvalidArgumentException;
 use Kirby\Toolkit\Collection as BaseCollection;
 use Kirby\Toolkit\Str;
 use Kirby\Uuid\Uuid;
+use Throwable;
 
 /**
  * The Collection class serves as foundation
@@ -17,9 +18,6 @@ use Kirby\Uuid\Uuid;
  * handle values from Field objects correctly, so
  * those can be used in filters as well.
  *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  *
@@ -121,16 +119,22 @@ class Collection extends BaseCollection
 	 */
 	public function append(...$args): static
 	{
-		if (count($args) === 1) {
-			// try to determine the key from the provided item
-			if (
-				is_object($args[0]) === true &&
-				is_callable([$args[0], 'id']) === true
-			) {
-				return parent::append($args[0]->id(), $args[0]);
+		// try to determine the key from the provided item
+		if (
+			count($args) === 1 &&
+			is_object($args[0]) === true &&
+			is_callable([$args[0], 'id']) === true
+		) {
+			try {
+				$id = $args[0]->id();
+			} catch (Throwable) {
+				// is_callable might be true when the object implements
+				// the magic __call method, but __call can still throw
+				// an exception
+				return parent::append($args[0]);
 			}
 
-			return parent::append($args[0]);
+			return parent::append($id, $args[0]);
 		}
 
 		return parent::append(...$args);

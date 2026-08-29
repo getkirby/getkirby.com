@@ -13,9 +13,6 @@ use TypeError;
 /**
  * Vue-like components
  *
- * @package   Kirby Toolkit
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
@@ -26,6 +23,14 @@ class Component
 	 * Registry for all component mixins
 	 */
 	public static array $mixins = [];
+
+	/**
+	 * Cache of fully resolved setup options, keyed by
+	 * `[static::class][$type]`. Each entry stores the source
+	 * `definition` for invalidation check
+	 * and the resolved `options`.
+	 */
+	public static array $setups = [];
 
 	/**
 	 * Registry for all component types
@@ -157,7 +162,7 @@ class Component
 			if (
 				isset($this->$name) === true &&
 				array_key_exists($name, get_object_vars($this)) === true &&
-				array_key_exists($name, get_class_vars(get_class($this))) === false
+				array_key_exists($name, get_class_vars($this::class)) === false
 			) {
 				unset($this->$name);
 			}
@@ -249,6 +254,16 @@ class Component
 	{
 		// load component definition
 		$definition = static::load($type);
+		$class      = static::class;
+
+		// return cached options if the underlying definition is
+		// still the same array we resolved from last time
+		if (
+			isset(static::$setups[$class][$type]) === true &&
+			static::$setups[$class][$type]['definition'] === $definition
+		) {
+			return static::$setups[$class][$type]['options'];
+		}
 
 		if (isset($definition['extends']) === true) {
 			// extend other definitions
@@ -280,6 +295,11 @@ class Component
 				);
 			}
 		}
+
+		static::$setups[$class][$type] = [
+			'definition' => $definition,
+			'options'    => $options,
+		];
 
 		return $options;
 	}

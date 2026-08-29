@@ -17,9 +17,6 @@ use SensitiveParameter;
 /**
  * Validators for all user actions
  *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
@@ -137,8 +134,33 @@ class UserRules
 	}
 
 	/**
+	 * Validates if the user secret can be changed
+	 * @since 6.0.0
+	 *
+	 * @throws \Kirby\Exception\PermissionException If the user is not allowed to change the secret
+	 */
+	public static function changeSecret(
+		User $user,
+		string $secret,
+		#[SensitiveParameter]
+		mixed $content
+	): void {
+		$currentUser = $user->kirby()->user();
+
+		if (
+			$currentUser->is($user) === false &&
+			$currentUser->isAdmin() === false
+		) {
+			throw new PermissionException(
+				message: 'You cannot change user secrets for ' . $user->email()
+			);
+		}
+	}
+
+	/**
 	 * Validates if the TOTP can be changed
 	 * @since 4.0.0
+	 * @deprecated 6.0.0
 	 *
 	 * @throws \Kirby\Exception\PermissionException If the user is not allowed to change the password
 	 */
@@ -177,7 +199,10 @@ class UserRules
 		static::validLanguage($user, $user->language());
 
 		// the first user must have a password
-		if ($user->kirby()->users()->count() === 0 && empty($props['password'])) {
+		if (
+			$user->kirby()->users()->count() === 0 &&
+			empty($props['password'])
+		) {
 			// trigger invalid password error
 			static::validPassword($user, ' ');
 		}
@@ -428,18 +453,8 @@ class UserRules
 		#[SensitiveParameter]
 		string $password
 	): void {
-		// too short passwords are ineffective
-		if (Str::length($password) < 8) {
-			throw new InvalidArgumentException(key: 'user.password.invalid');
-		}
-
-		// too long passwords can cause DoS attacks
-		// and are therefore blocked in the auth system
-		// (blocked here as well to avoid passwords
-		// that cannot be used to log in)
-		if (Str::length($password) > 1000) {
-			throw new InvalidArgumentException(key: 'user.password.excessive');
-		}
+		// validate against the configured policy (`auth.passwords`)
+		$user->kirby()->auth()->passwords()->validate($password);
 	}
 
 	/**

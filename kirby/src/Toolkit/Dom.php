@@ -4,6 +4,7 @@ namespace Kirby\Toolkit;
 
 use Closure;
 use DOMAttr;
+use DOMComment;
 use DOMDocument;
 use DOMDocumentType;
 use DOMElement;
@@ -17,14 +18,10 @@ use Kirby\Exception\InvalidArgumentException;
 
 /**
  * Helper class for DOM handling using the DOMDocument class
- * @since 3.5.8
  *
- * @package   Kirby Toolkit
- * @author    Bastian Allgeier <bastian@getkirby.com>,
- *            Lukas Bestle <lukas@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
+ * @since     3.5.8
  */
 class Dom
 {
@@ -88,10 +85,9 @@ class Dom
 
 				if (
 					// Case 1: libxml preserved it as a processing instruction
-					($node->nodeType === XML_PI_NODE && $node->data === $xml) ||
+					($node instanceof DOMProcessingInstruction && $node->data === $xml) ||
 					// Case 2: libxml converted it into a comment node
-					// (<!--?xml encoding="UTF-8" id="..."-->)
-					($node->nodeType === XML_COMMENT_NODE && strpos($node->data, $xml) !== false)
+					($node instanceof DOMComment && strpos($node->data, $xml) !== false)
 				) {
 					static::remove($node);
 					break;
@@ -270,7 +266,7 @@ class Dom
 		$url     = Str::lower($url);
 
 		// allow empty URL values
-		if (empty($url) === true) {
+		if ($url === '') {
 			return true;
 		}
 
@@ -292,7 +288,7 @@ class Dom
 		) {
 			// if a CMS instance is active, only allow the URL
 			// if it doesn't point outside of the index URL
-			if ($kirby = App::instance(null, true)) {
+			if ($kirby = App::instance(lazy: true)) {
 				$indexUrl = $kirby->url('index', true)->path()->toString(true);
 
 				if (Str::startsWith($url, $indexUrl) !== true) {
@@ -372,7 +368,10 @@ class Dom
 		if (Str::startsWith($url, 'mailto:') === true) {
 			$address = Str::after($url, 'mailto:');
 
-			if (empty($address) === true || V::email($address) === true) {
+			if (
+				$address === '' ||
+				V::email($address) === true
+			) {
 				return true;
 			}
 
@@ -384,7 +383,7 @@ class Dom
 			$address = Str::after($url, 'tel:');
 
 			if (
-				empty($address) === true ||
+				$address === '' ||
 				preg_match('!^[+]?[0-9]+$!', $address) === 1
 			) {
 				return true;
@@ -517,12 +516,22 @@ class Dom
 	 * Executes an XPath query in the document
 	 *
 	 * @param \DOMNode|null $node Optional context node for relative queries
+	 * @throws \Kirby\Exception\InvalidArgumentException for invalid XPath queries
 	 */
 	public function query(
 		string $query,
 		DOMNode|null $node = null
-	): DOMNodeList|false {
-		return (new DOMXPath($this->doc))->query($query, $node);
+	): DOMNodeList {
+		$path   = new DOMXPath($this->doc);
+		$result = @$path->query($query, $node);
+
+		if ($result === false) {
+			throw new InvalidArgumentException(
+				message: 'Invalid XPath query: ' . $query
+			);
+		}
+
+		return $result;
 	}
 
 	/**
@@ -915,20 +924,16 @@ class Dom
 
 				// custom check (if the attribute is still in the document)
 				if ($attr->ownerElement !== null && $options['attrCallback']) {
-					$errors = [
-						...$errors,
-						...$options['attrCallback']($attr, $options) ?? []
-					];
+					$attrErrors = (array)($options['attrCallback']($attr, $options) ?? []);
+					array_push($errors, ...array_values($attrErrors));
 				}
 			}
 		}
 
 		// custom check
 		if ($options['elementCallback']) {
-			$errors = [
-				...$errors,
-				...$options['elementCallback']($element, $options) ?? []
-			];
+			$elementErrors = (array)($options['elementCallback']($element, $options) ?? []);
+			array_push($errors, ...array_values($elementErrors));
 		}
 	}
 

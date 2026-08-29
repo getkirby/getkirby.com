@@ -10,9 +10,6 @@ use Kirby\Toolkit\BlockCollectionAccess;
 /**
  * Trait for image resizing, blurring etc.
  *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
@@ -196,10 +193,8 @@ trait FileModifications
 		// fallback to content file options
 		if (($options['crop'] ?? false) === true) {
 			$options['crop'] = match (true) {
-				$this instanceof ModelWithContent
-					=> $this->focus()->value() ?? 'center',
-				default
-				=> 'center'
+				$this instanceof File => $this->focus()->value() ?? 'center',
+				default               => 'center'
 			};
 		}
 

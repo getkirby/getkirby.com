@@ -2,10 +2,10 @@
 
 namespace Kirby\Form;
 
-use Kirby\Cms\File;
 use Kirby\Cms\Language;
 use Kirby\Cms\ModelWithContent;
 use Kirby\Data\Data;
+use Kirby\Form\Field\BaseField;
 use Kirby\Toolkit\A;
 
 /**
@@ -14,9 +14,6 @@ use Kirby\Toolkit\A;
  * and handles global form validation
  * and submission
  *
- * @package   Kirby Form
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
@@ -70,7 +67,10 @@ class Form
 		$language = $this->fields->language();
 
 		foreach ($this->fields as $field) {
-			if ($field->isStorable($language) === false) {
+			if (
+				$field->hasValue() === false ||
+				$field->isStorable($language) === false
+			) {
 				if ($includeNulls === true) {
 					$data[$field->name()] = null;
 				}
@@ -118,7 +118,7 @@ class Form
 	 *
 	 * @throws \Kirby\Exception\NotFoundException
 	 */
-	public function field(string $name): Field|FieldClass
+	public function field(string $name): Field|BaseField
 	{
 		return $this->fields->field($name);
 	}
@@ -268,6 +268,8 @@ class Form
 	 * if the field does not exist
 	 *
 	 * @since 5.0.0
+	 *
+	 * @return ($values is null ? array : static)
 	 */
 	public function passthrough(
 		array|null $values = null
@@ -336,13 +338,13 @@ class Form
 	 */
 	public function toArray(): array
 	{
-		$array = [
-			'errors'  => $this->fields->errors(),
-			'fields'  => $this->fields->toArray(),
-			'invalid' => $this->isInvalid()
-		];
+		$errors = $this->fields->errors();
 
-		return $array;
+		return [
+			'errors'  => $errors,
+			'fields'  => $this->fields->toArray(),
+			'invalid' => $errors !== []
+		];
 	}
 
 	/**
@@ -381,7 +383,7 @@ class Form
 	/**
 	 * Validates the form and throws an exception if there are any errors
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws \Kirby\Exception\FormValidationException
 	 */
 	public function validate(): void
 	{

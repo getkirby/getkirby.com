@@ -12,12 +12,10 @@ use Stringable;
  * to the content. In the future, we also plan to use this
  * for older revisions of the content.
  *
- * @package   Kirby Content
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  * @since     5.0.0
+ *
  * @unstable
  */
 class VersionId implements Stringable
@@ -25,12 +23,12 @@ class VersionId implements Stringable
 	/**
 	 * Latest stable version of the content
 	 */
-	public const LATEST = 'latest';
+	public const string LATEST = 'latest';
 
 	/**
 	 * Latest changes to the content (optional)
 	 */
-	public const CHANGES = 'changes';
+	public const string CHANGES = 'changes';
 
 	/**
 	 * A global store for a version id that should be

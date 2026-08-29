@@ -10,12 +10,9 @@ use Kirby\Query\Runners\Scope;
 /**
  * Processes a query AST
  *
- * @package   Kirby Query
- * @author    Roman Steiner <roman@toastlab.ch>,
- *            Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
  * @license   https://opensource.org/licenses/MIT
  * @since     5.1.0
+ *
  * @unstable
  */
 class DefaultVisitor extends Visitor
@@ -35,7 +32,7 @@ class DefaultVisitor extends Visitor
 		int|float $left,
 		string $operator,
 		int|float $right
-	): mixed {
+	): int|float {
 		return match ($operator) {
 			'+'     => $left + $right,
 			'-'     => $left - $right,

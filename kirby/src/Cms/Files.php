@@ -17,14 +17,11 @@ use Throwable;
  * converted, modified or evaluated with the
  * following methods:
  *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  *
- * @template TFile of \Kirby\Cms\File
- * @extends \Kirby\Cms\Collection<TFile>
+ * @template TValue of \Kirby\Cms\File
+ * @extends \Kirby\Cms\Collection<TValue>
  */
 class Files extends Collection
 {
@@ -45,7 +42,7 @@ class Files extends Collection
 	 * an entire second collection to the
 	 * current collection
 	 *
-	 * @param \Kirby\Cms\Files<TFile>|TFile|string $object
+	 * @param \Kirby\Cms\Files<TValue>|TValue|string $object
 	 * @return $this
 	 * @throws \Kirby\Exception\InvalidArgumentException When no `File` or `Files` object or an ID of an existing file is passed
 	 */
@@ -156,7 +153,7 @@ class Files extends Collection
 	/**
 	 * Finds a file by its filename
 	 * @internal Use `$files->find()` instead
-	 * @return TFile|null
+	 * @return TValue|null
 	 */
 	public function findByKey(string $key): File|null
 	{
@@ -195,7 +192,7 @@ class Files extends Collection
 	/**
 	 * Returns the collection sorted by
 	 * the sort number and the filename
-	 * @return \Kirby\Cms\Files<TFile>
+	 * @return static<TValue>
 	 */
 	public function sorted(): static
 	{

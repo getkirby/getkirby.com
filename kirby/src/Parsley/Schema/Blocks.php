@@ -12,9 +12,6 @@ use Kirby\Toolkit\Str;
  * The blocks schema definition converts
  * the entire document into blocks for the blocks field
  *
- * @package   Kirby Parsley
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  * @since     3.5.0
@@ -69,7 +66,7 @@ class Blocks extends Plain
 			if (Str::contains($html, '<p>') === false) {
 				$html = '<p>' . $html . '</p>';
 			}
-		} elseif (is_string($element) === true) {
+		} else {
 			$html = trim($element);
 
 			if (Str::length($html) === 0) {
@@ -77,8 +74,6 @@ class Blocks extends Plain
 			}
 
 			$html = '<p>' . $html . '</p>';
-		} else {
-			return null;
 		}
 
 		return [

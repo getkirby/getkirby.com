@@ -13,9 +13,6 @@ use InvalidArgumentException;
  * fetching elements from arrays, merging and
  * sorting or shuffling arrays.
  *
- * @package   Kirby Toolkit
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
@@ -323,8 +320,12 @@ class A
 			return $array[$key];
 		}
 
-		// extract data from nested array structures using the dot notation
-		if (str_contains($key, '.') === true) {
+		// extract data from nested array structures
+		// using the dot notation
+		if (
+			is_string($key) === true &&
+			str_contains($key, '.') === true
+		) {
 			$keys     = explode('.', $key);
 			$firstKey = array_shift($keys);
 
@@ -502,7 +503,11 @@ class A
 	 */
 	public static function last(array $array): mixed
 	{
-		return $array[array_key_last($array)] ?? null;
+		if ($array === []) {
+			return null;
+		}
+
+		return $array[array_key_last($array)];
 	}
 
 	/**
@@ -515,9 +520,9 @@ class A
 		return array_map($map, $array);
 	}
 
-	public const MERGE_OVERWRITE = 0;
-	public const MERGE_APPEND    = 1;
-	public const MERGE_REPLACE   = 2;
+	public const int MERGE_OVERWRITE = 0;
+	public const int MERGE_APPEND    = 1;
+	public const int MERGE_REPLACE   = 2;
 
 	/**
 	 * Merges arrays recursively
@@ -536,7 +541,18 @@ class A
 
 		// get the first two arrays that should be merged
 		$merged = array_shift($arrays);
-		$join   = array_shift($arrays);
+
+		// no arrays passed (or only a mode constant)
+		if (is_array($merged) === false) {
+			return [];
+		}
+
+		$join = array_shift($arrays);
+
+		// only one array passed: nothing to merge into
+		if (is_array($join) === false) {
+			return $merged;
+		}
 
 		if (
 			static::isAssociative($merged) === false &&
@@ -679,6 +695,10 @@ class A
 
 	/**
 	 * Move an array item to a new index
+	 *
+	 * @template T
+	 * @param list<T> $array
+	 * @return list<T>
 	 */
 	public static function move(array $array, int $from, int $to): array
 	{
@@ -711,8 +731,10 @@ class A
 	 */
 	public static function nest(array $array, array $ignore = []): array
 	{
-		// convert a simple ignore list to a nested $key => true array
+		// convert a simple ignore list
+		// to a nested $key => true array
 		if (isset($ignore[0]) === true) {
+			/** @psalm-suppress TooManyArguments */
 			$ignore = array_map(fn () => true, array_flip($ignore));
 			$ignore = A::nest($ignore);
 		}

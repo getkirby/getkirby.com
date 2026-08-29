@@ -9,9 +9,6 @@ use Kirby\Toolkit\Str;
  * The `Cookie` class helps you to
  * handle cookies in your projects.
  *
- * @package   Kirby Http
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
@@ -221,7 +218,9 @@ class Cookie
 	{
 		if (isset($_COOKIE[$key]) === true) {
 			unset($_COOKIE[$key]);
-			return setcookie($key, '', 1, '/') && setcookie($key, false);
+			return
+				setcookie($key, '', 1, '/') &&
+				setcookie($key, false);
 		}
 
 		return false;

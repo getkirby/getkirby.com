@@ -2,15 +2,11 @@
 
 namespace Kirby\Cms;
 
-use Kirby\Filesystem\Dir;
 use Kirby\Toolkit\Str;
 
 /**
  * HasChildren
  *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
@@ -91,7 +87,7 @@ trait HasChildren
 		$kirby = $this->kirby();
 
 		// create the inventory for all drafts
-		$inventory = Dir::inventory(
+		$inventory = Inventory::for(
 			$this->root() . '/_drafts',
 			$kirby->contentExtension(),
 			$kirby->contentIgnore(),

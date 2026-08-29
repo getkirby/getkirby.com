@@ -16,9 +16,6 @@ use Throwable;
  * of handy methods for string
  * handling and manipulation.
  *
- * @package   Kirby Toolkit
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
@@ -340,36 +337,35 @@ class Str
 	 *
 	 * @param 'date'|'intl'|'strftime'|null $handler Custom date handler or `null`
 	 *                                               for the globally configured one
+	 * @return ($format is null ? int : string|false)
 	 */
 	public static function date(
 		int|null $time,
 		string|IntlDateFormatter|null $format = null,
 		string|null $handler = null
 	): string|int|false {
+		$time ??= time();
+
 		if (is_null($format) === true) {
 			return $time;
 		}
 
 		// $format is an IntlDateFormatter instance
 		if ($format instanceof IntlDateFormatter) {
-			return $format->format($time ?? time());
+			return $format->format($time);
 		}
 
 		// automatically determine the handler from global configuration
 		// if an app instance is already running; otherwise fall back to
 		// `date` for backwards-compatibility
 		if ($handler === null) {
-			$handler = App::instance(null, true)?->option('date.handler') ?? 'date';
+			$handler = App::instance(lazy: true)?->option('date.handler') ?? 'date';
 		}
 
 		// `intl` handler
 		if ($handler === 'intl') {
 			$datetime = new DateTime();
-
-			if ($time !== null) {
-				$datetime->setTimestamp($time);
-			}
-
+			$datetime->setTimestamp($time);
 			return IntlDateFormatter::formatObject($datetime, $format);
 		}
 
@@ -388,6 +384,8 @@ class Str
 
 	/**
 	 * Converts a string to a different encoding
+	 *
+	 * @throws \Kirby\Exception\InvalidArgumentException when conversion failed
 	 */
 	public static function convert(
 		string $string,
@@ -402,7 +400,15 @@ class Str
 			return $string;
 		}
 
-		return iconv($sourceEncoding, $targetEncoding, $string);
+		$result = @iconv($sourceEncoding, $targetEncoding, $string);
+
+		if ($result === false) {
+			throw new InvalidArgumentException(
+				message: 'Could not convert string "' . $string . '" from "' . $sourceEncoding . '" to "' . $targetEncoding . '"'
+			);
+		}
+
+		return $result;
 	}
 
 	/**
@@ -434,7 +440,7 @@ class Str
 			$string,
 			'UTF-8, ISO-8859-1, windows-1251',
 			true
-		);
+		) ?: 'UTF-8';
 	}
 
 	/**
@@ -751,6 +757,8 @@ class Str
 
 	/**
 	 * Get a character pool with various possible combinations
+	 *
+	 * @return ($array is true ? list<int|string> : string)
 	 */
 	public static function pool(
 		string|array $type,
@@ -827,6 +835,7 @@ class Str
 
 		// catch invalid pools
 		if (!$pool) {
+			// TODO: throw here to make problem and return type clearer
 			return false;
 		}
 
@@ -835,13 +844,15 @@ class Str
 		$regex = '/[^' . $pool . ']/';
 
 		// collect characters until we have our required length
-		$result = '';
+		$result    = '';
+		$remaining = $length;
 
-		while (($currentLength = strlen($result)) < $length) {
-			$missing = $length - $currentLength;
-			$bytes   = random_bytes($missing);
-			$allowed = preg_replace($regex, '', base64_encode($bytes));
-			$result .= substr($allowed, 0, $missing);
+		while ($remaining > 0) {
+			$bytes      = random_bytes($remaining);
+			$allowed    = preg_replace($regex, '', base64_encode($bytes));
+			$chunk      = substr($allowed, 0, $remaining);
+			$result    .= $chunk;
+			$remaining -= strlen($chunk);
 		}
 
 		return $result;
@@ -1253,11 +1264,11 @@ class Str
 	/**
 	 * Convert a string to a safe version to be used in a URL
 	 *
-	 * @param string $string The unsafe string
-	 * @param string $separator To be used instead of space and
-	 *                          other non-word characters.
-	 * @param string $allowed List of all allowed characters (regex)
-	 * @param int $maxlength The maximum length of the slug
+	 * @param string|null $string The unsafe string
+	 * @param string|null $separator To be used instead of space and
+	 *                               other non-word characters.
+	 * @param string|null $allowed List of all allowed characters (regex)
+	 * @param int|false $maxlength The maximum length of the slug
 	 * @return string The safe string
 	 */
 	public static function slug(
@@ -1329,6 +1340,7 @@ class Str
 	 * @param string $separator The string to split by
 	 * @param int $length The min length of values.
 	 * @return array An array of found values
+	 * @psalm-return ($string is array ? array : list<string>)
 	 */
 	public static function split(
 		string|array|null $string,
@@ -1339,10 +1351,7 @@ class Str
 			return $string;
 		}
 
-		// make sure $string is string
-		$string ??= '';
-
-		$parts = explode($separator, $string);
+		$parts = explode($separator, (string)$string);
 		$out   = [];
 
 		foreach ($parts as $p) {

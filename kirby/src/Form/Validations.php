@@ -3,14 +3,12 @@
 namespace Kirby\Form;
 
 use Kirby\Exception\InvalidArgumentException;
+use Kirby\Form\Field\BaseField;
 use Kirby\Toolkit\V;
 
 /**
  * Often used validation rules for fields
  *
- * @package   Kirby Form
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
@@ -19,7 +17,7 @@ class Validations
 	/**
 	 * Validates if the field value is boolean
 	 *
-	 * @param \Kirby\Form\Field|\Kirby\Form\FieldClass $field
+	 * @param \Kirby\Form\Field|\Kirby\Form\Field\BaseField $field
 	 * @throws \Kirby\Exception\InvalidArgumentException
 	 */
 	public static function boolean($field, $value): bool
@@ -40,7 +38,7 @@ class Validations
 	 *
 	 * @throws \Kirby\Exception\InvalidArgumentException
 	 */
-	public static function date(Field|FieldClass $field, mixed $value): bool
+	public static function date(Field|BaseField $field, mixed $value): bool
 	{
 		if ($field->isEmptyValue($value) === false) {
 			if (V::date($value) !== true) {
@@ -58,7 +56,7 @@ class Validations
 	 *
 	 * @throws \Kirby\Exception\InvalidArgumentException
 	 */
-	public static function email(Field|FieldClass $field, mixed $value): bool
+	public static function email(Field|BaseField $field, mixed $value): bool
 	{
 		if ($field->isEmptyValue($value) === false) {
 			if (V::email($value) === false) {
@@ -76,7 +74,7 @@ class Validations
 	 *
 	 * @throws \Kirby\Exception\InvalidArgumentException
 	 */
-	public static function max(Field|FieldClass $field, mixed $value): bool
+	public static function max(Field|BaseField $field, mixed $value): bool
 	{
 		if (
 			$field->isEmptyValue($value) === false &&
@@ -97,7 +95,7 @@ class Validations
 	 *
 	 * @throws \Kirby\Exception\InvalidArgumentException
 	 */
-	public static function maxlength(Field|FieldClass $field, mixed $value): bool
+	public static function maxlength(Field|BaseField $field, mixed $value): bool
 	{
 		if (
 			$field->isEmptyValue($value) === false &&
@@ -118,7 +116,7 @@ class Validations
 	 *
 	 * @throws \Kirby\Exception\InvalidArgumentException
 	 */
-	public static function min(Field|FieldClass $field, mixed $value): bool
+	public static function min(Field|BaseField $field, mixed $value): bool
 	{
 		if (
 			$field->isEmptyValue($value) === false &&
@@ -139,7 +137,7 @@ class Validations
 	 *
 	 * @throws \Kirby\Exception\InvalidArgumentException
 	 */
-	public static function minlength(Field|FieldClass $field, mixed $value): bool
+	public static function minlength(Field|BaseField $field, mixed $value): bool
 	{
 		if (
 			$field->isEmptyValue($value) === false &&
@@ -160,7 +158,7 @@ class Validations
 	 *
 	 * @throws \Kirby\Exception\InvalidArgumentException
 	 */
-	public static function pattern(Field|FieldClass $field, mixed $value): bool
+	public static function pattern(Field|BaseField $field, mixed $value): bool
 	{
 		if ($field->isEmptyValue($value) === false) {
 			if ($pattern = $field->pattern()) {
@@ -185,7 +183,7 @@ class Validations
 	 *
 	 * @throws \Kirby\Exception\InvalidArgumentException
 	 */
-	public static function required(Field|FieldClass $field, mixed $value): bool
+	public static function required(Field|BaseField $field, mixed $value): bool
 	{
 		if (
 			$field->hasValue() === true &&
@@ -205,7 +203,7 @@ class Validations
 	 *
 	 * @throws \Kirby\Exception\InvalidArgumentException
 	 */
-	public static function option(Field|FieldClass $field, mixed $value): bool
+	public static function option(Field|BaseField $field, mixed $value): bool
 	{
 		if ($field->isEmptyValue($value) === false) {
 			$values = array_column($field->options(), 'value');
@@ -225,7 +223,7 @@ class Validations
 	 *
 	 * @throws \Kirby\Exception\InvalidArgumentException
 	 */
-	public static function options(Field|FieldClass $field, mixed $value): bool
+	public static function options(Field|BaseField $field, mixed $value): bool
 	{
 		if ($field->isEmptyValue($value) === false) {
 			$values = array_column($field->options(), 'value');
@@ -246,7 +244,7 @@ class Validations
 	 *
 	 * @throws \Kirby\Exception\InvalidArgumentException
 	 */
-	public static function time(Field|FieldClass $field, mixed $value): bool
+	public static function time(Field|BaseField $field, mixed $value): bool
 	{
 		if ($field->isEmptyValue($value) === false) {
 			if (V::time($value) !== true) {
@@ -264,7 +262,7 @@ class Validations
 	 *
 	 * @throws \Kirby\Exception\InvalidArgumentException
 	 */
-	public static function url(Field|FieldClass $field, mixed $value): bool
+	public static function url(Field|BaseField $field, mixed $value): bool
 	{
 		if ($field->isEmptyValue($value) === false) {
 			if (V::url($value) === false) {

@@ -3,6 +3,8 @@
 namespace Kirby\Cms;
 
 use Closure;
+use Kirby\Blueprint\Blueprint;
+use Kirby\Blueprint\PageBlueprint;
 use Kirby\Content\Field;
 use Kirby\Content\VersionId;
 use Kirby\Exception\Exception;
@@ -24,9 +26,6 @@ use Throwable;
  * pages and all their dependencies like
  * children, files, content, etc.
  *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  *
@@ -43,13 +42,7 @@ class Page extends ModelWithContent
 	use PageActions;
 	use PageSiblings;
 
-	public const CLASS_ALIAS = 'page';
-
-	/**
-	 * All registered page methods
-	 * @todo Remove when support for PHP 8.2 is dropped
-	 */
-	public static array $methods = [];
+	public const string CLASS_ALIAS = 'page';
 
 	/**
 	 * The PageBlueprint object
@@ -59,7 +52,7 @@ class Page extends ModelWithContent
 	/**
 	 * Nesting level
 	 */
-	protected int $depth;
+	protected int|null $depth = null;
 
 	/**
 	 * Sorting number + slug
@@ -210,6 +203,7 @@ class Page extends ModelWithContent
 	 */
 	public function blueprint(): PageBlueprint
 	{
+		/** @var \Kirby\Blueprint\PageBlueprint */
 		return $this->blueprint ??= PageBlueprint::factory(
 			'pages/' . $this->intendedTemplate(),
 			'pages/default',
@@ -261,7 +255,7 @@ class Page extends ModelWithContent
 			}
 		}
 
-		return $this->blueprints = array_values($blueprints);
+		return $this->blueprints = $blueprints;
 	}
 
 	/**
@@ -485,7 +479,7 @@ class Page extends ModelWithContent
 
 		$kirby = $this->kirby();
 
-		return $this->inventory = Dir::inventory(
+		return $this->inventory = Inventory::for(
 			$this->root(),
 			$kirby->contentExtension(),
 			$kirby->contentIgnore(),
@@ -577,7 +571,7 @@ class Page extends ModelWithContent
 		}
 
 		// disable the pages cache when there's request data
-		if (empty($request->data()) === false) {
+		if ($request->data() !== []) {
 			return false;
 		}
 
@@ -1025,12 +1019,9 @@ class Page extends ModelWithContent
 			$versionId = VersionId::latest();
 		}
 
-		// authenticated requests can always be trusted;
-		// only resolve the expected token when one was sent
-		if (
-			$token !== '' &&
-			hash_equals($this->version($versionId)->previewToken(), $token) === true
-		) {
+		// authenticated requests can always be trusted
+		$expectedToken = $this->version($versionId)->previewToken();
+		if ($token !== '' && hash_equals($expectedToken, $token) === true) {
 			return $versionId;
 		}
 

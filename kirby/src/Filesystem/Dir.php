@@ -3,8 +3,8 @@
 namespace Kirby\Filesystem;
 
 use Exception;
-use Kirby\Cms\App;
 use Kirby\Cms\Helpers;
+use Kirby\Cms\Inventory;
 use Kirby\Cms\Page;
 use Kirby\Toolkit\Str;
 use Throwable;
@@ -21,9 +21,6 @@ use Throwable;
  * and converting the results into
  * children, files and other page stuff.
  *
- * @package   Kirby Filesystem
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
@@ -102,10 +99,10 @@ class Dir
 		bool $absolute = false
 	): array {
 		$scan   = static::read($dir, $ignore, true);
-		$result = array_values(array_filter($scan, 'is_dir'));
+		$result = array_values(array_filter($scan, is_dir(...)));
 
 		if ($absolute !== true) {
-			$result = array_map('basename', $result);
+			$result = array_map(basename(...), $result);
 		}
 
 		return $result;
@@ -133,10 +130,10 @@ class Dir
 		bool $absolute = false
 	): array {
 		$scan   = static::read($dir, $ignore, true);
-		$result = array_values(array_filter($scan, 'is_file'));
+		$result = array_values(array_filter($scan, is_file(...)));
 
 		if ($absolute !== true) {
-			$result = array_map('basename', $result);
+			$result = array_map(basename(...), $result);
 		}
 
 		return $result;
@@ -216,6 +213,8 @@ class Dir
 	 * relevant information.
 	 *
 	 * Don't use outside the Cms context.
+	 *
+	 * @deprecated 5.5.0 Use `Kirby\Cms\Inventory::for()` instead. Will be removed in Kirby 6.
 	 */
 	public static function inventory(
 		string $dir,
@@ -223,148 +222,14 @@ class Dir
 		array|null $contentIgnore = null,
 		bool $multilang = false
 	): array {
-		$inventory = [
-			'children' => [],
-			'files'    => [],
-			'template' => 'default',
-		];
+		Helpers::deprecated('`Kirby\Filesystem\Dir::inventory()` has been deprecated. Please use `Kirby\Cms\Inventory::for()` instead.', 'dir-inventory');
 
-		$dir = realpath($dir);
-
-		if ($dir === false) {
-			return $inventory;
-		}
-
-		// a temporary store for all content files
-		$content = [];
-
-		// read and sort all items naturally to avoid sorting issues later
-		$items = static::read($dir, $contentIgnore);
-		natsort($items);
-
-		// loop through all directory items and collect all relevant information
-		foreach ($items as $item) {
-			// ignore all items with a leading dot or underscore
-			if (
-				str_starts_with($item, '.') ||
-				str_starts_with($item, '_')
-			) {
-				continue;
-			}
-
-			$root = $dir . '/' . $item;
-
-			// collect all directories as children
-			if (is_dir($root) === true) {
-				$inventory['children'][] = static::inventoryChild(
-					$item,
-					$root,
-					$contentExtension,
-					$multilang
-				);
-				continue;
-			}
-
-			$extension = pathinfo($item, PATHINFO_EXTENSION);
-
-			// don't track files with these extensions
-			if (in_array($extension, ['htm', 'html', 'php'], true) === true) {
-				continue;
-			}
-
-			// collect all content files separately,
-			// not as inventory entries
-			if ($extension === $contentExtension) {
-				$filename = pathinfo($item, PATHINFO_FILENAME);
-
-				// remove the language codes from all content filenames
-				if ($multilang === true) {
-					$filename = pathinfo($filename, PATHINFO_FILENAME);
-				}
-
-				$content[] = $filename;
-				continue;
-			}
-
-			// collect all other files
-			$inventory['files'][$item] = [
-				'filename'  => $item,
-				'extension' => $extension,
-				'root'      => $root,
-			];
-		}
-
-		$content = array_unique($content);
-
-		$inventory['template'] = static::inventoryTemplate(
-			$content,
-			$inventory['files']
+		return Inventory::for(
+			$dir,
+			$contentExtension,
+			$contentIgnore,
+			$multilang
 		);
-
-		return $inventory;
-	}
-
-	/**
-	 * Collect information for a child for the inventory
-	 */
-	protected static function inventoryChild(
-		string $item,
-		string $root,
-		string $contentExtension = 'txt',
-		bool $multilang = false
-	): array {
-		// extract the slug and num of the directory
-		if ($separator = strpos($item, static::$numSeparator)) {
-			$num  = (int)substr($item, 0, $separator);
-			$slug = substr($item, $separator + 1);
-		}
-
-		// determine the model
-		if (Page::$models !== []) {
-			if ($multilang === true) {
-				$code = App::instance()->defaultLanguage()->code();
-				$contentExtension = $code . '.' . $contentExtension;
-			}
-
-			// look if a content file can be found
-			// for any of the available models
-			foreach (Page::$models as $modelName => $modelClass) {
-				if (is_file($root . '/' . $modelName . '.' . $contentExtension) === true) {
-					$model = $modelName;
-					break;
-				}
-			}
-		}
-
-		return [
-			'dirname' => $item,
-			'model'   => $model ?? null,
-			'num'     => $num ?? null,
-			'root'    => $root,
-			'slug'    => $slug ?? $item,
-		];
-	}
-
-	/**
-	 * Determines the main template for the inventory
-	 * from all collected content files, ignore file meta files
-	 */
-	protected static function inventoryTemplate(
-		array $content,
-		array $files,
-	): string {
-		foreach ($content as $name) {
-			// is a meta file corresponding to an actual file, i.e. cover.jpg
-			if (isset($files[$name]) === true) {
-				continue;
-			}
-
-			// it's most likely the template
-			// (will overwrite and use the last match for historic reasons)
-			$template = $name;
-		}
-
-		return $template ?? 'default';
 	}
 
 	/**
@@ -397,9 +262,11 @@ class Dir
 	 * @return bool True: the dir has been created, false: creating failed
 	 * @throws \Exception If a file with the provided path already exists or the parent directory is not writable
 	 */
-	public static function make(string $dir, bool $recursive = true): bool
-	{
-		if (empty($dir) === true) {
+	public static function make(
+		string $dir,
+		bool $recursive = true
+	): bool {
+		if ($dir === '') {
 			return false;
 		}
 
@@ -437,12 +304,13 @@ class Dir
 	 * @param string $dir The path of the directory
 	 * @param 'date'|'intl'|'strftime'|null $handler Custom date handler or `null`
 	 *                                               for the globally configured one
+	 * @return ($format is null ? int : string|false)
 	 */
 	public static function modified(
 		string $dir,
 		string|null $format = null,
 		string|null $handler = null
-	): int|string {
+	): int|string|false {
 		$modified = filemtime($dir);
 		$items    = static::read($dir);
 
@@ -522,7 +390,7 @@ class Dir
 		$ignore   = [...$ignore, '.', '..'];
 
 		// scan for all files and dirs
-		$result = array_values((array)array_diff(scandir($dir), $ignore));
+		$result = array_values(array_diff(scandir($dir), $ignore));
 
 		// add absolute paths
 		if ($absolute === true) {
@@ -551,17 +419,7 @@ class Dir
 				throw new Exception(sprintf('The parent directory does not exist: "%s"', $in));
 			}
 
-			// require a path separator boundary so that
-			// a sibling directory sharing the same name prefix
-			// (e.g. `/site2` for the parent `/site`)
-			// cannot pass the containment check
-			$parent = rtrim($parent, '/\\');
-
-			// TODO: Tighten to only allow **inside** $parent in v6
-			if (
-				$realpath !== $parent &&
-				str_starts_with($realpath, $parent . DIRECTORY_SEPARATOR) === false
-			) {
+			if (substr($realpath, 0, strlen($parent)) !== $parent) {
 				throw new Exception('The directory is not within the parent directory');
 			}
 		}

@@ -7,20 +7,17 @@ use Kirby\Exception\InvalidArgumentException;
 
 /**
  * PHP locale handling
- * @since 3.5.0
  *
- * @package   Kirby Toolkit
- * @author    Lukas Bestle <lukas@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
+ * @since     3.5.0
  */
 class Locale
 {
 	/**
 	 * List of all locale constants supported by PHP
 	 */
-	public const LOCALE_CONSTANTS = [
+	public const array LOCALE_CONSTANTS = [
 		'LC_COLLATE',
 		'LC_CTYPE',
 		'LC_MONETARY',
@@ -131,7 +128,6 @@ class Locale
 	/**
 	 * Sets the PHP locale with a locale string or
 	 * an array with constant or string keys
-	 * @psalm-suppress UnusedFunctionCall
 	 */
 	public static function set(array|string $locale): void
 	{

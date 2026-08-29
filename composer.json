@@ -4,13 +4,16 @@
 	"type": "project",
 	"homepage": "https://getkirby.com",
 	"require": {
-		"php": ">=8.2.0",
-		"getkirby/cms": "^4.0"
+		"php": ">=8.3.0",
+		"getkirby/cms": "6.0.0-alpha.3"
 	},
 	"scripts": {
 		"run": "php -S localhost:8181 kirby/router.php"
 	},
 	"config": {
-		"optimize-autoloader": true
+		"optimize-autoloader": true,
+		"allow-plugins": {
+			"getkirby/composer-installer": true
+		}
 	}
 }

@@ -3,6 +3,7 @@
 namespace Kirby\Cms;
 
 use Closure;
+use Kirby\Blueprint\Blueprint;
 use Kirby\Content\Content;
 use Kirby\Content\ImmutableMemoryStorage;
 use Kirby\Content\Lock;
@@ -27,9 +28,6 @@ use Throwable;
 /**
  * ModelWithContent
  *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
@@ -41,7 +39,7 @@ abstract class ModelWithContent implements Identifiable, Stringable
 	 * The CLASS_ALIAS is a short human-readable
 	 * version of the class name, i.e. page.
 	 */
-	public const CLASS_ALIAS = null;
+	public const string|null CLASS_ALIAS = null;
 
 	/**
 	 * Cached array of valid blueprints
@@ -49,9 +47,9 @@ abstract class ModelWithContent implements Identifiable, Stringable
 	 */
 	public array|null $blueprints = null;
 
-	public static App $kirby;
+	public static App|null $kirby = null;
 	protected Site|null $site;
-	protected Storage $storage;
+	protected Storage|null $storage = null;
 
 	/**
 	 * Store values used to initilaize object
@@ -67,6 +65,11 @@ abstract class ModelWithContent implements Identifiable, Stringable
 
 		$this->propertyData = $props;
 	}
+
+	/**
+	 * Returns the url to the api endpoint
+	 */
+	abstract public function apiUrl(bool $relative = false): string;
 
 	/**
 	 * Returns the blueprint of the model

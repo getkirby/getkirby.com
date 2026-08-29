@@ -4,11 +4,11 @@ namespace Kirby\Cms;
 
 use Closure;
 use Exception;
+use Kirby\Blueprint\UserBlueprint;
 use Kirby\Content\Field;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\NotFoundException;
 use Kirby\Exception\PermissionException;
-use Kirby\Filesystem\Dir;
 use Kirby\Filesystem\F;
 use Kirby\Panel\User as Panel;
 use Kirby\Session\Session;
@@ -20,9 +20,6 @@ use SensitiveParameter;
  * The `$user` object represents a
  * single Panel or frontend user.
  *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  *
@@ -37,16 +34,10 @@ class User extends ModelWithContent
 	use HasSiblings;
 	use UserActions;
 
-	public const CLASS_ALIAS = 'user';
-
-	/**
-	 * All registered user methods
-	 * @todo Remove when support for PHP 8.2 is dropped
-	 */
-	public static array $methods = [];
+	public const string CLASS_ALIAS = 'user';
 
 	protected UserBlueprint|null $blueprint = null;
-	protected array $credentials;
+	protected array|null $credentials = null;
 	protected string|null $email;
 	protected string $hash;
 	protected string $id;
@@ -161,6 +152,7 @@ class User extends ModelWithContent
 	public function blueprint(): UserBlueprint
 	{
 		try {
+			/** @var \Kirby\Blueprint\UserBlueprint */
 			return $this->blueprint ??= UserBlueprint::factory(
 				'users/' . $this->role(),
 				'users/default',
@@ -274,7 +266,7 @@ class User extends ModelWithContent
 
 		$kirby = $this->kirby();
 
-		return $this->inventory = Dir::inventory(
+		return $this->inventory = Inventory::for(
 			$this->root(),
 			$kirby->contentExtension(),
 			$kirby->contentIgnore(),
@@ -555,7 +547,17 @@ class User extends ModelWithContent
 	#[BlockCollectionAccess]
 	public function password(): string|null
 	{
-		return $this->password ??= $this->readPassword();
+		if ($this->password !== null) {
+			return $this->password;
+		}
+
+		$password = $this->readPassword();
+
+		if ($password === false) {
+			return $this->password = '';
+		}
+
+		return $this->password = $password;
 	}
 
 	/**
@@ -576,7 +578,13 @@ class User extends ModelWithContent
 			return null;
 		}
 
-		return filemtime($file);
+		$time = filemtime($file);
+
+		if ($time === false) {
+			return null;
+		}
+
+		return $time;
 	}
 
 	public function permissions(): UserPermissions
@@ -596,7 +604,7 @@ class User extends ModelWithContent
 		$name = $this->role ?? $this->credentials()['role'] ?? 'default';
 
 		return $this->role =
-			$this->kirby()->roles()->find($name) ??
+			$this->kirby()->roles()->findByKey($name) ??
 			Role::defaultNobody();
 	}
 

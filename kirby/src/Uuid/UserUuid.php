@@ -8,17 +8,14 @@ use Kirby\Cms\User;
 
 /**
  * UUID for \Kirby\Cms\User
- * @since 3.8.0
  *
- * @package   Kirby Uuid
- * @author    Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
+ * @since     3.8.0
  */
 class UserUuid extends Uuid
 {
-	protected const TYPE = 'user';
+	protected const string TYPE = 'user';
 
 	/**
 	 * @var \Kirby\Cms\User|null
@@ -32,13 +29,14 @@ class UserUuid extends Uuid
 	 */
 	public function id(): string
 	{
+		/** @var string - is always set from User::id() at construction */
 		return $this->uri->host();
 	}
 
 	/**
 	 * Generator for all users
 	 *
-	 * @return \Generator|\Kirby\Cms\User[]
+	 * @return \Generator<string, \Kirby\Cms\User>
 	 */
 	public static function index(): Generator
 	{

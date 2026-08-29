@@ -3,11 +3,10 @@
 namespace Kirby\Form\Mixin;
 
 /**
- * @package   Kirby Form
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
+ * Provides the `icon` prop for an optional icon shown alongside the input
+ *
  * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
+ * @license   https://getkirby.com/license
  */
 trait Icon
 {
@@ -19,10 +18,5 @@ trait Icon
 	public function icon(): string|null
 	{
 		return $this->icon;
-	}
-
-	protected function setIcon(string|null $icon = null): void
-	{
-		$this->icon = $icon;
 	}
 }

@@ -3,16 +3,27 @@
 namespace Kirby\Api;
 
 use Closure;
-use Exception;
+use Kirby\Cms\App;
+use Kirby\Cms\File;
+use Kirby\Cms\Files;
+use Kirby\Cms\Find;
+use Kirby\Cms\ModelWithContent;
+use Kirby\Cms\Page;
+use Kirby\Cms\Pages;
+use Kirby\Cms\Site;
 use Kirby\Cms\User;
+use Kirby\Cms\Users;
 use Kirby\Exception\Exception as ExceptionException;
+use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\NotFoundException;
+use Kirby\Exception\PermissionException;
 use Kirby\Filesystem\F;
+use Kirby\Form\Form;
 use Kirby\Http\Response;
 use Kirby\Http\Route;
 use Kirby\Http\Router;
+use Kirby\Session\Session;
 use Kirby\Toolkit\Collection as BaseCollection;
-use Kirby\Toolkit\I18n;
 use Kirby\Toolkit\Pagination;
 use Throwable;
 
@@ -22,9 +33,6 @@ use Throwable;
  * to run our REST API. You can find our API setup
  * in `kirby/config/api.php`.
  *
- * @package   Kirby Api
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
@@ -49,6 +57,8 @@ class Api
 	 * Injected data/dependencies
 	 */
 	protected array $data = [];
+
+	protected App $kirby;
 
 	/**
 	 * Model definitions
@@ -89,7 +99,9 @@ class Api
 	{
 		$this->authentication = $props['authentication'] ?? null;
 		$this->data           = $props['data'] ?? [];
+		$this->kirby          = $props['kirby'] ?? App::instance();
 		$this->routes         = $props['routes'] ?? [];
+		$this->router         = new Router($this->routes);
 		$this->debug  		  = $props['debug'] ?? false;
 
 		if ($collections = $props['collections'] ?? null) {
@@ -147,38 +159,15 @@ class Api
 
 		$this->setRequestMethod($method);
 		$this->setRequestData($requestData);
+		$this->setLanguage();
+		$this->setTranslation();
 
-		$this->router = new Router($this->routes());
-		$this->route  = $this->router->find($path, $method);
-		$auth = $this->route?->attributes()['auth'] ?? true;
+		$this->route = $this->router->find($path, $method);
+		$auth = $this->route->attributes()['auth'] ?? true;
 
 		if ($auth !== false) {
-			$user = $this->authenticate();
-
-			// set PHP locales based on *user* language
-			// so that e.g. strftime() gets formatted correctly
-			if ($user instanceof User) {
-				$language = $user->language();
-
-				// get the locale from the translation
-				$locale = $user->kirby()->translation($language)->locale();
-
-				// provide some variants as fallbacks to be
-				// compatible with as many systems as possible
-				$locales = [
-					$locale . '.UTF-8',
-					$locale . '.UTF8',
-					$locale . '.ISO8859-1',
-					$locale,
-					$language,
-					setlocale(LC_ALL, 0) // fall back to the previously defined locale
-				];
-
-				// set the locales that are relevant for string formatting
-				// *don't* set LC_CTYPE to avoid breaking other parts of the system
-				setlocale(LC_MONETARY, $locales);
-				setlocale(LC_NUMERIC, $locales);
-				setlocale(LC_TIME, $locales);
+			if (($user = $this->authenticate()) instanceof User) {
+				$this->setLocale($user);
 			}
 		}
 
@@ -187,7 +176,7 @@ class Api
 		$validate = Pagination::$validate;
 		Pagination::$validate = false;
 
-		$output = $this->route?->action()->call(
+		$output = $this->route->action()->call(
 			$this,
 			...$this->route->arguments()
 		);
@@ -214,12 +203,13 @@ class Api
 		return new static([
 			'autentication' => $this->authentication,
 			'data'			=> $this->data,
-			'routes'		=> $this->routes,
-			'debug'			=> $this->debug,
 			'collections'   => $this->collections,
+			'debug'			=> $this->debug,
+			'kirby'			=> $this->kirby,
 			'models'		=> $this->models,
 			'requestData'   => $this->requestData,
 			'requestMethod' => $this->requestMethod,
+			'routes'		=> $this->routes,
 			...$props
 		]);
 	}
@@ -255,6 +245,8 @@ class Api
 	 * Returns the injected data array
 	 * or certain parts of it by key
 	 *
+	 * @psalm-return ($key is null ? array : mixed)
+	 *
 	 * @throws \Kirby\Exception\NotFoundException If no data for `$key` exists
 	 */
 	public function data(string|null $key = null, ...$args): mixed
@@ -286,11 +278,88 @@ class Api
 	}
 
 	/**
+	 * @throws \Kirby\Exception\NotFoundException if the field type cannot be found or the field cannot be loaded
+	 */
+	public function fieldApi(
+		ModelWithContent $model,
+		string $name,
+		string|null $path = null
+	): mixed {
+		$field = Form::for($model)->field($name);
+
+		$fieldApi = $this->clone([
+			'data'   => [...$this->data(), 'field' => $field],
+			'routes' => $field->api(),
+		]);
+
+		return $fieldApi->call(
+			$path,
+			$this->requestMethod(),
+			$this->requestData()
+		);
+	}
+
+	/**
+	 * Returns the file object for the given
+	 * parent path and filename
+	 *
+	 * @param string $path Path to file's parent model
+	 * @throws \Kirby\Exception\NotFoundException if the file cannot be found
+	 */
+	public function file(
+		string $path,
+		string $filename
+	): File|null {
+		return Find::file($path, $filename);
+	}
+
+	/**
+	 * Returns the all readable files for the parent
+	 *
+	 * @param string $path Path to file's parent model
+	 * @throws \Kirby\Exception\NotFoundException if the file cannot be found
+	 */
+	public function files(string $path): Files
+	{
+		$parent = $this->parent($path);
+
+		if (
+			$parent instanceof Site === false &&
+			$parent instanceof Page === false &&
+			$parent instanceof User === false
+		) {
+			throw new InvalidArgumentException(
+				message: 'Not a valid file parent: ' . $parent->id()
+			);
+		}
+
+		return $parent->files()->filter('isListable', true);
+	}
+
+	/**
 	 * Checks if injected data exists for the given key
 	 */
 	public function hasData(string $key): bool
 	{
 		return isset($this->data[$key]) === true;
+	}
+
+	/**
+	 * Returns the Kirby instance
+	 */
+	public function kirby(): App
+	{
+		return $this->kirby;
+	}
+
+	/**
+	 * Returns the language request header
+	 */
+	public function language(): string|null
+	{
+		return
+			$this->requestQuery('language') ??
+			$this->requestHeaders('x-language');
 	}
 
 	/**
@@ -340,6 +409,51 @@ class Api
 	public function models(): array
 	{
 		return $this->models;
+	}
+
+	/**
+	 * Returns the page object for the given id
+	 *
+	 * @param string $id Page's id
+	 * @throws \Kirby\Exception\NotFoundException if the page cannot be found
+	 */
+	public function page(string $id): Page|null
+	{
+		return Find::page($id);
+	}
+
+	/**
+	 * Returns the subpages for the given
+	 * parent. The subpages can be filtered
+	 * by status (draft, listed, unlisted, published, all)
+	 */
+	public function pages(
+		string|null $parentId = null,
+		string|null $status = null
+	): Pages {
+		$parent = $parentId === null ? $this->site() : $this->page($parentId);
+		$pages  = match ($status) {
+			'all'             => $parent->childrenAndDrafts(),
+			'draft', 'drafts' => $parent->drafts(),
+			'listed'          => $parent->children()->listed(),
+			'unlisted'        => $parent->children()->unlisted(),
+			'published'       => $parent->children(),
+			default           => $parent->children()
+		};
+
+		return $pages->filter('isListable', true);
+	}
+
+	/**
+	 * Returns the model's object for the given path
+	 *
+	 * @param string $path Path to parent model
+	 * @throws \Kirby\Exception\InvalidArgumentException if the model type is invalid
+	 * @throws \Kirby\Exception\NotFoundException if the model cannot be found
+	 */
+	public function parent(string $path): ModelWithContent|null
+	{
+		return Find::parent($path);
 	}
 
 	/**
@@ -538,42 +652,16 @@ class Api
 	 */
 	public function responseForException(Throwable $e): array
 	{
-		if (isset($this->kirby) === true) {
-			$docRoot = $this->kirby->environment()->get('DOCUMENT_ROOT');
-		} else {
-			$docRoot = $_SERVER['DOCUMENT_ROOT'] ?? null;
-		}
-
-		// determine which message to expose to avoid leaking
-		// internal details (e.g. file paths) from PHP errors
-		if ($e instanceof ExceptionException) {
-			// Kirby exceptions carry safe, intentional messages
-			// that can be returned as-is whether debugging or not
-			$message = $e->getMessage();
-
-		} elseif ($this->debug === true) {
-			// in debug mode, expose the actual message
-			// but disguise absolute file paths in it
-			$message = $e->getMessage();
-
-			if (isset($this->kirby) === true) {
-				$message = $this->kirby->disguiseFilePath($message);
-			}
-
-		} else {
-			// any other (PHP) error could leak internal details,
-			// so only a generic message is returned
-			$message = I18n::translate('error.unexpected');
-		}
+		$root = $this->kirby->environment()->get('DOCUMENT_ROOT');
 
 		// prepare the result array for all exception types
 		$result = [
 			'status'    => 'error',
-			'message'   => $message,
+			'message'   => $e->getMessage(),
 			'code'      => empty($e->getCode()) === true ? 500 : $e->getCode(),
 			'exception' => $e::class,
 			'key'       => null,
-			'file'      => F::relativepath($e->getFile(), $docRoot),
+			'file'      => F::relativepath($e->getFile(), $root),
 			'line'      => $e->getLine(),
 			'details'   => [],
 			'route'     => $this->route?->pattern()
@@ -598,6 +686,105 @@ class Api
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Search for direct subpages of the given parent
+	 */
+	public function searchPages(string|null $parent = null): Pages
+	{
+		$status = $this->requestQuery('status');
+		$method = $this->requestMethod();
+		$pages  = $this->pages($parent, $status);
+
+		if ($method === 'GET') {
+			$query = $this->requestQuery('q');
+			return $pages->search($query);
+		}
+
+		return $pages->query(array_filter([
+			'limit'    => $this->requestBody('limit'),
+			'offset'   => $this->requestBody('offset'),
+			'paginate' => $this->requestBody('paginate'),
+			'search'   => $this->requestBody('search'),
+		], fn ($value) => $value !== null));
+	}
+
+	/**
+	 * @throws \Kirby\Exception\NotFoundException if the section type cannot be found or the section cannot be loaded
+	 */
+	public function sectionApi(
+		ModelWithContent $model,
+		string $name,
+		string|null $path = null
+	): mixed {
+		$section = $model->blueprint()->section($name);
+
+		if ($section === null) {
+			throw new NotFoundException(
+				message: 'The section "' . $name . '" could not be found'
+			);
+		}
+
+		$sectionApi = $this->clone([
+			'data'   => [...$this->data(), 'section' => $section],
+			'routes' => $section->api(),
+		]);
+
+		return $sectionApi->call(
+			$path,
+			$this->requestMethod(),
+			$this->requestData()
+		);
+	}
+
+	/**
+	 * Returns the current Session instance
+	 *
+	 * @param array $options Additional options, see the session component
+	 */
+	public function session(array $options = []): Session
+	{
+		return $this->kirby->session(['detect' => true, ...$options]);
+	}
+
+	/**
+	 * @since 6.0.0
+	 */
+	protected function setLanguage(): void
+	{
+		$language = $this->language();
+		$this->kirby->setCurrentLanguage($language);
+	}
+
+	/**
+	 * Set PHP locales based on *user* language
+	 * so that e.g. strftime() gets formatted correctly
+	 * @since 6.0.0
+	 */
+	protected function setLocale(User $user): void
+	{
+		$language = $user->language();
+
+		// get the locale from the translation
+		$locale = $user->kirby()->translation($language)->locale();
+
+		// provide some variants as fallbacks to be
+		// compatible with as many systems as possible
+		$locales = [
+			$locale . '.UTF-8',
+			$locale . '.UTF8',
+			$locale . '.ISO8859-1',
+			$locale,
+			$language,
+			setlocale(LC_ALL, 0) // fall back to the previously defined locale
+		];
+
+		// set the locales that are relevant for string formatting
+		// *don't* set LC_CTYPE to avoid breaking other parts of the system
+		setlocale(LC_MONETARY, $locales);
+		setlocale(LC_NUMERIC, $locales);
+		setlocale(LC_TIME, $locales);
 	}
 
 	/**
@@ -628,6 +815,29 @@ class Api
 	}
 
 	/**
+	 * @since 6.0.0
+	 */
+	protected function setTranslation(): void
+	{
+		$allowImpersonation = $this->kirby->option('api.allowImpersonation', false);
+
+		$translation   = $this->kirby->user(null, $allowImpersonation)?->language();
+		$translation ??= $this->kirby->panelLanguage();
+		$this->kirby->setCurrentTranslation($translation);
+	}
+
+	/**
+	 * Returns the site object
+	 *
+	 * @throws \Kirby\Exception\NotFoundException if the site cannot be accessed
+	 * @since 5.4.0
+	 */
+	public function site(): Site
+	{
+		return Find::site();
+	}
+
+	/**
 	 * Upload helper method
 	 *
 	 * move_uploaded_file() not working with unit test
@@ -639,17 +849,56 @@ class Api
 		Closure $callback,
 		bool $single = false,
 		bool $debug = false,
-		string|null $template = null,
-		Closure|null $preflight = null
+		string|null $template = null
 	): array {
 		$upload = new Upload(
 			api: $this,
 			single: $single,
 			debug: $debug,
-			template: $template,
-			preflight: $preflight
+			template: $template
 		);
 
 		return $upload->process($callback);
+	}
+
+	/**
+	 * Returns the user object for the given id or
+	 * returns the current authenticated user if no
+	 * id is passed
+	 *
+	 * @throws \Kirby\Exception\NotFoundException if the user for the given id cannot be found
+	 */
+	public function user(string|null $id = null): User|null
+	{
+		try {
+			return Find::user($id);
+		} catch (NotFoundException $e) {
+			if ($id === null) {
+				return null;
+			}
+
+			throw $e;
+		}
+	}
+
+	/**
+	 * Returns the users collection
+	 */
+	public function users(): Users
+	{
+		return Find::users();
+	}
+
+	/**
+	 * Validates that the acting user has access to the given area.
+	 *
+	 * @throws \Kirby\Exception\PermissionException
+	 * @since 5.4.0
+	 */
+	public function validateAreaAccess(string $area): void
+	{
+		if ($this->kirby->user()?->role()->permissions()->for('access', $area) !== true) {
+			throw new PermissionException(message: 'No access');
+		}
 	}
 }

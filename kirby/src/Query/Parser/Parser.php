@@ -23,12 +23,9 @@ use Kirby\Query\AST\VariableNode;
  * and then matching and consuming tokens to create
  * an abstract syntax tree (AST) of matching nodes
  *
- * @package   Kirby Query
- * @author    Roman Steiner <roman@toastlab.ch>,
- *            Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
  * @license   https://opensource.org/licenses/MIT
  * @since     5.1.0
+ *
  * @unstable
  */
 class Parser
@@ -134,7 +131,7 @@ class Parser
 		string|false $error = false
 	): Token|false {
 		if ($this->is($type) === true) {
-			return $this->advance();
+			return $this->advance() ?? false;
 		}
 
 		if (is_string($error) === true) {
@@ -151,7 +148,7 @@ class Parser
 	{
 		foreach ($types as $type) {
 			if ($this->is($type) === true) {
-				return $this->advance();
+				return $this->advance() ?? false;
 			}
 		}
 

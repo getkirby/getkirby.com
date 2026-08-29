@@ -11,9 +11,6 @@ use Kirby\Toolkit\Str;
  * from different criteria like
  * extensions etc.
  *
- * @package   Kirby Filesystem
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
@@ -180,12 +177,10 @@ class Mime
 
 		if ($mode = $map[$mime][$extension] ?? null) {
 			if (is_callable($mode) === true) {
-				return $mode($file, $mime, $extension);
+				return $mode($file) ?: null;
 			}
 
-			if (is_string($mode) === true) {
-				return $mode;
-			}
+			return $mode;
 		}
 
 		return $mime;

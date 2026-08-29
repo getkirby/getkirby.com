@@ -10,10 +10,6 @@ use Kirby\Toolkit\V;
 /**
  * Wrapper for email libraries
  *
- * @package   Kirby Email
- * @author    Bastian Allgeier <bastian@getkirby.com>,
- *            Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
@@ -180,7 +176,7 @@ class Email
 	 */
 	public function isHtml(): bool
 	{
-		return empty($this->body()->html()) === false;
+		return $this->body()->html() !== '';
 	}
 
 	/**

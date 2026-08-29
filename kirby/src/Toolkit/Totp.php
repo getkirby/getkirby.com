@@ -10,13 +10,10 @@ use SensitiveParameter;
  * The TOTP class handles the generation and verification
  * of time-based one-time passwords according to RFC6238
  * with the SHA1 algorithm, 30 second intervals and 6 digits
- * @since 4.0.0
  *
- * @package   Kirby Toolkit
- * @author    Lukas Bestle <lukas@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
+ * @since     4.0.0
  */
 class Totp
 {
@@ -39,14 +36,13 @@ class Totp
 		string|null $secret = null,
 		bool $force = false
 	) {
-		// if provided, decode the existing secret into binary
+		// if provided, decode the existing secret into binary;
+		// otherwise generate a new one (20 bytes = length of the SHA1 HMAC)
 		if ($secret !== null) {
 			$this->secret = Base32::decode($secret);
+		} else {
+			$this->secret = random_bytes(20);
 		}
-
-		// otherwise generate a new one;
-		// 20 bytes are the length of the SHA1 HMAC
-		$this->secret ??= random_bytes(20);
 
 		// safety check to avoid accidental insecure secrets
 		if ($force === false && strlen($this->secret) !== 20) {

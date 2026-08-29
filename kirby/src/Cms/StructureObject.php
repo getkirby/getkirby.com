@@ -14,9 +14,6 @@ use Kirby\Content\Content;
  * the same way as Page fields. They also use the same
  * Field methods.
  *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  *
@@ -26,7 +23,7 @@ class StructureObject extends Item
 {
 	use HasMethods;
 
-	public const ITEMS_CLASS = Structure::class;
+	public const string ITEMS_CLASS = Structure::class;
 
 	protected Content $content;
 

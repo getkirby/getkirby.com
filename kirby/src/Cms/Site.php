@@ -2,6 +2,7 @@
 
 namespace Kirby\Cms;
 
+use Kirby\Blueprint\SiteBlueprint;
 use Kirby\Content\VersionId;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\LogicException;
@@ -16,9 +17,6 @@ use Kirby\Toolkit\BlockCollectionAccess;
  * the main content folder with its
  * `site.txt`.
  *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  *
@@ -31,7 +29,7 @@ class Site extends ModelWithContent
 	use HasMethods;
 	use SiteActions;
 
-	public const CLASS_ALIAS = 'site';
+	public const string CLASS_ALIAS = 'site';
 
 	/**
 	 * The SiteBlueprint object
@@ -73,7 +71,7 @@ class Site extends ModelWithContent
 	/**
 	 * The absolute path to the site directory
 	 */
-	protected string $root;
+	protected string|null $root = null;
 
 	/**
 	 * The page url
@@ -166,11 +164,8 @@ class Site extends ModelWithContent
 	 */
 	public function blueprint(): SiteBlueprint
 	{
-		if ($this->blueprint instanceof SiteBlueprint) {
-			return $this->blueprint;
-		}
-
-		return $this->blueprint = SiteBlueprint::factory('site', null, $this);
+		/** @var \Kirby\Blueprint\SiteBlueprint */
+		return $this->blueprint ??= SiteBlueprint::factory('site', null, $this);
 	}
 
 	/**
@@ -256,7 +251,7 @@ class Site extends ModelWithContent
 
 		$kirby = $this->kirby();
 
-		return $this->inventory = Dir::inventory(
+		return $this->inventory = Inventory::for(
 			$this->root(),
 			$kirby->contentExtension(),
 			$kirby->contentIgnore(),
@@ -314,11 +309,13 @@ class Site extends ModelWithContent
 	/**
 	 * Gets the last modification date of all pages
 	 * in the content folder.
+	 *
+	 * @return ($format is null ? int : string|false)
 	 */
 	public function modified(
 		string|null $format = null,
 		string|null $handler = null
-	): int|string {
+	): int|string|false {
 		return Dir::modified($this->root(), $format, $handler);
 	}
 
@@ -382,14 +379,7 @@ class Site extends ModelWithContent
 	#[BlockCollectionAccess]
 	public function previewUrl(VersionId|string $versionId = 'latest'): string|null
 	{
-		// the site needs its own preview permission
-		if ($this->permissions()->can('preview') !== true) {
-			return null;
-		}
-
-		// the site preview defaults to the home page, so for backward
-		// compatibility we also check the home page's preview permission
-		// @todo Remove in 6.0.0, only check `site.preview`
+		// the site previews the home page and thus needs to check permissions for it
 		if ($this->homePage()?->permissions()->can('preview') !== true) {
 			return null;
 		}
@@ -403,6 +393,7 @@ class Site extends ModelWithContent
 	#[BlockCollectionAccess]
 	public function root(): string
 	{
+		/** @var string */
 		return $this->root ??= $this->kirby()->root('content');
 	}
 
@@ -471,6 +462,7 @@ class Site extends ModelWithContent
 			return $this->urlForLanguage($language);
 		}
 
+		/** @var string */
 		return $this->url ?? $this->kirby()->url();
 	}
 
@@ -482,6 +474,7 @@ class Site extends ModelWithContent
 		string|null $languageCode = null,
 		array|null $options = null
 	): string {
+		/** @var string */
 		return
 			$this->kirby()->language($languageCode)?->url() ??
 			$this->kirby()->url();

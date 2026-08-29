@@ -15,14 +15,10 @@ use Stringable;
 
 /**
  * Extension for PHP's `DateTime` class
- * @since 3.6.2
  *
- * @package   Kirby Toolkit
- * @author    Bastian Allgeier <bastian@getkirby.com>,
- *            Lukas Bestle <lukas@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
+ * @since     3.6.2
  */
 class Date extends DateTime implements Stringable
 {
@@ -106,7 +102,7 @@ class Date extends DateTime implements Stringable
 	public static function firstWeekday(string $locale): int
 	{
 		// config option, if available
-		$weekday = App::instance(null, true)?->option('date.weekday');
+		$weekday = App::instance(lazy: true)?->option('date.weekday');
 
 		if (is_int($weekday) === true) {
 			return $weekday;
@@ -121,14 +117,17 @@ class Date extends DateTime implements Stringable
 		// @codeCoverageIgnoreEnd
 
 		$calendar = IntlCalendar::createInstance(null, $locale);
-		$day      = $calendar->getFirstDayOfWeek();
 
-		return match ($day) {
-			// if any error occurs, return Monday
-			false   => 1, // @codeCoverageIgnore
-			// convert to 0-6 index numbering
-			default => $day - 1
-		};
+		/** @var int|false $day */
+		$day = $calendar->getFirstDayOfWeek();
+
+		// if any error occurs, return Monday
+		if ($day === false) {
+			return 1; // @codeCoverageIgnore
+		}
+
+		// convert to 0-6 index numbering
+		return $day - 1;
 	}
 
 	/**
@@ -304,9 +303,15 @@ class Date extends DateTime implements Stringable
 	public function nearest(
 		string|int|DateTimeInterface ...$datetime
 	): string|int|DateTimeInterface {
+		if ($datetime === []) {
+			throw new InvalidArgumentException(
+				message: 'At least one datetime must be provided'
+			);
+		}
+
 		$timestamp = $this->timestamp();
+		$nearest   = $datetime[0];
 		$minDiff   = PHP_INT_MAX;
-		$nearest   = null;
 
 		foreach ($datetime as $item) {
 			$itemObject    = new static($item, $this->timezone());
@@ -450,12 +455,12 @@ class Date extends DateTime implements Stringable
 	 *
 	 * @param array|string|int|null $input Full array with `size` and/or `unit` keys, `unit`
 	 *                                     string, `size` int or `null` for the default
-	 * @param array|null $default Default values to use if one or both values are not provided
+	 * @param array $default Default values to use if one or both values are not provided
 	 */
 	public static function stepConfig(
 		// no type hint to use InvalidArgumentException at the end
 		$input = null,
-		array|null $default = ['size' => 1, 'unit' => 'day']
+		array $default = ['size' => 1, 'unit' => 'day']
 	): array {
 		if ($input === null) {
 			return $default;
@@ -560,9 +565,10 @@ class Date extends DateTime implements Stringable
 	protected static function validateUnit(string $unit): void
 	{
 		$units = ['year', 'month', 'day', 'hour', 'minute', 'second'];
+
 		if (in_array($unit, $units, true) === false) {
 			throw new InvalidArgumentException(
-				message: 'Invalid rounding unit'
+				message: 'Invalid rounding unit: ' . $unit
 			);
 		}
 	}

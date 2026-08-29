@@ -2,6 +2,7 @@
 
 namespace Kirby\Panel\Lab;
 
+use Kirby\Cms\Inventory;
 use Kirby\Exception\NotFoundException;
 use Kirby\Filesystem\Dir;
 use Kirby\Filesystem\F;
@@ -10,12 +11,10 @@ use Kirby\Http\Response;
 /**
  * One or multiple lab examples with one or multiple tabs
  *
- * @package   Kirby Panel
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  * @since     4.0.0
+ *
  * @internal
  * @codeCoverageIgnore
  */
@@ -59,7 +58,7 @@ class Example
 	{
 		$tabs = [];
 
-		foreach (Dir::inventory($this->root)['children'] as $child) {
+		foreach (Inventory::for($this->root)['children'] as $child) {
 			$tabs[$child['dirname']] = [
 				'name'  => $child['dirname'],
 				'label' => $child['slug'],
@@ -127,7 +126,13 @@ class Example
 			return null;
 		}
 
-		return F::read($file);
+		$content = F::read($file);
+
+		if ($content === false) {
+			return null;
+		}
+
+		return $content;
 	}
 
 	public function root(): string

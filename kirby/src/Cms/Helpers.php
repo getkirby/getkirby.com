@@ -8,13 +8,10 @@ use Kirby\Toolkit\Str;
 
 /**
  * The `Helpers` class hosts a few handy helper methods
- * @since 3.7.0
  *
- * @package   Kirby Cms
- * @author    Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
+ * @since     3.7.0
  */
 class Helpers
 {
@@ -38,11 +35,7 @@ class Helpers
 		// Setting undefined permission categories or actions is deprecated
 		// and will be ignored in a future version. Custom permissions should
 		// be registered via the `permissions` extension instead.
-		// The warning is disabled by default for now, as it is triggered
-		// while loading roles and would thus break the Panel on every request
-		// even though the permission is still applied.
-		// TODO: switch to true in v6
-		'permissions-undefined' => false,
+		'permissions-undefined' => true,
 
 		// Passing an `info` array inside the `extends` array
 		// has been deprecated. Pass the individual entries (e.g. root, version)

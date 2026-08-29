@@ -3,19 +3,18 @@
 namespace Kirby\Option;
 
 use Kirby\Cms\ModelWithContent;
-use Kirby\Toolkit\I18n;
+use Kirby\Toolkit\HasI18n;
 
 /**
  * Option for select fields, radio fields, etc.
  *
- * @package   Kirby Option
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
 class Option
 {
+	use HasI18n;
+
 	public string|array $text;
 
 	/**
@@ -66,9 +65,9 @@ class Option
 		return new static(...$props, resolve: $resolve);
 	}
 
-	public function id(): string|int|float
+	public function id(): string
 	{
-		return $this->value ?? '';
+		return (string)($this->value ?? '');
 	}
 
 	/**
@@ -78,8 +77,8 @@ class Option
 		ModelWithContent $model,
 		bool $safeMode = true
 	): array {
-		$info = I18n::translate($this->info, $this->info);
-		$text = I18n::translate($this->text, $this->text);
+		$info = $this->i18n($this->info);
+		$text = $this->i18n($this->text);
 		$method = $safeMode === true ? 'toSafeString' : 'toString';
 
 		return [

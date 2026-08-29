@@ -20,16 +20,14 @@ use Throwable;
  * the composer.json. It also creates the prefix
  * and media url for the plugin.
  *
- * @package   Kirby Plugin
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 class Plugin
 {
-	protected Assets $assets;
+	protected Assets|null $assets = null;
 	protected License|Closure|array|string $license;
+	protected string $root;
 	protected UpdateStatus|null $updateStatus = null;
 
 	/**
@@ -43,19 +41,19 @@ class Plugin
 		protected array $extends = [],
 		protected array $info = [],
 		Closure|string|array|null $license = null,
-		protected string|null $root = null,
+		string|null $root = null,
 		protected string|null $version = null,
 	) {
 		static::validateName($name);
 
 		// TODO: Remove in v7
-		if ($root = $extends['root'] ?? null) {
+		if ($extendsRoot = $extends['root'] ?? null) {
 			Helpers::deprecated('Plugin "' . $name . '": Passing the `root` inside the `extends` array has been deprecated. Pass it directly as named argument `root`.', 'plugin-extends-root');
-			$this->root ??= $root;
+			$root ??= $extendsRoot;
 			unset($this->extends['root']);
 		}
 
-		$this->root ??= dirname(debug_backtrace()[0]['file']);
+		$this->root = $root ?? dirname(debug_backtrace()[0]['file']);
 
 		// TODO: Remove in v7
 		if ($info = $extends['info'] ?? null) {
@@ -288,7 +286,7 @@ class Plugin
 			);
 
 			// sort the matches by key length (with longest key first)
-			$keys = array_map('strlen', array_keys($option));
+			$keys = array_map(strlen(...), array_keys($option));
 			array_multisort($keys, SORT_DESC, $option);
 
 			if ($option !== []) {

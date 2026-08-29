@@ -3,31 +3,32 @@
 namespace Kirby\Cms;
 
 use Closure;
+use Kirby\Blueprint\Blueprint;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\I18n;
 use Kirby\Toolkit\Str;
 
 /**
  * A collection of fieldsets
- * @since 3.5.0
  *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
+ * @since     3.5.0
  *
  * @extends \Kirby\Cms\Items<\Kirby\Cms\Fieldset>
  */
 class Fieldsets extends Items
 {
-	public const ITEM_CLASS = Fieldset::class;
+	public const string ITEM_CLASS = Fieldset::class;
 
 	/**
 	 * All registered fieldsets methods
 	 */
 	public static array $methods = [];
 
+	/**
+	 * @return array{fieldsets: array, groups: array}
+	 */
 	protected static function createFieldsets(array $params): array
 	{
 		$fieldsets = [];

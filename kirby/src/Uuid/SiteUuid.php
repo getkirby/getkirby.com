@@ -8,17 +8,14 @@ use Kirby\Cms\Site;
 
 /**
  * UUID for \Kirby\Cms\Site
- * @since 3.8.0
  *
- * @package   Kirby Uuid
- * @author    Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
+ * @since     3.8.0
  */
 class SiteUuid extends Uuid
 {
-	protected const TYPE = 'site';
+	protected const string TYPE = 'site';
 
 	/**
 	 * @var \Kirby\Cms\Site|null
@@ -37,11 +34,11 @@ class SiteUuid extends Uuid
 	/**
 	 * Generator for the one and only site object
 	 *
-	 * @return \Generator|\Kirby\Cms\Site[]
+	 * @return \Generator<string, \Kirby\Cms\Site>
 	 */
 	public static function index(): Generator
 	{
-		yield App::instance()->site();
+		yield '' => App::instance()->site();
 	}
 
 	/**

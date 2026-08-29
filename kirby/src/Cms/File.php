@@ -4,6 +4,7 @@ namespace Kirby\Cms;
 
 use Exception;
 use IntlDateFormatter;
+use Kirby\Blueprint\FileBlueprint;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Filesystem\F;
 use Kirby\Filesystem\IsFile;
@@ -25,9 +26,6 @@ use Kirby\Toolkit\Str;
  * In addition the File class handles
  * meta data via `Kirby\Cms\Content`.
  *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  *
@@ -42,13 +40,7 @@ class File extends ModelWithContent
 	use HasSiblings;
 	use IsFile;
 
-	public const CLASS_ALIAS = 'file';
-
-	/**
-	 * All registered file methods
-	 * @todo Remove when support for PHP 8.2 is dropped
-	 */
-	public static array $methods = [];
+	public const string CLASS_ALIAS = 'file';
 
 	/**
 	 * Cache for the initialized blueprint object
@@ -57,7 +49,7 @@ class File extends ModelWithContent
 
 	protected string $filename;
 
-	protected string $id;
+	protected string|null $id = null;
 
 	/**
 	 * The parent object
@@ -157,6 +149,7 @@ class File extends ModelWithContent
 	 */
 	public function blueprint(): FileBlueprint
 	{
+		/** @var \Kirby\Blueprint\FileBlueprint */
 		return $this->blueprint ??= FileBlueprint::factory(
 			'files/' . $this->template(),
 			'files/default',
@@ -460,7 +453,7 @@ class File extends ModelWithContent
 	 */
 	protected function modifiedFile(): int
 	{
-		return F::modified($this->root());
+		return F::modified($this->root()) ?: 0;
 	}
 
 	/**
@@ -468,8 +461,10 @@ class File extends ModelWithContent
 	 */
 	public function page(): Page|null
 	{
-		if ($this->parent() instanceof Page) {
-			return $this->parent();
+		$parent = $this->parent();
+
+		if ($parent instanceof Page) {
+			return $parent;
 		}
 
 		return null;
@@ -494,7 +489,7 @@ class File extends ModelWithContent
 	/**
 	 * Returns the parent id if a parent exists
 	 */
-	public function parentId(): string
+	public function parentId(): string|null
 	{
 		return $this->parent()->id();
 	}
@@ -577,8 +572,10 @@ class File extends ModelWithContent
 	 */
 	public function site(): Site
 	{
-		if ($this->parent() instanceof Site) {
-			return $this->parent();
+		$parent = $this->parent();
+
+		if ($parent instanceof Site) {
+			return $parent;
 		}
 
 		return $this->kirby()->site();

@@ -12,6 +12,7 @@ use Kirby\Cms\User;
 use Kirby\Cms\Users;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Image\QrCode;
+use Kirby\Query\Runners\DefaultRunner;
 use Kirby\Query\Runners\Runner;
 use Kirby\Toolkit\I18n;
 
@@ -19,10 +20,6 @@ use Kirby\Toolkit\I18n;
  * The Query class can be used to run expressions on arrays and objects,
  * including their methods with a very simple string-based syntax
  *
- * @package   Kirby Query
- * @author    Bastian Allgeier <bastian@getkirby.com>,
- *            Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
@@ -30,8 +27,7 @@ class Query
 {
 	public static array $cache = [];
 	public static array $entries = [];
-
-	public Runner|string $runner;
+	public static Runner|string|null $runner = null;
 
 	/**
 	 * Creates a new Query object
@@ -43,15 +39,16 @@ class Query
 			$this->query = trim($query);
 		}
 
-		$this->runner = App::instance()->option('query.runner', 'legacy');
+		static::$runner ??= App::instance()->option('query.runner', DefaultRunner::class);
 
-		if ($this->runner !== 'legacy') {
-
-			if (is_subclass_of($this->runner, Runner::class) === false) {
-				throw new InvalidArgumentException("Query runner $this->runner must extend " . Runner::class);
+		if (static::$runner !== 'legacy') {
+			if (is_subclass_of(static::$runner, Runner::class) === false) {
+				throw new InvalidArgumentException(
+					message: 'Query runner "' . static::$runner . '" must extend ' . Runner::class
+				);
 			}
 
-			$this->runner = $this->runner::for($this);
+			static::$runner = static::$runner::for($this);
 		}
 	}
 
@@ -85,16 +82,14 @@ class Query
 			return $data;
 		}
 
-		// TODO: switch to 'interpreted' as default in v6
 		// TODO: remove in v7
 		// @codeCoverageIgnoreStart
-
-		if ($this->runner === 'legacy') {
+		if (static::$runner === 'legacy') {
 			return $this->resolveLegacy($data);
 		}
 		// @codeCoverageIgnoreEnd
 
-		return $this->runner->run($this->query, (array)$data);
+		return static::$runner->run($this->query, (array)$data);
 	}
 
 	/**
@@ -159,7 +154,8 @@ Query::$entries['t'] = function (
 	string|array|null $fallback = null,
 	string|null $locale = null
 ): string|null {
-	return I18n::translate($key, $fallback, $locale);
+	$result = I18n::translate($key, $fallback, $locale);
+	return is_string($result) ? $result : null;
 };
 
 Query::$entries['user'] = function (string|null $id = null): User|null {

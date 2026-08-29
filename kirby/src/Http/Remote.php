@@ -14,16 +14,13 @@ use stdClass;
  * A handy little class to handle
  * all kinds of remote requests
  *
- * @package   Kirby Http
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
 class Remote
 {
-	public const CA_INTERNAL = 1;
-	public const CA_SYSTEM   = 2;
+	public const int CA_INTERNAL = 1;
+	public const int CA_SYSTEM   = 2;
 
 	public static array $defaults = [
 		'agent'     => null,
@@ -68,8 +65,10 @@ class Remote
 
 		// update the defaults with App config if set;
 		// request the App instance lazily
-		if ($app = App::instance(null, true)) {
-			$defaults = [...$defaults, ...$app->option('remote', [])];
+		if ($app = App::instance(lazy: true)) {
+			/** @var array $remote */
+			$remote   = $app->option('remote', []);
+			$defaults = [...$defaults, ...$remote];
 		}
 
 		// set all options, incl. url
@@ -92,12 +91,15 @@ class Remote
 		string $method,
 		array $arguments = []
 	): static {
+		/** @var string $url */
+		$url = $arguments[0];
+
+		/** @var array $options */
+		$options = $arguments[1] ?? [];
+
 		return new static(
-			url:     $arguments[0],
-			options: [
-				'method' => strtoupper($method),
-				...$arguments[1] ?? []
-			]
+			url: $url,
+			options: ['method' => strtoupper($method), ...$options]
 		);
 	}
 

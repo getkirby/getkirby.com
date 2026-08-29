@@ -12,9 +12,6 @@ use Kirby\Toolkit\Str;
 /**
  * Validators for all page actions
  *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
@@ -137,7 +134,7 @@ class PageRules
 
 		static::publish($page);
 
-		if ($position !== null && $position < 0) {
+		if ($position < 0) {
 			throw new InvalidArgumentException(key: 'page.num.invalid');
 		}
 	}
@@ -287,7 +284,6 @@ class PageRules
 		}
 
 		self::validateSlugLength($slug);
-		self::validateSlugProtectedPaths($page, $slug);
 	}
 
 	/**
@@ -318,8 +314,6 @@ class PageRules
 		) {
 			throw new LogicException(key: 'page.move.ancestor');
 		}
-
-		self::validateSlugProtectedPaths($page, $page->slug(), $parent);
 
 		// check for duplicates
 		if ($parent->childrenAndDrafts()->find($page->slug())) {
@@ -391,7 +385,7 @@ class PageRules
 			);
 		}
 
-		if ($page->isDraft() === true && empty($page->errors()) === false) {
+		if ($page->isDraft() === true && $page->errors() !== []) {
 			throw new PermissionException(
 				key:  'page.changeStatus.incomplete',
 				details: $page->errors()
@@ -449,27 +443,22 @@ class PageRules
 	 */
 	protected static function validateSlugProtectedPaths(
 		Page $page,
-		string $slug,
-		Site|Page|null $parent = null
+		string $slug
 	): void {
-		$parent ??= $page->parent();
-
-		if ($parent instanceof Page === true) {
-			return;
-		}
-
-		$paths = A::map(
-			['api', 'assets', 'media', 'panel'],
-			fn ($url) => $page->kirby()->url($url, true)->path()->toString()
-		);
-
-		$index = array_search($slug, $paths);
-
-		if ($index !== false) {
-			throw new InvalidArgumentException(
-				key: 'page.changeSlug.reserved',
-				data: ['path' => $paths[$index]]
+		if ($page->parent() === null) {
+			$paths = A::map(
+				['api', 'assets', 'media', 'panel'],
+				fn ($url) => $page->kirby()->url($url, true)->path()->toString()
 			);
+
+			$index = array_search($slug, $paths);
+
+			if ($index !== false) {
+				throw new InvalidArgumentException(
+					key: 'page.changeSlug.reserved',
+					data: ['path' => $paths[$index]]
+				);
+			}
 		}
 	}
 
