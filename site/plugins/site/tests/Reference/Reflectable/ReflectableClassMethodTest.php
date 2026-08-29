@@ -65,7 +65,7 @@ class ReflectableClassMethodTest extends TestCase
 	public function testSee(): void
 	{
 		$reflectable = new ReflectableClassMethod('Bar\Fox', 'barWithDocBlock');
-		$this->assertSame('Bar\Fox::baz', $reflectable->see());
+		$this->assertSame('Bar\Fox::baz', (string)$reflectable->see());
 	}
 
 	public function testSource(): void

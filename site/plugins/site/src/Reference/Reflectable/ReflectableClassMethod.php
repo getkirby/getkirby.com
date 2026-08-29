@@ -28,6 +28,29 @@ class ReflectableClassMethod extends ReflectableFunction
 	}
 
 	/**
+	 * Returns the names of the methods that are aliases
+	 * for this method
+	 */
+	public function aliases(): array
+	{
+		$aliases    = [];
+		$reflection = new ReflectionClass($this->class);
+
+		foreach ($reflection->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
+			$alias = new ReflectableClassMethod($this->class, $method->getName());
+
+			if (
+				$alias->isMagic() === false &&
+				$alias->see()?->for() === $this->method
+			) {
+				$aliases[] = $alias->method;
+			}
+		}
+
+		return $aliases;
+	}
+
+	/**
 	 * Returns the name of the method's class
 	 */
 	public function class(
@@ -59,6 +82,15 @@ class ReflectableClassMethod extends ReflectableFunction
 		}
 
 		return new Identifier($origin);
+	}
+
+	/**
+	 * Returns whether the method is an alias
+	 * for another method of the same class
+	 */
+	public function isAlias(): bool
+	{
+		return $this->see()?->for() !== null;
 	}
 
 	/**
@@ -132,29 +164,6 @@ class ReflectableClassMethod extends ReflectableFunction
 		}
 
 		return '$' . Str::camel($class) . '->' . $this->method;
-	}
-
-	/**
-	 * Returns the `@see` tag value which references
-	 * another class method to refer to for more information
-	 */
-	public function see(): string|null
-	{
-		$see = parent::see();
-
-		if ($see === null) {
-			return null;
-		}
-
-		// remove self:: or static:: prefix
-		$see = preg_replace('/^(self|static)::/', '::', $see);
-
-		// add class name if missing
-		if (str_starts_with($see, '::') === true) {
-			$see = $this->class(short: false) . $see;
-		}
-
-		return $see;
 	}
 
 	/**

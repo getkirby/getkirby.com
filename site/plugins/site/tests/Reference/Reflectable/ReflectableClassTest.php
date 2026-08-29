@@ -72,7 +72,7 @@ new FooWithDocBlock();
 	public function testSee(): void
 	{
 		$reflectable = new ReflectableClass('Bar\FooWithDocBlock');
-		$this->assertSame('Bar\Foo', $reflectable->see());
+		$this->assertSame('Bar\Foo', (string)$reflectable->see());
 	}
 
 	public function testSince(): void
