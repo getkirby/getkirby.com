@@ -23,7 +23,7 @@ class SinceTest extends TestCase
 		$reflectable = new ReflectableFunction('sinceDocBlock');
 		$since       = Since::factory($reflectable);
 		$this->assertInstanceOf(Since::class, $since);
-		$this->assertSame('5.0.0', $since->version());
+		$this->assertSame('6.0.0', $since->version());
 
 		$reflectable = new ReflectableFunction('sinceNotSameMajorVersion');
 		$since       = Since::factory($reflectable);

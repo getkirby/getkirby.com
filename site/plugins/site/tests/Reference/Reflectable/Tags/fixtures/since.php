@@ -5,7 +5,7 @@ function sinceNoDocBlock()
 }
 
 /**
- * @since 5.0.0
+ * @since 6.0.0
  */
 function sinceDocBlock()
 {

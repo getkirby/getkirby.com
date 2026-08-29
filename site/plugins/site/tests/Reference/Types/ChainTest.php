@@ -62,10 +62,21 @@ class ChainTest extends TestCase
 		$this->assertSame('docs/reference/objects/cms/app/user', $page?->id());
 
 		// field method
+		$chain = new Chain('$field->escape()');
+		$page  = $chain->toPage();
+		$this->assertInstanceOf(ReferenceFieldMethodPage::class, $page);
+		$this->assertSame('docs/reference/templates/field-methods/escape', $page?->id());
+
+		// field method alias, documented on the page of the
+		// method its `@see` tag points to
 		$chain = new Chain('$field->esc()');
 		$page  = $chain->toPage();
 		$this->assertInstanceOf(ReferenceFieldMethodPage::class, $page);
 		$this->assertSame('docs/reference/templates/field-methods/escape', $page?->id());
+
+		// a field method that doesn't exist
+		$chain = new Chain('$field->doesNotExist()');
+		$this->assertNull($chain->toPage());
 
 		// helper function
 		$chain = new Chain('Helper::css()');

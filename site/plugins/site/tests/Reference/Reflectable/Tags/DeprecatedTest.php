@@ -16,23 +16,23 @@ class DeprecatedTest extends TestCase
 
 	public function testFactory(): void
 	{
-		$reflectable = new ReflectableClass('DeprecatedNot');
+		$reflectable = new ReflectableClass('TestDeprecated\\DeprecatedNot');
 		$deprecated  = Deprecated::factory($reflectable);
 		$this->assertNull($deprecated);
 
-		$reflectable = new ReflectableClass('Deprecated');
+		$reflectable = new ReflectableClass('TestDeprecated\\Deprecated');
 		$deprecated  = Deprecated::factory($reflectable);
 		$this->assertInstanceOf(Deprecated::class, $deprecated);
 		$this->assertSame('5.0.0', $deprecated->version());
 		$this->assertSame('This is deprecated', $deprecated->description());
 
-		$reflectable = new ReflectableClass('DeprecatedOnlyVersion');
+		$reflectable = new ReflectableClass('TestDeprecated\\DeprecatedOnlyVersion');
 		$deprecated  = Deprecated::factory($reflectable);
 		$this->assertInstanceOf(Deprecated::class, $deprecated);
 		$this->assertSame('5.0.0', $deprecated->version());
 		$this->assertNull($deprecated->description());
 
-		$reflectable = new ReflectableClass('DeprecatedOnlyTag');
+		$reflectable = new ReflectableClass('TestDeprecated\\DeprecatedOnlyTag');
 		$deprecated  = Deprecated::factory($reflectable);
 		$this->assertInstanceOf(Deprecated::class, $deprecated);
 		$this->assertNull($deprecated->description());

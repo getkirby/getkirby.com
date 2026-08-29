@@ -94,7 +94,7 @@ fooWithDocBlock();
 	public function testSince(): void
 	{
 		$reflectable = new ReflectableFunction('fooWithDocBlock');
-		$this->assertSame('5.0.0', $reflectable->since()->version());
+		$this->assertSame('6.0.0', $reflectable->since()->version());
 	}
 
 	public function testSummary(): void

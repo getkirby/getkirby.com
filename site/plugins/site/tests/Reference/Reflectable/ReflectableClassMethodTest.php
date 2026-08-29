@@ -13,6 +13,21 @@ class ReflectableClassMethodTest extends TestCase
 		require_once __DIR__ . '/fixtures/classmethod.php';
 	}
 
+	public function testAliases(): void
+	{
+		// methods pointing at this one via `@see` are its aliases
+		$reflectable = new ReflectableClassMethod('Bar\\Vixen', 'escape');
+		$this->assertSame(['esc', 'escapeHtml'], $reflectable->aliases());
+
+		// an alias itself has no aliases
+		$reflectable = new ReflectableClassMethod('Bar\\Vixen', 'esc');
+		$this->assertSame([], $reflectable->aliases());
+
+		// a `@see` tag pointing nowhere doesn't make an alias
+		$reflectable = new ReflectableClassMethod('Bar\\Vixen', 'escapeUnknown');
+		$this->assertSame([], $reflectable->aliases());
+	}
+
 	public function testCall(): void
 	{
 		$reflectable = new ReflectableClassMethod('Bar\Fox', 'bar');
@@ -36,6 +51,19 @@ class ReflectableClassMethodTest extends TestCase
 
 		$reflectable = new ReflectableClassMethod('Bar\Fox', 'bar');
 		$this->assertNull($reflectable->inheritedFrom());
+	}
+
+	public function testIsAlias(): void
+	{
+		$reflectable = new ReflectableClassMethod('Bar\\Vixen', 'esc');
+		$this->assertTrue($reflectable->isAlias());
+
+		$reflectable = new ReflectableClassMethod('Bar\\Vixen', 'escape');
+		$this->assertFalse($reflectable->isAlias());
+
+		// the referenced method has to exist on the same class
+		$reflectable = new ReflectableClassMethod('Bar\\Vixen', 'escapeUnknown');
+		$this->assertFalse($reflectable->isAlias());
 	}
 
 	public function testIsMagic(): void

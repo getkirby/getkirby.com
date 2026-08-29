@@ -78,7 +78,7 @@ new FooWithDocBlock();
 	public function testSince(): void
 	{
 		$reflectable = new ReflectableClass('Bar\FooWithDocBlock');
-		$this->assertSame('5.0.0', $reflectable->since()->version());
+		$this->assertSame('6.0.0', $reflectable->since()->version());
 	}
 
 	public function testSource(): void

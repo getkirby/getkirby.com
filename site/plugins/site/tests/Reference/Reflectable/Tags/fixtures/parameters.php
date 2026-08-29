@@ -6,7 +6,7 @@
 function parameters(
 	string $a,
 	string $b = 'bar',
-	string $c = null,
+	string|null $c = null,
 	$d = null
 ) {
 }

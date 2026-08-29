@@ -17,6 +17,10 @@ class ReferenceFieldMethodPage extends ReferenceArticlePage
 	public static function findByName(
 		string $name
 	): ReferenceFieldMethodPage|null {
+		if (method_exists(Field::class, $name) === true) {
+			$name = (new ReflectableFieldMethod($name))->see()?->for() ?? $name;
+		}
+
 		$methods = page('docs/reference/templates/field-methods');
 		return $methods->find(Str::kebab($name));
 	}
