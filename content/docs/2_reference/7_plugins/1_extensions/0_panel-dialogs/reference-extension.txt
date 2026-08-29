@@ -139,7 +139,6 @@ Panel::go('some/path');
 ```
 
 
-<since v="5.1.0">
 ### Controller classes
 
 Instead of defining the dialog directly as an array with `load` and `submit` keys, you can pass a controller class name or a closure that returns an object with `load` and `submit` methods. If the named class defines a static `::for()` method, Kirby will call it to create the instance.
@@ -162,7 +161,6 @@ Kirby::plugin('yourname/todos', [
   ]
 ]);
 ```
-</since>
 
 
 ## Extending dialogs

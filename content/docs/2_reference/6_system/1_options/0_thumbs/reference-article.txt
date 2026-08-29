@@ -101,7 +101,6 @@ return [
 The old ImageMagick (`im`) driver has been deprecated and will be removed in a future major release. Use the `imagick` driver instead.
 </warning>
 
-<since v="5.1.0">
 ### Additional options for the Imagick driver
 
 #### `interlace`
@@ -144,7 +143,6 @@ return [
   ]
 ];
 ```
-</since>
 
 ### Additional options for the ImageMagick driver
 

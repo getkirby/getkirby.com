@@ -2,10 +2,6 @@ Title: File previews
 
 ----
 
-Since: 5.0.0
-
-----
-
 Text:
 
 Kirby ships with some default Panel file previews for common formats: images, videos, audio or PDFs. But you can also add custom file previews as plugin extensions to customize the preview for these formats or create previews for other file formats.

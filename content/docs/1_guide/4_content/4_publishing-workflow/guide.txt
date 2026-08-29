@@ -26,14 +26,12 @@ All changes by everyone in the team - not just the current editor - are listed i
 (image: changes-dialog.png)
 
 
-<since v="5.0.0">
 ### Preview your changes
 
 Even though they aren't saved/published, you can take a look at how your page would look like with your unsaved changes. Click on the preview button at the top right of the Panel and a view opens that allows you to preview your current page, the page with the unsaved changes as well as compare them side by side:
 
 (video: changes.mp4)
 
-</since>
 
 ### Content locking
 

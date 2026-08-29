@@ -224,9 +224,7 @@ Kirby internally relies on the following values:
 - The (link: docs/reference/system/options/content#salt-for-drafts-and-media-files text: `content.salt` option) is used to generate secure preview and media URLs that should not be guessable by external visitors.
 - The (link: docs/reference/system/options/cookie#cookie-key text: `cookie.key` option) is used to sign (or authenticate) cookie values to prevent easy tampering with cookie values set by the backend.
 
-<since v="5.4.4">
 The `cookie.key` option was added in Kirby 5.4.5 and 4.9.4. In previous releases, the cookie key needed to be set via the `Kirby\Http\Cookie::$key` property.
-</since>
 
 Kirby cannot set secure defaults for these options. This is because there is no install step during which Kirby could generate and persist random values and because config files are typically kept in version control and cannot be written by the system without causing merge conflicts.
 
@@ -240,9 +238,7 @@ We are in the active process of migrating the Kirby Panel to Vue 3 (with the pla
 
 In its default configuration, Kirby enables the template compiler, as it is needed for all Panel plugins that have not been precompiled. It is also used for the examples in the Panel lab environment.
 
-<since v="4.7">
 Kirby 4.7 introduces a new `panel.vue.compiler` option that can be set to `false` to disable the template compiler and switch to the Vue 2 runtime version. We recommend to set this option to `false` if your site and the installed plugins do not rely on the Vue template compiler. Should you require the template compiler and are not affected by its [known vulnerabilities](https://www.herodevs.com/vulnerability-directory?framework=Vue+2), you can set the option to `true` to make the warning in the Panel go away. Do this at your own risk!
-</since>
 
 ## Secure data in Git repositories
 

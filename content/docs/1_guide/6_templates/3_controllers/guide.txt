@@ -206,7 +206,6 @@ return function ($page, $tag) {
 The properties defined in the `$data` array are exposed to **templates** as global variables, so in use cases where you **do not** need them in a controller, you can use them directly.
 </info>
 
-<since v="5.0.0">
 ## General site controller
 
 You can also add a general site controller called `site.php` which you put into your `/site/controllers` folder like any other page controller. Such a general site controller is useful if multiple templates share the same logic.The `site` controller data will now always be merged as default data with data from page template specific controllers.
@@ -242,6 +241,5 @@ return function () {
 	];
 };
 ```
-</since>
 
 

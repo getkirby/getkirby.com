@@ -181,7 +181,6 @@ The fields in the example `composer.json` above are just the basic metadata fiel
 Note that the `name` inside the `composer.json` file is only the name of the Composer package. If needed, it can differ from the name you give your plugin when registering it with `Kirby::plugin()`, which will be used when getting plugin data.
 </info>
 
-<since v="5.0.0">
 ### Plugin licenses
 
 You can add information about your plugin license which is then shown in the plugins table on the Panel system view with an additional column to indicate its status. Licenses can link to their license document, a custom license shop or open a custom dialog to activate the license.
@@ -229,7 +228,6 @@ Kirby::plugin(
   license: fn (Plugin $plugin) => new MyCustomLicense($plugin)
 );
 ```
-</since>
 
 ### Named arguments
 

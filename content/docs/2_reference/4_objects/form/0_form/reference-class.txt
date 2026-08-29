@@ -4,7 +4,6 @@ Class: Kirby\Form\Form
 
 Text:
 
-<since v="5.0.0">
 ## Setting up a form
 
 ```php
@@ -457,4 +456,3 @@ $form->submit([
 
 dump($form->toStoredValues());
 ```
-</since>

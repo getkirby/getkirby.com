@@ -12,7 +12,6 @@ Text:
 
 The `query.runner` option allows you to define which runner classes are used to parse and interpret the Kirby query language.
 
-<since v="5.1.0">
 Kirby offers a new runner for its query syntax based on parsing the query as abstract syntax tree. This runner is more reliable and efficient than the rudimentary legacy runner. It also offers (link: docs/guide/blueprints/query-language#advanced-query-syntax__operators text: additional features). The new runner is currently in its beta phase:
 
 ```php "site/config/config.php"
@@ -24,7 +23,6 @@ return [
   ]
 ];
 ```
-</since>
 
 ### Custom query runner
 

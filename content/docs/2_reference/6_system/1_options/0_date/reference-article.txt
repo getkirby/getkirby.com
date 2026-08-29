@@ -66,7 +66,6 @@ echo $page->date()->toDate('EEEE, MMMM d, YYYY');
 
 All formats: https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-format-syntax
 
-<since v="5.0.0">
 ## First day of the week
 
 In the Panel, the first day of the week is chosen based on user language or the `date.weekday` config option (`0` for Sunday … `6` for Saturday):
@@ -78,4 +77,3 @@ return [
 	]
 ];
 ```
-</since>

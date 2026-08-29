@@ -173,11 +173,9 @@ Property access (`parent.property`) will behave like this:
 - If the parent is an array, the respective array element will be returned.
 - Calling a property without any arguments (`parent.property()`) is equivalent to accessing the property.
 
-<since v="5.1.0">
 When you use (link: docs/reference/system/options/query text: the new query runner), queries support subscript access notation, e.g. `page[site.pageMethodName]`.
 
 The new query runner is stricter in parsing queries. In some edge cases, this will require you to access an array/object via subscript notation - in rare cases on the top level via the new `this` keyword, e.g. `this["identifier.with dots and spaces"]`.
-</since>
 
 ### Operators
 
@@ -189,7 +187,6 @@ page.title.isNotEmpty ? page.title.lower : page.slug
 page.title.value ?? page.slug
 ```
 
-<since v="5.1.0">
 When you use (link: docs/reference/system/options/query text: the new query runner), you can also use
 - logical operators: `AND`, `&&`, `OR`, `||`
 - comparisons: `==`, `!=`, `>`, `<`, `<=`, `>=`
@@ -210,7 +207,6 @@ $bar = $query->resolve($data);
 $bar = $bar(['homer' => 'simpson']);
 $this->assertSame('simpson', $bar);
 ```
-</since>
 
 
 

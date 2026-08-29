@@ -65,7 +65,6 @@ return [
 ];
 ```
 
-<since v="5.0.0">
 ## Panel view buttons
 
 You can customize what buttons are shown on the various Panel views. Learn about (link: docs/reference/system/options/panel/panel-view-buttons text: all the options to customize the Panel view buttons).
@@ -86,9 +85,7 @@ return [
   ]
 ];
 ```
-</since>
 
-<since v="5.1.0">
 ## Panel theme
 
 Set the default Panel theme that is used when the user has not set any custom setting in their account view via the `panel.theme` config option.
@@ -103,7 +100,6 @@ return [
 ];
 ```
 
-</since>
 
 ## Panel search
 

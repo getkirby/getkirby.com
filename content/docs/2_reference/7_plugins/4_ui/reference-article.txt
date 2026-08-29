@@ -35,7 +35,6 @@ To keep the distributed package small, the example files (`panel/lab`) and the g
 
 > The default Lab examples are not installed. / The UI docs are not installed.
 
-<since v="5.5.1">
 ### Install the examples and docs
 
 The examples and docs are built automatically and attached to every GitHub release as a  single ZIP, so you can add them to your local installation:
@@ -53,4 +52,3 @@ Both `ui` and `lab` are new folders that don't exist in a default install, so yo
 Always download the ZIP from the release that matches your installed Kirby version, so the examples and docs reflect the components you actually have.
 
 If the examples don't render and you see "The Vue template compiler must be enabled to show lab examples"* make sure you haven't disabled the `panel.vue.compiler` option in your config.
-</since>

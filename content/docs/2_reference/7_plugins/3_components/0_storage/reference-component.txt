@@ -2,10 +2,6 @@ Title: Storage
 
 ----
 
-Since: 5.0.0
-
-----
-
 Text:
 
 The `storage` component takes care of providing the default content storage handler for our models (site, pages, files and users).

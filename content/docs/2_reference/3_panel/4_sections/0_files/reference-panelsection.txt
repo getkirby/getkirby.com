@@ -92,7 +92,6 @@ label: "{{ page.title }} Gallery"
 ```
 
 
-<since v="5.2.0">
 ## Upload button
 
 You can disable the upload button in a files section with the `create` option. This is useful for query-based sections where uploads wouldn't show up in the list.
@@ -103,7 +102,6 @@ files:
   query: page.files
   create: false
 ```
-</since>
 
 ## Layout
 
@@ -276,7 +274,6 @@ By default, Kirby supports (link: docs/guide/files/files#supported-file-types te
 
 To upload file types not supported out of the box by Kirby, you can (link: docs/reference/plugins/extensions/file-types text: register new file types with the `fileTypes` extension) in a plugin.
 
-<since v="5.0.0">
 ## Batch delete files
 
 When managing many files, it can be tedious to delete them one by one. Adding `batch: true`, allows you to select multiple files and delete them at once.
@@ -286,7 +283,6 @@ gallery:
   type: files
   batch: true
 ```
-</since>
 
 ## Preview images
 
