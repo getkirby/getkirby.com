@@ -242,6 +242,15 @@ html {
 
 /* Parameters tables */
 
+/**
+ * Array defaults like `['size' => 1, 'unit' => 'day']` are long enough
+ * to blow up the table layout, as inline code doesn't wrap by default
+ */
+.parameters .default code {
+	white-space: normal;
+	overflow-wrap: break-word;
+}
+
 @media screen and (max-width: 42rem) {
 	.parameters,
 	.parameters :where(thead, tbody, th, tr, td) {

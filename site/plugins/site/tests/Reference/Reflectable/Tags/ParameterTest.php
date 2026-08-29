@@ -74,11 +74,61 @@ class ParameterTest extends TestCase
 
 		$parameter   = $reflectable->reflection->getParameters()[2];
 		$parameter   = Parameter::factory(parameter: $parameter);
-		$this->assertSame('[ ]', $parameter->default());
+		$this->assertSame('[]', $parameter->default());
 
 		$parameter   = $reflectable->reflection->getParameters()[3];
 		$parameter   = Parameter::factory(parameter: $parameter);
 		$this->assertSame('null', $parameter->default());
+	}
+
+	public function testFactoryDefaultArray(): void
+	{
+		$reflectable = new ReflectableFunction('parametersDefaults');
+
+		// associative arrays keep their keys
+		$parameter = $reflectable->reflection->getParameters()[4];
+		$parameter = Parameter::factory(parameter: $parameter);
+		$this->assertSame(
+			"['size' => 1, 'unit' => 'day']",
+			$parameter->default()
+		);
+
+		// lists drop their keys
+		$parameter = $reflectable->reflection->getParameters()[5];
+		$parameter = Parameter::factory(parameter: $parameter);
+		$this->assertSame(
+			"['url', 'page', 'file']",
+			$parameter->default()
+		);
+
+		// nested arrays are formatted the same way
+		$parameter = $reflectable->reflection->getParameters()[6];
+		$parameter = Parameter::factory(parameter: $parameter);
+		$this->assertSame(
+			"[['1/1'], ['1/2', '1/2']]",
+			$parameter->default()
+		);
+
+		// arrays with gaps in their numeric keys aren't lists
+		$parameter = $reflectable->reflection->getParameters()[7];
+		$parameter = Parameter::factory(parameter: $parameter);
+		$this->assertSame(
+			"[2 => 'a', 5 => 'b']",
+			$parameter->default()
+		);
+	}
+
+	public function testFormatDefault(): void
+	{
+		$this->assertSame('null', Parameter::formatDefault(null));
+		$this->assertSame('true', Parameter::formatDefault(true));
+		$this->assertSame('1', Parameter::formatDefault(1));
+		$this->assertSame("'foo'", Parameter::formatDefault('foo'));
+		$this->assertSame('[]', Parameter::formatDefault([]));
+		$this->assertSame(
+			'new stdClass()',
+			Parameter::formatDefault(new \stdClass())
+		);
 	}
 
 	public function testHasDescription(): void

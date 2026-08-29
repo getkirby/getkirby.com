@@ -34,6 +34,10 @@ function parametersDefaults(
 	$a,
 	$b = 'foo',
 	$c = [],
-	$d = null
+	$d = null,
+	$e = ['size' => 1, 'unit' => 'day'],
+	$f = ['url', 'page', 'file'],
+	$g = [['1/1'], ['1/2', '1/2']],
+	$h = [2 => 'a', 5 => 'b']
 ) {
 }

@@ -91,15 +91,38 @@ class Parameter
 	public static function formatDefault(mixed $default = null): string
 	{
 		if (is_object($default) === true) {
-			$default = 'new ' . get_class($default) . '()';
-		} else {
-			$default = var_export($default, true);
+			return 'new ' . $default::class . '()';
 		}
 
-		$default = str_replace('NULL', 'null', $default);
-		$default = str_replace('array (' . PHP_EOL . ')', '[ ]', $default);
+		if (is_array($default) === true) {
+			return static::formatDefaultArray($default);
+		}
 
-		return $default;
+		return str_replace('NULL', 'null', var_export($default, true));
+	}
+
+	/**
+	 * Turns an array default into a compact single-line
+	 * short array syntax, e.g. `['size' => 1, 'unit' => 'day']`,
+	 * as `var_export()` would be far too verbose for a table cell
+	 */
+	protected static function formatDefaultArray(array $default): string
+	{
+		$isList = array_is_list($default);
+		$items  = [];
+
+		foreach ($default as $key => $value) {
+			$item = static::formatDefault($value);
+
+			// the keys of a plain list add no information
+			if ($isList === false) {
+				$item = static::formatDefault($key) . ' => ' . $item;
+			}
+
+			$items[] = $item;
+		}
+
+		return '[' . implode(', ', $items) . ']';
 	}
 
 	/**
