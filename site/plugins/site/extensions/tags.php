@@ -343,7 +343,6 @@ $tags['video'] = [
 		'playsinline',
 		'poster',
 		'preload',
-		'style',
 		'width',
 	],
 	'html' => function ($tag) {
@@ -415,8 +414,7 @@ $tags['video'] = [
 		}
 
 		return Html::figure([$video ?? ''], $tag->caption, [
-			'class' => $tag->class ?? 'video',
-			'style' => $tag->style
+			'class' => $tag->class ?? 'video'
 		]);
 	}
 ];
