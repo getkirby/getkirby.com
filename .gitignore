@@ -26,6 +26,7 @@ Icon
 
 /site/plugins/*/vendor/**/.*
 /site/plugins/*/vendor/**/*.json
+!/site/plugins/*/vendor/composer/installed.json
 /site/plugins/*/vendor/**/*.txt
 /site/plugins/*/vendor/**/*.md
 /site/plugins/*/vendor/**/*.yml

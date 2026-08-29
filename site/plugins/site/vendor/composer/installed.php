@@ -3,7 +3,7 @@
         'name' => 'getkirby/site',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '4ab0244ba1c617db66c7fbb8cf8c56ea46e93607',
+        'reference' => 'e93d533c7833cd4140c7eb8063ec6030e78b91c4',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -31,7 +31,7 @@
         'getkirby/site' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '4ab0244ba1c617db66c7fbb8cf8c56ea46e93607',
+            'reference' => 'e93d533c7833cd4140c7eb8063ec6030e78b91c4',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
