@@ -22,15 +22,16 @@ function kirbytagsToMarkdown(string|null $text): string
 
 	$kirby = App::instance();
 
-	$data['kirby']  ??= $kirby;
-	$data['site']   ??= $kirby->site();
-	$data['parent'] ??= $kirby->site()->page();
+	$data['kirby']   ??= $kirby;
+	$data['site']    ??= $kirby->site();
+	$data['parent']  ??= $kirby->site()->page();
+	$data['kirbytags'] = false;
 
 	$options = $kirby->options();
-	$options['kirbytags'] = false;
+	$debug   = ($options['debug'] ?? false) === true;
 
 	$text = $kirby->apply('kirbytags:before', compact('text', 'data', 'options'));
-	$text = KirbyTags::parse($text, $data, $options);
+	$text = KirbyTags::parse($text, $data, debug: $debug);
 	$text = $kirby->apply('kirbytags:after', compact('text', 'data', 'options'));
 
 	// convert (columns…) $1 (…columns) to just $1

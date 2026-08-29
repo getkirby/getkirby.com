@@ -1,8 +1,8 @@
 <?php
 
+use Kirby\Blueprint\Section;
 use Kirby\Cms\App;
 use Kirby\Cms\Html;
-use Kirby\Cms\Section;
 use Kirby\Form\Field;
 use Kirby\Reference\Reflectable\ReflectableOptions;
 use Kirby\Reference\Types\Chain;
@@ -80,7 +80,7 @@ $tags['docs'] = [
 
 		$snippet = snippet('docs/' . $tag->value, $data, true);
 
-		if (($tag->options['kirbytags'] ?? true) === false) {
+		if (($tag->data['kirbytags'] ?? true) === false) {
 			return kirbytagsToMarkdown($snippet);
 		}
 
@@ -153,7 +153,7 @@ $tags['image'] = [
 	'html' => function ($tag) {
 		if ($file = $tag->file($tag->value)) {
 
-			if (($tag->options['kirbytags'] ?? true) === false) {
+			if (($tag->data['kirbytags'] ?? true) === false) {
 				// markdown image syntax
 				return '![' . ($tag->caption ?? $file->caption()->or($tag->alt)) . '](' . $file->url() . ')';
 			}
@@ -199,7 +199,7 @@ $tags['kirby-version'] = [
 $tags['link'] = [
 	...$coreTags['link'],
 	'html' => function ($tag) use ($coreTags) {
-		if (($tag->options['kirbytags'] ?? true) === false) {
+		if (($tag->data['kirbytags'] ?? true) === false) {
 			if ($page = page($tag->value())) {
 				return markdownLink($tag->text() ?? $tag->value(), $page->markdownUrl());
 			}
@@ -269,7 +269,7 @@ $tags['reference'] = [
 		if ($page = page('docs/reference/' . $tag->value())) {
 			$snippet = 'kirbytext/reference';
 
-			if (($tag->options['kirbytags'] ?? true) === false) {
+			if (($tag->data['kirbytags'] ?? true) === false) {
 				$snippet = 'kirbytext/reference.md';
 			}
 
@@ -292,7 +292,7 @@ $tags['screencast'] = [
 	'html' => function ($tag) {
 		$snippet = 'kirbytext/screencast';
 
-		if (($tag->options['kirbytags'] ?? true) === false) {
+		if (($tag->data['kirbytags'] ?? true) === false) {
 			$snippet = 'kirbytext/screencast.md';
 		}
 
@@ -301,7 +301,7 @@ $tags['screencast'] = [
 			'poster' => $tag->poster ? $tag->file($tag->poster) : $tag->file('youtube.jpg'),
 			'title'  => $tag->title ?? null,
 			'text'   => $tag->text ?? null,
-			'lazy'   => $tag->data['field']->key() !== 'screencast'
+			'lazy'   => ($tag->data['field'] ?? null)?->key() !== 'screencast'
 		], true);
 	}
 ];
