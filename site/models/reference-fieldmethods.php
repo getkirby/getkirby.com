@@ -2,6 +2,7 @@
 
 use Kirby\Cms\Pages;
 use Kirby\Content\Field;
+use Kirby\Reference\Reflectable\ReflectableFieldMethod;
 use Kirby\Toolkit\Str;
 
 class ReferenceFieldMethodsPage extends ReferenceSectionPage
@@ -14,10 +15,7 @@ class ReferenceFieldMethodsPage extends ReferenceSectionPage
 
 		$children = [];
 		$pages    = parent::children();
-		$methods  = [
-			...$this->getDynamicMethods(),
-			...$this->getNativeMethods()
-		];
+		$methods  = $this->getNativeMethods();
 
 		foreach ($methods as $name => $reflection) {
 			$children[] = [
@@ -33,17 +31,6 @@ class ReferenceFieldMethodsPage extends ReferenceSectionPage
 		return $this->children = Pages::factory($children, $this)->sortBy('title', 'asc');
 	}
 
-	protected function getDynamicMethods(): array
-	{
-		static $methods = (include $this->kirby()->root('kirby') . '/config/methods.php')($this->kirby());
-
-		foreach ($methods as $key => $function) {
-			$methods[$key] = new ReflectionFunction($function);
-		}
-
-		return $methods;
-	}
-
 	protected function getNativeMethods(): array
 	{
 		$methods    = [];
@@ -52,9 +39,16 @@ class ReferenceFieldMethodsPage extends ReferenceSectionPage
 		foreach ($reflection->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
 			$name = $method->getName();
 
-			if (substr($name, 0, 1) !== '_') {
-				$methods[$name] = $method;
+			if (substr($name, 0, 1) === '_') {
+				continue;
 			}
+
+			// aliases are listed on the page of the method they point to
+			if ((new ReflectableFieldMethod($name))->isAlias() === true) {
+				continue;
+			}
+
+			$methods[$name] = $method;
 		}
 
 		return $methods;

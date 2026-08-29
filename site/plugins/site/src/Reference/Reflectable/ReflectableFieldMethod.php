@@ -4,9 +4,6 @@ namespace Kirby\Reference\Reflectable;
 
 use Exception;
 use Kirby\Content\Field;
-use Kirby\Reference\Reflectable\Tags\Parameters;
-use Kirby\Reference\Types\Identifier;
-use ReflectionFunction;
 use ReflectionMethod;
 
 /**
@@ -18,48 +15,11 @@ class ReflectableFieldMethod extends ReflectableClassMethod
 		public string $method
 	) {
 		$this->class = Field::class;
-		$method      = Field::$methods[$this->method] ?? null;
-		$method    ??= Field::$methods[strtolower($this->method)] ?? null;
 
-		if ($method !== null) {
-			// method is defined in `kirby/config/methods.php`
-			$this->reflection = new ReflectionFunction($method);
-		} else if (method_exists(Field::class, $this->method) === true) {
-			// method is defined in the `Field` class
-			$this->reflection = new ReflectionMethod(Field::class, $this->method);
-		} else {
+		if (method_exists(Field::class, $this->method) === false) {
 			throw new Exception('Field method "' . $this->method . '" not found');
 		}
-	}
 
-	/**
-	 * Returns name aliases of the field method
-	 */
-	public function aliases(): array
-	{
-		return array_keys(Field::$aliases, $this->method);
-	}
-
-	/**
-	 * Returns the parameters of the field method
-	 */
-	public function parameters(): Parameters
-	{
-		// Kirby automatically inserts $field as first parameter on all methods
-		// defined in `kirby/config/methods.php`. The reflection picks up this
-		// parameter, however, we need to remove it from the list.
-		return $this->parameters ??= Parameters::factory($this)->not('field');
-	}
-
-	/**
-	 * Returns the path to the source code of the field method
-	 */
-	protected function sourcePath(): string|null
-	{
-		if ($this->reflection instanceof ReflectionMethod) {
-			return 'src/Content/Field.php';
-		}
-
-		return 'config/methods.php';
+		$this->reflection = new ReflectionMethod(Field::class, $this->method);
 	}
 }

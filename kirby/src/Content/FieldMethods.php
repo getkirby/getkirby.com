@@ -760,7 +760,7 @@ trait FieldMethods
 	}
 
 	/**
-	 * @see self::float()
+	 * @see self::toFloat()
 	 */
 	public function float(float $default = 0): float
 	{
@@ -776,7 +776,7 @@ trait FieldMethods
 	}
 
 	/**
-	 * @see self::int()
+	 * @see self::toInt()
 	 */
 	public function int(int $default = 0): int
 	{
@@ -792,7 +792,7 @@ trait FieldMethods
 	}
 
 	/**
-	 * @see self::kirbytextinline()
+	 * @see self::kirbytextInline()
 	 */
 	public function kti(array $options = []): static
 	{
