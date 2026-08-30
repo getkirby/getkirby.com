@@ -52,6 +52,8 @@ class Parameter
 		// so the native type hint is used instead
 		$types   = $doc instanceof ParamTagValueNode ? $doc->type : null;
 		$types ??= $parameter?->getType();
+		// a parameter without any type at all accepts anything
+		$types ??= 'mixed';
 		$types   = Types::factory($types, $context);
 
 		return new static(

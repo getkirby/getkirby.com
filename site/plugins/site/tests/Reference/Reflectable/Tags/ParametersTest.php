@@ -33,7 +33,7 @@ class ParametersTest extends TestCase
 		$parameters  = Parameters::factory($reflectable);
 		$this->assertInstanceOf(Parameters::class, $parameters);
 		$this->assertSame(5, $parameters->count());
-		$this->assertSame('string $a, string $b = \'bar\', string|null $c = null, $d = null, mixed $e', $parameters->toString());
+		$this->assertSame('string $a, string $b = \'bar\', string|null $c = null, mixed $d = null, mixed $e', $parameters->toString());
 
 
 		$reflectable = new ReflectableFunction('parametersWithDescriptions');
@@ -58,7 +58,7 @@ class ParametersTest extends TestCase
 		$parameters  = Parameters::factory($reflectable);
 		$this->assertInstanceOf(Parameters::class, $parameters);
 		$this->assertSame(1, $parameters->count());
-		$this->assertSame('...$args', $parameters->toString());
+		$this->assertSame('mixed ...$args', $parameters->toString());
 
 		$reflectable = new ReflectableFunction('parametersVariadicWithDocBlock');
 		$parameters  = Parameters::factory($reflectable);

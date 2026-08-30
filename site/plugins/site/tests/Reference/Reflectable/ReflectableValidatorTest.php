@@ -28,7 +28,7 @@ class ReflectableValidatorTest extends TestCase
 	public function testCall(): void
 	{
 		$reflectable = new ReflectableValidator('email');
-		$this->assertSame('V::email($value): bool', $reflectable->call());
+		$this->assertSame('V::email(mixed $value): bool', $reflectable->call());
 	}
 
 	public function testClass(): void

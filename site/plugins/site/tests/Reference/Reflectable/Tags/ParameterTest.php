@@ -54,7 +54,7 @@ class ParameterTest extends TestCase
 		$parameter   = $reflectable->reflection->getParameters()[0];
 		$parameter   = Parameter::factory(parameter: $parameter);
 		$this->assertTrue($parameter->isVariadic());
-		$this->assertSame('...$args', $parameter->toString());
+		$this->assertSame('mixed ...$args', $parameter->toString());
 
 		$reflectable = new ReflectableFunction('parametersWithDescriptions');
 		$doc         = $reflectable->doc()->getParamTagValues()[0];
@@ -64,9 +64,12 @@ class ParameterTest extends TestCase
 
 		$reflectable = new ReflectableFunction('parametersDefaults');
 
+		// a parameter without a native type and without a `@param`
+		// tag falls back to `mixed`
 		$parameter   = $reflectable->reflection->getParameters()[0];
 		$parameter   = Parameter::factory(parameter: $parameter);
 		$this->assertNull($parameter->default());
+		$this->assertSame('mixed $a', $parameter->toString());
 
 		$parameter   = $reflectable->reflection->getParameters()[1];
 		$parameter   = Parameter::factory(parameter: $parameter);
