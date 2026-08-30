@@ -8,6 +8,7 @@
 		"getkirby/cms": "6.0.0-alpha.3"
 	},
 	"scripts": {
+		"fix": "cpx getkirby/php-cs:^0.2 fix",
 		"run": "php -S localhost:8181 kirby/router.php"
 	},
 	"config": {
