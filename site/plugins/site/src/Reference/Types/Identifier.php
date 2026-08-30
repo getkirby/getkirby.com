@@ -21,8 +21,8 @@ class Identifier extends Type
 	/**
 	 * Returns the HTML markup for the type
 	 *
-	 * @param string|null $text Alternative text to display
-	 * @param bool $linked Whether to link to the Reference page
+	 * @param $text Alternative text to display
+	 * @param $linked Whether to link to the Reference page
 	 */
 	public function toHtml(
 		string|null $text = null,

@@ -15,15 +15,15 @@ class ReferenceKirbytagPage extends ReferenceArticlePage
 		]);
 	}
 
-	public function title(): Field
-	{
-		return new Field($this, 'title', '&#40;' . $this->name() . ': …&#41;');
-	}
-
 	public function reflection(): ReflectableKirbytag
 	{
 		return $this->reflection ??= new ReflectableKirbytag(
 			name: $this->name()
 		);
+	}
+
+	public function title(): Field
+	{
+		return new Field($this, 'title', '&#40;' . $this->name() . ': …&#41;');
 	}
 }

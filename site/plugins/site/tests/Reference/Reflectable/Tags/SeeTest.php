@@ -10,11 +10,6 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(See::class)]
 class SeeTest extends TestCase
 {
-	public function setUp(): void
-	{
-		require_once __DIR__ . '/fixtures/see.php';
-	}
-
 	protected function see(string $method): See|null
 	{
 		return See::factory(
@@ -22,10 +17,9 @@ class SeeTest extends TestCase
 		);
 	}
 
-	public function testFactoryWithoutTag(): void
+	public function setUp(): void
 	{
-		$this->assertNull($this->see('escape'));
-		$this->assertNull($this->see('noDocBlock'));
+		require_once __DIR__ . '/fixtures/see.php';
 	}
 
 	public function testFactoryForFunction(): void
@@ -50,6 +44,12 @@ class SeeTest extends TestCase
 			$this->assertSame('TestSee\Vixen::escape()', $see->reference());
 			$this->assertSame('escape', $see->for());
 		}
+	}
+
+	public function testFactoryWithoutTag(): void
+	{
+		$this->assertNull($this->see('escape'));
+		$this->assertNull($this->see('noDocBlock'));
 	}
 
 	public function testForWithDifferentSpelling(): void

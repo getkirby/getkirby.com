@@ -15,7 +15,7 @@ use Reflector;
 class ReflectableFunction extends Reflectable
 {
 	/**
-	 * @var \ReflectionMethod
+	 * @var ReflectionMethod
 	 */
 	public Reflector $reflection;
 

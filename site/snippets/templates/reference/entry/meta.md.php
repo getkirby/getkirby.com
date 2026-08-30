@@ -3,9 +3,7 @@
  * @var ReferenceArticlePage $page
  */
 
-use Kirby\Cms\App;
 use Kirby\Reference\Reflectable\ReflectableClass;
-use Kirby\Toolkit\Str;
 
 $reflection = $page->reflection();
 $since      = $page->since();

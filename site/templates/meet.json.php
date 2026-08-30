@@ -6,7 +6,7 @@
 
 $since = param('since');
 
-$upcomingEvents = $upcoming->toArray(fn($event) => [
+$upcomingEvents = $upcoming->toArray(fn ($event) => [
 	'title'    => $event->shortTitle()->value(),
 	'date'     => $event->datetime()->format('c'),
 	'timezone' => $event->timezone()->value(),
@@ -22,7 +22,7 @@ if (is_string($since)) {
 	$past = $past->filterBy('num', '>', $since);
 }
 
-$pastEvents = $past->toArray(fn($event) => [
+$pastEvents = $past->toArray(fn ($event) => [
 	'title'    => $event->shortTitle()->value(),
 	'date'     => $event->datetime()->format('c'),
 	'link'     => $event->link()->value(),

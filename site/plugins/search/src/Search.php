@@ -8,7 +8,6 @@ use Kirby\Cms\App;
  * The Search class is the main interface to generate the
  * search index or run any search queries
  *
- * @package   Kirby Search
  * @author    Nico Hoffmann <nico@getkirby.com>
  * @link      https://getkirby.com
  * @license   MIT

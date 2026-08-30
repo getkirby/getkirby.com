@@ -10,20 +10,6 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(ReflectableFieldMethod::class)]
 class ReflectableFieldMethodTest extends TestCase
 {
-	public function testConstruct(): void
-	{
-		$reflectable = new ReflectableFieldMethod('or');
-		$this->assertSame('or', $reflectable->method);
-		$this->assertSame(Field::class, $reflectable->class);
-	}
-
-	public function testConstructWithUnknownMethod(): void
-	{
-		$this->expectException(Exception::class);
-		$this->expectExceptionMessage('Field method "doesNotExist" not found');
-		new ReflectableFieldMethod('doesNotExist');
-	}
-
 	public function testAliases(): void
 	{
 		// aliases are resolved from the `@see` tags on the `Field` class
@@ -48,6 +34,20 @@ class ReflectableFieldMethodTest extends TestCase
 		$reflectable = new ReflectableFieldMethod('or');
 		$this->assertSame('Kirby\Content\Field', $reflectable->class());
 		$this->assertSame('Field', $reflectable->class(short: true));
+	}
+
+	public function testConstruct(): void
+	{
+		$reflectable = new ReflectableFieldMethod('or');
+		$this->assertSame('or', $reflectable->method);
+		$this->assertSame(Field::class, $reflectable->class);
+	}
+
+	public function testConstructWithUnknownMethod(): void
+	{
+		$this->expectException(Exception::class);
+		$this->expectExceptionMessage('Field method "doesNotExist" not found');
+		new ReflectableFieldMethod('doesNotExist');
 	}
 
 	public function testName(): void

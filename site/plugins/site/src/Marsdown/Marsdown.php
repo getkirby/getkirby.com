@@ -25,108 +25,6 @@ class Marsdown extends ParsedownExtra
 		$this->setBreaksEnabled(true);
 	}
 
-	protected function parseAttributes(string $input): array
-	{
-		$dom = new DomDocument();
-		$dom->loadHtml('<html ' . $input . '/>');
-		$attributes = [];
-		foreach ($dom->documentElement->attributes as $name => $attr) {
-			$attributes[$name] = $attr->value;
-		}
-		return $attributes;
-	}
-
-	protected function blockGroups(array $Line, array|null $Block = null)
-	{
-		if (preg_match('!^\((columns|tabs)…\)$!', $Line['text'], $matches)) {
-			return [
-				'group' => [
-					'type' => $matches[1],
-					'html' => null
-				]
-			];
-		}
-	}
-
-	protected function blockGroupsContinue(array $Line, array $Block)
-	{
-		if ($Block['complete'] ?? false) {
-			return;
-		}
-
-		if (preg_match('!^\(…(columns|tabs)\)$!', $Line['text'])) {
-			return [
-				...$Block,
-				'complete' => true
-			];
-		}
-
-		if (isset($Block['interrupted']) === true)  {
-        	$Block['group']['html'] .= "\n";
-        	unset($Block['interrupted']);
-        }
-
-		$Block['group']['html'] .= "\n" . $Line['body'];
-
-		return $Block;
-	}
-
-	protected function blockGroupsComplete(array $Block): array
-	{
-		return match ($Block['group']['type']) {
-			'columns' => $this->blockGroupsColumnsComplete($Block),
-			'tabs'    => $this->blockGroupsTabsComplete($Block),
-		};
-	}
-
-	protected function blockGroupsColumnsComplete(array $Block): array
-	{
-		$columns = Str::split($Block['group']['html'], '++++');
-
-		return [
-			'element' => [
-				'name' => 'div',
-				'attributes' => [
-					'class' => 'columns',
-					'style' => '--columns: 2; --gap: 3rem'
-				],
-				'rawHtml' => snippet('kirbytext/columns', [
-					'columns' => $columns
-				], true),
-			]
-		];
-	}
-
-	protected function blockGroupsTabsComplete(array $Block): array
-	{
-		preg_match_all('!=== (.*)!', $Block['group']['html'], $titles);
-		$contents = preg_split('!=== .*!', $Block['group']['html']);
-		$tabs     = array_map(
-			fn ($content, $title) => [
-				'title'   => $title,
-				'content' => kirbytext($content)
-			],
-			array_slice($contents, 1),
-			$titles[1]
-		);
-
-		$id = Str::random(3);
-
-		return [
-			'element' => [
-				'name' => 'div',
-				'attributes' => [
-					'class' => 'tabs',
-					'id'    => 'tabs-' . $id
-				],
-				'rawHtml' => snippet('kirbytext/tabs', [
-					'id'   => $id,
-					'tabs' => $tabs,
-				], true),
-			]
-		];
-	}
-
 	/**
 	 * Parse Kirby's text boxes
 	 */
@@ -156,30 +54,6 @@ class Marsdown extends ParsedownExtra
 		}
 
 		return null;
-	}
-
-	/**
-	 * Add lines to the boxes
-	 */
-	protected function blockBoxContinue(array $Line, array $Block)
-	{
-		if ($Block['complete'] ?? false) {
-			return;
-		}
-
-		if ($Line['text'] === '</' . $Block['box']['type'] . '>') {
-			$Block['complete'] = true;
-			return $Block;
-		}
-
-		if (isset($Block['interrupted'])) {
-			$Block['box']['html'] .= str_repeat("\n", $Block['interrupted']);
-			unset($Block['interrupted']);
-		}
-
-		$Block['box']['html'] .= "\n" . $Line['body'];
-
-		return $Block;
 	}
 
 	/**
@@ -223,6 +97,30 @@ class Marsdown extends ParsedownExtra
 	}
 
 	/**
+	 * Add lines to the boxes
+	 */
+	protected function blockBoxContinue(array $Line, array $Block)
+	{
+		if ($Block['complete'] ?? false) {
+			return;
+		}
+
+		if ($Line['text'] === '</' . $Block['box']['type'] . '>') {
+			$Block['complete'] = true;
+			return $Block;
+		}
+
+		if (isset($Block['interrupted'])) {
+			$Block['box']['html'] .= str_repeat("\n", $Block['interrupted']);
+			unset($Block['interrupted']);
+		}
+
+		$Block['box']['html'] .= "\n" . $Line['body'];
+
+		return $Block;
+	}
+
+	/**
 	 * An extended version of Parsedown’s codeblock handler,
 	 * offering the possibility of adding a caption (e.g. filename)
 	 * to codeblocks.
@@ -254,7 +152,7 @@ class Marsdown extends ParsedownExtra
 		$infostring = explode(' ', $infostring, 2);
 		$language   = $infostring[0];
 
-		if (sizeof($infostring) === 2) {
+		if (count($infostring) === 2) {
 			// Block with caption
 			$caption  = $infostring[1];
 			$openChar = $caption[0];
@@ -350,6 +248,97 @@ class Marsdown extends ParsedownExtra
 		}
 
 		return $Block;
+	}
+
+	protected function blockGroups(array $Line, array|null $Block = null)
+	{
+		if (preg_match('!^\((columns|tabs)…\)$!', $Line['text'], $matches)) {
+			return [
+				'group' => [
+					'type' => $matches[1],
+					'html' => null
+				]
+			];
+		}
+	}
+
+	protected function blockGroupsColumnsComplete(array $Block): array
+	{
+		$columns = Str::split($Block['group']['html'], '++++');
+
+		return [
+			'element' => [
+				'name' => 'div',
+				'attributes' => [
+					'class' => 'columns',
+					'style' => '--columns: 2; --gap: 3rem'
+				],
+				'rawHtml' => snippet('kirbytext/columns', [
+					'columns' => $columns
+				], true),
+			]
+		];
+	}
+
+	protected function blockGroupsComplete(array $Block): array
+	{
+		return match ($Block['group']['type']) {
+			'columns' => $this->blockGroupsColumnsComplete($Block),
+			'tabs'    => $this->blockGroupsTabsComplete($Block),
+		};
+	}
+
+	protected function blockGroupsContinue(array $Line, array $Block)
+	{
+		if ($Block['complete'] ?? false) {
+			return;
+		}
+
+		if (preg_match('!^\(…(columns|tabs)\)$!', $Line['text'])) {
+			return [
+				...$Block,
+				'complete' => true
+			];
+		}
+
+		if (isset($Block['interrupted']) === true) {
+			$Block['group']['html'] .= "\n";
+			unset($Block['interrupted']);
+		}
+
+		$Block['group']['html'] .= "\n" . $Line['body'];
+
+		return $Block;
+	}
+
+	protected function blockGroupsTabsComplete(array $Block): array
+	{
+		preg_match_all('!=== (.*)!', $Block['group']['html'], $titles);
+		$contents = preg_split('!=== .*!', $Block['group']['html']);
+		$tabs     = array_map(
+			fn ($content, $title) => [
+				'title'   => $title,
+				'content' => kirbytext($content)
+			],
+			array_slice($contents, 1),
+			$titles[1]
+		);
+
+		$id = Str::random(3);
+
+		return [
+			'element' => [
+				'name' => 'div',
+				'attributes' => [
+					'class' => 'tabs',
+					'id'    => 'tabs-' . $id
+				],
+				'rawHtml' => snippet('kirbytext/tabs', [
+					'id'   => $id,
+					'tabs' => $tabs,
+				], true),
+			]
+		];
 	}
 
 	protected function blockHeader($Line)
@@ -454,4 +443,14 @@ class Marsdown extends ParsedownExtra
 		];
 	}
 
+	protected function parseAttributes(string $input): array
+	{
+		$dom = new DomDocument();
+		$dom->loadHtml('<html ' . $input . '/>');
+		$attributes = [];
+		foreach ($dom->documentElement->attributes as $name => $attr) {
+			$attributes[$name] = $attr->value;
+		}
+		return $attributes;
+	}
 }

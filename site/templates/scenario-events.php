@@ -52,7 +52,7 @@ snippet('templates/features/section', [
 	'figure' => [
 		'image' => 'concert.jpg',
 		'alt'   => 'Man walking into a concert arena',
-		],
+	],
 	'features' => [
 		[
 			'title' => 'Inherently multilingual',

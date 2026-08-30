@@ -8,7 +8,6 @@ use Exception;
 /**
  * Algolia Search
  *
- * @package   Kirby Search
  * @author    Nico Hoffmann <nico@getkirby.com>
  * @link      https://getkirby.com
  * @license   MIT
@@ -45,9 +44,9 @@ class AlgoliaSearch extends Search
 	 * Sends a search query to Algolia and returns
 	 * a paginated collection of results
 	 *
-	 * @param string|null $query Search query
-	 * @param array $options Search parameters to override the default settings
-	 *                       See https://www.algolia.com/doc/api-client/methods/search/
+	 * @param $query Search query
+	 * @param $options Search parameters to override the default settings
+	 *                See https://www.algolia.com/doc/api-client/methods/search/
 	 */
 	public function query(
 		string|null $query = null,

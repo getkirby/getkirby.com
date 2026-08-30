@@ -58,7 +58,7 @@ class Type
 			if ($reflectable instanceof ReflectableClass) {
 				$alias = $type;
 				$type  = $reflectable->name(short: false);
-			} else if ($reflectable instanceof ReflectableClassMethod) {
+			} elseif ($reflectable instanceof ReflectableClassMethod) {
 				$alias = $type;
 				$type  = $reflectable->class;
 			}
@@ -74,7 +74,7 @@ class Type
 	{
 		if ($generic = static::$types[$type] ?? null) {
 			return $generic;
-		};
+		}
 
 		if (
 			(
@@ -110,8 +110,7 @@ class Type
 	public function toHtml(
 		string|null $text = null,
 		bool $linked = true
-	): string
-	{
+	): string {
 		$text ??= $this->toString();
 
 		return Html::tag('code', $text, [

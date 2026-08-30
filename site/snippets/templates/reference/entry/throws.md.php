@@ -8,14 +8,14 @@ if (!$throws = $page->reflection()->throws()) {
 }
 
 $table = markdownTable(
-    columns: [
-        'Type',
-        'Description',
-    ],
-    rows: array_map(fn ($exception) => [
-        'Type'        => $exception->types()->toMarkdown(),
-        'Description' => $exception->description() ?? '–',
-    ], [...$throws])
+	columns: [
+		'Type',
+		'Description',
+	],
+	rows: array_map(fn ($exception) => [
+		'Type'        => $exception->types()->toMarkdown(),
+		'Description' => $exception->description() ?? '–',
+	], [...$throws])
 );
 
 echo cleanUpMarkdown(<<<MARKDOWN

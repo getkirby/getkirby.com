@@ -10,6 +10,19 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(ReflectableValidator::class)]
 class ReflectableValidatorTest extends TestCase
 {
+	public function testCall(): void
+	{
+		$reflectable = new ReflectableValidator('email');
+		$this->assertSame('V::email(mixed $value): bool', $reflectable->call());
+	}
+
+	public function testClass(): void
+	{
+		$reflectable = new ReflectableValidator('email');
+		$this->assertSame('Kirby\Toolkit\V', $reflectable->class());
+		$this->assertSame('V', $reflectable->class(short: true));
+	}
+
 	public function testConstruct(): void
 	{
 		$reflectable = new ReflectableValidator('email');
@@ -23,19 +36,6 @@ class ReflectableValidatorTest extends TestCase
 		$this->expectException(Exception::class);
 		$this->expectExceptionMessage('Validator "doesNotExist" not found');
 		new ReflectableValidator('doesNotExist');
-	}
-
-	public function testCall(): void
-	{
-		$reflectable = new ReflectableValidator('email');
-		$this->assertSame('V::email(mixed $value): bool', $reflectable->call());
-	}
-
-	public function testClass(): void
-	{
-		$reflectable = new ReflectableValidator('email');
-		$this->assertSame('Kirby\Toolkit\V', $reflectable->class());
-		$this->assertSame('V', $reflectable->class(short: true));
 	}
 
 	public function testName(): void

@@ -9,15 +9,6 @@ class KosmosPage extends DefaultPage
 {
 	protected static Pages|null $subpages = null;
 
-	public function subpages(): Pages
-	{
-		if (static::$subpages) {
-			return static::$subpages;
-		}
-
-		return static::$subpages = Pages::factory($this->inventory()['children'], $this);
-	}
-
 	public function children(): Pages
 	{
 		if ($this->children instanceof Pages) {
@@ -36,7 +27,7 @@ class KosmosPage extends DefaultPage
 
 			$issues = A::map(
 				array_keys($data),
-				fn($issue) => [
+				fn ($issue) => [
 					'slug'     => $issue,
 					'parent'   => $this,
 					'url'      => $this->url() . '/' . $issue,
@@ -60,6 +51,15 @@ class KosmosPage extends DefaultPage
 		return $this->children = $this->subpages()->add(Pages::factory($issues, $this));
 	}
 
+	public function subpages(): Pages
+	{
+		if (static::$subpages) {
+			return static::$subpages;
+		}
+
+		return static::$subpages = Pages::factory($this->inventory()['children'], $this);
+	}
+
 	/**
 	 * Creates a collection of `VirtualFile` objects from array data that comes
 	 * from the Kosmos API's `apiArray()` file method
@@ -71,16 +71,16 @@ class KosmosPage extends DefaultPage
 		foreach (array_filter($files) as $file) {
 			$file = VirtualFile::factory(
 				[
-					 'filename'   => basename($file['url']),
-					 'url'        => $file['url'],
-					 'width'      => $file['width'],
-					 'height'     => $file['height'],
-					 'parent'     => $parent,
-					 'collection' => $collection,
-					 'content'    => [
-						 'isCover' => $file['cover']
-					 ]
- 				]
+					'filename'   => basename($file['url']),
+					'url'        => $file['url'],
+					'width'      => $file['width'],
+					'height'     => $file['height'],
+					'parent'     => $parent,
+					'collection' => $collection,
+					'content'    => [
+						'isCover' => $file['cover']
+					]
+				]
 			);
 
 			$collection->data[$file->id()] = $file;

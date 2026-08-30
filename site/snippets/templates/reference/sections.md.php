@@ -29,4 +29,3 @@ $html = $sections->toArray(function ($section) use ($headingLevel) {
 });
 
 echo implode(markdownBreak(), $html);
-

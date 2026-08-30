@@ -11,8 +11,7 @@ $filteredVersions = $versions->flip()->filterBy('endOfLife', 'date >=', date('Y-
 /**
  * Converts an input date (or the current time) into a timestamp
  */
-$normalizeTimestamp = function(DateTime|string|null $date = null): int
-{
+$normalizeTimestamp = function (DateTime|string|null $date = null): int {
 	if ($date instanceof DateTime) {
 		return $date->getTimestamp();
 	}
@@ -28,7 +27,7 @@ $normalizeTimestamp = function(DateTime|string|null $date = null): int
  * Returns the SVG X coordinate of a given timestamp
  * or of the current day
  */
-$calendarPosition = function(DateTime|string|null $date = null) use($normalizeTimestamp, $minDate, $maxDate): float {
+$calendarPosition = function (DateTime|string|null $date = null) use ($normalizeTimestamp, $minDate, $maxDate): float {
 	$time     = $normalizeTimestamp($date);
 	$position = max(0, min(1, ($time - $minDate->getTimestamp()) / ($maxDate->getTimestamp() - $minDate->getTimestamp())));
 
@@ -39,7 +38,7 @@ $calendarPosition = function(DateTime|string|null $date = null) use($normalizeTi
  * Returns the label text of a given timestamp
  * or of the current day
  */
-$calendarText = function(DateTime|string|null $date = null) use($normalizeTimestamp): string {
+$calendarText = function (DateTime|string|null $date = null) use ($normalizeTimestamp): string {
 	$time = $normalizeTimestamp($date);
 	return date('M j, Y', $time);
 };

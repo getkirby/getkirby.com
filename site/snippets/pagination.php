@@ -3,7 +3,7 @@
  * @var Kirby\Cms\Pagination $item
  */
 ?>
-<?php if($item->pages() > 0): ?>
+<?php if ($item->pages() > 0): ?>
 <nav class="flex items-center justify-between text-sm">
 	<?php if ($item->hasPrevPage()): ?>
 	<a href="<?= $item->prevPageURL() ?>" rel="prev">

@@ -22,18 +22,18 @@ $title = $title ? '## ' . $title : null;
 $intro = $intro ? kirbytagsToMarkdown($intro) : null;
 
 $table = markdownTable(
-    columns: [
-        'Name',
-        'Type',
-        'Default',
-        'Description',
-    ],
-    rows: array_map(fn ($parameter) => [
-        'Name'        => '`' . $parameter->name() . '`' . ($parameter->isRequired() ? ' (required)' : ''),
-        'Type'        => $parameter->types()->toMarkdown(fallback: 'mixed'),
-        'Default'     => $parameter->default() ? '`' . $parameter->default() . '`' : '–',
-        'Description' => $parameter->description() ?? '–',
-    ], [...$parameters])
+	columns: [
+		'Name',
+		'Type',
+		'Default',
+		'Description',
+	],
+	rows: array_map(fn ($parameter) => [
+		'Name'        => '`' . $parameter->name() . '`' . ($parameter->isRequired() ? ' (required)' : ''),
+		'Type'        => $parameter->types()->toMarkdown(fallback: 'mixed'),
+		'Default'     => $parameter->default() ? '`' . $parameter->default() . '`' : '–',
+		'Description' => $parameter->description() ?? '–',
+	], [...$parameters])
 );
 
 echo cleanUpMarkdown(<<<MARKDOWN
@@ -45,4 +45,3 @@ $intro
 $table
 
 MARKDOWN);
-?>

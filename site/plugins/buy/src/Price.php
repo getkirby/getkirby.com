@@ -54,9 +54,9 @@ class Price
 	 * Converts a price from EUR to the given currency
 	 * and rounds it to the nearest pretty price
 	 *
-	 * @param bool $charm Whether prices will end in 5/9 (when true)
-	 *                    or 0/5 (when false)
-	 * @param bool $adjust Whether to perform PPP adjustment to the generated price
+	 * @param $charm Whether prices will end in 5/9 (when true)
+	 *              or 0/5 (when false)
+	 * @param $adjust Whether to perform PPP adjustment to the generated price
 	 */
 	public function convert(int $price, bool $charm = true, bool $adjust = false): int
 	{
@@ -94,19 +94,32 @@ class Price
 	}
 
 	/**
-	 * Gets the team donation amount
-	 * per license in the customer currency
+	 * Gets the regular price for the product
+	 *
+	 * @param $multiplier Optional price multiplier (used for partner products)
 	 */
-	public function teamDonation(): int
+	public function regular(int $multiplier = 1): int
 	{
-		return $this->convert(option('buy.donation.teamAmount'));
+		$rawPrice = $this->product->rawPrice();
+		$adjust   = $this->product->adjustForPPP();
+
+		if ($multiplier > 1) {
+			// first use the base price without 9 ending
+			// (avoids jumps between 5 and 9 for multiplied prices)
+			$price = $multiplier * $this->convert($rawPrice, charm: false, adjust: $adjust);
+
+			// now round the final sum to the nearest pretty price
+			return $this->round($price);
+		}
+
+		return $this->convert($rawPrice, adjust: $adjust);
 	}
 
 	/**
 	 * Rounds a price to the nearest pretty price
 	 * (ending in -5 or -9)
 	 *
-	 * @param bool $charm If `true`, price will end in 5 or 9, otherwise 0 or 5
+	 * @param $charm If `true`, price will end in 5 or 9, otherwise 0 or 5
 	 */
 	public function round(float $price, bool $charm = true): int
 	{
@@ -145,28 +158,6 @@ class Price
 	}
 
 	/**
-	 * Gets the regular price for the product
-	 *
-	 * @param int $multiplier Optional price multiplier (used for partner products)
-	 */
-	public function regular(int $multiplier = 1): int
-	{
-		$rawPrice = $this->product->rawPrice();
-		$adjust   = $this->product->adjustForPPP();
-
-		if ($multiplier > 1) {
-			// first use the base price without 9 ending
-			// (avoids jumps between 5 and 9 for multiplied prices)
-			$price = $multiplier * $this->convert($rawPrice, charm: false, adjust: $adjust);
-
-			// now round the final sum to the nearest pretty price
-			return $this->round($price);
-		}
-
-		return $this->convert($rawPrice, adjust: $adjust);
-	}
-
-	/**
 	 * Gets the sale price for the product
 	 * (regular price if no sale is active)
 	 */
@@ -196,7 +187,16 @@ class Price
 		$length     = strlen((int)$this->rate);
 		$firstDigit = ((string)$this->rate)[0];
 
-		return pow(10, $firstDigit >= 5 ? $length : $length - 1);
+		return 10 ** ($firstDigit >= 5 ? $length : $length - 1);
+	}
+
+	/**
+	 * Gets the team donation amount
+	 * per license in the customer currency
+	 */
+	public function teamDonation(): int
+	{
+		return $this->convert(option('buy.donation.teamAmount'));
 	}
 
 	/**

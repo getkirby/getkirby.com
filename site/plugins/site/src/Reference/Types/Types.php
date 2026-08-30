@@ -4,8 +4,6 @@ namespace Kirby\Reference\Types;
 
 use Kirby\Cms\Html;
 use Kirby\Reference\Reflectable\Reflectable;
-use Kirby\Reference\Reflectable\ReflectableClass;
-use Kirby\Reference\Reflectable\ReflectableClassMethod;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\Str;
 use PHPStan\PhpDocParser\Ast\Type\TypeNode;
@@ -62,7 +60,7 @@ class Types
 
 		if ($types instanceof ReflectionUnionType) {
 			$types = $types->getTypes();
-		} else if ($types instanceof UnionTypeNode) {
+		} elseif ($types instanceof UnionTypeNode) {
 			$types = $types->types;
 		}
 

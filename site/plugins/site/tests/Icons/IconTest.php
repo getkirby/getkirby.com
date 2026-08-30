@@ -38,6 +38,12 @@ class IconTest extends TestCase
 		$this->assertStringStartsWith('<svg xmlns="http://www.w3.org/2000/svg" data-type="bars" viewBox="0 0 24 24" aria-hidden="true"><path d="', $icon->render());
 	}
 
+	public function testRenderInvalidName(): void
+	{
+		$icon = new Icon('foo');
+		$this->assertNull($icon->render());
+	}
+
 	public function testRenderWithTitle(): void
 	{
 		// no title in SVG, provide title
@@ -51,11 +57,5 @@ class IconTest extends TestCase
 		// title in SVG, provide different title
 		$icon = new Icon('test-with-title', 'The CMS');
 		$this->assertMatchesRegularExpression('/<svg width="14" height="16" viewBox="0 0 36 42" role="img" aria-labelledby="([a-z0-9-]+)"><title id="\1">The CMS<\/title>    <path d="/', $icon->render());
-	}
-
-	public function testRenderInvalidName(): void
-	{
-		$icon = new Icon('foo');
-		$this->assertNull($icon->render());
 	}
 }

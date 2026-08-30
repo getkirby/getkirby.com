@@ -18,8 +18,59 @@ class PartnersSignupPage extends Page
 			'reviewRef'  => $this->validateDownloadLink($data['reviewRef']),
 		];
 
-		return array_filter($errors, fn($error) => $error !== true);
+		return array_filter($errors, fn ($error) => $error !== true);
 	}
+
+	public function validateBusinessType(string $businessType): string|bool
+	{
+		if (is_numeric($businessType) || preg_match('/^[0-9_\-@#$]/', $businessType)) {
+			return 'Please provide a valid business name';
+		}
+
+		return true;
+	}
+
+	public function validateDownloadLink(string|null $link): string|bool
+	{
+		if ($link && $link !== '' && V::url($link) === false) {
+			return 'Please provide a valid download URL or leave the field empty';
+		}
+
+		return true;
+	}
+
+	public function validateEmail(string $email): string|bool
+	{
+		if (V::email($email) === false || Str::contains($email, 'example')) {
+			return 'Please provide a valid email';
+		}
+
+		return true;
+	}
+
+	public function validatePlan(string $plan): string|bool
+	{
+		if (in_array($plan, ['regular', 'certified']) === false) {
+			return 'Please provide a valid plan';
+		}
+
+		return true;
+	}
+
+	public function validateProjects(int $projects, string $plan): string|bool
+	{
+		$rules = [
+			'regular'   => 2,
+			'certified' => 4,
+		];
+
+		if ($projects < $rules[$plan]) {
+			return 'The number of projects does not match the minimum number of required projects for the selected plan';
+		}
+
+		return true;
+	}
+
 	/**
 	 * @throws Exception
 	 */
@@ -58,56 +109,6 @@ class PartnersSignupPage extends Page
 
 		if (Str::contains($website, 'example')) {
 			return 'Please provide a valid website name';
-		}
-
-		return true;
-	}
-
-	public function validateEmail(string $email): string|bool
-	{
-		if (V::email($email) === false || Str::contains($email, 'example')) {
-			return 'Please provide a valid email';
-		}
-
-		return true;
-	}
-
-	public function validateBusinessType(string $businessType): string|bool
-	{
-		if (is_numeric($businessType) || preg_match('/^[0-9_\-@#$]/', $businessType)) {
-			return 'Please provide a valid business name';
-		}
-
-		return true;
-	}
-
-	public function validatePlan(string $plan): string|bool
-	{
-		if (in_array($plan, ['regular', 'certified']) === false) {
-			return 'Please provide a valid plan';
-		}
-
-		return true;
-	}
-
-	public function validateDownloadLink(?string $link): string|bool
-	{
-		if ($link && $link !== '' && V::url($link) === false) {
-			return 'Please provide a valid download URL or leave the field empty';
-		}
-
-		return true;
-	}
-
-	public function validateProjects(int $projects, string $plan): string|bool
-	{
-		$rules = [
-			'regular'   => 2,
-			'certified' => 4,
-		];
-
-		if ($projects < $rules[$plan]) {
-			return 'The number of projects does not match the minimum number of required projects for the selected plan';
 		}
 
 		return true;

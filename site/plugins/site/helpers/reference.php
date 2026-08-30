@@ -7,7 +7,7 @@ use Kirby\Content\Field;
  */
 function csv(string $file): array
 {
-	$handle = fopen($file, "r");
+	$handle = fopen($file, 'r');
 	$lines  = [];
 
 	if ($handle === false) {

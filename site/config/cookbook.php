@@ -13,11 +13,11 @@ return [
 		'i18n'                    => ['pattern' => 'lagoon'],
 		'integrations'            => ['pattern' => 'lava'],
 		'navigation'              => ['pattern' => 'pinkblue'],
-		'panel'                   => ['pattern' => 'blobs'], //
-		'performance'             => ['pattern' => 'sea'], //
-		'php'                     => ['pattern' => 'sky'], //
-		'plugins'                 => ['pattern' => 'viscera'], //
-		'security'                => ['pattern' => 'turmoil'], //
-		'mixed'                   => ['pattern' => 'rainforest'], //
+		'panel'                   => ['pattern' => 'blobs'],
+		'performance'             => ['pattern' => 'sea'],
+		'php'                     => ['pattern' => 'sky'],
+		'plugins'                 => ['pattern' => 'viscera'],
+		'security'                => ['pattern' => 'turmoil'],
+		'mixed'                   => ['pattern' => 'rainforest'],
 	],
 ];

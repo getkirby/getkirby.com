@@ -9,7 +9,6 @@ use Kirby\Image\Dimensions;
  * A file that comes from an external API and
  * is virtually mirrored through the CDN
  *
- * @package   Kirby Cdn
  * @author    Sonja Broda <sonja@getkirby.com>
  * @link      https://getkirby.com
  * @copyright Bastian Allgeier

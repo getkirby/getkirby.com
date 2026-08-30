@@ -47,7 +47,7 @@ snippet('templates/features/section', [
 	'figure' => [
 		'image' => 'graduates.png',
 		'alt'   => 'A photo of university graduates',
-		],
+	],
 	'features' => [
 		[
 			'title' => 'Global reach',

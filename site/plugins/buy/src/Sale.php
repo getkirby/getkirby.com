@@ -7,9 +7,10 @@ use DateTimeZone;
 
 class Sale
 {
-	public readonly int $start;
-	public readonly int $end;
 	public readonly int $discount;
+	public readonly int $end;
+	public readonly int $start;
+
 	protected static int $time;
 
 	public function __construct()

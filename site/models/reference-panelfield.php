@@ -25,22 +25,6 @@ class ReferencePanelFieldPage extends ReferenceArticlePage
 		return parent::read()->or('docs/guide/blueprints/fields');
 	}
 
-	/**
-	 * Returns the table of contents incl. the heading of the
-	 * options table, which is rendered by the template and
-	 * therefore isn't part of the text field
-	 */
-	public function toc(): Collection
-	{
-		return $this->text()->toToc('h2')->prepend(
-			'#field-options',
-			new Obj([
-				'id'   => '#field-options',
-				'text' => 'Field options'
-			])
-		);
-	}
-
 	public function source(): string|null
 	{
 		$root  = App::instance()->root('kirby');
@@ -57,5 +41,21 @@ class ReferencePanelFieldPage extends ReferenceArticlePage
 		}
 
 		return null;
+	}
+
+	/**
+	 * Returns the table of contents incl. the heading of the
+	 * options table, which is rendered by the template and
+	 * therefore isn't part of the text field
+	 */
+	public function toc(): Collection
+	{
+		return $this->text()->toToc('h2')->prepend(
+			'#field-options',
+			new Obj([
+				'id'   => '#field-options',
+				'text' => 'Field options'
+			])
+		);
 	}
 }

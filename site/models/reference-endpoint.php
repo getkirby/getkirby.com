@@ -4,11 +4,6 @@ use Kirby\Content\Field;
 
 class ReferenceEndpointPage extends ReferenceArticlePage
 {
-	public function request(): string
-	{
-		return $this->info() . ': ' . $this->title();
-	}
-
 	public function metadata(): array
 	{
 		return array_replace_recursive(parent::metadata(), [
@@ -17,6 +12,11 @@ class ReferenceEndpointPage extends ReferenceArticlePage
 				'lead'  => 'Reference / API'
 			]
 		]);
+	}
+
+	public function request(): string
+	{
+		return $this->info() . ': ' . $this->title();
 	}
 
 	public function title(): Field

@@ -9,19 +9,9 @@ class HomeStoryPage extends DefaultPage
 		return $this->images()->findBy('name', 'panel-dark');
 	}
 
-	public function storyImageLight(): File
-	{
-		return $this->images()->findBy('name', 'panel');
-	}
-
 	public function storyImageDarkSrc(): string
 	{
 		return $this->storyImageDark()->thumb($this->storyImageSrcSize())->url();
-	}
-
-	public function storyImageLightSrc(): string
-	{
-		return $this->storyImageLight()->thumb($this->storyImageSrcSize())->url();
 	}
 
 	public function storyImageDarkSrcset(): string
@@ -29,14 +19,19 @@ class HomeStoryPage extends DefaultPage
 		return $this->storyImageDark()->srcset($this->storyImageSrcsetSizes());
 	}
 
+	public function storyImageLight(): File
+	{
+		return $this->images()->findBy('name', 'panel');
+	}
+
+	public function storyImageLightSrc(): string
+	{
+		return $this->storyImageLight()->thumb($this->storyImageSrcSize())->url();
+	}
+
 	public function storyImageLightSrcset(): string
 	{
 		return $this->storyImageLight()->srcset($this->storyImageSrcsetSizes());
-	}
-
-	public function storyImageSrcSize(): array
-	{
-		return ['width' => 1520];
 	}
 
 	public function storyImageSrcsetSizes(): array
@@ -52,5 +47,10 @@ class HomeStoryPage extends DefaultPage
 			2400,
 			3040
 		];
+	}
+
+	public function storyImageSrcSize(): array
+	{
+		return ['width' => 1520];
 	}
 }

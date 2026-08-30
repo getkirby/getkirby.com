@@ -76,7 +76,7 @@ class FileSystem
 			}
 
 			// truncate path if needed
-			while ($depth < sizeof($path)) {
+			while ($depth < count($path)) {
 				array_pop($path);
 			}
 
@@ -98,22 +98,6 @@ class FileSystem
 
 		// return
 		return $result;
-	}
-
-	protected static function renderLabel(
-		string $name,
-		string|null $type = null
-	): string {
-		$html = '<span role="presentation" class="filesystem-label" data-type="' . $type . '">';
-
-		if ($type !== null) {
-			$html .= icon($type);
-		}
-
-		$html .= $name;
-		$html .= '</span>';
-
-		return $html;
 	}
 
 	protected static function renderBlock(
@@ -158,6 +142,21 @@ class FileSystem
 
 	}
 
+	protected static function renderLabel(
+		string $name,
+		string|null $type = null
+	): string {
+		$html = '<span role="presentation" class="filesystem-label" data-type="' . $type . '">';
+
+		if ($type !== null) {
+			$html .= icon($type);
+		}
+
+		$html .= $name;
+		$html .= '</span>';
+
+		return $html;
+	}
 }
 
 // ```filesystem

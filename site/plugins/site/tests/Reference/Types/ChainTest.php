@@ -39,13 +39,6 @@ class ChainTest extends TestCase
 		$this->assertSame('<a class="type-link" href="/docs/reference/templates/helpers/css"><code class="type type-method">css()</code></a>', $html);
 	}
 
-	public function toHtmlNotLinked(): void
-	{
-		$chain = new Chain('$kirby->user()');
-		$html  = $chain->toHtml();
-		$this->assertSame('<code class="type type-method">$kirby->user()</code>', $html);
-	}
-
 	public function testToHtmlCustomText(): void
 	{
 		$chain = new Chain('Kirby\Cms\ModelWithContent::id()');
@@ -116,5 +109,12 @@ class ChainTest extends TestCase
 		$chain  = new Chain('Helper::css()');
 		$string = $chain->toString();
 		$this->assertSame('css()', $string);
+	}
+
+	public function toHtmlNotLinked(): void
+	{
+		$chain = new Chain('$kirby->user()');
+		$html  = $chain->toHtml();
+		$this->assertSame('<code class="type type-method">$kirby->user()</code>', $html);
 	}
 }

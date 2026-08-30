@@ -2,8 +2,10 @@
 /**
  * @var array $tags
  */
+
+use Kirby\Http\Uri;
+
 ?>
-<?php use Kirby\Http\Uri; ?>
 <nav aria-label="Cookbook menu">
 	<div class="sidebar cookbook-sidebar sticky" style="--top: var(--spacing-6)">
 		<header class="sidebar-header mb-12">
@@ -23,7 +25,7 @@
 				>
 					<option disabled selected>Select a tag …</option>
 						<?php foreach ($tags as $tag): ?>
-						<option value="<?= page('docs/quicktips')->url(). '/tags/' . Str::slug($tag) ?>">
+						<option value="<?= page('docs/quicktips')->url() . '/tags/' . Str::slug($tag) ?>">
 							<?= Str::ucFirst($tag) ?>
 						</option>
 						<?php endforeach ?>
@@ -46,7 +48,7 @@
 			<li><hr class="hr"></li>
 			<?php foreach ($tags as $tag): ?>
 			<li>
-				<a aria-label="<?= $tag ?> recipes" href="<?= page('docs/quicktips')->url(). '/tags/' . Str::slug($tag) ?>"<?= ariaCurrent($tag === Uri::current()->path()->last()) ?>>
+				<a aria-label="<?= $tag ?> recipes" href="<?= page('docs/quicktips')->url() . '/tags/' . Str::slug($tag) ?>"<?= ariaCurrent($tag === Uri::current()->path()->last()) ?>>
 					 <?= Str::ucFirst($tag) ?>
 				</a>
 			</li>

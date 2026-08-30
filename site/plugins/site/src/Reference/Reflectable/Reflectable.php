@@ -110,22 +110,6 @@ abstract class Reflectable
 	}
 
 	/**
-	 * Returns the summary/description from the doc block
-	 */
-	public function summary(): string|null
-	{
-		$node = $this->doc()->getTextNodes()[0] ?? null;
-
-		if ($node instanceof PhpDocTextNode) {
-			$text = explode(PHP_EOL . PHP_EOL, $node->text)[0];
-			$text = str_replace(PHP_EOL, ' ', $text);
-			return trim($text);
-		}
-
-		return null;
-	}
-
-	/**
 	 * Returns the URL to the source code on GitHub
 	 * incl. line number if available
 	 */
@@ -155,6 +139,22 @@ abstract class Reflectable
 
 	protected function sourcePath(): string|null
 	{
+		return null;
+	}
+
+	/**
+	 * Returns the summary/description from the doc block
+	 */
+	public function summary(): string|null
+	{
+		$node = $this->doc()->getTextNodes()[0] ?? null;
+
+		if ($node instanceof PhpDocTextNode) {
+			$text = explode(PHP_EOL . PHP_EOL, $node->text)[0];
+			$text = str_replace(PHP_EOL, ' ', $text);
+			return trim($text);
+		}
+
 		return null;
 	}
 

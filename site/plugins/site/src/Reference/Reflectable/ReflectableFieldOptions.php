@@ -25,6 +25,39 @@ class ReflectableFieldOptions extends Reflectable
 		$this->reflection = new ReflectionClass($class);
 	}
 
+	/**
+	 * Returns the effective default of an option
+	 */
+	protected static function default(
+		ReflectionClass $reflection,
+		string $option,
+		array|null $probes = null
+	): string|null {
+		if ($probes === null || $reflection->hasMethod($option) === false) {
+			return null;
+		}
+
+		$method = $reflection->getMethod($option);
+
+		try {
+			$a = $method->invoke($probes[0]);
+			$b = $method->invoke($probes[1]);
+		} catch (Throwable) {
+			// some getters rely on a model or other state
+			// that a bare instance doesn't have
+			return null;
+		}
+
+		// the getter derives its value from the field itself
+		// (e.g. `label` falls back to a label built from the
+		// name), so there is no static default to document
+		if ($a !== $b) {
+			return null;
+		}
+
+		return Parameter::formatDefault($a);
+	}
+
 	public static function factory(string $name): static
 	{
 		$class = App::instance()->core()->fields()[$name] ?? null;
@@ -103,39 +136,6 @@ class ReflectableFieldOptions extends Reflectable
 			description: $property?->summary(),
 			prefix:      ''
 		);
-	}
-
-	/**
-	 * Returns the effective default of an option
-	 */
-	protected static function default(
-		ReflectionClass $reflection,
-		string $option,
-		array|null $probes = null
-	): string|null {
-		if ($probes === null || $reflection->hasMethod($option) === false) {
-			return null;
-		}
-
-		$method = $reflection->getMethod($option);
-
-		try {
-			$a = $method->invoke($probes[0]);
-			$b = $method->invoke($probes[1]);
-		} catch (Throwable) {
-			// some getters rely on a model or other state
-			// that a bare instance doesn't have
-			return null;
-		}
-
-		// the getter derives its value from the field itself
-		// (e.g. `label` falls back to a label built from the
-		// name), so there is no static default to document
-		if ($a !== $b) {
-			return null;
-		}
-
-		return Parameter::formatDefault($a);
 	}
 
 	public function parameters(): Parameters

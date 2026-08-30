@@ -7,11 +7,11 @@
 
 <div class="prose">
 	<h2 id="preview"><a href="#preview">Preview</a></h2>
-	<?php if($image = $page->image()): ?>
+	<?php if ($image = $page->image()): ?>
 		<?= kirbytag('image', $image->filename()) ?>
 	<?php endif ?>
 
-	<?php if($page->slug() !== 'table'): ?>
+	<?php if ($page->slug() !== 'table'): ?>
 
 	<?= $page->text()->kt() ?>
 

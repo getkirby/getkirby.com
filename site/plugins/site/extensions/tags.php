@@ -161,7 +161,7 @@ $tags['kirby-version'] = [
 		'offset'
 	],
 	'html' => function ($tag) {
-		list($major, $minor, $patch) = explode('.', App::version());
+		[$major, $minor, $patch] = explode('.', App::version());
 
 		// optional relative offsets for major-only versions
 		if ($tag->value() === 'major') {
@@ -234,13 +234,13 @@ $tags['quote'] = [
 
 		if ($author = $tag->author()) {
 			if ($link = $tag->link()) {
-				$author = '<a href="' . $link .'" class="link">' . $author . '</a>';
+				$author = '<a href="' . $link . '" class="link">' . $author . '</a>';
 			}
 
 			$html .= '<footer>– ' . $author . '</footer>';
 		}
 
-		return $html. '</blockquote>';
+		return $html . '</blockquote>';
 	}
 ];
 

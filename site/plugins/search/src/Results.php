@@ -10,7 +10,6 @@ use Kirby\Toolkit\Obj;
 /**
  * Search results
  *
- * @package   Kirby Search
  * @author    Nico Hoffmann <nico@getkirby.com>
  * @link      https://getkirby.com
  * @license   MIT

@@ -118,7 +118,7 @@
 			}
 
 			if (this.$entries) {
-				const entries = this.$entries.querySelector(`li[data-id="<?= ($entry ??$page)->id() ?>"]`);
+				const entries = this.$entries.querySelector(`li[data-id="<?= ($entry ?? $page)->id() ?>"]`);
 				if (entries) {
 					data.entries = entries.offsetTop - this.$entries.offsetTop;
 				}

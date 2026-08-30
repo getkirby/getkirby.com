@@ -1,6 +1,5 @@
 <?php
 
-use Kirby\Cms\Page;
 use Kirby\Cms\Pages;
 use Kirby\Content\Field;
 use Kirby\Reference\Reflectable\ReflectableClass;
@@ -126,6 +125,22 @@ class ReferenceClassPage extends ReferenceSectionPage
 		return $this->reflection()->name(short: $short);
 	}
 
+	public function reflection(): ReflectableClass
+	{
+		if ($this->reflection !== null) {
+			return $this->reflection;
+		}
+
+		// get class name as defined in content file
+		$class = $this->class()->value();
+
+		if ($class === null) {
+			throw new Exception('Content file of "' . $this->id() . '" needs to define a "class" field');
+		}
+
+		return $this->reflection = new ReflectableClass($class);
+	}
+
 	public function searchbyline(): Field
 	{
 		return parent::searchbyline()->value(
@@ -150,21 +165,5 @@ class ReferenceClassPage extends ReferenceSectionPage
 		}
 
 		return parent::title()->value($name);
-	}
-
-	public function reflection(): ReflectableClass
-	{
-		if ($this->reflection !== null) {
-			return $this->reflection;
-		}
-
-		// get class name as defined in content file
-		$class = $this->class()->value();
-
-		if ($class === null) {
-			throw new Exception('Content file of "' . $this->id() . '" needs to define a "class" field');
-		}
-
-		return $this->reflection = new ReflectableClass($class);
 	}
 }

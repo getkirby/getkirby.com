@@ -77,8 +77,8 @@ class ReferenceClassMethodPage extends ReferenceArticlePage
 	 * class that are not already part
 	 * of the methods collection
 	 *
-	 * @param string $source class name that is proxied
-	 * @param \Kirby\Cms\Pages $methods existing methods collection
+	 * @param $source class name that is proxied
+	 * @param $methods existing methods collection
 	 */
 	public static function proxied(string $source, Pages $methods): Pages
 	{
@@ -95,12 +95,6 @@ class ReferenceClassMethodPage extends ReferenceArticlePage
 		return new Pages();
 	}
 
-	public function title(): Field
-	{
-		$name = $this->reflection()->name();
-		return parent::title()->value($name . '()');
-	}
-
 	public function read(): Field
 	{
 		// use content field from original class method as fallback
@@ -114,5 +108,11 @@ class ReferenceClassMethodPage extends ReferenceArticlePage
 			classalias: $this->parent()->content()->get('name')->value(),
 			method:     $this->name()
 		);
+	}
+
+	public function title(): Field
+	{
+		$name = $this->reflection()->name();
+		return parent::title()->value($name . '()');
 	}
 }

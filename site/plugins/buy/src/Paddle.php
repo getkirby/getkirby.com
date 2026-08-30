@@ -358,7 +358,7 @@ class Paddle
 	/**
 	 * Generates a custom checkout link and returns the checkout URL
 	 *
-	 * @throws \Exception On request errors or Paddle API errors
+	 * @throws Exception On request errors or Paddle API errors
 	 */
 	public static function checkout(string $product, array $payload = []): string
 	{
@@ -369,7 +369,7 @@ class Paddle
 			'expires'           => date('Y-m-d', strtotime('+1 day')),
 			'quantity_variable' => false,
 			'quantity'          => 1,
-			'discountable'      => (new Sale)->isActive() ? 0 : 1,
+			'discountable'      => (new Sale())->isActive() ? 0 : 1,
 			...$payload
 		];
 
@@ -390,7 +390,7 @@ class Paddle
 	 *
 	 * @param 'GET'|'POST' $method HTTP method
 	 *
-	 * @throws \Exception On request errors or Paddle API errors
+	 * @throws Exception On request errors or Paddle API errors
 	 */
 	public static function request(
 		string $endpoint,
@@ -420,7 +420,7 @@ class Paddle
 	 * Determines the country, currency and conversion rate information
 	 * for the visitor via the Paddle price API
 	 *
-	 * @param string|null $country Override for a country code
+	 * @param $country Override for a country code
 	 */
 	public static function visitor(string|null $country = null): Visitor
 	{

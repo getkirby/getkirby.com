@@ -121,4 +121,3 @@ class Icon
 		return implode('', $svg);
 	}
 }
-

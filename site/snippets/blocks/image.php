@@ -3,8 +3,6 @@
  * @var Kirby\Cms\Block $block
  */
 
-use Kirby\Cms\Block;
-
 $alt  = $block->alt();
 $url  = $block->url()->esc();
 $link = $block->link();

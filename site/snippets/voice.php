@@ -10,7 +10,7 @@
 	<footer>
 		<a href="<?= $voice->website() ?>">
 			<figure class="flex items-center">
-				<?php if($image = $voice->image()): ?>
+				<?php if ($image = $voice->image()): ?>
 				<div class="flex-shrink-0 mr-3" style="width: var(--spacing-12); --aspect-ratio: 1/1">
 					<?= img($image, [
 						'alt' => 'Photo of ' . $voice->title(),

@@ -22,6 +22,7 @@ use ReflectionFunctionAbstract;
 class Context
 {
 	public static array $cache = [];
+
 	public array $types = [];
 
 	public function __construct(
@@ -102,6 +103,33 @@ class Context
 	}
 
 	/**
+	 * Iterate though parent classes and traits
+	 * using generics to build a complete template => type map
+	 */
+	public function resolveClass(array $payload = []): array
+	{
+		$doc = Doc::factory($this->class);
+
+		// add all types from the class'/trait's docblock
+		$this->addTemplates($doc);
+
+		// inject already resolved types
+		$this->addPayload($payload);
+
+		// recursively resolve all parent classes
+		foreach ($doc->getExtendsTagValues() as $extends) {
+			$this->resolveParent($extends->type);
+		}
+
+		// recursively resolve all used traits
+		foreach ($doc->getUsesTagValues() as $use) {
+			$this->resolveParent($use->type);
+		}
+
+		return $this->types;
+	}
+
+	/**
 	 * Resolve the templates from a function's docblock by
 	 * mapping param and return tags to their native PHP type hints
 	 */
@@ -150,33 +178,6 @@ class Context
 				}
 			}
 		}
-	}
-
-	/**
-	 * Iterate though parent classes and traits
-	 * using generics to build a complete template => type map
-	 */
-	public function resolveClass(array $payload = []): array
-	{
-		$doc = Doc::factory($this->class);
-
-		// add all types from the class'/trait's docblock
-		$this->addTemplates($doc);
-
-		// inject already resolved types
-		$this->addPayload($payload);
-
-		// recursively resolve all parent classes
-		foreach ($doc->getExtendsTagValues() as $extends) {
-			$this->resolveParent($extends->type);
-		}
-
-		// recursively resolve all used traits
-		foreach ($doc->getUsesTagValues() as $use) {
-			$this->resolveParent($use->type);
-		}
-
-		return $this->types;
 	}
 
 	/**
