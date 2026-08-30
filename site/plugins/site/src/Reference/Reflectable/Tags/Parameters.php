@@ -30,7 +30,12 @@ class Parameters extends Iterator
 
 		// Collect all parameters from the doc block and add them
 		// if they haven't been added as native parameters yet
-		foreach ($reflectable->doc()->getParamTagValues() as $doc) {
+		$docs = [
+			...$reflectable->doc()->getParamTagValues(),
+			...$reflectable->doc()->getTypelessParamTagValues()
+		];
+
+		foreach ($docs as $doc) {
 			$name                = ltrim($doc?->parameterName, '$');
 			$parameters[$name] ??= Parameter::factory(
 				doc:     $doc,

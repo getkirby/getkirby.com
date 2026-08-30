@@ -5,6 +5,7 @@ namespace Kirby\Reference\Reflectable\Tags;
 use Kirby\Reference\Reflectable\Reflectable;
 use Kirby\Reference\Types\Types;
 use PHPStan\PhpDocParser\Ast\PhpDoc\ParamTagValueNode;
+use PHPStan\PhpDocParser\Ast\PhpDoc\TypelessParamTagValueNode;
 use ReflectionParameter;
 
 /**
@@ -42,12 +43,14 @@ class Parameter
 
 	public static function factory(
 		ReflectionParameter|null $parameter = null,
-		ParamTagValueNode|null $doc = null,
+		ParamTagValueNode|TypelessParamTagValueNode|null $doc = null,
 		Reflectable|null $context = null
 	): static {
 		$name    = $parameter?->getName();
 		$name  ??= ltrim($doc?->parameterName, '$');
-		$types   = $doc?->type;
+		// a typeless `@param $name Description` carries no type,
+		// so the native type hint is used instead
+		$types   = $doc instanceof ParamTagValueNode ? $doc->type : null;
 		$types ??= $parameter?->getType();
 		$types   = Types::factory($types, $context);
 

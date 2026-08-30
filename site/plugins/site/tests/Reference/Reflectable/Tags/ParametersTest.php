@@ -43,6 +43,17 @@ class ParametersTest extends TestCase
 		$this->assertSame('mixed $a', $parameters->toString());
 		$this->assertTrue($parameters->hasDescriptions());
 
+		// a typeless `@param $name Description` keeps its description
+		// and falls back to the native type hint
+		$reflectable = new ReflectableFunction('parametersTypeless');
+		$parameters  = Parameters::factory($reflectable);
+		$this->assertInstanceOf(Parameters::class, $parameters);
+		$this->assertSame(2, $parameters->count());
+		$this->assertSame('string $a, int ...$rest', $parameters->toString());
+		$this->assertTrue($parameters->hasDescriptions());
+		$this->assertSame('Something', $parameters->data[0]->description());
+		$this->assertSame('The rest', $parameters->data[1]->description());
+
 		$reflectable = new ReflectableFunction('parametersVariadic');
 		$parameters  = Parameters::factory($reflectable);
 		$this->assertInstanceOf(Parameters::class, $parameters);

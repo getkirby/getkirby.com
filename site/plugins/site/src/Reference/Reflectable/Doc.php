@@ -9,6 +9,7 @@ use PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocNode;
 use PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagNode;
 use PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTextNode;
 use PHPStan\PhpDocParser\Ast\PhpDoc\ReturnTagValueNode;
+use PHPStan\PhpDocParser\Ast\PhpDoc\TypelessParamTagValueNode;
 use PHPStan\PhpDocParser\Lexer\Lexer;
 use PHPStan\PhpDocParser\Parser\ConstExprParser;
 use PHPStan\PhpDocParser\Parser\PhpDocParser;
@@ -23,12 +24,16 @@ use Throwable;
  */
 class Doc extends PhpDocNode
 {
-	public function getParamNode(string $name): ParamTagValueNode|null
-	{
+	public function getParamNode(
+		string $name
+	): ParamTagValueNode|TypelessParamTagValueNode|null {
 		// PHPStan uses names with a $ prefix
 		// while reflection gives us the name without it
 		$name   = '$' . strtolower($name);
-		$params = $this->getParamTagValues();
+		$params = [
+			...$this->getParamTagValues(),
+			...$this->getTypelessParamTagValues()
+		];
 
 		return A::find(
 			$params,

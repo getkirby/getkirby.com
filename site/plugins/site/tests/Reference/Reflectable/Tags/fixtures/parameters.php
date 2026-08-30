@@ -18,6 +18,14 @@ function parametersWithDescriptions(
 ) {
 }
 
+/**
+ * @param $a Something
+ * @param ...$rest The rest
+ */
+function parametersTypeless(string $a, int ...$rest)
+{
+}
+
 function parametersVariadic(...$args)
 {
 }
