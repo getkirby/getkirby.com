@@ -8,7 +8,7 @@ class RevenueLimit
 	 * Returns the formatted approximate revenue limit,
 	 * optionally in the user's currency
 	 *
-	 * @param bool $verbose Whether to use long suffixes
+	 * @param $verbose Whether to use long suffixes
 	 */
 	public static function approximation(Visitor|null $visitor = null, bool $verbose = false): string
 	{
@@ -28,18 +28,10 @@ class RevenueLimit
 	}
 
 	/**
-	 * Returns the raw Euro value
-	 */
-	public static function value(): int
-	{
-		return option('buy.revenueLimit');
-	}
-
-	/**
 	 * Formats a number as approximate indicator of magnitude
 	 *
-	 * @param float $amount Number to format
-	 * @param bool $verbose Whether to use long suffixes
+	 * @param $amount Number to format
+	 * @param $verbose Whether to use long suffixes
 	 */
 	protected static function formatMagnitude(float $amount, bool $verbose = false): string
 	{
@@ -61,5 +53,13 @@ class RevenueLimit
 		$amount = round($amount, -$digits + 2);
 
 		return $amount . $suffix;
+	}
+
+	/**
+	 * Returns the raw Euro value
+	 */
+	public static function value(): int
+	{
+		return option('buy.revenueLimit');
 	}
 }

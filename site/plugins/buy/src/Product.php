@@ -114,5 +114,4 @@ enum Product: string
 	{
 		return $this->value;
 	}
-
 }

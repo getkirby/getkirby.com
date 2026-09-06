@@ -21,14 +21,34 @@ class Visitor
 	}
 
 	/**
+	 * Returns the Paddle currency conversion fee for the current currency
+	 */
+	public function conversionFee(): float
+	{
+		if ($this->currency() === 'EUR') {
+			return 0;
+		}
+
+		return Paddle::CONVERSION_FEES[$this->currency()] ?? Paddle::CONVERSION_FEES['...'];
+	}
+
+	/**
+	 * Returns the user's two-character ISO country code if available
+	 */
+	public function country(): string|null
+	{
+		return $this->country;
+	}
+
+	/**
 	 * Creates a new instance (with validation)
 	 *
-	 * @param string $currency Currency code
-	 * @param float $rate Currency conversion rate from EUR
-	 * @param float|null $vatRate VAT rate for the country on top of the net price if available
-	 * @param string|null $country Two-character ISO country code if available
-	 * @param bool $countryIsDetected Whether the country code was detected from visitor IP address
-	 * @param string|null $error Error message if an error occurred during currency detection
+	 * @param $currency Currency code
+	 * @param $rate Currency conversion rate from EUR
+	 * @param $vatRate VAT rate for the country on top of the net price if available
+	 * @param $country Two-character ISO country code if available
+	 * @param $countryIsDetected Whether the country code was detected from visitor IP address
+	 * @param $error Error message if an error occurred during currency detection
 	 */
 	public static function create(
 		string $currency,
@@ -87,26 +107,6 @@ class Visitor
 			rate: 1.0,
 			error: $error
 		);
-	}
-
-	/**
-	 * Returns the Paddle currency conversion fee for the current currency
-	 */
-	public function conversionFee(): float
-	{
-		if ($this->currency() === 'EUR') {
-			return 0;
-		}
-
-		return Paddle::CONVERSION_FEES[$this->currency()] ?? Paddle::CONVERSION_FEES['...'];
-	}
-
-	/**
-	 * Returns the user's two-character ISO country code if available
-	 */
-	public function country(): string|null
-	{
-		return $this->country;
 	}
 
 	/**
@@ -226,7 +226,7 @@ class Visitor
 	 * Returns the formatted approximate revenue limit
 	 * in the user's currency
 	 *
-	 * @param bool $verbose Whether to use long suffixes
+	 * @param $verbose Whether to use long suffixes
 	 */
 	public function revenueLimit(bool $verbose = false): string
 	{
