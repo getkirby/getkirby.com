@@ -1,0 +1,22 @@
+Title: EULA 2026-09-08: Summary of changes
+
+----
+
+Intro:
+
+With this EULA update, we have made changes to the handling of refunds.
+
+In particular, we have changed the following:
+
+----
+
+Text:
+
+## Your rights
+
+- We have extended the explanations on refunds for licenses purchased by consumers (right of withdrawal).
+- Note that the right of withdrawal only applies to consumers (purchases for purposes that can predominantly be attributed neither to your commercial nor your self-employed professional activity).
+
+## Clarifications
+
+- We have clarified that Kirby can be evaluated before purchase.
