@@ -17,6 +17,7 @@ return [
 		]
 	],
 	'thumbs'    => [
+		'driver' => 'imagick',
 		// 'bin' => '/usr/local/bin/convert'
 	],
 	'hub'       => [
