@@ -1,0 +1,106 @@
+
+Title: Do you know moinframe?
+
+----
+
+Category: Interview
+
+----
+
+Intro: Few people have done as much to help new Kirby users find their way around the CMS as moinframe, who has built up a whole library of tutorials on YouTube with more videos and other projects on the way.
+
+----
+
+Text:
+
+**Hey Justus! Could you introduce yourself and tell us what moinframe is about?**
+
+Hi! I’m a designer and developer from Germany. 
+I have lived and worked in central Cologne for more than a decade but moved to the northern countryside a few years ago. I’ve started using Kirby during my time at university, which may or may not be many years ago :) 
+
+(image: moinframe-portrait.jpg)
+
+After using it for small scale projects, I’ve had the opportunity to build more complex websites with it during my time at an agency. Currently I’m running my own studio called [Gute Kombi](https://gutekombi.de/kirby-cms-agentur) with my fiancé and, who would have thought, we’re building great websites with the help of Kirby as well! 
+
+I love to learn new things and really enjoy the exchange in the Kirby Community, be it in the Discord or in meetups. With that spirit I started with moinframe, a YouTube channel about Kirby CMS. With moinframe I want to share the joy of working with Kirby and create value for the community. It’s a mix of tutorials, little hacks, ideas and first looks at plugins, or of course, new Kirby CMS versions – looking at you v6! 
+
+I have the idea to also include more community members, maybe in some kind of interview style, so it’s not only me talking. If someone is up for that, feel free to contact me :) 
+
+---
+
+**Now the obligatory question: What made you stick with Kirby?**
+
+That’s an interesting question and one I have thought about in the past. With the level of experience and the comfort in the Kirby Source Code the obvious answer is: because I feel very confident to built a great product with it, no matter the requirements. But that confidence might have grown with other tools as well. 
+
+What really made me stick is the ethics and calmness, in which Kirby is being developed and maintained, the community for sure and the simplicity it offers, which is such a strong contrast to everything else in the web development world.
+
+---
+
+**How did your background as a designer shape your experience?**
+
+Being a designer, I am for sure more offended by some of the interfaces used in Content Management Systems out there. Kirby does fit my taste here pretty well. But most importantly, with the flexibility of the blueprints, the option to easily integrate css changes and, of course, extend whole components of the Panel, I can ship a pleasant editor experience for any feature I build. That I love very much.
+
+---
+
+**When did you get introduced to Kirby CMS and how did it happen?**
+
+I honestly don’t remember. I searched for a way to build my photography portfolio around 2012 (maybe?) and found Kirby. I had some experience with other php based systems but felt definitely more at home in the frontend. Kirby had a great cheatsheet (printed out!) and a nice syntax to write php, a bit like jQuery. The rest were filenames, those I could handle very well. 
+
+---
+
+**What changed the most since then? What stayed the same?**
+
+Personally, using Kirby CMS brought me closer to the backend, to think about structure and code separation and I was eager to learn more about those concepts. But at the same time, it made the integration of my frontend ideas so much easier than other tools. Javascript libraries like Angular started to emerge and made interactive components really fun. With Kirby, it was also fun to connect those frontends to a CMS, with other systems on the markets back then it wasn’t. While trends and systems changed during the years, these aspects stayed when working with Kirby. Ease of use and joy when building things. 
+
+---
+
+**Have you coded your own plugins?**
+
+Oh yes, lot’s of them. Most I did not publish. It was quite fearful to first release a plugin. I remember switching my first plugin to public was nerve wrecking. But nothing bad happened, on the contrary, I had wonderful interactions with people from the community. 
+
+Maintaining is still a bit stressful, I must say, because now there are other people using the stuff you write. But I’m eager to work on better systems to test and validate plugin updates to keep my stresslevel low :D
+
+---
+
+**You have built quite a few plugins yourself. Please tell us about them!**
+
+Most plugins come from my own need and then I think: well, that might be useful for someone else as well. [Kirby Paradocs](https://moinfra.me/docs/moinframe-paradocs) was created as an easy way to maintain a website for each plugins documentation. Before, I either only relied on the readme file in GitHub or built an extra documentation website. But both were always hard to keep updated. With Kirby Paradocs, you just put all your docs in markdown files inside your plugin repository that anyone can read. But you can also publish those markdown files as websites, too.
+
+[Kirby Panel Menu](https://moinfra.me/docs/moinframe-panel-menu) is also a plugin I use in every project. It’s a simple abstraction class for building the sidebar menu in the panel. There are some cool use cases because you can programmatically build dynamic menus. One community member (João) even used it to add automatically add listed pages to the sidebar, which is quite nice I think.
+
+---
+
+**Aside from your own, do you have a favorite plugin from the community?**
+
+Many! There a so many talented developers in the community. I really mean that, while sounding cheesy. Some of my go to plugins are for sure 
+* [kirby-laravel-vite](https://plugins.getkirby.com/lukaskleinschmidt/laravel-vite) built by Lukas, 
+* [kirby3-dotenv](https://plugins.getkirby.com/bnomei/dotenv) by Bruno, 
+* [retour-for-kirby](https://plugins.getkirby.com/distantnative/retour) by Nico, 
+* [kirby-help-view](https://plugins.getkirby.com/medienbaecker/help-view) by Thomas, 
+* [kirby-dreamform](https://plugins.getkirby.com/tobimori/dreamform) by Tobias and 
+* [kirby-visual-block-selector](https://plugins.getkirby.com/junohamburg/visual-block-selector) by JUNO.
+
+---
+
+**How does AI influence your workflow?**
+
+LLMs are pretty solid in replicating certain structures or concepts. So that is a great help. I have a good library of things I’ve built over the years, so transferring concepts from one project to another I let them do quite regularly. If the constraints are clear, I’m pretty happy with the work an LLM can provide. 
+
+Design wise, or in ideation, those tools are pretty shit, so I can confidently still use my brain for that. I also find it irritating to automate with LLMs, so I stay away from building super smart prompt flows that show me my calendar in the morning.
+
+---
+
+**What’s next for moinframe? Any new videos coming up**
+
+I have lots of great ideas for future videos. But I also did take a little summer break to work on a new thing I’m looking forward to launching soon. It’s called **Kirby Deck** and it will be a curated block library. It’s combining my passion for design and frontend with the practicability of having inspiration and working code paired together. The idea is to provide Kirby users and developers easy access to ready made blocks, but also be a learning resource for web design. It’s also a great place to put used and unused concepts of my own projects and have them on hand whenever the opportunity comes along to use them! 
+
+I’m eager to know, what the community thinks about it. You can register to the mailing list on https://kirbydeck.com.
+
+---
+
+&rarr; *Don't miss out on any new tutorials by moinframe on his [Youtube channel](https://www.youtube.com/@moinfra-me).*
+*For more check his website [moinfra.me](https://moinfra.me/) or his other channels:*
+
+* *Mastodon: [@moinframe](https://norden.social/@moinframe)*
+* *Instagram: [@moinfra.me](https://www.instagram.com/moinfra.me)*
+
