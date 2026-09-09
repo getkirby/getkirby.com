@@ -18,7 +18,7 @@ Text:
 Hi! I’m a designer and developer from Germany. 
 I have lived and worked in central Cologne for more than a decade but moved to the northern countryside a few years ago. I’ve started using Kirby during my time at university, which may or may not be many years ago :) 
 
-(image: moinframe-portrait.jpg)
+(image: moinframe-portrait.jpg alt: Photo of Justus)
 
 After using it for small scale projects, I’ve had the opportunity to build more complex websites with it during my time at an agency. Currently I’m running my own studio called [Gute Kombi](https://gutekombi.de/kirby-cms-agentur) with my fiancé and, who would have thought, we’re building great websites with the help of Kirby as well! 
 
