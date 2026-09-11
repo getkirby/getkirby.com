@@ -1,0 +1,5 @@
+Details:
+
+<info>
+Note that the `page.move:before` hook is not called if the page already lives inside the given parent. In that case `$page->move()` returns early without triggering any hooks.
+</info>
