@@ -37,6 +37,17 @@ The `README` is the documentation for most of your users. Answer the following f
 
 Comment your code, too. Comments are what let you understand your own plugin in a year, and what lets someone else send you a pull request.
 
+## Add a security policy
+
+A `SECURITY.md` next to your `README` tells people how to report a vulnerability in your plugin. Without one, the only route they can see is your public issue tracker, which is the one place a vulnerability should not be posted.
+
+Cover two things:
+
+1. **Which versions get security updates.** Usually the current major, sometimes the one before it. Say so plainly, so nobody assumes a three-year-old release is still patched.
+2. **Where to report, and what happens next.** A private channel, an idea of how quickly you answer, and what you do once a report is accepted or declined.
+
+GitHub reads the file and shows a "Report a vulnerability" button on your repository, and (link: https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing-information-about-vulnerabilities/privately-reporting-a-security-vulnerability text: private vulnerability reporting) gives you a channel that is not the issue tracker.
+
 ## Publish it
 
 1. Push your code and create a Git tag with the version number of the release.
