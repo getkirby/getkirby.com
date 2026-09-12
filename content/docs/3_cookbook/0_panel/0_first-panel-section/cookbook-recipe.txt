@@ -25,9 +25,9 @@ In this recipe, we will create a custom Panel section that displays a list of li
 (image: custom-section.jpg)
 
 <info>
-For the purposes of this recipe, we assume you have read the (link: docs/guide/plugins/plugin-setup-panel text: Panel plugin setup guide) on how to get started with our Panel plugin bundler (link: https://github.com/johannschopplich/kirbyup text: kirbyup).
+For the purposes of this recipe, we assume you have read the (link: docs/guide/plugins/panel text: Panel plugins guide) on how to get started with our Panel plugin bundler (link: https://github.com/johannschopplich/kirbyup text: kirbyup).
 
-You can install the (link: https://github.com/getkirby/pluginkit/tree/4-panel text: Pluginkit) as a basis or create the file structure we need manually, that's up to you. Also, it doesn't matter if you use the Plainkit or the Starterkit as a starting point.
+You can install the (link: https://github.com/getkirby/pluginkit/tree/step-3-panel text: Pluginkit) as a basis or create the file structure we need manually, that's up to you. Also, it doesn't matter if you use the Plainkit or the Starterkit as a starting point.
 </info>
 
 ## Getting started

@@ -1,0 +1,148 @@
+Title: Licensing
+
+----
+
+Intro: Every plugin has a license, whether you think about it or not. Kirby shows it in the Panel, and for paid plugins it can also show whether that license is active.
+
+----
+
+Text:
+
+
+## Simple open-source plugin
+
+For a free plugin, one field in your (link: docs/guide/plugins/packaging text: `composer.json`) is enough:
+
+```json "/site/plugins/anchor/composer.json"
+{
+  "license": "MIT"
+}
+```
+
+Kirby shows the name in the plugins table of the Panel's system view. Use an (link: https://spdx.org/licenses/ text: SPDX identifier) such as `MIT`, `Apache-2.0` or `GPL-3.0-or-later` so that tools other than Kirby understand it too. If you are unsure which license fits, (link: https://choosealicense.com text: choosealicense.com) is a good starting point.
+
+Add a `LICENSE.md` file with the full license text next to it. The `composer.json` field names the license; the file is what actually grants your users the rights.
+
+## Registering license information
+
+Passing a `license` argument to `Kirby::plugin()` gives you more than a name. Kirby then adds a status column to the plugins table:
+
+```php "/site/plugins/anchor/index.php"
+Kirby::plugin(
+	name: 'superwoman/anchor',
+	extends: [...],
+	license: [
+		'name'   => 'Anchor License',
+		'link'   => 'https://superwoman.example.com/anchor/license',
+		'status' => 'active'
+	]
+);
+```
+
+(image: plugin-licenses.png)
+
+The `link` is opened when a user clicks the license name. It can point at your license document or at your shop.
+
+### Status values
+
+Kirby ships with these statuses. Each one comes with its own icon, label and color:
+
+| Value | Meaning |
+| - | - |
+| `active` | The license is valid |
+| `demo` | The plugin runs in demo mode |
+| `inactive` | The license has expired or was not activated |
+| `legacy` | The license does not cover this version of the plugin |
+| `missing` | No license was found |
+| `acknowledged` | The user confirmed they are aware of the license terms |
+| `unknown` | The status could not be determined |
+
+Because the status is only computed when the system view is rendered, you can look it up at that moment:
+
+```php "/site/plugins/anchor/index.php"
+Kirby::plugin(
+	name: 'superwoman/anchor',
+	extends: [...],
+	license: [
+		'name'   => 'Anchor License',
+		'status' => option('superwoman.anchor.licenseKey') ? 'active' : 'missing'
+	]
+);
+```
+
+### A custom status
+
+If none of the built-in statuses fit, pass an array instead of a string and define the label, icon, color and link yourself:
+
+```php
+license: [
+	'name'   => 'Anchor License',
+	'status' => [
+		'value' => 'missing',
+		'label' => 'Buy a license',
+		'icon'  => 'alert',
+		'theme' => 'negative',
+		'link'  => 'https://superwoman.example.com/anchor/buy'
+	]
+]
+```
+
+The `theme` controls the color of the status: `positive`, `negative`, `notice`, `passive`, `info` or `love`.
+
+## An activation dialog
+
+Sending users to a website to activate a license is a detour. Instead of a `link`, a status can open a (link: docs/reference/plugins/extensions/panel-dialogs text: Panel dialog) so they can enter their license key without leaving Kirby:
+
+```php
+license: [
+	'name'   => 'Anchor License',
+	'status' => [
+		'value'  => 'missing',
+		'label'  => 'Activate',
+		'icon'   => 'key',
+		'theme'  => 'love',
+		'dialog' => 'anchor/activate'
+	]
+]
+```
+
+The value is the path of a dialog your plugin registers. Use `drawer` instead of `dialog` if the activation needs more room.
+
+## `License` object
+
+For anything more involved, pass a closure. It receives the plugin and returns a (class: Kirby\Plugin\License text: license object), which lets you compute the name, link and status together:
+
+```php "/site/plugins/anchor/index.php"
+use Kirby\Plugin\License;
+use Kirby\Plugin\LicenseStatus;
+use Kirby\Plugin\Plugin;
+
+Kirby::plugin(
+	name: 'superwoman/anchor',
+	extends: [...],
+	license: function (Plugin $plugin) {
+		$key = option('superwoman.anchor.licenseKey');
+
+		return new License(
+			plugin: $plugin,
+			name: 'Anchor License',
+			link: 'https://superwoman.example.com/anchor',
+			status: LicenseStatus::from($key ? 'active' : 'missing')
+		);
+	}
+);
+```
+
+<warning>
+The status is a display, not a lock. Everything in a Kirby plugin runs on the user's own server, where they can read and change the code. Treat license checks as a way to tell honest users what the state of their license is, not as copy protection.
+</warning>
+
+## Private plugins
+
+A paid plugin usually cannot be downloaded by everyone, which rules out some of the (link: docs/guide/plugins/basics#installing-plugins text: installation methods) your users may expect. Say which ones you support in your README, because Kirby cannot tell them.
+
+- **A ZIP file after purchase** works everywhere and is the most common choice. Everything has to be prepared in the archive, including the compiled Panel assets and the `vendor` folder.
+- **A private Git repository** works for submodules and for Composer, but only for users you have granted access to.
+- **A private Composer repository** lets users run `composer require` as usual. Point them at it with a `repositories` entry for their project's `composer.json`, and authenticate them per customer.
+
+Because a private plugin is not on Packagist, Kirby's update check cannot reach it either. Keep the `version` field in your `composer.json` accurate so users can at least compare what they have against what you released.
