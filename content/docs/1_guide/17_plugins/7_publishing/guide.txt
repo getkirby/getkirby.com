@@ -1,0 +1,166 @@
+Title: Publishing and maintaining
+
+----
+
+Intro: Getting your plugin out into the world, and keeping it working as Kirby moves on.
+
+----
+
+Text:
+
+Your plugin is packaged and installable. What is left is helping people find it, and making sure it still works a year from now.
+
+## Naming
+
+Name the repository so that it is obvious the plugin is for Kirby. Most developers use `kirby-pluginname`, and the plugin name itself should say what the plugin does.
+
+Do not put a Kirby version number in the name. Kirby has a major release every year, and a plugin called `kirby(kirby-version: major offset: -1)-anchor` looks abandoned the moment (kirby-version: major) is out, even when it works perfectly.
+
+The three names involved are allowed to differ, and usually should:
+
+| | Example |
+| - | - |
+| Repository | `superwoman/kirby-anchor` |
+| Composer package in `composer.json` | `superwoman/kirby-anchor` |
+| Plugin name in `Kirby::plugin()` | `superwoman/anchor` |
+
+The `kirby-` prefix helps on GitHub and Packagist, where your plugin sits among packages for every framework. It only adds noise inside Kirby, so leave it out of the name you register.
+
+## Write a `README`
+
+The `README` is the documentation for most of your users. Answer the following four questions:
+
+1. What does the plugin do, and who is it for?
+2. How is it installed, and which of the (link: docs/guide/plugins/basics#installing-plugins text: installation methods) do you support?
+3. How is it used? Write step-by-step instructions rather than a couple of examples, especially where the plugin needs background knowledge or code from the user.
+4. Which options does it have, and what does each one do?
+
+Comment your code, too. Comments are what let you understand your own plugin in a year, and what lets someone else send you a pull request.
+
+## Add a security policy
+
+A `SECURITY.md` next to your `README` tells people how to report a vulnerability in your plugin. Without one, the only route they can see is your public issue tracker, which is the one place a vulnerability should not be posted.
+
+Cover two things:
+
+1. **Which versions get security updates.** Usually the current major, sometimes the one before it. Say so plainly, so nobody assumes a three-year-old release is still patched.
+2. **Where to report, and what happens next.** A private channel, an idea of how quickly you answer, and what you do once a report is accepted or declined.
+
+GitHub reads the file and shows a "Report a vulnerability" button on your repository, and (link: https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing-information-about-vulnerabilities/privately-reporting-a-security-vulnerability text: private vulnerability reporting) gives you a channel that is not the issue tracker.
+
+## Publish it
+
+1. Push your code and create a Git tag with the version number of the release.
+2. Publish the plugin on (link: https://packagist.org text: Packagist) so it can be installed with Composer. This is only needed once — Packagist picks up new tags automatically after that.
+3. Add the topics `kirby-plugin` and `kirby-cms` to your GitHub repository, and declare the Kirby versions you support (see below).
+4. Announce it in the (link: https://forum.getkirby.com/c/resources/plugins/7 text: plugins category of the forum).
+5. Submit it to the (link: https://plugins.getkirby.com text: plugin directory) by emailing <support@getkirby.com> with a link to your repository and a cover image in 2:1 format or a short code snippet.
+6. Post about it and mention `@getkirby` where that fits.
+
+A live demo helps more than any description. If you want to build one, we are happy to provide a free Kirby license for it: Write to <support@getkirby.com> with some details about the plugin and what the site will contain.
+
+## Versioning
+
+Use (link: https://semver.org text: semantic versioning). Given `MAJOR.MINOR.PATCH`, increment the:
+
+1. **MAJOR** version for changes that break existing usage
+2. **MINOR** version for new functionality that stays backward compatible
+3. **PATCH** version for backward compatible bug fixes
+
+For a plugin, "breaking" means anything a user's code or blueprints could depend on: the name of an option, the signature of a page method, the props of a Panel component, the fields a blueprint expects. Renaming an option is a major release, even if the change is one line.
+
+Keep the `version` field in your `composer.json` in step with the tag. Users who installed from a ZIP file have nothing else to go on, and Kirby's update check reads exactly that field.
+
+## Kirby versions support
+
+Your plugin should declare, which Kirby versions it does support. Our (link: https://plugins.getkirby.com text: plugin directory) works this out from your repository, so you never submit it by hand. It reads your `composer.json` once per release, which means the answer can differ between e.g. your 2.x and your 3.x releases.
+
+### In your `composer.json`
+
+Three fields are read to find out which Kirby version your plugin supports, in the following order. The first one that contains a valid Composer constraint wins.
+
+`extra.kirby.compatible`:
+
+```json "/site/plugins/anchor/composer.json"
+{
+  "extra": {
+    "kirby": {
+      "compatible": "^4.0 || ^5.0"
+    }
+  }
+}
+```
+
+`require."getkirby/cms"`:
+
+```json "/site/plugins/anchor/composer.json"
+{
+  "require": {
+    "getkirby/cms": "^5.0"
+  }
+}
+```
+
+<warning>
+Requiring the CMS is the only one of the three fields that Composer acts on: it refuses to install your plugin on an unsupported Kirby rather than just declaring the range. It also makes Kirby a dependency of your plugin, so Composer takes over installing and updating it for that project, even one that was managing Kirby by hand until now.
+</warning>
+
+`conflict."getkirby/cms"`:
+
+```json "/site/plugins/anchor/composer.json"
+{
+  "conflict": {
+    "getkirby/cms": "<5.0"
+  }
+}
+```
+
+It stops your plugin from being installed next to a Kirby that is too old, without making Kirby a dependency. Only the plain `<version` and `<=version` forms are understood; the example above is read as "Kirby 5.0 and up".
+
+<info>
+`require-dev` is deliberately ignored. It usually holds a CI test matrix rather than a statement about what your plugin supports.
+</info>
+
+### Support per release
+
+The `composer.json` is read at the newest release of each of your major versions. So a plugin can say all of this at once:
+
+| Your releases | Supported Kirby versions |
+| - | - |
+| 3.x | Kirby (kirby-version: major) |
+| 2.x | Kirby (kirby-version: major offset: -1) and (kirby-version: major) |
+| 1.x | Kirby (kirby-version: major offset: -2) |
+
+Release lines come from your stable GitHub releases; pre-releases and drafts are skipped. A repository with no releases falls back to its Git tags, and one with neither is read from its default branch as a single line.
+
+<info>
+Dropping an old Kirby in a new major release does not remove your plugin from the directory for that Kirby. In the table above, the 3.x line no longer mentions Kirby (kirby-version: major offset: -1), but the 2.x line still does, and that is the release the directory offers to anyone still on it.
+</info>
+
+### And in your `README`
+
+None of the above is visible to somebody reading your repository, and users who install from a ZIP file never see the directory at all. State the supported Kirby versions at the top of your `README` as well.
+
+The directory refreshes when it next crawls your repository. If what it shows does not match what you declared, email <support@getkirby.com>.
+
+## Surviving the next Kirby major release
+
+Kirby tries often to deprecate functionality before it removes. When you use something that is on its way out, Kirby raises a PHP deprecation warning, which is visible while `debug` is on:
+
+```php "/site/config/config.php"
+return [
+  'debug' => true
+];
+```
+
+Run your plugin against a Kirby installation in debug mode before you release. A deprecation warning today is a fatal error two majors from now.
+
+When a new Kirby major is released, work through its (link: docs/guide/updates text: upgrade guide) with your plugin the way you would with a site. If you have to drop support for an older Kirby, do it in a major release of your plugin and say so in the `README`, so users on the old version keep getting the old one from Composer.
+
+## Testing
+
+Nothing makes the yearly upgrade cheaper than a test suite. When Kirby changes something your plugin depends on, tests tell you in minutes instead of after a bug report.
+
+- **PHPUnit** is the convention for the PHP side. Kirby's own (link: https://github.com/getkirby/kirby text: test suite) is a working example of how to boot an app instance and test against it.
+- **Vitest** is the counterpart for Panel components, and it is what the Panel itself uses.
+- **A CI matrix** is the shape that pays off: run your suite against every Kirby version you claim to support, on every PHP version those support. That matrix is what turns "should still work" into something you know.

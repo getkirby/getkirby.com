@@ -1,0 +1,121 @@
+Title: Your first plugin
+
+----
+
+Intro: Every Kirby plugin starts as a folder with a single PHP file in it. This walkthrough takes you from an empty folder to a plugin that is installed and running.
+
+----
+
+Text:
+
+You do not need Composer, npm or any other tool on the command line to get started with a Kirby plugin. A text editor and a Kirby installation are enough. The later pages of this chapter add build tooling and packaging, but none of it is required to write a working plugin. Follow along as we o from a basic plugin to a more elaborate setup.
+
+## What you will build
+
+The plugin adds an `anchor()` page method that turns a page title into a string that is safe to use in a URL fragment:
+
+```php
+$page->anchor(); // 'hello-world' for a page titled 'Hello, World!'
+```
+
+A (link: docs/reference/plugins/extensions/page-methods text: page method) is one of many extension types. It is a good first choice because you can call it from any template and see the result immediately.
+
+<info>
+The code on this page is the (link: https://github.com/getkirby/pluginkit/tree/step-1-minimal text: `step-1-minimal`) tag of our example plugin, the Pluginkit. Each page of this chapter matches one tag, so you can compare your own code against a working reference at every stage.
+</info>
+
+## Create the plugin folder
+
+Every plugin lives in its own folder inside `/site/plugins`. Create one and give it a name that describes what the plugin does:
+
+```filesystem
+site/
+  plugins/
+    anchor/
+      index.php
+```
+
+The folder name is only used to find the plugin on disk. It does not have to match the name you register the plugin under, and it never appears in a URL.
+
+If the `/site/plugins` folder does not exist yet, create it first.
+
+## Register the plugin
+
+The `index.php` is the entry point. Kirby loads it automatically and expects it to register the plugin:
+
+```php "/site/plugins/anchor/index.php"
+<?php
+
+Kirby::plugin(
+	name: 'superwoman/anchor',
+	extends: []
+);
+```
+
+The `name` is the plugin name in the format `{vendor}/{plugin}`. Pick something unique, because the name identifies your plugin in the Panel, in the update check and in our (link: https://plugins.getkirby.com text: plugin directory). Both parts may only contain the characters `a-z`, numbers and dashes.
+
+`extends` is everything your plugin adds to Kirby. It is empty for now.
+
+<warning>
+`extends` is required, even when it is empty. Called with a name alone, `Kirby::plugin()` acts as a getter and returns the plugin that is already registered under that name instead of registering a new one.
+</warning>
+
+Your plugin is now installed. It does not do anything yet, but Kirby knows about it: open the Panel and you will find it listed in the system view.
+
+## Add an extension
+
+Everything a plugin contributes to Kirby goes into `extends`. Each key is an extension type and each value is what you want to add. To register a page method, use the `pageMethods` key:
+
+```php "/site/plugins/anchor/index.php"
+<?php
+
+Kirby::plugin(
+	name: 'superwoman/anchor',
+	extends: [
+		'pageMethods' => [
+			/**
+			 * Turns the page title into an anchor that is safe to use
+			 * in a URL fragment
+			 */
+			'anchor' => function (): string {
+				$anchor = mb_strtolower($this->title()->value());
+				$anchor = preg_replace('/[^a-z0-9]+/', '-', $anchor);
+
+				return trim($anchor, '-');
+			}
+		]
+	]
+);
+```
+
+Inside the method, `$this` is the page the method was called on, so you can reach every field and method of that page.
+
+<info>
+`pageMethods` is one of more than forty extension types. The (link: docs/reference/plugins/extensions text: reference) has the full list.
+</info>
+
+## Try it out
+
+Call the new method from any template:
+
+```php "/site/templates/default.php"
+<h1 id="<?= $page->anchor() ?>"><?= $page->title() ?></h1>
+```
+
+A page titled "Hello, World!" now renders as:
+
+```html
+<h1 id="hello-world">Hello, World!</h1>
+```
+
+If nothing happens, check the three things that go wrong most often: the folder is not directly inside `/site/plugins`, the file is not named `index.php`, or `extends` was never passed to `Kirby::plugin()`.
+
+## Done: a custom plugin for your own site
+
+If you wrote this plugin for your own site, you can stop here. Copy the folder into any of your projects and it works.
+
+Everything that follows is about the two things that come up once a plugin grows or gets published:
+
+- (link: docs/guide/plugins/structure text: Structuring your plugin code) once one file is no longer enough
+- (link: docs/guide/plugins/panel text: Panel plugins) when your extension needs a user interface
+- (link: docs/guide/plugins/packaging text: Packaging and distribution) when other people should be able to install it

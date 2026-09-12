@@ -28,7 +28,7 @@ You can follow along, but there will be a GitHub template at the end of the guid
 
 ## Plugin files
 
-To begin, we need to establish the base of our plugin first. The [pluginkit](https://github.com/getkirby/pluginkit/tree/4-panel) is a very nice starting point:
+To begin, we need to establish the base of our plugin first. The [pluginkit](https://github.com/getkirby/pluginkit/tree/step-3-panel) is a very nice starting point:
 
 ```filesystem
 src/
@@ -45,9 +45,12 @@ README.md
 This gives us the `index.php` file that initializes our plugin:
 
 ```php
-Kirby::plugin('getkirby/pluginkit', [
-    // plugin magic happens here
-]);
+Kirby::plugin(
+    name: 'getkirby/pluginkit',
+    extends: [
+        // plugin magic happens here
+    ]
+);
 ```
 
 ...and `package.json` with npm scripts for [kirbyup](https://github.com/johannschopplich/kirbyup):
