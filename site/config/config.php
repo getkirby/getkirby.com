@@ -9,8 +9,8 @@ return [
 	'github'     => ['url' => 'https://github.com/getkirby'],
 	'hub'        => ['url' => 'https://hub.getkirby.com'],
 	'partners' => [
-		'url'        => 'https://partners.getkirby.com/partners.json',
-		'partnerUrl' => 'https://partners.getkirby.com/partners/',
+		'url'        => 'https://partners.getkirby.com/profiles.json',
+		'partnerUrl' => 'https://partners.getkirby.com/profiles/',
 		'signupUrl'  => 'https://partners.getkirby.com/signup'
 	],
 	'keys'       => file_exists(__DIR__ . '/keys.php') ? require __DIR__ . '/keys.php' : require __DIR__ . '/keys.sample.php',
