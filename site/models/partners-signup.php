@@ -15,7 +15,7 @@ class PartnersSignupPage extends Page
 			'email'      => $this->validateEmail($data['email']),
 			'business'   => $this->validateBusinessType($data['business']),
 			'projects'   => $this->validateProjects($data['projects'], $data['plan']),
-			'reviewRef'  => $this->validateDownloadLink($data['reviewRef']),
+			'sourceCode' => $this->validateDownloadLink($data['sourceCode']),
 		];
 
 		return array_filter($errors, fn($error) => $error !== true);

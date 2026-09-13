@@ -317,7 +317,7 @@ createApp({
 		address: "<?= esc($data['address'] ?? '', 'js') ?>",
 		projects: "<?= esc($data['projects'] ?? '', 'js') ?>",
 		references: "<?= esc($data['references'] ?? '', 'js') ?>",
-		downloadLink: "<?= esc($data['reviewRef'] ?? '', 'js') ?>",
+		downloadLink: "<?= esc($data['sourceCode'] ?? '', 'js') ?>",
 
 		// contact info
 		name: "<?= esc($data['contact'] ?? '', 'js') ?>",

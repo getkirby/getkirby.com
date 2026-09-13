@@ -24,7 +24,7 @@ return function (App $kirby, Page $page) {
 			'address'    => get('address'),
 			'projects'   => (int)get('projects'),
 			'references' => get('references'),
-			'reviewRef'  => get('downloadLink'),
+			'sourceCode' => get('downloadLink'),
 			'contact'    => get('name'),
 			'email'      => get('email'),
 			'discord'    => get('discord'),
@@ -91,7 +91,7 @@ return function (App $kirby, Page $page) {
 			$response = Remote::post(option('partners.signupUrl'), [
 				'data' => json_encode([
 					'fields' => [
-						'partnerstatus' => 'open',
+						'state'         => 'open',
 						'people'        => $people,
 						'price'         => $visitor->currencySign() . $localizedPrice,
 						'checkout'      => $product->checkout('buy', $checkoutData),
