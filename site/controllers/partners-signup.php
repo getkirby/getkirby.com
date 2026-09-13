@@ -40,7 +40,7 @@ return function (App $kirby, Page $page) {
 			$localizedPrice = $price->regular($peopleNum);
 
 			$checkoutData = [
-				'expires'     => date('Y-m-d', strtotime('+2 months')),
+				'expires'     => date('Y-m-d', strtotime('+4 months')),
 				'passthrough' => new Passthrough(multiplier: $peopleNum),
 				'prices'      => [
 					'EUR:' . $eurPrice,
