@@ -29,9 +29,9 @@ Among other use cases, Panel areas are a great way to show and edit data that is
 This recipe is based on the products area demo presented during the (link: https://www.youtube.com/watch?v=QgCMc89rdNY text: 3.6 product launch), but we will extend it a bit.
 
 <info>
-For the purposes of this recipe, we assume you have read the (link: docs/guide/plugins/plugin-setup-panel text: Panel plugin setup guide) on how to get started with our Panel plugin bundler (link: https://github.com/johannschopplich/kirbyup text: kirbyup) and are familiar with the (link: docs/reference/plugins/extensions/panel-areas text: basic Panel area setup).
+For the purposes of this recipe, we assume you have read the (link: docs/guide/plugins/panel text: Panel plugins guide) on how to get started with our Panel plugin bundler (link: https://github.com/johannschopplich/kirbyup text: kirbyup) and are familiar with the (link: docs/reference/plugins/extensions/panel-areas text: basic Panel area setup).
 
-You can install the (link: https://github.com/getkirby/pluginkit/tree/4-panel text: Pluginkit) as a basis or create the file structure we need manually, that’s up to you. Also, it doesn’t matter if you use the Plainkit or the Starterkit as a starting point.
+You can install the (link: https://github.com/getkirby/pluginkit/tree/step-3-panel text: Pluginkit) as a basis or create the file structure we need manually, that’s up to you. Also, it doesn’t matter if you use the Plainkit or the Starterkit as a starting point.
 </info>
 
 ## Downloads

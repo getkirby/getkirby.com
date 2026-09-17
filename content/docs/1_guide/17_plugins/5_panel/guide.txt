@@ -1,0 +1,208 @@
+Title: Panel plugins
+
+----
+
+Intro: Some extensions need a user interface. Panel fields, views and blocks are Vue components, which you can write by hand or, once they grow, build from single file components.
+
+----
+
+Text:
+
+Everything so far ran on the server. As soon as your plugin adds a field, a view or a block to the Panel, your plugin needs to provide the necessary parts to render a Panel UI.
+
+This page continues from (link: docs/guide/plugins/first-plugin text: Your first plugin). It does not depend on (link: docs/guide/plugins/structure text: Structuring your plugin code), so you can come here directly if the Panel UI is what you need.
+
+<info>
+The result of this page is the (link: https://github.com/getkirby/pluginkit/tree/step-3-panel text: `step-3-panel`) tag of the Pluginkit.
+</info>
+
+## Two parts of a Panel extension
+
+Any Panel-related extension consists of two parts: The PHP half declares that the extension exists and prepares its data. The JavaScript half renders it. In its smallest form that is one file each:
+
+```filesystem
+site/
+  plugins/
+    anchor/
+      index.js
+      index.php
+```
+
+Kirby loads `index.php`, `index.js` and `index.css` from the plugin root. Nothing else in the folder is loaded unless you tell Kirby to.
+
+## The PHP half
+
+Registering a (link: docs/reference/plugins/extensions/fields text: field type) looks like any other extension. Anything you put under `computed` is handed to the Vue component as a prop:
+
+```php "/site/plugins/anchor/index.php"
+Kirby::plugin(
+	name: 'superwoman/anchor',
+	extends: [
+		'fields' => [
+			'anchor' => [
+				// everything that is computed here is handed to the
+				// `k-anchor-field` Vue component as a prop
+				'computed' => [
+					'anchor' => function (): string {
+						return $this->model()->anchor();
+					}
+				]
+			]
+		]
+	]
+);
+```
+
+Kirby derives the component name from the extension type and the key: a field registered as `anchor` looks for a Vue component called `k-anchor-field`.
+
+The type is now available in any blueprint, and nothing shows up in the Panel until you add it to one:
+
+```yaml "/site/blueprints/pages/default.yml"
+fields:
+  anchor:
+    type: anchor
+    label: Anchor
+```
+
+## The JavaScript half
+
+Write the plugin root's `index.js` by hand and the component is a plain object, with its markup in a `template` string:
+
+```js "/site/plugins/anchor/index.js"
+window.panel.plugin("superwoman/anchor", {
+	fields: {
+		anchor: {
+			props: {
+				// computed by the PHP part of the field in the plugin's index.php
+				anchor: String,
+				// set in the blueprint
+				label: String
+			},
+			template: `
+				<k-field :label="label" class="k-anchor-field">
+					<k-code>#{{ anchor }}</k-code>
+				</k-field>
+			`
+		}
+	}
+});
+```
+
+The props it declares are the values that the PHP half computed, plus the ones the blueprint set. `k-field` is Kirby's own wrapper and takes care of the label.
+
+That is a complete, working field, with no build step and nothing to install. If your extension is small enough to write this way, you can stop here.
+
+<info>
+A plugin that adds nothing but Panel code still needs an `index.php` that registers the name. Without it, Kirby loads the JavaScript anonymously and cannot show the plugin's name and version in the system view.
+</info>
+
+This field only shows the anchor, it never writes to the content file. A field that stores what the user types needs a `value` prop and an `input` event on top of this, which (link: docs/cookbook/panel/first-panel-field text: Your first Panel field) covers step by step.
+
+## Single file components
+
+The template above is a string, and a string is all your code editor/IDE sees: no syntax highlighting, no formatting, and nowhere to put styles. A (link: https://vuejs.org/guide/scaling-up/sfc.html text: Vue single file component) gives you markup, logic and CSS in one `.vue` file, in exchange for a build step.
+
+The component moves into a file of its own:
+
+```html "/site/plugins/anchor/src/components/AnchorField.vue"
+<template>
+	<k-field :label="label" class="k-anchor-field">
+		<k-code>#{{ anchor }}</k-code>
+	</k-field>
+</template>
+
+<script>
+export default {
+	props: {
+		// computed by the PHP part of the field in the plugin's index.php
+		anchor: String,
+		// set in the blueprint
+		label: String
+	}
+};
+</script>
+
+<style>
+.k-anchor-field code {
+	user-select: all;
+}
+</style>
+```
+
+`src/index.js` becomes the entry point and does nothing but register the components:
+
+```js "/site/plugins/anchor/src/index.js"
+import AnchorField from "./components/AnchorField.vue";
+
+window.panel.plugin("superwoman/anchor", {
+	fields: {
+		anchor: AnchorField
+	}
+});
+```
+
+Which leaves the plugin folder looking like this:
+
+```filesystem
+site/
+  plugins/
+    anchor/
+      src/
+        components/
+          AnchorField.vue
+        index.js
+      index.js
+      index.css
+      index.php
+      package.json
+```
+
+The two `index.js` files are not a mistake. `src/index.js` is the source you edit. The `index.js` in the plugin root is the compiled bundle that Kirby loads, and `index.css` next to it is where the component's styles end up.
+
+## Building with `kirbyup`
+
+Single file components cannot run in the browser as they are. We use (link: https://github.com/johannschopplich/kirbyup text: kirbyup) to compile them. It is built for Kirby Panel plugins and needs no configuration.
+
+You do not have to install `kirbyup`. The commands below fetch it on first use, which may take a moment:
+
+```json "/site/plugins/anchor/package.json"
+{
+  "name": "anchor",
+  "private": true,
+  "scripts": {
+    "dev": "npx -y kirbyup src/index.js --watch",
+    "serve": "npx -y kirbyup serve src/index.js",
+    "build": "npx -y kirbyup src/index.js"
+  }
+}
+```
+
+Run the commands from your plugin folder:
+
+- `npm run dev` compiles `src/index.js` into `index.js` and `index.css` and recompiles on every change. Reload the Panel to see the result.
+- `npm run serve` does the same, but reloads the Panel for you whenever you save. Pass extra options after `--`, for example `npm run serve -- --port 1234`.
+- `npm run build` creates the minified files you ship.
+
+## Commit the build
+
+Kirby loads `index.js` and `index.css` from the plugin root and nothing else. Those two files are build output, so it is tempting to ignore them in Git. Do not.
+
+Only Composer users could rebuild your plugin, and even they have no reason to run npm. Everyone who installs your plugin from a ZIP file or as a Git submodule gets exactly what is in your repository. If the compiled `index.js` and `index.css` are missing, your plugin loads without ever showing its interface, and nothing reports an error.
+
+Run `npm run build` before you tag a release and commit the result. What belongs in `.gitignore` is the development leftovers:
+
+```bash "/site/plugins/anchor/.gitignore"
+# npm modules
+/node_modules
+
+# kirbyup temp development entry
+/index.dev.mjs
+```
+
+## What to build next
+
+The (link: docs/reference/plugins/extensions text: reference) lists every Panel extension type. Our cookbook walks through the most common ones in detail:
+
+- (link: docs/cookbook/panel/first-panel-field text: Your first Panel field)
+- (link: docs/cookbook/panel/first-panel-section text: Your first Panel section)
+- (link: docs/cookbook/panel/first-panel-area text: Your first Panel area)

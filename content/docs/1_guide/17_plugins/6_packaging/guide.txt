@@ -1,0 +1,237 @@
+Title: Packaging and distribution
+
+----
+
+Intro: If you want other people to use your plugin, it has to leave your project and become something they can install. This page turns the folder in your `/site/plugins` into a package anyone can download, add as a submodule or `composer require`.
+
+----
+
+Text:
+
+Your users install plugins by (link: docs/guide/plugins/basics#installing-plugins text: downloading a ZIP file, adding a Git submodule, or running Composer), and each method hands them a different subset of your repository.
+
+Supporting all three is worth the effort, because which one a user picks depends on their project, not on your plugin.
+
+<info>
+The result of this page is the (link: https://github.com/getkirby/pluginkit/tree/step-4-composer text: `step-4-composer`) tag of the Pluginkit.
+</info>
+
+## Your own repository
+
+Your plugin needs a Git repository of its own, separate from the project you built it in. Users who install it as a submodule clone that repository directly, and it is what Packagist and our (link: https://plugins.getkirby.com text: plugin directory) point at.
+
+Host it wherever you like. GitHub, GitLab, Codeberg and a server of your own all work. What your users need is a URL they can clone and maybe somewhere to report bugs.
+
+GitHub is the most common choice for Kirby plugins, and two of the directory's conveniences are built around it: release info come from (link: docs/guide/plugins/publishing#declaring-which-kirby-versions-you-support__one-answer-per-release-line text: GitHub releases) and (link: docs/guide/plugins/publishing#declaring-which-kirby-versions-you-support__github-topics-as-a-fallback text: repository topics) can stand in for a missing `composer.json` constraint. Host elsewhere and you declare the same things in the `composer.json`, which the directory reads either way.
+
+## The `composer.json`
+
+A `composer.json` describes your plugin: what it is called, who wrote it, which version this is and what it needs to run. Composer uses that description to install it, and Kirby reads the same file off disk whether or not Composer was ever involved, so a plugin installed from a ZIP file still shows its name and version in the Panel's system view:
+
+```json "/site/plugins/anchor/composer.json"
+{
+  "name": "superwoman/kirby-anchor",
+  "description": "Turns page titles into URL-safe anchors",
+  "license": "MIT",
+  "type": "kirby-plugin",
+  "version": "1.0.0",
+  "authors": [
+    {
+      "name": "Your Name",
+      "email": "you@example.com"
+    }
+  ],
+  "require": {
+    "getkirby/composer-installer": "^1.2"
+  },
+  "extra": {
+    "kirby": {
+      "compatible": "^5.0"
+    }
+  }
+}
+```
+
+- `name` is what your users type after `composer require`. It is not the name you register with `Kirby::plugin()`, and by convention the two differ: `superwoman/kirby-anchor` as the package, `superwoman/anchor` as the plugin.
+- `description`, `license` and `authors` are what people see before they decide to install. Packagist shows them in search results, Kirby shows them in the Panel's system view. (link: docs/guide/plugins/licensing text: Licensing) covers what belongs in `license`.
+- `version` is the number your users see in the Panel and the one Kirby's update check compares against, so keep it in step with your Git tag. Composer will warn you about setting it by hand and reads the real version from its own metadata for Composer installs, but ZIP and submodule users have nothing else to go on. Passing `version` to `Kirby::plugin()` works as well and takes precedence over this field.
+- `extra.kirby.compatible` tells your users, and our plugin directory, which Kirby versions this release supports. Composer ignores `extra` when it resolves dependencies, so saying so costs your users nothing. (link: docs/guide/plugins/publishing#declaring-which-kirby-versions-you-support text: Declaring which Kirby versions you support) covers it in full.
+
+### Where Composer puts your plugin
+
+Composer usually installs packages into `vendor`, where Kirby would never look for a plugin. Two of the fields above send yours to `/site/plugins` instead:
+
+```json
+{
+  "type": "kirby-plugin",
+  "require": {
+    "getkirby/composer-installer": "^1.2"
+  }
+}
+```
+
+The `kirby-plugin` type marks your package as something that belongs elsewhere, and `getkirby/composer-installer` is the code that acts on that mark.
+
+<warning>
+Both are required. With only the type, no installer knows what to do with it. With only the dependency, nothing marks your package as a plugin. Either way your plugin ends up in `vendor` and Kirby never loads it.
+</warning>
+
+By default the installer uses the part of the package name after the slash as the folder name, so `superwoman/kirby-anchor` lands in `/site/plugins/kirby-anchor`. Override it if you want a tidier folder:
+
+```json
+{
+  "name": "superwoman/kirby-anchor",
+  "extra": {
+    "installer-name": "anchor",
+    "kirby": {
+      "compatible": "^5.0"
+    }
+  }
+}
+```
+
+## Third-party dependencies
+
+Say your plugin needs a library. Add it the normal way, from inside your plugin folder:
+
+```bash
+composer require cocur/slugify
+```
+
+Composer adds it to your `composer.json` and installs it into your plugin's `vendor` folder. Load Composer's autoloader at the top of your `index.php` and the library is available:
+
+```php "/site/plugins/anchor/index.php"
+<?php
+
+use Superwoman\Anchor\Anchor;
+
+@include_once __DIR__ . '/vendor/autoload.php';
+
+Kirby::plugin(
+	name: 'superwoman/anchor',
+	extends: [
+		// unchanged
+	]
+);
+```
+
+### Why `@include_once` and not `require`
+
+The autoloader is not always there. When a user installs your plugin with Composer, our installer deletes the plugin's `vendor` folder, because the project's own `vendor` folder already contains those packages and loading them twice causes conflicts.
+
+So the file exists for ZIP and submodule users and is absent for Composer users. `@include_once` loads it if it is there and stays quiet if it is not. A `require` would break the site for everyone who installed with Composer.
+
+### Commit the vendor folder
+
+ZIP and submodule users never run `composer install`. If the library's code is not in your repository, your plugin is broken for them.
+
+Commit `vendor`, but leave out the files that are never needed at runtime:
+
+```bash "/site/plugins/anchor/.gitignore"
+# Files of Composer dependencies that are not needed to run the plugin
+/vendor/**/.*
+/vendor/**/*.json
+/vendor/**/*.txt
+/vendor/**/*.md
+/vendor/**/*.yml
+/vendor/**/*.yaml
+/vendor/**/*.xml
+/vendor/**/*.dist
+/vendor/**/readme.php
+/vendor/**/docs/*
+/vendor/**/example/*
+/vendor/**/examples/*
+/vendor/**/test/*
+/vendor/**/tests/*
+/vendor/**/php4/*
+
+# The Composer installer is only needed while Composer runs, never at runtime
+/vendor/getkirby/composer-installer
+```
+
+<info>
+Keep the license files of your dependencies. Most open source licenses require the copyright notice to ship with the code, and a committed `vendor` folder means your plugin redistributes that code.
+</info>
+
+This is also the point where it makes sense to let Composer autoload your own classes instead of (link: docs/guide/plugins/structure text: Kirby's `F::loadClasses()`). You are loading Composer's autoloader anyway:
+
+```json "/site/plugins/anchor/composer.json"
+{
+  "autoload": {
+    "psr-4": {
+      "Superwoman\\Anchor\\": "src/"
+    }
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "allow-plugins": {
+      "getkirby/composer-installer": true
+    }
+  }
+}
+```
+
+Run `composer install` again afterwards to regenerate the autoloader, then commit what changed in `vendor`.
+
+## What each install method needs from your repository
+
+| | ZIP download | Git submodule | Composer |
+| - | - | - | - |
+| `index.php` | ✅ | ✅ | ✅ |
+| `composer.json` with `type` and installer | — | — | ✅ |
+| Compiled `index.js` and `index.css` | ✅ | ✅ | ✅ |
+| Committed `vendor` folder | ✅ | ✅ | — |
+| Published on Packagist | — | — | ✅ |
+
+The pattern is that the first two columns need everything prepared in advance, because nothing runs on the user's machine.
+
+<info>
+The `.gitattributes` file can keep development files out of the ZIP download and the Composer installation while leaving them in the repository. Mark them with `export-ignore`:
+
+```bash "/site/plugins/anchor/.gitattributes"
+.editorconfig export-ignore
+.gitattributes export-ignore
+.gitignore export-ignore
+/.github/ export-ignore
+```
+
+Never mark a file your plugin needs at runtime, or the ZIP download will be broken.
+</info>
+
+## Reading your metadata back
+
+Everything in the `composer.json` is available at runtime through the plugin object:
+
+```php
+$plugin = $kirby->plugin('superwoman/anchor');
+
+$plugin->version();
+$plugin->description();
+$plugin->authors();
+$plugin->license();
+```
+
+Kirby uses `homepage`, `support.docs` and `support.source`, in that order, to link to your plugin from the Panel's system view:
+
+```json "/site/plugins/anchor/composer.json"
+{
+  "homepage": "https://github.com/superwoman/kirby-anchor",
+  "support": {
+    "docs": "https://github.com/superwoman/kirby-anchor/blob/main/README.md",
+    "source": "https://github.com/superwoman/kirby-anchor"
+  }
+}
+```
+
+If you would rather not maintain a `composer.json`, the same values can be passed to `Kirby::plugin()` directly:
+
+```php
+Kirby::plugin(
+	name: 'superwoman/anchor',
+	extends: [...],
+	version: '1.0.0',
+	info: [
+		'license' => 'MIT'
+	]
+);
+```

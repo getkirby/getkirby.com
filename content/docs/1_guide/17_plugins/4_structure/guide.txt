@@ -1,0 +1,147 @@
+Title: Structuring your plugin code
+
+----
+
+Intro: Your plugin has grown past a single closure in the `index.php`. Here is how to split it into classes and load them without slowing every request down.
+
+----
+
+Text:
+
+This page continues where (link: docs/guide/plugins/first-plugin text: Your first plugin) left off. The plugin registers one page method whose logic sits inline in the `index.php`. That is fine for a few lines. Once the logic gets longer, or a second extension needs the same code, it belongs in a class of its own.
+
+<info>
+The result of this page is the (link: https://github.com/getkirby/pluginkit/tree/step-2-classes text: `step-2-classes`) tag of the Pluginkit.
+</info>
+
+## One class per file
+
+Put each class in its own file under a `src` folder and name the file after the class:
+
+```filesystem
+site/
+  plugins/
+    anchor/
+      src/
+        Anchor.php
+      index.php
+```
+
+Give your classes a namespace of your own so they cannot collide with Kirby's classes or with another plugin:
+
+```php "/site/plugins/anchor/src/Anchor.php"
+<?php
+
+namespace Superwoman\Anchor;
+
+/**
+ * Turns page titles into anchors that are safe to use
+ * in a URL fragment
+ */
+class Anchor
+{
+	public static function from(string $title): string
+	{
+		$anchor = mb_strtolower($title);
+		$anchor = preg_replace('/[^a-z0-9]+/', '-', $anchor);
+
+		return trim($anchor, '-');
+	}
+}
+```
+
+The `index.php` now only wires the class into Kirby:
+
+```php "/site/plugins/anchor/index.php"
+<?php
+
+use Superwoman\Anchor\Anchor;
+
+Kirby::plugin(
+	name: 'superwoman/anchor',
+	extends: [
+		'pageMethods' => [
+			/**
+			 * Turns the page title into an anchor that is safe to use
+			 * in a URL fragment
+			 */
+			'anchor' => function (): string {
+				return Anchor::from($this->title()->value());
+			}
+		]
+	]
+);
+```
+
+As it stands, this does not work yet. Nothing has told PHP where the `Anchor` class lives.
+
+## Loading your classes
+
+You could `require` every class file at the top of your `index.php`, but that loads all of them on every single request, even the ones that are never used. An autoloader loads a class file the first time the class is actually needed instead.
+
+Kirby ships with (method: Kirby\Filesystem\F::loadClasses text: `F::loadClasses()`), a small autoloader that takes a map of class names to file paths:
+
+```php "/site/plugins/anchor/index.php"
+<?php
+
+use Superwoman\Anchor\Anchor;
+
+F::loadClasses([
+	'superwoman\\anchor\\anchor' => 'src/Anchor.php'
+], __DIR__);
+
+Kirby::plugin(
+	name: 'superwoman/anchor',
+	extends: [
+		'pageMethods' => [
+			/**
+			 * Turns the page title into an anchor that is safe to use
+			 * in a URL fragment
+			 */
+			'anchor' => function (): string {
+				return Anchor::from($this->title()->value());
+			}
+		]
+	]
+);
+```
+
+The second argument is the base directory the paths are relative to, which is why `__DIR__` is passed.
+
+<info>
+The keys of the class map are lowercased. The autoloader normalizes class names before it looks them up, so an uppercase key would never match.
+</info>
+
+## Kirby's autoloader or Composer
+
+Composer brings its own PSR-4 autoloader, which loads classes by convention instead of an explicit map. Both work. Which one fits depends on whether your plugin uses Composer for anything else.
+
+| | `F::loadClasses()` | Composer PSR-4 |
+| - | ------------------ | -------------- |
+| **Setup** | A few lines in `index.php` | `autoload` section in `composer.json` |
+| **New class** | Add a line to the class map | Just add the file |
+| **Requires Composer on your machine** | No | Yes, to generate the autoloader |
+| **Works without a `vendor` folder** | Yes | No |
+| **Good for** | Plugins with a handful of classes and no dependencies | Plugins that already require third-party packages |
+
+Use `F::loadClasses()` while your plugin has no Composer dependencies. It keeps the plugin installable from a ZIP file with nothing generated in advance.
+
+Once your plugin depends on a third-party package, it loads Composer's autoloader anyway, and maintaining a second class map next to it is needless work. (link: docs/guide/plugins/packaging text: Packaging and distribution) shows that switch.
+
+## Folder conventions
+
+For plugins with more than one extension, these folder names are a common convention across the ecosystem. Use the ones you need and leave out the rest:
+
+```filesystem
+site/
+  plugins/
+    anchor/
+      assets/
+      blueprints/
+      snippets/
+      src/
+      templates/
+      index.php
+```
+
+Files in `assets` are a special case: Kirby publishes them automatically under `/media/plugins/{vendor}/{plugin}/`, so you can link to them from templates and Panel components. The URL is built from the name you registered the plugin under, not from the folder name.
