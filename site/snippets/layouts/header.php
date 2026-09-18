@@ -7,7 +7,7 @@
 ?>
 <?php snippet('layouts/skipper') ?>
 
-<?php if ($kirby->option('archived') !== true): ?>
+<?php if ($kirby->option('archived') !== true && $kirby->option('topbar') === true): ?>
 	<div class="container">
 		<?php snippet('layouts/topbar', [
 			'icon'   => '🎉',
