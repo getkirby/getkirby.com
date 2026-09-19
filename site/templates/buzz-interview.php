@@ -7,8 +7,8 @@
 
 <style>
 .prose {
-	--avatar-size: 2.25rem;
-	--avatar-gap: 1rem;
+	--avatar-size: 2.7rem;
+	--avatar-gap: 1.2rem;
 }
 
 .interview {
@@ -18,7 +18,7 @@
 	margin-top: 2.75rem;
 }
 .answer {
-	margin-top: 1rem;
+	margin-top: 1.75rem;
 }
 
 
@@ -33,11 +33,9 @@
 .prose :where(.question, .answer, .outro) > .image {
 	grid-column: 1 / -1;
 }
-/* the text sharing row 1 with the avatar: no inherited `* + p` spacing,
-   and centred against the avatar while it is the shorter of the two */
+/* the text sharing row 1 with the avatar: no inherited `* + p` spacing */
 .prose :where(.question, .answer, .outro) > :is(:first-child, .avatar + *) {
 	margin-top: 0;
-	align-self: center;
 }
 
 .prose .image a {
@@ -58,6 +56,10 @@
 	align-self: start;
 	width: var(--avatar-size);
 	height: var(--avatar-size);
+	/* centre the avatar on the first line of the adjacent text,
+	   no matter how many lines follow */
+	margin-top: calc((var(--leading-normal) * 1em - var(--avatar-size)) / 2);
+	margin-top: calc((1lh - var(--avatar-size)) / 2);
 	color: var(--color-black);
 }
 .prose .avatar :where(img, svg) {
