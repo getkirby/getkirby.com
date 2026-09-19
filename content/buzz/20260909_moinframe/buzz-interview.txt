@@ -99,7 +99,7 @@ Interview:
   answer: |
     I have lots of great ideas for future videos. But I also did take a little summer break to work on a new thing I’m looking forward to launching soon. It’s called Kirby Deck and it will be a curated block library. It’s combining my passion for design and frontend with the practicability of having inspiration and working code paired together. The idea is to provide Kirby users and developers easy access to ready made blocks, but also be a learning resource for web design. It’s also a great place to put used and unused concepts of my own projects and have them on hand whenever the opportunity comes along to use them!
 
-    I’m eager to know, what the community thinks about it. You can register to the mailing list on https://kirbydeck.com.
+    I’m eager to know, what the community thinks about it. You can register to the mailing list on (link: https://kirbydeck.com text: kirbydeck.com).
 
 
 ----
