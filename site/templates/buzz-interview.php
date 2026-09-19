@@ -108,7 +108,7 @@
 
 	<h1 class="h1 mb-12"><?= $page->title() ?></h1>
 
-	<p class="text-xl leading-snug mb-6">
+	<p class="text-xl leading-snug mb-12">
 		<?= $page->intro()->widont() ?>
 	</p>
 
