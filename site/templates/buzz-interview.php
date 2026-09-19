@@ -6,27 +6,45 @@
 <?php layout() ?>
 
 <style>
-:root {
-	--name-col: 2em;
-	--gap: 0.7em;
-	--bubble-pad-x: 0.9em;
-	--bubble-pad-y: 0.6em;
+.prose {
+	--avatar-size: 2.25rem;
+	--avatar-gap: 1rem;
 }
 
-.prose > :first-child {
-	padding-top: var(--bubble-pad-y);
+.interview {
+	margin-bottom: 1.5rem;
+}
+.interview > li + li {
+	margin-top: 2.75rem;
+}
+.answer {
+	margin-top: 1rem;
 }
 
-.prose :where(p, ul, .image a) {
-	position: relative;
-	padding-block: var(--bubble-pad-y);
-	min-height: 3.5em;
+
+.prose :where(.question, .answer, .outro) {
+	display: grid;
+	grid-template-columns: var(--avatar-size) minmax(0, 1fr);
+	column-gap: var(--avatar-gap);
 }
-.prose :where(p, ul) {
-	padding-left: calc(var(--name-col) + var(--gap) + var(--bubble-pad-x));
+.prose :where(.question, .answer, .outro) > :not(.avatar) {
+	grid-column: 2;
+}
+.prose :where(.question, .answer, .outro) > .image {
+	grid-column: 1 / -1;
+}
+/* the text sharing row 1 with the avatar: no inherited `* + p` spacing,
+   and centred against the avatar while it is the shorter of the two */
+.prose :where(.question, .answer, .outro) > :is(:first-child, .avatar + *) {
+	margin-top: 0;
+	align-self: center;
 }
 
-.prose strong{
+.prose .image a {
+	display: block;
+}
+
+.prose strong {
 	text-decoration: underline;
 	text-decoration-style: solid;
 	text-decoration-skip-ink: none;
@@ -35,44 +53,17 @@
 	font-weight: 400;
 }
 
-/* bubble background — starts only after the name column, so it never
-		bleeds under the name */
-.prose p::before {
-	content: '';
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: calc(var(--name-col) + var(--gap));
-	right: 0;
-	background: #ffffff00;
-	border-radius: 0.55rem;
-	z-index: -1;
-	border: #008c8b00 solid 2px;
+.prose .avatar {
+	grid-area: 1 / 1;
+	align-self: start;
+	width: var(--avatar-size);
+	height: var(--avatar-size);
+	color: var(--color-black);
 }
-
-.answer {
-	position: relative;
-}
-.prose * + .answer {
-	margin-top: 1em;
-}
-
-.avatar {
-	position: absolute;
-	left: 0;
-	top: var(--bubble-pad-y);
-	height: 2.5em;
-	width: 2.5em;
-	transform: translateY(-0.5em);
-}
-.avatar :where(img, svg) {
+.prose .avatar :where(img, svg) {
 	width: 100%;
 	height: 100%;
 	object-fit: contain;
-}
-
-.prose .image a {
-	display:block;
 }
 
 .prose img {
@@ -136,45 +127,53 @@
 	</figure>
 <?php endif ?>
 
-<article>
-	<div class="prose mb-24">
-		<?php $avatar = $page->avatar() ?>
+<article class="mb-24">
+	<?php $avatar = $page->avatar() ?>
 
+	<ol class="interview">
 		<?php foreach ($page->qa() as $qa): ?>
-			<p class="question">
-				<span class="avatar" aria-hidden="true"><?= icon('kirby') ?></span>
-				<strong><?= $qa->question()->kti() ?></strong>
-			</p>
+			<li class="prose">
+				<div class="question">
+					<span class="avatar" aria-hidden="true">
+						<?= icon('kirby') ?>
+					</span>
+					<p><strong><?= $qa->question()->kti() ?></strong></p>
+				</div>
 
-			<div class="answer">
-				<?php if ($avatar): ?>
-					<span class="avatar">
-						<?= img($avatar, [
-							'alt' => '',
-							'src' => [
-								'crop'  => true,
-								'width' => 40
-							],
-							'srcset' => [
-								'40w' => [
+				<div class="answer">
+					<?php if ($avatar): ?>
+						<span class="avatar">
+							<?= img($avatar, [
+								'alt' => '',
+								'src' => [
 									'crop'  => true,
 									'width' => 40
 								],
-								'80w' => [
-									'crop'  => true,
-									'width' => 80
+								'srcset' => [
+									'40w' => [
+										'crop'  => true,
+										'width' => 40
+									],
+									'80w' => [
+										'crop'  => true,
+										'width' => 80
+									]
 								]
-							]
-						]) ?>
-					</span>
-				<?php endif ?>
+							]) ?>
+						</span>
+					<?php endif ?>
 
-				<?= $qa->answer()->kt() ?>
-			</div>
+					<?= $qa->answer()->kt() ?>
+				</div>
+			</li>
 		<?php endforeach ?>
+	</ol>
 
-		<?php if ($page->outro()->isNotEmpty()): ?>
-			<?= $page->outro()->kt() ?>
-		<?php endif ?>
-	</div>
+	<?php if ($page->outro()->isNotEmpty()): ?>
+		<div class="prose">
+			<div class="outro">
+				<?= $page->outro()->kt() ?>
+			</div>
+		</div>
+	<?php endif ?>
 </article>
