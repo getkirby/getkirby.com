@@ -8,8 +8,8 @@
 
 <style>
   :root {
-    --name-col: 2em;	
-	--gap: 0.7em;
+    --name-col: 2em;
+		--gap: 0.7em;
     --bubble-pad-x: 0.9em;
     --bubble-pad-y: 0.6em;
   }
@@ -73,22 +73,36 @@
 	width: 100%;
 }
 
-.max-w-xl, article { 
-	max-width: 45rem;	
+.max-w-xl, article {
+	max-width: 45rem;
 	margin: auto;
 }
-
 </style>
 
 
-<div class="w-auto header-img">
-<?php if ($image = $page->image('z-interview-header.jpg')): ?>
-	<img src="<?= $image->url() ?>" alt="<?= $page->title() ?>" class="rounded mb-12 shadow-lg w-auto" />
+<?php if ($image = $page->image('header.jpg')): ?>
+	<?= img($image, [
+		// decorative
+		'alt'   => $image->alt()->or(''),
+		'class' => 'rounded mb-12 shadow-lg w-auto',
+		'src'   => [
+			'width' => 1248
+		],
+		// above the fold, so it must not be lazy-loaded
+		'lazy'          => false,
+		'fetchpriority' => 'high',
+		'sizes' => '(min-width: 90rem) 1248px, (min-width: 72rem) calc(100vw - 192px), (min-width: 30rem) calc(100vw - 96px), (min-width: 22rem) calc(100vw - 48px), calc(100vw - 32px)',
+		'srcset' => [
+			640,
+			960,
+			1248,
+			1600,
+			2496
+		]
+	]) ?>
 <?php endif ?>
-</div>
+
 <header class="mb-12 max-w-xl">
-
-
 	<div class="text-base mb-1 color-gray-600">
 		<?= $page->category()->widont() ?>
 	</div>
@@ -119,5 +133,4 @@
 	<div class="prose mb-24">
 		<?= $page->text()->kt() ?>
 	</div>
-
 </article>
