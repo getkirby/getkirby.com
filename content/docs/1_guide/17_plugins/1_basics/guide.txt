@@ -1,0 +1,307 @@
+Title: How plugins work
+
+----
+
+Intro: Plugins are how you add custom functionalities to Kirby, whether code you wrote yourself or shared from another developer. This page explains how to install a plugin, what a plugin is made of, and how Kirby finds, loads and registers a plugin.
+
+----
+
+Text:
+
+Many Kirby sites want to extend the core functionality of Kirby and Kirby offers you plenty of extensions to really make this CMS your own. This page introduces you to what a Kirby plugin is made of and how to install it.
+
+If you would rather directly build something than read about it, (link: docs/guide/plugins/first-plugin text: Your first plugin) walks through a working plugin from an empty folder.
+
+## Installing plugins
+
+Thanks to our developer community, the Kirby ecosystem has a large number of (link: https://plugins.getkirby.com text: free and paid plugins) that extend the functionality of Kirby. There are also several (link: https://plugins.getkirby.com/developers/getkirby text: official Kirby plugins) maintained by the Kirby team.
+
+Once you have found one or more plugins that meet your needs, you will need to install them. Some plugins also require additional configuration options or some setup. All this information can be found in the documentation of the respective plugin.
+
+There are usually four ways to install a plugin:
+
+(tabs…)
+
+=== Download
+
+Download the plugin via the download link and unzip. Then put the unzipped folder into the `/site/plugins/` folder of your Kirby project. If the `plugins` folder does not exist yet, create it first. The resulting folder structure should look like this:
+
+```filesystem
+site/
+  plugins/
+    plugin-name/
+      composer.json
+      index.php
+      index.js
+      README.md
+      …
+```
+
+There may be more files and folders in the downloaded plugin folder, or some of the files/folders may not be present, it depends on the plugin.
+
+=== Git
+
+If you use (link: https://git-scm.com/ text: Git) to version control your project, you can install plugins that are available from an online service like GitHub as a Git submodule:
+
+```bash
+git submodule add https://github.com/developer-name/plugin-name.git site/plugins/plugin-name
+```
+
+=== Composer
+
+Many Kirby plugins also support installation via (link: https://getcomposer.org/ text: Composer), which is a PHP package manager that must be installed on your system. This installation method works best if (link: docs/guide/install-guide/composer text: your project is managed via Composer) as well. Then you can run the following command from the root of your project:
+
+```bash
+composer require developer-name/plugin-name
+```
+
+This will automatically add the plugin to your `composer.json` and install the plugin in the `/site/plugins` folder.
+
+=== Kirby CLI
+
+The Kirby CLI helps you to make common tasks with your Kirby installations simpler. It also has a command to download and install plugins from a Git repo link:
+
+```bash
+kirby plugin:install https://github.com/developer-name/plugin-name.git
+```
+
+(…tabs)
+
+Note that some plugins may not support all installation types, so always consult their documentation. This may apply in particular to some paid plugins that are not publicly available and for which you may only receive a download link after purchase.
+
+## Anatomy of a plugin
+
+A plugin is a folder inside `/site/plugins`. Kirby looks at every folder inside this directory and cares about three file names:
+
+```filesystem
+site/
+  plugins/
+    your-plugin/
+      index.php
+      index.js
+      index.css
+```
+
+- `index.php` is the entry point. Kirby loads it and expects it to register the plugin and all its extensions.
+- `index.js` and `index.css` are loaded into the Panel if they exist.
+
+Everything else in the folder is yours to organize. Kirby only reads the other files if your `index.php` tells it to.
+
+A folder with none of these three files is skipped entirely. A folder with only `index.js` or `index.css` is loaded, but anonymously: the Panel can use the assets, yet it has no name or version to show in the system view. Add an `index.php` even for a pure Panel plugin, so your plugin is properly registered.
+
+<info>
+Kirby skips folders whose name starts with a dot or an underscore. Renaming `your-plugin` to `_your-plugin` is a quick way to switch a plugin off without deleting it.
+</info>
+
+### Plain PHP or a proper extension
+
+Not everything has to be registered as a full extension. Code that only needs to exist, e.g. a helper function, a class, a constant, can sit directly in your `index.php`, because Kirby loads that file on every request and makes those available globally, e.g. in your templates:
+
+```php "/site/plugins/your-plugin/index.php"
+<?php
+
+function superplugin_excerpt(string $text): string
+{
+	return Str::excerpt($text, 100);
+}
+```
+
+Anything that plugs into Kirby itself is different. Kirby cannot use a snippet, a page method or a Panel field it does not know about, and telling Kirby about each extension you want to add is what `Kirby::plugin()` is for.
+
+(screencast: https://www.youtube.com/watch?v=PajT4qyE55c title: Where to put your helpers)
+
+## Registering your plugin
+
+Every plugin registers itself with the static `Kirby::plugin()` method. It takes the plugin name and everything the plugin adds to Kirby:
+
+```php "/site/plugins/your-plugin/index.php"
+<?php
+
+Kirby::plugin(
+	name: 'superwoman/superplugin',
+	extends: [
+		// extensions go here
+	]
+);
+```
+
+The arguments are named. You can pass them positionally, but naming them keeps the call readable once a plugin registers more than a handful of extensions.
+
+<warning>
+`extends` is required, even when your plugin has no extensions at all. Called with a name alone, `Kirby::plugin()` acts as a getter and returns an already registered plugin instead of registering yours.
+
+```php
+Kirby::plugin(name: 'superwoman/superplugin', extends: []); // registers
+Kirby::plugin(name: 'superwoman/superplugin');              // returns
+```
+</warning>
+
+### Choosing a plugin name
+
+The name follows the `{vendor}/{plugin}` format known from Composer and npm. Both parts may only contain the characters `a-z`, numbers and dashes.
+
+The name has to be unique, because Kirby uses it to identify your plugin in the Panel, during the update check and in our (link: https://plugins.getkirby.com text: plugin directory). It is also how you look a plugin up at runtime:
+
+```php
+$kirby->plugin('superwoman/superplugin')->version();
+```
+
+Two things this name is *not*:
+
+- It is **not the folder name**. The folder is only how Kirby finds the plugin on disk.
+- It is **not the Composer package name**. Those conventionally differ: `superwoman/kirby-superplugin` as the Composer package, `superwoman/superplugin` as the plugin name. The `kirby-` prefix is useful on Packagist, where your package sits next to packages for every other framework, and redundant inside Kirby.
+
+<info>
+Do not put a Kirby version number in either name. With a major Kirby release every year, the name would be outdated long before the plugin is. (link: docs/guide/plugins/publishing text: Publishing) covers naming in more detail.
+</info>
+
+### The other arguments
+
+`name` and `extends` are the two you always pass. Three more describe the plugin itself:
+
+```php "/site/plugins/your-plugin/index.php"
+Kirby::plugin(
+	name: 'superwoman/superplugin',
+	extends: [
+		'snippets'  => [...],
+		'templates' => [...],
+		'hooks'     => [...]
+	],
+	version: '1.0.0',
+	info: [
+		'description' => 'Does something useful',
+		'license'     => 'MIT'
+	]
+);
+```
+
+Everything in `version` and `info` can also come from a `composer.json` next to your `index.php`, which is where it usually belongs, see (link: docs/guide/plugins/packaging text: Packaging and distribution). The arguments are the alternative for plugins that do not ship one.
+
+The third argument is `license`, and it is not the same as the `license` key inside `info`. That key is only a name; the argument lets Kirby show whether the license is active, which is what paid plugins need. See (link: docs/guide/plugins/licensing text: Licensing).
+
+## Extensions
+
+An extension is a single thing your plugin contributes to Kirby: a snippet, a template, a page method, a Panel field, a hook, a route. The `extends` argument is a map of extension types to what you are adding.
+
+Registering a snippet means pointing a name at a file:
+
+```php "/site/plugins/your-plugin/index.php"
+<?php
+
+Kirby::plugin(
+	name: 'superwoman/superplugin',
+	extends: [
+		'snippets' => [
+			'newsletter' => __DIR__ . '/snippets/newsletter.php'
+		]
+	]
+);
+```
+
+Any template in the site can now use it, exactly as if the file lived in `/site/snippets`:
+
+```php
+<?php snippet('newsletter') ?>
+```
+
+Other extension types take a closure instead of a file path, and some take an array of settings. What every type has in common is that it is one key in that array, so a plugin can register as many as it likes:
+
+```php "/site/plugins/your-plugin/index.php"
+Kirby::plugin(
+	name: 'superwoman/superplugin',
+	extends: [
+		'snippets' => [
+			'newsletter' => __DIR__ . '/snippets/newsletter.php'
+		],
+		'templates' => [
+			'blog' => __DIR__ . '/templates/blog.php'
+		],
+		'hooks' => [
+			'page.update:after' => function ($newPage) {
+				// react to the change
+			}
+		]
+	]
+);
+```
+
+Kirby has more than forty extension types, and the (link: docs/reference/plugins/extensions text: reference) documents each one with the shape it expects.
+
+### Registering extensions conditionally
+
+The array is built when your `index.php` runs, so you can decide what goes in it. What you cannot do at that moment is look at another plugin, because it may not have been loaded yet.
+
+For that, use the (link: docs/reference/plugins/hooks/system-loadplugins-after text: `system.loadPlugins:after`) hook, which fires once every plugin is registered:
+
+```php "/site/plugins/your-plugin/index.php"
+Kirby::plugin(
+	name: 'superwoman/superplugin',
+	extends: [
+		'hooks' => [
+			'system.loadPlugins:after' => function () {
+				if ($this->plugin('superwoman/other-plugin')) {
+					// the other plugin is available
+				}
+			}
+		]
+	]
+);
+```
+
+## When plugins are loaded
+
+Plugins are loaded while the Kirby object is being constructed, which means:
+
+1. `/site/config/config.php` has already been read, so your plugin can act on the site's options.
+2. Kirby's own extensions are already registered.
+3. Your plugins are loaded, in **alphabetical order of their folder name**.
+4. The `system.loadPlugins:after` hook fires.
+
+Alphabetical order is the only guarantee you get. If your plugin depends on another one, do not rely on the folder names sorting the right way — check for the other plugin in the hook instead.
+
+<warning>
+Some older tutorials load plugin code from a `config.php` inside the plugin folder. That file is read in step 1, before plugins are loaded, which makes the loading order hard to follow and easy to break. Register everything from `index.php` instead.
+</warning>
+
+## Plugin options
+
+A plugin can define its own options together with their default values:
+
+```php "/site/plugins/your-plugin/index.php"
+Kirby::plugin(
+	name: 'superwoman/superplugin',
+	extends: [
+		'options' => [
+			'apiKey' => null,
+			'cache'  => true
+		]
+	]
+);
+```
+
+Kirby prefixes them automatically with your plugin name, with the slash replaced by a dot. `superwoman/superplugin` becomes `superwoman.superplugin`, so the options above are `superwoman.superplugin.apiKey` and `superwoman.superplugin.cache`. The prefix is what keeps your options from colliding with Kirby's own or with another plugin's.
+
+Read them anywhere with the `$kirby` object or the `option()` helper:
+
+```php
+$kirby->option('superwoman.superplugin.apiKey');
+option('superwoman.superplugin.cache');
+```
+
+Your users override the defaults in their config, using the same prefixed keys:
+
+```php "/site/config/config.php"
+return [
+  'superwoman.superplugin.apiKey' => 'a-real-key'
+];
+```
+
+<info>
+Options are a better place for anything a user might want to change than asking them to edit your plugin's code. An edited plugin cannot be updated.
+</info>
+
+## Where to go from here
+
+- (link: docs/guide/plugins/first-plugin text: Your first plugin) builds one from scratch
+- (link: docs/reference/plugins/extensions text: The extensions reference) lists everything you can extend
+- (link: docs/guide/plugins/packaging text: Packaging and distribution) prepares a plugin for other people
