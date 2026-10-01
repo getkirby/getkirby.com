@@ -46,7 +46,7 @@ A `composer.json` describes your plugin: what it is called, who wrote it, which 
   },
   "extra": {
     "kirby": {
-      "compatible": "^5.0"
+      "compatible": "(kirby-version: ^major.0)"
     }
   }
 }
@@ -84,7 +84,7 @@ By default the installer uses the part of the package name after the slash as th
   "extra": {
     "installer-name": "anchor",
     "kirby": {
-      "compatible": "^5.0"
+      "compatible": "(kirby-version: ^major.0)"
     }
   }
 }

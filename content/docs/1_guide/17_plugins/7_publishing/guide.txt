@@ -85,7 +85,7 @@ Three fields are read to find out which Kirby version your plugin supports, in t
 {
   "extra": {
     "kirby": {
-      "compatible": "^4.0 || ^5.0"
+      "compatible": "^(kirby-version: major offset: -1).0 || (kirby-version: ^major.0)"
     }
   }
 }
@@ -96,7 +96,7 @@ Three fields are read to find out which Kirby version your plugin supports, in t
 ```json "/site/plugins/anchor/composer.json"
 {
   "require": {
-    "getkirby/cms": "^5.0"
+    "getkirby/cms": "(kirby-version: ^major.0)"
   }
 }
 ```
@@ -110,12 +110,12 @@ Requiring the CMS is the only one of the three fields that Composer acts on: it 
 ```json "/site/plugins/anchor/composer.json"
 {
   "conflict": {
-    "getkirby/cms": "<5.0"
+    "getkirby/cms": "(kirby-version: <major.0)"
   }
 }
 ```
 
-It stops your plugin from being installed next to a Kirby that is too old, without making Kirby a dependency. Only the plain `<version` and `<=version` forms are understood; the example above is read as "Kirby 5.0 and up".
+It stops your plugin from being installed next to a Kirby that is too old, without making Kirby a dependency. Only the plain `<version` and `<=version` forms are understood; the example above is read as "Kirby (kirby-version: major.0) and up".
 
 <info>
 `require-dev` is deliberately ignored. It usually holds a CI test matrix rather than a statement about what your plugin supports.
