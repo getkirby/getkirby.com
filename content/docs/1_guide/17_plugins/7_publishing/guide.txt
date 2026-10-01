@@ -14,7 +14,7 @@ Your plugin is packaged and installable. What is left is helping people find it,
 
 Name the repository so that it is obvious the plugin is for Kirby. Most developers use `kirby-pluginname`, and the plugin name itself should say what the plugin does.
 
-Do not put a Kirby version number in the name. Kirby has a major release every year, and a plugin called `kirby(kirby-version: major offset: -1)-anchor` looks abandoned the moment (kirby-version: major) is out, even when it works perfectly.
+Do *not* put a Kirby version number in the name. Kirby has a major release every year, and a plugin called `kirby(kirby-version: major offset: -1)-anchor` looks abandoned the moment (kirby-version: major) is out, even when it works perfectly.
 
 The three names involved are allowed to differ, and usually should:
 
@@ -134,7 +134,7 @@ The `composer.json` is read at the newest release of each of your major versions
 Release lines come from your stable GitHub releases; pre-releases and drafts are skipped. A repository with no releases falls back to its Git tags, and one with neither is read from its default branch as a single line.
 
 <info>
-Dropping an old Kirby in a new major release does not remove your plugin from the directory for that Kirby. In the table above, the 3.x line no longer mentions Kirby (kirby-version: major offset: -1), but the 2.x line still does, and that is the release the directory offers to anyone still on it.
+Dropping an old Kirby version in a new major release does not remove your plugin from the directory for that Kirby version. In the table above, the 3.x line no longer mentions Kirby (kirby-version: major offset: -1), but the 2.x line still does, and that is the release the directory offers to anyone still on it.
 </info>
 
 ### And in your `README`
