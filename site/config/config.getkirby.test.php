@@ -17,14 +17,15 @@ return [
 		]
 	],
 	'thumbs'    => [
+		'driver' => 'imagick',
 		// 'bin' => '/usr/local/bin/convert'
 	],
 	'hub'       => [
 		'url' => 'https://hub.getkirby.test'
 	],
 	'partners'  => [
-		'url'        => 'http://partners.test/partners.json',
-		'partnerUrl' => 'http://partners.test/partners/',
+		'url'        => 'http://partners.test/profiles.json',
+		'partnerUrl' => 'http://partners.test/profiles/',
 		'signupUrl'  => 'http://partners.test/signup'
 
 	],

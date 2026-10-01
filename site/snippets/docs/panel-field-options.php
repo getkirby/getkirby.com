@@ -388,11 +388,11 @@ If you prefer to use (link: docs/guide/languages/custom-language-variables text:
 ```yaml
 options:
   summer:
-    *: season.summer
+    "*": season.summer
   autumn:
-    *: season.autumn
+    "*": season.autumn
   winter:
-    *: season.winter
+    "*": season.winter
   spring:
-    *: season.spring
+    "*": season.spring
 ```

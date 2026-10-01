@@ -2,6 +2,7 @@
 
 namespace Kirby\Buy;
 
+use Kirby\Reflection\Constructor;
 use Kirby\Toolkit\Str;
 
 /**
@@ -47,7 +48,18 @@ class Passthrough
 			return new static(license: $json);
 		}
 
-		return new static(...json_decode($json, true));
+		$data = json_decode($json, true);
+
+		if (is_array($data) === false) {
+			return new static();
+		}
+
+		// drop unknown properties; Paddle sends back the passthrough
+		// that was stored when the checkout was created, so it can
+		// still contain properties that have been removed since then
+		$data = (new Constructor(static::class))->getAcceptedArguments($data);
+
+		return new static(...$data);
 	}
 
 	/**
