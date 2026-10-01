@@ -12,10 +12,6 @@ Everything so far ran on the server. As soon as your plugin adds a field, a view
 
 This page continues from (link: docs/guide/plugins/first-plugin text: Your first plugin). It does not depend on (link: docs/guide/plugins/structure text: Structuring your plugin code), so you can come here directly if the Panel UI is what you need.
 
-<info>
-The result of this page is the (link: https://github.com/getkirby/pluginkit/tree/step-3-panel text: `step-3-panel`) tag of the Pluginkit.
-</info>
-
 ## Two parts of a Panel extension
 
 Any Panel-related extension consists of two parts: The PHP half declares that the extension exists and prepares its data. The JavaScript half renders it. In its smallest form that is one file each:

@@ -28,7 +28,7 @@ You can follow along, but there will be a GitHub template at the end of the guid
 
 ## Plugin files
 
-To begin, we need to establish the base of our plugin first. The [pluginkit](https://github.com/getkirby/pluginkit/tree/step-3-panel) is a very nice starting point:
+To begin, we need to establish the base of our plugin first. The [pluginkit](https://github.com/getkirby/pluginkit/tree/4-panel) is a very nice starting point:
 
 ```filesystem
 src/

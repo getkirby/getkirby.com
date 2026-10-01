@@ -20,10 +20,6 @@ $page->anchor(); // 'hello-world' for a page titled 'Hello, World!'
 
 A (link: docs/reference/plugins/extensions/page-methods text: page method) is one of many extension types. It is a good first choice because you can call it from any template and see the result immediately.
 
-<info>
-The code on this page is the (link: https://github.com/getkirby/pluginkit/tree/step-1-minimal text: `step-1-minimal`) tag of our example plugin, the Pluginkit. Each page of this chapter matches one tag, so you can compare your own code against a working reference at every stage.
-</info>
-
 ## Create the plugin folder
 
 Every plugin lives in its own folder inside `/site/plugins`. Create one and give it a name that describes what the plugin does:

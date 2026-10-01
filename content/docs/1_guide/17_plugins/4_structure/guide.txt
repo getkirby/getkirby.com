@@ -10,10 +10,6 @@ Text:
 
 This page continues where (link: docs/guide/plugins/first-plugin text: Your first plugin) left off. The plugin registers one page method whose logic sits inline in the `index.php`. That is fine for a few lines. Once the logic gets longer, or a second extension needs the same code, it belongs in a class of its own.
 
-<info>
-The result of this page is the (link: https://github.com/getkirby/pluginkit/tree/step-2-classes text: `step-2-classes`) tag of the Pluginkit.
-</info>
-
 ## One class per file
 
 Put each class in its own file under a `src` folder and name the file after the class:

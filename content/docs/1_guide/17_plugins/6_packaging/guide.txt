@@ -12,10 +12,6 @@ Your users install plugins by (link: docs/guide/plugins/basics#installing-plugin
 
 Supporting all three is worth the effort, because which one a user picks depends on their project, not on your plugin.
 
-<info>
-The result of this page is the (link: https://github.com/getkirby/pluginkit/tree/step-4-composer text: `step-4-composer`) tag of the Pluginkit.
-</info>
-
 ## Your own repository
 
 Your plugin needs a Git repository of its own, separate from the project you built it in. Users who install it as a submodule clone that repository directly, and it is what Packagist and our (link: https://plugins.getkirby.com text: plugin directory) point at.
