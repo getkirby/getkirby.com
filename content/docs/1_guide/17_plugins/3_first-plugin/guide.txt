@@ -54,6 +54,10 @@ Kirby::plugin(
 
 The `name` is the plugin name in the format `{vendor}/{plugin}`. Pick something unique, because the name identifies your plugin in the Panel, in the update check and in our (link: https://plugins.getkirby.com text: plugin directory). Both parts may only contain the characters `a-z`, numbers and dashes.
 
+<info>
+The name is not the folder name or the Composer package name. (link: docs/guide/plugins/basics#choosing-a-plugin-name text: Choosing a plugin name) explains the difference.
+</info>
+
 `extends` is everything your plugin adds to Kirby. It is empty for now.
 
 <warning>
