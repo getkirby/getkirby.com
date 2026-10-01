@@ -28,17 +28,19 @@ Let's first have a look at the content structure: We have an `events` page with 
 ```filesystem
 content/
     1_events/
-        1_event-a/
+        20260510_event-a/
             event.txt
-        2_event-b/
+        20260605_event-b/
             event.txt
-        3_event-c/
+        20260701_event-c/
             event.txt
         events.txt
     success/
         success.txt
     ...
 ```
+
+Each registration will be stored as a draft subpage of the event it belongs to.
 
 ## The registration form snippet
 
@@ -49,37 +51,40 @@ First, we need the event registration form, which we will save in a snippet call
 
   <div class="form-element">
     <label for="name">Name <abbr title="required">*</abbr></label>
-    <input type="text" id="name" name="name" value="<?= $data['name'] ?? null ?>" required/>
+    <input type="text" id="name" name="name" value="<?= esc($data['name'] ?? '', 'attr') ?>" required>
   </div>
 
   <div class="form-element">
     <label for="company">Company</label>
-    <input type="text" id="company" name="company" value="<?= $data['company'] ?? null ?>"/>
+    <input type="text" id="company" name="company" value="<?= esc($data['company'] ?? '', 'attr') ?>">
   </div>
 
   <div class="form-element">
     <label for="email">Email <abbr title="required">*</abbr></label>
-    <input type="email" name="email" id="email" value="<?= $data['email'] ?? null ?>" required/>
+    <input type="email" id="email" name="email" value="<?= esc($data['email'] ?? '', 'attr') ?>" required>
   </div>
 
   <div class="form-element">
     <label for="message">Message</label>
-    <textarea name="message" id="message"><?= $data['message'] ?? null ?></textarea>
+    <textarea id="message" name="message"><?= esc($data['message'] ?? '') ?></textarea>
   </div>
 
   <div class="honey">
-     <label for="website">If you are a human, leave this field empty</label>
-     <input type="website" name="website" id="website" value="<?= isset($data['website']) ? esc($data['website']) : null ?>"/>
+    <label for="website">If you are a human, leave this field empty</label>
+    <input type="url" id="website" name="website" tabindex="-1" autocomplete="off">
   </div>
 
-  <input class="registration-button" type="submit" name="register" value="Register" />
+  <input type="hidden" name="csrf" value="<?= csrf() ?>">
+  <input class="registration-button" type="submit" name="register" value="Register">
 
 </form>
 ```
 
-The form contains some form fields (`name`, `company`, `email` and `message`) and a honeypot field to ensure a minimum level of spam bot protection.
+The form contains some form fields (`name`, `company`, `email` and `message`), a honeypot field to ensure a minimum level of spam bot protection and a hidden field with a (link: docs/reference/templates/helpers/csrf text: CSRF token).
 
-The honeypot field needs to be positioned off the screen via CSS. Therefore add these styles to your stylesheet (you can  change the class and styling).
+When the form is redisplayed after a failed validation, we fill in the values the user already entered. Since this is user input, we always escape it with the (link: docs/reference/templates/helpers/esc text: `esc()` helper) before we output it.
+
+The honeypot field needs to be positioned off the screen via CSS. Therefore add these styles to your stylesheet (you can change the class and styling).
 
 ```css
 .honey {
@@ -90,7 +95,7 @@ The honeypot field needs to be positioned off the screen via CSS. Therefore add 
 
 When we submit the form, the `action` attribute calls the URL of the current page. This allows us to process the input data in the `event.php` controller. We will get to this in a bit.
 
-The form snippet is included the `event.php` template because we want to render it on every event page that uses this template.
+The form snippet is included in the `event.php` template because we want to render it on every event page that uses this template.
 
 ## The `event.php` template
 
@@ -108,8 +113,12 @@ Additionally, we will display alerts if the user filled in the form incorrectly 
       <time class="event-date"><?= $page->date()->toDate('d F Y') ?></time>
     </header>
 
+    <div class="text">
+      <?= $page->text()->kt() ?>
+    </div>
+
     <div class="registration">
-      <header class="note-header">
+      <header class="registration-header">
         <h2>Register for this event</h2>
       </header>
 
@@ -124,7 +133,8 @@ Additionally, we will display alerts if the user filled in the form incorrectly 
         </ul>
       </div>
       <?php endif ?>
-      <?php snippet('registration-form', compact('data')); ?>
+
+      <?php snippet('registration-form', ['data' => $data]) ?>
     </div>
   </article>
 </main>
@@ -137,6 +147,8 @@ Additionally, we will display alerts if the user filled in the form incorrectly 
 ```php "/site/controllers/event.php"
 <?php
 
+use Kirby\Toolkit\Str;
+
 return function ($kirby, $page) {
 
     // if the form has been submitted…
@@ -145,7 +157,6 @@ return function ($kirby, $page) {
         // check the honeypot and exit if is has been filled in
         if (empty(get('website')) === false) {
             go($page->url());
-            exit;
         }
 
         $data = [
@@ -165,29 +176,33 @@ return function ($kirby, $page) {
             'email' => 'Please enter a valid (link: #email text: email address)',
         ];
 
+        // check the CSRF token to make sure the request came from our form
+        if (csrf(get('csrf')) !== true) {
+            $alert = ['Your session has expired. Please submit the form again.'];
+
         // some of the data is invalid
-        if ($invalid = invalid($data, $rules, $messages)) {
+        } elseif ($invalid = invalid($data, $rules, $messages)) {
             $alert = $invalid;
 
         } else {
 
-            // authenticate as almighty
-            $kirby->impersonate('kirby');
-
             // everything is ok, let's try to create a new registration
             try {
-                // we store registrations as subpages of the current page
-                $registration = $page->createChild([
-                    'slug'     => md5(str::slug($data['name'] . microtime())),
-                    'template' => 'registration',
-                    'content'  => $data
-                ]);
+                // authenticate as almighty, but only for this one action
+                $registration = $kirby->impersonate('kirby', function () use ($page, $data) {
+                    // we store registrations as subpages of the current page
+                    return $page->createChild([
+                        'slug'     => md5(Str::slug($data['name']) . microtime()),
+                        'template' => 'registration',
+                        'content'  => $data
+                    ]);
+                });
 
                 if ($registration) {
                     // store referer and name in session
                     $kirby->session()->set([
                         'referer' => $page->uri(),
-                        'regName'  => esc($data['name'])
+                        'regName' => esc($data['name'])
                     ]);
                     go('success');
                 }
@@ -207,7 +222,7 @@ return function ($kirby, $page) {
 ```
 Since this is a lot of stuff, let's go through this one step at a time:
 
-The form evaluation starts once we receive a `POST` request. First, we check if a bot was trapped in our honeypot. If this is the case, we send him back to the page and stop script execution.
+The form evaluation starts once we receive a `POST` request. First, we check if a bot was trapped in our honeypot. If this is the case, we send it back to the page. The `go()` helper redirects and stops the script execution.
 
 We then fetch the values of each form field from the `POST` data into the `$data` variable. We can use the `get()` helper to do so:
 
@@ -222,7 +237,6 @@ $data = [
 
 Next, we check if all form fields have been filled according to our validation rules using the `invalid()` helper:
 
-All fields are required and must be filled out.
 - The `name` field is required.
 - The `email` field is required and must contain a valid email address.
 
@@ -248,29 +262,39 @@ You can change these rules based on the type of data you want to obtain and use 
 To prevent garbage data, you may want to use validators on the other fields as well, for example by limiting input to a given character set (using regex patterns).
 </info>
 
-If all went well, we authenticate using the almighty `kirby` user and try to create a new subpage within a `try/catch` block, which allows us to react on possible errors. We store all registrations as subpages of the current `event` page. If the registration was successfully created, two things happen:
+Before we validate the data, we make sure the request actually came from our form by checking the CSRF token we added to the form:
+
+```php
+if (csrf(get('csrf')) !== true) {
+    $alert = ['Your session has expired. Please submit the form again.'];
+}
+```
+
+If all went well, we try to create a new subpage within a `try/catch` block, which allows us to react on possible errors. We store all registrations as subpages of the current `event` page. Visitors of our site are not logged in, so they don't have the permission to create pages. That's why we wrap the creation of the page in a callback that we pass to (link: docs/reference/objects/cms/app/impersonate text: `$kirby->impersonate()`). This way, the almighty `kirby` user is only used for this one action and the permissions are reset right afterwards.
+
+If the registration was successfully created, two things happen:
 
 1. We store the current page URI and the name in the session.
 2. We redirect to the `success` page.
 
 ```php
-// authenticate as almighty
-$kirby->impersonate('kirby');
-
 // everything is ok, let's try to create a new registration
 try {
-    // we store registrations as subpages of the current page
-    $registration = $page->createChild([
-        'slug'     => md5(str::slug($data['name'] . microtime())),
-        'template' => 'registration',
-        'content'  => $data
-    ]);
+    // authenticate as almighty, but only for this one action
+    $registration = $kirby->impersonate('kirby', function () use ($page, $data) {
+        // we store registrations as subpages of the current page
+        return $page->createChild([
+            'slug'     => md5(Str::slug($data['name']) . microtime()),
+            'template' => 'registration',
+            'content'  => $data
+        ]);
+    });
 
     if ($registration) {
         // store referer and name in session
         $kirby->session()->set([
             'referer' => $page->uri(),
-            'regName'  => esc($data['name'])
+            'regName' => esc($data['name'])
         ]);
         go('success');
     }
@@ -280,8 +304,70 @@ try {
 }
 ```
 
+New pages created with `createChild()` are always drafts. This is exactly what we want here: registrations are not publicly accessible, but you can review them in the Panel.
+
 If the registration fails, we add the error message to our alerts variable.
 
+## Blueprints
+
+To manage the registrations in the Panel, we add a `registration.yml` blueprint with fields for the submitted data:
+
+```yaml "/site/blueprints/pages/registration.yml"
+title: Registration
+icon: user
+
+options:
+  changeTitle: false
+  changeSlug: false
+
+fields:
+  name:
+    type: text
+    width: 1/2
+  company:
+    type: text
+    width: 1/2
+  email:
+    type: email
+  message:
+    type: textarea
+    buttons: false
+```
+
+In the `event.yml` blueprint, we list all registrations of an event in a pages section. Since registrations are drafts, we set the section's `status` option to `draft`:
+
+```yaml "/site/blueprints/pages/event.yml"
+title: Event
+icon: calendar
+num: date
+
+columns:
+  main:
+    width: 2/3
+    fields:
+      text:
+        type: textarea
+        size: large
+
+  sidebar:
+    width: 1/3
+    sections:
+      meta:
+        type: fields
+        fields:
+          date:
+            type: date
+            required: true
+
+      registrations:
+        type: pages
+        headline: Registrations
+        template: registration
+        status: draft
+        create: false
+        text: "{{ page.name }}"
+        info: "{{ page.email }}"
+```
 
 ## The `success` page and a plugin
 
@@ -291,17 +377,18 @@ If the registration was successful, the user is redirected to the `success` page
 Title: Success
 
 \----
+
 Text:
 
 Hello {{ name }},
-Thank your for registering for **{{ event }}**.
+Thank you for registering for **{{ event }}**.
 
 You will receive confirmation and further information soon via email to the address you provided.
 
 If you want to register for another event, go back to the (link: events text: Events overview page).
 ```
 
-In the `text` field, we include a placeholder for the event title to customize it a little. To actually display the title, we use a `kirbyTags:after` hook in a plugin.
+In the `text` field, we include placeholders for the name and the event title to customize it a little. To actually replace them, we use a `kirbytags:after` hook in a plugin.
 
 The `success` page is rendered using the `default.php` template.
 
@@ -312,14 +399,22 @@ In the plugin, we replace the `name` and `event` placeholders in the text with t
 ```php "/site/plugins/event/index.php"
 <?php
 
+use Kirby\Cms\App as Kirby;
+use Kirby\Toolkit\Str;
+
 Kirby::plugin('eventkit/event', [
     'hooks' => [
-        'kirbytags:after' => function ($text, $data, $options) {
+        'kirbytags:after' => function (string|null $text, array $data, array $options) {
+            // only touch texts that contain our placeholders
+            if ($text === null || Str::contains($text, '{{') === false) {
+                return $text;
+            }
+
             $session = kirby()->session();
 
             if ($location = $session->get('referer')) {
                 if ($page = page(urldecode($location))) {
-                    $title = $page->title();
+                    $title = $page->title()->escape();
                 }
             }
 
