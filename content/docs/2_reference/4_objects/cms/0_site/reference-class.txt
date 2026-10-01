@@ -22,6 +22,18 @@ $site = $kirby->site();
 $site = site();
 ```
 
+## Content fields
+
+The `$site` class offers a magic caller for your (link: docs/guide/content/fields text: content fields). Instead of getting them via `$site->content()->get('your_field')`, you can use the shorthand `$site->your_field()`.
+
+### Reserved names
+
+You cannot use the shorthand for fields with names that conflict with methods of the `$site` class or with (link: docs/reference/plugins/extensions/site-methods text: custom site methods). Besides the methods listed above, this also includes internal methods that are not part of the documented API. The following names are reserved:
+
+(reserved-names: Kirby\Cms\Site)
+
+To access a field with a reserved name, use `$site->content()->get('fieldname')`. We recommend prefixing your field names instead to avoid any conflicts.
+
 ----
 
 Examples:

@@ -34,6 +34,17 @@ $user = $kirby->users()->first();
 Before calling any of the methods of the User class, verify that you have a valid User object.
 </info>
 
+## Content fields
+
+The `$user` class offers a magic caller for your (link: docs/guide/content/fields text: content fields). Instead of getting them via `$user->content()->get('your_field')`, you can use the shorthand `$user->your_field()`.
+
+### Reserved names
+
+You cannot use the shorthand for fields with names that conflict with methods of the `$user` class or with (link: docs/reference/plugins/extensions/user-methods text: custom user methods). Besides the methods listed above, this also includes internal methods that are not part of the documented API. The following names are reserved:
+
+(reserved-names: Kirby\Cms\User)
+
+To access a field with a reserved name, use `$user->content()->get('fieldname')`. We recommend prefixing your field names instead to avoid any conflicts.
 
 ----
 
