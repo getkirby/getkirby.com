@@ -57,19 +57,6 @@ Kirby ships with these statuses. Each one comes with its own icon, label and col
 | `acknowledged` | The user confirmed they are aware of the license terms |
 | `unknown` | The status could not be determined |
 
-Because the status is only computed when the system view is rendered, you can look it up at that moment:
-
-```php "/site/plugins/anchor/index.php"
-Kirby::plugin(
-	name: 'superwoman/anchor',
-	extends: [...],
-	license: [
-		'name'   => 'Anchor License',
-		'status' => option('superwoman.anchor.licenseKey') ? 'active' : 'missing'
-	]
-);
-```
-
 ### A custom status
 
 If none of the built-in statuses fit, pass an array instead of a string and define the label, icon, color and link yourself:
