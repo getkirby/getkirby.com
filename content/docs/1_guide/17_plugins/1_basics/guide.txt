@@ -175,7 +175,7 @@ Kirby::plugin(
 );
 ```
 
-Everything in `version` and `info` can also come from a `composer.json` next to your `index.php`. `composer.json`is where it usually belongs, see (link: docs/guide/plugins/packaging text: Packaging and distribution). The arguments are the alternative for plugins that do not ship with a `composer.json`.
+Everything in `version` and `info` can also come from a `composer.json` next to your `index.php`. `composer.json` is where it usually belongs, see (link: docs/guide/plugins/packaging text: Packaging and distribution). The arguments are the alternative for plugins that do not ship with a `composer.json`.
 
 The third argument is `license`, and it is not the same as the `license` key inside `info`. That info key is only a name; the separate argument lets Kirby show whether the license is active, which is what paid plugins need. See (link: docs/guide/plugins/licensing text: Licensing).
 
