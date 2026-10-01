@@ -109,3 +109,5 @@ If you use another separator than the default comma, you have to pass this separ
 ```
 
 See [`$field->split()`](/docs/reference/templates/field-methods/split) for more information.
+
+(docs: panel-field-update field: tags)

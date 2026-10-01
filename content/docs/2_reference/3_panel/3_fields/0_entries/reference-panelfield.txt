@@ -42,3 +42,5 @@ To easily loop through your entries and retrieve each entry as field object, you
   <?php endforeach ?>
 </ul>
 ```
+
+(docs: panel-field-update field: entries vars: level=3)

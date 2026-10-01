@@ -253,6 +253,8 @@ return [
 ];
 ```
 
+(docs: panel-field-update field: blocks)
+
 ## Further reading
 
 - (link: https://getkirby.com/docs/reference/panel/blocks text: Block types)

@@ -252,6 +252,8 @@ foreach($relatedPages as $relatedPage): ?>
 <?php endforeach ?>
 ```
 
+(docs: panel-field-update field: pages)
+
 ## More information
 
 (link: docs/cookbook/collections/related-articles text: Related articles)

@@ -101,3 +101,4 @@ if ($page->toggle()->toBool() === true) {
 }
 ```
 
+(docs: panel-field-update field: toggle)

@@ -182,3 +182,5 @@ If you have set the (link: docs/reference/system/options/date text: date handler
 ```php
 <?= $page->published()->toDate('%Y-%m-%d') ?>
 ```
+
+(docs: panel-field-update field: date)

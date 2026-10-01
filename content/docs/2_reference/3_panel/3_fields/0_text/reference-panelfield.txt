@@ -54,3 +54,5 @@ With fallback text if field is empty:
 ```
 
 For more field manipulations, check out Kirby's (link: docs/reference/templates/field-methods text: field methods).
+
+(docs: panel-field-update field: text)

@@ -62,3 +62,5 @@ Convert the field value to a float:
 ```
 
 For more field manipulations, check out Kirby's (link: docs/reference/templates/field-methods text: field methods).
+
+(docs: panel-field-update field: range)

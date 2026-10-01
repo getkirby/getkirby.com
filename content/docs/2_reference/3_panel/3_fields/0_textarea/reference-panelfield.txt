@@ -142,3 +142,4 @@ However, there might be situations, where you want to parse KirbyTags, but not r
 
 For more field manipulations, check out Kirby's (link: docs/reference/templates/field-methods text: field methods).
 
+(docs: panel-field-update field: textarea)

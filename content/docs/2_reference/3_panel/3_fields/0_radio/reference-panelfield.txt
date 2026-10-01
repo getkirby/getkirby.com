@@ -69,3 +69,5 @@ If you want to render all letters in uppercase:
 ```
 
 If you want to output the text that is shown to the user rather than the value stored in the content file, you have different options, that are explained in our Cookbook recipe (link: docs/cookbook/i18n/fetching-field-options text: Fetching field options).
+
+(docs: panel-field-update field: radio)

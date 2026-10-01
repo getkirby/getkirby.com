@@ -58,3 +58,5 @@ A multiselect field stores all selected values in a comma separated list (`value
   <?php endforeach ?>
 </ul>
 ```
+
+(docs: panel-field-update field: multiselect)

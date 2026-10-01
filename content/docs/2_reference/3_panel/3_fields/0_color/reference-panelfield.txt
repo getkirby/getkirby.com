@@ -181,3 +181,4 @@ By default, the API type expects that the JSON endpoint returns an option array 
 }
 ```
 
+(docs: panel-field-update field: color)

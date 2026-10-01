@@ -48,6 +48,4 @@ See the docs for the [`toLink()`](/docs/reference/templates/field-methods/to-lin
 
 For more field manipulations, check out Kirby's (link: docs/reference/templates/field-methods text: field methods).
 
-
-
-
+(docs: panel-field-update field: url)

@@ -103,3 +103,5 @@ Let's say we wanted to render the `contact` data from above in a template:
 <info>
 If you nest object fields inside another object field, block field or structure field, you have to call the `toObject()` method on the nested fields as well and then access the nested object properties like above.
 </info>
+
+(docs: panel-field-update field: object)

@@ -100,3 +100,5 @@ fields:
 	<!-- -->
 </div>
 ```
+
+(docs: panel-field-update field: slug)

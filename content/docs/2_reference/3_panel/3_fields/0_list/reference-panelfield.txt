@@ -50,3 +50,5 @@ The content of the list field is stored as plain HTML. To render the field in yo
 ```php
 <?= $page->list() ?>
 ```
+
+(docs: panel-field-update field: list)

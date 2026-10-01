@@ -201,3 +201,5 @@ foreach($images as $image): ?>
   <img src="<?= $image->url() ?>" alt="">
 <?php endforeach ?>
 ```
+
+(docs: panel-field-update field: files)

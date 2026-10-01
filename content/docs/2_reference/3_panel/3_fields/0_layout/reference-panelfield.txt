@@ -236,3 +236,5 @@ You have also access to a shortcut, which allows you to call the settings field 
 </section>
 <?php endforeach ?>
 ```
+
+(docs: panel-field-update field: layout)

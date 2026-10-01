@@ -74,3 +74,5 @@ For floating value, use the `toFloat()` method:
 ```php
 <?= $page->numberfield()->toFloat() ?>
 ```
+
+(docs: panel-field-update field: number)

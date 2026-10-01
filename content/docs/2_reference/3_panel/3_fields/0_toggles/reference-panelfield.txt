@@ -144,3 +144,5 @@ If your saved values are lowercase versions of the text shown to the user, you m
 ```
 
 If you want to output the text that is shown to the user rather than the value stored in the content file, you have different options, that are explained in our Cookbook recipe (link: docs/cookbook/i18n/fetching-field-options text: Fetching field options).
+
+(docs: panel-field-update field: toggles)

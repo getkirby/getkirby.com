@@ -255,6 +255,7 @@ foreach ($items as $item): ?>
 If you nest structure fields inside a structure field, you have to call the `toStructure()` method on the nested fields as well and then loop through the nested items like above.
 </info>
 
+(docs: panel-field-update field: structure)
 
 ## More information
 

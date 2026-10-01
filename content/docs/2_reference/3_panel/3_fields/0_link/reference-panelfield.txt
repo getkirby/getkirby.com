@@ -73,6 +73,8 @@ Use the `toUrl()` method to convert any type of link to a valid URL:
 <a href="<?= $page->link()->toUrl() ?>"><?= $page->link() ?></a>
 ```
 
+(docs: panel-field-update field: link)
+
 ## Adding target, link text etc.
 
 The link field does one job and one job only: It stores a link. If you need additional metadata such as a target, link text, class names etc., you can wrap the link field within an object field:

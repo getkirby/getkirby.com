@@ -50,3 +50,5 @@ Unlike the (link: docs/reference/text/kirbytags/email text: email KirbyTag), the
     ]);
 ?>
 ```
+
+(docs: panel-field-update field: email)
