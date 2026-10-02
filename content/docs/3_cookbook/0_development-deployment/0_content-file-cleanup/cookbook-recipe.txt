@@ -18,17 +18,23 @@ Then run the script with http://yourdomain.com/cleanup.php. You can also run the
 Before you use this script, make sure you have a backup of your project.
 
 Do not use this script if your project contains fields not defined in blueprints on purpose.
+
+The script only cleans up the saved content. Make sure there are no unsaved changes in the Panel before you run it.
 </warning>
 
 ```php "cleanup.php"
 <?php
 
 /**
- * Script to clean up unused fields in page or file content files
+ * Script to clean up unused fields in page, file and user content files
  * Compares fields present in the content file
  * with fields defined in the blueprint
  * and removes all undefined fields
  */
+
+use Kirby\Cms\App as Kirby;
+use Kirby\Cms\Html;
+use Kirby\Cms\ModelWithContent;
 
 require __DIR__ . '/kirby/bootstrap.php';
 
@@ -37,61 +43,67 @@ $kirby = new Kirby;
 // Authenticate as almighty
 $kirby->impersonate('kirby');
 
-// Define your collection;
+// Define your collection
 $models = $kirby->models();
 
-// set the fields to be ignored
+// Set the fields to be ignored
 $ignore = ['uuid', 'title', 'slug', 'template', 'sort', 'focus'];
 
 foreach ($models as $model) {
-	// call the script for all languages if multilang
+	// Call the script for all languages if multilang
 	if ($kirby->multilang() === true) {
-			$languages = $kirby->languages();
-			foreach ($languages as $language) {
-					cleanUp($model, $ignore, $language->code());
-			}
+		foreach ($kirby->languages() as $language) {
+			cleanUp($model, $ignore, $language->code());
+		}
 	} else {
-			cleanUp($model, $ignore);
+		cleanUp($model, $ignore);
 	}
 }
 
+function cleanUp(
+	ModelWithContent $model,
+	array $ignore = [],
+	string $lang = 'default'
+): void {
+	$version = $model->version('latest');
 
-function cleanUp($model, $ignore = null, string $lang = null) {
-			// get all fields in the content file
-			$contentFields = $model->content($lang)->fields();
+	// Get the fields stored in the content file for this language
+	// (without falling back to the default language)
+	$contentFields = $version->read($lang);
 
-			// unset all fields in the `$ignore` array
-			foreach ($ignore as $field) {
-					if (array_key_exists($field, $contentFields) === true) {
-							unset($contentFields[$field]);
-					}
-			}
+	// Skip if there is no content file for this language
+	if ($contentFields === null) {
+		return;
+	}
 
-			// get the keys
-			$contentFields = array_keys($contentFields);
+	// Get all field keys from the blueprint
+	$blueprintFields = array_keys($model->blueprint()->fields());
 
-			// get all field keys from blueprint
-			$blueprintFields = array_keys($model->blueprint()->fields());
+	// Get all field keys that are neither in the blueprint
+	// nor in the `$ignore` array
+	$fieldsToBeDeleted = array_diff(
+		array_keys($contentFields),
+		$blueprintFields,
+		array_map(strtolower(...), $ignore)
+	);
 
-			// get all field keys that are in $contentFields but not in $blueprintFields
-			$fieldsToBeDeleted = array_diff($contentFields, $blueprintFields);
+	$name = $model->id() ?? $model::class;
 
-			// update page only if there are any fields to be deleted
-			if (count($fieldsToBeDeleted) > 0) {
+	if ($fieldsToBeDeleted === []) {
+		echo Html::tag('p', 'Nothing to clean up in ' . $name . ' (' . $lang . ')');
+		return;
+	}
 
-					// flip keys and values and set new values to null
-					$data = array_map(fn ($value) => null, array_flip($fieldsToBeDeleted));
+	// Remove the fields to be deleted
+	$data = array_diff_key($contentFields, array_flip($fieldsToBeDeleted));
 
-					// try to update the page with the data
-					try {
-							$model->update($data, $lang);
-							echo Html::tag('p', 'The content file for ' . $model->id() . ' was updated');
-					} catch (Exception $e) {
-							echo Html::tag('p', $model->id() . ': ' .$e->getMessage());
-					}
-			} else {
-					echo Html::tag('p', 'Nothing to clean up in ' . $model->id());
-			}
+	// Try to write the cleaned-up content back to the content file
+	try {
+		$version->replace($data, $lang);
+		echo Html::tag('p', 'Removed ' . implode(', ', $fieldsToBeDeleted) . ' from ' . $name . ' (' . $lang . ')');
+	} catch (Exception $e) {
+		echo Html::tag('p', $name . ': ' . $e->getMessage());
+	}
 }
 ```
 

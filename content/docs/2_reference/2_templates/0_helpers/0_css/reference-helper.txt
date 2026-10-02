@@ -31,6 +31,21 @@ Template                    | CSS file
 /site/templates/home.php    | /assets/css/templates/home.css
 /site/templates/blog.php    | /assets/css/templates/blog.css
 
+### Plugin assets
+
+You can pass a plugin object, a plugin's assets collection or a single plugin asset. For a plugin or an assets collection, a tag is created for each CSS file:
+
+```php
+<?= css($kirby->plugin('my-name/my-plugin')) ?>
+
+<?= css([
+  'assets/css/site.css',
+  $kirby->plugin('my-name/my-plugin')->asset('styles.css')
+]) ?>
+```
+
+(link: docs/guide/plugins/structure#plugin-assets text: Learn more about plugin assets ›)
+
 ### Media attribute
 
 You can also specify a media attribute for the link tags:

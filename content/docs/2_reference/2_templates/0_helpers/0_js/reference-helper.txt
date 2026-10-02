@@ -30,6 +30,21 @@ Template                    | JS file
 /site/templates/home.php    | /assets/js/templates/home.js
 /site/templates/blog.php    | /assets/js/templates/blog.js
 
+### Plugin assets
+
+You can pass a plugin object, a plugin's assets collection or a single plugin asset. For a plugin or an assets collection, a tag is created for each JS file:
+
+```php
+<?= js($kirby->plugin('my-name/my-plugin')) ?>
+
+<?= js([
+  'assets/js/site.js',
+  $kirby->plugin('my-name/my-plugin')->asset('scripts.js')
+]) ?>
+```
+
+(link: docs/guide/plugins/structure#plugin-assets text: Learn more about plugin assets ›)
+
 ### Async
 
 If you want the JS files to be loaded asynchronously (if supported by the browser), you can set a second parameter to `true`:

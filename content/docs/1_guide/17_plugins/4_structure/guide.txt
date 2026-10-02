@@ -140,4 +140,60 @@ site/
       index.php
 ```
 
-Files in `assets` are a special case: Kirby publishes them automatically under `/media/plugins/{vendor}/{plugin}/`, so you can link to them from templates and Panel components. The URL is built from the name you registered the plugin under, not from the folder name.
+Files in `assets` are a special case: Kirby publishes them automatically, so you can link to them from templates and Panel components.
+
+## Plugin assets
+
+### Custom asset paths
+
+If your assets don't live in the `assets` folder, or you only want to publish some of them, you can define them with the (link: docs/reference/plugins/extensions/assets text: `assets` extension). Once the extension is used, the `assets` folder is no longer published automatically.
+
+```php "/site/plugins/anchor/index.php"
+Kirby::plugin(
+	name: 'superwoman/anchor',
+	extends: [
+		'assets' => [
+			'styles.css' => __DIR__ . '/dist/styles.css',
+			'scripts.js' => __DIR__ . '/dist/scripts.js'
+		]
+	]
+);
+```
+
+### Asset URLs
+
+Plugin assets are served from the `media` folder. The URL is built from the name you registered the plugin under (not from the folder name) and contains a hash based on the filename and the last modification time of the asset:
+
+```
+/media/plugins/superwoman/anchor/2375797551-1712345678/styles.css
+```
+
+Whenever you change an asset, its URL changes as well. This busts any browser or CDN cache automatically. Don't hardcode these URLs. Always let Kirby generate them for you as shown below.
+
+### Using assets in templates and snippets
+
+You can access a single asset via the plugin object and get its URL:
+
+```php
+<?php $plugin = $kirby->plugin('superwoman/anchor') ?>
+
+<img src="<?= $plugin->asset('images/logo.svg')->url() ?>" alt="">
+```
+
+`$plugin->assets()` returns a collection of all assets of the plugin, which can be filtered with `->css()` and `->js()`.
+
+The (link: docs/reference/templates/helpers/css text: `css()`) and (link: docs/reference/templates/helpers/js text: `js()`) helpers accept the plugin object, an assets collection or a single asset. When passing the plugin or an assets collection, all CSS or JS files are included respectively:
+
+```php
+// all CSS files of the plugin
+<?= css($kirby->plugin('superwoman/anchor')) ?>
+
+// all JS files of the plugin
+<?= js($kirby->plugin('superwoman/anchor')->assets()) ?>
+
+// a single asset, mixed with other files
+<?= css([
+	'assets/css/index.css',
+	$kirby->plugin('superwoman/anchor')->asset('styles.css')
+]) ?>
+```

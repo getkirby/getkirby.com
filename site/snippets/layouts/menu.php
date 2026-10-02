@@ -85,11 +85,10 @@
 				<ul class="menu-2">
 					<?php snippet('layouts/menu-items', [
 						'items' => [
-							'Get together' => page('meet'),
+							'Community Hub' => 'https://community.getkirby.com',
 							'-',
 							'Support forum' => 'https://forum.getkirby.com',
 							'Discord chat' => 'https://chat.getkirby.com',
-							'Community map' => 'https://community.getkirby.com',
 							'-',
 							'Mastodon' => 'https://mastodon.social/@getkirby',
 							'LinkedIn' => 'https://www.linkedin.com/company/getkirby',
