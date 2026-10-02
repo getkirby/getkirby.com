@@ -58,7 +58,7 @@ Our community of Kirby developers have created cool blocks field plugins, so mak
 - (link: plugins/jongacnik/fields-block text: Fields block: Kirby block preview plugin to directly render block fields, allowing for inline editing)
 - (link: plugins/johannschopplich/highlighter text: Highlighter: Syntax highlighting for code)
 
-Already made your own? Don't hesitate to (link: docs/guide/plugins/plugin-setup-basic#publish-your-plugin text: share them with the world).
+Already made your own? Don't hesitate to (link: docs/guide/plugins/publishing#publish-it text: share them with the world).
 
 ----
 Resources:
