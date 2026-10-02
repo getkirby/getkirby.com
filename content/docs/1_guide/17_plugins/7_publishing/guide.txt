@@ -77,7 +77,7 @@ Your plugin should declare, which Kirby versions it does support. Our (link: htt
 
 ### In your `composer.json`
 
-Three fields are read to find out which Kirby version your plugin supports, in the following order. The first one that contains a valid Composer constraint wins.
+Three fields are read to find out which Kirby version your plugin supports, in the following order. The first one that contains a valid (link: https://getcomposer.org/doc/articles/versions.md#writing-version-constraints text: Composer version constraint) wins.
 
 `extra.kirby.compatible`:
 
