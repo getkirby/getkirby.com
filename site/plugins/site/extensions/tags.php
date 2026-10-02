@@ -281,6 +281,36 @@ $tags['reference'] = [
 ];
 
 /**
+ * Renders all public method names of a class,
+ * which therefore cannot be used as content field shorthand
+ * (reserved-names: Kirby\Cms\Page)
+ */
+$tags['reserved-names'] = [
+	'html' => function ($tag) {
+		$classes = [
+			$tag->value,
+			...ReferenceClassPage::findByName($tag->value)?->proxies()->yaml() ?? []
+		];
+		$names = [];
+
+		foreach ($classes as $class) {
+			foreach ((new ReflectionClass($class))->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
+				$name = $method->getName();
+
+				// magic methods are not callable as field shorthand anyway
+				if (str_starts_with($name, '__') === false) {
+					$names[strtolower($name)] = $name;
+				}
+			}
+		}
+
+		natcasesort($names);
+
+		return implode(', ', array_map(fn ($name) => '`' . $name . '`', $names));
+	}
+];
+
+/**
  * (screencast: https://www.youtube.com/watch?v=EDVYjxWMecc poster: youtube.jpg title: How to install Kirby in 5 minutes)
  */
 $tags['screencast'] = [

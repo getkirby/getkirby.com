@@ -45,7 +45,19 @@ You can get a `$file` object to use with these methods by fetching it from the `
 Note how we use an if statement here to check if we have a file object before we call the `url()` method to prevent errors in case the page doesn't have any files. Never forget to do this in your own code.
 </info>
 
----
+## Content fields
+
+The `$file` class offers a magic caller for your (link: docs/guide/content/fields text: content fields). Instead of getting them via `$file->content()->get('your_field')`, you can use the shorthand `$file->your_field()`.
+
+### Reserved names
+
+You cannot use the shorthand for fields with names that conflict with methods of the `$file` class or with (link: docs/reference/plugins/extensions/file-methods text: custom file methods). Besides the methods listed above, this also includes internal methods that are not part of the documented API. The following names are reserved:
+
+(reserved-names: Kirby\Cms\File)
+
+To access a field with a reserved name, use `$file->content()->get('fieldname')`. We recommend prefixing your field names instead to avoid any conflicts.
+
+----
 
 Examples:
 
