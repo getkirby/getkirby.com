@@ -1,9 +1,0 @@
-start: 18:00:00
-----
-city: Hamburg
-----
-country: Germany
-----
-issue: 3
-----
-link: https://lu.ma/4fkqgrz0

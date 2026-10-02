@@ -1,9 +1,0 @@
-start: 19:00:00
-----
-city: Hamburg
-----
-country: Germany
-----
-issue: 2
-----
-link: https://www.meetup.com/kirby-cms-community-hamburg/events/305625518/

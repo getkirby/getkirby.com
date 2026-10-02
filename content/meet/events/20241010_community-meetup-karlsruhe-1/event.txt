@@ -1,9 +1,0 @@
-start: 19:00:00
-----
-city: Karlsruhe
-----
-country: Germany
-----
-issue: 1
-----
-link: https://kirby-ka.carrd.co/

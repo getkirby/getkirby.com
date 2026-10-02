@@ -1,9 +1,0 @@
-start: 19:45:00
-----
-city: Düsseldorf
-----
-country: Germany
-----
-conference: Beyond Tellerrand
-----
-link: https://www.meetup.com/kirby-community-nrw/events/307333098

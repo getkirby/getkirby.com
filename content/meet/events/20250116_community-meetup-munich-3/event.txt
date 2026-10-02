@@ -1,9 +1,0 @@
-start: 18:00:00
-----
-city: Munich
-----
-country: Germany
-----
-issue: 3
-----
-link: https://www.meetup.com/kirby-cms-community-munchen/events/304542769/

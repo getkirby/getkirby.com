@@ -1,7 +1,0 @@
-title: Kirby 5 - Live Release Show
-----
-start: 16:00:00
-----
-end: 17:30:00
-----
-link: https://beyondtellerrand.com/stay-curious/kirby-5-release
