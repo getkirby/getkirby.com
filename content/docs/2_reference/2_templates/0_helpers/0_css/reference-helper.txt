@@ -44,7 +44,7 @@ You can pass a plugin object, a plugin's assets collection or a single plugin as
 ]) ?>
 ```
 
-(link: docs/guide/plugins/custom-plugins#plugin-assets text: Learn more about plugin assets ›)
+(link: docs/guide/plugins/structure#plugin-assets text: Learn more about plugin assets ›)
 
 ### Media attribute
 

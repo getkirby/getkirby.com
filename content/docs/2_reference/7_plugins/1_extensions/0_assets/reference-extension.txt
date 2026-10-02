@@ -6,7 +6,7 @@ Since: 4.0.0
 
 ----
 
-Read: docs/guide/plugins/custom-plugins#plugin-assets
+Read: docs/guide/plugins/structure#plugin-assets
 
 ----
 
@@ -56,4 +56,4 @@ Kirby::plugin('your/plugin', [
 ]);
 ```
 
-The assets can then be accessed via `$kirby->plugin('your/plugin')->asset('styles.css')` or passed to the `css()` and `js()` helpers. (link: docs/guide/plugins/custom-plugins#plugin-assets text: Learn more about using plugin assets ›)
+The assets can then be accessed via `$kirby->plugin('your/plugin')->asset('styles.css')` or passed to the `css()` and `js()` helpers. (link: docs/guide/plugins/structure#plugin-assets text: Learn more about using plugin assets ›)

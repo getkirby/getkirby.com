@@ -193,7 +193,7 @@ To wrap this up, we need to adjust our CSS file a bit to make it work with the i
 
 ### Single file components
 
-All examples above are written in plain JS. You don't need a build process to create such preview plugins. But if you want to go further and use Vue's brilliant single file components, you need to look into our (link: docs/guide/plugins/plugin-setup-panel text: pluginkit) for Panel plugins that comes with a full build process and parses Vue single file components. You can then switch the example above to a single file component in no time:
+All examples above are written in plain JS. You don't need a build process to create such preview plugins. But if you want to go further and use Vue's brilliant single file components, you need to look into our (link: docs/guide/plugins/panel text: Pluginkit) for Panel plugins that comes with a full build process and parses Vue single file components. You can then switch the example above to a single file component in no time:
 
 ```html "/site/plugins/button/components/Button.vue"
 <template>
