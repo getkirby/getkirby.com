@@ -45,9 +45,12 @@ README.md
 This gives us the `index.php` file that initializes our plugin:
 
 ```php
-Kirby::plugin('getkirby/pluginkit', [
-    // plugin magic happens here
-]);
+Kirby::plugin(
+    name: 'getkirby/pluginkit',
+    extends: [
+        // plugin magic happens here
+    ]
+);
 ```
 
 ...and `package.json` with npm scripts for [kirbyup](https://github.com/johannschopplich/kirbyup):
