@@ -77,9 +77,7 @@ Your plugin should declare, which Kirby versions it does support. Our (link: htt
 
 ### In your `composer.json`
 
-Three fields are read to find out which Kirby version your plugin supports, in the following order. The first one that contains a valid (link: https://getcomposer.org/doc/articles/versions.md#writing-version-constraints text: Composer version constraint) wins.
-
-`extra.kirby.compatible`:
+Declare the supported range as a (link: https://getcomposer.org/doc/articles/versions.md#writing-version-constraints text: Composer version constraint) in `extra.kirby.compatible`:
 
 ```json "/site/plugins/anchor/composer.json"
 {
@@ -90,6 +88,10 @@ Three fields are read to find out which Kirby version your plugin supports, in t
   }
 }
 ```
+
+This is the recommended way. It only states what your plugin supports and has no effect on how Composer installs it.
+
+If you already let Composer enforce the Kirby version, you do not need to repeat it there. Without `extra.kirby.compatible`, the directory falls back to the following fields, in this order. The first one that contains a valid constraint wins.
 
 `require."getkirby/cms"`:
 
@@ -102,7 +104,7 @@ Three fields are read to find out which Kirby version your plugin supports, in t
 ```
 
 <warning>
-Requiring the CMS is the only one of the three fields that Composer acts on: it refuses to install your plugin on an unsupported Kirby rather than just declaring the range. It also makes Kirby a dependency of your plugin, so Composer takes over installing and updating it for that project, even one that was managing Kirby by hand until now.
+Composer refuses to install your plugin on an unsupported Kirby. But this also makes Kirby a dependency of your plugin, so Composer takes over installing and updating it for that project, even one that was managing Kirby by hand until now.
 </warning>
 
 `conflict."getkirby/cms"`:
@@ -118,7 +120,7 @@ Requiring the CMS is the only one of the three fields that Composer acts on: it 
 It stops your plugin from being installed next to a Kirby that is too old, without making Kirby a dependency. Only the plain `<version` and `<=version` forms are understood; the example above is read as "Kirby (kirby-version: major.0) and up".
 
 <info>
-`require-dev` is deliberately ignored. It usually holds a CI test matrix rather than a statement about what your plugin supports.
+If none of these fields are set, the directory also reads `require-dev."getkirby/cms"`, and for your newest release only, `kirby(kirby-version: major)`-style topics on GitHub or keywords in your `composer.json`.
 </info>
 
 ### Support per release
