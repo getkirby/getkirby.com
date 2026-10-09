@@ -1,13 +1,29 @@
 title: Kirby 6
+
 ----
-Subtitle: Alpha 2
+
+Subtitle: Beta 1
+
 ----
+
 Version: 6
+
 ----
-Prerelease: alpha.2
+
+Prerelease: beta.1
+
 ----
+
+Trylink: https://github.com/getkirby/kirby/releases/tag/6.0.0-beta.1
+
+----
+
 ogimage:
+
 ----
-Description: Kirby 6.0.0-alpha.2 release notes and changelog.
+
+Description: Kirby 6.0.0-beta.1: passkeys, simpler blueprints with fields only, a live preview view, guards, template stacks and a Vue 3 Panel. Release notes, migration guides and changelog.
+
 ----
+
 Cover:

@@ -8,64 +8,163 @@ Subtitle: Details that deliver
 
 Features:
 -
-  icon: sliders
-	headline: Picker customization
-	text: Customize picker dialogs for files, pages and users with options like size and layout.
-	link: "/releases/6/more-details#picker-customization"
--
-  icon: link
-	headline: Panel URL access
-	text: The Panel URL is available inside the Panel as `this.$panel.urls.panel`.
-	link: "/releases/6/more-details#panel-url-access"
--
-  icon: alert
-	headline: Required PHP extensions
-	text: Installations now verify required PHP extensions and block setup if one is missing.
-	link: "/releases/6/more-details#required-php-extensions"
--
-  icon: edit
-	headline: Unsaved changes highlight
-	text: Field labels get highlighted when a field has unsaved changes.
-	link: "/releases/6/more-details#unsaved-changes-highlight"
--
-  icon: sort
-	headline: Better drag sorting
-	text: Improved drag sorting in list layouts for pages and files.
-	link: "/releases/6/more-details#better-drag-sorting"
+  icon: markdown
+	headline: Content negotiation
+	text: Serve the Markdown or JSON representation of a page based on the Accept header of the request, no file extension in the URL needed.
+	link: "/releases/6/more-details#content-negotiation"
 -
   icon: code
-	headline: Debug editor URL
-	text: Error responses include the editor URL in debug mode for easier troubleshooting.
-	link: "/releases/6/more-details#debug-editor-url"
+	headline: Smarter queries
+	text: Kirby queries support logical not and negative values, and several parsing bugs have been fixed.
+	link: "/releases/6/more-details#smarter-queries"
+-
+  icon: calendar
+	headline: Date formats with text
+	text: Add your own words to the display format of date and time fields and see an example as placeholder.
+	link: "/releases/6/more-details#date-formats-with-text"
+-
+  icon: keyboard
+	headline: Easier date input
+	text: Date fields read your input in their own format and understand month names in English and the Panel language.
+	link: "/releases/6/more-details#easier-date-input"
+-
+  icon: upload
+	headline: Upload in the file picker
+	text: Drop files onto the file picker dialog to upload and select them in one go.
+	link: "/releases/6/more-details#upload-in-the-file-picker"
+-
+  icon: edit-line
+	headline: Unsaved changes at a glance
+	text: Field labels are highlighted as long as the field has unsaved changes.
+	link: "/releases/6/more-details#unsaved-changes-at-a-glance"
+-
+  icon: copy
+	headline: Copy from disabled fields
+	text: Select and copy the values of disabled fields.
+	link: "/releases/6/more-details#copy-from-disabled-fields"
+-
+  icon: image
+	headline: Sharper image block previews
+	text: Image and gallery blocks load properly sized thumbnails that respect the ratio and crop settings of the block.
+	link: "/releases/6/more-details#sharper-image-block-previews"
+-
+  icon: file
+	headline: More MIME types
+	text: Kirby knows more file types, from WebAssembly to WebVTT subtitles and web app manifests.
+	link: "/releases/6/more-details#more-mime-types"
+-
+  icon: plugin
+	headline: Disable core Panel features
+	text: Plugins can remove any core dialog, drawer, dropdown, search, request or view of a Panel area.
+	link: "/releases/6/more-details#disable-core-panel-features"
 
 ----
 
 Text:
 
-## Picker customization
+## Content negotiation
 
-The `picker` option for `files`, `pages` and `users` fields lets you tune picker dialogs (e.g. `size`, `layout`). [#7687](https://github.com/getkirby/kirby/pull/7687)
+(link: docs/guide/templates/content-representations text: Content representations) like `site/templates/article.md.php` could so far only be requested with the file extension in the URL, e.g. `/blog/my-article.md`. In Kirby 6, the `Accept` header of a request works as well. https://feedback.getkirby.com/741
 
-## Panel URL access
+```php "/site/templates/article.md.php"
+# <?= $page->title() ?>
 
-The Panel URL is now available inside the Panel as `this.$panel.urls.panel`. [#7800](https://github.com/getkirby/kirby/pull/7800)
-
-```js
-const panelUrl = this.$panel.urls.panel;
+<?= $page->text() ?>
 ```
+
+```bash
+curl -H "Accept: text/markdown" https://example.com/blog/my-article
+```
+
+This request gets the Markdown representation of the page from its regular URL. Handy for tools and AI agents that ask for Markdown, and it works for any representation that Kirby knows a MIME type for, e.g. `application/json` for `article.json.php`.
+
+## Objects as field values
+
+`$model->update()` accepts Kirby objects and collections as values for the fields of the blueprint. Each field converts them into the format that it stores:
+
+```php
+$page->update([
+	'cover'   => $file,
+	'related' => $page->siblings()->listed(),
+	'authors' => $kirby->users()->role('editor'),
+	'text'    => $page->text()->toBlocks(),
+	'gallery' => $other->gallery(),
+	'date'    => new DateTime(),
+]);
+```
+
+## Smarter queries
+
+Kirby queries support the logical not operator and negative values:
+
+```yaml "/site/blueprints/pages/article.yml"
+fields:
+  visibility:
+    type: info
+    text: "{{ !page.isListed ? 'Not visible on your site yet' : 'Live on your site' }}"
+```
+
+More examples: `!user.isAdmin ? "guest" : "admin"`, `-page.price` or `-(1 + 2)`.
+
+## Date formats with text
+
+The `display` format of date and time fields supports text in square brackets, which is printed as it is:
+
+```yaml "/site/blueprints/pages/event.yml"
+fields:
+  meeting:
+    type: date
+    display: D. MMMM [in the year] YYYY
+    time:
+      display: HH[h]mm
+```
+
+Empty date and time fields also show an example of their `display` format as placeholder, so editors know the expected notation before they start typing.
+
+## Easier date input
+
+Date and time fields parse what you type in the field's own `display` format instead of blind guessing. Month names and their abbreviations are recognized in English and in the current Panel language. If your input can't be read, the field keeps it and marks it as invalid instead of silently clearing it.
+
+## Upload in the file picker
+
+The file picker dialog is a drop zone now. Drag files from your computer onto the open dialog to upload them, and they are selected right away. This works whenever the field allows uploads.
+
+## Unsaved changes at a glance
+
+Field labels are highlighted as long as a field has unsaved changes. In long forms, you can see at a glance what you've changed before you save.
+
+## Copy from disabled fields
+
+Disabled fields still can't be edited, but you can select and copy their values now.
+
+## Sharper image block previews
+
+The previews of `image` and `gallery` blocks load properly sized thumbnails that respect the ratio and crop settings of the block.
 
 ## Required PHP extensions
 
-On installation, all required PHP extensions are checked and installation is blocked if one is missing. The system view also shows an alert if an extension is missing. [#7812](https://github.com/getkirby/kirby/pull/7812)
+During installation, Kirby checks all required PHP extensions and blocks the installation if one is missing: `ctype`, `curl`, `dom`, `filter`, `hash`, `iconv`, `json`, `libxml`, `mbstring`, `openssl` and `SimpleXML`. The system view in the Panel shows an alert if one of them is missing on an existing installation.
 
-## Unsaved changes highlight
+## More MIME types
 
-Field labels get highlighted when a field has unsaved changes, making it easier to spot what still needs saving. [#7794](https://github.com/getkirby/kirby/pull/7794)
+Kirby knows the MIME types of more file extensions: `7z`, `aac`, `apng`, `atom`, `epub`, `ods`, `oga`, `rar`, `svgz`, `vtt`, `wasm`, `weba` and `webmanifest`. `ico` and `psd` also map to their registered types now.
 
-## Better drag sorting
+## Disable core Panel features
 
-Drag sorting in list layout has been improved for pages and files sections. [#7349](https://github.com/getkirby/kirby/issues/7349)
+Plugins can remove any core definition from a Panel area by setting it to `false`. This already worked for menu items and view buttons and now covers dialogs, drawers, dropdowns, requests, searches and views as well. For example, to remove the file search:
 
-## Debug editor URL
+```php "/site/plugins/no-file-search/index.php"
+<?php
 
-Error responses from the backend now include the `editor` URL when debug mode is enabled. [#7782](https://github.com/getkirby/kirby/pull/7782)
+use Kirby\Cms\App as Kirby;
+
+Kirby::plugin('acme/no-file-search', [
+	'areas' => [
+		'site' => [
+			'searches' => [
+				'files' => false
+			]
+		]
+	]
+]);
+```

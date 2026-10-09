@@ -1,0 +1,394 @@
+Title: From custom sections to fields
+
+----
+
+Intro: Kirby 6 has no sections anymore: everything a section did, a field can do now. This guide shows how to turn a custom section plugin into a field, on the PHP side, in the Panel and in your blueprints.
+
+----
+
+Text:
+
+## What changed
+
+Sections and fields used to be two parallel worlds with their own plugin extensions, API routes, Vue mixins and blueprint syntax. In Kirby 6, fields fully replace sections. A field that doesn't store anything (a `DisplayField`) covers everything a section was used for. And as a field, it also gets `when` conditions, a `width` and its place in the same blueprint structure as all other fields.
+
+For the core sections, nothing needs to happen right away: Kirby converts `pages`, `files`, `info` and `stats` sections into the `pagelist`, `filelist`, `info` and `stats` fields, and unwraps `fields` sections into their fields. Read more about the conversion and the new fields in (link: releases/6/blueprints text: Blueprints).
+
+Custom sections are not converted. You will need act and convert your section into a field. See the (link: releases/6/changelog#breaking-changes__sections text: full list of breaking changes for sections).
+
+## Porting a section
+
+Let's port a realistic section plugin: a "Backlinks" section that lists all pages linking to the current page. Searching the whole site is slow on big sites, so the section loads its data asynchronously, which makes it a good example for loading data in a field as well.
+
+### The Kirby 5 section
+
+```php "/site/plugins/backlinks/index.php"
+<?php
+
+use Kirby\Toolkit\I18n;
+
+Kirby::plugin('acme/backlinks', [
+	'sections' => [
+		'backlinks' => [
+			'props' => [
+				/**
+				 * Text shown when no page links here
+				 */
+				'empty' => function ($empty = null) {
+					return I18n::translate($empty, $empty);
+				},
+				'label' => function ($label = null) {
+					return I18n::translate($label, $label);
+				}
+			],
+			'computed' => [
+				'pages' => function () {
+					$model = $this->model();
+					$uuid  = $model->uuid()?->id();
+
+					if ($uuid === null) {
+						return [];
+					}
+
+					$pages = [];
+
+					foreach ($this->kirby()->site()->index(true) as $page) {
+						if ($page->is($model) === true) {
+							continue;
+						}
+
+						$content = json_encode($page->content()->toArray());
+
+						if (str_contains($content, $uuid) === true) {
+							$pages[] = [
+								'info' => $page->id(),
+								'link' => $page->panel()->url(true),
+								'text' => $page->title()->value(),
+							];
+						}
+					}
+
+					return $pages;
+				}
+			],
+			'toArray' => function () {
+				return [
+					'empty' => $this->empty ?? 'No page links here yet',
+					'label' => $this->label,
+					'pages' => $this->pages
+				];
+			}
+		]
+	]
+]);
+```
+
+```js "/site/plugins/backlinks/index.js"
+panel.plugin("acme/backlinks", {
+	sections: {
+		backlinks: {
+			data() {
+				return {
+					empty: null,
+					label: null,
+					pages: []
+				};
+			},
+			async created() {
+				const response = await this.load();
+				this.empty = response.empty;
+				this.label = response.label;
+				this.pages = response.pages;
+			},
+			template: `
+				<k-section :label="label" class="k-backlinks-section">
+					<k-collection
+						:empty="{ icon: 'link', text: empty }"
+						:items="pages"
+					/>
+				</k-section>
+			`
+		}
+	}
+});
+```
+
+### The Kirby 6 field class
+
+A section stores nothing, so the field extends `Kirby\Form\Field\DisplayField`. It already brings `label` and `help` (both translatable), as well as `name`, `when` and `width`. The rest follows the same rules as for any other custom field, see (link: releases/6/migration/plugin-developers/fields text: Custom fields as PHP classes) for the details.
+
+```php "/site/plugins/backlinks/classes/BacklinksField.php"
+<?php
+
+namespace Acme\Backlinks;
+
+use Kirby\Form\Field\DisplayField;
+
+class BacklinksField extends DisplayField
+{
+	/**
+	 * Text shown when no page links here
+	 */
+	protected array|string|null $empty;
+
+	public function __construct(
+		array|string|null $empty = null,
+		mixed ...$args
+	) {
+		parent::__construct(...$args);
+
+		$this->empty = $empty;
+	}
+
+	public function api(): array
+	{
+		$field = $this;
+
+		return [
+			[
+				'pattern' => '',
+				'method'  => 'GET',
+				'action'  => fn () => [
+					'pages' => $field->pages()
+				]
+			]
+		];
+	}
+
+	public function empty(): string
+	{
+		return $this->stringTemplateI18n($this->empty) ?? 'No page links here yet';
+	}
+
+	/**
+	 * All pages that mention the UUID of the current model
+	 */
+	public function pages(): array
+	{
+		$model = $this->model();
+		$uuid  = $model->uuid()?->id();
+
+		if ($uuid === null) {
+			return [];
+		}
+
+		$pages = [];
+
+		foreach ($this->kirby()->site()->index(true) as $page) {
+			if ($page->is($model) === true) {
+				continue;
+			}
+
+			$content = json_encode($page->content()->toArray());
+
+			if (str_contains($content, $uuid) === true) {
+				$pages[] = [
+					'info' => $page->id(),
+					'link' => $page->panel()->url(true),
+					'text' => $page->title()->value(),
+				];
+			}
+		}
+
+		return $pages;
+	}
+
+	public function props(): array
+	{
+		return [
+			...parent::props(),
+			'empty' => $this->empty(),
+		];
+	}
+}
+```
+
+Here's where each part of the section went:
+
+| Section (Kirby 5) | Field (Kirby 6) |
+|---|---|
+| `'sections' => ['backlinks' => […]]` | A class that extends `DisplayField`, registered under `fields` |
+| `props` | Constructor parameters, typed properties and getters. `label` and `help` come from `DisplayField`. |
+| `computed` | Getters – sent with `props()` or loaded through `api()` |
+| `methods` | Regular methods |
+| `toArray` | `props()` for everything the component gets right away |
+| `this.load()` response | An `api()` route with the pattern `''` |
+| `api` | `api()` |
+| `dialogs` / `drawers` | `dialogs()` / `drawers()` |
+| `errors` | `errors()` |
+| `$this->model()`, `$this->kirby()` | Same |
+
+The pattern `''` mounts the route on the field itself, e.g. at `/api/pages/notes+my-note/fields/backlinks`. That's what the core `pagelist` and `filelist` fields do to refresh their lists.
+
+### Sync props or async data?
+
+A section always loaded its data with an extra request. A field gets its props together with the view, without any extra request. Decide per piece of data:
+
+- **Cheap data goes into `props()`.** The label, texts, settings and anything you can compute quickly. Your component gets it right away and it's fresh whenever the view loads.
+- **Expensive data goes into an `api()` route** and is loaded by the component after it has been rendered, so the view doesn't wait for it. That's what our backlinks field does with `pages()`.
+
+If your section was cheap all along, you can skip the API route entirely:
+
+```php
+public function props(): array
+{
+	return [
+		...parent::props(),
+		'empty' => $this->empty(),
+		'pages' => $this->pages(),
+	];
+}
+```
+
+Keep in mind that Kirby creates field objects in many places, e.g. for every form, every save and every `$page->update()` call. Don't compute anything expensive in the constructor. `props()` and your API routes are only called when the Panel actually needs them.
+
+### Errors
+
+If your section reported errors, e.g. to keep a draft from being published while something is missing, override `errors()` in your field and return an array of messages. Kirby collects them together with the errors of all other fields. The `pagelist` and `filelist` fields use this for their `min` and `max` options.
+
+```php
+public function errors(): array
+{
+	if ($this->isActive() === false) {
+		return [];
+	}
+
+	if ($this->pages() === []) {
+		return ['backlinks' => 'Please link to this page from somewhere first'];
+	}
+
+	return [];
+}
+```
+
+### Registering the field
+
+```php "/site/plugins/backlinks/index.php"
+<?php
+
+use Acme\Backlinks\BacklinksField;
+
+load([
+	'Acme\Backlinks\BacklinksField' => 'classes/BacklinksField.php'
+], __DIR__);
+
+Kirby::plugin('acme/backlinks', [
+	'fields' => [
+		'backlinks' => BacklinksField::class
+	]
+]);
+```
+
+### The Vue component
+
+The section mixin is gone, and so is `this.load()`. Your component is now a regular field component:
+
+- **Wrap it in `<k-field>` instead of `<k-section>`.** `<k-field>` renders the label and the help text. Set `:input="false"`, as there is no input element the label could point to.
+- **Declare the props from `props()`.** They arrive directly, no need to copy a response into `data()`.
+- **Replace `this.load()` with a request to the field endpoint**: `this.$api.get(this.endpoints.field)`.
+
+```html "/site/plugins/backlinks/src/components/BacklinksField.vue"
+<template>
+	<k-field
+		:help="help"
+		:input="false"
+		:label="label"
+		:name="name"
+		:type="type"
+		class="k-backlinks-field"
+	>
+		<k-collection
+			:empty="{ icon: 'link', text: empty }"
+			:items="pages"
+		/>
+	</k-field>
+</template>
+
+<script>
+export default {
+	inheritAttrs: false,
+	props: {
+		// from DisplayField::props()
+		help: String,
+		label: String,
+		name: String,
+		type: String,
+		// from BacklinksField::props()
+		empty: String,
+		// added by the Panel
+		endpoints: Object
+	},
+	data() {
+		return {
+			pages: []
+		};
+	},
+	async created() {
+		const response = await this.$api.get(this.endpoints.field);
+		this.pages = response.pages;
+
+		// lets the preview view adjust the page links,
+		// like the core `pagelist` field does
+		await this.$nextTick();
+		this.$events.emit("field.loaded", this);
+	}
+};
+</script>
+```
+
+```js "/site/plugins/backlinks/src/index.js"
+import BacklinksField from "./components/BacklinksField.vue";
+
+panel.plugin("acme/backlinks", {
+	fields: {
+		backlinks: BacklinksField
+	}
+});
+```
+
+The component is compiled for Vue 3 now. Learn more in (link: releases/6/migration/plugin-developers/vue-3 text: Vue 3 for Panel plugins).
+
+## Updating blueprints
+
+Everyone who uses your plugin needs to move it from `sections` to `fields` in their blueprints. Let them know in your release notes.
+
+### Before
+
+```yaml "/site/blueprints/pages/note.yml"
+title: Note
+
+columns:
+  main:
+    width: 2/3
+    sections:
+      content:
+        type: fields
+        fields:
+          text:
+            type: textarea
+  sidebar:
+    width: 1/3
+    sections:
+      backlinks:
+        type: backlinks
+        headline: Linked from
+```
+
+### After
+
+```yaml "/site/blueprints/pages/note.yml"
+title: Note
+
+columns:
+  main:
+    width: 2/3
+    fields:
+      text:
+        type: textarea
+  sidebar:
+    width: 1/3
+    fields:
+      backlinks:
+        type: backlinks
+        label: Linked from
+```

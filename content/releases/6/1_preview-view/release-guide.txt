@@ -1,20 +1,91 @@
 Title: Preview view
+
 ----
-Subtitle: Live editing next to your site
+
+Subtitle: Edit side-by-side to your live site
+
 ----
+
 Teaser:
 
-Kirby 6 adds a live preview mode that keeps your content editor and your rendered page in sync, even across multiple browser windows.
+The preview view becomes a live editor: Your fields on one side, the rendered page on the other. Changes show up in the preview while you type, links in the preview take the editor along, and you can move the preview to a second window or check it in different viewport sizes.
+
 ----
+
 Intro:
 
-With the new preview view, you can work on content and immediately see the result next to it. Navigation stays synchronized, and you can test different viewport sizes without leaving the Panel.
+Kirby 5 introduced the preview view to compare unsaved changes with the published version. Kirby 6 turns it into a live editor that keeps the form and the rendered page in sync, even across browser windows.
+
 ----
+
 Text:
 
-- Preview view syncs navigation in the browser(s)
-- Open the preview in a second browser window and still see a live preview of your changes
-- Preview your site in different viewport widths in the preview view
-- New `panel.preview.sizes` option to define custom viewport sizes
-
 (video: live-preview.mp4 controls: true class: video rounded shadow-xl bg-light)
+
+## The live editor
+
+ In Kirby 6, the Panel preview view opens in the new **Live editor** mode: the rendered page on the left, the page's form with all its tabs on the right.
+
+The preview always shows the changed version of the page. As you type, the Panel stores your changes on the server and reloads the preview automatically.
+
+### Four modes
+
+Switch between four modes of the preview view:
+
+- **Live editor**: The changed version next to the form
+- **Compare versions**: The latest and the changed version side by side
+- **Latest version**: Only the latest published version
+- **Changed version**: Only the changed version
+
+In compare mode, a toggle in the header keeps the scroll positions of both frames in sync.
+
+## Navigation stays in sync
+
+The preview isn't a static screenshot. It's your site, and you can click around in it:
+
+- Click a link to another page in the preview, and the whole view follows: the form switches to the linked page as well.
+- Links to other domains and links into the Panel open in a new tab.
+- Click the page title in the header to jump to any page via the page tree.
+
+Sometimes you want to look at one page while editing another. Use the pin button in the preview header to make the preview and the form navigate independently. While pinned, clicking a link in the preview only changes the preview, and switching to another page in the form keeps the preview where it is. Unpin to bring both back in sync.
+
+## Preview in a second window
+
+Got a second screen? In live editor mode, click the open button in the header to move the preview to a new browser tab, which you can drag to its own window, and the form in the main window takes up the full width.
+
+Both windows stay connected: the second window reloads whenever you change content in the form, navigating in either window takes the other one along, and pinning works there too. Close the second window and the preview returns to the main window.
+
+## Viewport sizes
+
+Buttons in the header let you check your page in different viewport widths. Sizes that need more room than your browser window offers are disabled. By default, you get three sizes:
+
+| Size | Icon | Width |
+| - | - | - |
+| `small` | `mobile` | `390px` |
+| `medium` | `tablet` | `820px` |
+| `large` | `display` | `1440px` |
+
+Define your own sizes with the new `panel.preview.sizes` option:
+
+```php "/site/config/config.php"
+return [
+	'panel' => [
+		'preview' => [
+			'sizes' => [
+				'phone' => [
+					'icon'  => 'mobile',
+					'width' => '375px'
+				],
+				'tablet' => [
+					'icon'  => 'tablet',
+					'width' => '768px'
+				],
+				'desktop' => [
+					'icon'  => 'display',
+					'width' => '1280px'
+				]
+			]
+		]
+	]
+];
+```

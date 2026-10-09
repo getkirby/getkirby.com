@@ -65,7 +65,7 @@
 <?php snippet('cta', [
 	'buttons' => [
 		[
-			'text' => 'Changelog',
+			'text' => 'Full changelog',
 			'link' => '/releases/6/changelog',
 			'icon' => 'list-numbers',
 			'style' => 'outlined'

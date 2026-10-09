@@ -26,6 +26,11 @@ echo Html::figure(
 					],
 					'alt'   => $alt ?? $file->alt()->or($caption),
 					'class' => 'rounded',
+					// `sizes=auto` can't resolve the width of prose images
+					// (`width: auto`) and falls back to 300px in browsers,
+					// so render them at their natural width instead,
+					// capped at the prose text width (42rem)
+					'sizes' => 'min(' . $file->width() . 'px, 42rem, 100vw)',
 					'srcset' => [
 						462,
 						690,

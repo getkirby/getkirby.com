@@ -1,5 +1,5 @@
 <style>
-.v6-stacks-columns {
+.v6-blueprints-columns {
 	display: grid;
 	gap: var(--spacing-6);
 	grid-template-areas:
@@ -8,7 +8,7 @@
 }
 
 @media screen and (min-width: 64rem) {
-	.v6-stacks-columns {
+	.v6-blueprints-columns {
 		grid-template-columns: 1fr 2fr;
 		grid-template-areas:
 			"teaser code";
@@ -16,11 +16,11 @@
 }
 </style>
 
-<div class="v6-stacks-columns">
+<div class="v6-blueprints-columns">
 	<div class="release-text-box" style="grid-area: teaser">
 		<?php snippet('templates/release-4/teaser', ['section' => $section]) ?>
 	</div>
 	<figure class="release-code-box text-lg" style="grid-area: code">
-		<?= $section->text()->kt() ?>
+		<?= $section->example()->kt() ?>
 	</figure>
 </div>

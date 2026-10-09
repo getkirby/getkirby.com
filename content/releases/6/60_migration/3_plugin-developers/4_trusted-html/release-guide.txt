@@ -1,0 +1,207 @@
+Title: Trusted HTML in the Panel
+
+----
+
+Intro: Panel components no longer render a string as HTML just because it was passed to them. Plain strings are escaped, and only HTML that has been explicitly marked as trusted is rendered. Here is how it works and how to mark the HTML your plugin produces.
+
+----
+
+Text:
+
+## Why we changed this
+
+Until Kirby 5, many Panel components rendered some of their props with Vue's `v-html`: the text and info of items, dialog texts, field help, option labels and more. Whoever filled these props had to remember to escape every bit of user content first, in the core and in every plugin. A single missing `Escape::html()` around a page title or a filename was enough for a cross-site scripting hole.
+
+Kirby 6 turns this around. These components now escape strings at the place where they are rendered, unless the string has been marked as trusted HTML where it was created. The code that builds the HTML is the only place that knows whether it is safe, so that's where the decision is made now.
+
+For most sites, nothing changes: Kirby's own HTML, e.g. a field `help` text from your blueprint, is already marked as trusted. Plugins that hand HTML strings to Panel components need to mark them.
+
+## How it works
+
+### In PHP: `Kirby\Toolkit\HtmlString`
+
+An `HtmlString` object wraps a string and marks it as trusted HTML:
+
+```php
+use Kirby\Toolkit\HtmlString;
+
+$text = new HtmlString('Created by <strong>Kirby</strong>');
+```
+
+Only wrap HTML that you have built yourself and where every piece of user content has been escaped. Two helpers do the escaping for you:
+
+`HtmlString::translate()` translates a key (or a template string) and escapes every value that is filled in. The markup of the translation itself stays intact:
+
+```php
+// 'my.plugin.delete.confirm' => 'Do you really want to delete <strong>{title}</strong>?'
+HtmlString::translate('my.plugin.delete.confirm', [
+	'title' => $page->title()->value()
+]);
+```
+
+Values that are `HtmlString` objects themselves are inserted as they are.
+
+`$model->toSafeHtmlString()` works like `$model->toSafeString()`: query results are escaped, the HTML in the template is kept. The result is an `HtmlString`:
+
+```php
+$page->toSafeHtmlString('<strong>{{ page.title }}</strong>');
+```
+
+`HtmlString` implements `Stringable`. Cast it with `(string)` if you need the raw string.
+
+### In the Panel: `$h()`, `$th()` and `v-safe-html`
+
+On the frontend, trusted HTML is an instance of the `HtmlString` class, which extends JavaScript's `String`. Create one in your components with these helpers:
+
+- `this.$h(html)` marks a string as trusted HTML. `this.$html()` and `window.panel.html()` do the same.
+- `this.$th(key, data, fallback)` translates a key like `this.$t()`, marks the translation as trusted HTML and escapes every value that is filled in. `window.panel.th()` does the same.
+
+`$th()` is safe even if `data` contains user content:
+
+```js
+// "my.plugin.hint": "Saved by <strong>{name}</strong>"
+this.$th("my.plugin.hint", { name: "<img src=x onerror=alert(1)>" });
+// the <strong> tag is rendered, the name is escaped and shows up as text
+```
+
+The new `v-safe-html` directive is the safe counterpart of Vue's `v-html`. It renders an `HtmlString` as HTML and escapes any other string:
+
+```html
+<!-- escaped -->
+<p v-safe-html="value"></p>
+
+<!-- rendered as HTML -->
+<p v-safe-html="$h(value)"></p>
+
+<!-- translation rendered as HTML, filled-in values escaped -->
+<p v-safe-html="$th('my.plugin.hint', { name })"></p>
+```
+
+### Components that render trusted HTML
+
+These components escape plain strings and render `HtmlString` values as HTML:
+
+- `<k-text>` with its new `text` prop
+- `<k-box>` and `<k-tag>` via their `text` prop
+- `<k-item>` (and with it `<k-items>` and `<k-collection>`) for `text` and `info`
+- `<k-tags>` and the option-based inputs (`<k-picklist-input>`, checkboxes, radio and toggles inputs) for option `text` and `info`
+- `text` of `<k-text-dialog>`, `<k-remove-dialog>`, `<k-form-dialog>` and `<k-text-drawer>`
+- the `help` of every field
+
+```html
+<!-- escaped -->
+<k-text :text="value" />
+
+<!-- rendered as HTML -->
+<k-text :text="$h(value)" />
+
+<!-- translation rendered as HTML, filled-in values escaped -->
+<k-text :text="$th('my.plugin.hint', { name })" />
+```
+
+## My plugin shows HTML as text. How do I fix it?
+
+If you see tags like `<strong>` as visible characters in your plugin's UI, a plain string arrives in a component that used to render it as HTML. Find out where the HTML is built and mark it there.
+
+### HTML built in PHP
+
+Typical places are dialogs, drawers and views of Panel areas, items you return to the Panel and props of custom fields. Wrap the HTML in an `HtmlString`, ideally with one of the helpers that escape for you.
+
+A remove dialog in a Panel area, Kirby 5:
+
+```php "/site/plugins/notes/index.php"
+'dialogs' => [
+	'notes/(:any)/delete' => [
+		'load' => function (string $id) {
+			$note = page('notes/' . $id);
+
+			return [
+				'component' => 'k-remove-dialog',
+				'props' => [
+					'text' => I18n::template('notes.delete.confirm', [
+						'title' => Escape::html($note->title()->value())
+					])
+				]
+			];
+		},
+		// …
+	]
+]
+```
+
+Kirby 6:
+
+```php "/site/plugins/notes/index.php"
+// at the top of the file: use Kirby\Toolkit\HtmlString;
+
+'dialogs' => [
+	'notes/(:any)/delete' => [
+		'load' => function (string $id) {
+			$note = page('notes/' . $id);
+
+			return [
+				'component' => 'k-remove-dialog',
+				'props' => [
+					'text' => HtmlString::translate('notes.delete.confirm', [
+						'title' => $note->title()->value()
+					])
+				]
+			];
+		},
+		// …
+	]
+]
+```
+
+Items with HTML in their `info`, Kirby 5:
+
+```php
+'info' => '<em>' . Escape::html($note->category()->value()) . '</em>'
+```
+
+Kirby 6:
+
+```php
+'info' => $note->toSafeHtmlString('<em>{{ page.category }}</em>')
+```
+
+### HTML built in your Vue components
+
+Mark the string with `$h()` before you pass it on. Escape every piece of user content first, e.g. with `this.$esc()`, or let `$th()` do it for translations.
+
+```js "/site/plugins/notes/src/components/NotesList.vue"
+// Kirby 5
+items() {
+	return this.notes.map((note) => ({
+		text: note.title,
+		info: `<em>${this.$esc(note.category)}</em>`
+	}));
+}
+
+// Kirby 6
+items() {
+	return this.notes.map((note) => ({
+		text: note.title,
+		info: this.$h(`<em>${this.$esc(note.category)}</em>`)
+	}));
+}
+```
+
+Translations with markup, Kirby 5:
+
+```html
+<p v-html="$t('notes.hint', { count })"></p>
+```
+
+Kirby 6:
+
+```html
+<p v-safe-html="$th('notes.hint', { count })"></p>
+```
+
+Never wrap content you haven't escaped with `$h()` or `new HtmlString()`. Both tell the Panel "this is safe", without checking.
+
+### Your own `v-html`
+
+Vue's `v-html` keeps working in your own components and renders `HtmlString` values as well. But it also renders any other string as HTML. Switch to `v-safe-html`, so your components follow the same rules as Kirby's.
+

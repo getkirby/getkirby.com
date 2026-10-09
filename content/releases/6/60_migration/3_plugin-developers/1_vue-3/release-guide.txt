@@ -1,0 +1,225 @@
+Title: Vue 3 for Panel plugins
+
+----
+
+Intro: The Panel now runs on Vue 3. Every plugin that ships Panel code has to be rebuilt, and a few Vue 2 habits need small changes. This page covers how Kirby loads your plugin now, the build setup, the Vue changes that matter for Kirby plugins and all other breaking changes in the Panel frontend.
+
+----
+
+Text:
+
+## Who is affected
+
+Vue 2 reached its end of life at the end of 2023. With Kirby 6, the Panel moves to Vue 3.5. This affects you if your plugin has an `index.js` that registers Panel components, fields, blocks, view buttons or other Panel extensions. Plugins without an `index.js` don't need anything from this page.
+
+What breaks:
+
+- **Compiled bundles:** Single file components compiled for Vue 2 don't run in Vue 3. Bundles built for Kirby 5 also expect a global `window.Vue`, which no longer exists. You need to rebuild them.
+- **Vue 2 APIs:** Some Vue 2 patterns behave differently or are gone in Vue 3, e.g. `v-model` on Kirby's input components, `$listeners` or `this.$set()`. There is no Vue 2 compatibility build.
+- **Panel components and helpers:** A few Kirby components, props and helpers have been renamed or removed. They are listed at the [end of this page](#other-breaking-changes-in-the-panel-frontend).
+
+<info>
+Run your plugin in a Kirby 6 test installation with the browser console open. Kirby logs warnings for components that cannot be registered or extended. While a plugin is in development mode (see [`index.dev.js`](#how-kirby-loads-your-plugin__index-dev-js-during-development)), Vue adds its own warnings, e.g. about unknown props and listeners.
+</info>
+
+## How Kirby loads your plugin
+
+### Vue comes from the Panel
+
+`window.Vue` is gone. Instead, the Panel exposes its own copy of Vue through an import map. Import what you need from `vue` and it resolves to the exact Vue instance the Panel uses:
+
+```js
+import { computed, ref } from "vue";
+```
+
+Never bundle your own copy of Vue: components compiled against a second Vue runtime cannot be rendered by the Panel.
+
+### `index.dev.js` during development
+
+If a plugin has an `index.dev.js` file next to its `index.js`, Kirby loads `index.dev.js` instead. Development tools like kirbyup use this file to connect the Panel to their dev server. As long as any plugin has an `index.dev.js`, the Panel also loads the development build of Vue, so the Vue devtools and Vue's warnings work.
+
+In Kirby 5 this file was called `index.dev.mjs`. Update your `.gitignore` accordingly and never ship an `index.dev.js` with a release.
+
+## Build tooling
+
+### kirbyup 4
+
+(link: https://github.com/johannschopplich/kirbyup text: kirbyup) is the bundler for Kirby Panel plugins. Version 4 is built for Kirby 6 and Vue 3. Plugins for Kirby 4 and 5 stay on kirbyup 3.
+
+At the time of beta.1, kirbyup 4 is a pre-release and published under the `next` tag. It requires Node.js 24 or newer.
+
+The simplest way to try it is to run it with `npx` in your plugin folder, without installing anything:
+
+```bash
+# build index.js and index.css
+npx kirbyup@next src/index.js
+
+# start a dev server with hot module replacement
+npx kirbyup@next dev src/index.js
+```
+
+### TypeScript types
+
+Large parts of the Panel are written in TypeScript now, including `this.$panel` and all its modules (see (link: releases/6/foundation#typescript text: A modern foundation)). In beta.1, Kirby doesn't publish these types as an npm package yet. The community packages (link: https://github.com/johannschopplich/kirby-types text: `kirby-types`) and (link: https://github.com/johannschopplich/kirbyuse text: `kirbyuse`) provide types for Panel plugins. Their Kirby 6 versions are available under the `next` tag.
+
+## Vue 2 → Vue 3 in Kirby plugins
+
+The (link: https://v3-migration.vuejs.org/breaking-changes/ text: official Vue 3 migration guide) lists all changes. Most of them don't matter for typical Kirby plugins. These are the ones that from our experience do.
+
+### `v-model` on Kirby components
+
+Kirby's form components keep their Vue 2 interface: a `value` prop and an `input` event. In Vue 3, `v-model` on a component binds a `modelValue` prop and listens to `update:modelValue` instead. So `v-model` on a Kirby input silently stops working: the input stays empty and changes are lost.
+
+Bind `value` and `input` explicitly:
+
+```html "/site/plugins/doi/src/components/DoiField.vue"
+<!-- Kirby 5 -->
+<k-text-input v-model="doi" :name="name" />
+
+<!-- Kirby 6 -->
+<k-text-input :name="name" :value="doi" @input="doi = $event" />
+```
+
+`v-model` on native elements like `<input>` works as before.
+
+The same interface applies to your own fields: Kirby passes the field value as `value` prop and listens to the `input` event, exactly like in Kirby 5.
+
+### Declare your events with `emits`
+
+In Vue 3, listeners for events that a component doesn't declare in `emits` are treated as attributes and get attached to the component's root element as native DOM listeners. For a custom field, an undeclared `input` listener also fires for every native `input` event bubbling up from an `<input>` inside your field, and Kirby would store the `InputEvent` object as field value.
+
+Always declare the events your component emits:
+
+```html "/site/plugins/doi/src/components/DoiField.vue"
+<template>
+	<k-field v-bind="$props" class="k-doi-field">
+		<k-text-input :name="name" :value="value" @input="$emit('input', $event)" />
+	</k-field>
+</template>
+
+<script>
+export default {
+	props: {
+		label: String,
+		name: String,
+		value: String
+	},
+	emits: ["input"]
+};
+</script>
+```
+
+### `$attrs`, `$listeners`, `class` and `style`
+
+`$listeners` is gone. Listeners are now part of `$attrs` (as `onClick`, `onInput` and so on), so `v-bind="$attrs"` passes them on:
+
+```html
+<!-- Kirby 5 -->
+<k-button v-bind="$attrs" v-on="$listeners" />
+
+<!-- Kirby 6 -->
+<k-button v-bind="$attrs" />
+```
+
+`$attrs` also includes `class` and `style` now. With `inheritAttrs: false`, Vue no longer applies them to the root element automatically. Kirby's own components bind them explicitly, and so should yours:
+
+```html
+<template>
+	<div :class="['k-my-component', $attrs.class]" :style="$attrs.style">
+		<slot />
+	</div>
+</template>
+
+<script>
+export default {
+	inheritAttrs: false
+};
+</script>
+```
+
+### Lifecycle hooks
+
+```js
+// Kirby 5
+beforeDestroy() {},
+destroyed() {}
+
+// Kirby 6
+beforeUnmount() {},
+unmounted() {}
+```
+
+### Reactivity without `$set` and `$delete`
+
+Vue 3 tracks new and deleted object properties on its own. `this.$set()`, `this.$delete()`, `Vue.set()` and `Vue.delete()` are gone:
+
+```js
+// Kirby 5
+this.$set(this.values, "title", title);
+this.$delete(this.values, "title");
+
+// Kirby 6
+this.values.title = title;
+delete this.values.title;
+```
+
+### Events between components
+
+Vue 3 components no longer have `$on()`, `$off()` and `$once()`, so a Vue instance can't be used as an event bus anymore. Use the Panel's event bus instead, which works the same as in Kirby 5:
+
+```js
+created() {
+	this.$panel.events.on("model.update", this.refresh);
+},
+beforeUnmount() {
+	this.$panel.events.off("model.update", this.refresh);
+}
+```
+
+`this.$panel.events.emit("my-plugin.something", data)` sends your own events.
+
+### Vue plugins registered via `use`
+
+Vue plugins registered with the `use` extension of `panel.plugin()` now receive the Vue app instead of the Vue constructor:
+
+```js "/site/plugins/my-plugin/src/index.js"
+// Kirby 5
+const MyVuePlugin = {
+	install(Vue) {
+		Vue.prototype.$myHelper = myHelper;
+		Vue.component("k-my-component", MyComponent);
+	}
+};
+
+// Kirby 6
+const MyVuePlugin = {
+	install(app) {
+		app.config.globalProperties.$myHelper = myHelper;
+		app.component("k-my-component", MyComponent);
+	}
+};
+
+window.panel.plugin("my/plugin", {
+	use: [MyVuePlugin]
+});
+```
+
+### More Vue 2 leftovers
+
+| Vue 2 (Kirby 5) | Vue 3 (Kirby 6) |
+| --- | --- |
+| `window.Vue`, `Vue.ref()`, `Vue.computed()` … | `import { ref, computed } from "vue"` |
+| `Vue.extend()`, `new Vue()` | Register components with `panel.plugin()` |
+| `this.$scopedSlots.default()` | `this.$slots.default()` |
+| `@click.native="…"` | `@click="…"` (the `.native` modifier is gone) |
+| `:title.sync="title"` | `v-model:title="title"` with an `update:title` event |
+| Template filters | Methods or computed props, e.g. `{{ format(date) }}` |
+| `this.$children` | Template refs |
+| `render(h) { return h(…) }` | `import { h } from "vue"` and `render() { return h(…) }` |
+| `functional: true` components | Regular components |
+
+Any third-party Vue library you bundle must support Vue 3 as well.
+
+## Other breaking changes in the Panel frontend
+
+Besides Vue 3, some Panel components, props, helpers and CSS custom properties have been renamed or removed. You'll find all of them in the changelog under (link: releases/6/changelog#breaking-changes__panel__frontend text: breaking changes) and (link: releases/6/changelog#deprecated__panel__frontend text: deprecations) for the Panel frontend.
