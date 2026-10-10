@@ -31,6 +31,9 @@ class TokenIterator
 
 	private ?string $newline = null;
 
+	/** @var list<int>|null */
+	private ?array $offsets = null;
+
 	/**
 	 * @param list<array{string, int, int}> $tokens
 	 */
@@ -42,7 +45,6 @@ class TokenIterator
 		$this->skipIrrelevantTokens();
 	}
 
-
 	/**
 	 * @return list<array{string, int, int}>
 	 */
@@ -50,7 +52,6 @@ class TokenIterator
 	{
 		return $this->tokens;
 	}
-
 
 	public function getContentBetween(int $startPos, int $endPos): string
 	{
@@ -66,47 +67,44 @@ class TokenIterator
 		return $content;
 	}
 
-
 	public function getTokenCount(): int
 	{
 		return count($this->tokens);
 	}
-
 
 	public function currentTokenValue(): string
 	{
 		return $this->tokens[$this->index][Lexer::VALUE_OFFSET];
 	}
 
-
 	public function currentTokenType(): int
 	{
 		return $this->tokens[$this->index][Lexer::TYPE_OFFSET];
 	}
 
-
 	public function currentTokenOffset(): int
 	{
-		$offset = 0;
-		for ($i = 0; $i < $this->index; $i++) {
-			$offset += strlen($this->tokens[$i][Lexer::VALUE_OFFSET]);
+		if ($this->offsets === null) {
+			$offset = 0;
+			$this->offsets = [];
+			foreach ($this->tokens as $token) {
+				$this->offsets[] = $offset;
+				$offset += strlen($token[Lexer::VALUE_OFFSET]);
+			}
 		}
 
-		return $offset;
+		return $this->offsets[$this->index];
 	}
-
 
 	public function currentTokenLine(): int
 	{
 		return $this->tokens[$this->index][Lexer::LINE_OFFSET];
 	}
 
-
 	public function currentTokenIndex(): int
 	{
 		return $this->index;
 	}
-
 
 	public function endIndexOfLastRelevantToken(): int
 	{
@@ -122,24 +120,20 @@ class TokenIterator
 		return $endIndex;
 	}
 
-
 	public function isCurrentTokenValue(string $tokenValue): bool
 	{
 		return $this->tokens[$this->index][Lexer::VALUE_OFFSET] === $tokenValue;
 	}
-
 
 	public function isCurrentTokenType(int ...$tokenType): bool
 	{
 		return in_array($this->tokens[$this->index][Lexer::TYPE_OFFSET], $tokenType, true);
 	}
 
-
 	public function isPrecededByHorizontalWhitespace(): bool
 	{
 		return ($this->tokens[$this->index - 1][Lexer::TYPE_OFFSET] ?? -1) === Lexer::TOKEN_HORIZONTAL_WS;
 	}
-
 
 	/**
 	 * @throws ParserException
@@ -159,7 +153,6 @@ class TokenIterator
 		$this->next();
 	}
 
-
 	/**
 	 * @throws ParserException
 	 */
@@ -171,7 +164,6 @@ class TokenIterator
 
 		$this->next();
 	}
-
 
 	/** @phpstan-impure */
 	public function tryConsumeTokenValue(string $tokenValue): bool
@@ -213,7 +205,6 @@ class TokenIterator
 		return true;
 	}
 
-
 	/**
 	 * @deprecated Use skipNewLineTokensAndConsumeComments instead (when parsing a type)
 	 */
@@ -227,7 +218,6 @@ class TokenIterator
 			$foundNewLine = $this->tryConsumeTokenType(Lexer::TOKEN_PHPDOC_EOL);
 		} while ($foundNewLine === true);
 	}
-
 
 	public function skipNewLineTokensAndConsumeComments(): void
 	{
@@ -251,7 +241,6 @@ class TokenIterator
 		} while ($foundNewLine === true);
 	}
 
-
 	private function detectNewline(): void
 	{
 		$value = $this->currentTokenValue();
@@ -262,7 +251,6 @@ class TokenIterator
 		}
 	}
 
-
 	public function getSkippedHorizontalWhiteSpaceIfAny(): string
 	{
 		if ($this->index > 0 && $this->tokens[$this->index - 1][Lexer::TYPE_OFFSET] === Lexer::TOKEN_HORIZONTAL_WS) {
@@ -271,7 +259,6 @@ class TokenIterator
 
 		return '';
 	}
-
 
 	/** @phpstan-impure */
 	public function joinUntil(int ...$tokenType): string
@@ -283,13 +270,11 @@ class TokenIterator
 		return $s;
 	}
 
-
 	public function next(): void
 	{
 		$this->index++;
 		$this->skipIrrelevantTokens();
 	}
-
 
 	private function skipIrrelevantTokens(): void
 	{
@@ -305,12 +290,10 @@ class TokenIterator
 		}
 	}
 
-
 	public function addEndOfLineToSkippedTokens(): void
 	{
 		$this->skippedTokenTypes = [Lexer::TOKEN_HORIZONTAL_WS, Lexer::TOKEN_PHPDOC_EOL];
 	}
-
 
 	public function removeEndOfLineFromSkippedTokens(): void
 	{
@@ -324,18 +307,15 @@ class TokenIterator
 		$this->index = $lastToken;
 	}
 
-
 	public function pushSavePoint(): void
 	{
 		$this->savePoints[] = [$this->index, $this->comments];
 	}
 
-
 	public function dropSavePoint(): void
 	{
 		array_pop($this->savePoints);
 	}
-
 
 	public function rollback(): void
 	{
@@ -343,7 +323,6 @@ class TokenIterator
 		assert($savepoint !== null);
 		[$this->index, $this->comments] = $savepoint;
 	}
-
 
 	/**
 	 * @throws ParserException
