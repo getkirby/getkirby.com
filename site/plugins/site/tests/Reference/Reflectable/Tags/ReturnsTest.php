@@ -49,21 +49,6 @@ class ReturnsTest extends TestCase
 		$this->assertSame('The answer to life', $returns->description());
 	}
 
-	public function testIsMutable(): void
-	{
-		$types       = Types::factory('static');
-		$reflectable = new Returns($types);
-		$this->assertFalse($reflectable->isMutable());
-
-		$types       = Types::factory('self');
-		$reflectable = new Returns($types);
-		$this->assertFalse($reflectable->isMutable());
-
-		$types       = Types::factory('$this');
-		$reflectable = new Returns($types);
-		$this->assertTrue($reflectable->isMutable());
-	}
-
 	public function testIsImmutable(): void
 	{
 		$types       = Types::factory('static');
@@ -77,6 +62,21 @@ class ReturnsTest extends TestCase
 		$types       = Types::factory('$this');
 		$reflectable = new Returns($types);
 		$this->assertFalse($reflectable->isImmutable());
+	}
+
+	public function testIsMutable(): void
+	{
+		$types       = Types::factory('static');
+		$reflectable = new Returns($types);
+		$this->assertFalse($reflectable->isMutable());
+
+		$types       = Types::factory('self');
+		$reflectable = new Returns($types);
+		$this->assertFalse($reflectable->isMutable());
+
+		$types       = Types::factory('$this');
+		$reflectable = new Returns($types);
+		$this->assertTrue($reflectable->isMutable());
 	}
 
 	public function testIsVoid(): void

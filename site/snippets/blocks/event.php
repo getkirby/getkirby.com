@@ -2,9 +2,6 @@
 /**
  * @var Kirby\Cms\Block $block
  */
-
-use Kirby\Cms\Block;
-
 ?>
 <p>
 	<strong>

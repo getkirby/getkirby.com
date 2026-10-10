@@ -35,7 +35,7 @@ class EventPage extends DefaultPage
 		}
 
 		$start = $this->start();
-		$dt    = DateTime::createFromFormat('H:i:s', $start);
+		$dt    = DateTime::createFromFormat('!H:i:s', $start);
 		$dt->modify('+2 hours');
 		return parent::end()->value($dt->format('H:i:s'));
 	}
@@ -65,16 +65,16 @@ class EventPage extends DefaultPage
 		return implode("\r\n", $lines);
 	}
 
-	public function foldTitle(): Field
-	{
-		$title = $this->fold($this->shortTitle()->value());
-		return parent::title()->value($title);
-	}
-
 	public function foldLink(): Field
 	{
 		$link = $this->fold($this->link()->value());
 		return parent::link()->value($link);
+	}
+
+	public function foldTitle(): Field
+	{
+		$title = $this->fold($this->shortTitle()->value());
+		return parent::title()->value($title);
 	}
 
 	public function icon(): string

@@ -52,7 +52,7 @@ snippet('templates/features/section', [
 	'figure' => [
 		'image' => 'view.png',
 		'alt'   => 'A photo of a traveler relaxing in a hammock surrounded by lights overlooking the forest',
-		],
+	],
 	'features' => [
 		[
 			'title' => 'Global reach',

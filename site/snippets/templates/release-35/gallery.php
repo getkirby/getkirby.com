@@ -17,9 +17,9 @@
 						loading="lazy"
 						src="<?= $thumb->resize(200)->url() ?>"
 						srcset="<?= $thumb->srcset([
-								200,
-								400,
-							])?>"
+							200,
+							400,
+						])?>"
 						alt="<?= $image->alt() ?>"
 					/>
 				</p>

@@ -1,1 +1,1 @@
-<?php go('https://community.getkirby.com/events.xml') ?>
+<?php go('https://community.getkirby.com/events.xml');

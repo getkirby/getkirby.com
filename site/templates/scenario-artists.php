@@ -52,7 +52,7 @@ snippet('templates/features/section', [
 	'figure' => [
 		'image' => 'band.png',
 		'alt'   => 'A photo of a band practicing',
-		],
+	],
 	'features' => [
 		[
 			'title' => 'Multilingual ready',

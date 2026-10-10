@@ -9,7 +9,6 @@ use Kirby\Cms\Pages;
 /**
  * Search Index
  *
- * @package   Kirby Search
  * @author    Lukas Bestle <lukas@getkirby.com>,
  *            Nico Hoffmann <nico@getkirby.com>
  * @link      https://getkirby.com
@@ -25,7 +24,7 @@ abstract class Index
 
 	/**
 	 * Retrieve all indexable pages as entries
-	 * @return \Generator|\Kirby\Search\Entry[]
+	 * @return Generator|Entry[]
 	 */
 	protected function entries(): Generator
 	{

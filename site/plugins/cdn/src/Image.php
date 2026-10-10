@@ -12,7 +12,6 @@ use Kirby\Image\Focus;
 /**
  * Helper class for KeyCDN image processing
  *
- * @package   Kirby Cdn
  * @author    Lukas Bestle <lukas@getkirby.com>
  * @link      https://getkirby.com
  * @copyright Bastian Allgeier
@@ -25,8 +24,8 @@ class Image
 	protected string $url;
 
 	/**
-	 * @param string|\Kirby\Filesystem\Asset|\Kirby\Cms\File $file File path or object
-	 * @param array $options Kirby thumb options
+	 * @param $file File path or object
+	 * @param $options Kirby thumb options
 	 */
 	public function __construct(
 		protected string|Asset|File $file,
@@ -74,46 +73,6 @@ class Image
 		$this->options = $optionsProcessed;
 	}
 
-	/**
-	 * Returns the relative path to the image
-	 */
-	public function path(): string
-	{
-		return Url::path($this->url);
-	}
-
-	/**
-	 * Generates KeyCDN image processing parameters
-	 * (https://www.keycdn.com/support/image-processing)
-	 */
-	public function query(): string
-	{
-		if (empty($this->options) === true) {
-			return '';
-		}
-
-		return '?' . http_build_query([
-			...static::resizeOrCrop(),
-			...static::grayscale(),
-			...static::progressive(),
-			...static::blur(),
-			...static::sharpen(),
-		]);
-	}
-
-	/**
-	 * Generates a URL with KeyCDN image processing parameters
-	 * (https://www.keycdn.com/support/image-processing)
-	 */
-	public function url(): string
-	{
-		if ($this->file instanceof VirtualFile) {
-			return $this->file->url() . $this->query();
-		}
-
-		return $this->app->option('cdn.domain') . '/' . $this->path() . $this->query();
-	}
-
 	protected function blur(): array
 	{
 		if ($this->options['blur'] !== false) {
@@ -134,6 +93,14 @@ class Image
 		return [];
 	}
 
+	/**
+	 * Returns the relative path to the image
+	 */
+	public function path(): string
+	{
+		return Url::path($this->url);
+	}
+
 	protected function progressive(): array
 	{
 		if ($this->options['interlace'] === true) {
@@ -141,6 +108,25 @@ class Image
 		}
 
 		return [];
+	}
+
+	/**
+	 * Generates KeyCDN image processing parameters
+	 * (https://www.keycdn.com/support/image-processing)
+	 */
+	public function query(): string
+	{
+		if (empty($this->options) === true) {
+			return '';
+		}
+
+		return '?' . http_build_query([
+			...static::resizeOrCrop(),
+			...static::grayscale(),
+			...static::progressive(),
+			...static::blur(),
+			...static::sharpen(),
+		]);
 	}
 
 	protected function resizeOrCrop(): array
@@ -191,5 +177,18 @@ class Image
 		}
 
 		return [];
+	}
+
+	/**
+	 * Generates a URL with KeyCDN image processing parameters
+	 * (https://www.keycdn.com/support/image-processing)
+	 */
+	public function url(): string
+	{
+		if ($this->file instanceof VirtualFile) {
+			return $this->file->url() . $this->query();
+		}
+
+		return $this->app->option('cdn.domain') . '/' . $this->path() . $this->query();
 	}
 }

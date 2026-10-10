@@ -9,16 +9,7 @@ use Kirby\Toolkit\A;
 
 class PartnersPage extends DefaultPage
 {
-	static $subpages = null;
-
-	public function subpages(): Pages
-	{
-		if (static::$subpages) {
-			return static::$subpages;
-		}
-
-		return static::$subpages = Pages::factory($this->inventory()['children'], $this);
-	}
+	public static $subpages = null;
 
 	public function children(): Pages
 	{
@@ -41,7 +32,7 @@ class PartnersPage extends DefaultPage
 
 			$partners = A::map(
 				array_keys($data),
-				fn($partner) => [
+				fn ($partner) => [
 					'slug'     => $partner,
 					'parent'   => $this,
 					'url'      => $this->url() . '/' . $partner,
@@ -76,9 +67,19 @@ class PartnersPage extends DefaultPage
 					]
 				]
 			);
-		} catch (Exception) {}
+		} catch (Exception) {
+		}
 
 		return $this->children = $this->subpages()->add(Pages::factory($partners, $this));
+	}
+
+	public function subpages(): Pages
+	{
+		if (static::$subpages) {
+			return static::$subpages;
+		}
+
+		return static::$subpages = Pages::factory($this->inventory()['children'], $this);
 	}
 
 	/**

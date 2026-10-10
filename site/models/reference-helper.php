@@ -21,11 +21,6 @@ class ReferenceHelperPage extends ReferenceArticlePage
 		]);
 	}
 
-	public function title(): Field
-	{
-		return parent::title()->value($this->name() . '()');
-	}
-
 	public function reflection(): ReflectableHelperFunction
 	{
 		return $this->reflection ??= new ReflectableHelperFunction(
@@ -33,4 +28,8 @@ class ReferenceHelperPage extends ReferenceArticlePage
 		);
 	}
 
+	public function title(): Field
+	{
+		return parent::title()->value($this->name() . '()');
+	}
 }

@@ -27,5 +27,3 @@ $description
 $mutationDescription
 
 MARKDOWN);
-
-?>

@@ -12,7 +12,6 @@ use Loupe\Loupe\SearchParameters;
  * Main Search class for Loupe integration
  * Provides an interface for indexing and searching documents
  *
- * @package   Kirby Search
  * @author    Ahmet Bora <ahmet@getkirby.com>,
  *            Nico Hoffmann <nico@getkirby.com>
  * @link      https://getkirby.com

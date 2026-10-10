@@ -20,7 +20,7 @@ return [
 	],
 	[
 		'pattern' => 'plugins/(:all).json',
-		'action'  => function (string $path) use($plugins) {
+		'action'  => function (string $path) use ($plugins) {
 			$url = $plugins . '/' . $path . '.json';
 
 			if (kirby()->request()->header('X-Pull') === option('keys.keycdn')) {

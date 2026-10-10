@@ -10,14 +10,13 @@ use Kirby\Http\Response;
 /**
  * Creates a dynamic OpenGraph thumbnail for a page
  *
- * @package   Kirby Meta
  * @author    Nico Hoffmann <nico@getkirby.com>
  * @link      https://getkirby.com
  * @license   https://opensource.org/licenses/MIT
  */
 class Thumbnail
 {
-	const PATTERNS = [
+	public const PATTERNS = [
 		'abyss',
 		'beach',
 		'blobs',
@@ -36,13 +35,12 @@ class Thumbnail
 	];
 
 	protected GdImage $canvas;
-	protected int $width  = 1200;
 	protected int $height = 630;
-	protected int $offset = 50;
-
-	protected string $lead;
-	protected string $title;
 	protected File|null $image;
+	protected string $lead;
+	protected int $offset = 50;
+	protected string $title;
+	protected int $width  = 1200;
 
 	public function __construct(
 		protected string $id
@@ -223,8 +221,7 @@ class Thumbnail
 	public static function file(
 		Page $page,
 		PageMeta $meta
-	): File|null
-	{
+	): File|null {
 		// Priotize custom thumbnail over auto-generated:
 		// If defined in...
 

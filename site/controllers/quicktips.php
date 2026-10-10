@@ -10,7 +10,7 @@ return function (Page $page, string|null $tag = null) {
 	sort($tags);
 
 	if ($tag) {
-		$quicktips = $quicktips->filter(function($tip) use($tag) {
+		$quicktips = $quicktips->filter(function ($tip) use ($tag) {
 			$tags = array_map(
 				fn ($item) => Str::slug($item),
 				$tip->tags()->split(',')

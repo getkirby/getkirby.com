@@ -48,20 +48,20 @@ class Returns
 
 	/**
 	 * Returns whether the return type
-	 * implies that the function is mutable (`$this`)
-	 */
-	public function isMutable(): bool
-	{
-		return $this->types->has('$this');
-	}
-
-	/**
-	 * Returns whether the return type
 	 * implies that the function is immutable (`static` or `self`)
 	 */
 	public function isImmutable(): bool
 	{
 		return $this->types->has('static') || $this->types->has('self');
+	}
+
+	/**
+	 * Returns whether the return type
+	 * implies that the function is mutable (`$this`)
+	 */
+	public function isMutable(): bool
+	{
+		return $this->types->has('$this');
 	}
 
 	/**

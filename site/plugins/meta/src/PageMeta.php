@@ -11,15 +11,13 @@ use Kirby\Toolkit\Tpl;
 class PageMeta
 {
 	public array $data = [];
-
 	public $defaults = [
 		'robots' => true,
 	];
 
 	public function __construct(
 		protected Page $page
-	)
-	{
+	) {
 		// Get metadata from page model
 		if (method_exists($this->page, 'metadata') === true) {
 			$this->data = $this->page->metadata();

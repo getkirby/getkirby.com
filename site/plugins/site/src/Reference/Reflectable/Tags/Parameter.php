@@ -86,7 +86,7 @@ class Parameter
 		$default = $parameter->getDefaultValue();
 
 		if (is_object($default)) {
-			$default = 'new ' . get_class($default) . '()';
+			$default = 'new ' . $default::class . '()';
 		} else {
 			$default = var_export($default, true);
 		}

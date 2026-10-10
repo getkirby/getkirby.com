@@ -81,7 +81,7 @@ return function (App $kirby, Page $page) {
 				}
 
 				throw new Exception(
-					"This form contains the following errors:\n" . implode("\n" , array_values($errors))
+					"This form contains the following errors:\n" . implode("\n", array_values($errors))
 				);
 			}
 

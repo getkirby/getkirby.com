@@ -1,1 +1,1 @@
-<?php go('https://community.getkirby.com/events.ics') ?>
+<?php go('https://community.getkirby.com/events.ics');

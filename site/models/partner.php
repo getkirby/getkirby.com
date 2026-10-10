@@ -1,7 +1,6 @@
 <?php
 
 use Kirby\Cms\File;
-use Kirby\Cms\Files;
 use Kirby\Cms\Page;
 use Kirby\Cms\Pages;
 use Kirby\Content\Field;
@@ -42,7 +41,7 @@ class PartnerPage extends DefaultPage
 
 		$gallery = A::map(
 			$gallery,
-			fn($galleryItem) => [
+			fn ($galleryItem) => [
 				'slug'     => $slug = Str::slug($galleryItem['title']),
 				'parent'   => $this,
 				'url'      => $this->url() . '/' . $slug,
@@ -52,7 +51,7 @@ class PartnerPage extends DefaultPage
 					'title'    => $galleryItem['title'],
 					'info'     => $galleryItem['info'],
 					'link'     => $galleryItem['link'],
-                    'showCase' => $galleryItem['showCase']
+					'showCase' => $galleryItem['showCase']
 				],
 				'files' => [
 					$galleryItem['image']
@@ -164,7 +163,7 @@ class PartnerPage extends DefaultPage
 		if (parent::plugins()->isNotEmpty() === true) {
 			$plugins = A::map(
 				parent::plugins()->yaml(),
-				fn($plugin) => $json['plugins']['developers/' . $id . '/' . $plugin] ?? null
+				fn ($plugin) => $json['plugins']['developers/' . $id . '/' . $plugin] ?? null
 			);
 			$plugins = array_filter($plugins);
 		}
@@ -172,7 +171,7 @@ class PartnerPage extends DefaultPage
 		$plugins ??= $json['plugins'] ?? [];
 		$plugins   = A::map(
 			array_keys($plugins),
-			fn($plugin) => new Page([
+			fn ($plugin) => new Page([
 				'slug'    => $plugin,
 				'parent'  => $developer,
 				'url'     => $plugins[$plugin]['url'],

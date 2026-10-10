@@ -9,6 +9,7 @@
 	},
 	"scripts": {
 		"run": "php -S localhost:8181 kirby/router.php",
+		"fix": "cpx getkirby/php-cs:^0.2 fix",
 		"test": "@composer --working-dir=site/plugins/site run test"
 	},
 	"config": {

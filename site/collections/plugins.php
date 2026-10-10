@@ -1,7 +1,7 @@
 <?php
 
-use Kirby\Cms\Pages;
 use Kirby\Cms\Page;
+use Kirby\Cms\Pages;
 use Kirby\Http\Remote;
 use Kirby\Toolkit\Str;
 
@@ -30,7 +30,7 @@ return function () {
 			);
 		}
 	} catch (Throwable) {
-		//
+
 	}
 
 	return $pages;

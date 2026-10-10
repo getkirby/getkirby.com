@@ -14,14 +14,14 @@
 	[
 		'title' => 'In this episode',
 		'items' => $page
-				->layouts()
-				->toBlocks()
-				->filterBy('type', 'heading')
-				->map(fn($item)  => new Obj([
-						'id'   => '#' . Str::slug(Str::unhtml($item->text())),
-						'text' => trim(strip_tags($item->text())),
-					]))
-]);
+			->layouts()
+			->toBlocks()
+			->filterBy('type', 'heading')
+			->map(fn ($item) => new Obj([
+				'id'   => '#' . Str::slug(Str::unhtml($item->text())),
+				'text' => trim(strip_tags($item->text())),
+			]))
+	]);
 ?>
 <?php endslot() ?>
 

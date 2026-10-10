@@ -68,5 +68,4 @@ class ReferenceQuickLinkPage extends DefaultPage
 		$link = $this->link()->toPage();
 		return new Field($this, 'title', $link ? $link->title() : null);
 	}
-
 }

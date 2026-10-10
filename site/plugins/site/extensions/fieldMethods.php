@@ -1,8 +1,6 @@
 <?php
 
-use Kirby\Cms\App;
 use Kirby\Http\Url;
-use Kirby\Text\KirbyTags;
 use Kirby\Toolkit\Collection;
 use Kirby\Toolkit\Obj;
 use Kirby\Toolkit\Str;

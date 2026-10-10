@@ -6,7 +6,6 @@ namespace Kirby\Search;
  * Handles Loupe search index operations
  * Manages document indexing and SQLite database creation
  *
- * @package   Kirby Search
  * @author    Ahmet Bora <ahmet@getkirby.com>,
  *            Nico Hoffmann <nico@getkirby.com>
  * @link      https://getkirby.com
@@ -15,7 +14,7 @@ namespace Kirby\Search;
 class LoupeIndex extends Index
 {
 	/**
-	 * @var \Kirby\Search\LoupeSearch
+	 * @var LoupeSearch
 	 */
 	protected Search $search;
 

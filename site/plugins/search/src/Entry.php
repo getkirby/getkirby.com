@@ -9,7 +9,6 @@ use Kirby\Content\Field;
 /**
  * Represents a search entry (page) to be indexed
  *
- * @package   Kirby Search
  * @author    Lukas Bestle <lukas@getkirby.com>,
  *            Nico Hoffmann <nico@getkirby.com>
  * @link      https://getkirby.com
@@ -18,6 +17,7 @@ use Kirby\Content\Field;
 class Entry
 {
 	protected App $kirby;
+
 	public function __construct(
 		protected Page $page,
 		protected Search $search

@@ -4,7 +4,7 @@
  * @var bool $lazy
  */
 ?>
-<?php if($entry->video()->isNotEmpty()): ?>
+<?php if ($entry->video()->isNotEmpty()): ?>
 	<div class="buzz-entry">
 		<article>
 			<figure class="rounded overflow-hidden mb-6 shadow-lg" style="--aspect-ratio: 800/400">

@@ -12,7 +12,7 @@ use Reflector;
 class ReflectableClass extends Reflectable
 {
 	/**
-	 * @var \ReflectionClass
+	 * @var ReflectionClass
 	 */
 	public Reflector $reflection;
 

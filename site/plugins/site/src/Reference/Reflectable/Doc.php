@@ -23,6 +23,24 @@ use Throwable;
  */
 class Doc extends PhpDocNode
 {
+	public static function factory(Reflector $reflection): static
+	{
+		try {
+			$docblock  = $reflection->getDocComment();
+			$config    = new ParserConfig(usedAttributes: []);
+			$lexer     = new Lexer($config);
+			$constExpr = new ConstExprParser($config);
+			$type      = new TypeParser($config, $constExpr);
+			$phpDoc    = new PhpDocParser($config, $type, $constExpr);
+			$tokens    = new TokenIterator($lexer->tokenize($docblock));
+			$node      = $phpDoc->parse($tokens);
+			return new static($node->children);
+
+		} catch (Throwable) {
+			return new static([]);
+		}
+	}
+
 	public function getParamNode(string $name): ParamTagValueNode|null
 	{
 		// PHPStan uses names with a $ prefix
@@ -69,23 +87,5 @@ class Doc extends PhpDocNode
 			$this->children,
 			fn (Node $node) => $node instanceof PhpDocTextNode
 		);
-	}
-
-	public static function factory(Reflector $reflection): static
-	{
-		try {
-			$docblock  = $reflection->getDocComment();
-			$config    = new ParserConfig(usedAttributes: []);
-			$lexer     = new Lexer($config);
-			$constExpr = new ConstExprParser($config);
-			$type      = new TypeParser($config, $constExpr);
-			$phpDoc    = new PhpDocParser($config, $type, $constExpr);
-			$tokens    = new TokenIterator($lexer->tokenize($docblock));
-			$node      = $phpDoc->parse($tokens);
-			return new static($node->children);
-
-		} catch (Throwable) {
-			return new static([]);
-		}
 	}
 }

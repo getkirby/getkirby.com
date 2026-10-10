@@ -1,8 +1,8 @@
 <?php
 
 use Kirby\Cms\File;
-use Kirby\Reference\Types\Type;
 use Kirby\Icons\Icon;
+use Kirby\Reference\Types\Type;
 use Kirby\Toolkit\Html;
 use Kirby\Toolkit\Str;
 use Kirby\Toolkit\Xml;

@@ -3,8 +3,8 @@
 namespace Kirby\Github;
 
 use Generator;
-use InvalidArgumentException;
 use Goedemiddag\LinkHeaderParser\LinkHeaderFactory;
+use InvalidArgumentException;
 use Kirby\Exception\Exception;
 use Kirby\Http\Remote;
 use Kirby\Http\Url;

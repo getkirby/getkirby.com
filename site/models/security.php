@@ -205,11 +205,6 @@ class SecurityPage extends DefaultPage
 		return $field;
 	}
 
-	public function urls(): array
-	{
-		return $this->replace(parent::urls())->yaml();
-	}
-
 	public function text(): Field
 	{
 		return $this->replace(parent::text(), [
@@ -217,5 +212,10 @@ class SecurityPage extends DefaultPage
 			'messages'  => $this->messagesTable(),
 			'versions'  => $this->kirbyVersionsTable()
 		]);
+	}
+
+	public function urls(): array
+	{
+		return $this->replace(parent::urls())->yaml();
 	}
 }

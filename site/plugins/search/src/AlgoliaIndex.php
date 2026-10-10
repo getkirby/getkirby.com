@@ -8,7 +8,6 @@ use Kirby\Cms\Pages;
 /**
  * Algolia Search Index
  *
- * @package   Kirby Search
  * @author    Lukas Bestle <lukas@getkirby.com>,
  *            Nico Hoffmann <nico@getkirby.com>
  * @link      https://getkirby.com
@@ -17,7 +16,7 @@ use Kirby\Cms\Pages;
 class AlgoliaIndex extends Index
 {
 	/**
-	 * @var \Kirby\Search\AlgoliaSearch
+	 * @var AlgoliaSearch
 	 */
 	protected Search $search;
 

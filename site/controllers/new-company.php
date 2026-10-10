@@ -3,7 +3,6 @@
 use Kirby\Cms\Page;
 use Kirby\Http\Remote;
 
-
 function customerTransfer(
 	string $email,
 	string $hash,

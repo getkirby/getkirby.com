@@ -5,7 +5,6 @@ namespace Kirby\Reference\Reflectable;
 use Exception;
 use Kirby\Content\Field;
 use Kirby\Reference\Reflectable\Tags\Parameters;
-use Kirby\Reference\Types\Identifier;
 use ReflectionFunction;
 use ReflectionMethod;
 
@@ -24,7 +23,7 @@ class ReflectableFieldMethod extends ReflectableClassMethod
 		if ($method !== null) {
 			// method is defined in `kirby/config/methods.php`
 			$this->reflection = new ReflectionFunction($method);
-		} else if (method_exists(Field::class, $this->method) === true) {
+		} elseif (method_exists(Field::class, $this->method) === true) {
 			// method is defined in the `Field` class
 			$this->reflection = new ReflectionMethod(Field::class, $this->method);
 		} else {
