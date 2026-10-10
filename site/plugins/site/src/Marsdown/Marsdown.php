@@ -3,7 +3,9 @@
 namespace Kirby\Marsdown;
 
 use DomDocument;
+use Kirby\Reference\Types\Type;
 use Kirby\Reference\Types\Types;
+use Kirby\Toolkit\A;
 use Kirby\Toolkit\Str;
 use ParsedownExtra;
 
@@ -440,9 +442,17 @@ class Marsdown extends ParsedownExtra
 
 	protected function inlineCodeHandler($text, $nonNestables = [])
 	{
+		// Only split into multiple types for unions (e.g. `string|int`),
+		// keep any other code with pipes (e.g. `foo(Bar|Baz $a): Bar|Foo`)
+		// together as a single code tag
+		$type = match ($this->isTypeUnion($text)) {
+			true  => Types::factory($text),
+			false => Type::factory($text)
+		};
+
 		return [
 			[
-				'rawHtml' => Types::factory($text)->toHtml(
+				'rawHtml' => $type->toHtml(
 					// Use text as provided
 					text: $text,
 					// Don't link if the code is  already nested in alink
@@ -452,6 +462,26 @@ class Marsdown extends ParsedownExtra
 				)
 			]
 		];
+	}
+
+	/**
+	 * Checks if the inline code is a union of types
+	 */
+	protected function isTypeUnion(string $text): bool
+	{
+		$types = Types::split($text);
+
+		// no empty types or whitespace around the pipes
+		if (implode('|', $types) !== $text) {
+			return false;
+		}
+
+		// each type must be a single token, only allowing
+		// whitespace nested in brackets, e.g. `array<string, mixed>`
+		return A::every(
+			$types,
+			fn ($type) => count(Types::split($type, ' ')) === 1
+		);
 	}
 
 }
