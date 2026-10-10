@@ -5,7 +5,7 @@
  * @example
  * (docs: panel-field-update field: tags)
  *
- * @var string      $field Field type
+ * @var string $field Field type
  * @var string|null $level Heading level (default: 2)
  */
 
