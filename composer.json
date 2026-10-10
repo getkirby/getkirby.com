@@ -8,7 +8,8 @@
 		"getkirby/cms": "^4.0"
 	},
 	"scripts": {
-		"run": "php -S localhost:8181 kirby/router.php"
+		"run": "php -S localhost:8181 kirby/router.php",
+		"test": "@composer --working-dir=site/plugins/site run test"
 	},
 	"config": {
 		"optimize-autoloader": true
