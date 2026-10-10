@@ -1,5 +1,7 @@
 <?php
 
+namespace TestDeprecated;
+
 /**
  * @deprecated 5.0.0 This is deprecated
  */
