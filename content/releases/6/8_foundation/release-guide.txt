@@ -177,3 +177,7 @@ Our own tooling got an upgrade as well, which helps us ship with fewer bugs:
 
 - (link: releases/6/migration text: Migration guides): everything you need to upgrade a site or a plugin to Kirby 6
 - (link: releases/6/migration/plugin-developers text: For plugin developers): the plugin migration guide with deep dives into Vue 3, field classes, trusted HTML, auth plugins and the Panel backend
+
+----
+
+Category: features

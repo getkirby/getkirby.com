@@ -94,3 +94,7 @@ export default {
 };
 </script>
 ```
+
+----
+
+Category: features

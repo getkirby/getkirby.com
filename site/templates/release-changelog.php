@@ -7,10 +7,14 @@
 
 <?php slot('sidebar') ?>
 <?php $release = $page->release() ?>
-<?php snippet('sidebar', [
-	'title' => $release->title(),
-	'link'  => $release->url(),
-	'menu'  => $release->children()->listed(),
+<?php snippet([
+	'templates/release-' . $release->versionField() . '/sidebar',
+	'sidebar'
+], [
+	'release' => $release,
+	'title'   => $release->title(),
+	'link'    => $release->url(),
+	'menu'    => $release->children()->listed(),
 ]) ?>
 <?php endslot() ?>
 

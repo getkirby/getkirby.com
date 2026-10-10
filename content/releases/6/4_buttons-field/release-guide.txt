@@ -276,3 +276,7 @@ class ProductPage extends Page
 ```
 
 Make sure the method returns a list (not an array with custom keys). If there are no buttons, the field shows an empty state.
+
+----
+
+Category: features

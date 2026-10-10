@@ -186,3 +186,7 @@ $page->guards()->ensureExecutable('changeTitle', $title);
 ```
 
 (link: releases/6/changelog#breaking-changes__core__permissions text: All permission-related breaking changes …)
+
+----
+
+Category: features

@@ -159,3 +159,7 @@ Please mention that you're testing `6.0.0-beta.1` and include:
 - the relevant parts of your blueprint, template or config
 
 Before you report a problem, check the (link: releases/6/changelog text: changelog) and the migration guides: it might be an intended change. If you're unsure whether something is a bug, report it anyway. That's exactly what the beta is for.
+
+----
+
+Category: migration

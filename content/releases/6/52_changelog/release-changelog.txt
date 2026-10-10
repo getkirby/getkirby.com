@@ -857,3 +857,7 @@ Housekeeping:
 - Simplified PHP class docblocks [#7944](https://github.com/getkirby/kirby/pull/7944) and added docblocks to frontend files [#8220](https://github.com/getkirby/kirby/pull/8220)
   - Docblocks use short class names where the class has been imported via `use` [#8338](https://github.com/getkirby/kirby/pull/8338)
   - Started to remove types from docblocks that only repeat the native PHP type hints [#8250](https://github.com/getkirby/kirby/pull/8250)
+
+----
+
+Category: changes

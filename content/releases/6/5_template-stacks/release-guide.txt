@@ -185,3 +185,7 @@ The template doesn't need to know about any of it:
 ```
 
 A page with three sliders gets `slider.css` and `slider.js` exactly once. A page without a slider doesn't load them at all.
+
+----
+
+Category: features

@@ -201,3 +201,7 @@ The Panel login view has been rebuilt. Each step has its own URL: `/panel/login/
 - **Challenge switcher:** during the second step, users can switch to any other second factor available to them, without starting over.
 
 Plugins can bring their own login methods and second factors, each with their own form in this view. Read more in (link: releases/6/migration/plugin-developers/auth text: Custom auth methods & challenges).
+
+----
+
+Category: features

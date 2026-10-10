@@ -275,3 +275,7 @@ The short form `options: page.children` with a query as string still works.
 ## Faster blueprints
 
 Kirby 5 processed a blueprint again for every page, file or user that used it. Kirby 6 normalizes each blueprint only once per request and shares the result between all models with the same blueprint. Lists with many entries and views with many models benefit the most.
+
+----
+
+Category: features
