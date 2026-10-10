@@ -49,7 +49,7 @@ class Types
 		// Handle simple strings first;
 		// expect a pipe-separated list of exact types
 		if (is_string($types) === true) {
-			$types = Str::split($types, '|');
+			$types = static::split($types);
 			return new static(
 				types: A::map(
 					$types,
@@ -140,6 +140,53 @@ class Types
 	}
 
 	/**
+	 * Splits a string of types at its top-level separators,
+	 * ignoring separators nested in brackets or quotes,
+	 * e.g. `array<string|int, mixed>|null`
+	 *
+	 * @return array<string>
+	 */
+	public static function split(
+		string $types,
+		string $separator = '|'
+	): array {
+		$chars = mb_str_split($types);
+		$parts = [''];
+		$depth = 0;
+		$quote = null;
+
+		foreach ($chars as $index => $char) {
+			if ($char === $separator && $depth === 0 && $quote === null) {
+				$parts[] = '';
+				continue;
+			}
+
+			$parts[count($parts) - 1] .= $char;
+
+			if ($quote !== null) {
+				// ignore everything until the closing quote
+				if ($char === $quote) {
+					$quote = null;
+				}
+			} elseif (in_array($char, ['"', '\''], true) === true) {
+				$quote = $char;
+			} elseif (in_array($char, ['(', '<', '[', '{'], true) === true) {
+				$depth++;
+			} elseif (
+				in_array($char, [')', '>', ']', '}'], true) === true &&
+				// arrows don't close brackets, e.g. `$page->parent()`
+				in_array($chars[$index - 1] ?? null, ['-', '='], true) === false
+			) {
+				$depth--;
+			}
+		}
+
+		// trim and remove empty types
+		$parts = A::map($parts, fn ($part) => trim($part));
+		return array_values(A::filter($parts, fn ($part) => $part !== ''));
+	}
+
+	/**
 	 * Convert the types to HTML
 	 * with links to the reference page for objects
 	 */
@@ -150,7 +197,7 @@ class Types
 	): string {
 		// Get HTML representation for each type
 		$types = [];
-		$texts = Str::split($text, '|');
+		$texts = static::split($text ?? '');
 
 		foreach ($this->types as $index => $type) {
 			$types[] = $type->toHtml(

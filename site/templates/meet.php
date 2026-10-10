@@ -1,1 +1,1 @@
-<?php go('https://community.getkirby.com') ?>
+<?php go('https://community.getkirby.com');

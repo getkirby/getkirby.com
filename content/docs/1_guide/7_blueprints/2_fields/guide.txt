@@ -19,10 +19,10 @@ Text:
 You can choose the names for your fields freely, but there are two limitations:
 
 1. You can only use **alphanumeric characters** and **underscores** in field names.
-2. Do not use names that are **reserved by (link: docs/reference/objects/page text: native page methods)**. For example, if you give your field the name "image", it will conflict with Kirby's `$page->image()` method.
+2. Do not use names that are **reserved by native methods** of the (link: docs/reference/objects/cms/page#content-fields__reserved-names text: page), (link: docs/reference/objects/cms/site#content-fields__reserved-names text: site), (link: docs/reference/objects/cms/file#content-fields__reserved-names text: file) or (link: docs/reference/objects/cms/user#content-fields__reserved-names text: user) objects. For example, if you give your field the name "image", it will conflict with Kirby's `$page->image()` method. This includes internal methods that are not listed in the reference, e.g. `$page->inventory()`.
 
 <info>
-You can still use field names that conflict with (link: docs/reference/objects/page text: native page methods). But you will have to call such a field via the `$page->content()->image()` method. We recommend prefixing your field names instead.
+You can still use field names that conflict with native methods. But you will have to call such a field via the `$page->content()->get('image')` method. We recommend prefixing your field names instead.
 </info>
 
 ## Available fields

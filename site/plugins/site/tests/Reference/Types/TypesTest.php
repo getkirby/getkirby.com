@@ -31,6 +31,14 @@ class TypesTest extends TestCase
 		$this->assertSame('string|int', $types->toString());
 	}
 
+	public function testFactoryWithStringNested(): void
+	{
+		$types = Types::factory('array<string|int, mixed>|null');
+		$this->assertSame(2, $types->count());
+		$this->assertSame('array<string|int, mixed>', $types->types[0]->type);
+		$this->assertSame('null', $types->types[1]->type);
+	}
+
 	public function testHas(): void
 	{
 		$types = new Types([
@@ -64,6 +72,34 @@ class TypesTest extends TestCase
 
 		$types = $types->not('int');
 		$this->assertSame('string', $types->toString());
+	}
+
+	public function testSplit(): void
+	{
+		$this->assertSame(['string', 'int'], Types::split('string|int'));
+		$this->assertSame(['string', 'int'], Types::split(' string | int '));
+		$this->assertSame(['null'], Types::split('|null'));
+		$this->assertSame([], Types::split('||'));
+		$this->assertSame([], Types::split(''));
+
+		// nested in brackets
+		$this->assertSame(['array<string, mixed>', 'null'], Types::split('array<string, mixed>|null'));
+		$this->assertSame(['array<string|int, mixed>', 'null'], Types::split('array<string|int, mixed>|null'));
+		$this->assertSame(['array{a: int|string}', 'null'], Types::split('array{a: int|string}|null'));
+		$this->assertSame(['foo(Fox|Bar $Baz): Bar', 'Foo'], Types::split('foo(Fox|Bar $Baz): Bar|Foo'));
+		$this->assertSame(['/panel/(changes|latest)'], Types::split('/panel/(changes|latest)'));
+
+		// arrows don't close brackets
+		$this->assertSame(['$page->parent()', 'null'], Types::split('$page->parent()|null'));
+		$this->assertSame(['Closure(int $a): array<int, Page>', 'null'], Types::split('Closure(int $a): array<int, Page>|null'));
+		$this->assertSame(['[\'a\' => 1|2]', 'null'], Types::split('[\'a\' => 1|2]|null'));
+
+		// nested in quotes
+		$this->assertSame(['\'a|b\'', '"c|d"'], Types::split('\'a|b\'|"c|d"'));
+
+		// custom separator
+		$this->assertSame(['array<string, mixed>'], Types::split('array<string, mixed>', ' '));
+		$this->assertSame(['foo(Fox|Bar $Baz):', 'Bar'], Types::split('foo(Fox|Bar $Baz): Bar', ' '));
 	}
 
 	public function testToHtml(): void

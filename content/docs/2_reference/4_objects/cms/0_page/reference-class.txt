@@ -42,9 +42,13 @@ you can use the shorthand
 $page->your_field()
 ```
 
-<info>
-You can not use the shorthand for fields with names that conflict with the default methods of the `$page` class (see above) or used by custom page methods.
-</info>
+### Reserved names
+
+You cannot use the shorthand for fields with names that conflict with methods of the `$page` class or with (link: docs/reference/plugins/extensions/page-methods text: custom page methods). Besides the methods listed above, this also includes internal methods that are not part of the documented API. The following names are reserved:
+
+(reserved-names: Kirby\Cms\Page)
+
+To access a field with a reserved name, use `$page->content()->get('inventory')`. We recommend prefixing your field names instead to avoid any conflicts.
 
 ----
 

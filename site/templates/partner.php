@@ -211,8 +211,11 @@
 <?php endif ?>
 
 <!-- Plugins -->
-<?php if ($page->showPlugins()->toBool() === true &&
-	($plugins = $page->plugins())	&& $plugins->count() > 0): ?>
+<?php if (
+	$page->showPlugins()->toBool() === true &&
+	($plugins = $page->plugins()) &&
+	$plugins->count() > 0
+): ?>
 	<div class="text-lg mb-24">
 		<h2 class="h2 mb-12"><?= ucfirst($page->my()) ?> Kirby Plugins</h2>
 		<section class="mb-12">
@@ -238,8 +241,6 @@
 	</div>
 <?php endif ?>
 
-<?php
-if ($page->isCertified() === true) {
-	snippet('templates/partners/info-dialog');
-}
-?>
+<?php if ($page->isCertified()): ?>
+	<?php snippet('templates/partners/info-dialog') ?>
+<?php endif ?>

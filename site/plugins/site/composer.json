@@ -7,13 +7,13 @@
 	},
 	"require": {
 		"caxy/php-htmldiff": "^0.1.15",
-		"phpstan/phpdoc-parser": "^2.1.0"
+		"phpstan/phpdoc-parser": "^2.3.6"
 	},
 	"config": {
 		"optimize-autoloader": true
 	},
 	"scripts": {
-		"test": "phpunit",
-		"test:coverage": "XDEBUG_MODE=coverage phpunit --coverage-html=tests/coverage"
+		"test": "cpx brianium/paratest:7.20.0",
+		"test:coverage": "XDEBUG_MODE=coverage cpx brianium/paratest:7.20.0 --coverage-html=tests/coverage"
 	}
 }

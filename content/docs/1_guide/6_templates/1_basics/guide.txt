@@ -216,7 +216,7 @@ PHP may swallow a newline if a printed variable like `<?= $variable ?>` is place
 
 ## Reserved words
 
-If you use field names in your text file, which are also used by native Kirby methods, e.g. "image", "videos", "audio", or "num", you cannot fetch the data like described above. To fetch the content of such fields, you have to use the `content()` method:
+If you use field names in your text file, which are also used by native Kirby methods, e.g. "image", "videos", "audio", or "num", you cannot fetch the data like described above. You can find the full list of reserved names for (link: docs/reference/objects/cms/page#content-fields__reserved-names text: pages), (link: docs/reference/objects/cms/site#content-fields__reserved-names text: site), (link: docs/reference/objects/cms/file#content-fields__reserved-names text: files) and (link: docs/reference/objects/cms/user#content-fields__reserved-names text: users) in the reference. To fetch the content of such fields, you have to use the `content()` method:
 
 | Field name      | Variable                     |
 | -               | -                            |

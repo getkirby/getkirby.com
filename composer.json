@@ -8,8 +8,12 @@
 		"getkirby/cms": "6.0.0-alpha.3"
 	},
 	"scripts": {
+		"start": [
+			"Composer\\Config::disableProcessTimeout",
+			"@php -S localhost:8181 kirby/router.php"
+		],
 		"fix": "cpx getkirby/php-cs:^0.2 fix",
-		"run": "php -S localhost:8181 kirby/router.php"
+		"test": "@composer --working-dir=site/plugins/site run test"
 	},
 	"config": {
 		"optimize-autoloader": true,
