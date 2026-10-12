@@ -20,23 +20,38 @@ A block snippet knows best which styles and scripts it needs, but the `<head>` o
 
 ----
 
-Example:
+Header:
 
-```php
-<!-- site/snippets/header.php -->
+```php "site/snippets/header.php"
 <head>
   <?php stack('head') ?>
 </head>
+```
 
-<!-- site/snippets/blocks/gallery.php -->
-<?php push('head', css('assets/css/gallery.css'), unique: true) ?>
+----
 
+Body:
+
+```php "site/templates/custom.php"
 <?php push('footer') ?>
-<script src="<?= url('assets/js/gallery.js') ?>" defer></script>
+  <?= css('assets/css/custom.css') ?>
 <?php endpush() ?>
 
-<!-- site/snippets/footer.php -->
-<?php stack('footer') ?>
+<h1><?= $page->title() ?></h1>
+
+<!-- the main code for the template -->
+
+<?php push('footer') ?>
+  <?= js('assets/js/custom.js') ?>
+<?php endpush() ?>
+```
+
+----
+
+Footer:
+
+```php "site/snippets/footer.php"
+    <?php stack('footer') ?>
 </body>
 ```
 

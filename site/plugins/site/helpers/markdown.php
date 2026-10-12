@@ -30,7 +30,7 @@ function kirbytagsToMarkdown(string|null $text): string
 	$options['kirbytags'] = false;
 
 	$text = $kirby->apply('kirbytags:before', compact('text', 'data', 'options'));
-	$text = KirbyTags::parse($text, $data, $options);
+	$text = KirbyTags::parse($text, $data);
 	$text = $kirby->apply('kirbytags:after', compact('text', 'data', 'options'));
 
 	// convert (columns…) $1 (…columns) to just $1

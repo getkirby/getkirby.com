@@ -15,6 +15,17 @@ return [
 			go('https://github.com/getkirby/kirby/releases/tag/' . $major . '.' . $minor . '.' . $patch)
 	],
 	[
+		'pattern' => 'releases/(:num)/(:all?).md',
+		'action'  => function ($major, $path) {
+			$page = page('releases/' . $major . '/' . $path) ??
+			(($p = page('releases/' . $major . '-0/' . $path)) ? go($p) : null);
+
+			$page->kirby()->response()->type('md');
+
+			return $page->render([], 'md');
+		}
+	],
+	[
 		'pattern' => 'releases/(:num)/(:all?)',
 		'action'  => fn ($major, $path) =>
 			page('releases/' . $major . '/' . $path) ??

@@ -20,7 +20,15 @@
 	<div class="release-text-box" style="grid-area: teaser">
 		<?php snippet('templates/release-4/teaser', ['section' => $section]) ?>
 	</div>
-	<figure class="release-code-box text-lg" style="grid-area: code">
-		<?= $section->example()->kt() ?>
-	</figure>
+	<div class="release-box flex flex-column" style="grid-area: code; gap: var(--spacing-6)">
+		<figure class="release-code-box text-lg">
+			<?= $section->header()->kt() ?>
+		</figure>
+		<figure class="release-code-box text-lg">
+			<?= $section->body()->kt() ?>
+		</figure>
+		<figure class="release-code-box text-lg">
+			<?= $section->footer()->kt() ?>
+		</figure>
+	</div>
 </div>

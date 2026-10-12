@@ -9,9 +9,9 @@
 
 @media screen and (min-width: 64rem) {
 	.v6-buttons-columns {
-		grid-template-columns: 1fr 2fr;
+		grid-template-columns: 2fr 1fr;
 		grid-template-areas:
-			"teaser image";
+			"image teaser";
 	}
 }
 </style>
@@ -20,12 +20,13 @@
 	<div class="release-text-box" style="grid-area: teaser">
 		<?php snippet('templates/release-4/teaser', ['section' => $section]) ?>
 	</div>
-	<figure class="release-box bg-light" style="grid-area: image">
+	<figure class="release-box bg-dark p-12" style="grid-area: image">
 		<?= img($section->image('image.png'), [
 			'alt' => 'A Panel form showing the new buttons field with multiple actions',
 			'src' => [
 				'width' => 760
 			],
+			'class' => 'shadow-xl rounded',
 			'lazy' => true,
 			'srcset' => [
 				400,

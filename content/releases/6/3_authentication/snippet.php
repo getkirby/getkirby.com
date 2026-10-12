@@ -41,12 +41,13 @@
 			]
 		]) ?>
 	</figure>
-	<figure class="release-box bg-light" style="grid-area: register">
+	<figure class="release-box bg-dark" style="grid-area: register">
 		<?= img($section->image('passkey-register.png'), [
 			'alt' => 'Security drawer listing a registered passkey and a form to create a new one',
 			'src' => [
 				'width' => 434
 			],
+			'class' => 'shadow-xl rounded',
 			'lazy' => true,
 			'srcset' => [
 				434,
