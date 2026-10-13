@@ -7,3 +7,23 @@ Description: Kirby is the content management system that adapts to any project. 
 ----
 
 OgImage: opengraph.png
+
+----
+
+karbon_last_updated: 2026-10-13
+
+----
+
+karbon_disclosures:
+
+- doc_type: sustainability-page
+	url: https://getkirby.com/sustainability
+	title: Sustainability Page
+----
+
+karbon_services:
+
+- domain: hetzner.com
+	service_type: hosting-provider
+- domain: keycdn.com
+	service_type: content-delivery-network

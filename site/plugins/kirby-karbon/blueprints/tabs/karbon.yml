@@ -1,0 +1,64 @@
+label: karbon.tab.label
+icon: globe
+fields:
+  karbon_last_updated:
+    label: karbon.fields.last_updated.label
+    help: karbon.fields.last_updated.help
+    type: date
+    disabled: true
+    translate: false
+  karbon_disclosures:
+    label: karbon.fields.disclosures.label
+    help: karbon.fields.disclosures.help
+    type: structure
+    translate: false
+    fields:
+      doc_type:
+        label: karbon.fields.disclosures.doc_type.label
+        type: select
+        required: true
+        options:
+          web-page:
+            *: karbon.options.doc_type.web-page
+          annual-report:
+            *: karbon.options.doc_type.annual-report
+          sustainability-page:
+            *: karbon.options.doc_type.sustainability-page
+          certificate:
+            *: karbon.options.doc_type.certificate
+          csrd-report:
+            *: karbon.options.doc_type.csrd-report
+          ai-model-card:
+            *: karbon.options.doc_type.ai-model-card
+          other:
+            *: karbon.options.doc_type.other
+      url:
+        label: karbon.fields.disclosures.url.label
+        type: url
+        required: true
+      domain:
+        label: karbon.fields.disclosures.domain.label
+        help: karbon.fields.disclosures.domain.help
+        type: text
+      valid_until:
+        label: karbon.fields.disclosures.valid_until.label
+        type: date
+      title:
+        label: karbon.fields.disclosures.title.label
+        type: text
+  karbon_services:
+    label: karbon.fields.services.label
+    help: karbon.fields.services.help
+    type: structure
+    translate: false
+    fields:
+      domain:
+        label: karbon.fields.services.domain.label
+        type: link
+        required: true
+        options:
+          - url
+      service_type:
+        label: karbon.fields.services.service_type.label
+        help: karbon.fields.services.service_type.help
+        type: tags

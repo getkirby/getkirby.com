@@ -1,0 +1,32 @@
+# Tab
+karbon.tab.label: carbon.txt
+
+# Last updated
+karbon.fields.last_updated.label: Zuletzt aktualisiert
+karbon.fields.last_updated.help: Wird automatisch gesetzt, wenn sich Offenlegungen oder vorgelagerte Dienste ändern.
+
+# Disclosures
+karbon.fields.disclosures.label: Offenlegungen
+karbon.fields.disclosures.help: Dokumente zu den Emissionen oder zur Nachhaltigkeit Ihrer Organisation. Einträge ohne Dokumenttyp oder URL werden nicht in die carbon.txt übernommen.
+karbon.fields.disclosures.doc_type.label: Dokumenttyp
+karbon.fields.disclosures.url.label: URL
+karbon.fields.disclosures.domain.label: Domain
+karbon.fields.disclosures.domain.help: Optional. Die Domain, für die das Dokument gilt, z. B. example.com (ohne https:// und ohne Pfad).
+karbon.fields.disclosures.valid_until.label: Gültig bis
+karbon.fields.disclosures.title.label: Titel
+
+# Upstream services
+karbon.fields.services.label: Vorgelagerte Dienste
+karbon.fields.services.help: Anbieter, auf die Ihre Website angewiesen ist, z. B. Hosting oder ein CDN.
+karbon.fields.services.domain.label: Domain
+karbon.fields.services.service_type.label: Dienstart
+karbon.fields.services.service_type.help: Optional. Zum Beispiel shared-hosting, virtual-private-servers, cdn oder object-storage.
+
+# Options: document types
+karbon.options.doc_type.web-page: Webseite
+karbon.options.doc_type.annual-report: Geschäftsbericht
+karbon.options.doc_type.sustainability-page: Nachhaltigkeitsseite
+karbon.options.doc_type.certificate: Zertifikat
+karbon.options.doc_type.csrd-report: CSRD-Bericht
+karbon.options.doc_type.ai-model-card: KI-Modellkarte
+karbon.options.doc_type.other: Sonstiges

@@ -1,0 +1,42 @@
+Title: Sustainability
+
+----
+
+Description:
+
+----
+
+Priority: 0.5
+
+----
+
+Intro:
+
+
+----
+
+Text:
+
+## A small footprint
+
+We've been fighting to keep Kirby's package size as small as possible from the very beginning. This isn't just a way to keep software bloat in check, but also to make sure we don't send unnecessary bytes around the globe. With hundreds of thousands of downloads a year, the size adds up, and deployments and CI workflows multiply the traffic. At roughly 2.5 MB compressed and 8.4 MB uncompressed, Kirby's package is far smaller than the typical CMS bundle.
+
+## For fast and efficient websites
+
+Kirby is built for speed by default and can run on very modest hardware. It comes with tools like a fast cache layer and support for modern image formats that help you build sites that are both performant and low in emissions. Kirby doesn't ship any frontend assets or pre-built HTML by default, so neither you nor your visitors have to load code you don't need. Performance and sustainability go hand in hand here.
+
+## Practicing what we preach
+
+We know our sustainability efforts are only a drop in the ocean so far. It's an ongoing process, and there's room for improvement in many places. Still, we want to practice what we preach and make this a credible effort. Here are a few things we consider whenever we build something:
+
+- All our sites run on (link: https://hetzner.de text: green hosting).
+- We use caching, image compression, responsive images, a (link: https://keycdn.com text: CDN) and other tools as effectively as we can to bring down the emissions of our own sites.
+- We share servers between multiple sites and keep server resources as lean as possible.
+
+## Free licenses for climate action and environmental protection
+
+For years, we've been committed as a team to supporting climate action, environmental organisations and other groups that (link: https://madewith.getkirby.com/for/society text: fight for a better future). With our good cause license program, we've provided Kirby for free to thousands of organisations over the years, and we'll continue to do so.
+
+## Donating to good causes
+
+With our (link: /buy text: checkout donation program), we've collected more than €10,000 in donations together with our community over the past three years. We pass these donations on to organisations fighting for democracy, society and a livable planet.
