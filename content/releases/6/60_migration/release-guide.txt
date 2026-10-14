@@ -73,6 +73,20 @@ The Panel in Kirby 6 needs browsers released from roughly mid-2024 onwards. We f
 
 Your website itself is not affected: these requirements only apply to the Panel.
 
+## First test drive
+
+If you just want a first test drive, we've migrated our two kits for you to play around with:
+
+### Starterkit
+
+- Release: https://github.com/getkirby/starterkit/releases/tag/6.0.0-beta.1
+- Download: (link: https://github.com/getkirby/plainkit/archive/refs/tags/6.0.0-beta.1.zip text: starterkit-6.0.0-beta.1.zip)
+
+### Plainkit
+
+- Release: https://github.com/getkirby/plainkit/releases/tag/6.0.0-beta.1
+- Download: (link: https://github.com/getkirby/starterkit/archive/refs/tags/6.0.0-beta.1.zip text: plainkit-6.0.0-beta.1.zip)
+
 ## Install beta.1
 
 Work on a copy of your site. Then pick the way you usually install Kirby:
