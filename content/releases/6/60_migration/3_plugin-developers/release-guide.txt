@@ -24,6 +24,16 @@ Find your plugin type below and follow the links. Most plugins combine several t
 - **Auth plugins** (custom challenges, custom login UI): Custom challenges must be rewritten based on `Kirby\Auth\Challenge`, the `login` Panel extension is gone. See (link: #auth-plugins text: Auth plugins) and (link: releases/6/migration/plugin-developers/auth text: Custom auth methods & challenges).
 - **Plugins that extend or call core classes** (page models, custom collections, `Form`, `Blueprint`, Panel classes): Check the (link: #moved-and-renamed-classes text: moved classes), (link: #php-8-3-and-stricter-types text: typed class constants), (link: #permissions-become-guards text: guards) and (link: #panel-backend text: Panel backend).
 
+## First example migrations
+
+We've started migrating a first few popular plugins to get a feel for the effort that it takes. You can take a look at the PRs for reference.
+
+- Table Field: https://github.com/bogdancondorachi/kirby-table-field/pull/30
+- Markdown Field: https://github.com/fabianmichael/kirby-markdown-field/pull/206
+- Locator Field: https://github.com/sylvainjule/kirby-locator/pull/69
+- Modules: https://github.com/medienbaecker/kirby-modules/pull/74
+- Retour: https://github.com/distantnative/retour-for-kirby/pull/389
+
 ## Deep dives
 
 The bigger topics have their own guides:
