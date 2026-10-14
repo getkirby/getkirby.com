@@ -253,7 +253,7 @@ fields:
 
 ### Picker fields
 
-The `files`, `pages` and `users` fields have been renamed to `filepicker`, `pagepicker` and `userpicker`. The old names still work, but are deprecated.
+The `files`, `pages` and `users` fields have been renamed to `filepicker`, `pagepicker` and `userpicker`. The old names still work in blueprints, but are deprecated.
 
 ```yaml "/site/blueprints/pages/article.yml"
 # Kirby 5

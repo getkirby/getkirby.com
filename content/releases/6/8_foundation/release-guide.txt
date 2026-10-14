@@ -78,7 +78,7 @@ Kirby 6 is the result of a large refactoring of the core. Many parts that had gr
 
 - **Panel controllers:** new in Kirby 6, every core view, dialog, drawer, dropdown, search and request of the Panel is handled by its own controller class instead of a closure in a big config array. Plugins can use the same approach: pass a controller class as `action` of a Panel route and build on the base classes like `Kirby\Panel\Controller\DialogController`. Closures keep working. (link: releases/6/migration/plugin-developers/panel-backend text: Learn more …)
 - **Panel backend:** the Panel itself is no longer a collection of static helpers. Areas, access checks and routing are objects now, and dialogs, drawers and views can be returned as UI objects like `Kirby\Panel\Ui\Dialog\FormDialog`.
-- **Form fields:** every core field type is a PHP class with named props, built on a few shared base classes and mixins. (link: releases/6/migration/plugin-developers/fields text: Learn more …)
+- **Form fields:** every core field type is a PHP class that declares its options once as properties with the `#[Prop]` attribute, built on a few shared base classes and mixins. (link: releases/6/migration/plugin-developers/fields text: Learn more …)
 - **Authentication:** the new `Kirby\Auth` namespace splits login methods and second factors into their own classes. This is what makes (link: releases/6/authentication text: passkeys) and custom auth plugins possible. (link: releases/6/migration/plugin-developers/auth text: Learn more …)
 - **Blueprints:** blueprint classes moved into the `Kirby\Blueprint` namespace, and all normalization happens in one place.
 - **Permissions:** (link: releases/6/guards text: Guards) bring abilities, permissions and validators together in one API.

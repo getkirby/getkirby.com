@@ -123,22 +123,15 @@ A section stores nothing, so the field extends `Kirby\Form\Field\DisplayField`. 
 namespace Acme\Backlinks;
 
 use Kirby\Form\Field\DisplayField;
+use Kirby\Reflection\Attributes\Prop;
 
 class BacklinksField extends DisplayField
 {
 	/**
 	 * Text shown when no page links here
 	 */
-	protected array|string|null $empty;
-
-	public function __construct(
-		array|string|null $empty = null,
-		mixed ...$args
-	) {
-		parent::__construct(...$args);
-
-		$this->empty = $empty;
-	}
+	#[Prop]
+	protected array|string|null $empty = null;
 
 	public function api(): array
 	{
@@ -192,26 +185,20 @@ class BacklinksField extends DisplayField
 
 		return $pages;
 	}
-
-	public function props(): array
-	{
-		return [
-			...parent::props(),
-			'empty' => $this->empty(),
-		];
-	}
 }
 ```
+
+Kirby picks up the `#[Prop]` attribute and sends the `empty` option to the Panel, through the `empty()` getter.
 
 Here's where each part of the section went:
 
 | Section (Kirby 5) | Field (Kirby 6) |
 |---|---|
 | `'sections' => ['backlinks' => […]]` | A class that extends `DisplayField`, registered under `fields` |
-| `props` | Constructor parameters, typed properties and getters. `label` and `help` come from `DisplayField`. |
-| `computed` | Getters – sent with `props()` or loaded through `api()` |
+| `props` | Typed properties with `#[Prop]` and getters. `label` and `help` come from `DisplayField`. |
+| `computed` | Getter methods, sent with the props or loaded through `api()` |
 | `methods` | Regular methods |
-| `toArray` | `props()` for everything the component gets right away |
+| `toArray` | `#[Prop]` properties and `props()` for everything the component gets right away |
 | `this.load()` response | An `api()` route with the pattern `''` |
 | `api` | `api()` |
 | `dialogs` / `drawers` | `dialogs()` / `drawers()` |
@@ -224,23 +211,22 @@ The pattern `''` mounts the route on the field itself, e.g. at `/api/pages/notes
 
 A section always loaded its data with an extra request. A field gets its props together with the view, without any extra request. Decide per piece of data:
 
-- **Cheap data goes into `props()`.** The label, texts, settings and anything you can compute quickly. Your component gets it right away and it's fresh whenever the view loads.
+- **Cheap data goes into the props.** The label, texts, settings and anything you can compute quickly. Your component gets it right away and it's fresh whenever the view loads.
 - **Expensive data goes into an `api()` route** and is loaded by the component after it has been rendered, so the view doesn't wait for it. That's what our backlinks field does with `pages()`.
 
-If your section was cheap all along, you can skip the API route entirely:
+If your section was cheap all along, you can skip the API route entirely and add the pages to the props:
 
 ```php
 public function props(): array
 {
 	return [
 		...parent::props(),
-		'empty' => $this->empty(),
 		'pages' => $this->pages(),
 	];
 }
 ```
 
-Keep in mind that Kirby creates field objects in many places, e.g. for every form, every save and every `$page->update()` call. Don't compute anything expensive in the constructor. `props()` and your API routes are only called when the Panel actually needs them.
+Keep in mind that Kirby creates field objects in many places, e.g. for every form, every save and every `$page->update()` call. Don't compute anything expensive while the field is created, e.g. in a constructor or setter. Getters, `props()` and your API routes are only called when the Panel actually needs them.
 
 ### Errors
 
@@ -284,7 +270,7 @@ Kirby::plugin('acme/backlinks', [
 The section mixin is gone, and so is `this.load()`. Your component is now a regular field component:
 
 - **Wrap it in `<k-field>` instead of `<k-section>`.** `<k-field>` renders the label and the help text. Set `:input="false"`, as there is no input element the label could point to.
-- **Declare the props from `props()`.** They arrive directly, no need to copy a response into `data()`.
+- **Declare the props of your field.** They arrive directly, no need to copy a response into `data()`.
 - **Replace `this.load()` with a request to the field endpoint**: `this.$api.get(this.endpoints.field)`.
 
 ```html "/site/plugins/backlinks/src/components/BacklinksField.vue"
@@ -308,12 +294,12 @@ The section mixin is gone, and so is `this.load()`. Your component is now a regu
 export default {
 	inheritAttrs: false,
 	props: {
-		// from DisplayField::props()
+		// from DisplayField
 		help: String,
 		label: String,
 		name: String,
 		type: String,
-		// from BacklinksField::props()
+		// from BacklinksField
 		empty: String,
 		// added by the Panel
 		endpoints: Object
