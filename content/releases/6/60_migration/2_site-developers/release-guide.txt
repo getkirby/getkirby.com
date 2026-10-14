@@ -21,9 +21,8 @@ Topics for plugin developers, like Vue 3, custom fields as PHP classes or the Pa
 Before you update:
 
 1. **Update to the latest Kirby 5 release** and fix all deprecation warnings that show up with `debug` mode turned on.
-2. **Run `kirby migrate:to:symfony-yaml`** with the (link: #yaml-symfony-is-the-new-default-parser__check-and-convert-with-the-kirby-cli text: Kirby CLI). It works on Kirby 5, so you know what to fix before you switch.
-3. **Check your plugins.** Every plugin with Panel features needs a version for Kirby 6.
-4. **Turn on debug mode** on your test copy. Kirby 6 is stricter in a few places and its error messages tell you what to fix:
+2. **Check your plugins.** Every plugin with Panel features needs a version for Kirby 6.
+3. **Turn on debug mode** on your test copy. Kirby 6 is stricter in a few places and its error messages tell you what to fix:
 
 ```php "/site/config/config.php"
 return [
@@ -132,27 +131,19 @@ fields:
     min: "2024-01-01"
 ```
 
-### Check and convert with the Kirby CLI
+### Switching back to Spyc
 
-The (link: docs/guide/install-guide/cli text: Kirby CLI) takes care of the switch with a single command. Make sure you have its latest version and run it in your project folder:
+Your content files can be affected as well: Kirby 5 stored the YAML of structure, object, entries and picker fields without quotes in many places. Symfony YAML reads some of these values differently, e.g. dates become timestamps and values starting with `@` make the whole field unreadable.
 
-```bash
-kirby migrate:to:symfony-yaml
+If you run into problems with Symfony YAML, in your blueprints or your content, you can switch back to Spyc with the `yaml.handler` option:
+
+```php "/site/config/config.php"
+return [
+  'yaml.handler' => 'spyc'
+];
 ```
 
-The command checks two things:
-
-- **Blueprints:** it lists every blueprint that Symfony YAML can't read or reads differently, including YAML blueprints registered by plugins, with the exact spot and how the value changes. Fix them by hand as shown above.
-- **Content:** Kirby 5 stored the YAML of structure, object, entries and picker fields without quotes in many places. Symfony YAML would read some of these values differently, e.g. dates become timestamps and values starting with `@` make the whole field unreadable. The command lists all content files with such fields, in all languages and including unsaved changes.
-
-Run the command twice:
-
-1. **Before the update**, on Kirby 5: fix the blueprints it lists. The content can't be converted yet, because Kirby 5 still reads YAML with Spyc.
-2. **Right after the update** to Kirby 6, before anybody edits content: run it again and confirm the conversion. The command rewrites the listed fields with Symfony YAML and makes sure that the data stays exactly the same. Fields that can't be converted safely are reported and left untouched.
-
-<warning>
-Make a backup of your `content` folder before you convert it. Use `kirby migrate:to:symfony-yaml --dry-run` to only list the issues without converting anything.
-</warning>
+We will provide a Kirby CLI command in a future beta that helps you migrate your blueprints and content to Symfony YAML.
 
 ## Config options
 
@@ -624,14 +615,6 @@ Once your site code and plugins are ready, update Kirby itself. For beta.1, use 
 - (link: docs/guide/install-guide/git#updating-kirby text: Update via Git)
 - (link: docs/guide/install-guide/cli#updating-via-the-cli text: Update via Kirby CLI)
 
-Right after the update, before anybody edits content, convert the YAML in your content files:
-
-```bash
-kirby migrate:to:symfony-yaml
-```
-
-See (link: #yaml-symfony-is-the-new-default-parser__check-and-convert-with-the-kirby-cli text: Check and convert with the Kirby CLI) for details.
-
 If you find a bug, please (link: releases/6/migration#report-issues text: report it).
 
 ## Checklist
@@ -644,11 +627,6 @@ Print this list or copy it into your project notes.
 - Site runs on the latest Kirby 5 release without deprecation warnings
 - PHP 8.3, 8.4 or 8.5 on the server
 - Plugins: Kirby 6 versions available
-- `kirby migrate:to:symfony-yaml` run and all listed blueprints fixed
-
-**Right after the update**
-
-- Content converted with `kirby migrate:to:symfony-yaml`
 
 **Config**
 
@@ -659,6 +637,7 @@ Print this list or copy it into your project notes.
 
 **Blueprints**
 
+- No YAML errors: special values quoted, no tabs, no duplicate keys
 - No error boxes for duplicate names or custom sections
 - `preset:` replaced
 - `options: query` and `options: api` moved into `options`

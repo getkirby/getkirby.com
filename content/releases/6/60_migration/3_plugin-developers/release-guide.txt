@@ -285,7 +285,7 @@ If your plugin registers blueprints (pages, files, blocks, …), check them for 
 - **Presets:** `preset: page`, `preset: pages` and `preset: files` have been removed. Define the layout directly, e.g. with `pagelist` and `filelist` fields.
 - **Sections:** `pages` and `files` sections keep working, but are converted into `pagelist` and `filelist` fields. Use the fields directly if your plugin is Kirby 6 only.
 - **Picker fields:** `type: pages`, `files` and `users` are deprecated aliases of `pagepicker`, `filepicker` and `userpicker`.
-- **YAML:** Kirby 6 parses YAML with Symfony YAML, which is stricter than the old Spyc parser in a few places. Run `kirby migrate:to:symfony-yaml` with the latest Kirby CLI in a project that uses your plugin: it also checks the YAML blueprints your plugin registers.
+- **YAML:** Kirby 6 parses YAML with Symfony YAML, which is stricter than the old Spyc parser in a few places. Test the YAML blueprints your plugin registers with Kirby 6 and fix the (link: releases/6/migration/site-developers#yaml-symfony-is-the-new-default-parser text: common YAML issues).
 - **Option fields:** Move `api` and `query` options into `options` (see above). The `text => value` notation for `color` field options has been removed, use `value => text`.
 
 More in (link: releases/6/blueprints text: Simpler blueprints).
