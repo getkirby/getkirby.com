@@ -26,4 +26,8 @@ Description: Kirby 6.0.0-beta.1: passkeys, simpler blueprints with fields only, 
 
 ----
 
-Cover:
+Cover: - kirby-6-0.png
+
+----
+
+ogimage: opengraph.png
