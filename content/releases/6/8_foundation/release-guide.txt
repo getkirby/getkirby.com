@@ -126,6 +126,7 @@ We have spent a lot of time on making Kirby faster, especially for large bluepri
 
 - ProseMirror, the editor library behind the writer and list fields, is no longer part of the initial Panel bundle. It is loaded when it is needed.
 - The icon sprite is no longer inlined into every Panel document. Browsers load it once and cache it.
+- The script and stylesheet of each plugin are loaded on their own. Browsers cache them until the plugin changes.
 - Images in the Panel are loaded lazily and decoded asynchronously.
 - The loading spinner only shows up after a short delay, so it no longer flashes for quick requests.
 
