@@ -1,30 +1,6 @@
 <?php
 
 return [
-	// August 2024
-	[
-		'pattern' => [
-			'docs/cheatsheet/(:any)/(:any)',
-			'docs/reference/objects/(:any)/(:any)',
-			'docs/reference/tools/(:any)/(:any)'
-		],
-		'action'  => function (string $object, string $method) {
-			if ($page = page('docs/reference/objects/cms/' . $object . '/' . $method)) {
-				go($page);
-			}
-
-			if ($page = page('docs/reference/objects/toolkit/' . $object . '/' . $method)) {
-				go($page);
-			}
-
-			if ($page = page('docs/reference/objects/http/' . $object . '/' . $method)) {
-				go($page);
-			}
-
-			$this->next();
-		}
-	],
-
 	// September 2026: restructured plugin chapter
 	[
 		'pattern' => 'docs/guide/plugins/installing-plugins',
