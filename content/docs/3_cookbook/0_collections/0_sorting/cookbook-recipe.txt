@@ -22,7 +22,7 @@ Text:
 
 5, 4, 3, 2, 1…, sorting content is an everyday developer's task when dealing with all sorts of content collections: articles, events, images or similar data needs to be sorted, for example, by date or title, in descending or ascending order, or even by a more complicated sorting algorithm.
 
-Kirby's API comes with a built-in method for sorting: the [sortBy()](/docs/reference/objects/pages/sort-by) method. This method can be used with all sorts of collections (pages, files, users, roles, translations, structure field items etc.).
+Kirby's API comes with a built-in method for sorting: the [sortBy()](/docs/reference/objects/cms/pages/sort-by) method. This method can be used with all sorts of collections (pages, files, users, roles, translations, structure field items etc.).
 
 The `sortBy($field, $direction = 'desc', $method = SORT_NATURAL | SORT_FLAG_CASE)` method accepts three parameters:
 
@@ -140,7 +140,7 @@ foreach($sortedEvents as $event): ?>
 <?php endforeach ?>
 ```
 
-If you use `yaml()` to create an array of events instead of a collection, and you want to sort that array, you can use the [`A::sort()`](/docs/reference/tools/a/sort) method from the toolkit, or check out the (link: https://www.php.net/manual/en/array.sorting.php text: different ways to sort arrays ) in the PHP manual.
+If you use `yaml()` to create an array of events instead of a collection, and you want to sort that array, you can use the [`A::sort()`](/docs/reference/objects/toolkit/a/sort) method from the toolkit, or check out the (link: https://www.php.net/manual/en/array.sorting.php text: different ways to sort arrays ) in the PHP manual.
 
 ## Custom sorting
 
