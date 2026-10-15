@@ -49,14 +49,23 @@ class SiteMeta
 				$pages = $pages();
 			}
 
+			// a single pattern for all excluded pages
+			// would exceed the size limit of PCRE
+			$patterns = array_map(
+				fn ($chunk) => '!^(?:' . implode('|', $chunk) . ')$!i',
+				array_chunk($pages, 100)
+			);
+
 			foreach ($site->index() as $item) {
 
 				if (in_array($item->intendedTemplate()->name(), $templates) === true) {
 					continue;
 				}
 
-				if (preg_match('!^(?:' . implode('|', $pages) . ')$!i', $item->id())) {
-					continue;
+				foreach ($patterns as $pattern) {
+					if (preg_match($pattern, $item->id())) {
+						continue 2;
+					}
 				}
 
 				$url = $item->url();
