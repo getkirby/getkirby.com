@@ -76,7 +76,7 @@ Because sections and fields now share one namespace, three field types that name
 | `type: users` | `type: userpicker` |
 
 <warning>
-There is no alias for the old names. A blueprint that still says `type: pages` inside `fields` will not resolve in Kirby 6. Search your blueprints for all three.
+The old names still work in Kirby 6, but they are deprecated and will be removed in a future major release. Search your blueprints for all three and switch to the new names.
 
 The names are worth reading carefully, because `pages` was ambiguous in Kirby 5 and is now split in two: a **`pagepicker`** lets an editor select pages as content, and a **`pagelist`** displays the children of the current page. The same distinction applies to `filepicker` and `filelist`.
 </warning>
