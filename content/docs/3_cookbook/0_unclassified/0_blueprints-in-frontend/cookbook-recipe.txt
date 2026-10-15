@@ -74,15 +74,15 @@ dump($model);
 
 With a page blueprint, this will return the Page object.
 
-## Get a section by name
+## Get a field by name
 
 
 ```php
-$section = $page->blueprint()->section('images');
-dump($section);
+$field = $page->blueprint()->field('images');
+dump($field);
 ```
 
-This returns a `Kirby\Cms\Section` object, which you can further query.
+This returns the field's props as an array.
 
 ## Custom blueprint options
 

@@ -24,7 +24,7 @@ fields:
     type: object
     fields:
       photo:
-        type: files
+        type: filepicker
       name:
         type: text
       email:
@@ -70,7 +70,7 @@ fields:
       phone: 1234 5678
     fields:
       photo:
-        type: files
+        type: filepicker
       name:
         type: text
       email:

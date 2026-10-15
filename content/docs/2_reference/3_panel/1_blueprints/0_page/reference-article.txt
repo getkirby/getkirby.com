@@ -232,7 +232,7 @@ icon: 📚
 
 ## `image` options
 
-The (preview) `image` blueprint option defines how any page with this blueprint will be presented, e.g. in a pages section:
+The (preview) `image` blueprint option defines how any page with this blueprint will be presented, e.g. in a `pagelist` field:
 
 ```yaml "site/blueprints/pages/note.yml"
 image: page.cover.toFile

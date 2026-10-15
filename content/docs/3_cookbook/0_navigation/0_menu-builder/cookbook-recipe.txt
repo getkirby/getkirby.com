@@ -36,7 +36,7 @@ The easiest way to create a custom menu from existing pages is the use of a (lin
 
 ```yaml
 mainMenu:
-  type: pages
+  type: pagepicker
   label: Main menu pages
 ```
 
@@ -71,7 +71,7 @@ menus:
       type: text
       label: Menu headline
     menuItems:
-      type: pages
+      type: pagepicker
       label: Menu item
 ```
 
@@ -146,14 +146,14 @@ menu:
   type: structure
   fields:
     mainMenu:
-      type: pages
+      type: pagepicker
       label: Mainmenu item
       max: 1
     hasSubmenu:
       type: toggle
       text: Include a submenu?
     subMenu:
-      type: pages
+      type: pagepicker
       label: Submenu items
       when:
         hasSubmenu: true

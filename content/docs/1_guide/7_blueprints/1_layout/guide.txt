@@ -273,16 +273,12 @@ columns:
     fields:
 
       # a simple form
-      content:
-        type: fields
-        fields:
-          headline:
-            label: Headline
-            type: text
-          text:
-            label: Text
-            type: textarea
-
+      headline:
+        label: Headline
+        type: text
+      text:
+        label: Text
+        type: textarea
   # sidebar right
   right:
     width: 1/4
@@ -409,16 +405,12 @@ tabs:
         fields:
 
           # a simple form
-          content:
-            type: fields
-            fields:
-              headline:
-                label: Headline
-                type: text
-              text:
-                label: Text
-                type: textarea
-
+          headline:
+            label: Headline
+            type: text
+          text:
+            label: Text
+            type: textarea
       # sidebar
       sidebar:
         width: 1/3

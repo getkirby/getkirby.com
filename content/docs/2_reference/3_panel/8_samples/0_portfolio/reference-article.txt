@@ -15,13 +15,13 @@ Text:
 title: Projects
 icon: 🖼
 
-sections:
+fields:
   drafts:
-    extends: sections/projects
+    extends: fields/projects
     label: Project Drafts
     status: drafts
   listed:
-    extends: sections/projects
+    extends: fields/projects
     label: Published Projects
     status: listed
     layout: cards
@@ -35,10 +35,10 @@ We'll create a `cover` blueprint file for the project to reference a certain ima
 extends: files/image
 ```
 
-### Reusable projects section
+### Reusable projects field
 
-```yaml "/site/blueprints/sections/projects.yml"
-type: pages
+```yaml "/site/blueprints/fields/projects.yml"
+type: pagelist
 label: Projects
 parent: kirby.page('projects')
 layout: cards
@@ -51,7 +51,7 @@ info: "{{ page.year }}"
 ```
 
 <info>
-Note that the above section will throw an error in the Panel as long as the given parent page does not exist in the file system.
+Note that the above field will throw an error in the Panel as long as the given parent page does not exist in the file system.
 </info>
 
 ### Result
@@ -91,9 +91,9 @@ columns:
         size: large
   sidebar:
     width: 1/3
-    sections:
+    fields:
       cover:
-        type: files
+        type: filelist
         label: Cover
         layout: cards
         info: "{{ file.dimensions }}"
@@ -101,7 +101,7 @@ columns:
         min: 1
         max: 3
       gallery:
-        type: files
+        type: filelist
         label: Gallery
         template: image
 ```

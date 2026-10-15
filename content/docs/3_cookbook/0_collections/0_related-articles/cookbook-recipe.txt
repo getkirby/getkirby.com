@@ -75,7 +75,7 @@ If you use the (glossary: panel), you have to add the `related` field to your (g
 ```yaml "/site/blueprints/pages/note.yml"
   related:
     label: Related articles
-    type: pages
+    type: pagepicker
     query: page.siblings(false)
 ```
 

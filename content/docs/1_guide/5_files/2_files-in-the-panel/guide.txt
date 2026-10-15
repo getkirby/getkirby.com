@@ -7,17 +7,17 @@ Text:
 
 Files can be uploaded to a page, the site or a user via the Panel using one of the following methods:
 
-1. A (link: docs/reference/panel/sections/files text: files section)
+1. A (link: docs/reference/panel/fields/filelist text: `filelist` field)
 2. A (link: docs/reference/panel/fields/files#upload-options text: files field). The files field is also used inside the (link: docs/reference/panel/blocks/image text: image) and (link: docs/reference/panel/blocks/gallery text: gallery) block types.
 3. A (link: docs/reference/panel/fields/textarea#file-upload-and-select text: textarea field)
 
-Depending on the context, as an editor you then click the `Add` button in a pages section, or select the upload option from the dropdown in a files or textarea field:
+Depending on the context, as an editor you then click the `Add` button in a `pagelist` field, or select the upload option from the dropdown in a files or textarea field:
 
 (tabs…)
 
-=== Files section
+=== File list
 
-A (link: docs/reference/panel/sections/files text: files section) helps you manage the files belonging to pages or the site: upload, delete, sort and replace. A files section does not store anything in your content file!
+A (link: docs/reference/panel/fields/filelist text: `filelist` field) helps you manage the files belonging to pages or the site: upload, delete, sort and replace. A `filelist` field does not store anything in your content file!
 (image: files-section.png)
 
 === Files field
@@ -35,7 +35,7 @@ The (link: docs/reference/panel/fields/textarea#file-upload-and-select text: tex
 
 ## Deleting files
 
-Files can be deleted via the delete option in a files section, or via the file view.
+Files can be deleted via the delete option in a `filelist` field, or via the file view.
 
 Note that if you unselect a file in a **files field**, this file is not deleted from the parent model.
 
@@ -55,7 +55,7 @@ In your file blueprints, you can also set (link: docs/reference/panel/blueprints
 
 Metadata fields for files to be used in the Panel are defined in (link: docs/reference/panel/blueprints/file text: file blueprints). They are stored in `/site/blueprints/files`.
 
-Depending on whether you use a files section or one of the fields to upload files, the way how you assign a file blueprints to a file, differs slightly, see field/section links at the top of this page for details.
+Depending on whether you use a `filelist` field or one of the fields to upload files, the way how you assign a file blueprints to a file, differs slightly, see field/section links at the top of this page for details.
 
 A typical files blueprint looks like this:
 

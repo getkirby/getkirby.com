@@ -103,13 +103,13 @@ tabs:
     label: Main
     fields:
       poster:
-        type: files
+        type: filepicker
         query: page.images.template('poster')
         uploads: poster
         multiple: false
         width: 1/2
       source:
-        type: files
+        type: filepicker
         query: page.audio.template('audio')
         uploads: audio
         multiple: false

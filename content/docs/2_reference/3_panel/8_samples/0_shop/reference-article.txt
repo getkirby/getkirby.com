@@ -9,7 +9,7 @@ Intro: Products for your sales
 
 Text:
 
-This set of blueprint samples is for a simple shop setup, with a shop overview page that lists all products in pages section and the single product pages with a cover image blueprint.
+This set of blueprint samples is for a simple shop setup, with a shop overview page that lists all products in `pagelist` field and the single product pages with a cover image blueprint.
 
 ## Shop overview
 
@@ -20,22 +20,22 @@ icon: 🛍
 options:
   status: false
 
-sections:
+fields:
   drafts:
-    extends: sections/products
+    extends: fields/products
     label: Unpublished Products
     status: drafts
   listed:
-    extends: sections/products
+    extends: fields/products
     label: Published Products
     status: listed
     layout: cards
 ```
 
-### Reusable products section
+### Reusable products field
 
-```yaml "/site/blueprints/sections/products.yml"
-type: pages
+```yaml "/site/blueprints/fields/products.yml"
+type: pagelist
 label: Products
 parent: site.find("shop")
 template: product
@@ -91,9 +91,9 @@ columns:
         type: textarea
   sidebar:
     width: 1/3
-    sections:
+    fields:
       image:
-        extends: sections/image
+        extends: fields/image
         template: cover
         min: 1
         image:
@@ -101,10 +101,10 @@ columns:
 ```
 
 
-### Reusable image section
+### Reusable image field
 
-```yaml "/site/blueprints/sections/image.yml"
-type: files
+```yaml "/site/blueprints/fields/image.yml"
+type: filelist
 label: Product Image
 max: 1
 layout: cards

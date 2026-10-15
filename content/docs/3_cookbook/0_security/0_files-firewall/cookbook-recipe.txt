@@ -38,24 +38,24 @@ In this recipe, we will create a simple `downloads` page, where registered users
 
 ### `Downloads.yml` blueprint
 
-For the new downloads page, we create a new page blueprint. It can have any content your like, but for our purposes, all we want is a files section:
+For the new downloads page, we create a new page blueprint. It can have any content your like, but for our purposes, all we want is a `filelist` field:
 
 ```yaml "/site/blueprints/pages/downloads.yml"
 title: Downloads
 
-sections:
+fields:
   files:
-    type: files
+    type: filelist
     template: protected
 ```
 
-All files we upload to this section get a template `protected` assigned to it that we can later use to filter files or create conditions.
+All files we upload here get a template `protected` assigned to it that we can later use to filter files or create conditions.
 
-Now modify the `pages` section in the `site.yml` file so that it looks like this:
+Now modify the `pagelist` field in the `site.yml` file so that it looks like this:
 
 ```yaml "/site/blueprints/site.yml"
 pages:
-  type: pages
+  type: pagelist
   templates:
     - about
     - home
@@ -65,7 +65,7 @@ pages:
 
 We add the `downloads` template to the allowed templates and remove the existing `create: default` option.
 
-Now open the Panel and create a new page with the `downloads` template (or create it manually in the file system if you prefer). Then upload some files (images and other) to this newly created page via the files section.
+Now open the Panel and create a new page with the `downloads` template (or create it manually in the file system if you prefer). Then upload some files (images and other) to this newly created page via the `filelist` field.
 
 <info>
 Make sure to upload the files via the Panel so that the `protected` template is assigned to the files. If you just put some files into the downloads page manually, you would also have to manually add the metadata file with the template information.

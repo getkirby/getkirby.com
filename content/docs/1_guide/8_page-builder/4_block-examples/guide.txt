@@ -593,7 +593,7 @@ fields:
       page: Create card from page
       manual: Create manual card
   page:
-    type: pages
+    type: pagepicker
     max: 1
     query: kirby.page('photography').children.listed
     when:
@@ -604,7 +604,7 @@ fields:
       cardType: manual
   image:
     label: Image
-    type: files
+    type: filepicker
     uploads: image
     when:
       cardType: manual
@@ -759,7 +759,7 @@ fields:
     inline: false
   image:
     label: Company logo or portrait
-    type: files
+    type: filepicker
     layout: list
     max: 1
   name:

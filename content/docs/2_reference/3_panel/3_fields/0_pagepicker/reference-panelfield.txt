@@ -24,7 +24,7 @@ Usage examples: Select related pages of the current page to show in a related pa
 fields:
   related:
     label: Related Pages
-    type: pages
+    type: pagepicker
 ```
 
 
@@ -38,7 +38,7 @@ If you only want to select a single page, set multiple mode to `false` (default 
 fields:
   related:
     label: Related Pages
-    type: pages
+    type: pagepicker
     multiple: false
 ```
 ### Maximum number of pages
@@ -49,7 +49,7 @@ You can set the maximum number of pages that can be selected:
 fields:
   related:
     label: Related Pages
-    type: pages
+    type: pagepicker
     max: 3
 ```
 ## Query pages
@@ -62,7 +62,7 @@ By default, the `pages` field lets you select pages from the complete page index
 fields:
   related:
     label: Related Pages
-    type: pages
+    type: pagepicker
     query: site.find('notes')
 ```
 
@@ -72,7 +72,7 @@ fields:
 fields:
   related:
     label: Related Pages
-    type: pages
+    type: pagepicker
     query: page.index.filterBy('template', 'in', ['template-a', 'template-b'])
 ```
 

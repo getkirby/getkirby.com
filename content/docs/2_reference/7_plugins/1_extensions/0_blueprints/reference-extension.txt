@@ -33,7 +33,7 @@ Kirby::plugin('your/plugin', [
 	'blueprints' => [
 		'pages/blog' => [
 			'title'    => 'Blog',
-			'sections' => [
+			'fields' => [
 				// ...
 			]
 		]
@@ -53,7 +53,7 @@ Kirby::plugin('my/blueprint', [
         'pages/blog' => function ($kirby) {
             return [
                 'title' => 'Blog',
-                'sections' => [
+                'fields' => [
                     'articles' => [
                         'type'     => 'pages',
                         'template' => 'article',

@@ -24,7 +24,7 @@ The users field can be used to select one or more users. It's perfect to store a
 fields:
   authors:
     label: Authors
-    type: users
+    type: userpicker
 ```
 
 ## Default values
@@ -35,7 +35,7 @@ You can set a user email or user UUID as default value:
 fields:
   author:
     label: Author
-    type: users
+    type: userpicker
     default: johndoe@company.com # or user://H7jTLLW1
 ```
 Or set the default to the current user by passing `true` as argument:
@@ -44,7 +44,7 @@ Or set the default to the current user by passing `true` as argument:
 fields:
   author:
     label: Author
-    type: users
+    type: userpicker
     default: true
 ```
 
@@ -58,7 +58,7 @@ If you only want to select a single user, set multiple mode to `false` (default 
 fields:
   author:
     label: Author
-    type: users
+    type: userpicker
     multiple: false
 ```
 
@@ -70,7 +70,7 @@ You can set the maximum number of users that can be selected:
 fields:
   author:
     label: Author
-    type: users
+    type: userpicker
     max: 3
 ```
 
@@ -84,7 +84,7 @@ You can use the `query` property to limit the users that can be selected:
 fields:
   author:
     label: Author
-    type: users
+    type: userpicker
     query: kirby.users.filterBy("role", "editor")
 ```
 

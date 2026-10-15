@@ -280,7 +280,7 @@ By default, every selected page, file or user is referenced by its UUID. You can
 
 ```yaml
 related:
-  type: pages
+  type: pagepicker
   store: id
 ```
 
