@@ -16,13 +16,16 @@ class CustomEmailProvider extends Kirby\Email\Email
     }
 }
 
-Kirby::plugin('my/email', [
-    'components' => [
-        'email' => function ($kirby, $props, $debug) {
-            return new CustomEmailProvider($props, $debug);
-        }
+Kirby::plugin(
+    name: 'my/email',
+    extends: [
+        'components' => [
+            'email' => function ($kirby, $props, $debug) {
+                return new CustomEmailProvider($props, $debug);
+            }
+        ]
     ]
-]);
+);
 ```
 
 ## SendGrid example
@@ -44,13 +47,16 @@ class SendGridProvider extends Kirby\Email\Email
     }
 }
 
-Kirby::plugin('my/sendgrid', [
-    'components' => [
-        'email' => function ($kirby, $props, $debug) {
-            return new SendGridProvider($props, $debug);
-        }
+Kirby::plugin(
+    name: 'my/sendgrid',
+    extends: [
+        'components' => [
+            'email' => function ($kirby, $props, $debug) {
+                return new SendGridProvider($props, $debug);
+            }
+        ]
     ]
-]);
+);
 ```
 
 ## Mailgun Example
@@ -72,13 +78,16 @@ class MailgunProvider extends Kirby\Email\Email
     }
 }
 
-Kirby::plugin('my/mailgun', [
-    'components' => [
-        'email' => function ($kirby, $props, $debug) {
-            return new MailgunProvider($props, $debug);
-        }
+Kirby::plugin(
+    name: 'my/mailgun',
+    extends: [
+        'components' => [
+            'email' => function ($kirby, $props, $debug) {
+                return new MailgunProvider($props, $debug);
+            }
+        ]
     ]
-]);
+);
 ```
 
 

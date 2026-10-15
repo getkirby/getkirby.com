@@ -28,11 +28,14 @@ $kirby = new App([
 ]);
 
 // in a plugin
-App::plugin('my/storage', [
-  'components' => [
-    'storage' => function (App $kirby, ModelWithContent $model) {
-        return MyCustomStorageClass($model);
+App::plugin(
+  name: 'my/storage',
+  extends: [
+    'components' => [
+      'storage' => function (App $kirby, ModelWithContent $model) {
+          return MyCustomStorageClass($model);
+      ]
     ]
   ]
-]);
+);
 ```

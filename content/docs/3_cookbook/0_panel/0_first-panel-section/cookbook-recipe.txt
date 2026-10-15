@@ -54,11 +54,14 @@ We also need an `index.php` file that contains the Kirby plugin wrapper, in whic
 ```php "/site/plugins/linksection/index.php"
 <?php
 
-Kirby::plugin('getkirby/linksection', [
-    'sections' => [
-        'links' => require __DIR__ . '/sections/links.php',
-    ],
-]);
+Kirby::plugin(
+    name: 'getkirby/linksection',
+    extends: [
+        'sections' => [
+            'links' => require __DIR__ . '/sections/links.php',
+        ],
+    ]
+);
 ```
 <info>
 Note that while we could put the props array we now outsource to `links.php` into our `index.php`, the purpose here is to get an idea how we can structure our files in more complex plugins.

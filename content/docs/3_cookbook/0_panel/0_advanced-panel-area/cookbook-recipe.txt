@@ -65,32 +65,35 @@ function products() {
     return Data::read(__DIR__ . '/products.json');
 }
 
-Kirby::plugin('getkirby/products', [
-  'areas' => [
-    'products' => [
-      'label'   => 'Products',
-      'icon'    => 'cart',
-      'menu'    => true,
-      // update and delete dialogs
-      'dialogs' => [
-          require __DIR__ . '/dialogs/update.php',
-          require __DIR__ . '/dialogs/delete.php'
-      ],
-      // dropdown with edit and delete buttons
-      'dropdowns' => [
-          //require __DIR__ . '/dropdowns/product.php'
-      ],
-      // search for productss
-      'searches' => [
-          //'products' => require __DIR__ . '/searches/products.php'
-      ],
-      // view route
-      'views' => [
-        require __DIR__ . '/views/products.php'
+Kirby::plugin(
+  name: 'getkirby/products',
+  extends: [
+    'areas' => [
+      'products' => [
+        'label'   => 'Products',
+        'icon'    => 'cart',
+        'menu'    => true,
+        // update and delete dialogs
+        'dialogs' => [
+            require __DIR__ . '/dialogs/update.php',
+            require __DIR__ . '/dialogs/delete.php'
+        ],
+        // dropdown with edit and delete buttons
+        'dropdowns' => [
+            //require __DIR__ . '/dropdowns/product.php'
+        ],
+        // search for productss
+        'searches' => [
+            //'products' => require __DIR__ . '/searches/products.php'
+        ],
+        // view route
+        'views' => [
+          require __DIR__ . '/views/products.php'
+        ]
       ]
     ]
   ]
-]);
+);
 ```
 
 For the moment, let's comment `dropdowns` and `searches`, we will get to that later.
@@ -589,32 +592,35 @@ load([
   'Kirby\Products\Product' => __DIR__ . '/classes/Product.php'
 ]);
 
-Kirby::plugin('getkirby/products', [
-  'areas' => [
-    'products' => [
-      'label'   => 'Products',
-      'icon'    => 'cart',
-      'menu'    => true,
-      // update and delete dialogs
-      'dialogs' => [
-          require __DIR__ . '/dialogs/update.php',
-          require __DIR__ . '/dialogs/delete.php'
-      ],
-      // dropdown with edit and delete buttons
-      'dropdowns' => [
-          require __DIR__ . '/dropdowns/product.php'
-      ],
-      // search for productss
-      'searches' => [
-          //'products' => require __DIR__ . '/searches/products.php'
-      ],
-      // view route
-      'views' => [
-          require __DIR__ . '/views/products.php'
+Kirby::plugin(
+  name: 'getkirby/products',
+  extends: [
+    'areas' => [
+      'products' => [
+        'label'   => 'Products',
+        'icon'    => 'cart',
+        'menu'    => true,
+        // update and delete dialogs
+        'dialogs' => [
+            require __DIR__ . '/dialogs/update.php',
+            require __DIR__ . '/dialogs/delete.php'
+        ],
+        // dropdown with edit and delete buttons
+        'dropdowns' => [
+            require __DIR__ . '/dropdowns/product.php'
+        ],
+        // search for productss
+        'searches' => [
+            //'products' => require __DIR__ . '/searches/products.php'
+        ],
+        // view route
+        'views' => [
+            require __DIR__ . '/views/products.php'
+        ]
       ]
     ]
   ]
-]);
+);
 ```
 
 Our shiny new class can now be used in our existing view and dialogs.

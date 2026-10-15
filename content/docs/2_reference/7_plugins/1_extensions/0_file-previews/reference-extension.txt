@@ -43,11 +43,14 @@ This is the minimal setup for a custom class. It defines which Vue component to 
 To use your custom file preview class, you need to register it as a plugin extension:
 
 ```php
-Kirby::plugin('your/plugin', [
-  'filePreviews' => [
-    GlbFilePreview::class
+Kirby::plugin(
+  name: 'your/plugin',
+  extends: [
+    'filePreviews' => [
+      GlbFilePreview::class
+    ]
   ]
-]);
+);
 ```
 
 ## Vue component

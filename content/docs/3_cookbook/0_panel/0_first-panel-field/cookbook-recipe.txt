@@ -56,13 +56,16 @@ As for any plugin, we first create an `index.php` file containing the Kirby plug
 ```php
 <?php
 
-Kirby::plugin('pluginAuthor/doi', [
-    'fields' => [
-        'doi' => [
-          // here we could define the backend logic for our field if needed
+Kirby::plugin(
+    name: 'pluginAuthor/doi',
+    extends: [
+        'fields' => [
+            'doi' => [
+              // here we could define the backend logic for our field if needed
+            ]
         ]
     ]
-]);
+);
 
 ```
 

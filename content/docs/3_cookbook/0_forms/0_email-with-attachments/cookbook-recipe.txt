@@ -456,24 +456,27 @@ In the plugin, we replace the name and event placeholders in the text with the d
 ```php "/site/plugins/applications/index.php"
 <?php
 
-Kirby::plugin('jobkit/application', [
-    'hooks' => [
-        'kirbytags:after' => function ($text, $data, $options) {
-            $session = kirby()->session();
+Kirby::plugin(
+    name: 'jobkit/application',
+    extends: [
+        'hooks' => [
+            'kirbytags:after' => function ($text, $data, $options) {
+                $session = kirby()->session();
 
-            if ($job = $session->get('reference')) {
-                if ($page = page('jobs')->children()->findBy('reference', urldecode($job))) {
-                    $title = $page->title() . ' - Reference ' . $job;
+                if ($job = $session->get('reference')) {
+                    if ($page = page('jobs')->children()->findBy('reference', urldecode($job))) {
+                        $title = $page->title() . ' - Reference ' . $job;
+                    }
                 }
-            }
 
-            return Str::template($text, [
-                'job'   => $title ?? '',
-                'name'  => $session->get('name') ?? ''
-            ]);
-        }
-    ],
-]);
+                return Str::template($text, [
+                    'job'   => $title ?? '',
+                    'name'  => $session->get('name') ?? ''
+                ]);
+            }
+        ],
+    ]
+);
 ```
 
 ## Download the demo

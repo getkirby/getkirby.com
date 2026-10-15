@@ -22,24 +22,27 @@ All reuse the same dialog components:
 Dialogs are defined as a part of areas:
 
 ```php
-Kirby::plugin('yourname/todos', [
-  'areas' => [
-    'todos' => function ($kirby) {
-      return [
-        // ... other code for custom Panel area
-        'dialogs' => [
+Kirby::plugin(
+  name: 'yourname/todos',
+  extends: [
+    'areas' => [
+      'todos' => function ($kirby) {
+        return [
+          // ... other code for custom Panel area
+          'dialogs' => [
 
-          // the key of the dialog defines its routing pattern
-          'todos/create' => [
-            // dialog callback functions
-            'load'   => function () {},
-            'submit' => function () {}
+            // the key of the dialog defines its routing pattern
+            'todos/create' => [
+              // dialog callback functions
+              'load'   => function () {},
+              'submit' => function () {}
+            ]
           ]
-        ]
-      ];
-    }
+        ];
+      }
+    ]
   ]
-]);
+);
 ```
 
 ### `load` callback
@@ -47,35 +50,38 @@ Kirby::plugin('yourname/todos', [
 The `load` function is called when the dialog is opened. It needs to return an array that specifies the UI component (see above) to be used for the dialog as well as all props that should be passed to the UI component, e.g. field definitions and values for a form dialog.
 
 ```php
-Kirby::plugin('yourname/todos', [
-  'areas' => [
-    'todos' => function ($kirby) {
-      return [
-        'dialogs' => [
-          'todos/create' => [
-            // the load event is creating a GET route at
-            // `/panel/dialogs/{pattern}`;
-            // it returns the setup for the dialog, including
-            // used component, buttons, props, etc.
-            'load' => function () {
-              return [
-                // what dialog component to use
-                'component' => 'k-form-dialog',
-                'props' => [
-                  // field definition for the form dialog
-                  'fields' => [ ... ],
-                  // the prefilled model data
-                  'value' => [ ... ]
-                ]
-              ];
-            },
-            // ...
+Kirby::plugin(
+  name: 'yourname/todos',
+  extends: [
+    'areas' => [
+      'todos' => function ($kirby) {
+        return [
+          'dialogs' => [
+            'todos/create' => [
+              // the load event is creating a GET route at
+              // `/panel/dialogs/{pattern}`;
+              // it returns the setup for the dialog, including
+              // used component, buttons, props, etc.
+              'load' => function () {
+                return [
+                  // what dialog component to use
+                  'component' => 'k-form-dialog',
+                  'props' => [
+                    // field definition for the form dialog
+                    'fields' => [ ... ],
+                    // the prefilled model data
+                    'value' => [ ... ]
+                  ]
+                ];
+              },
+              // ...
+            ]
           ]
-        ]
-      ];
-    }
+        ];
+      }
+    ]
   ]
-]);
+);
 ```
 
 ### `submit` callback
@@ -83,29 +89,32 @@ Kirby::plugin('yourname/todos', [
 The `submit` function is called once the dialog is submitted and defines the actions triggered by the event but also the response the Panel will receive.
 
 ```php
-Kirby::plugin('yourname/todos', [
-  'areas' => [
-    'todos' => function ($kirby) {
-      return [
-        'dialogs' => [
-          'todos/create' => [
-            // ...
+Kirby::plugin(
+  name: 'yourname/todos',
+  extends: [
+    'areas' => [
+      'todos' => function ($kirby) {
+        return [
+          'dialogs' => [
+            'todos/create' => [
+              // ...
 
-            // the submit event is creating a POST route at
-            // `/panel/dialogs/{pattern}`;
-            // the submit button of the dialog is automatically
-            // wired to fire the POST request with the form
-            // data or whatever data the dialog provides
-            'submit' => function () {
-              // create todo
-              return true;
-            }
+              // the submit event is creating a POST route at
+              // `/panel/dialogs/{pattern}`;
+              // the submit button of the dialog is automatically
+              // wired to fire the POST request with the form
+              // data or whatever data the dialog provides
+              'submit' => function () {
+                // create todo
+                return true;
+              }
+            ]
           ]
-        ]
-      ];
-    }
+        ];
+      }
+    ]
   ]
-]);
+);
 ```
 
 The dialog's `submit` callback has multiple ways to interact with the component presented in the Panel via it's response:
@@ -144,22 +153,25 @@ Panel::go('some/path');
 Instead of defining the dialog directly as an array with `load` and `submit` keys, you can pass a controller class name or a closure that returns an object with `load` and `submit` methods. If the named class defines a static `::for()` method, Kirby will call it to create the instance.
 
 ```php
-Kirby::plugin('yourname/todos', [
-  'areas' => [
-    'todos' => function () {
-      return [
-        'dialogs' => [
-          'todos/create' => [
-            'controller' => TodoCreateDialogController::class
-          ],
-          'todos/edit' => [
-            'controller' => fn () => new TodoEditDialogController()
+Kirby::plugin(
+  name: 'yourname/todos',
+  extends: [
+    'areas' => [
+      'todos' => function () {
+        return [
+          'dialogs' => [
+            'todos/create' => [
+              'controller' => TodoCreateDialogController::class
+            ],
+            'todos/edit' => [
+              'controller' => fn () => new TodoEditDialogController()
+            ]
           ]
-        ]
-      ];
-    }
+        ];
+      }
+    ]
   ]
-]);
+);
 ```
 
 
@@ -170,24 +182,27 @@ We've seen above, how to create entirely new dialogs. But you can also replace o
 ```php
 <?php
 
-Kirby::plugin('custom/dialog', [
-  'areas' => [
-    'site' => function ($kirby) {
-      return [
-        'dialogs' => [
-          'page.changeStatus' => [
-            'load' => function (string $id) {
-              // custom dialog setup
-            },
-            'submit' => function (string $id) {
-              // custom dialog submitter action
-            }
+Kirby::plugin(
+  name: 'custom/dialog',
+  extends: [
+    'areas' => [
+      'site' => function ($kirby) {
+        return [
+          'dialogs' => [
+            'page.changeStatus' => [
+              'load' => function (string $id) {
+                // custom dialog setup
+              },
+              'submit' => function (string $id) {
+                // custom dialog submitter action
+              }
+            ]
           ]
-        ]
-      ];
-    },
+        ];
+      },
+    ]
   ]
-]);
+);
 ```
 
 You have multiple options to extend a core dialog: You can keep the `submit` handler and only replace the `load` setup, you can change both or you can load an entirely new custom dialog component and modify the entire look of the dialog. It's all possible.
@@ -201,27 +216,30 @@ When you plan to extend a dialog, you might want to fall back to Kirby's core be
 ```php
 <?php
 
-Kirby::plugin('custom/dialog', [
-  'areas' => [
-    'site' => function ($kirby) {
-      return [
-        'dialogs' => [
-          'page.changeStatus' => [
-            'load' => function (string $id) use ($kirby) {
-              $page = Find::page($id);
+Kirby::plugin(
+  name: 'custom/dialog',
+  extends: [
+    'areas' => [
+      'site' => function ($kirby) {
+        return [
+          'dialogs' => [
+            'page.changeStatus' => [
+              'load' => function (string $id) use ($kirby) {
+                $page = Find::page($id);
 
-              if ($page->id() === 'blog') {
-                // return some custom dialog setup for the blog
+                if ($page->id() === 'blog') {
+                  // return some custom dialog setup for the blog
+                }
+
+                return $kirby->core()->area('site')['dialogs']['page.changeStatus']['load']($id);
               }
-
-              return $kirby->core()->area('site')['dialogs']['page.changeStatus']['load']($id);
-            }
+            ]
           ]
-        ]
-      ];
-    },
+        ];
+      },
+    ]
   ]
-]);
+);
 ```
 
 ## Core dialogs

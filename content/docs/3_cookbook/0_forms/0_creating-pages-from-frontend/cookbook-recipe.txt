@@ -402,29 +402,32 @@ In the plugin, we replace the `name` and `event` placeholders in the text with t
 use Kirby\Cms\App as Kirby;
 use Kirby\Toolkit\Str;
 
-Kirby::plugin('eventkit/event', [
-    'hooks' => [
-        'kirbytags:after' => function (string|null $text, array $data, array $options) {
-            // only touch texts that contain our placeholders
-            if ($text === null || Str::contains($text, '{{') === false) {
-                return $text;
-            }
-
-            $session = kirby()->session();
-
-            if ($location = $session->get('referer')) {
-                if ($page = page(urldecode($location))) {
-                    $title = $page->title()->escape();
+Kirby::plugin(
+    name: 'eventkit/event',
+    extends: [
+        'hooks' => [
+            'kirbytags:after' => function (string|null $text, array $data, array $options) {
+                // only touch texts that contain our placeholders
+                if ($text === null || Str::contains($text, '{{') === false) {
+                    return $text;
                 }
-            }
 
-            return Str::template($text, [
-                'event' => $title ?? '',
-                'name'  => $session->get('regName') ?? ''
-            ]);
-        }
-    ],
-]);
+                $session = kirby()->session();
+
+                if ($location = $session->get('referer')) {
+                    if ($page = page(urldecode($location))) {
+                        $title = $page->title()->escape();
+                    }
+                }
+
+                return Str::template($text, [
+                    'event' => $title ?? '',
+                    'name'  => $session->get('regName') ?? ''
+                ]);
+            }
+        ],
+    ]
+);
 ```
 
 ## Download example

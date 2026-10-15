@@ -61,34 +61,37 @@ A Panel search extension returns results as a simple array with parameters for e
 That's all it takes to create your own search index for your own plugins:
 
 ```php
-Kirby::plugin('your-plugin/todos', [
-    'areas' => [
-        'todos' => [
-            ...
-            'searches' => [
-                'todos' => [
-                    'label' => 'Todos',
-                    'icon'  => 'check',
-                    'query' => function (string|null $query, int $limit, int $page) {
-                        // search for $todos here.
-                        $results = [];
+Kirby::plugin(
+    name: 'your-plugin/todos',
+    extends: [
+        'areas' => [
+            'todos' => [
+                ...
+                'searches' => [
+                    'todos' => [
+                        'label' => 'Todos',
+                        'icon'  => 'check',
+                        'query' => function (string|null $query, int $limit, int $page) {
+                            // search for $todos here.
+                            $results = [];
 
-                        foreach ($todos as $todo) {
-                            $results[] = [
-                                'image' => [ // optional image settings ],
-                                'text'  => $todo->text(),
-                                'link'  => '/todos/' . $todo->id(),
-                                'info'  => 'Get it done!'
-                            ];
+                            foreach ($todos as $todo) {
+                                $results[] = [
+                                    'image' => [ // optional image settings ],
+                                    'text'  => $todo->text(),
+                                    'link'  => '/todos/' . $todo->id(),
+                                    'info'  => 'Get it done!'
+                                ];
+                            }
+
+                            return $results;
                         }
-
-                        return $results;
-                    }
+                    ]
                 ]
             ]
         ]
     ]
-]);
+);
 ```
 
 
@@ -107,36 +110,39 @@ You don't like the way the pages search works? Maybe you already have your data 
 ```php
 <?php
 
-Kirby::plugin('example/search', [
-  'areas' => [
-    // extending a core search
-    'site' => function ($kirby) {
-      return [
-        'searches' => [
-          'pages' => [
-            'query' => function (string|null $query, int $limit, int $page) {
-              // run your own search here ...
+Kirby::plugin(
+  name: 'example/search',
+  extends: [
+    'areas' => [
+      // extending a core search
+      'site' => function ($kirby) {
+        return [
+          'searches' => [
+            'pages' => [
+              'query' => function (string|null $query, int $limit, int $page) {
+                // run your own search here ...
 
-              // example result
-              return [
-                [
-                  'image' => [
-                    'src'   => 'https://source.unsplash.com/random',
-                    'cover' => true,
-                    'back'  => 'white'
-                  ],
-                  'text'  => 'Test Result',
-                  'link'  => '/site',
-                  'info'  => 'test info'
-                ]
-              ];
-            }
+                // example result
+                return [
+                  [
+                    'image' => [
+                      'src'   => 'https://source.unsplash.com/random',
+                      'cover' => true,
+                      'back'  => 'white'
+                    ],
+                    'text'  => 'Test Result',
+                    'link'  => '/site',
+                    'info'  => 'test info'
+                  ]
+                ];
+              }
+            ]
           ]
-        ]
-      ];
-    },
+        ];
+      },
+    ]
   ]
-]);
+);
 ```
 
 ### Reusing core code
@@ -146,27 +152,30 @@ When you plan to extend a search, you might want to fall back to Kirby's core be
 ```php
 <?php
 
-Kirby::plugin('example/search', [
-  'areas' => [
-    // extending a core search
-    'site' => function ($kirby) {
-      return [
-        'searches' => [
-          'pages' => [
-            'query' => function (string|null $query, int $limit, int $page) use ($kirby) {
+Kirby::plugin(
+  name: 'example/search',
+  extends: [
+    'areas' => [
+      // extending a core search
+      'site' => function ($kirby) {
+        return [
+          'searches' => [
+            'pages' => [
+              'query' => function (string|null $query, int $limit, int $page) use ($kirby) {
 
-              if ($kirby->user()->isAdmin()) {
-                // return super secret search results for the admin
+                if ($kirby->user()->isAdmin()) {
+                  // return super secret search results for the admin
+                }
+
+                return $kirby->core()->area('site')['searches']['pages']['query']($query, $limit, $page);
               }
-
-              return $kirby->core()->area('site')['searches']['pages']['query']($query, $limit, $page);
-            }
+            ]
           ]
-        ]
-      ];
-    },
+        ];
+      },
+    ]
   ]
-]);
+);
 ```
 
 ## Core searches

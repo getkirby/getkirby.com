@@ -31,13 +31,16 @@ Just like fields, sections can be used in any blueprint — no matter if it's th
 Let's start with a PHP plugin file.
 
 ```php "/site/plugins/modified/index.php"
-Kirby::plugin('yourname/modified', [
-    'sections' => [
-        'modified' => [
-            // the section code goes here
+Kirby::plugin(
+    name: 'yourname/modified',
+    extends: [
+        'sections' => [
+            'modified' => [
+                // the section code goes here
+            ]
         ]
     ]
-]);
+);
 ```
 
 The array key `modified` sets the section type that can later be used in your blueprints.
@@ -51,17 +54,20 @@ Those property values from the blueprint will be sent to the section via the RES
 Properties are defined with the `props` array
 
 ```php "/site/plugins/modified/index.php"
-Kirby::plugin('yourname/modified', [
-    'sections' => [
-        'modified' => [
-            'props' => [
-                'label' => function ($label) {
-                    return $label;
-                }
+Kirby::plugin(
+    name: 'yourname/modified',
+    extends: [
+        'sections' => [
+            'modified' => [
+                'props' => [
+                    'label' => function ($label) {
+                        return $label;
+                    }
+                ]
             ]
         ]
     ]
-]);
+);
 ```
 
 A property is always a combination of a key (the property name) and a function (the property setter).
@@ -143,22 +149,25 @@ modified: {
 If you need to pass additional values to the field, that are not defined by properties in the blueprint, you can use computed values.
 
 ```php "/site/plugins/modified/index.php"
-Kirby::plugin('yourname/modified', [
-    'sections' => [
-        'modified' => [
-            'props' => [
-                'label' => function (string $label) {
-                    return $label;
-                },
-            ],
-            'computed' => [
-                'text' => function () {
-                    return 'The page has been modified at ' . $this->model()->modified('d.m.Y H:i:s');
-                }
+Kirby::plugin(
+    name: 'yourname/modified',
+    extends: [
+        'sections' => [
+            'modified' => [
+                'props' => [
+                    'label' => function (string $label) {
+                        return $label;
+                    },
+                ],
+                'computed' => [
+                    'text' => function () {
+                        return 'The page has been modified at ' . $this->model()->modified('d.m.Y H:i:s');
+                    }
+                ]
             ]
         ]
     ]
-]);
+);
 ```
 
 ```yaml "Blueprint"

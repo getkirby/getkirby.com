@@ -53,36 +53,39 @@ Let's start with a `kirbytext:after` hook that converts all given headline level
 ```php "/site/plugins/toc/index.php"
 <?php
 
-Kirby::plugin('k-cookbook/toc', [
-  'hooks' => [
-    'kirbytext:after' => [
+Kirby::plugin(
+  name: 'k-cookbook/toc',
+  extends: [
+    'hooks' => [
+      'kirbytext:after' => [
 
-      function($text) {
+        function($text) {
 
-        // get the headline levels to convert from a config option, we use h2 as the default
-        $headlines = option('k-cookbook.toc.headlines', 'h2|h3');
+          // get the headline levels to convert from a config option, we use h2 as the default
+          $headlines = option('k-cookbook.toc.headlines', 'h2|h3');
 
-        // create the regex pattern to be used as first argument in `preg_replace_callback()`
-        $headlinesPattern = is_array($headlines) ? implode('|', $headlines) : $headlines;
+          // create the regex pattern to be used as first argument in `preg_replace_callback()`
+          $headlinesPattern = is_array($headlines) ? implode('|', $headlines) : $headlines;
 
-        // use `preg_replace_callback()` to replace matches with anchors
-        $text = preg_replace_callback('!<(' . $headlinesPattern . ')>(.*?)</\\1>!s', function ($match) {
+          // use `preg_replace_callback()` to replace matches with anchors
+          $text = preg_replace_callback('!<(' . $headlinesPattern . ')>(.*?)</\\1>!s', function ($match) {
 
-            // create the id from the headline text
-            $id = Str::slug(Str::unhtml($match[2]));
+              // create the id from the headline text
+              $id = Str::slug(Str::unhtml($match[2]));
 
-            // return the modified headline:
-            // $match[1] contains the match for the first subpattern, i.e. `h2`, `h3` etc.
-            // $match[2] contains the match for the second subpattern, i.e. the actual headline text
-            return '<' . $match[1] . ' id="' . $id . '"><a href="#' . $id . '">' . $match[2] . '</a></' . $match[1] . '>';
+              // return the modified headline:
+              // $match[1] contains the match for the first subpattern, i.e. `h2`, `h3` etc.
+              // $match[2] contains the match for the second subpattern, i.e. the actual headline text
+              return '<' . $match[1] . ' id="' . $id . '"><a href="#' . $id . '">' . $match[2] . '</a></' . $match[1] . '>';
 
-        }, $text);
+          }, $text);
 
-        return $text;
-      },
+          return $text;
+        },
+      ]
     ]
   ]
-]);
+);
 ```
 <info>
 Since we want to add a second hook of the same type in the next step, we use an array of functions after the `kirbytext:after` key.
@@ -118,30 +121,33 @@ This is an alternative to using the `kirbytext` hook described above. Do not use
 ```php "/site/plugins/toc/index.php"
 <?php
 
-Kirby::plugin('k-cookbook/toc', [
-  'fieldMethods' => [
-    'anchorHeadlines' => function($field, $headlines = 'h2|h3') {
+Kirby::plugin(
+  name: 'k-cookbook/toc',
+  extends: [
+    'fieldMethods' => [
+      'anchorHeadlines' => function($field, $headlines = 'h2|h3') {
 
-      // create the regex pattern to be used as first argument in `preg_replace_callback()`
-      $headlinesPattern = is_array($headlines) ? implode('|', $headlines) : $headlines;
+        // create the regex pattern to be used as first argument in `preg_replace_callback()`
+        $headlinesPattern = is_array($headlines) ? implode('|', $headlines) : $headlines;
 
-      // use `preg_replace_callback()` to replace matches with anchors
-      $field->value = preg_replace_callback('!<(' . $headlinesPattern . ')>(.*?)</\\1>!s', function ($match) {
+        // use `preg_replace_callback()` to replace matches with anchors
+        $field->value = preg_replace_callback('!<(' . $headlinesPattern . ')>(.*?)</\\1>!s', function ($match) {
 
-          // create the id from the headline text
-          $id = Str::slug(Str::unhtml($match[2]));
+            // create the id from the headline text
+            $id = Str::slug(Str::unhtml($match[2]));
 
-          // return the modified headline:
-          // $match[1] contains the match for the first subpattern, i.e. `h2`, `h3` etc.
-          // $match[2] contains the match for the second subpattern, i.e. the actual headline text
-          return '<' . $match[1] . ' id="' . $id . '"><a href="#' . $id . '">' . $match[2] . '</a></' . $match[1] . '>';
+            // return the modified headline:
+            // $match[1] contains the match for the first subpattern, i.e. `h2`, `h3` etc.
+            // $match[2] contains the match for the second subpattern, i.e. the actual headline text
+            return '<' . $match[1] . ' id="' . $id . '"><a href="#' . $id . '">' . $match[2] . '</a></' . $match[1] . '>';
 
-      }, $field->value);
+        }, $field->value);
 
-      return $field;
-    }
+        return $field;
+      }
+    ]
   ]
-]);
+);
 ```
 
 In your templates/snippets, you can now use the field method like this:
@@ -191,54 +197,57 @@ use Kirby\Toolkit\Collection;
 use Kirby\Toolkit\Str;
 use Kirby\Toolkit\Obj;
 
-Kirby::plugin('k-cookbook/toc', [
-  'hooks' => [
+Kirby::plugin(
+  name: 'k-cookbook/toc',
+  extends: [
+    'hooks' => [
 
-    'kirbytext:after' => [
+      'kirbytext:after' => [
 
-      // (…) add the callback function from above here (without the wrapper)
+        // (…) add the callback function from above here (without the wrapper)
 
-      function($text) {
+        function($text) {
 
-        // the pattern allows passing an optional headline level `(toc: h3)`
-        $pattern  = '!\(toc(?::\s?(h[1-6]))?\)!';
+          // the pattern allows passing an optional headline level `(toc: h3)`
+          $pattern  = '!\(toc(?::\s?(h[1-6]))?\)!';
 
-        $text = preg_replace_callback($pattern, function($match) use($text) {
+          $text = preg_replace_callback($pattern, function($match) use($text) {
 
-          // get the headline level from the match
-          $headline = $match[1] ?? 'h2';
+            // get the headline level from the match
+            $headline = $match[1] ?? 'h2';
 
-          // find all headline matches
-          preg_match_all('!<' . $headline . '.*?>(.*?)</' . $headline . '>!s', $text, $matches);
+            // find all headline matches
+            preg_match_all('!<' . $headline . '.*?>(.*?)</' . $headline . '>!s', $text, $matches);
 
-          // create a new collection for the headlines…
-          $headlines = new Collection();
+            // create a new collection for the headlines…
+            $headlines = new Collection();
 
-          // …and add all matches
-          foreach ($matches[1] as $text) {
-              $headline = new Obj([
-                  'id'   => $id = '#' . Str::slug(Str::unhtml($text)),
-                  'url'  => $id,
-                  'text' => trim(strip_tags($text)),
-              ]);
+            // …and add all matches
+            foreach ($matches[1] as $text) {
+                $headline = new Obj([
+                    'id'   => $id = '#' . Str::slug(Str::unhtml($text)),
+                    'url'  => $id,
+                    'text' => trim(strip_tags($text)),
+                ]);
 
-              $headlines->append($headline->url(), $headline);
-          }
+                $headlines->append($headline->url(), $headline);
+            }
 
-          // return the html for the ToC
-          return snippet('toc', ['headlines' => $headlines], false);
+            // return the html for the ToC
+            return snippet('toc', ['headlines' => $headlines], false);
 
-        }, $text);
+          }, $text);
 
-        return $text;
+          return $text;
 
-      },
+        },
+      ],
     ],
-  ],
-  'snippets' => [
-    'toc' => __DIR__ . '/snippets/toc.php'
-  ],
-]);
+    'snippets' => [
+      'toc' => __DIR__ . '/snippets/toc.php'
+    ],
+  ]
+);
 ```
 
 The code for the snippet goes into `/site/plugins/toc/snippets/toc.php`:
@@ -267,29 +276,32 @@ If you now add a `(toc)` placeholder to a page that contains headlines of the gi
 ```php "/site/plugins/toc/index.php"
 <?php
 
-Kirby::plugin('k-cookbook/toc', [
-  'fieldMethods' => [
-    'headlines' => function($field, $headline = 'h2') {
+Kirby::plugin(
+  name: 'k-cookbook/toc',
+  extends: [
+    'fieldMethods' => [
+      'headlines' => function($field, $headline = 'h2') {
 
-        preg_match_all('!<' . $headline . '.*?>(.*?)</' . $headline . '>!s', $field->kt()->value(), $matches);
+          preg_match_all('!<' . $headline . '.*?>(.*?)</' . $headline . '>!s', $field->kt()->value(), $matches);
 
-        $headlines = new Collection();
+          $headlines = new Collection();
 
-        foreach ($matches[1] as $text) {
-            $headline = new Obj([
-                'id'   => $id = '#' . Str::slug(Str::unhtml($text)),
-                'url'  => $id,
-                'text' => trim(strip_tags($text)),
-            ]);
+          foreach ($matches[1] as $text) {
+              $headline = new Obj([
+                  'id'   => $id = '#' . Str::slug(Str::unhtml($text)),
+                  'url'  => $id,
+                  'text' => trim(strip_tags($text)),
+              ]);
 
-            $headlines->append($headline->url(), $headline);
-        }
+              $headlines->append($headline->url(), $headline);
+          }
 
-        return $headlines;
+          return $headlines;
 
-    }
+      }
+    ]
   ]
-]);
+);
 ```
 
 The field method returns a collection of headline objects.

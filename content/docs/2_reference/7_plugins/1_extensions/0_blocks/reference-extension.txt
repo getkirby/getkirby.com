@@ -50,7 +50,10 @@ For starters, the `index.php` file will do nothing but tell Kirby that the plugi
 ```php "/site/plugins/button/index.php"
 <?php
 
-Kirby::plugin('your-project/button-block', []);
+Kirby::plugin(
+  name: 'your-project/button-block',
+  extends: []
+);
 ```
 
 ### index.js
@@ -291,14 +294,17 @@ As a first step, register the custom snippet and blueprint in the index.php of y
 ```php "/site/plugins/button/index.php"
 <?php
 
-Kirby::plugin('your-project/button-block', [
-  'blueprints' => [
-    'blocks/button' => __DIR__ . '/blueprints/blocks/button.yml'
-  ],
-  'snippets' => [
-    'blocks/button' => __DIR__ . '/snippets/blocks/button.php'
+Kirby::plugin(
+  name: 'your-project/button-block',
+  extends: [
+    'blueprints' => [
+      'blocks/button' => __DIR__ . '/blueprints/blocks/button.yml'
+    ],
+    'snippets' => [
+      'blocks/button' => __DIR__ . '/snippets/blocks/button.php'
+    ]
   ]
-]);
+);
 ```
 
 Then, add the blueprint definition and the snippet code in their respective files:

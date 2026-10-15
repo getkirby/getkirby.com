@@ -168,13 +168,16 @@ And in a plugin, define the method
 ```php "/site/plugins/custom-methods/index.php"
 <?php
 
-Kirby::plugin('getkirby/custom-methods', [
-  'siteMethods' => [
-    'time' => function() {
-      return time();
-    }
+Kirby::plugin(
+  name: 'getkirby/custom-methods',
+  extends: [
+    'siteMethods' => [
+      'time' => function() {
+        return time();
+      }
+    ]
   ]
-]);
+);
 
 ```
 If title and slug are generated automatically, and no custom fields are defined for the page creation dialog, the dialog will be skipped and the page is created immediately.

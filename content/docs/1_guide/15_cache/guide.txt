@@ -191,11 +191,14 @@ The getter will now return `null` after the 30 minutes expired.
 Plugins can have their own namespaced caches by defining them in their options:
 
 ```php
-Kirby::plugin('superwoman/superplugin', [
-  'options' => [
-    'cache' => true
+Kirby::plugin(
+  name: 'superwoman/superplugin',
+  extends: [
+    'options' => [
+      'cache' => true
+    ]
   ]
-]);
+);
 ```
 This plugin cache instance will be available at:
 
@@ -206,11 +209,14 @@ $kirby->cache('superwoman.superplugin');
 But you can even have multiple cache instances per plugin:
 
 ```php
-Kirby::plugin('superwoman/superplugin', [
-  'options' => [
-    'cache.api' => true
+Kirby::plugin(
+  name: 'superwoman/superplugin',
+  extends: [
+    'options' => [
+      'cache.api' => true
+    ]
   ]
-]);
+);
 ```
 
 Following the same concept, you can access it like this:

@@ -25,13 +25,16 @@ Page methods are registered with the `pageMethods` extension.
 You can extend the set of defined page methods very easily in a plugin file.
 
 ```php "/site/plugins/page-methods/index.php"
-Kirby::plugin('my/page-methods', [
-    'pageMethods' => [
-        'linktag' => function () {
-            return '<a href="' . $this->url() . '">' . $this->title()->html() . '</a>';
-        }
+Kirby::plugin(
+    name: 'my/page-methods',
+    extends: [
+        'pageMethods' => [
+            'linktag' => function () {
+                return '<a href="' . $this->url() . '">' . $this->title()->html() . '</a>';
+            }
+        ]
     ]
-]);
+);
 ```
 
 This example shows the basic architecture of a page method. You define the method name with the key for the `pageMethods` extension array. `$this` in the callback function is the `$page` object.
@@ -43,14 +46,17 @@ There are two common scenarios, what page methods can do:
 ### 1. Modifying the page
 
 ```php
-Kirby::plugin('my/page-methods', [
-    'pageMethods' => [
-        'likeIt' => function () {
-            $this->increment('like');
-            return $this;
-        }
+Kirby::plugin(
+    name: 'my/page-methods',
+    extends: [
+        'pageMethods' => [
+            'likeIt' => function () {
+                $this->increment('like');
+                return $this;
+            }
+        ]
     ]
-]);
+);
 ```
 
 If you want to make it possible to chain page methods and that the page can be further modified by other page methods, you must modify the page and then return the page object (`$this`).
@@ -64,13 +70,16 @@ If you want to make it possible to chain page methods and that the page can be f
 ### 2. Returning info about the page
 
 ```php
-Kirby::plugin('my/page-methods', [
-    'pageMethods' => [
-        'has5Siblings' => function () {
-            return $this->siblings()->count() === 5;
-        }
+Kirby::plugin(
+    name: 'my/page-methods',
+    extends: [
+        'pageMethods' => [
+            'has5Siblings' => function () {
+                return $this->siblings()->count() === 5;
+            }
+        ]
     ]
-]);
+);
 ```
 
 Page methods can also be used to make if clauses easier.
@@ -94,11 +103,14 @@ In some cases it might be helpful to be able to pass arguments to the method:
 The definition for such a method with arguments is very simple:
 
 ```php
-Kirby::plugin('my/page-methods', [
-    'pageMethods' => [
-        'isSiblingsOf' => function ($otherPage) {
-            return $otherPage->siblings()->has($this);
-        }
+Kirby::plugin(
+    name: 'my/page-methods',
+    extends: [
+        'pageMethods' => [
+            'isSiblingsOf' => function ($otherPage) {
+                return $otherPage->siblings()->has($this);
+            }
+        ]
     ]
-]);
+);
 ```

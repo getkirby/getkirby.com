@@ -367,17 +367,20 @@ Inside the `/plugins` folder, create a folder `virtual-gallery` with the followi
 
 ```php "/site/plugins/file-component/index.php"
 <?php
-Kirby::plugin('cookbook/virtual-gallery', [
-  'components' => [
-    'file::url' => function (Kirby $kirby, $file) {
-      if ($kirby->visitor()->prefersJson() && $file->parent()->slug() === 'gallery') {
-          return $kirby->url() . '/' . $file->parent()->slug() . '/' . $file->name();
-      }
+Kirby::plugin(
+  name: 'cookbook/virtual-gallery',
+  extends: [
+    'components' => [
+      'file::url' => function (Kirby $kirby, $file) {
+        if ($kirby->visitor()->prefersJson() && $file->parent()->slug() === 'gallery') {
+            return $kirby->url() . '/' . $file->parent()->slug() . '/' . $file->name();
+        }
 
-      return $file->mediaUrl();
-    }
+        return $file->mediaUrl();
+      }
+    ]
   ]
-]);
+);
 ```
 
 ## Final result
@@ -414,30 +417,33 @@ use Kirby\Cms\App as Kirby;
 require __DIR__ . '/models/Gallery.php';
 require __DIR__ . '/models/GalleryImage.php';
 
-Kirby::plugin('cookbook/virtual-gallery', [
-  'blueprints' => [
-    'pages/gallery'       => __DIR__ . '/blueprints/pages/gallery.yml',
-    'pages/gallery-image' => __DIR__ . '/blueprints/pages/gallery-image.yml',
-    'files/gallery-image' => __DIR__ . '/blueprints/files/gallery-image.yml',
-  ],
-  'pageModels' => [
-    'gallery'       => 'GalleryPage',
-    'gallery-image' => 'GalleryImagePage',
-  ],
-  'templates' => [
-    'gallery'       => __DIR__ . '/templates/gallery.php',
-    'gallery-image' => __DIR__ . '/templates/gallery-image.php',
-  ],
-  'components' => [
-    'file::url' => function (Kirby $kirby, $file) {
-      if ($kirby->visitor()->prefersJson() && $file->parent()->slug() === 'gallery') {
-          return $kirby->url() . '/' . $file->parent()->slug() . '/' . $file->name();
-      }
+Kirby::plugin(
+  name: 'cookbook/virtual-gallery',
+  extends: [
+    'blueprints' => [
+      'pages/gallery'       => __DIR__ . '/blueprints/pages/gallery.yml',
+      'pages/gallery-image' => __DIR__ . '/blueprints/pages/gallery-image.yml',
+      'files/gallery-image' => __DIR__ . '/blueprints/files/gallery-image.yml',
+    ],
+    'pageModels' => [
+      'gallery'       => 'GalleryPage',
+      'gallery-image' => 'GalleryImagePage',
+    ],
+    'templates' => [
+      'gallery'       => __DIR__ . '/templates/gallery.php',
+      'gallery-image' => __DIR__ . '/templates/gallery-image.php',
+    ],
+    'components' => [
+      'file::url' => function (Kirby $kirby, $file) {
+        if ($kirby->visitor()->prefersJson() && $file->parent()->slug() === 'gallery') {
+            return $kirby->url() . '/' . $file->parent()->slug() . '/' . $file->name();
+        }
 
-      return $file->mediaUrl();
-    }
+        return $file->mediaUrl();
+      }
+    ]
   ]
-]);
+);
 ```
 
 ### `gallery.yml` page blueprint

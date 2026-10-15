@@ -83,11 +83,14 @@ You can create content representations in plugins by defining a template with th
 ```php "/site/plugins/feed/index.php"
 <?php
 
-Kirby::plugin('your/feed', [
-    'templates' => [
-        'notes.rss' => __DIR__ . '/templates/notes.rss.php'
-    ],
-]);
+Kirby::plugin(
+    name: 'your/feed',
+    extends: [
+        'templates' => [
+            'notes.rss' => __DIR__ . '/templates/notes.rss.php'
+        ],
+    ]
+);
 ```
 
 If you need a matching controller, you can create one via a plugin as well:
@@ -95,16 +98,19 @@ If you need a matching controller, you can create one via a plugin as well:
 ```php "/site/plugins/feed/index.php"
 <?php
 
-Kirby::plugin('your/feed', [
-    'templates' => [
-        'notes.rss' => __DIR__ . '/templates/notes.rss.php'
-    ],
-    'controllers' => [
-        'notes.rss' => function () {
-            // put your controller code here
-        }
+Kirby::plugin(
+    name: 'your/feed',
+    extends: [
+        'templates' => [
+            'notes.rss' => __DIR__ . '/templates/notes.rss.php'
+        ],
+        'controllers' => [
+            'notes.rss' => function () {
+                // put your controller code here
+            }
+        ]
     ]
-]);
+);
 ```
 
 Controllers and templates from plugins get overridden automatically if they exist in the `templates` or `controllers` directories. You can use this behavior to provide default setups in a plugin and still give the option to overwrite them individually if needed.

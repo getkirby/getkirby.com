@@ -59,18 +59,21 @@ use Kirby\Cms\App as Kirby;
 
 require __DIR__ . '/models/photos.php';
 
-Kirby::plugin('cookbook/virtual-files', [
-  'blueprints' => [
-    'files/virtual-file' => __DIR__ . '/blueprints/files/virtual-file.yml',
-    'pages/photos'       => __DIR__ . '/blueprints/pages/photos.yml',
-  ],
-  'pageModels' => [
-    'photos'             => 'PhotosPage',
-  ],
-  'templates'  => [
-    'photos'             => __DIR__ . '/templates/photos.php',
-  ],
-]);
+Kirby::plugin(
+  name: 'cookbook/virtual-files',
+  extends: [
+    'blueprints' => [
+      'files/virtual-file' => __DIR__ . '/blueprints/files/virtual-file.yml',
+      'pages/photos'       => __DIR__ . '/blueprints/pages/photos.yml',
+    ],
+    'pageModels' => [
+      'photos'             => 'PhotosPage',
+    ],
+    'templates'  => [
+      'photos'             => __DIR__ . '/templates/photos.php',
+    ],
+  ]
+);
 ```
 
 Next, create those four files in the file system according to the following file structure:
@@ -244,21 +247,24 @@ use Kirby\Cms\App as Kirby;
 
 require __DIR__ . '/models/photos.php';
 
-Kirby::plugin('cookbook/virtual-files', [
-  'blueprints' => [
-    'files/virtual-file'  => __DIR__ . '/blueprints/files/virtual-file.yml',
-    'pages/photos'        => __DIR__ . '/blueprints/pages/photos.yml',
-  ],
-  'pageModels' => [
-    'photos'              => 'PhotosPage',
-  ],
-  'templates'  => [
-    'photos'              => __DIR__ . '/templates/photos.php',
-  ],
-  'components' => [
-    'file::version'       => include __DIR__ . '/components/file-version.php',
-  ],
-]);
+Kirby::plugin(
+  name: 'cookbook/virtual-files',
+  extends: [
+    'blueprints' => [
+      'files/virtual-file'  => __DIR__ . '/blueprints/files/virtual-file.yml',
+      'pages/photos'        => __DIR__ . '/blueprints/pages/photos.yml',
+    ],
+    'pageModels' => [
+      'photos'              => 'PhotosPage',
+    ],
+    'templates'  => [
+      'photos'              => __DIR__ . '/templates/photos.php',
+    ],
+    'components' => [
+      'file::version'       => include __DIR__ . '/components/file-version.php',
+    ],
+  ]
+);
 ```
 
 The file structure in the plugins folder should now look like this:

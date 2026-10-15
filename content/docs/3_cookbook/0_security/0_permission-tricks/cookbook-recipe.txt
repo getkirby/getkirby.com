@@ -92,11 +92,14 @@ if (($user = kirby()->user()) && $user->role()->name() === 'client') {
     $dir = __DIR__ . '/blueprints/pages/home.yml';
 }
 
-Kirby::plugin('cookbook/role-blueprints', [
-    'blueprints' => [
-        'pages/home' => $dir
+Kirby::plugin(
+    name: 'cookbook/role-blueprints',
+    extends: [
+        'blueprints' => [
+            'pages/home' => $dir
+        ]
     ]
-]);
+);
 ```
 
 The plugin folder structure in this example will look like this:

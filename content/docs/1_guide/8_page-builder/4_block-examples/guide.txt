@@ -37,28 +37,31 @@ The `index.php` file is the place where we register the blueprints and snippets 
 
 ```php "/site/plugins/block-factory/index.php"
 <?php
-Kirby::plugin('cookbook/block-factory', [
-  'blueprints' => [
-    'blocks/awesomeblock' => __DIR__ . '/blueprints/blocks/awesomeblock.yml',
-    // more blueprints
-  ],
-  'snippets' => [
-    'blocks/awesomeblock' => __DIR__ . '/snippets/blocks/awesomeblock.php',
-    // more snippets
-  ],
-  'translations' => [
-    'en' => [
-      'field.blocks.awesomeblock.name' => 'My awesome block',
-      // more block names
+Kirby::plugin(
+  name: 'cookbook/block-factory',
+  extends: [
+    'blueprints' => [
+      'blocks/awesomeblock' => __DIR__ . '/blueprints/blocks/awesomeblock.yml',
+      // more blueprints
     ],
-    'de' => [
-       'field.blocks.awesomeblock.name' => 'Mein Superblock',
-      // more block names
+    'snippets' => [
+      'blocks/awesomeblock' => __DIR__ . '/snippets/blocks/awesomeblock.php',
+      // more snippets
+    ],
+    'translations' => [
+      'en' => [
+        'field.blocks.awesomeblock.name' => 'My awesome block',
+        // more block names
+      ],
+      'de' => [
+         'field.blocks.awesomeblock.name' => 'Mein Superblock',
+        // more block names
 
-    ],
-    // more languages
+      ],
+      // more languages
+    ]
   ]
-]);
+);
 ```
 
 ### Register templates
@@ -860,34 +863,37 @@ Here is the complete `index.php` with all registered blueprints and examples int
 ```php "/site/plugins/block-factory/index.php"
 
 <?php
-Kirby::plugin('cookbook/block-factory', [
-  'blueprints' => [
-    'blocks/accordion'   => __DIR__ . '/blueprints/blocks/accordion.yml',
-    'blocks/box'         => __DIR__ . '/blueprints/blocks/box.yml',
-    'blocks/card'        => __DIR__ . '/blueprints/blocks/card.yml',
-    'blocks/faq'         => __DIR__ . '/blueprints/blocks/faq.yml',
-    'blocks/faq2'        => __DIR__ . '/blueprints/blocks/faq2.yml',
-    'blocks/testimonial' => __DIR__ . '/blueprints/blocks/testimonial.yml',
-  ],
-  'snippets' => [
-    'blocks/accordion'   => __DIR__ . '/snippets/blocks/accordion.php',
-    'blocks/box'         => __DIR__ . '/snippets/blocks/box.php',
-    'blocks/card'        => __DIR__ . '/snippets/blocks/card.php',
-    'blocks/faq'         => __DIR__ . '/snippets/blocks/faq.php',
-    'blocks/faq2'        => __DIR__ . '/snippets/blocks/faq2.php',
-    'blocks/testimonial' => __DIR__ . '/snippets/blocks/testimonial.php',
-  ],
-  'translations' => [
-    'en' => [
-      'field.blocks.accordion.name'   => 'Accordion block',
-      'field.blocks.box.name'         => 'Textbox block',
-      'field.blocks.card.name'        => 'Card',
-      'field.blocks.faq.name'         => 'FAQ Section Version 1',
-      'field.blocks.faq2.name'        => 'FAQ Section Version 2',
-      'field.blocks.testimonial.name' => 'Testimonial',
-    ]
-  ],
-]);
+Kirby::plugin(
+  name: 'cookbook/block-factory',
+  extends: [
+    'blueprints' => [
+      'blocks/accordion'   => __DIR__ . '/blueprints/blocks/accordion.yml',
+      'blocks/box'         => __DIR__ . '/blueprints/blocks/box.yml',
+      'blocks/card'        => __DIR__ . '/blueprints/blocks/card.yml',
+      'blocks/faq'         => __DIR__ . '/blueprints/blocks/faq.yml',
+      'blocks/faq2'        => __DIR__ . '/blueprints/blocks/faq2.yml',
+      'blocks/testimonial' => __DIR__ . '/blueprints/blocks/testimonial.yml',
+    ],
+    'snippets' => [
+      'blocks/accordion'   => __DIR__ . '/snippets/blocks/accordion.php',
+      'blocks/box'         => __DIR__ . '/snippets/blocks/box.php',
+      'blocks/card'        => __DIR__ . '/snippets/blocks/card.php',
+      'blocks/faq'         => __DIR__ . '/snippets/blocks/faq.php',
+      'blocks/faq2'        => __DIR__ . '/snippets/blocks/faq2.php',
+      'blocks/testimonial' => __DIR__ . '/snippets/blocks/testimonial.php',
+    ],
+    'translations' => [
+      'en' => [
+        'field.blocks.accordion.name'   => 'Accordion block',
+        'field.blocks.box.name'         => 'Textbox block',
+        'field.blocks.card.name'        => 'Card',
+        'field.blocks.faq.name'         => 'FAQ Section Version 1',
+        'field.blocks.faq2.name'        => 'FAQ Section Version 2',
+        'field.blocks.testimonial.name' => 'Testimonial',
+      ]
+    ],
+  ]
+);
 ```
 
 ## Stylesheet

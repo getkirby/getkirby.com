@@ -28,13 +28,16 @@ Our Kirby panel is built with (glossary: vue) and speaks to our (link: docs/guid
 Let's start with a PHP plugin file.
 
 ```php "/site/plugins/hello/index.php"
-Kirby::plugin('yourname/hello', [
-    'fields' => [
-        'hello' => [
-            // the field code goes here
+Kirby::plugin(
+    name: 'yourname/hello',
+    extends: [
+        'fields' => [
+            'hello' => [
+                // the field code goes here
+            ]
         ]
     ]
-]);
+);
 ```
 
 The array key `hello` sets the field type that can later be used in your blueprints.
@@ -46,17 +49,20 @@ Fields can have many options in your blueprint, such as a label, a default value
 Properties are defined with the `props` array
 
 ```php
-Kirby::plugin('yourname/hello', [
-    'fields' => [
-        'hello' => [
-            'props' => [
-                'message' => function ($message) {
-                    return $message;
-                }
+Kirby::plugin(
+    name: 'yourname/hello',
+    extends: [
+        'fields' => [
+            'hello' => [
+                'props' => [
+                    'message' => function ($message) {
+                        return $message;
+                    }
+                ]
             ]
         ]
     ]
-]);
+);
 ```
 
 A property is always a combination of a key (the property name) and a function (the property setter).
@@ -137,25 +143,28 @@ hello: {
 If you need to pass additional values to the field, that are not defined by properties in the blueprint, you can use computed values.
 
 ```php
-Kirby::plugin('yourname/hello', [
-    'fields' => [
-        'hello' => [
-            'props' => [
-                'message' => function (string $message) {
-                    return $message;
-                },
-                'username' => function (string $username) {
-                    return $username;
-                }
-            ],
-            'computed' => [
-                'sentence' => function () {
-                    return $this->username . ' said ' . $this->message;
-                }
+Kirby::plugin(
+    name: 'yourname/hello',
+    extends: [
+        'fields' => [
+            'hello' => [
+                'props' => [
+                    'message' => function (string $message) {
+                        return $message;
+                    },
+                    'username' => function (string $username) {
+                        return $username;
+                    }
+                ],
+                'computed' => [
+                    'sentence' => function () {
+                        return $this->username . ' said ' . $this->message;
+                    }
+                ]
             ]
         ]
     ]
-]);
+);
 ```
 
 ```yaml "Blueprint"
@@ -267,17 +276,20 @@ Please make sure to check for our (link: docs/reference/plugins/ui text: UI kit 
 ```php "/site/plugins/your-plugin/index.php"
 <?php
 
-Kirby::plugin('your/plugin', [
-    'fields' => [
-        'hello' => [
-            'props' => [
-                'message' => function (string $message) {
-                    return $message;
-                }
+Kirby::plugin(
+    name: 'your/plugin',
+    extends: [
+        'fields' => [
+            'hello' => [
+                'props' => [
+                    'message' => function (string $message) {
+                        return $message;
+                    }
+                ]
             ]
         ]
     ]
-]);
+);
 ```
 
 ### Vue component
@@ -321,13 +333,16 @@ Instead of creating a new field from scratch, you can reuse existing fields.
 ```php "/site/plugins/your-plugin/index.php"
 <?php
 
-Kirby::plugin('your/plugin', [
-    'fields' => [
-        'hello' => [
-            'extends' => 'text'
+Kirby::plugin(
+    name: 'your/plugin',
+    extends: [
+        'fields' => [
+            'hello' => [
+                'extends' => 'text'
+            ]
         ]
     ]
-]);
+);
 ```
 
 This custom field will inherit the entire backend code of the text field.
@@ -337,18 +352,21 @@ You can now start replacing parts of the field implementation or add your own pr
 ```php "/site/plugins/your-plugin/index.php"
 <?php
 
-Kirby::plugin('your/plugin', [
-    'fields' => [
-        'hello' => [
-            'extends' => 'text',
-            'props' => [
-                'myNewProp' => function (string $myNewProp = null) {
-                    return $myNewProp;
-                }
+Kirby::plugin(
+    name: 'your/plugin',
+    extends: [
+        'fields' => [
+            'hello' => [
+                'extends' => 'text',
+                'props' => [
+                    'myNewProp' => function (string $myNewProp = null) {
+                        return $myNewProp;
+                    }
+                ]
             ]
         ]
     ]
-]);
+);
 ```
 
 ### Extending the frontend

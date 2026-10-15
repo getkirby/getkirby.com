@@ -48,11 +48,14 @@ Let's start with a new plugin folder called `programmable-blueprints` in `/site/
 
 use Kirby\Cms\App as Kirby;
 
-Kirby::plugin('cookbook/programmable-blueprints', [
-    'blueprints' => [
-        // here we will add the blueprints
+Kirby::plugin(
+    name: 'cookbook/programmable-blueprints',
+    extends: [
+        'blueprints' => [
+            // here we will add the blueprints
+        ]
     ]
-]);
+);
 ```
 
 ## Load different blueprints per user
@@ -72,17 +75,20 @@ Then we register a `site` blueprint and assign the two files to use conditionall
 
 use Kirby\Cms\App as Kirby;
 
-Kirby::plugin('cookbook/programmable-blueprints', [
-    'blueprints' => [
-        'site' => function () {
-            if (($user = kirby()->user()) && $user->isAdmin()) {
-                return Data::read(__DIR__ . '/blueprints/site.admin.yml');
-            } else {
-                return Data::read(__DIR__ . '/blueprints/site.editor.yml');
-            }
-        },
+Kirby::plugin(
+    name: 'cookbook/programmable-blueprints',
+    extends: [
+        'blueprints' => [
+            'site' => function () {
+                if (($user = kirby()->user()) && $user->isAdmin()) {
+                    return Data::read(__DIR__ . '/blueprints/site.admin.yml');
+                } else {
+                    return Data::read(__DIR__ . '/blueprints/site.editor.yml');
+                }
+            },
+        ]
     ]
-]);
+);
 ```
 We use `Data::read()` to read the `yaml` files into an array.
 
@@ -210,13 +216,16 @@ For this example we register a pages blueprint called `notes` in our `index.php`
 
 use Kirby\Cms\App as Kirby;
 
-Kirby::plugin('cookbook/programmable-blueprints', [
-    'blueprints' => [
-        'pages/notes' => function ($kirby) {
-            return include __DIR__ . '/blueprints/pages/notes.php';
-        },
+Kirby::plugin(
+    name: 'cookbook/programmable-blueprints',
+    extends: [
+        'blueprints' => [
+            'pages/notes' => function ($kirby) {
+                return include __DIR__ . '/blueprints/pages/notes.php';
+            },
+        ]
     ]
-]);
+);
 ```
 
 Now create a new subfolder `pages` in the `/blueprints` folder, and inside the `pages` folder the `notes.php` file with the following code:
@@ -288,16 +297,19 @@ Again, we first register the new blueprint:
 
 use Kirby\Cms\App as Kirby;
 
-Kirby::plugin('cookbook/programmable-blueprints', [
-    'blueprints' => [
-        'pages/notes'        => function($kirby) {
-            return include __DIR__ . '/blueprints/pages/notes.php';
-        },
-        'fields/multifields' => function($kirby) {
-            return include __DIR__ . '/blueprints/fields/multifields.php';
-        }
-    ],
-]);
+Kirby::plugin(
+    name: 'cookbook/programmable-blueprints',
+    extends: [
+        'blueprints' => [
+            'pages/notes'        => function($kirby) {
+                return include __DIR__ . '/blueprints/pages/notes.php';
+            },
+            'fields/multifields' => function($kirby) {
+                return include __DIR__ . '/blueprints/fields/multifields.php';
+            }
+        ],
+    ]
+);
 ```
 
 And then create a fieldgroup called `multiselects` in the given path:
@@ -367,20 +379,23 @@ Let's register a new field blueprint in our `index.php`:
 
 ```php "/site/plugins/programmable-blueprints/index.php"
 
-Kirby::plugin('cookbook/programmable-blueprints', [
-    'blueprints' => [
-        'pages/notes'        => function($kirby) {
-            return include __DIR__ . '/blueprints/pages/notes.php';
-        },
-        'fields/multifields' => function($kirby) {
-            return include __DIR__ . '/blueprints/fields/multifields.php';
-        },
-        'fields/category' => function($kirby) {
-            return include __DIR__ . '/blueprints/fields/category.php';
-        },
+Kirby::plugin(
+    name: 'cookbook/programmable-blueprints',
+    extends: [
+        'blueprints' => [
+            'pages/notes'        => function($kirby) {
+                return include __DIR__ . '/blueprints/pages/notes.php';
+            },
+            'fields/multifields' => function($kirby) {
+                return include __DIR__ . '/blueprints/fields/multifields.php';
+            },
+            'fields/category' => function($kirby) {
+                return include __DIR__ . '/blueprints/fields/category.php';
+            },
 
-    ],
-]);
+        ],
+    ]
+);
 
 ```
 
@@ -421,22 +436,25 @@ For this example, we register a new section blueprint:
 
 ```php "/site/plugins/programmable-blueprints/index.php"
 
-Kirby::plugin('cookbook/programmable-blueprints', [
-    'blueprints' => [
-        'pages/notes'        => function($kirby) {
-            return include __DIR__ . '/blueprints/pages/notes.php';
-        },
-        'fields/multifields' => function($kirby) {
-            return include __DIR__ . '/blueprints/fields/multifields.php';
-        },
-        'fields/categories' => function($kirby) {
-            return include __DIR__ . '/blueprints/fields/categories.php';
-        },
-        'sections/notes'      => function($kirby) {
-            return include __DIR__ . '/blueprints/sections/notes.php';
-        },
-    ],
-]);
+Kirby::plugin(
+    name: 'cookbook/programmable-blueprints',
+    extends: [
+        'blueprints' => [
+            'pages/notes'        => function($kirby) {
+                return include __DIR__ . '/blueprints/pages/notes.php';
+            },
+            'fields/multifields' => function($kirby) {
+                return include __DIR__ . '/blueprints/fields/multifields.php';
+            },
+            'fields/categories' => function($kirby) {
+                return include __DIR__ . '/blueprints/fields/categories.php';
+            },
+            'sections/notes'      => function($kirby) {
+                return include __DIR__ . '/blueprints/sections/notes.php';
+            },
+        ],
+    ]
+);
 
 ```
 
@@ -517,25 +535,28 @@ In this last example, we register a (link: docs/guide/blueprints/tabs text: tab 
 
 use Kirby\Cms\App as Kirby;
 
-Kirby::plugin('cookbook/programmable-blueprints', [
-    'blueprints' => [
-        'pages/notes'        => function($kirby) {
-            return include __DIR__ . '/blueprints/pages/notes.php';
-        },
-        'fields/multifields' => function($kirby) {
-            return include __DIR__ . '/blueprints/fields/multifields.php';
-        },
-        'fields/categories' => function($kirby) {
-            return include __DIR__ . '/blueprints/fields/categories.php';
-        },
-        'sections/notes'      => function($kirby) {
-            return include __DIR__ . '/blueprints/sections/notes.php';
-        },
-        'tabs/meta'           => function($kirby) {
-            return include __DIR__ . '/blueprints/tabs/meta.php';
-        },
-    ],
-]);
+Kirby::plugin(
+    name: 'cookbook/programmable-blueprints',
+    extends: [
+        'blueprints' => [
+            'pages/notes'        => function($kirby) {
+                return include __DIR__ . '/blueprints/pages/notes.php';
+            },
+            'fields/multifields' => function($kirby) {
+                return include __DIR__ . '/blueprints/fields/multifields.php';
+            },
+            'fields/categories' => function($kirby) {
+                return include __DIR__ . '/blueprints/fields/categories.php';
+            },
+            'sections/notes'      => function($kirby) {
+                return include __DIR__ . '/blueprints/sections/notes.php';
+            },
+            'tabs/meta'           => function($kirby) {
+                return include __DIR__ . '/blueprints/tabs/meta.php';
+            },
+        ],
+    ]
+);
 ```
 
 Let's assume we already had a basic `yml` blueprint that we wanted to extend programmatically.

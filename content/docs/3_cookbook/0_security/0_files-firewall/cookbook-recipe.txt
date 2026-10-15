@@ -106,16 +106,19 @@ In this `index.php` file, add the component like this:
 
 ```php "/site/plugins/files-firewall/index.php"
 <?php
-Kirby::plugin('cookbook/files-firewall', [
-  'components' => [
-    'file::url' => function ($kirby, $file) {
-      if ($file->template() === 'protected') {
-        return $kirby->url() . '/' . $file->parent()->id() . '/' . $file->filename();
-      }
-      return $file->mediaUrl();
-    },
-  ],
-]);
+Kirby::plugin(
+  name: 'cookbook/files-firewall',
+  extends: [
+    'components' => [
+      'file::url' => function ($kirby, $file) {
+        if ($file->template() === 'protected') {
+          return $kirby->url() . '/' . $file->parent()->id() . '/' . $file->filename();
+        }
+        return $file->mediaUrl();
+      },
+    ],
+  ]
+);
 ```
 
 Inside the component we check the file's template, and if it has the `protected` template assigned, we change the URL of the file to a location of our liking, otherwise we return the default `mediaUrl()`.
@@ -159,22 +162,25 @@ We can now adapt our route so that logged-in users would be able to download the
 
 use Kirby\Cms\Response;
 
-Kirby::plugin('cookbook/files-firewall', [
-  'routes' => [
-   [
-      'pattern' => 'downloads/(:any)',
-      'action'  => function ($filename) {
-        if (kirby()->user() &&
-          ($page = page('downloads')) &&
-          $file = $page->files()->findBy('filename', $filename)) {
-          return $file->download();
-        }
-        return site()->errorPage();
-      },
+Kirby::plugin(
+  name: 'cookbook/files-firewall',
+  extends: [
+    'routes' => [
+     [
+        'pattern' => 'downloads/(:any)',
+        'action'  => function ($filename) {
+          if (kirby()->user() &&
+            ($page = page('downloads')) &&
+            $file = $page->files()->findBy('filename', $filename)) {
+            return $file->download();
+          }
+          return site()->errorPage();
+        },
+      ],
     ],
-  ],
-  // …
-]);
+    // …
+  ]
+);
 ```
 
 <info>
@@ -192,29 +198,32 @@ The Kirby component responsible for thumbs is the `File::version` component. Let
 
 use Kirby\Cms\Response;
 
-Kirby::plugin('cookbook/files-firewall', [
-  // …
-  'components'   => [
+Kirby::plugin(
+  name: 'cookbook/files-firewall',
+  extends: [
     // …
-    'file::version' => function ( $kirby, $file, array $options = []) {
+    'components'   => [
+      // …
+      'file::version' => function ( $kirby, $file, array $options = []) {
 
-      static $original;
+        static $original;
 
-      // if the file is protected, return the original file
-      if ($file->template() === 'protected') {
-        return $file;
+        // if the file is protected, return the original file
+        if ($file->template() === 'protected') {
+          return $file;
+        }
+        // if static $original is null, get the original component
+        if ($original === null) {
+            $original = $kirby->nativeComponent('file::version');
+        }
+
+        // and return it with the given options
+        return $original($kirby, $file, $options);
+
       }
-      // if static $original is null, get the original component
-      if ($original === null) {
-          $original = $kirby->nativeComponent('file::version');
-      }
-
-      // and return it with the given options
-      return $original($kirby, $file, $options);
-
-    }
-  ],
-]);
+    ],
+  ]
+);
 ```
 
 Again we check the file template and return the original file if the file has the `protected` template, otherwise return the original component with its options.
@@ -228,45 +237,48 @@ To finish this up, here is the complete code again:
 
 use Kirby\Cms\Response;
 
-Kirby::plugin('cookbook/files-firewall', [
-  'routes'       => [
-    [
-      'pattern' => 'downloads/(:any)',
-      'action'  => function ($filename) {
-        if (kirby()->user() &&
-          ($page = page('downloads')) &&
-          $file = $page->files()->findBy('filename', $filename)) {
-          return $file->download();
-        }
-        return site()->errorPage();
-      },
+Kirby::plugin(
+  name: 'cookbook/files-firewall',
+  extends: [
+    'routes'       => [
+      [
+        'pattern' => 'downloads/(:any)',
+        'action'  => function ($filename) {
+          if (kirby()->user() &&
+            ($page = page('downloads')) &&
+            $file = $page->files()->findBy('filename', $filename)) {
+            return $file->download();
+          }
+          return site()->errorPage();
+        },
+      ],
     ],
-  ],
-  'components'   => [
-    'file::url' => function ($kirby, $file) {
-      if ($file->template() === 'protected') {
-        return $kirby->url() . '/' . $file->parent()->id() . '/' . $file->filename();
-      }
-      return $file->mediaUrl();
-    },
-    'file::version' => function ($kirby, $file, array $options = []) {
+    'components'   => [
+      'file::url' => function ($kirby, $file) {
+        if ($file->template() === 'protected') {
+          return $kirby->url() . '/' . $file->parent()->id() . '/' . $file->filename();
+        }
+        return $file->mediaUrl();
+      },
+      'file::version' => function ($kirby, $file, array $options = []) {
 
-      static $original;
+        static $original;
 
-      // if the file is protected, return the original file
-      if ($file->template() === 'protected') {
-        return $file;
-      }
-      // if static $original is null, get the original component
-      if ($original === null) {
-          $original = $kirby->nativeComponent('file::version');
-      }
+        // if the file is protected, return the original file
+        if ($file->template() === 'protected') {
+          return $file;
+        }
+        // if static $original is null, get the original component
+        if ($original === null) {
+            $original = $kirby->nativeComponent('file::version');
+        }
 
-      // and return it with the given options
-      return $original($kirby, $file, $options);
-    }
-  ],
-]);
+        // and return it with the given options
+        return $original($kirby, $file, $options);
+      }
+    ],
+  ]
+);
 ```
 
 ## Conclusion

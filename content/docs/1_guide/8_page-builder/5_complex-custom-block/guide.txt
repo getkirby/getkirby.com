@@ -78,16 +78,19 @@ Let's start with the most important plugin file, the `index.php`, where we regis
 ```php "/site/plugins/audio-block/index.php"
 <?php
 
-Kirby::plugin('cookbook/audio-block', [
-  'blueprints' => [
-    'blocks/audio' => __DIR__ . '/blueprints/blocks/audio.yml',
-    'files/audio'  => __DIR__ . '/blueprints/files/audio.yml',
-    'files/poster' => __DIR__ . '/blueprints/files/poster.yml',
-  ],
-  'snippets' => [
-    'blocks/audio' => __DIR__ . '/snippets/blocks/audio.php',
-  ],
-]);
+Kirby::plugin(
+  name: 'cookbook/audio-block',
+  extends: [
+    'blueprints' => [
+      'blocks/audio' => __DIR__ . '/blueprints/blocks/audio.yml',
+      'files/audio'  => __DIR__ . '/blueprints/files/audio.yml',
+      'files/poster' => __DIR__ . '/blueprints/files/poster.yml',
+    ],
+    'snippets' => [
+      'blocks/audio' => __DIR__ . '/snippets/blocks/audio.php',
+    ],
+  ]
+);
 ```
 ## The block blueprint
 

@@ -67,37 +67,40 @@ The dropdown definition returns an array of dropdown options. Each option can de
 Of course, you can create your own dropdowns for your plugins as part of your (link: docs/reference/plugins/extensions/panel-areas text: Panel area extension):
 
 ```php
-Kirby::plugin('your-plugin/todos', [
-    'areas' => [
-        'todos' => function ($kirby) {
-            return [
-                ...
-                'dropdowns' => [
-                    'todos/(:any)' => function (string $id) {
-                        // find the $todo here. (i.e. from a database)
-                        return [
-                            [
-                                'text'   => 'Edit',
-                                'dialog' => 'todos/' . $id . '/edit',
-                                'icon'   => 'edit'
-                            ],
-                            [
-                                'text'   => 'Duplicate',
-                                'dialog' => 'todos/' . $id . '/duplicate',
-                                'icon'   => 'copy'
-                            ],
-                            [
-                                'text'   => 'Delete',
-                                'dialog' => 'todos/' . $id . '/delete',
-                                'icon'   => 'trash'
-                            ]
-                        ];
-                    }
-                ]
-            ];
-        }
+Kirby::plugin(
+    name: 'your-plugin/todos',
+    extends: [
+        'areas' => [
+            'todos' => function ($kirby) {
+                return [
+                    ...
+                    'dropdowns' => [
+                        'todos/(:any)' => function (string $id) {
+                            // find the $todo here. (i.e. from a database)
+                            return [
+                                [
+                                    'text'   => 'Edit',
+                                    'dialog' => 'todos/' . $id . '/edit',
+                                    'icon'   => 'edit'
+                                ],
+                                [
+                                    'text'   => 'Duplicate',
+                                    'dialog' => 'todos/' . $id . '/duplicate',
+                                    'icon'   => 'copy'
+                                ],
+                                [
+                                    'text'   => 'Delete',
+                                    'dialog' => 'todos/' . $id . '/delete',
+                                    'icon'   => 'trash'
+                                ]
+                            ];
+                        }
+                    ]
+                ];
+            }
+        ]
     ]
-]);
+);
 ```
 
 Your dropdown options can then be loaded in your Vue code like this:
@@ -116,36 +119,39 @@ Those dropdowns can be extended or modified to add additional options, remove op
 ```php
 <?php
 
-Kirby::plugin('example/dropdown', [
-  'areas' => [
-    'site' => function ($kirby) {
-      return [
-        'dropdowns' => [
-          'page' => function (string $id) {
+Kirby::plugin(
+  name: 'example/dropdown',
+  extends: [
+    'areas' => [
+      'site' => function ($kirby) {
+        return [
+          'dropdowns' => [
+            'page' => function (string $id) {
 
-            // find the right page for the dropdown
-            $page = Find::page($id);
+              // find the right page for the dropdown
+              $page = Find::page($id);
 
-            // load the core dropdown definition
-            $dropdown = $page->panel()->dropdown();
+              // load the core dropdown definition
+              $dropdown = $page->panel()->dropdown();
 
-            // append a separator
-            $dropdown[] = '-';
+              // append a separator
+              $dropdown[] = '-';
 
-            // append a new option
-            $dropdown[] = [
-              'icon'   => 'share',
-              'text'   => 'Publish on Netlify',
-              'dialog' => 'publish'
-            ];
+              // append a new option
+              $dropdown[] = [
+                'icon'   => 'share',
+                'text'   => 'Publish on Netlify',
+                'dialog' => 'publish'
+              ];
 
-            return $dropdown;
-          }
-        ]
-      ];
-    },
+              return $dropdown;
+            }
+          ]
+        ];
+      },
+    ]
   ]
-]);
+);
 ```
 
 #### Listen for dropdown event
@@ -177,27 +183,30 @@ When you plan to extend a dropdown, you might want to fall back to Kirby's core 
 ```php
 <?php
 
-Kirby::plugin('example/dropdown', [
-  'areas' => [
-    'site' => function ($kirby) {
-      return [
-        'dropdowns' => [
-          'page' => function (string $id) use ($kirby) {
+Kirby::plugin(
+  name: 'example/dropdown',
+  extends: [
+    'areas' => [
+      'site' => function ($kirby) {
+        return [
+          'dropdowns' => [
+            'page' => function (string $id) use ($kirby) {
 
-            // find the right page for the dropdown
-            $page = Find::page($id);
+              // find the right page for the dropdown
+              $page = Find::page($id);
 
-            if ($page->id() === 'blog') {
-                // return a custom dropdown
+              if ($page->id() === 'blog') {
+                  // return a custom dropdown
+              }
+
+              return $kirby->core()->area('site')['dropdowns']['page']['options']($id);
             }
-
-            return $kirby->core()->area('site')['dropdowns']['page']['options']($id);
-          }
-        ]
-      ];
-    },
+          ]
+        ];
+      },
+    ]
   ]
-]);
+);
 ```
 
 The core models (page, user and file) all have a separate `$model->panel()->dropdown()` method for their own dropdown. While the code above is the correct way to load core code for any part of an area, you can simplify this for dropdowns by reusing the dropdown method.
@@ -205,26 +214,29 @@ The core models (page, user and file) all have a separate `$model->panel()->drop
 ```php
 <?php
 
-Kirby::plugin('example/dropdown', [
-  'areas' => [
-    'site' => function ($kirby) {
-      return [
-        'dropdowns' => [
-          'page' => function (string $id) {
-            // find the right page for the dropdown
-            $page = Find::page($id);
+Kirby::plugin(
+  name: 'example/dropdown',
+  extends: [
+    'areas' => [
+      'site' => function ($kirby) {
+        return [
+          'dropdowns' => [
+            'page' => function (string $id) {
+              // find the right page for the dropdown
+              $page = Find::page($id);
 
-            if ($page->id() === 'blog') {
-                // return a custom dropdown
+              if ($page->id() === 'blog') {
+                  // return a custom dropdown
+              }
+
+              return $page->panel()->dropdown();
             }
-
-            return $page->panel()->dropdown();
-          }
-        ]
-      ];
-    },
+          ]
+        ];
+      },
+    ]
   ]
-]);
+);
 ```
 
 ## Core dropdowns

@@ -17,24 +17,30 @@ By default, all files in the `assets` folder of your plugin are made publicly av
 The extension accepts an array of key/value pairs, where the key is the path of the asset in the URL and the value the absolute path to the file:
 
 ```php
-Kirby::plugin('your/plugin', [
-	'assets' => [
-		'styles.css'      => __DIR__ . '/dist/styles.css',
-		'scripts.js'      => __DIR__ . '/dist/scripts.js',
-		'images/logo.svg' => __DIR__ . '/images/logo.svg'
+Kirby::plugin(
+	name: 'your/plugin',
+	extends: [
+		'assets' => [
+			'styles.css'      => __DIR__ . '/dist/styles.css',
+			'scripts.js'      => __DIR__ . '/dist/scripts.js',
+			'images/logo.svg' => __DIR__ . '/images/logo.svg'
+		]
 	]
-]);
+);
 ```
 
 If you leave out the key, the path relative to the plugin root is used:
 
 ```php
-Kirby::plugin('your/plugin', [
-	'assets' => [
-		// available as `dist/styles.css`
-		__DIR__ . '/dist/styles.css'
+Kirby::plugin(
+	name: 'your/plugin',
+	extends: [
+		'assets' => [
+			// available as `dist/styles.css`
+			__DIR__ . '/dist/styles.css'
+		]
 	]
-]);
+);
 ```
 
 You can also pass a closure that returns the array. This is useful if you want to collect the files dynamically, as the closure is only called when the assets are needed:
@@ -42,18 +48,21 @@ You can also pass a closure that returns the array. This is useful if you want t
 ```php
 use Kirby\Filesystem\Dir;
 
-Kirby::plugin('your/plugin', [
-	'assets' => function () {
-		$assets = [];
-		$root   = __DIR__ . '/dist';
+Kirby::plugin(
+	name: 'your/plugin',
+	extends: [
+		'assets' => function () {
+			$assets = [];
+			$root   = __DIR__ . '/dist';
 
-		foreach (Dir::files($root) as $file) {
-			$assets[$file] = $root . '/' . $file;
+			foreach (Dir::files($root) as $file) {
+				$assets[$file] = $root . '/' . $file;
+			}
+
+			return $assets;
 		}
-
-		return $assets;
-	}
-]);
+	]
+);
 ```
 
 The assets can then be accessed via `$kirby->plugin('your/plugin')->asset('styles.css')` or passed to the `css()` and `js()` helpers. (link: docs/guide/plugins/structure#plugin-assets text: Learn more about using plugin assets ›)

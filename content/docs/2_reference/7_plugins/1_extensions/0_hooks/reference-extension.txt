@@ -60,33 +60,39 @@ return [
 In a plugin, hooks are registered with the `hooks` extension. The extension accepts an array of key/value pairs where the key is the event and the value a function with the code that should be executed before or after an event.
 
 ```php
-Kirby::plugin('your/plugin', [
-    'hooks' => [
-        'page.delete:before' => function ($page) {
-            // do something before a page gets deleted
-        },
-        'page.create:after' => function ($page) {
-            // do something after the page was created
-        }
+Kirby::plugin(
+    name: 'your/plugin',
+    extends: [
+        'hooks' => [
+            'page.delete:before' => function ($page) {
+                // do something before a page gets deleted
+            },
+            'page.create:after' => function ($page) {
+                // do something after the page was created
+            }
+        ]
     ]
-]);
+);
 ```
 
 If you want to register more than one function to a hook, you can simple pass an array of functions:
 
 ```php
-Kirby::plugin('your/plugin', [
-    'hooks' => [
-        'page.delete:before' => [
-					 function ($page) {
-            	// do something before a page gets deleted
-        	 },
-					 function ($page) {
-            	// do something else before a page gets deleted
-        	 }
-				],
+Kirby::plugin(
+    name: 'your/plugin',
+    extends: [
+        'hooks' => [
+            'page.delete:before' => [
+    					 function ($page) {
+                	// do something before a page gets deleted
+            	 },
+    					 function ($page) {
+                	// do something else before a page gets deleted
+            	 }
+    				],
+        ]
     ]
-]);
+);
 ```
 
 ## Wildcard hooks
@@ -183,16 +189,19 @@ return [
 You can react on errors in a hook callback by throwing an Exception. The error message will be displayed in the Panel.
 
 ```php
-Kirby::plugin('your/plugin', [
-    'hooks' => [
-        'page.update:after' => function ($newPage, $oldPage) {
-            throw new Exception('Page Updated');
-        },
-        'page.create:after' => function ($page) {
-            throw new Exception('Page Created');
-        },
+Kirby::plugin(
+    name: 'your/plugin',
+    extends: [
+        'hooks' => [
+            'page.update:after' => function ($newPage, $oldPage) {
+                throw new Exception('Page Updated');
+            },
+            'page.create:after' => function ($page) {
+                throw new Exception('Page Created');
+            },
+        ]
     ]
-]);
+);
 ```
 
 ## Creating your own hooks
@@ -200,13 +209,16 @@ Kirby::plugin('your/plugin', [
 You can also define your own custom hook types in plugins, which works just like with the built-in hooks:
 
 ```php
-Kirby::plugin('your/plugin', [
-    'hooks' => [
-        'your-plugin.your-hook' => function ($page) {
-            // do whatever you need
-        },
+Kirby::plugin(
+    name: 'your/plugin',
+    extends: [
+        'hooks' => [
+            'your-plugin.your-hook' => function ($page) {
+                // do whatever you need
+            },
+        ]
     ]
-]);
+);
 ```
 
 As you can see, only the name of the hook has changed. Please make sure to namespace your hooks by including the plugin name in the hook name. Otherwise your hooks might conflict with other plugins or future built-in hooks.

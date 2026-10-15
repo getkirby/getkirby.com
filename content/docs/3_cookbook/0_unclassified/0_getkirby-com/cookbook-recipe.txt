@@ -262,23 +262,26 @@ We host all our assets on (link: https://www.keycdn.com/ text: KeyCDN) with a ti
 ```php
 <?php
 
-Kirby::plugin('getkirby/keycdn', [
-    'components' => [
-        'url' => function ($kirby, $path, $options) {
-            $original = $kirby->nativeComponent('url');
+Kirby::plugin(
+    name: 'getkirby/keycdn',
+    extends: [
+        'components' => [
+            'url' => function ($kirby, $path, $options) {
+                $original = $kirby->nativeComponent('url');
 
-            if (preg_match('!assets!', $path)) {
-                $path = Cachebuster::path($path);
+                if (preg_match('!assets!', $path)) {
+                    $path = Cachebuster::path($path);
 
-                if (option('keycdn', false) !== false) {
-                    return option('keycdn.domain') . '/' . $path;
+                    if (option('keycdn', false) !== false) {
+                        return option('keycdn.domain') . '/' . $path;
+                    }
                 }
-            }
 
-            return $original($kirby, $path, $options);
-        }
+                return $original($kirby, $path, $options);
+            }
+        ]
     ]
-]);
+);
 ```
 
 The plugin also takes care of optimizing images. Check out the (link: https://github.com/getkirby/getkirby.com/blob/main/site/plugins/cdn/index.php text: source code) if you are interested in learning more about it.
