@@ -307,7 +307,7 @@ In your route, you can also pass all arguments explicitly to the `->render()` me
 
 ### Page status
 
-Filter methods like `visible()`, `invisible()` and related pages methods have been replaced with (link: docs/reference/objects/pages/listed text: `listed`)/(link: docs/reference/objects/pages/unlisted text: `unlisted`)/(link: docs/reference/objects/pages/published text: `published`) and related methods.
+Filter methods like `visible()`, `invisible()` and related pages methods have been replaced with (link: docs/reference/objects/cms/pages/listed text: `listed`)/(link: docs/reference/objects/cms/pages/unlisted text: `unlisted`)/(link: docs/reference/objects/cms/pages/published text: `published`) and related methods.
 
 ### KirbyText pre/post filters
 

@@ -7,7 +7,7 @@ $collection = page('exhibitions')->children()->listed();
 $collection->add('somepage');
 ```
 
-### Add single page by (link: docs/reference/objects/page/create text: `$page` object)
+### Add single page by (link: docs/reference/objects/cms/page/create text: `$page` object)
 
 ```php
 $collection = page('exhibitions')->children()->listed();
