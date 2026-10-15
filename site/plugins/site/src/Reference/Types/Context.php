@@ -235,6 +235,11 @@ class Context
 			return ltrim($name, '\\');
 		}
 
+		// keep simple types (e.g. `string`) as they are
+		if (Type::generic($name) !== null) {
+			return $name;
+		}
+
 		$first   = Str::before($name, '\\') ?: $name;
 		$imports = static::imports($this->class);
 
@@ -243,7 +248,16 @@ class Context
 		}
 
 		if ($namespace = $this->class->getNamespaceName()) {
-			return $namespace . '\\' . $name;
+			$class = $namespace . '\\' . $name;
+
+			// template names (e.g. `TValue`) aren't classes
+			if (
+				class_exists($class) === true ||
+				interface_exists($class) === true ||
+				trait_exists($class) === true
+			) {
+				return $class;
+			}
 		}
 
 		return $name;
@@ -264,7 +278,7 @@ class Context
 
 				$type = A::map(
 					A::wrap($type),
-					fn ($t) => $this->types[$t->name] ?? $t->name
+					fn ($t) => $this->types[$t->name] ?? $this->resolveName($t->name)
 				);
 
 				return implode('|', $type);
