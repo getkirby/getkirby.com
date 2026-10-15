@@ -35,12 +35,12 @@ Today, {{ company }} rules the world. Contact us at {{ phone }}.
 ```
 
 <info>
-If you want to use different start and end characters instead of the curly braces, you can control this using the `$start` and `$end` parameters of the [`Str::template()`](/docs/reference/tools/str/template) method.
+If you want to use different start and end characters instead of the curly braces, you can control this using the `$start` and `$end` parameters of the [`Str::template()`](/docs/reference/objects/toolkit/str/template) method.
 </info>
 
 ## Replacing placeholders in templates
 
-In your templates, you can replace such placeholders on the fly using the [`Str::template()`](/docs/reference/tools/str/template) method:
+In your templates, you can replace such placeholders on the fly using the [`Str::template()`](/docs/reference/objects/toolkit/str/template) method:
 
 ```php
 <?= Str::template($page->text()->kt(), [
