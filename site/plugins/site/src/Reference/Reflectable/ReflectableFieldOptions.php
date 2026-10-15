@@ -35,9 +35,9 @@ class ReflectableFieldOptions extends Reflectable
 		$parameters = [];
 
 		foreach ($props->all() as $option => $prop) {
-			// the name isn't written as an option;
-			// it comes from the blueprint key
-			if ($option === 'name') {
+			// the name and type aren't written as options;
+			// they come from the blueprint key and select the field
+			if ($option === 'name' || $option === 'type') {
 				continue;
 			}
 

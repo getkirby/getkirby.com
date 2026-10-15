@@ -91,12 +91,13 @@ class ReflectableFieldOptionsTest extends TestCase
 		$this->assertSame('width', $option->name());
 	}
 
-	public function testParametersOmitName(): void
+	public function testParametersOmitNameAndType(): void
 	{
-		// the name isn't written as an option;
-		// it comes from the blueprint key
+		// the name and type aren't written as options;
+		// they come from the blueprint key and select the field
 		$options = $this->options('text');
 		$this->assertArrayNotHasKey('name', $options);
+		$this->assertArrayNotHasKey('type', $options);
 		$this->assertArrayHasKey('placeholder', $options);
 	}
 
