@@ -1,0 +1,32 @@
+# Tab
+karbon.tab.label: carbon.txt
+
+# Last updated
+karbon.fields.last_updated.label: Last updated
+karbon.fields.last_updated.help: Set automatically when disclosures or upstream services change.
+
+# Disclosures
+karbon.fields.disclosures.label: Disclosures
+karbon.fields.disclosures.help: Documents about your organisation's emissions or sustainability. Entries without a document type or URL are left out of carbon.txt.
+karbon.fields.disclosures.doc_type.label: Document type
+karbon.fields.disclosures.url.label: URL
+karbon.fields.disclosures.domain.label: Domain
+karbon.fields.disclosures.domain.help: Optional. The domain this document applies to, e.g. example.com (without https:// or a path).
+karbon.fields.disclosures.valid_until.label: Valid until
+karbon.fields.disclosures.title.label: Title
+
+# Upstream services
+karbon.fields.services.label: Upstream services
+karbon.fields.services.help: Providers your site depends on, such as hosting or a CDN.
+karbon.fields.services.domain.label: Domain
+karbon.fields.services.service_type.label: Service type
+karbon.fields.services.service_type.help: Optional. For example shared-hosting, virtual-private-servers, cdn or object-storage.
+
+# Options: document types
+karbon.options.doc_type.web-page: Web page
+karbon.options.doc_type.annual-report: Annual report
+karbon.options.doc_type.sustainability-page: Sustainability page
+karbon.options.doc_type.certificate: Certificate
+karbon.options.doc_type.csrd-report: CSRD report
+karbon.options.doc_type.ai-model-card: AI model card
+karbon.options.doc_type.other: Other

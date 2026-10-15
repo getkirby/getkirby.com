@@ -1,0 +1,184 @@
+Title: A modern foundation
+
+----
+
+Subtitle: Ready for the next years, from PHP to the Panel
+
+----
+
+Teaser:
+
+We have renewed Kirby's foundation for the years ahead. The core builds on a modern PHP baseline with a clearer architecture. The Panel runs on Vue 3, its core is written in TypeScript and its components only render HTML that has been marked as trusted.
+
+On top of that, Kirby does less work on every request and the Panel got a lot faster. Your editors will notice it most in complex setups that load and react noticeably quicker.
+
+----
+
+Intro: A lot of what changed in Kirby 6 is invisible: a modern PHP baseline, a restructured core, a new version of the framework the Panel is built on, a safer way to render HTML and a lot of performance work. Here is what it means for editors, site developers and plugin developers.
+
+----
+
+Highlights:
+
+-
+  icon: php
+  headline: Modern PHP
+  text: Kirby 6 supports PHP 8.3, 8.4 and 8.5. Support for PHP 8.6 is coming.
+  link: "/releases/6/foundation#modern-php"
+-
+  icon: layers
+  headline: Cleaner core
+  text: New controller classes for all Panel views, dialogs and drawers. Form fields, authentication and blueprints have been rebuilt as clear, testable classes too.
+  link: "/releases/6/foundation#a-cleaner-core"
+-
+  icon: vue
+  headline: Vue 3
+  text: The Panel has moved from Vue 2, which reached its end of life, to Vue 3.5.
+  link: "/releases/6/foundation#vue-3"
+-
+  icon: code
+  headline: TypeScript core
+  text: "`this.$panel`, all its modules and the API client are written in TypeScript."
+  link: "/releases/6/foundation#typescript"
+-
+  icon: shield
+  headline: Trusted HTML
+  text: Panel components escape plain strings and only render HTML that has been marked as trusted.
+  link: "/releases/6/foundation#trusted-html"
+-
+  icon: bolt
+  headline: Faster Kirby
+  text: Less code on first load, batched requests, fewer re-renders while you type and less work on the server.
+  link: "/releases/6/foundation#performance"
+-
+  icon: globe
+  headline: Modern browsers
+  text: The Panel follows Baseline "widely available" and needs browsers from mid-2024 or newer.
+  link: "/releases/6/foundation#browser-support"
+
+----
+
+Text:
+
+## Modern PHP
+
+Kirby 6 supports PHP 8.3, 8.4 and 8.5. We have dropped support for PHP 8.2, which only receives security fixes until the end of 2026.
+
+<info>
+Support for PHP 8.6 is coming. It isn't part of beta.1 yet.
+</info>
+
+A newer PHP baseline lets us use the language features of the last releases throughout the code base.  When you install Kirby 6, it checks that all required PHP extensions are available and stops the installation if one is missing. The system view in the Panel warns you if a required extension goes missing later.
+
+**For site developers**, switch your server to PHP 8.3 or newer before you update. Kirby 5 already supports these versions, so you can change PHP first. All requirements are listed in the (link: releases/6/migration#requirements text: migration overview).
+
+## A cleaner core
+
+Kirby 6 is the result of a large refactoring of the core. Many parts that had grown over the years have been rebuilt as small, focused classes that are easier to understand, test and extend:
+
+- **Panel controllers:** new in Kirby 6, every core view, dialog, drawer, dropdown, search and request of the Panel is handled by its own controller class instead of a closure in a big config array. Plugins can use the same approach: pass a controller class as `action` of a Panel route and build on the base classes like `Kirby\Panel\Controller\DialogController`. Closures keep working. (link: releases/6/migration/plugin-developers/panel-backend text: Learn more …)
+- **Panel backend:** the Panel itself is no longer a collection of static helpers. Areas, access checks and routing are objects now, and dialogs, drawers and views can be returned as UI objects like `Kirby\Panel\Ui\Dialog\FormDialog`.
+- **Form fields:** every core field type is a PHP class that declares its options once as properties with the `#[Prop]` attribute, built on a few shared base classes and mixins. (link: releases/6/migration/plugin-developers/fields text: Learn more …)
+- **Authentication:** the new `Kirby\Auth` namespace splits login methods and second factors into their own classes. This is what makes (link: releases/6/authentication text: passkeys) and custom auth plugins possible. (link: releases/6/migration/plugin-developers/auth text: Learn more …)
+- **Blueprints:** blueprint classes moved into the `Kirby\Blueprint` namespace, and all normalization happens in one place.
+- **Permissions:** (link: releases/6/guards text: Guards) bring abilities, permissions and validators together in one API.
+- **Sessions:** the session package has been streamlined with dedicated classes for tokens, cookies and headers.
+
+**For editors and site developers**, little of this is visible directly. It's the groundwork for many of the new features in Kirby 6 and for the ones to come.
+
+**For plugin developers**, some core classes have moved or changed. Start with the (link: releases/6/migration/plugin-developers text: migration guide for plugin developers).
+
+## Vue 3
+
+The Panel is a Vue application. Kirby 5 was built on Vue 2, which reached its end of life at the end of 2023 and no longer receives updates. In Kirby 6, the Panel runs on Vue 3.5.
+
+**For site developers**, check your Panel plugins before you upgrade. Plugins that add anything to the Panel interface, e.g. custom fields, blocks or views, must be rebuilt for Vue 3 by their developers. Plugins that only add PHP functionality are not affected by this change.
+
+**For plugin developers**, the (link: releases/6/migration/plugin-developers/vue-3 text: Vue 3 guide for Panel plugins) explains the new build setup with `kirbyup 4`, the Vue changes that matter for Kirby plugins and all other breaking changes in the Panel frontend.
+
+## TypeScript
+
+Under the hood, we have migrated `this.$panel`, all its modules, our libraries and helpers to TypeScript: dialogs, drawers, dropdowns, notifications, requests, uploads, the content module and more.
+
+TypeScript catches many mistakes before they reach a release and makes the code more robust, safer to change and often easier to understand. Nothing changes in how you use these APIs, and Kirby's source now documents the exact signature of every method of `this.$panel`. In beta.1, the types are not published as a separate npm package yet, but we plan to release them for plugin developers as well.
+
+## Trusted HTML
+
+Many Panel components used to render their texts as raw HTML: item info, dialog texts, field help, option labels. This only stayed safe as long as every piece of code that filled them escaped all user content.
+
+Kirby 6 reverses this. These components now escape plain strings and only render HTML that has been explicitly marked as trusted where it was created.
+
+**For editors and site developers**, nothing changes. HTML from your blueprints, e.g. in `help` texts or in `text` and `info` templates of page and file lists, is marked as trusted by Kirby and renders as before.
+
+**For plugin developers**, HTML that your plugin passes to Panel components shows up as visible tags until you mark it as trusted. (link: releases/6/migration/plugin-developers/trusted-html text: Trusted HTML in the Panel) explains how, in PHP and in Vue.
+
+## Safer cookies and sessions
+
+- Cookies are signed with HMAC-SHA256 instead of HMAC-SHA1. Cookies signed by earlier versions are no longer accepted, so all users have to log in again once after the update.
+- Cookies set on HTTPS requests get the `Secure` flag by default.
+- The session package has been hardened and no longer stores objects.
+
+## Performance
+
+We have spent a lot of time on making Kirby faster, especially for large blueprints, long forms and big lists. This is where editors will notice Kirby 6 the most: the more complex your setup, the bigger the difference.
+
+### Loading the Panel
+
+- ProseMirror, the editor library behind the writer and list fields, is no longer part of the initial Panel bundle. It is loaded when it is needed.
+- The icon sprite is no longer inlined into every Panel document. Browsers load it once and cache it.
+- The script and stylesheet of each plugin are loaded on their own. Browsers cache them until the plugin changes.
+- Images in the Panel are loaded lazily and decoded asynchronously.
+- The loading spinner only shows up after a short delay, so it no longer flashes for quick requests.
+
+### Working with content
+
+- Typing inside a block, layout, entries or structure row no longer re-renders the surrounding field on every keystroke.
+- The blocks field only renders the toolbar of the selected block instead of one hidden toolbar per block.
+- The difference between saved and unsaved content is computed once per change instead of every time it is needed.
+- Saving a page with a `blocks` field is faster when the blueprint registers more block types than the content uses.
+
+### Lists and pickers
+
+- `pagelist` and `filelist` fields with `layout: table` load faster. Their speed only depends on the number of displayed columns, not on the size of the blueprint.
+- Requests for the preview data of pages and files are batched: components that need a page or file at the same time share a single request.
+
+### On the server
+
+- Blueprints are normalized once per request and reused for all models that share them.
+- Panel routes load their controller classes only when they are needed.
+- Constructor parameter names are resolved once per class instead of once per reflection.
+- Exceptions resolve their code and message only when they are needed.
+
+## Browser support
+
+Kirby 6 raises the browser requirements of the Panel:
+
+| Browser | Version |
+| --- | --- |
+| Chrome, Edge, Chrome for Android | 124 or newer |
+| Firefox | 125 or newer |
+| Safari, Safari on iOS | 17.5 or newer |
+| Opera | 110 or newer |
+
+These are browsers released from roughly mid-2024 onwards. We follow Baseline "widely available": the Panel only relies on web platform features that have been available in every major browser for at least 2.5 years. This allows us to use modern CSS like `light-dark()` and `:has()` without polyfills.
+
+Editors with an older browser are redirected to a page that names the browser versions the Panel needs.
+
+## Under the hood
+
+Our own tooling got an upgrade as well, which helps us ship with fewer bugs:
+
+- PHPUnit 12, with tests running in parallel
+- Static analysis with Psalm on a stricter level
+- Component tests for the Panel frontend with Vue Test Utils
+- Accessibility lint rules for all Vue components
+- Vite 8 to build the Panel
+
+## Next steps
+
+- (link: releases/6/migration text: Migration guides): everything you need to upgrade a site or a plugin to Kirby 6
+- (link: releases/6/migration/plugin-developers text: For plugin developers): the plugin migration guide with deep dives into Vue 3, field classes, trusted HTML, auth plugins and the Panel backend
+
+----
+
+Category: features

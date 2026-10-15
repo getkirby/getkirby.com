@@ -1,0 +1,281 @@
+Title: Simpler blueprints
+
+----
+
+Subtitle: Less nesting, one concept: fields
+
+----
+
+Teaser:
+
+Blueprints in Kirby 6 become a lot easier to handle with need less nesting and fewer concepts. Define your fields once at the top of a blueprint and place them in tabs and columns by name.
+
+Sections are gone: lists of pages and files are regular fields now and can be placed next to other fields with `width`, like everything else in your form. Your existing blueprints keep working, because Kirby converts their sections into fields automatically.
+
+----
+
+Intro:
+
+Kirby 6 flattens your blueprints. Fields can be defined once and placed anywhere in the layout, sections have become fields, and the old blueprint presets are gone.
+
+----
+
+Example:
+
+```yaml "/site/blueprints/pages/blog.yml"
+title: Blog
+
+fields:
+  intro:
+    type: textarea
+  cover:
+    type: filepicker
+  articles:
+    type: pagelist
+    templates: article
+    layout: table
+    search: true
+
+columns:
+  - width: 2/3
+    fields:
+      - intro
+      - articles
+  - width: 1/3
+    fields:
+      - cover
+```
+
+----
+
+Text:
+
+## Define fields once, place them anywhere
+
+Deeply nested tabs, columns and sections made blueprints hard to read and painful to rearrange. In Kirby 6, you can define all fields at the root level of a blueprint and reference them by name in your layout. Moving a field to another column or tab becomes a one-line change.
+
+**Kirby 5**
+
+```yaml "/site/blueprints/pages/blog.yml"
+title: Blog
+
+tabs:
+  content:
+    label: Content
+    columns:
+      - width: 2/3
+        sections:
+          content:
+            type: fields
+            fields:
+              intro:
+                type: textarea
+          articles:
+            type: pages
+            headline: Articles
+            template: article
+            layout: table
+      - width: 1/3
+        sections:
+          meta:
+            type: fields
+            fields:
+              cover:
+                type: files
+                max: 1
+          gallery:
+            type: files
+            headline: Gallery
+            layout: cards
+  seo:
+    label: SEO
+    fields:
+      seoTitle:
+        label: SEO title
+        type: text
+      seoDescription:
+        label: SEO description
+        type: textarea
+```
+
+**Kirby 6**
+
+```yaml "/site/blueprints/pages/blog.yml"
+title: Blog
+
+fields:
+  intro:
+    type: textarea
+  articles:
+    label: Articles
+    type: pagelist
+    template: article
+    layout: table
+  cover:
+    type: filepicker
+    max: 1
+  gallery:
+    label: Gallery
+    type: filelist
+    layout: cards
+  seoTitle:
+    label: SEO title
+    type: text
+  seoDescription:
+    label: SEO description
+    type: textarea
+
+tabs:
+  content:
+    label: Content
+    columns:
+      - width: 2/3
+        fields:
+          - intro
+          - articles
+      - width: 1/3
+        fields:
+          - cover
+          - gallery
+  seo:
+    label: SEO
+    fields:
+      - seoTitle
+      - seoDescription
+```
+
+Both blueprints result in the same layout in the Panel. Kirby 6 still understands the Kirby 5 version, so you don't have to rewrite blueprints that work.
+
+
+## Sections become fields
+
+Until now, blueprints had two building blocks: fields, which store content, and sections, which show lists of pages or files, info boxes and stats. In Kirby 6, fields fully replace sections. Blueprints only need fields, and lists of pages and files can be placed and configured like any other field.
+
+| Kirby 5 section | Kirby 6 field |
+| - | - |
+| `type: pages` | `type: pagelist` |
+| `type: files` | `type: filelist` |
+| `type: info` | `type: info` |
+| `type: stats` | `type: stats` |
+
+The picker fields got new names along the way: `pagepicker`, `filepicker` and `userpicker`. `pages`, `files` and `users` are deprecated aliases for them.
+
+Like sections before, the `pagelist`, `filelist`, `info` and `stats` fields don't have a value. They never store anything in your content files.
+
+Existing blueprints keep working in Kirby 6 and are converted on the fly.
+
+### What doesn't convert
+
+**Custom sections from plugins** are no longer supported. Check if the plugin offers a Kirby 6 version with a field instead. If you maintain such a plugin, read (link: releases/6/migration/plugin-developers/sections text: porting custom sections to fields).
+
+**PHP code that reads blueprints** has to be adapted. `$blueprint->sections()` and `$blueprint->section()` have been removed. Use `$blueprint->fields()` and `$blueprint->field('name')` instead.
+
+**The `rawvalues` option** of the Kirby 5 pages and files sections is gone. It was a workaround for slow tables, which the new table layout no longer needs.
+
+See the full list in the (link: releases/6/changelog#breaking-changes__sections text: changelog).
+
+### Rewriting a blueprint by hand
+
+There's no need to rewrite working blueprints right away. If you want to, these are the steps:
+
+1. Replace `sections:` with `fields:`.
+2. Remove the wrapper of every `fields` section and move its fields one level up.
+3. Change `type: pages` to `type: pagelist` and `type: files` to `type: filelist`.
+4. Rename `headline` to `label`.
+
+**Kirby 5**
+
+```yaml "/site/blueprints/pages/album.yml"
+title: Album
+
+columns:
+  - width: 2/3
+    sections:
+      content:
+        type: fields
+        fields:
+          text:
+            type: textarea
+      gallery:
+        type: files
+        headline: Gallery
+        template: image
+        layout: cards
+  - width: 1/3
+    sections:
+      notes:
+        type: info
+        headline: Notes
+        text: The gallery is shown in the order of this list.
+      subpages:
+        type: pages
+        headline: Subpages
+        status: listed
+```
+
+**Kirby 6**
+
+```yaml "/site/blueprints/pages/album.yml"
+title: Album
+
+columns:
+  - width: 2/3
+    fields:
+      text:
+        type: textarea
+      gallery:
+        label: Gallery
+        type: filelist
+        template: image
+        layout: cards
+  - width: 1/3
+    fields:
+      notes:
+        label: Notes
+        type: info
+        text: The gallery is shown in the order of this list.
+      subpages:
+        label: Subpages
+        type: pagelist
+        status: listed
+```
+
+## Blueprint presets have been removed
+
+The `preset: page`, `preset: pages` and `preset: files` blueprint presets have been removed. They were a shortcut for simple layouts. With root-level fields and the new list fields, writing out the full blueprint is just as short and much easier to adjust later.
+
+## Option fields
+
+The `checkboxes`, `color`, `multiselect`, `radio`, `select`, `tags` and `toggles` fields have been rebuilt. These fields no longer remove values that don't match any of their options when the content is loaded or saved.
+
+### Queries and APIs go into `options`
+
+The separate `query` and `api` options have been removed. Define the query or API call directly in the `options` option instead.
+
+```yaml
+author:
+  type: select
+  options:
+    type: query
+    query: kirby.users
+    text: "{{ user.name }}"
+    value: "{{ user.email }}"
+
+country:
+  type: select
+  options:
+    type: api
+    url: https://example.com/countries.json
+    text: "{{ item.name }}"
+    value: "{{ item.code }}"
+```
+
+The short form `options: page.children` with a query as string still works.
+
+## Faster blueprints
+
+Kirby 5 processed a blueprint again for every page, file or user that used it. Kirby 6 normalizes each blueprint only once per request and shares the result between all models with the same blueprint. Lists with many entries and views with many models benefit the most.
+
+----
+
+Category: features

@@ -1,0 +1,665 @@
+Title: For site developers
+
+----
+
+Intro: Everything you need to move a Kirby 5 site to Kirby 6 beta.1: what breaks, how to spot it and what to change, with before and after code for every step.
+
+----
+
+Text:
+
+## Before you start
+
+<warning>
+Kirby 6 beta.1 is not ready for production. Make a backup and test the update on a copy of your site, including the `content` folder.
+</warning>
+
+This guide will navigate you through the main breaking changes that can affect a site, sorted by where you'll run into it: requirements, config, blueprints, templates, content, queries, users and permissions, the Panel and custom PHP code. At the end, you'll find (link: #how-to-perform-the-update text: how to perform the update) and a (link: #checklist text: checklist) to work through.
+
+Topics for plugin developers, like Vue 3, custom fields as PHP classes or the Panel backend, have their own (link: releases/6/migration/plugin-developers text: guide for plugin developers). For all details, see the (link: releases/6/changelog#breaking-changes text: breaking changes) and (link: releases/6/changelog#deprecated text: deprecations) in the changelog.
+
+Before you update:
+
+1. **Update to the latest Kirby 5 release** and fix all deprecation warnings that show up with `debug` mode turned on.
+2. **Check your plugins.** Every plugin with Panel features needs a version for Kirby 6.
+3. **Turn on debug mode** on your test copy. Kirby 6 is stricter in a few places and its error messages tell you what to fix:
+
+```php "/site/config/config.php"
+return [
+  'debug' => true
+];
+```
+
+## Requirements
+
+### PHP 8.3, 8.4 or 8.5
+
+Kirby 6 needs PHP 8.3 or newer. PHP 8.2 is no longer supported.
+
+### Plugins
+
+Plugins that add anything to the Panel have to be rebuilt for Vue 3. Plugins that register custom sections or define custom fields as arrays need updates as well.
+
+Update to a Kirby 6 version of each plugin. If there is none yet, ask the plugin author. For your own plugins, follow the (link: releases/6/migration/plugin-developers text: guide for plugin developers).
+
+## YAML: Symfony is the new default parser
+
+Kirby 6 uses the [Symfony YAML](https://symfony.com/doc/current/components/yaml.html) parser by default. It replaces Spyc, the default parser of Kirby 5. Symfony YAML follows the YAML specification much more closely, which means that it is stricter: some things that Spyc accepted are errors now, and a few values are read differently.
+
+This affects every YAML file Kirby reads, especially your **blueprints**, and the YAML that Kirby stores in your **content files** for structure, object and entries fields.
+
+### What breaks
+
+All of these worked with Spyc, but fail with Symfony YAML:
+
+```yaml "/site/blueprints/pages/article.yml"
+fields:
+  twitter:
+    type: text
+    placeholder: @yourhandle         # starts with @
+  discount:
+    type: number
+    after: %                         # starts with %
+  intro:
+    type: textarea
+    help: `Markdown` is supported    # starts with a backtick
+  title:
+    type: text
+    label: [Draft] Title             # starts with [ but isn't a list
+  byline:
+    type: info
+    text: {{ page.title }} by {{ page.author }}   # starts with { but isn't an object
+  zip:
+    type: text
+    pattern: "^\d{5}$"               # \d isn't a valid escape in double quotes
+```
+
+Kirby stops at the first problem with an error message that tells you the line, e.g.:
+
+```
+The reserved indicator "@" cannot start a plain scalar; you need to quote the scalar at line 4 (near "placeholder: @yourhandle").
+```
+
+```
+Found unknown escape character "\d" at line 19 (near "pattern: "^\d{5}$"").
+```
+
+Other common errors:
+
+- `A YAML file cannot contain tabs as indentation`: indent with spaces only.
+- `Duplicate key "text" detected`: Spyc silently used the last definition. Remove or rename the duplicate.
+- `Unexpected characters near " world"`: a value that starts with a quoted part, e.g. `label: "Hello" world`. Quote the entire value.
+
+**What to do:** wrap such values in quotes. Use single quotes for values with backslashes, e.g. regular expressions:
+
+```yaml "/site/blueprints/pages/article.yml"
+fields:
+  twitter:
+    type: text
+    placeholder: "@yourhandle"
+  discount:
+    type: number
+    after: "%"
+  intro:
+    type: textarea
+    help: "`Markdown` is supported"
+  title:
+    type: text
+    label: "[Draft] Title"
+  byline:
+    type: info
+    text: "{{ page.title }} by {{ page.author }}"
+  zip:
+    type: text
+    pattern: '^\d{5}$'
+```
+
+### What is read differently
+
+- **`yes`, `no`, `on` and `off`** are plain strings for Symfony YAML, not booleans. For options that expect a boolean, PHP treats every non-empty string as `true`. `translate: no` makes a field translatable and `required: no` makes it required.
+- **Unquoted dates** like `2024-01-01` or `2024-01-01 10:30:00` become Unix timestamps (integers).
+
+**What to do:** use `true` and `false` for boolean options and quote dates:
+
+```yaml "/site/blueprints/pages/article.yml"
+fields:
+  featured:
+    type: toggle
+    translate: false
+  published:
+    type: date
+    min: "2024-01-01"
+```
+
+### Switching back to Spyc
+
+Your content files can be affected as well: Kirby 5 stored the YAML of structure, object, entries and picker fields without quotes in many places. Symfony YAML reads some of these values differently, e.g. dates become timestamps and values starting with `@` make the whole field unreadable.
+
+If you run into problems with Symfony YAML, in your blueprints or your content, you can switch back to Spyc with the `yaml.handler` option:
+
+```php "/site/config/config.php"
+return [
+  'yaml.handler' => 'spyc'
+];
+```
+
+We will provide a Kirby CLI command in a future beta that helps you migrate your blueprints and content to Symfony YAML.
+
+## Config options
+
+### `query.runner` and `panel.vue.compiler` are gone
+
+Remove these options from your config:
+
+```php "/site/config/config.php"
+return [
+  // throws an exception in Kirby 6
+  'query.runner' => 'legacy',
+
+  // no effect in Kirby 6
+  'panel.vue.compiler' => false,
+];
+```
+
+- `query.runner`: Kirby 6 always uses the new query runner. Read the (link: #queries text: queries section) for what changed.
+- `panel.vue.compiler` isn't needed with Vue 3 anymore.
+
+### `panel.favicon`
+
+The favicon notation that was deprecated in Kirby 5 has been removed: the icon's URL goes into `href` instead of `url`, and `rel` is an attribute of each icon instead of the array key.
+
+```php "/site/config/config.php"
+// Kirby 5
+return [
+  'panel' => [
+    'favicon' => [
+      'shortcut icon' => [
+        'type' => 'image/svg+xml',
+        'url'  => 'assets/favicon.svg',
+      ]
+    ]
+  ]
+];
+```
+
+```php "/site/config/config.php"
+// Kirby 6
+return [
+  'panel' => [
+    'favicon' => [
+      [
+        'rel'  => 'shortcut icon',
+        'type' => 'image/svg+xml',
+        'href' => 'assets/favicon.svg',
+      ]
+    ]
+  ]
+];
+```
+
+A plain string, e.g. `'favicon' => 'assets/favicon.svg'`, works like before.
+
+### Login and two-factor options
+
+The `auth` options mostly work like before, with a few changes:
+
+- **`auth.methods.password.2fa`** has new semantics. Without the option (or with `false`), users can set up a second factor for their own account and are asked for it from then on. With `true`, every user has to complete a second step, like before.
+- **`auth.challenges`** defaults to `['webauthn', 'totp', 'email']` now (Kirby 5: `['totp', 'email']`). If you set the option in your config, add `webauthn` to let users use passkeys as second factor.
+- HTTP Basic auth (`api.basicAuth`) can't complete a second step. Users who have set up a second factor can no longer authenticate with Basic auth. Use dedicated API users without a second factor.
+
+To offer passkeys as login method, add `webauthn` to `auth.methods`. Passkeys need HTTPS, except on `localhost`, and are bound to the host of your site URL: passkeys from your staging domain won't work on your production domain. All details are in the (link: releases/6/authentication#passkeys text: authentication guide).
+
+## Blueprints
+
+Blueprints have changed a lot in Kirby 6, but most existing blueprints keep working without changes. The (link: releases/6/blueprints text: blueprints guide) explains everything in detail.
+
+### Sections become fields
+
+All sections are now fields: `pages` sections become `pagelist` fields, `files` sections become `filelist` fields, `info` and `stats` sections become `info` and `stats` fields. Kirby converts your existing sections automatically when it loads a blueprint. The section name becomes the field name, `headline` becomes `label`, and the fields of a `fields` section are placed directly in the column or tab.
+
+You don't need to rewrite working blueprints. There are two cases where the automatic conversion can't help:
+
+**Sections and fields now share one namespace.** In Kirby 5, a section could have the same name as a field, and two tabs could have a section with the same name. In Kirby 6, the second one turns into an error box: "The field "gallery" already exists in your blueprint". Names are compared case-insensitively.
+
+**Custom sections from plugins** are no longer supported. Kirby shows an error box ("Invalid section type") in their place. Update the plugin to a version for Kirby 6.
+
+When you rewrite blueprints, keep in mind that `type: pages`, `type: files` and `type: users` in a `fields` list are the (deprecated) names of our picker fields, not lists. Use `pagelist` and `filelist` for lists. Read the full details in the (link: releases/6/blueprints#sections-become-fields text: blueprints guide).
+
+### Blueprint presets
+
+The `preset` option has been removed. Kirby 6 ignores it silently. The view ends up empty or with only some of its fields.
+
+Replace the preset with the fields it generated. For `preset: pages`:
+
+```yaml "/site/blueprints/pages/blog.yml"
+title: Blog
+fields:
+  drafts:
+    label: Drafts
+    type: pagelist
+    status: drafts
+    templates: article
+  unlisted:
+    label: Unlisted
+    type: pagelist
+    status: unlisted
+    templates: article
+  listed:
+    label: Published
+    type: pagelist
+    status: listed
+    templates: article
+```
+
+### Picker fields
+
+The `files`, `pages` and `users` fields have been renamed to `filepicker`, `pagepicker` and `userpicker`. The old names still work in blueprints, but are deprecated.
+
+```yaml "/site/blueprints/pages/article.yml"
+# Kirby 5
+fields:
+  cover:
+    type: files
+  related:
+    type: pages
+  author:
+    type: users
+
+# Kirby 6
+fields:
+  cover:
+    type: filepicker
+  related:
+    type: pagepicker
+  author:
+    type: userpicker
+```
+
+### Option fields: `query` and `api` move into `options`
+
+The `checkboxes`, `color`, `multiselect`, `radio`, `select`, `tags` and `toggles` fields no longer have separate `query` and `api` options. The old notation `options: query` or `options: api` shows an error box instead of the field.
+
+Move the query or API settings into the `options` option:
+
+```yaml "/site/blueprints/pages/article.yml"
+# Kirby 5
+category:
+  type: select
+  options: query
+  query:
+    fetch: site.find("categories").children
+    text: "{{ page.title }}"
+    value: "{{ page.slug }}"
+
+country:
+  type: select
+  options: api
+  api:
+    url: "{{ site.url }}/countries.json"
+```
+
+```yaml "/site/blueprints/pages/article.yml"
+# Kirby 6
+category:
+  type: select
+  options:
+    type: query
+    query: site.find("categories").children
+    text: "{{ page.title }}"
+    value: "{{ page.slug }}"
+
+country:
+  type: select
+  options:
+    type: api
+    url: "{{ site.url }}/countries.json"
+```
+
+The shorthand with a query string, e.g. `options: site.children`, works like before. Read more in the (link: releases/6/blueprints#option-fields text: blueprints guide).
+
+### Option fields keep invalid values
+
+Option fields no longer remove values that aren't one of their options. In Kirby 5, such a value was silently dropped the next time the page was saved. In Kirby 6, the value is kept and the field shows "Please select a valid option".
+
+This matters if you have removed options from a blueprint over time, or if you write values with `$page->update()`:
+
+```php
+$page->update(['category' => 'sports']);
+
+// Kirby 5: stored an empty value if "sports" isn't an option
+// Kirby 6: stores "sports"
+```
+
+### Color field options
+
+The color field no longer accepts options in `text: value` notation. Always use `value: text`.
+
+```yaml "/site/blueprints/pages/article.yml"
+# Kirby 5 (both worked)
+color:
+  type: color
+  options:
+    "Red": "#ff0000"
+    "Green": "#00ff00"
+
+# Kirby 6
+color:
+  type: color
+  options:
+    "#ff0000": Red
+    "#00ff00": Green
+```
+
+With the old notation, the Panel offers "Red" as the color value and shows "#ff0000" as its label.
+
+### Text fields and spellcheck
+
+In Kirby 5, the `text` field turned off the browser's spell checker by default. Kirby 6 no longer sets the `spellcheck` attribute unless you configure it, so the browser's default applies. To turn spell checking off like before, set the option explicitly:
+
+```yaml "/site/blueprints/pages/article.yml"
+fields:
+  title:
+    type: text
+    spellcheck: false
+```
+
+## Templates, snippets and controllers
+
+### Non-existing field methods throw an exception
+
+In Kirby 5, calling a method that doesn't exist on a field silently returned the field itself. Kirby 6 throws a `Kirby\Exception\BadMethodCallException` instead.
+
+### New helpers `push()`, `endpush()` and `stack()`
+
+Kirby 6 adds the global helper functions `push()`, `endpush()` and `stack()` for (link: releases/6/template-stacks text: template stacks).
+
+### `$slot` and `$slots` are reserved in templates
+
+Templates now receive `$slot` and `$slots` like snippets already did in Kirby 5. Data passed to a template must not use these names.
+
+### `video` KirbyTag: `style` option removed
+
+The `style` option of the `video` KirbyTag has been removed to protect against style injections. Kirby 6 no longer recognizes it.
+
+```kirbytext
+<!-- Kirby 5 -->
+(\video: intro.mp4 style: max-width: 30rem)
+
+<!-- Kirby 6 -->
+(\video: intro.mp4 class: video video-narrow)
+```
+
+```css "/assets/css/site.css"
+.video-narrow {
+  max-width: 30rem;
+}
+```
+
+## Queries
+
+### The new query runner is always on
+
+Kirby 5.1 introduced a new runner for the Kirby query language, but unless you opted in with the `query.runner` option, your Kirby 5 site still used the legacy runner. Kirby 6 always uses the new runner, for every query in your blueprints, for `{{ }}` placeholders and for `$page->query()`.
+
+Most queries return the same results. The new runner is stricter and supports more syntax, so a few queries behave differently:
+
+- **A `-` is a minus now**: `page.num-1` subtracts 1. Access fields with dashes in their name with `page.content.get("my-field")` instead of `page.my-field`.
+- **Comparisons and logical operators work**: queries like `page.title.isEmpty == false` or `page.price.toFloat > 5 && page.stock.toInt > 0` return a boolean now.
+- **Backslashes in strings are kept**, e.g. in regular expressions like `'\d+'`. Only `\'`, `\"` and `\\` are escape sequences.
+- `{{ 0 }}` resolves to `0` and an empty placeholder like `{{ }}` stays as it is.
+- `??`, `?:` and the ternary operator only evaluate the side they need.
+- Calling a field method that doesn't exist throws an exception, like in your templates.
+
+## Users, permissions and login
+
+### `$model->permissions()` is deprecated: use guards
+
+Kirby 6 introduces guards: one place that answers whether an action on a site, page, file, user or language is possible at all, allowed for the current user and valid for the given input. `$model->permissions()`, the classes behind it and the `PageRules`, `FileRules`, `SiteRules`, `UserRules` and `LanguageRules` classes are deprecated. They keep working for now.
+
+```php "/site/snippets/edit-button.php"
+// Kirby 5
+<?php if ($page->permissions()->can('update')): ?>
+<a href="<?= $page->panel()->url() ?>">Edit</a>
+<?php endif ?>
+
+// Kirby 6
+<?php if ($page->guards()->isAvailable('update')): ?>
+<a href="<?= $page->panel()->url() ?>">Edit</a>
+<?php endif ?>
+```
+
+| Kirby 5 | Kirby 6 |
+| - | - |
+| `$page->permissions()->can('delete')` | `$page->guards()->isAvailable('delete')` |
+| `$page->permissions()->toArray()` | `$page->guards()->availability()` |
+| `PageRules::changeTitle($page, $title)` | `$page->guards()->ensureExecutable('changeTitle', $title)` |
+
+Your role permissions and the `options` in your blueprints work like before. Read more about (link: releases/6/guards text: guards).
+
+### Throwing Kirby exceptions with an array
+
+Kirby exceptions no longer accept a single array argument. Use named arguments. This already works in Kirby 5, so you can change it before you update.
+
+```php
+use Kirby\Exception\InvalidArgumentException;
+
+// Kirby 5
+throw new InvalidArgumentException([
+  'key'      => 'article.title.missing',
+  'fallback' => 'Please enter a title'
+]);
+
+// Kirby 6
+throw new InvalidArgumentException(
+  key: 'article.title.missing',
+  fallback: 'Please enter a title'
+);
+```
+
+### Custom validators can't replace core validators
+
+The default validators like `email`, `url` or `date` are now regular methods of `Kirby\Toolkit\V`. A custom validator with the same name as a core validator is ignored.
+
+### Frontend login forms
+
+If your site has its own login forms in the frontend, check them:
+
+- `$kirby->auth()->login()` throws an exception if `password` isn't one of your `auth.methods`.
+- For users with a second factor, `login()` starts the challenge (e.g. sends the email) and then throws a `Kirby\Auth\Exception\LoginNotPermittedException`. Use `$kirby->auth()->authenticate()` to support second factors.
+- `$kirby->auth()->status()` returns a `Kirby\Auth\Status` object instead of `Kirby\Cms\Auth\Status`. `$status->status()` and casting the object to a string no longer work. Use `$status->state()`, which returns a `Kirby\Auth\State` enum, or `$status->is(State::Pending)`. Update type hints as well.
+
+```php "/site/controllers/login.php"
+// Kirby 5
+$status = $kirby->auth()->login2fa($email, $password);
+
+if ($status->status() === 'pending') {
+  // show the form for the code
+}
+
+// Kirby 6
+use Kirby\Auth\State;
+use Kirby\Auth\Status;
+
+$result = $kirby->auth()->authenticate('password', $email, $password);
+
+if ($result instanceof Status && $result->is(State::Pending)) {
+  // show the form for the code
+}
+```
+
+Verify the code with `$kirby->auth()->verifyChallenge($code)` like before. `login2fa()` still works, but is deprecated.
+
+### Custom auth challenges and the `changeTotp` hooks
+
+Custom auth challenges have to be rewritten based on the new `Kirby\Auth\Challenge` class. Read more about (link: releases/6/migration/plugin-developers/auth text: custom auth methods and challenges).
+
+`$user->changeTotp()` is deprecated in favor of `$user->changeSecret('totp', $secret)`. As a consequence, the `user.changeTotp:before` and `user.changeTotp:after` hooks no longer run. Use `user.changeSecret:before` and `user.changeSecret:after` instead. The `$secret` argument of the `before` hook tells you which secret changes, e.g. `totp`:
+
+```php "/site/config/config.php"
+return [
+  'hooks' => [
+    'user.changeSecret:after' => function (Kirby\Cms\User $newUser, Kirby\Cms\User $oldUser) {
+      // …
+    }
+  ]
+];
+```
+
+## Panel
+
+### Custom Panel CSS
+
+If you customize the Panel with `panel.css`, check your selectors and CSS properties:
+
+- **Removed CSS properties:** the deprecated Kirby 3 properties are gone, e.g. `--color-red` (use `--color-red-600`), `--color-background` (use `--panel-color-back`), `--color-text-light` (use `--color-text-dimmed`), `--font-size-small` (use `--text-sm`) or `--spacing-10` (use `2.5rem`).
+- **Sections** are now fields. Classes like `.k-pages-section` or `.k-files-section` no longer exist.
+- **Picker fields** use their full name in their class: `.k-pagepicker-field`, `.k-filepicker-field` and `.k-userpicker-field`.
+- **The `data-overlay` attribute** is no longer set. Use `:has(.k-overlay[open])` instead.
+- **List items** (`.k-item`) have an additional `.k-item-box` wrapper.
+
+### Panel plugins and custom Panel code
+
+Kirby 6 runs the Panel on Vue 3. Plugins compiled for Vue 2 have to be rebuilt. Custom sections, custom fields defined as arrays, custom Panel areas and dialogs, and Panel login plugins have changed as well. All of this is covered in the (link: releases/6/migration/plugin-developers text: guide for plugin developers).
+
+## Custom code using core classes
+
+If your site has its own PHP code that uses Kirby's classes, e.g. in plugins, page models, routes or controllers, check this section.
+
+### Moved and deprecated classes
+
+These classes still work as deprecated aliases. Update your `use` statements:
+
+| Deprecated | Use instead |
+| - | - |
+| `Kirby\Cms\Blueprint` | `Kirby\Blueprint\Blueprint` |
+| `Kirby\Field\FieldOptions` | `Kirby\Form\FieldOptions` |
+| `Kirby\Cms\PageBlueprint` | `Kirby\Blueprint\PageBlueprint` |
+| `Kirby\Cms\FileBlueprint` | `Kirby\Blueprint\FileBlueprint` |
+| `Kirby\Cms\SiteBlueprint` | `Kirby\Blueprint\SiteBlueprint` |
+| `Kirby\Cms\UserBlueprint` | `Kirby\Blueprint\UserBlueprint` |
+| `Kirby\Cms\Auth` | `Kirby\Auth\Auth` |
+| `Kirby\Cms\Api` | `Kirby\Api\Api` |
+| `Kirby\Session\SessionData` | `Kirby\Session\Data` |
+| `Kirby\Session\SessionStore` | `Kirby\Session\Store` |
+| `Kirby\Session\FileSessionStore` | `Kirby\Session\FileStore` |
+| `$kirby->sessionHandler()` | `$kirby->sessions()` |
+
+These classes have been removed without an alias:
+
+| Removed | Use instead |
+| - | - |
+| `Kirby\Session\AutoSession` | `Kirby\Session\Sessions` |
+| `Kirby\Cms\Section` | fields, see (link: releases/6/blueprints text: blueprints) |
+| `Kirby\Cms\Picker`, `PagePicker`, `FilePicker`, `UserPicker` | the picker dialog controllers in `Kirby\Panel\Controller\Dialog` |
+| `Kirby\Form\FieldClass` | `Kirby\Form\Field`, see the (link: releases/6/migration/plugin-developers text: guide for plugin developers) |
+
+### Forms
+
+The deprecated props array of the `Form` class and its old methods have been removed. Use named arguments and the new methods.
+
+```php "/site/controllers/contact.php"
+use Kirby\Form\Form;
+
+// Kirby 5
+$form = new Form([
+  'fields' => $fields,
+  'values' => $values,
+  'input'  => $input,
+  'model'  => $page,
+]);
+
+$data = $form->data();
+
+// Kirby 6
+$form = new Form(fields: $fields, model: $page);
+$form->fill(input: $values, defaults: true);
+$form->submit(input: $input);
+
+$data = $form->toStoredValues();
+```
+
+| Kirby 5 | Kirby 6 |
+| - | - |
+| `$form->content()` | `$form->toStoredValues()` |
+| `$form->data()`, `$form->strings()` | `$form->toStoredValues()` together with `$form->fill(defaults: true)` |
+| `$form->values()` | `$form->toFormValues()` |
+| `Form::for($page, ['values' => …])` | `Form::for($page)` and `$form->fill()` or `$form->submit()` |
+
+`$form->validate()` throws the new `Kirby\Exception\FormValidationException`. It extends `InvalidArgumentException`, so existing `catch` blocks keep working.
+
+### Blueprints in PHP
+
+- `Blueprint::factory()` expects the model as first argument: `Blueprint::factory($page, 'pages/article')` instead of `Blueprint::factory('pages/article', null, $page)`.
+- `$blueprint->sections()` and `$blueprint->section()` have been removed. Use `$blueprint->fields()` and `$blueprint->field()`. `$blueprint->fields()` now also contains the former sections as `pagelist`, `filelist`, `info` and `stats` fields. If you loop through the blueprint fields to output content, skip these types.
+- `$blueprint->tabs()` returns a `Kirby\Blueprint\Tabs` collection and `$blueprint->tab()` a `Kirby\Blueprint\Tab` object instead of arrays.
+- The `$inSection` argument of `$page->blueprints()` and `$file->blueprints()` has been renamed to `$inField`.
+
+### Sessions
+
+Most code uses `$kirby->session()`, which works like before. If you work with the sessions handler directly: [#8248](https://github.com/getkirby/kirby/pull/8248)
+
+| Kirby 5 | Kirby 6 |
+| - | - |
+| `$kirby->sessionHandler()` | `$kirby->sessions()` |
+| `$sessions->get($token)` | `$sessions->find($token)` |
+| `new Sessions($store, $options)` | `Sessions::factory($store, $options)` |
+| `$sessions->createManually()` | `$sessions->create(['mode' => 'manual'])` |
+| `$sessions->getManually($token)` | `$sessions->find($token)` |
+
+## How to perform the update
+
+Once your site code and plugins are ready, update Kirby itself. For beta.1, use the exact version `6.0.0-beta.1`, as described on the (link: releases/6/migration#install-beta-1 text: migration overview). Otherwise, our general update instructions apply:
+
+- (link: docs/guide/install-guide/installation-via-download#updating-your-installation text: Update via download)
+- (link: docs/guide/install-guide/composer#updating-kirby text: Update via Composer)
+- (link: docs/guide/install-guide/git#updating-kirby text: Update via Git)
+- (link: docs/guide/install-guide/cli#updating-via-the-cli text: Update via Kirby CLI)
+
+If you find a bug, please (link: releases/6/migration#report-issues text: report it).
+
+## Checklist
+
+Print this list or copy it into your project notes.
+
+**Before the update**
+
+- Backup made, test copy set up, debug mode on
+- Site runs on the latest Kirby 5 release without deprecation warnings
+- PHP 8.3, 8.4 or 8.5 on the server
+- Plugins: Kirby 6 versions available
+
+**Config**
+
+- `query.runner` and `panel.vue.compiler` removed
+- `panel.favicon` uses `rel` and `href`
+- `auth.challenges` includes `webauthn` (if set) and `email` (if `2fa` is required)
+- Editors know they have to log in again
+
+**Blueprints**
+
+- No YAML errors: special values quoted, no tabs, no duplicate keys
+- No error boxes for duplicate names or custom sections
+- `preset:` replaced
+- `options: query` and `options: api` moved into `options`
+- Color field options use `value: text`
+- Booleans are `true`/`false`, dates are quoted
+- Optional: picker fields renamed to `filepicker`, `pagepicker`, `userpicker`
+
+**Templates and code**
+
+- No calls to non-existing field methods
+- No functions named `push()`, `endpush()` or `stack()`
+- No template data named `$slot` or `$slots`
+- No `style` option in `video` KirbyTags
+- `$language->isLast()` checked
+- `Uuid::for()` only with objects
+- Exceptions thrown with named arguments
+- Custom validators don't use core names
+- Frontend login forms use `authenticate()` and `$status->state()`
+- `user.changeTotp` hooks replaced with `user.changeSecret`
+- Optional: `$model->permissions()` replaced with `$model->guards()`
+
+**Panel**
+
+- `panel.css` checked for removed CSS properties and class names
+- All views open without errors

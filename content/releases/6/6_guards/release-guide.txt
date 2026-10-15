@@ -1,0 +1,192 @@
+Title: Guards
+
+----
+
+Subtitle: One place to ask “can I do this?”
+
+----
+
+Teaser:
+
+Every site, page, file, user and language has a new `guards()` method. It answers whether an action is possible at all, whether the current user is allowed to run it and whether the input is valid.
+
+The Panel uses it to enable the right buttons and to explain why an action is blocked, and you can use it in your own templates and plugins.
+
+----
+
+Intro:
+
+Before Kirby 6, the checks for an action were spread over rule classes, permission classes and the actions themselves. Guards bring them together in one place with one clear answer, and blocked actions finally tell you why.
+
+----
+
+Example:
+
+```php
+// abilities + permissions, e.g. to decide whether to show a button
+if ($page->guards()->isAvailable('delete')) {
+	// …
+}
+
+// also validates the input for the action
+$page->guards()->isExecutable('changeTitle', $title);
+
+// throws an exception that explains why the action is blocked
+$page->guards()->ensureExecutable('changeSlug', $slug);
+```
+
+----
+
+Text:
+
+## Three layers
+
+Whether an action can run depends on three questions. Guards answer each of them in its own layer:
+
+| Layer | Question | Example |
+| - | - | - |
+| Abilities | Is the action possible at all? | The home page can never be deleted. |
+| Permissions | Is the current user allowed to run it? | Editors must not change slugs. |
+| Validators | Is the given input valid? | A title must not be empty. |
+
+**Abilities** protect the system logic and apply to everyone, even the almighty `kirby` user. The home page and the error page cannot be deleted or moved, the last admin cannot be demoted and an unlisted page cannot be sorted.
+
+**Permissions** come from your blueprints and user roles. Kirby resolves them in a fixed order (see below).
+
+**Validators** check the input of an action, e.g. whether a new slug is valid and not taken yet or whether a page that you want to delete still has children.
+
+## Available or executable?
+
+Guards know two kinds of checks:
+
+```php
+// abilities and permissions, no input needed
+$page->guards()->isAvailable('delete');     // returns bool
+$page->guards()->ensureAvailable('delete'); // throws
+
+// abilities, permissions and validators for the given input
+$page->guards()->isExecutable('changeTitle', $title);     // returns bool
+$page->guards()->ensureExecutable('changeTitle', $title); // throws
+```
+
+Use **available** when there's no input yet, e.g. to decide whether to show a button. Use **executable** right before you run an action, with the same arguments that you would pass to the action itself.
+
+The `is*` methods return a boolean. The `ensure*` methods throw an exception with a message that explains what blocks the action.
+
+Guards always check against the logged-in user. If nobody is logged in, they check against an anonymous user with the `nobody` role, which isn't allowed to do anything that requires a permission.
+
+## Use guards in your templates
+
+Show an edit link on the frontend, but only to users who may edit the page:
+
+```php "/site/templates/article.php"
+<?php if ($page->guards()->isAvailable('update')): ?>
+<a href="<?= $page->panel()->url() ?>">Edit this page</a>
+<?php endif ?>
+```
+
+Visitors who aren't logged in never see the link.
+
+## Use guards in controllers and plugins
+
+Kirby's actions run their guards automatically. `$page->changeTitle($title)` throws an exception if the title is empty or the user isn't allowed to change it. You don't need to check first.
+
+Guards become useful when you need the answer before anything happens. For example, when you delete several pages at once: if you just loop through them, the third deletion could fail after the first two pages are already gone. With guards, you check all of them first and only start deleting when every page can go:
+
+```php "/site/controllers/events.php"
+<?php
+
+use Kirby\Exception\Exception;
+
+return function ($kirby, $page) {
+	$error = null;
+
+	if ($kirby->request()->is('POST') === true) {
+		$expired = $page->children()->filterBy('date', 'date <', 'today');
+
+		try {
+			// make sure every page can be deleted …
+			foreach ($expired as $event) {
+				$event->guards()->ensureExecutable('delete');
+			}
+
+			// … before deleting the first one
+			foreach ($expired as $event) {
+				$event->delete();
+			}
+		} catch (Exception $e) {
+			$error = $e->getMessage();
+		}
+	}
+
+	return compact('error');
+};
+```
+
+All exceptions from the guards extend `Kirby\Exception\Exception` and come with a translated message that you can show to the user.
+
+Or filter a collection to the pages that the current user could delete right now:
+
+```php
+$deletable = $page->children()->filter(
+	fn ($child) => $child->guards()->isExecutable('delete')
+);
+```
+
+## How permissions are resolved
+
+The permission layer looks for a rule in this order and stops at the first one it finds:
+
+1. **The model's blueprint**: the `options` of the page, file, user or site blueprint, either for everyone or per role
+2. **The user's role**: the `permissions` in the role blueprint
+3. **The default**: `false`, unless you pass a different `$default` to `isAvailable()` or `ensureAvailable()`
+
+Two users are special: users with the `nobody` role are never allowed to do anything, and the `kirby` user is always allowed. Abilities still apply to both.
+
+```yaml "/site/blueprints/pages/legal.yml"
+options:
+  delete: false
+  changeSlug:
+    admin: true
+    "*": false
+```
+
+With this blueprint, nobody can delete a legal page and only admins can change its slug, no matter what the role blueprints say. A rule in the blueprint wins over the role. This order hasn't changed since Kirby 5.
+
+The default only matters for actions without any rule. All core actions have a rule in the role defaults, so they always resolve to a definite answer.
+
+## Migrating from Kirby 5
+
+### `$model->permissions()` is deprecated
+
+The permission classes keep working for now and pass their work on to the guards. Switch to `$model->guards()`:
+
+```php
+// Kirby 5
+$page->permissions()->can('delete');
+$page->permissions()->cannot('delete');
+$page->permissions()->toArray();
+
+// Kirby 6
+$page->guards()->isAvailable('delete');
+$page->guards()->isAvailable('delete') === false;
+$page->guards()->availability();
+```
+
+### Rules classes are deprecated
+
+`Kirby\Cms\PageRules`, `Kirby\Cms\FileRules`, `Kirby\Cms\UserRules`, `Kirby\Cms\SiteRules` and `Kirby\Cms\LanguageRules` still exist, but only call the guards now:
+
+```php
+// Kirby 5
+PageRules::changeTitle($page, $title);
+
+// Kirby 6
+$page->guards()->ensureExecutable('changeTitle', $title);
+```
+
+(link: releases/6/changelog#breaking-changes__core__permissions text: All permission-related breaking changes …)
+
+----
+
+Category: features

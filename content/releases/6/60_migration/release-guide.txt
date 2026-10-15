@@ -1,0 +1,179 @@
+Title: Migration guides
+
+----
+
+Intro: Kirby 6 beta.1 is ready for testing. Here's how to try it safely, what your server and browsers need and which guide fits your role.
+
+----
+
+Text:
+
+## This is a beta
+
+<warning>
+**Don't use Kirby 6 beta.1 in production.** Make a backup of your site and test the beta on a copy, either locally or on a staging server.
+</warning>
+
+Kirby 6 is a major release. The beta is meant to give you a head start: try it with your sites and plugins, find out what needs to change and tell us what breaks. Tweaks and even breaking changes can still change between the beta releases and the final release of Kirby 6 to get all ready and in place.
+
+Two things to keep in mind while testing:
+
+- Work on a copy of your site, including the `content` folder. Kirby 6 writes some content slightly differently, e.g. YAML in structure fields, so don't sync content from your test copy back to your live site.
+- Turn on (link: docs/reference/system/options/debug text: debug mode) on your test copy. Kirby 6 is stricter in a few places and the error messages tell you exactly what to fix.
+
+## Which guide is for you?
+
+#### (link: releases/6/migration/editors text: For editors →)
+For everyone who works in the Panel: what changes in daily use, from the new login screen to passkeys, two-factor authentication and the live preview, plus what to tell your team before the switch.
+
+#### (link: releases/6/migration/site-developers text: For site developers →)
+The complete guide for everyone who builds and maintains Kirby sites: requirements, config options, blueprints, templates, content, queries, users and permissions, step by step with before and after code.
+
+#### (link: releases/6/migration/plugin-developers text: For plugin developers →)
+For everyone who maintains a plugin or custom Panel extensions: Vue 3, custom fields as PHP classes, sections, the Panel backend and the new auth extensions.
+
+## Requirements
+
+### PHP
+
+Kirby 6 requires **PHP 8.3, 8.4 or 8.5**. Support for PHP 8.2 has been removed.
+
+You can check your PHP version in the system view of the Panel. If your server runs an older version, switch to a newer one before you update Kirby. Kirby 5 already runs on PHP 8.3, 8.4 and 8.5, so you can change the PHP version first while your site still runs on Kirby 5 and update Kirby afterwards.
+
+### Browsers for the Panel
+
+The Panel in Kirby 6 needs browsers released from roughly mid-2024 onwards. We follow [Baseline "widely available"](https://web.dev/baseline): the Panel relies on web platform features that have been available in all major browsers for at least 2.5 years.
+
+<div class="table">
+    <table>
+        <tr>
+            <th>Desktop</th>
+            <th>Mobile</th>
+        </tr>
+        <tr>
+            <td class="prose">
+                <ul>
+                    <li>Chrome 124+</li>
+                    <li>Edge 124+</li>
+                    <li>Firefox 125+</li>
+                    <li>Safari 17.5+</li>
+                    <li>Opera 110+</li>
+                </ul>
+            </td>
+            <td class="prose">
+                <ul>
+                    <li>Safari on iOS 17.5+</li>
+                    <li>Chrome for Android 124+</li>
+                    <li>Android Browser 124+</li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+</div>
+
+Your website itself is not affected: these requirements only apply to the Panel.
+
+## First test drive
+
+If you just want a first test drive, we've migrated our two kits for you to play around with:
+
+### Starterkit
+
+- Release: https://github.com/getkirby/starterkit/releases/tag/6.0.0-beta.1
+- Download: (link: https://github.com/getkirby/starterkit/archive/refs/tags/6.0.0-beta.1.zip text: starterkit-6.0.0-beta.1.zip)
+
+### Plainkit
+
+- Release: https://github.com/getkirby/plainkit/releases/tag/6.0.0-beta.1
+- Download: (link: https://github.com/getkirby/plainkit/archive/refs/tags/6.0.0-beta.1.zip text: plainkit-6.0.0-beta.1.zip)
+
+## Install beta.1
+
+Work on a copy of your site. Then pick the way you usually install Kirby:
+
+(tabs…)
+
+=== Download
+
+Download the `6.0.0-beta.1` release from [GitHub](https://github.com/getkirby/kirby/releases), unpack it and replace your `kirby` folder with it. Rename the unpacked folder to `kirby` if needed.
+
+=== Composer
+
+Require the exact beta version:
+
+```bash
+composer require getkirby/cms:6.0.0-beta.1
+```
+
+Or set the version in your `composer.json` and run `composer update getkirby/cms`:
+
+```js "/composer.json"
+{
+  "require": {
+    "getkirby/cms": "6.0.0-beta.1"
+  }
+}
+```
+
+Composer installs a pre-release only if you ask for it explicitly like this. A constraint like `^6.0` won't pick up the beta.
+
+=== Git submodule
+
+If Kirby is a Git submodule in your project:
+
+```bash
+cd kirby
+git fetch --tags
+git checkout 6.0.0-beta.1
+cd ..
+git add kirby
+git commit -m "Try Kirby 6.0.0-beta.1"
+```
+
+=== Kirby CLI
+
+```bash
+kirby upgrade 6.0.0-beta.1
+```
+
+The CLI asks you to confirm the major version upgrade.
+
+(…tabs)
+
+## Licensing
+
+Kirby 6 is a **free upgrade** for everyone with a valid Kirby Basic or Enterprise license.
+
+If you have an older license, e.g. for Kirby 3, you can upgrade it in our (link: https://hub.getkirby.com text: license hub).
+
+You don't need a paid license to try Kirby 6. You can activate your test installation with a free development license in the Panel's system view instead. All details are in our (link: license#free-licenses__usage-for-a-development-installation text: license terms).
+
+## Coming from Kirby 4 or older
+
+Update one major version at a time. Each step has its own changes and deprecations, and the Kirby 5 guides and changelogs explain what changed in between.
+
+1. **Make a backup** of your entire site.
+2. **From Kirby 3 or older:** follow the guide to (link: docs/guide/updates/update-to-v4 text: update to Kirby 4) and check that everything works.
+3. **From Kirby 4:** follow the guide to (link: docs/guide/updates/update-to-v5 text: update to Kirby 5) and read the (link: releases/5/changelog text: Kirby 5 changelog).
+4. **Update to the latest Kirby 5 release.** Turn on debug mode and fix all deprecation warnings you see. Code that is deprecated in Kirby 5 is often removed in Kirby 6.
+5. **Switch to PHP 8.3 or newer** while your site still runs on Kirby 5.
+6. **Update to Kirby 6** and follow the (link: releases/6/migration/site-developers text: guide for site developers).
+
+Test your site after every step. If something breaks, you know which update caused it.
+
+## Report issues
+
+Found a bug or something that doesn't work like it did in Kirby 5? Please report it on GitHub: [github.com/getkirby/kirby/issues](https://github.com/getkirby/kirby/issues).
+
+Please mention that you're testing `6.0.0-beta.1` and include:
+
+- your PHP version and, for Panel issues, your browser and its version
+- the steps to reproduce the problem
+- the full error message, ideally with debug mode turned on
+- the relevant parts of your blueprint, template or config
+
+Before you report a problem, check the (link: releases/6/changelog text: changelog) and the migration guides: it might be an intended change. If you're unsure whether something is a bug, report it anyway. That's exactly what the beta is for.
+
+----
+
+Category: migration

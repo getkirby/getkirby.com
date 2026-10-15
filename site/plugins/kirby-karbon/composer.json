@@ -1,0 +1,39 @@
+{
+    "name": "lex-zander/kirby-karbon",
+    "description": "Serves a carbon.txt for Kirby sites, editable in the Panel",
+    "license": "MIT",
+    "type": "kirby-plugin",
+    "keywords": [
+        "kirby",
+        "kirby-plugin",
+        "carbon.txt",
+        "sustainability",
+        "green-web"
+    ],
+    "authors": [
+        {
+            "name": "Alexander Drießen"
+        }
+    ],
+    "require": {
+        "php": ">=8.2",
+        "getkirby/composer-installer": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "LexZander\\KirbyKarbon\\": "lib/"
+        }
+    },
+    "extra": {
+        "installer-name": "karbon",
+        "kirby-cms-path": false
+    },
+    "config": {
+        "allow-plugins": {
+            "getkirby/composer-installer": true
+        }
+    },
+    "require-dev": {
+        "getkirby/cms": "^4.0 || ^5.0"
+    }
+}

@@ -6,6 +6,7 @@ return function ($site) {
 		'privacy',
 		'license',
 		'security',
+		'sustainability',
 		'styleguide'
 	);
 };

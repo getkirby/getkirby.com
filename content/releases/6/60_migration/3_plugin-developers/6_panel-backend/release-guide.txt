@@ -1,0 +1,764 @@
+Title: Panel backend: controllers & UI classes
+
+----
+
+Intro: The Panel backend has been rebuilt from static helpers into objects. Views, dialogs, drawers, dropdowns, searches and requests can now be handled by controller classes that return UI objects.
+
+----
+
+Text:
+
+## What has changed
+
+In Kirby 5, the Panel backend was a collection of static classes, and all core views, dialogs and dropdowns were anonymous closures in `kirby/config/areas`. This has changed in Kirby 6:
+
+- The Panel is an object, available as `$kirby->panel()`, with separate classes for areas, access checks and routing.
+- Every Panel route can be handled by a **controller class** instead of a closure. All core routes use them.
+- Controllers and closures can return **UI objects** like `FormDialog` or `View` instead of `component`/`props` arrays.
+- The term "Fiber" is gone. The data that the backend sends to the frontend is called Panel state now.
+
+## The Panel object
+
+`Kirby\Panel\Panel` and `Kirby\Panel\Home` are no longer static. Get the Panel object from the app:
+
+```php
+$panel = $kirby->panel();
+```
+
+| Kirby 5 | Kirby 6 |
+| - | - |
+| `Panel::url($path)` | `$kirby->panel()->url($path)` |
+| `Panel::areas()` (array) | `$kirby->panel()->areas()` (`Kirby\Panel\Areas` collection) |
+| `Panel::area($id, $definition)` | `Kirby\Panel\Areas::area($id, $definition)` (returns a `Kirby\Panel\Area`) |
+| `Panel::buttons()` | `$kirby->panel()->areas()->buttons()` |
+| `Panel::firewall($user, $area)` | `$kirby->panel()->access()->area($area, throws: true)` |
+| `Panel::hasAccess($user, $area)` | `$kirby->panel()->access()->area($area)` |
+| `Panel::isFiberRequest()` | `$kirby->panel()->isStateRequest()` |
+| `Panel::multilang()`, `Panel::referrer()` | `$kirby->panel()->multilang()`, `$kirby->panel()->referrer()` |
+| `Panel::router($path)` | `$kirby->panel()->router()?->call($path)` |
+| `Panel::routesForViews()` etc. | `Kirby\Panel\Routes\ViewRoutes` etc. |
+| `Home::url()` | `$kirby->panel()->home()->url()` |
+| `Home::isPanelUrl($url)` | `$kirby->panel()->isPanelUrl($url)` |
+| `Home::panelPath($url)` | `$kirby->panel()->path($url)` |
+
+## Defining an area
+
+Areas are registered as before. Each definition is turned into a `Kirby\Panel\Area` object. The area accepts these options: `breadcrumb`, `breadcrumbLabel`, `buttons`, `dialogs`, `drawers`, `dropdowns`, `icon`, `label`, `link`, `menu`, `requests`, `search`, `searches`, `title` and `views`.
+
+### Route definitions
+
+Each type of route in an area accepts these keys:
+
+| Type | Definition | Handler in Kirby 5 | Handler in Kirby 6 |
+| - | - | - | - |
+| `views` | `pattern`, `when` | `action` | `action`: closure or controller class |
+| `dialogs`, `drawers` | `pattern` (defaults to the name) | `load`, `submit` | `load`/`submit` closures or `action`: controller class |
+| `dropdowns` | `pattern` (defaults to the name) or the name as pattern with a closure as value | `options` or `action` | `options` or `action`: closure or controller class |
+| `searches` | `label`, `icon` | `query` | `query` closure or `action`: closure or controller class |
+| `requests` | `pattern`, `method`, `auth` | `action` | `action`: closure or controller class |
+
+### Closures keep working
+
+An area like this one from Kirby 5 runs in Kirby 6 without changes:
+
+```php "/site/plugins/todos/index.php"
+'dialogs' => [
+	'todo.update' => [
+		'pattern' => 'todos/(:any)/update',
+		'load'    => fn (string $id) => [
+			'component' => 'k-form-dialog',
+			'props'     => [
+				'fields' => [
+					'text' => ['label' => 'Todo', 'type' => 'text']
+				],
+				'value' => todo($id)
+			]
+		],
+		'submit' => function (string $id) {
+			// save the todo
+			return true;
+		}
+	]
+]
+```
+
+There are only two things to watch out for: plain strings in props like a dialog's `text` are escaped now (see (link: releases/6/migration/plugin-developers/trusted-html text: Trusted HTML)), and errors are handled differently (see (link: releases/6/error-handling#for-plugin-developers text: Better errors in the Panel)).
+
+## Controller classes
+
+A controller is a class that handles one Panel route. Instead of a closure, you pass its class name as `action`:
+
+```php
+'dialogs' => [
+	'todo.update' => [
+		'pattern' => 'todos/(:any)/update',
+		'action'  => TodoUpdateDialogController::class
+	]
+]
+```
+
+The class must extend the base controller for the route type:
+
+| Route type | Base class |
+| - | - |
+| `views` | `Kirby\Panel\Controller\ViewController` |
+| `dialogs` | `Kirby\Panel\Controller\DialogController` |
+| `drawers` | `Kirby\Panel\Controller\DrawerController` |
+| `dropdowns` | `Kirby\Panel\Controller\DropdownController` |
+| `searches` | `Kirby\Panel\Controller\SearchController` |
+| `requests` | `Kirby\Panel\Controller\RequestController` |
+
+### How a controller is created
+
+When the route is called, Kirby creates the controller with the arguments from the route pattern. If the class has a static `factory()` method, Kirby calls it, otherwise the constructor:
+
+```php
+class TodoUpdateDialogController extends DialogController
+{
+	public function __construct(
+		public string $id,
+		public array $todo
+	) {
+		parent::__construct();
+	}
+
+	// called with the (:any) part of `todos/(:any)/update`
+	public static function factory(string $id): static
+	{
+		return new static(id: $id, todo: todo($id));
+	}
+}
+```
+
+The factory is the place to turn the URL arguments into the objects your controller works with, like the core controllers do with `Find::page($id)`. The constructor then only takes ready-made objects, which makes the controller easy to test.
+
+You can also create the controller yourself in a closure, e.g. to pass extra arguments:
+
+```php
+'action' => fn (string $id) => new TodoUpdateDialogController(
+	id: $id,
+	todo: todo($id)
+)
+```
+
+### `load()` and `submit()`
+
+Every controller implements `::load()`, which returns what the route sends to the Panel. Dialog and drawer controllers also handle the form submission in `::submit()`. The base class returns `true` there, which closes the dialog successfully.
+
+### Search controllers
+
+Search controllers get the search query, limit and page from the request in their `::factory()` method. Implement `::load()` and use the properties:
+
+```php
+use Kirby\Panel\Controller\SearchController;
+
+class TodosSearchController extends SearchController
+{
+	public function load(): array
+	{
+		$results = [];
+
+		foreach (todos() as $id => $todo) {
+			if (str_contains($todo['text'], $this->query) === true) {
+				$results[] = [
+					'text' => $todo['text'],
+					'link' => '/todos',
+					'icon' => 'check'
+				];
+			}
+		}
+
+		return $results;
+	}
+}
+```
+
+## UI objects
+
+Controllers and closures can still return `component`/`props` arrays. But they can also return UI objects from the `Kirby\Panel\Ui` namespace. Kirby calls their `render()` method and sends the result to the Panel.
+
+```php
+// Kirby 5
+return [
+	'component' => 'k-todos-view',
+	'title'     => 'Todos',
+	'props'     => [
+		'todos' => todos()
+	]
+];
+
+// Kirby 6
+return new View(
+	component: 'k-todos-view',
+	title: 'Todos',
+	todos: todos()
+);
+```
+
+A `RemoveDialog` comes with a trash icon and the negative theme for its submit button. Text, remove and form dialogs default to the `medium` size. The `text` of these dialogs is escaped unless it is trusted HTML. Use `$this->i18nHtml()` to insert user content into HTML safely:
+
+```php
+return new RemoveDialog(
+	text: $this->i18nHtml(
+		'Do you really want to delete <strong>{text}</strong>?',
+		['text' => $this->todo['text']]
+	)
+);
+```
+
+### Submit results
+
+`::submit()` returns the same results as the `submit` closures in Kirby 5:
+
+- `true` closes the dialog or drawer.
+- An array can trigger an event (`'event' => 'todo.update'`) and/or redirect to another Panel URL (`'redirect' => 'todos'`).
+- An exception shows an error. To redirect from anywhere, call `Panel::go('todos')`.
+
+## Complete example: a Panel area in Kirby 5 and 6
+
+Let's build a small todo list: a view that lists all todos, a dropdown with options for each todo and two dialogs to edit and delete a todo. The todos are stored in a JSON file in the plugin folder for the sake of our example. These helper functions are the same in both versions:
+
+```php "/site/plugins/todos/index.php"
+use Kirby\Data\Data;
+use Kirby\Exception\NotFoundException;
+
+function todos(): array
+{
+	return Data::read(__DIR__ . '/todos.json');
+}
+
+function todo(string $id): array
+{
+	return todos()[$id] ?? throw new NotFoundException(
+		message: 'The todo "' . $id . '" does not exist'
+	);
+}
+
+function saveTodos(array $todos): void
+{
+	Data::write(__DIR__ . '/todos.json', $todos);
+}
+```
+
+```json "/site/plugins/todos/todos.json"
+{
+	"milk": { "text": "Buy milk", "done": false },
+	"bike": { "text": "Fix bike", "done": true }
+}
+```
+
+### Kirby 5
+
+In Kirby 5, everything lives in closures inside the area definition:
+
+```php "/site/plugins/todos/index.php"
+Kirby::plugin('acme/todos', [
+	'areas' => [
+		'todos' => fn () => [
+			'label' => 'Todos',
+			'icon'  => 'check',
+			'menu'  => true,
+			'views' => [
+				'todos' => [
+					'pattern' => 'todos',
+					'action'  => fn () => [
+						'component' => 'k-todos-view',
+						'title'     => 'Todos',
+						'props'     => [
+							'todos' => todos()
+						]
+					]
+				]
+			],
+			'dialogs' => [
+				'todo.update' => [
+					'pattern' => 'todos/(:any)/update',
+					'load'    => fn (string $id) => [
+						'component' => 'k-form-dialog',
+						'props'     => [
+							'fields' => [
+								'text' => [
+									'label'    => 'Todo',
+									'type'     => 'text',
+									'required' => true
+								],
+								'done' => [
+									'label' => 'Done',
+									'type'  => 'toggle'
+								]
+							],
+							'value' => todo($id)
+						]
+					],
+					'submit' => function (string $id) {
+						todo($id);
+
+						$todos      = todos();
+						$todos[$id] = [
+							'text' => get('text'),
+							'done' => get('done', false)
+						];
+
+						saveTodos($todos);
+
+						return [
+							'event' => 'todo.update'
+						];
+					}
+				],
+				'todo.delete' => [
+					'pattern' => 'todos/(:any)/delete',
+					'load'    => fn (string $id) => [
+						'component' => 'k-remove-dialog',
+						'props'     => [
+							'text' => 'Do you really want to delete "' . Escape::html(todo($id)['text']) . '"?'
+						]
+					],
+					'submit' => function (string $id) {
+						$todos = todos();
+						unset($todos[$id]);
+						saveTodos($todos);
+
+						return true;
+					}
+				]
+			],
+			'dropdowns' => [
+				'todo' => [
+					'pattern' => 'todos/(:any)',
+					'options' => fn (string $id) => [
+						[
+							'text'   => 'Edit',
+							'icon'   => 'edit',
+							'dialog' => 'todos/' . $id . '/update'
+						],
+						[
+							'text'   => 'Delete',
+							'icon'   => 'trash',
+							'dialog' => 'todos/' . $id . '/delete'
+						]
+					]
+				]
+			]
+		]
+	]
+]);
+```
+
+### Kirby 6
+
+In Kirby 6, the area definition only maps routes to controllers:
+
+```php "/site/plugins/todos/index.php"
+<?php
+
+use Acme\Todos\TodoDeleteDialogController;
+use Acme\Todos\TodoDropdownController;
+use Acme\Todos\TodosViewController;
+use Acme\Todos\TodoUpdateDialogController;
+
+load([
+	'Acme\Todos\TodoDeleteDialogController' => 'src/TodoDeleteDialogController.php',
+	'Acme\Todos\TodoDropdownController'     => 'src/TodoDropdownController.php',
+	'Acme\Todos\TodosViewController'        => 'src/TodosViewController.php',
+	'Acme\Todos\TodoUpdateDialogController' => 'src/TodoUpdateDialogController.php',
+], __DIR__);
+
+// the todos(), todo() and saveTodos() helpers from above
+
+Kirby::plugin('acme/todos', [
+	'areas' => [
+		'todos' => fn () => [
+			'label' => 'Todos',
+			'icon'  => 'check',
+			'menu'  => true,
+			'views' => [
+				'todos' => [
+					'pattern' => 'todos',
+					'action'  => TodosViewController::class
+				]
+			],
+			'dialogs' => [
+				'todo.update' => [
+					'pattern' => 'todos/(:any)/update',
+					'action'  => TodoUpdateDialogController::class
+				],
+				'todo.delete' => [
+					'pattern' => 'todos/(:any)/delete',
+					'action'  => TodoDeleteDialogController::class
+				]
+			],
+			'dropdowns' => [
+				'todo' => [
+					'pattern' => 'todos/(:any)',
+					'action'  => TodoDropdownController::class
+				]
+			]
+		]
+	]
+]);
+```
+
+The view controller returns a `View` object:
+
+```php "/site/plugins/todos/src/TodosViewController.php"
+<?php
+
+namespace Acme\Todos;
+
+use Kirby\Panel\Controller\ViewController;
+use Kirby\Panel\Ui\View;
+
+class TodosViewController extends ViewController
+{
+	public function load(): View
+	{
+		return new View(
+			component: 'k-todos-view',
+			title: 'Todos',
+			todos: todos()
+		);
+	}
+}
+```
+
+The update dialog looks up the todo in its factory, returns a `FormDialog` and saves the submitted values:
+
+```php "/site/plugins/todos/src/TodoUpdateDialogController.php"
+<?php
+
+namespace Acme\Todos;
+
+use Kirby\Panel\Controller\DialogController;
+use Kirby\Panel\Ui\Dialog\FormDialog;
+
+class TodoUpdateDialogController extends DialogController
+{
+	public function __construct(
+		public string $id,
+		public array $todo
+	) {
+		parent::__construct();
+	}
+
+	public static function factory(string $id): static
+	{
+		return new static(id: $id, todo: todo($id));
+	}
+
+	public function load(): FormDialog
+	{
+		return new FormDialog(
+			fields: [
+				'text' => [
+					'label'    => 'Todo',
+					'type'     => 'text',
+					'required' => true
+				],
+				'done' => [
+					'label' => 'Done',
+					'type'  => 'toggle'
+				]
+			],
+			value: $this->todo
+		);
+	}
+
+	public function submit(): array
+	{
+		$todos = todos();
+		$todos[$this->id] = [
+			'text' => $this->request->get('text'),
+			'done' => $this->request->get('done', false)
+		];
+
+		saveTodos($todos);
+
+		return [
+			'event' => 'todo.update'
+		];
+	}
+}
+```
+
+The delete dialog returns a `RemoveDialog` with trusted HTML, in which the todo text is escaped:
+
+```php "/site/plugins/todos/src/TodoDeleteDialogController.php"
+<?php
+
+namespace Acme\Todos;
+
+use Kirby\Panel\Controller\DialogController;
+use Kirby\Panel\Ui\Dialog\RemoveDialog;
+
+class TodoDeleteDialogController extends DialogController
+{
+	public function __construct(
+		public string $id,
+		public array $todo
+	) {
+		parent::__construct();
+	}
+
+	public static function factory(string $id): static
+	{
+		return new static(id: $id, todo: todo($id));
+	}
+
+	public function load(): RemoveDialog
+	{
+		return new RemoveDialog(
+			text: $this->i18nHtml(
+				'Do you really want to delete <strong>{text}</strong>?',
+				['text' => $this->todo['text']]
+			)
+		);
+	}
+
+	public function submit(): bool
+	{
+		$todos = todos();
+		unset($todos[$this->id]);
+		saveTodos($todos);
+
+		return true;
+	}
+}
+```
+
+The dropdown controller returns the options as an array:
+
+```php "/site/plugins/todos/src/TodoDropdownController.php"
+<?php
+
+namespace Acme\Todos;
+
+use Kirby\Panel\Controller\DropdownController;
+
+class TodoDropdownController extends DropdownController
+{
+	public function __construct(
+		public string $id
+	) {
+		parent::__construct();
+	}
+
+	public function load(): array
+	{
+		return [
+			[
+				'text'   => 'Edit',
+				'icon'   => 'edit',
+				'dialog' => 'todos/' . $this->id . '/update'
+			],
+			[
+				'text'   => 'Delete',
+				'icon'   => 'trash',
+				'dialog' => 'todos/' . $this->id . '/delete'
+			]
+		];
+	}
+}
+```
+
+### The view component
+
+The Vue component for the view is the same in both versions. It passes the dropdown URL as `options` to each item, so the Panel loads the options from the dropdown route when the dropdown opens:
+
+```js "/site/plugins/todos/index.js"
+panel.plugin("acme/todos", {
+	components: {
+		"k-todos-view": {
+			props: {
+				todos: Object
+			},
+			computed: {
+				items() {
+					return Object.entries(this.todos).map(([id, todo]) => ({
+						id: id,
+						text: todo.text,
+						info: todo.done ? "Done" : "",
+						options: "todos/" + id
+					}));
+				}
+			},
+			template: `
+				<k-panel-inside>
+					<k-header>Todos</k-header>
+					<k-items :items="items" />
+				</k-panel-inside>
+			`
+		}
+	}
+});
+```
+
+If you compile your components with a build tool, you need a Vue 3 build for Kirby 6. See (link: releases/6/migration/plugin-developers/vue-3 text: Vue 3 for Panel plugins).
+
+### What you gain
+
+The controller version needs more files, but each route is now a small class with a clear job:
+
+- **Testable:** You can create a controller with test data, call `load()` and `submit()` and check the result without any HTTP request.
+- **Reusable:** Other plugins (and you) can extend your controllers or call them, like you can with the core controllers.
+- **Safe by default:** `i18nHtml()` and the UI classes make it easy to send trusted HTML without forgetting to escape user content.
+
+## Extending core areas
+
+Plugins can still extend the core areas. Kirby merges your definition into the core definition, so you only define what you want to change.
+
+### Removing core definitions
+
+Set any core view, dialog, drawer, dropdown, search, request or view button to `false` to remove it:
+
+```php "/site/plugins/no-file-search/index.php"
+Kirby::plugin('acme/no-file-search', [
+	'areas' => [
+		'site' => [
+			'searches' => [
+				'files' => false
+			]
+		]
+	]
+]);
+```
+
+### Overriding core routes
+
+All core routes are defined with a controller class in `action` now. Override them like this:
+
+- **Views:** Set `action` to your closure or controller class.
+- **Dialogs and drawers:** Set `load` and/or `submit` closures. They take precedence over the core controller, so you can e.g. replace only `load` and keep the core `submit`. Or replace `action`.
+- **Dropdowns:** Set `options` or `action`.
+- **Searches:** Set `action`. The Kirby 5 `query` option is ignored when the core definition already has an `action`, so an override with `query` silently does nothing.
+
+```php "/site/plugins/search/index.php"
+// Kirby 5
+'searches' => [
+	'pages' => [
+		'query' => fn (string $query, int $limit, int $page) => mySearch($query, $limit, $page)
+	]
+]
+
+// Kirby 6
+'searches' => [
+	'pages' => [
+		'action' => fn (string $query, int $limit, int $page) => mySearch($query, $limit, $page)
+	]
+]
+```
+
+### Reusing core code
+
+In Kirby 5, you could fall back to the core closures, e.g. `$kirby->core()->area('site')['dialogs']['page.changeStatus']['load']($id)`. In Kirby 6, the core definitions only contain class names. Use the controllers instead:
+
+```php "/site/plugins/custom-status/index.php"
+use Kirby\Cms\Find;
+use Kirby\Panel\Controller\Dialog\PageChangeStatusDialogController;
+use Kirby\Panel\Controller\Dropdown\PageSettingsDropdownController;
+use Kirby\Panel\Controller\Search\PagesSearchController;
+
+Kirby::plugin('acme/custom-status', [
+	'areas' => [
+		'site' => fn () => [
+			'dialogs' => [
+				'page.changeStatus' => [
+					'load' => function (string $id) {
+						if ($id === 'blog') {
+							// custom dialog for the blog
+						}
+
+						return PageChangeStatusDialogController::factory($id)->load();
+					}
+				]
+			],
+			'dropdowns' => [
+				'page' => [
+					'action' => function (string $id) {
+						$options   = PageSettingsDropdownController::factory($id)->load();
+						$options[] = '-';
+						$options[] = [
+							'text'  => 'Custom option',
+							'icon'  => 'star',
+							'click' => 'custom'
+						];
+
+						return $options;
+					}
+				]
+			],
+			'searches' => [
+				'pages' => [
+					'action' => function (string $query, int $limit, int $page) {
+						// e.g. your own search for some queries …
+
+						return (new PagesSearchController($query, $limit, $page))->load();
+					}
+				]
+			]
+		]
+	]
+]);
+```
+
+You find all core controllers in `kirby/config/areas` and `kirby/src/Panel/Controller`.
+
+### Custom model views
+
+To render a page, site, file or user view with your own component, extend the core view controller instead of modifying the view array:
+
+```php
+// Kirby 5
+'views' => [
+	'page' => [
+		'action' => function (string $path) {
+			$view = Find::page($path)->panel()->view();
+			$view['component'] = 'k-my-page-view';
+
+			return $view;
+		}
+	]
+]
+```
+
+```php
+// Kirby 6
+use Kirby\Panel\Controller\View\PageViewController;
+
+class MyPageViewController extends PageViewController
+{
+	public function component(): string
+	{
+		return 'k-my-page-view';
+	}
+}
+
+// in the area definition:
+'views' => [
+	'page' => [
+		'action' => MyPageViewController::class
+	]
+]
+```
+
+## Panel model classes
+
+`Kirby\Panel\Model` and its subclasses (`$page->panel()` etc.) still exist, but the view-related methods are deprecated in favor of the view controllers:
+
+| Deprecated | Use instead |
+| - | - |
+| `$model->panel()->breadcrumb()` | `ModelViewController::breadcrumb()` |
+| `$model->panel()->buttons()` | `ModelViewController::buttons()` |
+| `$model->panel()->prevNext()` | `ModelViewController::prev()` and `::next()` |
+| `$model->panel()->props()` | `ModelViewController::props()` |
+| `$model->panel()->versions()` | `ModelViewController::versions()` |
+| `$model->panel()->view()` | `ModelViewController::load()` |
+| `$page->panel()->dropdown()`, `$file->panel()->dropdown()`, `$user->panel()->dropdown()` | `PageSettingsDropdownController`, `FileSettingsDropdownController`, `UserSettingsDropdownController` |
+
+`ModelViewController` is the base class of `SiteViewController`, `PageViewController`, `FileViewController`, `UserViewController` and their variants in `Kirby\Panel\Controller\View`, e.g. `PageViewController::factory('blog')` or `new PageViewController($page)`.
+
+## More changes
+
+Most classes of the old static Panel have been moved or replaced. The term "Fiber" is gone: the data the backend sends to the Panel is called Panel state now. New `items/pages`, `items/files` and `items/users` request endpoints turn model IDs into item data, and exceptions in Panel routes go through Kirby's regular error handler.
+
+You'll find all details in the changelog: the breaking changes for the (link: releases/6/changelog#breaking-changes__panel__backend text: Panel backend) and the (link: releases/6/changelog#breaking-changes__panel__frontend text: Panel frontend), and the (link: releases/6/changelog#enhancements__for-plugin-developers__backend text: new backend features for plugin developers).

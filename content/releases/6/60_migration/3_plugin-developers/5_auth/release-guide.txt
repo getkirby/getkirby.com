@@ -1,0 +1,512 @@
+Title: Custom auth methods & challenges
+
+----
+
+Intro: Kirby 6 rebuilt authentication around two extension points: auth methods start a login, auth challenges confirm it. Both are now instance-based PHP classes that bring their own form for the Panel login view.
+
+----
+
+Text:
+
+## Methods and challenges
+
+A login in Kirby 6 has up to two steps:
+
+1. An **auth method** starts the login. It either logs the user in directly or creates a challenge. The core methods are `password`, `code`, `password-reset`, `webauthn` (passkeys) and `basic-auth`.
+2. An **auth challenge** confirms the login, e.g. with a one-time code or a passkey. The core challenges are `email`, `totp` and `webauthn`. Challenges are used as second factor after a password, for passwordless logins with the `code` method and for password resets.
+
+Plugins can add both. Kirby 5 already had the `authChallenges` extension, Kirby 6 adds `authMethods` and replaces the static challenge class with a new base class.
+
+```php "/site/plugins/acme-auth/index.php"
+<?php
+
+load([
+    'Acme\\Auth\\AccessKeyMethod' => 'classes/AccessKeyMethod.php',
+    'Acme\\Auth\\SmsChallenge'    => 'classes/SmsChallenge.php'
+], __DIR__);
+
+Kirby::plugin('acme/auth', [
+    'authMethods' => [
+        'access-key' => Acme\Auth\AccessKeyMethod::class
+    ],
+    'authChallenges' => [
+        'sms' => Acme\Auth\SmsChallenge::class
+    ]
+]);
+```
+
+Registering a method or challenge doesn't enable it. Site developers add it to their config, in the position they want:
+
+```php "/site/config/config.php"
+return [
+    'auth' => [
+        'methods'    => ['password', 'access-key'],
+        'challenges' => ['webauthn', 'totp', 'sms', 'email']
+    ]
+];
+```
+The key you register must match the `type()` of your class. By default, Kirby derives it from the class name: `AccessKeyMethod` becomes `access-key`, `SmsChallenge` becomes `sms`. Name your class accordingly or override `type()`.
+
+## Auth methods
+
+Auth methods extend the abstract `Kirby\Auth\Method` class:
+
+| Method | | Description |
+| --- | --- | --- |
+| `authenticate()` | required | Logs the user in and returns the `Kirby\Cms\User`, or creates a challenge and returns the pending `Kirby\Auth\Status` |
+| `form()` | needed for the Panel | The Vue component (and its props) for the login view |
+| `static icon()` | optional | Icon in the method picker, default: `key` |
+| `static isEnabled()` | optional | Whether the method can be used on this site, default: `true` |
+| `static settings()` | optional | `Kirby\Panel\Ui\Button` objects for the "Sign in methods" section of the user's security drawer |
+| `static type()` | optional | Identifier, derived from the class name |
+
+A method has two ways to finish:
+
+- **Log the user in** with `$user->loginPasswordless()` and return the user.
+- **Create a challenge** with `$this->auth->createChallenge()` and return the `Status` it gives you. The Panel then shows the challenge form. This is what the core `code` method does.
+
+### Example: log in with an access key
+
+Methods don't need an email address. This method logs users in with a personal access key in the format `<user id>.<secret>` and finds the user from the key itself:
+
+```php "/site/plugins/acme-auth/classes/AccessKeyMethod.php"
+<?php
+
+namespace Acme\Auth;
+
+use Kirby\Auth\Exception\LoginNotPermittedException;
+use Kirby\Auth\Method;
+use Kirby\Cms\User;
+use Kirby\Exception\PermissionException;
+use Kirby\Panel\Ui\Component;
+use SensitiveParameter;
+
+class AccessKeyMethod extends Method
+{
+    public function authenticate(
+        string|null $email,
+        #[SensitiveParameter]
+        string|null $password = null,
+        bool $long = false
+    ): User {
+        return $this->auth->guard(
+            // no email: the rate limit only applies to the IP address
+            email: null,
+            attempt: function () use ($password, $long) {
+                [$id, $secret] = explode('.', $password ?? '', 2) + ['', ''];
+
+                $user = $this->auth->kirby()->users()->find($id);
+                $hash = $user?->secret('accessKey');
+
+                if (
+                    is_string($hash) === false ||
+                    password_verify($secret, $hash) === false
+                ) {
+                    throw new PermissionException(message: 'Invalid access key');
+                }
+
+                $user->loginPasswordless([
+                    'createMode' => 'cookie',
+                    'long'       => $long
+                ]);
+
+                return $user;
+            },
+            // shown instead of the real error when auth debugging is off
+            fallback: new LoginNotPermittedException()
+        );
+    }
+
+    public function form(): Component
+    {
+        return new Component(
+            component: 'k-login-access-key-method-form',
+            submit: [
+                'icon'  => static::icon(),
+                'label' => static::i18n('login'),
+            ],
+        );
+    }
+}
+```
+
+How users get their key is up to your plugin, e.g. a drawer linked from `settings()` that stores a hash in the user's secrets with `$user->changeSecret('accessKey', password_hash($secret, PASSWORD_DEFAULT))`.
+
+The form is a regular Panel component:
+
+```html "/site/plugins/acme-auth/src/components/LoginAccessKeyMethodForm.vue"
+<template>
+  <form class="k-login-form" @submit.prevent="onSubmit">
+    <k-password-field
+      :autofocus="true"
+      :counter="false"
+      :label="$t('login.method.access-key.field')"
+      :required="true"
+      :value="accessKey"
+      name="accessKey"
+      @input="accessKey = $event"
+    />
+
+    <k-login-footer>
+      <k-login-remember :checked="long" @input="long = $event" />
+      <k-login-submit :icon="submit.icon" :label="submit.label" />
+    </k-login-footer>
+  </form>
+</template>
+
+<script>
+export default {
+  props: {
+    submit: Object
+  },
+  emits: ["submit"],
+  data() {
+    return {
+      accessKey: "",
+      long: false
+    };
+  },
+  methods: {
+    onSubmit() {
+      // `email`, `password` and `long` are passed to `authenticate()`
+      this.$emit("submit", { password: this.accessKey, long: this.long });
+    }
+  }
+};
+</script>
+```
+
+```js "/site/plugins/acme-auth/src/index.js"
+import LoginAccessKeyMethodForm from "./components/LoginAccessKeyMethodForm.vue";
+import LoginSmsChallengeForm from "./components/LoginSmsChallengeForm.vue";
+
+panel.plugin("acme/auth", {
+  components: {
+    "k-login-access-key-method-form": LoginAccessKeyMethodForm,
+    "k-login-sms-challenge-form": LoginSmsChallengeForm
+  }
+});
+```
+
+Building Panel plugins with Vue 3 is explained in (link: releases/6/migration/plugin-developers/vue-3 text: Vue 3 for Panel plugins).
+
+## Auth challenges
+
+Auth challenges extend the abstract `Kirby\Auth\Challenge` class. Unlike in Kirby 5, a challenge is an object: Kirby creates one for a specific user and purpose (`$mode`: `'login'`, `'password-reset'` or `'2fa'`).
+
+| Method | | Description |
+| --- | --- | --- |
+| `create()` | required | Generates and sends the code (or whatever your challenge needs) and returns the data to verify it later. Return `null` if there's nothing to remember, e.g. for codes generated by an app. |
+| `verify()` | required | Checks the user's input against the data from `create()` |
+| `form()` | needed for the Panel | The Vue component (and its props) for the login view |
+| `static icon()` | optional | Icon in the challenge switcher, default: `key` |
+| `static isAvailable()` | optional | Whether the user can use this challenge for this purpose, default: `true` |
+| `static isEnabled()` | optional | Whether the challenge can be used on this site at all, default: `true` |
+| `isSingleUse()` | optional | Return `true` if a failed attempt must discard the pending challenge (e.g. a signed nonce), default: `false` |
+| `static settings()` | optional | `Kirby\Panel\Ui\Button` objects for the "Two-factor methods" section of the user's security drawer |
+| `type(): string` | optional | Identifier, derived from the class name |
+
+### The `Pending` object
+
+`create()` returns a `Kirby\Auth\Pending` object with two optional slots:
+
+```php
+use Kirby\Auth\Pending;
+
+return new Pending(
+    // sent to the Panel, e.g. a masked phone number
+    public: '•••• 1234',
+    // stays in the session, only passed to verify()
+    secret: password_hash($code, PASSWORD_DEFAULT)
+);
+```
+
+Both end up in the session, so only use strings, numbers and arrays. You get the same object back in `form()` and `verify()`. Kirby 5 hashed the code for you. In Kirby 6, hashing is your job: never put a plain code into `secret`.
+
+Kirby checks the timeout before it calls `verify()` and rate-limits every attempt. A wrong code can be retried until the challenge times out, unless `isSingleUse()` returns `true`.
+
+### Availability means "set up"
+
+In Kirby 6, every user can opt into a second factor (see (link: releases/6/authentication#two-factor-authentication text: two-factor for every user)). Kirby considers a second factor as set up when `isAvailable($user, '2fa')` returns `true`. Such users are asked for it after every password login, even if the site doesn't set `'2fa' => true`.
+
+If your challenge is available for every user (e.g. everybody with a phone number), make the `2fa` mode opt-in: store a flag in the user's secrets once the user has confirmed the factor, and check it in `isAvailable()`. The core email challenge does exactly that with `$user->secret('email')`. Add a `settings()` button so users can turn the factor on and off in their security drawer.
+
+For the `login` and `password-reset` modes, Kirby only offers challenges that the user has also set up as second factor (if they have any), so a password reset can never be weaker than the user's 2FA setup.
+
+## How the login view renders your form
+
+The Panel login view is driven by the backend. Each step has its own route:
+
+- `/panel/login/method/{type}` renders the `form()` of the method,
+- `/panel/login/challenge/{type}` renders the `form()` of the active challenge.
+
+`form()` returns a `Kirby\Panel\Ui\Component`. Its first argument is the name of a Vue component, all other named arguments become its props. Your component receives these props and talks to the view through two events:
+
+- `submit` with the form data. The view sends it to the backend. For methods, Kirby reads `email`, `password` and `long` and calls `Auth::authenticate($type, $email, $password, $long)`: put any secret your method needs into `password` (the passkey method sends its JSON-encoded assertion there). For challenges, Kirby reads `code` and passes it to `verify()`. It can be anything JSON can carry.
+- `error` with an object that has a `message`. The view shows it above the form.
+
+After a successful method, the view either opens the Panel or moves on to the challenge. The method picker and the challenge switcher below the form are rendered by the view, with the `icon()` of each class and the translation `login.method.{type}.label` or `login.challenge.{type}.label` as text. Add these translations to your plugin.
+
+You can build your form from the same pieces as the core forms:
+
+| Component | |
+| --- | --- |
+| `<k-login-footer>` | Footer row, with a "Back" button if you pass `:back="true"` (for challenges) |
+| `<k-login-submit>` | Submit button with `icon`, `label` and `loading` props |
+| `<k-login-remember>` | "Keep me logged in" checkbox for methods |
+| `<k-login-code>` | One-time code field. With `type="sms"`, it uses the translations `login.code.label.sms`, `login.code.text.sms` and `login.code.placeholder.sms`. |
+| `<k-login-back>` | The "Back" button on its own |
+
+Add the class `k-login-form` to your `<form>` to get the same box as the core forms. For more examples, look at the core forms in `panel/src/components/Views/Login/` of the Kirby source, e.g. `LoginEmailChallengeForm.vue`, and their PHP counterparts in `src/Auth/Method/` and `src/Auth/Challenge/`.
+
+## Entries in the security drawer
+
+Your method or challenge can show up in the user's (link: releases/6/authentication#security-drawer text: security drawer), right next to the core entries. That's where users set up and manage it, e.g. enter the phone number for an SMS challenge or create their access key.
+
+Return one or more `Kirby\Panel\Ui\Button` objects from the static `settings()` method. Kirby calls it for every enabled method and challenge: buttons of methods appear under **Sign in methods**, buttons of challenges under **Two-factor methods**.
+
+```php "/site/plugins/acme-auth/classes/SmsChallenge.php"
+use Kirby\Cms\User;
+use Kirby\Panel\Ui\Button;
+
+class SmsChallenge extends Challenge
+{
+    // …
+
+    public static function settings(User $user): array
+    {
+        return [
+            new Button(
+                icon:   static::icon(),
+                text:   static::i18n('login.challenge.sms.label'),
+                dialog: $user->panel()->url(true) . '/security/challenge/sms'
+            )
+        ];
+    }
+}
+```
+
+The button opens a dialog or drawer that your plugin registers itself. `$user->panel()->url(true)` points to `/account` for the logged-in user and to `/users/(id)` for everyone else, so register your route in both areas, like the core does for its own entries:
+
+- `users` area: `users/(:any)/security/challenge/sms`
+- `account` area: `(account)/security/challenge/sms`
+
+Both patterns pass the user ID (or `account`) to your route, and `Kirby\Cms\Find::user($id)` returns the right user for either. Read (link: releases/6/migration/plugin-developers/panel-backend text: Panel backend: areas, controllers & UI classes) for how to define dialogs and drawers in Kirby 6.
+
+Without a `settings()` method, your method or challenge works at login, but doesn't show up in the security drawer.
+
+## Migrating a Kirby 5 challenge
+
+A custom challenge for Kirby 5 extends `Kirby\Cms\Auth\Challenge`. This class no longer exists, so the plugin breaks with a "class not found" error until you update it. Here is an SMS challenge before and after.
+
+### Before: Kirby 5
+
+```php "/site/plugins/acme-auth/classes/SmsChallenge.php"
+<?php
+
+namespace Acme\Auth;
+
+use Kirby\Cms\Auth\Challenge;
+use Kirby\Cms\User;
+use Kirby\Toolkit\Str;
+
+class SmsChallenge extends Challenge
+{
+    public static function isAvailable(User $user, string $mode): bool
+    {
+        return $user->content()->get('phone')->isNotEmpty();
+    }
+
+    public static function create(User $user, array $options): string
+    {
+        $code = Str::random(6, 'num');
+
+        // your SMS provider's client
+        Gateway::send(
+            $user->content()->get('phone')->value(),
+            'Your login code: ' . $code
+        );
+
+        // Kirby hashed the returned code and stored it in the session
+        return $code;
+    }
+
+    // no verify(): the base class compared the input
+    // with the hashed code from the session
+}
+```
+
+```php "/site/plugins/acme-auth/index.php"
+Kirby::plugin('acme/auth', [
+    'authChallenges' => [
+        'sms' => Acme\Auth\SmsChallenge::class
+    ],
+    'translations' => [
+        'en' => [
+            'login.code.placeholder.sms' => '000000',
+            'login.code.text.sms'        => 'We sent a code to your phone.'
+        ]
+    ]
+]);
+```
+
+### After: Kirby 6
+
+```php "/site/plugins/acme-auth/classes/SmsChallenge.php"
+<?php
+
+namespace Acme\Auth;
+
+use Kirby\Auth\Challenge;
+use Kirby\Auth\Pending;
+use Kirby\Cms\User;
+use Kirby\Panel\Ui\Component;
+use Kirby\Toolkit\Str;
+use SensitiveParameter;
+
+class SmsChallenge extends Challenge
+{
+    public static function isAvailable(User $user, string $mode): bool
+    {
+        return $user->content()->get('phone')->isNotEmpty();
+    }
+
+    public function create(): Pending
+    {
+        $code  = Str::random(6, 'num');
+        $phone = $this->user->content()->get('phone')->value();
+
+        // your SMS provider's client
+        Gateway::send($phone, 'Your login code: ' . $code);
+
+        return new Pending(
+            public: '•••• ' . substr($phone, -4),
+            secret: password_hash($code, PASSWORD_DEFAULT)
+        );
+    }
+
+    public function form(Pending $pending): Component
+    {
+        return new Component(
+            component: 'k-login-sms-challenge-form',
+            submit:    $this->submit(),
+            phone:     $pending->public(),
+            user:      $this->user->email(),
+        );
+    }
+
+    public static function icon(): string
+    {
+        return 'mobile';
+    }
+
+    public function verify(
+        #[SensitiveParameter]
+        mixed $input,
+        Pending $data
+    ): bool {
+        $hash = $data->secret();
+
+        if (is_string($input) === false || is_string($hash) === false) {
+            return false;
+        }
+
+        return password_verify(str_replace(' ', '', $input), $hash);
+    }
+}
+```
+
+With `isAvailable()` as above, every user with a phone number is asked for an SMS code after their password. Make the `2fa` mode opt-in as described in (link: releases/6/migration/plugin-developers/auth#auth-challenges__availability-means-set-up text: Availability means "set up") if that's not what you want.
+
+```php "/site/plugins/acme-auth/index.php"
+Kirby::plugin('acme/auth', [
+    'authChallenges' => [
+        'sms' => Acme\Auth\SmsChallenge::class
+    ],
+    'translations' => [
+        'en' => [
+            'login.challenge.sms.label'  => 'Code via SMS',
+            'login.code.label.sms'       => 'Code from SMS',
+            'login.code.placeholder.sms' => '000000',
+            'login.code.text.sms'        => 'We sent a code to { phone }.'
+        ]
+    ]
+]);
+```
+
+Kirby 5 rendered the same generic code form for every challenge. In Kirby 6, the challenge brings its own:
+
+```html "/site/plugins/acme-auth/src/components/LoginSmsChallengeForm.vue"
+<template>
+  <form class="k-login-form" @submit.prevent="onSubmit">
+    <k-user-info :user="user" />
+
+    <k-text-field
+      :autofocus="true"
+      :counter="false"
+      :help="$t('login.code.text.sms', { phone })"
+      :label="$t('login.code.label.sms')"
+      :placeholder="$t('login.code.placeholder.sms')"
+      :required="true"
+      :value="code"
+      autocomplete="one-time-code"
+      icon="unlock"
+      name="code"
+      @input="code = $event"
+    />
+
+    <k-login-footer :back="true">
+      <k-login-submit :icon="submit.icon" :label="submit.label" />
+    </k-login-footer>
+  </form>
+</template>
+
+<script>
+export default {
+  props: {
+    phone: String,
+    submit: Object,
+    user: String
+  },
+  emits: ["submit"],
+  data() {
+    return {
+      code: ""
+    };
+  },
+  methods: {
+    onSubmit() {
+      this.$emit("submit", { code: this.code });
+    }
+  }
+};
+</script>
+```
+
+If you don't need the phone number in the form, `<k-login-code type="sms" :value="code" @input="code = $event" />` replaces the whole `<k-text-field>`.
+
+## Replacing the login form
+
+In Kirby 5, a plugin could replace the whole login form with the `login` extension of `panel.plugin()`. This extension has been removed in Kirby 6, together with the `<k-login-form>` and `<k-login-code-form>` components and the deprecated aliases `<k-login>` and `<k-login-code>`.
+
+Write an auth method instead and return your form from its `form()` method. Your method then appears next to the core methods, and site developers decide in `auth.methods` whether it's the only one, the first one or an alternative.
+
+## Rate limiting with `Auth::guard()`
+
+`$kirby->auth()->guard()` wraps any login attempt in Kirby's brute-force protection:
+
+```php
+$user = $kirby->auth()->guard(
+    email:    $email,   // or null to only limit by IP address
+    attempt:  fn () => $this->checkCredentials(),
+    fallback: new LoginNotPermittedException()
+);
+```
+
+1. It checks whether the IP address (and the email address, if you pass one) has used up its `auth.trials` within `auth.timeout`. If so, the attempt fails with a `RateLimitException` without running `$attempt`.
+2. It runs `$attempt` and returns its result.
+3. If anything fails, it counts the failed attempt (except for rate limit hits), which also triggers the `user.login:failed` hook. It then waits a random amount of time and throws `$fallback` instead of the real error. The real error only comes through with `'auth.debug' => true`. By default (`'auth.debug' => 'log'`), it is written to the PHP error log. Without a `$fallback`, `guard()` returns `null` in that case.
+
+Use it in every custom method or route that checks credentials, so attackers can't tell why an attempt failed or brute-force your method. Before a method's `authenticate()` runs, Kirby already rejects IP addresses that are blocked.
+
+Find all other changes to the auth system in the (link: releases/6/changelog#breaking-changes__auth text: changelog) and the (link: releases/6/migration/plugin-developers text: migration guide for plugin developers).

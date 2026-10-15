@@ -7,10 +7,14 @@
 
 <?php slot('sidebar') ?>
 <?php $release = $page->release() ?>
-<?php snippet('sidebar', [
-	'title' => $release->title(),
-	'link'  => $release->url(),
-	'menu'  => $release->children()->listed(),
+<?php snippet([
+	'templates/release-' . $release->versionField() . '/sidebar',
+	'sidebar'
+], [
+	'release' => $release,
+	'title'   => $release->title(),
+	'link'    => $release->url(),
+	'menu'    => $release->children()->listed(),
 ]) ?>
 <?php endslot() ?>
 
@@ -54,26 +58,24 @@
 		<?= $page->text()->kt() ?>
 	</div>
 
-	<?php snippet('templates/release-5/changelog', [
-		'title'   => '✨ Enhancements',
-		'changes' => $page->enhancements()
-	]) ?>
-	<?php snippet('templates/release-5/changelog', [
-		'title'   => '🐛 Bugfixes',
-		'changes' => $page->bugfixes()
-	]) ?>
-	<?php snippet('templates/release-5/changelog', [
-		'title'   => '⚠️ Breaking changes',
-		'changes' => $page->breaking()
-	]) ?>
-	<?php snippet('templates/release-5/changelog', [
-		'title'   => '☠️ Deprecated',
-		'changes' => $page->deprecated()
-	]) ?>
-	<?php snippet('templates/release-5/changelog', [
-		'title'   => '♻️ Refactored',
-		'changes' => $page->refactored()
-	]) ?>
+	<?php foreach ([
+		'features'     => '🎉 Features',
+		'enhancements' => '✨ Enhancements',
+		'security'     => '🔒 Security',
+		'performance'  => '🏎️ Performance',
+		'bugfixes'     => '🐛 Bugfixes',
+		'breaking'     => '⚠️ Breaking changes',
+		'deprecated'   => '☠️ Deprecated',
+		'refactored'   => '♻️ Refactored',
+		'housekeeping' => '🧹 Housekeeping',
+	] as $field => $title): ?>
+		<?php if ($page->content()->get($field)->isNotEmpty()): ?>
+		<?php snippet('templates/release-5/changelog', [
+			'title'   => $title,
+			'changes' => $page->content()->get($field)
+		]) ?>
+		<?php endif ?>
+	<?php endforeach ?>
 </section>
 
 <?php endslot() ?>

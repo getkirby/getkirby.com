@@ -1,0 +1,96 @@
+Title: For editors
+
+----
+
+Intro: What changes for everyone who works in the Panel every day, and what to tell your team before the switch to Kirby 6.
+
+----
+
+Text:
+
+## Before the switch: tell your team
+
+A short heads-up saves you a few support questions:
+
+- **Everybody has to log in again once.** Kirby 6 protects login cookies with a stronger method and no longer accepts the old ones. After the update, every user sees the login screen, even if they ticked "Keep me logged in" before.
+- **Check your browser.** The Panel needs a browser from roughly mid-2024 or newer: Chrome or Edge 124, Firefox 125, Safari 17.5 (also on iPhone and iPad) or newer. If a browser is too old, the Panel shows a page that names the versions it needs. Updating the browser is all it takes.
+- **The menu for your password has moved.** "Change password" is now part of the new **Security** settings of your account (see below).
+- **It's a beta.** While Kirby 6 is in beta, your developer will test it on a copy of your site, not on your live site. Changes you make in the test copy won't show up on the live site.
+
+## Logging in
+
+The login screen has been rebuilt. You log in just like before, with a few additions:
+
+- **More than one way to log in:** if your site offers several ways to log in, the other options are listed below the form, e.g. "Login with passkey" or "Forgot your password?".
+- **Switch your second factor:** if you're asked for a second step, e.g. a code from your authenticator app, you can switch to another method you have set up, e.g. a code via email, without starting over.
+
+Read more about the (link: releases/6/authentication#new-login-view text: new login view).
+
+## Your security settings
+
+Everything about how you log in now lives in one place:
+
+1. Open **Your account** from the Panel menu.
+2. Open the settings menu of your account.
+3. Choose **Security**.
+
+The security drawer shows your email address and password, and the second factors your site offers. Depending on how your site is set up, you'll find some or all of these options:
+
+- **Email** and **Password:** change your email address or password.
+- **Passkeys:** confirm your login with your fingerprint, face or device PIN.
+- **Authenticator app:** use one-time codes from an app on your phone as a second factor.
+- **Code via email:** receive a one-time code by email as a second factor.
+
+Read more about (link: releases/6/authentication#security-drawer text: the security drawer).
+
+### Passkeys
+
+A passkey lets you log in with your device, e.g. with your fingerprint, face or the PIN of your computer or phone. Depending on how your site is set up, a passkey replaces your password or serves as a second step after your password. To add one, open the security drawer, choose **Passkeys** and create a new passkey. Give it a name you recognize later, e.g. "work laptop".
+
+### Two-factor authentication for your own account
+
+In Kirby 5, two-factor authentication was all or nothing: either your developer turned it on for everybody, or nobody could use it. In Kirby 6, **you can turn it on for your own account**, even if it isn't required on your site.
+
+Open the security drawer and set up one of the second factors:
+
+- **Authenticator app:** scan the QR code with an authenticator app on your phone and confirm with the code the app shows.
+- **Passkey:** create a passkey as described above.
+- **Code via email:** confirm that you receive emails from the Panel.
+
+From then on, the Panel asks you for this second factor every time you log in with your password.
+
+If your site requires two-factor authentication for everybody, nothing changes for you: users who haven't set up a passkey or an authenticator app get a code via email.
+
+Read more about (link: releases/6/authentication#two-factor-authentication text: two-factor authentication for every user).
+
+## Editing content
+
+### Edit right next to a live preview
+
+The preview button in the header of a page now opens the **live editor**: the page as it will look on your site on one side, the fields on the other. Your changes show up in the preview while you type. You can even move the preview to a second window or check it in different screen sizes.
+
+Read more about the (link: releases/6/preview-view text: preview view).
+
+### Unsaved changes are highlighted
+
+When you change a field, its label gets an orange underline until you save or discard your changes. This way, you see at a glance which fields you've touched.
+
+### Typing dates and times
+
+Date and time fields now read what you type in exactly the format they display, e.g. `31.12.2026` if the field shows dates like that. The empty field shows an example of the expected format.
+
+If the Panel can't read what you typed, it keeps your input and marks the field as invalid instead of silently clearing it. Correct the date and you're good to go. Month names like "March" or "Mar" work too, in English and in the language of your Panel UI.
+
+### Clearer error messages
+
+Kirby 6 is built to tell you why the Panel can't do something:
+
+- Actions that are not possible explain themselves, e.g. "The home page cannot be deleted" instead of a generic "You are not allowed to do this".
+- If a field can't be loaded, e.g. because of a setup problem, the Panel shows an error in place of that field instead of breaking the whole page.
+- When fields contain invalid values, e.g. when you try to publish a page, the Panel lists the problems in a clearer dialog.
+
+Read more about (link: releases/6/error-handling text: better errors in the Panel).
+
+### Upload files right in the file picker
+
+When you select files for a field, you can drag files from your computer onto the dialog to upload them.

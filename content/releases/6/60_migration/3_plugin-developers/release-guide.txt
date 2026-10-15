@@ -1,0 +1,365 @@
+Title: For plugin developers
+
+----
+
+Intro: Everything you need to bring your plugin to Kirby 6: what breaks, how to spot it and what to change. Start with the triage list, then work through the sections that apply to your plugin.
+
+----
+
+Text:
+
+Kirby 6 is a major release with breaking changes. For most plugins, a handful of them matter: the Panel now runs on Vue 3, custom fields are PHP classes, sections are gone and the Panel backend has been rebuilt from static helpers into objects and controller classes.
+
+The complete list is in the (link: releases/6/changelog#breaking-changes text: changelog). If you also maintain sites, the (link: releases/6/migration/site-developers text: guide for site developers) covers the project side.
+
+## Start here
+
+Find your plugin type below and follow the links. Most plugins combine several types, e.g. a field plugin with a Panel component and a KirbyTag.
+
+- **Field plugins:** Array-based field definitions are gone. Rewrite the PHP side as a (link: #custom-fields text: class) based on `Kirby\Form\Field` and rebuild the Vue component for Vue 3. Deep dives: (link: releases/6/migration/plugin-developers/fields text: Custom fields as PHP classes), (link: releases/6/migration/plugin-developers/vue-3 text: Vue 3 for Panel plugins).
+- **Section plugins:** Custom sections are no longer supported. Port them to fields: (link: #custom-sections text: what changes), (link: releases/6/migration/plugin-developers/sections text: Porting custom sections to fields).
+- **Panel UI plugins** (areas, views, dialogs, drawers, dropdowns, searches, view buttons): Your closures keep working. Static `Kirby\Panel\Panel` methods, a few area options, the "Fiber" naming and some core patterns have changed. Rebuild your Vue code for Vue 3 (see (link: #panel-frontend text: Panel frontend)). Read the (link: #panel-backend text: Panel backend summary) and (link: releases/6/migration/plugin-developers/panel-backend text: Panel backend: areas, controllers & UI classes).
+- **Block plugins:** Rebuild your preview components for Vue 3. Check your (link: #blueprints-shipped-with-your-plugin text: block blueprints) for presets and sections. The `image`, `gallery` and `video` block previews receive the file UUID now instead of the full file data.
+- **KirbyTag, hook, method and route plugins** (PHP only): Usually the quickest to migrate. Check (link: #php-8-3-and-stricter-types text: PHP 8.3), (link: #field-methods text: field methods) and (link: #exceptions text: exceptions). These plugins can often support Kirby 5 and 6 from one codebase.
+- **Auth plugins** (custom challenges, custom login UI): Custom challenges must be rewritten based on `Kirby\Auth\Challenge`, the `login` Panel extension is gone. See (link: #auth-plugins text: Auth plugins) and (link: releases/6/migration/plugin-developers/auth text: Custom auth methods & challenges).
+- **Plugins that extend or call core classes** (page models, custom collections, `Form`, `Blueprint`, Panel classes): Check the (link: #moved-and-renamed-classes text: moved classes), (link: #php-8-3-and-stricter-types text: typed class constants), (link: #permissions-become-guards text: guards) and (link: #panel-backend text: Panel backend).
+
+## First example migrations
+
+We've started migrating a first few popular plugins to get a feel for the effort that it takes. You can take a look at the PRs for reference.
+
+- Table Field: https://github.com/bogdancondorachi/kirby-table-field/pull/30
+- Markdown Field: https://github.com/fabianmichael/kirby-markdown-field/pull/206
+- Locator Field: https://github.com/sylvainjule/kirby-locator/pull/69
+- Modules: https://github.com/medienbaecker/kirby-modules/pull/74
+- Retour: https://github.com/distantnative/retour-for-kirby/pull/389
+
+## Deep dives
+
+The bigger topics have their own guides:
+
+- (link: releases/6/migration/plugin-developers/vue-3 text: Vue 3 for Panel plugins): how Kirby loads your plugin now, the build setup with kirbyup 4, the Vue changes that matter for Kirby plugins and all other breaking changes in the Panel frontend
+- (link: releases/6/migration/plugin-developers/fields text: Custom fields as PHP classes): base classes, props, values, validation and API routes, with a Kirby 5 field ported step by step
+- (link: releases/6/migration/plugin-developers/sections text: Porting custom sections to fields): turn your section into a field that also supports `when` conditions and `width`
+- (link: releases/6/migration/plugin-developers/trusted-html text: Trusted HTML in the Panel): mark the HTML your plugin produces with `Kirby\Toolkit\HtmlString`, `$h()`, `$th()` and `v-safe-html`
+- (link: releases/6/migration/plugin-developers/auth text: Custom auth methods & challenges): bring your own login method or second factor, with a form in the Panel login view and an entry in the security drawer
+- (link: releases/6/migration/plugin-developers/panel-backend text: Panel backend: areas, controllers & UI classes): controller classes and UI objects for views, dialogs, drawers and more, with a complete Panel area in its Kirby 5 and Kirby 6 version
+
+<info>
+Some of the new APIs, especially the Panel controller classes, are still marked as `@unstable` in beta.1 and may change until the final release.
+</info>
+
+## Declaring Kirby 6 support
+
+### Your `composer.json`
+
+Declare the Kirby versions your plugin supports in `extra.kirby.compatible`.  Our (link: https://plugins.getkirby.com text: plugin directory) reads it to show which Kirby versions your plugin supports:
+
+```json "/site/plugins/your-plugin/composer.json"
+{
+	"name": "acme/kirby-todos",
+	"type": "kirby-plugin",
+	"version": "2.0.0",
+	"require": {
+		"php": "~8.3.0 || ~8.4.0 || ~8.5.0",
+		"getkirby/composer-installer": "^1.2"
+	},
+	"extra": {
+		"kirby": {
+			"compatible": "^6.0"
+		}
+	}
+}
+```
+
+If one version of your plugin supports both majors, use `"^5.0 || ^6.0"` and keep your PHP constraint wide enough for Kirby 5 (PHP 8.2). A constraint like `^6.0` also matches pre-releases such as `6.0.0-beta.1`.
+
+All details are in our guide on (link: docs/guide/plugins/publishing#kirby-versions-support text: declaring which Kirby versions you support).
+
+### One codebase or a new major version?
+
+Whether your plugin can support Kirby 5 and 6 at the same time depends on what it contains:
+
+| Your plugin contains … | One codebase for Kirby 5 and 6? |
+| - | - |
+| PHP only: KirbyTags, hooks, page/field methods, routes, snippets, blueprints | Usually yes. Use APIs that exist in both versions (see the tips in each section below). |
+| Panel areas, dialogs, dropdowns etc. defined with closures | Yes. Closures returning arrays work in both. Controller classes and UI objects are Kirby 6 only. |
+| Vue components compiled with a build tool (single file components) | No. Vue 2 and Vue 3 builds are not interchangeable. |
+| Custom fields or sections | No. The PHP side has changed completely. |
+
+If you need both, release Kirby 6 support as a new major version of your plugin and keep the old major for Kirby 5. That's also what the plugin directory expects: it reads the supported Kirby versions per release line.
+
+For small differences in PHP, you can check the Kirby version at runtime:
+
+```php
+if (version_compare(Kirby::version(), '6.0.0', '>=') === true) {
+	// Kirby 6 code
+}
+```
+
+## PHP 8.3 and stricter types
+
+Kirby 6 requires PHP 8.3, 8.4 or 8.5. PHP 8.2 is no longer supported. Update the `php` constraint in your `composer.json` and your CI matrix.
+
+### Signatures and return types
+
+When you extend core classes, compare your property and method signatures with the Kirby 6 source to ensure you are using the same type hints. The full tables of changes are in the changelog: (link: releases/6/changelog#breaking-changes__core__changed-return-types text: changed return types), (link: releases/6/changelog#breaking-changes__core__changed-exceptions text: changed exceptions) and (link: releases/6/changelog#breaking-changes__core__methods-that-newly-throw text: methods that newly throw).
+
+## Moved and renamed classes
+
+Several classes have moved into new namespaces. Some old names still resolve through a deprecated class alias in beta.1, others are gone:
+
+| Kirby 5 | Kirby 6 | Old name in beta.1 |
+| - | - | - |
+| `Kirby\Cms\Blueprint`, `Kirby\Cms\PageBlueprint`, `Kirby\Cms\SiteBlueprint`, `Kirby\Cms\FileBlueprint`, `Kirby\Cms\UserBlueprint` | `Kirby\Blueprint\Blueprint`, `Kirby\Blueprint\PageBlueprint` … | deprecated alias |
+| `Kirby\Cms\Auth` | `Kirby\Auth\Auth` | deprecated alias |
+| `Kirby\Cms\Auth\Status` | `Kirby\Auth\Status` | deprecated, but `$kirby->auth()->status()` returns the new class |
+| `Kirby\Cms\Auth\Challenge`, `EmailChallenge`, `TotpChallenge` | `Kirby\Auth\Challenge`, `Kirby\Auth\Challenge\EmailChallenge`, `Kirby\Auth\Challenge\TotpChallenge` | removed |
+| `Kirby\Cms\Api` | `Kirby\Api\Api` | alias |
+| `Kirby\Field\FieldOptions` | `Kirby\Form\FieldOptions` | removed |
+| `Kirby\Session\SessionData`, `SessionStore`, `FileSessionStore` | `Kirby\Session\Data`, `Store`, `FileStore` | deprecated alias |
+| `Kirby\Session\AutoSession` | `Kirby\Session\Sessions` | removed |
+| `Kirby\Form\FieldClass`, `Kirby\Form\Mixin\Value` | `Kirby\Form\Field`, `Kirby\Form\Field\ValueField` | removed |
+| `Kirby\Cms\Picker`, `PagePicker`, `FilePicker`, `UserPicker` | `Kirby\Panel\Controller\Dialog\ModelPickerDialogController`, `PagePickerDialogController`, `FilePickerDialogController`, `UserPickerDialogController` | removed |
+| `Kirby\Blueprint\Section`, `Kirby\Cms\Section` | – | removed |
+| `Kirby\Panel\Ui\Buttons\*`, `Kirby\Panel\Ui\FilePreviews\*` | `Kirby\Panel\Ui\Button\*`, `Kirby\Panel\Ui\FilePreview\*` | partly aliased, see (link: #panel-backend text: Panel backend) |
+
+### Blueprint classes
+
+Besides the new namespace, `Blueprint::factory()` takes the model as first argument now:
+
+```php
+// Kirby 5
+$blueprint = PageBlueprint::factory('pages/article', null, $page);
+
+// Kirby 6
+$blueprint = PageBlueprint::factory($page, 'pages/article');
+
+// Kirby 5 and 6
+$blueprint = PageBlueprint::factory(
+	name: 'pages/article',
+	fallback: null,
+	model: $page
+);
+```
+
+Prefer `$page->blueprint()` where you can.
+
+### Sessions
+
+`Kirby\Session\AutoSession` has been merged into `Kirby\Session\Sessions`:
+
+```php
+// Kirby 5
+$session = $kirby->sessionHandler()->get($token);
+
+// Kirby 6
+$session = $kirby->sessions()->find($token);
+```
+
+All deprecated session methods are listed in the (link: releases/6/changelog#deprecated__core__sessions text: changelog).
+
+## Field methods
+
+Field methods are real methods of `Kirby\Content\Field` now. Registering your own still works the same way:
+
+```php "/site/plugins/your-plugin/index.php"
+Kirby::plugin('acme/shout', [
+	'fieldMethods' => [
+		'shout' => function ($field, string $suffix = '!') {
+			return strtoupper($field->value) . $suffix;
+		}
+	]
+]);
+```
+
+What has changed:
+
+- **Unknown methods throw:** Calling a field method that doesn't exist throws a `Kirby\Exception\BadMethodCallException`. In Kirby 5, `$page->tilte()->doSomething()` silently returned the field. Check your code for typos and for methods from plugins that may not be installed.
+- **Core methods can't be replaced:** A custom field method with the name of a core method (e.g. `upper` or `toDate`) is ignored now. The core method always wins. Give your method its own name.
+- **Aliases are methods:** `Kirby\Content\Field::$aliases`, `Kirby\Cms\Core::fieldMethods()` and `Kirby\Cms\Core::fieldMethodsAliases()` have been removed. The short aliases (`kt()`, `bool()`, `int()` …) keep working as regular methods.
+
+## Exceptions
+
+Kirby exceptions no longer accept a single array argument. Use named arguments, which also work in Kirby 5:
+
+```php
+// Kirby 5
+throw new InvalidArgumentException([
+	'key'  => 'acme.todos.invalid',
+	'data' => ['id' => $id]
+]);
+
+// Kirby 5 and 6
+throw new InvalidArgumentException(
+	key: 'acme.todos.invalid',
+	data: ['id' => $id]
+);
+```
+
+Also see (link: releases/6/changelog#breaking-changes__core__changed-exceptions text: changed exceptions).
+
+## Permissions become guards
+
+Kirby 6 introduces (link: releases/6/guards text: guards): one place that answers whether an action is possible, allowed for the current user and valid for the given input. `$model->permissions()`, the permission classes behind it and the `*Rules` classes are deprecated, but keep working in beta.1:
+
+```php
+// Kirby 5 (deprecated in Kirby 6)
+if ($page->permissions()->can('delete') === true) {
+	// show the delete button
+}
+
+PageRules::changeTitle($page, $title);
+
+// Kirby 6
+if ($page->guards()->isAvailable('delete') === true) {
+	// show the delete button
+}
+
+$page->guards()->ensureExecutable('changeTitle', $title);
+```
+
+## Custom fields
+
+Custom fields can no longer be defined as arrays. Every field is a class based on `Kirby\Form\Field` or one of its base classes (`Kirby\Form\Field\DisplayField`, `ValueField`, `InputField`, …), registered by its class name. To extend a core field, extend its class:
+
+```php
+// Kirby 5
+Kirby::plugin('acme/handle', [
+	'fields' => [
+		'handle' => [
+			'extends' => 'text',
+			'props'   => [
+				'icon' => fn (string $icon = 'user') => $icon
+			]
+		]
+	]
+]);
+```
+
+```php
+// Kirby 6
+use Kirby\Form\Field\TextField;
+
+class HandleField extends TextField
+{
+	protected string|null $icon = 'user';
+}
+
+Kirby::plugin('acme/handle', [
+	'fields' => [
+		'handle' => HandleField::class
+	]
+]);
+```
+
+Options are typed properties with the `#[Prop]` attribute. A redeclared property like `$icon` keeps the attribute of the parent class.
+
+The field type sent to the Panel, and thus the Vue component, is the name you register the field with: `handle` → `<k-handle-field>`.
+
+All of this is covered step by step in (link: releases/6/migration/plugin-developers/fields text: Custom fields as PHP classes).
+
+### Using forms in PHP
+
+If your plugin uses `Kirby\Form\Form` directly, the deprecated methods are gone and the constructor no longer accepts a `$props` array:
+
+```php
+// Kirby 5
+$form   = new Form(['fields' => $fields, 'model' => $page, 'values' => $values]);
+$values = $form->values();
+$data   = $form->data();
+
+// Kirby 5 and 6
+$form   = new Form(fields: $fields, model: $page);
+$form->fill(input: $values);
+$values = $form->toFormValues();
+$data   = $form->toStoredValues();
+```
+
+`Form::content()` becomes `toStoredValues()`, `Form::values()` becomes `toFormValues()`, and `Form::data()`/`Form::strings()` become `toStoredValues()` together with `fill(defaults: true)` (the `$defaults` argument of `fill()` is new in Kirby 6). `Form::validate()` throws a `Kirby\Exception\FormValidationException`.
+
+## Custom sections
+
+Sections have been replaced by fields. The core `pages`, `files`, `info`, `stats` and `fields` sections are converted automatically. Everything else is gone:
+
+- The `sections` plugin extension has been removed.
+- A blueprint that uses your section type shows an "Invalid section type" error box in its place.
+- `Kirby\Blueprint\Section`, `Blueprint::section()`, `Blueprint::sections()`, `Kirby\Api\Api::sectionApi()` and all `…/sections/…` API, dialog and drawer routes have been removed.
+- On the frontend, `<k-sections>`, all section components and the `section` mixin are gone. The `section.loaded` event is now `field.loaded`.
+- Sections and fields share one namespace in a blueprint now. A section and a field with the same name collide.
+
+Most custom sections become a field based on `Kirby\Form\Field\DisplayField`, which supports `when` conditions and `width` for free. The porting guide walks you through it: (link: releases/6/migration/plugin-developers/sections text: Porting custom sections to fields).
+
+## Blueprints shipped with your plugin
+
+If your plugin registers blueprints (pages, files, blocks, …), check them for these changes:
+
+- **Presets:** `preset: page`, `preset: pages` and `preset: files` have been removed. Define the layout directly, e.g. with `pagelist` and `filelist` fields.
+- **Sections:** `pages` and `files` sections keep working, but are converted into `pagelist` and `filelist` fields. Use the fields directly if your plugin is Kirby 6 only.
+- **Picker fields:** `type: pages`, `files` and `users` are deprecated aliases of `pagepicker`, `filepicker` and `userpicker`. They only work in blueprints. In PHP, e.g. in `Field::resolve()` or in field definitions for `new Form()`, use the full names.
+- **YAML:** Kirby 6 parses YAML with Symfony YAML, which is stricter than the old Spyc parser in a few places. Test the YAML blueprints your plugin registers with Kirby 6 and fix the (link: releases/6/migration/site-developers#yaml-symfony-is-the-new-default-parser text: common YAML issues).
+- **Option fields:** Move `api` and `query` options into `options` (see above). The `text => value` notation for `color` field options has been removed, use `value => text`.
+
+More in (link: releases/6/blueprints text: Simpler blueprints).
+
+## Auth plugins
+
+The auth system has moved to the new `Kirby\Auth` namespace and was rebuilt around auth methods and auth challenges:
+
+- **Custom challenges** must be rewritten based on the instance-based `Kirby\Auth\Challenge` class. They are still registered with the `authChallenges` extension and need a `form()` for the Panel login.
+- **Custom login methods** are new: register them with the `authMethods` extension. Registered methods and challenges must also be enabled in the `auth.methods` and `auth.challenges` options, and their registry key must match the class's `type()`.
+- **Custom login UI:** The `login` extension type of `panel.plugin()` has been removed. Register your form as a regular component and return it from the `form()` method of your method or challenge. `<k-login-form>`, `<k-login-code-form>` and `<k-login>` have been removed. `<k-login-code>` is now a different component, a code input for the new login forms.
+- **Status and return values:** `$kirby->auth()->status()` returns a `Kirby\Auth\Status` object with a different API than `Kirby\Cms\Auth\Status`. `Auth::validatePassword()` and `Auth::verifyChallenge()` return `Kirby\Cms\User|null`. `Kirby\Cms\Find::user()` throws a `Kirby\Exception\UserNotFoundException`.
+
+The full walkthrough is in (link: releases/6/migration/plugin-developers/auth text: Custom auth methods & challenges).
+
+## Panel frontend
+
+The Panel runs on Vue 3. Every plugin with an `index.js` must be checked, and every bundle built for Vue 2 must be rebuilt:
+
+- **Rebuild:** Single file components compiled for Vue 2 don't run in Kirby 6, and Vue 3 builds don't run in Kirby 5. Kirby 6 plugins are built with kirbyup 4. The quickest way to try it is `npx kirbyup@next src/index.js` in your plugin folder, see (link: releases/6/migration/plugin-developers/vue-3#build-tooling__kirbyup-4 text: build tooling).
+- **No global `Vue`:** `window.Vue` no longer exists. Import what you need from `"vue"`, which the Panel provides through an import map.
+- **Vue 2 habits:** `$listeners`, `this.$set()`, `v-model` with `value`/`input` on Kirby components and Vue plugins registered via `use` (which receive the app instead of the Vue constructor) need small changes. See (link: releases/6/migration/plugin-developers/vue-3#vue-2-vue-3-in-kirby-plugins text: Vue 2 → Vue 3 in Kirby plugins).
+- **Renamed and removed components and helpers:** The full list: (link: releases/6/migration/plugin-developers/vue-3#other-breaking-changes-in-the-panel-frontend text: other breaking changes in the Panel frontend).
+- **Trusted HTML:** `<k-item>`, `<k-text>`, `<k-box>`, `<k-tag>`, `<k-tags>` and the `text` of dialogs and drawers escape plain strings now. Mark your HTML as trusted with `$h()` in Vue, or with `Kirby\Toolkit\HtmlString`, `HtmlString::translate()` or `$model->toSafeHtmlString()` in PHP. See (link: releases/6/migration/plugin-developers/trusted-html#my-plugin-shows-html-as-text-how-do-i-fix-it text: My plugin shows HTML as text).
+- **No more "Fiber":** `window.fiber` is now `window.panelState`, the `X-Fiber*` headers are `X-Panel`, `X-Panel-Globals` and `X-Panel-Referrer`, and state keys lose their `$` prefix:
+
+```js
+// Kirby 5
+this.$reload({ globals: ["$system", "$translation"] });
+
+// Kirby 6
+this.$panel.reload({ globals: ["system", "translation"] });
+```
+
+Everything is explained with before/after examples in (link: releases/6/migration/plugin-developers/vue-3 text: Vue 3 for Panel plugins).
+
+## Panel backend
+
+The `Kirby\Panel` namespace has been rebuilt from static helpers into objects, and all core views, dialogs, drawers, dropdowns, searches and requests are controller classes now. Your area definitions with closures keep working. These are the changes most likely to break a plugin:
+
+**Static `Panel` methods:** `Kirby\Panel\Panel` and `Kirby\Panel\Home` are no longer static. Use the Panel object from `$kirby->panel()`:
+
+```php
+// Kirby 5
+Panel::url('todos');
+Panel::router($path);
+Panel::hasAccess($user, 'todos');
+Panel::isFiberRequest();
+
+// Kirby 6
+$kirby->panel()->url('todos');
+$kirby->panel()->router()?->call($path);
+$kirby->panel()->access()->area('todos');
+$kirby->panel()->isStateRequest();
+```
+
+`Panel::go()` and `Panel::json()` are still static.
+
+**Overriding core searches:** Core searches are defined with `action` now. A plugin that overrides a core search with the Kirby 5 `query` option is silently ignored. Use `action`, which receives the same `$query`, `$limit` and `$page` arguments.
+
+**Reusing core code:** Patterns like `$kirby->core()->area('site')['dialogs']['page.changeStatus']['load']($id)` no longer work, because core definitions are class names. Call the controller instead, e.g. `PageChangeStatusDialogController::factory($id)->load()`.
+
+**Moved classes and methods:** `Kirby\Panel\View`, `Dialog`, `Drawer`, `Dropdown`, `Json`, `Request`, `Search` and `Document` have moved to `Kirby\Panel\Response\*`, the dialog classes and field dialogs to controllers, and the view buttons to `Kirby\Panel\Ui\Button\*`. Several `Kirby\Panel\Model` methods (e.g. `$page->panel()->view()` and `->props()`) are deprecated in favor of `Kirby\Panel\Controller\View\ModelViewController`, and `$page->panel()->dropdown()` (also for files and users) in favor of the `*SettingsDropdownController` classes.
+
+The (link: releases/6/migration/plugin-developers/panel-backend text: Panel backend deep dive) has all details, the full mapping table, the new controller classes and a complete before/after example of a Panel area.
