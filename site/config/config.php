@@ -22,6 +22,7 @@ return [
 	'thumbs'     => [
 		// 'driver' => 'im'
 	],
+	'topbar'     => true,
 	'versions'   => require __DIR__ . '/versions.php',
 	'content' => [
 		'locking' => false,
