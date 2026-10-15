@@ -108,7 +108,7 @@ class ClassPage extends Page
 
 Children are created as an array that we then pass to the `Pages::factory()` method. That's pretty much all you have to do to create virtual subpages that are not necessarily located in the file system.
 
-Those subpages are first-class citizens in Kirby and everything around them will work. You can filter or sort them, routing works out of the box, templates will work, etc. (link: docs/reference/objects/page/num text: Here's an example of such a virtual page).
+Those subpages are first-class citizens in Kirby and everything around them will work. You can filter or sort them, routing works out of the box, templates will work, etc. (link: docs/reference/objects/cms/page/num text: Here's an example of such a virtual page).
 
 Here, we define that each subpage automatically gets a new `MethodPage` model. We use this model to fetch more information about each class method and to inject it into the template (arguments, method call, return type, etc.) You could nest this indefinitely if you want and combine it again with real pages in the file system. The possibilities are endless.
 

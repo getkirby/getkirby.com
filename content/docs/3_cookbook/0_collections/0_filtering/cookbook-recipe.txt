@@ -272,7 +272,7 @@ $events = page('events')
 ```
 ## Filtering by the `pagepicker`, `filepicker` or `userpicker` field
 
-The (link: docs/reference/panel/fields/pagepicker text: `pagepicker`), (link: docs/reference/panel/fields/filepicker text: `filepicker`) and (link: docs/reference/panel/fields/userpicker text: `userpicker`) fields store one or multiple entries in `yaml` format. Using the simple `filterBy()` method is therefore not useful to filter a collection by these field types and we have to use the [`filter()`](/docs/reference/objects/pages/filter) method.
+The (link: docs/reference/panel/fields/pagepicker text: `pagepicker`), (link: docs/reference/panel/fields/filepicker text: `filepicker`) and (link: docs/reference/panel/fields/userpicker text: `userpicker`) fields store one or multiple entries in `yaml` format. Using the simple `filterBy()` method is therefore not useful to filter a collection by these field types and we have to use the [`filter()`](/docs/reference/objects/cms/pages/filter) method.
 
 Let's first understand what these fields store in the content files:
 
