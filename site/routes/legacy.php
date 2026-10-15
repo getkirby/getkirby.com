@@ -1,33 +1,7 @@
 <?php
 
 return [
-	// May 2024
-	[
-		'pattern' => 'docs/cookbook/setup/git',
-		'action'  => fn () => go('docs/guide/install-guide/git')
-	],
-	[
-		'pattern' => 'docs/guide/virtual-pages/simple-virtual-page',
-		'action'  => fn () => go('docs/guide/virtual-content/simple-virtual-page')
-	],
-	[
-		'pattern' => 'docs/guide/virtual-pages/content-from-rss-feed',
-		'action'  => fn () => go('docs/guide/virtual-content/content-from-rss-feed')
-	],
-	[
-		'pattern' => 'docs/cookbook/extensions/virtual-files',
-		'action'  => fn () => go('docs/guide/virtual-content/virtual-files')
-	],
-	[
-		'pattern' => 'docs/cookbook/content-representations/load-more-with-ajax',
-		'action'  => fn () => go('docs/cookbook/content-representations/ajax-load-more')
-	],
-
 	// August 2024
-	[
-		'pattern' => 'docs/cookbook/setup/ddev',
-		'action'  => fn () => go('docs/cookbook/development-deployment/ddev')
-	],
 	[
 		'pattern' => [
 			'docs/cheatsheet/(:any)/(:any)',
@@ -49,16 +23,6 @@ return [
 
 			$this->next();
 		}
-	],
-	[
-		'pattern' => 'made-with-kirby-and-love',
-		'action'  => fn () => go('/')
-	],
-
-	// June 2025
-	[
-		'pattern' => 'buzz/v5-alpha',
-		'action'  => fn () => go('releases/5')
 	],
 
 	// September 2026: restructured plugin chapter
