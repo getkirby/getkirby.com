@@ -63,7 +63,7 @@ columns:
 ```
 
 <info>
-If you only need fields, you can simplify this example as below where we only use fields. It is also possible to use fields within columns without having to define sections.
+If you only need input fields, you can simplify this example as below.
 </info>
 
 ### Result

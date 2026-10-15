@@ -81,7 +81,7 @@ columns:
 
   sidebar:
     width: 1/3
-    # here we add two sections: meta fields and a `filelist` field to upload files we can select from in the heroImage field
+    # here we add meta fields and a `filelist` field to upload files we can select from in the heroImage field
     fields:
       heroImage:
         type: filepicker
