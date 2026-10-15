@@ -73,12 +73,6 @@ fields:
 Keep in mind that the same field name can only be used once per blueprint.
 
 
-## Field properties
-
-The `pagelist` field has multiple options to control what kind of pages should be displayed, how they should be displayed and what happens if a new page is added.
-
-(field-options: pagelist)
-
 ## Label
 
 The label will be displayed above the `pagelist` field. You can pass a simple label as a string or you can provide translations for multiple languages, if you have an international editing team.

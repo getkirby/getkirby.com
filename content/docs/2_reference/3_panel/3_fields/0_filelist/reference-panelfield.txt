@@ -59,12 +59,6 @@ fields:
 Keep in mind that the same field name can only be used once per blueprint.
 
 
-## Field properties
-
-The `filelist` field has multiple options to control what kind of files should be displayed, how they should be displayed and what happens if a new file is uploaded.
-
-(field-options: filelist)
-
 ## Label
 
 The label will be displayed above the `filelist` field. You can pass a simple headline as a string or you can provide translations for multiple languages, if you have an international editing team.
