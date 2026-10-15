@@ -5,44 +5,42 @@ namespace Kirby\Blueprint;
 use Exception;
 use Kirby\Cms\App;
 use Kirby\Cms\ModelWithContent;
+use Kirby\Cms\User;
 use Kirby\Data\Data;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\NotFoundException;
 use Kirby\Filesystem\F;
-use Kirby\Form\Field;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\I18n;
-use Kirby\Toolkit\Str;
-use Throwable;
 
 /**
- * The Blueprint class normalizes an array from a
- * blueprint file and converts sections, columns, fields
- * etc. into a correct tab layout.
+ * The Blueprint class gives access to all settings
+ * of a blueprint file. The raw props are converted
+ * into a proper tab layout by the `Normalizer`.
  *
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
 class Blueprint
 {
-	public static array $presets = [];
 	public static array $loaded = [];
+
+	/**
+	 * Cache of blueprints with fully normalized props,
+	 * keyed by class, name and fallback. The normalized
+	 * props are model- and language-agnostic, so they can
+	 * be shared between all models of the same blueprint.
+	 *
+	 * @var array<string, static>
+	 */
+	public static array $normalized = [];
 
 	protected AcceptRules|null $acceptRules = null;
 
-	/**
-	 * Global field definitions that can be referenced
-	 * in tabs, columns and sections.
-	 */
-	protected array $fieldDefinitions = [];
-
-	// Cache for collected field props
-	protected array $fields = [];
-	protected array|null $fieldsLower = null;
+	protected FieldsRegistry $fields;
 	protected ModelWithContent $model;
 	protected array $props;
-	protected array $sections = [];
-	protected array $tabs = [];
+	protected Tabs|null $tabs = null;
 
 	/**
 	 * Magic getter/caller for any blueprint prop
@@ -53,9 +51,20 @@ class Blueprint
 	}
 
 	/**
+	 * Resets all caches that are bound to a single model
+	 *
+	 * @since 6.0.0
+	 */
+	public function __clone()
+	{
+		$this->acceptRules = null;
+		$this->tabs        = null;
+	}
+
+	/**
 	 * Creates a new blueprint object with the given props
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the blueprint model is missing
+	 * @throws InvalidArgumentException If the blueprint model is missing
 	 */
 	public function __construct(array $props)
 	{
@@ -76,31 +85,13 @@ class Blueprint
 		// the model should not be included in the props array
 		unset($props['model']);
 
-		// extend the blueprint in general
-		$props = static::extend($props);
+		// convert all shortcuts and normalize the props
+		$normalizer = new Normalizer(
+			props: $props
+		);
 
-		// apply any blueprint preset
-		$props = $this->preset($props);
-
-		// normalize the name
-		$props['name'] ??= 'default';
-
-		// normalize and translate the title
-		$props['title'] ??= Str::label($props['name']);
-		$props['title']   = $this->i18n($props['title']);
-
-		// extract global field definitions before normalization
-		$props = $this->extractFieldReferences($props);
-
-		// convert all shortcuts
-		$props = $this->convertFieldsToSections('main', $props);
-		$props = $this->convertSectionsToColumns('main', $props);
-		$props = $this->convertColumnsToTabs('main', $props);
-
-		// normalize all tabs
-		$props['tabs'] = $this->normalizeTabs($props['tabs'] ?? []);
-
-		$this->props = $props;
+		$this->fields = $normalizer->fields();
+		$this->props  = $normalizer->props();
 	}
 
 	/**
@@ -127,9 +118,9 @@ class Blueprint
 	 * Gathers what file templates are allowed in
 	 * this model based on the blueprint
 	 */
-	public function acceptedFileTemplates(string|null $inSection = null): array
+	public function acceptedFileTemplates(string|null $inField = null): array
 	{
-		return $this->acceptRules()->fileTemplates($inSection);
+		return $this->acceptRules()->fileTemplates($inField);
 	}
 
 	/**
@@ -138,84 +129,6 @@ class Blueprint
 	public function buttons(): array|false|null
 	{
 		return $this->props['buttons'] ?? null;
-	}
-
-	/**
-	 * Converts all column definitions, that
-	 * are not wrapped in a tab, into a generic tab
-	 */
-	protected function convertColumnsToTabs(
-		string $tabName,
-		array $props
-	): array {
-		if (isset($props['columns']) === false) {
-			return $props;
-		}
-
-		// wrap everything in a main tab
-		$props['tabs'] = [
-			$tabName => [
-				'columns' => $props['columns']
-			]
-		];
-
-		unset($props['columns']);
-
-		return $props;
-	}
-
-	/**
-	 * Converts all field definitions, that are not
-	 * wrapped in a fields section into a generic
-	 * fields section.
-	 */
-	protected function convertFieldsToSections(
-		string $tabName,
-		array $props
-	): array {
-		if (isset($props['fields']) === false) {
-			return $props;
-		}
-
-		// Resolve field references and extract inline definitions
-		$fields = $this->resolveFieldReferences($props['fields']);
-
-		// wrap all fields in a section
-		$props['sections'] = [
-			$tabName . '-fields' => [
-				'type'   => 'fields',
-				'fields' => $fields
-			]
-		];
-
-		unset($props['fields']);
-
-		return $props;
-	}
-
-	/**
-	 * Converts all sections that are not wrapped in
-	 * columns, into a single generic column.
-	 */
-	protected function convertSectionsToColumns(
-		string $tabName,
-		array $props
-	): array {
-		if (isset($props['sections']) === false) {
-			return $props;
-		}
-
-		// wrap everything in one big column
-		$props['columns'] = [
-			[
-				'width'    => '1/1',
-				'sections' => $props['sections']
-			]
-		];
-
-		unset($props['sections']);
-
-		return $props;
 	}
 
 	/**
@@ -252,57 +165,46 @@ class Blueprint
 	}
 
 	/**
-	 * Extracts global field definitions from root level.
-	 * When layout elements exist, adds fields to the registry
-	 * and removes them from props so they can be referenced.
-	 * When no layout exists, fields stay in props for the
-	 * existing backwards-compatible behavior.
-	 *
-	 * @since 6.0.0
-	 */
-	protected function extractFieldReferences(array $props): array
-	{
-		if (isset($props['fields']) === false) {
-			return $props;
-		}
-
-		// Check if layout elements exist
-		$hasLayout = isset($props['tabs']) === true ||
-					 isset($props['sections']) === true ||
-					 isset($props['columns']) === true;
-
-		// Only store definitions and remove from props when layout exists
-		// (fields will be referenced from layout, not processed inline)
-		if ($hasLayout === true) {
-			$this->fieldDefinitions = static::fieldsProps($props['fields']);
-			unset($props['fields']);
-		}
-
-		return $props;
-	}
-
-	/**
 	 * Create a new blueprint for a model
 	 */
 	public static function factory(
+		ModelWithContent $model,
 		string $name,
-		string|null $fallback,
-		ModelWithContent $model
+		string|null $fallback = null
 	): static|null {
-		try {
-			$props = static::load($name);
-		} catch (Exception) {
-			$props = $fallback !== null ? static::load($fallback) : null;
+		$shared = static::class . '/' . $name . '/';
+		$key    = $shared;
+
+		// a blueprint that resolves by its own name never consults
+		// the fallback and is shared by all fallback variants
+		if (isset(static::$normalized[$shared]) === false) {
+			$key = $shared . $fallback;
 		}
 
-		if ($props === null) {
-			return null;
+		if (isset(static::$normalized[$key]) === false) {
+			try {
+				$props = static::load($name);
+				$key   = $shared;
+			} catch (Exception) {
+				$props = $fallback !== null ? static::load($fallback) : null;
+			}
+
+			if ($props === null) {
+				return null;
+			}
+
+			// inject the parent model
+			$props['model'] = $model;
+
+			static::$normalized[$key] = new static($props);
 		}
 
-		// inject the parent model
-		$props['model'] = $model;
+		// hand out a copy, so that the cached blueprint
+		// keeps its normalized props untouched
+		$blueprint        = clone static::$normalized[$key];
+		$blueprint->model = $model;
 
-		return new static($props);
+		return $blueprint;
 	}
 
 	/**
@@ -310,13 +212,7 @@ class Blueprint
 	 */
 	public function field(string $name): array|null
 	{
-		if (isset($this->fields[$name]) === true) {
-			return $this->fields[$name];
-		}
-
-		// field objects use normalized lowercase keys
-		$this->fieldsLower ??= array_change_key_case($this->fields);
-		return $this->fieldsLower[Str::lower($name)] ?? null;
+		return $this->fields->get($name);
 	}
 
 	/**
@@ -334,60 +230,14 @@ class Blueprint
 	}
 
 	/**
-	 * Normalize field props for a single field
+	 * Normalize field props for a single field.
+	 * Facade for `Normalizer::normalizeFieldProps()`
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the filed name is missing or the field type is invalid
+	 * @throws InvalidArgumentException If the filed name is missing or the field type is invalid
 	 */
 	public static function fieldProps(array|string $props): array
 	{
-		$props = static::extend($props);
-
-		if (isset($props['name']) === false) {
-			throw new InvalidArgumentException(
-				message: 'The field name is missing'
-			);
-		}
-
-		$name = $props['name'];
-		$type = $props['type'] ?? $name;
-
-		if ($type !== 'group' && isset(Field::$types[$type]) === false) {
-			throw new InvalidArgumentException(
-				message: 'Invalid field type ("' . $type . '")'
-			);
-		}
-
-		// support for nested fields
-		if (isset($props['fields']) === true) {
-			$props['fields'] = static::fieldsProps($props['fields']);
-		}
-
-		// groups don't need all the crap
-		if ($type === 'group') {
-			$fields = $props['fields'];
-
-			if (isset($props['when']) === true) {
-				$fields = array_map(
-					fn ($field) => array_replace_recursive(['when' => $props['when']], $field),
-					$fields
-				);
-			}
-
-			return [
-				'fields' => $fields,
-				'name'   => $name,
-				'type'   => $type
-			];
-		}
-
-		// add some useful defaults
-		return [
-			...$props,
-			'label' => $props['label'] ?? Str::label($name),
-			'name'  => $name,
-			'type'  => $type,
-			'width' => $props['width'] ?? '1/1',
-		];
+		return Normalizer::normalizeFieldProps($props);
 	}
 
 	/**
@@ -395,76 +245,25 @@ class Blueprint
 	 */
 	public function fields(): array
 	{
-		return $this->fields;
+		return $this->fields->toArray();
 	}
 
 	/**
 	 * Normalizes all fields and adds automatic labels,
 	 * types and widths.
+	 * Facade for `Normalizer::normalizeFieldsProps()`
+	 *
+	 * @return array<string|int, array>
 	 */
-	public static function fieldsProps($fields): array
+	public static function fieldsProps(mixed $fields): array
 	{
-		if (is_array($fields) === false) {
-			$fields = [];
-		}
-
-		foreach ($fields as $fieldName => $fieldProps) {
-			// extend field from string
-			if (is_string($fieldProps) === true) {
-				$fieldProps = [
-					'extends' => $fieldProps,
-					'name'    => $fieldName
-				];
-			}
-
-			// use the name as type definition
-			if ($fieldProps === true) {
-				$fieldProps = [];
-			}
-
-			// unset / remove field if its property is false
-			if ($fieldProps === false) {
-				unset($fields[$fieldName]);
-				continue;
-			}
-
-			// inject the name
-			$fieldProps['name'] = $fieldName;
-
-			// create all props
-			try {
-				$fieldProps = static::fieldProps($fieldProps);
-			} catch (Throwable $e) {
-				$fieldProps = static::fieldError($fieldName, $e->getMessage());
-			}
-
-			// resolve field groups
-			if ($fieldProps['type'] === 'group') {
-				if (
-					empty($fieldProps['fields']) === false &&
-					is_array($fieldProps['fields']) === true
-				) {
-					$index  = array_search($fieldName, array_keys($fields));
-					$fields = [
-						...array_slice($fields, 0, $index),
-						...$fieldProps['fields'] ?? [],
-						...array_slice($fields, $index + 1)
-					];
-				} else {
-					unset($fields[$fieldName]);
-				}
-			} else {
-				$fields[$fieldName] = $fieldProps;
-			}
-		}
-
-		return $fields;
+		return Normalizer::normalizeFieldsProps($fields);
 	}
 
 	/**
 	 * Find a blueprint by name
 	 *
-	 * @throws \Kirby\Exception\NotFoundException If the blueprint cannot be found
+	 * @throws NotFoundException If the blueprint cannot be found
 	 */
 	public static function find(string $name): array
 	{
@@ -542,12 +341,6 @@ class Blueprint
 		// inject the filename as name if no name is set
 		$props['name'] ??= $name;
 
-		// normalize the title
-		$title = $props['title'] ?? Str::label($props['name']);
-
-		// translate the title
-		$props['title'] = I18n::translate($title) ?? $title;
-
 		return $props;
 	}
 
@@ -568,312 +361,90 @@ class Blueprint
 	}
 
 	/**
-	 * Normalizes all required props in a column setup
-	 */
-	protected function normalizeColumns(string $tabName, array $columns): array
-	{
-		foreach ($columns as $columnKey => $columnProps) {
-			// unset/remove column if its property is not array
-			if (is_array($columnProps) === false) {
-				unset($columns[$columnKey]);
-				continue;
-			}
-
-			$columnProps = $this->convertFieldsToSections(
-				$tabName . '-col-' . $columnKey,
-				$columnProps
-			);
-
-			// inject getting started info, if the sections are empty
-			if (empty($columnProps['sections']) === true) {
-				$columnProps['sections'] = [
-					$tabName . '-info-' . $columnKey => [
-						'label' => 'Column (' . ($columnProps['width'] ?? '1/1') . ')',
-						'type'  => 'info',
-						'text'  => 'No sections yet'
-					]
-				];
-			}
-
-			$columns[$columnKey] = [
-				...$columnProps,
-				'width'    => $columnProps['width'] ?? '1/1',
-				'sections' => $this->normalizeSections(
-					$tabName,
-					$columnProps['sections'] ?? []
-				)
-			];
-		}
-
-		return $columns;
-	}
-
-	/**
 	 * Normalizes blueprint options. This must be used in the
-	 * constructor of an extended class, if you want to make use of it.
+	 * constructor of an extended class, if you want to make use
+	 * of it. Facade for `Normalizer::normalizeOptions()`
 	 */
 	protected function normalizeOptions(
 		array|string|bool|null $options,
 		array $defaults,
 		array $aliases = []
 	): array {
-		// return defaults when options are not defined or set to true
-		if ($options === true) {
-			return $defaults;
-		}
-
-		// set all options to false
-		if ($options === false) {
-			return array_fill_keys(array_keys($defaults), false);
-		}
-
-		// extend options if possible
-		$options = static::extend($options);
-
-		foreach ($options as $key => $value) {
-			$alias = $aliases[$key] ?? null;
-
-			if ($alias !== null) {
-				$options[$alias] ??= $value;
-				unset($options[$key]);
-			}
-		}
-
-		return [...$defaults, ...$options];
-	}
-
-	/**
-	 * Normalizes all required keys in sections
-	 */
-	protected function normalizeSections(
-		string $tabName,
-		array $sections
-	): array {
-		foreach ($sections as $sectionName => $sectionProps) {
-			// unset / remove section if its property is false
-			if ($sectionProps === false) {
-				unset($sections[$sectionName]);
-				continue;
-			}
-
-			// fallback to default props when true is passed
-			if ($sectionProps === true) {
-				$sectionProps = [];
-			}
-
-			// inject all section extensions
-			$sectionProps = static::extend($sectionProps);
-
-			$sections[$sectionName] = $sectionProps = [
-				...$sectionProps,
-				'name' => $sectionName,
-				'type' => $type = $sectionProps['type'] ?? $sectionName
-			];
-
-			if (empty($type) === true || is_string($type) === false) {
-				$sections[$sectionName] = [
-					'name'  => $sectionName,
-					'label' => 'Invalid section type for section "' . $sectionName . '"',
-					'type'  => 'info',
-					'text'  => 'The following section types are available: ' . static::helpList(array_keys(Section::$types))
-				];
-			} elseif (isset(Section::$types[$type]) === false) {
-				$sections[$sectionName] = [
-					'name'  => $sectionName,
-					'label' => 'Invalid section type ("' . $type . '")',
-					'type'  => 'info',
-					'text'  => 'The following section types are available: ' . static::helpList(array_keys(Section::$types))
-				];
-			}
-
-			if ($sectionProps['type'] === 'fields') {
-				// Resolve field references before normalizing
-				$sectionFields = $this->resolveFieldReferences($sectionProps['fields'] ?? []);
-				$fields = Blueprint::fieldsProps($sectionFields);
-
-				// inject guide fields guide
-				if ($fields === []) {
-					$fields = [
-						$tabName . '-info' => [
-							'label' => 'Fields',
-							'text'  => 'No fields yet',
-							'type'  => 'info'
-						]
-					];
-				} else {
-					foreach ($fields as $fieldName => $fieldProps) {
-						if (isset($this->fields[$fieldName]) === true) {
-							$this->fields[$fieldName] = $fields[$fieldName] = [
-								'type'  => 'info',
-								'label' => $fieldProps['label'] ?? 'Error',
-								'text'  => 'The field <strong>"' . $fieldName . '"</strong> already exists in your blueprint',
-								'theme' => 'negative'
-							];
-						} else {
-							$this->fields[$fieldName] = $fieldProps;
-						}
-					}
-				}
-
-				$sections[$sectionName]['fields'] = $fields;
-			}
-		}
-
-		// store all normalized sections
-		$this->sections = [...$this->sections, ...$sections];
-
-		return $sections;
-	}
-
-	/**
-	 * Normalizes all required keys in tabs
-	 */
-	protected function normalizeTabs($tabs): array
-	{
-		if (is_array($tabs) === false) {
-			$tabs = [];
-		}
-
-		foreach ($tabs as $tabName => $tabProps) {
-			// unset / remove tab if its property is false
-			if ($tabProps === false) {
-				unset($tabs[$tabName]);
-				continue;
-			}
-
-			// inject all tab extensions
-			$tabProps = static::extend($tabProps);
-
-			// inject a preset if available
-			$tabProps = $this->preset($tabProps);
-
-			$tabProps = $this->convertFieldsToSections($tabName, $tabProps);
-			$tabProps = $this->convertSectionsToColumns($tabName, $tabProps);
-
-			$tabs[$tabName] = [
-				...$tabProps,
-				'columns' => $this->normalizeColumns($tabName, $tabProps['columns'] ?? []),
-				'icon'    => $tabProps['icon']  ?? null,
-				'label'   => $this->i18n($tabProps['label'] ?? Str::label($tabName)),
-				'link'    => $this->model->panel()->url(true) . '/?tab=' . $tabName,
-				'name'    => $tabName,
-			];
-		}
-
-		return $this->tabs = $tabs;
-	}
-
-	/**
-	 * Injects a blueprint preset
-	 */
-	protected function preset(array $props): array
-	{
-		if (isset($props['preset']) === false) {
-			return $props;
-		}
-
-		if (isset(static::$presets[$props['preset']]) === false) {
-			return $props;
-		}
-
-		$preset = static::$presets[$props['preset']];
-
-		if (is_string($preset) === true) {
-			$preset = F::load($preset, allowOutput: false);
-		}
-
-		return $preset($props);
-	}
-
-	/**
-	 * Resolves field references (numeric keys with string values)
-	 * to full definitions from the global registry
-	 *
-	 * @since 6.0.0
-	 */
-	protected function resolveFieldReferences(array $fields): array
-	{
-		$resolved = [];
-
-		foreach ($fields as $key => $value) {
-			// Numeric key with string value = field reference
-			if (is_int($key) === true && is_string($value) === true) {
-				$fieldName = $value;
-
-				if (isset($this->fieldDefinitions[$fieldName]) === true) {
-					$resolved[$fieldName] = $this->fieldDefinitions[$fieldName];
-				} else {
-					$resolved[$fieldName] = static::fieldError(
-						$fieldName,
-						'Referenced field "' . $fieldName . '" is not defined in fields'
-					);
-				}
-			} else {
-				// Inline field definition - keep as is
-				$resolved[$key] = $value;
-			}
-		}
-
-		return $resolved;
-	}
-
-	/**
-	 * Returns a single section by name
-	 */
-	public function section(string $name): Section|null
-	{
-		if (empty($this->sections[$name]) === true) {
-			return null;
-		}
-
-		if ($this->sections[$name] instanceof Section) {
-			return $this->sections[$name]; //@codeCoverageIgnore
-		}
-
-		// get all props
-		$props = $this->sections[$name];
-
-		// inject the blueprint model
-		$props['model'] = $this->model();
-
-		// create a new section object
-		return $this->sections[$name] = new Section($props['type'], $props);
-	}
-
-	/**
-	 * Returns all sections
-	 *
-	 * @return array<string, Section>
-	 */
-	public function sections(): array
-	{
-		return A::map(
-			$this->sections,
-			fn ($section) => match (true) {
-				$section instanceof Section => $section,
-				default                     => $this->section($section['name'])
-			}
+		return Normalizer::normalizeOptions(
+			options: $options,
+			defaults: $defaults,
+			aliases: $aliases
 		);
 	}
 
 	/**
-	 * Returns a single tab by name
+	 * Return the option settings depending on the user role
 	 */
-	public function tab(string|null $name = null): array|null
+	public function optionForUser(User $user, string $action): bool|null
 	{
-		if ($name === null) {
-			return A::first($this->tabs);
+		$rules = $this->options()[$action] ?? null;
+
+		if ($rules === true || $rules === false) {
+			return $rules;
 		}
 
-		return $this->tabs[$name] ?? null;
+		// only associative arrays hold role-based rules.
+		// Lists are used for other option settings,
+		// e.g. `changeTemplate` with a list of template names
+		if (
+			is_array($rules) === true &&
+			A::isAssociative($rules) === true
+		) {
+			$roleId = $user->role()->id();
+
+			if (isset($rules[$roleId]) === true) {
+				return $rules[$roleId];
+			}
+
+			if (isset($rules['*']) === true) {
+				return $rules['*'];
+			}
+		}
+
+		return null;
 	}
 
 	/**
-	 * Returns all tabs
+	 * Clears all blueprint caches
+	 *
+	 * @since 6.0.0
 	 */
-	public function tabs(): array
+	public static function reset(): void
 	{
-		return array_values($this->tabs);
+		static::$loaded     = [];
+		static::$normalized = [];
+	}
+
+	/**
+	 * Returns a single tab by name or the
+	 * first tab if no name is given
+	 */
+	public function tab(string|null $name = null): Tab|null
+	{
+		$tabs = $this->tabs();
+
+		if ($name === null) {
+			return $tabs->first();
+		}
+
+		return $tabs->get($name);
+	}
+
+	/**
+	 * Creates and caches the collection of all tabs
+	 * from the normalized tab props
+	 */
+	public function tabs(): Tabs
+	{
+		return $this->tabs ??= new Tabs(
+			tabs: $this->props['tabs'] ?? [],
+			model: $this->model
+		);
 	}
 
 	/**
@@ -881,7 +452,7 @@ class Blueprint
 	 */
 	public function title(): string
 	{
-		return $this->props['title'];
+		return $this->i18n($this->props['title']);
 	}
 
 	/**
@@ -889,6 +460,10 @@ class Blueprint
 	 */
 	public function toArray(): array
 	{
-		return $this->props;
+		return [
+			...$this->props,
+			'tabs'  => $this->tabs()->toArray(),
+			'title' => $this->title()
+		];
 	}
 }

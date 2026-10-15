@@ -8,9 +8,6 @@ use Kirby\Panel\Ui\Drawer;
 use Kirby\Toolkit\A;
 
 /**
- * @package   Kirby Panel
- * @author    Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  * @since     6.0.0
@@ -25,12 +22,6 @@ class UserSecurityDrawerController extends UserDrawerController
 
 	public function challenges(): array
 	{
-		$methods = $this->auth()->methods();
-
-		if ($methods->hasAnyUsingChallenges() === false) {
-			return [];
-		}
-
 		$buttons    = [];
 		$challenges = $this->auth()->challenges();
 
@@ -54,7 +45,8 @@ class UserSecurityDrawerController extends UserDrawerController
 			component:  'k-user-security-drawer',
 			title:      $this->i18n('security'),
 			challenges: $this->challenges(),
-			methods:    $this->methods()
+			methods:    $this->methods(),
+			user:       $this->user->panel()->info()
 		);
 	}
 
@@ -66,13 +58,13 @@ class UserSecurityDrawerController extends UserDrawerController
 				'text'     => $this->i18n('email'),
 				'icon'     => 'email',
 				'dialog'   => $this->user->panel()->url(true) . '/changeEmail',
-				'disabled' => !$this->user->permissions()->can('changeEmail'),
+				'disabled' => $this->user->guards()->isAvailable('changeEmail') === false,
 			]
 		];
 
 		$methods = $this->auth()->methods()->enabled();
 
-		foreach ($methods as $type => $options) {
+		foreach (array_keys($methods) as $type) {
 			$method  = $this->auth()->methods()->class($type);
 			$buttons = [
 				...$buttons,

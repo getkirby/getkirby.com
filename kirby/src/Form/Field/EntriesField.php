@@ -5,10 +5,12 @@ namespace Kirby\Form\Field;
 use Kirby\Data\Data;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Form\Form;
+use Kirby\Form\Interface\ProvidesNestedForm;
 use Kirby\Form\Mixin\EmptyState;
 use Kirby\Form\Mixin\Max;
 use Kirby\Form\Mixin\Min;
 use Kirby\Form\Mixin\Sortable;
+use Kirby\Reflection\Attributes\Prop;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\BlockCollectionAccess;
 
@@ -19,7 +21,7 @@ use Kirby\Toolkit\BlockCollectionAccess;
  * @license   https://getkirby.com/license
  * @since     5.0.0
  */
-class EntriesField extends InputField
+class EntriesField extends InputField implements ProvidesNestedForm
 {
 	use EmptyState;
 	use Max;
@@ -31,47 +33,11 @@ class EntriesField extends InputField
 	 * Supported field types are `color`, `date`, `email`, `number`, `select`,
 	 * `slug`, `tel`, `text`, `time`, `url`.
 	 */
-	protected array|string|null $field;
+	#[Prop(getter: 'fieldProps')]
+	protected array|string $field = ['type' => 'text'];
 
 	protected Form|null $form = null;
 	protected array $value = [];
-
-	public function __construct(
-		bool|null $autofocus = null,
-		mixed $default = null,
-		bool|null $disabled = null,
-		array|string|null $empty = null,
-		array|string|null $field = null,
-		array|string|null $help = null,
-		array|string|null $label = null,
-		int|null $max = null,
-		int|null $min = null,
-		string|null $name = null,
-		bool|null $required = null,
-		bool|null $sortable = null,
-		bool|null $translate = null,
-		array|null $when = null,
-		string|null $width = null
-	) {
-		parent::__construct(
-			autofocus: $autofocus,
-			default:   $default,
-			disabled:  $disabled,
-			help:      $help,
-			label:     $label,
-			name:      $name,
-			required:  $required,
-			translate: $translate,
-			when:      $when,
-			width:     $width
-		);
-
-		$this->empty    = $empty;
-		$this->field    = $field;
-		$this->max      = $max;
-		$this->min      = $min;
-		$this->sortable = $sortable;
-	}
 
 	public function field(): array
 	{
@@ -80,8 +46,6 @@ class EntriesField extends InputField
 		if (is_string($props) === true) {
 			$props = ['type' => $props];
 		}
-
-		$props ??= ['type' => 'text'];
 
 		if (in_array($props['type'], $this->supports(), true) === false) {
 			throw new InvalidArgumentException(
@@ -101,10 +65,6 @@ class EntriesField extends InputField
 		return $this->form()->fields()->first()->toArray();
 	}
 
-	/**
-	 * @psalm-suppress MethodSignatureMismatch
-	 * @todo Remove psalm suppress after https://github.com/vimeo/psalm/issues/8673 is fixed
-	 */
 	#[BlockCollectionAccess]
 	public function fill(mixed $value): static
 	{
@@ -119,18 +79,6 @@ class EntriesField extends InputField
 			fields: [$this->field()],
 			model:  $this->model()
 		);
-	}
-
-	public function props(): array
-	{
-		return [
-			...parent::props(),
-			'empty'    => $this->empty(),
-			'field'    => $this->fieldProps(),
-			'max'      => $this->max(),
-			'min'      => $this->min(),
-			'sortable' => $this->sortable(),
-		];
 	}
 
 	public function supports(): array
@@ -156,12 +104,9 @@ class EntriesField extends InputField
 
 		return A::map(
 			$value,
-			fn ($value) => $form
-				->reset()
-				->fill(input: [$value])
-				->fields()
-				->first()
-				->toFormValue()
+			fn ($value) => A::first(
+				$form->reset()->fill(input: [$value])->toFormValues()
+			)
 		);
 	}
 
@@ -172,12 +117,9 @@ class EntriesField extends InputField
 
 		return A::map(
 			$value,
-			fn ($value) => $form
-				->reset()
-				->submit(input: [$value])
-				->fields()
-				->first()
-				->toStoredValue()
+			fn ($value) => A::first(
+				$form->reset()->submit(input: [$value])->toStoredValues()
+			)
 		);
 	}
 

@@ -3,6 +3,8 @@
 namespace Kirby\Cms;
 
 use Kirby\Cms\System\UpdateStatus;
+use Kirby\Exception\Exception;
+use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\PermissionException;
 use Kirby\Filesystem\Dir;
 use Kirby\Toolkit\A;
@@ -190,7 +192,7 @@ class System
 	 * Create the most important folders
 	 * if they don't exist yet
 	 *
-	 * @throws \Kirby\Exception\PermissionException
+	 * @throws PermissionException
 	 */
 	public function init(): void
 	{
@@ -233,14 +235,19 @@ class System
 
 	/**
 	 * Check if the Panel has 2FA activated
+	 *
+	 * @deprecated 6.0.0 Use `$kirby->auth()->methods()->hasAnyRequiring2FA()` instead
 	 */
 	public function is2FA(): bool
 	{
-		return ($this->loginMethods()['password']['2fa'] ?? null) === true;
+		return $this->app->auth()->methods()->hasAnyRequiring2FA();
 	}
 
 	/**
 	 * Check if the Panel has 2FA with TOTP activated
+	 *
+	 * @deprecated 6.0.0 Use `$kirby->auth()->methods()->hasAnyRequiring2FA()` and
+	 *                   `$kirby->auth()->enabledChallenges()` instead
 	 */
 	public function is2FAWithTOTP(): bool
 	{
@@ -308,8 +315,8 @@ class System
 	 * Returns the configured UI modes for the login form
 	 * with their respective options
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the configuration is invalid
-	 *                                                   (only in debug mode)
+	 * @throws InvalidArgumentException If the configuration is invalid
+	 *                                  (only in debug mode)
 	 *
 	 * @deprecated 6.0.0 Use `$kirby->auth()->methods()->enabled()` instead
 	 */
@@ -341,8 +348,8 @@ class System
 	 * and adds it to the .license file in the config
 	 * folder if possible.
 	 *
-	 * @throws \Kirby\Exception\Exception
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws Exception
+	 * @throws InvalidArgumentException
 	 */
 	public function register(
 		string|null $license = null,

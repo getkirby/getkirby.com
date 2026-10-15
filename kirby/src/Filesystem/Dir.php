@@ -214,7 +214,7 @@ class Dir
 	 *
 	 * Don't use outside the Cms context.
 	 *
-	 * @deprecated 5.5.0 Use `Kirby\Cms\Inventory::for()` instead. Will be removed in Kirby 6.
+	 * @deprecated 5.6.0 Use `Kirby\Cms\Inventory::for()` instead. Will be removed in Kirby 6.
 	 */
 	public static function inventory(
 		string $dir,
@@ -260,7 +260,7 @@ class Dir
 	 * @param string $dir The path for the new directory
 	 * @param bool $recursive Create all parent directories, which don't exist
 	 * @return bool True: the dir has been created, false: creating failed
-	 * @throws \Exception If a file with the provided path already exists or the parent directory is not writable
+	 * @throws Exception If a file with the provided path already exists or the parent directory is not writable
 	 */
 	public static function make(
 		string $dir,
@@ -419,7 +419,14 @@ class Dir
 				throw new Exception(sprintf('The parent directory does not exist: "%s"', $in));
 			}
 
-			if (substr($realpath, 0, strlen($parent)) !== $parent) {
+			// require a path separator boundary so that
+			// a sibling directory sharing the same name prefix
+			// (e.g. `/site2` for the parent `/site`)
+			// cannot pass the containment check; the parent
+			// directory itself is not considered to be within itself
+			$parent = rtrim($parent, '/\\');
+
+			if (str_starts_with($realpath, $parent . DIRECTORY_SEPARATOR) === false) {
 				throw new Exception('The directory is not within the parent directory');
 			}
 		}

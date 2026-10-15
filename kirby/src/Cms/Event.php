@@ -231,7 +231,7 @@ class Event implements Stringable
 	 * Updates a given argument with a new value
 	 *
 	 * @unstable
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function updateArgument(string $name, $value): void
 	{
@@ -253,19 +253,21 @@ class Event implements Stringable
 			// the same effect as if the hook returned the modified model.
 			$state = $this->arguments[$name];
 
-			if ($state instanceof ModelWithContent) {
+			// follow chained modifications to the last clone
+			while ($state instanceof ModelWithContent) {
 				$storage = $state->storage();
 
 				if (
-					$storage instanceof ImmutableMemoryStorage &&
-					$storage->nextModel() !== null
+					($storage instanceof ImmutableMemoryStorage) === false ||
+					$storage->nextModel() === null
 				) {
-					$this->arguments[$name] = $storage->nextModel();
+					break;
 				}
+
+				$state = $storage->nextModel();
 			}
 
-			// Otherwise, there's no need to update the argument
-			// if no new value is provided
+			$this->arguments[$name] = $state;
 			return;
 		}
 

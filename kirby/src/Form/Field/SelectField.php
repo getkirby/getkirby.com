@@ -4,6 +4,7 @@ namespace Kirby\Form\Field;
 
 use Kirby\Form\FieldOptions;
 use Kirby\Form\Mixin;
+use Kirby\Reflection\Attributes\Prop;
 
 /**
  * Select Field
@@ -15,40 +16,12 @@ use Kirby\Form\Mixin;
 class SelectField extends OptionField
 {
 	use Mixin\Icon;
-	use Mixin\Placeholder;
 
-	public function __construct(
-		bool|null $autofocus = null,
-		mixed $default = null,
-		bool|null $disabled = null,
-		array|string|null $help = null,
-		string|null $icon = null,
-		array|string|null $label = null,
-		string|null $name = null,
-		array|string|null $options = null,
-		array|string|null $placeholder = null,
-		bool|null $required = null,
-		bool|null $translate = null,
-		array|null $when = null,
-		string|null $width = null
-	) {
-		parent::__construct(
-			autofocus: $autofocus,
-			default:   $default,
-			disabled:  $disabled,
-			help:      $help,
-			label:     $label,
-			name:      $name,
-			options:   $options,
-			required:  $required,
-			translate: $translate,
-			when:      $when,
-			width:     $width
-		);
-
-		$this->icon        = $icon;
-		$this->placeholder = $placeholder;
-	}
+	/**
+	 * Text shown when no option is selected yet
+	 */
+	#[Prop]
+	protected array|string|null $placeholder = '—';
 
 	protected function fetchOptions(): array
 	{
@@ -63,15 +36,6 @@ class SelectField extends OptionField
 
 	public function placeholder(): string|null
 	{
-		return $this->stringTemplateI18n($this->placeholder) ?? '—';
-	}
-
-	public function props(): array
-	{
-		return [
-			...parent::props(),
-			'icon'        => $this->icon(),
-			'placeholder' => $this->placeholder(),
-		];
+		return $this->stringTemplateI18n($this->placeholder);
 	}
 }

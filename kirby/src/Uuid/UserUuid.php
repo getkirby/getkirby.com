@@ -7,20 +7,17 @@ use Kirby\Cms\App;
 use Kirby\Cms\User;
 
 /**
- * UUID for \Kirby\Cms\User
+ * UUID for $user
  *
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  * @since     3.8.0
+ *
+ * @extends Uuid<User>
  */
 class UserUuid extends Uuid
 {
 	protected const string TYPE = 'user';
-
-	/**
-	 * @var \Kirby\Cms\User|null
-	 */
-	public Identifiable|null $model = null;
 
 	/*
 	 * Returns the user ID
@@ -36,7 +33,7 @@ class UserUuid extends Uuid
 	/**
 	 * Generator for all users
 	 *
-	 * @return \Generator<string, \Kirby\Cms\User>
+	 * @return Generator<string, User>
 	 */
 	public static function index(): Generator
 	{

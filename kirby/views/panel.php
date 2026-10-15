@@ -4,7 +4,6 @@ use Kirby\Toolkit\Html;
 
 /**
  * @var \Kirby\Cms\App $kirby
- * @var string $icons
  * @var array<string, mixed> $assets
  * @var array<string, mixed> $state
  * @var string $panelUrl
@@ -17,6 +16,7 @@ use Kirby\Toolkit\Html;
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<meta name="referrer" content="same-origin">
+	<meta name="robots" content="noindex, nofollow">
 
 	<title>Kirby Panel</title>
 
@@ -28,11 +28,13 @@ use Kirby\Toolkit\Html;
 
 	<script nonce="<?= $nonce ?>">
 	if (
-			!window.CSS ||
-			window.CSS.supports("display", "grid") === false ||
-			!window.fetch
+		!window.CSS ||
+		window.CSS.supports("color", "light-dark(#fff, #000)") === false ||
+		!window.HTMLScriptElement.supports ||
+		window.HTMLScriptElement.supports("importmap") === false ||
+		!window.Promise.withResolvers
 	) {
-		window.location.href = "<?= $panelUrl ?>browser";
+		window.location.replace("<?= $panelUrl ?>browser");
 	}
 	</script>
 
@@ -48,6 +50,9 @@ use Kirby\Toolkit\Html;
 	<?php if (($js['defer'] ?? null) !== true): ?>
 	<link rel="modulepreload" href="<?= $js['src'] ?>">
 	<?php endif ?>
+	<?php foreach ($js['plugins'] ?? [] as $plugin): ?>
+	<link rel="modulepreload" href="<?= $plugin ?>">
+	<?php endforeach ?>
 	<?php endforeach ?>
 
 	<base href="<?= $panelUrl ?>">
@@ -59,8 +64,6 @@ use Kirby\Toolkit\Html;
 		Please enable JavaScript in your browser
 	</noscript>
 
-	<?= $icons ?>
-
 	<script nonce="<?= $nonce ?>">
 	// Panel state setup
 	window.panelState = <?= json_encode($state) ?>;
@@ -68,13 +71,11 @@ use Kirby\Toolkit\Html;
 
 	<?php foreach ($assets['js'] as $key => $js): ?>
 		<?php if ($key === 'index'): ?>
-			<script type="module" nonce="<?= $nonce ?>" defer>
-			try {
-				await import("<?= $js['plugins'] ?>")
-			} finally {
-				import("<?= $js['src'] ?>")
-			}
+			<script nonce="<?= $nonce ?>">
+			// plugin scripts, loaded by the Panel
+			window.panelPlugins = <?= json_encode($js['plugins']) ?>;
 			</script>
+			<script type="module" nonce="<?= $nonce ?>" src="<?= $js['src'] ?>"></script>
 		<?php else: ?>
 			<?= Html::tag('script', '', $js) . PHP_EOL ?>
 		<?php endif ?>

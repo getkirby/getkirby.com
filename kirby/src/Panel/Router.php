@@ -113,6 +113,23 @@ class Router
 	}
 
 	/**
+	 * Response for the SVG icon sprite
+	 * @since 6.0.0
+	 */
+	public function icons(): Response
+	{
+		$assets = $this->panel->assets();
+		$cache  = $assets->isDev() === true
+			? 'no-store'
+			: 'public, max-age=31536000, immutable';
+
+		return Response::file(
+			$assets->iconsRoot(),
+			['headers' => ['Cache-Control' => $cache]]
+		);
+	}
+
+	/**
 	 * Creates a Response object from the result of
 	 * a Panel route call
 	 */
@@ -155,16 +172,25 @@ class Router
 	{
 		$kirby   = $this->kirby;
 		$panel   = $this->panel;
+		$router  = $this;
 		$areas ??= $panel->areas();
 
-		// the browser incompatibility
-		// warning is always needed
+		// the icon sprite and the browser incompatibility
+		// warning are always needed, no matter the areas
 		$routes = [
+			[
+				'pattern' => 'assets/(:any)/icons.svg',
+				'auth'    => false,
+				'action'  => fn () => $router->icons(),
+			],
 			[
 				'pattern' => 'browser',
 				'auth'    => false,
 				'action'  => fn () => new Response(
-					Tpl::load($kirby->root('kirby') . '/views/browser.php')
+					Tpl::load(
+						$kirby->root('kirby') . '/views/browser.php',
+						['browsers' => $panel->browsers()]
+					)
 				),
 			]
 		];
@@ -197,8 +223,9 @@ class Router
 
 	/**
 	 * Set the current language in multi-lang
-	 * installations based on the session or the
-	 * query language query parameter
+	 * installations based on the `language` query
+	 * parameter, the `x-language` request header
+	 * or the session
 	 */
 	public function setLanguage(): string|null
 	{
@@ -210,9 +237,16 @@ class Router
 				$fallback = $defaultLanguage->code();
 			}
 
+			$request         = $this->kirby->request();
 			$session         = $this->kirby->session();
 			$sessionLanguage = $session->get('panel.language', $fallback);
-			$language        = $this->kirby->request()->get('language') ?? $sessionLanguage;
+
+			// the header carries the language of the requesting Panel tab,
+			// the session is only the fallback for the first request of a tab
+			$language =
+				$request->get('language') ??
+				$request->header('x-language') ??
+				$sessionLanguage;
 
 			// keep the language for the next visit
 			if ($language !== $sessionLanguage) {

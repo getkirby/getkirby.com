@@ -745,7 +745,13 @@ class F
 				throw new Exception(sprintf('The parent directory does not exist: "%s"', $in));
 			}
 
-			if (str_starts_with($realpath, $parent) === false) {
+			// require a path separator boundary so that a
+			// sibling file or directory sharing the same
+			// name prefix (e.g. `/site2` for the parent `/site`)
+			// cannot pass the containment check
+			$parent = rtrim($parent, '/\\');
+
+			if (str_starts_with($realpath, $parent . DIRECTORY_SEPARATOR) === false) {
 				throw new Exception('The file is not within the parent directory');
 			}
 		}
@@ -1005,11 +1011,8 @@ class F
 	): bool {
 		// ensure the parent directory exists so `fopen('c+')`
 		// can create the file if it does not yet exist
-		$dir = dirname($file);
-		if (is_dir($dir) === false) {
-			if (Dir::make($dir) === false) {
-				return false; // @codeCoverageIgnore
-			}
+		if (Dir::make(dirname($file)) === false) {
+			return false; // @codeCoverageIgnore
 		}
 
 		// `c+` opens read/write, creates the file if missing,
@@ -1088,11 +1091,9 @@ class F
 
 		$mode = $append === true ? FILE_APPEND | LOCK_EX : LOCK_EX;
 
-		// if the parent directory does not exist, create it
-		if (is_dir(dirname($file)) === false) {
-			if (Dir::make(dirname($file)) === false) {
-				return false;
-			}
+		// create the parent directory if it does not exist yet
+		if (Dir::make(dirname($file)) === false) {
+			return false;
 		}
 
 		if (static::isWritable($file) === false) {

@@ -3,6 +3,7 @@
 namespace Kirby\Form\Field;
 
 use Kirby\Blueprint\Blueprint;
+use Kirby\Cms\Api;
 use Kirby\Cms\App;
 use Kirby\Cms\Fieldset;
 use Kirby\Cms\Layout;
@@ -11,6 +12,7 @@ use Kirby\Data\Data;
 use Kirby\Data\Json;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Form\Form;
+use Kirby\Reflection\Attributes\Prop;
 use Kirby\Toolkit\BlockCollectionAccess;
 use Kirby\Toolkit\Str;
 use Throwable;
@@ -26,67 +28,25 @@ class LayoutField extends BlocksField
 	/**
 	 * Define available layouts. Each layout is list of column widths. (e.g. 1/2, 1/2 or 1/4, 3/4)
 	 */
-	protected array|null $layouts;
+	#[Prop(computed: true)]
+	protected array|null $layouts = ['1/1'];
 
 	/**
 	 * Customize the `size` and `columns` in the layout selector to account for the number of different layouts you have defined via the layouts property. Available sizes: `small`, `medium` (default), `large`, `huge`. Default columns: `3`
 	 */
-	protected array|null $selector;
+	#[Prop]
+	protected array|null $selector = null;
 
 	/**
 	 * Define tabs and fields for the layout settings. Layout settings are defined globally. Each layout will then get a "Settings" button in its dropdown and open a settings drawer with the configured fields.
 	 */
+	#[Prop]
 	protected array|string|null $settings = null;
 
 	/**
 	 * Cache for the settings Fieldset instance
 	 */
 	protected Fieldset|null $settingsFieldset;
-
-	public function __construct(
-		bool|null $autofocus = null,
-		array|null $default = null,
-		bool|null $disabled = null,
-		array|string|null $empty = null,
-		array|string|null $fieldsets = null,
-		array|string|null $help = null,
-		string|null $group = null,
-		array|string|null $label = null,
-		array|null $layouts = null,
-		int|null $max = null,
-		int|null $min = null,
-		string|null $name = null,
-		bool|null $pretty = null,
-		bool|null $required = null,
-		array|null $selector = null,
-		array|string|null $settings = null,
-		bool|null $translate = null,
-		array|null $when = null,
-		string|null $width = null,
-	) {
-		parent::__construct(
-			autofocus: $autofocus,
-			disabled:  $disabled,
-			empty:     $empty,
-			fieldsets: $fieldsets,
-			help:      $help,
-			group:     $group,
-			label:     $label,
-			name:      $name,
-			max:       $max,
-			min:       $min,
-			pretty:    $pretty,
-			required:  $required,
-			translate: $translate,
-			when:      $when,
-			width:     $width
-		);
-
-		$this->default  = $default;
-		$this->layouts  = $layouts;
-		$this->selector = $selector;
-		$this->settings = $settings;
-	}
 
 	public function api(): array
 	{
@@ -102,7 +62,7 @@ class LayoutField extends BlocksField
 				$columns = $request->get('columns') ?? ['1/1'];
 				$form    = $field->attrsForm();
 
-				$form->fill(input: $form->defaults());
+				$form->fill(defaults: true);
 				$form->submit(input: $request->get('attrs') ?? []);
 
 				return Layout::factory([
@@ -136,7 +96,7 @@ class LayoutField extends BlocksField
 				string|null $path = null
 			) use ($field): array {
 				/**
-				 * @var \Kirby\Cms\Api $api
+				 * @var Api $api
 				 */
 				$api   = $this;
 				$form  = $field->attrsForm();
@@ -186,13 +146,13 @@ class LayoutField extends BlocksField
 		return $default;
 	}
 
-	/**
-	 * @psalm-suppress MethodSignatureMismatch
-	 * @todo Remove psalm suppress after https://github.com/vimeo/psalm/issues/8673 is fixed
-	 */
 	#[BlockCollectionAccess]
 	public function fill(mixed $value): static
 	{
+		if ($value instanceof Layouts) {
+			$value = $value->toArray();
+		}
+
 		$attrs   = $this->attrsForm();
 		$value   = Data::decode($value, type: 'json', fail: false);
 		$layouts = Layouts::factory($value, ['parent' => $this->model()])->toArray();
@@ -222,7 +182,7 @@ class LayoutField extends BlocksField
 
 	public function layouts(): array
 	{
-		return array_map(Str::split(...), $this->layouts ?? ['1/1']);
+		return array_map(Str::split(...), $this->layouts);
 	}
 
 	/**
@@ -286,8 +246,6 @@ class LayoutField extends BlocksField
 	{
 		return [
 			...parent::props(),
-			'layouts'  => $this->layouts(),
-			'selector' => $this->selector(),
 			'settings' => $this->settings()?->toArray()
 		];
 	}
@@ -338,7 +296,7 @@ class LayoutField extends BlocksField
 			}
 
 			foreach ($layout['columns'] as $columnIndex => $column) {
-				$value[$layoutIndex]['columns'][$columnIndex]['blocks'] = $this->blocksToValues($column['blocks'] ?? [], 'content');
+				$value[$layoutIndex]['columns'][$columnIndex]['blocks'] = $this->blocksToValues($column['blocks'] ?? [], 'toStoredValues');
 			}
 		}
 

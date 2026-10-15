@@ -2,9 +2,12 @@
 
 namespace Kirby\Form\Field;
 
+use Kirby\Cms\Collection;
 use Kirby\Cms\ModelWithContent;
 use Kirby\Data\Data;
 use Kirby\Form\Mixin;
+use Kirby\Panel\Ui\Item\ProtectedItem;
+use Kirby\Reflection\Attributes\Prop;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\Str;
 use Kirby\Uuid\Uuids;
@@ -16,131 +19,78 @@ use Kirby\Uuid\Uuids;
  * @license   https://getkirby.com/license
  * @since     6.0.0
  *
- * @template TModel of \Kirby\Cms\ModelWithContent
+ * @template TModel of ModelWithContent
  */
 abstract class ModelPickerField extends InputField
 {
+	use Mixin\ItemLayout;
+	use Mixin\ItemSize;
 	use Mixin\Max;
 	use Mixin\Min;
 
 	/**
 	 * The placeholder text if none have been selected yet
 	 */
-	protected array|string|null $empty;
+	#[Prop]
+	protected array|string|null $empty = null;
 
 	/**
-	 * Image settings for each item
+	 * Image settings for each item, a query string for the
+	 * preview image or `false` to disable previews
 	 */
-	protected array|null $image;
+	#[Prop]
+	protected array|string|false|null $image = null;
 
 	/**
 	 * Info text for each item
 	 */
-	protected string|null $info;
-
-	/**
-	 * Changes the layout of the selected entries.
-	 * Available layouts: `list`, `cardlets`, `cards`
-	 */
-	protected string|null $layout;
+	#[Prop]
+	protected string|null $info = null;
 
 	/**
 	 * Whether each item should be clickable
 	 */
-	protected bool|null $link;
+	#[Prop]
+	protected bool $link = true;
 
 	/**
 	 * If `false`, only a single one can be selected
 	 */
-	protected bool|null $multiple;
+	#[Prop]
+	protected bool $multiple = true;
 
 	/**
 	 * Additional picker dialog props { image, layout, size }
 	 * @since 6.0.0
 	 */
-	protected array|null $picker;
+	#[Prop(export: false)]
+	protected array $picker = [];
 
 	/**
 	 * Query for the items to be included in the picker
 	 */
-	protected string|null $query;
+	#[Prop]
+	protected string|null $query = null;
 
 	/**
 	 * Enable/disable the search field in the picker
 	 */
-	protected bool|null $search;
-
-	/**
-	 * Layout size for cards: `tiny`, `small`, `medium`, `large`, `huge`, `full`
-	 */
-	protected string|null $size;
+	#[Prop]
+	protected bool $search = true;
 
 	/**
 	 * Whether to store `uuid` or `id` in the content file of the model
 	 */
-	protected string|null $store;
+	#[Prop(computed: true)]
+	protected string $store = 'uuid';
 
 	/**
 	 * Main text for each item
 	 */
-	protected string|null $text;
+	#[Prop]
+	protected string|null $text = null;
 
 	protected array $value = [];
-
-	public function __construct(
-		bool|null $autofocus = null,
-		mixed $default = null,
-		bool|null $disabled = null,
-		array|string|null $empty = null,
-		array|string|null $help = null,
-		array|null $image = null,
-		string|null $info = null,
-		array|string|null $label = null,
-		string|null $layout = null,
-		bool|null $link = null,
-		int|null $max = null,
-		int|null $min = null,
-		bool|null $multiple = null,
-		string|null $name = null,
-		array|null $picker = null,
-		string|null $query = null,
-		bool|null $required = null,
-		bool|null $search = null,
-		string|null $size = null,
-		string|null $store = null,
-		string|null $text = null,
-		bool|null $translate = null,
-		array|null $when = null,
-		string|null $width = null
-	) {
-		parent::__construct(
-			autofocus: $autofocus,
-			default: $default,
-			disabled: $disabled,
-			help: $help,
-			label: $label,
-			name: $name,
-			required: $required,
-			translate: $translate,
-			when: $when,
-			width: $width
-		);
-
-		$this->empty    = $empty;
-		$this->image    = $image;
-		$this->info     = $info;
-		$this->layout   = $layout;
-		$this->link     = $link;
-		$this->max      = $max;
-		$this->min      = $min;
-		$this->multiple = $multiple;
-		$this->picker   = $picker;
-		$this->query    = $query;
-		$this->search   = $search;
-		$this->store    = $store;
-		$this->size     = $size;
-		$this->text     = $text;
-	}
 
 	public function api(): array
 	{
@@ -157,7 +107,20 @@ abstract class ModelPickerField extends InputField
 						$ids,
 						function ($id) use ($field): array|null {
 							$model = $field->toModel($id);
-							return $model ? $field->toItem($model) : null;
+
+							if ($model === null) {
+								return null;
+							}
+
+							// never disclose a model the current user must not
+							// list, but keep its ID to not drop it from the value
+							return match ($model->isListable()) {
+								true  => $field->toItem($model),
+								false => (new ProtectedItem(
+									$id,
+									layout: $field->layout()
+								))->props()
+							};
 						}
 					);
 				}
@@ -179,16 +142,29 @@ abstract class ModelPickerField extends InputField
 		return $this->i18n($this->empty);
 	}
 
-	/**
-	 * @psalm-suppress MethodSignatureMismatch
-	 * @todo Remove psalm suppress after https://github.com/vimeo/psalm/issues/8673 is fixed
-	 */
 	public function fill(mixed $value): static
 	{
-		return parent::fill(value: Data::decode($value, 'yaml'));
+		if ($value instanceof ModelWithContent) {
+			$value = [$value];
+		}
+
+		if ($value instanceof Collection) {
+			$value = $value->values();
+		}
+
+		$value = Data::decode($value, 'yaml');
+
+		// resolve models to an ID that `::toModel()` can find
+		foreach ($value as $key => $item) {
+			if ($item instanceof ModelWithContent) {
+				$value[$key] = $item->uuid()?->toString() ?? $item->id();
+			}
+		}
+
+		return parent::fill(value: $value);
 	}
 
-	public function image(): array|null
+	public function image(): array|string|false|null
 	{
 		return $this->image;
 	}
@@ -201,45 +177,24 @@ abstract class ModelPickerField extends InputField
 	public function layout(): string
 	{
 		return match ($this->layout) {
-			'cards'    => 'cards',
-			'cardlets' => 'cardlets',
-			default    => 'list'
+			'cards', 'cardlets' => $this->layout,
+			default             => 'list'
 		};
 	}
 
 	public function link(): bool
 	{
-		return $this->link ?? true;
+		return $this->link;
 	}
 
 	public function multiple(): bool
 	{
-		return $this->multiple ?? true;
+		return $this->multiple;
 	}
 
 	public function picker(): array
 	{
-		return $this->picker ?? [];
-	}
-
-	public function props(): array
-	{
-		return [
-			...parent::props(),
-			'empty'    => $this->empty(),
-			'image'    => $this->image(),
-			'info'     => $this->info(),
-			'layout'   => $this->layout(),
-			'link'     => $this->link(),
-			'max'      => $this->max(),
-			'min'      => $this->min(),
-			'multiple' => $this->multiple(),
-			'query'    => $this->query(),
-			'search'   => $this->search(),
-			'size'     => $this->size(),
-			'store'    => $this->store(),
-			'text'     => $this->text(),
-		];
+		return $this->picker;
 	}
 
 	public function query(): string|null
@@ -249,12 +204,7 @@ abstract class ModelPickerField extends InputField
 
 	public function search(): bool
 	{
-		return $this->search ?? true;
-	}
-
-	public function size(): string
-	{
-		return $this->size ?? 'auto';
+		return $this->search;
 	}
 
 	/**
@@ -266,7 +216,7 @@ abstract class ModelPickerField extends InputField
 			return 'id';
 		}
 
-		return Str::lower($this->store ?? 'uuid');
+		return Str::lower($this->store);
 	}
 
 	public function text(): string|null
@@ -307,16 +257,11 @@ abstract class ModelPickerField extends InputField
 		// and convert them to the stored values
 		foreach ($this->value as $id) {
 			if ($model = $this->toModel($id)) {
-				$ids[] = (string)$model->{$this->store()}();
+				$ids[] = (string)$model->{$this->store($model)}();
 			}
 		}
 
 		return $ids;
-	}
-
-	public function type(): string
-	{
-		return str_replace('picker', '', parent::type()) . 's';
 	}
 
 	public function validations(): array

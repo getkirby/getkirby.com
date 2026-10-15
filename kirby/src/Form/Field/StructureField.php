@@ -2,9 +2,12 @@
 
 namespace Kirby\Form\Field;
 
+use Kirby\Cms\Structure;
 use Kirby\Data\Data;
 use Kirby\Exception\InvalidArgumentException;
+use Kirby\Form\Interface\ProvidesNestedForm;
 use Kirby\Form\Mixin;
+use Kirby\Reflection\Attributes\Prop;
 use Kirby\Toolkit\Str;
 
 /**
@@ -13,13 +16,12 @@ use Kirby\Toolkit\Str;
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
-class StructureField extends InputField
+class StructureField extends InputField implements ProvidesNestedForm
 {
 	use Mixin\Batch;
 	use Mixin\Duplicate;
 	use Mixin\EmptyState;
 	use Mixin\Fields;
-	use Mixin\Limit;
 	use Mixin\Max;
 	use Mixin\Min;
 	use Mixin\Prepend;
@@ -27,87 +29,28 @@ class StructureField extends InputField
 	use Mixin\SortBy;
 	use Mixin\TableColumns;
 
+	/**
+	 * The number of entries that will be displayed on a single page. Afterwards pagination kicks in.
+	 */
+	#[Prop]
+	protected int|null $limit = null;
+
 	protected array $value = [];
 
-	public function __construct(
-		bool|null $batch = null,
-		array|null $columns = null,
-		array|null $default = null,
-		bool|null $disabled = null,
-		bool|null $duplicate = null,
-		array|string|null $empty = null,
-		array|null $fields = null,
-		array|string|null $help = null,
-		array|string|null $label = null,
-		int|null $limit = null,
-		string|null $name = null,
-		int|null $max = null,
-		int|null $min = null,
-		bool|null $prepend = null,
-		bool|null $required = null,
-		bool|null $sortable = null,
-		string|null $sortBy = null,
-		bool|null $translate = null,
-		array|null $when = null,
-		string|null $width = null,
-	) {
-		parent::__construct(
-			default:   $default,
-			disabled:  $disabled,
-			help:      $help,
-			label:     $label,
-			name:      $name,
-			required:  $required,
-			translate: $translate,
-			when:      $when,
-			width:     $width
-		);
-
-		$this->batch     = $batch;
-		$this->columns   = $columns;
-		$this->duplicate = $duplicate;
-		$this->empty     = $empty;
-		$this->fields    = $fields;
-		$this->limit     = $limit;
-		$this->max       = $max;
-		$this->min       = $min;
-		$this->prepend   = $prepend;
-		$this->sortable  = $sortable;
-		$this->sortBy    = $sortBy;
-	}
-
-	public function duplicate(): bool
-	{
-		return $this->duplicate ?? true;
-	}
-
-	/**
-	 * @psalm-suppress MethodSignatureMismatch
-	 * @todo Remove psalm suppress after https://github.com/vimeo/psalm/issues/8673 is fixed
-	 */
 	public function fill(mixed $value): static
 	{
+		if ($value instanceof Structure) {
+			$value = $value->toArray(fn ($row) => $row->content()->toArray());
+		}
+
 		return parent::fill(
 			value: Data::decode($value, 'yaml')
 		);
 	}
 
-	public function props(): array
+	public function limit(): int|null
 	{
-		return [
-			...parent::props(),
-			'batch'     => $this->batch(),
-			'columns'   => $this->columns(),
-			'duplicate' => $this->duplicate(),
-			'empty'     => $this->empty(),
-			'fields'    => $this->fields(),
-			'limit'     => $this->limit(),
-			'max'       => $this->max(),
-			'min'       => $this->min(),
-			'prepend'   => $this->prepend(),
-			'sortable'  => $this->sortable(),
-			'sortBy'    => $this->sortBy()
-		];
+		return $this->limit;
 	}
 
 	public function toFormValue(): array

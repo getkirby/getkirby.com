@@ -4,6 +4,7 @@ namespace Kirby\Form\Field;
 
 use Kirby\Form\Mixin;
 use Kirby\Form\Validations;
+use Kirby\Reflection\Attributes\Prop;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\Str;
 
@@ -16,84 +17,47 @@ use Kirby\Toolkit\Str;
  */
 class TagsField extends OptionsField
 {
-	use Mixin\Icon;
-	use Mixin\Layout;
 	use Mixin\Separator;
 
 	/**
 	 * If set to `all`, any type of input is accepted. If set to `options` only the predefined options are accepted as input.
 	 */
-	protected string|null $accept;
+	#[Prop]
+	protected string $accept = 'all';
+
+	/**
+	 * Icon that will be shown at the end of the field
+	 */
+	#[Prop]
+	protected string|null $icon = 'tag';
 
 	/**
 	 * Set to `list` to display each tag with 100% width,
 	 * otherwise the tags are displayed inline
 	 */
-	protected string|null $layout;
+	#[Prop]
+	protected string|null $layout = null;
 
 	/**
 	 * Enable/disable the search in the dropdown
 	 * Also limit displayed items (display: 20)
 	 * and set minimum number of characters to search (min: 3)
 	 */
-	protected array|bool|null $search;
+	#[Prop]
+	protected array|bool $search = true;
 
 	/**
 	 * If `true`, selected entries will be sorted
 	 * according to their position in the dropdown
 	 */
-	protected bool|null $sort;
-
-	public function __construct(
-		string|null $accept = null,
-		bool|null $autofocus = null,
-		mixed $default = null,
-		bool|null $disabled = null,
-		string|null $icon = null,
-		array|string|null $help = null,
-		array|string|null $label = null,
-		string|null $layout = null,
-		int|null $max = null,
-		int|null $min = null,
-		string|null $name = null,
-		array|string|null $options = null,
-		bool|null $required = null,
-		array|bool|null $search = null,
-		string|null $separator = null,
-		bool|null $sort = null,
-		bool|null $translate = null,
-		array|null $when = null,
-		string|null $width = null
-	) {
-		parent::__construct(
-			autofocus: $autofocus,
-			default:   $default,
-			disabled:  $disabled,
-			help:      $help,
-			label:     $label,
-			name:      $name,
-			max:       $max,
-			min:       $min,
-			options:   $options,
-			required:  $required,
-			translate: $translate,
-			when:      $when,
-			width:     $width
-		);
-
-		$this->accept    = $accept;
-		$this->icon      = $icon;
-		$this->layout    = $layout;
-		$this->search    = $search;
-		$this->separator = $separator;
-		$this->sort      = $sort;
-	}
+	#[Prop]
+	protected bool $sort = false;
 
 	public function accept(): string
 	{
-		return match($this->accept) {
-			'options' => 'options',
-			default   => 'all'
+		return match ($this->accept) {
+			'all', 'options' => $this->accept,
+			default          => 'all'
 		};
 	}
 
@@ -102,10 +66,6 @@ class TagsField extends OptionsField
 		return parent::default() ?? [];
 	}
 
-	/**
-	 * @psalm-suppress MethodSignatureMismatch
-	 * @todo Remove psalm suppress after https://github.com/vimeo/psalm/issues/8673 is fixed
-	 */
 	public function fill(mixed $value): static
 	{
 		return parent::fill(
@@ -113,32 +73,24 @@ class TagsField extends OptionsField
 		);
 	}
 
-	public function icon(): string
+	public function icon(): string|null
 	{
-		return $this->icon ?? 'tag';
+		return $this->icon;
+	}
+
+	public function layout(): string|null
+	{
+		return $this->layout;
 	}
 
 	public function search(): array|bool
 	{
-		return $this->search ?? true;
+		return $this->search;
 	}
 
 	public function sort(): bool
 	{
-		return $this->sort ?? false;
-	}
-
-	public function props(): array
-	{
-		return [
-			...parent::props(),
-			'accept'    => $this->accept(),
-			'icon'      => $this->icon(),
-			'layout'    => $this->layout(),
-			'search'    => $this->search(),
-			'separator' => $this->separator(),
-			'sort'      => $this->sort(),
-		];
+		return $this->sort;
 	}
 
 	public function toStoredValue(): string

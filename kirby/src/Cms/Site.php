@@ -7,9 +7,11 @@ use Kirby\Content\VersionId;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\LogicException;
 use Kirby\Filesystem\Dir;
+use Kirby\Guards\SiteGuards;
 use Kirby\Panel\Site as Panel;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\BlockCollectionAccess;
+use Kirby\Uuid\SiteUuid;
 
 /**
  * The `$site` object is the root element
@@ -20,7 +22,7 @@ use Kirby\Toolkit\BlockCollectionAccess;
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  *
- * @method \Kirby\Uuid\SiteUuid uuid()
+ * @method SiteUuid uuid()
  */
 class Site extends ModelWithContent
 {
@@ -164,8 +166,8 @@ class Site extends ModelWithContent
 	 */
 	public function blueprint(): SiteBlueprint
 	{
-		/** @var \Kirby\Blueprint\SiteBlueprint */
-		return $this->blueprint ??= SiteBlueprint::factory('site', null, $this);
+		/** @var SiteBlueprint */
+		return $this->blueprint ??= SiteBlueprint::factory($this, 'site');
 	}
 
 	/**
@@ -223,6 +225,14 @@ class Site extends ModelWithContent
 	}
 
 	/**
+	 * Returns the guards object for this site
+	 */
+	public function guards(): SiteGuards
+	{
+		return SiteGuards::for($this);
+	}
+
+	/**
 	 * Returns the home page object
 	 */
 	public function homePage(): Page|null
@@ -277,7 +287,7 @@ class Site extends ModelWithContent
 	 */
 	public function isAccessible(): bool
 	{
-		return SitePermissions::canFromCache($this, 'access');
+		return $this->guards()->isAvailable('access');
 	}
 
 	/**
@@ -379,8 +389,15 @@ class Site extends ModelWithContent
 	#[BlockCollectionAccess]
 	public function previewUrl(VersionId|string $versionId = 'latest'): string|null
 	{
-		// the site previews the home page and thus needs to check permissions for it
-		if ($this->homePage()?->permissions()->can('preview') !== true) {
+		// the site needs its own preview permission
+		if ($this->guards()->isAvailable('preview') !== true) {
+			return null;
+		}
+
+		// the site preview defaults to the home page, so for backward
+		// compatibility we also check the home page's preview permission
+		// @todo Remove in 6.0.0, only check `site.preview`
+		if ($this->homePage()?->guards()->isAvailable('preview') !== true) {
 			return null;
 		}
 
@@ -401,6 +418,8 @@ class Site extends ModelWithContent
 	 * Returns the SiteRules class instance
 	 * which is being used in various methods
 	 * to check for valid actions and input.
+	 *
+	 * @deprecated 6.0.0 Use `$site->guards()` instead
 	 */
 	protected function rules(): SiteRules
 	{

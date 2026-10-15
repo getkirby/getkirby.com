@@ -11,7 +11,9 @@ use Kirby\Content\VersionId;
 use Kirby\Exception\DuplicateException;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\LogicException;
+use Kirby\Exception\NotFoundException;
 use Kirby\Filesystem\Dir;
+use Kirby\Template\Template;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\BlockCollectionAccess;
 use Kirby\Toolkit\I18n;
@@ -25,7 +27,7 @@ use Kirby\Uuid\Uuids;
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  *
- * @mixin \Kirby\Cms\Page
+ * @mixin Page
  */
 trait PageActions
 {
@@ -38,7 +40,7 @@ trait PageActions
 	 * @internal
 	 *
 	 * @return $this|static
-	 * @throws \Kirby\Exception\LogicException If a draft is being sorted or the directory cannot be moved
+	 * @throws LogicException If a draft is being sorted or the directory cannot be moved
 	 */
 	#[BlockCollectionAccess]
 	public function changeNum(int|null $num = null): static
@@ -91,7 +93,7 @@ trait PageActions
 	 * Changes the slug/uid of the page
 	 *
 	 * @return $this|static
-	 * @throws \Kirby\Exception\LogicException If the directory cannot be moved
+	 * @throws LogicException If the directory cannot be moved
 	 */
 	#[BlockCollectionAccess]
 	public function changeSlug(
@@ -170,8 +172,8 @@ trait PageActions
 	/**
 	 * Change the slug for a specific language
 	 *
-	 * @throws \Kirby\Exception\NotFoundException If the language for the given language code cannot be found
-	 * @throws \Kirby\Exception\InvalidArgumentException If the slug for the default language is being changed
+	 * @throws NotFoundException If the language for the given language code cannot be found
+	 * @throws InvalidArgumentException If the slug for the default language is being changed
 	 */
 	protected function changeSlugForLanguage(
 		string $slug,
@@ -224,7 +226,7 @@ trait PageActions
 	 *
 	 * @param string $status "draft", "listed" or "unlisted"
 	 * @param int|null $position Optional sorting number
-	 * @throws \Kirby\Exception\InvalidArgumentException If an invalid status is being passed
+	 * @throws InvalidArgumentException If an invalid status is being passed
 	 */
 	#[BlockCollectionAccess]
 	public function changeStatus(
@@ -333,7 +335,7 @@ trait PageActions
 	 * Changes the page template
 	 *
 	 * @return $this|static
-	 * @throws \Kirby\Exception\LogicException If the textfile cannot be renamed/moved
+	 * @throws LogicException If the textfile cannot be renamed/moved
 	 */
 	#[BlockCollectionAccess]
 	public function changeTemplate(string $template): static
@@ -416,7 +418,7 @@ trait PageActions
 	 * (e.g. permissions) before calling it.
 	 * @internal
 	 *
-	 * @throws \Kirby\Exception\DuplicateException If the page already exists
+	 * @throws DuplicateException If the page already exists
 	 */
 	#[BlockCollectionAccess]
 	public function copy(array $options = []): static
@@ -506,11 +508,17 @@ trait PageActions
 			'translations' => null
 		]);
 
-		// merge the content with the defaults
-		$props['content'] = [
-			...$page->createDefaultContent(),
-			...$props['content'],
-		];
+		// keep the initial storage class
+		$storage = $page->storage()::class;
+
+		// Make sure that the page does not already exist at this point.
+		// Otherwise, moving the storage to memory storage, might delete
+		// an existing page before we can even run the checks.
+		$page->guards()->ensureExecutable('create');
+
+		// merge the content with the defaults and run it through
+		// the fields to apply their save handlers
+		$props['content'] = $page->createContent($props['content']);
 
 		// make sure that a UUID gets generated
 		// and added to content right away
@@ -518,22 +526,17 @@ trait PageActions
 			$props['content']['uuid'] ??= Uuid::generate();
 		}
 
-		// keep the initial storage class
-		$storage = $page->storage()::class;
-
-		// Make sure that the page does not already exist at this point.
-		// Otherwise, moving the storage to memory storage, might delete
-		// an existing page before we can even run the checks.
-		PageRules::create($page);
-
 		// make sure that the temporary page is stored in memory
 		$page->changeStorage(MemoryStorage::class);
 
 		// inject the content
 		$page->setContent($props['content']);
 
-		// inject the translations
-		$page->setTranslations($props['translations'] ?? null);
+		// inject the translations and run their content through
+		// the fields to apply their save handlers
+		$page->setTranslations(
+			$page->createTranslations($props['translations'] ?? null)
+		);
 
 		// run the hooks and creation action
 		$page = $page->commit(
@@ -773,6 +776,9 @@ trait PageActions
 					throw new LogicException(key: 'page.move.directory');
 				}
 
+				// media folder is bound to the page id, which just changed
+				Dir::remove($page->mediaRoot());
+
 				// flush all collection caches to be sure that
 				// the new child is included afterwards
 				$parent->purge();
@@ -795,13 +801,21 @@ trait PageActions
 
 	protected static function normalizeProps(array $props): array
 	{
-		// Prevent injecting blueprint as this always must be derived from
-		// the template/model name and blueprint object in the app,
-		// never directly be supplied by the caller
-		unset($props['blueprint']);
+		unset(
+			// Prevent injecting blueprint as this always must be derived from
+			// the template/model name and blueprint object in the app,
+			// never directly be supplied by the caller
+			$props['blueprint'],
+
+			// Prevent injecting the root and dirname as those must always be
+			// derived from the parent and slug. Otherwise the caller could
+			// place the page's content at an arbitrary path on disk.
+			$props['dirname'],
+			$props['root']
+		);
 
 		$content  = (array)($props['content'] ?? []);
-		$template = $props['template'] ?? 'default';
+		$template = Template::sanitizeName($props['template'] ?? null) ?: 'default';
 
 		return [
 			...$props,
@@ -815,7 +829,7 @@ trait PageActions
 
 	/**
 	 * @return $this|static
-	 * @throws \Kirby\Exception\LogicException If the folder cannot be moved
+	 * @throws LogicException If the folder cannot be moved
 	 */
 	#[BlockCollectionAccess]
 	public function publish(): static
@@ -881,7 +895,7 @@ trait PageActions
 	}
 
 	/**
-	 * @throws \Kirby\Exception\LogicException If the page is not included in the siblings collection
+	 * @throws LogicException If the page is not included in the siblings collection
 	 */
 	protected function resortSiblingsAfterListing(int|null $position = null): bool
 	{
@@ -970,7 +984,7 @@ trait PageActions
 	 * Convert a page from listed or unlisted to draft
 	 *
 	 * @return $this|static
-	 * @throws \Kirby\Exception\LogicException If the folder cannot be moved
+	 * @throws LogicException If the folder cannot be moved
 	 */
 	#[BlockCollectionAccess]
 	public function unpublish(): static

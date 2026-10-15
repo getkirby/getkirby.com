@@ -10,9 +10,11 @@ use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\LogicException;
 use Kirby\Filesystem\F;
 use Kirby\Filesystem\File as FilesystemFile;
+use Kirby\Image\Darkroom;
 use Kirby\Toolkit\BlockCollectionAccess;
 use Kirby\Uuid\Uuid;
 use Kirby\Uuid\Uuids;
+use Throwable;
 
 /**
  * FileActions
@@ -20,7 +22,7 @@ use Kirby\Uuid\Uuids;
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  *
- * @mixin \Kirby\Cms\File
+ * @mixin File
  */
 trait FileActions
 {
@@ -35,7 +37,7 @@ trait FileActions
 	 * Renames the file (optionally also the extension).
 	 * The store is used to actually execute this.
 	 *
-	 * @throws \Kirby\Exception\LogicException
+	 * @throws LogicException
 	 */
 	#[BlockCollectionAccess]
 	public function changeName(
@@ -224,8 +226,8 @@ trait FileActions
 	 * way of generating files.
 	 *
 	 * @param bool $move If set to `true`, the source will be deleted
-	 * @throws \Kirby\Exception\InvalidArgumentException
-	 * @throws \Kirby\Exception\LogicException
+	 * @throws InvalidArgumentException
+	 * @throws LogicException
 	 */
 	#[BlockCollectionAccess]
 	public static function create(array $props, bool $move = false): static
@@ -242,11 +244,13 @@ trait FileActions
 		$upload   = $file->assetFactory($props['source']);
 		$existing = null;
 
-		// merge the content with the defaults
-		$props['content'] = [
-			...$file->createDefaultContent(),
-			...$props['content'],
-		];
+		// check the rules before any user input is passed
+		// through the field classes
+		$file->guards()->ensureExecutable('create', $upload);
+
+		// merge the content with the defaults and run it through
+		// the fields to apply their save handlers
+		$props['content'] = $file->createContent($props['content']);
 
 		// reuse the existing content if the uploaded file
 		// is identical to an existing file
@@ -284,8 +288,11 @@ trait FileActions
 		// inject the content
 		$file->setContent($props['content']);
 
-		// inject the translations
-		$file->setTranslations($props['translations'] ?? null);
+		// inject the translations and run their content through
+		// the fields to apply their save handlers
+		$file->setTranslations(
+			$file->createTranslations($props['translations'] ?? null)
+		);
 
 		// if the format is different from the original,
 		// we need to already rename it so that the correct file rules
@@ -306,22 +313,10 @@ trait FileActions
 				// remove all public versions, lock and clear UUID cache
 				$file->unpublish();
 
-				// only move the original source if intended
-				$method = $move === true ? 'move' : 'copy';
+				// ingest the upload and resize it on the way if configured
+				$file = $file->ingest($upload, $create, $move);
 
-				// overwrite the original
-				if (F::$method($upload->root(), $file->root(), true) !== true) {
-					// @codeCoverageIgnoreStart
-					throw new LogicException(
-						message: 'The file could not be created'
-					);
-					// @codeCoverageIgnoreEnd
-				}
-
-				// resize the file on upload if configured
-				$file = $file->manipulate($create);
-
-				// store the content if necessary
+				// store the content once the final filename is known
 				$file->changeStorage($storage);
 
 				$file->uuid()?->populate();
@@ -367,6 +362,62 @@ trait FileActions
 	}
 
 	/**
+	 * Ingests the source into the file's root. If options are given,
+	 * the source is resized in the cache folder beforehand.
+	 */
+	protected function ingest(
+		FilesystemFile $source,
+		array|null $options = null,
+		bool $move = false
+	): static {
+		$root   = $source->root();
+		$method = $move === true ? 'move' : 'copy';
+		$format = null;
+
+		if ($options !== null && $options !== []) {
+			$tmp = $this->kirby()->root('cache') . '/.uploads/' . uniqid() . '.' . $this->filename();
+
+			F::$method($root, $tmp);
+
+			$root   = $tmp;
+			$method = 'move';
+
+			// check the copy as it carries the final extension,
+			// the source might have none (e.g. `tmp_name` from forms)
+			if ($this->assetFactory($tmp)->isResizable() === true) {
+				try {
+					// apply the options on top of the defaults
+					// instead of the global thumb settings
+					$this->kirby()->thumb($tmp, $tmp, [
+						...Darkroom::defaultOptions(),
+						...$options
+					]);
+				} catch (Throwable $e) {
+					F::remove($tmp);
+					throw $e;
+				}
+
+				$format = $options['format'] ?? null;
+			}
+		}
+
+		if (F::$method($root, $this->root(), true) !== true) {
+			// @codeCoverageIgnoreStart
+			throw new LogicException(
+				message: 'The file could not be created'
+			);
+			// @codeCoverageIgnoreEnd
+		}
+
+		// change the file extension if format option configured
+		if ($format !== null) {
+			return $this->changeExtension($this, $format);
+		}
+
+		return $this;
+	}
+
+	/**
 	 * Resizes/crops the original file with Kirby's thumb handler
 	 */
 	#[BlockCollectionAccess]
@@ -377,17 +428,8 @@ trait FileActions
 			return $this;
 		}
 
-		// generate image file and overwrite it in place
-		$this->kirby()->thumb($this->root(), $this->root(), $options);
-
-		$file = $this->clone();
-
-		// change the file extension if format option configured
-		if ($format = $options['format'] ?? null) {
-			$file = $file->changeExtension($file, $format);
-		}
-
-		return $file;
+		// resize a copy and put it back in place
+		return $this->ingest($this->asset(), $options)->clone();
 	}
 
 	protected static function normalizeProps(array $props): array
@@ -407,9 +449,8 @@ trait FileActions
 		$template = $props['template'] ?? 'default';
 
 		// prefer the filename from the props
-		$filename   = $props['filename'] ?? null;
-		$filename ??= basename($props['source']);
-		$filename   = F::safeName($props['filename']);
+		$filename = $props['filename'] ?? basename($props['source']);
+		$filename = F::safeName($filename);
 
 		return [
 			...$props,
@@ -441,7 +482,7 @@ trait FileActions
 	 * source.
 	 *
 	 * @param bool $move If set to `true`, the source will be deleted
-	 * @throws \Kirby\Exception\LogicException
+	 * @throws LogicException
 	 */
 	#[BlockCollectionAccess]
 	public function replace(string $source, bool $move = false): static
@@ -452,7 +493,7 @@ trait FileActions
 			action:    'replace',
 			arguments: [
 				'file'   => $file,
-				'upload' => $file->asset($source)
+				'upload' => $file->assetFactory($source)
 			],
 			callback: function (
 				File $file,
@@ -461,19 +502,10 @@ trait FileActions
 				// delete all public versions
 				$file->unpublish(true);
 
-				// only move the original source if intended
-				$method = $move === true ? 'move' : 'copy';
-
-				// overwrite the original
-				if (F::$method($upload->root(), $file->root(), true) !== true) {
-					throw new LogicException(
-						message: 'The file could not be created'
-					);
-				}
-
-				// apply the resizing/crop options from the blueprint
+				// overwrite the original and apply the
+				// resizing/crop options from the blueprint
 				$create = $file->blueprint()->create();
-				$file   = $file->manipulate($create);
+				$file   = $file->ingest($upload, $create, $move);
 
 				// return a fresh clone
 				return $file->clone();
@@ -504,7 +536,7 @@ trait FileActions
 	 * Updates the file's data and ensures that
 	 * media files get wiped if `focus` changed
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the input array contains invalid values
+	 * @throws InvalidArgumentException If the input array contains invalid values
 	 */
 	#[BlockCollectionAccess]
 	public function update(

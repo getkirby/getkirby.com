@@ -32,7 +32,7 @@ class Darkroom
 	 * Creates a new Darkroom instance
 	 * for the given type/driver
 	 *
-	 * @throws \Exception
+	 * @throws Exception
 	 */
 	public static function factory(string $type, array $settings = []): static
 	{
@@ -44,9 +44,10 @@ class Darkroom
 	}
 
 	/**
-	 * Returns the default thumb settings
+	 * Returns the default thumb options
+	 * without any driver-specific settings
 	 */
-	protected function defaults(): array
+	public static function defaultOptions(): array
 	{
 		return [
 			'blur'        => false,
@@ -60,6 +61,14 @@ class Darkroom
 			'sharpen'     => null,
 			'width'       => null,
 		];
+	}
+
+	/**
+	 * Returns the default thumb settings
+	 */
+	protected function defaults(): array
+	{
+		return static::defaultOptions();
 	}
 
 	/**
@@ -102,6 +111,27 @@ class Darkroom
 		}
 
 		return $options;
+	}
+
+	/**
+	 * Calculates the dimensions to downscale the image to
+	 * before cropping, so that it still covers the thumb size
+	 * without a full-resolution intermediate copy
+	 */
+	protected function downscale(array $options): Dimensions
+	{
+		$dimensions = new Dimensions(
+			$options['sourceWidth'],
+			$options['sourceHeight']
+		);
+
+		$ratioThumb = Focus::ratio($options['width'], $options['height']);
+
+		if ($ratioThumb > $dimensions->ratio()) {
+			return $dimensions->fitWidth($options['width'], true);
+		}
+
+		return $dimensions->fitHeight($options['height'], true);
 	}
 
 	/**

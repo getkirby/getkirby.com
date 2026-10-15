@@ -20,11 +20,18 @@ class PageStatusButton extends ViewButton
 	) {
 		$status    = $page->status();
 		$blueprint = $page->blueprint()->status()[$status] ?? null;
-		$disabled  = $page->permissions()->cannot('changeStatus') || $page->lock()->isLocked();
+		$disabled  = $page->guards()->isAvailable('changeStatus') === false || $page->lock()->isLocked() === true;
 
 		$text   = $blueprint['label'] ?? null;
 		$text ??= $this->i18n('page.status.' . $status);
 		$title  = $this->i18n('page.status') . ': ' . $text;
+
+		$theme   = $blueprint['theme'] ?? null;
+		$theme ??= match ($status) {
+			'draft'    => 'negative',
+			'unlisted' => 'info',
+			'listed'   => 'positive'
+		};
 
 		if ($disabled === true) {
 			$title .= ' (' . $this->i18n('disabled') . ')';
@@ -34,15 +41,11 @@ class PageStatusButton extends ViewButton
 			class: 'k-status-view-button k-page-status-button',
 			dialog: $page->panel()->url(true) . '/changeStatus',
 			disabled: $disabled,
-			icon: 'status-' . $status,
+			icon: $blueprint['icon'] ?? 'status-' . $status,
 			style: '--icon-size: 15px',
 			text: $text,
 			title: $title,
-			theme: match($status) {
-				'draft'    => 'negative-icon',
-				'unlisted' => 'info-icon',
-				'listed'   => 'positive-icon'
-			}
+			theme: $theme . '-icon'
 		);
 	}
 }

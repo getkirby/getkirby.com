@@ -2,6 +2,8 @@
 
 namespace Kirby\Form\Field;
 
+use Kirby\Reflection\Attributes\Prop;
+
 /**
  * Password field
  *
@@ -11,8 +13,6 @@ namespace Kirby\Form\Field;
  */
 class PasswordField extends TextField
 {
-	public function icon(): string
-	{
-		return $this->icon ?? 'key';
-	}
+	#[Prop]
+	protected string|null $icon = 'key';
 }

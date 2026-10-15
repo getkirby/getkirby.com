@@ -2,6 +2,7 @@
 
 namespace Kirby\Content;
 
+use BackedEnum;
 use Closure;
 use DOMElement;
 use IntlDateFormatter;
@@ -14,6 +15,7 @@ use Kirby\Cms\Html;
 use Kirby\Cms\Layouts;
 use Kirby\Cms\Page;
 use Kirby\Cms\Pages;
+use Kirby\Cms\Site;
 use Kirby\Cms\Structure;
 use Kirby\Cms\Url;
 use Kirby\Cms\User;
@@ -46,7 +48,7 @@ use Throwable;
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  *
- * @mixin \Kirby\Content\Field
+ * @mixin Field
  */
 trait FieldMethods
 {
@@ -122,8 +124,8 @@ trait FieldMethods
 	 */
 	public function inline(): static
 	{
-		// List of valid inline elements taken from:
-		// https://developer.mozilla.org/de/docs/Web/HTML/Inline_elemente
+		// List of valid inline elements based on the WHATWG text-level
+		// semantics: https://html.spec.whatwg.org/multipage/text-level-semantics.html
 		// Obsolete elements, script tags, image maps and form elements have
 		// been excluded for safety reasons and as they are most likely not
 		// needed in most cases.
@@ -297,7 +299,7 @@ trait FieldMethods
 	 */
 	public function permalinksToUrls(): static
 	{
-		/** @var \Kirby\Content\Field $field */
+		/** @var Field $field */
 		$field = clone $this;
 
 		if ($field->isNotEmpty() === true) {
@@ -470,7 +472,7 @@ trait FieldMethods
 	/**
 	 * Converts the field value to a timestamp or a formatted date
 	 *
-	 * @param string|\IntlDateFormatter|null $format PHP date formatting string
+	 * @param string|IntlDateFormatter|null $format PHP date formatting string
 	 * @param string|null $fallback Fallback string for `strtotime`
 	 */
 	public function toDate(
@@ -504,6 +506,25 @@ trait FieldMethods
 		}
 
 		return $entries;
+	}
+
+	/**
+	 * Converts the value to a case of the given enum
+	 *
+	 * @example
+	 * $field->toEnum(MyEnum::class)
+	 *
+	 * @template T of \BackedEnum
+	 * @param class-string<T> $enum
+	 * @return T|null
+	 */
+	public function toEnum(string $enum): BackedEnum|null
+	{
+		if ($this->isEmpty() === true) {
+			return null;
+		}
+
+		return $enum::tryFrom($this->value());
 	}
 
 	/**
@@ -580,7 +601,7 @@ trait FieldMethods
 		array|null $attr2 = null
 	): string {
 		/**
-		 * @var \Kirby\Cms\Page|\Kirby\Cms\Site $parent
+		 * @var Page|Site $parent
 		 */
 		$parent   = $this->parent();
 		$parent ??= $this->kirby()->site();

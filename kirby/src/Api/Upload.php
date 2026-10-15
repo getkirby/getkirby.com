@@ -6,8 +6,8 @@ use Closure;
 use Exception;
 use Kirby\Cms\App;
 use Kirby\Cms\File;
-use Kirby\Cms\FileRules;
 use Kirby\Cms\Page;
+use Kirby\Data\Json;
 use Kirby\Exception\DuplicateException;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\NotFoundException;
@@ -33,14 +33,15 @@ readonly class Upload
 		protected Api $api,
 		protected bool $single = true,
 		protected bool $debug = false,
-		protected string|null $template = null
+		protected string|null $template = null,
+		protected Closure|null $preflight = null
 	) {
 	}
 
 	/**
 	 * Ensures a clean chunk ID by stripping forbidden characters
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException Too short ID string
+	 * @throws InvalidArgumentException Too short ID string
 	 */
 	public static function chunkId(string $id): string
 	{
@@ -102,7 +103,7 @@ readonly class Upload
 	/**
 	 * Throws an exception with the appropriate translated error message
 	 *
-	 * @throws \Exception Any upload error
+	 * @throws Exception Any upload error
 	 */
 	public static function error(int $error): never
 	{
@@ -149,7 +150,7 @@ readonly class Upload
 	/**
 	 * Upload the files and call closure for each file
 	 *
-	 * @throws \Exception Any upload error
+	 * @throws Exception Any upload error
 	 */
 	public function process(Closure $callback): array
 	{
@@ -173,7 +174,20 @@ readonly class Upload
 				}
 
 				$filename = static::filename($upload);
-				$source   = $this->source($upload['tmp_name'], $filename);
+
+				// authorize the upload before any (chunk) data is
+				// persisted to the cache dir; for chunked uploads this
+				// runs on every request (not just the first chunk), so
+				// the request that ultimately completes the file is
+				// always authorized for its own declared template
+				if ($this->preflight !== null) {
+					($this->preflight)(
+						$filename,
+						$this->template ?? $this->api->requestBody('template')
+					);
+				}
+
+				$source = $this->source($upload['tmp_name'], $filename);
 
 				// if the file is uploaded in chunks…
 				if ($this->api->requestHeaders('Upload-Length')) {
@@ -211,10 +225,10 @@ readonly class Upload
 	 * in the tmp directory and only returning the new
 	 * $source path to the tmp file once complete
 	 *
-	 * @throws \Kirby\Exception\DuplicateException Duplicate first chunk (same filename and id)
+	 * @throws DuplicateException Duplicate first chunk (same filename and id)
 	 * @throws \Kirby\Exception\Exception Chunk offset does not match existing tmp file
-	 * @throws \Kirby\Exception\InvalidArgumentException Too short ID string
-	 * @throws \Kirby\Exception\NotFoundException Subsequent chunk has no  existing tmp file
+	 * @throws InvalidArgumentException Too short ID string
+	 * @throws NotFoundException Subsequent chunk has no  existing tmp file
 	 */
 	public function processChunk(
 		string $source,
@@ -228,18 +242,43 @@ readonly class Upload
 		$id       = $this->api->requestHeaders('Upload-Id', '');
 		$id       = static::chunkId($id);
 		$total    = (int)$this->api->requestHeaders('Upload-Length');
+		$offset   = (int)$this->api->requestHeaders('Upload-Offset');
 		$filename = basename($filename);
+		$template = $this->template ?? $this->api->requestBody('template');
 		$tmpRoot  = $dir . '/' . $id . '-' . $filename;
+
+		// meta sidecar file storing the template and total length
+		// for the first chunk, so that all following chunks
+		// can be validated against it
+		$metaRoot = $tmpRoot . '.json';
 
 		// validate various aspects of the request
 		// to ensure the chunk isn't trying to do malicious actions
 		static::validateChunk(
 			source:   $source,
 			tmp:      $tmpRoot,
+			meta:     $metaRoot,
 			total:    $total,
-			offset:   $this->api->requestHeaders('Upload-Offset'),
-			template: $this->template ?? $this->api->requestBody('template'),
+			offset:   $offset,
+			template: $template,
 		);
+
+		if ($offset === 0) {
+			// If the very first chunk already contains the whole file,
+			// there is no need to buffer it in the tmp upload directory.
+			// It can be used directly like a regular, non-chunked upload.
+			if (F::size($source) >= $total) {
+				return $source;
+			}
+
+			// Write the meta file for the first chunk;
+			// the template and total length must not change for any of
+			// the following chunks (enforced by `::validateChunk()`)
+			Json::write($metaRoot, [
+				'template' => $template,
+				'total'    => $total
+			]);
+		}
 
 		// stream chunk content and append it to partial file
 		stream_copy_to_stream(
@@ -256,9 +295,12 @@ readonly class Upload
 			return null;
 		}
 
-		// remove id from partial filename now the file is complete,
-		// so we can pass the path from the tmp upload directory
-		// as new source path for the file back to the API upload method
+		// the upload is complete: the meta sidecar is no longer
+		// needed and the id prefix can be removed from the filename, so
+		// we can pass the path from the tmp upload directory as new
+		// source path for the file back to the API upload method
+		F::remove($metaRoot);
+
 		rename(
 			$tmpRoot,
 			$source = $dir . '/' . $filename
@@ -337,14 +379,16 @@ readonly class Upload
 	/**
 	 * Ensures the sent chunk is valid
 	 *
-	 * @throws \Kirby\Exception\DuplicateException Duplicate first chunk (same filename and id)
-	 * @throws \Kirby\Exception\InvalidArgumentException Chunk offset does not match existing tmp file
-	 * @throws \Kirby\Exception\InvalidArgumentException The maximum file size for this blueprint was exceeded
-	 * @throws \Kirby\Exception\NotFoundException Subsequent chunk has no  existing tmp file
+	 * @throws DuplicateException Duplicate first chunk (same filename and id)
+	 * @throws InvalidArgumentException Chunk offset does not match existing tmp file
+	 * @throws InvalidArgumentException The maximum file size for this blueprint was exceeded
+	 * @throws InvalidArgumentException Template or total length changed between chunks
+	 * @throws NotFoundException Subsequent chunk has no  existing tmp file
 	 */
 	protected static function validateChunk(
 		string $source,
 		string $tmp,
+		string $meta,
 		int $total,
 		int $offset,
 		string|null $template = null
@@ -384,7 +428,7 @@ readonly class Upload
 			// validate file (extension, name) for first chunk;
 			// will also be validate again by `$model->createFile()`
 			// when completely uploaded
-			FileRules::validFile($file, false);
+			$file->guards()->validators()->validateFile(false);
 
 			// first chunk is valid
 			return;
@@ -395,6 +439,24 @@ readonly class Upload
 		if (F::exists($tmp) === false) {
 			throw new NotFoundException(
 				message: 'Chunk offset ' . $offset . ' for non-existing tmp file: ' . $filename
+			);
+		}
+
+		// the upload meta (file template and total length) must
+		// be identical to the one stored for the first chunk; this
+		// prevents a later chunk from smuggling in a different template
+		// than the initial one
+		$descriptor = F::exists($meta) === true
+			? json_decode(F::read($meta), true)
+			: null;
+
+		if (
+			is_array($descriptor) === false ||
+			($descriptor['template'] ?? null) !== $template ||
+			($descriptor['total'] ?? null) !== $total
+		) {
+			throw new InvalidArgumentException(
+				message: 'The file template and upload length must not change between chunks'
 			);
 		}
 
@@ -409,7 +471,7 @@ readonly class Upload
 	/**
 	 * Validate the files array for upload
 	 *
-	 * @throws \Exception No files were uploaded
+	 * @throws Exception No files were uploaded
 	 */
 	protected static function validateFiles(array $files): void
 	{

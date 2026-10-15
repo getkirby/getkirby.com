@@ -1,6 +1,7 @@
 <?php
 
 use Kirby\Cms\Find;
+use Kirby\Exception\PermissionException;
 use Kirby\Filesystem\F;
 
 /**
@@ -87,7 +88,8 @@ return [
 		'method'  => 'POST',
 		'action'  => function (string $id) {
 			return $this->upload(
-				function ($source, $filename) use ($id) {
+				single: true,
+				callback: function ($source, $filename) use ($id) {
 					$user   = Find::user($id);
 					$method = $user->avatar() === null ? 'createAvatar' : 'replaceAvatar';
 
@@ -97,7 +99,16 @@ return [
 						move: true
 					)->avatar();
 				},
-				single: true
+				preflight: function () use ($id) {
+					$user = Find::user($id);
+
+					if ($user->guards()->isAvailable('update') !== true) {
+						throw new PermissionException(
+							key: 'user.update.permission',
+							data: ['name' => $user->username()]
+						);
+					}
+				},
 			);
 		}
 	],
@@ -129,7 +140,7 @@ return [
 		],
 		'method'  => 'GET',
 		'action'  => function (string $id) {
-			return Find::user($id)->blueprints($this->requestQuery('section'));
+			return Find::user($id)->blueprints($this->requestQuery('field'));
 		}
 	],
 	[
@@ -174,8 +185,14 @@ return [
 
 			// validate password of acting user unless they have logged in to reset it;
 			// always validate password of acting user when changing password of other users
-			if ($this->session()->get('kirby.resetPassword') !== true || $user->is($currentUser) !== true) {
-				$currentUser->validatePassword($this->requestBody('currentPassword'));
+			if (
+				$this->kirby()->auth()->isResettingPassword($this->session()) !== true ||
+				$user->is($currentUser) !== true
+			) {
+				$this->kirby()->auth()->ensurePassword(
+					$currentUser,
+					$this->requestBody('currentPassword')
+				);
 			}
 
 			$result = $user->changePassword($this->requestBody('password'));
@@ -216,28 +233,6 @@ return [
 		'method'  => 'ALL',
 		'action'  => function (string $id, string $fieldName, string|null $path = null) {
 			return $this->fieldApi(Find::user($id), $fieldName, $path);
-		}
-	],
-	[
-		'pattern' => [
-			'(account)/sections/(:any)',
-			'users/(:any)/sections/(:any)',
-		],
-		'method'  => 'GET',
-		'action'  => function (string $id, string $sectionName) {
-			if ($section = Find::user($id)->blueprint()->section($sectionName)) {
-				return $section->toResponse();
-			}
-		}
-	],
-	[
-		'pattern' => [
-			'(account)/sections/(:any)/(:all?)',
-			'users/(:any)/sections/(:any)/(:all?)',
-		],
-		'method'  => 'ALL',
-		'action'  => function (string $id, string $sectionName, string|null $path = null) {
-			return $this->sectionApi(Find::user($id), $sectionName, $path);
 		}
 	],
 	// @codeCoverageIgnoreEnd

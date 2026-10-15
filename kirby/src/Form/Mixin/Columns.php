@@ -2,6 +2,8 @@
 
 namespace Kirby\Form\Mixin;
 
+use Kirby\Reflection\Attributes\Prop;
+
 /**
  * Provides the `columns` prop to arrange multiple inputs in a column grid
  *
@@ -13,10 +15,11 @@ trait Columns
 	/**
 	 * Arranges the inputs in the given number of columns
 	 */
-	protected int|null $columns;
+	#[Prop]
+	protected int $columns = 1;
 
 	public function columns(): int
 	{
-		return $this->columns ?? 1;
+		return $this->columns;
 	}
 }

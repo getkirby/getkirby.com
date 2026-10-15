@@ -13,7 +13,7 @@ use Kirby\Panel\Ui\Button\ViewButtons;
  * @license   https://getkirby.com/license
  * @since     6.0.0
  *
- * @extends \Kirby\Panel\Controller\View\ModelViewController<\Kirby\Cms\Site, \Kirby\Panel\Site>
+ * @extends ModelViewController<Site, \Kirby\Panel\Site>
  */
 class SiteViewController extends ModelViewController
 {
@@ -46,8 +46,12 @@ class SiteViewController extends ModelViewController
 			'blueprint'   => 'site',
 			'id'          => '/',
 			'permissions' => [
-				...$this->model->permissions()->toArray(),
-				'preview' => $this->model->homePage()?->permissions()->can('preview') === true,
+				...$this->model->guards()->availability(),
+				// the home page check is kept for backward compatibility
+				// @todo Remove the home page check in 6.0.0
+				'preview' =>
+					$this->model->guards()->isAvailable('preview') === true &&
+					$this->model->homePage()?->guards()->isAvailable('preview') === true,
 			],
 		];
 	}

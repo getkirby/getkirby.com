@@ -2,6 +2,7 @@
 
 namespace Kirby\Form\Field;
 
+use Kirby\Cms\Api;
 use Kirby\Cms\App;
 use Kirby\Cms\Block;
 use Kirby\Cms\Blocks as BlocksCollection;
@@ -17,6 +18,7 @@ use Kirby\Form\Mixin\Min;
 use Kirby\Form\Mixin\Pretty;
 use Kirby\Panel\Controller\Dialog\FieldDialogController;
 use Kirby\Panel\Controller\Drawer\FieldDrawerController;
+use Kirby\Reflection\Attributes\Prop;
 use Kirby\Toolkit\BlockCollectionAccess;
 use Kirby\Toolkit\Str;
 use Throwable;
@@ -37,7 +39,8 @@ class BlocksField extends InputField
 	/**
 	 * Defines the allowed block types in the blocks field. See below.
 	 */
-	protected array|null $fieldsets;
+	#[Prop(computed: true, default: Fieldsets::DEFAULT)]
+	protected array|null $fieldsets = null;
 
 	/**
 	 * Cache for the Fieldsets collection
@@ -52,48 +55,10 @@ class BlocksField extends InputField
 	/**
 	 * Group name to identify all block fields that can share blocks via drag & drop
 	 */
-	protected string|null $group;
+	#[Prop]
+	protected string $group = 'blocks';
 
 	protected array $value = [];
-
-	public function __construct(
-		bool|null $autofocus = null,
-		array|null $default = null,
-		bool|null $disabled = null,
-		array|string|null $empty = null,
-		array|null $fieldsets = null,
-		array|string|null $help = null,
-		string|null $group = null,
-		array|string|null $label = null,
-		string|null $name = null,
-		int|null $max = null,
-		int|null $min = null,
-		bool|null $pretty = null,
-		bool|null $required = null,
-		bool|null $translate = null,
-		array|null $when = null,
-		string|null $width = null,
-	) {
-		parent::__construct(
-			autofocus: $autofocus,
-			default:   $default,
-			disabled:  $disabled,
-			help:      $help,
-			label:     $label,
-			name:      $name,
-			required:  $required,
-			translate: $translate,
-			when:      $when,
-			width:     $width
-		);
-
-		$this->empty     = $empty;
-		$this->fieldsets = $fieldsets;
-		$this->group     = $group;
-		$this->max       = $max;
-		$this->min       = $min;
-		$this->pretty    = $pretty;
-	}
 
 	public function api(): array
 	{
@@ -124,7 +89,7 @@ class BlocksField extends InputField
 					$fields = $field->fields($fieldsetType);
 					$form   = $field->form($fields);
 
-					$form->fill(input: $form->defaults());
+					$form->fill(defaults: true);
 
 					return Block::factory([
 						'content' => $form->toFormValues(),
@@ -141,7 +106,7 @@ class BlocksField extends InputField
 					string|null $path = null
 				) use ($field) {
 					/**
-					 * @var \Kirby\Cms\Api $api
+					 * @var Api $api
 					 */
 					$api    = $this;
 					$fields = $field->fields($fieldsetType);
@@ -276,13 +241,13 @@ class BlocksField extends InputField
 		return $groups === [] ? null : $groups;
 	}
 
-	/**
-	 * @psalm-suppress MethodSignatureMismatch
-	 * @todo Remove psalm suppress after https://github.com/vimeo/psalm/issues/8673 is fixed
-	 */
 	#[BlockCollectionAccess]
 	public function fill(mixed $value): static
 	{
+		if ($value instanceof BlocksCollection) {
+			$value = $value->toArray();
+		}
+
 		$value  = BlocksCollection::parse($value);
 		$blocks = BlocksCollection::factory($value)->toArray();
 		return parent::fill(value: $this->blocksToValues($blocks));
@@ -304,7 +269,7 @@ class BlocksField extends InputField
 
 	public function group(): string
 	{
-		return $this->group ?? 'blocks';
+		return $this->group;
 	}
 
 	/**
@@ -334,13 +299,10 @@ class BlocksField extends InputField
 	public function props(): array
 	{
 		return [
-			'empty'          => $this->empty(),
+			...parent::props(),
 			'fieldsets'      => $this->fieldsets()->toArray(),
 			'fieldsetGroups' => $this->fieldsetGroups(),
-			'group'          => $this->group(),
-			'max'            => $this->max(),
-			'min'            => $this->min(),
-		] + parent::props();
+		];
 	}
 
 	public function toStoredValue(): mixed

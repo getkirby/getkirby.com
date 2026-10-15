@@ -3,6 +3,7 @@
 namespace Kirby\Form\Field;
 
 use Kirby\Exception\InvalidArgumentException;
+use Kirby\Reflection\Attributes\Prop;
 use Kirby\Toolkit\Str;
 use Kirby\Toolkit\V;
 
@@ -16,40 +17,12 @@ use Kirby\Toolkit\V;
 class LinkField extends InputField
 {
 	/**
-	 * @values 'anchor', 'url, 'page, 'file', 'email', 'tel', 'custom'
+	 * Link types that can be selected. Available types: `anchor`, `custom`, `email`, `file`, `page`, `tel`, `url`
 	 */
-	protected array|null $options;
+	#[Prop]
+	protected array $options = ['url', 'page', 'file', 'email', 'tel', 'anchor'];
 
 	protected string $value = '';
-
-	public function __construct(
-		bool|null $autofocus = null,
-		mixed $default = null,
-		bool|null $disabled = null,
-		array|string|null $help = null,
-		array|string|null $label = null,
-		string|null $name = null,
-		array|string|null $options = null,
-		bool|null $required = null,
-		bool|null $translate = null,
-		array|null $when = null,
-		string|null $width = null
-	) {
-		parent::__construct(
-			autofocus: $autofocus,
-			default: $default,
-			disabled: $disabled,
-			help: $help,
-			label: $label,
-			name: $name,
-			required: $required,
-			translate: $translate,
-			when: $when,
-			width: $width
-		);
-
-		$this->options = $options;
-	}
 
 	public function activeTypes(): array
 	{
@@ -147,11 +120,6 @@ class LinkField extends InputField
 
 	public function options(): array
 	{
-		// default options
-		if ($this->options === null) {
-			return ['url', 'page', 'file', 'email', 'tel', 'anchor'];
-		}
-
 		// validate options
 		$available = array_keys($this->availableTypes());
 
@@ -163,14 +131,6 @@ class LinkField extends InputField
 		}
 
 		return $this->options;
-	}
-
-	public function props(): array
-	{
-		return [
-			...parent::props(),
-			'options' => $this->options()
-		];
 	}
 
 	public function validations(): array

@@ -6,6 +6,7 @@ use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\LogicException;
 use Kirby\Filesystem\Dir;
 use Kirby\Filesystem\F;
+use Kirby\Guards\UserValidators;
 use Kirby\Toolkit\Str;
 use Kirby\Toolkit\V;
 use Kirby\Uuid\HasUuids;
@@ -19,8 +20,8 @@ use Kirby\Uuid\HasUuids;
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  *
- * @template TValue of \Kirby\Cms\User
- * @extends \Kirby\Cms\LazyCollection<TValue>
+ * @template TValue of User
+ * @extends LazyCollection<TValue>
  */
 class Users extends LazyCollection
 {
@@ -58,9 +59,9 @@ class Users extends LazyCollection
 	 * an entire second collection to the
 	 * current collection
 	 *
-	 * @param \Kirby\Cms\Users<TValue>|TValue|string $object
+	 * @param Users<TValue>|TValue|string $object
 	 * @return $this
-	 * @throws \Kirby\Exception\InvalidArgumentException When no `User` or `Users` object or an ID of an existing user is passed
+	 * @throws InvalidArgumentException When no `User` or `Users` object or an ID of an existing user is passed
 	 */
 	public function add($object): static
 	{
@@ -159,7 +160,7 @@ class Users extends LazyCollection
 
 		// ensure the user ID only contains safe characters
 		// to prevent path traversal into subfolders
-		if (V::match($key, '/^([a-z0-9_-])+$/i') !== true) {
+		if (V::match($key, UserValidators::ID_PATTERN) !== true) {
 			return null;
 		}
 

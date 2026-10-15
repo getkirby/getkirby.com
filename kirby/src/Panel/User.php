@@ -17,7 +17,7 @@ use Kirby\Panel\Ui\Item\UserItem;
  * @license   https://getkirby.com/license
  * @since     3.6.0
  *
- * @extends \Kirby\Panel\Model<\Kirby\Cms\User>
+ * @extends Model<\Kirby\Cms\User>
  */
 class User extends Model
 {
@@ -78,6 +78,20 @@ class User extends Model
 		}
 
 		return parent::imageSource($query);
+	}
+
+	/**
+	 * Returns the minimal data to represent a user in the UI
+	 * (e.g. used for the `k-user-info` component)
+	 * @since 6.0.0
+	 */
+	public function info(): array
+	{
+		return [
+			'avatar' => $this->model->avatar()?->url(),
+			'email'  => $this->model->email(),
+			'name'   => $this->model->name()->value()
+		];
 	}
 
 	/**

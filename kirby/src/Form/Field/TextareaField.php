@@ -2,10 +2,12 @@
 
 namespace Kirby\Form\Field;
 
+use Kirby\Api\Api;
 use Kirby\Cms\File;
 use Kirby\Cms\ModelWithContent;
 use Kirby\Form\Mixin;
 use Kirby\Panel\Controller\Dialog\FilePickerDialogController;
+use Kirby\Reflection\Attributes\Prop;
 
 /**
  * Textarea Field
@@ -29,65 +31,23 @@ class TextareaField extends InputField
 	 * Available buttons: `headlines`, `italic`, `bold`, `link`, `email`,
 	 * `file`, `code`, `ul`, `ol` (as well as `|` for a divider)
 	 */
-	protected array|bool|null $buttons;
+	#[Prop]
+	protected array|bool $buttons = true;
 
 	/**
 	 * Sets the options for the files picker
 	 */
-	protected mixed $files;
+	#[Prop(export: false)]
+	protected mixed $files = null;
 
 	/**
 	 * Changes the size of the textarea.
 	 * Available sizes: `small`, `medium`, `large`, `huge`
 	 */
-	protected string|null $size;
+	#[Prop]
+	protected string|null $size = null;
 
 	protected string $value = '';
-
-	public function __construct(
-		bool|null $autofocus = null,
-		array|bool|null $buttons = null,
-		bool|null $counter = null,
-		mixed $default = null,
-		bool|null $disabled = null,
-		mixed $files = null,
-		array|string|null $help = null,
-		string|null $font = null,
-		array|string|null $label = null,
-		int|null $maxlength = null,
-		int|null $minlength = null,
-		string|null $name = null,
-		bool|null $required = null,
-		string|null $size = null,
-		bool|null $spellcheck = null,
-		bool|null $translate = null,
-		mixed $uploads = null,
-		array|null $when = null,
-		string|null $width = null
-	) {
-		parent::__construct(
-			autofocus: $autofocus,
-			default: $default,
-			disabled: $disabled,
-			help: $help,
-			label: $label,
-			name: $name,
-			required: $required,
-			translate: $translate,
-			when: $when,
-			width: $width
-		);
-
-		$this->buttons    = $buttons;
-		$this->counter    = $counter;
-		$this->files      = $files;
-		$this->font       = $font;
-		$this->maxlength  = $maxlength;
-		$this->minlength  = $minlength;
-		$this->size       = $size;
-		$this->spellcheck = $spellcheck;
-		$this->uploads    = $uploads;
-	}
 
 	public function api(): array
 	{
@@ -100,7 +60,7 @@ class TextareaField extends InputField
 				'action'  => function () use ($field) {
 					// @codeCoverageIgnoreStart
 					/**
-					 * @var \Kirby\Api\Api
+					 * @var Api
 					 */
 					$api = $this;
 
@@ -122,7 +82,7 @@ class TextareaField extends InputField
 
 	public function buttons(): array|bool
 	{
-		return $this->buttons ?? true;
+		return $this->buttons;
 	}
 
 	public function default(): string|null
@@ -147,30 +107,11 @@ class TextareaField extends InputField
 		];
 	}
 
-	/**
-	 * @psalm-suppress MethodSignatureMismatch
-	 * @todo Remove psalm suppress after https://github.com/vimeo/psalm/issues/8673 is fixed
-	 */
 	public function fill(mixed $value): static
 	{
 		return parent::fill(
 			value: trim($value ?? '')
 		);
-	}
-
-	public function props(): array
-	{
-		return [
-			...parent::props(),
-			'buttons'    => $this->buttons(),
-			'counter'    => $this->counter(),
-			'font'       => $this->font(),
-			'maxlength'  => $this->maxlength(),
-			'minlength'  => $this->minlength(),
-			'spellcheck' => $this->spellcheck(),
-			'size'       => $this->size(),
-			'uploads'    => $this->uploads()
-		];
 	}
 
 	public function size(): string|null

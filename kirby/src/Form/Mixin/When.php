@@ -2,6 +2,8 @@
 
 namespace Kirby\Form\Mixin;
 
+use Kirby\Reflection\Attributes\Prop;
+
 /**
  * Provides the `when` prop for conditional field visibility
  *
@@ -15,7 +17,8 @@ trait When
 	 *
 	 * @since 3.1.0
 	 */
-	protected array|null $when;
+	#[Prop]
+	protected array|null $when = null;
 
 	/**
 	 * Checks if the field is currently active
@@ -33,7 +36,11 @@ trait When
 
 		foreach ($when as $field => $value) {
 			$field = $siblings->get($field);
-			$input = $field?->value() ?? '';
+			$input = '';
+
+			if ($field?->hasValue() === true) {
+				$input = $field->value() ?? '';
+			}
 
 			// if the input data doesn't match the requested `when` value,
 			// that means that this field is not required and can be saved

@@ -6,6 +6,8 @@ use Closure;
 use Exception as GlobalException;
 use Generator;
 use Kirby\Api\Api;
+use Kirby\Blueprint\Blueprint;
+use Kirby\Cms\App\Resolver;
 use Kirby\Content\Storage;
 use Kirby\Content\VersionCache;
 use Kirby\Data\Data;
@@ -25,15 +27,15 @@ use Kirby\Http\Router;
 use Kirby\Http\Uri;
 use Kirby\Http\Visitor;
 use Kirby\Panel\Panel;
-use Kirby\Query\Query;
-use Kirby\Session\AutoSession;
 use Kirby\Session\Session;
+use Kirby\Session\Sessions;
 use Kirby\Template\Snippet;
 use Kirby\Template\Stack;
 use Kirby\Template\Template;
 use Kirby\Text\KirbyTag;
 use Kirby\Text\KirbyTags;
 use Kirby\Toolkit\A;
+use Kirby\Toolkit\Collection;
 use Kirby\Toolkit\Config;
 use Kirby\Toolkit\Controller;
 use Kirby\Toolkit\LazyValue;
@@ -87,7 +89,7 @@ class App
 	protected Ingredients $roots;
 	protected array|null $routes = null;
 	protected Router|null $router = null;
-	protected AutoSession|null $sessionHandler = null;
+	protected Sessions|null $sessions = null;
 	protected Site|null $site = null;
 	protected System|null $system = null;
 	protected Ingredients $urls;
@@ -106,13 +108,10 @@ class App
 		$this->events = new Events($this);
 
 		// start with fresh caches
+		Blueprint::reset();
 		Snippet::$cache = [];
 		Stack::reset();
 		VersionCache::reset();
-		ModelPermissions::$cache = [];
-
-		// start with a fresh Query runner option
-		Query::$runner = null;
 
 		// reset the UUIDs option cache
 		Uuids::$enabled = null;
@@ -375,7 +374,7 @@ class App
 	 * by name. All relevant dependencies are
 	 * automatically injected
 	 *
-	 * @return \Kirby\Toolkit\Collection|null
+	 * @return Collection|null
 	 * @todo 6.0 Add return type declaration
 	 */
 	public function collection(string $name, array $options = [])
@@ -598,8 +597,10 @@ class App
 	 */
 	public static function destroy(): void
 	{
-		static::$plugins  = [];
-		static::$instance = null;
+		static::$plugins         = [];
+		static::$instance        = null;
+		ModelWithContent::$kirby = null;
+		Language::$kirby         = null;
 	}
 
 	/**
@@ -989,7 +990,7 @@ class App
 	 * Yields all models (site, pages, files and users) of this site
 	 * @since 4.0.0
 	 *
-	 * @return \Generator<string, \Kirby\Cms\ModelWithContent>
+	 * @return Generator<string, ModelWithContent>
 	 */
 	public function models(): Generator
 	{
@@ -1181,7 +1182,7 @@ class App
 		if ($page = $parent->find($id)) {
 			/**
 			 * We passed a single $id, we can be sure that the result is
-			 * @var \Kirby\Cms\Page $page
+			 * @var Page $page
 			 */
 			return $page;
 		}
@@ -1255,7 +1256,7 @@ class App
 	 * Path resolver for the router
 	 *
 	 * @unstable
-	 * @throws \Kirby\Exception\NotFoundException if the home page cannot be found
+	 * @throws LogicException if the home page cannot be found
 	 */
 	public function resolve(
 		string|null $path = null,
@@ -1267,97 +1268,14 @@ class App
 		// set the current locale
 		$this->setCurrentLanguage($language);
 
-		// directly prevent path with incomplete content representation
-		if (Str::endsWith($path, '.') === true) {
+		try {
+			return (new Resolver($this))->resolve($path);
+		} catch (NotFoundException) {
+			// an unresolvable path resolves to null, so the router falls
+			// through to the error page (the old resolver behavior);
+			// a missing home page throws a LogicException and bubbles up
 			return null;
 		}
-
-		// the site is needed a couple times here
-		$site = $this->site();
-
-		// use the home page
-		if ($path === null) {
-			if ($homePage = $site->homePage()) {
-				return $homePage;
-			}
-
-			throw new NotFoundException(
-				message: 'The home page does not exist'
-			);
-		}
-
-		// search for the page by path
-		$page = $site->find($path);
-
-		// search for a draft if the page cannot be found
-		if (!$page && $draft = $site->draft($path)) {
-			if (
-				($this->user() && $draft->isAccessible()) ||
-				$draft->renderVersionFromRequest() !== null
-			) {
-				$page = $draft;
-			}
-		}
-
-		// try to resolve content representations if the path has an extension
-		$extension = F::extension($path);
-
-		// no content representation? then return the page
-		if (empty($extension) === true) {
-			return $page;
-		}
-
-		// only try to return a representation
-		// when the page has been found
-		if ($page) {
-			// if extension is the default content type,
-			// redirect to page URL without extension
-			if ($extension === 'html') {
-				return Response::redirect($page->url(), 301);
-			}
-
-			try {
-				$response = $this->response();
-				$output   = $page->render([], $extension);
-
-				// attach a MIME type based on the representation
-				// only if no custom MIME type was set
-				if ($response->type() === null) {
-					$response->type($extension);
-				}
-
-				return $response->body($output);
-			} catch (NotFoundException) {
-				return null;
-			}
-		}
-
-		// try to resolve clean URLs to site files
-		if (str_contains($path, '/') === false) {
-			return $this->resolveFile($site->file($path));
-		}
-
-		$id       = dirname($path);
-		$filename = basename($path);
-
-		// try to resolve clean URLs to files for pages and drafts
-		if ($page = $site->findPageOrDraft($id)) {
-			// don't leak files on draft pages through clean URLs:
-			// only serve them to an authenticated user with access
-			// permission or a request with a valid preview token
-			if (
-				$page->isDraft() === true &&
-				($this->user() && $page->isAccessible()) === false &&
-				$page->renderVersionFromRequest() === null
-			) {
-				return null;
-			}
-
-			return $this->resolveFile($page->file($filename));
-		}
-
-		// none of our resolvers were successful
-		return null;
 	}
 
 	/**
@@ -1371,17 +1289,11 @@ class App
 			return null;
 		}
 
-		$option = $this->option('content.fileRedirects', false);
-
-		if ($option === true) {
+		// the file redirect logic is owned by the resolver
+		if ((new Resolver($this))->isResolvableFile($file) === true) {
 			return $file;
 		}
 
-		if ($option instanceof Closure) {
-			return $option($file) === true ? $file : null;
-		}
-
-		// option was set to `false` or an invalid value
 		return null;
 	}
 
@@ -1471,7 +1383,7 @@ class App
 	 */
 	public function session(array $options = []): Session
 	{
-		$session = $this->sessionHandler()->get($options);
+		$session = $this->sessions()->get($options);
 
 		// disable caching for sessions that use the `Authorization` header;
 		// cookie sessions are already covered by the `Cookie` class
@@ -1485,10 +1397,20 @@ class App
 
 	/**
 	 * Returns the session handler
+	 * @deprecated 6.0.0 Use ::sessions() instead.
 	 */
-	public function sessionHandler(): AutoSession
+	public function sessionHandler(): Sessions
 	{
-		return $this->sessionHandler ??= new AutoSession(
+		return $this->sessions();
+	}
+
+	/**
+	 * Returns the sessions handler
+	 * @since 6.0.0
+	 */
+	public function sessions(): Sessions
+	{
+		return $this->sessions ??= Sessions::factory(
 			($this->component('session::store'))($this),
 			$this->option('session', [])
 		);
@@ -1717,7 +1639,7 @@ class App
 	 * Returns a system url
 	 *
 	 * @param bool $object If set to `true`, the URL is converted to an object
-	 * @psalm-return ($object is false ? string|null : \Kirby\Http\Uri)
+	 * @psalm-return ($object is false ? string|null : Uri)
 	 */
 	public function url(
 		string $type = 'index',
@@ -1752,7 +1674,7 @@ class App
 	 * Returns the current version number from
 	 * the composer.json (Keep that up to date! :))
 	 *
-	 * @throws \Kirby\Exception\LogicException if the Kirby version cannot be detected
+	 * @throws LogicException if the Kirby version cannot be detected
 	 */
 	public static function version(): string|null
 	{

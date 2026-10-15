@@ -3,6 +3,7 @@
 namespace Kirby\Form\Mixin;
 
 use Kirby\Form\Form;
+use Kirby\Reflection\Attributes\Prop;
 
 /**
  * Provides nested fields and form handling for complex field types
@@ -15,7 +16,8 @@ trait Fields
 	/**
 	 * Fields setup for the form. Works just like fields in regular forms.
 	 */
-	protected array|null $fields;
+	#[Prop]
+	protected array $fields = [];
 
 	/**
 	 * Cache for the form instance
@@ -27,7 +29,7 @@ trait Fields
 	 */
 	public function fields(): array
 	{
-		if ($this->fields === null || $this->fields === []) {
+		if ($this->fields === []) {
 			return [];
 		}
 
@@ -40,7 +42,7 @@ trait Fields
 	public function form(): Form
 	{
 		$this->form ??= new Form(
-			fields: $this->fields ?? [],
+			fields: $this->fields,
 			model: $this->model(),
 			language: 'current'
 		);

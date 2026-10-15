@@ -4,7 +4,9 @@ namespace Kirby\Form\Field;
 
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Form\Mixin;
+use Kirby\Reflection\Attributes\Prop;
 use Kirby\Toolkit\A;
+use Kirby\Toolkit\HtmlString;
 
 /**
  * Toggle Field
@@ -25,49 +27,11 @@ class ToggleField extends InputField
 	 * and the second one the positive. The text will automatically
 	 * switch when the toggle is triggered.
 	 */
-	protected array|string|null $text;
+	#[Prop]
+	protected array|string|null $text = null;
 
 	protected bool|null $value = null;
 
-	public function __construct(
-		array|string|null $after = null,
-		bool|null $autofocus = null,
-		array|string|null $before = null,
-		mixed $default = null,
-		bool|null $disabled = null,
-		array|string|null $help = null,
-		string|null $icon = null,
-		array|string|null $label = null,
-		string|null $name = null,
-		bool|null $required = null,
-		array|string|null $text = null,
-		bool|null $translate = null,
-		array|null $when = null,
-		string|null $width = null
-	) {
-		parent::__construct(
-			autofocus: $autofocus,
-			default:   $default,
-			disabled:  $disabled,
-			help:      $help,
-			label:     $label,
-			name:      $name,
-			required:  $required,
-			translate: $translate,
-			when:      $when,
-			width:     $width
-		);
-
-		$this->after  = $after;
-		$this->before = $before;
-		$this->icon   = $icon;
-		$this->text   = $text;
-	}
-
-	/**
-	 * @psalm-suppress MethodSignatureMismatch
-	 * @todo Remove psalm suppress after https://github.com/vimeo/psalm/issues/8673 is fixed
-	 */
 	public function fill(mixed $value): static
 	{
 		return parent::fill(
@@ -75,18 +39,7 @@ class ToggleField extends InputField
 		);
 	}
 
-	public function props(): array
-	{
-		return [
-			...parent::props(),
-			'after'  => $this->after(),
-			'before' => $this->before(),
-			'icon'   => $this->icon(),
-			'text'   => $this->text(),
-		];
-	}
-
-	public function text(): array|string|null
+	public function text(): array|HtmlString|null
 	{
 		$text = $this->text;
 
@@ -94,11 +47,17 @@ class ToggleField extends InputField
 			return null;
 		}
 
-		if (is_string($text) === true || A::isAssociative($text) === true) {
-			return $this->stringTemplateI18n($text);
+		if (
+			is_string($text) === true ||
+			A::isAssociative($text) === true
+		) {
+			return new HtmlString($this->stringTemplateI18n($text));
 		}
 
-		return A::map($text, fn ($value) => $this->stringTemplateI18n($value));
+		return A::map(
+			$text,
+			fn ($value) => new HtmlString($this->stringTemplateI18n($value))
+		);
 	}
 
 	public function toFormValue(): bool

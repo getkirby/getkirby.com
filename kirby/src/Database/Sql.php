@@ -171,7 +171,7 @@ abstract class Sql
 	 *                      - `unique`: Whether the index (or if not set the column itself) has a UNIQUE constraint
 	 *                      - `default`: Default value of this column
 	 * @return array Array with `query` and `key` strings, a `unique` boolean and a `bindings` array
-	 * @throws \Kirby\Exception\InvalidArgumentException if no column type is given or the column type is not supported.
+	 * @throws InvalidArgumentException if no column type is given or the column type is not supported.
 	 */
 	public function createColumn(string $name, array $column): array
 	{
@@ -433,9 +433,9 @@ abstract class Sql
 	 */
 	public function insert(array $params = []): array
 	{
-		$table    = $params['table']  ?? null;
-		$values   = $params['values'] ?? null;
-		$bindings = $params['bindings'];
+		$table    = $params['table']    ?? null;
+		$values   = $params['values']   ?? null;
+		$bindings = $params['bindings'] ?? [];
 		$query    = ['INSERT INTO ' . $this->tableName($table)];
 
 		// add the values
@@ -454,7 +454,7 @@ abstract class Sql
 	/**
 	 * Creates a join query
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException if an invalid join type is given
+	 * @throws InvalidArgumentException if an invalid join type is given
 	 */
 	public function join(string $type, string $table, string $on): array
 	{
@@ -510,7 +510,7 @@ abstract class Sql
 
 		return [
 			'query'    => implode(' ', array_filter($query)),
-			'bindings' => [],
+			'bindings' => $bindings,
 		];
 	}
 
@@ -675,7 +675,7 @@ abstract class Sql
 	 * Splits a (qualified) identifier into table and column
 	 *
 	 * @param string $table Default table if the identifier is not qualified
-	 * @throws \Kirby\Exception\InvalidArgumentException if an invalid identifier is given
+	 * @throws InvalidArgumentException if an invalid identifier is given
 	 */
 	public function splitIdentifier(string $table, string $identifier): array
 	{
@@ -708,7 +708,7 @@ abstract class Sql
 	/**
 	 * Validates and quotes a table name
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException if an invalid table name is given
+	 * @throws InvalidArgumentException if an invalid table name is given
 	 */
 	public function tableName(string $table): string
 	{
@@ -727,23 +727,23 @@ abstract class Sql
 	 */
 	public function unquoteIdentifier(string $identifier): string
 	{
-		// remove quotes around the identifier
-		if (
-			str_starts_with($identifier, '"') ||
-			str_starts_with($identifier, '`')
-		) {
-			$identifier = Str::substr($identifier, 1);
+		foreach (['`', '"'] as $quote) {
+			if (
+				Str::length($identifier) >= 2 &&
+				str_starts_with($identifier, $quote) === true &&
+				str_ends_with($identifier, $quote) === true
+			) {
+				// only the wrapping quote can be escaped inside
+				return str_replace(
+					$quote . $quote,
+					$quote,
+					Str::substr($identifier, 1, -1)
+				);
+			}
 		}
 
-		if (
-			str_ends_with($identifier, '"') ||
-			str_ends_with($identifier, '`')
-		) {
-			$identifier = Str::substr($identifier, 0, -1);
-		}
-
-		// unescape duplicated quotes
-		return str_replace(['""', '``'], ['"', '`'], $identifier);
+		// not quoted, so nothing to unwrap or unescape
+		return $identifier;
 	}
 
 	/**
@@ -789,7 +789,7 @@ abstract class Sql
 	/**
 	 * Validates a given column name in a table
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the column is invalid
+	 * @throws InvalidArgumentException If the column is invalid
 	 */
 	public function validateColumn(string $table, string $column): bool
 	{

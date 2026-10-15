@@ -13,7 +13,7 @@ namespace Kirby\Cms;
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  *
- * @extends \Kirby\Cms\Collection<\Kirby\Cms\Role>
+ * @extends Collection<Role>
  */
 class Roles extends Collection
 {
@@ -43,7 +43,7 @@ class Roles extends Collection
 					'role'  => $role->id()
 				]);
 
-				return $newUser->permissions()->can('changeRole');
+				return $newUser->guards()->isAvailable('changeRole');
 			});
 		}
 
@@ -69,7 +69,7 @@ class Roles extends Collection
 					'role'  => $role->id()
 				]);
 
-				return $newUser->permissions()->can('create');
+				return $newUser->guards()->isAvailable('create');
 			});
 		}
 
