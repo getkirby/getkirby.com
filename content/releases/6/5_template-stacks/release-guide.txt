@@ -33,7 +33,7 @@ Header:
 Body:
 
 ```php "site/templates/custom.php"
-<?php push('footer') ?>
+<?php push('head') ?>
   <?= css('assets/css/custom.css') ?>
 <?php endpush() ?>
 
