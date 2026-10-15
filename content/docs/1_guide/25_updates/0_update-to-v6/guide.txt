@@ -1,0 +1,146 @@
+Title: Update to Kirby 6
+
+----
+
+Intro: Learn how to upgrade a Kirby 5 project to Kirby 6, whose biggest change for blueprints is that sections have become fields.
+
+----
+
+Text:
+
+<warning>
+Kirby 6 is still in development. This page describes the changes as they currently stand and may change before the release.
+
+Make a backup of your site before upgrading, as always.
+</warning>
+
+## Sections are now fields
+
+Kirby had two kinds of building block inside a blueprint. Fields collected content, sections displayed things around it, and each needed its own extension type, its own registry and its own set of props that happened to overlap.
+
+In Kirby 6, there is only one: **fields**. Everything a section used to do, a field does now.
+
+```yaml "Kirby 5"
+columns:
+  main:
+    width: 2/3
+    sections:
+      fields:
+        type: fields
+        fields:
+          text:
+            type: textarea
+      subpages:
+        type: pages
+        template: article
+```
+
+```yaml "Kirby 6"
+columns:
+  main:
+    width: 2/3
+    fields:
+      text:
+        type: textarea
+      subpages:
+        type: pagelist
+        template: article
+```
+
+Two things happened here. The `sections` key is gone, and the `pages` section became a `pagelist` field. The `fields` section disappeared entirely, because it only ever existed to nest fields inside a section — with sections gone, the fields sit directly in the column.
+
+<info>
+Your existing blueprints keep working. Kirby 6 normalizes a `sections` key into fields when it reads a blueprint, using exactly the mapping below. It is a compatibility shortcut rather than a supported way of writing new blueprints, so migrate when you touch a blueprint anyway.
+</info>
+
+### What each section became
+
+| Kirby 5 section | Kirby 6 field |
+| - | - |
+| `type: files` | `type: filelist` |
+| `type: pages` | `type: pagelist` |
+| `type: info` | `type: info` |
+| `type: stats` | `type: stats` |
+| `type: fields` | unwrapped into the surrounding `fields` |
+
+`info` and `stats` keep their names, because a field of each already existed and the two have been merged.
+
+### Some fields were renamed too
+
+Because sections and fields now share one namespace, three field types that named a model had to make room for their list counterparts:
+
+| Kirby 5 field | Kirby 6 field |
+| - | - |
+| `type: files` | `type: filepicker` |
+| `type: pages` | `type: pagepicker` |
+| `type: users` | `type: userpicker` |
+
+<warning>
+There is no alias for the old names. A blueprint that still says `type: pages` inside `fields` will not resolve in Kirby 6. Search your blueprints for all three.
+
+The names are worth reading carefully, because `pages` was ambiguous in Kirby 5 and is now split in two: a **`pagepicker`** lets an editor select pages as content, and a **`pagelist`** displays the children of the current page. The same distinction applies to `filepicker` and `filelist`.
+</warning>
+
+### The `section` field is gone
+
+The `section` field type, which embedded a section inside a form, no longer has anything to embed. Use the field directly.
+
+## Name collisions
+
+Sections and fields used to have separate namespaces, so a blueprint could have a section and a field with the same name. In Kirby 6 they share one namespace.
+
+If two entries end up with the same name, Kirby replaces the second one with a visible error field in the Panel rather than failing silently:
+
+> The field **"notes"** already exists in your blueprint
+
+This is the most likely thing to break in a large blueprint that mixed both. Rename one of the two.
+
+## Blueprint structure
+
+A blueprint is now consistently tabs, then columns, then fields:
+
+```filesystem
+tabs/
+  columns/
+    fields/
+```
+
+You do not have to write all three levels. Loose fields are wrapped in a single full-width column, and loose columns are wrapped in a single tab, so the short forms you already use keep working:
+
+```yaml
+fields:
+  text:
+    type: textarea
+```
+
+## Custom sections in plugins
+
+The `sections` plugin extension no longer exists. A custom section becomes a (link: docs/reference/plugins/extensions/fields text: custom field), which is the same shape: a PHP definition that computes props and a Vue component that renders them.
+
+```php "Kirby 5"
+Kirby::plugin(
+	name: 'superwoman/superplugin',
+	extends: [
+		'sections' => [
+			'anchor' => [...]
+		]
+	]
+);
+```
+
+```php "Kirby 6"
+Kirby::plugin(
+	name: 'superwoman/superplugin',
+	extends: [
+		'fields' => [
+			'anchor' => [...]
+		]
+	]
+);
+```
+
+On the JavaScript side, `window.panel.plugin()` takes the component under `fields` instead of `sections`, and the component name Kirby looks for changes from `k-anchor-section` to `k-anchor-field`.
+
+<info>
+A section that only displayed something and never collected a value is still a valid field. Fields are not required to store content — the `info`, `headline`, `line` and `gap` types have always worked that way.
+</info>

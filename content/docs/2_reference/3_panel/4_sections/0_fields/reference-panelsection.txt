@@ -279,4 +279,4 @@ tabs:
         type: tags
 ```
 
-(docs: sections/conditional-sections)
+(docs: fields/conditional-fields)
