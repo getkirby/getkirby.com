@@ -15,21 +15,21 @@ This set of blueprint samples is for a simple shop setup, with a shop overview p
 
 ```yaml "/site/blueprints/pages/shop.yml"
 title: Shop
-preset: pages
-
 icon: 🛍
 
 options:
   status: false
 
-drafts:
-  extends: sections/products
-  label: Unpublished Products
-
-listed:
-  extends: sections/products
-  label: Published Products
-  layout: cards
+sections:
+  drafts:
+    extends: sections/products
+    label: Unpublished Products
+    status: drafts
+  listed:
+    extends: sections/products
+    label: Published Products
+    status: listed
+    layout: cards
 ```
 
 ### Reusable products section
@@ -54,47 +54,50 @@ image:
 
 ```yaml "/site/blueprints/pages/product.yml"
 title: Product
-preset: page
 num: zero
 
 status:
   draft: true
   listed: true
 
-fields:
-  price:
-    type: number
-    step: 0.01
-    before: €
-  design:
-    label: Design by …
-    type: text
-  sizes:
-    type: checkboxes
-    default:
-      - S
-      - M
-      - L
-      - XL
-      - XXL
-    options:
-      - S
-      - M
-      - L
-      - XL
-      - XXL
-  link:
-    type: url
-  description:
-    type: textarea
-
-sidebar:
-  image:
-    extends: sections/image
-    template: cover
-    min: 1
-    image:
-      ratio: 1/1
+columns:
+  main:
+    width: 2/3
+    fields:
+      price:
+        type: number
+        step: 0.01
+        before: €
+      design:
+        label: Design by …
+        type: text
+      sizes:
+        type: checkboxes
+        default:
+          - S
+          - M
+          - L
+          - XL
+          - XXL
+        options:
+          - S
+          - M
+          - L
+          - XL
+          - XXL
+      link:
+        type: url
+      description:
+        type: textarea
+  sidebar:
+    width: 1/3
+    sections:
+      image:
+        extends: sections/image
+        template: cover
+        min: 1
+        image:
+          ratio: 1/1
 ```
 
 
