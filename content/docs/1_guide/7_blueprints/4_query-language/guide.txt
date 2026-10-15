@@ -10,7 +10,7 @@ Text:
 
 ## Introduction
 
-The query language adds a lot of flexibility when querying options for select, radio  and checkboxes fields, for querying collections in Panel sections and to manipulate how information is displayed in the Panel.
+The query language adds a lot of flexibility when querying options for select, radio  and checkboxes fields, for querying collections in Panel fields and to manipulate how information is displayed in the Panel.
 
 If you are not familiar with (link: docs/guide/templates/php-api text: Kirby's PHP API) yet, you should learn more about it first. The query language is very close to it and will be confusing without the basics.
 
@@ -71,10 +71,10 @@ mySelect:
 Another way to use the language is to create custom information for page or file lists. In this case we use the query language as part of our template syntax.
 
 ```yaml
-# pages section
+# pagelist field
 published:
   label: Published Pages
-  type: pages
+  type: pagelist
   info: "Year: {{ page.year }}"
 ```
 
@@ -104,12 +104,12 @@ mySelect:
 Check out the (link: docs/reference/panel/fields text: docs for each of these fields in the Reference).
 
 
-## Querying the parent in pages and files sections
+## Querying the parent in `pagelist` and `filelist` fields
 
 ```yaml
-sections:
+fields:
   articles:
-    type: pages
+    type: pagelist
     label: Blog Articles
     parent: site.find("blog")
 ```

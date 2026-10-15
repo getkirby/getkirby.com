@@ -2,15 +2,14 @@ Title: Reusing & extending blueprints
 
 ----
 
-Intro: Fields, sections, tabs and entire blueprint layouts can be reused within your blueprints. If you want, you can even create a complete component system to apply to multiple projects.
+Intro: Fields, tabs and entire blueprint layouts can be reused within your blueprints. If you want, you can even create a complete component system to apply to multiple projects.
 
 ----
 Text:
 
 <info>
 While the examples used below all refer to page blueprints, you can also
-- reuse field and field group mixins in file and user blueprints and field sections,
-- reuse all section type mixins in user blueprints and
+- reuse field and field group mixins in page, file and user blueprints and
 - reuse layout mixins in user blueprints.
 </info>
 
@@ -91,70 +90,61 @@ Reuse in your page blueprint:
 **Simple reuse**
 
 ```yaml "/site/blueprints/pages/article.yml"
-sections:
-  meta:
-    type: fields
-    fields:
-      meta: fields/meta
+fields:
+  meta: fields/meta
 ```
 
 **Extended reuse**
 
 ```yaml "/site/blueprints/pages/article.yml"
-sections:
+fields:
   meta:
-    type: fields
+    extends: fields/meta
     fields:
-      meta:
-        extends: fields/meta
-        fields:
-          date:
-            time: false
-
+      date:
+        time: false
 ```
 
-## Reusing and extending sections
+## Reusing and extending lists
 
-You can create section blueprints (predefined sections) for pages, files and fields, which you can reuse in your blueprints.
+Fields that list pages or files are reused in exactly the same way as any other field.
 
-Let's look at an example for a section of `type: pages`. Suppose you want to have multiple page lists in the `blog.yml` blueprint for drafts, unlisted and listed articles. Instead of defining the same section over and over again, you can create a basic section definition like this:
+Suppose you want several page lists in the `blog.yml` blueprint, for drafts, unlisted and listed articles. Instead of defining the same field over and over, create a basic definition:
 
-```yaml "/site/blueprints/sections/articles.yml"
+```yaml "/site/blueprints/fields/articles.yml"
 
-type: pages
+type: pagelist
 parent: site.find("blog")
 label: Blog
 layout: list
 info: "{{ page.date.toDate('d.m.Y') }}"
 ```
 
-In your `blog.yml` blueprint, you can now create different pages sections based on this section blueprint:
+In your `blog.yml` blueprint, you can now build three lists on top of it:
 
 ```yaml "/site/blueprints/pages/blog.yml"
 
-sections:
+fields:
   drafts:
-    extends: sections/articles
+    extends: fields/articles
     label: Unpublished articles
     status: draft
 
   unlisted:
-    extends: sections/articles
+    extends: fields/articles
     label: Articles in review
     status: unlisted
 
   published:
-    extends: sections/articles
+    extends: fields/articles
     label: Published articles
     status: listed
 ```
 
-In the example, we have created three sections that extend the articles section blueprint, one for drafts, one for unlisted subpages and one for listed subpages.
+A file list works the same way:
 
-In the same way, you can create a files section:
-
-```yaml "/site/blueprints/sections/image.yml"
-type: files
+```yaml "/site/blueprints/fields/image.yml"
+type: filelist
 label: Cover
 max: 1
 layout: cards
@@ -164,15 +154,15 @@ info: "{{ file.dimensions }}"
 And reuse it in your blueprint:
 
 ```yaml "/site/blueprints/pages/product.yml"
-sections:
+fields:
   cover:
-    extends: sections/image
+    extends: fields/image
     template: cover
     min: 1
     max: 3
 ```
 
-Check out the (link: https://github.com/getkirby/starterkit text: Starterkit) section and page blueprints for more examples of section reuse.
+Check out the (link: https://github.com/getkirby/starterkit text: Starterkit) blueprints for more examples of reuse.
 
 ## Extending tabs
 
@@ -275,8 +265,8 @@ extends: layouts/default
 
 tabs:
   content:
-    sections:
-      # custom sections setup for the content tab
+    fields:
+      # custom fields setup for the content tab
 ```
 
 ## Unset parts of extended blueprints
