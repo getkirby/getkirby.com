@@ -80,12 +80,12 @@ If you just want a first test drive, we've migrated our two kits for you to play
 ### Starterkit
 
 - Release: https://github.com/getkirby/starterkit/releases/tag/6.0.0-beta.1
-- Download: (link: https://github.com/getkirby/plainkit/archive/refs/tags/6.0.0-beta.1.zip text: starterkit-6.0.0-beta.1.zip)
+- Download: (link: https://github.com/getkirby/starterkit/archive/refs/tags/6.0.0-beta.1.zip text: starterkit-6.0.0-beta.1.zip)
 
 ### Plainkit
 
 - Release: https://github.com/getkirby/plainkit/releases/tag/6.0.0-beta.1
-- Download: (link: https://github.com/getkirby/starterkit/archive/refs/tags/6.0.0-beta.1.zip text: plainkit-6.0.0-beta.1.zip)
+- Download: (link: https://github.com/getkirby/plainkit/archive/refs/tags/6.0.0-beta.1.zip text: plainkit-6.0.0-beta.1.zip)
 
 ## Install beta.1
 
