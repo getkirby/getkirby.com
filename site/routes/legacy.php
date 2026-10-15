@@ -93,4 +93,41 @@ return [
 		'pattern' => 'docs/guide/plugins/best-practices',
 		'action'  => fn () => go('docs/guide/plugins/publishing')
 	],
+
+	// Kirby 6: sections became fields
+	[
+		'pattern' => 'docs/cookbook/panel/first-panel-section',
+		'action'  => fn () => go('docs/cookbook/panel/custom-panel-field')
+	],
+	[
+		'pattern' => 'docs/reference/panel/sections/files',
+		'action'  => fn () => go('docs/reference/panel/fields/filelist')
+	],
+	[
+		'pattern' => 'docs/reference/panel/sections/pages',
+		'action'  => fn () => go('docs/reference/panel/fields/pagelist')
+	],
+	[
+		'pattern' => 'docs/reference/panel/sections/(info|stats)',
+		'action'  => function (string $type) {
+			go('docs/reference/panel/fields/' . $type);
+		}
+	],
+	[
+		'pattern' => [
+			'docs/reference/panel/sections',
+			'docs/reference/panel/sections/fields'
+		],
+		'action'  => fn () => go('docs/reference/panel/fields')
+	],
+	[
+		'pattern' => 'docs/reference/plugins/extensions/sections',
+		'action'  => fn () => go('docs/reference/plugins/extensions/fields')
+	],
+	[
+		'pattern' => 'docs/reference/panel/fields/(files|pages|users)',
+		'action'  => function (string $type) {
+			go('docs/reference/panel/fields/' . rtrim($type, 's') . 'picker');
+		}
+	],
 ];

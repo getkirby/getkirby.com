@@ -43,6 +43,18 @@ fields:
         info: n/a
 ```
 
+## Shortcuts
+
+For a field that is only used once per blueprint, you can use a shortcut. In its most basic form, a `stats` field consists of the field type as name and the `reports` property with the information you want to show.
+
+```yaml
+fields:
+  stats:
+    reports: ...
+```
+
+Keep in mind that the same field name can only be used once per blueprint.
+
 ## Reports
 
 You can add as many reports to your stats field as needed. Each report can be customized to fit your data.
