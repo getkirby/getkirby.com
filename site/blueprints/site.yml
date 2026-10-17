@@ -1,3 +1,15 @@
 title: Site
-preset: pages
-unlisted: true
+
+fields:
+  drafts:
+    label: Drafts
+    type: pagelist
+    status: drafts
+  unlisted:
+    label: Unlisted
+    type: pagelist
+    status: unlisted
+  listed:
+    label: Published
+    type: pagelist
+    status: listed
