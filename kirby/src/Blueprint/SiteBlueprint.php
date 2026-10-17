@@ -3,6 +3,7 @@
 namespace Kirby\Blueprint;
 
 use Kirby\Cms\ModelWithContent;
+use Kirby\Cms\Site;
 
 /**
  * Extension of the basic blueprint class
@@ -13,7 +14,7 @@ use Kirby\Cms\ModelWithContent;
  */
 class SiteBlueprint extends Blueprint
 {
-	/** @var \Kirby\Cms\Site */
+	/** @var Site */
 	protected ModelWithContent $model;
 
 	/**
@@ -31,6 +32,7 @@ class SiteBlueprint extends Blueprint
 			[
 				'access'      => null,
 				'changeTitle' => null,
+				'preview'     => null,
 				'update'      => null,
 			],
 			// aliases
@@ -54,6 +56,6 @@ class SiteBlueprint extends Blueprint
 			return $this->model->toString($preview);
 		}
 
-		return $this->model->permissions()->can('preview', true);
+		return $this->model->guards()->isAvailable('preview', default: true);
 	}
 }

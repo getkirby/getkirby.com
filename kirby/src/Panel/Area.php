@@ -25,7 +25,10 @@ class Area
 		protected array $breadcrumb = [],
 		protected Closure|array|string|null $breadcrumbLabel = null,
 		protected array $buttons = [],
+		protected Closure|bool|null $current = null,
+		protected array|string|null $dialog = null,
 		protected array $dialogs = [],
+		protected array|string|null $drawer = null,
 		protected array $drawers = [],
 		protected array $dropdowns = [],
 		protected string|null $icon = null,
@@ -35,6 +38,7 @@ class Area
 		protected string|null $search = null,
 		protected array $searches = [],
 		protected array $requests = [],
+		protected string|null $target = null,
 		protected Closure|array|string|null $title = null,
 		protected array $views = [],
 	) {
@@ -55,6 +59,50 @@ class Area
 	}
 
 	/**
+	 * All view buttons of the area that have not been disabled
+	 */
+	public function buttons(): array
+	{
+		return $this->filterEnabled($this->buttons);
+	}
+
+	/**
+	 * All dialogs of the area that have not been disabled
+	 */
+	public function dialogs(): array
+	{
+		return $this->filterEnabled($this->dialogs);
+	}
+
+	/**
+	 * All drawers of the area that have not been disabled
+	 */
+	public function drawers(): array
+	{
+		return $this->filterEnabled($this->drawers);
+	}
+
+	/**
+	 * All dropdowns of the area that have not been disabled
+	 */
+	public function dropdowns(): array
+	{
+		return $this->filterEnabled($this->dropdowns);
+	}
+
+	/**
+	 * Removes all definitions that have been disabled
+	 * by setting them to `false`, e.g. by a plugin
+	 */
+	protected function filterEnabled(array $definitions): array
+	{
+		return array_filter(
+			$definitions,
+			fn ($definition) => $definition !== false
+		);
+	}
+
+	/**
 	 * The label is used for the menu item and the breadcrumb
 	 * unless a custom breadcrumb label is defined
 	 */
@@ -70,13 +118,25 @@ class Area
 	public function menuItem(): array
 	{
 		return [
-			'id'     => $this->id(),
-			'icon'   => $this->icon(),
-			'label'  => $this->label(),
-			'link'   => $this->link(),
-			'menu'   => $this->menu(),
-			'title'  => $this->title()
+			'id'      => $this->id(),
+			'current' => $this->current(),
+			'dialog'  => $this->dialog(),
+			'drawer'  => $this->drawer(),
+			'icon'    => $this->icon(),
+			'label'   => $this->label(),
+			'link'    => $this->link(),
+			'menu'    => $this->menu(),
+			'target'  => $this->target(),
+			'title'   => $this->title()
 		];
+	}
+
+	/**
+	 * All requests of the area that have not been disabled
+	 */
+	public function requests(): array
+	{
+		return $this->filterEnabled($this->requests);
 	}
 
 	/**
@@ -99,6 +159,14 @@ class Area
 			...$dropdownRoutes->toArray(),
 			...$requestRoutes->toArray(),
 		];
+	}
+
+	/**
+	 * All searches of the area that have not been disabled
+	 */
+	public function searches(): array
+	{
+		return $this->filterEnabled($this->searches);
 	}
 
 	/**
@@ -127,5 +195,13 @@ class Area
 			'search'          => $this->search(),
 			'title'           => $this->title(),
 		];
+	}
+
+	/**
+	 * All views of the area that have not been disabled
+	 */
+	public function views(): array
+	{
+		return $this->filterEnabled($this->views);
 	}
 }

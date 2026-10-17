@@ -11,6 +11,8 @@ use Kirby\Auth\User as AuthUser;
 use Kirby\Cms\App;
 use Kirby\Cms\User;
 use Kirby\Exception\InvalidArgumentException;
+use Kirby\Exception\LogicException;
+use Kirby\Exception\NotFoundException;
 use Kirby\Exception\PermissionException;
 use Kirby\Exception\UserNotFoundException;
 use Kirby\Http\Idn;
@@ -52,9 +54,9 @@ class Auth
 	 * Login a user with email and (maybe optional) password
 	 * as well as an auth challenge, if required by the auth method
 	 *
-	 * @throws \Kirby\Exception\PermissionException If the rate limit was exceeded if any other error occurred with debug mode off
-	 * @throws \Kirby\Exception\NotFoundException If the email was invalid
-	 * @throws \Kirby\Exception\InvalidArgumentException If the password is not valid (via `$user->login()`)
+	 * @throws PermissionException If the rate limit was exceeded if any other error occurred with debug mode off
+	 * @throws NotFoundException If the email was invalid
+	 * @throws InvalidArgumentException If the password is not valid (via `$user->login()`)
 	 */
 	public function authenticate(
 		string $method,
@@ -72,6 +74,10 @@ class Auth
 
 		if ($result instanceof User === true) {
 			$this->setUser($result);
+
+			$session = $this->kirby->session();
+			$this->challenges->clear($session);
+			$this->methods->clear($session);
 		}
 
 		return $result;
@@ -94,9 +100,9 @@ class Auth
 	 * @param bool $long If `true`, a long session will be created
 	 * @param 'login'|'password-reset'|'2fa' $mode Purpose of the code
 	 *
-	 * @throws \Kirby\Exception\LogicException If there is no suitable authentication challenge (only in debug mode)
-	 * @throws \Kirby\Exception\NotFoundException If the user does not exist (only in debug mode)
-	 * @throws \Kirby\Exception\PermissionException If the rate limit is exceeded
+	 * @throws LogicException If there is no suitable authentication challenge (only in debug mode)
+	 * @throws NotFoundException If the user does not exist (only in debug mode)
+	 * @throws PermissionException If the rate limit is exceeded
 	 */
 	public function createChallenge(
 		string $email,
@@ -115,16 +121,17 @@ class Auth
 			$this->challenges->create($session, $email, $mode);
 
 		} catch (Throwable $e) {
+			// drop the previous challenge; its type and data must not
+			// survive, or its code could be verified against the email below
+			$this->challenges->clear($session);
+
 			// only re-throw the exception in auth debug mode
 			$this->fail($e);
 
-			// always make sure to still set the email, mode and timeout,
-			// even if the challenge wasn't created;
+			// always make sure to still keep the session generically
+			// pending, even if the challenge wasn't created;
 			// this avoids leaking whether the user exists
-			$timeout = $this->challenges()->timeout();
-			$session->set('kirby.challenge.email', $email);
-			$session->set('kirby.challenge.mode', $mode);
-			$session->set('kirby.challenge.timeout', time() + $timeout);
+			$this->challenges()->keepPending($session, $email, $mode);
 		}
 
 		// sleep for a random amount of milliseconds
@@ -159,8 +166,8 @@ class Auth
 	 * Returns the logged in user by checking for a
 	 * basic authentication header with valid credentials
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException if the authorization header is invalid
-	 * @throws \Kirby\Exception\PermissionException if basic authentication is not allowed
+	 * @throws InvalidArgumentException if the authorization header is invalid
+	 * @throws PermissionException if basic authentication is not allowed
 	 */
 	public function currentUserFromBasicAuth(
 		BasicAuth|null $auth = null
@@ -198,11 +205,41 @@ class Auth
 	}
 
 	/**
+	 * Re-confirms the password of an already authenticated user before
+	 * a sensitive action, inside the shared rate-limit envelope so that
+	 * a hijacked session cannot brute-force it.
+	 *
+	 * @internal
+	 * @since 6.0.0
+	 *
+	 * @throws RateLimitException If the rate limit was exceeded
+	 * @throws InvalidArgumentException If the password is not valid
+	 */
+	public function ensurePassword(
+		User $user,
+		#[SensitiveParameter]
+		string|null $password
+	): void {
+		$email = $user->email();
+
+		$this->limits->ensure($email);
+
+		try {
+			$user->validatePassword($password);
+		} catch (Throwable $e) {
+			// confirming a password is not a login attempt,
+			// so do not fire user.login:failed
+			$this->limits->track($email, triggerHook: false);
+			throw $e;
+		}
+	}
+
+	/**
 	 * Throws an exception only in debug mode, otherwise falls back
 	 * to a public error without sensitive information
 	 *
-	 * @throws \Throwable Either the passed `$exception` or the `$fallback`
-	 *                    (no exception if debugging is disabled and no fallback was passed)
+	 * @throws Throwable Either the passed `$exception` or the `$fallback`
+	 *                   (no exception if debugging is disabled and no fallback was passed)
 	 */
 	protected function fail(
 		Throwable $exception,
@@ -245,7 +282,7 @@ class Auth
 	 * @since 6.0.0
 	 * @internal
 	 *
-	 * @throws \Throwable Fallback or the original error in debug mode
+	 * @throws Throwable Fallback or the original error in debug mode
 	 */
 	public function guard(
 		string|null $email,
@@ -288,7 +325,7 @@ class Auth
 	 *                         `null` to use the actual user again,
 	 *                         `'kirby'` for a virtual admin user or
 	 *                         `'nobody'` to disable the actual user
-	 * @throws \Kirby\Exception\NotFoundException if the given user cannot be found
+	 * @throws NotFoundException if the given user cannot be found
 	 */
 	public function impersonate(string|null $who = null): User|null
 	{
@@ -305,6 +342,24 @@ class Auth
 	public function isBlocked(string $email): bool
 	{
 		return $this->limits->isBlocked($email);
+	}
+
+	/**
+	 * Checks if the currently logged in user was authenticated
+	 * by a password reset challenge and may therefore set a new
+	 * password without knowing the previous one
+	 * @since 6.0.0
+	 */
+	public function isResettingPassword(
+		Session|array|null $session = null
+	): bool {
+		$user = $this->user($session);
+
+		if ($user === null) {
+			return false;
+		}
+
+		return $this->session($session)->get('kirby.resetPassword') === $user->id();
 	}
 
 	/**
@@ -345,9 +400,9 @@ class Auth
 	/**
 	 * Login a user by email and password
 	 *
-	 * @throws \Kirby\Exception\PermissionException If the rate limit was exceeded or if any other error occurred with debug mode off
-	 * @throws \Kirby\Exception\NotFoundException If the email was invalid
-	 * @throws \Kirby\Exception\InvalidArgumentException If the password is not valid (via `$user->login()`)
+	 * @throws PermissionException If the rate limit was exceeded or if any other error occurred with debug mode off
+	 * @throws NotFoundException If the email was invalid
+	 * @throws InvalidArgumentException If the password is not valid (via `$user->login()`)
 	 */
 	public function login(
 		string $email,
@@ -371,9 +426,9 @@ class Auth
 	 * Login a user by email, password and auth challenge
 	 * @since 3.5.0
 	 *
-	 * @throws \Kirby\Exception\PermissionException If the rate limit was exceeded or if any other error occurred with debug mode off
-	 * @throws \Kirby\Exception\NotFoundException If the email was invalid
-	 * @throws \Kirby\Exception\InvalidArgumentException If the password is not valid (via `$user->login()`)
+	 * @throws PermissionException If the rate limit was exceeded or if any other error occurred with debug mode off
+	 * @throws NotFoundException If the email was invalid
+	 * @throws InvalidArgumentException If the password is not valid (via `$user->login()`)
 	 *
 	 * @deprecated 6.0.0 Use `self::authenticate()` instead
 	 */
@@ -392,17 +447,21 @@ class Auth
 	 */
 	public function logout(): void
 	{
-		// stop impersonating;
 		// ensures that we log out the actually logged in user
 		$this->user->impersonate(null);
 
-		// logout the current user if it exists
+		// clear our own session data before the user is logged out;
+		// otherwise this leftover data would keep the session alive
+		// and its cookie would block the pages cache
+		$session = $this->kirby->session();
+
+		$this->challenges->clear($session);
+		$this->csrf->clear($session);
+		$this->methods->clear($session);
+		$session->remove('kirby.resetPassword');
+
 		$this->user()?->logout();
 
-		// clear the pending challenge
-		$this->challenges->clear($this->kirby->session());
-
-		// clear the status cache
 		$this->status = null;
 	}
 
@@ -536,7 +595,7 @@ class Auth
 	 * @param bool $allowImpersonation If set to false, only the actually
 	 *                                 logged in user will be returned
 	 *
-	 * @throws \Throwable If an authentication error occurred
+	 * @throws Throwable If an authentication error occurred
 	 */
 	public function user(
 		Session|array|null $session = null,
@@ -549,9 +608,9 @@ class Auth
 	 * Validates the user credentials and returns the user object on success;
 	 * otherwise logs the failed attempt
 	 *
-	 * @throws \Kirby\Exception\PermissionException If the rate limit was exceeded or if any other error occurred with debug mode off
-	 * @throws \Kirby\Exception\NotFoundException If the email was invalid
-	 * @throws \Kirby\Exception\InvalidArgumentException If the password is not valid (via `$user->login()`)
+	 * @throws PermissionException If the rate limit was exceeded or if any other error occurred with debug mode off
+	 * @throws NotFoundException If the email was invalid
+	 * @throws InvalidArgumentException If the password is not valid (via `$user->login()`)
 	 */
 	public function validatePassword(
 		string $email,
@@ -594,13 +653,13 @@ class Auth
 	 * @since 3.5.0
 	 *
 	 * @param mixed $input User-provided auth code/input to verify
-	 * @return \Kirby\Cms\User User object of the logged-in user
+	 * @return User User object of the logged-in user
 	 *
-	 * @throws \Kirby\Exception\PermissionException If the rate limit was exceeded, the challenge timed out, the code
-	 *                                              is incorrect or if any other error occurred with debug mode off
-	 * @throws \Kirby\Exception\NotFoundException If the user from the challenge doesn't exist
-	 * @throws \Kirby\Exception\InvalidArgumentException If no authentication challenge is active
-	 * @throws \Kirby\Exception\LogicException If the authentication challenge is invalid
+	 * @throws PermissionException If the rate limit was exceeded, the challenge timed out, the code
+	 *                             is incorrect or if any other error occurred with debug mode off
+	 * @throws NotFoundException If the user from the challenge doesn't exist
+	 * @throws InvalidArgumentException If no authentication challenge is active
+	 * @throws LogicException If the authentication challenge is invalid
 	 */
 	public function verifyChallenge(
 		#[SensitiveParameter]
@@ -645,10 +704,12 @@ class Auth
 				$this->logout();
 				$user->loginPasswordless();
 
-				// allow the user to set a new password
-				// without knowing the previous one
+				// allow the user to set a new password without knowing the
+				// previous one; bound to the user the challenge was issued
+				// for, so that no other user of the same session can make
+				// use of the flag
 				if ($challenge->mode() === 'password-reset') {
-					$session->set('kirby.resetPassword', true);
+					$session->set('kirby.resetPassword', $user->id());
 				}
 
 				$this->setUser($user);

@@ -2,6 +2,8 @@
 
 namespace Kirby\Form\Mixin;
 
+use Kirby\Reflection\Attributes\Prop;
+
 /**
  * Provides the `columns` prop for table layout column definitions
  *
@@ -13,7 +15,8 @@ trait TableColumns
 	/**
 	 * Columns definition for the table
 	 */
-	protected array|null $columns;
+	#[Prop(computed: true)]
+	protected array|null $columns = null;
 
 	/**
 	 * Cache for the columns definition

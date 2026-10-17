@@ -3,6 +3,8 @@
 namespace Kirby\Blueprint;
 
 use Kirby\Cms\ModelWithContent;
+use Kirby\Cms\User;
+use Kirby\Exception\InvalidArgumentException;
 
 /**
  * Extension of the basic blueprint class
@@ -13,20 +15,16 @@ use Kirby\Cms\ModelWithContent;
  */
 class UserBlueprint extends Blueprint
 {
-	/** @var \Kirby\Cms\User */
+	/** @var User */
 	protected ModelWithContent $model;
 
 	/**
 	 * UserBlueprint constructor.
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct(array $props)
 	{
-		// normalize and translate the description
-		$props['description'] = $this->i18n($props['description'] ?? null);
-
-		// register the other props
 		parent::__construct($props);
 
 		// normalize all available page options
@@ -46,5 +44,26 @@ class UserBlueprint extends Blueprint
 				'update'         => null,
 			]
 		);
+	}
+
+	/**
+	 * Returns the translated role description
+	 *
+	 * @since 6.0.0
+	 */
+	public function description(): string|null
+	{
+		return $this->i18n($this->props['description'] ?? null);
+	}
+
+	/**
+	 * Converts the blueprint object to a plain array
+	 */
+	public function toArray(): array
+	{
+		return [
+			...parent::toArray(),
+			'description' => $this->description()
+		];
 	}
 }

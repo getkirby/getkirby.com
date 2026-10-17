@@ -3,14 +3,13 @@
 namespace Kirby\Cms;
 
 use Closure;
-use Kirby\Blueprint\Blueprint;
 use Kirby\Blueprint\PageBlueprint;
 use Kirby\Content\Field;
 use Kirby\Content\VersionId;
-use Kirby\Exception\Exception;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\NotFoundException;
 use Kirby\Filesystem\Dir;
+use Kirby\Guards\PageGuards;
 use Kirby\Http\Response;
 use Kirby\Panel\Page as Panel;
 use Kirby\Template\Template;
@@ -18,6 +17,7 @@ use Kirby\Toolkit\A;
 use Kirby\Toolkit\BlockCollectionAccess;
 use Kirby\Toolkit\LazyValue;
 use Kirby\Toolkit\Str;
+use Kirby\Uuid\PageUuid;
 use Throwable;
 
 /**
@@ -29,8 +29,8 @@ use Throwable;
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  *
- * @use \Kirby\Cms\HasSiblings<\Kirby\Cms\Pages>
- * @method \Kirby\Uuid\PageUuid uuid()
+ * @use HasSiblings<Pages>
+ * @method PageUuid uuid()
  */
 class Page extends ModelWithContent
 {
@@ -203,21 +203,21 @@ class Page extends ModelWithContent
 	 */
 	public function blueprint(): PageBlueprint
 	{
-		/** @var \Kirby\Blueprint\PageBlueprint */
+		/** @var PageBlueprint */
 		return $this->blueprint ??= PageBlueprint::factory(
+			$this,
 			'pages/' . $this->intendedTemplate(),
-			'pages/default',
-			$this
+			'pages/default'
 		);
 	}
 
 	/**
 	 * Returns an array with all blueprints that are available for the page
 	 */
-	public function blueprints(string|null $inSection = null): array
+	public function blueprints(string|null $inField = null): array
 	{
-		if ($inSection !== null) {
-			return $this->blueprint()->section($inSection)->blueprints();
+		if ($inField !== null) {
+			return parent::blueprints($inField);
 		}
 
 		if ($this->blueprints !== null) {
@@ -244,15 +244,29 @@ class Page extends ModelWithContent
 
 		foreach ($templates as $template) {
 			try {
-				$props = Blueprint::load('pages/' . $template);
-
+				// the full blueprint, so that a title inherited
+				// through `extends` is taken into account
+				$blueprint = PageBlueprint::factory($this, 'pages/' . $template);
+			} catch (Throwable) {
+				// a blueprint that cannot be created still needs an entry,
+				// based on its name, so the template stays selectable
 				$blueprints[] = [
-					'name'  => basename($props['name']),
-					'title' => $props['title'],
+					'name'  => basename($template),
+					'title' => ucfirst($template),
 				];
-			} catch (Exception) {
-				// skip invalid blueprints
+
+				continue;
 			}
+
+			// skip templates without a blueprint
+			if ($blueprint === null) {
+				continue;
+			}
+
+			$blueprints[] = [
+				'name'  => basename($blueprint->name()),
+				'title' => $blueprint->title(),
+			];
 		}
 
 		return $this->blueprints = $blueprints;
@@ -292,7 +306,7 @@ class Page extends ModelWithContent
 	/**
 	 * Call the page controller
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the controller returns invalid objects for `kirby`, `site`, `pages` or `page`
+	 * @throws InvalidArgumentException If the controller returns invalid objects for `kirby`, `site`, `pages` or `page`
 	 */
 	#[BlockCollectionAccess]
 	public function controller(
@@ -427,6 +441,14 @@ class Page extends ModelWithContent
 	}
 
 	/**
+	 * Returns the guards object for this page
+	 */
+	public function guards(): PageGuards
+	{
+		return PageGuards::for($this);
+	}
+
+	/**
 	 * Checks if the intended template
 	 * for the page exists.
 	 */
@@ -490,7 +512,7 @@ class Page extends ModelWithContent
 	/**
 	 * Compares the current object with the given page object
 	 *
-	 * @param \Kirby\Cms\Page|string $page
+	 * @param Page|string $page
 	 */
 	public function is($page): bool
 	{
@@ -520,7 +542,7 @@ class Page extends ModelWithContent
 			return false;
 		}
 
-		return PagePermissions::canFromCache($this, 'access');
+		return $this->guards()->isAvailable('access');
 	}
 
 	/**
@@ -600,7 +622,7 @@ class Page extends ModelWithContent
 	/**
 	 * Checks if the page is a child of the given page
 	 *
-	 * @param \Kirby\Cms\Page|string $parent
+	 * @param Page|string $parent
 	 */
 	public function isChildOf($parent): bool
 	{
@@ -610,7 +632,7 @@ class Page extends ModelWithContent
 	/**
 	 * Checks if the page is a descendant of the given page
 	 *
-	 * @param \Kirby\Cms\Page|string $parent
+	 * @param Page|string $parent
 	 */
 	public function isDescendantOf($parent): bool
 	{
@@ -677,17 +699,13 @@ class Page extends ModelWithContent
 	 */
 	public function isListable(): bool
 	{
-		// TODO: remove this check when `read` option deprecated in v6
-		if ($this->isReadable() === false) {
-			return false;
-		}
-
 		// not accessible also means not listable
+		// (which covers the `read` check as well)
 		if ($this->isAccessible() === false) {
 			return false;
 		}
 
-		return PagePermissions::canFromCache($this, 'list');
+		return $this->guards()->isAvailable('list');
 	}
 
 	/**
@@ -701,7 +719,7 @@ class Page extends ModelWithContent
 	public function isMovableTo(Page|Site $parent): bool
 	{
 		try {
-			PageRules::move($this, $parent);
+			$this->guards()->ensureExecutable('move', $parent);
 			return true;
 		} catch (Throwable) {
 			return false;
@@ -740,12 +758,7 @@ class Page extends ModelWithContent
 	 */
 	public function isReadable(): bool
 	{
-		static $readable   = [];
-		$role              = $this->kirby()->role()?->id() ?? '__none__';
-		$template          = $this->intendedTemplate()->name();
-		$readable[$role] ??= [];
-
-		return $readable[$role][$template] ??= $this->permissions()->can('read');
+		return $this->guards()->isAvailable('read');
 	}
 
 	/**
@@ -753,7 +766,7 @@ class Page extends ModelWithContent
 	 */
 	public function isSortable(): bool
 	{
-		return $this->permissions()->can('sort');
+		return $this->guards()->isAvailable('sort');
 	}
 
 	/**
@@ -891,7 +904,7 @@ class Page extends ModelWithContent
 	#[BlockCollectionAccess]
 	public function previewUrl(VersionId|string $versionId = 'latest'): string|null
 	{
-		if ($this->permissions()->can('preview') !== true) {
+		if ($this->guards()->isAvailable('preview') !== true) {
 			return null;
 		}
 
@@ -906,8 +919,8 @@ class Page extends ModelWithContent
 	 * the default template.
 	 *
 	 * @param string $contentType
-	 * @param \Kirby\Content\VersionId|string|null $versionId Optional override for the auto-detected version to render
-	 * @throws \Kirby\Exception\NotFoundException If the default template cannot be found
+	 * @param VersionId|string|null $versionId Optional override for the auto-detected version to render
+	 * @throws NotFoundException If the default template cannot be found
 	 */
 	#[BlockCollectionAccess]
 	public function render(
@@ -1019,9 +1032,12 @@ class Page extends ModelWithContent
 			$versionId = VersionId::latest();
 		}
 
-		// authenticated requests can always be trusted
-		$expectedToken = $this->version($versionId)->previewToken();
-		if ($token !== '' && hash_equals($expectedToken, $token) === true) {
+		// authenticated requests can always be trusted;
+		// only resolve the expected token when one was sent
+		if (
+			$token !== '' &&
+			hash_equals($this->version($versionId)->previewToken(), $token) === true
+		) {
 			return $versionId;
 		}
 
@@ -1039,7 +1055,7 @@ class Page extends ModelWithContent
 	}
 
 	/**
-	 * @throws \Kirby\Exception\NotFoundException If the content representation cannot be found
+	 * @throws NotFoundException If the content representation cannot be found
 	 */
 	#[BlockCollectionAccess]
 	public function representation(mixed $type): Template
@@ -1071,6 +1087,8 @@ class Page extends ModelWithContent
 	 * Returns the PageRules class instance
 	 * which is being used in various methods
 	 * to check for valid actions and input.
+	 *
+	 * @deprecated 6.0.0 Use `$page->guards()` instead
 	 */
 	protected function rules(): PageRules
 	{

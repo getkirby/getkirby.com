@@ -2,6 +2,8 @@
 
 namespace Kirby\Form\Field;
 
+use Kirby\Reflection\Attributes\Prop;
+
 /**
  * Range field
  *
@@ -11,63 +13,14 @@ namespace Kirby\Form\Field;
  */
 class RangeField extends NumberField
 {
-	protected array|bool|null $tooltip;
+	#[Prop]
+	protected float|null $max = 100;
 
-	public function __construct(
-		array|string|null $after = null,
-		bool|null $autofocus = null,
-		array|string|null $before = null,
-		float|string|null $default = null,
-		bool|null $disabled = null,
-		array|string|null $help = null,
-		string|null $icon = null,
-		array|string|null $label = null,
-		array|string|null $placeholder = null,
-		float|null $max = null,
-		float|null $min = null,
-		string|null $name = null,
-		bool|null $required = null,
-		float|string|null $step = null,
-		array|bool|null $tooltip = null,
-		bool|null $translate = null,
-		array|null $when = null,
-		string|null $width = null
-	) {
-		parent::__construct(
-			after: $after,
-			autofocus: $autofocus,
-			before: $before,
-			default: $default,
-			disabled: $disabled,
-			help: $help,
-			icon: $icon,
-			label: $label,
-			max: $max,
-			min: $min,
-			name: $name,
-			placeholder: $placeholder,
-			required: $required,
-			step: $step,
-			translate: $translate,
-			when: $when,
-			width: $width,
-		);
-
-		$this->tooltip = $tooltip;
-	}
-
-	public function max(): float|null
-	{
-		return $this->max ?? 100;
-	}
-
-	public function props(): array
-	{
-		return [
-			...parent::props(),
-			'tooltip' => $this->tooltip()
-		];
-	}
+	/**
+	 * Enables/disables the tooltip and sets the `before` and `after` values
+	 */
+	#[Prop]
+	protected array|bool $tooltip = true;
 
 	public function tooltip(): array|bool
 	{
@@ -78,6 +31,6 @@ class RangeField extends NumberField
 			];
 		}
 
-		return $this->tooltip ?? true;
+		return $this->tooltip;
 	}
 }

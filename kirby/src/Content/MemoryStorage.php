@@ -5,6 +5,7 @@ namespace Kirby\Content;
 use Kirby\Cache\MemoryCache;
 use Kirby\Cms\Language;
 use Kirby\Cms\ModelWithContent;
+use Kirby\Exception\NotFoundException;
 
 /**
  * @copyright Bastian Allgeier
@@ -28,11 +29,11 @@ class MemoryStorage extends Storage
 
 	/**
 	 * Returns a unique id for a combination
-	 * of the version id, the language code and the model id
+	 * of the version id and the language code
 	 */
 	protected function cacheId(VersionId $versionId, Language $language): string
 	{
-		return $versionId->value() . '/' . $language->code() . '/' . $this->model->id() . '/' . spl_object_hash($this->model);
+		return $versionId->value() . '/' . $language->code();
 	}
 
 	/**
@@ -82,7 +83,7 @@ class MemoryStorage extends Storage
 	/**
 	 * Updates the modification timestamp of an existing version
 	 *
-	 * @throws \Kirby\Exception\NotFoundException If the version does not exist
+	 * @throws NotFoundException If the version does not exist
 	 */
 	public function touch(VersionId $versionId, Language $language): void
 	{

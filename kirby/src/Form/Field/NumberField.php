@@ -3,6 +3,7 @@
 namespace Kirby\Form\Field;
 
 use Kirby\Form\Mixin;
+use Kirby\Reflection\Attributes\Prop;
 use Kirby\Toolkit\Str;
 
 /**
@@ -22,66 +23,24 @@ class NumberField extends InputField
 	/**
 	 * The highest allowed number
 	 */
-	protected float|null $max;
+	#[Prop]
+	protected float|null $max = null;
 
 	/**
 	 * The lowest allowed number
 	 */
-	protected float|null $min;
+	#[Prop]
+	protected float|null $min = null;
 
 	/**
 	 * Allowed incremental steps between numbers (i.e `0.5`)
 	 * Use `any` to allow any decimal value.
 	 */
-	protected float|string|null $step;
+	#[Prop]
+	protected float|string|null $step = null;
 
 	protected float|null $value = null;
 
-	public function __construct(
-		array|string|null $after = null,
-		bool|null $autofocus = null,
-		array|string|null $before = null,
-		float|string|null $default = null,
-		bool|null $disabled = null,
-		array|string|null $help = null,
-		string|null $icon = null,
-		array|string|null $label = null,
-		array|string|null $placeholder = null,
-		float|null $max = null,
-		float|null $min = null,
-		string|null $name = null,
-		bool|null $required = null,
-		float|string|null $step = null,
-		bool|null $translate = null,
-		array|null $when = null,
-		string|null $width = null
-	) {
-		parent::__construct(
-			autofocus: $autofocus,
-			default:   $default,
-			disabled:  $disabled,
-			help:      $help,
-			label:     $label,
-			name:      $name,
-			required:  $required,
-			translate: $translate,
-			when:      $when,
-			width:     $width,
-		);
-
-		$this->after       = $after;
-		$this->before      = $before;
-		$this->icon        = $icon;
-		$this->max         = $max;
-		$this->min         = $min;
-		$this->placeholder = $placeholder;
-		$this->step        = $step;
-	}
-
-	/**
-	 * @psalm-suppress MethodSignatureMismatch
-	 * @todo Remove psalm suppress after https://github.com/vimeo/psalm/issues/8673 is fixed
-	 */
 	public function fill(mixed $value): static
 	{
 		return parent::fill(
@@ -106,20 +65,6 @@ class NumberField extends InputField
 		return $this->min;
 	}
 
-	public function props(): array
-	{
-		return [
-			...parent::props(),
-			'after'       => $this->after(),
-			'before'      => $this->before(),
-			'icon'        => $this->icon(),
-			'max'         => $this->max(),
-			'min'         => $this->min(),
-			'placeholder' => $this->placeholder(),
-			'step'        => $this->step(),
-		];
-	}
-
 	public function step(): float|string|null
 	{
 		return match ($this->step) {
@@ -130,13 +75,14 @@ class NumberField extends InputField
 
 	public static function toNumber(mixed $value): float|null
 	{
+		if (is_string($value) === true) {
+			$value = Str::float($value);
+		}
+
 		return match(true) {
-			$value === ''    => null,
 			is_null($value)  => null,
 			is_float($value) => $value,
-			is_int($value)   => (float)$value,
-			is_bool($value)  => (float)$value,
-			default          => (float)Str::float($value),
+			default          => (float)$value,
 		};
 	}
 

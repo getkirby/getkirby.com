@@ -3,36 +3,33 @@
 namespace Kirby\Panel\Controller\Drawer;
 
 use Kirby\Cms\User;
-use Kirby\Cms\UserRules;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Image\QrCode;
 use Kirby\Panel\Ui\Drawer;
-use Kirby\Toolkit\Escape;
 use Kirby\Toolkit\Totp;
 
 /**
- * @package   Kirby Panel
- * @author    Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  * @since     6.0.0
  * @unstable
  */
-class UserTotpDrawerController extends UserDrawerController
+class UserTotpDrawerController extends UserCredentialDrawerController
 {
 	protected string|null $secret;
 
 	public function __construct(User $user)
 	{
-		parent::__construct($user);
+		parent::__construct($user, 'totp');
 
 		// ensure user has the necessary permissions
-		UserRules::changeSecret($user, 'totp', null);
+		$user->guards()->ensureExecutable('changeSecret', 'totp', null);
 	}
 
 	protected function create(): User
 	{
+		parent::create();
+
 		$secret  = $this->request->get('secret');
 		$confirm = $this->request->get('confirm');
 
@@ -51,11 +48,6 @@ class UserTotpDrawerController extends UserDrawerController
 		return $this->user->changeSecret('totp', $secret);
 	}
 
-	protected function isCurrentUser(): bool
-	{
-		return $this->kirby->user()->is($this->user);
-	}
-
 	protected function isEnabled(): bool
 	{
 		return $this->user->secret('totp') !== null;
@@ -64,7 +56,6 @@ class UserTotpDrawerController extends UserDrawerController
 	public function load(): Drawer
 	{
 		$totp = new Totp();
-		$name = $this->user->name()->or($this->user->email());
 
 		return new Drawer(
 			component: 'k-user-totp-drawer',
@@ -77,7 +68,7 @@ class UserTotpDrawerController extends UserDrawerController
 				issuer: $this->user->kirby()->site()->title(),
 				label: $this->user->email()
 			),
-			user:      Escape::html($name),
+			user:      $this->user->panel()->info(),
 			value:     ['secret' => $totp->secret()]
 		);
 	}
@@ -95,27 +86,8 @@ class UserTotpDrawerController extends UserDrawerController
 
 	protected function remove(): User
 	{
-		$password = $this->request->get('password');
-
-		try {
-			if ($this->isCurrentUser() === true) {
-				$this->user->validatePassword($password);
-			}
-
-			// Remove the TOTP secret from the account
-			return $this->user->changeSecret('totp', null);
-
-		} catch (InvalidArgumentException $e) {
-			// Catch and re-throw exception so that any
-			// Unauthenticated exception for incorrect passwords
-			// does not trigger a logout
-			throw new InvalidArgumentException(
-				key:     $e->getKey(),
-				data:     $e->getData(),
-				fallback: $e->getMessage(),
-				previous: $e
-			);
-		}
+		$this->authorize();
+		return $this->user->changeSecret('totp', null);
 	}
 
 	public function submit(): bool

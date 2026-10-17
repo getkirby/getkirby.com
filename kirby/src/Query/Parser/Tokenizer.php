@@ -78,7 +78,7 @@ class Tokenizer
 	 *
 	 * @param int $current The current position in the source string
 	 *
-	 * @throws \Exception If an unexpected character is encountered
+	 * @throws Exception If an unexpected character is encountered
 	 */
 	public static function token(string $query, int $current): Token
 	{
@@ -91,17 +91,17 @@ class Tokenizer
 		}
 
 		// true
-		if ($lex = static::match($query, $current, 'true', true)) {
+		if ($lex = static::match($query, $current, 'true\b', true)) {
 			return new Token(TokenType::T_TRUE, $lex, true);
 		}
 
 		// false
-		if ($lex = static::match($query, $current, 'false', true)) {
+		if ($lex = static::match($query, $current, 'false\b', true)) {
 			return new Token(TokenType::T_FALSE, $lex, false);
 		}
 
 		// null
-		if ($lex = static::match($query, $current, 'null', true)) {
+		if ($lex = static::match($query, $current, 'null\b', true)) {
 			return new Token(TokenType::T_NULL, $lex, null);
 		}
 
@@ -110,7 +110,7 @@ class Tokenizer
 			return new Token(
 				TokenType::T_STRING,
 				$lex,
-				stripcslashes(substr($lex, 1, -1))
+				static::unescape($lex)
 			);
 		}
 
@@ -119,18 +119,18 @@ class Tokenizer
 			return new Token(
 				TokenType::T_STRING,
 				$lex,
-				stripcslashes(substr($lex, 1, -1))
+				static::unescape($lex)
 			);
 		}
 
 		// float (check before single character tokens)
-		$lex = static::match($query, $current, '-?\d+\.\d+\b');
+		$lex = static::match($query, $current, '\d+\.\d+\b');
 		if ($lex !== null) {
 			return new Token(TokenType::T_FLOAT, $lex, (float)$lex);
 		}
 
 		// int (check before single character tokens)
-		$lex = static::match($query, $current, '-?\d+\b');
+		$lex = static::match($query, $current, '\d+\b');
 		if ($lex !== null) {
 			return new Token(TokenType::T_INTEGER, $lex, (int)$lex);
 		}
@@ -156,12 +156,13 @@ class Tokenizer
 			return new Token(TokenType::T_ARROW, $lex);
 		}
 
-		// Logical operators (check before comparison operators)
-		if ($lex = static::match($query, $current, '&&|AND')) {
+		// Logical operators (check before comparison operators);
+		// group the alternation so that `\G` anchors both keywords
+		if ($lex = static::match($query, $current, '(?:&&|AND\b)')) {
 			return new Token(TokenType::T_AND, $lex);
 		}
 
-		if ($lex = static::match($query, $current, '\|\||OR')) {
+		if ($lex = static::match($query, $current, '(?:\|\||OR\b)')) {
 			return new Token(TokenType::T_OR, $lex);
 		}
 
@@ -211,6 +212,7 @@ class Tokenizer
 			'/'     => new Token(TokenType::T_DIVIDE, '/'),
 			'%'     => new Token(TokenType::T_MODULO, '%'),
 			'?'     => new Token(TokenType::T_QUESTION_MARK, '?'),
+			'!'     => new Token(TokenType::T_NOT, '!'),
 			'<'     => new Token(TokenType::T_LESS_THAN, '<'),
 			'>'     => new Token(TokenType::T_GREATER_THAN, '>'),
 			default => null
@@ -225,8 +227,10 @@ class Tokenizer
 			return new Token(TokenType::T_IDENTIFIER, $lex);
 		}
 
-		// Unknown token
-		throw new Exception('Invalid character in query: ' . $query[$current]);
+		// Unknown token (with the full character, even if multibyte)
+		throw new Exception(
+			'Invalid character in query: ' . mb_substr(substr($query, $current), 0, 1)
+		);
 	}
 
 	/**
@@ -249,5 +253,21 @@ class Tokenizer
 		}
 
 		yield new Token(TokenType::T_EOF, '', null);
+	}
+
+	/**
+	 * Returns the value of a string literal: only its quote
+	 * and the backslash can be escaped (e.g. `"say \"hi\""`),
+	 * all other backslashes are kept as-is (e.g. `'\d+'`)
+	 * @since 6.0.0
+	 */
+	protected static function unescape(string $lexeme): string
+	{
+		$quote = $lexeme[0];
+
+		return strtr(substr($lexeme, 1, -1), [
+			'\\' . $quote => $quote,
+			'\\\\'      => '\\'
+		]);
 	}
 }

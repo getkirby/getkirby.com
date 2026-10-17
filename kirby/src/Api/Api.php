@@ -24,6 +24,8 @@ use Kirby\Http\Route;
 use Kirby\Http\Router;
 use Kirby\Session\Session;
 use Kirby\Toolkit\Collection as BaseCollection;
+use Kirby\Toolkit\HtmlString;
+use Kirby\Toolkit\I18n;
 use Kirby\Toolkit\Pagination;
 use Throwable;
 
@@ -119,7 +121,7 @@ class Api
 	/**
 	 * Magic accessor for any given data
 	 *
-	 * @throws \Kirby\Exception\NotFoundException
+	 * @throws NotFoundException
 	 */
 	public function __call(string $method, array $args = [])
 	{
@@ -147,7 +149,7 @@ class Api
 	 * Execute an API call for the given path,
 	 * request method and optional request data
 	 *
-	 * @throws \Kirby\Exception\NotFoundException
+	 * @throws NotFoundException
 	 * @throws \Exception
 	 */
 	public function call(
@@ -217,7 +219,7 @@ class Api
 	/**
 	 * Setter and getter for an API collection
 	 *
-	 * @throws \Kirby\Exception\NotFoundException If no collection for `$name` exists
+	 * @throws NotFoundException If no collection for `$name` exists
 	 * @throws \Exception
 	 */
 	public function collection(
@@ -247,7 +249,7 @@ class Api
 	 *
 	 * @psalm-return ($key is null ? array : mixed)
 	 *
-	 * @throws \Kirby\Exception\NotFoundException If no data for `$key` exists
+	 * @throws NotFoundException If no data for `$key` exists
 	 */
 	public function data(string|null $key = null, ...$args): mixed
 	{
@@ -278,7 +280,7 @@ class Api
 	}
 
 	/**
-	 * @throws \Kirby\Exception\NotFoundException if the field type cannot be found or the field cannot be loaded
+	 * @throws NotFoundException if the field type cannot be found or the field cannot be loaded
 	 */
 	public function fieldApi(
 		ModelWithContent $model,
@@ -304,7 +306,7 @@ class Api
 	 * parent path and filename
 	 *
 	 * @param string $path Path to file's parent model
-	 * @throws \Kirby\Exception\NotFoundException if the file cannot be found
+	 * @throws NotFoundException if the file cannot be found
 	 */
 	public function file(
 		string $path,
@@ -317,7 +319,7 @@ class Api
 	 * Returns the all readable files for the parent
 	 *
 	 * @param string $path Path to file's parent model
-	 * @throws \Kirby\Exception\NotFoundException if the file cannot be found
+	 * @throws NotFoundException if the file cannot be found
 	 */
 	public function files(string $path): Files
 	{
@@ -385,7 +387,7 @@ class Api
 	/**
 	 * Returns an API model instance by name
 	 *
-	 * @throws \Kirby\Exception\NotFoundException If no model for `$name` exists
+	 * @throws NotFoundException If no model for `$name` exists
 	 */
 	public function model(
 		string|null $name = null,
@@ -415,7 +417,7 @@ class Api
 	 * Returns the page object for the given id
 	 *
 	 * @param string $id Page's id
-	 * @throws \Kirby\Exception\NotFoundException if the page cannot be found
+	 * @throws NotFoundException if the page cannot be found
 	 */
 	public function page(string $id): Page|null
 	{
@@ -448,8 +450,8 @@ class Api
 	 * Returns the model's object for the given path
 	 *
 	 * @param string $path Path to parent model
-	 * @throws \Kirby\Exception\InvalidArgumentException if the model type is invalid
-	 * @throws \Kirby\Exception\NotFoundException if the model cannot be found
+	 * @throws InvalidArgumentException if the model type is invalid
+	 * @throws NotFoundException if the model cannot be found
 	 */
 	public function parent(string $path): ModelWithContent|null
 	{
@@ -532,7 +534,7 @@ class Api
 	 * Turns a Kirby object into an
 	 * API model or collection representation
 	 *
-	 * @throws \Kirby\Exception\NotFoundException If `$object` cannot be resolved
+	 * @throws NotFoundException If `$object` cannot be resolved
 	 */
 	public function resolve($object): Model|Collection
 	{
@@ -591,6 +593,7 @@ class Api
 
 		// pretty print json data
 		$pretty = (bool)($requestData['query']['pretty'] ?? false) === true;
+		$code   = 200;
 
 		if (($result['status'] ?? 'ok') === 'error') {
 			$code = $result['code'] ?? 400;
@@ -599,11 +602,15 @@ class Api
 			if ($code < 400 || $code > 599) {
 				$code = 500;
 			}
-
-			return Response::json($result, $code, $pretty);
 		}
 
-		return Response::json($result, 200, $pretty);
+		// mark trusted HTML for the Panel, but never for the public
+		// API, where the marked keys would be a breaking change
+		if ((bool)$this->requestHeaders('x-panel') === true) {
+			$result = HtmlString::resolve($result);
+		}
+
+		return Response::json($result, $code, $pretty);
 	}
 
 	/**
@@ -654,10 +661,28 @@ class Api
 	{
 		$root = $this->kirby->environment()->get('DOCUMENT_ROOT');
 
+		// determine which message to expose to avoid leaking
+		// internal details (e.g. file paths) from PHP errors
+		if ($e instanceof ExceptionException) {
+			// Kirby exceptions carry safe, intentional messages
+			// that can be returned as-is whether debugging or not
+			$message = $e->getMessage();
+
+		} elseif ($this->debug === true) {
+			// in debug mode, expose the actual message
+			// but disguise absolute file paths in it
+			$message = $this->kirby->disguiseFilePath($e->getMessage());
+
+		} else {
+			// any other (PHP) error could leak internal details,
+			// so only a generic message is returned
+			$message = I18n::translate('error.unexpected');
+		}
+
 		// prepare the result array for all exception types
 		$result = [
 			'status'    => 'error',
-			'message'   => $e->getMessage(),
+			'message'   => $message,
 			'code'      => empty($e->getCode()) === true ? 500 : $e->getCode(),
 			'exception' => $e::class,
 			'key'       => null,
@@ -708,34 +733,6 @@ class Api
 			'paginate' => $this->requestBody('paginate'),
 			'search'   => $this->requestBody('search'),
 		], fn ($value) => $value !== null));
-	}
-
-	/**
-	 * @throws \Kirby\Exception\NotFoundException if the section type cannot be found or the section cannot be loaded
-	 */
-	public function sectionApi(
-		ModelWithContent $model,
-		string $name,
-		string|null $path = null
-	): mixed {
-		$section = $model->blueprint()->section($name);
-
-		if ($section === null) {
-			throw new NotFoundException(
-				message: 'The section "' . $name . '" could not be found'
-			);
-		}
-
-		$sectionApi = $this->clone([
-			'data'   => [...$this->data(), 'section' => $section],
-			'routes' => $section->api(),
-		]);
-
-		return $sectionApi->call(
-			$path,
-			$this->requestMethod(),
-			$this->requestData()
-		);
 	}
 
 	/**
@@ -829,7 +826,7 @@ class Api
 	/**
 	 * Returns the site object
 	 *
-	 * @throws \Kirby\Exception\NotFoundException if the site cannot be accessed
+	 * @throws NotFoundException if the site cannot be accessed
 	 * @since 5.4.0
 	 */
 	public function site(): Site
@@ -849,13 +846,15 @@ class Api
 		Closure $callback,
 		bool $single = false,
 		bool $debug = false,
-		string|null $template = null
+		string|null $template = null,
+		Closure|null $preflight = null
 	): array {
 		$upload = new Upload(
 			api: $this,
 			single: $single,
 			debug: $debug,
-			template: $template
+			template: $template,
+			preflight: $preflight
 		);
 
 		return $upload->process($callback);
@@ -866,7 +865,7 @@ class Api
 	 * returns the current authenticated user if no
 	 * id is passed
 	 *
-	 * @throws \Kirby\Exception\NotFoundException if the user for the given id cannot be found
+	 * @throws NotFoundException if the user for the given id cannot be found
 	 */
 	public function user(string|null $id = null): User|null
 	{
@@ -892,7 +891,7 @@ class Api
 	/**
 	 * Validates that the acting user has access to the given area.
 	 *
-	 * @throws \Kirby\Exception\PermissionException
+	 * @throws PermissionException
 	 * @since 5.4.0
 	 */
 	public function validateAreaAccess(string $area): void

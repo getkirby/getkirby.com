@@ -9,7 +9,7 @@ use Kirby\Cms\File;
  * @license   https://getkirby.com/license
  * @since     5.1.0
  *
- * @extends \Kirby\Panel\Ui\Item\ModelItem<\Kirby\Cms\File, \Kirby\Panel\File>
+ * @extends ModelItem<File, \Kirby\Panel\File>
  */
 class FileItem extends ModelItem
 {
@@ -37,11 +37,11 @@ class FileItem extends ModelItem
 
 	protected function permissions(): array
 	{
-		$permissions = $this->model->permissions();
+		$guards = $this->model->guards();
 
 		return [
-			'delete' => $permissions->can('delete'),
-			'sort'   => $permissions->can('sort'),
+			'delete' => $guards->isAvailable('delete'),
+			'sort'   => $guards->isAvailable('sort'),
 		];
 	}
 

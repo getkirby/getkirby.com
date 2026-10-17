@@ -23,7 +23,7 @@ class UserPickerDialogController extends ModelPickerDialogController
 	public function __construct(
 		ModelWithContent $model,
 		bool $hasSearch = true,
-		array|null $image = [],
+		array|string|false|null $image = [],
 		string|null $info = null,
 		string $layout = 'list',
 		public int|null $limit = null,
@@ -73,7 +73,7 @@ class UserPickerDialogController extends ModelPickerDialogController
 
 	/**
 	 * Returns the item data for a user
-	 * @param \Kirby\Cms\User $model
+	 * @param User $model
 	 */
 	public function item(ModelWithContent $model): array
 	{

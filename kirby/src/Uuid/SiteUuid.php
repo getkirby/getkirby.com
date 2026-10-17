@@ -7,20 +7,17 @@ use Kirby\Cms\App;
 use Kirby\Cms\Site;
 
 /**
- * UUID for \Kirby\Cms\Site
+ * UUID for $site
  *
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  * @since     3.8.0
+ *
+ * @extends Uuid<Site>
  */
 class SiteUuid extends Uuid
 {
 	protected const string TYPE = 'site';
-
-	/**
-	 * @var \Kirby\Cms\Site|null
-	 */
-	public Identifiable|null $model = null;
 
 	/*
 	 * Returns empty string since
@@ -34,7 +31,7 @@ class SiteUuid extends Uuid
 	/**
 	 * Generator for the one and only site object
 	 *
-	 * @return \Generator<string, \Kirby\Cms\Site>
+	 * @return Generator<string, Site>
 	 */
 	public static function index(): Generator
 	{

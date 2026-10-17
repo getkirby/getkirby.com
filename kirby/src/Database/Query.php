@@ -200,7 +200,7 @@ class Query
 	 * Sets the name of the table, which should be queried
 	 *
 	 * @return $this
-	 * @throws \Kirby\Exception\InvalidArgumentException if the table does not exist
+	 * @throws InvalidArgumentException if the table does not exist
 	 */
 	public function table(string $table): static
 	{
@@ -407,7 +407,7 @@ class Query
 	 *
 	 * @return $this
 	 */
-	public function order(string|null $order = null)
+	public function order(string|null $order = null): static
 	{
 		$this->order = $order;
 		return $this;
@@ -441,7 +441,7 @@ class Query
 	 *
 	 * @param string $type (select, update, insert, delete)
 	 * @return array The final query
-	 * @throws \InvalidArgumentException If the query type is invalid
+	 * @throws InvalidArgumentException If the query type is invalid
 	 */
 	public function build(string $type): array
 	{
@@ -821,14 +821,14 @@ class Query
 	/**
 	 * Builder for where and having clauses
 	 *
-	 * @param array $args Arguments, see where() description
-	 * @param mixed $current Current value (like $this->where)
+	 * @param $args Arguments, see where() description
+	 * @param $current Current value (like $this->where)
 	 */
 	protected function filterQuery(
 		array $args,
-		$current,
+		string|null $current,
 		string $mode = 'AND'
-	) {
+	): string|null {
 		$result = '';
 
 		switch (count($args)) {

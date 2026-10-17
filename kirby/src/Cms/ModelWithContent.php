@@ -7,6 +7,7 @@ use Kirby\Blueprint\Blueprint;
 use Kirby\Content\Content;
 use Kirby\Content\ImmutableMemoryStorage;
 use Kirby\Content\Lock;
+use Kirby\Content\LockedContentException;
 use Kirby\Content\MemoryStorage;
 use Kirby\Content\Storage;
 use Kirby\Content\Translation;
@@ -15,14 +16,17 @@ use Kirby\Content\Version;
 use Kirby\Content\VersionId;
 use Kirby\Content\Versions;
 use Kirby\Exception\InvalidArgumentException;
+use Kirby\Exception\NotFoundException;
 use Kirby\Form\Fields;
 use Kirby\Form\Form;
-use Kirby\Panel\Model;
+use Kirby\Form\Interface\ProvidesAcceptedBlueprints;
+use Kirby\Panel\Model as PanelModel;
+use Kirby\Toolkit\A;
 use Kirby\Toolkit\BlockCollectionAccess;
+use Kirby\Toolkit\HtmlString;
 use Kirby\Toolkit\Str;
 use Kirby\Uuid\Identifiable;
 use Kirby\Uuid\Uuid;
-use Stringable;
 use Throwable;
 
 /**
@@ -31,7 +35,7 @@ use Throwable;
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
-abstract class ModelWithContent implements Identifiable, Stringable
+abstract class ModelWithContent extends Model implements Identifiable
 {
 	/**
 	 * Each model must define a CLASS_ALIAS
@@ -79,33 +83,31 @@ abstract class ModelWithContent implements Identifiable, Stringable
 	/**
 	 * Returns an array with all blueprints that are available
 	 */
-	public function blueprints(string|null $inSection = null): array
+	public function blueprints(string|null $inField = null): array
 	{
 		// helper function
-		$toBlueprints = static function (array $sections): array {
+		$toBlueprints = static function (iterable $fields): array {
 			$blueprints = [];
 
-			foreach ($sections as $section) {
-				if ($section === null) {
-					continue;
-				}
-
-				foreach ((array)$section->blueprints() as $blueprint) {
-					$blueprints[$blueprint['name']] = $blueprint;
+			foreach ($fields as $field) {
+				if ($field instanceof ProvidesAcceptedBlueprints) {
+					foreach ($field->blueprints() as $blueprint) {
+						$blueprints[$blueprint['name']] = $blueprint;
+					}
 				}
 			}
 
 			return array_values($blueprints);
 		};
 
-		$blueprint = $this->blueprint();
+		$fields = Fields::for($this);
 
-		// no caching for when collecting for specific section
-		if ($inSection !== null) {
-			return $toBlueprints([$blueprint->section($inSection)]);
+		// no caching for when collecting for a specific field
+		if ($inField !== null) {
+			return $toBlueprints([$fields->get($inField)]);
 		}
 
-		return $this->blueprints ??= $toBlueprints($blueprint->sections());
+		return $this->blueprints ??= $toBlueprints($fields);
 	}
 
 	/**
@@ -170,7 +172,7 @@ abstract class ModelWithContent implements Identifiable, Stringable
 	/**
 	 * Returns the content
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the language for the given code does not exist
+	 * @throws InvalidArgumentException If the language for the given code does not exist
 	 */
 	public function content(string|null $languageCode = null): Content
 	{
@@ -204,6 +206,17 @@ abstract class ModelWithContent implements Identifiable, Stringable
 	 */
 	protected function convertTo(string $blueprint): static
 	{
+		// Make sure that no other user is editing the content
+		// right now before any of the versions get converted
+		$lock = $this->lock();
+
+		if ($lock->isLocked() === true) {
+			throw new LockedContentException(
+				lock: $lock,
+				key: 'content.lock.update'
+			);
+		}
+
 		// Keep a copy of the old model with the original storage handler.
 		// This will be used to delete the old versions.
 		$old = $this->clone();
@@ -232,8 +245,22 @@ abstract class ModelWithContent implements Identifiable, Stringable
 		// Get all languages to loop through
 		$languages = Languages::ensure();
 
-		// Loop through all versions
-		foreach ($old->versions() as $oldVersion) {
+		// Convert the latest version before the changes version.
+		// Creating the changes version tracks the model by its UUID,
+		// which has to be readable from the new latest version by then.
+		$versions = [
+			$old->version('latest'),
+			$old->version('changes')
+		];
+
+		// Keep track of all converted versions
+		$converted = [];
+
+		// Save all converted versions first. The old versions
+		// are only deleted afterwards. This way a failing
+		// storage handler cannot destroy the old content
+		// before the new content has been written.
+		foreach ($versions as $oldVersion) {
 			// Loop through all languages
 			foreach ($languages as $language) {
 				// Skip non-existing versions
@@ -241,21 +268,66 @@ abstract class ModelWithContent implements Identifiable, Stringable
 					continue;
 				}
 
-				// Convert the content to the new blueprint
-				$content = $oldVersion->content($language)->convertTo($blueprint);
+				// Convert the fields of the version to the new blueprint.
+				// The fields are read directly to only convert the fields
+				// of the version itself without the fallback to the
+				// default language.
+				$fields = $oldVersion->read($language) ?? [];
+				unset($fields['lock']);
 
-				// Delete the old versions. This will also remove the
-				// content files from the storage if this is a plain text
-				// storage instance.
-				$oldVersion->delete($language);
+				$content = new Content(
+					parent: $old,
+					data: $fields,
+					normalize: false
+				);
 
-				// Save to re-create the new version
+				// Save to create or update the new version
 				// with the converted/updated content
-				$new->version($oldVersion->id())->save($content, $language);
+				$new->version($oldVersion->id())->save(
+					fields: $content->convertTo($blueprint),
+					language: $language
+				);
+
+				$converted[] = [$oldVersion->id(), $language];
 			}
 		}
 
+		// Delete the old versions. This will also remove the
+		// content files from the storage if this is a plain text
+		// storage instance.
+		foreach ($converted as [$versionId, $language]) {
+			// The old version has already been overwritten if its
+			// storage location does not depend on the template
+			// (e.g. the content files of files)
+			if ($old->storage()->isSameStorageLocation(
+				fromVersionId: $versionId,
+				fromLanguage: $language,
+				toStorage: $new->storage()
+			) === true) {
+				continue;
+			}
+
+			$old->storage()->delete($versionId, $language);
+		}
+
 		return $new;
+	}
+
+	/**
+	 * Creates the content for a new model by merging the given
+	 * values with the defaults from the model's blueprint and
+	 * converting all of them to their storable values
+	 *
+	 * @since 5.6.0
+	 */
+	public function createContent(array $content = []): array
+	{
+		$fields = Fields::for($this, 'default');
+
+		return $fields
+			->fill($fields->defaults())
+			->fill($content)
+			->toStoredValues();
 	}
 
 	/**
@@ -264,11 +336,40 @@ abstract class ModelWithContent implements Identifiable, Stringable
 	 * model's blueprint setup.
 	 *
 	 * @since 5.0.0
+	 * @deprecated 5.6.0 Use `::createContent()` instead
 	 */
 	public function createDefaultContent(): array
 	{
-		$fields = Fields::for($this, 'default');
-		return $fields->fill($fields->defaults())->toStoredValues();
+		return $this->createContent();
+	}
+
+	/**
+	 * Converts the content of the given translations to the values
+	 * that will be stored by running each of them through the fields
+	 * of the model's blueprint
+	 *
+	 * @since 5.6.0
+	 */
+	public function createTranslations(array|null $translations = null): array|null
+	{
+		if ($translations === null) {
+			return null;
+		}
+
+		return A::map($translations, function (array $translation): array {
+			$content = array_change_key_case($translation['content'] ?? []);
+			$fields  = Fields::for($this, $translation['code'] ?? 'default');
+
+			// only convert the values that have been passed;
+			// fields that are missing in the translation
+			// must not be added to it
+			$translation['content'] = array_intersect_key(
+				$fields->fill($content)->toStoredValues(),
+				$content
+			);
+
+			return $translation;
+		});
 	}
 
 	/**
@@ -294,13 +395,7 @@ abstract class ModelWithContent implements Identifiable, Stringable
 	 */
 	public function errors(): array
 	{
-		$errors = [];
-
-		foreach ($this->blueprint()->sections() as $section) {
-			$errors = [...$errors, ...$section->errors()];
-		}
-
-		return $errors;
+		return Form::for($this)->errors();
 	}
 
 	/**
@@ -384,7 +479,7 @@ abstract class ModelWithContent implements Identifiable, Stringable
 	 * Returns the panel info of the model
 	 * @since 3.6.0
 	 */
-	abstract public function panel(): Model;
+	abstract public function panel(): PanelModel;
 
 	/**
 	 * Must return the permissions object for the model
@@ -575,6 +670,27 @@ abstract class ModelWithContent implements Identifiable, Stringable
 	}
 
 	/**
+	 * String template builder with automatic HTML escaping,
+	 * marking the result as trusted HTML for the Panel.
+	 * Use this over `toSafeString()` whenever the result is
+	 * rendered as HTML rather than used as plain text.
+	 * @since 6.0.0
+	 *
+	 * @param $template Template string or `null` to use the model ID
+	 * @param $fallback Fallback for tokens in the template that cannot be replaced
+	 *                 (`null` to keep the original token)
+	 */
+	public function toSafeHtmlString(
+		string|null $template = null,
+		array $data = [],
+		string|null $fallback = ''
+	): HtmlString {
+		return new HtmlString(
+			$this->toSafeString($template, $data, $fallback)
+		);
+	}
+
+	/**
 	 * String template builder with automatic HTML escaping
 	 * @since 3.6.0
 	 *
@@ -635,7 +751,7 @@ abstract class ModelWithContent implements Identifiable, Stringable
 	 * Returns a single translation by language code
 	 * If no code is specified the current translation is returned
 	 *
-	 * @throws \Kirby\Exception\NotFoundException If the language does not exist
+	 * @throws NotFoundException If the language does not exist
 	 */
 	public function translation(
 		string|null $languageCode = null
@@ -663,7 +779,7 @@ abstract class ModelWithContent implements Identifiable, Stringable
 	/**
 	 * Updates the model data
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the input array contains invalid values
+	 * @throws InvalidArgumentException If the input array contains invalid values
 	 */
 	#[BlockCollectionAccess]
 	public function update(

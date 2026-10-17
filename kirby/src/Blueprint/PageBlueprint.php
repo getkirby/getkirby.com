@@ -3,6 +3,7 @@
 namespace Kirby\Blueprint;
 
 use Kirby\Cms\ModelWithContent;
+use Kirby\Cms\Page;
 
 /**
  * PageBlueprint
@@ -12,7 +13,7 @@ use Kirby\Cms\ModelWithContent;
  */
 class PageBlueprint extends Blueprint
 {
-	/** @var \Kirby\Cms\Page */
+	/** @var Page */
 	protected ModelWithContent $model;
 
 	/**
@@ -85,18 +86,25 @@ class PageBlueprint extends Blueprint
 	 */
 	protected function normalizeStatus($status): array
 	{
+		// the i18n keys are resolved in `status()`
 		$defaults = [
 			'draft'    => [
-				'label' => $this->i18n('page.status.draft'),
-				'text'  => $this->i18n('page.status.draft.description'),
+				'label' => 'page.status.draft',
+				'text'  => 'page.status.draft.description',
+				'icon'  => 'status-draft',
+				'theme' => 'negative',
 			],
 			'unlisted' => [
-				'label' => $this->i18n('page.status.unlisted'),
-				'text'  => $this->i18n('page.status.unlisted.description'),
+				'label' => 'page.status.unlisted',
+				'text'  => 'page.status.unlisted.description',
+				'icon'  => 'status-unlisted',
+				'theme' => 'info',
 			],
 			'listed' => [
-				'label' => $this->i18n('page.status.listed'),
-				'text'  => $this->i18n('page.status.listed.description'),
+				'label' => 'page.status.listed',
+				'text'  => 'page.status.listed.description',
+				'icon'  => 'status-listed',
+				'theme' => 'positive',
 			]
 		];
 
@@ -130,26 +138,24 @@ class PageBlueprint extends Blueprint
 			}
 
 			// always make sure to have a proper label
-			if (empty($status[$key]['label']) === true) {
+			if (($status[$key]['label'] ?? '') === '') {
 				$status[$key]['label'] = $defaults[$key]['label'];
+
+				// the default description only fits the default label
+				$status[$key]['text'] ??= $defaults[$key]['text'];
 			}
 
 			// also make sure to have the text field set
 			$status[$key]['text'] ??= null;
 
-			// translate text and label if necessary
-			$status[$key]['label'] = $this->i18n($status[$key]['label'], $status[$key]['label']);
-			$status[$key]['text']  = $this->i18n($status[$key]['text'], $status[$key]['text']);
+			// fall back to the default icon and theme of the status
+			$status[$key]['icon']  ??= $defaults[$key]['icon'];
+			$status[$key]['theme'] ??= $defaults[$key]['theme'];
 		}
 
 		// the draft status is required
 		if (isset($status['draft']) === false) {
 			$status = ['draft' => $defaults['draft']] + $status;
-		}
-
-		// remove the draft status for the home and error pages
-		if ($this->model->isHomeOrErrorPage() === true) {
-			unset($status['draft']);
 		}
 
 		return $status;
@@ -178,7 +184,7 @@ class PageBlueprint extends Blueprint
 			return $this->model->toString($preview);
 		}
 
-		return $this->model->permissions()->can('preview', true);
+		return $this->model->guards()->isAvailable('preview', default: true);
 	}
 
 	/**
@@ -186,6 +192,30 @@ class PageBlueprint extends Blueprint
 	 */
 	public function status(): array
 	{
-		return $this->props['status'];
+		$status = $this->props['status'];
+
+		// the home and error page can never be drafts
+		if ($this->model->isHomeOrErrorPage() === true) {
+			unset($status['draft']);
+		}
+
+		// translate the labels and description texts
+		foreach ($status as $key => $options) {
+			$status[$key]['label'] = $this->i18n($options['label'], $options['label']);
+			$status[$key]['text']  = $this->i18n($options['text'], $options['text']);
+		}
+
+		return $status;
+	}
+
+	/**
+	 * Converts the blueprint object to a plain array
+	 */
+	public function toArray(): array
+	{
+		return [
+			...parent::toArray(),
+			'status' => $this->status()
+		];
 	}
 }

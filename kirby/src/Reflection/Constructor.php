@@ -15,6 +15,8 @@ use ReflectionParameter;
  */
 class Constructor extends ReflectionMethod
 {
+	protected static array $names = [];
+
 	public function __construct(object|string $objectOrClass)
 	{
 		parent::__construct($objectOrClass, '__construct');
@@ -62,17 +64,20 @@ class Constructor extends ReflectionMethod
 
 		foreach ($this->getParameters() as $parameter) {
 			if ($parameter->isVariadic() === true) {
-				foreach ($this->getParentParameters() as $parameter) {
-					$parameters[] = $parameter;
+				// the variadic parameter stands in for all parameters of the
+				// parent constructor. Own parameters win, because they can
+				// refine the type of an inherited parameter.
+				foreach ($this->getParentParameters() as $inherited) {
+					$parameters[$inherited->name] ??= $inherited;
 				}
 
 				continue;
 			}
 
-			$parameters[] = $parameter;
+			$parameters[$parameter->name] = $parameter;
 		}
 
-		return $parameters;
+		return array_values($parameters);
 	}
 
 	/**
@@ -88,7 +93,10 @@ class Constructor extends ReflectionMethod
 	 */
 	public function getParameterNames(): array
 	{
-		return array_values(array_map(fn (ReflectionParameter $param) => $param->name, $this->getAllParameters()));
+		return static::$names[$this->class] ??= array_values(array_map(
+			fn (ReflectionParameter $param) => $param->name,
+			$this->getAllParameters()
+		));
 	}
 
 	/**

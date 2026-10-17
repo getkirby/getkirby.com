@@ -7,6 +7,7 @@ use Kirby\Cms\User;
 use Kirby\Exception\Exception;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\NotFoundException;
+use Kirby\Session\Session;
 use Kirby\Toolkit\A;
 
 /**
@@ -35,7 +36,7 @@ class Methods
 	/**
 	 * Authenticates via the specific auth method
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If auth method type does not exists or is not available
+	 * @throws InvalidArgumentException If auth method type does not exists or is not available
 	 */
 	public function authenticate(
 		string $type,
@@ -66,13 +67,21 @@ class Methods
 			($class = static::$methods[$type] ?? null) &&
 			is_subclass_of($class, Method::class) === true
 		) {
-			/** @var class-string<\Kirby\Auth\Method> $class */
+			/** @var class-string<Method> $class */
 			return $class;
 		}
 
 		throw new NotFoundException(
 			message: 'No auth method class for: ' . $type
 		);
+	}
+
+	/**
+	 * Removes the pending login state of the auth methods
+	 */
+	public function clear(Session $session): void
+	{
+		$session->remove('kirby.method.data');
 	}
 
 	/**
@@ -139,7 +148,7 @@ class Methods
 	 * Returns the first enabled auth method
 	 * for the current context
 	 *
-	 * @throws \Kirby\Exception\NotFoundException If no auth method is enabled
+	 * @throws NotFoundException If no auth method is enabled
 	 */
 	public function firstEnabled(): Method
 	{
@@ -179,18 +188,11 @@ class Methods
 	}
 
 	/**
-	 * Checks if any method is using challenges
+	 * Checks if any method requires 2FA
 	 */
-	public function hasAnyUsingChallenges(): bool
+	public function hasAnyRequiring2FA(): bool
 	{
-		foreach ($this->enabled() as $method => $options) {
-			$class = $this->class($method);
-
-			if ($class::isUsingChallenges($this->auth, $options) === true) {
-				return true;
-			}
-		}
-
-		return false;
+		return in_array(true, array_column($this->config(), '2fa'), true);
 	}
+
 }

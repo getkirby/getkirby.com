@@ -2,7 +2,6 @@
 
 namespace Kirby\Query;
 
-use Closure;
 use Kirby\Cms\App;
 use Kirby\Cms\Collection;
 use Kirby\Cms\File;
@@ -10,6 +9,7 @@ use Kirby\Cms\Page;
 use Kirby\Cms\Site;
 use Kirby\Cms\User;
 use Kirby\Cms\Users;
+use Kirby\Exception\BadMethodCallException;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Image\QrCode;
 use Kirby\Query\Runners\DefaultRunner;
@@ -27,7 +27,7 @@ class Query
 {
 	public static array $cache = [];
 	public static array $entries = [];
-	public static Runner|string|null $runner = null;
+	public Runner $runner;
 
 	/**
 	 * Creates a new Query object
@@ -39,17 +39,15 @@ class Query
 			$this->query = trim($query);
 		}
 
-		static::$runner ??= App::instance()->option('query.runner', DefaultRunner::class);
+		$runner = App::instance()->option('query.runner', DefaultRunner::class);
 
-		if (static::$runner !== 'legacy') {
-			if (is_subclass_of(static::$runner, Runner::class) === false) {
-				throw new InvalidArgumentException(
-					message: 'Query runner "' . static::$runner . '" must extend ' . Runner::class
-				);
-			}
-
-			static::$runner = static::$runner::for($this);
+		if (is_subclass_of($runner, Runner::class) === false) {
+			throw new InvalidArgumentException(
+				message: 'Query runner "' . $runner . '" must extend ' . Runner::class
+			);
 		}
+
+		$this->runner = $runner::for($this);
 	}
 
 	/**
@@ -73,52 +71,16 @@ class Query
 	 * Returns the query result if anything
 	 * can be found, otherwise returns null
 	 *
-	 * @throws \Kirby\Exception\BadMethodCallException If an invalid method is accessed by the query
-	 * @throws \Kirby\Exception\InvalidArgumentException If an invalid query runner is set in the config option
+	 * @throws BadMethodCallException If an invalid method is accessed by the query
+	 * @throws InvalidArgumentException If an invalid query runner is set in the config option
 	 */
 	public function resolve(array|object $data = []): mixed
 	{
-		if (empty($this->query) === true) {
+		if ($this->query === null || $this->query === '') {
 			return $data;
 		}
 
-		// TODO: remove in v7
-		// @codeCoverageIgnoreStart
-		if (static::$runner === 'legacy') {
-			return $this->resolveLegacy($data);
-		}
-		// @codeCoverageIgnoreEnd
-
-		return static::$runner->run($this->query, (array)$data);
-	}
-
-	/**
-	 * @deprecated 5.1.0
-	 * @codeCoverageIgnore
-	 */
-	private function resolveLegacy(array|object $data = []): mixed
-	{
-		// merge data with default entries
-		if (is_array($data) === true) {
-			$data = [...static::$entries, ...$data];
-		}
-
-		// direct data array access via key
-		if (
-			is_array($data) === true &&
-			array_key_exists($this->query, $data) === true
-		) {
-			$value = $data[$this->query];
-
-			if ($value instanceof Closure) {
-				$value = $value();
-			}
-
-			return $value;
-		}
-
-		// loop through all segments to resolve query
-		return Expression::factory($this->query, $this)->resolve($data);
+		return $this->runner->run($this->query, (array)$data);
 	}
 }
 

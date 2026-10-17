@@ -17,7 +17,7 @@ use Kirby\Toolkit\A;
  * @license   https://getkirby.com/license
  * @since     3.6.0
  *
- * @template TModel of \Kirby\Cms\ModelWithContent
+ * @template TModel of ModelWithContent
  */
 abstract class Model
 {
@@ -162,7 +162,20 @@ abstract class Model
 			...$blueprint ?? [],
 		];
 
-		if ($image = $this->imageSource($settings['query'] ?? null)) {
+		$query = $settings['query'] ?? null;
+		unset($settings['query']);
+
+		// resolve options defined as query before they are used,
+		// e.g. as `ratio` for the srcset
+		$settings = A::map($settings, function ($option) {
+			if (is_string($option) === false) {
+				return $option;
+			}
+
+			return $this->model->toString($option);
+		});
+
+		if ($image = $this->imageSource($query)) {
 			// main url
 			$settings['url'] = $image->url();
 
@@ -176,16 +189,7 @@ abstract class Model
 			}
 		}
 
-		unset($settings['query']);
-
-		// resolve remaining options defined as query
-		return A::map($settings, function ($option) {
-			if (is_string($option) === false) {
-				return $option;
-			}
-
-			return $this->model->toString($option);
-		});
+		return $settings;
 	}
 
 	/**
@@ -271,10 +275,19 @@ abstract class Model
 			]);
 		}
 
-		// for all other provide crops based on the card ratio
+		// for all other provide crops based on the card ratio;
+		// turn fractions like `16/9` into a float and
+		// fall back to a square for malformed values
 		if (is_numeric($ratio) === false) {
-			$ratio = explode('/', $ratio);
-			$ratio = (float)$ratio[0] / (float)$ratio[1];
+			$parts = explode('/', $ratio);
+			$ratio = 1;
+
+			if (
+				is_numeric($parts[0]) === true &&
+				(float)($parts[1] ?? 0) > 0
+			) {
+				$ratio = (float)$parts[0] / (float)$parts[1];
+			}
 		}
 
 		$srcset = [];
@@ -310,7 +323,7 @@ abstract class Model
 	 */
 	public function options(array $unlock = []): array
 	{
-		$options = $this->model->permissions()->toArray();
+		$options = $this->model->guards()->availability();
 
 		if ($this->model->lock()->isLocked() === true) {
 			foreach ($options as $key => $value) {

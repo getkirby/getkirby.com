@@ -4,15 +4,18 @@ namespace Kirby\Cms;
 
 use Kirby\Auth\Challenge\EmailChallenge;
 use Kirby\Auth\Challenge\TotpChallenge;
+use Kirby\Auth\Challenge\WebauthnChallenge;
 use Kirby\Auth\Method\BasicAuthMethod;
 use Kirby\Auth\Method\CodeMethod;
 use Kirby\Auth\Method\PasswordMethod;
 use Kirby\Auth\Method\PasswordResetMethod;
+use Kirby\Auth\Method\WebauthnMethod;
 use Kirby\Cache\ApcuCache;
 use Kirby\Cache\FileCache;
 use Kirby\Cache\MemCached;
 use Kirby\Cache\MemoryCache;
 use Kirby\Cache\RedisCache;
+use Kirby\Filesystem\F;
 use Kirby\Form\Field\BlocksField;
 use Kirby\Form\Field\ButtonsField;
 use Kirby\Form\Field\CheckboxesField;
@@ -20,6 +23,7 @@ use Kirby\Form\Field\ColorField;
 use Kirby\Form\Field\DateField;
 use Kirby\Form\Field\EmailField;
 use Kirby\Form\Field\EntriesField;
+use Kirby\Form\Field\FileListField;
 use Kirby\Form\Field\FilePickerField;
 use Kirby\Form\Field\GapField;
 use Kirby\Form\Field\HeadlineField;
@@ -32,6 +36,7 @@ use Kirby\Form\Field\ListField;
 use Kirby\Form\Field\MultiselectField;
 use Kirby\Form\Field\NumberField;
 use Kirby\Form\Field\ObjectField;
+use Kirby\Form\Field\PageListField;
 use Kirby\Form\Field\PagePickerField;
 use Kirby\Form\Field\PasswordField;
 use Kirby\Form\Field\RadioField;
@@ -122,8 +127,9 @@ class Core
 	public function authChallenges(): array
 	{
 		return [
-			'email' => EmailChallenge::class,
-			'totp'  => TotpChallenge::class,
+			'email'    => EmailChallenge::class,
+			'totp'     => TotpChallenge::class,
+			'webauthn' => WebauthnChallenge::class,
 		];
 	}
 
@@ -137,21 +143,8 @@ class Core
 			'basic-auth'     => BasicAuthMethod::class,
 			'code'           => CodeMethod::class,
 			'password'       => PasswordMethod::class,
-			'password-reset' => PasswordResetMethod::class
-		];
-	}
-
-	/**
-	 * Returns a list of all paths to blueprint presets
-	 *
-	 * They are located in `/kirby/config/presets`
-	 */
-	public function blueprintPresets(): array
-	{
-		return [
-			'pages' => $this->root . '/presets/pages.php',
-			'page'  => $this->root . '/presets/page.php',
-			'files' => $this->root . '/presets/files.php',
+			'password-reset' => PasswordResetMethod::class,
+			'webauthn'       => WebauthnMethod::class,
 		];
 	}
 
@@ -190,10 +183,10 @@ class Core
 			// site blueprints
 			'site' => [
 				'title' => 'Site',
-				'sections' => [
+				'fields' => [
 					'pages' => [
-						'headline' => ['*' => 'pages'],
-						'type'	   => 'pages'
+						'label' => ['*' => 'pages'],
+						'type'	=> 'pagelist'
 					]
 				]
 			]
@@ -234,36 +227,13 @@ class Core
 	 */
 	public function components(): array
 	{
-		return $this->cache['components'] ??= include $this->root . '/components.php';
+		return $this->cache['components'] ??= F::load($this->root . '/components.php');
 	}
 
 	/**
-	 * Returns an array of paths for field mixins
+	 * Returns an array of all class names of panel fields
 	 *
-	 * They are located in `/kirby/config/fields/mixins`
-	 */
-	public function fieldMixins(): array
-	{
-		return [
-			'datetime'   => $this->root . '/fields/mixins/datetime.php',
-			'filepicker' => $this->root . '/fields/mixins/filepicker.php',
-			'layout'     => $this->root . '/fields/mixins/layout.php',
-			'min'        => $this->root . '/fields/mixins/min.php',
-			'options'    => $this->root . '/fields/mixins/options.php',
-			'pagepicker' => $this->root . '/fields/mixins/pagepicker.php',
-			'picker'     => $this->root . '/fields/mixins/picker.php',
-			'upload'     => $this->root . '/fields/mixins/upload.php',
-			'userpicker' => $this->root . '/fields/mixins/userpicker.php',
-		];
-	}
-
-	/**
-	 * Returns an array of all paths and class names of panel fields
-	 *
-	 * Traditional panel fields are located in `/kirby/config/fields`
-	 *
-	 * The more complex field classes can be found in
-	 * `/kirby/src/Form/Fields`
+	 * The field classes can be found in `/kirby/src/Form/Field`
 	 */
 	public function fields(): array
 	{
@@ -275,7 +245,8 @@ class Core
 			'date'        => DateField::class,
 			'email'       => EmailField::class,
 			'entries'     => EntriesField::class,
-			'files'       => FilePickerField::class,
+			'filelist'    => FileListField::class,
+			'filepicker'  => FilePickerField::class,
 			'gap'         => GapField::class,
 			'headline'    => HeadlineField::class,
 			'hidden'      => HiddenField::class,
@@ -287,7 +258,8 @@ class Core
 			'multiselect' => MultiselectField::class,
 			'number'      => NumberField::class,
 			'object'      => ObjectField::class,
-			'pages'       => PagePickerField::class,
+			'pagelist'    => PageListField::class,
+			'pagepicker'  => PagePickerField::class,
 			'password'    => PasswordField::class,
 			'radio'       => RadioField::class,
 			'range'       => RangeField::class,
@@ -303,40 +275,8 @@ class Core
 			'toggle'      => ToggleField::class,
 			'toggles'     => TogglesField::class,
 			'url'         => UrlField::class,
-			'users'       => UserPickerField::class,
+			'userpicker'  => UserPickerField::class,
 			'writer'      => WriterField::class,
-
-			'legacy-checkboxes'  => $this->root . '/fields/checkboxes.php',
-			'legacy-color'       => $this->root . '/fields/color.php',
-			'legacy-date'        => $this->root . '/fields/date.php',
-			'legacy-email'       => $this->root . '/fields/email.php',
-			'legacy-files'       => $this->root . '/fields/files.php',
-			'legacy-gap'         => $this->root . '/fields/gap.php',
-			'legacy-headline'    => $this->root . '/fields/headline.php',
-			'legacy-hidden'      => $this->root . '/fields/hidden.php',
-			'legacy-info'        => $this->root . '/fields/info.php',
-			'legacy-line'        => $this->root . '/fields/line.php',
-			'legacy-link'        => $this->root . '/fields/link.php',
-			'legacy-list'        => $this->root . '/fields/list.php',
-			'legacy-multiselect' => $this->root . '/fields/multiselect.php',
-			'legacy-number'      => $this->root . '/fields/number.php',
-			'legacy-object'      => $this->root . '/fields/object.php',
-			'legacy-pages'       => $this->root . '/fields/pages.php',
-			'legacy-radio'       => $this->root . '/fields/radio.php',
-			'legacy-range'       => $this->root . '/fields/range.php',
-			'legacy-select'      => $this->root . '/fields/select.php',
-			'legacy-slug'        => $this->root . '/fields/slug.php',
-			'legacy-structure'   => $this->root . '/fields/structure.php',
-			'legacy-tags'        => $this->root . '/fields/tags.php',
-			'legacy-tel'         => $this->root . '/fields/tel.php',
-			'legacy-text'        => $this->root . '/fields/text.php',
-			'legacy-textarea'    => $this->root . '/fields/textarea.php',
-			'legacy-time'        => $this->root . '/fields/time.php',
-			'legacy-toggle'      => $this->root . '/fields/toggle.php',
-			'legacy-toggles'     => $this->root . '/fields/toggles.php',
-			'legacy-url'         => $this->root . '/fields/url.php',
-			'legacy-users'       => $this->root . '/fields/users.php',
-			'legacy-writer'      => $this->root . '/fields/writer.php',
 		];
 	}
 
@@ -371,7 +311,7 @@ class Core
 	 */
 	public function kirbyTags(): array
 	{
-		return $this->cache['kirbytags'] ??= include $this->root . '/tags.php';
+		return $this->cache['kirbytags'] ??= F::load($this->root . '/tags.php');
 	}
 
 	/**
@@ -433,7 +373,7 @@ class Core
 	 */
 	public function routes(): array
 	{
-		return $this->cache['routes'] ??= (include $this->root . '/routes.php')($this->kirby);
+		return $this->cache['routes'] ??= F::load($this->root . '/routes.php')($this->kirby);
 	}
 
 	/**
@@ -455,45 +395,6 @@ class Core
 			'blocks/table'    => $this->root . '/blocks/table/table.php',
 			'blocks/text'     => $this->root . '/blocks/text/text.php',
 			'blocks/video'    => $this->root . '/blocks/video/video.php',
-		];
-	}
-
-	/**
-	 * Returns a list of paths to section mixins
-	 *
-	 * They are located in `/kirby/config/sections/mixins`
-	 */
-	public function sectionMixins(): array
-	{
-		return [
-			'batch'      => $this->root . '/sections/mixins/batch.php',
-			'details'    => $this->root . '/sections/mixins/details.php',
-			'empty'      => $this->root . '/sections/mixins/empty.php',
-			'headline'   => $this->root . '/sections/mixins/headline.php',
-			'help'       => $this->root . '/sections/mixins/help.php',
-			'layout'     => $this->root . '/sections/mixins/layout.php',
-			'max'        => $this->root . '/sections/mixins/max.php',
-			'min'        => $this->root . '/sections/mixins/min.php',
-			'pagination' => $this->root . '/sections/mixins/pagination.php',
-			'parent'     => $this->root . '/sections/mixins/parent.php',
-			'search'     => $this->root . '/sections/mixins/search.php',
-			'sort'        => $this->root . '/sections/mixins/sort.php',
-		];
-	}
-
-	/**
-	 * Returns a list of all section definitions
-	 *
-	 * They are located in `/kirby/config/sections`
-	 */
-	public function sections(): array
-	{
-		return [
-			'fields' => $this->root . '/sections/fields.php',
-			'files'  => $this->root . '/sections/files.php',
-			'info'   => $this->root . '/sections/info.php',
-			'pages'  => $this->root . '/sections/pages.php',
-			'stats'  => $this->root . '/sections/stats.php',
 		];
 	}
 

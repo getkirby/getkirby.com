@@ -8,7 +8,6 @@ use Kirby\Cms\Language;
 use Kirby\Cms\User;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\Date;
-use Kirby\Toolkit\HtmlString;
 use Kirby\Toolkit\Str;
 
 /**
@@ -51,6 +50,7 @@ class State
 			'theme'       => $this->kirby->option('panel.theme', 'system'),
 			'translation' => $this->kirby->option('panel.language', 'en'),
 			'upload'      => Upload::chunkSize(),
+			'uploads'     => $this->kirby->option('panel.uploads', 3),
 		];
 	}
 
@@ -274,20 +274,17 @@ class State
 		if ($globals === false) {
 			// filter data, if only globals headers or
 			// query parameters are requested
-			$data = $this->filter($data);
-			return HtmlString::resolve($data);
+			return $this->filter($data);
 		}
 
 		// load globals for the full document response
 		$globals = $this->globals();
 
 		// resolve and merge globals and shared data
-		$data = array_merge_recursive(
+		return array_merge_recursive(
 			A::apply($globals),
 			A::apply($data)
 		);
-
-		return HtmlString::resolve($data);
 	}
 
 	public function translation(): array
@@ -317,6 +314,7 @@ class State
 	{
 		return [
 			'api'   => $this->kirby->url('api'),
+			'icons' => $this->panel->assets()->icons(),
 			'panel' => $this->kirby->url('panel'),
 			'site'  => $this->kirby->url('index')
 		];
@@ -326,6 +324,7 @@ class State
 	{
 		if ($this->user) {
 			return [
+				'avatar'   => $this->user->avatar()?->url(),
 				'email'    => $this->user->email(),
 				'id'       => $this->user->id(),
 				'language' => $this->user->language(),
@@ -344,7 +343,12 @@ class State
 			'code'       => 200,
 			'path'       => Str::after($this->kirby->path(), '/'),
 			'props'      => [],
-			'query'      => $this->kirby->request()->query()->toArray(),
+			// the State params are part of the transport and
+			// must not end up in the URL the Panel restores
+			'query'      => A::without(
+				$this->kirby->request()->query()->toArray(),
+				['_globals', '_json', '_only', '_pretty']
+			),
 			'referrer'   => $this->panel->referrer(),
 			'search'     => $this->kirby->option('panel.search.type', 'pages'),
 			'timestamp'  => (int)(microtime(true) * 1000),

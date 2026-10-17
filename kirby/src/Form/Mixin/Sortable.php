@@ -2,6 +2,8 @@
 
 namespace Kirby\Form\Mixin;
 
+use Kirby\Reflection\Attributes\Prop;
+
 /**
  * Provides the `sortable` prop to enable drag & drop sorting
  *
@@ -13,10 +15,11 @@ trait Sortable
 	/**
 	 * If `true`, entries are sortable via drag & drop
 	 */
-	protected bool|null $sortable;
+	#[Prop]
+	protected bool $sortable = true;
 
 	public function sortable(): bool
 	{
-		return $this->sortable ?? true;
+		return $this->sortable;
 	}
 }

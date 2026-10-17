@@ -2,6 +2,8 @@
 
 namespace Kirby\Form\Mixin;
 
+use Kirby\Reflection\Attributes\Prop;
+
 /**
  * Provides the `required` prop to mark the field as mandatory
  *
@@ -13,7 +15,8 @@ trait Required
 	/**
 	 * If `true`, the field has to be filled in correctly to be saved.
 	 */
-	protected bool|null $required;
+	#[Prop(getter: 'isRequired')]
+	protected bool $required = false;
 
 	/**
 	 * Checks if the field is required
@@ -25,6 +28,6 @@ trait Required
 
 	public function required(): bool
 	{
-		return $this->required ?? false;
+		return $this->required;
 	}
 }

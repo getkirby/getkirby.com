@@ -4,6 +4,7 @@ namespace Kirby\Panel;
 
 use Kirby\Cms\App;
 use Kirby\Cms\Collection;
+use Kirby\Reflection\Constructor;
 use Kirby\Toolkit\A;
 
 /**
@@ -11,7 +12,7 @@ use Kirby\Toolkit\A;
  * @license   https://getkirby.com/license
  * @since     6.0.0
  *
- * @extends \Kirby\Cms\Collection<\Kirby\Panel\Area>
+ * @extends Collection<Area>
  */
 class Areas extends Collection
 {
@@ -20,8 +21,14 @@ class Areas extends Collection
 	 */
 	public static function area(string $id, array $area): Area
 	{
+		$area       = array_filter($area, fn ($value) => $value !== null);
 		$area['id'] = $id;
-		return new Area(...$area);
+
+		// ignore unknown keys instead of breaking the whole Panel
+		$constructor = new Constructor(Area::class);
+		$args        = $constructor->getAcceptedArguments($area);
+
+		return new Area(...$args);
 	}
 
 	/**

@@ -2,6 +2,8 @@
 
 namespace Kirby\Form\Mixin;
 
+use Kirby\Reflection\Attributes\Prop;
+
 /**
  * Provides the `name` prop and accessor for the field's identifier
  *
@@ -10,7 +12,11 @@ namespace Kirby\Form\Mixin;
  */
 trait Name
 {
-	protected string|null $name;
+	/**
+	 * Unique name of the field, which is used as key in the content file
+	 */
+	#[Prop(computed: true)]
+	protected string|null $name = null;
 
 	public function name(): string
 	{

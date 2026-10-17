@@ -56,7 +56,7 @@ class Cookie
 		$expires  = static::lifetime($options['lifetime'] ?? 0);
 		$path     = $options['path']     ?? '/';
 		$domain   = $options['domain']   ?? null;
-		$secure   = $options['secure']   ?? false;
+		$secure   = $options['secure']   ?? Url::scheme() === 'https';
 		$httponly = $options['httpOnly'] ?? true;
 		$samesite = $options['sameSite'] ?? 'Lax';
 
@@ -169,7 +169,7 @@ class Cookie
 		// or fall back to the fixed default set directly with the prop
 		$key = App::instance(lazy: true)?->option('cookie.key') ?: static::$key;
 
-		return hash_hmac('sha1', $value, $key);
+		return hash_hmac('sha256', $value, $key);
 	}
 
 	/**

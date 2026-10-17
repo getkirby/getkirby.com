@@ -4,6 +4,7 @@ namespace Kirby\Form\Field;
 
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Form\Mixin;
+use Kirby\Reflection\Attributes\Prop;
 use Kirby\Toolkit\Date;
 
 /**
@@ -19,57 +20,23 @@ abstract class DateTimeField extends InputField
 
 	public const ISO = 'Y-m-d H:i:s';
 
-	protected string|null $display;
+	#[Prop]
+	protected string|null $display = null;
 
 	/**
 	 * Defines a custom format that is used when the field is saved
 	 */
-	protected string|null $format;
+	#[Prop]
+	protected string|null $format = null;
 
-	protected string|null $max;
-	protected string|null $min;
-	protected array|int|string|null $step;
+	#[Prop]
+	protected string|null $max = null;
+	#[Prop]
+	protected string|null $min = null;
+	#[Prop(setter: 'setStep')]
+	protected array $step = [];
 
 	protected Date|null $value = null;
-
-	public function __construct(
-		bool|null $autofocus = null,
-		mixed $default = null,
-		string|null $display = null,
-		bool|null $disabled = null,
-		string|null $format = null,
-		array|string|null $help = null,
-		string|null $icon = null,
-		array|string|null $label = null,
-		string|null $max = null,
-		string|null $min = null,
-		string|null $name = null,
-		bool|null $required = null,
-		bool|null $translate = null,
-		array|int|string|null $step = null,
-		array|null $when = null,
-		string|null $width = null
-	) {
-		parent::__construct(
-			autofocus: $autofocus,
-			default:   $default,
-			disabled:  $disabled,
-			help:      $help,
-			label:     $label,
-			name:      $name,
-			required:  $required,
-			translate: $translate,
-			when:      $when,
-			width:     $width
-		);
-
-		$this->display = $display;
-		$this->format  = $format;
-		$this->icon    = $icon;
-		$this->max     = $max;
-		$this->min     = $min;
-		$this->step    = $step;
-	}
 
 	public function default(): string|null
 	{
@@ -80,10 +47,6 @@ abstract class DateTimeField extends InputField
 
 	abstract public function display(): string;
 
-	/**
-	 * @psalm-suppress MethodSignatureMismatch
-	 * @todo Remove psalm suppress after https://github.com/vimeo/psalm/issues/8673 is fixed
-	 */
 	public function fill(mixed $value): static
 	{
 		$value = Date::optional($value);
@@ -93,29 +56,14 @@ abstract class DateTimeField extends InputField
 
 	abstract public function format(): string;
 
-	abstract public function icon(): string;
-
 	public function max(): string|null
 	{
-		return Date::optional($this->max);
+		return Date::optional($this->max)?->format(static::ISO);
 	}
 
 	public function min(): string|null
 	{
-		return Date::optional($this->min);
-	}
-
-	public function props(): array
-	{
-		return [
-			...parent::props(),
-			'display' => $this->display(),
-			'format'  => $this->format(),
-			'icon'    => $this->icon(),
-			'max'     => $this->max(),
-			'min'     => $this->min(),
-			'step'    => $this->step(),
-		];
+		return Date::optional($this->min)?->format(static::ISO);
 	}
 
 	protected function roundToStep(Date|null $value): Date|null
@@ -131,6 +79,15 @@ abstract class DateTimeField extends InputField
 		}
 
 		return $value;
+	}
+
+	/**
+	 * Normalizes the step option, which can be
+	 * passed as int, string or array
+	 */
+	protected function setStep(array|int|string $step): void
+	{
+		$this->step = Date::stepConfig($step, $this->step);
 	}
 
 	abstract public function step(): array;
@@ -175,14 +132,14 @@ abstract class DateTimeField extends InputField
 		if ($min && $value->isMin($min) === false) {
 			throw new InvalidArgumentException(
 				key: 'validation.' . $this->type() . '.after',
-				data: ['date' => $min->format($format)]
+				data: [$this->type() => $min->format($format)]
 			);
 		}
 
 		if ($max && $value->isMax($max) === false) {
 			throw new InvalidArgumentException(
 				key: 'validation.' . $this->type() . '.before',
-				data: ['date' => $max->format($format)]
+				data: [$this->type() => $max->format($format)]
 			);
 		}
 	}

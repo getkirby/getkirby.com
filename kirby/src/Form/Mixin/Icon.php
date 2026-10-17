@@ -2,6 +2,8 @@
 
 namespace Kirby\Form\Mixin;
 
+use Kirby\Reflection\Attributes\Prop;
+
 /**
  * Provides the `icon` prop for an optional icon shown alongside the input
  *
@@ -13,7 +15,8 @@ trait Icon
 	/**
 	 * Optional icon that will be shown at the end of the field
 	 */
-	protected string|null $icon;
+	#[Prop]
+	protected string|null $icon = null;
 
 	public function icon(): string|null
 	{

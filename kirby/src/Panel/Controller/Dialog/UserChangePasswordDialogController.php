@@ -2,12 +2,14 @@
 
 namespace Kirby\Panel\Controller\Dialog;
 
-use Kirby\Cms\UserRules;
+use Kirby\Auth\Exception\RateLimitException;
 use Kirby\Exception\Exception;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Panel\Field;
 use Kirby\Panel\Ui\Dialog;
 use Kirby\Panel\Ui\Dialog\FormDialog;
+use Kirby\Toolkit\Escape;
+use Kirby\Toolkit\HtmlString;
 
 /**
  * Controls the Panel dialog for changing the password of a user
@@ -48,7 +50,9 @@ class UserChangePasswordDialogController extends UserDialogController
 			'password' => Field::password([
 				'label'        => $this->i18n('user.changePassword.new'),
 				'autocomplete' => 'new-password',
-				'help'         => $this->i18n('account') . ': ' . $this->user->email() . ($hint ? '<br>' . $hint : ''),
+				'help'         => new HtmlString(
+					$this->i18n('account') . ': ' . Escape::html($this->user->email()) . ($hint ? '<br>' . $hint : '')
+				),
 				'minlength'    => $policy->minlength()
 			]),
 			'passwordConfirmation' => Field::password([
@@ -88,8 +92,15 @@ class UserChangePasswordDialogController extends UserDialogController
 		// validate the current password of the acting user
 		try {
 			if ($this->canSkipConfirmation() === false) {
-				$this->kirby->user()->validatePassword($currentPassword);
+				$this->kirby->auth()->ensurePassword(
+					$this->kirby->user(),
+					$currentPassword
+				);
 			}
+		} catch (RateLimitException $e) {
+			// surface the limit honestly instead of as a wrong password,
+			// otherwise the user keeps retrying against a closed door
+			throw $e;
 		} catch (Exception) {
 			// catching and re-throwing exception to avoid automatic
 			// sign-out of current user from the Panel
@@ -97,7 +108,7 @@ class UserChangePasswordDialogController extends UserDialogController
 		}
 
 		// validate the new password
-		UserRules::validPassword($this->user, $password ?? '');
+		$this->user->guards()->validators()->validateNewPassword($password ?? '');
 
 		// compare passwords
 		if ($password !== $passwordConfirmation) {

@@ -5,6 +5,7 @@ namespace Kirby\Form\Mixin;
 use Closure;
 use Exception;
 use Kirby\Form\Validations;
+use Kirby\Reflection\Attributes\Prop;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\I18n;
 use Kirby\Toolkit\V;
@@ -17,6 +18,12 @@ use Kirby\Toolkit\V;
  */
 trait Validation
 {
+	/**
+	 * Additional validator rules for the value, e.g. `email` or `['minLength' => 3]`
+	 */
+	#[Prop(export: false)]
+	protected array|string|null $validate = null;
+
 	/**
 	 * Runs all validations and returns an array of
 	 * error messages

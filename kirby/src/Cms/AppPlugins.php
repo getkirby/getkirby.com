@@ -5,8 +5,6 @@ namespace Kirby\Cms;
 use Closure;
 use Kirby\Auth\Challenges;
 use Kirby\Auth\Methods;
-use Kirby\Blueprint\PageBlueprint;
-use Kirby\Blueprint\Section;
 use Kirby\Content\Field;
 use Kirby\Exception\DuplicateException;
 use Kirby\Filesystem\Asset;
@@ -19,6 +17,7 @@ use Kirby\Plugin\Plugin;
 use Kirby\Text\KirbyTag;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\Collection as ToolkitCollection;
+use Kirby\Toolkit\I18n;
 use Kirby\Toolkit\V;
 
 /**
@@ -74,7 +73,6 @@ trait AppPlugins
 		'pageModels' => [],
 		'permissions' => [],
 		'routes' => [],
-		'sections' => [],
 		'siteMethods' => [],
 		'snippets' => [],
 		'structureMethods' => [],
@@ -98,7 +96,7 @@ trait AppPlugins
 	/**
 	 * Register all given extensions
 	 *
-	 * @param \Kirby\Plugin\Plugin|null $plugin The plugin which defined those extensions
+	 * @param Plugin|null $plugin The plugin which defined those extensions
 	 */
 	public function extend(
 		array $extensions,
@@ -573,17 +571,6 @@ trait AppPlugins
 	}
 
 	/**
-	 * Registers Panel sections
-	 */
-	protected function extendSections(array $sections): array
-	{
-		return $this->extensions['sections'] = Section::$types = [
-			...Section::$types,
-			...$sections
-		];
-	}
-
-	/**
 	 * Registers additional site methods
 	 */
 	protected function extendSiteMethods(array $methods): array
@@ -662,6 +649,11 @@ trait AppPlugins
 	 */
 	protected function extendTranslations(array $translations): array
 	{
+		// drop translations that were cached before these strings existed
+		$this->i18nStrings  = [];
+		$this->translations = null;
+		I18n::$translations = [];
+
 		return $this->extensions['translations'] = array_replace_recursive(
 			$this->extensions['translations'],
 			$translations
@@ -818,20 +810,12 @@ trait AppPlugins
 	 */
 	protected function extensionsFromSystem(): void
 	{
-		// Always start with fresh fields and sections
+		// Always start with fresh fields
 		// from the core and add plugins on top of that
 		FormField::$types = [];
-		Section::$types   = [];
-
-		// mixins
-		FormField::$mixins = $this->core->fieldMixins();
-		Section::$mixins   = $this->core->sectionMixins();
 
 		// aliases
 		KirbyTag::$aliases = $this->core->kirbyTagAliases();
-
-		// blueprint presets
-		PageBlueprint::$presets = $this->core->blueprintPresets();
 
 		$this->extendAuthChallenges($this->core->authChallenges());
 		$this->extendAuthMethods($this->core->authMethods());
@@ -840,7 +824,6 @@ trait AppPlugins
 		$this->extendBlueprints($this->core->blueprints());
 		$this->extendFields($this->core->fields());
 		$this->extendFilePreviews($this->core->filePreviews());
-		$this->extendSections($this->core->sections());
 		$this->extendSnippets($this->core->snippets());
 		$this->extendTags($this->core->kirbyTags());
 		$this->extendTemplates($this->core->templates());
@@ -868,7 +851,7 @@ trait AppPlugins
 	 * Kirby plugin factory and getter
 	 *
 	 * @param array|null $extends If null is passed it will be used as getter. Otherwise as factory.
-	 * @throws \Kirby\Exception\DuplicateException
+	 * @throws DuplicateException
 	 */
 	public static function plugin(
 		string $name,

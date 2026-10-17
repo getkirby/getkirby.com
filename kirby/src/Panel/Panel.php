@@ -22,7 +22,12 @@ use Kirby\Toolkit\Str;
 class Panel
 {
 	protected Access|null $access = null;
-	protected Areas|null $areas = null;
+	/**
+	 * Areas cached per user id, since the available
+	 * areas change when the user logs in or out
+	 */
+	protected array $areas = [];
+	protected Assets|null $assets = null;
 	protected Home|null $home = null;
 	protected Router|null $router = null;
 
@@ -41,17 +46,55 @@ class Panel
 	}
 
 	/**
-	 * Collect all registered areas
+	 * Collect all registered areas for the current user
 	 */
 	public function areas(): Areas
 	{
-		return $this->areas ??= Areas::for($this->kirby);
+		$key = $this->kirby->user()?->id() ?? '';
+		return $this->areas[$key] ??= Areas::for($this->kirby);
+	}
+
+	/**
+	 * Returns the Panel Assets object
+	 * @since 6.0.0
+	 */
+	public function assets(): Assets
+	{
+		return $this->assets ??= new Assets();
+	}
+
+	/**
+	 * Minimum supported browser versions, read from
+	 * the browserslist config the Panel is built against
+	 * @since 6.0.0
+	 */
+	public function browsers(): array
+	{
+		$file = $this->kirby->root('panel') . '/.browserslistrc';
+
+		if (is_file($file) === false) {
+			return [];
+		}
+
+		$browsers = [];
+		$lines    = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+
+		foreach ($lines as $line) {
+			// strip comments, browserslist allows them at the end of a line
+			$line = trim(preg_replace('!#.*$!', '', $line));
+
+			if (preg_match('!^(\w+)\s*>=\s*([\d.]+)$!', $line, $match) === 1) {
+				$browsers[$match[1]] = $match[2];
+			}
+		}
+
+		return $browsers;
 	}
 
 	/**
 	 * Redirect to a Panel url
 	 *
-	 * @throws \Kirby\Panel\Redirect
+	 * @throws Redirect
 	 * @codeCoverageIgnore
 	 */
 	public static function go(string|null $url = null, int $code = 302, int|false $refresh = false): void
@@ -101,7 +144,7 @@ class Panel
 	{
 		$request = App::instance()->request();
 
-		return Response::json($data, $code, $request->get('_pretty'), [
+		return Response::json($data, $code, (bool)$request->get('_pretty'), [
 			'X-Panel'       => 'true',
 			'Cache-Control' => 'no-store, private'
 		]);

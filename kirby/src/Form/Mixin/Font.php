@@ -2,6 +2,8 @@
 
 namespace Kirby\Form\Mixin;
 
+use Kirby\Reflection\Attributes\Prop;
+
 /**
  * Provides the `font` prop to set the field input font family
  *
@@ -13,9 +15,10 @@ trait Font
 	/**
 	 * Sets the font family (sans or monospace)
 	 */
-	protected string|null $font;
+	#[Prop]
+	protected string $font = 'sans-serif';
 
-	public function font(): string|null
+	public function font(): string
 	{
 		return match ($this->font) {
 			'monospace', 'mono' => 'monospace',

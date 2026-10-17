@@ -3,6 +3,7 @@
 namespace Kirby\Panel\Response;
 
 use Kirby\Cms\App;
+use Kirby\Exception\Exception;
 use Kirby\Exception\NotFoundException;
 use Kirby\Http\Response;
 use Kirby\Http\Uri;
@@ -33,8 +34,8 @@ class ViewDocumentResponse extends ViewResponse
 			code: $code,
 		);
 
-		$this->assets = new Assets();
 		$this->kirby  = App::instance();
+		$this->assets = $this->kirby->panel()->assets();
 	}
 
 	/**
@@ -58,9 +59,8 @@ class ViewDocumentResponse extends ViewResponse
 
 		return Tpl::load($template, [
 			'assets'     => $this->assets->external(),
-			'icons'      => $this->assets->icons(),
 			'nonce'      => $this->kirby->nonce(),
-			'state'      => $this->data(),
+			'state'      => $this->payload(),
 			'panelUrl'   => $this->url(),
 		]);
 	}
@@ -71,6 +71,18 @@ class ViewDocumentResponse extends ViewResponse
 	public function data(bool $globals = true): array
 	{
 		return parent::data($globals);
+	}
+
+	/**
+	 * Renders the error view for a Kirby exception
+	 */
+	public static function exception(Exception $exception): static
+	{
+		return static::error(
+			message: $exception->getMessage(),
+			code:    $exception->getHttpCode(),
+			details: $exception->getDetails()
+		);
 	}
 
 	/**
@@ -94,6 +106,7 @@ class ViewDocumentResponse extends ViewResponse
 	{
 		return [
 			'Content-Security-Policy' => $this->cors(),
+			'X-Robots-Tag'            => 'noindex, nofollow',
 		];
 	}
 

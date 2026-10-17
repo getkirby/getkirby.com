@@ -19,7 +19,7 @@ use Kirby\Filesystem\Filename;
 use Kirby\Http\Uri;
 use Kirby\Http\Url;
 use Kirby\Image\Darkroom;
-use Kirby\Session\SessionStore;
+use Kirby\Session\Store;
 use Kirby\Template\Snippet;
 use Kirby\Template\Template;
 use Kirby\Text\Markdown;
@@ -82,6 +82,13 @@ return [
 		$thumbRoot = (new Filename($file->root(), $template, $options))->toString();
 		$thumbName = basename($thumbRoot);
 		$job       = $mediaRoot . '/.jobs/' . $thumbName . '.json';
+
+		// additional protection against path traversal
+		// e.g. from dynamic user-controlled file or asset objects
+		// or malicious data in the `$options`; we check both for `../` and `..\` (Windows)
+		if (Str::contains(Str::replace($thumbRoot, '\\', '/'), '../') === true) {
+			throw new InvalidArgumentException('Received unexpected generated thumb root');
+		}
 
 		// check if the thumb or job file already exists
 		if (
@@ -303,7 +310,7 @@ return [
 	/**
 	 * Add your own session store
 	 */
-	'session::store' => function (App $kirby): string|SessionStore {
+	'session::store' => function (App $kirby): string|Store {
 		/** @var string $root */
 		$root = $kirby->root('sessions');
 		return $root;
@@ -396,8 +403,9 @@ return [
 		$root      = (new Filename($src, $dst, $options))->toString();
 		$extension = F::extension($root);
 
-		// generate the thumb in a temp file so broken output never appears at the final path
-		$tempRoot  = F::dirname($root) . '/' . F::name($root) . '.tmp-' . uniqid();
+		// generate the thumb in a hidden temp file so broken output never appears
+		// at the final path and the temp file is not picked up as model file
+		$tempRoot  = F::dirname($root) . '/.' . F::name($root) . '.tmp-' . uniqid();
 
 		// keep the original extension so the darkroom can infer the output format.
 		if ($extension !== '') {

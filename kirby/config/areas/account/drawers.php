@@ -11,24 +11,25 @@ return [
 		...$drawers['user.security.method.code'],
 		'pattern' => '(account)/security/method/code',
 	],
+	'account.security.challenge.email' => [
+		...$drawers['user.security.challenge.email'],
+		'pattern' => '(account)/security/challenge/email',
+	],
 	'account.security.challenge.totp' => [
 		...$drawers['user.security.challenge.totp'],
 		'pattern' => '(account)/security/challenge/totp',
 	],
+	'account.security.method.webauthn' => [
+		...$drawers['user.security.method.webauthn'],
+		'pattern' => '(account)/security/method/webauthn',
+	],
+
 	'account.fields' => [
 		...$drawers['user.fields'],
 		'pattern' => '(account)/fields/(:any)/(:all?)',
 	],
-	'account.sections' => [
-		...$drawers['user.sections'],
-		'pattern' => '(account)/sections/(:any)/(:all?)',
-	],
 	'account.file.fields' => [
 		...$drawers['user.file.fields'],
 		'pattern' => '(account)/files/(:any)/fields/(:any)/(:all?)',
-	],
-	'account.file.sections' => [
-		...$drawers['user.file.sections'],
-		'pattern' => '(account)/files/(:any)/sections/(:any)/(:all?)',
 	],
 ];

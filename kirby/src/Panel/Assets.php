@@ -57,8 +57,8 @@ class Assets
 	public function css(): array
 	{
 		$css = [
-			'index'   => $this->url . '/css/style.min.css',
-			'plugins' => $this->plugins->url('css'),
+			'index' => $this->url . '/css/style.min.css',
+			...$this->plugins->css(),
 			...$this->custom('panel.css')
 		];
 
@@ -116,7 +116,7 @@ class Assets
 	/**
 	 * Returns array of favicon icons based on config option
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function favicons(): array
 	{
@@ -180,17 +180,30 @@ class Assets
 	}
 
 	/**
-	 * Load the SVG icon sprite
-	 * This will be injected in the
-	 * initial HTML document for the Panel
+	 * URL for the SVG icon sprite, which is referenced by
+	 * all `<use>` elements in the Panel.
+	 *
+	 * The sprite is served by a Panel route to keep it on the same
+	 * origin as the Panel document. External `<use>` references are
+	 * limited to the same origin and CORS cannot open them up, so the
+	 * media URL is no option as it can point to a different origin.
 	 */
 	public function icons(): string
 	{
-		$dir   = $this->kirby->root('panel') . '/';
-		$dir  .= $this->isDev ? 'public' : 'dist';
-		$icons = F::read($dir . '/img/icons.svg');
-		$icons = preg_replace('/<!--(.|\s)*?-->/', '', $icons) ?? '';
-		return $icons;
+		$version = $this->isDev === true
+			? F::modified($this->iconsRoot())
+			: $this->kirby->versionHash();
+
+		return $this->kirby->url('panel') . '/assets/' . $version . '/icons.svg';
+	}
+
+	/**
+	 * Root of the SVG icon sprite file
+	 */
+	public function iconsRoot(): string
+	{
+		$dir = $this->isDev === true ? 'public' : 'dist';
+		return $this->kirby->root('panel') . '/' . $dir . '/img/icons.svg';
 	}
 
 	/**
@@ -201,6 +214,15 @@ class Assets
 		return array_filter([
 			'vue' => $this->vue()
 		]);
+	}
+
+	/**
+	 * Whether the Panel is running in dev mode
+	 * @since 6.0.0
+	 */
+	public function isDev(): bool
+	{
+		return $this->isDev;
 	}
 
 	/**
@@ -227,7 +249,7 @@ class Assets
 			'index' => [
 				'nonce'   => $this->nonce,
 				'src'     => $this->url . '/js/index.min.js',
-				'plugins' => $this->plugins->url('js'),
+				'plugins' => $this->plugins->js(),
 			],
 		];
 
@@ -258,7 +280,7 @@ class Assets
 	 * Links all dist files in the media folder
 	 * and returns the link to the requested asset
 	 *
-	 * @throws \Kirby\Exception\Exception If Panel assets could not be moved to the public directory
+	 * @throws Exception If Panel assets could not be moved to the public directory
 	 */
 	public function link(): bool
 	{

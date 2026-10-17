@@ -13,7 +13,7 @@ use Kirby\Cms\ModelWithContent;
  */
 trait Model
 {
-	protected ModelWithContent|null $model;
+	protected ModelWithContent|null $model = null;
 
 	/**
 	 * Returns the Kirby instance
@@ -29,14 +29,5 @@ trait Model
 	public function model(): ModelWithContent
 	{
 		return $this->model ?? App::instance()->site();
-	}
-
-	/**
-	 * Sets the parent model
-	 */
-	public function setModel(ModelWithContent|null $model): static
-	{
-		$this->model = $model;
-		return $this;
 	}
 }

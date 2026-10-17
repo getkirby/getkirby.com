@@ -8,9 +8,9 @@ namespace Kirby\Cms;
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  *
- * @extends \Kirby\Cms\ModelPermissions<\Kirby\Cms\Site>
+ * @extends ModelPermissions<Site>
+ * @deprecated 6.0.0 Use `$site->guards()` instead
  */
 class SitePermissions extends ModelPermissions
 {
-	protected const string CATEGORY = 'site';
 }

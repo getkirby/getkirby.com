@@ -2,6 +2,8 @@
 
 namespace Kirby\Form\Mixin;
 
+use Kirby\Reflection\Attributes\Prop;
+
 /**
  * Provides the `prepend` prop to add new items at the beginning
  *
@@ -13,10 +15,11 @@ trait Prepend
 	/**
 	 * If activated, new items will be added at the start
 	 */
-	protected bool|null $prepend;
+	#[Prop]
+	protected bool $prepend = false;
 
 	public function prepend(): bool
 	{
-		return $this->prepend ?? false;
+		return $this->prepend;
 	}
 }

@@ -2,6 +2,7 @@
 
 namespace Kirby\Form\Field;
 
+use Kirby\Reflection\Attributes\Prop;
 use Kirby\Toolkit\Date;
 use Kirby\Toolkit\Str;
 
@@ -17,85 +18,77 @@ class DateField extends DateTimeField
 	/**
 	 * Activate/deactivate the dropdown calendar
 	 */
-	protected bool|null $calendar;
+	#[Prop]
+	protected bool $calendar = true;
 
 	/**
 	 * Custom format (dayjs tokens: `DD`, `MM`, `YYYY`) that is
 	 * used to display the field in the Panel
 	 */
-	protected string|null $display;
+	#[Prop]
+	protected string|null $display = 'YYYY-MM-DD';
+
+	/**
+	 * Defines a custom format that is used when the field is saved
+	 */
+	#[Prop(computed: true)]
+	protected string|null $format = null;
+
+	#[Prop]
+	protected string|null $icon = 'calendar';
 
 	/**
 	 * Latest date, which can be selected/saved (Y-m-d)
 	 */
-	protected string|null $max;
+	#[Prop]
+	protected string|null $max = null;
 
 	/**
 	 * Earliest date, which can be selected/saved (Y-m-d)
 	 */
-	protected string|null $min;
+	#[Prop]
+	protected string|null $min = null;
 
 	/**
 	 * Round to the nearest: sub-options for `unit` (day) and `size` (1)
 	 */
-	protected array|int|string|null $step;
+	#[Prop(computed: true, setter: 'setStep')]
+	protected array $step = ['size' => 1, 'unit' => 'day'];
 
 	/**
 	 * Pass `true` or an array of time field options to show the time selector.
 	 */
-	protected bool|array|null $time;
+	#[Prop]
+	protected bool|array $time = false;
 
-	public function __construct(
-		bool|null $autofocus = null,
-		bool|null $calendar = null,
-		mixed $default = null,
-		string|null $display = null,
-		bool|null $disabled = null,
-		string|null $format = null,
-		array|string|null $help = null,
-		string|null $icon = null,
-		array|string|null $label = null,
-		string|null $max = null,
-		string|null $min = null,
-		string|null $name = null,
-		bool|null $required = null,
-		bool|null $translate = null,
-		array|int|string|null $step = null,
-		bool|array|null $time = null,
-		array|null $when = null,
-		string|null $width = null
-	) {
-		parent::__construct(
-			autofocus: $autofocus,
-			default:   $default,
-			display:   $display,
-			disabled:  $disabled,
-			format:    $format,
-			help:      $help,
-			icon:      $icon,
-			label:     $label,
-			max:       $max,
-			min:       $min,
-			name:      $name,
-			required:  $required,
-			step:      $step,
-			translate: $translate,
-			when:      $when,
-			width:     $width
-		);
-
-		$this->calendar = $calendar;
-		$this->time     = $time;
+	/**
+	 * Cuts a boundary down to the precision of the field, so that it
+	 * can never carry more information than the field is able to produce.
+	 */
+	protected function boundary(string|null $boundary): string|null
+	{
+		$format = $this->time() === false ? 'Y-m-d' : static::ISO;
+		return Date::optional($boundary)?->format($format);
 	}
 
 	public function calendar(): bool
 	{
-		return $this->calendar ?? true;
+		return $this->calendar;
 	}
 
 	public function display(): string
 	{
-		return Str::upper($this->i18n($this->display) ?? 'YYYY-MM-DD');
+		$display = (string)($this->i18n($this->display) ?? $this->display);
+
+		// a date marker is uppercase, whatever case it was written in,
+		// but what the pattern escapes is printed as it is
+		return preg_replace_callback(
+			'!\[[^\]]*\]|[^\[]+!',
+			fn (array $match): string => str_starts_with($match[0], '[')
+				? $match[0]
+				: Str::upper($match[0]),
+			$display
+		) ?? $display;
 	}
 
 	public function format(): string
@@ -111,18 +104,25 @@ class DateField extends DateTimeField
 		return 'Y-m-d H:i:s';
 	}
 
-	public function icon(): string
+	public function max(): string|null
 	{
-		return $this->icon ?? 'calendar';
+		return $this->boundary($this->max);
 	}
 
-	public function props(): array
+	public function min(): string|null
 	{
-		return [
-			...parent::props(),
-			'calendar' => $this->calendar(),
-			'time'     => $this->time()
-		];
+		return $this->boundary($this->min);
+	}
+
+	protected function roundToStep(Date|null $value): Date|null
+	{
+		// without a time selector, the time is cut off
+		// instead of rounding the date to the nearest day
+		if ($this->time() === false) {
+			$value?->setTime(hour: 0, minute: 0);
+		}
+
+		return parent::roundToStep($value);
 	}
 
 	public function step(): array
@@ -130,10 +130,7 @@ class DateField extends DateTimeField
 		$time = $this->time();
 
 		if ($time === false || empty($time['step']) === true) {
-			return Date::stepConfig($this->step, [
-				'size' => 1,
-				'unit' => 'day'
-			]);
+			return $this->step;
 		}
 
 		return Date::stepConfig($time['step'], [
@@ -144,7 +141,7 @@ class DateField extends DateTimeField
 
 	public function time(): array|bool
 	{
-		if ($this->time === null || $this->time === false) {
+		if ($this->time === false) {
 			return false;
 		}
 
@@ -153,7 +150,7 @@ class DateField extends DateTimeField
 			'model' => $this->model()
 		];
 
-		return TimeField::factory($props)->toArray();
+		return (new TimeField(...$props))->toArray();
 	}
 
 	protected function validations(): array

@@ -4,6 +4,7 @@ namespace Kirby\Form\Field;
 
 use Kirby\Data\Data;
 use Kirby\Exception\InvalidArgumentException;
+use Kirby\Form\Interface\ProvidesNestedForm;
 use Kirby\Form\Mixin;
 
 /**
@@ -12,55 +13,13 @@ use Kirby\Form\Mixin;
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
-class ObjectField extends InputField
+class ObjectField extends InputField implements ProvidesNestedForm
 {
 	use Mixin\EmptyState;
 	use Mixin\Fields;
 
 	protected array $value = [];
 
-	public function __construct(
-		array|null $default = null,
-		bool|null $disabled = null,
-		array|string|null $empty = null,
-		array|null $fields = null,
-		array|string|null $help = null,
-		array|string|null $label = null,
-		string|null $name = null,
-		bool|null $required = null,
-		bool|null $translate = null,
-		array|null $when = null,
-		string|null $width = null,
-	) {
-		parent::__construct(
-			default:   $default,
-			disabled:  $disabled,
-			help:      $help,
-			label:     $label,
-			name:      $name,
-			required:  $required,
-			translate: $translate,
-			when:      $when,
-			width:     $width
-		);
-
-		$this->empty  = $empty;
-		$this->fields = $fields;
-	}
-
-	public function props(): array
-	{
-		return [
-			...parent::props(),
-			'empty'  => $this->empty(),
-			'fields' => $this->fields(),
-		];
-	}
-
-	/**
-	 * @psalm-suppress MethodSignatureMismatch
-	 * @todo Remove psalm suppress after https://github.com/vimeo/psalm/issues/8673 is fixed
-	 */
 	public function fill(mixed $value): static
 	{
 		return parent::fill(
@@ -88,13 +47,8 @@ class ObjectField extends InputField
 			return [];
 		}
 
-		$form     = $this->form();
-		$defaults = $form->defaults();
-
-		return $form
-			->fill(
-				input: $defaults,
-			)
+		return $this->form()
+			->fill(defaults: true)
 			->submit(
 				input: $this->value,
 				passthrough: true

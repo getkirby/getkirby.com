@@ -5,6 +5,7 @@ namespace Kirby\Form\Field;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Form\FieldOptions;
 use Kirby\Form\Mixin;
+use Kirby\Reflection\Attributes\Prop;
 use Kirby\Toolkit\A;
 
 /**
@@ -22,61 +23,25 @@ class ColorField extends OptionField
 	/**
 	 * Whether to allow alpha transparency in the color
 	 */
-	protected bool|null $alpha;
+	#[Prop]
+	protected bool $alpha = false;
 
 	/**
 	 * The CSS format (hex, rgb, hsl) to display and store the value
 	 */
-	protected string|null $format;
+	#[Prop]
+	protected string $format = 'hex';
 
 	/**
 	 * Change mode to disable the color picker (`input`) or to only
 	 * show the `options` as toggles
 	 */
-	protected string|null $mode;
-
-	public function __construct(
-		bool|null $alpha = null,
-		bool|null $autofocus = null,
-		mixed $default = null,
-		bool|null $disabled = null,
-		string|null $format = null,
-		array|string|null $help = null,
-		string|null $icon = null,
-		array|string|null $label = null,
-		string|null $mode = null,
-		string|null $name = null,
-		array|string|null $options = null,
-		array|string|null $placeholder = null,
-		bool|null $required = null,
-		bool|null $translate = null,
-		array|null $when = null,
-		string|null $width = null
-	) {
-		parent::__construct(
-			autofocus: $autofocus,
-			default:   $default,
-			disabled:  $disabled,
-			help:      $help,
-			label:     $label,
-			name:      $name,
-			options:   $options,
-			required:  $required,
-			translate: $translate,
-			when:      $when,
-			width:     $width
-		);
-
-		$this->alpha       = $alpha;
-		$this->format      = $format;
-		$this->icon        = $icon;
-		$this->mode        = $mode;
-		$this->placeholder = $placeholder;
-	}
+	#[Prop]
+	protected string $mode = 'picker';
 
 	public function alpha(): bool
 	{
-		return $this->alpha ?? false;
+		return $this->alpha;
 	}
 
 	protected function fetchOptions(): array
@@ -98,12 +63,13 @@ class ColorField extends OptionField
 
 		if (
 			is_numeric($options[0]['value']) ||
-			$options[0]['value'] === $options[0]['text']
+			$options[0]['value'] === (string)$options[0]['text']
 		) {
 			// simple array of values
-			// or value=text (from Options class)
+			// or value=text (from Options class).
+			// the text is trusted HTML, the value must stay a plain string
 			$options = A::map($options, fn ($option) => [
-				'value' => $option['text']
+				'value' => (string)$option['text']
 			]);
 
 		} else {
@@ -118,10 +84,6 @@ class ColorField extends OptionField
 
 	public function format(): string
 	{
-		if ($this->format === null) {
-			return 'hex';
-		}
-
 		if (in_array($this->format, ['hex', 'hsl', 'rgb'], true) === true) {
 			return $this->format;
 		}
@@ -156,10 +118,6 @@ class ColorField extends OptionField
 
 	public function mode(): string
 	{
-		if ($this->mode === null) {
-			return 'picker';
-		}
-
 		if (in_array($this->mode, ['picker', 'input', 'options'], true) === true) {
 			return $this->mode;
 		}
@@ -167,18 +125,6 @@ class ColorField extends OptionField
 		throw new InvalidArgumentException(
 			message: 'Invalid mode "' . $this->mode . '" in color field' . ($this->name ? ' "' . $this->name . '"' : null)
 		);
-	}
-
-	public function props(): array
-	{
-		return [
-			...parent::props(),
-			'alpha'       => $this->alpha(),
-			'format'      => $this->format(),
-			'icon'        => $this->icon(),
-			'mode'        => $this->mode(),
-			'placeholder' => $this->placeholder(),
-		];
 	}
 
 	protected function validations(): array

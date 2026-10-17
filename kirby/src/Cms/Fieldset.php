@@ -3,6 +3,7 @@
 namespace Kirby\Cms;
 
 use Kirby\Blueprint\Blueprint;
+use Kirby\Blueprint\FieldsRegistry;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Form\Form;
 use Kirby\Toolkit\I18n;
@@ -15,7 +16,7 @@ use Kirby\Toolkit\Str;
  * @license   https://getkirby.com/license
  * @since     3.5.0
  *
- * @extends \Kirby\Cms\Item<\Kirby\Cms\Fieldsets>
+ * @extends Item<Fieldsets>
  */
 class Fieldset extends Item
 {
@@ -23,12 +24,13 @@ class Fieldset extends Item
 
 	protected bool $disabled;
 	protected bool $editable;
-	protected array $fields = [];
+	protected array|null $fields = null;
 	protected string|null $icon;
 	protected string|null $label;
 	protected string $name;
 	protected string|bool|null $preview;
-	protected array $tabs;
+	protected FieldsRegistry|null $registry = null;
+	protected array|null $tabs = null;
 	protected bool $translate;
 	protected string $type;
 	protected bool $unset;
@@ -56,7 +58,6 @@ class Fieldset extends Item
 		$this->name        = $this->createName($params['title']) ?? Str::label($this->type);
 		$this->label       = $this->createLabel($params['label'] ?? null);
 		$this->preview     = $params['preview'] ?? null;
-		$this->tabs        = $this->createTabs($params);
 		$this->translate   = $params['translate'] ?? true;
 		$this->unset       = $params['unset'] ?? false;
 		$this->wysiwyg     = $params['wysiwyg'] ?? false;
@@ -74,11 +75,12 @@ class Fieldset extends Item
 
 	protected function createFields(array $fields = []): array
 	{
-		$fields = Blueprint::fieldsProps($fields);
-		$fields = $this->form($fields)->fields()->toProps(defaults: true);
+		$this->registry ??= new FieldsRegistry();
+		$resolved         = $this->registry->add(Blueprint::fieldsProps($fields));
+		$fields           = $this->form($resolved)->fields()->toProps(defaults: true);
 
 		// collect all fields
-		$this->fields = [...$this->fields, ...$fields];
+		$this->fields = [...$this->fields ?? [], ...$fields];
 
 		return $fields;
 	}
@@ -140,7 +142,7 @@ class Fieldset extends Item
 			return false;
 		}
 
-		if ($this->fields === []) {
+		if ($this->fields() === []) {
 			return false;
 		}
 
@@ -149,7 +151,11 @@ class Fieldset extends Item
 
 	public function fields(): array
 	{
-		return $this->fields;
+		// the fields of all tabs are collected
+		// while creating the tabs, so ensure they are
+		$this->tabs();
+
+		return $this->fields ??= [];
 	}
 
 	/**
@@ -197,7 +203,7 @@ class Fieldset extends Item
 
 	public function tabs(): array
 	{
-		return $this->tabs;
+		return $this->tabs ??= $this->createTabs($this->params);
 	}
 
 	public function translate(): bool

@@ -2,6 +2,7 @@
 
 namespace Kirby\Panel\Response;
 
+use Kirby\Cms\App;
 use Kirby\Data\Json;
 use Kirby\Exception\Exception;
 use Kirby\Exception\InvalidArgumentException;
@@ -10,6 +11,7 @@ use Kirby\Http\Response;
 use Kirby\Panel\Area;
 use Kirby\Panel\Redirect;
 use Kirby\Panel\Ui\Component;
+use Kirby\Toolkit\HtmlString;
 use Throwable;
 
 /**
@@ -44,7 +46,7 @@ class JsonResponse extends Response
 	 */
 	public function body(): string
 	{
-		return Json::encode([static::$key => $this->data()], $this->pretty());
+		return Json::encode($this->payload(), $this->pretty());
 	}
 
 	/**
@@ -97,6 +99,23 @@ class JsonResponse extends Response
 	}
 
 	/**
+	 * Renders the error response for a Kirby exception
+	 */
+	public static function exception(Exception $exception): Response
+	{
+		return Response::json(
+			body: [
+				'status'  => 'error',
+				'message' => $exception->getMessage(),
+				'code'    => $exception->getHttpCode(),
+				'key'     => $exception->getKey(),
+				'details' => $exception->getDetails()
+			],
+			code: $exception->getHttpCode()
+		);
+	}
+
+	/**
 	 * Creates a response object from mixed input
 	 */
 	public static function from(mixed $data): Response
@@ -130,6 +149,14 @@ class JsonResponse extends Response
 		// interpret missing/empty data as not found
 		if ($data === null || $data === false) {
 			throw new NotFoundException('The data could not be found');
+		}
+
+		// handle Kirby exceptions
+		if (
+			$data instanceof Exception &&
+			App::instance()->option('debug') !== true
+		) {
+			return static::exception($data);
 		}
 
 		// handle Throwables
@@ -170,6 +197,15 @@ class JsonResponse extends Response
 	}
 
 	/**
+	 * Returns the full body data with all trusted HTML
+	 * marked for the frontend.
+	 */
+	protected function payload(): array
+	{
+		return HtmlString::resolve($this->wrap());
+	}
+
+	/**
 	 * Should the JSON in the body be pretty-printed?
 	 */
 	public function pretty(): bool
@@ -196,5 +232,13 @@ class JsonResponse extends Response
 	public function type(): string
 	{
 		return 'application/json';
+	}
+
+	/**
+	 * Wraps the data in the response key namespace
+	 */
+	protected function wrap(): array
+	{
+		return [static::$key => $this->data()];
 	}
 }

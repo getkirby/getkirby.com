@@ -5,14 +5,15 @@ namespace Kirby\Panel\Ui\Item;
 use Kirby\Cms\ModelWithContent;
 use Kirby\Panel\Model as Panel;
 use Kirby\Panel\Ui\Item;
+use Kirby\Toolkit\HtmlString;
 
 /**
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  * @since     5.1.0
  *
- * @template TModel of \Kirby\Cms\ModelWithContent
- * @template TPanel of \Kirby\Panel\Model
+ * @template TModel of ModelWithContent
+ * @template TPanel of panel
  */
 class ModelItem extends Item
 {
@@ -44,9 +45,16 @@ class ModelItem extends Item
 		$this->panel = $model->panel();
 	}
 
-	protected function info(): string|null
+	protected function info(): string|HtmlString|null
 	{
-		return $this->model->toSafeString($this->info ?? false);
+		// an empty template, not null: null would render the model id
+		$info = $this->info ?? '';
+
+		if ($this->layout === 'table') {
+			return $this->model->toString($info);
+		}
+
+		return $this->model->toSafeHtmlString($info);
 	}
 
 	protected function image(): array|null
@@ -61,7 +69,7 @@ class ModelItem extends Item
 
 	protected function permissions(): array
 	{
-		return $this->model->permissions()->toArray();
+		return $this->model->guards()->availability();
 	}
 
 	public function props(): array
@@ -75,8 +83,12 @@ class ModelItem extends Item
 		];
 	}
 
-	protected function text(): string
+	protected function text(): string|HtmlString
 	{
-		return $this->model->toSafeString($this->text);
+		if ($this->layout === 'table') {
+			return $this->model->toString($this->text);
+		}
+
+		return $this->model->toSafeHtmlString($this->text);
 	}
 }

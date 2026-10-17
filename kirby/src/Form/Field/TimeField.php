@@ -2,7 +2,7 @@
 
 namespace Kirby\Form\Field;
 
-use Kirby\Toolkit\Date;
+use Kirby\Reflection\Attributes\Prop;
 
 /**
  * Time field
@@ -15,73 +15,43 @@ class TimeField extends DateTimeField
 {
 	public const ISO = 'H:i:s';
 
+	#[Prop]
+	protected string|null $format = self::ISO;
+
 	/**
 	 * Custom format (dayjs tokens: `HH`, `hh`, `mm`, `ss`, `a`) that is
 	 * used to display the field in the Panel
 	 */
-	protected string|null $display;
+	#[Prop(computed: true)]
+	protected string|null $display = null;
+
+	#[Prop]
+	protected string|null $icon = 'clock';
 
 	/**
 	 * Latest time, which can be selected/saved (H:i or H:i:s)
 	 */
-	protected string|null $max;
+	#[Prop]
+	protected string|null $max = null;
 
 	/**
 	 * Earliest time, which can be selected/saved (H:i or H:i:s)
 	 */
-	protected string|null $min;
+	#[Prop]
+	protected string|null $min = null;
 
 	/**
 	 * `12` or `24` hour notation. If `12`, an AM/PM selector will be shown.
 	 * If `display` is defined, that option will take priority.
 	 */
-	protected int|null $notation;
+	#[Prop]
+	protected int $notation = 24;
 
 	/**
 	 * Round to the nearest: sub-options for `unit` (minute) and `size` (5)
 	 */
-	protected array|int|string|null $step;
-
-	public function __construct(
-		bool|null $autofocus = null,
-		mixed $default = null,
-		string|null $display = null,
-		bool|null $disabled = null,
-		string|null $format = null,
-		array|string|null $help = null,
-		string|null $icon = null,
-		array|string|null $label = null,
-		string|null $max = null,
-		string|null $min = null,
-		string|null $name = null,
-		int|null $notation = null,
-		bool|null $required = null,
-		array|int|string|null $step = null,
-		bool|null $translate = null,
-		array|null $when = null,
-		string|null $width = null
-	) {
-		parent::__construct(
-			autofocus: $autofocus,
-			default:   $default,
-			display:   $display,
-			disabled:  $disabled,
-			format:    $format,
-			help:      $help,
-			icon:      $icon,
-			label:     $label,
-			max:       $max,
-			min:       $min,
-			name:      $name,
-			required:  $required,
-			step:      $step,
-			translate: $translate,
-			when:      $when,
-			width:     $width
-		);
-
-		$this->notation = $notation;
-	}
+	#[Prop(setter: 'setStep')]
+	protected array $step = ['size' => 5, 'unit' => 'minute'];
 
 	public function display(): string
 	{
@@ -97,11 +67,6 @@ class TimeField extends DateTimeField
 		return $this->format ?? static::ISO;
 	}
 
-	public function icon(): string
-	{
-		return $this->icon ?? 'clock';
-	}
-
 	public function notation(): int
 	{
 		return match ($this->notation) {
@@ -110,20 +75,9 @@ class TimeField extends DateTimeField
 		};
 	}
 
-	public function props(): array
-	{
-		return [
-			...parent::props(),
-			'notation' => $this->notation()
-		];
-	}
-
 	public function step(): array
 	{
-		return Date::stepConfig($this->step, [
-			'size' => 5,
-			'unit' => 'minute',
-		]);
+		return $this->step;
 	}
 
 	protected function validations(): array

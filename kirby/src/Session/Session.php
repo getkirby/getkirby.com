@@ -27,7 +27,7 @@ class Session
 	protected int|false $timeout = false;
 	protected int|null $lastActivity = null;
 	protected bool $renewable;
-	protected SessionData $data;
+	protected Data $data;
 	protected array|null $newSession = null;
 
 	// temporary state flags
@@ -39,14 +39,14 @@ class Session
 	/**
 	 * Creates a new Session instance
 	 *
-	 * @param \Kirby\Session\Sessions $sessions Parent sessions object
-	 * @param string|null $token Session token or null for a new session
-	 * @param array $options Optional additional options:
-	 *                       - `mode`: Token transmission mode (cookie or manual); defaults to `cookie`
-	 *                       - `startTime`: Time the session starts being valid (date string or timestamp); defaults to `now`
-	 *                       - `expiryTime`: Time the session expires (date string or timestamp); defaults to `+ 2 hours`
-	 *                       - `timeout`: Activity timeout in seconds (integer or false for none); defaults to `1800` (half an hour)
-	 *                       - `renewable`: Should it be possible to extend the expiry date?; defaults to `true`
+	 * @param Sessions $sessions Parent sessions object
+	 * @param $token Session token or null for a new session
+	 * @param $options Optional additional options:
+	 *                - `mode`: Token transmission mode (cookie or manual); defaults to `cookie`
+	 *                - `startTime`: Time the session starts being valid (date string or timestamp); defaults to `now`
+	 *                - `expiryTime`: Time the session expires (date string or timestamp); defaults to `+ 2 hours`
+	 *                - `timeout`: Activity timeout in seconds (integer or false for none); defaults to `1800` (half an hour)
+	 *                - `renewable`: Should it be possible to extend the expiry date?; defaults to `true`
 	 */
 	public function __construct(
 		protected Sessions $sessions,
@@ -84,7 +84,7 @@ class Session
 		$this->duration   = $this->expiryTime - $this->startTime;
 		$this->timeout    = $options['timeout'] ?? 1800;
 		$this->renewable  = $options['renewable'] ?? true;
-		$this->data       = new SessionData($this, []);
+		$this->data       = new Data($this, []);
 
 		// validate persistent data
 		if ($now > $this->expiryTime) {
@@ -146,7 +146,7 @@ class Session
 	}
 
 	/**
-	 * @see \Kirby\Session\SessionData::clear()
+	 * @see Data::clear()
 	 * @since 6.0.0
 	 */
 	public function clear(): void
@@ -219,13 +219,13 @@ class Session
 	/**
 	 * Returns the session data object
 	 */
-	public function data(): SessionData
+	public function data(): Data
 	{
 		return $this->data;
 	}
 
 	/**
-	 * @see \Kirby\Session\SessionData::decrement()
+	 * @see Data::decrement()
 	 * @since 6.0.0
 	 */
 	public function decrement(
@@ -261,11 +261,9 @@ class Session
 	}
 
 	/**
-	 * Gets or sets the session duration
-	 * Setting the duration also updates the expiry time and regenerates the session token
-	 *
-	 * @param int|null $duration Optional new duration in seconds to set
-	 * @return int Number of seconds
+	 * Gets or sets the session duration (in seconds).
+	 * Setting the duration also updates the expiry time
+	 * and regenerates the session token.
 	 */
 	public function duration(int|null $duration = null): int
 	{
@@ -292,7 +290,7 @@ class Session
 
 	/**
 	 * Initially generates the token for new sessions
-	 * Used internally
+	 * @internal
 	 */
 	public function ensureToken(): void
 	{
@@ -302,11 +300,11 @@ class Session
 	}
 
 	/**
-	 * Gets or sets the session expiry time
-	 * Setting the expiry time also updates the duration and regenerates the session token
+	 * Gets or sets the session expiry timestamp.
+	 * Setting the expiry time also updates the duration and
+	 * regenerates the session token.
 	 *
-	 * @param string|int|null $expiryTime Optional new expiry timestamp or time string to set
-	 * @return int Timestamp
+	 * @param $expiryTime Optional new expiry timestamp or time string to set
 	 */
 	public function expiryTime(string|int|null $expiryTime = null): int
 	{
@@ -336,7 +334,7 @@ class Session
 	}
 
 	/**
-	 * @see \Kirby\Session\SessionData::get()
+	 * @see Data::get()
 	 * @since 6.0.0
 	 */
 	public function get(string|null $key = null, mixed $default = null): mixed
@@ -345,7 +343,7 @@ class Session
 	}
 
 	/**
-	 * @see \Kirby\Session\SessionData::increment()
+	 * @see Data::increment()
 	 * @since 6.0.0
 	 */
 	public function increment(
@@ -478,33 +476,31 @@ class Session
 		if (isset($this->data) === true) {
 			$this->data()->reload($data['data']);
 		} else {
-			$this->data = new SessionData($this, $data['data']);
+			$this->data = new Data($this, $data['data']);
 		}
 	}
 
 	/**
-	 * Gets or sets the transmission mode
-	 * Setting only works for new sessions that haven't been transmitted yet
-	 *
-	 * @param string|null $mode Optional new transmission mode
-	 * @return string Transmission mode
+	 * Gets or sets the transmission mode.
+	 * Setting only works for new sessions
+	 * that haven't been transmitted yet.
 	 */
 	public function mode(string|null $mode = null): string
 	{
-		if ($mode !== null) {
-			// only allow this if this is a new session, otherwise the change
-			// might not be applied correctly to the current request
-			if ($this->token() !== null) {
-				throw new InvalidArgumentException(
-					data: ['method' => 'Session::mode', 'argument' => '$mode'],
-					translate: false
-				);
-			}
-
-			$this->mode = $mode;
+		if ($mode === null) {
+			return $this->mode;
 		}
 
-		return $this->mode;
+		// only allow this if this is a new session, otherwise the change
+		// might not be applied correctly to the current request
+		if ($this->token() !== null) {
+			throw new InvalidArgumentException(
+				data: ['method' => 'Session::mode', 'argument' => '$mode'],
+				translate: false
+			);
+		}
+
+		return $this->mode = $mode;
 	}
 
 	/**
@@ -519,8 +515,8 @@ class Session
 	}
 
 	/**
-	 * Returns whether the session token needs to be retransmitted to the client
-	 * Only relevant in header and manual modes
+	 * Returns whether the session token needs to be retransmitted
+	 * to the client. Only relevant in header and manual modes.
 	 */
 	public function needsRetransmission(): bool
 	{
@@ -566,7 +562,7 @@ class Session
 	}
 
 	/**
-	 * @see \Kirby\Session\SessionData::pull()
+	 * @see Data::pull()
 	 * @since 6.0.0
 	 */
 	public function pull(string $key, mixed $default = null): mixed
@@ -575,8 +571,8 @@ class Session
 	}
 
 	/**
-	 * Regenerates the session token
-	 * The old token will keep its validity for a 30 second grace period
+	 * Regenerates the session token.
+	 * The old token will keep its validity for a 30 second grace period.
 	 */
 	public function regenerateToken(): void
 	{
@@ -612,8 +608,8 @@ class Session
 			$this->needsRetransmission = true;
 		}
 
-		// update cache of the Sessions instance with the new token
-		$this->sessions->updateCache($this);
+		// update the session in the Sessions instance's cache
+		$this->sessions->update($this);
 	}
 
 	/**
@@ -627,7 +623,7 @@ class Session
 	}
 
 	/**
-	 * @see \Kirby\Session\SessionData::remove()
+	 * @see Data::remove()
 	 * @since 6.0.0
 	 */
 	public function remove(string|array $key): void
@@ -655,10 +651,8 @@ class Session
 	}
 
 	/**
-	 * Gets or sets the renewable flag
+	 * Gets or sets the renewable flag.
 	 * Automatically renews the session if renewing gets enabled
-	 *
-	 * @param bool|null $renewable Optional new renewable flag to set
 	 */
 	public function renewable(bool|null $renewable = null): bool
 	{
@@ -672,7 +666,7 @@ class Session
 	}
 
 	/**
-	 * @see \Kirby\Session\SessionData::set()
+	 * @see Data::set()
 	 * @since 6.0.0
 	 */
 	public function set(string|array $key, mixed $value = null): void
@@ -681,9 +675,7 @@ class Session
 	}
 
 	/**
-	 * Gets the session start time
-	 *
-	 * @return int Timestamp
+	 * Gets the session start timestamp
 	 */
 	public function startTime(): int
 	{
@@ -694,7 +686,7 @@ class Session
 	 * Throws an exception for an invalid session
 	 * @since 6.0.0
 	 *
-	 * @throws \Kirby\Exception\LogicException
+	 * @throws LogicException
 	 */
 	protected function throwInvalid(): never
 	{
@@ -709,9 +701,7 @@ class Session
 
 	/**
 	 * Gets or sets the session timeout
-	 *
-	 * @param int|false|null $timeout Optional new timeout to set or false to disable timeout
-	 * @return int|false Number of seconds or false for "no timeout"
+	 * (in seconds or false for "no timeout").
 	 */
 	public function timeout(int|false|null $timeout = null): int|false
 	{
@@ -736,11 +726,10 @@ class Session
 	}
 
 	/**
-	 * Makes sure that the given value is a valid timestamp
+	 * Ensures and normalizes the given value as a valid timestamp
 	 *
-	 * @param string|int $time Timestamp or date string (must be supported by `strtotime()`)
-	 * @param int|null $now Timestamp to use as a base for the calculation of relative dates
-	 * @return int Timestamp value
+	 * @param $time Timestamp or date string (must be supported by `strtotime()`)
+	 * @param $now Timestamp to use as a base for the calculation of relative dates
 	 */
 	protected static function timeToTimestamp(
 		string|int $time,

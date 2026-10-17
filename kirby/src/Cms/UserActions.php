@@ -7,6 +7,7 @@ use Kirby\Content\ImmutableMemoryStorage;
 use Kirby\Content\MemoryStorage;
 use Kirby\Data\Data;
 use Kirby\Data\Json;
+use Kirby\Exception\LogicException;
 use Kirby\Exception\PermissionException;
 use Kirby\Filesystem\Dir;
 use Kirby\Filesystem\F;
@@ -23,7 +24,7 @@ use Throwable;
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  *
- * @mixin \Kirby\Cms\User
+ * @mixin User
  */
 trait UserActions
 {
@@ -44,6 +45,12 @@ trait UserActions
 			callback: function (User $user, string $email): User {
 				$user = $user->clone(['email' => $email]);
 				$user->updateCredentials(['email' => $email]);
+
+				// the email challenge was confirmed for the old address,
+				// so the opt-in must not carry over to the new one
+				if ($user->secret('email') === true) {
+					$user->writeSecret('email', null);
+				}
 
 				return $user;
 			}
@@ -153,7 +160,7 @@ trait UserActions
 		#[SensitiveParameter]
 		string|null $secret
 	): static {
-		UserRules::changeTotp($this, $secret);
+		$this->guards()->ensureExecutable('changeSecret', 'totp', $secret);
 		return $this->changeSecret('totp', $secret);
 	}
 
@@ -161,6 +168,7 @@ trait UserActions
 	 * Stores secrets for the user
 	 * @since 6.0.0
 	 */
+	#[BlockCollectionAccess]
 	public function changeSecret(
 		string $secret,
 		#[SensitiveParameter]
@@ -200,7 +208,7 @@ trait UserActions
 	 * 4. applies the `after` hook
 	 * 5. returns the result
 	 *
-	 * @throws \Kirby\Exception\PermissionException
+	 * @throws PermissionException
 	 */
 	protected function commit(
 		string $action,
@@ -238,11 +246,13 @@ trait UserActions
 			'translations' => null
 		]);
 
-		// merge the content with the defaults
-		$props['content'] = [
-			...$user->createDefaultContent(),
-			...$props['content'],
-		];
+		// check the rules before any user input is passed
+		// through the field classes
+		$user->guards()->ensureExecutable('create', $input);
+
+		// merge the content with the defaults and run it through
+		// the fields to apply their save handlers
+		$props['content'] = $user->createContent($props['content']);
 
 		// keep the initial storage class
 		$storage = $user->storage()::class;
@@ -253,8 +263,11 @@ trait UserActions
 		// inject the content
 		$user->setContent($props['content']);
 
-		// inject the translations
-		$user->setTranslations($props['translations'] ?? null);
+		// inject the translations and run their content through
+		// the fields to apply their save handlers
+		$user->setTranslations(
+			$user->createTranslations($props['translations'] ?? null)
+		);
 
 		// run the hook
 		return $user->commit(
@@ -320,7 +333,7 @@ trait UserActions
 		do {
 			try {
 				$id = Str::random($length);
-				UserRules::validId($this, $id);
+				$this->guards()->validators()->validateId($id);
 				return $id;
 
 				// we can't really test for a random match
@@ -335,7 +348,7 @@ trait UserActions
 	/**
 	 * Deletes the user
 	 *
-	 * @throws \Kirby\Exception\LogicException
+	 * @throws LogicException
 	 */
 	#[BlockCollectionAccess]
 	public function delete(): bool
@@ -495,7 +508,7 @@ trait UserActions
 				// check if the user can delete the old avatar,
 				// but don't delete it yet. If creating the new one fails
 				// we can still keep the old one around
-				FileRules::delete($oldAvatar);
+				$oldAvatar->guards()->ensureExecutable('delete');
 
 				// try to create the new avatar
 				$user->createFile(
@@ -525,7 +538,7 @@ trait UserActions
 		string|null $languageCode = null,
 		bool $validate = false
 	): static {
-		/** @var \Kirby\Cms\User $user */
+		/** @var User $user */
 		$user = parent::update($input, $languageCode, $validate);
 
 		// set auth user data only if the current user is this user
