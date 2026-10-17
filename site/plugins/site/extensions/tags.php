@@ -2,7 +2,7 @@
 
 use Kirby\Cms\App;
 use Kirby\Cms\Html;
-use Kirby\Reference\Reflectable\ReflectableSectionOptions;
+use Kirby\Reference\Reflectable\ReflectableFieldOptions;
 use Kirby\Reference\Types\Chain;
 use Kirby\Reference\Types\Identifier;
 use Kirby\Toolkit\Str;
@@ -334,7 +334,7 @@ $tags['section-options'] = [
 
 		return snippet($snippet, [
 			'title'       => false,
-			'reflectable' => ReflectableSectionOptions::factory($tag->value)
+			'reflectable' => ReflectableFieldOptions::forSection($tag->value)
 		], true);
 	}
 ];

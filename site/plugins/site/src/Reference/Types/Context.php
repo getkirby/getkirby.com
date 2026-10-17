@@ -23,6 +23,11 @@ class Context
 {
 	public static array $cache = [];
 
+	/**
+	 * Cache for the imported class names per file
+	 */
+	public static array $imports = [];
+
 	public array $types = [];
 
 	public function __construct(
@@ -92,6 +97,45 @@ class Context
 		}
 
 		throw new Exception('Invalid reflectable for creating context');
+	}
+
+	/**
+	 * Returns the class names imported via `use`
+	 * statements in the file of the given class,
+	 * keyed by their (aliased) short name
+	 */
+	protected static function imports(ReflectionClass $class): array
+	{
+		$file = $class->getFileName();
+
+		if ($file === false) {
+			return [];
+		}
+
+		if (isset(static::$imports[$file]) === true) {
+			return static::$imports[$file];
+		}
+
+		$imports = [];
+
+		// only top-level imports start at the beginning of
+		// the line; trait `use` statements are indented
+		preg_match_all(
+			'/^use\s+([\w\\\\]+)(?:\s+as\s+(\w+))?\s*;/m',
+			file_get_contents($file),
+			$matches,
+			PREG_SET_ORDER
+		);
+
+		foreach ($matches as $match) {
+			$name  = ltrim($match[1], '\\');
+			$parts = explode('\\', $name);
+			$alias = $match[2] ?? end($parts);
+
+			$imports[$alias] = $name;
+		}
+
+		return static::$imports[$file] = $imports;
 	}
 
 	/**
@@ -181,6 +225,31 @@ class Context
 	}
 
 	/**
+	 * Resolves a class name from a docblock to its fully
+	 * qualified name, using the imports and namespace
+	 * of the class the docblock belongs to
+	 */
+	protected function resolveName(string $name): string
+	{
+		if (str_starts_with($name, '\\') === true || $this->class === null) {
+			return ltrim($name, '\\');
+		}
+
+		$first   = Str::before($name, '\\') ?: $name;
+		$imports = static::imports($this->class);
+
+		if (isset($imports[$first]) === true) {
+			return $imports[$first] . substr($name, strlen($first));
+		}
+
+		if ($namespace = $this->class->getNamespaceName()) {
+			return $namespace . '\\' . $name;
+		}
+
+		return $name;
+	}
+
+	/**
 	 * Resolve a single parent class or trait
 	 * to extend the template => type map
 	 */
@@ -202,7 +271,7 @@ class Context
 			}
 		);
 
-		$reflection  = new ReflectionClass($reference->type->name);
+		$reflection  = new ReflectionClass($this->resolveName($reference->type->name));
 		$context     = new Context(class: $reflection);
 		$types       = $context->resolveClass($payload);
 		$this->types = [...$this->types, ...$types];
