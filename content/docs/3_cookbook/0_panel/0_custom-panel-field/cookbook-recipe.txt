@@ -22,7 +22,7 @@ Text:
 
 In this recipe, we will create a custom Panel field that displays a list of links with an icon, a title and a description. This is what it will look like once we are ready:
 
-(image: custom-field.jpg)
+(image: custom-field.webp)
 
 <info>
 For the purposes of this recipe, we assume you have read the (link: docs/guide/plugins/panel text: Panel plugins guide) on how to get started with our Panel plugin bundler (link: https://github.com/johannschopplich/kirbyup text: kirbyup).
@@ -36,8 +36,10 @@ Please read the (link: docs/reference/plugins/extensions/fields text: chapter ab
 
 Let's get started with the plugin folder, we'll call it `/linkfield`. Inside this folder, we create a `package.json` file which is needed so that kirbyup knows what to do.
 
-```yaml "/site/plugins/linkfield/package.json"
+```json "/site/plugins/linkfield/package.json"
 {
+  "name": "linkfield",
+  "private": true,
   "scripts": {
     "dev": "npx -y kirbyup src/index.js --watch",
     "build": "npx -y kirbyup src/index.js"
@@ -49,43 +51,58 @@ This will take care of compiling our source files into an `index.js` file in the
 
 ## Register the field: PHP part
 
-We also need an `index.php` file that contains the Kirby plugin wrapper, in which we define the field. The field definition itself goes into a separate file, which we will put into a separate `/fields` folder and require from there.
+Every field in Kirby is a PHP class. Our field only displays links and doesn't store anything in the content file, so its class extends Kirby's `DisplayField` class, which already comes with the `label` and `help` options. We add two more options: a `layout` and the `links` themselves. These are the options we can later define in the blueprint for the field.
+
+```php "/site/plugins/linkfield/src/LinksField.php"
+<?php
+
+namespace GetKirby\LinkField;
+
+use Kirby\Form\Field\DisplayField;
+use Kirby\Reflection\Attributes\Prop;
+
+class LinksField extends DisplayField
+{
+	/**
+	 * Layout of the links: `list` or `cards`
+	 */
+	#[Prop]
+	protected string $layout = 'list';
+
+	/**
+	 * The links to display
+	 */
+	#[Prop]
+	protected array $links = [];
+}
+```
+
+Each option is a typed property with the `#[Prop]` attribute. Its default value is used, if the option isn't set in the blueprint. Kirby sends all options to the Vue component of the field automatically.
+
+We also need an `index.php` file that contains the Kirby plugin wrapper, in which we load the class and register it as `links` field.
 
 ```php "/site/plugins/linkfield/index.php"
 <?php
 
+use GetKirby\LinkField\LinksField;
+
+F::loadClasses([
+	'getkirby\\linkfield\\linksfield' => 'src/LinksField.php'
+], __DIR__);
+
 Kirby::plugin(
-    name: 'getkirby/linkfield',
-    extends: [
-        'fields' => [
-            'links' => require __DIR__ . '/fields/links.php',
-        ],
-    ]
+	name: 'getkirby/linkfield',
+	extends: [
+		'fields' => [
+			'links' => LinksField::class
+		]
+	]
 );
 ```
+
 <info>
-Note that while we could put the props array we now outsource to `links.php` into our `index.php`, the purpose here is to get an idea how we can structure our files in more complex plugins.
+We put the class into its own file in a `/src` folder. This keeps the `index.php` short and gives you an idea of how to structure the files of more complex plugins. Read more about it in (link: docs/guide/plugins/structure text: Structuring your plugin code).
 </info>
-
-Inside `links.php`, we set the field's properties. We keep it simple and only set a label, a layout and a links property. These are the properties we can later define in the blueprint for the field.
-
-```php "/site/plugins/linkfield/fields/links.php"
-<?php
-
-return [
-    'props' => [
-        'label' => function ($label = 'Links') {
-            return $label;
-        },
-        'layout' => function ($layout = 'list') {
-            return $layout;
-        },
-        'links' => function($links = []) {
-          return $links;
-        }
-    ]
-];
-```
 
 ## Register the field: Vue part
 
@@ -105,23 +122,30 @@ Inside this file, we import the `Links.vue` component and assign this component 
 
 ## Set up the field component
 
-Finally, we need the `Links.vue` component that contains the template and data for the field.
+Finally, we need the `Links.vue` component that contains the template for the field. The options from the PHP class arrive as props, so we declare them in the `props` object of the component:
 
 ```html "/site/plugins/linkfield/src/components/fields/Links.vue"
 <template>
-
+  <k-field :label="label" class="k-links-field">
+    <k-collection :items="links" :layout="layout" />
+  </k-field>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-
-    }
+  inheritAttrs: false,
+  props: {
+    label: String,
+    layout: String,
+    links: Array
   }
 };
 </script>
 ```
+
+Kirby makes this really easy for us by providing default components we can reuse all over the place. The `k-field` component takes care of the label. And the `k-collection` component makes it easy to switch between the cards and list layouts. All we have to do is bind our data to the `:items` property and our `layout` to the `:layout` property.
+
+Kirby passes a few more props to every field, like `name`, `type` or `width`. `inheritAttrs: false` keeps the props our component doesn't declare from ending up as HTML attributes of our field.
 
 At this point, we are ready to run…
 
@@ -136,201 +160,74 @@ npm run dev
 If this went smoothly, we are ready to use the field in a blueprint, e.g. `site.yml`:
 
 ```yaml "/site/blueprints/site.yml"
-Title: Site
-  fields:
-    links:
-      type: links
-      label: Getting started
+title: Site
+
+fields:
+  links:
+    type: links
+    label: Getting started
 ```
 
-If we now open the Panel start page, we will not see anything yet in the browser. However, on inspecting the source code, there will be an empty `div` tag with a class of `k-field k-field-name-links`. Hurray!
-
-## Adding the missing pieces
-
-Back to `Links.vue`. We now define the same properties that we already defined in `links.php` inside the data function of the component object, and fill them once the props defined in PHP have been loaded from the API.
-
-```html "/site/plugins/linkfield/src/components/fields/Links.vue"
-<script>
-export default {
-  data() {
-    return {
-      label: null,
-      layout: null,
-      links: []
-    }
-  }
-};
-</script>
-```
-
-As a next step, we finalize our template, so it can later display the data:
-
-```html "/site/plugins/linkfield/src/components/fields/Links.vue"
-<template>
-  <field class="k-links-field">
-    <header class="k-field-header">
-      <h2 class="k-headline">{{ label }}</h2>
-    </header>
-    <k-collection
-      :items="links"
-      :layout="layout"
-    />
-  </field>
-</template>
-```
-
-Kirby makes this really easy for us by providing default components we can reuse all over the place. Here we use the `k-collection` component. The `k-collection` components makes it easy to switch between the cards and list layouts. All we have to do is bind our data to the `:items` property and our `layout` to the `:layout` property.
-
-Still, nothing to see in the Panel.
-
-## Manually adding some data
-
-We can now quickly add some placeholder data so that we finally get something to see in the Panel:
-
-```html "/site/plugins/linkfield/src/components/fields/Links.vue"
-<script>
-export default {
-  data() {
-    return {
-      label: "Links",
-      layout: "list",
-      links: [
-        {
-          icon: {
-            type: "document",
-            back: "black"
-          },
-          text: "Guide",
-          link: "https://getkirby.com/docs/guide",
-          info: "Get an overview of all the cool things you can do with Kirby",
-          target: "_blank",
-        }
-      ]
-    }
-  }
-};
-</script>
-```
-
-Inside the data array, we use the keywords the `k-collection` component expects, and add a value to each. Et voilà, there is our first field entry in the Panel.
-
-## Fetching the data from the backend
-
-The bit that is left to do, is to load the data from the API and let it replace the placeholder values. We do that within the `created` hook that is triggered when the component is ready, using the `load()` method. The load method is automatically injected into every field component and handles fetching the PHP properties from our `links.php` file.
-
-When we get a response, we assign the values to our properties.
-
-```html "/site/plugins/linkfield/src/components/fields/Links.vue"
-<script>
-export default {
-  data() {
-    return {
-      label: "Links",
-      layout: "list",
-      links: [
-        {
-          icon: {
-            type: "document",
-            back: "black"
-          },
-          text: "Guide",
-          link: "https://getkirby.com/docs/guide",
-          info: "Get an overview of all the cool things you can do with Kirby",
-          target: "_blank",
-        }
-      ]
-    }
-  },
-  async created() {
-    const response = await this.load();
-    this.label  = response.label;
-    this.layout = response.layout;
-    this.links  = response.links;
-  }
-};
-</script>
-```
-
-Once our props are correctly loaded from the backend, we can remove our hard-coded placeholder values:
-
-```html "/site/plugins/linkfield/src/components/fields/Links.vue"
-<script>
-export default {
-  data() {
-    return {
-      label: "",
-      layout: "list",
-      links: []
-    }
-  },
-  async created() {
-    const response = await this.load();
-    this.label  = response.label;
-    this.layout = response.layout;
-    this.links  = response.links;
-  }
-};
-</script>
-```
-
-We now have a working connection between our field backend and our field frontend and we can freely pass data from blueprints and computed PHP props to our Vue component.
-
+If we now open the Panel start page, we see the label of our field, but no links yet, because we haven't defined any.
 
 ## The blueprint with the final field definition
 
-Finally, let's add the data we want to show in the field to the field definition:
+Finally, let's add the links we want to show in the field to the field definition. Each link uses the keys the `k-collection` component expects for its items: a `text`, an `info`, the `link` with its `target` and an `image`, for which we use a white icon on a black background in a 3/2 ratio.
 
-```yaml
+```yaml "/site/blueprints/site.yml"
+title: Site
+
 fields:
   links:
     type: links
     label: Getting started
     layout: cards
     links:
-      -
-        icon:
-            type: document
-            back: black
-        link: 'https://getkirby.com/docs/guide'
-        target: _blank
-        text: Guide
+      - text: Guide
         info: Get an overview of all the cool things you can do with Kirby
-
-      -
-        icon:
-            type: book
-            back: black
-        link: 'https://getkirby.com/docs/cookbook'
+        link: https://getkirby.com/docs/guide
         target: _blank
-        text: Cookbook
+        image:
+          icon: book
+          back: black
+          color: white
+          ratio: 3/2
+      - text: Cookbook
         info: Yummy step by step recipes for all sorts of usage tastes
-
-      -
-        icon:
-            type: list-bullet
-            back: black
-        link: 'https://getkirby.com/docs/reference'
+        link: https://getkirby.com/docs/cookbook
         target: _blank
-        text: Referenz
+        image:
+          icon: palette
+          back: black
+          color: white
+          ratio: 3/2
+      - text: Reference
         info: Discover Kirby's API in all detail
-
-      -
-        icon:
-            type: cog
-            back: black
-        link: 'https://getkirby.com/plugins'
+        link: https://getkirby.com/docs/reference
         target: _blank
-        text: Plugins
+        image:
+          icon: list-bullet
+          back: black
+          color: white
+          ratio: 3/2
+      - text: Plugins
         info: Find plugins to extend Kirby's core functionality and make the most of your site
-
-      -
-        icon:
-            type: user
-            back: black
-        link: 'https://forum.getkirby.com'
+        link: https://plugins.getkirby.com
         target: _blank
-        text: Forum
+        image:
+          icon: box
+          back: black
+          color: white
+          ratio: 3/2
+      - text: Forum
         info: Meet Kirby's lovely community and get help whenever you get stuck
+        link: https://forum.getkirby.com
+        target: _blank
+        image:
+          icon: users
+          back: black
+          color: white
+          ratio: 3/2
 ```
 
 Change the layout to `list` in the blueprint to see how your field is now displayed as a list.
@@ -347,20 +244,19 @@ npm run build
 
 ```filesystem
 linkfield/
-  index.js
-  package.json
-  fields/
-    links.php
   src/
-    index.js
     components/
       fields/
         Links.vue
+    index.js
+    LinksField.php
+  index.js
+  index.php
+  package.json
 ```
-
 
 ## Where to go from here
 
-This is a very basic example that should still have given you an understanding of how the different parts play together and enable you to set up your first custom fields for your clients. The data to fill this field can come in fact come from anywhere, you can provide it through a route, a database or whatever you see fit. And you probably don't just want to display stuff, but add actions to each item etc. We'll cover that in future recipes.
+This is a very basic example that should still have given you an understanding of how the different parts play together and enable you to set up your first custom fields for your clients. The data to fill this field can in fact come from anywhere: instead of the blueprint, the PHP class could load it from a database, an API or whatever you see fit. And you probably don't just want to display stuff, but add actions to each item etc.
 
 You don't have to use the components Kirby provides, either, but can come up with your own markup and design. The possibilities are pretty much endless.
