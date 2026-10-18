@@ -594,7 +594,52 @@ Sections have been replaced by fields (see "Sections become fields" above). Blue
   - Removed `$library.dayjs.merge()`
 - Removed deprecated `panel.dialog.openComponent()` method [#7518](https://github.com/getkirby/kirby/pull/7518)
 - `panel.notification.error()` no longer resolves nested errors in the state. Always throw Exceptions instead to create first-level error responses. [#7782](https://github.com/getkirby/kirby/pull/7782)
-- Removed deprecated v3 CSS properties [#7825](https://github.com/getkirby/kirby/pull/7825)
+
+- Removed deprecated v3 CSS properties [#7825](https://github.com/getkirby/kirby/pull/7825):
+
+| Removed                    | Use instead                             |
+| -------------------------- | --------------------------------------- |
+| `--color-backdrop`         | `--overlay-color-back`                  |
+| `--color-background`       | `--panel-color-back`                    |
+| `--color-gray`             | `--color-gray-600`                      |
+| `--color-red`              | `--color-red-600`                       |
+| `--color-orange`           | `--color-orange-600`                    |
+| `--color-yellow`           | `--color-yellow-600`                    |
+| `--color-green`            | `--color-green-600`                     |
+| `--color-aqua`             | `--color-aqua-600`                      |
+| `--color-blue`             | `--color-blue-600`                      |
+| `--color-purple`           | `--color-purple-600`                    |
+| `--color-focus-light`      | `--color-focus`                         |
+| `--color-focus-outline`    | `--color-focus`                         |
+| `--color-negative`         | `--color-red-700`                       |
+| `--color-negative-light`   | `--color-red-500`                       |
+| `--color-negative-outline` | `--color-red-900`                       |
+| `--color-notice`           | `--color-orange-700`                    |
+| `--color-notice-light`     | `--color-orange-500`                    |
+| `--color-positive`         | `--color-green-700`                     |
+| `--color-positive-light`   | `--color-green-500`                     |
+| `--color-positive-outline` | `--color-green-900`                     |
+| `--color-text-light`       | `--color-text-dimmed`                   |
+| `--text-base`              | `--text-md`                             |
+| `--font-size-tiny`         | `--text-xs`                             |
+| `--font-size-small`        | `--text-sm`                             |
+| `--font-size-medium`       | `--text-md`                             |
+| `--font-size-large`        | `--text-xl`                             |
+| `--font-size-huge`         | `--text-2xl`                            |
+| `--font-size-monster`      | `--text-3xl`                            |
+| `--shadow-dropdown`        | `--shadow-lg`                           |
+| `--shadow-item`            | `--shadow-sm`                           |
+| `--box-shadow-dropdown`    | `--shadow-lg`                           |
+| `--box-shadow-item`        | `--shadow`                              |
+| `--box-shadow-focus`       | `--shadow-xl`                           |
+| `--shadow-outline`         | `outline: var(--outline)`               |
+| `--shadow-inset`           | `inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)` |
+| `--shadow-sticky`          | `rgba(0, 0, 0, 0.05) 0 2px 5px`         |
+| `--spacing-px`             | `1px`                                   |
+| `--spacing-2px`            | `2px`                                   |
+| `--spacing-5`              | `1.25rem`                               |
+| `--spacing-10`             | `2.5rem`                                |
+| `--spacing-20`             | `5rem`                                  |
 
 ### Backend
 
