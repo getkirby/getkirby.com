@@ -276,7 +276,6 @@ return array(
     'Kirby\\Reference\\Reflectable\\ReflectableHelperFunction' => $baseDir . '/src/Reference/Reflectable/ReflectableHelperFunction.php',
     'Kirby\\Reference\\Reflectable\\ReflectableKirbytag' => $baseDir . '/src/Reference/Reflectable/ReflectableKirbytag.php',
     'Kirby\\Reference\\Reflectable\\ReflectableProperty' => $baseDir . '/src/Reference/Reflectable/ReflectableProperty.php',
-    'Kirby\\Reference\\Reflectable\\ReflectableSectionOptions' => $baseDir . '/src/Reference/Reflectable/ReflectableSectionOptions.php',
     'Kirby\\Reference\\Reflectable\\ReflectableValidator' => $baseDir . '/src/Reference/Reflectable/ReflectableValidator.php',
     'Kirby\\Reference\\Reflectable\\Tags\\Deprecated' => $baseDir . '/src/Reference/Reflectable/Tags/Deprecated.php',
     'Kirby\\Reference\\Reflectable\\Tags\\Exception' => $baseDir . '/src/Reference/Reflectable/Tags/Exception.php',
