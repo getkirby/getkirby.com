@@ -34,24 +34,11 @@ class ReferenceClassesPage extends ReferenceSectionPage
 		}
 
 		// Add listed shortlink for each page defined in the
-		// `menu `content field; a shortlink whose slug collides
-		// with a namespace (e.g. `session/data` and `Kirby\Data`)
-		// gets the namespace as prefix (e.g. `session-data`)
-		$slugs      = array_column($children, 'slug');
-		$quicklinks = ReferenceQuickLinkPage::childrenFromContentField($this->menu());
-
-		foreach ($quicklinks as $key => $quicklink) {
-			if (in_array($quicklink['slug'], $slugs, true) === true) {
-				$namespace = basename(dirname($quicklink['content']['link']));
-				$quicklinks[$key]['slug'] = $namespace . '-' . $quicklink['slug'];
-			}
-		}
-
-		// Add the shortlinks as well as a separator, a
+		// `menu `content field as well as a separator, a
 		// shortlink to the overview and to the class alias page
 		$children = [
 			...$children,
-			...$quicklinks,
+			...ReferenceQuickLinkPage::childrenFromContentField($this->menu()),
 			[
 				'slug'     => '_' . Str::random(10),
 				'template' => 'separator',

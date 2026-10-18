@@ -415,12 +415,12 @@ The toolkit has been completely rewritten, new methods have been added, others r
 | Toolkit class  |  Replacement |
 |---|---|
 | `Bitmask` | <code></code>  |
-| `Brick`  | (link: docs/reference/tools/html text: `Kirby\Toolkit\Html`)  |
+| `Brick`  | (link: docs/reference/objects/cms/html text: `Kirby\Toolkit\Html`)  |
 | `C` | <code></code> |
 | `Cache`  | `Kirby\Cache`  |
-| `Cookie`  | (link: docs/reference/tools/cookie text: `Kirby\Http\Cookie`)  |
+| `Cookie`  | (link: docs/reference/objects/http/cookie text: `Kirby\Http\Cookie`)  |
 | `Crypt`  | <code></code> |
-| `Data`  | (link: docs/reference/tools/data text: `Kirby\Data`)  |
+| `Data`  | (link: docs/reference/objects/data/data text: `Kirby\Data`)  |
 | `Database`  | `Kirby\Database`  |
 | `Db`  | `Kirby\Database\Db`  |
 | `Detect` | `Kirby\CMS\System` |
@@ -431,18 +431,18 @@ The toolkit has been completely rewritten, new methods have been added, others r
 | `ErrorReporting`  | `Kirby\Exception`  |
 | `Exif`  | `Kirby\Image\Exif`  |
 | `Folder`  | <code></code> |
-| `Header` | (link: docs/reference/tools/header text: `Kirby\Http\Header`) |
+| `Header` | (link: docs/reference/objects/http/header text: `Kirby\Http\Header`) |
 | `I`  | `Kirby\Toolkit\Iterator` |
 | `L`  | `Kirby\Toolkit\I18n`  |
 | `Media`  | `Kirby\Image`  |
 | `Password`  | <code></code> |
-| `R`  | (link: docs/reference/objects/request text: `Kirby\Http\Request`)  |
+| `R`  | (link: docs/reference/objects/http/request text: `Kirby\Http\Request`)  |
 | `Redirect`  | `Kirby\Http\Response\Redirect`  |
 | `Remote`  | `Kirby\Http\Remote`  |
 | `Response`  | `Kirby\Http\Response`  |
 | `Router`  | `Kirby\Http\Router`  |
 | `S`  | `Kirby\Session`  |
-| `Server`  | (link: docs/reference/tools/server text: `Kirby\Http\Server`)  |
+| `Server`  | `Kirby\Http\Server`  |
 | `Sql`  | `Kirby\Database\Sql`  |
 | `System`  | <code></code>  |
 | `Thumb`  | `Kirby\Image`  |
@@ -451,7 +451,7 @@ The toolkit has been completely rewritten, new methods have been added, others r
 | `Upload`  | `Kirby\Api`  |
 | `Url`  | `Kirby\Http\Url`  |
 | `Visitor`  | `Kirby\Http\Visitor`  |
-| `YAML`  | (link: docs/reference/tools/data text: `Kirby\Data\Yaml`)  |
+| `YAML`  | (link: docs/reference/objects/data/data text: `Kirby\Data\Yaml`)  |
 
 The Toolkit classes are now in the  `Kirby\Toolkit` namespace.
 

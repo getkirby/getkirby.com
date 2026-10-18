@@ -128,7 +128,7 @@ Kirby provides many ways to render files in your templates. Here are some exampl
 <?php endforeach ?>
 ```
 
-These are just some basic examples to give you an idea. You can filter and find files by type, template, by their meta data etc. More information on the available file and files methods in the (link: docs/reference/objects/file text: Reference).
+These are just some basic examples to give you an idea. You can filter and find files by type, template, by their meta data etc. More information on the available file and files methods in the (link: docs/reference/objects/cms/file text: Reference).
 
 <success>
 The default sorting order of files is based on their order in the file system. To retrieve files in the order they appear in the Panel, you can use `$files->sortBy('sort')`, where `sort` is the field that stores the sorting number from the Panel.
