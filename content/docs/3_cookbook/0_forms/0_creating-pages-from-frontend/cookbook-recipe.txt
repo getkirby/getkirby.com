@@ -154,7 +154,7 @@ return function ($kirby, $page) {
     // if the form has been submitted…
     if ($kirby->request()->is('POST') && get('register')) {
 
-        // check the honeypot and exit if is has been filled in
+        // check the honeypot and exit if it has been filled in
         if (empty(get('website')) === false) {
             go($page->url());
         }
@@ -429,4 +429,4 @@ Kirby::plugin(
 
 ## Download example
 
-For a working example, download the (file: eventkit.zip text: demo "Eventkit").
+For a working example, download the (file: eventkit.zip text: demo "Eventkit"). Kirby itself is not included: install it with `composer install` or (link: docs/guide/install-guide/installation-via-download#updating-your-installation text: add the `kirby` folder from a download). The README of the kit has all the steps.
