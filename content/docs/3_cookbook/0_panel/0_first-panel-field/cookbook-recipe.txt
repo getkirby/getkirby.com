@@ -30,6 +30,8 @@ This cookbook recipe is based on these two video episodes…
 
 In this recipe, we start with the basics of creating a field from scratch using a Vue.js single file component, and then build on this by reusing parts of Kirby's UI Kit. We will deviate a little from the example in the videos though, and our final result will be a text input for (link: https://www.doi.org/ text: DOI names), with a link that allows us to verify the input by calling the link `https://www.doi.org/` suffixed with the field input.
 
+Finally, we build a second field that doesn't store anything, but only shows a list of links in the Panel.
+
 <info>
 For the purposes of this recipe, we assume you have read the (link: docs/guide/plugins/panel text: Panel plugins guide) on how to get started with our Panel plugin bundler (link: https://github.com/johannschopplich/kirbyup text: kirbyup).
 
@@ -544,3 +546,163 @@ Kirby::plugin(
 Voilà, our new doi field is ready for use.
 
 (image: doifield-8.webp)
+
+## Fields without a value
+
+Our DOI field stores what editors type into it. But a field doesn't have to store anything. It can also just show something in the Panel, for example a few links that help editors get started:
+
+(image: linksfield.webp)
+
+Such a field is set up the same way as our DOI field. So let's create a second plugin folder called `linksfield`, add the same `package.json` with `linksfield` as its `name` and focus on what's different.
+
+### The PHP class
+
+Instead of the class of the text field, the class of our new field extends Kirby's `DisplayField` class. Display fields come with the `label` and `help` options, but they don't have a value, so Kirby never writes anything to the content file for them. We add two options of our own: a `layout` and the `links` themselves.
+
+```php "/site/plugins/linksfield/src/LinksField.php"
+<?php
+
+namespace PluginAuthor\Links;
+
+use Kirby\Form\Field\DisplayField;
+use Kirby\Reflection\Attributes\Prop;
+
+class LinksField extends DisplayField
+{
+	/**
+	 * Layout of the links: `list` or `cards`
+	 */
+	#[Prop]
+	protected string $layout = 'list';
+
+	/**
+	 * The links to display
+	 */
+	#[Prop]
+	protected array $links = [];
+}
+```
+
+We load and register the class like before, this time as `links` field:
+
+```php "/site/plugins/linksfield/index.php"
+<?php
+
+use PluginAuthor\Links\LinksField;
+
+F::loadClasses([
+	'pluginauthor\\links\\linksfield' => 'src/LinksField.php'
+], __DIR__);
+
+Kirby::plugin(
+	name: 'pluginauthor/links',
+	extends: [
+		'fields' => [
+			'links' => LinksField::class
+		]
+	]
+);
+```
+
+### The Vue component
+
+In the `src/index.js` of the plugin, we register the component for the `links` field:
+
+```js "/site/plugins/linksfield/src/index.js"
+import LinksField from "./components/fields/LinksField.vue";
+
+panel.plugin("pluginauthor/links", {
+  fields: {
+    links: LinksField
+  }
+});
+```
+
+The component itself is much shorter than the one of our DOI field. There is no `value` prop, no `input` event and nothing to save. It only receives the options from the PHP class as props:
+
+```html "/site/plugins/linksfield/src/components/fields/LinksField.vue"
+<template>
+  <k-field :label="label" class="k-links-field">
+    <k-collection :items="links" :layout="layout" />
+  </k-field>
+</template>
+
+<script>
+export default {
+  inheritAttrs: false,
+  props: {
+    label: String,
+    layout: String,
+    links: Array
+  }
+};
+</script>
+```
+
+`k-field` takes care of the label again, and the `k-collection` component shows our links as a list or as cards, depending on the `layout`.
+
+Run `npm run dev` in the `linksfield` folder to compile the component.
+
+### The blueprint
+
+We add the field to the `site.yml` blueprint, so that the links show up on the start page of the Panel. Each link uses the keys the `k-collection` component expects for its items: a `text`, an `info`, the `link` with its `target` and an `image`, for which we use a white icon on a black background in a 3/2 ratio.
+
+```yaml "/site/blueprints/site.yml"
+title: Site
+
+fields:
+  links:
+    type: links
+    label: Getting started
+    layout: cards
+    links:
+      - text: Guide
+        info: Get an overview of all the cool things you can do with Kirby
+        link: https://getkirby.com/docs/guide
+        target: _blank
+        image:
+          icon: book
+          back: black
+          color: white
+          ratio: 3/2
+      - text: Cookbook
+        info: Yummy step by step recipes for all sorts of usage tastes
+        link: https://getkirby.com/docs/cookbook
+        target: _blank
+        image:
+          icon: palette
+          back: black
+          color: white
+          ratio: 3/2
+      - text: Reference
+        info: Discover Kirby's API in all detail
+        link: https://getkirby.com/docs/reference
+        target: _blank
+        image:
+          icon: list-bullet
+          back: black
+          color: white
+          ratio: 3/2
+      - text: Plugins
+        info: Find plugins to extend Kirby's core functionality and make the most of your site
+        link: https://plugins.getkirby.com
+        target: _blank
+        image:
+          icon: box
+          back: black
+          color: white
+          ratio: 3/2
+      - text: Forum
+        info: Meet Kirby's lovely community and get help whenever you get stuck
+        link: https://forum.getkirby.com
+        target: _blank
+        image:
+          icon: users
+          back: black
+          color: white
+          ratio: 3/2
+```
+
+Change the `layout` to `list` to see the links as a list instead.
+
+The links don't have to come from the blueprint, either. The PHP class of the field could just as well fetch them from a database or an API in its `props()` method, before Kirby hands them to the component.

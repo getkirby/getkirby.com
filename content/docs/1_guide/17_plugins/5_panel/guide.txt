@@ -200,5 +200,4 @@ Run `npm run build` before you tag a release and commit the result. What belongs
 The (link: docs/reference/plugins/extensions text: reference) lists every Panel extension type. Our cookbook walks through the most common ones in detail:
 
 - (link: docs/cookbook/panel/first-panel-field text: Your first Panel field)
-- (link: docs/cookbook/panel/custom-panel-field text: Custom Panel field)
 - (link: docs/cookbook/panel/first-panel-area text: Your first Panel area)

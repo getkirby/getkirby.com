@@ -102,4 +102,8 @@ return [
 			go('docs/reference/panel/fields/' . rtrim($type, 's') . $suffix);
 		}
 	],
+	[
+		'pattern' => 'docs/cookbook/(:any)/first-panel-section',
+		'action'  => fn () => go('docs/cookbook/panel/first-panel-field#fields-without-a-value')
+	],
 ];
