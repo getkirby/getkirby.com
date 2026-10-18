@@ -26,10 +26,7 @@ class ReflectableFieldOptions extends Reflectable
 
 	public static function factory(string $name): static
 	{
-		// the legacy `files`, `pages` and `users` field
-		// types are mapped onto the picker fields
-		$type  = Normalizer::$fieldAliases[$name] ?? $name;
-		$class = App::instance()->core()->fields()[$type] ?? null;
+		$class = App::instance()->core()->fields()[$name] ?? null;
 
 		if (is_string($class) === false || class_exists($class) === false) {
 			throw new Exception('Field "' . $name . '" not found');

@@ -176,7 +176,7 @@ columns:
       published:
         type: date
       author:
-        type: users
+        type: userpicker
         max: 1
 ```
 

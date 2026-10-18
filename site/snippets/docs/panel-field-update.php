@@ -97,7 +97,7 @@ $fields = [
 		'pass'  => 'an array of values',
 		'value' => "['design', 'architecture']",
 	],
-	'files' => $picker('files', 'downloads', '$page->files()->filterBy(\'extension\', \'pdf\')', "'file://Kp0Vb2lm9Qe7Xs4R', 'blog/my-article/report.pdf'", "'file://Kp0Vb2lm9Qe7Xs4R'"),
+	'filepicker' => $picker('files', 'downloads', '$page->files()->filterBy(\'extension\', \'pdf\')', "'file://Kp0Vb2lm9Qe7Xs4R', 'blog/my-article/report.pdf'", "'file://Kp0Vb2lm9Qe7Xs4R'"),
 	'hidden' => [
 		'name'  => 'title',
 		'pass'  => 'the value',
@@ -161,7 +161,7 @@ $fields = [
 			  ]
 			PHP,
 	],
-	'pages' => $picker('pages', 'related', '$page->siblings()->listed()', "'page://8RxIAFzmw1Ae3rnK', 'blog/my-article'", "'page://8RxIAFzmw1Ae3rnK'"),
+	'pagepicker' => $picker('pages', 'related', '$page->siblings()->listed()', "'page://8RxIAFzmw1Ae3rnK', 'blog/my-article'", "'page://8RxIAFzmw1Ae3rnK'"),
 	'radio' => $options('category', "'design'"),
 	'range' => [
 		'name'  => 'budget',
@@ -243,7 +243,7 @@ $fields = [
 		'value' => "'https://getkirby.com'",
 		'notes' => ['By default, the value is not validated when you update it programmatically. Make sure it is a valid URL.'],
 	],
-	'users' => [
+	'userpicker' => [
 		...$picker('users', 'authors', '$kirby->users()->role(\'editor\')', "'user://abcd1234', 'jane@example.com'", "'user://abcd1234'"),
 		'pass' => 'an array of user IDs, UUIDs or email addresses',
 	],

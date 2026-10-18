@@ -54,7 +54,7 @@ UUIDs are supported throughout the system wherever a model gets selected or quer
 
 ### In picker fields
 
-The `files`, `pages` and `users` fields support UUIDs out of the box. Every page or file that you select will be referenced by its UUID automatically (unless you disable the UUID mode with the field's `store` property).
+The `filepicker`, `pagepicker` and `userpicker` fields support UUIDs out of the box. Every page or file that you select will be referenced by its UUID automatically (unless you disable the UUID mode with the field's `store` property).
 
 Let's consider an example blueprint with various picker fields:
 

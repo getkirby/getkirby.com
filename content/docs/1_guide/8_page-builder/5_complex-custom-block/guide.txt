@@ -94,7 +94,7 @@ Kirby::plugin(
 ```
 ## The block blueprint
 
-In the audio block blueprint, we define the fields for the block that will later show up in the drawer in the Panel. In addition to the files field we need for the audio file itself, we add some additional settings for the audio tag like the controls and the autoplay attributes. And to make it less boring and more enlightening, our block gets a poster image, headlines and a description.
+In the audio block blueprint, we define the fields for the block that will later show up in the drawer in the Panel. In addition to the filepicker field we need for the audio file itself, we add some additional settings for the audio tag like the controls and the autoplay attributes. And to make it less boring and more enlightening, our block gets a poster image, headlines and a description.
 
 You can adapt this blueprint to your needs, particularly if you want to add track files for audio transcriptions to make your audio files more accessible.
 
@@ -106,13 +106,13 @@ tabs:
     label: Main
     fields:
       poster:
-        type: files
+        type: filepicker
         query: page.images.template('poster')
         uploads: poster
         multiple: false
         width: 1/2
       source:
-        type: files
+        type: filepicker
         query: page.audio.template('audio')
         uploads: audio
         multiple: false
@@ -334,7 +334,7 @@ panel.plugin("cookbook/audio-block", {
 });
 ```
 
-We have access to the fields through `content`, so we can get the title with `content.title`. The `content.source` files field returns an array of file objects, so we can fetch the first one with the index `0` and the URL from the `url` property.
+We have access to the fields through `content`, so we can get the title with `content.title`. The `content.source` filepicker field returns an array of file objects, so we can fetch the first one with the index `0` and the URL from the `url` property.
 
 Now listen to this! We have a simple audio tag preview with a title (provided that we selected a file before).
 

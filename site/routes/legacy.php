@@ -93,4 +93,10 @@ return [
 		'pattern' => 'docs/guide/plugins/best-practices',
 		'action'  => fn () => go('docs/guide/plugins/publishing')
 	],
+
+	// October 2026: picker fields renamed in Kirby 6
+	[
+		'pattern' => 'docs/reference/panel/fields/(files|pages|users)',
+		'action'  => fn (string $type) => go('docs/reference/panel/fields/' . rtrim($type, 's') . 'picker')
+	],
 ];

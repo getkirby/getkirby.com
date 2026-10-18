@@ -104,7 +104,7 @@ columns:
         width: 1/2
       account:
         label: CMS Account
-        type: users
+        type: userpicker
       about:
         label: About
         type: textarea

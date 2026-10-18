@@ -420,7 +420,7 @@ sections:
 
 ## Fetching files in the frontend
 
-Through a section, you upload files to a page, either the current page or another parent page. Contrary to a files field, the file does not become part of the content, i.e. it is not referenced in the content file.
+Through a section, you upload files to a page, either the current page or another parent page. Contrary to a filepicker field, the file does not become part of the content, i.e. it is not referenced in the content file.
 
 If you assign a file template to a particular section, you can filter by this template when fetching files in the frontend.
 

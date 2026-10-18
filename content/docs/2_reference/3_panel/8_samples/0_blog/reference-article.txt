@@ -87,14 +87,14 @@ columns:
         type: fields
         fields:
           heroImage:
-            type: files
+            type: filepicker
             max: 1
           date:
             type: date
             time: true
             default: now
           author:
-            type: users
+            type: userpicker
           tags:
             type: tags
       files:

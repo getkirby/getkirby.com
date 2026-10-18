@@ -4,7 +4,6 @@ namespace Kirby\Reference\Reflectable;
 
 use Exception;
 use Kirby\Form\Field\FileListField;
-use Kirby\Form\Field\PagePickerField;
 use Kirby\Form\Field\TextField;
 use Kirby\Reference\Reflectable\Tags\Parameters;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -33,14 +32,6 @@ class ReflectableFieldOptionsTest extends TestCase
 		$this->assertSame('text', $reflectable->name);
 		$this->assertSame(TextField::class, $reflectable->class);
 		$this->assertInstanceOf(Parameters::class, $reflectable->parameters());
-	}
-
-	public function testFactoryWithFieldAlias(): void
-	{
-		// the legacy `pages` field type is mapped onto the page picker
-		$reflectable = ReflectableFieldOptions::factory('pages');
-		$this->assertSame('pages', $reflectable->name);
-		$this->assertSame(PagePickerField::class, $reflectable->class);
 	}
 
 	public function testFactoryWithLegacyField(): void

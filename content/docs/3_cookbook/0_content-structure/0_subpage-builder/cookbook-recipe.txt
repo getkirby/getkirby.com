@@ -65,10 +65,10 @@ columns:
             time: true
             default: now
           author:
-            type: users
+            type: userpicker
           tags: true
           gallery:
-            type: pages
+            type: pagepicker
             query: site.find("photography").children
             multiple: false
             info: "{{ page.images.count }} image(s)"

@@ -154,7 +154,7 @@ tabs:
             type: text
           ogImg:
             label: Open Graph Image
-            type: files
+            type: filepicker
             query: site.images
           ## ... more fields
 ```
@@ -288,7 +288,7 @@ Note that we have set `changeSlug` to `false`, because the blueprint would stop 
 
 ## Field group with dynamic fields
 
-The same kind of logic will work for dynamic fields, for example if you wanted to create a number of pages fields where users can select one (or more) pages from each parent.
+The same kind of logic will work for dynamic fields, for example if you wanted to create a number of pagepicker fields where users can select one (or more) pages from each parent.
 
 Again, we first register the new blueprint:
 
@@ -322,7 +322,7 @@ $fields = [];
 foreach (site()->children()->filterBy('template', 'in', ['notes', 'photography']) as $page) {
     $fields[$page->slug()] = [
         'label' => $page->title()->value(),
-        'type'  => 'pages',
+        'type'  => 'pagepicker',
         'query' => 'site.find("' . $page->slug() . '").children',
         'min'   => 1,
         'max'   => 1,
@@ -590,7 +590,7 @@ sections:
         type: text
       metaImage:
         label: Image
-        type: files
+        type: filepicker
         multiple: false
       metaPhoneNumber:
         label: Phone Number

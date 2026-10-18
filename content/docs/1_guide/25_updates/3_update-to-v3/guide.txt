@@ -203,9 +203,9 @@ The option to make a field readonly (`readonly: true`)  has been replaced with t
 
 The following field types no longer exist and have to be replaced:
 
-- `user` field &rarr; (link: docs/reference/panel/fields/users text: `users` field)
-- `page` field &rarr; (link: docs/reference/panel/fields/pages text: `pages` field)
-- `image` field &rarr; (link: docs/reference/panel/fields/files text: `files` field)
+- `user` field &rarr; (link: docs/reference/panel/fields/userpicker text: `users` field)
+- `page` field &rarr; (link: docs/reference/panel/fields/pagepicker text: `pages` field)
+- `image` field &rarr; (link: docs/reference/panel/fields/filepicker text: `files` field)
 - `checkbox` field &rarr; (link: docs/reference/panel/fields/toggle text: `toggle` field)
 - `datetime` field &rarr; (link: docs/reference/panel/fields/date text: `date` field) with `time` option
 

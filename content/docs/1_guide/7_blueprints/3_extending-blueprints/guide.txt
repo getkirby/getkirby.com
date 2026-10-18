@@ -76,7 +76,7 @@ fields:
     time: true
     default: now
   author:
-    type: users
+    type: userpicker
   tags:
     type: tags
     options:
@@ -341,7 +341,7 @@ settings:
       width: 1/2
     image:
       label: Background image
-      type: files
+      type: filepicker
 ```
 
 Then in the extending blueprint …

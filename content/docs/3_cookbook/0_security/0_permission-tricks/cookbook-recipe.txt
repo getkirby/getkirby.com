@@ -140,7 +140,7 @@ To make this work, the subpage blueprints needs to have a field that stores the 
 
 ```yaml
 author:
-  type: users
+  type: userpicker
   label: Author
   default: true
   disabled: true

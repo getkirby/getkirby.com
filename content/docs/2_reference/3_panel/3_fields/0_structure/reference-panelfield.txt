@@ -114,7 +114,7 @@ fields:
       title:
         type: text
       images:
-        type: files
+        type: filepicker
       description:
         type: textarea
       price:
@@ -163,7 +163,7 @@ fields:
       title:
         type: text
       images:
-        type: files
+        type: filepicker
       description:
         type: textarea
       price:
@@ -208,7 +208,7 @@ fields:
         mobile: true
     fields:
       image:
-        type: files
+        type: filepicker
       title:
         type: text
       date:
