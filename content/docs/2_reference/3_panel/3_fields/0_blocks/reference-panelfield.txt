@@ -20,7 +20,7 @@ The Blocks field is the perfect solution for complex single-column layouts and l
 
 ## Blueprint setup
 
-You can add the Blocks field to any fields section in your Panel like this:
+You can add the Blocks field to any blueprint like this:
 
 ```yaml
 fields:

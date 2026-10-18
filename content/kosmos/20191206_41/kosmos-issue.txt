@@ -82,7 +82,7 @@ Custom views can greatly enhance the Panel, for example if you want to include d
 
 **Custom sections**
 
-While Kirby comes with users, files and pages sections on board, custom sections are great for adding additional functionality to Panel forms. Make your first steps towards creating your own with a little help from our [link list section example](https://getkirby.com/docs/cookbook/extensions/first-panel-section).
+While Kirby comes with users, files and pages sections on board, custom sections are great for adding additional functionality to Panel forms. Make your first steps towards creating your own with a little help from our [link list section example](https://getkirby.com/docs/cookbook/panel/custom-panel-field).
 
 ## Kirby in the wild II
 

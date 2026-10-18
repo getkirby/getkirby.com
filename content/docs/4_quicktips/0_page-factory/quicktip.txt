@@ -22,7 +22,7 @@ Text:
 
 ## Short-form pages in seconds
 
-Creating pages in the Panel usually means: Click the `Add` button above a pages section, fill in a title and optionally customize the slug, land on the draft page, then start editing. That’s perfect for long-form content, but a tad cumbersome for content like:
+Creating pages in the Panel usually means: Click the `Add` button above a `pagelist` field, fill in a title and optionally customize the slug, land on the draft page, then start editing. That’s perfect for long-form content, but a tad cumbersome for content like:
 
 * Short blog notes
 * Status updates

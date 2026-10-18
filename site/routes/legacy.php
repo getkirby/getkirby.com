@@ -94,9 +94,12 @@ return [
 		'action'  => fn () => go('docs/guide/plugins/publishing')
 	],
 
-	// October 2026: picker fields renamed in Kirby 6
+	// Kirby 6: picker fields were renamed, sections became list fields
 	[
-		'pattern' => 'docs/reference/panel/fields/(files|pages|users)',
-		'action'  => fn (string $type) => go('docs/reference/panel/fields/' . rtrim($type, 's') . 'picker')
+		'pattern' => 'docs/reference/panel/(fields|sections)/(files|pages|users)',
+		'action'  => function (string $group, string $type) {
+			$suffix = $group === 'fields' ? 'picker' : 'list';
+			go('docs/reference/panel/fields/' . rtrim($type, 's') . $suffix);
+		}
 	],
 ];

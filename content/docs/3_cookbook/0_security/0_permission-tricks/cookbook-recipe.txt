@@ -115,7 +115,7 @@ plugins/
     index.php
 
 ```
-This approach works for all types of blueprints, so you could do this even for individual sections used in your blueprints if necessary.
+This approach works for all types of blueprints, so you could do this even for individual fields used in your blueprints if necessary.
 
 
 <warning>

@@ -25,76 +25,72 @@ fields:
     type: textarea
 ```
 
-For more sophisticated setups, you can use sections, columns and tabs to create nice layouts.
-
+For more sophisticated setups, you can use columns and tabs to create nice layouts.
 
 <info>
-The `fields` keyword can be used on the top blueprint level like in the example above, but also in columns or tabs. However, once you want to mix sections and fields inside the same blueprint, column or tab, you need to wrap your fields inside a `fields` section. See examples below.
+The `fields` keyword works on the top blueprint level like in the example above, and equally inside columns and tabs.
 </info>
 
-## Sections
+## More than input fields
 
-With the `sections` keyword you add one or more (link: docs/reference/panel/sections text: section types) to your blueprint. When the `sections` keyword is used without being wrapped in (link: #columns text: columns), this will result in a single-column layout of stacked sections.
+Not every field collects content. Some display what is already there, and they are written exactly like any other field:
 
-(image: sections.png alt: Outline of sections stacks in a single column layout)
+(image: stacked-fields.png alt: Outline of stacked fields in a single column layout)
 
 Here are some examples:
 
 (tabs…)
 
-=== Multiple pages sections
+=== Multiple page lists
 
-In this example we use multiple (link: docs/reference/panel/sections/files text: pages sections) to separate drafts from published pages:
+In this example we use two (link: docs/reference/panel/fields/pagelist text: `pagelist` fields) to separate drafts from published pages:
 
 ```yaml
 title: My blueprint
 
-sections: # keyword that allows you to add multiple section types
+fields:
   drafts:
-    type: pages
+    type: pagelist
     label: Drafts
     status: draft
   published:
-    type: pages
+    type: pagelist
     label: Published pages
     status: listed
 ```
 
 
-=== Pages & files sections
+=== Pages & files
 
-In this example we have a (link: docs/reference/panel/sections/pages text: pages section) and a (link: docs/reference/panel/sections/files text: files section) below each other
+In this example we have a (link: docs/reference/panel/fields/pagelist text: `pagelist`) and a (link: docs/reference/panel/fields/filelist text: `filelist`) below each other:
 
 ```yaml
 title: My blueprint
 
-sections:
+fields:
   pages:
-    type: pages
+    type: pagelist
     label: Pages
   files:
-    type: files
+    type: filelist
     label: Files
 ```
 
-=== Pages & fields sections
+=== Mixed with input fields
 
-You always need to create `sections` when you want to mix any type of section with fields. In that case, your fields need to be wrapped in a (link: docs/reference/panel/sections/fields text: fields section)
+Lists and input fields live in the same `fields` list and can be ordered freely:
 
 ```yaml
 title: My blueprint
 
-sections:
+fields:
   pages:
-    type: pages
+    type: pagelist
     label: Pages
-  fields:
-    type: fields
-    fields:
-      text:
-        type: text
-      description:
-        type: text
+  text:
+    type: text
+  description:
+    type: text
 ```
 
 (…tabs)
@@ -104,9 +100,9 @@ sections:
 
 (image: columns.png)
 
-A single-column stacked layout like the above with only sections can sometimes be useful, in many cases you will,  however, want to give more structure to your layout. That's where `columns` come into play.
+A single stacked column like the above can sometimes be useful, in many cases you will, however, want to give more structure to your layout. That's where `columns` come into play.
 
-A column can hold only fields, or (link: docs/reference/panel/sections text: different section types), the same rules for mixing fields and section apply as already outlined above.
+A column holds fields of any type, in any order.
 
 
 ### Defining columns
@@ -123,12 +119,12 @@ title: My blueprint
 columns:
   left:
     width: 2/3
-    sections:
+    fields:
       # fields in the left column
   right:
     width: 1/3
-    sections:
-      # sections in the right column
+    fields:
+      # fields in the right column
 ```
 
 <info>
@@ -145,8 +141,8 @@ columns:
     fields:
       # fields in the left column
   - width: 1/3
-    sections:
-      # sections in the right column
+    fields:
+      # fields in the right column
 ```
 (…tabs)
 
@@ -154,12 +150,9 @@ columns:
 The following widths are available when defining columns:
 `1/2`, `1/3`, `1/4`, `2/3`, `2/4`, `3/4`
 
-### Adding fields and sections to columns
+### Adding fields to columns
 
-(tabs…)
-=== Adding fields to columns
-
-Just like a blueprint itself, a column can contain fields only:
+Just like a blueprint itself, a column contains fields:
 
 ```yaml
 title: My blueprint
@@ -180,10 +173,7 @@ columns:
         max: 1
 ```
 
-=== Adding sections to columns
-
-You can also add sections to a column. If you want to mix fields with sections inside a single column, sections are mandatory.
-
+A column that displays existing content works the same way. Here the main column holds a form and the sidebar lists the page's subpages and files:
 
 ```yaml
 title: My blueprint
@@ -192,39 +182,32 @@ columns:
   # main
   main:
     width: 2/3
-    sections:
-
-      # a simple form
-      content:
-        type: fields
-        fields:
-          headline:
-            label: Headline
-            type: text
-          text:
-            label: Text
-            type: textarea
+    fields:
+      headline:
+        label: Headline
+        type: text
+      text:
+        label: Text
+        type: textarea
 
   # sidebar
   sidebar:
     width: 1/3
-    sections:
+    fields:
 
       # a list of subpages
       pages:
-        type: pages
+        type: pagelist
         label: Subpages
 
       # a list of files
       files:
-        type: files
+        type: filelist
         label: Files
 ```
 
-(…tabs)
 
-
-(image: sidebar-right.png caption: Two-column layout with sidebar on the right (pages and files sections) and form fields on the left.)
+(image: sidebar-right.png caption: Two-column layout with sidebar on the right (page and file lists) and form fields on the left.)
 
 
 You can probably already see how flexible this is. By slightly changing the columns, we can change the interface drastically.
@@ -241,16 +224,16 @@ columns:
   # sidebar
   sidebar:
     width: 1/3
-    sections:
+    fields:
 
       # a list of subpages
       pages:
-        type: pages
+        type: pagelist
         label: Subpages
 
       # a list of files
       files:
-        type: files
+        type: filelist
         label: Files
 
   # main
@@ -264,7 +247,7 @@ columns:
         label: Text
         type: textarea
 ```
-(image: sidebar-left.png caption: Two-column layout with sidebar on the left (pages and files sections) and form fields on the right.)
+(image: sidebar-left.png caption: Two-column layout with sidebar on the left (page and file lists) and form fields on the right.)
 
 ### Two Sidebars
 
@@ -276,41 +259,37 @@ columns:
   # sidebar left
   left:
     width: 1/4
-    sections:
+    fields:
 
       # a list of subpages
       pages:
-        type: pages
+        type: pagelist
         label: Subpages
         template: default
 
   # main
   main:
     width: 1/2
-    sections:
+    fields:
 
       # a simple form
-      content:
-        type: fields
-        fields:
-          headline:
-            label: Headline
-            type: text
-          text:
-            label: Text
-            type: textarea
-
+      headline:
+        label: Headline
+        type: text
+      text:
+        label: Text
+        type: textarea
   # sidebar right
   right:
     width: 1/4
-    sections:
+    fields:
       # a list of files
       files:
-        type: files
+        type: filelist
         label: Files
 ```
 
-(image: sidebar-both.png caption: Three-column layout with sidebars on the right (pages section) and on the left (files section) and form fields in the middle.)
+(image: sidebar-both.png caption: Three-column layout with sidebars on the right (page list) and on the left (file list) and form fields in the middle.)
 
 ### Sticky columns
 
@@ -320,8 +299,8 @@ You can make an entire column sticky. This can be handy for a setup with a small
 columns:
   - width: 1/3
     sticky: true
-    sections:
-      # sections in the sticky column
+    fields:
+      # fields in the sticky column
 ```
 
 ## Adapt all to your needs
@@ -336,35 +315,35 @@ title: My blueprint
 columns:
   gallery:
     width: 1/1
-    sections:
+    fields:
       gallery:
-        type: files
+        type: filelist
         layout: card
         ...
 
   review:
     width: 1/2
-    sections:
+    fields:
       drafts:
-        type: pages
+        type: pagelist
         status: draft
         ...
       review:
-        type: pages
+        type: pagelist
         status: unlisted
         ...
 
   published:
     width: 1/2
-    sections:
+    fields:
       published:
-        type: pages
+        type: pagelist
         status: listed
         ...
 ```
 
 
-If this isn't yet enough ways and space for you to structure your sections and fields, move on with…
+If this isn't yet enough ways and space for you to structure your fields, move on with…
 
 ## Tabs
 
@@ -375,8 +354,8 @@ When your blueprints get more complex, splitting up your view into multiple tabs
 Like the blueprint itself, a tab can contain
 
 - only fields
-- one or more sections
-- columns with fields and section
+- one or more fields
+- columns with fields
 
 ### Defining tabs
 
@@ -423,32 +402,28 @@ tabs:
       # main
       main:
         width: 2/3
-        sections:
+        fields:
 
           # a simple form
-          content:
-            type: fields
-            fields:
-              headline:
-                label: Headline
-                type: text
-              text:
-                label: Text
-                type: textarea
-
+          headline:
+            label: Headline
+            type: text
+          text:
+            label: Text
+            type: textarea
       # sidebar
       sidebar:
         width: 1/3
-        sections:
+        fields:
 
           # a list of subpages
           pages:
-            type: pages
+            type: pagelist
             label: Subpages
 
           # a list of files
           files:
-            type: files
+            type: filelist
             label: Files
 
   # seo tab

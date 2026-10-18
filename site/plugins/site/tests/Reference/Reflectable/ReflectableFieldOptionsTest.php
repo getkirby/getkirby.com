@@ -3,7 +3,6 @@
 namespace Kirby\Reference\Reflectable;
 
 use Exception;
-use Kirby\Form\Field\FileListField;
 use Kirby\Form\Field\TextField;
 use Kirby\Reference\Reflectable\Tags\Parameters;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -47,21 +46,6 @@ class ReflectableFieldOptionsTest extends TestCase
 		$this->expectException(Exception::class);
 		$this->expectExceptionMessage('Field "doesNotExist" not found');
 		ReflectableFieldOptions::factory('doesNotExist');
-	}
-
-	public function testForSection(): void
-	{
-		// the legacy `files` section is converted into a file list
-		$reflectable = ReflectableFieldOptions::forSection('files');
-		$this->assertSame('filelist', $reflectable->name);
-		$this->assertSame(FileListField::class, $reflectable->class);
-	}
-
-	public function testForSectionWithUnknownSection(): void
-	{
-		$this->expectException(Exception::class);
-		$this->expectExceptionMessage('Section "doesNotExist" not found');
-		ReflectableFieldOptions::forSection('doesNotExist');
 	}
 
 	public function testParametersAreSorted(): void

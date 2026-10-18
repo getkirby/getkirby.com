@@ -63,7 +63,7 @@ By default, file preview components will receive three default props:
 |--|--|
 | `url` | URL to the file |
 | `details` | array with basic file information (ideally used for `<k-file-preview-details>`) |
-| `image` | object with the thumb icon/image also used in sections etc. |
+| `image` | object with the thumb icon/image also used in list fields etc. |
 
 You could provide additional information to your Vue component by extending the (method: Kirby\Panel\Ui\FilePreview::props text: ::props()) method. We are not using the `image` prop for this example.
 

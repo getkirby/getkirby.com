@@ -334,7 +334,7 @@ fields:
     buttons: false
 ```
 
-In the `event.yml` blueprint, we list all registrations of an event in a pages section. Since registrations are drafts, we set the section's `status` option to `draft`:
+In the `event.yml` blueprint, we list all registrations of an event in a `pagelist` field. Since registrations are drafts, we set the field's `status` option to `draft`:
 
 ```yaml "/site/blueprints/pages/event.yml"
 title: Event
@@ -351,17 +351,14 @@ columns:
 
   sidebar:
     width: 1/3
-    sections:
-      meta:
-        type: fields
-        fields:
-          date:
-            type: date
-            required: true
+    fields:
+      date:
+        type: date
+        required: true
 
       registrations:
-        type: pages
-        headline: Registrations
+        type: pagelist
+        label: Registrations
         template: registration
         status: draft
         create: false

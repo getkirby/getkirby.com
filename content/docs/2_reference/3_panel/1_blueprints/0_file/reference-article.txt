@@ -12,7 +12,7 @@ Read: docs/guide/blueprints/introduction
 
 Text:
 
-In each (link: docs/reference/panel/sections/files text: files section) you can use the `template` option to determine which template will be used for each file within that section. For example, you can create a files section to which users can only upload images and which have a given set of fields, and another section for PDF files with another set of fields.
+In each (link: docs/reference/panel/fields/filelist text: `filelist` field) you can use the `template` option to determine which template will be used for each file within that section. For example, you can create a `filelist` field to which users can only upload images and which have a given set of fields, and another section for PDF files with another set of fields.
 
 ## Blueprint location
 
@@ -169,7 +169,7 @@ Please keep in mind that it is *not* possible to disable the stripping by settin
 
 ## `image` options
 
-The (preview) `image` blueprint option defines how any file with this blueprint will be presented, e.g. in a files section.
+The (preview) `image` blueprint option defines how any file with this blueprint will be presented, e.g. in a `filelist` field.
 
 ### `back`
 

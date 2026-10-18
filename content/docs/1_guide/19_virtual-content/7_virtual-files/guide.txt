@@ -180,7 +180,7 @@ Before we can visit the page in the Panel, let’s create a basic page blueprint
 ```yaml "/site/plugins/virtual-files/blueprints/pages/photos.yml"
 title: Photos
 
-sections:
+fields:
   files:
     layout: cards
     size: medium
@@ -188,12 +188,12 @@ sections:
       cover: true
 ```
 
-…and modify the `pages` section in `site.yml` so that we can easily access the `photos` page.
+…and modify the `pagelist` field in `site.yml` so that we can easily access the `photos` page.
 
 ```yaml "/site/blueprints/site.yml"
 # …
 pages:
-  type: pages
+  type: pagelist
   #create: default # Comment create option
   templates:
     - about
@@ -368,24 +368,21 @@ options:
   replace: false
   update: false
 
-sections:
-  meta:
-    type: fields
-    fields:
-      alt:
-        label: Alternative Text
-        type: text
-      photographer:
-        label: Photogapher
-        type: text
-        width: 2/3
-      license:
-        label: License
-        type: text
-        width: 1/3
-      link:
-        label: Link
-        type: url
+fields:
+  alt:
+    label: Alternative Text
+    type: text
+  photographer:
+    label: Photogapher
+    type: text
+    width: 2/3
+  license:
+    label: License
+    type: text
+    width: 1/3
+  link:
+    label: Link
+    type: url
 ```
 
 Note that we also set all files options like `delete`, `changeName`, `replace` and `update` to false, because these settings don’t make sense in our current use case.

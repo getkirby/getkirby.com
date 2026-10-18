@@ -25,7 +25,7 @@ fields:
 
 ## Sizes
 
-In some section layouts, a small textarea looks lost. The `size` option sets an initial default height for empty textareas before auto-sizing kicks in. Available sizes:
+In some layouts, a small textarea looks lost. The `size` option sets an initial default height for empty textareas before auto-sizing kicks in. Available sizes:
 
 - `small`
 - `medium`

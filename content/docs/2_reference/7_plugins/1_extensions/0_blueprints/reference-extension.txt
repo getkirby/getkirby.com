@@ -37,8 +37,8 @@ Kirby::plugin(
 	extends: [
 		'blueprints' => [
 			'pages/blog' => [
-				'title'    => 'Blog',
-				'sections' => [
+				'title'  => 'Blog',
+				'fields' => [
 					// ...
 				]
 			]
@@ -61,9 +61,9 @@ Kirby::plugin(
             'pages/blog' => function ($kirby) {
                 return [
                     'title' => 'Blog',
-                    'sections' => [
+                    'fields' => [
                         'articles' => [
-                            'type'     => 'pages',
+                            'type'     => 'pagelist',
                             'template' => 'article',
                             'limit'    => $kirby->option('blog.article.limit')
                         ]

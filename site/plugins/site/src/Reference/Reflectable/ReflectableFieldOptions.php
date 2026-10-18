@@ -3,7 +3,6 @@
 namespace Kirby\Reference\Reflectable;
 
 use Exception;
-use Kirby\Blueprint\Normalizer;
 use Kirby\Cms\App;
 use Kirby\Reference\Reflectable\Tags\Parameter;
 use Kirby\Reference\Reflectable\Tags\Parameters;
@@ -50,19 +49,6 @@ class ReflectableFieldOptions extends Reflectable
 			class:      $class,
 			parameters: new Parameters($parameters)
 		);
-	}
-
-	/**
-	 * Returns the field options for the field
-	 * that a legacy section is converted into
-	 */
-	public static function forSection(string $name): static
-	{
-		$type = Normalizer::$sectionFields[$name] ?? throw new Exception(
-			'Section "' . $name . '" not found'
-		);
-
-		return static::factory($type);
 	}
 
 	/**

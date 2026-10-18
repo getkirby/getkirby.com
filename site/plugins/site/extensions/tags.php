@@ -2,7 +2,6 @@
 
 use Kirby\Cms\App;
 use Kirby\Cms\Html;
-use Kirby\Reference\Reflectable\ReflectableFieldOptions;
 use Kirby\Reference\Types\Chain;
 use Kirby\Reference\Types\Identifier;
 use Kirby\Toolkit\Str;
@@ -316,25 +315,6 @@ $tags['screencast'] = [
 			'title'  => $tag->title ?? null,
 			'text'   => $tag->text ?? null,
 			'lazy'   => ($tag->data['field'] ?? null)?->key() !== 'screencast'
-		], true);
-	}
-];
-
-/**
- * Renders a list of options for a given section
- * (section-options: pages)
- */
-$tags['section-options'] = [
-	'html' => function ($tag) {
-		$snippet = 'templates/reference/entry/parameters';
-
-		if (($tag->data['kirbytags'] ?? true) === false) {
-			$snippet .= '.md';
-		}
-
-		return snippet($snippet, [
-			'title'       => false,
-			'reflectable' => ReflectableFieldOptions::forSection($tag->value)
 		], true);
 	}
 ];

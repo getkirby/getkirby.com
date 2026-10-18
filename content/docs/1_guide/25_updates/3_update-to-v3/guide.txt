@@ -132,8 +132,8 @@ Before you run any page update scripts or update pages via the Panel, make sure 
 
 The old subpage and file settings are no longer compatible with Kirby 3. Files are now added via files sections, subpages via pages sections, and files get their own blueprints with meta data:
 
-- (link: docs/reference/panel/sections/pages text: Pages sections)
-- (link: docs/reference/panel/sections/files text: Files sections)
+- (link: docs/reference/panel/fields/pagelist text: Pages sections)
+- (link: docs/reference/panel/fields/filelist text: Files sections)
 - (link: docs/guide/content/files text: File meta data)
 
 The fields will work as before but you might want to restructure them to leverage the (link: docs/guide/blueprints/layout text: new layout features) sections, columns and tabs that give you much more control over the look of forms in the Panel.
@@ -215,7 +215,7 @@ When moving from the old `user`, `page` and `image` fields to the Kirby 3 `users
 
 ### Dashboard and widgets
 
-The Kirby 2 Dashboard no longer exists in Kirby 3. With the Dashboard, Panel widgets are gone. Widgets can be replaced with (link: docs/reference/plugins/extensions/sections text: custom Panel sections).
+The Kirby 2 Dashboard no longer exists in Kirby 3. With the Dashboard, Panel widgets are gone. Widgets can be replaced with (link: docs/reference/plugins/extensions/fields text: custom Panel sections).
 
 ## Configuration
 

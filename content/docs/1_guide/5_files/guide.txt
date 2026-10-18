@@ -78,7 +78,7 @@ There are also other file types that are blocked for security reasons, such as H
 
 You can add/upload files to a page/the site manually by placing them into the corresponding folders.
 
-Note that if you upload files you later want to use in the Panel, you have to define (link: docs/reference/panel/sections/files text: files sections) in your blueprints. Otherwise, these files will not show up.
+Note that if you upload files you later want to use in the Panel, you have to define (link: docs/reference/panel/fields/filelist text: `filelist` fields) in your blueprints. Otherwise, these files will not show up.
 
 ## Linking to files in your content
 

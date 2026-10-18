@@ -1,4 +1,4 @@
-Title: Files section
+Title: Filelist
 
 ----
 
@@ -14,7 +14,7 @@ Read: docs/guide/content/files
 
 Text:
 
-The files section can be used to show any combination of files for the current page, any other page in your site or even all files of your site. Using a files section, you can execute the following operations on files (if not forbidden or impossible because of other settings):
+The `filelist` field can be used to show any combination of files for the current page, any other page in your site or even all files of your site. Using a `filelist` field, you can execute the following operations on files (if not forbidden or impossible because of other settings):
 
 - upload files
 - replace a file
@@ -23,51 +23,45 @@ The files section can be used to show any combination of files for the current p
 - change the order number of files (if sorted manually)
 - change the template of a file
 
-(image: files-section.png)
+(image: filelist.png)
 
 ## Example
 
 ```yaml "/site/blueprints/pages/project.yml"
 title: Project
 
-sections:
+fields:
   gallery:
     label: Gallery
-    type: files
+    type: filelist
     template: gallery
 ```
-## Section shortcuts
+## Shortcuts
 
-For simple sections that are only used once per blueprint, you can use shortcuts. In its most basic form, a `files` section consists of the section type as name, and  `true` as its value.
+For simple lists that are only used once per blueprint, you can use shortcuts. In its most basic form, a `filelist` field consists of the field type as name, and  `true` as its value.
 
 ```yaml
-sections:
+fields:
 
-  files: true
+  filelist: true
 ```
-This will add a `files` section with all default properties.
+This will add a `filelist` field with all default properties.
 
-These shortcuts can be extended with other section properties as needed, for example:
+These shortcuts can be extended with other field properties as needed, for example:
 
 ```yaml
-sections:
+fields:
 
   files:
     label: My Files
     template: cover
 ```
-Keep in mind that the same section name can only be used once per blueprint.
+Keep in mind that the same field name can only be used once per blueprint.
 
-
-## Section properties
-
-The files section has multiple options to control what kind of files should be displayed, how they should be displayed and what happens if a new file is uploaded.
-
-(section-options: files)
 
 ## Label
 
-The label will be displayed above the files section. You can pass a simple headline as a string or you can provide translations for multiple languages, if you have an international editing team.
+The label will be displayed above the `filelist` field. You can pass a simple headline as a string or you can provide translations for multiple languages, if you have an international editing team.
 
 ### Single language
 
@@ -94,11 +88,11 @@ label: "{{ page.title }} Gallery"
 
 ## Upload button
 
-You can disable the upload button in a files section with the `create` option. This is useful for query-based sections where uploads wouldn't show up in the list.
+You can disable the upload button in a `filelist` field with the `create` option. This is useful for query-based `filelist` fields where uploads wouldn't show up in the list.
 
 ```yaml
 files:
-  type: files
+  type: filelist
   query: page.files
   create: false
 ```
@@ -115,7 +109,7 @@ The `list` layout is perfect for file types without thumbnails like PDFs, excel 
 layout: list
 ```
 
-(image: files-section.png)
+(image: filelist.png)
 
 ### Cards layout
 
@@ -125,17 +119,17 @@ The `card` layout is great for all kinds of images.
 layout: cards
 ```
 
-(image: files-section-cards.png)
+(image: filelist-cards.png)
 
-(docs: sections/cardlets)
+(docs: fields/cardlets)
 
-(image: files-section-cardlets.png)
+(image: filelist-cardlets.png)
 
 ### Table layout
 
 The table layout has the highest information density. Columns can be fully customized and make it perfect if you need to show multiple values at once for better overview and scannability.
 
-(image: files-section-table.png)
+(image: filelist-table.png)
 
 ```yaml
 layout: table
@@ -268,7 +262,7 @@ info: "{{ file.dimensions }}"
 ```
 ## Restricting uploads to certain file types
 
-If you want to restrict what types of files can be uploaded to the given section, assign a file template using the `template` property. In your file template, set the `accept` option. See the docs about (link: docs/reference/panel/blueprints/file#accept text: file blueprints).
+If you want to restrict what types of files can be uploaded to the field, assign a file template using the `template` property. In your file template, set the `accept` option. See the docs about (link: docs/reference/panel/blueprints/file#accept text: file blueprints).
 
 By default, Kirby supports (link: docs/guide/files/files#supported-file-types text: the following files types).
 
@@ -280,16 +274,16 @@ When managing many files, it can be tedious to delete them one by one. Adding `b
 
 ```yml
 gallery:
-  type: files
+  type: filelist
   batch: true
 ```
 
 ## Preview images
 
-The (preview) image for each item in the list is by default what is (link: docs/reference/panel/blueprints/file#image-options text: configured in the respective file blueprint). However, you can customize these further for your section with the (link: docs/reference/panel/blueprints/file#image-options text: same options) as in the file blueprint:
+The (preview) image for each item in the list is by default what is (link: docs/reference/panel/blueprints/file#image-options text: configured in the respective file blueprint). However, you can customize these further for your field with the (link: docs/reference/panel/blueprints/file#image-options text: same options) as in the file blueprint:
 
 ```yaml
-type: files
+type: filelist
 image:
   back: pattern
   cover: true
@@ -297,7 +291,7 @@ image:
 
 ## Empty state
 
-With the `empty` option you can define the message which is displayed when no files are listed in the section.
+With the `empty` option you can define the message which is displayed when no files are listed in the field.
 
 ```yaml
 empty: No documents yet
@@ -307,7 +301,7 @@ empty: No documents yet
 
 ### `parent`
 
-By default, the current page is being used as the parent to find files for the list. With this option, any page on your site can be the parent of the section.
+By default, the current page is being used as the parent to find files for the list. With this option, any page on your site can be the parent of the field.
 
 ```yaml
 parent: site.find("galleries")
@@ -315,16 +309,16 @@ parent: site.find("galleries")
 
 ### `query`
 
-The files section supports a query option to filter files using our (link: docs/guide/blueprints/introduction#query-language text: query string syntax). Manual sorting will be disabled for sections with a query.
+The `filelist` field supports a query option to filter files using our (link: docs/guide/blueprints/introduction#query-language text: query string syntax). Manual sorting will be disabled for fields with a query.
 
 ```yaml
 images:
-  type: files
+  type: filelist
   label: Images
   query: page.images
   template: image
 documents:
-  type: files
+  type: filelist
   label: Documents
   query: page.documents
   template: document
@@ -383,7 +377,7 @@ flip: true
 
 ### `limit`
 
-The `limit` property sets how many files will be shown per page. If there are more entries in the section, the pagination navigation will be shown at the bottom of the section.
+The `limit` property sets how many files will be shown per page. If there are more entries in the field, the pagination navigation will be shown at the bottom of the field.
 
 ```yaml
 limit: 20
@@ -391,7 +385,7 @@ limit: 20
 
 ### `max`
 
-You can define a maximum number of files, that will be allowed in this section. After the maximum is reached, the upload button will be hidden and no more files can be uploaded.
+You can define a maximum number of files, that will be allowed in this field. After the maximum is reached, the upload button will be hidden and no more files can be uploaded.
 
 ```yaml
 max: 10
@@ -405,31 +399,31 @@ You can also define the minimum number of files, that need to be added in order 
 min: 2
 ```
 
-(docs: sections/conditional-sections)
+(docs: fields/conditional-fields)
 
 ## Search
 
-Section search is disabled by default. You can use the `search` option to enable it.
+Search is disabled by default. You can use the `search` option to enable it.
 
 ```yaml
-sections:
+fields:
   gallery:
-    type: files
+    type: filelist
     search: true
 ```
 
 ## Fetching files in the frontend
 
-Through a section, you upload files to a page, either the current page or another parent page. Contrary to a filepicker field, the file does not become part of the content, i.e. it is not referenced in the content file.
+Through a field, you upload files to a page, either the current page or another parent page. Contrary to a filepicker field, the file does not become part of the content, i.e. it is not referenced in the content file.
 
-If you assign a file template to a particular section, you can filter by this template when fetching files in the frontend.
+If you assign a file template to a particular field, you can filter by this template when fetching files in the frontend.
 
-Assuming a files section like the following which uploads images to the current page and assigns a template called `gallery`:
+Assuming a `filelist` field like the following which uploads images to the current page and assigns a template called `gallery`:
 
 ```yaml
-sections:
+fields:
   gallery:
-    type: files
+    type: filelist
     template: gallery
 ```
 
