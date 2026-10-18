@@ -27,20 +27,21 @@ class ReferencePanelFieldPage extends ReferenceArticlePage
 
 	public function source(): string|null
 	{
-		$root  = App::instance()->root('kirby');
-		$class = 'src/Form/Field/' . ucfirst($this->name()) . 'Field.php';
-		$def   = 'config/fields/' . $this->name() . '.php';
-		$url   = option('github.url') . '/kirby/tree/' . App::version();
-
-		if (file_exists($root . '/' . $class) === true) {
-			return $url . '/' . $class;
+		try {
+			$file = (new ReflectionClass($this->options()->class))->getFileName();
+		} catch (Throwable) {
+			return null;
 		}
 
-		if (file_exists($root . '/' . $def) === true) {
-			return $url . '/' . $def;
+		$root = App::instance()->root('kirby') . '/';
+
+		if ($file === false || str_starts_with($file, $root) === false) {
+			return null;
 		}
 
-		return null;
+		$url = option('github.url') . '/kirby/tree/' . App::version();
+
+		return $url . '/' . substr($file, strlen($root));
 	}
 
 	/**

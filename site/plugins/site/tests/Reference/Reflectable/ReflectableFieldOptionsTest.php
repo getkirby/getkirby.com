@@ -3,6 +3,8 @@
 namespace Kirby\Reference\Reflectable;
 
 use Exception;
+use Kirby\Form\Field\FileListField;
+use Kirby\Form\Field\PagePickerField;
 use Kirby\Form\Field\TextField;
 use Kirby\Reference\Reflectable\Tags\Parameters;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -33,6 +35,14 @@ class ReflectableFieldOptionsTest extends TestCase
 		$this->assertInstanceOf(Parameters::class, $reflectable->parameters());
 	}
 
+	public function testFactoryWithFieldAlias(): void
+	{
+		// the legacy `pages` field type is mapped onto the page picker
+		$reflectable = ReflectableFieldOptions::factory('pages');
+		$this->assertSame('pages', $reflectable->name);
+		$this->assertSame(PagePickerField::class, $reflectable->class);
+	}
+
 	public function testFactoryWithLegacyField(): void
 	{
 		// `legacy-*` fields still point to an array definition file
@@ -48,12 +58,36 @@ class ReflectableFieldOptionsTest extends TestCase
 		ReflectableFieldOptions::factory('doesNotExist');
 	}
 
+	public function testForSection(): void
+	{
+		// the legacy `files` section is converted into a file list
+		$reflectable = ReflectableFieldOptions::forSection('files');
+		$this->assertSame('filelist', $reflectable->name);
+		$this->assertSame(FileListField::class, $reflectable->class);
+	}
+
+	public function testForSectionWithUnknownSection(): void
+	{
+		$this->expectException(Exception::class);
+		$this->expectExceptionMessage('Section "doesNotExist" not found');
+		ReflectableFieldOptions::forSection('doesNotExist');
+	}
+
 	public function testParametersAreSorted(): void
 	{
 		$options = array_keys($this->options('text'));
 		$sorted  = $options;
 		sort($sorted);
 		$this->assertSame($sorted, $options);
+	}
+
+	public function testParametersDefaults(): void
+	{
+		$options = $this->options('text');
+
+		$this->assertSame("'1/1'", $options['width']->default());
+		$this->assertSame('true', $options['counter']->default());
+		$this->assertSame('false', $options['required']->default());
 	}
 
 	public function testParametersDescriptions(): void
@@ -91,26 +125,15 @@ class ReflectableFieldOptionsTest extends TestCase
 		$this->assertArrayHasKey('placeholder', $options);
 	}
 
-	public function testParametersReadDefaultsFromGetters(): void
-	{
-		$options = $this->options('text');
-
-		// the constructor default is `null`, the getter
-		// resolves the actual default
-		$this->assertSame("'1/1'", $options['width']->default());
-		$this->assertSame('true', $options['counter']->default());
-		$this->assertSame('false', $options['required']->default());
-	}
-
 	public function testParametersWithoutStaticDefault(): void
 	{
 		$options = $this->options('text');
 
-		// `label` is derived from the field itself, so there
+		// `label` is computed from the field itself, so there
 		// is no static default to document
 		$this->assertNull($options['label']->default());
 
-		// `icon` has no getter default at all
+		// `icon` has no default at all
 		$this->assertSame('null', $options['icon']->default());
 	}
 }

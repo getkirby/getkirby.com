@@ -6,7 +6,7 @@ Name: Session
 
 ----
 
-Class: Kirby\Session\SessionData
+Class: Kirby\Session\Data
 
 ----
 
