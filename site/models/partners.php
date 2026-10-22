@@ -59,6 +59,8 @@ class PartnersPage extends DefaultPage
 						'changes'         => $data[$partner]['changes'] ?? null,
 						'pluginDeveloper' => $data[$partner]['pluginDeveloper'] ?? null,
 						'showPlugins'     => $data[$partner]['showPlugins'] ?? true,
+						'renewalPlan'     => $data[$partner]['renewalPlan'] ?? null,
+						'renewalPeople'   => $data[$partner]['renewalPeople'] ?? null,
 					],
 					'files' => [
 						$data[$partner]['card'] ?? null,
