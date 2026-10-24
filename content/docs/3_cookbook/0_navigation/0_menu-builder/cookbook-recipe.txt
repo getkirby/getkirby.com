@@ -118,7 +118,7 @@ mixedMenu:
         - page
         - url
 ```
-The (link: docs/reference/panel/fields/link type: text: link field) allows us to add different kinds of links via a single field type. Here we limit the options to page links and external URLs, but if you want, you can allow other options.
+The (link: docs/reference/panel/fields/link text: link field) allows us to add different kinds of links via a single field type. Here we limit the options to page links and external URLs, but if you want, you can allow other options.
 
 In the template:
 
