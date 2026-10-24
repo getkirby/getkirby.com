@@ -40,7 +40,7 @@ To keep the distributed package small, the example files (`panel/lab`) and the g
 The examples and docs are built automatically and attached to every GitHub release as a  single ZIP, so you can add them to your local installation:
 
 1. (link: https://release.getkirby.com text: Open the release) that matches your installed Kirby version.
-2. Under assets, download `lab-<version>.zip` (e.g. `lab-5.5.1.zip`).
+2. Under assets, download `lab-<version>.zip` (e.g. `lab-6.0.0.zip`).
 3. Extract it. You'll get two folders: `ui` and `lab`.
 4. Move them into your Kirby core's Panel directory:
    - `ui` → `kirby/panel/dist/ui`
