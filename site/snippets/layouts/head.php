@@ -33,5 +33,4 @@ extract([
 
 <?= $meta->robots() ?>
 <?= $meta->jsonld() ?>
-<?= $meta->opensearch() ?>
 <?= $meta->social() ?>
