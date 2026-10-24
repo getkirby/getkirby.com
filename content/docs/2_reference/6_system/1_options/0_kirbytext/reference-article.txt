@@ -134,7 +134,6 @@ return [
       'muted'    => true,
       'poster'   => 'cover.jpg',
       'preload'  => 'auto',
-      'style'    => 'border: 3px solid red;'
       'width'    => 300,
 
       'options'  => [
