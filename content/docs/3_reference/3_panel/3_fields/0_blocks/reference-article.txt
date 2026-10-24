@@ -20,7 +20,7 @@ Text:
 
 The Blocks field is the perfect solution for complex single-column layouts and long-form text.
 
-(image: blocks.png)
+(image: blocks.webp)
 
 ## Blueprint setup
 
@@ -61,7 +61,7 @@ fields:
     type: blocks
 ```
 
-(image: single.png)
+(image: single.webp)
 
 However, you can fully customize the selector for new block types with sorted block types and groups.
 
@@ -82,7 +82,7 @@ fields:
       - markdown
 ```
 
-(image: single-sorted.png)
+(image: single-sorted.webp)
 
 ### Groups
 
@@ -116,7 +116,7 @@ fields:
           - markdown
 ```
 
-(image: groups.png)
+(image: groups.webp)
 
 ### Closed groups
 
@@ -149,7 +149,7 @@ fields:
           - markdown
 ```
 
-(image: closed-groups.png)
+(image: closed-groups.webp)
 
 ## Default values
 

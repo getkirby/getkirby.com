@@ -117,7 +117,7 @@ purgecss --css {{input}} --content "{{rawRootDir}}/site/**/*.php" --output {{out
 
 6. Click on _Add Custom Command_
 
-(image: prepros-config-screenshot.png caption: Screenshot of Prepros "Add Custom Command" section)
+(image: prepros-config-screenshot.webp caption: Screenshot of Prepros "Add Custom Command" section)
 
 <info>
 The `{{output}}` placeholder is required by Prepros but PurgeCSS doesn't support an explicit output path, so the `{{output}}` placeholder is ignored by PurgeCSS.
@@ -129,7 +129,7 @@ The command scans all PHP files inside the `/site` folder for CSS classes and wr
 
 When you now change the `CSS/SASS/SCSS` file (that includes your CSS framework), Prepros will automatically perform the custom command afterward when enabled and purge your final CSS.
 
-(image: prepros-overview-screenshot.png caption: Screenshot of Prepros file explorer with customization panel)
+(image: prepros-overview-screenshot.webp caption: Screenshot of Prepros file explorer with customization panel)
 
 All that's left to do is to add a link to this file in your HTML head tag in your header snippet (or your template).
 

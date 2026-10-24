@@ -146,9 +146,9 @@ If you are wondering now why you should use this longer syntax when both return 
 <?php endif ?>
 ```
 
-(image: screen-width-1200-1x.png caption: At 1200px screen width and a DPR of 1, the browser choses the 1200px image)
+(image: screen-width-1200-1x.webp caption: At 1200px screen width and a DPR of 1, the browser choses the 1200px image)
 
-(image: screen-width-400-2x.png caption: At 400px screen width and a DPR of 2, the browser choses the 900px image)
+(image: screen-width-400-2x.webp caption: At 400px screen width and a DPR of 2, the browser choses the 900px image)
 
 But let's not get distracted, let's move on to some explanations....
 
@@ -245,7 +245,7 @@ As Kirby implementation, we end up with this code:
 
 At a screen size of 1200px and above, our image will take up a 25% of the viewport width, between 900px and 1200px 33% of the viewport width, between 600px and 900px 50% of the viewport width, and below 600px the full viewport width.
 
-(image: srcset-and-sizes.png caption: At a viewport width of 1200px and a DPR of 2, the browser selects the 600px image for an image that uses approx. one fourth of the viewport)
+(image: srcset-and-sizes.webp caption: At a viewport width of 1200px and a DPR of 2, the browser selects the 600px image for an image that uses approx. one fourth of the viewport)
 
 With large margin or padding settings, it might make sense to use `calc()` to provide more exact hints.
 
@@ -439,7 +439,7 @@ Contrary to the `img` element, the `picture` element actually gives us control o
 
 
 
-(image: sunflowers.png)
+(image: sunflowers.webp)
 
 
 An HTML version of such a setup could look like this:

@@ -22,7 +22,7 @@ fields:
 
 ### Result
 
-(image: default.png)
+(image: default.webp)
 
 ## File blueprint with two column layout
 
@@ -74,7 +74,7 @@ If you only need fields, you can simplify this example as below where we only us
 
 ### Result
 
-(image: image.png)
+(image: image.webp)
 
 ## File blueprint with `accept` option
 
@@ -107,4 +107,4 @@ fields:
 
 ### Result
 
-(image: cover.png)
+(image: cover.webp)
