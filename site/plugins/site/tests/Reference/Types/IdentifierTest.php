@@ -80,4 +80,16 @@ class IdentifierTest extends TestCase
 		$identifier = new Identifier('$page');
 		$this->assertSame('Kirby\Cms\Page', $identifier->toString());
 	}
+
+	public function testToStringShort(): void
+	{
+		$identifier = new Identifier('\Kirby\Cms\App');
+		$this->assertSame('App', $identifier->toString(short: true));
+
+		$identifier = new Identifier('$page');
+		$this->assertSame('Page', $identifier->toString(short: true));
+
+		$identifier = new Identifier('stdClass');
+		$this->assertSame('stdClass', $identifier->toString(short: true));
+	}
 }

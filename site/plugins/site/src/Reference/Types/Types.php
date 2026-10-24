@@ -272,10 +272,10 @@ class Types
 	/**
 	 * Convert the types to a string
 	 */
-	public function toString(): string
+	public function toString(bool $short = false): string
 	{
 		// Get string representation for each type
-		$types = A::map($this->types, fn (Type $type) => $type->toString());
+		$types = A::map($this->types, fn (Type $type) => $type->toString($short));
 
 		// Remove duplicates
 		$types = array_unique($types);

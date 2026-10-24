@@ -204,4 +204,10 @@ class TypesTest extends TestCase
 
 		$this->assertSame('TestTypes\A', $types->toString());
 	}
+
+	public function testToStringShort(): void
+	{
+		$types = Types::fromString('Kirby\Cms\Page|array<string, Kirby\Cms\File>|null');
+		$this->assertSame('Page|array<string, File>|null', $types->toString(short: true));
+	}
 }

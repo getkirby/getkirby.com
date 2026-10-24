@@ -27,3 +27,10 @@ function fooWithVoidReturnType(): void {
 function fooWithDocBlock(): string {
 	return 'foo';
 }
+
+/**
+ * @return array<string, \Kirby\Cms\Page>
+ */
+function fooWithClasses(\Kirby\Cms\Page $page, string $class = 'Kirby\Cms\Page'): array {
+	return [];
+}

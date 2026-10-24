@@ -31,7 +31,7 @@ class ReflectableClassMethodTest extends TestCase
 	public function testCall(): void
 	{
 		$reflectable = new ReflectableClassMethod('Bar\Fox', 'bar');
-		$this->assertSame('$fox->bar(string $a, int $b): Bar\Fox', $reflectable->call());
+		$this->assertSame('$fox->bar(string $a, int $b): Fox', $reflectable->call());
 
 		$reflectable = new ReflectableClassMethod('Bar\Fox', 'barStatic');
 		$this->assertSame('Fox::barStatic()', $reflectable->call());

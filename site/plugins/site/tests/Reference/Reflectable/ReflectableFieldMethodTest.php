@@ -26,7 +26,7 @@ class ReflectableFieldMethodTest extends TestCase
 	public function testCall(): void
 	{
 		$reflectable = new ReflectableFieldMethod('or');
-		$this->assertSame('$field->or(mixed $fallback = null): Kirby\Content\Field', $reflectable->call());
+		$this->assertSame('$field->or(mixed $fallback = null): Field', $reflectable->call());
 	}
 
 	public function testClass(): void

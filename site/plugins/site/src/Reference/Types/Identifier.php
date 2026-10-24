@@ -103,8 +103,13 @@ class Identifier extends Type
 	/**
 	 * Return the identifier as a string
 	 */
-	public function toString(): string
+	public function toString(bool $short = false): string
 	{
-		return $this->toPage()?->name(short: false) ?? $this->type;
+		$name = $this->toPage()?->name(short: false) ?? $this->type;
+
+		return match ($short) {
+			true    => static::shortName($name),
+			default => $name
+		};
 	}
 }

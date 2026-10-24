@@ -3,6 +3,9 @@
 namespace Kirby\Reference\Types;
 
 use Kirby\Cms\Html;
+use Kirby\Reference\Reflectable\Doc;
+use PHPStan\PhpDocParser\Ast\Node;
+use PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
 
 /**
  * A type composed of other types, e.g. a generic like
@@ -76,5 +79,28 @@ class Compound extends Type
 			},
 			Html::encode($this->type)
 		);
+	}
+
+	/**
+	 * Returns the type as a string
+	 */
+	public function toString(bool $short = false): string
+	{
+		if ($short === false) {
+			return $this->type;
+		}
+
+		$node = ClosureVisitor::map(
+			Doc::parseType($this->type),
+			function (Node $node) {
+				if ($node instanceof IdentifierTypeNode) {
+					$node->name = static::shortName($node->name);
+				}
+
+				return null;
+			}
+		);
+
+		return Types::print($node);
 	}
 }

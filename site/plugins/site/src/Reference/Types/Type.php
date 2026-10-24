@@ -134,6 +134,15 @@ class Type
 	}
 
 	/**
+	 * Returns the class name without its namespace,
+	 * e.g. `Page` for `Kirby\Cms\Page`
+	 */
+	protected static function shortName(string $name): string
+	{
+		return substr(strrchr('\\' . $name, '\\'), 1);
+	}
+
+	/**
 	 * Return the type as an HTML code tag
 	 */
 	public function toHtml(
@@ -159,7 +168,7 @@ class Type
 	/**
 	 * Return the type as a string
 	 */
-	public function toString(): string
+	public function toString(bool $short = false): string
 	{
 		return $this->type;
 	}

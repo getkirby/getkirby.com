@@ -84,11 +84,11 @@ class Parameters extends Iterator
 	/**
 	 * Returns the string representation of all parameters
 	 */
-	public function toString(): string
+	public function toString(bool $short = false): string
 	{
 		return implode(
 			', ',
-			A::map($this->data, fn ($parameter) => $parameter->toString())
+			A::map($this->data, fn ($parameter) => $parameter->toString($short))
 		);
 	}
 }

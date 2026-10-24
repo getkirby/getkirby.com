@@ -2,7 +2,6 @@
 
 namespace Kirby\Reference\Types;
 
-use Closure;
 use Exception;
 use Kirby\Reference\Reflectable\Doc;
 use Kirby\Reference\Reflectable\Reflectable;
@@ -11,10 +10,8 @@ use Kirby\Reference\Reflectable\ReflectableClassMethod;
 use Kirby\Reference\Reflectable\ReflectableFunction;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\Str;
-use PHPStan\PhpDocParser\Ast\AbstractNodeVisitor;
 use PHPStan\PhpDocParser\Ast\Node;
 use PHPStan\PhpDocParser\Ast\NodeTraverser;
-use PHPStan\PhpDocParser\Ast\NodeVisitor\CloningVisitor;
 use PHPStan\PhpDocParser\Ast\Type\ArrayShapeItemNode;
 use PHPStan\PhpDocParser\Ast\Type\GenericTypeNode;
 use PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
@@ -286,7 +283,7 @@ class Context
 	{
 		$file ??= $this->function?->getFileName() ?: $this->class?->getFileName() ?: null;
 
-		$visitor = new class (function (Node $node) use ($file) {
+		return ClosureVisitor::map($node, function (Node $node) use ($file) {
 			// only the value of a shape item is a type,
 			// not its key (e.g. `array{files: Files}`)
 			if (
@@ -307,21 +304,7 @@ class Context
 
 			$node->name = $this->resolveName($node->name, $file);
 			return null;
-		}) extends AbstractNodeVisitor {
-
-			public function __construct(protected Closure $enter)
-			{
-			}
-
-			public function enterNode(Node $node): Node|int|null
-			{
-				return ($this->enter)($node);
-			}
-		};
-
-		// clone the nodes first, as doc blocks are cached
-		$traverser = new NodeTraverser([new CloningVisitor(), $visitor]);
-		return $traverser->traverse([$node])[0];
+		});
 	}
 
 	/**

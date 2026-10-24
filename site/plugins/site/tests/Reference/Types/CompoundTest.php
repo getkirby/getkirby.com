@@ -59,4 +59,14 @@ class CompoundTest extends TestCase
 		$type = new Compound('array<string, Kirby\Cms\App>');
 		$this->assertSame('<code class="type type-compound type-array">a &lt;b&gt;</code>', $type->toHtml(text: 'a <b>'));
 	}
+
+	public function testToString(): void
+	{
+		$type = new Compound('array{files: Kirby\Cms\Files, page: Kirby\Cms\Page|null}');
+		$this->assertSame('array{files: Kirby\Cms\Files, page: Kirby\Cms\Page|null}', $type->toString());
+		$this->assertSame('array{files: Files, page: Page|null}', $type->toString(short: true));
+
+		$type = new Compound('callable(Kirby\Cms\Page $page): bool');
+		$this->assertSame('callable(Page $page): bool', $type->toString(short: true));
+	}
 }

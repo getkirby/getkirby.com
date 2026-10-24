@@ -173,12 +173,12 @@ class Parameter
 	 * Returns the string representation of the parameter
 	 * with the types, the name and the default value
 	 */
-	public function toString(): string
+	public function toString(bool $short = false): string
 	{
 		$string = $this->name();
 
 		// combine the types and the name
-		$string = trim($this->types->toString() . ' ' . $string);
+		$string = trim($this->types->toString($short) . ' ' . $string);
 
 		// if there is a default value, add it
 		if ($this->default !== null) {
