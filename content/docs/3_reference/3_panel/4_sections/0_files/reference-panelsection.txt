@@ -16,7 +16,7 @@ Text:
 
 The files section can be used to show any combination of files for the current page or any other page in your site.
 
-(image: files.png)
+(image: files.webp)
 
 ## Example
 
@@ -96,7 +96,7 @@ The `list` layout is perfect for file types without thumbnails like PDFs, excel 
 layout: list
 ```
 
-(image: list.png)
+(image: list.webp)
 
 ### Cards layout
 
@@ -106,17 +106,17 @@ The `card` layout is great for all kinds of images.
 layout: cards
 ```
 
-(image: cards.png)
+(image: cards.webp)
 
 (docs: sections/cardlets)
 
-(image: cardlets.png)
+(image: cardlets.webp)
 
 ### Table layout
 
 The table layout has the highest information density. Columns can be fully customized and make it perfect if you need to show multiple values at once for better overview and scannability.
 
-(image: table.png)
+(image: table.webp)
 
 ```yaml
 layout: table
@@ -273,7 +273,7 @@ image:
 
 | `cover: true` | `cover: false` |
 | -   | -   |
-| (image: cover.png) | (image: no-cover.png) |
+| (image: cover.webp) | (image: no-cover.webp) |
 
 ### `ratio`
 
@@ -288,7 +288,7 @@ image:
 
 | `ratio: 2/3` | `ratio: 1/1` | `ratio: 3/2` | `ratio: 16/9` |
 | -   | -   | -   | -    |
-| (image: 2by3.png) | (image: 1by1.png) | (image: 3by2.png) | (image: 16by9.png) |
+| (image: 2by3.webp) | (image: 1by1.webp) | (image: 3by2.webp) | (image: 16by9.webp) |
 
 <info>
 You are not limited to the example ratios above. In fact, Kirby calculates the ratio for you as long as you enter it in the format **`a/b`**
@@ -310,7 +310,7 @@ image:
 
 | `back: pattern` | `back: black` | `back: white` |
 | -   | -   | -   |
-| (image: pattern.png) | (image: black.png) | (image: white.png) |
+| (image: pattern.webp) | (image: black.webp) | (image: white.webp) |
 
 ## Empty state
 

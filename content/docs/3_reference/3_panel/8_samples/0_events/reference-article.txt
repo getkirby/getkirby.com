@@ -52,7 +52,7 @@ Make sure your events page isn't a draft anymore, otherwise the `site.find("even
 
 ### Result
 
-(image: events.png)
+(image: events.webp)
 
 
 ## Single event
@@ -96,7 +96,7 @@ columns:
 
 ### Result
 
-(image: event.png)
+(image: event.webp)
 
 ## Example template
 
