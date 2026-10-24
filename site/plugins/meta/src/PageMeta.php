@@ -92,6 +92,11 @@ class PageMeta
 
 	public function opensearch(): string
 	{
+		// Archived docs are served as static snapshot without search
+		if ($this->page->kirby()->option('archived') === true) {
+			return '';
+		}
+
 		return Html::tag('link', null, [
 			'rel'   => 'search',
 			'type'  => 'application/opensearchdescription+xml',

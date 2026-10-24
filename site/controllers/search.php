@@ -3,6 +3,11 @@
 use Kirby\Cms\App;
 
 return function (App $kirby) {
+	// Archived docs are served as static snapshot without search
+	if ($kirby->option('archived') === true) {
+		go('/');
+	}
+
 	$query = trim(get('q', ''));
 	$area  = trim(get('area', ''));
 	$areas = $kirby->option('search.areas')($kirby);

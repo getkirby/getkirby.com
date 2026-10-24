@@ -24,11 +24,13 @@
 					<?= icon('list-bullet') ?> All recipes
 				</a>
 			</li>
+			<?php if ($kirby->option('archived') !== true): ?>
 			<li>
 				<button class="search-button" type="button" data-area="cookbook">
 					<?= icon('search') ?> Search
 				</button>
 			</li>
+			<?php endif ?>
 			<li><hr class="hr"></li>
 			<?php foreach (collection('cookbook/categories') as $category): ?>
 			<li>
