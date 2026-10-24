@@ -227,7 +227,7 @@ Kirby::plugin('acme/history', [
 ## Coming soon: Send a request
 
 <info>
-We are planning to let buttons send off a request to the backend directly, e.g. to trigger an action or a custom endpoint with a single click, without opening a dialog first. This isn't part of beta.1 yet.
+We are planning to let buttons send off a request to the backend directly, e.g. to trigger an action or a custom endpoint with a single click, without opening a dialog first. This isn't part of beta.2 yet.
 </info>
 
 ## Buttons from a query

@@ -2,7 +2,7 @@ Title: Migration guides
 
 ----
 
-Intro: Kirby 6 beta.1 is ready for testing. Here's how to try it safely, what your server and browsers need and which guide fits your role.
+Intro: Kirby 6 beta.2 is ready for testing. Here's how to try it safely, what your server and browsers need and which guide fits your role.
 
 ----
 
@@ -11,7 +11,7 @@ Text:
 ## This is a beta
 
 <warning>
-**Don't use Kirby 6 beta.1 in production.** Make a backup of your site and test the beta on a copy, either locally or on a staging server.
+**Don't use Kirby 6 beta.2 in production.** Make a backup of your site and test the beta on a copy, either locally or on a staging server.
 </warning>
 
 Kirby 6 is a major release. The beta is meant to give you a head start: try it with your sites and plugins, find out what needs to change and tell us what breaks. Tweaks and even breaking changes can still change between the beta releases and the final release of Kirby 6 to get all ready and in place.
@@ -79,15 +79,15 @@ If you just want a first test drive, we've migrated our two kits for you to play
 
 ### Starterkit
 
-- Release: https://github.com/getkirby/starterkit/releases/tag/6.0.0-beta.1
-- Download: (link: https://github.com/getkirby/starterkit/archive/refs/tags/6.0.0-beta.1.zip text: starterkit-6.0.0-beta.1.zip)
+- Release: https://github.com/getkirby/starterkit/releases/tag/6.0.0-beta.2
+- Download: (link: https://github.com/getkirby/starterkit/archive/refs/tags/6.0.0-beta.2.zip text: starterkit-6.0.0-beta.2.zip)
 
 ### Plainkit
 
-- Release: https://github.com/getkirby/plainkit/releases/tag/6.0.0-beta.1
-- Download: (link: https://github.com/getkirby/plainkit/archive/refs/tags/6.0.0-beta.1.zip text: plainkit-6.0.0-beta.1.zip)
+- Release: https://github.com/getkirby/plainkit/releases/tag/6.0.0-beta.2
+- Download: (link: https://github.com/getkirby/plainkit/archive/refs/tags/6.0.0-beta.2.zip text: plainkit-6.0.0-beta.2.zip)
 
-## Install beta.1
+## Install beta.2
 
 Work on a copy of your site. Then pick the way you usually install Kirby:
 
@@ -95,14 +95,14 @@ Work on a copy of your site. Then pick the way you usually install Kirby:
 
 === Download
 
-Download the `6.0.0-beta.1` release from [GitHub](https://github.com/getkirby/kirby/releases), unpack it and replace your `kirby` folder with it. Rename the unpacked folder to `kirby` if needed.
+Download the `6.0.0-beta.2` release from [GitHub](https://github.com/getkirby/kirby/releases), unpack it and replace your `kirby` folder with it. Rename the unpacked folder to `kirby` if needed.
 
 === Composer
 
 Require the exact beta version:
 
 ```bash
-composer require getkirby/cms:6.0.0-beta.1
+composer require getkirby/cms:6.0.0-beta.2
 ```
 
 Or set the version in your `composer.json` and run `composer update getkirby/cms`:
@@ -110,7 +110,7 @@ Or set the version in your `composer.json` and run `composer update getkirby/cms
 ```js "/composer.json"
 {
   "require": {
-    "getkirby/cms": "6.0.0-beta.1"
+    "getkirby/cms": "6.0.0-beta.2"
   }
 }
 ```
@@ -124,16 +124,16 @@ If Kirby is a Git submodule in your project:
 ```bash
 cd kirby
 git fetch --tags
-git checkout 6.0.0-beta.1
+git checkout 6.0.0-beta.2
 cd ..
 git add kirby
-git commit -m "Try Kirby 6.0.0-beta.1"
+git commit -m "Try Kirby 6.0.0-beta.2"
 ```
 
 === Kirby CLI
 
 ```bash
-kirby upgrade 6.0.0-beta.1
+kirby upgrade 6.0.0-beta.2
 ```
 
 The CLI asks you to confirm the major version upgrade.
@@ -165,7 +165,7 @@ Test your site after every step. If something breaks, you know which update caus
 
 Found a bug or something that doesn't work like it did in Kirby 5? Please report it on GitHub: [github.com/getkirby/kirby/issues](https://github.com/getkirby/kirby/issues).
 
-Please mention that you're testing `6.0.0-beta.1` and include:
+Please mention that you're testing `6.0.0-beta.2` and include:
 
 - your PHP version and, for Panel issues, your browser and its version
 - the steps to reproduce the problem
