@@ -22,10 +22,8 @@
 		<?php foreach ($sizes as $size): ?>
 		<li>
 			<h3 class="font-mono mb-1"><?= $size ?> px</h3>
-			<figure class="grid place-items-center icon rounded" data-bg="<?= strtolower($color) ?>">
-				<svg data-size="<?= $size ?>">
-					<use xlink:href="#icon-<?= $page->slug() ?>" />
-				</svg>
+			<figure class="grid place-items-center icon rounded" data-bg="<?= strtolower($color) ?>" data-size="<?= $size ?>">
+				<?= icon($page->slug(), local: false) ?>
 			</figure>
 		</li>
 		<?php endforeach ?>
@@ -44,15 +42,15 @@ figure.icon[data-bg="white"] {
 figure.icon[data-bg="white"] svg {
 	fill: var(--color-white);
 }
-svg[data-size="18"] {
+figure.icon[data-size="18"] svg {
 	width: 18px;
 	height: 18px;
 }
-svg[data-size="36"] {
+figure.icon[data-size="36"] svg {
 	width: 36px;
 	height: 36px;
 }
-svg[data-size="72"] {
+figure.icon[data-size="72"] svg {
 	width: 72px;
 	height: 72px;
 }
