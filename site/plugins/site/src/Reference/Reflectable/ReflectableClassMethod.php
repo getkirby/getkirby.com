@@ -5,7 +5,6 @@ namespace Kirby\Reference\Reflectable;
 use Kirby\Reference\Reflectable\Tags\Since;
 use Kirby\Reference\Types\Identifier;
 use Kirby\Toolkit\Str;
-use ReflectionClass;
 use ReflectionMethod;
 use Reflector;
 
@@ -18,6 +17,12 @@ class ReflectableClassMethod extends ReflectableFunction
 	 * @var ReflectionMethod
 	 */
 	public Reflector $reflection;
+
+	/**
+	 * Names of the alias methods per class,
+	 * keyed by the method they point to
+	 */
+	protected static array $aliases = [];
 
 	public function __construct(
 		public string $class,
@@ -33,21 +38,24 @@ class ReflectableClassMethod extends ReflectableFunction
 	 */
 	public function aliases(): array
 	{
-		$aliases    = [];
-		$reflection = new ReflectionClass($this->class);
+		if (isset(static::$aliases[$this->class]) === false) {
+			static::$aliases[$this->class] = [];
+			$class   = ReflectableClass::for($this->class)->reflection;
+			$methods = $class->getMethods(ReflectionMethod::IS_PUBLIC);
 
-		foreach ($reflection->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
-			$alias = new ReflectableClassMethod($this->class, $method->getName());
+			foreach ($methods as $method) {
+				$alias = new ReflectableClassMethod($this->class, $method->getName());
 
-			if (
-				$alias->isMagic() === false &&
-				$alias->see()?->for() === $this->method
-			) {
-				$aliases[] = $alias->method;
+				if (
+					$alias->isMagic() === false &&
+					($for = $alias->see()?->for()) !== null
+				) {
+					static::$aliases[$this->class][$for][] = $alias->method;
+				}
 			}
 		}
 
-		return $aliases;
+		return static::$aliases[$this->class][$this->method] ?? [];
 	}
 
 	/**
@@ -57,11 +65,7 @@ class ReflectableClassMethod extends ReflectableFunction
 		bool $short = false,
 		bool $typed = false
 	): string|Identifier {
-		$class = new ReflectionClass($this->class);
-		$class = match ($short) {
-			true  => $class->getShortName(),
-			false => $class->getName(),
-		};
+		$class = ReflectableClass::for($this->class)->name(short: $short);
 
 		if ($typed === true) {
 			return new Identifier($class);
@@ -100,7 +104,7 @@ class ReflectableClassMethod extends ReflectableFunction
 	{
 		return
 			parent::isDeprecated() ||
-			(new ReflectableClass($this->class))->isDeprecated();
+			ReflectableClass::for($this->class)->isDeprecated();
 	}
 
 	/**
@@ -110,7 +114,7 @@ class ReflectableClassMethod extends ReflectableFunction
 	{
 		return
 			parent::isInternal() ||
-			(new ReflectableClass($this->class))->isInternal();
+			ReflectableClass::for($this->class)->isInternal();
 	}
 
 	/**
@@ -128,7 +132,7 @@ class ReflectableClassMethod extends ReflectableFunction
 	{
 		return
 			parent::isUnstable() ||
-			(new ReflectableClass($this->class))->isUnstable();
+			ReflectableClass::for($this->class)->isUnstable();
 	}
 
 	public function mutationDescription(): string|null
@@ -173,7 +177,7 @@ class ReflectableClassMethod extends ReflectableFunction
 	public function since(): Since|null
 	{
 		return parent::since() ?? Since::factory(
-			reflection: new ReflectableClass($this->class)
+			reflection: ReflectableClass::for($this->class)
 		);
 	}
 
