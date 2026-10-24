@@ -12,7 +12,7 @@
 	]) ?>
 
 	<figure class="video mb-6 rounded-xl overflow-hidden" style="--aspect-ratio: 16/9">
-		<?= video('https://www.youtube-nocookie.com/watch?v=ASmy8mcBWqg', $page->image('youtube.jpg'), [], [
+		<?= video('https://www.youtube-nocookie.com/watch?v=ASmy8mcBWqg', $page->image('youtube.webp'), [], [
 			'loading' => 'lazy',
 			'title' => 'YouTube video demonstrating snippets with slots'
 		]) ?>

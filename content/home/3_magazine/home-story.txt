@@ -12,7 +12,7 @@ content/
               article.txt
         20231116_exploring-the-universe/
             article.txt
-            dark-forest.jpg
+            dark-forest.webp
 ```
 
 ----
@@ -31,7 +31,7 @@ Subheading: The edge of nowhere
 
 &minus;---
 
-Cover: dark-forest.jpg
+Cover: dark-forest.webp
 
 &minus;---
 
@@ -49,7 +49,7 @@ PhoneSubtitle: In 90 ways
 
 ----
 
-PhoneImage: waterfall.jpg
+PhoneImage: waterfall.webp
 
 ----
 

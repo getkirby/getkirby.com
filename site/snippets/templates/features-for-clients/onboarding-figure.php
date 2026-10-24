@@ -1,5 +1,5 @@
 <figure>
-	<?= img('panel.png', [
+	<?= img('panel.webp', [
 		'alt' => 'A screenshot of the Panel',
 		'class' => 'rounded',
 		'lightbox' => true,

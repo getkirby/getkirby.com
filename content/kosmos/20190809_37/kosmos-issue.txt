@@ -30,7 +30,7 @@ Although life usually slows down a bit during the summer months and Bastian was 
 
 🥁 We have a big surprise for you this month. Something many of you have been longing for is coming: [Kirby Editor](https://github.com/getkirby/editor), a new type of WYSIWYG editor for Kirby. It's a mixture between a regular WYSIWYG and a block editor that brings together the best parts of both worlds in a user-friendly interface. And best of all: you can extend it with your own block plugins. Editor is a plugin for Kirby and you can test the beta now.
 
-(image: kirby-editor.png)
+(image: kirby-editor.webp)
 
 ## Kirby docs
 
@@ -42,7 +42,7 @@ The [Starterkit](https://download.getkirby.com/) is now completely annotated wit
 
 ## Kirby in the Wild
 
-(image: levon-biss.png)
+(image: levon-biss.webp)
 [Levon Biss](https://levonbiss.com)
 
 ## Kirby Plugins
@@ -63,7 +63,7 @@ When using a lot of plugins, you can categorize them in separate folders for eas
 
 <small>Always test third-party plugins thoroughly before using them in production.</small>
 
-(image: bayerische-aerztekammer.png)
+(image: bayerische-aerztekammer.webp)
 
 [Bayerische Landesärztekammer](https://www.blaek.de)
 

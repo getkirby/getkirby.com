@@ -54,13 +54,13 @@ changes to Kirby since version 3, with the new sidebar probably being the
 most notable change, but check out all the features of the cool new
 design yourself on our [Kirby 4 release page](https://getkirby.com/releases/4).
 
-(image: 1_kirby-4.png)
+(image: 1_kirby-4.webp)
 
 
 ## Kirby in the wild
 
 
-(image: ifb.com.png)
+(image: ifb.com.webp)
 
 [IFB International Freightbridge](https://ifb.com/en)
 

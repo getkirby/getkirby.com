@@ -50,7 +50,7 @@ This meetup takes place at the venue of the beyond tellerrand conference. As a s
 
 ## Made with Kirby
 
-(image: 1-templo.png)
+(image: 1-templo.webp)
 
 [Templo](https://templo.co.uk/)
 
@@ -72,7 +72,7 @@ Joshua Pangborn walks you through [deploying Kirby CMS with Kamal 2](https://wor
 
 Need to convince your customers that Kirby is the right tool for them? We added a new project type "For artists" to help you with this task.
 
-(image: panel.png)
+(image: panel.webp)
 [Made for artists](https://getkirby.com/for/artists)
 
 
@@ -82,20 +82,20 @@ We truly believe that our partner program is all about building a strong network
 
 <div class="columns mb-12" style="--columns: 3">
 <div>
-(image: present-progressive.jpg)
+(image: present-progressive.webp)
 (link: https://presentprogressive.de text: Present Progressive)
 
 </div>
 
 <div>
 
-(image: bruno-meilick_1.png)
+(image: bruno-meilick_1.webp)
 (link: https://bnomei.com text: Bruno Meilick)
 </div>
 
 <div>
 
-(image: reinorange-gmbh.png)
+(image: reinorange-gmbh.webp)
 (link: https://reinorange.com text: reinorange.com)
 
 </div>

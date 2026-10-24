@@ -18,7 +18,7 @@ Kosmos-Subscription: on
 
 ----
 
-Cover: kirby-5.png
+Cover: kirby-5.webp
 
 ----
 
@@ -30,7 +30,7 @@ On that note, enjoy the festive season🎄. The entire Kirby team wishes you and
 
 ## 🚀 Kirby 5 — Beta: A whole new editing experience
 
-(image: kirby-5.png alt: A screenshot of Kirby 5's new dark mode for the Panel link: https://getkirby.com/releases/5)
+(image: kirby-5.webp alt: A screenshot of Kirby 5's new dark mode for the Panel link: https://getkirby.com/releases/5)
 
 While we had planned to release Kirby 5 by the end of 2024, we decided to postpone it a bit to give it some more love, and instead present a first beta before the holidays. You can expect the final release early next year.
 
@@ -88,11 +88,11 @@ We'll meet for the 2nd edition of the Kirby Mainz Meetup at the 3st offices. Wit
 
 With 16 events, 2024 has been an incredible Kirby meetup year. We want to send a huge thank-you to all the organisers and attendees. We truly appreciate your support and can't wait to meet again in 2025.
 
-(image: meetups.jpg link: meet)
+(image: meetups.webp link: meet)
 
 ## 👷‍♀️ Made with Kirby
 
-(image: amsterdam-bereikbaar.png link: https://www.amsterdambereikbaar.nl/ caption: Amsterdam Bereikbaar)
+(image: amsterdam-bereikbaar.webp link: https://www.amsterdambereikbaar.nl/ caption: Amsterdam Bereikbaar)
 
 ## 📝 Articles
 
@@ -110,17 +110,17 @@ We truly believe that our partner program is all about building a strong network
 
 <div class="columns mb-12" style="--columns: 3">
 <div>
-(image: tobias-moeritz.jpg)
+(image: tobias-moeritz.webp)
 (link: /partners/tobias-moeritz text: Tobias Möritz) 
 </div>
 
 <div>
-(image: diverently.png)
+(image: diverently.webp)
 (link: /partners/diverently text: Diverently GmbH)
 </div>
 
 <div>
-(image: thomas-guenther.png)
+(image: thomas-guenther.webp)
 (link: partners/thomas-guenther text: Thomas Günther)
 </div>
 </div>

@@ -41,7 +41,7 @@ We also used the opportunity to refactor and improve our open-source [Demo Manag
 
 ## Kirby in the wild
 
-(image: baltic-sea-philharmonic.png)
+(image: baltic-sea-philharmonic.webp)
 
 [Baltic Sea Philharmonic](https://baltic-sea-philharmonic.eu/en)
 

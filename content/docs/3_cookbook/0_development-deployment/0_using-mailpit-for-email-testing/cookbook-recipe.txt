@@ -54,7 +54,7 @@ By default, MailPit runs with the following default settings:
 
 If your system already uses ports 1025/8025 for other services, you can configure MailPit to use other settings.
 
-(image: mailpit-ui.png)
+(image: mailpit-ui.webp)
 
 ## Configure Kirby to use MailPit
 
@@ -118,7 +118,7 @@ Before you hit the send button of the form, or open the page with the email code
 
 Now go open the page with the email code in a browser, and if all went well, you should now see the newly sent mail in MailPit's Web UI:
 
-(image: mailpit-mail.png)
+(image: mailpit-mail.webp)
 
 <warning>
 If you put the email code into an arbitrary template instead of setting up a form, remember to remove it again after you have finished testing. Otherwise you will see an error if MailPit is not running and you want to visit that page again some time later, when you have long forgotten that you put that test code in there.

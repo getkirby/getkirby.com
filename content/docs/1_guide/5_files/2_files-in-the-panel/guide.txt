@@ -18,19 +18,19 @@ Depending on the context, as an editor you then click the `Add` button in a page
 === Files section
 
 A (link: docs/reference/panel/sections/files text: files section) helps you manage the files belonging to pages or the site: upload, delete, sort and replace. A files section does not store anything in your content file!
-(image: files-section.png)
+(image: files-section.webp)
 
 === Files field
 
 A (link: docs/reference/panel/fields/files text: files field) allows you to select one or multiple files out the ones queried as options. The selected file references are stored in the content file of the model in which the field is used. The files field also offers the option to upload files.
 
-(image: files-field.png)
+(image: files-field.webp)
 
 === Textarea field
 
 The (link: docs/reference/panel/fields/textarea#file-upload-and-select text: textarea field) has an upload option to quickly upload files you want to link to in your content.
 
-(image: textarea-field.png)
+(image: textarea-field.webp)
 (…tabs)
 
 ## Deleting files
@@ -47,7 +47,7 @@ Kirby will convert the filename of your uploaded file to ASCII characters. This 
 
 The upload dialog allows you to preview and edit the filenames of the files to upload. This gives you the opportunity to gives your files useful names, which will make it easier to find the right file later.
 
-(image: uploader.png)
+(image: uploader.webp)
 
 In your file blueprints, you can also set (link: docs/reference/panel/blueprints/file#optimize-uploaded-images-create text: options for optimizing uploaded files). These options will be applied directly after upload, and they are a great way to avoid huge original files in the content folder, to normalize file formats or to prevent leakage of personal information from image metadata.
 
@@ -86,7 +86,7 @@ For details of creating a file blueprint, see the (link: docs/reference/panel/bl
 
 You can change the file template currently assigned to a file to any template that is available for files in the file parent (sections, fields, textareas)
 
-(image: file-template.png)
+(image: file-template.webp)
 
 <warning>
 Changing the file's template will remove content for fields that don't match in type. If the new template defines certain rules, e.g. image dimensions, those will also be applied irreversibly. Use with caution.

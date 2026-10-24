@@ -38,7 +38,7 @@ Kirby plugins have a new home: [plugins.getkirby.com](https://plugins.getkirby.c
 *   📰 Get updates for new and recently updated plugins via RSS
 *   🔎 Additional search filters
 
-(image: getkirby-plugins.png)
+(image: getkirby-plugins.webp)
 
 More features including a form to easily submit your plugins are on the roadmap, so stay tuned.
 
@@ -50,7 +50,7 @@ More features including a form to easily submit your plugins are on the roadmap,
 
 Get to know fellow Kirby users, organize meetings, collaborate. Our community map is the perfect place to find people in your area. Not there yet? Add yourself to the map: [https://community.getkirby.com/](https://community.getkirby.com/)
 
-(image: community-map.png)
+(image: community-map.webp)
 
 ## Kirby meetups
 
@@ -63,7 +63,7 @@ Monday, May 13, 2024, 18:00 PM (CEST)
 
 ## Kirby in the wild
 
-(image: blog-oper-frankfurt.png)
+(image: blog-oper-frankfurt.webp)
 
 [https://blog.oper-frankfurt.de/](https://blog.oper-frankfurt.de/)
 

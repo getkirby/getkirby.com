@@ -53,7 +53,7 @@ It can be accessed with the new preview button for the site and pages.
 
 Get more details about the changes for the current page, file or user, by accessing the new info dropdown next to the form buttons:
 
-(image: changes-info-dropdown.png class: screenshot-sm)
+(image: changes-info-dropdown.webp class: screenshot-sm)
 
 This dropdown will also show more information when the content is locked because another editor is currently working on it.
 
@@ -61,13 +61,13 @@ This dropdown will also show more information when the content is locked because
 
 All changes by everyone in the team - not just the current editor - are now listed in the Changes dialog (accessible via the “Changes” menu item in the sidebar) and grouped by type (page, user, file). Now everyone in the team can directly use the dialog to jump to changes by other team members and preview them directly on the fly, even while someone else is still actively working on them.
 
-(image: changes-dialog.png class: screenshot-md)
+(image: changes-dialog.webp class: screenshot-md)
 
 ## Languages dropdown
 
 We’ve also improved the language dropdown to highlight changes in different translations.
 
-(image: languages-dropdown.png class: screenshot-sm)
+(image: languages-dropdown.webp class: screenshot-sm)
 
 ## Outlook
 

@@ -22,7 +22,7 @@ Text:
 
 For our very first (link: docs/reference/plugins/extensions/panel-areas text: Panel area), we will query a third-party REST API and display the results in a nice card layout:
 
-(image: movie-reviews-card-view.png)
+(image: movie-reviews-card-view.webp)
 
 As an example API, we will be using the (link: https://developer.nytimes.com/docs/articlesearch-product/1/overview text: NYT Article Search API), for which you need an API key. Feel free to use any other API or data from a database. Of course, if you do so, you will have to adapt the code where necessary.
 
@@ -169,7 +169,7 @@ in our plugin folder, and kirbyup will compile an `index.js` in the `moviereview
 
 If all went well, we will now see a new menu entry in the Panel dropdown navigation, and when we click on it, we can visit the newly created view that's still empty at this time.
 
-(image: movie-reviews-empty.png)
+(image: movie-reviews-empty.webp)
 
 ## A component for our data
 
@@ -253,7 +253,7 @@ moviereviews/
 
 To get more familiar with how this all plays together, play around a bit. Try to get other data in, e.g. from a database, a .csv file, another API or try to fetch some data from your Kirby installation. Adjust the data provider route as needed. Or simply change the layout to cardlets like in this screenshot:
 
-(image: movie-reviews-cardlets.png)
+(image: movie-reviews-cardlets.webp)
 
 To go further, check the (link: docs/cookbook/panel/advanced-panel-area text: advanced Panel area cookbook).
 

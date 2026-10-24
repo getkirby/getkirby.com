@@ -48,7 +48,7 @@ We are incredibly happy to have found two great partners for Kirby Konf who will
 
 (columns…)
 
-(image: uberspace.jpg)
+(image: uberspace.webp)
 
 ++++
 
@@ -62,7 +62,7 @@ We are incredibly happy to have found two great partners for Kirby Konf who will
 
 (columns…)
 
-(image: keycdn.jpg)
+(image: keycdn.webp)
 
 ++++
 
@@ -78,7 +78,7 @@ While flat-file by nature, Kirby also supports virtual pages from all sorts of s
 
 (columns…)
 
-(image: talking-shorts.jpg)
+(image: talking-shorts.webp)
 
 ++++
 
@@ -94,7 +94,7 @@ While flat-file by nature, Kirby also supports virtual pages from all sorts of s
 
 ++++
 
-(image: goose-gourmet.jpg)
+(image: goose-gourmet.webp)
 
 (…columns)
 

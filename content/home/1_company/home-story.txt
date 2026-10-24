@@ -48,7 +48,7 @@ PhoneSubtitle: Digital Agency
 
 ----
 
-PhoneImage: agency.jpg
+PhoneImage: agency.webp
 
 ----
 

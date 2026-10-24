@@ -8,7 +8,7 @@
 	<div class="buzz-entry">
 		<article>
 			<figure class="rounded overflow-hidden mb-6 shadow-lg" style="--aspect-ratio: 800/400">
-				<?= video($entry->video(), $entry->image('youtube.jpg'), [], [
+				<?= video($entry->video(), $entry->image('youtube.webp'), [], [
 					'loading' => $lazy ? 'lazy' : null
 				]) ?>
 			</figure>

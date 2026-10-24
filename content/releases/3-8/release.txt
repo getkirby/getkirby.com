@@ -6,7 +6,7 @@ Version: 3.8
 ----
 ogimage: opengraph.png
 ----
-Cover: - kirby-3-8.png
+Cover: - kirby-3-8.webp
 ----
 Description: Lost relations are a thing of the past with the new UUID and permalink features for pages, files and users.
 ----

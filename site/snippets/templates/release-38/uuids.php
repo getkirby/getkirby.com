@@ -40,7 +40,7 @@
 	]) ?>
 
 	<figure class="release-box mb-6" style="--aspect-ratio: 1558/688">
-		<?= img($page->image('uuids.png'), [
+		<?= img($page->image('uuids.webp'), [
 			'alt' => 'An illustration showing the new UUID system',
 			'src' => [
 				'width' => 1248
@@ -75,7 +75,7 @@
 
 	<div class="v38-uuid-grid">
 		<figure class="release-box" style="--aspect-ratio: 1123/682; grid-area: figure">
-			<img src="<?= $page->image('pickers.png')?->url() ?>" loading="lazy" alt="A screenshot of the updated picker fields">
+			<img src="<?= $page->image('pickers.webp')?->url() ?>" loading="lazy" alt="A screenshot of the updated picker fields">
 		</figure>
 
 		<div class="release-text-box" style="grid-area: text">

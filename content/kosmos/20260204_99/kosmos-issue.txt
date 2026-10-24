@@ -72,7 +72,7 @@ Thu April 16, 2026 at 19:00 CET
 
 ## Made with Kirby
 
-(image: 1_seashepherd.fr.png)
+(image: 1_seashepherd.fr.webp)
 [Sea Shepherd France](https://seashepherd.fr/)
 
 
@@ -95,12 +95,12 @@ We’ve also got some fantastic new plugins for you. Check out these fresh addit
 We truly believe that our partner program is all about building a strong network of reliable agencies and freelancers for Kirby. Here are our newcomers…
 
 (columns…)
-(image: enzo-volkmann.jpg)
+(image: enzo-volkmann.webp)
 **[Enzo Volkmann](https://getkirby.com/partners/enzo-volkmann)**
 Freelancer
 
 ++++
-(image: arno-schlipf.png)
+(image: arno-schlipf.webp)
 
 **[Arno Schlipf](https://getkirby.com/partners/arno-schlipf)**
 Freelance Designer and Developer

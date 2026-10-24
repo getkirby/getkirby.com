@@ -21,7 +21,7 @@ Kirby's (link: docs/reference/panel/fields/blocks text: blocks field) comes with
 ## Resources
 
 - (file: sample.mp3 text: A sample mp3 file)
-- (file: mr-pod.jpg text: A sample podcast cover)
+- (file: mr-pod.webp text: A sample podcast cover)
 
 ## Useful links
 - (link: docs/guide/plugins/basics#extensions text: Registering extensions)
@@ -31,7 +31,7 @@ Kirby's (link: docs/reference/panel/fields/blocks text: blocks field) comes with
 
 ## What we will be building
 
-(image: audio-block-panel-preview.png caption: Preview of our amazing audio block in the Panel)
+(image: audio-block-panel-preview.webp caption: Preview of our amazing audio block in the Panel)
 
 We are going to use the example of an audio block type to show you how to create custom block types for the blocks field from scratch, complete with an inline editable preview for the Panel using a single file component with a build process.
 
@@ -147,7 +147,7 @@ In our blueprint, we create two tabs, one for the general stuff and a second one
 
 When this block is open, the drawer will look like this:
 
-(image: audio-block-drawer.png)
+(image: audio-block-drawer.webp)
 ## File blueprints
 
 Since we want to prevent users from uploading non-audio files in the `source` field, we need a (link: docs/reference/panel/blueprints/file text: file blueprint), in which we can restrict file uploads via the `accept` property.
@@ -282,11 +282,11 @@ For more information how to list fieldsets, create groups of fieldsets etc., che
 
 Now head over to the Panel, fill in some data, and open the page on the frontend. It will look similar to this:
 
-(image: audio-block-frontend.png)
+(image: audio-block-frontend.webp)
 
 However, our block in the Panel currently looks like this:
 
-(image: audio-block-without-preview.png)
+(image: audio-block-without-preview.webp)
 
 We can surely do better. In the next step, we are going to change this and create a slightly more pleasant preview with an audio tag.
 
@@ -308,7 +308,7 @@ panel.plugin("cookbook/audio-block", {
 });
 ```
 
-(image: audio-block-creating-preview-step-one.png)
+(image: audio-block-creating-preview-step-one.webp)
 
 Not really what we want to end up with, but easy, right?
 
@@ -364,7 +364,7 @@ panel.plugin("cookbook/audio-block", {
 
 The computed `source` method checks if the file exists and returns an empty object otherwise. In the template we can now use the `v-if`/`v-else` directive to render either the audio element or a message that no audio file was selected if the URL is missing in that object.
 
-(image: audio-block-with-audio-tag.png)
+(image: audio-block-with-audio-tag.webp)
 
 Theoretically, we could now go ahead and put all our methods and the complete template into this file. Additional styling could be applied by creating an `index.css` file for our plugin.
 
@@ -475,7 +475,7 @@ As our first refinement step, we wrap the current HTML in a `k-block-figure` com
   </k-block-figure>
 </template>
 ```
-(image: audio-block-empty.png)
+(image: audio-block-empty.webp)
 
 We also add some missing pieces, i.e. the subtitle and the description.
 
@@ -591,7 +591,7 @@ export default {
 
 It starts to look like what we anticipated at the beginning:
 
-(image: audio-block-almost-there.png)
+(image: audio-block-almost-there.webp)
 ### Side quest: Getting the mime type through the API
 
 If you look closely, you will notice that we hard-coded the mime-type of the audio file all this time, because we don't have access to the mime type of the file through `content.source[0]`. In our example it doesn't really matter much because we limited the uploadable file types to `.mp3` files. But once we want to allow multiple files types or want to provide multiple file formats for the same audio file, we better find out how to get at the file object (who knows, maybe you need exactly that piece of information in one of your next custom blocks).
@@ -879,4 +879,4 @@ This will create the final `index.js` and `index.css` files that are now ready t
 
 In its different states the block now looks like this:
 
-(image: audio-block-final-states.png)
+(image: audio-block-final-states.webp)

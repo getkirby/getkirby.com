@@ -57,7 +57,7 @@ You can always find the current support status in our [security policy](https://
 
 ## Kirby in the wild
 
-(image: naturally-made.jpeg)
+(image: naturally-made.webp)
 [Nutramaxx Food GmbH](https://naturallymade.com)
 
 

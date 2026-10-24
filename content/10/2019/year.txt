@@ -10,11 +10,11 @@ We are still incredibly proud of this release, as it catapulted us into an entir
 
 The jump wasn't easy for our users. There were quite a few breaking changes and necessary steps to upgrade existing projects. Maybe because of the Kirby Next campaign or maybe because we have the best community in the world, the feedback was again overwhelmingly positive.
 
-(image: panel.png caption: The brand new Panel)
+(image: panel.webp caption: The brand new Panel)
 
-(image: producthunt.png caption: Our launch on Product Hunt went pretty well link: https://www.producthunt.com/posts/kirby-3-0)
+(image: producthunt.webp caption: Our launch on Product Hunt went pretty well link: https://www.producthunt.com/posts/kirby-3-0)
 
-(image: v3-website.png caption: v3 came with a brand new website and a maskot.)
+(image: v3-website.webp caption: v3 came with a brand new website and a maskot.)
 
 We changed our pricing model once again. After very insightful discussions with our supporters, we decided to remove personal licenses. Unfortunately, they were abused time and again over the years, and caused more financial damage instead of helping us move forward. We increased the regular price to €99, which is still the same price we offer today.
 
@@ -22,7 +22,7 @@ We also moved our shop from Fastspring to (link: https://paddle.com text: Paddle
 
 ## Meeting IRL
 
-(image: konf-planning.jpg caption: Sonja and Florian at 3st digital)
+(image: konf-planning.webp caption: Sonja and Florian at 3st digital)
 
 The idea to finally meet IRL circulated in the community for a while. The Kirby Next community made hilarious, half-serious plans to meet in a castle or giant villa in Italy.
 

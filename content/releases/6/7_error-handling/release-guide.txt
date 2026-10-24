@@ -30,7 +30,7 @@ When a request in a Panel view fails, the Panel opens the new request error dial
 - additional details from the exception, if there are any
 - the full stack trace in a collapsible section (in debug mode)
 
-(image: image 2.png)
+(image: image 2.webp)
 
 File paths are shortened to placeholders like `{kirby}`, `{site}` or `{index}` so that error responses don't expose the folder structure of your server.
 
@@ -51,13 +51,13 @@ This works for the same editors that the error page of your site already support
 
 The stack trace in the dialog is rendered by the new `<k-error-trace>` component. It lists every step that led to the error with file, line, class and function.
 
-(image: image 1.png)
+(image: image 1.webp)
 
 ## Validation error dialog
 
 When the Panel cannot save your changes because some fields are invalid, the new validation error dialog lists every issue, grouped by field. Instead of a single long error string, you see at a glance which fields need your attention and why.
 
-(image: image 3.png)
+(image: image 3.webp)
 
 ## For plugin developers
 

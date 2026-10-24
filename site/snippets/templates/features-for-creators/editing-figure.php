@@ -1,5 +1,5 @@
 <figure>
-	<?= img('blocks.png', [
+	<?= img('blocks.webp', [
 		'alt' => 'A screenshot of our blocks field',
 		'class' => 'rounded',
 		'lightbox' => true,

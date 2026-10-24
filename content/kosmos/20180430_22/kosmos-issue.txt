@@ -30,12 +30,12 @@ The next [Kirby Workshop](https://beyondtellerrand.com/events/duesseldorf-2018/w
 
 
 
-(image: paulduncombe.jpg size: banner)
+(image: paulduncombe.webp size: banner)
 [Paul Duncombe](https://paulduncombe.com)
 Artist
 
 
-(image: rpprt.jpg size: banner)
+(image: rpprt.webp size: banner)
 [RPPRT](http://rpprt.be)
 Community Marketeers
 

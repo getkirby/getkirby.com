@@ -39,10 +39,10 @@ Bastian created a [Pluginkit for Panel plugins](https://getkirby.com/docs/guide/
 
 ## Kirby in the Wild
 
-(image: studio-raven.png)
+(image: studio-raven.webp)
 [Studio Raven](https://www.studioraven.be)
 
-(image: strato-automation.png)
+(image: strato-automation.webp)
 [Strato Automation](http://stratoautomation.com/en/)
 
 ## Kirby Plugins

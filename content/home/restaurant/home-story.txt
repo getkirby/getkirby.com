@@ -7,9 +7,9 @@ Filesystem:
 ```filesystem
 content/
     restaurant/
-      restaurant-cover.jpg
+      restaurant-cover.webp
       restaurant-3.jpg
-      restaurant-2.jpg
+      restaurant-2.webp
       restaurant-1.jpg
       restaurant.txt
 ```

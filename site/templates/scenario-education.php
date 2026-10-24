@@ -6,7 +6,7 @@ snippet('templates/features/section', [
 	'title' => 'Transform your university’s digital presence',
 	'text'  => 'Kirby delivers a powerful and user-friendly content management system tailored for higher education. Streamlined content updates and multi-language support simplify managing your website and let your team focus on providing exceptional educational experiences.',
 	'figure' => [
-		'image' => 'campus.png',
+		'image' => 'campus.webp',
 		'alt'   => 'A photo of three students entering a university campus',
 	],
 	'features' => [
@@ -45,7 +45,7 @@ snippet('templates/features/section', [
 	'title' => 'Fast, fair & mighty',
 	'text'  => 'Kirby provides universities with a flexible and reliable platform. Its robust features allow you to improve the overall digital experience for students and staff alike. All for a comparatively small fee.',
 	'figure' => [
-		'image' => 'graduates.png',
+		'image' => 'graduates.webp',
 		'alt'   => 'A photo of university graduates',
 	],
 	'features' => [

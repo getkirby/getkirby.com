@@ -29,7 +29,7 @@
 		<?php snippet('templates/release-4/teaser', ['section' => $section]) ?>
 	</div>
 	<figure class="release-box bg-light" style="grid-area: login">
-		<?= img($section->image('passkey-login.png'), [
+		<?= img($section->image('passkey-login.webp'), [
 			'alt' => 'Panel login screen with a “Login with passkey” button above the password login',
 			'src' => [
 				'width' => 450
@@ -42,7 +42,7 @@
 		]) ?>
 	</figure>
 	<figure class="release-box bg-dark" style="grid-area: register">
-		<?= img($section->image('passkey-register.png'), [
+		<?= img($section->image('passkey-register.webp'), [
 			'alt' => 'Security drawer listing a registered passkey and a form to create a new one',
 			'src' => [
 				'width' => 434

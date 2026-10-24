@@ -45,7 +45,7 @@ With the new [Plugin Creator](https://getkirby.com/plugins/create), the setup pr
 
 ## Kirby in the wild
 
-(image: the-penguin-project.png)
+(image: the-penguin-project.webp)
 [The Penguin Project](http://thepenguinproject.com/)
 
 ## Cookbook

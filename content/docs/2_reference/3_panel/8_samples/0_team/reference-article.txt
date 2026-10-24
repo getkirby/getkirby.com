@@ -68,7 +68,7 @@ tabs:
 
 ### Result
 
-(image: team.png)
+(image: team.webp)
 
 ### Team member subpage
 
@@ -130,7 +130,7 @@ info: "{{ file.dimensions }}"
 
 ### Result
 
-(image: team-member.png)
+(image: team-member.webp)
 
 ## Example template
 

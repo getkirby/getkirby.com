@@ -50,13 +50,13 @@
 	<div class="columns mb-6" style="--columns: 3">
 		<div class="release-box bg-light">
 			<figure style="--aspect-ratio: 1/1">
-				<img src="<?= $page->image('pages.png')->url() ?>" loading="lazy" alt="The card design shows the new rounded corners that have been introduced throughout the Panel">
+				<img src="<?= $page->image('pages.webp')->url() ?>" loading="lazy" alt="The card design shows the new rounded corners that have been introduced throughout the Panel">
 			</figure>
 		</div>
 
 		<div class="release-box bg-light">
 			<figure style="--aspect-ratio: 1/1">
-				<img src="<?= $page->image('fields.png')->url() ?>" loading="lazy" alt="Fields also feature a more rounded look">
+				<img src="<?= $page->image('fields.webp')->url() ?>" loading="lazy" alt="Fields also feature a more rounded look">
 			</figure>
 		</div>
 
@@ -86,7 +86,7 @@
 		<div class="release-padded-box bg-light">
 			<h3 class="mb-6">New file icons</h3>
 			<figure style="--aspect-ratio: 1968/834">
-				<img src="<?= $page->image('fileicons.png')->url() ?>" loading="lazy" alt="The placeholder icons for all kinds of file types – documents, videos, spreadsheets, etc.">
+				<img src="<?= $page->image('fileicons.webp')->url() ?>" loading="lazy" alt="The placeholder icons for all kinds of file types – documents, videos, spreadsheets, etc.">
 			</figure>
 		</div>
 	</div>

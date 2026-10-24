@@ -45,7 +45,7 @@
 	<figure class="v4-link-hero release-padded-box bg-light flex items-center" style="grid-area: hero">
 		<?php snippet('templates/release-4/image', [
 			'alt' => 'Our new link field with the new file browser',
-			'img' => $section->image('file-link.png')->resize(1200)
+			'img' => $section->image('file-link.webp')->resize(1200)
 		]) ?>
 	</figure>
 	<figure class="v4-link-code release-code-box text-lg" style="grid-area: code">
@@ -54,7 +54,7 @@
 	<figure class="v4-link-dropdown release-padded-box bg-light" style="grid-area: dropdown">
 		<?php snippet('templates/release-4/image', [
 			'alt' => 'Dropdown with all available link types (URL, Page, File, Email and Phone Number)',
-			'img' => $section->image('link-types.png')
+			'img' => $section->image('link-types.webp')
 		]) ?>
 	</figure>
 </div>

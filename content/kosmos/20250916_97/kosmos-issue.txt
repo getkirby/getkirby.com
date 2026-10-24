@@ -61,14 +61,14 @@ If you work with Kirby CMS let's meet up, celebrate the release of Kirby 5 and g
 
 ## Made with Kirby
 
-(image: planqc.jpg)
+(image: planqc.webp)
 [planqc](https://planqc.eu)
 
 ## Certified partners
 
 (columns…)
 
-(image: stripe.png)
+(image: stripe.webp)
 
 ++++
 

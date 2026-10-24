@@ -31,7 +31,7 @@ Text:
 
 Plugin licenses are now shown in the plugins table with an additional column to indicate their status. Licenses can link to their license document, a custom license shop or open a custom dialog to activate the license. [#6738](https://github.com/getkirby/kirby/pull/6738)
 
-(image: plugin-licenses.png)
+(image: plugin-licenses.webp)
 
 - New `Kirby\Plugin\License` class
 - New `Kirby\Plugin\LicenseStatus` class

@@ -39,7 +39,7 @@ Kirby::plugin(
 );
 ```
 
-(image: plugin-licenses.png)
+(image: plugin-licenses.webp)
 
 The `link` is opened when a user clicks the license name. It can point at your license document or at your shop.
 

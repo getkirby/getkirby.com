@@ -27,14 +27,14 @@ It's always inspiring to see what others are creating with Kirby. This month’s
 
 (columns…)
 
-(image: diverently.jpg)
+(image: diverently.webp)
 
 [Diverently](https://www.diverently.com)
 Digital Media
 
 ++++
 
-(image: timothy-achumba.jpg)
+(image: timothy-achumba.webp)
 
 [Timothy Achumba](http://timothyachumba.com)
 Designer at Microsoft
@@ -54,7 +54,7 @@ Designer at Microsoft
 
 (columns…)
 
-(image: interfacelovers.jpg)
+(image: interfacelovers.webp)
 
 ++++
 
@@ -69,11 +69,11 @@ RelMeAuth is a [proposed web standard ](http://microformats.org/wiki/RelMeAuth) 
 
 ++++
 
-(image: kirby-cookbook.jpg)
+(image: kirby-cookbook.webp)
 
 ++++
 
-(image: decoupled-kirby.jpg)
+(image: decoupled-kirby.webp)
 
 ++++
 

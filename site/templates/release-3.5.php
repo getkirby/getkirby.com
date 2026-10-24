@@ -43,7 +43,7 @@
 	</article>
 	<figure>
 		<a class="block bg-light p-6" href="<?= url('docs/reference/panel/fields/blocks') ?>">
-			<?php if ($image = $page->image('blocks.jpg')): ?>
+			<?php if ($image = $page->image('blocks.webp')): ?>
 			<img
 				loading="lazy"
 				src="<?= $image->resize(700)->url() ?>"
@@ -61,7 +61,7 @@
 <section class="columns mb-36" style="--columns: 2; --gap: var(--spacing-24)">
 	<figure>
 		<a href="<?= url('docs/reference/panel/fields/layout') ?>">
-			<?php if ($image = $page->image('layouts.jpg')): ?>
+			<?php if ($image = $page->image('layouts.webp')): ?>
 			<img
 				loading="lazy"
 				class="shadow-xl rounded"
@@ -106,13 +106,13 @@
 
 			<div class="mb-12">
 				<?php snippet('templates/release-35/image', [
-					'image' => $page->image('login-passwordless.jpg')
+					'image' => $page->image('login-passwordless.webp')
 				]) ?>
 			</div>
 
 			<div class="mb-12">
 				<?php snippet('templates/release-35/image', [
-					'image' => $page->image('login-code.jpg')
+					'image' => $page->image('login-code.webp')
 				]) ?>
 			</div>
 			<div>
@@ -129,17 +129,17 @@
 			</div>
 			<div class="mb-12">
 				<?php snippet('templates/release-35/image', [
-					'image' => $page->image('password-reset-email.jpg'),
+					'image' => $page->image('password-reset-email.webp'),
 				]) ?>
 			</div>
 			<div class="mb-12">
 				<?php snippet('templates/release-35/image', [
-					'image' => $page->image('password-reset-code.jpg')
+					'image' => $page->image('password-reset-code.webp')
 				]) ?>
 			</div>
 			<div class="mb-12">
 				<?php snippet('templates/release-35/image', [
-					'image' => $page->image('password-reset.jpg')
+					'image' => $page->image('password-reset.webp')
 				]) ?>
 			</div>
 			<div>
@@ -156,12 +156,12 @@
 			</div>
 			<div class="mb-12">
 				<?php snippet('templates/release-35/image', [
-					'image' => $page->image('login.jpg')
+					'image' => $page->image('login.webp')
 				]) ?>
 			</div>
 			<div class="mb-12">
 				<?php snippet('templates/release-35/image', [
-					'image' => $page->image('login-code.jpg')
+					'image' => $page->image('login-code.webp')
 				]) ?>
 			</div>
 			<div>
@@ -177,46 +177,46 @@
 	<div class="mb-36 masonry" style="--columns-sm: 1; --columns-md: 2; --columns-lg: 4; --gap: var(--spacing-12)">
 		<?php snippet('templates/release-35/feature', [
 			'headline' => 'Date & Time',
-			'image' => $page->image('date.jpg'),
+			'image' => $page->image('date.webp'),
 			'text' => 'The new date and time fields are a joy to work with and open completely new ways to enter dates with custom date formats and intervals.',
 			'link' => 'docs/reference/panel/fields/date'
 		]) ?>
 
 		<?php snippet('templates/release-35/feature', [
 			'headline' => 'Writer field',
-			'image' => $page->image('writer.jpg'),
+			'image' => $page->image('writer.webp'),
 			'text' => 'You don’t need the full power of the Blocks? Maybe just some inline HTML? Then the new Writer field is here for you. Create single-line HTML with formats like bold, italic, underline or links.',
 			'link' => 'docs/reference/panel/fields/writer'
 		]) ?>
 
 		<?php snippet('templates/release-35/feature', [
 			'headline' => 'List field',
-			'image' => $page->image('list.jpg'),
+			'image' => $page->image('list.webp'),
 			'text' => 'The new list field can be used if you want to create simple ordered or unordered lists in a more visual way than with Markdown.',
 			'link' => 'docs/reference/panel/fields/list'
 		]) ?>
 
 		<?php snippet('templates/release-35/feature', [
 			'headline' => 'Quicksearch',
-			'image' => $page->image('search.jpg'),
+			'image' => $page->image('search.webp'),
 			'text' => 'The Panel search has been redesigned and now shows nice previews for pages, files and users.'
 		]) ?>
 
 		<?php snippet('templates/release-35/feature', [
 			'headline' => 'Title & URL',
-			'image' => $page->image('unified-dialog.jpg'),
+			'image' => $page->image('unified-dialog.webp'),
 			'text' => 'Changing the page title or the page URL is now done in the same dialog. With this simplified workflow you can instantly see when your page title and slug no longer match and should be updated.'
 		]) ?>
 
 		<?php snippet('templates/release-35/feature', [
 			'headline' => 'Status icons',
-			'image' => $page->image('status-icons.jpg'),
+			'image' => $page->image('status-icons.webp'),
 			'text' => 'Kirby\'s page status icons now have distinctive forms to make them accessible for people with color blindness.'
 		]) ?>
 
 		<?php snippet('templates/release-35/feature', [
 			'headline' => 'New starterkit',
-			'image' => $page->image('starterkit.jpg'),
+			'image' => $page->image('starterkit.webp'),
 			'class' => 'shadow',
 			'text' => 'We completely overhauled Kirby’s Starterkit to feature a new design together with the new blocks and layout fields.',
 			'link' => option('github.url') . '/starterkit'

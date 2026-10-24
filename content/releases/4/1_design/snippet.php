@@ -36,7 +36,7 @@
 </style>
 
 <figure class="release-box bg-light mb-6">
-	<?= img($section->image('company.png'), [
+	<?= img($section->image('company.webp'), [
 		'src' => [
 			'width' => 1248
 		],

@@ -216,31 +216,31 @@ mark {
 		<ul class="hero-images">
 			<li>
 				<figure>
-					<?= image('bastian.jpg')->crop(250, 300) ?>
+					<?= image('bastian.webp')->crop(250, 300) ?>
 					<figcaption>Bastian <span>Allgeier</span></figcaption>
 				</figure>
 			</li>
 			<li>
 				<figure>
-					<?= image('sonja.jpg')->crop(250, 300) ?>
+					<?= image('sonja.webp')->crop(250, 300) ?>
 					<figcaption>Sonja <span>Broda</span></figcaption>
 				</figure>
 			</li>
 			<li>
 				<figure>
-					<?= image('lukas.jpg')->crop(250, 300) ?>
+					<?= image('lukas.webp')->crop(250, 300) ?>
 					<figcaption>Lukas <span>Bestle</span></figcaption>
 				</figure>
 			</li>
 			<li>
 				<figure>
-					<?= image('nico.jpg')->crop(250, 300) ?>
+					<?= image('nico.webp')->crop(250, 300) ?>
 					<figcaption>Nico <span>Hoffmann</span></figcaption>
 				</figure>
 			</li>
 			<li>
 				<figure>
-					<?= image('ahmet.png')->crop(250, 300) ?>
+					<?= image('ahmet.webp')->crop(250, 300) ?>
 					<figcaption>Ahmet <span>Bora</span></figcaption>
 				</figure>
 			</li>

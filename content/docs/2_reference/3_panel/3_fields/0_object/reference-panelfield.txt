@@ -14,7 +14,7 @@ The object field allows to create data objects. This is handy for more complex s
 
 A typical example would be contact data for an author in a blog article, multiple layout settings for images in your template, custom settings for a theme, SEO configuration etc.
 
-(image: object.png)
+(image: object.webp)
 
 ## Example
 

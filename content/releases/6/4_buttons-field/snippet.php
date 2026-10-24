@@ -21,7 +21,7 @@
 		<?php snippet('templates/release-4/teaser', ['section' => $section]) ?>
 	</div>
 	<figure class="release-box bg-dark p-12" style="grid-area: image">
-		<?= img($section->image('image.png'), [
+		<?= img($section->image('image.webp'), [
 			'alt' => 'A Panel form showing the new buttons field with multiple actions',
 			'src' => [
 				'width' => 760

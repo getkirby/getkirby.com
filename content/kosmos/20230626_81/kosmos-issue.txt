@@ -40,13 +40,13 @@ With almost 30 partners to date, our [Kirby partner network](https://getkirby.co
 
 [Find the right program and join now!](https://getkirby.com/partners/join)
 
-(image: partners.jpg)
+(image: partners.webp)
 
 
 ## Kirby in the wild
 
 
-(image: tinimalitius.jpg)
+(image: tinimalitius.webp)
 
 [Tini Malitius](https://tinimalitius.com/)
 

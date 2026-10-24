@@ -35,7 +35,7 @@ Save [20% off of the regular price for every Kirby license](https://getkirby.com
 We gave the old plugin directory on our website a [complete overhaul](https://getkirby.com/plugins). It is now much more visual and will hopefully make it a lot easier for you to find the right plugin for your needs.
 
 
-(image: plugins.png)
+(image: plugins.webp)
 
 We will work on improving it even more in the next weeks and months, e.g. add compatibility data and much more. Stay tuned. And as always, don't hesitate to send us your feedback.
 
@@ -51,14 +51,14 @@ With the company stuff now out of the way, we have a lot more time again to conc
 
 ## New theme directory
 
-(image: 1_themes.png)
+(image: 1_themes.webp)
 
 [Kirby themes/templates](https://getkirby.com/themes) finally have the home that they deserve: right on our website. For theme developers, this is your new place to showcase your beautiful themes. And for users, it will be much easier to browse and find what they like.
 
 
 ## Kirby in the wild
 
-(image: tapsody.png)
+(image: tapsody.webp)
 
 [Tapsody app](https://www.tapsody.app/)
 

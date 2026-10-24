@@ -14,7 +14,7 @@ Description: The new Editor plugin lifted editing to a whole new level.
 
 ----
 
-Cover: kirby-3-3.png
+Cover: kirby-3-3.webp
 
 ----
 

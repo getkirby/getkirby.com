@@ -21,7 +21,7 @@ Please **make a backup** of your site in any case.
 
 Kirby 4 requires PHP 8.1, 8.2 or 8.3. You can check your current PHP version in the system view in the Panel:
 
-(image: system-view.png)
+(image: system-view.webp)
 
 If you see **PHP 8.1.\*, PHP 8.2.\* or PHP 8.3.\***, you are already good to go.
 

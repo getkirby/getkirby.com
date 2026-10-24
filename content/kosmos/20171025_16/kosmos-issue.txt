@@ -29,15 +29,15 @@ In the meantime, we are continuing to improve Kirby 2 and just published [Kirby 
 
 ## Kirby in the Wild
 
-(image: 2pac.jpg)
+(image: 2pac.webp)
 [Tupac Amaru Shakur (1971-1996)](http://www.2pac.com)
 Artist
 
-(image: integrated-2017.jpg)
+(image: integrated-2017.webp)
 [Integrated 2017](https://integratedconf.org)
 Conference
 
-(image: kueste-gegen-plastik.jpg)
+(image: kueste-gegen-plastik.webp)
 [Küste gegen Plastik](https://www.kueste-gegen-plastik.de)
 Nonprofit organization fighting the toxic impact of plastic on oceans
 
@@ -67,27 +67,27 @@ The collection of available themes on (http://getkirby-themes.com) has grown aga
 
 (columns…)
 
-(image: symmetric-theme.jpg)
+(image: symmetric-theme.webp)
 
 [Symmetric](https://cj-lab.fr/themes/symmetric/).
 Symmetric is a nice multi-purpose theme by Constantin Holy.
 
 ++++
 
-(image: alpha-theme.jpg)
+(image: alpha-theme.webp)
 [Alpha](http://t.starck.io/alpha/)
 Alpha is a minimalistic blog theme created by Christopher Boutillé.
 
 ++++
 
-(image: uime-theme.jpg)
+(image: uime-theme.webp)
 
 [UI-ME](https://cj-lab.fr/themes/uime/)
 UI-ME is a customizable multi-purpose theme created by Constantin Joly.
 
 ++++
 
-(image: kollide-theme.jpg)
+(image: kollide-theme.webp)
 [Kollide](http://themes.yordanoff.net/kollide/)
 Kollide is a very feature-rich Portfolio Theme created by Joro Yordanov.
 
@@ -98,7 +98,7 @@ Julian Oster shares his new [workflow with Kirby and Git](https://jlnostr.de/blo
 
 ++++
 
-(image: kirby-workflow-with-git.jpg)
+(image: kirby-workflow-with-git.webp)
 
 ++++
 ## Javascript
@@ -107,7 +107,7 @@ Julian Oster shares his new [workflow with Kirby and Git](https://jlnostr.de/blo
 
 ++++
 
-(image: draggable.jpg)
+(image: draggable.webp)
 
 ++++
 
@@ -117,7 +117,7 @@ Julian Oster shares his new [workflow with Kirby and Git](https://jlnostr.de/blo
 
 ++++
 
-(image: essential-image-optimization.jpg)
+(image: essential-image-optimization.webp)
 
 (…columns)
 

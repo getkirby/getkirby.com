@@ -14,7 +14,7 @@ Text:
 
 With the `panel.viewButtons` config option, you can customize which buttons to show on different views in the Panel (e.g. page, site, file, user, language).
 
-(image: buttons.png)
+(image: buttons.webp)
 
 ## Default buttons for a Panel view type
 

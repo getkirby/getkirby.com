@@ -97,13 +97,13 @@ fields:
 
 It uses a custom `create` dialog to create new bookmarks quickly, with as much content as time and mood allow at the moment of creating a new entry:
 
-(image: create-dialog.png)
+(image: create-dialog.webp)
 
 Each bookmark is assigned the intended Kosmos issue as a tag, along with a category that later determines the section it appears in when the Kosmos edition is created.
 
 The categories are stored in a blocks field, which has the added advantage of providing a unique ID for free, and can be easily reordered:
 
-(image: categories.png)
+(image: categories.webp)
 
 Over time, we grew more and more unhappy with our newsletter provider. Using their editor was a pain and always carried the risk of overwriting content, and destroying the layout. On top of that, we had to create a separate version for the website. So why not turn this little bookmark tool into something more powerful? Why not create everything in one place, and then just send it to some API? Enter…
 
@@ -119,7 +119,7 @@ Three of these buttons you might see in the screenshot above:
 
 Let’s take a closer look at what the `Create issue` button does.
 
-(image: create-issue.png)
+(image: create-issue.webp)
 
 Clicking it opens a dialog to select the issue to create. In this example, there are only bookmarks for one issue, so we select 100. Another click on `Create` then performs the “magic” in the background. This logic is implemented via a `createIssue()` method in the BookmarksPage model (for the purposes of this recipe, I removed some irrelevant stuff):
 
@@ -307,7 +307,7 @@ When it’s ready to be sent, its status is changed to `listed`. It can then be 
 
 This is what the final result looks like:
 
-(image: final-kosmos-issue.png)
+(image: final-kosmos-issue.webp)
 
 ## Sending newsletters
 

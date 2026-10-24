@@ -85,7 +85,7 @@ If you work with Kirby CMS, let’s meet up, get to know each other, and share w
 
 ## Made with Kirby
 
-(image: lassemajasdetektivbyra.se.png)
+(image: lassemajasdetektivbyra.se.webp)
 [LasseMajas Detektivbyrå](https://www.lassemajasdetektivbyra.se/)
 
 
