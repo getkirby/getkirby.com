@@ -34,8 +34,6 @@ extract([
   <link rel="dns-prefetch" href="https://cdn.paddle.com">
 <?php endif ?>
 
-<link href="<?= url('releases.rss') ?>" rel="alternate" type="application/rss+xml" title="Kirby Releases" />
-<link href="<?= url('kosmos.rss') ?>" rel="alternate" type="application/rss+xml" title="Kirby Kosmos Archive" />
 
 <?= $meta->robots() ?>
 <?= $meta->jsonld() ?>
