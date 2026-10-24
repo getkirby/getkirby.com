@@ -68,7 +68,7 @@ fields:
       text: Generate!
 ```
 
-(image: slug-field-wizard-option.png)
+(image: slug-field-wizard-option.webp)
 
 ## Allow option
 

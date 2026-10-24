@@ -240,7 +240,7 @@ If you use PHPStorm as your IDE, go to *Preferences > PHP > Quality Tools*. Then
 
 Under *Options > Ruleset*, select *Custom* and then your `.php-cs-fixer.dist.php` configuration file.
 
-(image: phpcsfixer-phpstorm.png)
+(image: phpcsfixer-phpstorm.webp)
 
 Next, still in Preferences, go to *Editor > Inspections > PHP > Quality Tools*, click on `PHP CS Fixer inspection`. In the inspections window, enable` PHP CS Fixer validation` if not yet enabled.
 
