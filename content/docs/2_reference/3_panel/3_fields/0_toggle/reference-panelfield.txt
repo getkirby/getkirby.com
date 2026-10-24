@@ -48,10 +48,6 @@ fields:
         - Yay
 ```
 
-<info>
-Note: The values `No` and `Yes` will not work out of the box as the YAML parser will interpret them as booleans. You need to quote them as `"No"` and `"Yes"`.
-</info>
-
 ### Translated text
 
 ```yaml

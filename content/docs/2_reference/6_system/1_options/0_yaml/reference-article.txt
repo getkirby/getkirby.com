@@ -1,13 +1,19 @@
-Intro: Enables the Symfony YAML parser
+Intro: Sets the YAML parser
 
 ----
 
 Text:
 
-You can set the `yaml.handler` option to enable the Symfony YAML parser, which will replace the Spyc YAML parser in one of the next major releases. For now, the Spyc YAML parser is the default.
+Kirby reads blueprints and the YAML in your content files, e.g. of structure or object fields, with the [Symfony YAML](https://symfony.com/doc/current/components/yaml.html) parser. It closely follows the YAML specification. Some notations that more forgiving parsers accept are errors, e.g. tabs for indentation or unquoted values that start with `@`.
 
-```php
+If your blueprints or content can't be read by Symfony YAML yet, you can switch to the older Spyc parser in the meantime:
+
+```php "/site/config/config.php"
 return [
-	'yaml.handler' => 'symfony'
+	'yaml.handler' => 'spyc'
 ];
 ```
+
+<warning>
+The Spyc parser is deprecated and will be removed in a future major version.
+</warning>
