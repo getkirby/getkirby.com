@@ -75,6 +75,21 @@ class ReflectableClassMethodTest extends TestCase
 		$this->assertTrue($reflectable->isMagic());
 	}
 
+	public function testMutationDescription(): void
+	{
+		$reflectable = new ReflectableClassMethod('Bar\Den', 'immutable');
+		$this->assertStringStartsWith('This method does not modify the existing `$den` object', $reflectable->mutationDescription());
+
+		$reflectable = new ReflectableClassMethod('Bar\Den', 'mutable');
+		$this->assertSame('This method modifies the existing `$den` object it is applied to and returns it again.', $reflectable->mutationDescription());
+
+		// methods that return something else, nothing or that are static
+		$this->assertNull((new ReflectableClassMethod('Bar\Den', 'string'))->mutationDescription());
+		$this->assertNull((new ReflectableClassMethod('Bar\Den', 'untyped'))->mutationDescription());
+		$this->assertNull((new ReflectableClassMethod('Bar\Den', 'void'))->mutationDescription());
+		$this->assertNull((new ReflectableClassMethod('Bar\Fox', 'barStatic'))->mutationDescription());
+	}
+
 	public function testName(): void
 	{
 		$reflectable = new ReflectableClassMethod('Bar\Fox', 'bar');

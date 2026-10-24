@@ -139,17 +139,17 @@ class ReflectableClassMethod extends ReflectableFunction
 	{
 		$returns = $this->returns();
 
-		if ($this->isStatic() === true || $returns?->isVoid() === true) {
+		if ($this->isStatic() === true || $returns === null) {
 			return null;
 		}
 
-		$object = '$' . strtolower($this->class(true));
+		$object = '`$' . strtolower($this->class(true)) . '`';
 
-		if ($returns->isImmutable() === true) {
-			return 'This method does not modify the existing `' . $object . '` object but returns a new object with the changes applied. (link: docs/guide/templates/php-api#immutable-objects text: Learn more →)';
-		}
-
-		return 'This method modifies the existing `' . $object . '` object it is applied to and returns it again.';
+		return match (true) {
+			$returns->isImmutable() => 'This method does not modify the existing ' . $object . ' object but returns a new object with the changes applied. (link: docs/guide/templates/php-api#immutable-objects text: Learn more →)',
+			$returns->isMutable()   => 'This method modifies the existing ' . $object . ' object it is applied to and returns it again.',
+			default                 => null
+		};
 	}
 
 	/**

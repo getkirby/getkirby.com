@@ -53,3 +53,29 @@ class Vixen
 	{
 	}
 }
+
+class Den
+{
+	public function immutable(): static
+	{
+	}
+
+	/**
+	 * @return $this
+	 */
+	public function mutable(): static
+	{
+	}
+
+	public function string(): string
+	{
+	}
+
+	public function untyped()
+	{
+	}
+
+	public function void(): void
+	{
+	}
+}
