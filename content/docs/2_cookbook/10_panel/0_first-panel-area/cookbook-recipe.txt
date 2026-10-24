@@ -18,7 +18,7 @@ Text:
 
 For our very first (link: docs/reference/plugins/extensions/panel-areas text: Panel area), we will query a public API and display the results in a nice card layout:
 
-(image: movie-reviews-card-view.png)
+(image: movie-reviews-card-view.webp)
 
 <info>
 For the purposes of this recipe, we assume you have read the (link: docs/guide/plugins/plugin-setup-panel text: Panel plugin setup guide) on how to get started with our Panel plugin bundler (link: https://github.com/johannschopplich/kirbyup text: kirbyup).
@@ -158,7 +158,7 @@ in our plugin folder, and kirbyup will compile an `index.js` in the `moviereview
 
 If all went well, we will now see a new menu entry in the Panel dropdown navigation, and when we click on it, we can visit the newly created view that's still empty at this time.
 
-(image: movie-reviews-empty.png)
+(image: movie-reviews-empty.webp)
 
 ## A component for our data
 
@@ -247,6 +247,6 @@ moviereviews/
 
 To get more familiar with how this all plays together, play around a bit. Try to get other data in, e.g. from a database, a .csv file, another API or try to fetch some data from your Kirby installation. Adjust the data provider route as needed. Or simply change the layout to cardlets like in this screenshot:
 
-(image: movie-reviews-cardlets.png)
+(image: movie-reviews-cardlets.webp)
 
 

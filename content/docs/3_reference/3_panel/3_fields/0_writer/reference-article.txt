@@ -18,7 +18,7 @@ Guide: blueprints/fields
 
 Text:
 
-(image: writer.png)
+(image: writer.webp)
 
 ## Example
 
@@ -67,7 +67,7 @@ fields:
         - strike
 ```
 
-(image: writer.png)
+(image: writer.webp)
 
 ## Format/node options
 
@@ -86,7 +86,7 @@ fields:
       - orderedList
 ```
 
-(image: writer-extended.png)
+(image: writer-extended.webp)
 
 </since>
 ## How to use in templates/snippets

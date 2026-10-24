@@ -55,13 +55,13 @@ echo json_encode($json);
 
 Now, when you access `domain.com/blog.json`, you should see the last 20 posts formatted in JSON. Nice isn't it?
 
-(image: json.png)
+(image: json.webp)
 
 ## Importing data in Figma
 
 Now we will move on to Figma. We are going to design a post for the feed and another one for a story. Something simple like this:
 
-(image: figma1.png)
+(image: figma1.webp)
 
 <info>
 Note that the titles of the layers must be the same as the keys of the JSON we created: `title`, `imagen`, `date`, and `text`. The image will be a rectangle with the fill as an image.
@@ -69,7 +69,7 @@ Note that the titles of the layers must be the same as the keys of the JSON we c
 
 Ok, now let's connect the content we have in Kirby with our designs in Figma. How do we do it? With the "JSON to Figma" plugin:
 
-(image: json-to-figma.png)
+(image: json-to-figma.webp)
 
 To import the JSON from our website, copy the URL, e.g. `https://yourwebpage.com/blog.json`, then click on the "From Clipboard Link" button of the plugin.
 
@@ -79,13 +79,13 @@ Alternatively, if you are working locally, you can save the JSON to file and the
 
 Now select the frame “Instagram post - 1” and the keys to use in the plugin, then click on the "Populate selected" button:
 
-(image: figma-4.png)
+(image: figma-4.webp)
 
 And "automagically" our design will be filled with the last post that we published in Kirby. The only thing left to do is to export the frame as an image and publish it on Instagram.
 
 This is very simple, but imagine all the things that can be automated in this way. I hope it will be useful for your workflow.
 
-(image: figma-5.png)
+(image: figma-5.webp)
 
 ----
 
