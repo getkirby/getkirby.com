@@ -48,7 +48,7 @@ image:
 
 ### Result
 
-(image: shop.png)
+(image: shop.webp)
 
 ## Single product
 
@@ -110,7 +110,7 @@ info: "{{ file.dimensions }}"
 
 ### Result
 
-(image: product.png)
+(image: product.webp)
 
 ## Shop template
 

@@ -6,7 +6,7 @@ Text:
 
 For our very first Panel view, we will query a public API and display the results in a nice card layout.
 
-(image: movie-reviews-custom-view.jpg)
+(image: movie-reviews-custom-view.webp)
 
 <info>
 For the purposes of this recipe, we assume you have read the (link: docs/guide/plugins/plugin-setup-panel text: Panel plugin setup guide) on how to get started with our Panel plugin bundler (link: https://github.com/johannschopplich/kirbyup text: kirbyup).
@@ -127,7 +127,7 @@ in our plugin folder, and kirbyup will compile an `index.js` in the `moviereview
 
 If all went well, we will now see a new menu entry in the Panel dropdown navigation, and when we click on it, we can visit the newly created view that's still empty at this time.
 
-(image: empty-panel-view.jpg)
+(image: empty-panel-view.webp)
 
 ## A component for our data
 
@@ -181,7 +181,7 @@ export default {
 
 If we now return to the Panel, our view has changed and will show the cards component with a single empty card in it.
 
-(image: panel-view-with-card.jpg)
+(image: panel-view-with-card.webp)
 
 
 ## Connecting the data

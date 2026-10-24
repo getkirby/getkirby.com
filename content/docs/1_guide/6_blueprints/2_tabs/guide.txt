@@ -7,7 +7,7 @@ Intro: When your blueprints get more complex, tabs help to keep them organized.
 
 Text:
 
-(image: tabs.png)
+(image: tabs.webp)
 
 ## Defining tabs
 
@@ -39,7 +39,7 @@ tabs:
       # layout
 ```
 
-(image: tabs-screen.png)
+(image: tabs-screen.webp)
 
 ### Full example
 
