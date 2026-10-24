@@ -16,7 +16,6 @@
     <div class="header-content relative flex items-center">
       <?php snippet('layouts/logo') ?>
       <?php snippet('layouts/menu') ?>
-      <?php snippet('layouts/search', ['area' => 'reference']) ?>
     </div>
   </header>
 
