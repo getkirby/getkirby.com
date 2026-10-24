@@ -14,7 +14,11 @@ class SiteMeta
 	{
 		$robots  = 'User-agent: *' . PHP_EOL;
 		$robots .= 'Allow: /' . PHP_EOL;
-		$robots .= 'Sitemap: ' . url('sitemap.xml');
+
+		// Archived docs are not indexed (see `PageMeta::robots()`)
+		if (App::instance()->option('archived') !== true) {
+			$robots .= 'Sitemap: ' . url('sitemap.xml');
+		}
 
 		return App::instance()
 			->response()

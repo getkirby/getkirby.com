@@ -116,6 +116,12 @@ class PageMeta
 		$html   = [];
 		$robots = $this->get('robots', true);
 
+		// Archived docs should not compete with
+		// the current docs in search results
+		if ($this->page->kirby()->option('archived') === true) {
+			$robots = new Field($this->page, 'robots', 'noindex');
+		}
+
 		if ($robots->isNotEmpty()) {
 			$html[] = Html::tag('meta', null, [
 				'name'    => 'robots',
