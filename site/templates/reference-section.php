@@ -5,7 +5,6 @@
 
 <?php slot() ?>
 <div class="mb-24">
-  <?php snippet('templates/reference/advanced') ?>
   <?php snippet('templates/reference/section', $entries) ?>
 </div>
 

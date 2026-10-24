@@ -53,7 +53,7 @@ Note that if you upload files to a page and want to use them later in the Panel,
 You can upload files via the Panel to pages that allow file uploads. To upload a file in the Panel, click on the `Add` button above the files section and select a file from your file system. If the file validates, it will be uploaded.
 
 
-(image: files-section.jpg)
+(image: files-section.webp)
 
 ## Linking to files in your content
 

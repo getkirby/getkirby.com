@@ -22,10 +22,10 @@ preset: files
 ```
 
 ### Empty
-(image: files-empty.png)
+(image: files-empty.webp)
 
 ### Filled
-(image: files-filled.png)
+(image: files-filled.webp)
 
 This basic blueprint can be extended in many ways.
 
