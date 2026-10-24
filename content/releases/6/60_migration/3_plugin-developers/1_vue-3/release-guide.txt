@@ -46,7 +46,7 @@ In Kirby 5 this file was called `index.dev.mjs`. Update your `.gitignore` accord
 
 (link: https://github.com/johannschopplich/kirbyup text: kirbyup) is the bundler for Kirby Panel plugins. Version 4 is built for Kirby 6 and Vue 3. Plugins for Kirby 4 and 5 stay on kirbyup 3.
 
-At the time of beta.1, kirbyup 4 is a pre-release and published under the `next` tag. It requires Node.js 24 or newer.
+At the time of beta.2, kirbyup 4 is a pre-release and published under the `next` tag. It requires Node.js 24 or newer.
 
 The simplest way to try it is to run it with `npx` in your plugin folder, without installing anything:
 
@@ -60,7 +60,7 @@ npx kirbyup@next dev src/index.js
 
 ### TypeScript types
 
-Large parts of the Panel are written in TypeScript now, including `this.$panel` and all its modules (see (link: releases/6/foundation#typescript text: A modern foundation)). In beta.1, Kirby doesn't publish these types as an npm package yet. The community packages (link: https://github.com/johannschopplich/kirby-types text: `kirby-types`) and (link: https://github.com/johannschopplich/kirbyuse text: `kirbyuse`) provide types for Panel plugins. Their Kirby 6 versions are available under the `next` tag.
+Large parts of the Panel are written in TypeScript now, including `this.$panel` and all its modules (see (link: releases/6/foundation#typescript text: A modern foundation)). In beta.2, Kirby doesn't publish these types as an npm package yet. The community packages (link: https://github.com/johannschopplich/kirby-types text: `kirby-types`) and (link: https://github.com/johannschopplich/kirbyuse text: `kirbyuse`) provide types for Panel plugins. Their Kirby 6 versions are available under the `next` tag.
 
 ## Vue 2 → Vue 3 in Kirby plugins
 
