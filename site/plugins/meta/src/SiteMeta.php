@@ -14,7 +14,6 @@ class SiteMeta
     {
         $robots = 'User-agent: *' . PHP_EOL;
         $robots .= 'Allow: /' . PHP_EOL;
-        $robots .= 'Sitemap: ' . url('sitemap.xml');
 
         return kirby()
             ->response()
