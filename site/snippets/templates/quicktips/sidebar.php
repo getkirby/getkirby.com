@@ -40,11 +40,13 @@ use Kirby\Http\Uri;
 					<?= icon('list-bullet') ?> All quicktips
 				</a>
 			</li>
+			<?php if ($kirby->option('archived') !== true): ?>
 			<li>
 				<button class="search-button" type="button" data-area="cookbook">
 					<?= icon('search') ?> Search
 				</button>
 			</li>
+			<?php endif ?>
 			<li><hr class="hr"></li>
 			<?php foreach ($tags as $tag): ?>
 			<li>
