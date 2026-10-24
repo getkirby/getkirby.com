@@ -2,6 +2,7 @@
 
 namespace Kirby\Reference\Types;
 
+use Kirby\Reference\Reflectable\ReflectableClassMethod;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
@@ -46,6 +47,23 @@ class TypeTest extends TestCase
 		// Vue components aren't compound types
 		$type = Type::factory('<k-button>');
 		$this->assertInstanceOf(Identifier::class, $type);
+	}
+
+	public function testFactoryWithClassContext(): void
+	{
+		$reflectable = new ReflectableClassMethod('Kirby\Form\Field', 'resolve');
+
+		$type = Type::factory('static', $reflectable);
+		$this->assertInstanceOf(Identifier::class, $type);
+		$this->assertSame('Kirby\Form\Field', $type->type);
+		$this->assertTrue($type->is('static'));
+
+		// `self` and `static` in compound types
+		$type = Type::factory('class-string<static>', $reflectable);
+		$this->assertSame('class-string<Kirby\Form\Field>', $type->type);
+
+		$type = Type::factory('array<string, self>|list<$static>', $reflectable);
+		$this->assertSame('array<string, Kirby\Form\Field>|list<$static>', $type->type);
 	}
 
 	public static function genericProvider(): array

@@ -70,24 +70,30 @@ class Type
 			return new Chain($type);
 		}
 
+		// the class that `self` and `static` refer to
+		$class = match (true) {
+			$reflectable instanceof ReflectableClass       => $reflectable->name(short: false),
+			$reflectable instanceof ReflectableClassMethod => $reflectable->class,
+			default                                        => null
+		};
+
 		// types composed of other types, e.g. `list<int>`,
 		// `array{a: int}`, `callable(int): bool` or `Page[]`
 		if (preg_match('/^[a-z_\\\\][\w\\\\-]*[<{(]|\[\]$/i', $type) === 1) {
+			if ($class !== null) {
+				$type = preg_replace('/(?<![\w\\\\$])(?:self|static)(?![\w\\\\-])/', $class, $type);
+			}
+
 			return new Compound($type);
 		}
 
-		// identifier types (class names, interfaces, traits)
-		if (in_array($type, ['self', 'static', '$this']) === true) {
-			if ($reflectable instanceof ReflectableClass) {
-				$alias = $type;
-				$type  = $reflectable->name(short: false);
-			} elseif ($reflectable instanceof ReflectableClassMethod) {
-				$alias = $type;
-				$type  = $reflectable->class;
-			}
+		// identifier types (class names, interfaces, traits),
+		// keeping `self`, `static` and `$this` as alias
+		if ($class !== null && in_array($type, ['self', 'static', '$this']) === true) {
+			return new Identifier($class, $type);
 		}
 
-		return new Identifier($type, $alias ?? null);
+		return new Identifier($type);
 	}
 
 	/**
