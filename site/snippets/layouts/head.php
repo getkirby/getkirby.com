@@ -32,8 +32,10 @@ extract([
 <link rel="icon" type="image/png" href="<?= url('/assets/images/favicon.png') ?>">
 <link rel="icon" type="image/svg+xml" href="<?= url('/assets/images/favicon.svg') ?>">
 <link rel="mask-icon" href="<?= url('/assets/images/safari-mask-icon.svg') ?>" color="#000">
+<?php if ($kirby->option('archived') !== true): ?>
 <link href="<?= url('releases.rss') ?>" rel="alternate" type="application/rss+xml" title="Kirby Releases" />
 <link href="<?= url('kosmos.rss') ?>" rel="alternate" type="application/rss+xml" title="Kirby Kosmos Archive" />
+<?php endif ?>
 <link rel="manifest" href="<?= url('app.webmanifest') ?>" />
 
 <?= $meta->robots() ?>
