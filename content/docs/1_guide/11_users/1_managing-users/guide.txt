@@ -16,7 +16,7 @@ It is not recommended to use a single user for multiple people working in parall
 
 Open the menu and click on "Users". You will find the "Add a new user" button in the top left corner, which will take you to a fresh user form. Fill in all required information and hit "Create" to add the new user.
 
-(image: create.png)
+(image: create.webp)
 
 ## User options
 
@@ -26,15 +26,15 @@ On the "Users" page, click on the option icon next to the user to open the dropd
 
 Users are identified by their email address by default, but you can also assign a more recognizable name. That can be a full name or just a nick name. It's up to you and your team.
 
-(image: change-name.png)
+(image: change-name.webp)
 
 ## Change user email
 
-(image: change-email.png)
+(image: change-email.webp)
 
 ## Change user role
 
-(image: change-role.png)
+(image: change-role.webp)
 
 <info>
 In order to be able to change user roles, you have to (link: docs/guide/users/roles text: create user roles) first.
@@ -44,17 +44,17 @@ In order to be able to change user roles, you have to (link: docs/guide/users/ro
 
 Passwords must be at least 8 characters long. Make them as strong as possible! We recommend 32+ characters, highly random passwords and a password manager to keep track of them.
 
-(image: change-password.png)
+(image: change-password.webp)
 
 ## Change user language
 
-(image: change-language.png)
+(image: change-language.webp)
 
 ## Delete user
 
 All user accounts except the last one can be deleted.
 
-(image: delete.png)
+(image: delete.webp)
 
 ## Upload a profile picture
 

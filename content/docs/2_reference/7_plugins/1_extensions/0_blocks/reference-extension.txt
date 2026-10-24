@@ -39,7 +39,7 @@ fields:
 
 By default, such custom blocks will all use a generic block preview including the defined icon and the name of the block.
 
-(image: editing.png)
+(image: editing.webp)
 
 To get started, create a new folder called `/site/plugins/button` and add an `index.php`, `index.css` and an `index.js`
 
@@ -105,7 +105,7 @@ Every block in the Panel has a default class name that reflects the block type (
 
 Instead of the generic preview, we will now see a much more visual representation of the button we created. Add your own styles to adapt the button to your design.
 
-(image: custom-preview.png)
+(image: custom-preview.webp)
 
 ## Preview with WYSIWYG editing
 
@@ -132,7 +132,7 @@ panel.plugin("your-project/button-block", {
 
 See the magic happen …
 
-(image: wysiwyg.gif class: screenshot)
+(image: wysiwyg.webp class: screenshot)
 
 Let's talk about the code a bit more. We use a regular HTML text input and put a little bit of Vue.js magic on top of it.
 
@@ -279,7 +279,7 @@ fields:
                 type: text
 ```
 
-(image: fields-preview.png class: screenshot)
+(image: fields-preview.webp class: screenshot)
 </since>
 
 ## Full block plugins

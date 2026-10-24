@@ -25,7 +25,7 @@ Before diving into the migration, it's important to familiarize yourself with Ki
 - Take our (link: docs/guide/tour text: Starterkit tour) to better understand what Kirby is all about.
 - Watch our (link: https://videos.getkirby.com text: screencast series) for step-by-step video tutorials that explain basic to advanced features.
 
-(screencast: https://www.youtube.com/watch?v=lLQZd64uvPs poster: youtube-tour.jpg title: Feel at home in your Kirby installation text: Getting started with Kirby? Let's explore our Starterkit and see where to find stuff.)
+(screencast: https://www.youtube.com/watch?v=lLQZd64uvPs poster: youtube-tour.webp title: Feel at home in your Kirby installation text: Getting started with Kirby? Let's explore our Starterkit and see where to find stuff.)
 
 Kirby has some incredibly simple yet powerful concepts to tackle features you might seek:
 
@@ -48,12 +48,12 @@ The crucial step in your migration is to move all your content and data – page
 
 If you are very familiar with your existing CMS, you could set up a script, plugin or similar that exports the data already in the (link: /docs/guide/content text: right format for Kirby): a folder per page with a text file that has the name of the corresponding template and contains all your page fields, as well as media files alongside of the text file that belong to the page.
 
-(screencast: https://www.youtube.com/watch?v=zUPqqrhbcR8 poster: youtube-content.jpg title: The content folder text: The heart and soul of your Kirby installation: Let's learn how to create pages and add content with simple text files and folders. )
+(screencast: https://www.youtube.com/watch?v=zUPqqrhbcR8 poster: youtube-content.webp title: The content folder text: The heart and soul of your Kirby installation: Let's learn how to create pages and add content with simple text files and folders. )
 
 ### Importing data
 If exporting in the right format for Kirby is not an option, but you have the data from your old CMS in a structured format of any kind, you can turn it into Kirby pages, users or files by parsing the data and creating the Kirby content from it:
 
-(screencast: https://www.youtube.com/watch?v=nWa_cmbuxLw poster: youtube-import.jpg title: How to import data into Kirby text: In this video you will learn how to use the Kirby CLI to create pages from a dataset. No matter if you are importing data from an existing CMS, a JSON API, an Excel sheet or any other source – this tutorial will provide a good foundation.)
+(screencast: https://www.youtube.com/watch?v=nWa_cmbuxLw poster: youtube-import.webp title: How to import data into Kirby text: In this video you will learn how to use the Kirby CLI to create pages from a dataset. No matter if you are importing data from an existing CMS, a JSON API, an Excel sheet or any other source – this tutorial will provide a good foundation.)
 
 #### Related docs
 

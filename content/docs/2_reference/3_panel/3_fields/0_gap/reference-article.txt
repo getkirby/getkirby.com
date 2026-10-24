@@ -30,7 +30,7 @@ fields:
       - "yes"
 ```
 
-(image: gap.png)
+(image: gap.webp)
 
 With conditional fields:
 

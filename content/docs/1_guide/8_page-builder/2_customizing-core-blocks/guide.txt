@@ -57,7 +57,7 @@ fields:
 
 This will add the `customID` field below the default fields of the block.
 
-(image: custom-id.png)
+(image: custom-id.webp)
 
 #### Extending existing fields in a block type
 

@@ -76,7 +76,7 @@ This means the connection is working, however we have not yet authenticated so w
 
 Set the user credentials under the Basic dropdown and set the query to POST using the local url to the headless system, for example: `https://headless.test/api/query`
 
-(image: basicAuthInsomnia.png)
+(image: basicAuthInsomnia.webp)
 
 We should now be getting a default response back. We haven't actually made any KQL queries yet, so Kirby will fall back to giving a basic listing of the sites children, as you can see below.
 
@@ -105,7 +105,7 @@ We should now be getting a default response back. We haven't actually made any K
 
 Let's do something a little more exciting. Under the Query tab in Insomnia, we can add a line of KQL to get all the children of the "Notes" page.
 
-(image: notesInsomnia.png)
+(image: notesInsomnia.webp)
 
 The KQL for this is `page('notes').children`, which should yield the following response:
 
@@ -224,7 +224,7 @@ Be sure to fill in your credentials in the auth line:
 
 You should now be able visit it in a browser after mapping it to a local test domain. It will generate a simple list of the pages and content in the Photography pages, complete with the images that belong to each page.
 
-(image: simpletest.jpg)
+(image: simpletest.webp)
 
 
 ## Closing
