@@ -94,7 +94,7 @@ We can finally polish our preview with a little bit of CSS.
 }
 .k-block-type-button button:empty::after {
     content: "Button text …";
-    color: var(--color-text-light);
+    color: var(--color-text-dimmed);
 }
 .k-block-type-button button:focus {
     outline: 0;
