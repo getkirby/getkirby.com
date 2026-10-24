@@ -243,12 +243,9 @@ class Thumbnail
 			return $file;
 		}
 
-		// Otherwise go with auto-generated image
-		return new File([
-			'parent'   => $page,
-			'filename' => 'og:image',
-			'url'      => '/' . $page->id() . '/opengraph.png'
-		]);
+		// archived docs are a static snapshot:
+		// no auto-generated images
+		return null;
 	}
 
 	protected function hasImage(): bool

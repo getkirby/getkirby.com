@@ -33,11 +33,6 @@
 					<?= icon('list-bullet') ?> All quicktips
 				</a>
 			</li>
-			<li>
-				<button class="search-button" type="button" data-area="cookbook">
-					<?= icon('search') ?> Search
-				</button>
-			</li>
 			<li><hr class="hr"></li>
 			<?php foreach ($tags as $tag): ?>
 			<li>
