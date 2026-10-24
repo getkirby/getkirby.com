@@ -50,5 +50,3 @@ The examples and docs are built automatically and attached to every GitHub relea
 Both `ui` and `lab` are new folders that don't exist in a default install, so you're only adding files. Don't drop the ZIP contents directly into `kirby/panel/`. That folder already contains the built Panel in `dist/`, which must stay untouched. Always place the `ui` folder inside the existing `dist` folder.
 
 Always download the ZIP from the release that matches your installed Kirby version, so the examples and docs reflect the components you actually have.
-
-If the examples don't render and you see "The Vue template compiler must be enabled to show lab examples"* make sure you haven't disabled the `panel.vue.compiler` option in your config.

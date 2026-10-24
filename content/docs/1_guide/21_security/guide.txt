@@ -230,14 +230,6 @@ Without secure random values for these options, attackers can access media files
 
 **We therefore recommend to set the `content.salt` and `cookie.key` options to long random strings for all of your sites.**
 
-## Disable the Vue template compiler
-
-We are in the active process of migrating the Kirby Panel to Vue 3 (with the plan to ship Vue 3 in Kirby 6.0). Until this process is complete, sites with increased security requirements should use the Vue 2 runtime version, which omits the vulnerable Vue template compiler.
-
-In its default configuration, Kirby enables the template compiler, as it is needed for all Panel plugins that have not been precompiled. It is also used for the examples in the Panel lab environment.
-
-Kirby 4.7 introduces a new `panel.vue.compiler` option that can be set to `false` to disable the template compiler and switch to the Vue 2 runtime version. We recommend to set this option to `false` if your site and the installed plugins do not rely on the Vue template compiler. Should you require the template compiler and are not affected by its [known vulnerabilities](https://www.herodevs.com/vulnerability-directory?framework=Vue+2), you can set the option to `true` to make the warning in the Panel go away. Do this at your own risk!
-
 ## Secure data in Git repositories
 
 ### `.gitignore /site/accounts`
