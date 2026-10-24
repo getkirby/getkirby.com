@@ -158,7 +158,7 @@ One popular JavaScript library is (link: https://github.com/aFarkas/Lazysizes te
 ```
 Adapt the path to the file if you put it in another location.
 
-You can include this script at the end of the body element before any blocking elements or in the head after any blocking elements, see (link: should then be placed before any other blocking elements (i.e.: script(s)) at the end of the body or after any blocking elements (i.e.: scripts, stylesheets) in the head to load the crucial content as fast possible text: as described in the documentation).
+You can include this script at the end of the body element before any blocking elements or in the head after any blocking elements, see (link: https://github.com/aFarkas/lazysizes#include-early text: as described in the documentation).
 
 
 And that's it. The script doesn't need to be initialized but works by adding a class and data attributes to your markup, as we will see in the following examples.

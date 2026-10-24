@@ -102,11 +102,14 @@ class Icon
 
 	/**
 	 * Returns the SVG markup for the icon
+	 *
+	 * @param $local Whether local icons take precedence
+	 *              over the Kirby Panel SVG sprite
 	 */
-	public function render(): string|null
+	public function render(bool $local = true): string|null
 	{
 		// Get the SVG element
-		$svg   = $this->getFromLocal();
+		$svg   = $local === true ? $this->getFromLocal() : null;
 		$svg ??= $this->getFromPanel();
 
 		if ($svg === null) {

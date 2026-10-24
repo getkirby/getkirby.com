@@ -25,10 +25,11 @@ function ariaCurrent(
  */
 function icon(
 	string $name,
-	string|null $title = null
+	string|null $title = null,
+	bool $local = true
 ): string|null {
 	$icon = new Icon($name, $title);
-	return $icon->render();
+	return $icon->render($local);
 }
 
 /**

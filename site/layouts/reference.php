@@ -5,10 +5,6 @@
 	<?= css('assets/css/layouts/reference.css') ?>
 </head>
 
-<div class="hidden">
-	<?= svg($kirby->root('panel') . '/dist/img/icons.svg') ?>
-</div>
-
 <body class="reference">
 
 	<header class="reference-header header">
