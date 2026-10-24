@@ -67,9 +67,9 @@ tags:
     label: Tags
     type: tags
     accept: options
-    options: query
-    query:
-       fetch: site.tags.split
+    options:
+      type: query
+      query: site.tags.split
 ```
 
 ## Tags field layout
