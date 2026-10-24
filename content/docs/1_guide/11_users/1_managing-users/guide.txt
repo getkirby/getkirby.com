@@ -42,7 +42,7 @@ In order to be able to change user roles, you have to (link: docs/guide/users/ro
 
 ## Change user password
 
-Passwords must be at least 8 characters long. Make them as strong as possible! We recommend 32+ characters, highly random passwords and a password manager to keep track of them.
+By default, passwords must be at least 8 characters long. Make them as strong as possible! We recommend 32+ characters, highly random passwords and a password manager to keep track of them.
 
 (image: change-password.png)
 

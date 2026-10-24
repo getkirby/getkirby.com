@@ -73,20 +73,23 @@ class CustomChallenge extends Challenge
     }
 }
 
-Kirby::plugin('superwoman/custom-challenge', [
-    'authChallenges' => [
-        'custom' => CustomChallenge::class
-    ],
-    'translations' => [
-        'en' => [
-            // Placeholder for the code field with the general format of the code
-            'login.code.placeholder.custom' => '000 000',
+Kirby::plugin(
+    name: 'superwoman/custom-challenge',
+    extends: [
+        'authChallenges' => [
+            'custom' => CustomChallenge::class
+        ],
+        'translations' => [
+            'en' => [
+                // Placeholder for the code field with the general format of the code
+                'login.code.placeholder.custom' => '000 000',
 
-            // Help text below the code field
-            'login.code.text.custom' => 'If your email address is registered, the requested code was sent via *custom*.'
+                // Help text below the code field
+                'login.code.text.custom' => 'If your email address is registered, the requested code was sent via *custom*.'
+            ]
         ]
     ]
-]);
+);
 ```
 
 ## How configuration can impact your plugin

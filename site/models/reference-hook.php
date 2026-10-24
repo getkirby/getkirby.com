@@ -51,7 +51,7 @@ class ReferenceHookPage extends ReferenceArticlePage
 
 			return new Parameter(
 				name: ltrim($parameter[count($parameter) - 1], '$'),
-				types: Types::factory($parameter[count($parameter) - 2] ?? 'null')
+				types: Types::fromString($parameter[count($parameter) - 2] ?? 'null')
 			);
 		});
 

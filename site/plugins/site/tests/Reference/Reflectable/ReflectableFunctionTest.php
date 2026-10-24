@@ -27,6 +27,10 @@ class ReflectableFunctionTest extends TestCase
 
 		$reflectable = new ReflectableFunction('fooWithVoidReturnType');
 		$this->assertSame('fooWithVoidReturnType(): void', $reflectable->call());
+
+		// short class names, but not in quoted strings
+		$reflectable = new ReflectableFunction('fooWithClasses');
+		$this->assertSame('fooWithClasses(Page $page, string $class = \'Kirby\\\\Cms\\\\Page\'): array<string, Page>', $reflectable->call());
 	}
 
 	public function testExamples(): void
@@ -88,13 +92,13 @@ fooWithDocBlock();
 	public function testSee(): void
 	{
 		$reflectable = new ReflectableFunction('fooWithDocBlock');
-		$this->assertSame('foo', $reflectable->see());
+		$this->assertSame('foo', (string)$reflectable->see());
 	}
 
 	public function testSince(): void
 	{
 		$reflectable = new ReflectableFunction('fooWithDocBlock');
-		$this->assertSame('5.0.0', $reflectable->since()->version());
+		$this->assertSame('6.0.0', $reflectable->since()->version());
 	}
 
 	public function testSummary(): void

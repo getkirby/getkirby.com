@@ -52,59 +52,62 @@ The most important stuff for our new area happens in the PHP part. Inside the `m
 ```php "/site/plugins/moviereviews/index.php"
 <?php
 
-Kirby::plugin('cookbook/moviereviews', [
-  'areas' => [
-    'moviereviews' => function ($kirby) {
-      return [
-        'label' => 'NYT Movie reviews',
-        'icon'  => 'video',
-        'menu'  => true,
-        'link'  => 'moviereviews',
-        'views' => [
-          [
-            // the Panel patterns must not start with 'panel/',
-            // the `panel` slug is automatically prepended.
-            'pattern' => 'moviereviews',
-            'action'  => function () {
+Kirby::plugin(
+  name: 'cookbook/moviereviews',
+  extends: [
+    'areas' => [
+      'moviereviews' => function ($kirby) {
+        return [
+          'label' => 'NYT Movie reviews',
+          'icon'  => 'video',
+          'menu'  => true,
+          'link'  => 'moviereviews',
+          'views' => [
+            [
+              // the Panel patterns must not start with 'panel/',
+              // the `panel` slug is automatically prepended.
+              'pattern' => 'moviereviews',
+              'action'  => function () {
 
-              // get movie reviews from API
-              $reviews = [];
-              $apikey  = 'your API key';
+                // get movie reviews from API
+                $reviews = [];
+                $apikey  = 'your API key';
 
-              // Make a request to the NYT Search API, filtering by movie reviews
-              $request = Remote::get(
-                'https://api.nytimes.com/svc/search/v2/articlesearch.json?' .
-                'fq=typeOfMaterials:Review%20AND%20section.name:Movies&sort=newest&' .
-                'api-key=' . $apikey
-              );
+                // Make a request to the NYT Search API, filtering by movie reviews
+                $request = Remote::get(
+                  'https://api.nytimes.com/svc/search/v2/articlesearch.json?' .
+                  'fq=typeOfMaterials:Review%20AND%20section.name:Movies&sort=newest&' .
+                  'api-key=' . $apikey
+                );
 
-              if ($request->code() === 200) {
-                  $reviews = $request->json(true)['response']['docs'] ?? [];
+                if ($request->code() === 200) {
+                    $reviews = $request->json(true)['response']['docs'] ?? [];
+                }
+
+                return [
+                    // the Vue component can be defined in the
+                    // `index.js` of your plugin
+                    'component' => 'moviereviews',
+
+                    // the document title for the current view
+                    'title' => 'NYT Movie reviews',
+
+                    // props are directly available in the Vue components
+                    // play around with setting the props to something else, e.g. use cardlets instead of cards etc.
+                    'props' => [
+                      'reviews' => $reviews,
+                      'size'    => 'small',
+                      'layout'  => 'cards',
+                    ],
+                ];
               }
-
-              return [
-                  // the Vue component can be defined in the
-                  // `index.js` of your plugin
-                  'component' => 'moviereviews',
-
-                  // the document title for the current view
-                  'title' => 'NYT Movie reviews',
-
-                  // props are directly available in the Vue components
-                  // play around with setting the props to something else, e.g. use cardlets instead of cards etc.
-                  'props' => [
-                    'reviews' => $reviews,
-                    'size'    => 'small',
-                    'layout'  => 'cards',
-                  ],
-              ];
-            }
+            ]
           ]
-        ]
-      ];
-    }
-  ],
-]);
+        ];
+      }
+    ],
+  ]
+);
 ```
 
 We define a new (link: docs/reference/plugins/extensions/panel-areas text: area) inside the `areas` array. Within that array, the `views` array contains the different routes that belong to the area. Here we only define one main view.

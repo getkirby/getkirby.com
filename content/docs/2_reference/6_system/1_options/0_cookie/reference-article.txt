@@ -2,10 +2,6 @@ Intro: Configure the behavior of HTTP cookies
 
 ----
 
-Since: 5.4.5
-
-----
-
 Text:
 
 ## Cookie key

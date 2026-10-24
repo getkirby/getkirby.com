@@ -15,10 +15,13 @@ As always, you first have to register the Plugin in a plugin folder's `index.php
 ```php "/site/plugins/icons/index.php"
 <?php
 
-Kirby::plugin('my/icons', [
-    'icons' => [
+Kirby::plugin(
+    name: 'my/icons',
+    extends: [
+        'icons' => [
+        ]
     ]
-]);
+);
 ```
 
 The second step is to create a corresponding `index.js` file with the Panel plugin:

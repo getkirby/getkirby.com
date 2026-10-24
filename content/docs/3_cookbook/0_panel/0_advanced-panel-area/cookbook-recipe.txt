@@ -43,8 +43,10 @@ You can either download the demo with the products example or ideally code along
 
 Let’s start by creating a new `products` folder inside the plugins folder. Inside the `products` folder, we first create a `package.json` file with the contents copied from the Pluginkit example mentioned above.
 
-```js "/site/plugins/products/package.json"
+```json "/site/plugins/products/package.json"
 {
+  "name": "products",
+  "private": true,
   "scripts": {
     "dev": "npx -y kirbyup src/index.js --watch",
     "build": "npx -y kirbyup src/index.js"
@@ -61,36 +63,40 @@ The most important stuff for our shiny new area happens in the PHP part of the p
 ```php "/site/plugins/products/index.php"
 <?php
 
-function products() {
+function products(): array
+{
     return Data::read(__DIR__ . '/products.json');
 }
 
-Kirby::plugin('getkirby/products', [
-  'areas' => [
-    'products' => [
-      'label'   => 'Products',
-      'icon'    => 'cart',
-      'menu'    => true,
-      // update and delete dialogs
-      'dialogs' => [
-          require __DIR__ . '/dialogs/update.php',
-          require __DIR__ . '/dialogs/delete.php'
-      ],
-      // dropdown with edit and delete buttons
-      'dropdowns' => [
-          //require __DIR__ . '/dropdowns/product.php'
-      ],
-      // search for productss
-      'searches' => [
-          //'products' => require __DIR__ . '/searches/products.php'
-      ],
-      // view route
-      'views' => [
-        require __DIR__ . '/views/products.php'
-      ]
+Kirby::plugin(
+    name: 'getkirby/products',
+    extends: [
+        'areas' => [
+            'products' => [
+                'label'   => 'Products',
+                'icon'    => 'cart',
+                'menu'    => true,
+                // update and delete dialogs
+                'dialogs' => [
+                    require __DIR__ . '/dialogs/update.php',
+                    require __DIR__ . '/dialogs/delete.php'
+                ],
+                // dropdown with edit and delete buttons
+                'dropdowns' => [
+                    //require __DIR__ . '/dropdowns/product.php'
+                ],
+                // search for products
+                'searches' => [
+                    //'products' => require __DIR__ . '/searches/products.php'
+                ],
+                // view route
+                'views' => [
+                    require __DIR__ . '/views/products.php'
+                ]
+            ]
+        ]
     ]
-  ]
-]);
+);
 ```
 
 For the moment, let's comment `dropdowns` and `searches`, we will get to that later.
@@ -112,7 +118,7 @@ products/
     products.php
   src/
     components/
-      Products.Vue
+      Products.vue
     index.js
   views/
     products.php
@@ -125,7 +131,7 @@ products/
 
 The `products.json` file contains the product data for this example, you can copy it into the plugins folder from the demo files. It has the following basic structure (leaving out the fields that are not used in our example):
 
-```js "/site/products/products.json"
+```js "/site/plugins/products/products.json"
 {
   "bd5nKG": {
     "description": "Sweet fresh strawberry on the wooden table",
@@ -169,7 +175,7 @@ A view is a (link: docs/guide/routing text: route) with a `pattern` that when ca
 
 The Vue component we will create in a second, we call `k-products-view`, and as props we return the product list from the JSON file as array via the `products` function we defined at the top of our `index.php`.
 
-The props we return to the component can of course be anything, so the product data from the JSON file can easily be replaced with data from a database or an API (see example in the (link: docs/cookbook/pane/first-panel-area text: My first Panel area recipe)).
+The props we return to the component can of course be anything, so the product data from the JSON file can easily be replaced with data from a database or an API (see example in the (link: docs/cookbook/panel/first-panel-area text: My first Panel area recipe)).
 
 We could for example pass the user role to the component and show different stuff based on role, or a config option for the layout etc.. The possibilities here are rather endless.
 
@@ -197,22 +203,26 @@ The product data itself we display in a table.
   <k-panel-inside>
     <k-header>Products</k-header>
     <table class="k-products">
-      <tr>
-        <th>Title</th>
-        <th class="k-product-type">Type</th>
-        <th>Description</th>
-        <th class="k-product-price">Price</th>
-        <th class="k-product-options"></th>
-      </tr>
-      <tr v-for="(product, id) in products" :key="id">
-        <td>{{ product.title }}</td>
-        <td class="k-product-type">{{ product.type }}</td>
-        <td>{{ product.description }}</td>
-        <td class="k-product-price">{{ price(product.price) }}</td>
-        <td class="k-product-options">
-          <k-options-dropdown :options="'products/' + id" />
-        </td>
-      </tr>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th class="k-product-type">Type</th>
+          <th>Description</th>
+          <th class="k-product-price">Price</th>
+          <th class="k-product-options"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(product, id) in products" :key="id">
+          <td>{{ product.title }}</td>
+          <td class="k-product-type">{{ product.type }}</td>
+          <td>{{ product.description }}</td>
+          <td class="k-product-price">{{ price(product.price) }}</td>
+          <td class="k-product-options">
+            <k-options-dropdown :options="'products/' + id" />
+          </td>
+        </tr>
+      </tbody>
     </table>
   </k-panel-inside>
 </template>
@@ -225,7 +235,10 @@ export default {
   methods: {
     // format the price in EURO
     price(price) {
-      return new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(price);
+      return new Intl.NumberFormat("de-DE", {
+        style: "currency",
+        currency: "EUR"
+      }).format(price);
     }
   }
 };
@@ -245,7 +258,11 @@ export default {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  background: var(--color-white);
+  background: var(--table-color-back);
+}
+.k-products th {
+  font-weight: var(--font-bold);
+  background: var(--table-color-th-back);
 }
 .k-product-type {
   width: 8rem;
@@ -265,6 +282,8 @@ export default {
 
 Maybe worth mentioning is the `price` method which converts the price into a nicely formatted currency.
 
+The `products` prop is an object, because our JSON file stores the products by their id. In the loop, `id` is the key of each product. Vue expects the rows of a table inside a `<thead>` and `<tbody>`, otherwise the build prints a warning. For the colors, we use the same CSS custom properties as Kirby's own tables, so our table also looks right when the Panel is in dark mode.
+
 The last table column contains the (link: https://lab.getkirby.com/public/lab/docs/k-options-dropdown text: options dropdown) for the edit and delete buttons).
 
 ```html
@@ -281,7 +300,7 @@ npm run dev
 
 Now open the Panel and navigate to the new Panel area. It will now look like this:
 
-(image: product-list.png)
+(image: product-list.webp)
 
 
 Since we haven't implemented the dropdowns yet, they will throw an error if you click on the buttons. But we already have a nice working list view of our products!
@@ -489,7 +508,7 @@ class Product
         $product = static::list()[$id] ?? null;
 
         if (empty($product) === true) {
-            throw new NotFoundException('The product could not be found');
+            throw new NotFoundException(message: 'The product could not be found');
         }
 
         return $product;
@@ -534,30 +553,30 @@ class Product
     {
         $product = [
             'id'          => $id,
-            'title'       => $input['title'] ?? null,
+            'title'       => $input['title'] ?? '',
             'type'        => $input['type'] ?? null,
-            'description' => $input['description'] ?? null,
+            'description' => $input['description'] ?? '',
             'price'       => floatval($input['price'] ?? null)
         ];
 
         // require a title
         if (V::minlength($product['title'], 1) === false) {
-            throw new InvalidArgumentException('The title must not be empty');
+            throw new InvalidArgumentException(message: 'The title must not be empty');
         }
 
         // make sure the title is not longer than expected
         if (V::maxlength($product['title'], 100) === false) {
-            throw new InvalidArgumentException('The title must not be longer than 100 characters');
+            throw new InvalidArgumentException(message: 'The title must not be longer than 100 characters');
         }
 
         // validate the product category
         if (V::in($product['type'], static::types()) === false) {
-            throw new InvalidArgumentException('Please select a valid product category');
+            throw new InvalidArgumentException(message: 'Please select a valid product category');
         }
 
         // validate the price
         if (V::min($product['price'], 0.01) === false) {
-            throw new InvalidArgumentException('The product must not be free');
+            throw new InvalidArgumentException(message: 'The product must not be free');
         }
 
         // load all products
@@ -586,35 +605,38 @@ Why `load()` instead of `require`? When you require the class file in your `inde
 <?php
 
 load([
-  'Kirby\Products\Product' => __DIR__ . '/classes/Product.php'
+    'Kirby\Products\Product' => __DIR__ . '/classes/Product.php'
 ]);
 
-Kirby::plugin('getkirby/products', [
-  'areas' => [
-    'products' => [
-      'label'   => 'Products',
-      'icon'    => 'cart',
-      'menu'    => true,
-      // update and delete dialogs
-      'dialogs' => [
-          require __DIR__ . '/dialogs/update.php',
-          require __DIR__ . '/dialogs/delete.php'
-      ],
-      // dropdown with edit and delete buttons
-      'dropdowns' => [
-          require __DIR__ . '/dropdowns/product.php'
-      ],
-      // search for productss
-      'searches' => [
-          //'products' => require __DIR__ . '/searches/products.php'
-      ],
-      // view route
-      'views' => [
-          require __DIR__ . '/views/products.php'
-      ]
+Kirby::plugin(
+    name: 'getkirby/products',
+    extends: [
+        'areas' => [
+            'products' => [
+                'label'   => 'Products',
+                'icon'    => 'cart',
+                'menu'    => true,
+                // update and delete dialogs
+                'dialogs' => [
+                    require __DIR__ . '/dialogs/update.php',
+                    require __DIR__ . '/dialogs/delete.php'
+                ],
+                // dropdown with edit and delete buttons
+                'dropdowns' => [
+                    require __DIR__ . '/dropdowns/product.php'
+                ],
+                // search for products
+                'searches' => [
+                    //'products' => require __DIR__ . '/searches/products.php'
+                ],
+                // view route
+                'views' => [
+                    require __DIR__ . '/views/products.php'
+                ]
+            ]
+        ]
     ]
-  ]
-]);
+);
 ```
 
 Our shiny new class can now be used in our existing view and dialogs.
@@ -643,12 +665,13 @@ The update dialog gets a couple cool updates. `Product::find()` will not just lo
 
 The same happens when the `Product::update()` method in the submit handler detects a validation issue or has any other issues. This increases the UX of the dialog quite a bit.
 
-We’ve also converted the type field to a select box and used the `Product::types()` method to create the options. This is great because we can now update our available types in one place, which will update the field and the backend validation at the same time.
+We’ve also converted the type field to a select box and used the `Product::types()` method to create the options. This is great because we can now update our available types in one place, which will update the field and the backend validation at the same time. Because every product needs a type, we make the field `required`, which also removes the empty option from the select box.
 
 ```php "/site/plugins/products/dialogs/update.php"
 <?php
 
 use Kirby\Products\Product;
+use Kirby\Toolkit\A;
 
 return [
     'pattern' => 'products/(:any)/update',
@@ -661,27 +684,28 @@ return [
                 'fields' => [
                     'title' => [
                         'label' => 'Title',
-                        'type' => 'text'
+                        'type'  => 'text'
                     ],
                     'type' => [
-                        'label' => 'Type',
-                        'type' => 'select',
-                        'empty' => false,
-                        'width' => '1/2',
-                        'options' => A::map(Product::types(), function ($type) {
-                            return ['value' => $type, 'text' => $type];
-                        })
+                        'label'    => 'Type',
+                        'type'     => 'select',
+                        'required' => true,
+                        'width'    => '1/2',
+                        'options'  => A::map(
+                            Product::types(),
+                            fn ($type) => ['value' => $type, 'text' => $type]
+                        )
                     ],
                     'price' => [
-                        'label' => 'Price',
-                        'type' => 'number',
-                        'step' => 0.01,
+                        'label'  => 'Price',
+                        'type'   => 'number',
+                        'step'   => 0.01,
                         'before' => '€',
-                        'width' => '1/2'
+                        'width'  => '1/2'
                     ],
                     'description' => [
-                        'label' => 'Description',
-                        'type' => 'textarea',
+                        'label'   => 'Description',
+                        'type'    => 'textarea',
                         'buttons' => false
                     ]
                 ],
@@ -724,46 +748,54 @@ With the cleaned up PHP code we can now extend our little plugin some more …
 
 Wouldn't it be great to be able to add new items, too? I think so, so let's do that. Luckily, we don't have to add a lot of code to achieve that.
 
-Let's first add an `add` button to our view in the `k-header` component. The `k-header` component has two slots: `left` and `right`. The left slot is normally used to create action buttons, while the right slot is used for our navigation arrows or for the filter dropdown in the users view.
+Let's first add an `add` button to our view in the `k-header` component. Next to the title, the `k-header` component has a `buttons` slot for the action buttons of a view, like the buttons in the header of a page view.
 
 ```html "/site/plugins/products/src/components/Products.vue"
 <template>
   <k-panel-inside>
     <k-header>
       Products
-      <k-button-group slot="left">
+      <template #buttons>
         <k-button
-          text="New product"
           icon="add"
-          @click="$dialog('products/create')"
+          size="sm"
+          text="New product"
+          variant="filled"
+          @click="$panel.dialog.open('products/create')"
         />
-      </k-button-group>
+      </template>
     </k-header>
     <table class="k-products">
-      <tr>
-        <th>Title</th>
-        <th class="k-product-type">Type</th>
-        <th>Description</th>
-        <th class="k-product-price">Price</th>
-        <th class="k-product-options"></th>
-      </tr>
-      <tr v-for="(product, id) in products" :key="id">
-        <td>{{ product.title }}</td>
-        <td class="k-product-type">{{ product.type }}</td>
-        <td>{{ product.description }}</td>
-        <td class="k-product-price">{{ price(product.price) }}</td>
-        <td class="k-product-options">
-          <k-options-dropdown :options="'products/' + id" />
-        </td>
-      </tr>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th class="k-product-type">Type</th>
+          <th>Description</th>
+          <th class="k-product-price">Price</th>
+          <th class="k-product-options"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(product, id) in products" :key="id">
+          <td>{{ product.title }}</td>
+          <td class="k-product-type">{{ product.type }}</td>
+          <td>{{ product.description }}</td>
+          <td class="k-product-price">{{ price(product.price) }}</td>
+          <td class="k-product-options">
+            <k-options-dropdown :options="'products/' + id" />
+          </td>
+        </tr>
+      </tbody>
     </table>
   </k-panel-inside>
 </template>
 ```
 
+`$panel.dialog.open()` loads a dialog from the backend by its route. The Panel then shows it and takes care of submitting it.
+
 The view should now look like this:
 
-(image: products-add.png)
+(image: products-add.webp)
 
 When the user clicks on this button, a new dialog, which we have yet to define, will open.
 
@@ -772,9 +804,9 @@ We register this new dialog in `index.php` next to the existing `update` and `de
 ```php "/site/plugins/products/index.php"
 // …
 'dialogs' => [
-    require __DIR__ . '/dialogs/create.php'
+    require __DIR__ . '/dialogs/create.php',
     require __DIR__ . '/dialogs/update.php',
-    require __DIR__ . '/dialogs/delete.php',
+    require __DIR__ . '/dialogs/delete.php'
 ],
 // …
 ```
@@ -826,27 +858,28 @@ use Kirby\Toolkit\A;
 return [
     'title' => [
         'label' => 'Title',
-        'type' => 'text'
+        'type'  => 'text'
     ],
     'type' => [
-        'label' => 'Type',
-        'type' => 'select',
-        'empty' => false,
-        'width' => '1/2',
-        'options' => A::map(Product::types(), function ($type) {
-            return ['value' => $type, 'text' => $type];
-        })
+        'label'    => 'Type',
+        'type'     => 'select',
+        'required' => true,
+        'width'    => '1/2',
+        'options'  => A::map(
+            Product::types(),
+            fn ($type) => ['value' => $type, 'text' => $type]
+        )
     ],
     'price' => [
-        'label' => 'Price',
-        'type' => 'number',
-        'step' => 0.01,
+        'label'  => 'Price',
+        'type'   => 'number',
+        'step'   => 0.01,
         'before' => '€',
-        'width' => '1/2'
+        'width'  => '1/2'
     ],
     'description' => [
-        'label' => 'Description',
-        'type' => 'textarea',
+        'label'   => 'Description',
+        'type'    => 'textarea',
         'buttons' => false
     ]
 ];
@@ -909,18 +942,19 @@ Panel areas also allow you to add your own (link: docs/reference/plugins/extensi
 <?php
 
 use Kirby\Products\Product;
+use Kirby\Toolkit\Str;
 
 return [
     'label' => 'Products',
     'icon'  => 'cart',
-    'query' => function (string $query) {
-        $products = Product::list();
-        $results  = [];
-        foreach ($products as $product) {
+    'query' => function (string $query, int $limit) {
+        $results = [];
+
+        foreach (Product::list() as $product) {
             if (Str::contains($product['title'], $query, true) === true) {
                 $results[] = [
-                    'text' => $product['title'],
-                    'link' => '/products',
+                    'text'  => $product['title'],
+                    'link'  => '/products',
                     'image' => [
                         'icon' => 'cart',
                         'back' => 'purple-400'
@@ -929,42 +963,33 @@ return [
             }
         }
 
-        return $results;
+        // only return as many results as the search asks for
+        return array_slice($results, 0, $limit);
     }
 ];
 ```
-In the `query` callback, we loop through the list items and return each item that contains the given query string in the product title. The parameters you can return for each item you find in the linked docs.
 
+In the `query` callback, we loop through the list items and return each item that contains the given query string in the product title. Besides the query, the callback receives the maximum number of results the search dialog wants to show, so we only return as many. The parameters you can return for each item you find in the linked docs.
 
 At this point, when we use the search, it works fine and returns the expected result set as we type.
 
-(image: area-search.png)
+(image: area-search.webp)
 
 However, when we click on the desired item, we are just redirected to the current view. Also, we currently have to select the `product` search from the menu first.
 
-Let's first fix the second issue by setting the products search as our default search for this view. We do that in the `action` callback of our product view route:
+Let's first fix the second issue by setting the products search as our default search. We do that with the `search` option in the area definition in our `index.php`:
 
-```php "/site/plugins/products/views/products.php"
-<?php
-
-use Kirby\Products\Product;
-
-return [
-    'pattern' => 'products',
-    'action'  => function () {
-        return [
-            'component' => 'k-products-view',
-            'props' => [
-                'products' => Product::list()
-            ],
-            // set products search as default
-            'search' => 'products'
-        ];
-    }
-];
+```php "/site/plugins/products/index.php"
+// …
+// search for products, used as default search in all views of the area
+'search'   => 'products',
+'searches' => [
+    'products' => require __DIR__ . '/searches/products.php'
+],
+// …
 ```
 
-Now, we don't have to select the right search component anymore when we use the search function. If you want to set the search as default for every view of the area, you can set the `search` option in the area definition.
+Now, we don't have to select the right search type anymore when we use the search in any view of our area. If you need a different default search for a single view, you can also return a `search` key from the `action` callback of the view route.
 
 For the second issue, we will create a single product view we can redirect to when the user clicks on an item.
 
@@ -1009,11 +1034,12 @@ use Kirby\Products\Product;
 
 return [
     'pattern' => 'products/(:any)',
-    'action'  => function ($id) {
+    'action'  => function (string $id) {
         $product = Product::find($id);
 
         return [
             'component'  => 'k-product-view',
+            'title'      => $product['title'],
             'breadcrumb' => [
                 [
                     'label' => $product['title'],
@@ -1030,7 +1056,7 @@ return [
 
 As route pattern we use a placeholder for the product `id`. In the `action` return array, we define a new `k-product-view` component, and in the `props` array, we return the single product with the given id as data for the view.
 
-In this view, we also modify the breadcrumb and add a new entry for our current product. You will see the result of it in a second. Adding breadcrumb items is simple. They need a label and a link.
+In this view, we also modify the breadcrumb and add a new entry for our current product. You will see the result of it in a second. Adding breadcrumb items is simple. They need a label and a link. The `title` sets the title of the browser tab.
 
 
 As before, we register the component in our `index.js`:
@@ -1049,35 +1075,45 @@ panel.plugin("getkirby/products", {
 
 And finally create the view for our single product, in which we basically use almost the same code as in the product list, with the difference that we don't need a loop this time, because we are only dealing with a single product:
 
-```html
+```html "/site/plugins/products/src/components/Product.vue"
 <template>
   <k-panel-inside>
     <k-header>
       {{ product.title }}
-      <k-button-group slot="left">
-        <k-button
-          text="Edit"
-          icon="edit"
-          @click="$dialog('products/' + product.id + '/update')"
-        />
-        <k-button
-          text="Delete"
-          icon="trash"
-          @click="$dialog('products/' + product.id + '/delete')"
-        />
-      </k-button-group>
+      <template #buttons>
+        <k-button-group>
+          <k-button
+            icon="edit"
+            size="sm"
+            text="Edit"
+            variant="filled"
+            @click="$panel.dialog.open('products/' + product.id + '/update')"
+          />
+          <k-button
+            icon="trash"
+            size="sm"
+            text="Delete"
+            variant="filled"
+            @click="$panel.dialog.open('products/' + product.id + '/delete')"
+          />
+        </k-button-group>
+      </template>
     </k-header>
     <table class="k-products">
-      <tr>
-        <th class="k-product-type">Type</th>
-        <th>Description</th>
-        <th class="k-product-price">Price</th>
-      </tr>
-      <tr>
-        <td class="k-product-type">{{ product.type }}</td>
-        <td>{{ product.description }}</td>
-        <td class="k-product-price">{{ price(product.price) }}</td>
-      </tr>
+      <thead>
+        <tr>
+          <th class="k-product-type">Type</th>
+          <th>Description</th>
+          <th class="k-product-price">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="k-product-type">{{ product.type }}</td>
+          <td>{{ product.description }}</td>
+          <td class="k-product-price">{{ price(product.price) }}</td>
+        </tr>
+      </tbody>
     </table>
   </k-panel-inside>
 </template>
@@ -1089,8 +1125,11 @@ export default {
   },
   methods: {
     price(price) {
-      return new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(price);
-    },
+      return new Intl.NumberFormat("de-DE", {
+        style: "currency",
+        currency: "EUR"
+      }).format(price);
+    }
   }
 };
 </script>
@@ -1098,9 +1137,67 @@ export default {
 
 When we go to the single view now, the result should look like this:
 
-(image: single-product-view.png)
+(image: single-product-view.webp)
 
 Depending on your real world data, you might want to choose a completely different layout for the single view, but that's up to you and you can start experimenting with your newly aquired knowledge from here on.
+
+### Linking from the list
+
+So far, we can only reach the single view through the search. Let's also turn the titles in our products list into links to the single view with Kirby's `k-link` component:
+
+```html "/site/plugins/products/src/components/Products.vue"
+<td>
+  <k-link :to="'products/' + id">{{ product.title }}</k-link>
+</td>
+```
+
+And underline them in our style block, so they look like links:
+
+```css
+.k-products a {
+  text-decoration: underline;
+}
+```
+
+### Deleting from the single view
+
+There is one catch: if we delete a product in its own view, the Panel stays in a view for a product that no longer exists. So let's always redirect to the products list after deleting a product. While we're at it, we also show the title of the product in the confirmation:
+
+```php "/site/plugins/products/dialogs/delete.php"
+<?php
+
+use Kirby\Products\Product;
+use Kirby\Toolkit\HtmlString;
+
+return [
+    'pattern' => 'products/(:any)/delete',
+    'load'    => function (string $id) {
+        $product = Product::find($id);
+
+        return [
+            'component' => 'k-remove-dialog',
+            'props'     => [
+                // the title is escaped, the <strong> tag is kept
+                'text' => HtmlString::translate('Do you really want to delete <strong>{title}</strong>?', [
+                    'title' => $product['title']
+                ])
+            ]
+        ];
+    },
+    'submit' => function (string $id) {
+        Product::delete($id);
+
+        // always redirect to the products list,
+        // especially when the product is deleted
+        // from its own view
+        return [
+            'redirect' => 'products'
+        ];
+    }
+];
+```
+
+The Panel escapes plain strings in the text of a dialog, so a product title can never inject any HTML. Since we want the `<strong>` tag to be rendered, we mark the text as trusted HTML with `HtmlString::translate()`, which escapes the values that it fills in. Read more about it in our guide on (link: releases/6/migration/plugin-developers/trusted-html text: trusted HTML in the Panel).
 
 ## Refactoring time
 
@@ -1163,7 +1260,7 @@ Still here? How about some sortable columns?
 
 ## Sortable columns
 
-Our table in the products view could really use some sortable columns. This is an example where our new Fiber architecture really shines again and it's much easier to implement than you might think.
+Our table in the products view could really use some sortable columns. This is an example where the Panel's architecture really shines: the backend prepares all data for our view, so it's much easier to implement than you might think.
 
 Let’s go back to our `views/products.php` first to implement the backend logic.
 
@@ -1216,32 +1313,36 @@ Let's start by adding buttons to our `<th>` elements in the table.
 <template>
     ...
       <table class="k-products">
-        <tr>
-          <th>
-            <button @click="sortBy('title')">
-              Title
-            </button>
-          </th>
-          <th class="k-product-type">
-            <button @click="sortBy('type')">
-              Type
-            </button>
-          </th>
-          <th>
-            <button @click="sortBy('description')">
-              Description
-            </button>
-          </th>
-          <th class="k-product-price">
-            <button @click="sortBy('price')">
-              Price
-            </button>
-          </th>
-          <th class="k-product-options"></th>
-        </tr>
-        <tr v-for="(product, id) in products" :key="id">
-          ...
-        </tr>
+        <thead>
+          <tr>
+            <th>
+              <button @click="sortBy('title')">
+                Title
+              </button>
+            </th>
+            <th class="k-product-type">
+              <button @click="sortBy('type')">
+                Type
+              </button>
+            </th>
+            <th>
+              <button @click="sortBy('description')">
+                Description
+              </button>
+            </th>
+            <th class="k-product-price">
+              <button @click="sortBy('price')">
+                Price
+              </button>
+            </th>
+            <th class="k-product-options"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(product, id) in products" :key="id">
+            ...
+          </tr>
+        </tbody>
       </table>
     ...
 </template>
@@ -1260,7 +1361,7 @@ export default {
   methods: {
     price,
     sortBy(sort) {
-      this.$reload({
+      this.$panel.view.reload({
         query: {
           sort: sort
         },
@@ -1271,7 +1372,7 @@ export default {
 </script>
 ```
 
-The `sortBy` method uses our built-in `$reload` method to reload the current view. You can use this in your plugin code to create a simple reload, which will update all the data of the current view, but you can also pass query parameters which then can be used on the backend to change data.
+The `sortBy` method uses `$panel.view.reload()` to reload the current view. You can use this in your plugin code to create a simple reload, which will update all the data of the current view, but you can also pass query parameters which then can be used on the backend to change data.
 
 In this example, we pass the column name with the sort query parameter. Our `get()` method in the `products.php` will fetch the column name and the products accordingly. Give it a try.
 
@@ -1314,8 +1415,8 @@ export default {
         dir = this.dir === "asc" ? "desc" : "asc";
       }
 
-      // refresh the view with the updated query parameters
-      this.$reload({
+      // reload the view with the updated query parameters
+      this.$panel.view.reload({
         query: {
           sort: sort,
           dir: dir,
@@ -1372,36 +1473,40 @@ Now we only need to add it to our template.
 <template>
     ...
       <table class="k-products">
-        <tr>
-          <th>
-            <button @click="sortBy('title')">
-              Title
-              <span v-if="sort === 'title'">{{ sortArrow }}</span>
-            </button>
-          </th>
-          <th class="k-product-type">
-            <button @click="sortBy('type')">
-              Type
-              <span v-if="sort === 'type'">{{ sortArrow }}</span>
-            </button>
-          </th>
-          <th>
-            <button @click="sortBy('description')">
-              Description
-              <span v-if="sort === 'description'">{{ sortArrow }}</span>
-            </button>
-          </th>
-          <th class="k-product-price">
-            <button @click="sortBy('price')">
-              Price
-              <span v-if="sort === 'price'">{{ sortArrow }}</span>
-            </button>
-          </th>
-          <th class="k-product-options"></th>
-        </tr>
-        <tr v-for="(product, id) in products" :key="id">
-          ...
-        </tr>
+        <thead>
+          <tr>
+            <th>
+              <button @click="sortBy('title')">
+                Title
+                <span v-if="sort === 'title'">{{ sortArrow }}</span>
+              </button>
+            </th>
+            <th class="k-product-type">
+              <button @click="sortBy('type')">
+                Type
+                <span v-if="sort === 'type'">{{ sortArrow }}</span>
+              </button>
+            </th>
+            <th>
+              <button @click="sortBy('description')">
+                Description
+                <span v-if="sort === 'description'">{{ sortArrow }}</span>
+              </button>
+            </th>
+            <th class="k-product-price">
+              <button @click="sortBy('price')">
+                Price
+                <span v-if="sort === 'price'">{{ sortArrow }}</span>
+              </button>
+            </th>
+            <th class="k-product-options"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(product, id) in products" :key="id">
+            ...
+          </tr>
+        </tbody>
       </table>
     ...
 </template>
@@ -1417,7 +1522,7 @@ If you add a class name to that span, you can also use it to apply some extra st
 
 Here's our final table with the little sorting arrow:
 
-(image: sortable.png)
+(image: sortable.webp)
 
 
 ## More information

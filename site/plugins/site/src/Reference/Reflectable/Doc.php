@@ -9,6 +9,9 @@ use PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocNode;
 use PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTagNode;
 use PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTextNode;
 use PHPStan\PhpDocParser\Ast\PhpDoc\ReturnTagValueNode;
+use PHPStan\PhpDocParser\Ast\PhpDoc\TypelessParamTagValueNode;
+use PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
+use PHPStan\PhpDocParser\Ast\Type\TypeNode;
 use PHPStan\PhpDocParser\Lexer\Lexer;
 use PHPStan\PhpDocParser\Parser\ConstExprParser;
 use PHPStan\PhpDocParser\Parser\PhpDocParser;
@@ -23,30 +26,27 @@ use Throwable;
  */
 class Doc extends PhpDocNode
 {
+	/**
+	 * Parsed doc blocks, keyed by their source
+	 */
+	protected static array $cache = [];
+
 	public static function factory(Reflector $reflection): static
 	{
-		try {
-			$docblock  = $reflection->getDocComment();
-			$config    = new ParserConfig(usedAttributes: []);
-			$lexer     = new Lexer($config);
-			$constExpr = new ConstExprParser($config);
-			$type      = new TypeParser($config, $constExpr);
-			$phpDoc    = new PhpDocParser($config, $type, $constExpr);
-			$tokens    = new TokenIterator($lexer->tokenize($docblock));
-			$node      = $phpDoc->parse($tokens);
-			return new static($node->children);
-
-		} catch (Throwable) {
-			return new static([]);
-		}
+		$docblock = $reflection->getDocComment() ?: '';
+		return static::$cache[$docblock] ??= static::parse($docblock);
 	}
 
-	public function getParamNode(string $name): ParamTagValueNode|null
-	{
+	public function getParamNode(
+		string $name
+	): ParamTagValueNode|TypelessParamTagValueNode|null {
 		// PHPStan uses names with a $ prefix
 		// while reflection gives us the name without it
 		$name   = '$' . strtolower($name);
-		$params = $this->getParamTagValues();
+		$params = [
+			...$this->getParamTagValues(),
+			...$this->getTypelessParamTagValues()
+		];
 
 		return A::find(
 			$params,
@@ -87,5 +87,69 @@ class Doc extends PhpDocNode
 			$this->children,
 			fn (Node $node) => $node instanceof PhpDocTextNode
 		);
+	}
+
+	protected static function parse(string $docblock): static
+	{
+		try {
+			[$lexer, $parser] = static::parsers();
+			$tokens = new TokenIterator($lexer->tokenize($docblock));
+			return new static($parser->parse($tokens)->children);
+		} catch (Throwable) {
+			return new static([]);
+		}
+	}
+
+	/**
+	 * Returns the lexer, doc block parser and type parser,
+	 * created once as they are stateless
+	 *
+	 * @return array{Lexer, PhpDocParser, TypeParser}
+	 */
+	protected static function parsers(): array
+	{
+		static $parsers;
+
+		if ($parsers === null) {
+			$config    = new ParserConfig(usedAttributes: []);
+			$constExpr = new ConstExprParser($config);
+			$type      = new TypeParser($config, $constExpr);
+			$parsers   = [
+				new Lexer($config),
+				new PhpDocParser($config, $type, $constExpr),
+				$type
+			];
+		}
+
+		return $parsers;
+	}
+
+	/**
+	 * Parses a type string, e.g. `array<string, Page>`;
+	 * falls back to an identifier if it isn't a valid type
+	 */
+	public static function parseType(string $type): TypeNode
+	{
+		try {
+			[$lexer, , $parser] = static::parsers();
+			$tokens = new TokenIterator($lexer->tokenize($type));
+			$node   = $parser->parse($tokens);
+
+			if ($tokens->currentTokenType() === Lexer::TOKEN_END) {
+				return $node;
+			}
+		} catch (Throwable) {
+		}
+
+		return new IdentifierTypeNode($type);
+	}
+
+	/**
+	 * Joins the lines of a tag description, as they are
+	 * rendered e.g. in a table cell
+	 */
+	public static function singleLine(string|null $text): string|null
+	{
+		return $text === null ? null : preg_replace('/\s*\R\s*/', ' ', $text);
 	}
 }

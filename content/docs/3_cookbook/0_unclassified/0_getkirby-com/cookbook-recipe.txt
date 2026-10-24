@@ -52,7 +52,7 @@ foreach ($reflection->getMethods() as $method) {
 
 Reflections have many handy little features such as getting the visibility of a method, a list of arguments, the return type and even access to the doc blocks in your code.
 
-To document our main classes (i.e. (link: docs/reference/objects/site text: $site), (link: docs/reference/objects/page  text: $page), (link: docs/reference/objects/file  text: $file)) and their methods, we use this feature inside a (link: docs/guide/templates/page-models text: page model) to create automatic subpages for each method.
+To document our main classes (i.e. (link: docs/reference/objects/cms/site text: $site), (link: docs/reference/objects/cms/page  text: $page), (link: docs/reference/objects/cms/file  text: $file)) and their methods, we use this feature inside a (link: docs/guide/templates/page-models text: page model) to create automatic subpages for each method.
 
 In our reference, we use regular pages to add each documented class:
 
@@ -108,7 +108,7 @@ class ClassPage extends Page
 
 Children are created as an array that we then pass to the `Pages::factory()` method. That's pretty much all you have to do to create virtual subpages that are not necessarily located in the file system.
 
-Those subpages are first-class citizens in Kirby and everything around them will work. You can filter or sort them, routing works out of the box, templates will work, etc. (link: docs/reference/objects/page/num text: Here's an example of such a virtual page).
+Those subpages are first-class citizens in Kirby and everything around them will work. You can filter or sort them, routing works out of the box, templates will work, etc. (link: docs/reference/objects/cms/page/num text: Here's an example of such a virtual page).
 
 Here, we define that each subpage automatically gets a new `MethodPage` model. We use this model to fetch more information about each class method and to inject it into the template (arguments, method call, return type, etc.) You could nest this indefinitely if you want and combine it again with real pages in the file system. The possibilities are endless.
 
@@ -262,23 +262,26 @@ We host all our assets on (link: https://www.keycdn.com/ text: KeyCDN) with a ti
 ```php
 <?php
 
-Kirby::plugin('getkirby/keycdn', [
-    'components' => [
-        'url' => function ($kirby, $path, $options) {
-            $original = $kirby->nativeComponent('url');
+Kirby::plugin(
+    name: 'getkirby/keycdn',
+    extends: [
+        'components' => [
+            'url' => function ($kirby, $path, $options) {
+                $original = $kirby->nativeComponent('url');
 
-            if (preg_match('!assets!', $path)) {
-                $path = Cachebuster::path($path);
+                if (preg_match('!assets!', $path)) {
+                    $path = Cachebuster::path($path);
 
-                if (option('keycdn', false) !== false) {
-                    return option('keycdn.domain') . '/' . $path;
+                    if (option('keycdn', false) !== false) {
+                        return option('keycdn.domain') . '/' . $path;
+                    }
                 }
-            }
 
-            return $original($kirby, $path, $options);
-        }
+                return $original($kirby, $path, $options);
+            }
+        ]
     ]
-]);
+);
 ```
 
 The plugin also takes care of optimizing images. Check out the (link: https://github.com/getkirby/getkirby.com/blob/main/site/plugins/cdn/index.php text: source code) if you are interested in learning more about it.

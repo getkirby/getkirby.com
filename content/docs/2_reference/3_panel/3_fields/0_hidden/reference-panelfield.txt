@@ -25,3 +25,5 @@ fields:
   notes:
     type: hidden
 ```
+
+(docs: panel-field-update field: hidden)

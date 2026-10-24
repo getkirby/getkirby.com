@@ -2,6 +2,8 @@
 
 namespace Kirby\Reference\Reflectable\Tags;
 
+use Kirby\Reference\Reflectable\Doc;
+use Kirby\Reference\Reflectable\Reflectable;
 use Kirby\Reference\Types\Types;
 use PHPStan\PhpDocParser\Ast\PhpDoc\ThrowsTagValueNode;
 
@@ -24,11 +26,13 @@ class Exception
 		return $this->description;
 	}
 
-	public static function factory(ThrowsTagValueNode $tag): static
-	{
+	public static function factory(
+		ThrowsTagValueNode $tag,
+		Reflectable|null $reflectable = null
+	): static {
 		return new static(
-			types:       Types::factory($tag->type),
-			description: $tag->description
+			types:       Types::fromNode($tag->type, $reflectable),
+			description: Doc::singleLine($tag->description)
 		);
 	}
 

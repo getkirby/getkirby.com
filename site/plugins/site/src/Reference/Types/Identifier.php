@@ -19,6 +19,24 @@ class Identifier extends Type
 	}
 
 	/**
+	 * Checks if a class, interface, trait or enum exists
+	 * with exactly this name; the case is checked as well,
+	 * as `class_exists()` and the like are case-insensitive
+	 */
+	public static function exists(string $name): bool
+	{
+		if (
+			class_exists($name) === false &&
+			interface_exists($name) === false &&
+			trait_exists($name) === false
+		) {
+			return false;
+		}
+
+		return (new ReflectionClass($name))->getName() === $name;
+	}
+
+	/**
 	 * Returns the HTML markup for the type
 	 *
 	 * @param $text Alternative text to display
@@ -60,13 +78,8 @@ class Identifier extends Type
 			return $tag;
 		}
 
-		// Some class exists in PHP in the global namespace.
-		// The second check is done to ensure correct case,
-		// as `class_exists()` is not case-sensitive.
-		if (
-			class_exists($this->type) === true &&
-			(new ReflectionClass($this->type))->getName() === $this->type
-		) {
+		// Some class or interface exists in PHP in the global namespace
+		if (static::exists($this->type) === true) {
 			return Html::tag('code', $text, [
 				'class' => 'type type-class'
 			]);
@@ -90,8 +103,13 @@ class Identifier extends Type
 	/**
 	 * Return the identifier as a string
 	 */
-	public function toString(): string
+	public function toString(bool $short = false): string
 	{
-		return $this->toPage()?->name(short: false) ?? $this->type;
+		$name = $this->toPage()?->name(short: false) ?? $this->type;
+
+		return match ($short) {
+			true    => static::shortName($name),
+			default => $name
+		};
 	}
 }

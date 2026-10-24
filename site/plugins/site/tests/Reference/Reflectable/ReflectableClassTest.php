@@ -24,6 +24,13 @@ new FooWithDocBlock();
 ```', $reflectable->examples());
 	}
 
+	public function testFor(): void
+	{
+		$reflectable = ReflectableClass::for('Bar\Foo');
+		$this->assertSame('Bar\Foo', $reflectable->name());
+		$this->assertSame($reflectable, ReflectableClass::for('Bar\Foo'));
+	}
+
 	public function testIsDeprecated(): void
 	{
 		$reflectable = new ReflectableClass('Bar\Foo');
@@ -72,13 +79,13 @@ new FooWithDocBlock();
 	public function testSee(): void
 	{
 		$reflectable = new ReflectableClass('Bar\FooWithDocBlock');
-		$this->assertSame('Bar\Foo', $reflectable->see());
+		$this->assertSame('Bar\Foo', (string)$reflectable->see());
 	}
 
 	public function testSince(): void
 	{
 		$reflectable = new ReflectableClass('Bar\FooWithDocBlock');
-		$this->assertSame('5.0.0', $reflectable->since()->version());
+		$this->assertSame('6.0.0', $reflectable->since()->version());
 	}
 
 	public function testSource(): void

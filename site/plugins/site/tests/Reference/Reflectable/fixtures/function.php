@@ -19,11 +19,18 @@ function fooWithVoidReturnType(): void {
  * ```
  *
  * @see foo
- * @since 5.0.0
+ * @since 6.0.0
  * @deprecated 6.0.0 Use foo() instead
  * @internal
  * @throws Exception when foo is not found
  */
 function fooWithDocBlock(): string {
 	return 'foo';
+}
+
+/**
+ * @return array<string, \Kirby\Cms\Page>
+ */
+function fooWithClasses(\Kirby\Cms\Page $page, string $class = 'Kirby\Cms\Page'): array {
+	return [];
 }

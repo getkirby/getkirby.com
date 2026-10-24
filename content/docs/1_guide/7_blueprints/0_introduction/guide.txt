@@ -22,7 +22,7 @@ Text:
 
 - Blueprints are stored in `/site/blueprints`.
 - Blueprints configure the Panel layout of the site, pages, files and users.
-- Create your own layouts with tabs, columns and sections.
+- Create your own layouts with tabs, columns and fields.
 
 ## Blueprint types
 
@@ -49,7 +49,7 @@ With fields you can break up your content into digestible chunks and structure i
 
 ## Layout
 
-When your project requires more elaborate setups, you can be the interface designer. You decide which features are needed for each type of page, file or user and how to arrange them in (link: docs/guide/blueprints/layout#tabs text: tabs), (link: docs/guide/blueprints/layout#columns text: columns) and (link: docs/guide/blueprints/layout#sections text: sections).
+When your project requires more elaborate setups, you can be the interface designer. You decide which features are needed for each type of page, file or user and how to arrange them in (link: docs/guide/blueprints/layout#tabs text: tabs), (link: docs/guide/blueprints/layout#columns text: columns) and (link: docs/guide/blueprints/layout#only-fields text: fields).
 
 (image: tabs.png)
 
@@ -63,13 +63,13 @@ Kirby comes with a blueprint query language that offers basically the same funct
 
 ## Extending blueprints
 
-You can store fields, sections, tabs and entire blueprint layouts in separate files so that they can be reused within your blueprints. If you want, you can even create a complete component system to apply to multiple projects.
+You can store fields, tabs and entire blueprint layouts in separate files so that they can be reused within your blueprints. If you want, you can even create a complete component system to apply to multiple projects.
 
 (link: docs/guide/blueprints/extending-blueprints text: Learn more about how to extend and reuse blueprints…)
 
 ## Translating blueprints
 
-For editors from various language backgrounds, you can translate blueprint titles, form field labels, section labels, help text, options, and more.
+For editors from various language backgrounds, you can translate blueprint titles, form field labels, help text, options, and more.
 
 (link: docs/guide/blueprints/translations text: Learn more about translating blueprints…)
 
