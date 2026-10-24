@@ -42,7 +42,7 @@ Buttons you add via your plugin extension can then be referenced (link: docs/ref
 
 ## Use a `ViewButton` class
 
-You can either return an array with the options or a `Kirby\Panel\Ui\Buttons\ViewButton` object. Especially when working on complex buttons, it can make sense to create your custom PHP class extending the (class: Kirby\Panel\Ui\Buttons\ViewButton text: ViewButton) class to power your button:
+You can either return an array with the options or a `Kirby\Panel\Ui\Button\ViewButton` object. Especially when working on complex buttons, it can make sense to create your custom PHP class extending the (class: Kirby\Panel\Ui\Button\ViewButton text: ViewButton) class to power your button:
 
 ```php "site/plugins/your-plugin/index.php"
 class AnalyticsViewButton extends Kirby\Panel\Ui\Button\ViewButton
@@ -127,4 +127,4 @@ return [
 ];
 ```
 
-When you are using a custom (class: Kirby\Panel\Ui\Buttons\ViewButton text: ViewButton) class, the class defines the Vue component to be used.
+When you are using a custom (class: Kirby\Panel\Ui\Button\ViewButton text: ViewButton) class, the class defines the Vue component to be used.
