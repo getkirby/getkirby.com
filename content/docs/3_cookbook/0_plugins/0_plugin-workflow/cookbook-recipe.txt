@@ -71,7 +71,7 @@ fields:
 
 When you open the Panel, you should see something like this:
 
-(image: plugin.gif)
+(image: plugin.webp)
 
 ### Bootstrapping Kirby
 

@@ -55,7 +55,7 @@ Note that the above section will throw an error in the Panel as long as the give
 
 ### Result
 
-(image: projects.png)
+(image: projects.webp)
 
 ## Single project
 
@@ -104,7 +104,7 @@ sidebar:
 
 ### Result
 
-(image: project.png)
+(image: project.webp)
 
 ## Example `projects` template
 

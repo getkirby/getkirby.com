@@ -72,7 +72,7 @@ $tags['image'] = [
 ];
 
 /**
- * (screencast: https://www.youtube.com/watch?v=EDVYjxWMecc poster: youtube.jpg title: How to install Kirby in 5 minutes)
+ * (screencast: https://www.youtube.com/watch?v=EDVYjxWMecc poster: youtube.webp title: How to install Kirby in 5 minutes)
  */
 $tags['screencast'] = [
 	'attr' => [
@@ -83,7 +83,7 @@ $tags['screencast'] = [
 	'html' => function ($tag) {
 		return snippet('kirbytext/screencast', [
 			'url'    => $tag->value,
-			'poster' => $tag->poster ? $tag->file($tag->poster) : $tag->file('youtube.jpg'),
+			'poster' => $tag->poster ? $tag->file($tag->poster) : $tag->file('youtube.webp'),
 			'title'  => $tag->title ?? null,
 			'text'   => $tag->text ?? null
 		], true);
@@ -439,7 +439,7 @@ $tags['video'] = [
 		} else {
 			$video = video(
 				$tag->value,
-				$tag->poster ? $tag->file($tag->poster) : $tag->file('youtube.jpg'),
+				$tag->poster ? $tag->file($tag->poster) : $tag->file('youtube.webp'),
 				$tag->kirby()->option('kirbytext.video.options', []),
 				$attrs
 			);

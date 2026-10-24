@@ -23,7 +23,7 @@ The files section can be used to show any combination of files for the current p
 - change the order number of files (if sorted manually)
 - change the template of a file
 
-(image: files-section.png)
+(image: files-section.webp)
 
 ## Example
 
@@ -103,7 +103,7 @@ The `list` layout is perfect for file types without thumbnails like PDFs, excel 
 layout: list
 ```
 
-(image: files-section.png)
+(image: files-section.webp)
 
 ### Cards layout
 
@@ -113,17 +113,17 @@ The `card` layout is great for all kinds of images.
 layout: cards
 ```
 
-(image: files-section-cards.png)
+(image: files-section-cards.webp)
 
 (docs: sections/cardlets)
 
-(image: files-section-cardlets.png)
+(image: files-section-cardlets.webp)
 
 ### Table layout
 
 The table layout has the highest information density. Columns can be fully customized and make it perfect if you need to show multiple values at once for better overview and scannability.
 
-(image: files-section-table.png)
+(image: files-section-table.webp)
 
 ```yaml
 layout: table

@@ -7,7 +7,7 @@ Pages can be created via the Panel, directly in the file system, or programmatic
 
 ----
 
-Thumbnail: screenshot.png
+Thumbnail: screenshot.webp
 
 ----
 
@@ -35,7 +35,7 @@ In the Panel, new pages can also be created by duplicating existing pages. This 
 To do so, select "Settings" > "Duplicate". In the duplicate dialog, you can edit the title and URL slug, and decide if you want to copy all files as well. When done, confirm with the "Duplicate button". By default, Kirby adds "copy" to title and slug.
 
 
-(image: duplicate-page.png)
+(image: duplicate-page.webp)
 
 ## Creating published pages manually
 

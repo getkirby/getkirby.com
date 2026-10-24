@@ -11,7 +11,7 @@ Text:
 
 The most simple setup of a blueprint is a form with just a few fields. For this setup, you can add fields using the `fields` keyword, then add your fields underneath with proper indentation:
 
-(image: fields.png)
+(image: fields.webp)
 
 ```yaml
 title: My blueprint
@@ -36,7 +36,7 @@ The `fields` keyword can be used on the top blueprint level like in the example 
 
 With the `sections` keyword you add one or more (link: docs/reference/panel/sections text: section types) to your blueprint. When the `sections` keyword is used without being wrapped in (link: #columns text: columns), this will result in a single-column layout of stacked sections.
 
-(image: sections.png alt: Outline of sections stacks in a single column layout)
+(image: sections.webp alt: Outline of sections stacks in a single column layout)
 
 Here are some examples:
 
@@ -102,7 +102,7 @@ sections:
 
 ## Columns
 
-(image: columns.png)
+(image: columns.webp)
 
 A single-column stacked layout like the above with only sections can sometimes be useful, in many cases you will,  however, want to give more structure to your layout. That's where `columns` come into play.
 
@@ -224,7 +224,7 @@ columns:
 (…tabs)
 
 
-(image: sidebar-right.png caption: Two-column layout with sidebar on the right (pages and files sections) and form fields on the left.)
+(image: sidebar-right.webp caption: Two-column layout with sidebar on the right (pages and files sections) and form fields on the left.)
 
 
 You can probably already see how flexible this is. By slightly changing the columns, we can change the interface drastically.
@@ -264,7 +264,7 @@ columns:
         label: Text
         type: textarea
 ```
-(image: sidebar-left.png caption: Two-column layout with sidebar on the left (pages and files sections) and form fields on the right.)
+(image: sidebar-left.webp caption: Two-column layout with sidebar on the left (pages and files sections) and form fields on the right.)
 
 ### Two Sidebars
 
@@ -310,7 +310,7 @@ columns:
         label: Files
 ```
 
-(image: sidebar-both.png caption: Three-column layout with sidebars on the right (pages section) and on the left (files section) and form fields in the middle.)
+(image: sidebar-both.webp caption: Three-column layout with sidebars on the right (pages section) and on the left (files section) and form fields in the middle.)
 
 ### Sticky columns
 
@@ -326,7 +326,7 @@ columns:
 
 ## Adapt all to your needs
 
-(image: columns-complex.png)
+(image: columns-complex.webp)
 
 Kirby gives you the flexibility to set up the (glossary: Panel) so that it adapts to the needs of every single page/template. Use the layout possibilities to create the structure that works best for you:
 
@@ -370,7 +370,7 @@ If this isn't yet enough ways and space for you to structure your sections and f
 
 When your blueprints get more complex, splitting up your view into multiple tabs helps to keep them organized. Tabs are basically wrappers around regular blueprint layouts. Check out (link: #columns text: how to create layouts) before you get started with tabs.
 
-(image: tabs.png)
+(image: tabs.webp)
 
 Like the blueprint itself, a tab can contain
 
@@ -405,7 +405,7 @@ tabs:
 ```
 
 
-(image: sidebar-right-and-tabs.png)
+(image: sidebar-right-and-tabs.webp)
 
 ### Full example
 

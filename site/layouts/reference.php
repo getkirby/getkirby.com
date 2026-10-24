@@ -5,9 +5,11 @@
 	<?= css('assets/css/layouts/reference.css') ?>
 </head>
 
+<?php if (in_array($page->intendedTemplate()->name(), ['reference-icon', 'reference-icons']) === true): ?>
 <div class="hidden">
 	<?= svg($kirby->root('panel') . '/dist/img/icons.svg') ?>
 </div>
+<?php endif ?>
 
 <body class="reference">
 
@@ -16,7 +18,6 @@
 		<div class="header-content relative flex items-center">
 			<?php snippet('layouts/logo') ?>
 			<?php snippet('layouts/menu') ?>
-			<?php snippet('layouts/search', ['area' => 'reference']) ?>
 		</div>
 	</header>
 
