@@ -14,10 +14,6 @@ The query language adds a lot of flexibility when querying options for select, r
 
 If you are not familiar with (link: docs/guide/templates/php-api text: Kirby's PHP API) yet, you should learn more about it first. The query language is very close to it and will be confusing without the basics.
 
-<info>
-In Kirby 5.1 and higher, you can opt-in to using a new (link: docs/reference/system/options/query text: `query.runner`), currently in beta phase, that offers improved performance and (link: #advanced-query-syntax__operators text: additional features).
-</info>
-
 ### Syntax
 
 #### PHP
@@ -173,9 +169,9 @@ Property access (`parent.property`) will behave like this:
 - If the parent is an array, the respective array element will be returned.
 - Calling a property without any arguments (`parent.property()`) is equivalent to accessing the property.
 
-When you use (link: docs/reference/system/options/query text: the new query runner), queries support subscript access notation, e.g. `page[site.pageMethodName]`.
+Queries also support subscript access notation, e.g. `page[site.pageMethodName]`.
 
-The new query runner is stricter in parsing queries. In some edge cases, this will require you to access an array/object via subscript notation - in rare cases on the top level via the new `this` keyword, e.g. `this["identifier.with dots and spaces"]`.
+The query parser is strict. In some edge cases, you need to access an array/object via subscript notation - in rare cases on the top level via the `this` keyword, e.g. `this["identifier.with dots and spaces"]`.
 
 ### Operators
 
@@ -187,7 +183,7 @@ page.title.isNotEmpty ? page.title.lower : page.slug
 page.title.value ?? page.slug
 ```
 
-When you use (link: docs/reference/system/options/query text: the new query runner), you can also use
+You can also use
 - logical operators: `AND`, `&&`, `OR`, `||`
 - comparisons: `==`, `!=`, `>`, `<`, `<=`, `>=`
 - math operators: `+`, `-`, `*`, `/`, `%`
