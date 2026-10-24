@@ -30,7 +30,24 @@ class Type
 		'null'      => 'null',
 		'void'      => 'void',
 		'callable'  => 'callable',
-		'mixed'     => 'mixed'
+		'mixed'     => 'mixed',
+
+		// PHPStan pseudo types
+		'array-key'        => 'mixed',
+		'callable-string'  => 'string',
+		'class-string'     => 'string',
+		'list'             => 'array',
+		'negative-int'     => 'int',
+		'never'            => 'void',
+		'non-empty-array'  => 'array',
+		'non-empty-list'   => 'array',
+		'non-empty-string' => 'string',
+		'non-negative-int' => 'int',
+		'non-positive-int' => 'int',
+		'numeric'          => 'number',
+		'numeric-string'   => 'string',
+		'positive-int'     => 'int',
+		'scalar'           => 'mixed',
 	];
 
 	public function __construct(
@@ -51,6 +68,12 @@ class Type
 		// assume, it’s a chain
 		if (preg_match('/' . Chain::SEPARATORS . '/', $type) === 1) {
 			return new Chain($type);
+		}
+
+		// types composed of other types, e.g. `list<int>`,
+		// `array{a: int}`, `callable(int): bool` or `Page[]`
+		if (preg_match('/^[a-z_\\\\][\w\\\\-]*[<{(]|\[\]$/i', $type) === 1) {
+			return new Compound($type);
 		}
 
 		// identifier types (class names, interfaces, traits)
@@ -111,10 +134,11 @@ class Type
 		string|null $text = null,
 		bool $linked = true
 	): string {
-		$text ??= $this->toString();
+		$text  ??= $this->toString();
+		$generic = static::generic($this->type);
 
 		return Html::tag('code', $text, [
-			'class' => 'type type-' . static::generic($this->type) ?? null
+			'class' => 'type' . ($generic !== null ? ' type-' . $generic : '')
 		]);
 	}
 

@@ -2,7 +2,9 @@
 
 namespace Kirby\Reference\Types;
 
+use Kirby\Reference\Reflectable\Doc;
 use Kirby\Reference\Reflectable\ReflectableClass;
+use Kirby\Toolkit\A;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
@@ -23,6 +25,16 @@ class TypesTest extends TestCase
 		$this->assertSame(2, $types->count());
 	}
 
+	public function testFactoryWithNode(): void
+	{
+		// unions nested in other types aren't split
+		$types = Types::factory(Doc::parseType('callable(mixed $value, int|string $key): bool|null'));
+		$this->assertSame(2, $types->count());
+		$this->assertInstanceOf(Compound::class, $types->types[0]);
+		$this->assertSame('callable(mixed $value, int|string $key): bool', $types->types[0]->type);
+		$this->assertSame('null', $types->types[1]->type);
+	}
+
 	public function testFactoryWithString(): void
 	{
 		$types = Types::factory('string|int');
@@ -37,6 +49,19 @@ class TypesTest extends TestCase
 		$this->assertSame(2, $types->count());
 		$this->assertSame('array<string|int, mixed>', $types->types[0]->type);
 		$this->assertSame('null', $types->types[1]->type);
+	}
+
+	public function testFlatten(): void
+	{
+		$flatten = fn (string $type) => A::map(
+			Types::flatten(Doc::parseType($type)),
+			fn ($node) => (string)$node
+		);
+
+		$this->assertSame(['int', 'string'], $flatten('int|string'));
+		$this->assertSame(['int', 'null'], $flatten('?int'));
+		$this->assertSame(['int', 'string', 'null'], $flatten('($a is true ? int : string)|null'));
+		$this->assertSame(['array<int, (int | string)>'], $flatten('array<int, int|string>'));
 	}
 
 	public function testHas(): void
@@ -72,6 +97,18 @@ class TypesTest extends TestCase
 
 		$types = $types->not('int');
 		$this->assertSame('string', $types->toString());
+	}
+
+	public function testPrint(): void
+	{
+		$print = fn (string $type) => Types::print(Doc::parseType($type));
+
+		$this->assertSame('list<int|string>', $print('list<int|string>'));
+		$this->assertSame('callable(int|string $key): bool', $print('callable(int|string $key): bool'));
+		$this->assertSame('array{a: int|null}', $print('array{a: int|null}'));
+
+		// brackets are needed for arrays of unions
+		$this->assertSame('(int|string)[]', $print('(int|string)[]'));
 	}
 
 	public function testSplit(): void

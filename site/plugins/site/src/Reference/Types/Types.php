@@ -2,10 +2,12 @@
 
 namespace Kirby\Reference\Types;
 
-use Kirby\Cms\Html;
 use Kirby\Reference\Reflectable\Reflectable;
 use Kirby\Toolkit\A;
-use Kirby\Toolkit\Str;
+use PHPStan\PhpDocParser\Ast\Type\ConditionalTypeForParameterNode;
+use PHPStan\PhpDocParser\Ast\Type\ConditionalTypeNode;
+use PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
+use PHPStan\PhpDocParser\Ast\Type\NullableTypeNode;
 use PHPStan\PhpDocParser\Ast\Type\TypeNode;
 use PHPStan\PhpDocParser\Ast\Type\UnionTypeNode;
 use ReflectionType;
@@ -58,10 +60,12 @@ class Types
 			);
 		}
 
+		if ($types instanceof TypeNode) {
+			return static::factoryFromNode($types, $reflectable);
+		}
+
 		if ($types instanceof ReflectionUnionType) {
 			$types = $types->getTypes();
-		} elseif ($types instanceof UnionTypeNode) {
-			$types = $types->types;
 		}
 
 		// Ensure types is an array
@@ -80,7 +84,7 @@ class Types
 			$context = Context::factory($reflectable);
 			$types   = A::map(
 				$types,
-				fn ($type) => Str::split($context->resolve($type), '|')
+				fn ($type) => static::split($context->resolve($type))
 			);
 			$types = array_merge(...$types);
 		}
@@ -93,6 +97,51 @@ class Types
 		);
 
 		return new static($types, $reflectable);
+	}
+
+	/**
+	 * Creates the types from a doc block type, with all
+	 * templates and class names resolved in the context
+	 */
+	protected static function factoryFromNode(
+		TypeNode $node,
+		Reflectable|null $reflectable = null
+	): static {
+		if ($reflectable !== null) {
+			$node = Context::factory($reflectable)->resolveNode($node);
+		}
+
+		$types = A::map(static::flatten($node), static::print(...));
+		$types = array_values(array_unique($types));
+
+		return new static(
+			types: A::map(
+				$types,
+				fn ($type) => Type::factory($type, $reflectable)
+			),
+			reflectable: $reflectable
+		);
+	}
+
+	/**
+	 * Returns the members of a union type, incl. both
+	 * branches of a conditional type like `($a is true ? int : string)`
+	 *
+	 * @return array<TypeNode>
+	 */
+	public static function flatten(TypeNode $node): array
+	{
+		return match (true) {
+			$node instanceof UnionTypeNode
+				=> array_merge(...A::map($node->types, static::flatten(...))),
+			$node instanceof NullableTypeNode
+				=> [...static::flatten($node->type), new IdentifierTypeNode('null')],
+			$node instanceof ConditionalTypeNode,
+			$node instanceof ConditionalTypeForParameterNode
+				=> [...static::flatten($node->if), ...static::flatten($node->else)],
+			default
+			=> [$node]
+		};
 	}
 
 	/**
@@ -137,6 +186,21 @@ class Types
 			),
 			reflectable: $this->reflectable
 		);
+	}
+
+	/**
+	 * Converts a type node to a compact string,
+	 * e.g. `list<int|string>` instead of `list<(int | string)>`
+	 */
+	public static function print(TypeNode $node): string
+	{
+		$type = (string)$node;
+
+		// remove the brackets around unions of simple
+		// types, unless they are needed for an array (`(int|string)[]`)
+		$type = preg_replace('/\(([\w\\\\-]+(?: \| [\w\\\\-]+)+)\)(?!\[)/', '$1', $type);
+
+		return str_replace(' | ', '|', $type);
 	}
 
 	/**

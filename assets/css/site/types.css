@@ -1,6 +1,15 @@
 .type {
 	white-space: nowrap;
 }
+/* long generics and shapes wrap instead of scrolling */
+.prose code.type-compound {
+	white-space: normal;
+}
+/* links to the classes inside of generics and shapes */
+.prose .type-compound a {
+	text-decoration: underline;
+	text-decoration-color: var(--color-gray-500);
+}
 .type-link {
 	text-decoration: none !important;
 }

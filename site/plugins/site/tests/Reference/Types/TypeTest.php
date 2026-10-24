@@ -30,6 +30,22 @@ class TypeTest extends TestCase
 		$type = Type::factory('Kirby\Cms\App->user');
 		$this->assertInstanceOf(Chain::class, $type);
 		$this->assertSame('Kirby\Cms\App->user', $type->type);
+
+		$type = Type::factory('list<int>');
+		$this->assertInstanceOf(Compound::class, $type);
+
+		$type = Type::factory('array{a: int}');
+		$this->assertInstanceOf(Compound::class, $type);
+
+		$type = Type::factory('callable(int): bool');
+		$this->assertInstanceOf(Compound::class, $type);
+
+		$type = Type::factory('Kirby\Cms\Page[]');
+		$this->assertInstanceOf(Compound::class, $type);
+
+		// Vue components aren't compound types
+		$type = Type::factory('<k-button>');
+		$this->assertInstanceOf(Identifier::class, $type);
 	}
 
 	public static function genericProvider(): array
@@ -38,7 +54,10 @@ class TypeTest extends TestCase
 			['integer', 'int'],
 			['object', 'object'],
 			['"foo"', 'string'],
-			['[1, 2, 3]', 'array']
+			['[1, 2, 3]', 'array'],
+			['list', 'array'],
+			['non-empty-string', 'string'],
+			['positive-int', 'int'],
 		];
 	}
 
@@ -70,6 +89,10 @@ class TypeTest extends TestCase
 		$this->assertSame('<code class="type type-string">string</code>', $type->toHtml());
 
 		$this->assertSame('<code class="type type-string">This is a string</code>', $type->toHtml('This is a string'));
+
+		// no generic type
+		$type = new Type('foo');
+		$this->assertSame('<code class="type">foo</code>', $type->toHtml());
 	}
 
 	public function testToString(): void
