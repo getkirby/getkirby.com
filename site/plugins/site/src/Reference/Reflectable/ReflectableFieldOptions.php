@@ -69,7 +69,7 @@ class ReflectableFieldOptions extends Reflectable
 
 		// all options are optional, so `null` would only
 		// clutter up the type column
-		$types = Types::factory($type)->not('null');
+		$types = Types::from($type)->not('null');
 
 		// computed options derive their value from the
 		// field itself (e.g. `label` falls back to a label

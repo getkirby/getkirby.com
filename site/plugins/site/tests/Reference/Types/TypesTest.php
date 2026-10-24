@@ -7,6 +7,8 @@ use Kirby\Reference\Reflectable\ReflectableClass;
 use Kirby\Toolkit\A;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
+use ReflectionFunction;
+use ReflectionParameter;
 
 #[CoversClass(Types::class)]
 class TypesTest extends TestCase
@@ -25,32 +27,6 @@ class TypesTest extends TestCase
 		$this->assertSame(2, $types->count());
 	}
 
-	public function testFactoryWithNode(): void
-	{
-		// unions nested in other types aren't split
-		$types = Types::factory(Doc::parseType('callable(mixed $value, int|string $key): bool|null'));
-		$this->assertSame(2, $types->count());
-		$this->assertInstanceOf(Compound::class, $types->types[0]);
-		$this->assertSame('callable(mixed $value, int|string $key): bool', $types->types[0]->type);
-		$this->assertSame('null', $types->types[1]->type);
-	}
-
-	public function testFactoryWithString(): void
-	{
-		$types = Types::factory('string|int');
-		$this->assertInstanceOf(Types::class, $types);
-		$this->assertSame(2, $types->count());
-		$this->assertSame('string|int', $types->toString());
-	}
-
-	public function testFactoryWithStringNested(): void
-	{
-		$types = Types::factory('array<string|int, mixed>|null');
-		$this->assertSame(2, $types->count());
-		$this->assertSame('array<string|int, mixed>', $types->types[0]->type);
-		$this->assertSame('null', $types->types[1]->type);
-	}
-
 	public function testFlatten(): void
 	{
 		$flatten = fn (string $type) => A::map(
@@ -62,6 +38,53 @@ class TypesTest extends TestCase
 		$this->assertSame(['int', 'null'], $flatten('?int'));
 		$this->assertSame(['int', 'string', 'null'], $flatten('($a is true ? int : string)|null'));
 		$this->assertSame(['array<int, (int | string)>'], $flatten('array<int, int|string>'));
+	}
+
+	public function testFrom(): void
+	{
+		$param = new ReflectionParameter(fn (int|null $a) => null, 'a');
+
+		$this->assertSame('array<string, int>', Types::from(Doc::parseType('array<string, int>'))->toString());
+		$this->assertSame('int|null', Types::from($param->getType())->toString());
+		$this->assertSame('string|int', Types::from('string|int')->toString());
+		$this->assertSame(0, Types::from(null)->count());
+	}
+
+	public function testFromNode(): void
+	{
+		// unions nested in other types aren't split
+		$types = Types::fromNode(Doc::parseType('callable(mixed $value, int|string $key): bool|null'));
+		$this->assertSame(2, $types->count());
+		$this->assertInstanceOf(Compound::class, $types->types[0]);
+		$this->assertSame('callable(mixed $value, int|string $key): bool', $types->types[0]->type);
+		$this->assertSame('null', $types->types[1]->type);
+	}
+
+	public function testFromReflection(): void
+	{
+		$params = (new ReflectionFunction(
+			fn (string|null $a, int|string|null $b, mixed $c) => null
+		))->getParameters();
+
+		$this->assertSame('string|null', Types::fromReflection($params[0]->getType())->toString());
+		$this->assertSame('string|int|null', Types::fromReflection($params[1]->getType())->toString());
+		$this->assertSame('mixed', Types::fromReflection($params[2]->getType())->toString());
+	}
+
+	public function testFromString(): void
+	{
+		$types = Types::fromString('string|int');
+		$this->assertInstanceOf(Types::class, $types);
+		$this->assertSame(2, $types->count());
+		$this->assertSame('string|int', $types->toString());
+	}
+
+	public function testFromStringNested(): void
+	{
+		$types = Types::fromString('array<string|int, mixed>|null');
+		$this->assertSame(2, $types->count());
+		$this->assertSame('array<string|int, mixed>', $types->types[0]->type);
+		$this->assertSame('null', $types->types[1]->type);
 	}
 
 	public function testHas(): void
@@ -77,7 +100,7 @@ class TypesTest extends TestCase
 
 	public function testHasWithIdentifierSelf(): void
 	{
-		$types = Types::factory(
+		$types = Types::fromString(
 			types: 'self',
 			reflectable: new ReflectableClass('TestTypes\A')
 		);
@@ -150,7 +173,7 @@ class TypesTest extends TestCase
 
 		// Replace self/static/$this with the actual class name
 		// and ensure duplicates are removed
-		$types = Types::factory(
+		$types = Types::fromString(
 			types: 'static|string',
 			reflectable: new ReflectableClass('TestTypes\A')
 		);
@@ -174,7 +197,7 @@ class TypesTest extends TestCase
 
 		// Replace self/static/$this with the actual class name
 		// and ensure duplicates are removed
-		$types = Types::factory(
+		$types = Types::fromString(
 			types: 'static|self',
 			reflectable: new ReflectableClass('TestTypes\A')
 		);

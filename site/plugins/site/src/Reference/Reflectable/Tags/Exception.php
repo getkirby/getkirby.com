@@ -27,7 +27,7 @@ class Exception
 	public static function factory(ThrowsTagValueNode $tag): static
 	{
 		return new static(
-			types:       Types::factory($tag->type),
+			types:       Types::fromNode($tag->type),
 			description: $tag->description
 		);
 	}

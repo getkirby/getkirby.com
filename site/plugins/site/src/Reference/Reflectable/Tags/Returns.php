@@ -35,10 +35,10 @@ class Returns
 			return null;
 		}
 
-		$types       = Types::factory($types, $reflectable);
-		$description = $tag?->description;
-
-		return new static($types, $description);
+		return new static(
+			types:       Types::from($types, $reflectable),
+			description: $tag?->description
+		);
 	}
 
 	public function headline(): string

@@ -170,7 +170,7 @@ class Context
 				$node instanceof IdentifierTypeNode &&
 				array_key_exists($node->name, $this->types) === true
 			) {
-				$this->types[$node->name] ??= Types::factory($native ?? 'mixed')->toString();
+				$this->types[$node->name] ??= Types::from($native ?? 'mixed')->toString();
 			}
 		}
 	}

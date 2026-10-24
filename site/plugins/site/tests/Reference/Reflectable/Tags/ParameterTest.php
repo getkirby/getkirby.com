@@ -17,13 +17,13 @@ class ParameterTest extends TestCase
 
 	public function testDefault(): void
 	{
-		$parameter = new Parameter('a', Types::factory('string'), default: '"foo"');
+		$parameter = new Parameter('a', Types::fromString('string'), default: '"foo"');
 		$this->assertSame('"foo"', $parameter->default());
 	}
 
 	public function testDescription(): void
 	{
-		$parameter = new Parameter('a', Types::factory('string'), description: 'Something');
+		$parameter = new Parameter('a', Types::fromString('string'), description: 'Something');
 		$this->assertSame('Something', $parameter->description());
 	}
 
@@ -136,55 +136,55 @@ class ParameterTest extends TestCase
 
 	public function testHasDescription(): void
 	{
-		$parameter = new Parameter('a', Types::factory('string'), description: 'Something');
+		$parameter = new Parameter('a', Types::fromString('string'), description: 'Something');
 		$this->assertTrue($parameter->hasDescription());
 
-		$parameter = new Parameter('a', Types::factory('string'));
+		$parameter = new Parameter('a', Types::fromString('string'));
 		$this->assertFalse($parameter->hasDescription());
 	}
 
 	public function testIsRequired(): void
 	{
-		$parameter = new Parameter('a', Types::factory('string'), isRequired: true);
+		$parameter = new Parameter('a', Types::fromString('string'), isRequired: true);
 		$this->assertTrue($parameter->isRequired());
 
-		$parameter = new Parameter('a', Types::factory('string'), isRequired: false);
+		$parameter = new Parameter('a', Types::fromString('string'), isRequired: false);
 		$this->assertFalse($parameter->isRequired());
 	}
 
 	public function testIsVariadic(): void
 	{
-		$parameter = new Parameter('a', Types::factory('string'), isVariadic: true);
+		$parameter = new Parameter('a', Types::fromString('string'), isVariadic: true);
 		$this->assertTrue($parameter->isVariadic());
 
-		$parameter = new Parameter('a', Types::factory('string'), isVariadic: false);
+		$parameter = new Parameter('a', Types::fromString('string'), isVariadic: false);
 		$this->assertFalse($parameter->isVariadic());
 	}
 
 	public function testName(): void
 	{
-		$parameter = new Parameter('a', Types::factory('string'));
+		$parameter = new Parameter('a', Types::fromString('string'));
 		$this->assertSame('$a', $parameter->name());
 
-		$parameter = new Parameter('a', Types::factory('string'), isVariadic: true);
+		$parameter = new Parameter('a', Types::fromString('string'), isVariadic: true);
 		$this->assertSame('...$a', $parameter->name());
 	}
 
 	public function testToString(): void
 	{
-		$parameter = new Parameter('a', Types::factory('string'), default: '"foo"');
+		$parameter = new Parameter('a', Types::fromString('string'), default: '"foo"');
 		$this->assertSame('string $a = "foo"', $parameter->toString());
 
-		$parameter = new Parameter('a', Types::factory('string'));
+		$parameter = new Parameter('a', Types::fromString('string'));
 		$this->assertSame('string $a', $parameter->toString());
 
-		$parameter = new Parameter('a', Types::factory('string'), isVariadic: true);
+		$parameter = new Parameter('a', Types::fromString('string'), isVariadic: true);
 		$this->assertSame('string ...$a', $parameter->toString());
 	}
 
 	public function testTypes(): void
 	{
-		$parameter = new Parameter('a', Types::factory('string'));
+		$parameter = new Parameter('a', Types::fromString('string'));
 		$this->assertInstanceOf(Types::class, $parameter->types());
 		$this->assertSame('string', $parameter->types()->toString());
 	}

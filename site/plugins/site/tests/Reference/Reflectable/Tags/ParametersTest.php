@@ -21,8 +21,8 @@ class ParametersTest extends TestCase
 		$this->assertSame(0, $parameters->count());
 
 		$parameters = new Parameters([
-			new Parameter('a', Types::factory('mixed')),
-			new Parameter('b', Types::factory('mixed')),
+			new Parameter('a', Types::fromString('mixed')),
+			new Parameter('b', Types::fromString('mixed')),
 		]);
 		$this->assertSame(2, $parameters->count());
 	}
@@ -73,14 +73,14 @@ class ParametersTest extends TestCase
 		$this->assertFalse($parameters->hasDescriptions());
 
 		$parameters = new Parameters([
-			new Parameter('a', Types::factory('mixed')),
-			new Parameter('b', Types::factory('mixed')),
+			new Parameter('a', Types::fromString('mixed')),
+			new Parameter('b', Types::fromString('mixed')),
 		]);
 		$this->assertFalse($parameters->hasDescriptions());
 
 		$parameters = new Parameters([
-			new Parameter('a', Types::factory('mixed'), description: 'Something'),
-			new Parameter('b', Types::factory('mixed')),
+			new Parameter('a', Types::fromString('mixed'), description: 'Something'),
+			new Parameter('b', Types::fromString('mixed')),
 		]);
 		$this->assertTrue($parameters->hasDescriptions());
 	}
@@ -88,8 +88,8 @@ class ParametersTest extends TestCase
 	public function testNot(): void
 	{
 		$parameters = new Parameters([
-			new Parameter('a', Types::factory('mixed')),
-			new Parameter('b', Types::factory('mixed')),
+			new Parameter('a', Types::fromString('mixed')),
+			new Parameter('b', Types::fromString('mixed')),
 		]);
 
 		$this->assertSame(2, $parameters->count());
@@ -103,8 +103,8 @@ class ParametersTest extends TestCase
 		$this->assertCount(0, $parameters);
 
 		$parameters = new Parameters([
-			new Parameter('a', Types::factory('mixed')),
-			new Parameter('b', Types::factory('mixed')),
+			new Parameter('a', Types::fromString('mixed')),
+			new Parameter('b', Types::fromString('mixed')),
 		]);
 		$this->assertCount(2, $parameters);
 		$this->assertInstanceOf(Parameter::class, $parameters->data[0]);
@@ -115,8 +115,8 @@ class ParametersTest extends TestCase
 	public function testToString(): void
 	{
 		$parameters = new Parameters([
-			new Parameter('a', Types::factory('string'), default: '"foo"'),
-			new Parameter('b', Types::factory('mixed')),
+			new Parameter('a', Types::fromString('string'), default: '"foo"'),
+			new Parameter('b', Types::fromString('mixed')),
 		]);
 		$this->assertSame('string $a = "foo", mixed $b', $parameters->toString());
 	}

@@ -54,7 +54,7 @@ class Parameter
 		$types ??= $parameter?->getType();
 		// a parameter without any type at all accepts anything
 		$types ??= 'mixed';
-		$types   = Types::factory($types, $context);
+		$types   = Types::from($types, $context);
 
 		return new static(
 			name:        $name,

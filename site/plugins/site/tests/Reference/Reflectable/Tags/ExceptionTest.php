@@ -17,7 +17,7 @@ class ExceptionTest extends TestCase
 
 	public function testDescription(): void
 	{
-		$types = Types::factory('Kirby\Exception\Exception');
+		$types = Types::fromString('Kirby\Exception\Exception');
 		$exception = new Exception($types, 'This is an exception');
 		$this->assertSame('This is an exception', $exception->description());
 	}
@@ -34,7 +34,7 @@ class ExceptionTest extends TestCase
 
 	public function testTypes(): void
 	{
-		$types = Types::factory('Kirby\Exception\Exception');
+		$types = Types::fromString('Kirby\Exception\Exception');
 		$exception = new Exception($types);
 		$this->assertSame($types, $exception->types());
 	}
