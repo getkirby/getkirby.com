@@ -1,14 +1,20 @@
 .type {
 	white-space: nowrap;
 }
-/* long generics and shapes wrap instead of scrolling */
 .prose code.type-compound {
+	display: inline;
+	/* same height as the inline-flex type tags */
+	padding-block: 0.17em;
 	white-space: normal;
+	box-decoration-break: clone;
+	-webkit-box-decoration-break: clone;
 }
 /* links to the classes inside of generics and shapes */
 .prose .type-compound a {
 	text-decoration: underline;
-	text-decoration-color: var(--color-gray-500);
+	text-decoration-color:  var(--color-gray-700);
+	text-underline-offset: 0.15em;
+	text-decoration-thickness: 1px;
 }
 .type-link {
 	text-decoration: none !important;
