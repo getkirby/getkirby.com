@@ -8,11 +8,6 @@
 					<?= icon('list') ?> All recipes
 				</a>
 			</li>
-			<li>
-				<button class="search-button" type="button" data-area="cookbook">
-					<?= icon('search') ?> Search
-				</button>
-			</li>
 			<li><hr class="hr"></li>
 			<?php foreach (collection('cookbook/categories') as $category): ?>
 			<li>

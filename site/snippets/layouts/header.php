@@ -4,7 +4,6 @@
     <div class="header-content relative flex items-center">
       <?php snippet('layouts/logo') ?>
       <?php snippet('layouts/menu') ?>
-      <?php snippet('layouts/search', ['area' => $search ?? 'all']) ?>
 
       <?php if ($page->id() !== 'buy') : ?>
         <?php snippet('layouts/banner', ['banner' => banner()]) ?>
