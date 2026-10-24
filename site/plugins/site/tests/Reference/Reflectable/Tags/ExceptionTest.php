@@ -32,6 +32,19 @@ class ExceptionTest extends TestCase
 		$this->assertSame('When something goes wrong', $exception->description());
 	}
 
+	public function testFactoryWithImportedClass(): void
+	{
+		$reflectable = new ReflectableClassMethod('Throws', 'throwsImported');
+		$tag         = $reflectable->doc()->getThrowsTagValues()[0];
+
+		// without context, the short name can't be resolved
+		$exception = Exception::factory($tag);
+		$this->assertSame('NotFoundException', $exception->types()->toString());
+
+		$exception = Exception::factory($tag, $reflectable);
+		$this->assertSame('Kirby\Exception\NotFoundException', $exception->types()->toString());
+	}
+
 	public function testTypes(): void
 	{
 		$types = Types::fromString('Kirby\Exception\Exception');

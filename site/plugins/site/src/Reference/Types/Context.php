@@ -2,7 +2,6 @@
 
 namespace Kirby\Reference\Types;
 
-use Exception;
 use Kirby\Reference\Reflectable\Doc;
 use Kirby\Reference\Reflectable\Reflectable;
 use Kirby\Reference\Reflectable\ReflectableClass;
@@ -93,9 +92,13 @@ class Context
 		}
 	}
 
+	/**
+	 * Creates the context for a class, method or function;
+	 * other reflectables (e.g. properties) have no context
+	 */
 	public static function factory(
 		Reflectable $reflectable
-	): static {
+	): static|null {
 		if ($reflectable instanceof ReflectableClass) {
 			return new static(class: $reflectable->reflection);
 		}
@@ -111,7 +114,7 @@ class Context
 			return new static(function: $reflectable->reflection);
 		}
 
-		throw new Exception('Invalid reflectable for creating context');
+		return null;
 	}
 
 	/**

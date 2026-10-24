@@ -81,7 +81,7 @@ class Types
 		Reflectable|null $reflectable = null
 	): static {
 		if ($reflectable !== null) {
-			$node = Context::factory($reflectable)->resolveNode($node);
+			$node = Context::factory($reflectable)?->resolveNode($node) ?? $node;
 		}
 
 		$types = A::map(static::flatten($node), static::print(...));

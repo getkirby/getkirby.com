@@ -22,6 +22,11 @@ class ThrowsTest extends TestCase
 		$this->assertCount(1, $throws);
 		$this->assertInstanceOf(Exception::class, $throws->data[0]);
 
+		// short class names are resolved in the context of the method
+		$reflectable = new ReflectableClassMethod('Throws', 'throwsImported');
+		$throws      = Throws::factory($reflectable);
+		$this->assertSame('Kirby\Exception\NotFoundException', $throws->data[0]->types()->toString());
+
 		$reflectable = new ReflectableClassMethod('Throws', 'throwsNot');
 		$throws      = Throws::factory($reflectable);
 		$this->assertNull($throws);
