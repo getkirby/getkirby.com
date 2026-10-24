@@ -184,10 +184,10 @@ If title and slug are generated automatically, and no custom fields are defined 
 
 ### Supported field types
 
-Currently, the list of supported field types in the dialog is limited to checkboxes, date, email, info, line, link, list, number, multiselect, radio, range, select, slug, tags, tel, text, toggles, time, url. Custom field types are disabled by default. To enable them, add your field type name to:
+Currently, the list of supported field types in the dialog is limited to checkboxes, date, email, info, line, link, list, number, multiselect, radio, range, select, slug, tags, tel, text, toggle, toggles, time, url. Custom field types are disabled by default. To enable them, add your field type name to:
 
 ```php
-Kirby\Panel\PageCreateDialog::$fieldTypes[] = 'yourFieldType'
+Kirby\Panel\Controller\Dialog\PageCreateDialogController::$fieldTypes[] = 'yourFieldType'
 ```
 
 

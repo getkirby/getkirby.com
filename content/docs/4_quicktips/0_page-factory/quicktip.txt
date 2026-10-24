@@ -74,11 +74,11 @@ Since the `textarea` field is not supported in the `create` dialog by default, w
 ```php "index.php"
 <?php
 
-use Kirby\Panel\PageCreateDialog;
+use Kirby\Panel\Controller\Dialog\PageCreateDialogController;
 
 require 'kirby/bootstrap.php';
 
-PageCreateDialog::$fieldTypes[] = 'textarea'; // textarea field added
+PageCreateDialogController::$fieldTypes[] = 'textarea'; // textarea field added
 
 echo (new Kirby)->render();
 ```
@@ -104,14 +104,16 @@ return [
 			'users',
 			// …
 			'bookmarks' => [
-				'icon'  => 'pen',
-				'label' => 'New bookmark',
-				'link'  => 'dialogs/pages/create?parent=pages/bookmarks&template=bookmark',
+				'icon'   => 'pen',
+				'label'  => 'New bookmark',
+				'dialog' => 'pages/bookmarks/fields/bookmarks/create',
 			],
 		]
 	]
 ];
 ```
+
+The `dialog` path opens the create dialog of the `pagelist` field that lists your bookmarks, here a field named `bookmarks` in the blueprint of the `bookmarks` page.
 
 This gives you a one-click entry point in the sidebar from everywhere without having to navigate the Panel.
 

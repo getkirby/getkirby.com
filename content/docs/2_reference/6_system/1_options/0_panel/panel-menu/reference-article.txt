@@ -90,11 +90,11 @@ However, you can also use this to open core dialogs: We want to add a menu entry
 'note' => [
   'icon'   => 'add',
   'label'  => 'New note',
-  'dialog' => 'pages/create?parent=/pages/notes&view=site&field=notes',
+  'dialog' => 'site/fields/notes/create',
 ]
 ```
 
-This will open the page create dialog specifically for a new note. With the query parameters, we set the parent for the new page (`/pages/notes`) and reference a view (`site`) and a field (`notes`). These are needed for the dialog to function. You will need to have this notes field in your site blueprint. The menu entry basically mirrors the create button from that field.
+This opens the create dialog of the `notes` (link: docs/reference/panel/fields/pagelist text: `pagelist` field) in your site blueprint, so you will need to have this field there. The menu entry mirrors the `Add` button of that field.
 
 ### Access `$kirby`
 
