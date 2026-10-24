@@ -6,7 +6,7 @@ Text:
 
 In this recipe, we will create a custom Panel section that displays a list of links with an icon, a title and a description. This is what it will look like once we are ready:
 
-(image: custom-section.jpg)
+(image: custom-section.webp)
 
 <info>
 For the purposes of this recipe, we assume you have read the (link: docs/guide/plugins/plugin-setup-panel text: Panel plugin setup guide) on how to get started with our Panel plugin bundler (link: https://github.com/johannschopplich/kirbyup text: kirbyup).

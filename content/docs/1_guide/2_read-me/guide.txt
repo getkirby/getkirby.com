@@ -35,13 +35,13 @@ The (link: docs/cookbook text: Cookbook) is a growing collection of step-by-step
 ### 4. Search
 The search can be accessed via the button at the top right of each page or with the keyboard shortcut <kbd>Ctrl/Cmd+K</kbd>. The dropdown allows you to filter the search results by parts of the documentation:
 
-(image: search-dropdown.png)
+(image: search-dropdown.webp)
 
 ## A Reference page in detail
 
 Let's look at a detailed Reference page to see how you can get the most of it.
 
-(image: reference-example-file-thumb.png link: docs/reference/objects/cms/file/thumb caption: Click on the image to visit the example page)
+(image: reference-example-file-thumb.webp link: docs/reference/objects/cms/file/thumb caption: Click on the image to visit the example page)
 
 
 1. **Method name**: In our example, the method name is `thumb()`.
