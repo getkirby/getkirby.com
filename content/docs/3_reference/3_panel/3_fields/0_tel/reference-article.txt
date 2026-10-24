@@ -16,7 +16,7 @@ Text:
 
 The phone field creates a text input with the type `tel` and a custom phone icon.
 
-(image: tel.png)
+(image: tel.webp)
 
 ## Example
 

@@ -12,7 +12,7 @@ Intro: Kirby’s unique IDs make it easy to refer to any page, file or user, no 
 
 Text:
 
-(image: uuids.png)
+(image: uuids.webp)
 
 ## What are UUIDs?
 
@@ -36,7 +36,7 @@ The `files`, `pages` and `users` fields support UUIDs out of the box. Every page
 
 Let's consider an example blueprint with various picker fields:
 
-(image: pickers.png)
+(image: pickers.webp)
 
 The resulting content file will look like this:
 
