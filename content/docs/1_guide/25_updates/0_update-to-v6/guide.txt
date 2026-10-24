@@ -115,7 +115,7 @@ fields:
 
 ## Custom sections in plugins
 
-The `sections` plugin extension no longer exists. A custom section becomes a (link: docs/reference/plugins/extensions/fields text: custom field), which is the same shape: a PHP definition that computes props and a Vue component that renders them.
+The `sections` plugin extension no longer exists. A custom section becomes a (link: docs/reference/plugins/extensions/fields text: custom field): a PHP class that computes its props, registered by its class name, and a Vue component that renders them.
 
 ```php "Kirby 5"
 Kirby::plugin(
@@ -133,14 +133,14 @@ Kirby::plugin(
 	name: 'superwoman/superplugin',
 	extends: [
 		'fields' => [
-			'anchor' => [...]
+			'anchor' => AnchorField::class
 		]
 	]
 );
 ```
 
-On the JavaScript side, `window.panel.plugin()` takes the component under `fields` instead of `sections`, and the component name Kirby looks for changes from `k-anchor-section` to `k-anchor-field`.
+On the JavaScript side, `window.panel.plugin()` takes the component under `fields` instead of `sections`, and the component name Kirby looks for changes from `k-anchor-section` to `k-anchor-field`. Learn how to port a section step by step in (link: releases/6/migration/plugin-developers/sections text: From custom sections to fields).
 
 <info>
-A section that only displayed something and never collected a value is still a valid field. Fields are not required to store content — the `info`, `headline`, `line` and `gap` types have always worked that way.
+A section that only displayed something and never collected a value is still a valid field. Fields are not required to store content: base your class on `Kirby\Form\Field\DisplayField`, like the `info` and `headline` fields.
 </info>
