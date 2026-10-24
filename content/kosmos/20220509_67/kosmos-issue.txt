@@ -34,7 +34,7 @@ To us at Kirby it is important to create a product that is as lean as possible. 
 
 ## Kirby in the wild
 
-(image: ableismus-toetet.png)
+(image: ableismus-toetet.webp)
 
 [#AbleismusTötet](https://ableismus.de/toetet/de)
 

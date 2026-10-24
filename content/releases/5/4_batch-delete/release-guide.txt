@@ -35,4 +35,4 @@ gallery:
   batch: true
 ```
 
-(image: batch-delete.jpg)
+(image: batch-delete.webp)

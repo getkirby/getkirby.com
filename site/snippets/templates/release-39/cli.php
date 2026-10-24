@@ -27,7 +27,7 @@
 
 	<div class="v38-cli-grid">
 		<figure class="release-box bg-black p-12 grid place-items-center">
-			<img src="<?= image('cli.png')?->url() ?>" loading="lazy" alt="A screenshot of Kirby’s new command line interface installing the starterkit" style="--aspect: 1242/379">
+			<img src="<?= image('cli.webp')?->url() ?>" loading="lazy" alt="A screenshot of Kirby’s new command line interface installing the starterkit" style="--aspect: 1242/379">
 		</figure>
 
 		<div class="release-text-box">

@@ -12,7 +12,7 @@ Text:
 
 The date field generates a simple input with a nice date picker. It can be setup to display and store dates.
 
-(image: date.png)
+(image: date.webp)
 
 ## Example
 

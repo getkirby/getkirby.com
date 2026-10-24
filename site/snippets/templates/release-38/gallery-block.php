@@ -60,7 +60,7 @@
 		</div>
 
 		<figure class="release-box bg-light grid place-items-center" style="grid-area: figure1">
-			<img src="<?= $page->image('gallery-block-1.png')?->url() ?>" loading="lazy" alt="The card design shows the new rounded corners that have been introduced throughout the Panel" style="--aspect-ratio: 1591/1137">
+			<img src="<?= $page->image('gallery-block-1.webp')?->url() ?>" loading="lazy" alt="The card design shows the new rounded corners that have been introduced throughout the Panel" style="--aspect-ratio: 1591/1137">
 		</figure>
 
 		<div class="release-text-box" style="grid-area: text2">
@@ -71,7 +71,7 @@
 		</div>
 
 		<figure class="release-box bg-light grid place-items-center" style="grid-area: figure2">
-			<img src="<?= $page->image('gallery-block-2.png')?->url() ?>" loading="lazy" alt="The card design shows the new rounded corners that have been introduced throughout the Panel" style="--aspect-ratio: 1874/694">
+			<img src="<?= $page->image('gallery-block-2.webp')?->url() ?>" loading="lazy" alt="The card design shows the new rounded corners that have been introduced throughout the Panel" style="--aspect-ratio: 1874/694">
 		</figure>
 	</div>
 

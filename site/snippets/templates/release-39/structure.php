@@ -7,7 +7,7 @@
 	]) ?>
 
 	<div class="release-box">
-		<?= image('structure.png') ?>
+		<?= image('structure.webp') ?>
 	</div>
 
 </section>

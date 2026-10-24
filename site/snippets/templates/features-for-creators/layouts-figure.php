@@ -1,5 +1,5 @@
 <figure>
-	<?= img('layouts.png', [
+	<?= img('layouts.webp', [
 		'alt' => 'A screenshot of our layouts field',
 		'class' => 'rounded',
 		'lightbox' => true,

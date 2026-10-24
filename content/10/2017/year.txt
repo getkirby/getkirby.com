@@ -20,4 +20,4 @@ The Slack server turned into a very vibrant group, and discussions there were ex
 
 The development took forever and got us into one or the other crisis along the way. But we had full support of our backers. Not just financially, but especially motivationally.
 
-(image: kirby-next.png link: http://web.archive.org/web/20170913122634/https://getkirby.com/next caption: Introducing Kirby next and the supporter packages)
+(image: kirby-next.webp link: http://web.archive.org/web/20170913122634/https://getkirby.com/next caption: Introducing Kirby next and the supporter packages)

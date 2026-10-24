@@ -35,7 +35,7 @@ Today, we release [Kirby 3.7.4](https://github.com/getkirby/kirby/releases/tag/3
 
 ## Kirby in the wild
 
-(image: everflow-water.jpg)
+(image: everflow-water.webp)
 
 [Everflow Water](https://www.everflowwater.com/) 
 

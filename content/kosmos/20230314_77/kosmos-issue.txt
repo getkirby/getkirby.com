@@ -41,7 +41,7 @@ Last week, we released [Kirby 3.9.2](https://github.com/getkirby/kirby/releases/
 
 ## Kirby in the wild
 
-(image: forum-design.jpg)
+(image: forum-design.webp)
 
 [Forum](https://forum.design/en)
 

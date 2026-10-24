@@ -106,7 +106,7 @@ Together they recorded three really interesting episodes talking about Kirby and
 
 ## Made with Kirby
 
-(image: 1-made-with-kirby.png)
+(image: 1-made-with-kirby.webp)
 
 Bruno has launched a brand new directory of sites, built with Kirby: [builtwithkirby.com](https://builtwithkirby.com/) for his new [Performance Audit Service](https://audit.bnomei.com/).
 
@@ -161,7 +161,7 @@ We truly believe that our partner program is all about building a strong network
 
 <div class="columns mb-12" style="--columns: 3">
 <div>
-(image: estd.png)
+(image: estd.webp)
 (link: https://estd.dev text: ESTD)
 
 </div>
@@ -174,7 +174,7 @@ We truly believe that our partner program is all about building a strong network
 
 <div>
 
-(image: wyler.jpg)
+(image: wyler.webp)
 (link: https://matthiaswyler.com/ text: Matthias Wyler)
 
 </div>

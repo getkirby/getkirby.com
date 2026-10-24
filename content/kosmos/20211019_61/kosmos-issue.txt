@@ -36,7 +36,7 @@ To test this new version, download the [Kirby 3.6-RC1 release](https://github.co
 
 ## Kirby in the wild
 
-(image: leiden-bio-science-park.png)
+(image: leiden-bio-science-park.webp)
 
 (link: https://leidenbiosciencepark.nl/ text: Leiden Bio Science Park)
 

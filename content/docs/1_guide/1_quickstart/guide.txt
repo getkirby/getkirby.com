@@ -74,7 +74,7 @@ You can install Kirby in a few quick steps in different ways. More instructions 
 
 (…tabs)
 
-(image: starterkit.png)
+(image: starterkit.webp)
 
 ## Web server configuration
 

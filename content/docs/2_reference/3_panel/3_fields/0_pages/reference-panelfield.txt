@@ -16,7 +16,7 @@ The pages field is basically a select/multiselect field specialized to allow you
 
 Usage examples: Select related pages of the current page to show in a related pages widget on the frontend, select one or more articles to feature on the homepage, etc.
 
-(image: pages.png)
+(image: pages.webp)
 
 ## Basic field definition
 

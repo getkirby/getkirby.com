@@ -179,7 +179,7 @@
 	<div class="columns bg-dark highlight color-white" style="--columns-sm: 1; --columns-md: 1; --columns: 2; --gap: var(--spacing-12)">
 		<article class="bg-black">
 			<figure class="video" style="--aspect-ratio: 16/9">
-				<?= video('https://www.youtube.com/watch?v=QgCMc89rdNY', $page->image('youtube-36.jpg'), [], [
+				<?= video('https://www.youtube.com/watch?v=QgCMc89rdNY', $page->image('youtube-36.webp'), [], [
 					'loading' => 'lazy',
 					'title' => 'YouTube video of the 3.6 release show'
 				]) ?>
@@ -191,7 +191,7 @@
 		</article>
 		<article class="bg-black">
 			<figure class="video" style="--aspect-ratio: 16/9">
-				<?= video('https://www.youtube-nocookie.com/watch?v=-zrgqExDS68', $page->image('youtube-lowa.jpg'), [], [
+				<?= video('https://www.youtube-nocookie.com/watch?v=-zrgqExDS68', $page->image('youtube-lowa.webp'), [], [
 					'loading' => 'lazy',
 					'title' => 'YouTube video of the Kirby in the Wild event'
 				]) ?>

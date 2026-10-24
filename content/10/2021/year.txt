@@ -10,7 +10,7 @@ We could all feel that because we really shied away from keeping it updated, whi
 
 After the 3.5 release, we decided to make a website sprint and release a new site in late January, early February 2021. Well, we finally finished it in April. But we all agreed that it was worth it and it finally feels great again to keep it updated.
 
-(image: v3-website-2.png caption: It was time for another redesign of getkirby.com)
+(image: v3-website-2.webp caption: It was time for another redesign of getkirby.com)
 
 ## 1000
 
@@ -34,4 +34,4 @@ In November, we released (link: releases/3.6 text: 3.6). It's our latest big rel
 
 Maybe because of the milestones, maybe because 2021 was a tough year because of the pandemic: It felt right to collect some more achievements. It often gets lost how much you really move forward as a team. We learned along our way that tiny consistent steps are the most effective way for us. But those tiny steps are sometimes harder to see when you don't keep track of them.
 
-(image: state-of-kirby.png link: 2021 caption: Our first wrap-up post in 10 years. Should keep those coming.)
+(image: state-of-kirby.webp link: 2021 caption: Our first wrap-up post in 10 years. Should keep those coming.)

@@ -10,7 +10,7 @@ Text:
 
 Kirby allows your plugin to add custom view buttons to most views of the Panel views (e.g. page, site, file, user, language). These buttons can be added alongside the default buttons, such as the preview button or settings dropdown button.
 
-(image: buttons.png)
+(image: buttons.webp)
 
 ## Buttons in your Panel area
 

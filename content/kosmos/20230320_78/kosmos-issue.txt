@@ -72,16 +72,16 @@ We are quite excited for Kirby 4, a great next step for our CMS, and we can't wa
 
 ## A small selection from our survey
 
-(image: eth-zurich.png link: https://gali-izard.arch.ethz.ch/)
+(image: eth-zurich.webp link: https://gali-izard.arch.ethz.ch/)
 
 (columns…)
 
-(image: esad-amiens.png link: https://esad-amiens.fr/)
+(image: esad-amiens.webp link: https://esad-amiens.fr/)
 
 ++++
 
 
-(image: cybersense.png link:https://cybersense.ai/)
+(image: cybersense.webp link:https://cybersense.ai/)
 
 (…columns)
 
@@ -89,38 +89,38 @@ We are quite excited for Kirby 4, a great next step for our CMS, and we can't wa
 
 (columns…)
 
-(image: hazy.png link: https://hazy.com/)
+(image: hazy.webp link: https://hazy.com/)
 
 ++++
 
 
-(image: yalla-yalla.png link: https://www.yallayalla.studio/)
+(image: yalla-yalla.webp link: https://www.yallayalla.studio/)
 
 (…columns)
 
 
-(image: scroll-nicht-weg.png link: https://scrollnichtweg.de/)
+(image: scroll-nicht-weg.webp link: https://scrollnichtweg.de/)
 
 > "Kirby is the best thing that happened to me in my career as a web designer / developer!"
 
 (columns…)
 
-(image: fondation-jan-michalski.png link: https://fondation-janmichalski.com/fr)
+(image: fondation-jan-michalski.webp link: https://fondation-janmichalski.com/fr)
 
 ++++
 
-(image: 100-tage-gegen-rassismus.png link: https://www.100-tage-gegen-rassismus.de/)
+(image: 100-tage-gegen-rassismus.webp link: https://www.100-tage-gegen-rassismus.de/)
 
 (…columns)
 
 
 (columns…)
 
-(image: diebaeckerei.at.png link: https://diebaeckerei.at/)
+(image: diebaeckerei.at.webp link: https://diebaeckerei.at/)
 
 ++++
 
-(image: i-just-love-breakfast.png link: https://ijustlovebreakfast.be/nl)
+(image: i-just-love-breakfast.webp link: https://ijustlovebreakfast.be/nl)
 
 (…columns)
 

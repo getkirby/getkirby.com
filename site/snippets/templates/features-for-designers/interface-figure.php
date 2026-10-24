@@ -14,7 +14,7 @@
 
 <div class="ingrid">
 	<div style="grid-column: span 6; align-self: flex-end">
-		<?= img('author.png', [
+		<?= img('author.webp', [
 			'alt' => 'A screenshot of the users and tags fields',
 			'lightbox' => 'interface',
 			'src' => [
@@ -29,7 +29,7 @@
 		]) ?>
 	</div>
 	<div style="grid-column: span 6; align-self: flex-end">
-		<?= img('list.png', [
+		<?= img('list.webp', [
 			'alt' => 'A screenshot with a list of pages',
 			'lightbox' => 'interface',
 			'src' => [
@@ -44,7 +44,7 @@
 		]) ?>
 	</div>
 	<div style="grid-column: span 12">
-		<?= img('images.png', [
+		<?= img('images.webp', [
 			'alt' => 'A screenshot of our layout field',
 			'lightbox' => 'interface',
 			'src' => [
@@ -60,7 +60,7 @@
 		]) ?>
 	</div>
 	<div style="grid-column: span 9">
-		<?= img('structure.png', [
+		<?= img('structure.webp', [
 			'alt' => 'A screenshot of our structure field to edit tabular data',
 			'lightbox' => 'interface',
 			'src' => [
@@ -73,7 +73,7 @@
 		]) ?>
 	</div>
 	<div style="grid-column: span 7">
-		<?= img('albums.png', [
+		<?= img('albums.webp', [
 			'alt' => 'A screenshot of an gallery section in the Panel.',
 			'lightbox' => 'interface',
 			'src' => [

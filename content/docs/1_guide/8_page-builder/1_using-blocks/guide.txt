@@ -10,9 +10,9 @@ Text:
 
 ## Block UI overview
 
-(image: add-button-with-dropdown.png caption: Add button above blocks field with dropdown to delete all or copy all blocks and paste option to paste blocks from HTML)
-(image: context-menu.png caption: Context menu shown when block is active)
-(image: context-menu-drop-down.png caption: Drop-down with block options from context menu)
+(image: add-button-with-dropdown.webp caption: Add button above blocks field with dropdown to delete all or copy all blocks and paste option to paste blocks from HTML)
+(image: context-menu.webp caption: Context menu shown when block is active)
+(image: context-menu-drop-down.webp caption: Drop-down with block options from context menu)
 
 ## Add block
 

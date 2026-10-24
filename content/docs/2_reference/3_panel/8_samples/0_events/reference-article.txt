@@ -55,7 +55,7 @@ Note that for the example to work, a page with the slug`events` needs to exist a
 
 ### Result
 
-(image: events.png)
+(image: events.webp)
 
 
 ## Single event
@@ -99,7 +99,7 @@ columns:
 
 ### Result
 
-(image: event.png)
+(image: event.webp)
 
 ## Example template
 

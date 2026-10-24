@@ -85,7 +85,7 @@
 		<ul class="team-members columns">
 			<li>
 				<figure>
-					<?= image('bastian.jpg')->crop(250, 350) ?>
+					<?= image('bastian.webp')->crop(250, 350) ?>
 					<figcaption>
 						<p><strong>Bastian</strong> Allgeier</p>
 						<p><a href="mailto:bastian@getkirby.com">bastian@getkirby.com</a></p>
@@ -94,7 +94,7 @@
 			</li>
 			<li>
 				<figure>
-					<?= image('sonja.jpg')->crop(250, 350) ?>
+					<?= image('sonja.webp')->crop(250, 350) ?>
 					<figcaption>
 						<p><strong>Sonja</strong> Broda</p>
 						<p><a href="mailto:sonja@getkirby.com">sonja@getkirby.com</a></p>
@@ -103,7 +103,7 @@
 			</li>
 			<li>
 				<figure>
-					<?= image('lukas.jpg')->crop(250, 350) ?>
+					<?= image('lukas.webp')->crop(250, 350) ?>
 					<figcaption>
 						<p><strong>Lukas</strong> Bestle</p>
 						<p><a href="mailto:lukas@getkirby.com">lukas@getkirby.com</a></p>
@@ -112,7 +112,7 @@
 			</li>
 			<li>
 				<figure>
-					<?= image('nico.png')->crop(250, 350) ?>
+					<?= image('nico.webp')->crop(250, 350) ?>
 					<figcaption>
 						<p><strong>Nico</strong> Hoffmann</p>
 						<p><a href="mailto:nico@getkirby.com">nico@getkirby.com</a></p>
@@ -121,7 +121,7 @@
 			</li>
 			<li>
 				<figure>
-					<?= image('ahmet.png')->crop(250, 350) ?>
+					<?= image('ahmet.webp')->crop(250, 350) ?>
 					<figcaption>
 						<p><strong>Ahmet</strong> Bora</p>
 						<p><a href="mailto:ahmet@getkirby.com">ahmet@getkirby.com</a></p>

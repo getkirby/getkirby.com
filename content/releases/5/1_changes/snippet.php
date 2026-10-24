@@ -24,7 +24,7 @@
 
 <div class="v5-unsaved-changes">
 	<figure class="release-box bg-light grid place-items-center" style="grid-area: preview">
-		<video autoplay playsinline muted loop class="rounded shadow-xl" style="width: 100%; --span: 2" poster="<?= $section->image('changes-poster.jpg')->url() ?>">
+		<video autoplay playsinline muted loop class="rounded shadow-xl" style="width: 100%; --span: 2" poster="<?= $section->image('changes-poster.webp')->url() ?>">
 			<source src="<?= $section->file('changes.mp4')->url() ?>" type="video/mp4">
 		</video>
 	</figure>
@@ -32,7 +32,7 @@
 		<?php snippet('templates/release-4/teaser', ['section' => $section]) ?>
 	</div>
 	<figure class="release-box bg-light" style="grid-area: dropdown">
-		<?= img($section->image('changes-info-dropdown.png'), [
+		<?= img($section->image('changes-info-dropdown.webp'), [
 			'alt' => 'A screenshot of the info dropdown for unsaved changes, showing the current editor, modification timestamp and a preview button',
 			'src' => [
 				'width' => 485
@@ -47,7 +47,7 @@
 		]) ?>
 	</figure>
 	<figure class="release-box bg-light" style="grid-area: dialog">
-		<?= img($section->image('changes-dialog.png'), [
+		<?= img($section->image('changes-dialog.webp'), [
 			'alt' => 'A screenshot of the changes dialog with all unsaved pages, files and accounts',
 			'src' => [
 				'width' => 485

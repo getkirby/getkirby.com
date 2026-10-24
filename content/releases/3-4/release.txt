@@ -14,7 +14,7 @@ Description: A release that brings a lot of new features, like extensible search
 
 ----
 
-Cover: kirby-3-4.png
+Cover: kirby-3-4.webp
 
 ----
 

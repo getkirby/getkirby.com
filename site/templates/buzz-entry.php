@@ -29,7 +29,7 @@
 
 <?php if ($page->video()->isNotEmpty()): ?>
 	<figure class="rounded overflow-hidden mb-12 shadow-lg" style="--aspect-ratio: 800/400">
-		<?= video($page->video(), $page->image('youtube.jpg')) ?>
+		<?= video($page->video(), $page->image('youtube.webp')) ?>
 	</figure>
 <?php endif ?>
 

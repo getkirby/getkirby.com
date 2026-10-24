@@ -21,7 +21,7 @@ Interview:
 
     After using it for small scale projects, I’ve had the opportunity to build more complex websites with it during my time at an agency. Currently I’m running my own studio called [Gute Kombi](https://gutekombi.de/kirby-cms-agentur) with my fiancé and, who would have thought, we’re building great websites with the help of Kirby as well!
 
-    (image: Kirby-channel2.jpg alt: Kirby Channel screenshot)
+    (image: Kirby-channel2.webp alt: Kirby Channel screenshot)
 
     I love to learn new things and really enjoy the exchange in the Kirby Community, be it in the Discord or in meetups. With that spirit I started with moinframe, a YouTube channel about Kirby CMS. With moinframe I want to share the joy of working with Kirby and create value for the community. It’s a mix of tutorials, little hacks, ideas and first looks at plugins, or of course, new Kirby CMS versions – looking at you v6!
 
@@ -61,7 +61,7 @@ Interview:
 
     Maintaining is still a bit stressful, I must say, because now there are other people using the stuff you write. But I’m eager to work on better systems to test and validate plugin updates to keep my stresslevel low :D
 
-    (image: Kirby-plugins.jpg alt: Kirby Plugin screenshot)
+    (image: Kirby-plugins.webp alt: Kirby Plugin screenshot)
 
 -
   question: |
@@ -91,7 +91,7 @@ Interview:
 
     Design wise, or in ideation, those tools are pretty shit, so I can confidently still use my brain for that. I also find it irritating to automate with LLMs, so I stay away from building super smart prompt flows that show me my calendar in the morning.
 
-    (image: Kirby-deck.jpg alt: Kirby Deck screenshot)
+    (image: Kirby-deck.webp alt: Kirby Deck screenshot)
 
 -
   question: |

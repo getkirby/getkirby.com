@@ -38,7 +38,7 @@ Two weeks ago, we released [Kirby 3.9.1](https://github.com/getkirby/kirby/relea
 
 ## Kirby in the wild
 
-(image: 1-visplay.png)
+(image: 1-visplay.webp)
 
 [Visplay](https://visplay.com/en)
 
@@ -47,7 +47,7 @@ Two weeks ago, we released [Kirby 3.9.1](https://github.com/getkirby/kirby/relea
 
 (columns…)
 
-(image: kirbycast-content-representations.jpg)
+(image: kirbycast-content-representations.webp)
 
 ++++
 
@@ -61,7 +61,7 @@ Ever wondered what [content representations](https://www.youtube.com/watch?v=LoN
 
 Generate Storybook stories from snippets and templates with the [Kirby Storybook](https://github.com/bnomei/kirby3-storybook) plugin.
 
-(image: kirby-storybook-plugin.png)
+(image: kirby-storybook-plugin.webp)
 
 Brave new world: Stop writing yourself, let AI do it for you right in Kirby, with the [OpenAI Textgenerator field](https://github.com/raduhoria/openai-textgenerator-field).
 

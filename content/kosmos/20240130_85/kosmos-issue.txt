@@ -55,7 +55,7 @@ Thursday, February 22, 2024, 18:00 PM
 
 ## Kirby in the wild
 
-(image: hansewasser.png)
+(image: hansewasser.webp)
 
 ## Kirby plugins
 

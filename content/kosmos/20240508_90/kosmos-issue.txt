@@ -39,7 +39,7 @@ Start into the holidays with our special deal: From today until July 2nd, 2024, 
 ## Kirby 5 alpha
 
 
-(image: cover.png link: https://getkirby.com/buzz/v5-alpha)
+(image: cover.webp link: https://getkirby.com/buzz/v5-alpha)
 
 Today we are sharing the very first alpha version of our new major version, Kirby 5 with you. As an alpha, this version is **far from complete** yet, so **things will still change**, and we will also **add new features** until the release at the end of this year.
 
@@ -49,7 +49,7 @@ Here is an overview of the very first new features:
 
 The most notable change is a dark mode for the Panel, a feature requested by many of you. Users can now activate a dark theme for the Panel from their account view.
 
-(image: dark-mode1.png)
+(image: dark-mode1.webp)
 
 ### More features
 
@@ -94,7 +94,7 @@ The new [Kirby CSV field plugin](https://github.com/distantnative/kirby-csv-fiel
 ## Kirby in the wild
 
 
-(image: poweredbyroots.png)
+(image: poweredbyroots.webp)
 
 [Roots](https://poweredbyroots.org/)
 

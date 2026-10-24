@@ -25,7 +25,7 @@ Text:
 
 Our next major version, [Kirby 3.7](https://github.com/getkirby/kirby/releases/tag/3.7.0-rc.1), is well under way and here comes the first release candidate with a looooot of cool new features.
 
-(image: pixels.png)
+(image: pixels.webp)
 
 Here are some of them:
 
@@ -47,7 +47,7 @@ In the last issue, I wrote down my thoughts about the climate crisis and sustain
 
 ## Kirby in the wild
 
-(image: insect-eco-system.jpg)
+(image: insect-eco-system.webp)
 
 [Insect Eco-System](https://insect-eco-system.org/)
 

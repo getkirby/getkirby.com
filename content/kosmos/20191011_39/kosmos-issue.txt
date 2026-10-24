@@ -20,7 +20,7 @@ Kosmos-Subscription: on
 
 Text:
 
-(image: chevalvert.jpg)
+(image: chevalvert.webp)
 
 [Studio Chevalvert](https://chevalvert.fr/en)
 
@@ -36,7 +36,7 @@ Also, the [Editor](https://github.com/getkirby/editor) is taking shape and getti
 
 (columns…)
 
-(image: kirby-memsource.png)
+(image: kirby-memsource.webp)
 
 ++++
 
@@ -68,7 +68,7 @@ fields:
 We went into the kitchen and came out with a new recipe. [Kirby in a nutshell](https://getkirby.com/docs/cookbook/setup/kirby-in-a-nutshell) is a round-up of things you may want to consider and questions to ask yourself when you start building your first (or second, or…) Kirby project.
 
 &nbsp;
-(image: natucate.jpg)
+(image: natucate.webp)
 
 [Natucate](https://www.natucate.com)
 

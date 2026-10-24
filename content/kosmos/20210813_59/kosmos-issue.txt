@@ -33,7 +33,7 @@ Find the [feature overview and docs about Kirby 3.6 on our release page](https:/
 
 ## Kirby in the wild 1
 
-(image: 1-taifun-tofu.jpg)
+(image: 1-taifun-tofu.webp)
 
 [Taifun-Tofu GmbH](https://www.taifun-tofu.de/en)
 
@@ -57,7 +57,7 @@ Learn how to share templates, controllers, and page models between pages with di
 
 ## Kirby in the wild 2
 
-(image: 2-coronaschutzimpfung.jpg)
+(image: 2-coronaschutzimpfung.webp)
 
 [coronaschutzimpfung.it](https://www.coronaschutzimpfung.it)
 

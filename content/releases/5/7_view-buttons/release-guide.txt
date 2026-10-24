@@ -55,7 +55,7 @@ Kirby 5 adds a new extension that allows plugin developers to add custom view bu
 Text:
 
 
-(image: buttons.png)
+(image: buttons.webp)
 
 There are different ways to define a custom button: in a blueprint, in the `config.php`, in a Panel area and/or as a full custom Vue component:
 

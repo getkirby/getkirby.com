@@ -20,7 +20,7 @@ Screencast: (screencast: https://www.youtube.com/watch?v=eOoGMmQbre8 title: A cl
 
 Text:
 
-(image: blocks.png)
+(image: blocks.webp)
 
 ## Like Lego® bricks for your content
 

@@ -38,7 +38,7 @@ PhoneSubtitle: It’s good – promised!
 
 ----
 
-PhoneImage: micro-1.jpg
+PhoneImage: micro-1.webp
 
 
 ----

@@ -35,7 +35,7 @@ It's always inspiring to see what others are creating with Kirby. This month’s
 
 ++++
 
-(image: reasonsto.jpg)
+(image: reasonsto.webp)
 
 (…columns)
 
@@ -59,19 +59,19 @@ If you want to get your website online fast, prebuilt themes are a good alternat
 
 (columns…)
 
-(image: kometa-theme.jpg)
+(image: kometa-theme.webp)
 [Kometa](http://themes.vlady.cc/kometa/)
 Customizable multi-purpose theme made by Vladimir Yordanov
 
 ++++
 
-(image: brilliance-theme.jpg)
+(image: brilliance-theme.webp)
 [Brilliance](http://themes.kueker.net/brilliance/)
 Blog theme with built-in comment system by Florian Küker.
 
 ++++
 
-(image: simplicity-theme.jpg)
+(image: simplicity-theme.webp)
 [Simplicity](http://themes.kueker.net/simplicity/)
 Simple blog theme by Florian Küker.
 

@@ -43,7 +43,7 @@ In the example above, we mix the default block types (heading and text) with our
 
 Custom block types don't have a visual preview by default. They show up with the icon and the name from your blueprint definition.
 
-(image: preview.png)
+(image: preview.webp)
 
 #### Field preview
 
@@ -94,7 +94,7 @@ fields:
             type: text
 ```
 
-(image: block-labels.png)
+(image: block-labels.webp)
 
 Within the label property, you have access to an array of field properties, here are some more examples:
 
@@ -109,7 +109,7 @@ label: "{{ image.0.filename }}" # to get the filename of the first image in the 
 
 To edit a custom block type, editors can either double-tap on the block or click on the edit icon in the toolbar. The block drawer opens with the fields you've defined for the block.
 
-(image: editing.png)
+(image: editing.webp)
 
 #### Drawer-less blocks
 
@@ -147,7 +147,7 @@ fields:
 
 The tabs will then show up in the block drawer.
 
-(image: tabs.png)
+(image: tabs.webp)
 
 ## Global block types
 

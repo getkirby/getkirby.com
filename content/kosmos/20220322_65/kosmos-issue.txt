@@ -31,7 +31,7 @@ Here we are again after a little break caused by the transfer to our new team co
 
 ## Kirby in the wild
 
-(image: 1_one-nil.jpg)
+(image: 1_one-nil.webp)
 
 [ONE:NIL](https://onenil.com/)
 
@@ -57,7 +57,7 @@ The [Move Pages](https://clicktonext.com/plugins/move-pages) plugin provides a f
 
 (columns…)
 
-(image: 2_mapnotator.jpg)
+(image: 2_mapnotator.webp)
 
 ++++
 

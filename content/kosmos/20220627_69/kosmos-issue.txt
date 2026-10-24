@@ -25,7 +25,7 @@ Wait, another Kosmos edition after only two weeks? What's happening?
 Well, we have a great new major Kirby version to celebrate, so say hello
 to:
 
-(image: 1-opengraph.png)
+(image: 1-opengraph.webp)
 
 ## Kirby 3.7 "Kinyongia"
 
@@ -45,27 +45,27 @@ And here are the most notable new Kirby 3.7 features:
 <p class="color-gray-600">Turn your dashboard into a smart&nbsp;report</p>
 
 
-(image: stats.png)
+(image: stats.webp)
 
 
 ## Table layout for sections
 <p class="color-gray-600">All relevant content at a glance</p>
 
 
-(image: table.png)
+(image: table.webp)
 
 
 ## Multi-toggle field
 <p class="color-gray-600">Stylish options you will love</p>
 
-(image: toggle-field.png)
+(image: toggle-field.webp)
 
 
 ## Improved system view
 <p class="color-gray-600">Important info about your site in one place</p>
 
 
-(image: system.png)
+(image: system.webp)
 
 
 ## Fresh UI design for the Panel
@@ -73,18 +73,18 @@ And here are the most notable new Kirby 3.7 features:
 
 (columns…)
 
-(image: pages.png)
+(image: pages.webp)
 
 ++++
 
-(image: fields.png)
+(image: fields.webp)
 
 (…columns)
 
 ## Icons, icons, icons
 <p class="color-gray-600">Eye candy for the Panel</p>
 
-(image: icons.png)
+(image: icons.webp)
 
 For an overview of all new features, deprecations and breaking changes,
 check out our [release page](https://getkirby.com/releases/3.7).

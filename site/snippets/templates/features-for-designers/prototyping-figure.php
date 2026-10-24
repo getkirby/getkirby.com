@@ -1,5 +1,5 @@
 <figure>
-	<?= img('files-and-folders.png', [
+	<?= img('files-and-folders.webp', [
 		'alt' => 'A screenshot of the file system with folders, text files and images in Kirby’s content folder',
 		'lightbox' => true,
 		'src' => [

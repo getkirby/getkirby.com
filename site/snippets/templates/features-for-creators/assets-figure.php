@@ -1,5 +1,5 @@
 <figure>
-	<?= img('assets.png', [
+	<?= img('assets.webp', [
 		'alt' => 'A screenshot of an image gallery in the Panel',
 		'class' => 'rounded',
 		'lightbox' => true,

@@ -40,7 +40,7 @@ Find more details in the changelog. You can download the beta from [https://gith
 
 ## Kirby in the wild
 
-(image: sunlight.jpg)
+(image: sunlight.webp)
 
 [Sunlight](https://www.sunlight.io/)
 

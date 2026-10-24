@@ -22,7 +22,7 @@
 	<figure class="release-box bg-light" style="grid-area: view">
 		<?php snippet('templates/release-4/image', [
 			'alt'   => 'The new dialog to change the template of a file.',
-			'img'   => $section->image('change-template.png')->resize(1600),
+			'img'   => $section->image('change-template.webp')->resize(1600),
 		]) ?>
 	</figure>
 	<div class="release-text-box" style="grid-area: teaser">

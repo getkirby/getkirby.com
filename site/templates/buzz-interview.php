@@ -79,7 +79,7 @@
 </style>
 
 
-<?php if ($image = $page->image('header.jpg')): ?>
+<?php if ($image = $page->image('header.webp')): ?>
 	<?= img($image, [
 		// decorative
 		'alt'   => $image->alt()->or(''),
@@ -125,7 +125,7 @@
 		class="rounded overflow-hidden mb-12 shadow-lg"
 		style="--aspect-ratio: 800/400"
 	>
-		<?= video($page->video(), $page->image('youtube.jpg')) ?>
+		<?= video($page->video(), $page->image('youtube.webp')) ?>
 	</figure>
 <?php endif ?>
 

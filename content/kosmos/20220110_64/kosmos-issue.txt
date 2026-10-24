@@ -29,7 +29,7 @@ How did you get to know Kirby and when, what was your first ever Kirby project, 
 
 ## Kirby in the wild
 
-(image: bolster.png)
+(image: bolster.webp)
 
 [Bolster](https://teambolster.com/en)
 

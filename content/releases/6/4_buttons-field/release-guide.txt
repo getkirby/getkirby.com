@@ -20,7 +20,7 @@ Sometimes a form needs more than fields: a link to the shop backend, a shortcut 
 
 Text:
 
-(image: image.png)
+(image: image.webp)
 
 ## Basic usage
 

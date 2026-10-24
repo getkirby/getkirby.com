@@ -35,11 +35,11 @@ I hope you had a good start into the new year! For the podcast lovers among you,
 
 (columns…)
 
-(image: snippets-with-slots-1.png)
+(image: snippets-with-slots-1.webp)
 
 ++++
 
-(image: snippets-with-slots-2.png)
+(image: snippets-with-slots-2.webp)
 
 
 (…columns)
@@ -48,14 +48,14 @@ I hope you had a good start into the new year! For the podcast lovers among you,
 <p class="color-gray-600">New row & delete all buttons</p>
 
 
-(image: structure.png)
+(image: structure.webp)
 
 ### PHP 8.2 support
 <p class="color-gray-600">PHP moves forward, we do too</p>
 
 With support for PHP 8.2, you can update your servers to the latest PHP version. And you can start using PHP 8.2 features in your custom code if you like.
 
-(image: php-8-2.png)
+(image: php-8-2.webp)
 
 For a full list of all features and enhancement and an overview of breaking changes, check out our [release page](https://getkirby.com/releases/3.9).
 
@@ -68,8 +68,8 @@ For a full list of all features and enhancement and an overview of breaking chan
 
 (columns…)
 
-(image: cli.png)
-(image: cli-2.png)
+(image: cli.webp)
+(image: cli-2.webp)
 
 ++++
 
@@ -81,7 +81,7 @@ The [Kirby Command Line Interface is getting a big update](https://github.com/ge
 ### Kirby KQL 2.0.0
 <p class="color-gray-600">Fully refactored, more features</p>
 
-(image: kql.png)
+(image: kql.webp)
 
 Kirby's Query Language API combines the flexibility of Kirby's data structures, the power of GraphQL and the simplicity of REST. [KQL 2.0.0](https://github.com/getkirby/kql/releases/tag/2.0.0) comes with all the new query syntax improvements from Kirby 3.8.3 and a fully refactored code base. Get started with the new KQL Playground which provides a set of example queries. Connected to our Starterkit, you can play around with your own queries.
 
@@ -99,12 +99,12 @@ The [Eleventykit](https://github.com/getkirby/eleventykit) is a simple, unstyled
 
 It uses Kirby's [query language (KQL)](https://github.com/getkirby/kql) to fetch articles from our KQL playground.
 
-(image: eleventykit.png)
+(image: eleventykit.webp)
 
 
 ## Kirby in the wild
 
-(image: 1_metaorganism.png)
+(image: 1_metaorganism.webp)
 
 [Meet the Metaorganism](https://metaorganism.app/): Headless Kirby CMS using content representations
 

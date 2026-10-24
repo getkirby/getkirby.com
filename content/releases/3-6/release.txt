@@ -6,7 +6,7 @@ ogimage: opengraph.jpg
 ----
 Description: Improvements all over: New way to present your content, an improved Blocks field and WebP & AVIF Support. Plus Fiber, an architecture for our Panel that will shape Kirby's future.
 ----
-Cover: kirby-3-6.png
+Cover: kirby-3-6.webp
 ----
 Area:
 

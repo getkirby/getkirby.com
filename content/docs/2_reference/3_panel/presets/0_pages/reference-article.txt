@@ -23,11 +23,11 @@ Title: Pages preset example
 preset: pages
 ```
 
-(image: pages-empty.png)
+(image: pages-empty.webp)
 
 By default, this adds two sections of type `pages` to your form: A drafts section (default label "Drafts") and a section of listed pages (default label "Published").
 
-(image: pages-filled.png)
+(image: pages-filled.webp)
 
 This preset is again extendable. For example, if you want to add a section for pages in review while at the same time using predefined sections with additional options, you can do it like this using the keywords `drafts`, `unlisted`, and `listed`:
 
@@ -50,5 +50,5 @@ listed:
   label: Published articles
 ```
 
-(image: pages-blog.png)
+(image: pages-blog.webp)
 

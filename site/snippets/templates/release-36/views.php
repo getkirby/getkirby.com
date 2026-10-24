@@ -9,7 +9,7 @@
 		<article class="p-6 bg-dark color-white">
 			<h3 class="h3 mb-6">System View</h3>
 			<figure class="mb-6">
-				<?= img('system-view.png', [
+				<?= img('system-view.webp', [
 					'alt' => 'A screenshot of the new system view',
 					'lightbox' => true,
 					'class' => 'bg-black rounded shadow-xl',
@@ -27,7 +27,7 @@
 		<article class="p-6 bg-dark color-white">
 			<h3 class="h3 mb-6">Languages View</h3>
 			<figure class="mb-6">
-				<?= img('languages-view.png', [
+				<?= img('languages-view.webp', [
 					'alt' => 'A screenshot of the new languages view',
 					'lightbox' => true,
 					'class' => 'bg-black rounded shadow-xl',

@@ -35,7 +35,7 @@
 	<figure class="release-box color-white grid place-items-center" style="grid-area: screenshot">
 		<?php snippet('templates/release-4/image', [
 			'alt'   => 'Time-based one-time passwords in Kirby 4',
-			'img'   => $section->image('totp.png')->resize(1500),
+			'img'   => $section->image('totp.webp')->resize(1500),
 			'class' => 'rounded shadow-xl'
 		]) ?>
 	</figure>

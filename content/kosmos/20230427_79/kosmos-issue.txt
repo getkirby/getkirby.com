@@ -27,7 +27,7 @@ Last Friday, we released [Kirby 3.9.4](https://github.com/getkirby/kirby/release
 ## Kirby in the wild
 
 
-(image: evaschwab-studio.jpg)
+(image: evaschwab-studio.webp)
 [Studio Eva Schwab](https://evaschwab.studio/)
 
 

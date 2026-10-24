@@ -30,18 +30,18 @@ Edit: A video of the event is (link: https://www.youtube.com/watch?v=QgCMc89rdNY
 
 After seven months of hard work, we are happy to announce that Kirby 3.6 is finally here. It comes with a ton of exciting new features that will make both users and developers happy. And it paves the way for more great features to come in the next releases. Especially, the Panel profits from a reduced JS bundle size and has become much more performant. Here are some highlights:
 
-(image: kirby-36.jpg)
+(image: kirby-36.webp)
 
 (columns…)
 
 **Cardlets:** The missing link between cards and list layouts for pages and files sections and pages, files and users fields.
-(image: cardlets.png)
+(image: cardlets.webp)
 
 ++++
 
 **New views:** The settings view has been replaced with separate system and language views. The system view provides useful information about your setup.
 
-(image: system-view.png)
+(image: system-view.webp)
 
 (…columns)
 
@@ -60,7 +60,7 @@ After seven months of hard work, we are happy to announce that Kirby 3.6 is fina
 **Copy & paste for blocks:** You can now copy and paste blocks between block fields, and even create blocks from pasted HTML and text.
 
 
-(image: blocks-copy-and-paste.png)
+(image: blocks-copy-and-paste.webp)
 
 **Panel CSS properties** can now be used throughout the Panel and in every plugin. Now, it's even easier to style the Panel for your users in your [custom Panel stylesheet](https://getkirby.com/docs/reference/system/options/panel#custom-panel-css).
 
@@ -89,7 +89,7 @@ To accompany the new areas feature (which replaces the former views), we have wr
 
 ## Kirby in the wild
 
-(image: 1_micdropagency.png)
+(image: 1_micdropagency.webp)
 
 (link: https://micdropagency.com/ text: https://micdropagency.com)
 

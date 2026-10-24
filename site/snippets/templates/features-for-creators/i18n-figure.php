@@ -1,5 +1,5 @@
 <figure class="mb-6">
-	<?= img('translations.png', [
+	<?= img('translations.webp', [
 		'alt' => 'A screenshot of the translation switcher',
 		'class' => 'rounded',
 		'lightbox' => 'i18n',
@@ -18,7 +18,7 @@
 </figure>
 
 <figure>
-	<?= img('languages.png', [
+	<?= img('languages.webp', [
 		'alt' => 'A screenshot of the language manager',
 		'class' => 'rounded',
 		'lightbox' => 'i18n',

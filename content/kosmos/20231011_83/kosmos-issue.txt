@@ -57,31 +57,31 @@ The UI lab will ship with the upcoming Beta 3 of Kirby 4. Some impressions to we
 
 (columns…)
 
-(image: lab-1.png)
+(image: lab-1.webp)
 
 ++++
 
-(image: lab-2.png)
+(image: lab-2.webp)
 
 (…columns)
 
 (columns…)
 
-(image: lab-3.png)
+(image: lab-3.webp)
 
 ++++
 
-(image: lab-4.png)
+(image: lab-4.webp)
 
 (…columns)
 
 (columns…)
 
-(image: lab-5.png)
+(image: lab-5.webp)
 
 ++++
 
-(image: lab-6.png)
+(image: lab-6.webp)
 
 (…columns)
 
@@ -97,7 +97,7 @@ We are also planning to release a Kirby 3.10 version with PHP 8.3 support (while
 
 ## Kirby in the wild
 
-(image: heylow.png)
+(image: heylow.webp)
 
 [Hey Low LTD](https://www.heylow.world)
 

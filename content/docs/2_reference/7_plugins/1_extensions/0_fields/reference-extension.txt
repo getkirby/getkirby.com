@@ -306,7 +306,7 @@ fields:
 
 ### Result
 
-(image: field.png)
+(image: field.webp)
 
 ## Kirby UI Kit
 
