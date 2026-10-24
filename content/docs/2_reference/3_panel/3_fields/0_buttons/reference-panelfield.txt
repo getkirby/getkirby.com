@@ -1,0 +1,189 @@
+Title: Buttons
+
+----
+
+Intro:
+
+Links, dialogs and drawers right inside your forms
+
+----
+
+Text:
+
+The `buttons` field adds a list of buttons to a blueprint. Each button opens a link, a Panel dialog or a drawer, so editors find shortcuts and custom actions right where they work on the content. The field doesn't store anything in the content file.
+
+(image: buttons.png)
+
+## Example
+
+```yaml "/site/blueprints/pages/product.yml"
+fields:
+  links:
+    label: Links
+    type: buttons
+    buttons:
+      - text: Shop
+        icon: cart
+        link: https://shop.example.com
+      - text: Analytics
+        icon: chart
+        link: https://stats.example.com
+      - text: Support
+        icon: chat
+        link: https://support.example.com
+```
+
+## Button options
+
+| Option | Type | Description |
+| - | - | - |
+| `text` | `string`, `array` | Button text, supports translations |
+| `icon` | `string` | Name of a (link: docs/reference/panel/icons text: Panel icon) |
+| `link` | `string` | Absolute or Panel URL to open on click |
+| `target` | `string` | Link target, e.g. `_blank` to open the link in a new tab |
+| `dialog` | `string` | Path of a Panel dialog to open on click |
+| `drawer` | `string` | Path of a Panel drawer to open on click |
+| `theme` | `string` | Color theme, e.g. `positive`, `negative`, `notice`, `info` or a color like `purple` |
+| `title` | `string`, `array` | Tooltip text, supports translations |
+| `badge` | `array` | Badge with `text` and `theme` in the top-right corner of the button |
+| `disabled` | `bool` | Disables the button |
+
+### Query templates
+
+`text`, `title`, `icon`, `theme`, `link`, `dialog` and `drawer` support (link: docs/guide/blueprints/query-language text: query templates), resolved against the current page, file, user or the site:
+
+```yaml
+buttons:
+  - text: "Open {{ page.title }} in the shop"
+    icon: cart
+    link: "https://shop.example.com/products/{{ page.sku }}"
+    target: _blank
+```
+
+### Themes
+
+Themes like `positive` or `purple` color the whole button. Add `-icon` to a theme, e.g. `purple-icon`, to only color the icon and keep the button itself neutral:
+
+```yaml
+buttons:
+  - text: Report a problem
+    icon: alert
+    theme: negative-icon
+    link: https://support.example.com
+```
+
+## Actions
+
+Each button opens a link, a dialog or a drawer. Define one of the `link`, `dialog` or `drawer` options per button.
+
+### Links
+
+`link` accepts absolute URLs and Panel URLs, so you can also link to related places in the Panel:
+
+```yaml
+buttons:
+  - text: Shop settings
+    icon: cog
+    link: "{{ site.find('shop').panel.url }}"
+  - text: Order dashboard
+    icon: chart
+    link: https://dashboard.example.com
+    target: _blank
+```
+
+### Dialogs
+
+`dialog` takes the path of a Panel dialog. This can be one of Kirby's own dialogs, for example the dialog to rename the current page:
+
+```yaml
+buttons:
+  - text: Rename this page
+    icon: title
+    dialog: "{{ page.panel.path }}/changeTitle"
+```
+
+It can also be a dialog of your own, e.g. to send the current page as a newsletter:
+
+```yaml
+buttons:
+  - text: Send as newsletter
+    icon: email
+    dialog: "{{ page.panel.path }}/newsletter"
+```
+
+Register the dialog in a Panel area of your plugin. Its route pattern matches the button's path and passes the page ID to the controller class that loads and submits the dialog:
+
+```php "/site/plugins/newsletter/index.php"
+'areas' => [
+	'site' => [
+		'dialogs' => [
+			'page.newsletter' => [
+				'pattern' => 'pages/(:any)/newsletter',
+				'action'  => NewsletterDialogController::class
+			]
+		]
+	]
+]
+```
+
+Learn how to build the dialog and its controller in the (link: docs/reference/plugins/extensions/panel-dialogs text: Panel dialogs) reference.
+
+### Drawers
+
+Drawers work the same way. Point the button to the path of a core drawer or one of your own:
+
+```yaml
+buttons:
+  - text: Version history
+    icon: clock
+    drawer: "{{ page.panel.path }}/history"
+```
+
+Register your own drawers in the `drawers` of a Panel area, as described in the (link: docs/reference/plugins/extensions/panel-drawers text: Panel drawers) reference.
+
+## Buttons from a query
+
+Instead of a list, `buttons` also accepts a query. It has to return a list of button definitions, which lets you build the buttons in PHP, e.g. in a page model:
+
+```yaml "/site/blueprints/pages/product.yml"
+fields:
+  shop:
+    label: Shop
+    type: buttons
+    buttons: page.shopButtons
+```
+
+```php "/site/models/product.php"
+<?php
+
+use Kirby\Cms\Page;
+
+class ProductPage extends Page
+{
+	public function shopButtons(): array
+	{
+		$buttons = [
+			[
+				'text'   => 'View in shop',
+				'icon'   => 'cart',
+				'link'   => 'https://shop.example.com/products/' . $this->sku(),
+				'target' => '_blank'
+			]
+		];
+
+		if ($this->stock()->toInt() === 0) {
+			$buttons[] = [
+				'text'   => 'Out of stock: restock now',
+				'icon'   => 'alert',
+				'theme'  => 'notice',
+				'link'   => 'https://inventory.example.com/products/' . $this->sku(),
+				'target' => '_blank'
+			];
+		}
+
+		return $buttons;
+	}
+}
+```
+
+Make sure the method returns a list, not an array with custom keys. If there are no buttons, the field shows an empty state.
