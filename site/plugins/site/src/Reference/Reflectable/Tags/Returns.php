@@ -2,6 +2,7 @@
 
 namespace Kirby\Reference\Reflectable\Tags;
 
+use Kirby\Reference\Reflectable\Doc;
 use Kirby\Reference\Reflectable\ReflectableFunction;
 use Kirby\Reference\Types\Types;
 
@@ -37,7 +38,7 @@ class Returns
 
 		return new static(
 			types:       Types::from($types, $reflectable),
-			description: $tag?->description
+			description: Doc::singleLine($tag?->description)
 		);
 	}
 

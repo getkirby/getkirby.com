@@ -2,6 +2,7 @@
 
 namespace Kirby\Reference\Reflectable\Tags;
 
+use Kirby\Reference\Reflectable\Doc;
 use Kirby\Reference\Reflectable\Reflectable;
 use Kirby\Reference\Types\Types;
 use PHPStan\PhpDocParser\Ast\PhpDoc\ThrowsTagValueNode;
@@ -31,7 +32,7 @@ class Exception
 	): static {
 		return new static(
 			types:       Types::fromNode($tag->type, $reflectable),
-			description: $tag->description
+			description: Doc::singleLine($tag->description)
 		);
 	}
 

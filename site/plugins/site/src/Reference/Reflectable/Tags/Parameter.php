@@ -2,6 +2,7 @@
 
 namespace Kirby\Reference\Reflectable\Tags;
 
+use Kirby\Reference\Reflectable\Doc;
 use Kirby\Reference\Reflectable\Reflectable;
 use Kirby\Reference\Types\Types;
 use PHPStan\PhpDocParser\Ast\PhpDoc\ParamTagValueNode;
@@ -60,7 +61,7 @@ class Parameter
 			name:        $name,
 			types:       $types,
 			default:     static::factoryDefault($parameter),
-			description: $doc?->description,
+			description: Doc::singleLine($doc?->description),
 			isRequired:  $parameter?->isOptional() !== true &&
 						 $types->has('null') !== true,
 			isVariadic:  $parameter?->isVariadic() ?? $doc?->isVariadic

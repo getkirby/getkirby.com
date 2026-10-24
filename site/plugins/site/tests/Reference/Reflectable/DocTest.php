@@ -44,4 +44,11 @@ class DocTest extends TestCase
 		$this->assertInstanceOf(IdentifierTypeNode::class, $type);
 		$this->assertSame('foo bar', $type->name);
 	}
+
+	public function testSingleLine(): void
+	{
+		$this->assertSame('Fallback for tokens (`null` to keep them)', Doc::singleLine("Fallback for tokens\n\t\t\t\t(`null` to keep them)"));
+		$this->assertSame('Single line', Doc::singleLine('Single line'));
+		$this->assertNull(Doc::singleLine(null));
+	}
 }

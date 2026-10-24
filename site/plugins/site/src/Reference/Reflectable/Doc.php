@@ -143,4 +143,13 @@ class Doc extends PhpDocNode
 
 		return new IdentifierTypeNode($type);
 	}
+
+	/**
+	 * Joins the lines of a tag description, as they are
+	 * rendered e.g. in a table cell
+	 */
+	public static function singleLine(string|null $text): string|null
+	{
+		return $text === null ? null : preg_replace('/\s*\R\s*/', ' ', $text);
+	}
 }
