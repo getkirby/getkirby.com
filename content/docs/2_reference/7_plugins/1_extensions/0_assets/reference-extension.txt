@@ -2,10 +2,6 @@ Title: Assets
 
 ----
 
-Since: 4.0.0
-
-----
-
 Read: docs/guide/plugins/structure#plugin-assets
 
 ----
