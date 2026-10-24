@@ -46,7 +46,7 @@ PhoneSubtitle: Add to cart &rarr;
 
 ----
 
-PhoneImage: salt-and-pepper.jpg
+PhoneImage: salt-and-pepper.webp
 
 ----
 

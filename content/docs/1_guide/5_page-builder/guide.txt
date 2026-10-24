@@ -8,7 +8,7 @@ Description: Create rich content or even complete page layouts right from the Pa
 
 Text:
 
-(image: blocks.png)
+(image: blocks.webp)
 
 ## Like Lego® bricks for your content
 
