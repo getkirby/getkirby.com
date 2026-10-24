@@ -153,8 +153,14 @@ return function (App $kirby, Page $page) {
 		($renew = param('renew')) &&
 		($partner = page('partners')->find($renew))
 	) {
-		$plan   = $partner->plan()->value();
-		$people = $partner->people()->value();
+		// prefer the sign-up's billing data over the public profile
+		$plan   = $partner->renewalPlan()->or($partner->plan())->value();
+		$people = $partner->renewalPeople()->or($partner->people())->value();
+
+		// profiles may list an exact head count instead of a form option
+		if ((int)$people >= 4) {
+			$people = '4+';
+		}
 	}
 
 	/**
