@@ -57,7 +57,7 @@ fields:
 
 ### Result
 
-(image: menu.png)
+(image: menu.webp)
 
 ## Example controller and template
 

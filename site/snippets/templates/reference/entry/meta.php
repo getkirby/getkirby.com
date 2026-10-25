@@ -63,7 +63,7 @@ extract([
     <?= icon('ban') ?>
     <div>
       <div class="font-bold">
-        Deprecated in <?= version($deprecated[0], '%s') ?>
+        Deprecated<?= isset($deprecated[0]) ? ' in ' . version($deprecated[0], '%s') : '' ?>
       </div>
       <?php if (count($deprecated) > 1) : ?>
       <?= kti($deprecated[1]) ?>

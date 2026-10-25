@@ -16,7 +16,7 @@ Text:
 
 The textarea field creates a textarea for longer texts with automatic resizing and optional format buttons.
 
-(image: textarea.png)
+(image: textarea.webp)
 
 ## Example
 
@@ -82,7 +82,7 @@ fields:
 
 <since v="3.1.0">
 
-(image: file-selector.png)
+(image: file-selector.webp)
 
 The file upload and select button is super useful if you want to embed images or other files right in your text.
 

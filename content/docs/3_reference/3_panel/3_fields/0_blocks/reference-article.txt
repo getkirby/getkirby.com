@@ -20,7 +20,7 @@ Text:
 
 The Blocks field is the perfect solution for complex single-column layouts and long-form text.
 
-(image: blocks.png)
+(image: blocks.webp)
 
 ## Blueprint setup
 
@@ -61,7 +61,7 @@ fields:
     type: blocks
 ```
 
-(image: single.png)
+(image: single.webp)
 
 However, you can fully customize the selector for new block types with sorted block types and groups.
 
@@ -82,7 +82,7 @@ fields:
       - markdown
 ```
 
-(image: single-sorted.png)
+(image: single-sorted.webp)
 
 ### Groups
 
@@ -116,7 +116,7 @@ fields:
           - markdown
 ```
 
-(image: groups.png)
+(image: groups.webp)
 
 ### Closed groups
 
@@ -149,7 +149,7 @@ fields:
           - markdown
 ```
 
-(image: closed-groups.png)
+(image: closed-groups.webp)
 
 ## Default values
 
@@ -225,13 +225,13 @@ In the example above, we mix the default block types (heading and text) with our
 
 Custom block types don't have a visual preview by default. They show up with the icon and the name from your blueprint definition.
 
-(image: preview.png)
+(image: preview-png.webp)
 
 ### Editing
 
 To edit a custom block type, editors can either double-tap on the block or click on the edit icon in the toolbar. The block drawer opens with the fields you've defined for the block.
 
-(image: editing.png)
+(image: editing.webp)
 
 ### Tabs
 
@@ -265,7 +265,7 @@ fields:
 
 The tabs will then show up in the block drawer.
 
-(image: tabs.png)
+(image: tabs.webp)
 
 ### Global block types
 
@@ -345,7 +345,7 @@ To render the HTML for your custom block type in the frontend, create a snippet 
 
 You can turn your custom blocks into highly visual, interactive representations with a custom block preview plugin.
 
-(image: custom-preview.png link: docs/reference/plugins/extensions/blocks)
+(image: custom-preview.webp link: docs/reference/plugins/extensions/blocks)
 
 **(link: docs/reference/plugins/extensions/blocks text: Read our plugin guide on how to create such previews.)**
 
@@ -372,7 +372,7 @@ fields:
 
 This will add the `customID` field below the default fields of the block.
 
-(image: custom-id.png)
+(image: custom-id.webp)
 
 ### Extending existing fields
 

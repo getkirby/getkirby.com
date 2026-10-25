@@ -7,7 +7,7 @@ Pages can be created via the Panel, directly in the file system, or programmatic
 
 ----
 
-Thumbnail: screenshot.png
+Thumbnail: screenshot.webp
 
 ----
 

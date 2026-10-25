@@ -14,7 +14,7 @@ With virtual pages, you can combine Kirby's file-based architecture with content
 
 Text:
 
-(image: virtual-pages.png)
+(image: virtual-pages.webp)
 
 Since Kirby is a flat-file CMS, pages that make up your website usually exist as files and folders in the filesystem. This has many advantages: your web project can be version controlled, you don't have to deal with a database, it's easy to make backups, you can manually edit your content if you want, and last not least, it's also very fast.
 
