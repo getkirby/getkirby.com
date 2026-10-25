@@ -43,7 +43,7 @@ This UI component hasn't been finalized yet. The functionality and syntax aren't
           <td><?= $prop['name'] ?></td>
           <td>
             <div class="<?= isset($prop['values']) ? 'mb-3' : null ?>">
-              <?= Types::format($prop['type']['name']) ?>
+              <?= isset($prop['type']) ? Types::format($prop['type']['name']) : '<span>–</span>' ?>
             </div>
             <?php if ($prop['values'] ?? null) : ?>
               <small>
