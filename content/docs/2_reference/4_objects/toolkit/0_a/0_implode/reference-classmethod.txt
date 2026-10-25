@@ -1,8 +1,0 @@
-Examples:
-
-```php
-$array = ['a', 'b', ['cc', 'dd']];
-
-A::implode($array); // abccdd
-A::implode($array, ', '); // a, b, cc, dd
-```
