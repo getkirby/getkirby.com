@@ -6,7 +6,10 @@ switch (rawurldecode(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH))) {
 		header('Location: /docs', true, 302);
 		break;
 	case '/docs':
-		echo '<img src="/docs/a b.png">';
+		echo '<img src="/docs/a b.png"><a href="/docs/warning">Warning</a>';
+		break;
+	case '/docs/warning':
+		echo "<br />\n<b>Warning</b>:  Something went wrong";
 		break;
 	case '/docs/a b.png':
 		header('Content-Type: image/png');

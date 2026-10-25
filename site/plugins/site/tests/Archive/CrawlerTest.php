@@ -39,6 +39,10 @@ class CrawlerTest extends TestCase
 		$this->assertSame('image', F::read($root . '/docs/a b.png'));
 		$this->assertFileExists($root . '/docs/index.html');
 
+		// pages with PHP errors count as failed
+		$this->assertSame(500, $crawler->results[$origin . '/docs/warning']['status']);
+		$this->assertFileDoesNotExist($root . '/docs/warning/index.html');
+
 		Dir::remove($root);
 	}
 

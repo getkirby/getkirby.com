@@ -260,6 +260,12 @@ class Crawler
 	{
 		$url    = curl_getinfo($handle, CURLINFO_PRIVATE);
 		$status = curl_getinfo($handle, CURLINFO_RESPONSE_CODE);
+		$body   = curl_multi_getcontent($handle);
+
+		// pages with PHP errors in them failed as well
+		if (preg_match('!<b>(Fatal error|Warning|Notice|Deprecated)</b>:!', $body) === 1) {
+			$status = 500;
+		}
 
 		if ($status !== 200) {
 			$location = curl_getinfo($handle, CURLINFO_REDIRECT_URL) ?: null;
@@ -279,7 +285,7 @@ class Crawler
 
 		$type = curl_getinfo($handle, CURLINFO_CONTENT_TYPE) ?? '';
 		$file = $this->path($url, str_starts_with($type, 'text/html'));
-		$body = $this->rewrite(curl_multi_getcontent($handle));
+		$body = $this->rewrite($body);
 
 		F::write($file, $body);
 		$this->visit($url, $file, $body);
