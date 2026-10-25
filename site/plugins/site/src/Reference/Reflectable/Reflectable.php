@@ -7,8 +7,6 @@ use Kirby\Reference\Reflectable\Tags\Deprecated;
 use Kirby\Reference\Reflectable\Tags\See;
 use Kirby\Reference\Reflectable\Tags\Since;
 use Kirby\Reference\Reflectable\Tags\Throws;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\Str;
 use PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTextNode;
 use Reflector;
 
@@ -49,20 +47,16 @@ abstract class Reflectable
 	}
 
 	/**
-	 * Returns an example code block from the doc block
+	 * Returns the fenced code blocks from the doc block
 	 */
 	public function examples(): string|null
 	{
 		$node = $this->doc()->getTextNodes()[0] ?? null;
 
 		if ($node instanceof PhpDocTextNode) {
-			$blocks   = explode(PHP_EOL . PHP_EOL, $node->text);
-			$examples = A::filter(
-				$blocks,
-				fn ($block) => Str::startsWith($block, '```')
-			);
-
-			return implode(PHP_EOL . PHP_EOL, $examples);
+			// match whole blocks, incl. blank lines inside them
+			preg_match_all('/^```.*?^```$/ms', $node->text, $matches);
+			return implode(PHP_EOL . PHP_EOL, $matches[0]);
 		}
 
 		return null;

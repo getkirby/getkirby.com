@@ -1,6 +1,6 @@
 Read: docs/guide/templates/collections
 
----
+----
 
 Examples:
 

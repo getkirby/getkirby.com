@@ -4,3 +4,4 @@ Examples:
 <?php if ($page->isAncestorOf(page('some-child-page'))): ?>
 This page is an ancestor of the given page.
 <?php endif ?>
+```

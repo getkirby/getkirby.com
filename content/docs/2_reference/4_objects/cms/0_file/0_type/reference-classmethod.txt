@@ -11,7 +11,7 @@ code      | js, css, html, xml, json
 video     | mov, avi, ogg, ogv, webm, flv, swf, mp4, mv4
 audio     | mp3, m4a, wav, aiff, midi
 
----
+----
 
 Examples:
 

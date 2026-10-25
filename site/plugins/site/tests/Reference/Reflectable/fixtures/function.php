@@ -16,6 +16,14 @@ function fooWithVoidReturnType(): void {
  *
  * ```php
  * fooWithDocBlock();
+ *
+ * echo fooWithDocBlock();
+ * ```
+ *
+ * Text between the examples
+ *
+ * ```php
+ * $foo = fooWithDocBlock();
  * ```
  *
  * @see foo

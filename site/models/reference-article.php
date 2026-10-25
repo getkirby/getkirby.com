@@ -139,9 +139,13 @@ class ReferenceArticlePage extends DefaultPage
 	 */
 	public function text(): Field
 	{
-		$text       = parent::text()->value();
-		$examples   = $this->examples()->value();
-		$examples ??= $this->reflection()?->examples();
+		$text     = parent::text()->value();
+		$examples = $this->examples()->value();
+
+		// an empty field shouldn't hide the doc block examples
+		if ($examples === null || trim($examples) === '') {
+			$examples = $this->reflection()?->examples();
+		}
 
 		if ($examples) {
 			$text .= PHP_EOL . PHP_EOL . '## Examples';
