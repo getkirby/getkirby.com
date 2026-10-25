@@ -111,7 +111,7 @@ permalink: /
 
 This uses the data pulled in from Kirby to generate a list of the available Photography articles. At this point (and after a little CSS!) we should have something like this in the browser:
 
-(image: image-list.jpg)
+(image: image-list.webp)
 
 So far, so good. The next step is to create the individual post pages. We can do this with a little more [Nunjucks](https://mozilla.github.io/nunjucks/) in a photography subfolder. This will give us our subpages based on the data coming in from Kirby.
 
@@ -260,7 +260,7 @@ yarn global add electron-icon-builder
 
 The next step is to create a 1024 x 1024 image to use as an icon. Store it in a folder called `icons/src` in the root of your project. Create a folder `icons/output` to store the generated icons.
 
-(image: sketch-icon.jpg)
+(image: sketch-icon.webp)
 
 We can run this through `electron-icon-builder` to generate all the different sized icons and formats. Adjust the input path to match your absolute folder location on your harddisk. 
 
@@ -272,7 +272,7 @@ For the DMG app backgrounds, we need to create two images, one at 540 x 380 with
 
 Remember to leave room at the bottom of the image, as this is where the install icons will sit. Store these images in the output folder with all the icons created in the previous step.
 
-(image: app-backgrounds.jpg)
+(image: app-backgrounds.webp)
 
 ### Configuration
 
@@ -411,11 +411,11 @@ Running `yarn desktop` will generate a desktop app depending on the platform you
 
 Run either `yarn desktop` or `yarn macuniversal` depending on the platform you are running on. If all goes well, you will find an executable application inside the `dist` folder. In my case, I am running on Apple Silicon and successfully get a DMG file allowing me to install the app.
 
-(image: dmg.jpg)
+(image: dmg.webp)
 
 After installing the app, we can finally see the result of all our hard work!
 
-(image: electron-app.jpg)
+(image: electron-app.webp)
 
 ### Mobile applications
 
@@ -459,7 +459,7 @@ The first time you do this, Android Studio should do a bunch of setting up due t
 
 With an Emulator configured in Android Studio, we can go ahead and hit the green Play button on the main toolbar, which will launch the project and allow us to preview it on an emulated device.
 
-(image: android.jpg)
+(image: android.webp)
 
 
 ### iOS application
@@ -476,7 +476,7 @@ Then generate the Xcode project in a similar fashion as we did before:
 npx cap add ios
 ```
 
-(image: ios.jpg)
+(image: ios.webp)
 
 Finally, we can make generating the projects simpler by adding those commands to the scripts section of `package.json`:
 

@@ -14,7 +14,7 @@ Text:
 
 The toggles field lets you select between different states.
 
-(image: toggles-labels-icons.png)
+(image: toggles-labels-icons.webp)
 
 ## Example
 
@@ -38,7 +38,7 @@ fields:
 
 Toggles can be defined with simple values or value & text options. They are a great alternative for the radio buttons.
 
-(image: toggles-labels.png)
+(image: toggles-labels.webp)
 
 ```yaml
 fields:
@@ -56,7 +56,7 @@ fields:
 
 The toggles can combine text and an icon for a more visual representation:
 
-(image: toggles-labels-icons.png)
+(image: toggles-labels-icons.webp)
 
 ```yaml
 fields:
@@ -82,7 +82,7 @@ fields:
 
 Labels can be hidden to toggle visual states. This is great for grid placement, text alignment, or similar use cases.
 
-(image: toggles-icons.png)
+(image: toggles-icons.webp)
 
 ```yaml
 fields:
@@ -111,7 +111,7 @@ fields:
 
 The buttons span the full width of the field by default. You can switch this off with the `grow` option to get a more compact layout.
 
-(image: toggles-compact.png)
+(image: toggles-compact.webp)
 
 ```yaml
 fields:

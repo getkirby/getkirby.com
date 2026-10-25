@@ -14,7 +14,7 @@ Guide: blueprints/fields
 
 Text:
 
-(image: layout.png)
+(image: layout.webp)
 
 ## Getting started
 
@@ -47,7 +47,7 @@ fields:
 
 Those layouts will then show up in the layout selector when an editor creates a new row:
 
-(image: selector.png)
+(image: selector.webp)
 
 ### Available widths
 
@@ -123,7 +123,7 @@ fields:
           type: files
 ```
 
-(image: layout-settings.png)
+(image: layout-settings.webp)
 
 ### Tabs
 

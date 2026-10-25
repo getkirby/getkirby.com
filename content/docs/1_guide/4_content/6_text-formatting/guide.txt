@@ -54,7 +54,7 @@ Blocks are basically like Lego® bricks, but for text and layout. Combine them i
 
 While Markdown is great for writing long form text like articles with nothing but a text editor, it doesn't provide a very visual experience, particularly when it comes to integrating rich content elements.
 
-(image: blocks.png)
+(image: blocks.webp)
 
 To learn more, head over to our (link: docs/guide/page-builder text: Page Builder guide)
 

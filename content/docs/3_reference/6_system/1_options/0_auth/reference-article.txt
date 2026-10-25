@@ -63,7 +63,7 @@ return [
 ];
 ```
 
-(image: login.png)
+(image: login.webp)
 
 ### Login via code & login via password
 
@@ -81,7 +81,7 @@ return [
 ];
 ```
 
-(image: email-and-password.png)
+(image: email-and-password.webp)
 
 ### Password reset
 
@@ -97,7 +97,7 @@ return [
 ];
 ```
 
-(image: password-reset.png)
+(image: password-reset.webp)
 
 ### Two-step or two-factor authentication
 
@@ -121,7 +121,7 @@ return [
 ];
 ```
 
-(image: 2fa.png)
+(image: 2fa.webp)
 
 ## Authentication challenges
 
