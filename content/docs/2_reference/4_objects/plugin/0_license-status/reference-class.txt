@@ -11,5 +11,5 @@ $status = new LicenseStatus(
   label: 'Get a license please',
   icon: 'alert',
   dialog: 'my/dialog/endpoint'
-)
+);
 ```
