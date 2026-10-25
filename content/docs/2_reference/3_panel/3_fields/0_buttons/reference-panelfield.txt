@@ -8,6 +8,10 @@ Links, dialogs and drawers right inside your forms
 
 ----
 
+Since: 6.0.0
+
+----
+
 Text:
 
 The `buttons` field adds a list of buttons to a blueprint. Each button opens a link, a Panel dialog or a drawer, so editors find shortcuts and custom actions right where they work on the content. The field doesn't store anything in the content file.
