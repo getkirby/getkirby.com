@@ -34,6 +34,12 @@ class ReflectableFunctionTest extends TestCase
 		$reflectable = new ReflectableFunction('fooWithDocBlock');
 		$this->assertSame('```php
 fooWithDocBlock();
+
+echo fooWithDocBlock();
+```
+
+```php
+$foo = fooWithDocBlock();
 ```', $reflectable->examples());
 	}
 
