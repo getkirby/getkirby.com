@@ -48,11 +48,14 @@ class SnapshotTest extends TestCase
 
 		$nginx = $snapshot->nginx();
 
-		$this->assertStringContainsString('rsync -az public/ ploi@server:/home/ploi/v5.getkirby.com/public/', $nginx);
-		$this->assertStringContainsString('absolute_redirect off;', $nginx);
-		$this->assertStringContainsString("location / {\n\ttry_files \$uri \$uri/index.html @fallback;\n}", $nginx);
-		$this->assertStringContainsString('return 302 https://getkirby.com$request_uri;', $nginx);
-		$this->assertStringEndsWith("\nlocation = \"/docs/guide\" { return 301 \"/docs/guide/quickstart\"; }\n", $nginx);
+		$this->assertStringContainsString('rsync -az public/ archive@server:/home/archive/v5.getkirby.com/', $nginx);
+		$this->assertStringContainsString("include /etc/nginx/ploi/v5.getkirby.com/before/*;\n\nserver {\n\troot /home/archive/v5.getkirby.com/;\n\tserver_name v5.getkirby.com;", $nginx);
+		$this->assertStringContainsString("\tinclude /etc/nginx/ssl/v5.getkirby.com;", $nginx);
+		$this->assertStringContainsString("\tinclude /etc/nginx/ploi/v5.getkirby.com/server/*;", $nginx);
+		$this->assertStringContainsString("\tlocation / {\n\t\ttry_files \$uri \$uri/index.html @fallback;\n\t}", $nginx);
+		$this->assertStringContainsString("\t\treturn 302 https://getkirby.com\$request_uri;", $nginx);
+		$this->assertStringContainsString("\t# redirects recorded while crawling\n\tlocation = \"/docs/guide\" { return 301 \"/docs/guide/quickstart\"; }\n\n\taccess_log off;", $nginx);
+		$this->assertStringEndsWith("}\n\n# Ploi Webserver Configuration, do not remove!\ninclude /etc/nginx/ploi/v5.getkirby.com/after/*;\n", $nginx);
 	}
 
 	public function testRedirects(): void
