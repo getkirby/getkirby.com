@@ -9,7 +9,7 @@ Text:
 
 ## Columns
 
-(image: columns.png)
+(image: columns.webp)
 
 A blueprint layout is made up of columns, and each column can hold any number of sections. Kirby ships with the following section types:
 
@@ -117,7 +117,7 @@ columns:
 
 ### Result
 
-(image: columns-screen-1.png)
+(image: columns-screen-1.webp)
 
 You can probably already see how flexible this is. By slightly changing the columns, we can change the interface drastically.
 
@@ -141,7 +141,7 @@ columns:
     sections:
       # a simple form …
 ```
-(image: columns-screen-2.png)
+(image: columns-screen-2.webp)
 
 ### Two Sidebars
 
@@ -169,11 +169,11 @@ columns:
       # a list of files …
 ```
 
-(image: columns-screen-3.png)
+(image: columns-screen-3.webp)
 
 ## Single-column layouts
 
-(image: sections.png)
+(image: sections.webp)
 
 If you don't need multiple columns, you can keep your blueprint a lot shorter by using the `sections` option instead of defining columns. This will automatically create a single-column layout for you, where all sections are listed below each other.
 
@@ -193,7 +193,7 @@ sections:
 
 ## Just some fields
 
-(image: fields.png)
+(image: fields.webp)
 
 Some blueprint types don't even need sections at all and a simple form is enough. In this case you can make your blueprints even shorter and add the fields definition directly without defining sections or columns.
 
@@ -211,7 +211,7 @@ fields:
 
 ## Adapt all to your needs
 
-(image: columns-complex.png)
+(image: columns-complex.webp)
 
 Kirby gives you the flexibility to set up the (glossary: Panel), so that it adapts to the needs of every single page/template. Use the layout possibilities to create the structure that works best for you:
 
@@ -256,7 +256,7 @@ If this isn't yet enough ways and space for you to structure your sections and f
 
 When your blueprints get more complex, splitting up your view into multiple tabs helps to keep them organized. Tabs are basically wrappers around regular blueprint layouts. Check out (link: #columns text: how to create layouts) before you get started with tabs.
 
-(image: tabs.png)
+(image: tabs.webp)
 
  A tab definition has three options:
 
@@ -282,7 +282,7 @@ tabs:
       # layout
 ```
 
-(image: tabs-screen.png)
+(image: tabs-screen.webp)
 
 ### Full example
 

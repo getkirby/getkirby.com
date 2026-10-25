@@ -18,7 +18,7 @@ Authors:
 
 Text:
 
-(image: moby-logo.png)
+(image: moby-logo.webp)
 
 ## The problem
 
