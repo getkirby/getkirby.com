@@ -133,6 +133,11 @@
 	"error.language.name": "Please enter a valid name for the language",
 	"error.language.notFound": "The language could not be found",
 	"error.language.update.permission": "You are not allowed to update the language",
+	"error.language.variable.core": "\"{key}\" is one of Kirby's own translation strings and cannot be overwritten by a language variable",
+	"error.language.variable.duplicate": "A variable for \"{key}\" already exists",
+	"error.language.variable.key": "Please enter a valid key for the variable",
+	"error.language.variable.notFound": "The variable could not be found",
+	"error.language.variable.numeric": "The variable key must not be numeric",
 
 	"error.layout.validation.block": "There's an error on the \"{field}\" field in block {blockIndex} using the \"{fieldset}\" block type in layout {layoutIndex}",
 	"error.layout.validation.settings": "There's an error in layout {index} settings",
@@ -182,6 +187,8 @@
 	"error.page.undefined": "The page cannot be found",
 	"error.page.update.permission": "You are not allowed to update \"{slug}\"",
 
+	"error.role.notFound": "The role \"{name}\" cannot be found",
+
 	"error.section.files.max.plural": "You must not add more than {max} files to the \"{section}\" section",
 	"error.section.files.max.singular": "You must not add more than one file to the \"{section}\" section",
 	"error.section.files.min.plural": "The \"{section}\" section requires at least {min} files",
@@ -197,6 +204,7 @@
 
 	"error.site.changeTitle.empty": "The title must not be empty",
 	"error.site.changeTitle.permission": "You are not allowed to change the title of the site",
+	"error.site.notAccessible": "The site is not accessible",
 	"error.site.update.permission": "You are not allowed to update the site",
 
 	"error.structure.validation": "There's an error on the \"{field}\" field in row {index}",
@@ -421,7 +429,6 @@
 
 	"language.variable.delete.confirm": "Do you really want to delete the variable for {key}?",
 	"language.variable.key": "Key",
-	"language.variable.notFound": "The variable could not be found",
 	"language.variable.value": "Value",
 
 	"languages": "Languages",
@@ -586,6 +593,7 @@
 	"plugins": "Plugins",
 	"prev": "Previous",
 	"preview": "Preview",
+	"protected": "Protected",
 	"remove": "Remove",
 	"rename": "Rename",
 	"renew": "Renew",
@@ -633,6 +641,8 @@
 	"system.info.copied": "System info copied",
 	"system.issues.api.methods": "Your server does not support PATCH requests",
 	"system.issues.content": "The content folder seems to be exposed",
+	"system.issues.content.salt": "The content salt has not been changed from its default value",
+	"system.issues.cookie.key": "The cookie signing key has not been changed from its default value",
 	"system.issues.eol.kirby": "Your installed Kirby version has reached end-of-life and will not receive further security updates",
 	"system.issues.eol.plugin": "Your installed version of the { plugin } plugin is has reached end-of-life and will not receive further security updates",
 	"system.issues.eol.php": "Your installed PHP release { release } has reached end-of-life and will not receive further security updates",

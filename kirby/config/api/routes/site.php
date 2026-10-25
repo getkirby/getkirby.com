@@ -58,7 +58,7 @@ return [
 		'pattern' => 'site/find',
 		'method'  => 'POST',
 		'action'  => function () {
-			return $this->site()->find(false, ...$this->requestBody());
+			return $this->site()->find(false, ...$this->requestBody())->filter('isAccessible', true);
 		}
 	],
 	[
@@ -81,7 +81,12 @@ return [
 				return $pages->search($this->requestQuery('q'));
 			}
 
-			return $pages->query($this->requestBody());
+			return $pages->query(array_filter([
+				'limit'    => $this->requestBody('limit'),
+				'offset'   => $this->requestBody('offset'),
+				'paginate' => $this->requestBody('paginate'),
+				'search'   => $this->requestBody('search'),
+			], fn ($value) => $value !== null));
 		}
 	],
 	[

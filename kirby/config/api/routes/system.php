@@ -14,21 +14,16 @@ return [
 		'auth'    => false,
 		'action'  => function () {
 			$system = $this->kirby()->system();
+			$model  = $this->resolve($system);
 
 			if ($this->kirby()->user()) {
-				return $system;
+				return $model->view('panel');
 			}
 
-			$info = match ($system->isOk()) {
-				true  => $this->resolve($system)->view('login')->toArray(),
-				false => $this->resolve($system)->view('troubleshooting')->toArray()
+			return match ($system->isOk()) {
+				true  => $model->view('login'),
+				false => $model->view('troubleshooting')
 			};
-
-			return [
-				'status' => 'ok',
-				'data'   => $info,
-				'type'   => 'model'
-			];
 		}
 	],
 	[
@@ -47,6 +42,8 @@ return [
 		'pattern' => 'system/register',
 		'method'  => 'POST',
 		'action'  => function () {
+			$this->validateAreaAccess('system');
+
 			return $this->kirby()->system()->register($this->requestBody('license'), $this->requestBody('email'));
 		}
 	],
