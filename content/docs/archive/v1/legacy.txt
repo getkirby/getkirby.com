@@ -6,7 +6,7 @@ Description: Kirby 1 has reached its **end of life** on Feb&nbsp;1,&nbsp;2016 an
 
 ----
 
-Src: https://k1.getkirby.com
+Src: https://v1.getkirby.com
 
 ----
 
