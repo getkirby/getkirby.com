@@ -10,7 +10,7 @@ A simple WYSIWYG editor field for ordered and unordered lists
 
 Text:
 
-(image: list.png)
+(image: list.webp)
 
 ## Example
 

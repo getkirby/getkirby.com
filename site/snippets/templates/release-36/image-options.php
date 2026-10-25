@@ -14,7 +14,7 @@
 			<?= $page->imageOptions()->kt() ?>
 		</div>
 		<figure>
-			<?= img('image-options.png', [
+			<?= img('image-options.webp', [
 				'alt' => 'A list with pages with custom colors and icons for previews in the panel',
 				'lightbox' => true,
 				'class' => 'rounded shadow-xl',

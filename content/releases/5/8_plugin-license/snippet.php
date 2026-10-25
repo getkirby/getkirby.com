@@ -27,7 +27,7 @@
 		<?= $section->plugin()->kt() ?>
 	</figure>
 	<figure class="release-box bg-light" style="grid-area: view">
-		<?= img($section->image('plugin-licenses.png'), [
+		<?= img($section->image('plugin-licenses.webp'), [
 			'alt' => 'A screenshot of the plugin table in the system view with different license states such as custom proprietary license, demo, pay to activate and expired',
 			'src' => [
 				'width' => 1248

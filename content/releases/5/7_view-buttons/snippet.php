@@ -36,7 +36,7 @@
 		<?php snippet('templates/release-4/teaser', ['section' => $section]) ?>
 	</div>
 	<figure class="release-box bg-light" style="grid-area: buttons">
-		<?= img($section->image('buttons.png'), [
+		<?= img($section->image('buttons.webp'), [
 			'alt' => 'A screenshot of a Panel header with custom view buttons labelled Analytics and Promote',
 			'src' => [
 				'width' => 485

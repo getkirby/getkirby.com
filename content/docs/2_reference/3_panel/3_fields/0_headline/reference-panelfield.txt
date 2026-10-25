@@ -12,7 +12,7 @@ Text:
 
 The headline field helps to group larger sets of fields. It creates a headline with additional white-space and a prepended index number.
 
-(image: headline.png)
+(image: headline.webp)
 
 ## Example
 

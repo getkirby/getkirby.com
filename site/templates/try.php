@@ -45,7 +45,7 @@
 			</p>
 
 			<button aria-label="Start the demo" class="block rounded shadow-2xl w-100% mb-6">
-				<?php if ($image = image('home/company/panel.png')): ?>
+				<?php if ($image = image('home/company/panel.webp')): ?>
 				<figure class="bg-light" style="--aspect-ratio: <?= $image->width() ?>/<?= $image->height() ?>">
 					<?= img($image, [
 						'alt' => 'A screenshot of the Panel',

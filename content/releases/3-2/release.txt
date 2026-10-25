@@ -14,7 +14,7 @@ Description: It's all about editing: content locking, conditional sections, dupl
 
 ----
 
-Cover: kirby-3-2.png
+Cover: kirby-3-2.webp
 
 ----
 

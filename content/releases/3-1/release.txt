@@ -14,7 +14,7 @@ Description: The Panel becomes much more powerful with conditional fields and an
 
 ----
 
-Cover: kirby-3-1.png
+Cover: kirby-3-1.webp
 
 ----
 

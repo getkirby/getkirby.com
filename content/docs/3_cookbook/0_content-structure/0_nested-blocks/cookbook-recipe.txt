@@ -22,7 +22,7 @@ Text:
 
 This is an example of how to build a nested block including a live panel preview and output snippets for the website. In our example we are creating a FAQ block, which allows us to add nested question/answer blocks within it. The block is built as a standalone plugin and can be extended and modified to your own needs. The example is based on a blank Kirby installation (v.3.5+) and everything is explained step by step.
 
-(image: nested-blocks.jpg)
+(image: nested-blocks.webp)
 
 ## Preparation
 
@@ -275,7 +275,7 @@ Feel free to download all needed files here: (file: example.zip text: Nested blo
 
 In some cases it is necessary to pass collected values from the parent block to the nested block, if you need different (nested) HTML markup depending on which option is selected. This is actually pretty simple if you know how. The next step explains how to extend nested blocks with additional layouts.
 
-(image: nested-blocks-advanced.jpg)
+(image: nested-blocks-advanced.webp)
 
 ### Blueprints
 First let's change the blueprints with the new requirements. We add a select field `layout` to our FAQ block and offer two layout variants for it.
@@ -349,4 +349,4 @@ endif;
 ### Conclusion
 Now you can create your own layouts regardless of the HTML markup you need. As a content creator you have the full flexibility to duplicate complete blocks, change the layout and compare which version fits better to your needs.
 
-(image: preview.jpg)
+(image: preview.webp)

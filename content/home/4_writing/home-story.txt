@@ -9,7 +9,7 @@ content/
     blog/
         exploring-the-universe/
             post.txt
-            dark-forest.jpg
+            dark-forest.webp
             milkyway.jpg
             stars.mp4
 ```
@@ -58,7 +58,7 @@ PhoneSubtitle: The edge of nowhere
 
 ----
 
-PhoneImage: dark-forest.jpg
+PhoneImage: dark-forest.webp
 
 ----
 

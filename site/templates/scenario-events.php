@@ -11,7 +11,7 @@ snippet('templates/features/section', [
 	'title' => 'Make your event stand out',
 	'text'  => 'Kirby CMS makes it easy to create unique and engaging event websites, whether for intimate gatherings or large-scale conferences. Kirby provides a platform to showcase your event\'s unique features and attract attendees.',
 	'figure' => [
-		'image' => 'makerspace.jpg',
+		'image' => 'makerspace.webp',
 		'alt'   => 'Crowded hallway during an art conference',
 	],
 	'features' => [
@@ -50,7 +50,7 @@ snippet('templates/features/section', [
 	'title' => 'Fast, fair & robust',
 	'text'  => 'Kirby is the ideal choice for the event space, providing a robust and reliable platform that enhances the online experience for attendees and organizers alike. Enjoy powerful features without the hassle of ongoing costs.',
 	'figure' => [
-		'image' => 'concert.jpg',
+		'image' => 'concert.webp',
 		'alt'   => 'Man walking into a concert arena',
 	],
 	'features' => [

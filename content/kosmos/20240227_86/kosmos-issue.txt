@@ -47,7 +47,7 @@ Check out the release notes for the vulnerabilities that have been fixed and for
 
 We have also launched a brand new interface for purchasing Kirby licenses, integrating volume discounts and the new optional donation in a clear and straightforward way:
 
-(image: checkout.png)
+(image: checkout.webp)
 
 
 [Check it out](https://getkirby.com/buy) (pun intended) and let us know what you think. 🙂
@@ -55,7 +55,7 @@ We have also launched a brand new interface for purchasing Kirby licenses, integ
 
 ## Kirby in the wild
 
-(image: nahuel-gerth.png)
+(image: nahuel-gerth.webp)
 [Nahuel Gerth Visual Communication](https://nahuelgerth.de/)
 
 

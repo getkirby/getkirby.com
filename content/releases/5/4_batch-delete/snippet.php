@@ -22,7 +22,7 @@
 		<?php snippet('templates/release-4/teaser', ['section' => $section]) ?>
 	</div>
 	<figure class="release-box bg-light grid place-items-center" style="grid-area: screenshot">
-		<?= img($section->image('batch-delete.jpg'), [
+		<?= img($section->image('batch-delete.webp'), [
 			'alt' => 'A screenshot of the fields section. Batch selection mode has been activated and multiple files are selected. A delete button at the top can delete all the selected files at once.',
 			'src' => [
 				'width' => 520

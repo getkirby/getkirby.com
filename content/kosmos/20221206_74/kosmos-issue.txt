@@ -43,7 +43,7 @@ Apart from adding new features, we always use new releases to clean up and refac
 
 ## Kirby in the wild
 
-(image: voi-law.png)
+(image: voi-law.webp)
 
 [Voi](https://voy.law/)
 

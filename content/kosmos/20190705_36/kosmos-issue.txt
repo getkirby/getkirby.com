@@ -26,10 +26,10 @@ Last Tuesday we published [Kirby 3.2.1-rc1](https://github.com/getkirby/kirby/re
 
 ## Kirby in the Wild
 
-(image: bruno-moinard-editions.png)
+(image: bruno-moinard-editions.webp)
 [Bruno Moinard Editions](https://brunomoinardeditions.com)
 
-(image: push-conference.png)
+(image: push-conference.webp)
 [Push Conference](https://push-conference.com/2019/)
 
 ## Kirby Plugins

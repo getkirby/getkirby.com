@@ -30,7 +30,7 @@
 
 <div class="v4-create-columns">
 	<figure class="release-box bg-light shadow-xl" style="grid-area: dialog">
-		<?= $section->image('page-creation-dialog.png')->resize(1400) ?>
+		<?= $section->image('page-creation-dialog.webp')->resize(1400) ?>
 	</figure>
 	<div class="v4-create-teaser release-text-box" style="grid-area: teaser">
 		<?php snippet('templates/release-4/teaser', ['section' => $section]) ?>

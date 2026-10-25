@@ -22,7 +22,7 @@ Text:
 
 Welcome to issue 55 of our Kosmos newsletter. We are a bit late this month, but we have sort of an excuse ;) Because last night was "big night"–at least for us–because it was launch night 🚀!
 
-(image: website-relaunch.jpg)
+(image: website-relaunch.webp)
 
 After a lot of hard work and several design rounds, it's finally done: [We relaunched our website](https://getkirby.com) yesterday and hope you will like it.
 
@@ -56,7 +56,7 @@ A new kid on the blocks: True to its name, the [Accordion Block](https://github.
 
 (columns…)
 
-(image: surfing-with-sharks.png)
+(image: surfing-with-sharks.webp)
 
 ++++
 

@@ -8,7 +8,7 @@
 <div class="columns">
 	<div style="--span: 8">
 		<div class="bg-light" style="--aspect-ratio: 3/2">
-			<?= img($story->image('salt-and-pepper.jpg'), [
+			<?= img($story->image('salt-and-pepper.webp'), [
 				'src' => [
 					'crop'   => true,
 					'width'  => 300,

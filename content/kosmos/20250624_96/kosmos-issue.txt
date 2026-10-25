@@ -14,7 +14,7 @@ Comments: off
 
 ----
 
-Cover: changes-optimized.jpg
+Cover: changes-optimized.webp
 
 ----
 
@@ -27,7 +27,7 @@ Summer is here, not just in the calendars of the Northern Hemisphere, but also i
 
 ## Kirby 5 is here
 
-(image: changes-optimized.jpg)
+(image: changes-optimized.webp)
 
 Here’s what’s new and hot in Kirby 5:
 
@@ -71,7 +71,7 @@ Topic: Accessibility – What is your current status? A relaxed exchange on desi
 
 ## Made with Kirby
 
-(image: stresstest.png)
+(image: stresstest.webp)
 
 [stresstest.world](https://stresstest.world)
 

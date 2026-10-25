@@ -33,7 +33,7 @@
 	]) ?>
 
 	<figure class="release-box bg-light mb-6" style="--aspect-ratio: 2751/1402">
-		<img src="<?= $page->image('object-field-1.png')?->url() ?>" loading="lazy" alt="The new object field opens in a new drawer to edit fields comfortably">
+		<img src="<?= $page->image('object-field-1.webp')?->url() ?>" loading="lazy" alt="The new object field opens in a new drawer to edit fields comfortably">
 	</figure>
 
 	<div class="v38-object-field-intro mb-6">
@@ -45,7 +45,7 @@
 		</div>
 
 		<figure class="release-box bg-light grid place-items-center">
-			<img src="<?= $page->image('object-field-2.png')?->url() ?>" loading="lazy" alt="The new object field shows data in a very compact way" style="--aspect-ratio: 1794/497">
+			<img src="<?= $page->image('object-field-2.webp')?->url() ?>" loading="lazy" alt="The new object field shows data in a very compact way" style="--aspect-ratio: 1794/497">
 		</figure>
 	</div>
 

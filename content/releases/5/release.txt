@@ -10,4 +10,4 @@ ogimage: opengraph.png
 ----
 Description: Kirby 5 is taking existing features to new levels: collaborate on changes and preview them, turn the Panel dark, upload large files or customize the Panel views.
 ----
-Cover: - kirby-5-0.png
+Cover: - kirby-5-0.webp

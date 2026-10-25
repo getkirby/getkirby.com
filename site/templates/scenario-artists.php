@@ -11,7 +11,7 @@ snippet('templates/features/section', [
 	'title' => 'Showcase your creativity like never before',
 	'text'  => 'Kirby CMS makes it easy to create visually stunning and engaging websites for all types of creatives, including artists, musicians and filmmakers. Whether you\'re a gallery showcasing artwork, a musician launching an album, or a videographer sharing your portfolio, Kirby gives you the flexibility to showcase your work beautifully.',
 	'figure' => [
-		'image' => 'museum.png',
+		'image' => 'museum.webp',
 		'alt'   => 'A photo showing a crowded museum room',
 	],
 	'features' => [
@@ -50,7 +50,7 @@ snippet('templates/features/section', [
 	'title' => 'Fast, flexible & cost-effective',
 	'text'  => 'Kirby delivers powerful features without subscription fees. Build your digital art space at a one-time cost, providing flexibility and value for creative professionals.',
 	'figure' => [
-		'image' => 'band.png',
+		'image' => 'band.webp',
 		'alt'   => 'A photo of a band practicing',
 	],
 	'features' => [

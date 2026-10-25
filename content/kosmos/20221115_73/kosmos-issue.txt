@@ -33,7 +33,7 @@ But before we get into the holiday spirit too much, there is a lot of new stuff 
 
 ## Kirby in the wild
 
-(image: sensconsulting.png)
+(image: sensconsulting.webp)
 
 [Sens Consulting AS](https://sensconsulting.no)
 
@@ -57,7 +57,7 @@ Use columns in block fields based on the layout field with the [Column Blocks pl
 ## Shop Talk with Basti
 (columns…)
 
-(image: shop-talk.png)
+(image: shop-talk.webp)
 
 ++++
 

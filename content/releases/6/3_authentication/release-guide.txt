@@ -46,7 +46,7 @@ return [
 ];
 ```
 
-(image: passkey-login.png)
+(image: passkey-login.webp)
 
 Users don't type an email address. The browser opens its passkey prompt right away, the user picks one of their passkeys for your site and unlocks it, and Kirby identifies the account from the passkey itself.
 
@@ -58,13 +58,13 @@ Keep `password` (or `code`) enabled next to `webauthn`. Users have to be logged 
 
 Passkeys are also a second factor: users log in with email and password and then confirm with one of their passkeys. You don't need to configure anything for this. `webauthn` is now part of the default `auth.challenges` list, together with `totp` and `email` (see (link: releases/6/authentication#two-factor-authentication text: two-factor auth) below).
 
-(image: passkey-2fa.png)
+(image: passkey-2fa.webp)
 
 ### Managing passkeys
 
 Users manage their passkeys in the (link: releases/6/authentication#security-drawer text: security drawer) of their account: *Security › Passkeys*. They can give each new passkey a name (e.g. "Work laptop" or "YubiKey").
 
-(image: passkey-register.png)
+(image: passkey-register.webp)
 
 To remove one of their passkeys, users confirm with one of their passkeys. Admins can open the security drawer of other users and remove their passkeys after confirming with their own password, e.g. when a device got lost. Admins can't register passkeys for other users.
 
@@ -186,7 +186,7 @@ $hint = $kirby->auth()->passwords()->hint();
 
 Open your account (or, as an admin, any user) in the Panel, click the settings button and choose **Security**. The new security drawer bundles everything about how this account logs in.
 
-(image: security-drawer.png)
+(image: security-drawer.webp)
 
 - **Sign in methods** lists the account's email address and the enabled login methods from `auth.methods`: password, login via code and passkeys.
 - **Two-factor methods** lists the second factors enabled in `auth.challenges`: passkeys, authenticator app and code via email.

@@ -14,7 +14,7 @@ Comments: off
 
 ----
 
-Cover: muenchen-tickets.jpg
+Cover: muenchen-tickets.webp
 
 ----
 
@@ -62,7 +62,7 @@ The year starts strong with Kirby meetups. After [Berlin, Munich, and Mainz](htt
 
 ## 👷‍♀️ Made with Kirby
 
-(image: muenchen-tickets.jpg link: https://www.muenchenticket.de/ caption: München Ticket)
+(image: muenchen-tickets.webp link: https://www.muenchenticket.de/ caption: München Ticket)
 
 ## 📝 Articles
 
@@ -80,17 +80,17 @@ We truly believe that our partner program is all about building a strong network
 
 <div class="columns mb-12" style="--columns: 3">
 <div>
-(image: visionbites.jpg)
+(image: visionbites.webp)
 (link: https://www.visionbites.de/ text: visionbites)
 </div>
 
 <div>
-(image: genb.jpg)
+(image: genb.webp)
 (link: https://genx.be/ text: GeNx)
 </div>
 
 <div>
-(image: acb.png)
+(image: acb.webp)
 (link: https://acb.studio/ text: ACB Studio GmbH)
 </div>
 </div>

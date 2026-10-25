@@ -15,7 +15,7 @@ When you edit pages, files or user accounts in the Panel, you will see our "unsa
 
 Get more details about the changes for the current page, file or user, by accessing the info dropdown next to the form controls:
 
-(image: changes-info-dropdown.png)
+(image: changes-info-dropdown.webp)
 
 
 
@@ -23,7 +23,7 @@ Get more details about the changes for the current page, file or user, by access
 
 All changes by everyone in the team - not just the current editor - are listed in the Changes dialog (accessible via the “Changes” menu item in the sidebar) and grouped by type (page, user, file). Everyone in the team can directly use the dialog to jump to changes by other team members and preview them directly on the fly, even while someone else is still actively working on them.
 
-(image: changes-dialog.png)
+(image: changes-dialog.webp)
 
 
 <since v="5.0.0">
@@ -39,7 +39,7 @@ Even though they aren't saved/published, you can take a look at how your page wo
 
 Kirby automatically locks pages that are currently being edited by another user in the Panel, making working in teams a lot safer. If you open a page that is edited by another user, you are informed about the editing user and cannot overwrite their changes.
 
-(image: content-locking.png)
+(image: content-locking.webp)
 
 If the editing user doesn't make any new changes within some time, the page will be unlocked again. If you do so, the editing user is informed that their changes have been overwritten and can then download them to edit the unsaved changes manually.
 
@@ -70,13 +70,13 @@ In your blueprints for the Panel, you can (link: docs/reference/panel/blueprints
 
 To publish a draft in the Panel, click on the "Draft" button with the red status icon in the toolbar or go to "Settings" > "Change status".
 
-(image: draft.png)
+(image: draft.webp)
 
 <warning>
 You can only publish a draft in the Panel if all required fields are filled in and all validations have passed.
 </warning>
 
-(image: validation.png)
+(image: validation.webp)
 
 === In the content folder
 

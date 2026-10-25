@@ -36,14 +36,14 @@ For you as developers/designers, this directory presents an opportunity to demon
 
 For clients all over the world, it is vital to have partners who know Kirby well, create great websites or apps, and provide high-quality services, in short, to be reassured there is always someone to trust with their Kirby project.
 
-(image: partner-profile.jpg)
+(image: partner-profile.webp)
 
 [Become a partner](https://getkirby.com/partners/join)
 
 
 ## Kirby 4 Alpha pre-release
 
-(image: chameleon.png)
+(image: chameleon.webp)
 
 Kirby 4 is all about a new editing experience for users. With new field types and views, a way to move pages, customizable page create dialogs, query support for sections, options and enhancements for the textarea, writer, blocks and layouts fields, and cool image editing improvements, using the Panel is now more impressive than ever. Here are just a few of the highlights waiting for you(and we are not done yet, more is planned for the release in late summer).
 
@@ -52,7 +52,7 @@ Link to anything
 
 (columns…)
 
-(image: file-link.png)
+(image: file-link.webp)
 
 ++++
 
@@ -68,7 +68,7 @@ Faster, better page creation
 
 (columns…)
 
-(image: page-creation-dialog.png)
+(image: page-creation-dialog.webp)
 
 
 ++++
@@ -84,7 +84,7 @@ I like to move it, move it
 
 (columns…)
 
-(image: move-dialog.png)
+(image: move-dialog.webp)
 
 ++++
 
@@ -97,7 +97,7 @@ Filter pages and files with queries
 
 (columns…)
 
-(image: section-filters.png)
+(image: section-filters.webp)
 
 
 ++++
@@ -111,7 +111,7 @@ Color me surprised
 
 (columns…)
 
-(image: color-field.png)
+(image: color-field.webp)
 
 
 ++++
@@ -126,7 +126,7 @@ Focus Pocus
 
 (columns…)
 
-(image: image-focus.png)
+(image: image-focus.webp)
 
 
 ++++
@@ -140,7 +140,7 @@ Uploading files the smart way
 
 (columns…)
 
-(image: uploader.png)
+(image: uploader.webp)
 
 
 ++++
@@ -156,7 +156,7 @@ Our best field is now 25% bester
 
 (columns…)
 
-(image: field-preview.png)
+(image: field-preview.webp)
 
 
 ++++
@@ -172,7 +172,7 @@ No longer lost in translation
 
 (columns…)
 
-(image: language-view.png)
+(image: language-view.webp)
 
 
 ++++
@@ -186,7 +186,7 @@ Deliver results
 
 (columns…)
 
-(image: search-view.png)
+(image: search-view.webp)
 
 
 ++++

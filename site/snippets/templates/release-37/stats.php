@@ -39,7 +39,7 @@
 
 	<div class="v37-stats-grid">
 		<figure class="release-box bg-light" style="--aspect-ratio: 2657/2248; grid-area: figure">
-			<?= img($page->image('stats.png'), [
+			<?= img($page->image('stats.webp'), [
 				'alt' => 'The stats section is used here for a shop site to show revenue, number of orders, average transaction price, refunds and discounted sales.',
 				'src' => [
 					'width' => 824

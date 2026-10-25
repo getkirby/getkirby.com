@@ -11,7 +11,7 @@ snippet('templates/features/section', [
 	'title' => 'Elevate your guest experience online',
 	'text'  => 'Kirby transforms the digital presence of hotels, restaurants, travel agencies and tour operators. Whether you\'re showcasing luxurious rooms, home-style cuisine, or exotic destinations, Kirby provides a platform to tell your story with elegance and ease.',
 	'figure' => [
-		'image' => 'host.png',
+		'image' => 'host.webp',
 		'alt'   => 'A photograph of a boutique restaurant. Guest interacting with a smiling host at the cash register.',
 	],
 	'features' => [
@@ -50,7 +50,7 @@ snippet('templates/features/section', [
 	'title' => 'Fast, fair & robust',
 	'text'  => 'Kirby is the ideal choice for the hospitality industry, providing a robust and reliable platform that enhances the online experience for guests and customers. Enjoy powerful features without the hassle of ongoing costs.',
 	'figure' => [
-		'image' => 'view.png',
+		'image' => 'view.webp',
 		'alt'   => 'A photo of a traveler relaxing in a hammock surrounded by lights overlooking the forest',
 	],
 	'features' => [

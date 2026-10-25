@@ -25,7 +25,7 @@
 		<?php snippet('templates/release-4/teaser', ['section' => $section]) ?>
 	</div>
 	<figure class="release-box bg-light" style="grid-area: trace">
-		<?= img($section->image('image 1.png'), [
+		<?= img($section->image('image 1.webp'), [
 			'alt' => 'Panel error trace view with a stack trace',
 			'src' => [
 				'width' => 640
@@ -34,7 +34,7 @@
 		]) ?>
 	</figure>
 	<figure class="release-box bg-light" style="grid-area: request">
-		<?= img($section->image('image 2.png'), [
+		<?= img($section->image('image 2.webp'), [
 			'alt' => 'Request error dialog with detailed response information',
 			'src' => [
 				'width' => 640
@@ -43,7 +43,7 @@
 		]) ?>
 	</figure>
 	<figure class="release-box bg-light" style="grid-area: validation">
-		<?= img($section->image('image 3.png'), [
+		<?= img($section->image('image 3.webp'), [
 			'alt' => 'Validation error dialog with structured field issues',
 			'src' => [
 				'width' => 900

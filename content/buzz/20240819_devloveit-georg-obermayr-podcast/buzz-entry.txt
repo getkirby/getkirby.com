@@ -18,4 +18,4 @@ Text:
 - (link: https://rss.com/podcasts/devslove-it-der-podcast/1600173/ text: Part 3: Why the community is important for a CMS)
 
 
-(image: devsloveit.jpg)
+(image: devsloveit.webp)

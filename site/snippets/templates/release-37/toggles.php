@@ -14,7 +14,7 @@
 
 		<div class="release-box bg-light grid items-center" style="--span: 2">
 			<figure style="--aspect-ratio: 800/500">
-				<img src="<?= ($image = $page->image('toggles-labels.png'))->url() ?>" loading="lazy" alt="The toggles field with four text buttons for text alignment">
+				<img src="<?= ($image = $page->image('toggles-labels.webp'))->url() ?>" loading="lazy" alt="The toggles field with four text buttons for text alignment">
 			</figure>
 		</div>
 
@@ -24,7 +24,7 @@
 
 		<div class="release-box bg-light grid items-center" style="--span: 2">
 			<figure style="--aspect-ratio: 800/500">
-				<img src="<?= ($image = $page->image('toggles-labels-icons.png'))->url() ?>" loading="lazy" alt="The toggles can combine text and an icon for a more visual representation">
+				<img src="<?= ($image = $page->image('toggles-labels-icons.webp'))->url() ?>" loading="lazy" alt="The toggles can combine text and an icon for a more visual representation">
 			</figure>
 		</div>
 
@@ -34,7 +34,7 @@
 
 		<div class="release-box bg-light grid items-center" style="--span: 2">
 			<figure style="--aspect-ratio: 800/500">
-				<img src="<?= ($image = $page->image('toggles-icons.png'))->url() ?>" loading="lazy" alt="The toggles can be just icons and have the label text as title attribute on the label in this case">
+				<img src="<?= ($image = $page->image('toggles-icons.webp'))->url() ?>" loading="lazy" alt="The toggles can be just icons and have the label text as title attribute on the label in this case">
 			</figure>
 		</div>
 
@@ -44,7 +44,7 @@
 
 		<div class="release-box bg-light grid items-center" style="--span: 2">
 			<figure style="--aspect-ratio: 800/500">
-				<img src="<?= ($image = $page->image('toggles-compact.png'))->url() ?>" loading="lazy" alt="The toggles can also be shown in a more compact form">
+				<img src="<?= ($image = $page->image('toggles-compact.webp'))->url() ?>" loading="lazy" alt="The toggles can also be shown in a more compact form">
 			</figure>
 		</div>
 

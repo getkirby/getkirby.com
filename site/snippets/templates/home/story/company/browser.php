@@ -11,7 +11,7 @@
 </div>
 
 <div class="mb-6" style="--aspect-ratio: 2/1">
-<?= img($story->image('agency.jpg'), [
+<?= img($story->image('agency.webp'), [
 	'src' => [
 		'crop'   => true,
 		'width'  => 500,

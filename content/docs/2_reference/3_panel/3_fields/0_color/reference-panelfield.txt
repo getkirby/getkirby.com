@@ -8,7 +8,7 @@ Intro: The `color` field supports multiple color notations, a color picker, pre-
 
 Text:
 
-(image: color.png)
+(image: color.webp)
 
 ## Field properties
 
@@ -49,7 +49,7 @@ With the `mode` option you control which elements of the color field are availab
 |`input`   | show only the input |
 |`options` | show only options |
 
-(image: color-field-modes.png)
+(image: color-field-modes.webp)
 
 
 ## Options
@@ -70,7 +70,7 @@ color:
     - "#355c7d"
 ```
 
-(image: color-field-options.png)
+(image: color-field-options.webp)
 
 If you name the colors, their name is shown in the Panel as well.
 
@@ -85,7 +85,7 @@ color:
     "#355C7D": "Midnight rain"
 ```
 
-(image: color-field-names.png)
+(image: color-field-names.webp)
 
 ### Dynamic options
 

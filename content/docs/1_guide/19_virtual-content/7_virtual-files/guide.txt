@@ -26,7 +26,7 @@ With Kirby, you can merge and aggregate all sorts of content from different sour
 
 Note that while the two options discussed in this recipe focus on images, it would work just as well for other file types.
 
-(image: virtual-files.jpg)
+(image: virtual-files.webp)
 
 ## Prerequisites
 

@@ -38,7 +38,7 @@
 		<?php snippet('templates/release-4/teaser', ['section' => $section]) ?>
 	</div>
 	<figure class="v5-entries-hero release-padded-box bg-light grid place-items-center">
-		<?= img($section->image('entries-field.png'), [
+		<?= img($section->image('entries-field.webp'), [
 			'alt' => 'The new entries field allows you to create and manage multiple entries for the same field type',
 			'src' => [
 				'width' => 600

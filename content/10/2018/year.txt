@@ -14,14 +14,14 @@ The crowdfunding budget shrinked and shrinked. We tried to communicate openly, b
 
 On the upside, I was able to run a bunch of really great Kirby workshops, as side events for Marc Thiele's (link: https://beyondtellerrand.com text: Beyond Tellerrand conferences) in Munich, Düsseldorf and Berlin.
 
-(image: workshop-munich.jpg caption: Workshop at the Microsoft offices in Munich)
+(image: workshop-munich.webp caption: Workshop at the Microsoft offices in Munich)
 
 Those led to various private and public workshops in the following years, such as the one in Nottingham at (link: https://newadventuresconf.com/ text: New Adventures Conference) in 2020.
 
-(image: workshop-berlin.jpg caption: Workshop in Berlin)
+(image: workshop-berlin.webp caption: Workshop in Berlin)
 
 ## Statistics: How do they work?
 
 Then one day, we received an image from Net magazine. Their CMS survey went really well for us. We will not question their scientific methods.
 
-(image: netmag.jpg alt: Page in the Net magazine with a pie chart, showing 5% market share of Kirby)
+(image: netmag.webp alt: Page in the Net magazine with a pie chart, showing 5% market share of Kirby)

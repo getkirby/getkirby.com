@@ -33,7 +33,7 @@ Would be great to meet you on one of these occasions.
 
 ## Kirby in the Wild
 
-(image: vega-studio.png)
+(image: vega-studio.webp)
 
 [Vega Studio](https://vega.studio)
 
@@ -85,7 +85,7 @@ Andy Clark shares this StarWars-based [CSS specificity graphic](https://stuffand
 
 ++++
 
-(image: css-specificity-wars.png)
+(image: css-specificity-wars.webp)
 
 
 (…columns)

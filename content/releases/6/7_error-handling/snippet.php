@@ -25,7 +25,7 @@
 	</div>
 
 	<figure class="release-box p-12 bg-dark text-lg" style="grid-area: request">
-		<?= img($section->image('image 2.png'), [
+		<?= img($section->image('image 2.webp'), [
 			'alt' => 'Request error dialog with detailed response information',
 			'src' => [
 				'width' => 640
@@ -36,7 +36,7 @@
 	</figure>
 
 	<figure class="release-box p-12 bg-dark" style="grid-area: validation">
-		<?= img($section->image('image 3.png'), [
+		<?= img($section->image('image 3.webp'), [
 			'alt' => 'Validation error dialog with structured field issues',
 			'src' => [
 				'width' => 900

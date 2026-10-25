@@ -33,17 +33,17 @@ Check out all the updates and don’t miss our release sale …
 
 No more lost relationships in picker fields because you changed the slug of a page, or renamed a file or updated a user id.
 
-(image: uuids.png)
+(image: uuids.webp)
 
 ### New update checks
 <p class="color-gray-600">Keep your installation healthy</p>
 
-(image: updates.png)
+(image: updates.webp)
 
 ### New object field
 <p class="color-gray-600">More power for your data</p>
 
-(image: object-field.png)
+(image: object-field.webp)
 
 
 The new object field allows you to create data objects. This is super handy for more complex settings, isolated entities or nested data.
@@ -59,14 +59,14 @@ With PHP 7.4 reaching end of live, we drop its support in Kirby 3.8.0. PHP 8 not
 
 ++++
 
-(image: php8.png)
+(image: php8.webp)
 
 (…columns)
 
 ## Better gallery block
 <p class="color-gray-600">Artistic control for your images</p>
 
-(image: gallery-block-1.png)
+(image: gallery-block-1.webp)
 
 With new ratio, crop and caption fields, the gallery block is now much more powerful.
 
@@ -75,7 +75,7 @@ Of course, the preview respects those settings.
 ### New Kirby CLI
 <p class="color-gray-600">Supercharge your workflow</p>
 
-(image: cli-screenshot.png)
+(image: cli-screenshot.webp)
 
 The revival of our command line interface is here and it's better than ever before. Managing your Kirby installations has never been easier.
 
@@ -98,7 +98,7 @@ Kirby 3.8.0 is a major Kirby version that comes with some breaking changes. To m
 
 ## Kirby in the wild
 
-(image: 1_liv-mats.png)
+(image: 1_liv-mats.webp)
 
 [livMatS](https://www.livmats.uni-freiburg.de/en)
 

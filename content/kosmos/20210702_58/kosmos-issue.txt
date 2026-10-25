@@ -53,7 +53,7 @@ Navigating between pages in the Panel is now completely customizable via bluepri
 
 Cardlets are a new layout type for Panel sections and the pages and files fields. They fill the gap between the list and card layouts.
 
-(image: panel-cardlets.png)
+(image: panel-cardlets.webp)
 
 **Custom file type extensions**
 
@@ -76,7 +76,7 @@ Of course, there's a lot more to discover! Want to know more or play with the ne
 
 Websites created with Kirby out in the wild are always a great source of inspiration and show that with its flexibility and extensibility, there are hardly any limits to what you can create with Kirby.
 
-(image: drigani.jpg)
+(image: drigani.webp)
 
 [Drigani](https://drigani.com/en/)
 

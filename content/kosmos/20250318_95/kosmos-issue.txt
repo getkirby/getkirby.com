@@ -14,7 +14,7 @@ Comments: off
 
 ----
 
-Cover: windenergie-monitor.jpg
+Cover: windenergie-monitor.webp
 
 ----
 
@@ -56,7 +56,7 @@ Save the dates for upcoming Kirby meetups:
 
 ## Made with Kirby
 
-(image: windenergie-monitor.jpg)
+(image: windenergie-monitor.webp)
 [Goal 100](https://goal100.org)
 
 ## Articles, videos and more
@@ -76,12 +76,12 @@ In each Kosmos edition, we highlight agencies and freelancers in our partner net
 
 (columns…)
 
-(image: vml.jpg)
+(image: vml.webp)
 (link: https://getkirby.com/partners/vml text: VML)
 
 ++++
 
-(image: lukas-kleinschmidt.png)
+(image: lukas-kleinschmidt.webp)
 (link: https://getkirby.com/partners/lukas-kleinschmidt text: Lukas Kleinschmidt)
 
 (…columns)

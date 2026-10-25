@@ -40,7 +40,7 @@ Almost another year gone by. Looking back, it has been an exciting year full of 
 
 ## Kirby 4 is here
 
-(image: company-1600x.png alt: Screenshot of the new Kirby 4 Panel)
+(image: company-1600x.webp alt: Screenshot of the new Kirby 4 Panel)
 
 After many months of hard work, we proudly present: [**Kirby 4**](https://getkirby.com/releases/4) !
 It wouldn't have been possible without you, our loyal community who helped so much with testing and your feedback, and the more adventurous ones of you and your clients, who already battle tested it in production.

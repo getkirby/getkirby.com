@@ -8,7 +8,7 @@ Intro: Use the link field to create links to external URLs, internal pages, file
 
 Text:
 
-(image: link.png)
+(image: link.webp)
 
 ## Field properties
 
@@ -38,13 +38,13 @@ The `custom` link type is not enabled by default as it cannot validate the enter
 
 ## Link to pages
 
-(image: page-link.png)
+(image: page-link.webp)
 
 If an icon has been defined in the page's blueprint, it will be used in the page selector.
 
 ## Link to files
 
-(image: file-link.png)
+(image: file-link.webp)
 
 ## Custom link type
 

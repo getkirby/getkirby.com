@@ -1,4 +1,4 @@
-<?php if ($image = image('matomo.jpg')): ?>
+<?php if ($image = image('matomo.webp')): ?>
 <figure>
 	<a class="block bg-light rounded mb-3" href="https://plugins.getkirby.com" style="--aspect-ratio: <?= $image->width() . '/' . $image->height() ?>">
 		<?= img($image, [

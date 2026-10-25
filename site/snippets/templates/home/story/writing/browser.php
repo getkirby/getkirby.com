@@ -4,7 +4,7 @@
  */
 ?>
 <div class="mb-3 bg-light" style="--aspect-ratio: 5/2">
-	<?= img($story->image('dark-forest.jpg'), [
+	<?= img($story->image('dark-forest.webp'), [
 		'src' => [
 			'crop'   => true,
 			'width'  => 500,
