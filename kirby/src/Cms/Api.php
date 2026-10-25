@@ -4,6 +4,7 @@ namespace Kirby\Cms;
 
 use Kirby\Api\Api as BaseApi;
 use Kirby\Exception\NotFoundException;
+use Kirby\Exception\PermissionException;
 use Kirby\Form\Form;
 use Kirby\Session\Session;
 
@@ -104,7 +105,7 @@ class Api extends BaseApi
 	 */
 	public function files(string $path): Files
 	{
-		return $this->parent($path)->files()->filter('isAccessible', true);
+		return $this->parent($path)->files()->filter('isListable', true);
 	}
 
 	/**
@@ -167,7 +168,7 @@ class Api extends BaseApi
 			default           => $parent->children()
 		};
 
-		return $pages->filter('isAccessible', true);
+		return $pages->filter('isListable', true);
 	}
 
 	/**
@@ -182,7 +183,12 @@ class Api extends BaseApi
 			return $pages->search($this->requestQuery('q'));
 		}
 
-		return $pages->query($this->requestBody());
+		return $pages->query(array_filter([
+			'limit'    => $this->requestBody('limit'),
+			'offset'   => $this->requestBody('offset'),
+			'paginate' => $this->requestBody('paginate'),
+			'search'   => $this->requestBody('search'),
+		], fn ($value) => $value !== null));
 	}
 
 	/**
@@ -223,10 +229,13 @@ class Api extends BaseApi
 
 	/**
 	 * Returns the site object
+	 *
+	 * @throws \Kirby\Exception\NotFoundException if the site cannot be accessed
+	 * @since 4.9.0
 	 */
 	public function site(): Site
 	{
-		return $this->kirby->site();
+		return Find::site();
 	}
 
 	/**
@@ -255,6 +264,18 @@ class Api extends BaseApi
 	 */
 	public function users(): Users
 	{
-		return $this->kirby->users();
+		return Find::users();
+	}
+
+	/**
+	 * Validates that the acting user has access to the given area.
+	 *
+	 * @throws \Kirby\Exception\PermissionException
+	 */
+	public function validateAreaAccess(string $area): void
+	{
+		if ($this->kirby->user()?->role()->permissions()->for('access', $area) !== true) {
+			throw new PermissionException('No access');
+		}
 	}
 }
