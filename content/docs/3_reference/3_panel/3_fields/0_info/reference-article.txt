@@ -16,7 +16,7 @@ Text:
 
 The info field is a great way to provide inline help or information for your users. You can put any kind of text in this field and it will be displayed as plain text. For better formatting you can use (glossary: Markdown) and (glossary: KirbyText).
 
-(image: info.png)
+(image: info.webp)
 
 ## Example
 
@@ -66,7 +66,7 @@ fields:
     text: This is a very important page type. Please double-check your content before publishing.
 ```
 
-(image: info-negative.png)
+(image: info-negative.webp)
 
 ### Disable theming
 
