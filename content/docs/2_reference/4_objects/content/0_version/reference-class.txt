@@ -11,6 +11,6 @@ $version = $page->version('changes');
 
 // check if changes exist in a particular language
 $version->exists('de');
-version->exists('current');
-version->exists('default');
+$version->exists('current');
+$version->exists('default');
 ```
