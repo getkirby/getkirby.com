@@ -237,7 +237,7 @@ class ReferenceClassPage extends SectionPage
                 }
 
                 if ($type = $parameter->getType()) {
-                    $type = $type->getName();
+                    $type = $type instanceof ReflectionNamedType ? $type->getName() : (string)$type;
                 } elseif ($doc) {
                     $type = (string)$doc->getParameters()[0]->getType();
                 }
