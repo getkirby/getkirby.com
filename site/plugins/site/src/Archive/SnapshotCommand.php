@@ -26,13 +26,21 @@ class SnapshotCommand extends Command
 				'longPrefix'  => 'include',
 				'description' => 'Only include pages in these comma-separated sections, e.g. `docs`'
 			],
+			'archive' => [
+				'longPrefix'  => 'archive',
+				'description' => 'Folder of an archive on another Kirby version to snapshot instead of this site, e.g. ../getkirby-v38'
+			],
+			'php' => [
+				'longPrefix'  => 'php',
+				'description' => 'PHP binary to run the site with, e.g. php80 for older archives (default: the current one)'
+			],
 			'server' => [
 				'longPrefix'  => 'server',
 				'description' => 'Crawl an already running copy of the site, e.g. https://getkirby.test (default: start a PHP server)'
 			],
 			'urls' => [
 				'longPrefix'  => 'urls',
-				'description' => 'File with the paths or URLs to crawl, one per line (default: all pages of this site)'
+				'description' => 'File with the paths or URLs to crawl, one per line (default: all pages of the site)'
 			],
 			'output' => [
 				'longPrefix'  => 'output',
@@ -59,9 +67,10 @@ class SnapshotCommand extends Command
 
 	public static function command(CLI $cli): void
 	{
-		$kirby = $cli->kirby();
-		$root  = $cli->arg('output') ?: $kirby->root('index') . '/snapshot';
-		$paths = null;
+		$kirby   = $cli->kirby();
+		$archive = $cli->arg('archive');
+		$output  = $cli->arg('output') ?: $kirby->root('index') . '/snapshot';
+		$paths   = null;
 
 		if ($file = $cli->arg('urls')) {
 			if (is_file($file) === false) {
@@ -69,30 +78,38 @@ class SnapshotCommand extends Command
 			}
 
 			$paths = Str::split(F::read($file), "\n");
-		} elseif ($kirby->option('archived') !== true) {
+		} elseif (!$archive && $kirby->option('archived') !== true) {
 			$cli->out('<yellow>The `archived` option is not enabled, the snapshot will contain the regular site.</yellow>');
 		}
 
 		if ($cli->arg('fresh') === true) {
-			Dir::remove($root . '/public');
+			Dir::remove($output . '/public');
+		}
+
+		$root   = $archive ?: $kirby->root('index');
+		$server = new Server(
+			root: $root,
+			router: $root . '/kirby/router.php',
+			workers: $cli->arg('workers'),
+			php: $cli->arg('php') ?: PHP_BINARY
+		);
+
+		// an archive on another Kirby version
+		// has to list its pages itself
+		if ($archive) {
+			$paths ??= $server->pages();
 		}
 
 		if ($origin = $cli->arg('server')) {
 			$origin = rtrim($origin, '/');
 		} else {
-			$server = new Server(
-				root: $kirby->root('index'),
-				router: $kirby->root('kirby') . '/router.php',
-				workers: $cli->arg('workers')
-			);
-
 			$origin = $server->start();
 			register_shutdown_function($server->stop(...));
 		}
 
 		$snapshot = new Snapshot(
 			url: rtrim($cli->arg('url'), '/'),
-			root: $root,
+			root: $output,
 			include: Str::split($cli->arg('include')),
 			fallback: rtrim($cli->arg('fallback'), '/'),
 			workers: $cli->arg('workers')
@@ -117,9 +134,9 @@ class SnapshotCommand extends Command
 		$report = $snapshot->write();
 
 		$cli->success(count($crawler->results) . ' URLs crawled in ' . round(microtime(true) - $start) . 's');
-		$cli->out('Static site: ' . $root . '/public (' . Dir::niceSize($root . '/public') . ')');
-		$cli->out('nginx config: ' . $root . '/nginx.conf');
-		$cli->out('Report: ' . $root . '/report.json');
+		$cli->out('Static site: ' . $output . '/public (' . Dir::niceSize($output . '/public') . ')');
+		$cli->out('nginx config: ' . $output . '/nginx.conf');
+		$cli->out('Report: ' . $output . '/report.json');
 
 		if ($report['errors'] !== []) {
 			$cli->br();
