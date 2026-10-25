@@ -8,11 +8,6 @@
 					<?= icon('list') ?> All recipes
 				</a>
 			</li>
-			<li>
-				<a aria-label="New recipes" href="/docs/cookbook/new"<?= ariaCurrent($page->slug() === 'new') ?>>
-					<?= icon('flash') ?> New
-				</a>
-			</li>
 			<li><hr class="hr"></li>
 			<?php foreach (collection('cookbook/categories') as $category): ?>
 			<li>
