@@ -19,7 +19,7 @@
           <p>Kirby 1 has reached its end of life and is no longer supported by us.</p>
         </div>
         <div class="columns" style="--columns: 2">
-          <a aria-label="Visit the Kirby 1 docs" href="https://k1.getkirby.com/docs" class="btn btn--outlined">
+          <a aria-label="Visit the Kirby 1 docs" href="https://v1.getkirby.com/docs" class="btn btn--outlined">
             <?= icon('book') ?>
             Docs
           </a>
@@ -40,7 +40,7 @@
           <p>Kirby 2 has reached its end of life and is no longer supported by us.</p>
         </div>
         <div class="columns" style="--columns: 2">
-          <a aria-label="Visit the Kirby 2 docs" href="https://k2.getkirby.com/docs" class="btn btn--outlined">
+          <a aria-label="Visit the Kirby 2 docs" href="https://v2.getkirby.com/docs" class="btn btn--outlined">
             <?= icon('book') ?>
             Docs
           </a>
