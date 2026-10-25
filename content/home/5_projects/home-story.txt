@@ -56,7 +56,7 @@ PhoneSubtitle: Product design
 
 ----
 
-PhoneImage: project-a.jpg
+PhoneImage: project-a.webp
 
 ----
 

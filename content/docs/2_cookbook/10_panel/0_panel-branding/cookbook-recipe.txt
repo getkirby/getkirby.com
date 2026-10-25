@@ -72,8 +72,8 @@ You can play with `margin-top`, `width` and `height` on `.k-header::before` to a
 
 Here you have some examples:
 
-(image: mtlaw.png)
-(image: baylos.png)
+(image: mtlaw.webp)
+(image: baylos.webp)
 
 
 As you can see, it is a simple adaptation that adds a logo, and modifies the base colors but you can go much further thanks to Kirby's [UI Kit](https://getkirby.com/docs/reference/plugins/ui#colors)
