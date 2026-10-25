@@ -28,7 +28,7 @@ The team behind the Git client Tower have free learning resources on Git. If you
 
 Kirby is developed using a single Git repository, which is hosted on [GitHub](https://github.com/getkirby/kirby). Not only can you follow our development process and contribute your own ideas and code changes there, but you can also use the repository as a Git submodule.
 
-This tutorial describes one of several ways you can install and update Kirby. See (link: docs/guide/installation text: the overview page) for all supported ways.
+This tutorial describes one of several ways you can install and update Kirby. See (link: docs/guide/install-guide text: the overview page) for all supported ways.
 
 ## Starting a new project
 
