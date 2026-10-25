@@ -43,7 +43,7 @@ The basic HTML markup within the `<head>` element looks like the following:
 
 The code snippet above is the same as the one that used for this cookbook recipe, and when you share it on social media, the link preview will look something like this:
 
-(image: kirby-opengraph.png caption: Open Graph image generated from getkirby.com website)
+(image: kirby-opengraph.webp caption: Open Graph image generated from getkirby.com website)
 
 
 ## Content representations
@@ -132,7 +132,7 @@ imagedestroy($canvas); // This function has no effect. Before PHP 8.0.0, this fu
 
 The basic OG image using only text will look like this:
 
-(image: textonly-opengraph.png caption: Open Graph image with only text generated with content representations)
+(image: textonly-opengraph.webp caption: Open Graph image with only text generated with content representations)
 
 ### Add more flavor to the image
 
@@ -153,7 +153,7 @@ $logo     = imagecreatefrompng($logoFile);
 imagecopyresampled($canvas, $logo, 975, 400, 0, 0, imagesx($logo), imagesy($logo), imagesx($logo), imagesy($logo));
 ```
 
-(image: flavour-opengraph.png caption: Open Graph image generated with content representations)
+(image: flavour-opengraph.webp caption: Open Graph image generated with content representations)
 
 ### Finally, adjust the markup of your HTML `head`
 

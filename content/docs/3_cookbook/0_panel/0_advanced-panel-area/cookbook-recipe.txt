@@ -283,7 +283,7 @@ npm run dev
 
 Now open the Panel and navigate to the new Panel area. It will now look like this:
 
-(image: product-list.png)
+(image: product-list.webp)
 
 
 Since we haven't implemented the dropdowns yet, they will throw an error if you click on the buttons. But we already have a nice working list view of our products!
@@ -767,7 +767,7 @@ Let's first add an `add` button to our view in the `k-header` component. The `k-
 
 The view should now look like this:
 
-(image: products-add.png)
+(image: products-add.webp)
 
 When the user clicks on this button, a new dialog, which we have yet to define, will open.
 
@@ -942,7 +942,7 @@ In the `query` callback, we loop through the list items and return each item tha
 
 At this point, when we use the search, it works fine and returns the expected result set as we type.
 
-(image: area-search.png)
+(image: area-search.webp)
 
 However, when we click on the desired item, we are just redirected to the current view. Also, we currently have to select the `product` search from the menu first.
 
@@ -1104,7 +1104,7 @@ export default {
 
 When we go to the single view now, the result should look like this:
 
-(image: single-product-view.png)
+(image: single-product-view.webp)
 
 Depending on your real world data, you might want to choose a completely different layout for the single view, but that's up to you and you can start experimenting with your newly aquired knowledge from here on.
 
@@ -1423,7 +1423,7 @@ If you add a class name to that span, you can also use it to apply some extra st
 
 Here's our final table with the little sorting arrow:
 
-(image: sortable.png)
+(image: sortable.webp)
 
 
 ## More information

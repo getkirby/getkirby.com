@@ -8,6 +8,7 @@ use Kirby\Exception\InvalidArgumentException;
 use Kirby\Filesystem\F;
 use Kirby\Filesystem\IsFile;
 use Kirby\Panel\File as Panel;
+use Kirby\Toolkit\BlockCollectionAccess;
 use Kirby\Toolkit\Str;
 
 /**
@@ -134,6 +135,7 @@ class File extends ModelWithContent
 	 * Returns the url to api endpoint
 	 * @internal
 	 */
+	#[BlockCollectionAccess]
 	public function apiUrl(bool $relative = false): string
 	{
 		return $this->parent()->apiUrl($relative) . '/files/' . $this->filename();
@@ -327,6 +329,10 @@ class File extends ModelWithContent
 		return $this->id() === $file->id();
 	}
 
+	public static array $accessibleCache = [];
+	public static array $listableCache   = [];
+	public static array $readableCache   = [];
+
 	/**
 	 * Checks if the files is accessible.
 	 * This permission depends on the `read` option until v5
@@ -338,12 +344,11 @@ class File extends ModelWithContent
 			return false;
 		}
 
-		static $accessible   = [];
-		$role                = $this->kirby()->user()?->role()->id() ?? '__none__';
-		$template            = $this->template() ?? '__none__';
-		$accessible[$role] ??= [];
+		$role     = $this->kirby()->user()?->role()->id() ?? '__none__';
+		$template = $this->template() ?? '__none__';
+		static::$accessibleCache[$role] ??= [];
 
-		return $accessible[$role][$template] ??= $this->permissions()->can('access');
+		return static::$accessibleCache[$role][$template] ??= $this->permissions()->can('access');
 	}
 
 	/**
@@ -362,12 +367,11 @@ class File extends ModelWithContent
 			return false;
 		}
 
-		static $listable   = [];
-		$role              = $this->kirby()->user()?->role()->id() ?? '__none__';
-		$template          = $this->template() ?? '__none__';
-		$listable[$role] ??= [];
+		$role     = $this->kirby()->user()?->role()->id() ?? '__none__';
+		$template = $this->template() ?? '__none__';
+		static::$listableCache[$role] ??= [];
 
-		return $listable[$role][$template] ??= $this->permissions()->can('list');
+		return static::$listableCache[$role][$template] ??= $this->permissions()->can('list');
 	}
 
 	/**
@@ -377,18 +381,18 @@ class File extends ModelWithContent
 	 */
 	public function isReadable(): bool
 	{
-		static $readable   = [];
-		$role              = $this->kirby()->user()?->role()->id() ?? '__none__';
-		$template          = $this->template() ?? '__none__';
-		$readable[$role] ??= [];
+		$role     = $this->kirby()->user()?->role()->id() ?? '__none__';
+		$template = $this->template() ?? '__none__';
+		static::$readableCache[$role] ??= [];
 
-		return $readable[$role][$template] ??= $this->permissions()->can('read');
+		return static::$readableCache[$role][$template] ??= $this->permissions()->can('read');
 	}
 
 	/**
 	 * Creates a unique media hash
 	 * @internal
 	 */
+	#[BlockCollectionAccess]
 	public function mediaHash(): string
 	{
 		return $this->mediaToken() . '-' . $this->modifiedFile();
@@ -398,6 +402,7 @@ class File extends ModelWithContent
 	 * Returns the absolute path to the file in the public media folder
 	 * @internal
 	 */
+	#[BlockCollectionAccess]
 	public function mediaRoot(): string
 	{
 		return $this->parent()->mediaRoot() . '/' . $this->mediaHash() . '/' . $this->filename();
@@ -407,6 +412,7 @@ class File extends ModelWithContent
 	 * Creates a non-guessable token string for this file
 	 * @internal
 	 */
+	#[BlockCollectionAccess]
 	public function mediaToken(): string
 	{
 		$token = $this->kirby()->contentToken($this, $this->id());
@@ -529,6 +535,7 @@ class File extends ModelWithContent
 	/**
 	 * Returns the absolute root to the file
 	 */
+	#[BlockCollectionAccess]
 	public function root(): string|null
 	{
 		return $this->root ??= $this->parent()->root() . '/' . $this->filename();
@@ -600,6 +607,7 @@ class File extends ModelWithContent
 	 * by injecting the information from
 	 * the asset.
 	 */
+	#[BlockCollectionAccess]
 	public function toArray(): array
 	{
 		return array_merge(parent::toArray(), $this->asset()->toArray(), [
@@ -623,6 +631,7 @@ class File extends ModelWithContent
 	 * option is used to disable this behavior or enable it
 	 * on a per-file basis.
 	 */
+	#[BlockCollectionAccess]
 	public function previewUrl(): string|null
 	{
 		// check if the clean file URL is accessible,

@@ -14,7 +14,7 @@ Guide: blueprints/fields
 
 Text:
 
-(image: writer.png)
+(image: writer.webp)
 
 #### Example
 
@@ -61,7 +61,7 @@ fields:
       - strike
 ```
 
-(image: writer.png)
+(image: writer.webp)
 
 <info>
 You can extend Kirby to (link: docs/reference/plugins/extensions/writer-marks-nodes text: include custom marks).
@@ -95,7 +95,7 @@ fields:
       - orderedList
 ```
 
-(image: writer-extended.png)
+(image: writer-extended.webp)
 
 <info>
 You can extend Kirby to (link: docs/reference/plugins/extensions/writer-marks-nodes text: include custom nodes).

@@ -105,7 +105,7 @@ fields:
 
 ## Custom flavored boxes
 
-(image: boxes.png)
+(image: boxes.webp)
 
 ### Blueprint
 
@@ -297,7 +297,7 @@ panel.plugin("cookbook/block-factory", {
 
 ## FAQ block using structure field
 
-(image: faq.png)
+(image: faq.webp)
 
 ### Blueprint
 
@@ -443,7 +443,7 @@ The single blocks we introduced above are already quite great, and blocks with s
 This example requires the `accordion` block from above.
 </info>
 
-(image: faq-section-2-drawer.png)
+(image: faq-section-2-drawer.webp)
 
 ### Blueprint
 
@@ -577,7 +577,7 @@ panel.plugin("cookbook/block-factory", {
 
 Cards are nice in multi-column layouts, and they can be "hand-made" or created from existing pages.
 
-(image: cards.png)
+(image: cards.webp)
 
 ### Blueprint
 
@@ -743,7 +743,7 @@ panel.plugin("cookbook/block-factory", {
 
 ## Testimonial
 
-(image: testimonial.png)
+(image: testimonial.webp)
 
 ### Blueprint
 

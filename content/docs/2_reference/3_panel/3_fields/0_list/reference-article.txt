@@ -14,7 +14,7 @@ Guide: blueprints/fields
 
 Text:
 
-(image: list.png)
+(image: list.webp)
 
 ## Example
 

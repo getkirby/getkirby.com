@@ -166,7 +166,7 @@ Focus: 30.5% 70%
 
 Or you use the focus feature via the Panel:
 
-(image: image-focus.png alt: Screenshot of our focus point interface in the Panel)
+(image: image-focus.webp alt: Screenshot of our focus point interface in the Panel)
 </since>
 
 ## Example meta data file

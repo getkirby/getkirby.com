@@ -42,12 +42,12 @@
 				<ul class="footer-menu-2">
 					<?php snippet('layouts/menu-items', [
 						'items' => [
-							'Security' => '/security',
-							'Privacy'  => '/privacy',
-							'License'  => '/license',
-							'Presskit' => '/press',
-							'Team'     => '/team',
-							'Contact'  => '/contact',
+							'Security' => 'https://getkirby.com/security',
+							'Privacy'  => 'https://getkirby.com/privacy',
+							'License'  => 'https://getkirby.com/license',
+							'Presskit' => 'https://getkirby.com/press',
+							'Team'     => 'https://getkirby.com/team',
+							'Contact'  => 'https://getkirby.com/contact',
 						]
 					]) ?>
 				</ul>

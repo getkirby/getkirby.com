@@ -99,6 +99,14 @@ class App
 	{
 		$this->core = new Core($this);
 
+		// start with fresh permission caches
+		File::$accessibleCache = [];
+		File::$listableCache   = [];
+		File::$readableCache   = [];
+		Page::$accessibleCache = [];
+		Page::$listableCache   = [];
+		Page::$readableCache   = [];
+
 		// register all roots to be able to load stuff afterwards
 		$this->bakeRoots($props['roots'] ?? []);
 
@@ -436,6 +444,15 @@ class App
 			$default = $this->root('content');
 		}
 
+		// The content path is used as the default salt intentionally: there is
+		// no install step during which a random salt could be generated and
+		// persisted. Kirby goes live the moment files are present on the server,
+		// so there is no defined point at which to write a one-time secret.
+		// Config files are typically kept in version control and cannot be
+		// written by the system without causing merge conflicts. No value in
+		// $_SERVER is both universally available across hosting environments and
+		// stable enough to serve as a salt. Sites with security requirements
+		// must set the content.salt option to a secret random value.
 		$salt = $this->option('content.salt', $default);
 
 		if ($salt instanceof Closure) {
@@ -1257,7 +1274,7 @@ class App
 		// search for a draft if the page cannot be found
 		if (!$page && $draft = $site->draft($path)) {
 			if (
-				$this->user() ||
+				($this->user() && $draft->isAccessible()) ||
 				$draft->isVerified($this->request()->get('token'))
 			) {
 				$page = $draft;
@@ -1302,6 +1319,17 @@ class App
 
 		// try to resolve image urls for pages and drafts
 		if ($page = $site->findPageOrDraft($id)) {
+			// don't leak files on draft pages through clean URLs:
+			// only serve them to an authenticated user with access
+			// permission or a request with a valid preview token
+			if (
+				$page->isDraft() === true &&
+				($this->user() && $page->isAccessible()) === false &&
+				$page->isVerified($this->request()->get('token')) === false
+			) {
+				return null;
+			}
+
 			return $this->resolveFile($page->file($filename));
 		}
 

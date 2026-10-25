@@ -69,13 +69,13 @@ When you don't use the Panel, you have to add the language extension to your tex
 
 After enabling languages in your config as described above, you can find the language setup on the Panel in the "Language" view.
 
-(image: languages.png)
+(image: languages.webp)
 
 The languages view is only visible in the menu when you switch to a multi-language setup. It features the same language editor from previous versions.
 
 To add the first/a new language, click on "Add a new language" and add the language name, code, direction and PHP locale string.
 
-(image: language-create-dialog.png)
+(image: language-create-dialog.webp)
 
 Once the default language is defined, you can add more languages as secondary languages. The Panel automatically renames all existing content and file meta data files and includes the language extension.
 (…tabs)
@@ -90,7 +90,7 @@ You can list all available locales on your system by typing `locale -a` on the c
 
 The Panel offers options to delete and edit a language. You can access them by clicking on the menu icon (three dots):
 
-(image: language-dropdown.png)
+(image: language-dropdown.webp)
 
 *Edit*: Go to the language view to add and edit custom language variables.
 *Settings*: Change the name, locale or reading direction of the language.

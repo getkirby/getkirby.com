@@ -1,4 +1,5 @@
 {
+	"account": "Conta",
 	"account.changeName": "Altere o seu nome",
 	"account.delete": "Elimine a sua conta",
 	"account.delete.confirm": "Tem a certeza que pretende eliminar a sua conta? A sessão será terminada imediatamente. A sua conta não poderá ser recuperada. ",
@@ -43,6 +44,9 @@
 	"delete": "Eliminar",
 	"delete.all": "Eliminar todos",
 
+	"deselect": "Desselecionar",
+	"deselect.all": "Desselecionar todos",
+
 	"dialog.fields.empty": "Esta caixa de diálogo não tem campos",
 	"dialog.files.empty": "Sem ficheiros para selecionar",
 	"dialog.pages.empty": "Sem páginas para selecionar",
@@ -52,7 +56,7 @@
 	"dimensions": "Dimensões",
 	"disable": "Desativar",
 	"disabled": "Desativado",
-	"discard": "Descartar",
+	"discard": "Reverter",
 
 	"drawer.fields.empty": "Esta janela não tem campos",
 
@@ -200,6 +204,8 @@
 	"error.page.undefined": "Não foi possível encontrar a página",
 	"error.page.update.permission": "Não tem permissões para atualizar \"{slug}\"",
 
+	"error.role.notFound": "A função \"{name}\" não foi encontrada",
+
 	"error.section.files.max.plural": "Não pode adicionar mais do que {max} ficheiros à secção \"{section}\"",
 	"error.section.files.max.singular": "Não pode adicionar mais do que um ficheiro à secção \"{section}\"",
 	"error.section.files.min.plural": "A secção \"{section}\" requer no mínimo {min} ficheiros",
@@ -215,6 +221,7 @@
 
 	"error.site.changeTitle.empty": "O título não pode ficar em branco",
 	"error.site.changeTitle.permission": "Não tem permissões para alterar o título do site",
+	"error.site.notAccessible": "O site não está acessível",
 	"error.site.update.permission": "Não tem permissões para atualizar o site",
 
 	"error.structure.validation": "Existe um erro no campo \"{field}\" na linha {index}",
@@ -293,6 +300,10 @@
 	"error.validation.time.between": "Por favor, insira uma hora entre {min} e {max}",
 	"error.validation.uuid": "Por favor, insira um UUID válido",
 	"error.validation.url": "Por favor, insira um URL válido",
+
+	"error.version.discard.permission": "Não tem permissão para reverter esta versão",
+	"error.version.publish.permission": "Não tem permissão para publicar esta versão",
+	"error.version.save.permission": "Não tem permissão para alterar esta versão",
 
 	"expand": "Expandir",
 	"expand.all": "Expandir todos",
@@ -376,6 +387,7 @@
 
 	"field.structure.delete.confirm": "Tem a certeza que pretende eliminar esta linha?",
 	"field.structure.delete.confirm.all": "Tem a certeza que pretende eliminar todas as entradas?",
+	"field.structure.delete.confirm.selected": "Tem a certeza que pretende eliminar todas as entradas selecionadas?",
 	"field.structure.empty": "Nenhuma entrada ainda",
 
 	"field.users.empty": "Nenhum utilizador selecionado ainda",
@@ -449,7 +461,12 @@
 	"language.variables.empty": "Nenhuma tradução ainda",
 
 	"language.variable.delete.confirm": "Tem a certeza que pretende eliminar a variável {key}?",
+	"language.variable.entries": "Valores",
+	"language.variable.entries.help": "Cada string será utilizada pela ordem correspondente à contagem. Isto é, três strings serão utilizadas, respetivamente, para as contagens <code>0</code>, <code>1</code> e <code>2 ou mais</code>. Utilize o marcador <code>{count}</code> para inserir o valor real da contagem.",
 	"language.variable.key": "Chave",
+	"language.variable.multiple": "Contável?",
+	"language.variable.multiple.text": "Utilize strings de tradução diferentes",
+	"language.variable.multiple.help": "É possível utilizar valores diferentes consoante a contagem associada à variável de idioma, permitindo assim a criação de traduções dinâmicas. Isto é, para formas singulares e plurais.",
 	"language.variable.notFound": "Não foi possível encontrar a variável",
 	"language.variable.value": "Valor",
 
@@ -469,6 +486,7 @@
 	"license.code": "Código",
 	"license.code.help": "Recebeu o seu código de licença por email após a compra. Por favor, copie e cole aqui.",
 	"license.code.label": "Por favor, insira o código da sua licença",
+	"license.remove.text": "<p>A remoção da licença deste site faz com que o ficheiro da licença seja eliminado irreversivelmente. Após a remoção, poderá então ativar este site com uma chave de licença diferente ou voltar a registar a mesma chave de licença desde que o domínio permaneça o mesmo.</p><p>Para alterar o domínio associado à licença, contacte a equipa do Kirby. <a href='https://getkirby.com/license'>Ler mais &rarr;</a></p>",
 	"license.status.active.info": "Inclui novas versões principais até {date}",
 	"license.status.active.label": "Licença válida",
 	"license.status.demo.info": "Esta é uma instalação de demonstração",
@@ -620,7 +638,9 @@
 	"plugin": "Plugin",
 	"plugins": "Plugins",
 	"prev": "Anterior",
+
 	"preview": "Pré-visualizar",
+	"preview.browser.scroll": "Sincronizar scroll",
 
 	"publish": "Publicar",
 	"published": "Publicadas",
@@ -656,6 +676,7 @@
 
 	"security": "Segurança",
 	"select": "Selecionar",
+	"select.all": "Selecionar todos",
 	"server": "Servidor",
 	"settings": "Configurações",
 	"show": "Mostrar",
@@ -764,11 +785,13 @@
 	"user.changePassword.current": "A sua palavra-passe atual",
 	"user.changePassword.new": "Nova palavra-passe",
 	"user.changePassword.new.confirm": "Confirme a nova palavra-passe…",
+	"user.changePassword.own": "A sua password",
 	"user.changeRole": "Alterar função",
 	"user.changeRole.select": "Selecione uma nova função",
 	"user.create": "Adicionar um novo utilizador",
 	"user.delete": "Eliminar este utilizador",
 	"user.delete.confirm": "Tem a certeza que pretende eliminar <br><strong>{email}</strong>?",
+	"user.setPassword": "Definir palavra-passe",
 
 	"users": "Utilizadores",
 

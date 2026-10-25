@@ -32,7 +32,7 @@ Text:
 |---- | ---- |
 | `/content` | The (link: #content text: content) of your website. |
 | `/site` | Think of this folder as your project folder. It contains your (glossary: template text: templates), configuration, plugins and setup files ((glossary: blueprint text: blueprints)) for the (glossary: Panel). |
-| `/kirby` | The Kirby app. Great for studying the source code, but in general you should leave this folder untouched (apart from (link: docs/guide/installation#updates text: updating) it when a new version is released). |
+| `/kirby` | The Kirby app. Great for studying the source code, but in general you should leave this folder untouched (apart from (link: docs/guide/install-guide#updates text: updating) it when a new version is released). |
 | `/media` | This folder is managed by Kirby and holds public images and thumbnails as well as plugin and (glossary: Panel) assets. Let Kirby do its work and leave this folder as it is. The media folder and the files in it are auto-generated.|
 
 Our (glossary: Starterkit) has an additional `/assets` folder, we use it to store CSS files. This is just a convention we use. It's not required by Kirby.
@@ -113,7 +113,7 @@ A typical Kirby template looks like this:
 
 Kirby's web interface is called the (glossary: Panel). You can find it at `yourdomain.com/panel`.
 
-(image: starterkit.png)
+(image: starterkit.webp)
 
 While you can manage your site 100% in the file system, the Panel makes it a lot more comfortable to add new pages, edit content or upload files. In the background it will do all the hard work of creating folders and files for you.
 
@@ -121,7 +121,7 @@ While you can manage your site 100% in the file system, the Panel makes it a lot
 
 The Panel is very versatile and can be customized to fit every project. To set up the Panel, you will use Kirby's so called (glossary: blueprint text: blueprints) to configure layouts, form fields, permissions and more.
 
-(image: tabs.png)
+(image: tabs.webp)
 
 (link: docs/guide/blueprints text: Learn more ›)
 
@@ -131,7 +131,7 @@ Now that we have explored the parts, you might wonder how it all fits together. 
 
 These files are in fact tied together by their filenames. The content in `about.txt` is rendered with the `about.php` template. And if you visit the `about` page in the Panel, the `about.yml` blueprint takes care of displaying the form fields for the fields in the text file.
 
-(image: from-blueprint-to-frontend.png)
+(image: from-blueprint-to-frontend.webp)
 
 ## The `media` folder
 
