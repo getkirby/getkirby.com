@@ -20,13 +20,17 @@ function img($file, array $props = [])
         return;
     }
 
-    if (empty($props['src']) === true) {
+    // ImageMagick bloats animated images when resizing them,
+    // so they are always shown in their original size
+    $animated = str_contains(file_get_contents($file->root(), false, null, 0, 64), 'ANIM');
+
+    if (empty($props['src']) === true || $animated === true) {
         $src = $file->url();
     } else {
         $src = $file->thumb($props['src'])->url();
     }
 
-    if (empty($props['srcset']) === true) {
+    if (empty($props['srcset']) === true || $animated === true) {
         $srcset = null;
     } else {
         $srcset = $file->srcset($props['srcset']);
@@ -47,7 +51,7 @@ function img($file, array $props = [])
     ]) . '>';
 
     if (empty($props['lightbox']) === false && $props['lightbox'] !== false) {
-        return Html::a($file->resize(1800, 1800)->url(), [$img], [
+        return Html::a($animated ? $file->url() : $file->resize(1800, 1800)->url(), [$img], [
             'class'         => 'block',
             'style'         => '--aspect-ratio: ' . $file->width() . '/' . $file->height(),
             'data-lightbox' => $props['lightbox']
