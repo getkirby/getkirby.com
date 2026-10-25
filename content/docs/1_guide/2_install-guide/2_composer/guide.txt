@@ -24,7 +24,7 @@ Text:
 
 ## About this tutorial
 
-This guide describes one of several ways you can install and update Kirby. See (link: docs/guide/installation text: the overview page) for all supported ways.
+This guide describes one of several ways you can install and update Kirby. See (link: docs/guide/install-guide text: the overview page) for all supported ways.
 
 ## Installing Composer
 

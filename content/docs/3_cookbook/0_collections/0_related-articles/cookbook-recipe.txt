@@ -19,7 +19,7 @@ Tags: collections, relations
 
 Text:
 
-With **(glossary: yaml text: YAML) content** and the **pages field** you can easily link information on your site with other sources in Kirby. All examples below are based on the (link: docs/guide/installation#installation text: Starterkit).
+With **(glossary: yaml text: YAML) content** and the **pages field** you can easily link information on your site with other sources in Kirby. All examples below are based on the (link: docs/guide/install-guide#installation text: Starterkit).
 
 ## In your content files
 
