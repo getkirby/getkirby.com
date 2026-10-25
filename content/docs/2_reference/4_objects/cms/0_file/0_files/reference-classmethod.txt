@@ -1,7 +1,7 @@
 Examples:
 
 ```php
-if ($file = $page->files()->first()) {
-    echo 'The first file in the collection is: ' . $file->title();
+if ($first = $file->files()->first()) {
+    echo 'The first file in the collection is: ' . $first->title();
 }
 ```
