@@ -44,3 +44,4 @@ $numberOfLanguage = $languages->count();
 
 ```php
 $sortedLanguages = $languages->sortBy('name', 'desc');
+```
