@@ -104,7 +104,7 @@ fields:
     text: "{{ !page.isListed ? 'Not visible on your site yet' : 'Live on your site' }}"
 ```
 
-More examples: `!user.isAdmin ? "guest" : "admin"`, `-page.price` or `-(1 + 2)`.
+More examples: `!user.isAdmin ? "guest" : "admin"`, `-page.price` or `-(1 + 2)`. Read more about all operators in the (link: docs/guide/blueprints/query-language#advanced-query-syntax__operators text: query language guide).
 
 ## Date formats with text
 
