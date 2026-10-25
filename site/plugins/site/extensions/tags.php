@@ -136,7 +136,7 @@ $tags['properties'] = [
 			$page = $tag->parent();
 		}
 
-		$rows = $tag->attr('rows') ?? $page->properties();
+		$rows = $tag->attr('rows') ?? ($page ? $page->properties() : []);
 
 		if ($additional = $tag->attr('additional')) {
 			$rows = [...$rows, ...$additional];
