@@ -221,7 +221,7 @@ content/
 
 We can create those examples in our text files like this:
 
-```
+````
 ```filesystem
 content/
   projects/
@@ -233,6 +233,7 @@ content/
       styles.css
       data.json
 ```
+````
 
 The code detects folders and files automatically and adds icons that match the file type. I’m seriously in love with Fabian’s work here.
 

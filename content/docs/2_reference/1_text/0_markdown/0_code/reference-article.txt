@@ -4,9 +4,10 @@ Title: Code blocks
 
 Text:
 
-```
+````markdown
 ```php
 <?php
 // awesome code example
 ?>
 ```
+````
