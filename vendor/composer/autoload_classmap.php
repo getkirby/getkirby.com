@@ -578,6 +578,7 @@ return array(
     'Kirby\\Panel\\Ui\\Item' => $baseDir . '/kirby/src/Panel/Ui/Item.php',
     'Kirby\\Panel\\Ui\\Item\\FileItem' => $baseDir . '/kirby/src/Panel/Ui/Item/FileItem.php',
     'Kirby\\Panel\\Ui\\Item\\LanguageItem' => $baseDir . '/kirby/src/Panel/Ui/Item/LanguageItem.php',
+    'Kirby\\Panel\\Ui\\Item\\MissingItem' => $baseDir . '/kirby/src/Panel/Ui/Item/MissingItem.php',
     'Kirby\\Panel\\Ui\\Item\\ModelItem' => $baseDir . '/kirby/src/Panel/Ui/Item/ModelItem.php',
     'Kirby\\Panel\\Ui\\Item\\PageItem' => $baseDir . '/kirby/src/Panel/Ui/Item/PageItem.php',
     'Kirby\\Panel\\Ui\\Item\\ProtectedItem' => $baseDir . '/kirby/src/Panel/Ui/Item/ProtectedItem.php',

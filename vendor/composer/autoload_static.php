@@ -718,6 +718,7 @@ class ComposerStaticInitc92e513b8e95795a9698b0479cd8a68e
         'Kirby\\Panel\\Ui\\Item' => __DIR__ . '/../..' . '/kirby/src/Panel/Ui/Item.php',
         'Kirby\\Panel\\Ui\\Item\\FileItem' => __DIR__ . '/../..' . '/kirby/src/Panel/Ui/Item/FileItem.php',
         'Kirby\\Panel\\Ui\\Item\\LanguageItem' => __DIR__ . '/../..' . '/kirby/src/Panel/Ui/Item/LanguageItem.php',
+        'Kirby\\Panel\\Ui\\Item\\MissingItem' => __DIR__ . '/../..' . '/kirby/src/Panel/Ui/Item/MissingItem.php',
         'Kirby\\Panel\\Ui\\Item\\ModelItem' => __DIR__ . '/../..' . '/kirby/src/Panel/Ui/Item/ModelItem.php',
         'Kirby\\Panel\\Ui\\Item\\PageItem' => __DIR__ . '/../..' . '/kirby/src/Panel/Ui/Item/PageItem.php',
         'Kirby\\Panel\\Ui\\Item\\ProtectedItem' => __DIR__ . '/../..' . '/kirby/src/Panel/Ui/Item/ProtectedItem.php',
