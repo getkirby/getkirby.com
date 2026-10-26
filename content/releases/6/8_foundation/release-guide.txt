@@ -65,7 +65,7 @@ Text:
 Kirby 6 supports PHP 8.3, 8.4 and 8.5. We have dropped support for PHP 8.2, which only receives security fixes until the end of 2026.
 
 <info>
-Support for PHP 8.6 is coming. It isn't part of beta.1 yet.
+Support for PHP 8.6 is coming. It isn't part of beta.2 yet.
 </info>
 
 A newer PHP baseline lets us use the language features of the last releases throughout the code base.  When you install Kirby 6, it checks that all required PHP extensions are available and stops the installation if one is missing. The system view in the Panel warns you if a required extension goes missing later.
@@ -100,7 +100,7 @@ The Panel is a Vue application. Kirby 5 was built on Vue 2, which reached its en
 
 Under the hood, we have migrated `this.$panel`, all its modules, our libraries and helpers to TypeScript: dialogs, drawers, dropdowns, notifications, requests, uploads, the content module and more.
 
-TypeScript catches many mistakes before they reach a release and makes the code more robust, safer to change and often easier to understand. Nothing changes in how you use these APIs, and Kirby's source now documents the exact signature of every method of `this.$panel`. In beta.1, the types are not published as a separate npm package yet, but we plan to release them for plugin developers as well.
+TypeScript catches many mistakes before they reach a release and makes the code more robust, safer to change and often easier to understand. Nothing changes in how you use these APIs, and Kirby's source now documents the exact signature of every method of `this.$panel`. In beta.2, the types are not published as a separate npm package yet, but we plan to release them for plugin developers as well.
 
 ## Trusted HTML
 

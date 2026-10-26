@@ -57,6 +57,8 @@ Each type of route in an area accepts these keys:
 | `searches` | `label`, `icon` | `query` | `query` closure or `action`: closure or controller class |
 | `requests` | `pattern`, `method`, `auth` | `action` | `action`: closure or controller class |
 
+Request routes accept `GET` and `POST` requests by default. All routes but views check the CSRF token, which `panel.get()`, `panel.post()` and `panel.request()` send automatically.
+
 ### Closures keep working
 
 An area like this one from Kirby 5 runs in Kirby 6 without changes:
@@ -211,7 +213,7 @@ return new RemoveDialog(
 `::submit()` returns the same results as the `submit` closures in Kirby 5:
 
 - `true` closes the dialog or drawer.
-- An array can trigger an event (`'event' => 'todo.update'`) and/or redirect to another Panel URL (`'redirect' => 'todos'`).
+- An array can trigger an event (`'event' => 'todo.update'`) and/or redirect to another Panel URL (`'redirect' => 'todos'`). New in Kirby 6: `'reload' => false` skips the reload of the current view.
 - An exception shows an error. To redirect from anywhere, call `Panel::go('todos')`.
 
 ## Complete example: a Panel area in Kirby 5 and 6

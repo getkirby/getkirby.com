@@ -22,7 +22,7 @@ Find your plugin type below and follow the links. Most plugins combine several t
 - **Block plugins:** Rebuild your preview components for Vue 3. Check your (link: #blueprints-shipped-with-your-plugin text: block blueprints) for presets and sections. The `image`, `gallery` and `video` block previews receive the file UUID now instead of the full file data.
 - **KirbyTag, hook, method and route plugins** (PHP only): Usually the quickest to migrate. Check (link: #php-8-3-and-stricter-types text: PHP 8.3), (link: #field-methods text: field methods) and (link: #exceptions text: exceptions). These plugins can often support Kirby 5 and 6 from one codebase.
 - **Auth plugins** (custom challenges, custom login UI): Custom challenges must be rewritten based on `Kirby\Auth\Challenge`, the `login` Panel extension is gone. See (link: #auth-plugins text: Auth plugins) and (link: releases/6/migration/plugin-developers/auth text: Custom auth methods & challenges).
-- **Plugins that extend or call core classes** (page models, custom collections, `Form`, `Blueprint`, Panel classes): Check the (link: #moved-and-renamed-classes text: moved classes), (link: #php-8-3-and-stricter-types text: typed class constants), (link: #permissions-become-guards text: guards) and (link: #panel-backend text: Panel backend).
+- **Plugins that extend or call core classes** (page models, custom collections, `Form`, `Blueprint`, Panel classes): Check the (link: #moved-and-renamed-classes text: moved classes), (link: #php-8-3-and-stricter-types text: typed class constants), (link: releases/6/migration/site-developers#custom-code-using-core-classes__collections text: removed collection methods), (link: #permissions-become-guards text: guards) and (link: #panel-backend text: Panel backend).
 
 ## First example migrations
 
@@ -46,7 +46,7 @@ The bigger topics have their own guides:
 - (link: releases/6/migration/plugin-developers/panel-backend text: Panel backend: areas, controllers & UI classes): controller classes and UI objects for views, dialogs, drawers and more, with a complete Panel area in its Kirby 5 and Kirby 6 version
 
 <info>
-Some of the new APIs, especially the Panel controller classes, are still marked as `@unstable` in beta.1 and may change until the final release.
+Some of the new APIs, especially the Panel controller classes, are still marked as `@unstable` in beta.2 and may change until the final release.
 </info>
 
 ## Declaring Kirby 6 support
@@ -72,7 +72,7 @@ Declare the Kirby versions your plugin supports in `extra.kirby.compatible`.  Ou
 }
 ```
 
-If one version of your plugin supports both majors, use `"^5.0 || ^6.0"` and keep your PHP constraint wide enough for Kirby 5 (PHP 8.2). A constraint like `^6.0` also matches pre-releases such as `6.0.0-beta.1`.
+If one version of your plugin supports both majors, use `"^5.0 || ^6.0"` and keep your PHP constraint wide enough for Kirby 5 (PHP 8.2). A constraint like `^6.0` also matches pre-releases such as `6.0.0-beta.2`.
 
 All details are in our guide on (link: docs/guide/plugins/publishing#kirby-versions-support text: declaring which Kirby versions you support).
 
@@ -107,9 +107,9 @@ When you extend core classes, compare your property and method signatures with t
 
 ## Moved and renamed classes
 
-Several classes have moved into new namespaces. Some old names still resolve through a deprecated class alias in beta.1, others are gone:
+Several classes have moved into new namespaces. Some old names still resolve through a deprecated class alias in beta.2, others are gone:
 
-| Kirby 5 | Kirby 6 | Old name in beta.1 |
+| Kirby 5 | Kirby 6 | Old name in beta.2 |
 | - | - | - |
 | `Kirby\Cms\Blueprint`, `Kirby\Cms\PageBlueprint`, `Kirby\Cms\SiteBlueprint`, `Kirby\Cms\FileBlueprint`, `Kirby\Cms\UserBlueprint` | `Kirby\Blueprint\Blueprint`, `Kirby\Blueprint\PageBlueprint` … | deprecated alias |
 | `Kirby\Cms\Auth` | `Kirby\Auth\Auth` | deprecated alias |
@@ -201,7 +201,7 @@ Also see (link: releases/6/changelog#breaking-changes__core__changed-exceptions 
 
 ## Permissions become guards
 
-Kirby 6 introduces (link: releases/6/guards text: guards): one place that answers whether an action is possible, allowed for the current user and valid for the given input. `$model->permissions()`, the permission classes behind it and the `*Rules` classes are deprecated, but keep working in beta.1:
+Kirby 6 introduces (link: releases/6/guards text: guards): one place that answers whether an action is possible, allowed for the current user and valid for the given input. `$model->permissions()`, the permission classes behind it and the `*Rules` classes are deprecated, but keep working in beta.2:
 
 ```php
 // Kirby 5 (deprecated in Kirby 6)
@@ -322,6 +322,7 @@ The Panel runs on Vue 3. Every plugin with an `index.js` must be checked, and ev
 - **Vue 2 habits:** `$listeners`, `this.$set()`, `v-model` with `value`/`input` on Kirby components and Vue plugins registered via `use` (which receive the app instead of the Vue constructor) need small changes. See (link: releases/6/migration/plugin-developers/vue-3#vue-2-vue-3-in-kirby-plugins text: Vue 2 → Vue 3 in Kirby plugins).
 - **Renamed and removed components and helpers:** The full list: (link: releases/6/migration/plugin-developers/vue-3#other-breaking-changes-in-the-panel-frontend text: other breaking changes in the Panel frontend).
 - **Trusted HTML:** `<k-item>`, `<k-text>`, `<k-box>`, `<k-tag>`, `<k-tags>` and the `text` of dialogs and drawers escape plain strings now. Mark your HTML as trusted with `$h()` in Vue, or with `Kirby\Toolkit\HtmlString`, `HtmlString::translate()` or `$model->toSafeHtmlString()` in PHP. See (link: releases/6/migration/plugin-developers/trusted-html#my-plugin-shows-html-as-text-how-do-i-fix-it text: My plugin shows HTML as text).
+- **CSRF token:** Dialogs, drawers, dropdowns, searches and request routes check the CSRF token now. `panel.get()`, `panel.post()` and `panel.request()` send it for you. If you call these routes with your own `fetch()`, send the token in the `X-CSRF` header (`panel.system.csrf`).
 - **No more "Fiber":** `window.fiber` is now `window.panelState`, the `X-Fiber*` headers are `X-Panel`, `X-Panel-Globals` and `X-Panel-Referrer`, and state keys lose their `$` prefix:
 
 ```js
