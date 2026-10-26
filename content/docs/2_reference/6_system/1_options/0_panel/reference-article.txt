@@ -115,6 +115,21 @@ return [
   ]
 ];
 ```
+
+## Parallel uploads
+
+When you upload multiple files at once, the Panel sends a few of them to the server at the same time. You can set how many files are uploaded in parallel with the `panel.uploads` option (default: `3`):
+
+```php "/site/config/config.php"
+return [
+  'panel' => [
+    'uploads' => 5
+  ]
+];
+```
+
+Each parallel upload occupies a PHP worker on your server. If large batch uploads make the Panel or your site unresponsive, lower the number.
+
 ## Default Panel language
 
 You can set the default Panel language that is used before a user logs in or when the user does not have a valid language configured:

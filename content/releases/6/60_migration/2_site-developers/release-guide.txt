@@ -2,7 +2,7 @@ Title: For site developers
 
 ----
 
-Intro: Everything you need to move a Kirby 5 site to Kirby 6 beta.1: what breaks, how to spot it and what to change, with before and after code for every step.
+Intro: Everything you need to move a Kirby 5 site to Kirby 6 beta.2: what breaks, how to spot it and what to change, with before and after code for every step.
 
 ----
 
@@ -11,7 +11,7 @@ Text:
 ## Before you start
 
 <warning>
-Kirby 6 beta.1 is not ready for production. Make a backup and test the update on a copy of your site, including the `content` folder.
+Kirby 6 beta.2 is not ready for production. Make a backup and test the update on a copy of your site, including the `content` folder.
 </warning>
 
 This guide will navigate you through the main breaking changes that can affect a site, sorted by where you'll run into it: requirements, config, blueprints, templates, content, queries, users and permissions, the Panel and custom PHP code. At the end, you'll find (link: #how-to-perform-the-update text: how to perform the update) and a (link: #checklist text: checklist) to work through.
@@ -606,9 +606,13 @@ Most code uses `$kirby->session()`, which works like before. If you work with th
 | `$sessions->createManually()` | `$sessions->create(['mode' => 'manual'])` |
 | `$sessions->getManually($token)` | `$sessions->find($token)` |
 
+### Collections
+
+The deprecated collection methods `current()`, `next()`, `prev()`, `key()`, `rewind()` and `valid()` have been removed. Calls to them don't throw an error but return `null`, so search your code for them. Use `foreach`, `first()`, `last()` or `nth()` instead. `$page->next()`, `$page->prev()` and similar methods of a single page, file or user are not affected.
+
 ## How to perform the update
 
-Once your site code and plugins are ready, update Kirby itself. For beta.1, use the exact version `6.0.0-beta.1`, as described on the (link: releases/6/migration#install-beta-1 text: migration overview). Otherwise, our general update instructions apply:
+Once your site code and plugins are ready, update Kirby itself. For beta.2, use the exact version `6.0.0-beta.2`, as described on the (link: releases/6/migration#install-beta-2 text: migration overview). Otherwise, our general update instructions apply:
 
 - (link: docs/guide/install-guide/installation-via-download#updating-your-installation text: Update via download)
 - (link: docs/guide/install-guide/composer#updating-kirby text: Update via Composer)
@@ -653,6 +657,7 @@ Print this list or copy it into your project notes.
 - No `style` option in `video` KirbyTags
 - `$language->isLast()` checked
 - `Uuid::for()` only with objects
+- No `current()`, `next()`, `prev()`, `key()`, `rewind()` or `valid()` calls on collections
 - Exceptions thrown with named arguments
 - Custom validators don't use core names
 - Frontend login forms use `authenticate()` and `$status->state()`

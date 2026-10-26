@@ -69,7 +69,7 @@
 }
 @media screen and (min-width: 57rem) {
 	.team-members {
-		grid-template-columns: repeat(5, 1fr);
+		grid-template-columns: repeat(4, 1fr);
 	}
 }
 
@@ -89,15 +89,6 @@
 					<figcaption>
 						<p><strong>Bastian</strong> Allgeier</p>
 						<p><a href="mailto:bastian@getkirby.com">bastian@getkirby.com</a></p>
-					</figcaption>
-				</figure>
-			</li>
-			<li>
-				<figure>
-					<?= image('sonja.jpg')->crop(250, 350) ?>
-					<figcaption>
-						<p><strong>Sonja</strong> Broda</p>
-						<p><a href="mailto:sonja@getkirby.com">sonja@getkirby.com</a></p>
 					</figcaption>
 				</figure>
 			</li>
