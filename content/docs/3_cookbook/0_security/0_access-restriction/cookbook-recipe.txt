@@ -120,22 +120,23 @@ In the login template, create the login form and a container for the error messa
 <?php endif ?>
 
 <form method="post" action="<?= $page->url() ?>">
-  <div>
-    <label for="email"><?= $page->username()->html() ?></label>
-    <input type="email" id="email" name="email" value="<?= get('email') ? esc(get('email'), 'attr') : '' ?>">
-  </div>
-  <div>
-    <label for="password"><?= $page->password()->html() ?></label>
-    <input type="password" id="password" name="password" value="<?= get('password') ? esc(get('password'), 'attr') : '' ?>">
-  </div>
-  <div>
-    <input type="submit" name="login" value="<?= $page->button()->html() ?>">
-  </div>
+	<div>
+		<label for="email"><?= $page->username()->html() ?></label>
+		<input type="email" id="email" name="email" value="<?= esc(get('email', ''), 'attr') ?>">
+	</div>
+	<div>
+		<label for="password"><?= $page->password()->html() ?></label>
+		<input type="password" id="password" name="password">
+	</div>
+	<div>
+		<input type="submit" name="login" value="<?= $page->button()->html() ?>">
+	</div>
 </form>
 
 <?php snippet('footer') ?>
-
 ```
+
+If the login fails, the form keeps the email address, so that the user only has to enter the password again.
 
 ### The controller
 
@@ -145,33 +146,29 @@ To handle the form submission we create a login controller to keep the logic out
 <?php
 
 return function ($kirby) {
+	// don't show the login screen to already logged in users
+	if ($kirby->user()) {
+		go('/');
+	}
 
-  // don't show the login screen to already logged in users
-  if ($kirby->user()) {
-    go('/');
-  }
+	$error = false;
 
-  $error = false;
+	// handle the form submission
+	if ($kirby->request()->is('POST') === true && get('login')) {
+		// try to log the user in with the provided credentials
+		try {
+			$kirby->auth()->login(get('email'), get('password'));
 
-  // handle the form submission
-  if ($kirby->request()->is('POST') && get('login')) {
+			// redirect to the homepage if the login was successful
+			go('/');
+		} catch (Exception $e) {
+			$error = true;
+		}
+	}
 
-    // try to log the user in with the provided credentials
-    try {
-      $kirby->auth()->login(get('email'), get('password'));
-
-      // redirect to the homepage if the login was successful
-      go('/');
-    } catch (Exception $e) {
-      $error = true;
-    }
-
-  }
-
-  return [
-    'error' => $error
-  ];
-
+	return [
+		'error' => $error
+	];
 };
 ```
 
@@ -183,41 +180,39 @@ For the logout we don’t need a real page. A simple URL to send logged-in users
 
 ```php "/site/config/config.php"
 return [
-  'routes' => [
-    [
-      'pattern' => 'logout',
-      'action'  => function() {
+	'routes' => [
+		[
+			'pattern' => 'logout',
+			'action'  => function () {
+				if ($user = kirby()->user()) {
+					$user->logout();
+				}
 
-        if ($user = kirby()->user()) {
-          $user->logout();
-        }
-
-        go('login');
-
-      }
-    ]
-  ]
+				go('login');
+			}
+		]
+	]
 ];
 ```
 
-By adding the code above to your config file, Kirby will register a new route to `http://yoursite.com/logout`. When you open that URL, the action method is called and a logged-in user will be logged out. Afterwards the script will redirect the user to the login page.
+By adding the code above to your config file, Kirby will register a new route to `https://yoursite.com/logout`. When you open that URL, the action method is called and a logged-in user will be logged out. Afterwards the script will redirect the user to the login page.
 
 ### Adding a logout link to the menu
 
-As soon as the user logged in, we display a logout link in the menu or somewhere else on the page. Here is the menu from Kirby’s Starterkit with an additional `li` element that appears when the user has logged in.
+As soon as the user logged in, we display a logout link in the menu or somewhere else on the page. Here is the menu from Kirby’s Starterkit with an additional `li` element that appears when the user has logged in.
 
 ```php "/site/snippets/header.php"
 <nav id="menu" class="menu">
 	<ul>
-  <?php foreach ($site->children()->listed() as $item): ?>
-    <li><?= $item->title()->link() ?></li>
-  <?php endforeach ?>
-  <?php if ($user = $kirby->user()): ?>
-    <li>
-      <a href="<?= url('logout') ?>">Logout</a>
-    </li>
-  <?php endif ?>
-  </ul>
+		<?php foreach ($site->children()->listed() as $item): ?>
+		<li><?= $item->title()->link() ?></li>
+		<?php endforeach ?>
+		<?php if ($kirby->user()): ?>
+		<li>
+			<a href="<?= url('logout') ?>">Logout</a>
+		</li>
+		<?php endif ?>
+	</ul>
 </nav>
 ```
 
@@ -227,16 +222,16 @@ With the login and logout processes in place, we can finally protect our content
 
 ### Protecting entire pages
 
-You can protect entire pages from unauthenticated users by adding the following line at the top of a template:
+You can protect entire pages from unauthenticated users by adding the following line at the top of a template:
 
 ```php
-<?php if (!$kirby->user()) go('/') ?>
+<?php if ($kirby->user() === null) go('login') ?>
 
 // rest of the template
 
 ```
 
-This will redirect all unauthenticated visitors to the home page.
+This will redirect all unauthenticated visitors to the login page.
 
 Instead of adding this code to each template, you can also put your logic into a (link: docs/guide/routing text: route), for example, when restricting access by other criteria than the template.
 
@@ -264,15 +259,17 @@ Top Secret: the meaning of life is…
 The above examples don’t differentiate by user role but grant access to these pages to all logged-in users. If you have multiple front-end user roles and want to restrict access to certain pages or parts of pages to particular roles, you can ask for the current user’s role like this:
 
 ```php
-<?php if (($user = $kirby->user()) && $user->role()->id() === 'client'): ?>
+<?php if ($kirby->user()?->role()->id() === 'client'): ?>
 This part of the page is only visible for
 clients with the role clients
 <?php endif ?>
 ```
 
 ## Remarks
-Note that this recipe only provides a basic example to give you an idea how to handle access restrictions. You can extend this into a powerful user area, with user sign-on, password reset, etc.
+Note that this recipe only provides a basic example to give you an idea how to handle access restrictions. You can extend this into a powerful user area, with (link: docs/cookbook/forms/user-registration text: user sign-up), password reset, etc.
+
+The login form only covers users who log in with their email address and password. Users who have set up a second factor in the Panel, or all users if you require a second factor with the (link: docs/reference/system/options/auth#login-methods__two-step-or-two-factor-authentication text: `2fa` option), can't log in with it. For them, the form needs a second step to enter the code, see (link: docs/guide/authentication/frontend-login text: frontend login).
 
 <warning>
-The process described here doesn’t prevent access to your assets (images, video, documents etc., which will still be accessible to anyone who guesses the URL to these files). We will deal with this in a separate recipe.
+The process described here doesn’t prevent access to your assets (images, video, documents etc., which will still be accessible to anyone who guesses the URL to these files). Learn how to protect them in the (link: docs/cookbook/security/files-firewall text: files firewall) recipe.
 </warning>

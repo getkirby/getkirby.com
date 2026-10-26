@@ -2,7 +2,6 @@
 
 namespace Kirby\Reference\Types;
 
-use Exception;
 use Kirby\Reference\Reflectable\Doc;
 use Kirby\Reference\Reflectable\Reflectable;
 use Kirby\Reference\Reflectable\ReflectableClass;
@@ -10,10 +9,16 @@ use Kirby\Reference\Reflectable\ReflectableClassMethod;
 use Kirby\Reference\Reflectable\ReflectableFunction;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\Str;
+use PHPStan\PhpDocParser\Ast\Node;
+use PHPStan\PhpDocParser\Ast\NodeTraverser;
+use PHPStan\PhpDocParser\Ast\Type\ArrayShapeItemNode;
 use PHPStan\PhpDocParser\Ast\Type\GenericTypeNode;
-use PHPStan\PhpDocParser\Ast\Type\UnionTypeNode;
+use PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
+use PHPStan\PhpDocParser\Ast\Type\ObjectShapeItemNode;
+use PHPStan\PhpDocParser\Ast\Type\TypeNode;
 use ReflectionClass;
 use ReflectionFunctionAbstract;
+use ReflectionType;
 
 /**
  * Resolves all type templates/generics
@@ -22,6 +27,7 @@ use ReflectionFunctionAbstract;
 class Context
 {
 	public static array $cache = [];
+	public static array $files = [];
 
 	public array $types = [];
 
@@ -29,7 +35,7 @@ class Context
 		public ReflectionClass|null $class = null,
 		public ReflectionFunctionAbstract|null $function = null
 	) {
-		$key = $class?->getName() . $function?->getName();
+		$key = $class?->getName() . '::' . $function?->getName();
 
 		// use cached resolved types if available
 		if (isset(static::$cache[$key])) {
@@ -37,13 +43,17 @@ class Context
 			return;
 		}
 
-		// try resolving all types from parent classes/traits
-		if ($this->class) {
-			$this->resolveClass();
+		// start with the templates of the class and its
+		// parent classes/traits, which are resolved once per class
+		if ($this->class !== null) {
+			$this->types = match ($this->function) {
+				null    => $this->resolveClass(),
+				default => (new static($this->class))->types
+			};
 		}
 
 		// resolve method/function docblock if necessary
-		if ($this->function) {
+		if ($this->function !== null) {
 			$this->resolveFunction();
 		}
 
@@ -52,37 +62,50 @@ class Context
 	}
 
 	/**
-	 * Update type map from array of already resolved types
+	 * Binds the type arguments of a child class to the
+	 * templates of this class by their position, e.g.
+	 * `Kirby\Cms\Page` from `@extends Collection<Page>`
 	 */
-	protected function addPayload(array $payload): void
+	protected function bindArguments(array $arguments): void
 	{
-		foreach ($payload as $key => $type) {
-			if ($key = array_keys($this->types)[$key] ?? null) {
-				$this->types[$key] = $type;
+		$templates = array_keys($this->types);
+
+		foreach ($arguments as $position => $type) {
+			if ($template = $templates[$position] ?? null) {
+				$this->types[$template] = $type;
 			}
 		}
 	}
 
 	/**
-	 * Add all templates from the docblock to the type map
+	 * Declares the templates of a docblock, with their
+	 * bound as type until a more specific type is known,
+	 * e.g. `Kirby\Cms\Page` for `@template TValue of Page`
 	 */
-	protected function addTemplates(Doc $doc): void
+	protected function declareTemplates(Doc $doc, string|null $file): void
 	{
 		foreach ($doc->getTemplates() as $template) {
-			$this->types[$template->name] ??= $template->bound;
+			$bound = $template->bound;
+			$bound = $bound ? Types::print($this->resolveNode($bound, $file)) : null;
+
+			$this->types[$template->name] ??= $bound;
 		}
 	}
 
+	/**
+	 * Creates the context for a class, method or function;
+	 * other reflectables (e.g. properties) have no context
+	 */
 	public static function factory(
 		Reflectable $reflectable
-	): static {
+	): static|null {
 		if ($reflectable instanceof ReflectableClass) {
 			return new static(class: $reflectable->reflection);
 		}
 
 		if ($reflectable instanceof ReflectableClassMethod) {
 			return new static(
-				class:    new ReflectionClass($reflectable->class),
+				class: new ReflectionClass($reflectable->class),
 				function: $reflectable->reflection
 			);
 		}
@@ -91,7 +114,65 @@ class Context
 			return new static(function: $reflectable->reflection);
 		}
 
-		throw new Exception('Invalid reflectable for creating context');
+		return null;
+	}
+
+	/**
+	 * Returns the namespace and the class names imported
+	 * via `use` statements (keyed by their alias) of a file
+	 *
+	 * @return array{string, array<string, string>}
+	 */
+	protected static function file(string $file): array
+	{
+		if (isset(static::$files[$file]) === true) {
+			return static::$files[$file];
+		}
+
+		$code = file_get_contents($file);
+
+		preg_match('/^namespace\s+([\w\\\\]+)\s*;/m', $code, $namespace);
+
+		// only top-level imports start at the beginning of
+		// the line; trait `use` statements are indented
+		preg_match_all(
+			'/^use\s+([\w\\\\]+)(?:\s+as\s+(\w+))?\s*;/m',
+			$code,
+			$matches,
+			PREG_SET_ORDER
+		);
+
+		$imports = [];
+
+		foreach ($matches as $match) {
+			$name  = ltrim($match[1], '\\');
+			$parts = explode('\\', $name);
+			$alias = $match[2] ?? end($parts);
+
+			$imports[$alias] = $name;
+		}
+
+		return static::$files[$file] = [$namespace[1] ?? '', $imports];
+	}
+
+	/**
+	 * Infers the templates that are still unknown from the
+	 * native PHP type hint, if they make up the docblock type
+	 * (or one of its union members), e.g. `@param TValue $a`
+	 * with `int $a`
+	 */
+	protected function inferFromNative(
+		TypeNode $type,
+		ReflectionType|null $native
+	): void {
+		foreach (Types::flatten($type) as $node) {
+			if (
+				$node instanceof IdentifierTypeNode &&
+				array_key_exists($node->name, $this->types) === true
+			) {
+				$this->types[$node->name] ??= Types::from($native ?? 'mixed')->toString();
+			}
+		}
 	}
 
 	/**
@@ -99,31 +180,36 @@ class Context
 	 */
 	public function resolve(string $name): string
 	{
-		return $this->types[$name] ?? $name;
+		if (array_key_exists($name, $this->types) === true) {
+			return $this->types[$name] ?? 'mixed';
+		}
+
+		return $name;
 	}
 
 	/**
 	 * Iterate though parent classes and traits
 	 * using generics to build a complete template => type map
 	 */
-	public function resolveClass(array $payload = []): array
+	public function resolveClass(array $arguments = []): array
 	{
-		$doc = Doc::factory($this->class);
+		$doc  = Doc::factory($this->class);
+		$file = $this->class->getFileName() ?: null;
 
-		// add all types from the class'/trait's docblock
-		$this->addTemplates($doc);
+		// declare the templates of the class/trait
+		$this->declareTemplates($doc, $file);
 
-		// inject already resolved types
-		$this->addPayload($payload);
+		// bind the type arguments from the child class
+		$this->bindArguments($arguments);
 
 		// recursively resolve all parent classes
 		foreach ($doc->getExtendsTagValues() as $extends) {
-			$this->resolveParent($extends->type);
+			$this->resolveParent($extends->type, $file);
 		}
 
 		// recursively resolve all used traits
 		foreach ($doc->getUsesTagValues() as $use) {
-			$this->resolveParent($use->type);
+			$this->resolveParent($use->type, $file);
 		}
 
 		return $this->types;
@@ -135,76 +221,111 @@ class Context
 	 */
 	public function resolveFunction(): void
 	{
-		$doc = Doc::factory($this->function);
+		$doc  = Doc::factory($this->function);
+		$file = $this->function->getFileName() ?: null;
 
-		// collect all templates from the docblock
-		$this->addTemplates($doc);
+		// declare the templates of the function
+		$this->declareTemplates($doc, $file);
 
-		// loop though all docblock param tags to see
-		// if the templates are used here; if so,
-		// map the template to the native PHP type hint
-		// for the given parameter
 		$params = $this->function->getParameters();
 
 		foreach ($doc->getParamTagValues() as $tag) {
-			$types = $tag->type;
-			$types = trim($types, '()');
-			$types = Str::split($types, '|');
+			$param = A::find(
+				$params,
+				fn ($p) => $p->getName() === ltrim($tag->parameterName, '$')
+			);
 
-			foreach ($types as $name) {
-				if (array_key_exists($name, $this->types)) {
-					$native = A::find(
-						$params,
-						fn ($p) => $p->getName() === ltrim($tag->parameterName, '$')
-					);
-
-					$type = $native->getType() ?? 'mixed';
-					$this->types[$name] ??= Types::factory($type)->toString();
-				}
-			}
+			$this->inferFromNative($tag->type, $param?->getType());
 		}
 
-		// check the docblock return tag to see
-		// if the templates are used here; if so,
-		// map the template to the native return PHP type hint
-		if ($return = $doc->getReturnNode()?->type) {
-			$return = trim($return, '()');
-			$return = Str::split($return, '|');
-
-			foreach ($return as $name) {
-				if (array_key_exists($name, $this->types)) {
-					$type = $this->function->getReturnType() ?? 'mixed';
-					$this->types[$name] ??= Types::factory($type)->toString();
-				}
-			}
+		if ($return = $doc->getReturnNode()) {
+			$this->inferFromNative($return->type, $this->function->getReturnType());
 		}
+	}
+
+	/**
+	 * Resolves a class name from a docblock to its fully
+	 * qualified name, using the namespace and imports
+	 * of the file the docblock belongs to
+	 */
+	protected function resolveName(string $name, string|null $file): string
+	{
+		if (str_starts_with($name, '\\') === true) {
+			return ltrim($name, '\\');
+		}
+
+		// keep simple types (e.g. `string`) as they are
+		if ($file === null || Type::generic($name) !== null) {
+			return $name;
+		}
+
+		[$namespace, $imports] = static::file($file);
+
+		$first = Str::before($name, '\\') ?: $name;
+
+		if (isset($imports[$first]) === true) {
+			return $imports[$first] . substr($name, strlen($first));
+		}
+
+		// template names (e.g. `TValue`) and keywords aren't classes
+		$class = ltrim($namespace . '\\' . $name, '\\');
+
+		return Identifier::exists($class) === true ? $class : $name;
+	}
+
+	/**
+	 * Returns a copy of the type with all templates replaced
+	 * by their types and all class names resolved to their
+	 * fully qualified name, e.g. `list<TValue>` to
+	 * `list<Kirby\Cms\Page>`
+	 *
+	 * @param $file File of the docblock the type belongs to,
+	 *             defaults to the file of the function/class
+	 */
+	public function resolveNode(TypeNode $node, string|null $file = null): TypeNode
+	{
+		$file ??= $this->function?->getFileName() ?: $this->class?->getFileName() ?: null;
+
+		return ClosureVisitor::map($node, function (Node $node) use ($file) {
+			// only the value of a shape item is a type,
+			// not its key (e.g. `array{files: Files}`)
+			if (
+				$node instanceof ArrayShapeItemNode ||
+				$node instanceof ObjectShapeItemNode
+			) {
+				$node->valueType = $this->resolveNode($node->valueType, $file);
+				return NodeTraverser::DONT_TRAVERSE_CHILDREN;
+			}
+
+			if ($node instanceof IdentifierTypeNode === false) {
+				return null;
+			}
+
+			if (array_key_exists($node->name, $this->types) === true) {
+				return Doc::parseType($this->types[$node->name] ?? 'mixed');
+			}
+
+			$node->name = $this->resolveName($node->name, $file);
+			return null;
+		});
 	}
 
 	/**
 	 * Resolve a single parent class or trait
 	 * to extend the template => type map
 	 */
-	protected function resolveParent(GenericTypeNode $reference): void
-	{
-		$payload = A::map(
+	protected function resolveParent(
+		GenericTypeNode $reference,
+		string|null $file
+	): void {
+		$arguments = A::map(
 			$reference->genericTypes,
-			function ($type) {
-				if ($type instanceof UnionTypeNode) {
-					$type = $type->types;
-				}
-
-				$type = A::map(
-					A::wrap($type),
-					fn ($t) => $this->types[$t->name] ?? $t->name
-				);
-
-				return implode('|', $type);
-			}
+			fn (TypeNode $type) => Types::print($this->resolveNode($type, $file))
 		);
 
-		$reflection  = new ReflectionClass($reference->type->name);
+		$reflection  = new ReflectionClass($this->resolveName($reference->type->name, $file));
 		$context     = new Context(class: $reflection);
-		$types       = $context->resolveClass($payload);
+		$types       = $context->resolveClass($arguments);
 		$this->types = [...$this->types, ...$types];
 	}
 }

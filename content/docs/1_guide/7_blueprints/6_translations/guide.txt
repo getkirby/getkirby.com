@@ -2,7 +2,7 @@ Title: Translating blueprints
 
 ----
 
-Intro: If you have editors from various language backgrounds, you can translate titles, form fields, section labels and more.
+Intro: If you have editors from various language backgrounds, you can translate titles, form fields, field labels and more.
 
 ----
 
@@ -22,14 +22,14 @@ title:
   de: Beispiel Seite
 ```
 
-## Section labels
+## Field labels
 
 The same applies to labels...
 
 ```yaml
-sections:
+fields:
   subpages:
-    type: pages
+    type: pagelist
     label:
       en: Articles
       de: Artikel

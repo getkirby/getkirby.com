@@ -10,10 +10,6 @@ Text:
 
 (image: color.png)
 
-## Field properties
-
-(field-options: color)
-
 ## Usage
 
 ```yaml
@@ -185,3 +181,4 @@ By default, the API type expects that the JSON endpoint returns an option array 
 }
 ```
 
+(docs: panel-field-update field: color)

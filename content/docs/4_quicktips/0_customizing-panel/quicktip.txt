@@ -23,9 +23,9 @@ Once this is set up, we can target the elements we want to modify via their sele
 
 In this recipe, we will shift the focus a little, and look at how we can actually extend default Panel elements by adding a property to a blueprint and the styling this element.
 
-## Info sections/fields
+## Info fields
 
-By default, the `info` field and the `info` section have 4 themes: `info`, `positive`, `negative` and no theme.
+By default, the `info` field has 4 themes: `info`, `positive`, `negative` and no theme.
 
 But since Kirby adds the property value we pass to the `theme` property into the `data-theme` attribute of the element, we can use this behavior to create any theme we need.
 
@@ -59,16 +59,16 @@ We can now style this field in our custom styleheet:
 }
 ```
 
-## Custom field/section image backgrounds
+## Custom field image backgrounds
 
 The available backgrounds for image cards in the Panel, defined via the `back` option, are: `pattern`, `black` and `white`.
 
 Again, we can leverage the fact that Kirby adds the value we pass to the `back` option to the `data-back` attribute:
 
 ```yaml
-sections:
+fields:
   pages:
-    type: pages
+    type: pagelist
     layout: cards
     image:
       query: page.images.findBy("name", "cover")

@@ -21,27 +21,27 @@ options:
   changeStatus: false
   delete: false
 
-sections:
+fields:
   drafts:
-    extends: sections/events
+    extends: fields/events
     label: Unpublished events
     status: draft
 
   unlisted:
-    extends: sections/events
+    extends: fields/events
     label: Unlisted events
     status: unlisted
 
   listed:
-    extends: sections/events
+    extends: fields/events
     label: Published events
     status: listed
 ```
 
-### Predefined section for reusage
+### Predefined field for reusage
 
-```yaml "/site/blueprints/sections/events.yml"
-type: pages
+```yaml "/site/blueprints/fields/events.yml"
+type: pagelist
 label: Events
 parent: site.find("events")
 sortBy: from desc
@@ -92,9 +92,9 @@ columns:
         type: textarea
   sidebar:
     width: 1/3
-    sections:
+    fields:
       files:
-        type: files
+        type: filelist
 ```
 
 ### Result

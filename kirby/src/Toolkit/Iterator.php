@@ -8,13 +8,10 @@ use Iterator as PhpIterator;
 use IteratorAggregate;
 
 /**
- * Extended version of PHP's iterator
- * class that builds the foundation of our
- * Collection class.
+ * Iterable and countable wrapper around
+ * a data array that builds the foundation
+ * of our Collection class.
  *
- * @package   Kirby Toolkit
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  *
@@ -36,21 +33,11 @@ class Iterator implements Countable, IteratorAggregate
 
 	/**
 	 * Returns an iterator for the elements
-	 * @return \ArrayIterator<TKey, TValue>
+	 * @return PhpIterator<TKey, TValue>
 	 */
 	public function getIterator(): PhpIterator
 	{
 		return new ArrayIterator($this->data);
-	}
-
-	/**
-	 * Returns the current key
-	 * @deprecated
-	 * @todo Remove in v6
-	 */
-	public function key(): int|string|null
-	{
-		return key($this->data);
 	}
 
 	/**
@@ -59,61 +46,6 @@ class Iterator implements Countable, IteratorAggregate
 	public function keys(): array
 	{
 		return array_keys($this->data);
-	}
-
-	/**
-	 * Returns the current element
-	 * @deprecated
-	 * @todo Remove in v6
-	 * @return TValue
-	 */
-	public function current(): mixed
-	{
-		return current($this->data);
-	}
-
-	/**
-	 * Moves the cursor to the previous element
-	 * and returns it
-	 * @deprecated
-	 * @todo Remove in v6
-	 * @return TValue
-	 */
-	public function prev(): mixed
-	{
-		return prev($this->data);
-	}
-
-	/**
-	 * Moves the cursor to the next element
-	 * and returns it
-	 * @deprecated
-	 * @todo Remove in v6
-	 * @return TValue
-	 */
-	public function next(): mixed
-	{
-		return next($this->data);
-	}
-
-	/**
-	 * Moves the cursor to the first element
-	 * @deprecated
-	 * @todo Remove in v6
-	 */
-	public function rewind(): void
-	{
-		reset($this->data);
-	}
-
-	/**
-	 * Checks if the current element is valid
-	 * @deprecated
-	 * @todo Remove in v6
-	 */
-	public function valid(): bool
-	{
-		return $this->current() !== false;
 	}
 
 	/**

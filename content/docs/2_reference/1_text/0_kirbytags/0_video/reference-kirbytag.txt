@@ -21,7 +21,6 @@ Text:
 | playsinline | Mobile browsers, will play the video right where it is instead of opening it in fullscreen | `false` |
 | poster | The poster attribute specifies an image to be shown while the video is downloading (only for local and remote videos) | `true` |
 | preload | The option that the video should be loaded when the page loads (only for local and remote videos) | `null` |
-| style | The style that is added to iframe and video elements | `null` |
 | width | The width that is added to iframe and video elements | `null` |
 
 <info>The `autoplay`, `controls`, `loop`, `muted`, `poster`, `preload` attributes are *not* supported by video providers such as YouTube and Vimeo.</info>

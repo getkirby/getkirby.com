@@ -35,8 +35,4 @@ fields:
     type: textarea
 ```
 
-## Field properties
-
-(field-options: headline)
-
 

@@ -168,23 +168,26 @@ And in a plugin, define the method
 ```php "/site/plugins/custom-methods/index.php"
 <?php
 
-Kirby::plugin('getkirby/custom-methods', [
-  'siteMethods' => [
-    'time' => function() {
-      return time();
-    }
+Kirby::plugin(
+  name: 'getkirby/custom-methods',
+  extends: [
+    'siteMethods' => [
+      'time' => function() {
+        return time();
+      }
+    ]
   ]
-]);
+);
 
 ```
 If title and slug are generated automatically, and no custom fields are defined for the page creation dialog, the dialog will be skipped and the page is created immediately.
 
 ### Supported field types
 
-Currently, the list of supported field types in the dialog is limited to checkboxes, date, email, info, line, link, list, number, multiselect, radio, range, select, slug, tags, tel, text, toggles, time, url. Custom field types are disabled by default. To enable them, add your field type name to:
+Currently, the list of supported field types in the dialog is limited to checkboxes, date, email, info, line, link, list, number, multiselect, radio, range, select, slug, tags, tel, text, toggle, toggles, time, url. Custom field types are disabled by default. To enable them, add your field type name to:
 
 ```php
-Kirby\Panel\PageCreateDialog::$fieldTypes[] = 'yourFieldType'
+Kirby\Panel\Controller\Dialog\PageCreateDialogController::$fieldTypes[] = 'yourFieldType'
 ```
 
 
@@ -232,7 +235,7 @@ icon: 📚
 
 ## `image` options
 
-The (preview) `image` blueprint option defines how any page with this blueprint will be presented, e.g. in a pages section:
+The (preview) `image` blueprint option defines how any page with this blueprint will be presented, e.g. in a `pagelist` field:
 
 ```yaml "site/blueprints/pages/note.yml"
 image: page.cover.toFile

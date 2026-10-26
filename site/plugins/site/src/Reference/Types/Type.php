@@ -30,7 +30,24 @@ class Type
 		'null'      => 'null',
 		'void'      => 'void',
 		'callable'  => 'callable',
-		'mixed'     => 'mixed'
+		'mixed'     => 'mixed',
+
+		// PHPStan pseudo types
+		'array-key'        => 'mixed',
+		'callable-string'  => 'string',
+		'class-string'     => 'string',
+		'list'             => 'array',
+		'negative-int'     => 'int',
+		'never'            => 'void',
+		'non-empty-array'  => 'array',
+		'non-empty-list'   => 'array',
+		'non-empty-string' => 'string',
+		'non-negative-int' => 'int',
+		'non-positive-int' => 'int',
+		'numeric'          => 'number',
+		'numeric-string'   => 'string',
+		'positive-int'     => 'int',
+		'scalar'           => 'mixed',
 	];
 
 	public function __construct(
@@ -53,18 +70,30 @@ class Type
 			return new Chain($type);
 		}
 
-		// identifier types (class names, interfaces, traits)
-		if (in_array($type, ['self', 'static', '$this']) === true) {
-			if ($reflectable instanceof ReflectableClass) {
-				$alias = $type;
-				$type  = $reflectable->name(short: false);
-			} elseif ($reflectable instanceof ReflectableClassMethod) {
-				$alias = $type;
-				$type  = $reflectable->class;
+		// the class that `self` and `static` refer to
+		$class = match (true) {
+			$reflectable instanceof ReflectableClass       => $reflectable->name(short: false),
+			$reflectable instanceof ReflectableClassMethod => $reflectable->class,
+			default                                        => null
+		};
+
+		// types composed of other types, e.g. `list<int>`,
+		// `array{a: int}`, `callable(int): bool` or `Page[]`
+		if (preg_match('/^[a-z_\\\\][\w\\\\-]*[<{(]|\[\]$/i', $type) === 1) {
+			if ($class !== null) {
+				$type = preg_replace('/(?<![\w\\\\$])(?:self|static)(?![\w\\\\-])/', $class, $type);
 			}
+
+			return new Compound($type);
 		}
 
-		return new Identifier($type, $alias ?? null);
+		// identifier types (class names, interfaces, traits),
+		// keeping `self`, `static` and `$this` as alias
+		if ($class !== null && in_array($type, ['self', 'static', '$this']) === true) {
+			return new Identifier($class, $type);
+		}
+
+		return new Identifier($type);
 	}
 
 	/**
@@ -105,16 +134,26 @@ class Type
 	}
 
 	/**
+	 * Returns the class name without its namespace,
+	 * e.g. `Page` for `Kirby\Cms\Page`
+	 */
+	protected static function shortName(string $name): string
+	{
+		return substr(strrchr('\\' . $name, '\\'), 1);
+	}
+
+	/**
 	 * Return the type as an HTML code tag
 	 */
 	public function toHtml(
 		string|null $text = null,
 		bool $linked = true
 	): string {
-		$text ??= $this->toString();
+		$text  ??= $this->toString();
+		$generic = static::generic($this->type);
 
 		return Html::tag('code', $text, [
-			'class' => 'type type-' . static::generic($this->type) ?? null
+			'class' => 'type' . ($generic !== null ? ' type-' . $generic : '')
 		]);
 	}
 
@@ -129,7 +168,7 @@ class Type
 	/**
 	 * Return the type as a string
 	 */
-	public function toString(): string
+	public function toString(bool $short = false): string
 	{
 		return $this->type;
 	}

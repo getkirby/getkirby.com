@@ -5,7 +5,6 @@ namespace Kirby\Reference\Reflectable;
 use Kirby\Reference\Reflectable\Tags\Since;
 use Kirby\Reference\Types\Identifier;
 use Kirby\Toolkit\Str;
-use ReflectionClass;
 use ReflectionMethod;
 use Reflector;
 
@@ -19,6 +18,12 @@ class ReflectableClassMethod extends ReflectableFunction
 	 */
 	public Reflector $reflection;
 
+	/**
+	 * Names of the alias methods per class,
+	 * keyed by the method they point to
+	 */
+	protected static array $aliases = [];
+
 	public function __construct(
 		public string $class,
 		public string $method,
@@ -28,17 +33,39 @@ class ReflectableClassMethod extends ReflectableFunction
 	}
 
 	/**
+	 * Returns the names of the methods that are aliases
+	 * for this method
+	 */
+	public function aliases(): array
+	{
+		if (isset(static::$aliases[$this->class]) === false) {
+			static::$aliases[$this->class] = [];
+			$class   = ReflectableClass::for($this->class)->reflection;
+			$methods = $class->getMethods(ReflectionMethod::IS_PUBLIC);
+
+			foreach ($methods as $method) {
+				$alias = new ReflectableClassMethod($this->class, $method->getName());
+
+				if (
+					$alias->isMagic() === false &&
+					($for = $alias->see()?->for()) !== null
+				) {
+					static::$aliases[$this->class][$for][] = $alias->method;
+				}
+			}
+		}
+
+		return static::$aliases[$this->class][$this->method] ?? [];
+	}
+
+	/**
 	 * Returns the name of the method's class
 	 */
 	public function class(
 		bool $short = false,
 		bool $typed = false
 	): string|Identifier {
-		$class = new ReflectionClass($this->class);
-		$class = match ($short) {
-			true  => $class->getShortName(),
-			false => $class->getName(),
-		};
+		$class = ReflectableClass::for($this->class)->name(short: $short);
 
 		if ($typed === true) {
 			return new Identifier($class);
@@ -62,13 +89,22 @@ class ReflectableClassMethod extends ReflectableFunction
 	}
 
 	/**
+	 * Returns whether the method is an alias
+	 * for another method of the same class
+	 */
+	public function isAlias(): bool
+	{
+		return $this->see()?->for() !== null;
+	}
+
+	/**
 	 * Returns whether the method or parent class is deprecated
 	 */
 	public function isDeprecated(): bool
 	{
 		return
 			parent::isDeprecated() ||
-			(new ReflectableClass($this->class))->isDeprecated();
+			ReflectableClass::for($this->class)->isDeprecated();
 	}
 
 	/**
@@ -78,7 +114,7 @@ class ReflectableClassMethod extends ReflectableFunction
 	{
 		return
 			parent::isInternal() ||
-			(new ReflectableClass($this->class))->isInternal();
+			ReflectableClass::for($this->class)->isInternal();
 	}
 
 	/**
@@ -96,24 +132,24 @@ class ReflectableClassMethod extends ReflectableFunction
 	{
 		return
 			parent::isUnstable() ||
-			(new ReflectableClass($this->class))->isUnstable();
+			ReflectableClass::for($this->class)->isUnstable();
 	}
 
 	public function mutationDescription(): string|null
 	{
 		$returns = $this->returns();
 
-		if ($this->isStatic() === true || $returns?->isVoid() === true) {
+		if ($this->isStatic() === true || $returns === null) {
 			return null;
 		}
 
-		$object = '$' . strtolower($this->class(true));
+		$object = '`$' . strtolower($this->class(true)) . '`';
 
-		if ($returns->isImmutable() === true) {
-			return 'This method does not modify the existing `' . $object . '` object but returns a new object with the changes applied. (link: docs/guide/templates/php-api#immutable-objects text: Learn more →)';
-		}
-
-		return 'This method modifies the existing `' . $object . '` object it is applied to and returns it again.';
+		return match (true) {
+			$returns->isImmutable() => 'This method does not modify the existing ' . $object . ' object but returns a new object with the changes applied. (link: docs/guide/templates/php-api#immutable-objects text: Learn more →)',
+			$returns->isMutable()   => 'This method modifies the existing ' . $object . ' object it is applied to and returns it again.',
+			default                 => null
+		};
 	}
 
 	/**
@@ -135,36 +171,13 @@ class ReflectableClassMethod extends ReflectableFunction
 	}
 
 	/**
-	 * Returns the `@see` tag value which references
-	 * another class method to refer to for more information
-	 */
-	public function see(): string|null
-	{
-		$see = parent::see();
-
-		if ($see === null) {
-			return null;
-		}
-
-		// remove self:: or static:: prefix
-		$see = preg_replace('/^(self|static)::/', '::', $see);
-
-		// add class name if missing
-		if (str_starts_with($see, '::') === true) {
-			$see = $this->class(short: false) . $see;
-		}
-
-		return $see;
-	}
-
-	/**
 	 * Returns the `@since` tag, if present
 	 * taking into account the parent class
 	 */
 	public function since(): Since|null
 	{
 		return parent::since() ?? Since::factory(
-			reflection: new ReflectableClass($this->class)
+			reflection: ReflectableClass::for($this->class)
 		);
 	}
 

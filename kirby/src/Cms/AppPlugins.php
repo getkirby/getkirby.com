@@ -3,6 +3,8 @@
 namespace Kirby\Cms;
 
 use Closure;
+use Kirby\Auth\Challenges;
+use Kirby\Auth\Methods;
 use Kirby\Content\Field;
 use Kirby\Exception\DuplicateException;
 use Kirby\Filesystem\Asset;
@@ -11,7 +13,6 @@ use Kirby\Filesystem\F;
 use Kirby\Filesystem\Mime;
 use Kirby\Form\Field as FormField;
 use Kirby\Image\Image;
-use Kirby\Plugin\License;
 use Kirby\Plugin\Plugin;
 use Kirby\Text\KirbyTag;
 use Kirby\Toolkit\A;
@@ -22,9 +23,6 @@ use Kirby\Toolkit\V;
 /**
  * AppPlugins
  *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
@@ -47,6 +45,7 @@ trait AppPlugins
 		'areas' => [],
 		'assetMethods' => [],
 		'authChallenges' => [],
+		'authMethods' => [],
 		'blockMethods' => [],
 		'blockModels' => [],
 		'blocksMethods' => [],
@@ -74,7 +73,6 @@ trait AppPlugins
 		'pageModels' => [],
 		'permissions' => [],
 		'routes' => [],
-		'sections' => [],
 		'siteMethods' => [],
 		'snippets' => [],
 		'structureMethods' => [],
@@ -98,7 +96,7 @@ trait AppPlugins
 	/**
 	 * Register all given extensions
 	 *
-	 * @param \Kirby\Plugin\Plugin|null $plugin The plugin which defined those extensions
+	 * @param Plugin|null $plugin The plugin which defined those extensions
 	 */
 	public function extend(
 		array $extensions,
@@ -166,9 +164,21 @@ trait AppPlugins
 	 */
 	protected function extendAuthChallenges(array $challenges): array
 	{
-		return $this->extensions['authChallenges'] = Auth::$challenges = [
-			...Auth::$challenges,
+		return $this->extensions['authChallenges'] = Challenges::$challenges = [
+			...Challenges::$challenges,
 			...$challenges
+		];
+	}
+
+	/**
+	 * Registers additional authentication methods
+	 * @since 6.0.0
+	 */
+	protected function extendAuthMethods(array $methods): array
+	{
+		return $this->extensions['authMethods'] = Methods::$methods = [
+			...Methods::$methods,
+			...$methods
 		];
 	}
 
@@ -551,23 +561,12 @@ trait AppPlugins
 	protected function extendRoutes(array|Closure $routes): array
 	{
 		if ($routes instanceof Closure) {
-			$routes = $routes($this);
+			$routes = (array)$routes($this);
 		}
 
 		return $this->extensions['routes'] = [
 			...$this->extensions['routes'],
 			...$routes
-		];
-	}
-
-	/**
-	 * Registers Panel sections
-	 */
-	protected function extendSections(array $sections): array
-	{
-		return $this->extensions['sections'] = Section::$types = [
-			...Section::$types,
-			...$sections
 		];
 	}
 
@@ -811,30 +810,20 @@ trait AppPlugins
 	 */
 	protected function extensionsFromSystem(): void
 	{
-		// Always start with fresh fields and sections
+		// Always start with fresh fields
 		// from the core and add plugins on top of that
 		FormField::$types = [];
-		Section::$types   = [];
-
-		// mixins
-		FormField::$mixins = $this->core->fieldMixins();
-		Section::$mixins   = $this->core->sectionMixins();
 
 		// aliases
 		KirbyTag::$aliases = $this->core->kirbyTagAliases();
-		Field::$aliases    = $this->core->fieldMethodAliases();
-
-		// blueprint presets
-		PageBlueprint::$presets = $this->core->blueprintPresets();
 
 		$this->extendAuthChallenges($this->core->authChallenges());
+		$this->extendAuthMethods($this->core->authMethods());
 		$this->extendCacheTypes($this->core->cacheTypes());
 		$this->extendComponents($this->core->components());
 		$this->extendBlueprints($this->core->blueprints());
-		$this->extendFieldMethods($this->core->fieldMethods());
 		$this->extendFields($this->core->fields());
 		$this->extendFilePreviews($this->core->filePreviews());
-		$this->extendSections($this->core->sections());
 		$this->extendSnippets($this->core->snippets());
 		$this->extendTags($this->core->kirbyTags());
 		$this->extendTemplates($this->core->templates());
@@ -862,7 +851,7 @@ trait AppPlugins
 	 * Kirby plugin factory and getter
 	 *
 	 * @param array|null $extends If null is passed it will be used as getter. Otherwise as factory.
-	 * @throws \Kirby\Exception\DuplicateException
+	 * @throws DuplicateException
 	 */
 	public static function plugin(
 		string $name,

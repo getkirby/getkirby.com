@@ -1,12 +1,7 @@
 - Either the `gd` extension or `ImageMagick` (see below)
-- `ctype`
-- `curl`
-- `dom`
-- `filter`
-- `hash`
-- `iconv`
-- `json`
-- `libxml`
-- `mbstring`
-- `openssl`
-- `SimpleXML`
+<?php
+
+// required extensions as checked by the Kirby core
+foreach (array_keys($kirby->system()->extensions()) as $extension) {
+	echo '- `' . $extension . '`' . PHP_EOL;
+}

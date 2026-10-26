@@ -8,12 +8,9 @@ use Generator;
 /**
  * Parses a query string into its individual tokens
  *
- * @package   Kirby Query
- * @author    Roman Steiner <roman@toastlab.ch>,
- *            Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
  * @license   https://opensource.org/licenses/MIT
  * @since     5.1.0
+ *
  * @unstable
  */
 class Tokenizer
@@ -30,15 +27,15 @@ class Tokenizer
 	 * For more complex identifier strings, subscript member access
 	 * should be used. With `this` to access the global context.
 	 */
-	private const IDENTIFIER_REGEX = <<<'REGEX'
+	private const string IDENTIFIER_REGEX = <<<'REGEX'
 	(?:[\p{L}\p{N}_])*
 	REGEX;
 
-	private const SINGLEQUOTE_STRING_REGEX = <<<'REGEX'
+	private const string SINGLEQUOTE_STRING_REGEX = <<<'REGEX'
 	'([^'\\]*(?:\\.[^'\\]*)*)'
 	REGEX;
 
-	private const DOUBLEQUOTE_STRING_REGEX = <<<'REGEX'
+	private const string DOUBLEQUOTE_STRING_REGEX = <<<'REGEX'
 	"([^"\\]*(?:\\.[^"\\]*)*)"
 	REGEX;
 
@@ -81,7 +78,7 @@ class Tokenizer
 	 *
 	 * @param int $current The current position in the source string
 	 *
-	 * @throws \Exception If an unexpected character is encountered
+	 * @throws Exception If an unexpected character is encountered
 	 */
 	public static function token(string $query, int $current): Token
 	{
@@ -113,7 +110,7 @@ class Tokenizer
 			return new Token(
 				TokenType::T_STRING,
 				$lex,
-				stripcslashes(substr($lex, 1, -1))
+				static::unescape($lex)
 			);
 		}
 
@@ -122,18 +119,18 @@ class Tokenizer
 			return new Token(
 				TokenType::T_STRING,
 				$lex,
-				stripcslashes(substr($lex, 1, -1))
+				static::unescape($lex)
 			);
 		}
 
 		// float (check before single character tokens)
-		$lex = static::match($query, $current, '-?\d+\.\d+\b');
+		$lex = static::match($query, $current, '\d+\.\d+\b');
 		if ($lex !== null) {
 			return new Token(TokenType::T_FLOAT, $lex, (float)$lex);
 		}
 
 		// int (check before single character tokens)
-		$lex = static::match($query, $current, '-?\d+\b');
+		$lex = static::match($query, $current, '\d+\b');
 		if ($lex !== null) {
 			return new Token(TokenType::T_INTEGER, $lex, (int)$lex);
 		}
@@ -215,6 +212,7 @@ class Tokenizer
 			'/'     => new Token(TokenType::T_DIVIDE, '/'),
 			'%'     => new Token(TokenType::T_MODULO, '%'),
 			'?'     => new Token(TokenType::T_QUESTION_MARK, '?'),
+			'!'     => new Token(TokenType::T_NOT, '!'),
 			'<'     => new Token(TokenType::T_LESS_THAN, '<'),
 			'>'     => new Token(TokenType::T_GREATER_THAN, '>'),
 			default => null
@@ -229,8 +227,10 @@ class Tokenizer
 			return new Token(TokenType::T_IDENTIFIER, $lex);
 		}
 
-		// Unknown token
-		throw new Exception('Invalid character in query: ' . $query[$current]);
+		// Unknown token (with the full character, even if multibyte)
+		throw new Exception(
+			'Invalid character in query: ' . mb_substr(substr($query, $current), 0, 1)
+		);
 	}
 
 	/**
@@ -253,5 +253,21 @@ class Tokenizer
 		}
 
 		yield new Token(TokenType::T_EOF, '', null);
+	}
+
+	/**
+	 * Returns the value of a string literal: only its quote
+	 * and the backslash can be escaped (e.g. `"say \"hi\""`),
+	 * all other backslashes are kept as-is (e.g. `'\d+'`)
+	 * @since 6.0.0
+	 */
+	protected static function unescape(string $lexeme): string
+	{
+		$quote = $lexeme[0];
+
+		return strtr(substr($lexeme, 1, -1), [
+			'\\' . $quote => $quote,
+			'\\\\'      => '\\'
+		]);
 	}
 }

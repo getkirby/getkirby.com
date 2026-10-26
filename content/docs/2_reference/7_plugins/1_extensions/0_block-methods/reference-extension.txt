@@ -21,13 +21,16 @@ Block methods are registered with the `blockMethods` extension.
 You can extend the set of defined block methods very easily in a plugin file.
 
 ```php "/site/plugins/block-methods/index.php"
-Kirby::plugin('my/block-methods', [
-    'blockMethods' => [
-        'url' => function () {
-            return $this->parent()->url() . '/#' . $this->id();
-        }
+Kirby::plugin(
+    name: 'my/block-methods',
+    extends: [
+        'blockMethods' => [
+            'url' => function () {
+                return $this->parent()->url() . '/#' . $this->id();
+            }
+        ]
     ]
-]);
+);
 ```
 
 This example shows the basic architecture of a block method. You define the method name with the key for the `blockMethods` extension array. `$this` in the callback function is the `$block` object.

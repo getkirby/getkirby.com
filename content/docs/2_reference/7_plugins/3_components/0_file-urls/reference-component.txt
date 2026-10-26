@@ -11,11 +11,14 @@ Text:
 You can modify the URLs for file objects with our `file::url` component. This component is also responsible for building thumbnail URLs. This makes it very powerful. It can be used to let thumbnails be generated on different services like Cloudinary or Imgix, but it can also be used to host files in a different location and load them from there.
 
 ```php "/site/plugins/file-urls/index.php"
-Kirby::plugin('my/fileUrls', [
-	'components' => [
-		'file::url' => function (Kirby $kirby, $file, array $options = []) {
-			return 'https://cloudinary.com/...';
-		}
+Kirby::plugin(
+	name: 'my/fileUrls',
+	extends: [
+		'components' => [
+			'file::url' => function (Kirby $kirby, $file, array $options = []) {
+				return 'https://cloudinary.com/...';
+			}
+		]
 	]
-]);
+);
 ```

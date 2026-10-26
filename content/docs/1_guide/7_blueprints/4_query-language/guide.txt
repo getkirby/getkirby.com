@@ -10,13 +10,9 @@ Text:
 
 ## Introduction
 
-The query language adds a lot of flexibility when querying options for select, radio  and checkboxes fields, for querying collections in Panel sections and to manipulate how information is displayed in the Panel.
+The query language adds a lot of flexibility when querying options for select, radio  and checkboxes fields, for querying collections in Panel fields and to manipulate how information is displayed in the Panel.
 
 If you are not familiar with (link: docs/guide/templates/php-api text: Kirby's PHP API) yet, you should learn more about it first. The query language is very close to it and will be confusing without the basics.
-
-<info>
-In Kirby 5.1 and higher, you can opt-in to using a new (link: docs/reference/system/options/query text: `query.runner`), currently in beta phase, that offers improved performance and (link: #advanced-query-syntax__operators text: additional features).
-</info>
 
 ### Syntax
 
@@ -71,10 +67,10 @@ mySelect:
 Another way to use the language is to create custom information for page or file lists. In this case we use the query language as part of our template syntax.
 
 ```yaml
-# pages section
+# pagelist field
 published:
   label: Published Pages
-  type: pages
+  type: pagelist
   info: "Year: {{ page.year }}"
 ```
 
@@ -104,12 +100,12 @@ mySelect:
 Check out the (link: docs/reference/panel/fields text: docs for each of these fields in the Reference).
 
 
-## Querying the parent in pages and files sections
+## Querying the parent in `pagelist` and `filelist` fields
 
 ```yaml
-sections:
+fields:
   articles:
-    type: pages
+    type: pagelist
     label: Blog Articles
     parent: site.find("blog")
 ```
@@ -153,7 +149,7 @@ Queries can include arrays and nested method calls:
 
 ```yaml
 # arrays
-query: site.index.filterBy("template", "in", ["note", "album"])
+query: site.index.filterBy("intendedTemplate", "in", ["note", "album"])
 
 # nested queries
 query: kirby.collection("some-collection").not(kirby.collection("excluded-collection"))
@@ -165,6 +161,8 @@ If you need to include quotes within strings, you can use the other quote type (
 query: site.title.or("This is a default value with \"quotes\"")
 ```
 
+Only `\"`, `\'` and `\\` are escape sequences. All other backslashes stay part of the string, e.g. in regular expressions like `'\d+'`.
+
 Method calls (`parent.method(arguments...)`) are supported if the parent is an object and the method exists (or if the object has a magic `__call()` method) or if the parent is an array and the method is a PHP closure (anonymous function).
 
 Property access (`parent.property`) will behave like this:
@@ -173,11 +171,9 @@ Property access (`parent.property`) will behave like this:
 - If the parent is an array, the respective array element will be returned.
 - Calling a property without any arguments (`parent.property()`) is equivalent to accessing the property.
 
-<since v="5.1.0">
-When you use (link: docs/reference/system/options/query text: the new query runner), queries support subscript access notation, e.g. `page[site.pageMethodName]`.
+Queries also support subscript access notation, e.g. `page[site.pageMethodName]`.
 
-The new query runner is stricter in parsing queries. In some edge cases, this will require you to access an array/object via subscript notation - in rare cases on the top level via the new `this` keyword, e.g. `this["identifier.with dots and spaces"]`.
-</since>
+The query parser is strict. In some edge cases, you need to access an array/object via subscript notation - in rare cases on the top level via the `this` keyword, e.g. `this["identifier.with dots and spaces"]`.
 
 ### Operators
 
@@ -189,10 +185,9 @@ page.title.isNotEmpty ? page.title.lower : page.slug
 page.title.value ?? page.slug
 ```
 
-<since v="5.1.0">
-When you use (link: docs/reference/system/options/query text: the new query runner), you can also use
-- logical operators: `AND`, `&&`, `OR`, `||`
-- comparisons: `==`, `!=`, `>`, `<`, `<=`, `>=`
+You can also use
+- logical operators: `AND`, `&&`, `OR`, `||`, `!`
+- comparisons: `==`, `===`, `!=`, `!==`, `>`, `<`, `<=`, `>=`
 - math operators: `+`, `-`, `*`, `/`, `%`
 
 ```txt
@@ -200,17 +195,34 @@ user.age.toInt > 25 && user.name != "John"
 page.price.toFloat + page.vat.toFloat
 ```
 
-### Arguments in query closures
+`AND` and `OR` have to be written in uppercase. A `-` is always the minus operator, so `page.num-1` subtracts 1 from the sorting number of the page. Kirby reads fields with a dash in their name, e.g. `My-field:` in a content file, as `my_field`, so you can access them with `page.my_field`.
 
-```php
-$query = new Query('(foo) => foo.homer');
-$data  = [];
+<since v="6.0.0">
+Use `!` to negate a value and `-` in front of a value to make it negative:
 
-$bar = $query->resolve($data);
-$bar = $bar(['homer' => 'simpson']);
-$this->assertSame('simpson', $bar);
+```txt
+!page.isListed ? "Draft" : "Live"
+-page.discount.toFloat
+-(1 + 2)
 ```
 </since>
+
+### Closures
+
+Some methods expect a function as argument, e.g. `filter()`. In a query, you write it as an arrow function with its arguments in parentheses:
+
+```yaml
+featured:
+  label: Featured articles
+  type: pagelist
+  query: page.children.filter((child) => child.featured.toBool)
+```
+
+The function is called for each child page and keeps those for which it returns `true`.
+
+### When a query fails
+
+If Kirby can't resolve a query, e.g. because of a typo or a method that doesn't exist, the Panel doesn't show an error. Options and lists from the query stay empty and string templates leave out the result of the query. If a query doesn't return what you expect, try its parts step by step, e.g. `page.children` before `page.children.listed.first`.
 
 
 

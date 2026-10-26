@@ -162,16 +162,19 @@ In the `index.php` file we register our blueprints and output snippets, respecti
 ```php "/site/plugins/faq-block/index.php"
 <?php
 
-Kirby::plugin('your-project/faq-block', [
-    'blueprints' => [
-        'blocks/faq'      => __DIR__ . '/blueprints/blocks/faq.yml',
-        'blocks/faqItem'  => __DIR__ . '/blueprints/blocks/faqItem.yml'
-    ],
-    'snippets'   => [
-        'blocks/faq'      => __DIR__ . '/snippets/blocks/faq.php',
-        'blocks/faqItem'  => __DIR__ . '/snippets/blocks/faqItem.php'
+Kirby::plugin(
+    name: 'your-project/faq-block',
+    extends: [
+        'blueprints' => [
+            'blocks/faq'      => __DIR__ . '/blueprints/blocks/faq.yml',
+            'blocks/faqItem'  => __DIR__ . '/blueprints/blocks/faqItem.yml'
+        ],
+        'snippets'   => [
+            'blocks/faq'      => __DIR__ . '/snippets/blocks/faq.php',
+            'blocks/faqItem'  => __DIR__ . '/snippets/blocks/faqItem.php'
+        ]
     ]
-]);
+);
 ```
 
 ### `index.js`

@@ -102,29 +102,32 @@ In a plugin, lets create a new files method that takes a data array as argument 
 
 ```php "/site/plugins/update-metadata/index.php"
 <?php
-Kirby::plugin('cookbook/update-metadata', [
-  'filesMethods' => [
-    'update' => function (array $data) {
-      $messages = [];
-      $kirby    = kirby();
-      foreach ($this as $file) {
-        try {
-          if ($kirby->multilang() === true) {
-            $languages = $kirby->languages();
-            foreach ($languages as $language) {
-              $newFile = $file->update($data, $language->code());
+Kirby::plugin(
+  name: 'cookbook/update-metadata',
+  extends: [
+    'filesMethods' => [
+      'update' => function (array $data) {
+        $messages = [];
+        $kirby    = kirby();
+        foreach ($this as $file) {
+          try {
+            if ($kirby->multilang() === true) {
+              $languages = $kirby->languages();
+              foreach ($languages as $language) {
+                $newFile = $file->update($data, $language->code());
+              }
+            } else {
+              $newFile = $file->update($data);
             }
-          } else {
-            $newFile = $file->update($data);
+          } catch (Exception $e) {
+            $messages[] = $file->filename() . ' could not be updated (' . $e->getMessage() . ')';
           }
-        } catch (Exception $e) {
-          $messages[] = $file->filename() . ' could not be updated (' . $e->getMessage() . ')';
         }
+        return $messages;
       }
-      return $messages;
-    }
-  ],
-]);
+    ],
+  ]
+);
 ```
 
 We can then call this method on a collection of files anywhere like this:

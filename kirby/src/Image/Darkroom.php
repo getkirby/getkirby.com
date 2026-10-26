@@ -12,9 +12,6 @@ use Kirby\Image\Darkroom\Imagick;
  * A wrapper around resizing and cropping
  * via GDLib, ImageMagick or other libraries.
  *
- * @package   Kirby Image
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
@@ -42,7 +39,7 @@ class Darkroom
 	 * Creates a new Darkroom instance
 	 * for the given type/driver
 	 *
-	 * @throws \Exception
+	 * @throws Exception
 	 */
 	public static function factory(string $type, array $settings = []): static
 	{

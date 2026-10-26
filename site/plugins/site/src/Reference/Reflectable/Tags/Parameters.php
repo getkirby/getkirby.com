@@ -30,7 +30,12 @@ class Parameters extends Iterator
 
 		// Collect all parameters from the doc block and add them
 		// if they haven't been added as native parameters yet
-		foreach ($reflectable->doc()->getParamTagValues() as $doc) {
+		$docs = [
+			...$reflectable->doc()->getParamTagValues(),
+			...$reflectable->doc()->getTypelessParamTagValues()
+		];
+
+		foreach ($docs as $doc) {
 			$name                = ltrim($doc?->parameterName, '$');
 			$parameters[$name] ??= Parameter::factory(
 				doc:     $doc,
@@ -79,11 +84,11 @@ class Parameters extends Iterator
 	/**
 	 * Returns the string representation of all parameters
 	 */
-	public function toString(): string
+	public function toString(bool $short = false): string
 	{
 		return implode(
 			', ',
-			A::map($this->data, fn ($parameter) => $parameter->toString())
+			A::map($this->data, fn ($parameter) => $parameter->toString($short))
 		);
 	}
 }

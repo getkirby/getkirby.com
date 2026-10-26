@@ -183,57 +183,57 @@ Versions:
 
 1.*:
     shortName: v1
-    initialRelease: 2012-01-09
-    endOfActiveSupport: 2014-10-07
-    endOfLife: 2016-02-01
+    initialRelease: "2012-01-09"
+    endOfActiveSupport: "2014-10-07"
+    endOfLife: "2016-02-01"
     latest: 1.1.2
 2.*:
     shortName: v2
-    initialRelease: 2014-10-07
-    endOfActiveSupport: 2019-02-05
-    endOfLife: 2021-01-01
+    initialRelease: "2014-10-07"
+    endOfActiveSupport: "2019-02-05"
+    endOfLife: "2021-01-01"
     latest: 2.5.14
 3.* <3.5:
     shortName: v3
-    initialRelease: 2019-02-05
-    endOfActiveSupport: 2020-12-15
-    endOfLife: 2021-11-16
+    initialRelease: "2019-02-05"
+    endOfActiveSupport: "2020-12-15"
+    endOfLife: "2021-11-16"
     latest: 3.10.1.2
 3.5.*:
     shortName: v3.5
-    initialRelease: 2020-12-15
-    endOfActiveSupport: 2021-11-16
-    endOfLife: 2023-11-16
+    initialRelease: "2020-12-15"
+    endOfActiveSupport: "2021-11-16"
+    endOfLife: "2023-11-16"
     latest: 3.10.1.2
 3.6.*:
     shortName: v3.6
-    initialRelease: 2021-11-16
-    endOfActiveSupport: 2022-06-27
-    endOfLife: 2024-06-27
+    initialRelease: "2021-11-16"
+    endOfActiveSupport: "2022-06-27"
+    endOfLife: "2024-06-27"
     latest: 3.10.1.2
 3.7.*:
     shortName: v3.7
-    initialRelease: 2022-06-27
-    endOfActiveSupport: 2022-10-06
-    endOfLife: 2024-06-27
+    initialRelease: "2022-06-27"
+    endOfActiveSupport: "2022-10-06"
+    endOfLife: "2024-06-27"
     latest: 3.10.1.2
 3.8.*:
     shortName: v3.8
-    initialRelease: 2022-10-06
-    endOfActiveSupport: 2023-01-17
-    endOfLife: 2024-12-02
+    initialRelease: "2022-10-06"
+    endOfActiveSupport: "2023-01-17"
+    endOfLife: "2024-12-02"
     latest: 3.10.1.2
 3.9.*:
     shortName: v3.9
-    initialRelease: 2023-01-17
-    endOfActiveSupport: 2023-11-28
-    endOfLife: 2025-12-01
+    initialRelease: "2023-01-17"
+    endOfActiveSupport: "2023-11-28"
+    endOfLife: "2025-12-01"
     latest: 3.10.1.2
 3.10.*:
     shortName: v3.10
-    initialRelease: 2023-12-19
-    endOfActiveSupport: 2023-12-19
-    endOfLife: 2025-12-01
+    initialRelease: "2023-12-19"
+    endOfActiveSupport: "2023-12-19"
+    endOfLife: "2025-12-01"
     latest: 3.10.1.2
 
 ----
@@ -272,12 +272,12 @@ Php:
 # End-of-life dates for each major PHP version
 # according to https://www.php.net/supported-versions.php
 
-"8.0": 2023-11-26
-"8.1": 2025-12-31
-"8.2": 2026-12-31
-"8.3": 2027-12-31
-"8.4": 2028-12-31
-"8.5": 2029-12-31
+"8.0": "2023-11-26"
+"8.1": "2025-12-31"
+"8.2": "2026-12-31"
+"8.3": "2027-12-31"
+"8.4": "2028-12-31"
+"8.5": "2029-12-31"
 
 ----
 

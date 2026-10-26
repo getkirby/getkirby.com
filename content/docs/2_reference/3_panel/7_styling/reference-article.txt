@@ -32,7 +32,7 @@ Besides adding more CSS selectors, we are also using data attributes to allow fo
 | Selector | Description |
 | -------- | ----------- |
 | `.k-panel[data-language]` | for the current content translation language |
-| `.k-panel[data-default-language]` | for the default content translation language |
+| `.k-panel[data-language-default="true"]` | if the current content translation language is the default language |
 | `.k-panel[data-translation]` | for the current Panel UI/user language |
 | `.k-panel[data-role]` | for current user role |
 | `.k-panel[data-user]` | for current user ID |
@@ -41,15 +41,12 @@ Besides adding more CSS selectors, we are also using data attributes to allow fo
 | `.k-file-view[data-id]` | for file ID |
 | `.k-file-view[data-template]` | for file's template |
 | `.k-user-view[data-id]` | for user ID |
-| `.k-user-view[data-role]` | for user's role |
 | `.k-site-view[data-id]` | for site ID (/) |
 | `.k-site-view[data-template]` | for site's template (site) |
 | `.k-languages-dropdown` | for content translation language dropdown |
-| `.k-page-view-options`, `.k-file-view-options` and `.k-user-view-options` | for options dropdown on model views |
-| `.k-page-view-preview`, `.k-file-view-preview`, `.k-site-view-preview` and `.k-user-view-preview` | for preview button on model views |
-| `.k-pages-section .k-item[data-id]`, `.k-pages-section .k-item[data-status]` and `.k-pages-section .k-item[data-template]` | |
-| `.k-files-section .k-item[data-id]` and `.k-files-section .k-item[data-template]` | |
-| `.k-status-icon .k-status-icon-{status}` | for the page's status button |
+| `.k-view-buttons .k-view-button` | for the buttons in the header of model views |
+| `.k-pagelist-field .k-item[data-id]`, `.k-pagelist-field .k-item[data-status]` and `.k-pagelist-field .k-item[data-template]` | |
+| `.k-filelist-field .k-item[data-id]` and `.k-filelist-field .k-item[data-template]` | |
 
 
 
@@ -61,7 +58,7 @@ You can overwrite our default properties in your custom `panel.css`:
 
 ```css "assets/panel.css"
 :root {
-  --color-backdrop: rgba(255, 255, 255, 0.6);
+  --overlay-color-back: rgba(255, 255, 255, 0.6);
 }
 ```
 

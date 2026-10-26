@@ -35,11 +35,14 @@ The (link: docs/reference/plugins/extensions/templates text: templates extension
 
 use Kirby\Cms\App as Kirby;
 
-Kirby::plugin('cookbook/shared-templates', [
-    'templates' => [
-        'blog' => __DIR__ . '/templates/blog.php',
+Kirby::plugin(
+    name: 'cookbook/shared-templates',
+    extends: [
+        'templates' => [
+            'blog' => __DIR__ . '/templates/blog.php',
+        ]
     ]
-]);
+);
 ```
 
 How can we leverage this extension to use the same template for multiple page types? By simply assigning the same file to multiple template names, like this:
@@ -50,14 +53,17 @@ How can we leverage this extension to use the same template for multiple page ty
 
 use Kirby\Cms\App as Kirby;
 
-Kirby::plugin('cookbook/shared-templates', [
-    'templates' => [
-        'jobs'   => __DIR__ . '/templates/grid.php',
-        'events' => __DIR__ . '/templates/grid.php',
-        'news'   => __DIR__ . '/templates/grid.php',
-        //…
+Kirby::plugin(
+    name: 'cookbook/shared-templates',
+    extends: [
+        'templates' => [
+            'jobs'   => __DIR__ . '/templates/grid.php',
+            'events' => __DIR__ . '/templates/grid.php',
+            'news'   => __DIR__ . '/templates/grid.php',
+            //…
+        ]
     ]
-]);
+);
 ```
 
 If you ever decide that one of the page types should get a different template, you can either change this in the plugin, or add a new template in the `/site/templates` folder.
@@ -72,20 +78,23 @@ You can also use this setup to register the same (link: docs/reference/plugins/e
 
 use Kirby\Cms\App as Kirby;
 
-Kirby::plugin('cookbook/shared-templates', [
-    'templates' => [
-        'jobs'   => __DIR__ . '/templates/grid.php',
-        'events' => __DIR__ . '/templates/grid.php',
-        'news'   => __DIR__ . '/templates/grid.php',
-        //…
-    ],
-    'controllers' => [
-        'jobs'   => require __DIR__ . '/controllers/grid.php',
-        'events' => require __DIR__ . '/controllers/grid.php',
-        'news'   => require __DIR__ . '/controllers/grid.php',
-        // …
+Kirby::plugin(
+    name: 'cookbook/shared-templates',
+    extends: [
+        'templates' => [
+            'jobs'   => __DIR__ . '/templates/grid.php',
+            'events' => __DIR__ . '/templates/grid.php',
+            'news'   => __DIR__ . '/templates/grid.php',
+            //…
+        ],
+        'controllers' => [
+            'jobs'   => require __DIR__ . '/controllers/grid.php',
+            'events' => require __DIR__ . '/controllers/grid.php',
+            'news'   => require __DIR__ . '/controllers/grid.php',
+            // …
+        ]
     ]
-]);
+);
 ```
 
 And it also works for (link: docs/reference/plugins/extensions/page-models text: page models):
@@ -103,26 +112,29 @@ class BasePage extends Page
   }
 }
 
-Kirby::plugin('cookbook/shared-templates', [
-    'templates' => [
-        'jobs'   => __DIR__ . '/templates/grid.php',
-        'events' => __DIR__ . '/templates/grid.php',
-        'news'   => __DIR__ . '/templates/grid.php',
-        //…
-    ],
-    'controllers' => [
-        'jobs'   => require __DIR__ . '/controllers/grid.php',
-        'events' => require __DIR__ . '/controllers/grid.php',
-        'news'   => require __DIR__ . '/controllers/grid.php',
-        // …
-    ],
-    'pageModels' => [
-        'jobs'   => 'BasePage',
-        'events' => 'BasePage',
-        'news'   => 'BasePage',
-        // ...
-    ],
-]);
+Kirby::plugin(
+    name: 'cookbook/shared-templates',
+    extends: [
+        'templates' => [
+            'jobs'   => __DIR__ . '/templates/grid.php',
+            'events' => __DIR__ . '/templates/grid.php',
+            'news'   => __DIR__ . '/templates/grid.php',
+            //…
+        ],
+        'controllers' => [
+            'jobs'   => require __DIR__ . '/controllers/grid.php',
+            'events' => require __DIR__ . '/controllers/grid.php',
+            'news'   => require __DIR__ . '/controllers/grid.php',
+            // …
+        ],
+        'pageModels' => [
+            'jobs'   => 'BasePage',
+            'events' => 'BasePage',
+            'news'   => 'BasePage',
+            // ...
+        ],
+    ]
+);
 ```
 
 We define a Base model, and assign it to different page model names.

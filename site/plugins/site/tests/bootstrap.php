@@ -5,10 +5,10 @@ define('KIRBY_HELPER_VIDEO', false);
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../../../../kirby/bootstrap.php';
 
-// boot the site to load its page models and content
-// which are needed to resolve Reference pages
+// boot the actual site, so that tests can rely on
+// the page models, the core extensions and the options
 new Kirby\Cms\App([
 	'roots' => [
-		'index' => dirname(__DIR__, 4)
+		'index' => __DIR__ . '/../../../..'
 	]
 ]);

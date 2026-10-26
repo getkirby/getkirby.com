@@ -398,8 +398,15 @@ $emailBody = snippet('email', $data, slots: true)->render(slots: [
 ]);
 ```
 
+<since v="6.0.0">
+## Pushing assets from snippets
+
+A snippet can push the styles and scripts it needs onto a stack, which your header or footer snippet then renders in the right place. Read more in the (link: docs/guide/templates/stacks text: template stacks guide).
+</since>
+
 ## More information
 
+- (link: docs/guide/templates/stacks text: Template stacks)
 - (link: docs/cookbook/navigation/menus text: Menus)
 - (link: docs/cookbook/navigation/previous-next text: Previous / Next navigation)
 - (link: docs/cookbook/navigation/pagination text: Pagination)

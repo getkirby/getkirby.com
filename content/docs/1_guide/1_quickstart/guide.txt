@@ -127,11 +127,9 @@ If you don’t want the Panel to connect to our server, registration via the Pan
 
 (…tabs)
 
-<since v="5.5.0">
 <info>
 If your installation is used for development only and is not publicly accessible (e.g. a staging or preview server), you can activate it as a **development site** with a free (link: license#free-licenses__usage-for-a-development-installation text: development license) instead. When activating in the Panel, confirm that you comply with the license terms and choose to activate as a development site.
 </info>
-</since>
 
 ## Where to go from here
 

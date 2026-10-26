@@ -15,13 +15,16 @@ Collections are registered with the `collections` extension.
  The `collections` extension accepts an array of collections where the key is the name of the collection and the value a callback function that returns the collection.
 
 ```php "/site/plugins/your-plugin/index.php"
-Kirby::plugin('your/plugin', [
-  'collections' => [
-    'projects' => function ($site) {
-      return $site->find('projects')->children()->listed();
-    }
+Kirby::plugin(
+  name: 'your/plugin',
+  extends: [
+    'collections' => [
+      'projects' => function ($site) {
+        return $site->find('projects')->children()->listed();
+      }
+    ]
   ]
-]);
+);
 ```
 
 ## File definition
@@ -29,11 +32,14 @@ Kirby::plugin('your/plugin', [
 Alternatively, you can require a file. The required file would be a (link: docs/guide/templates/collections text: collection) with a return function.
 
 ```php
-Kirby::plugin('your/plugin', [
-  'collections' => [
-    'articles' => require 'some/file.php'
+Kirby::plugin(
+  name: 'your/plugin',
+  extends: [
+    'collections' => [
+      'articles' => require 'some/file.php'
+    ]
   ]
-]);
+);
 ```
 
 ## Usage in templates

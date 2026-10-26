@@ -1,0 +1,15 @@
+Since: 6.0.0
+
+----
+
+Examples:
+
+Ends the output started with (helper: push) and adds it to the stack:
+
+```php
+<?php push('footer') ?>
+<script src="<?= url('assets/js/gallery.js') ?>" defer></script>
+<?php endpush() ?>
+```
+
+Read more in the (link: docs/guide/templates/stacks text: template stacks guide).

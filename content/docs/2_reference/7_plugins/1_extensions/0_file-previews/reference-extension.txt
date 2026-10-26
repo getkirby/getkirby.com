@@ -2,10 +2,6 @@ Title: File previews
 
 ----
 
-Since: 5.0.0
-
-----
-
 Text:
 
 Kirby ships with some default Panel file previews for common formats: images, videos, audio or PDFs. But you can also add custom file previews as plugin extensions to customize the preview for these formats or create previews for other file formats.
@@ -47,11 +43,14 @@ This is the minimal setup for a custom class. It defines which Vue component to 
 To use your custom file preview class, you need to register it as a plugin extension:
 
 ```php
-Kirby::plugin('your/plugin', [
-  'filePreviews' => [
-    GlbFilePreview::class
+Kirby::plugin(
+  name: 'your/plugin',
+  extends: [
+    'filePreviews' => [
+      GlbFilePreview::class
+    ]
   ]
-]);
+);
 ```
 
 ## Vue component
@@ -64,7 +63,7 @@ By default, file preview components will receive three default props:
 |--|--|
 | `url` | URL to the file |
 | `details` | array with basic file information (ideally used for `<k-file-preview-details>`) |
-| `image` | object with the thumb icon/image also used in sections etc. |
+| `image` | object with the thumb icon/image also used in list fields etc. |
 
 You could provide additional information to your Vue component by extending the (method: Kirby\Panel\Ui\FilePreview::props text: ::props()) method. We are not using the `image` prop for this example.
 

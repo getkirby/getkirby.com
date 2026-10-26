@@ -1,0 +1,34 @@
+Since: 6.0.0
+
+----
+
+Examples:
+
+Renders everything that has been pushed to the stack with (helper: push), including content that is only pushed later while the template is rendered:
+
+```php "/site/snippets/header.php"
+<head>
+  <?= css('assets/css/index.css') ?>
+  <?php stack('head') ?>
+</head>
+```
+
+```php
+// join the entries without line breaks
+<?php stack('head', glue: '') ?>
+
+// return instead of echo
+<?php $head = stack('head', return: true) ?>
+```
+
+## Render a stack more than once
+
+A stack is empty after it has been rendered. To render it in more than one place, pass `clear: false` to every call but the last:
+
+```php
+<?php stack('notices', clear: false) ?>
+<!-- … -->
+<?php stack('notices') ?>
+```
+
+Read more in the (link: docs/guide/templates/stacks text: template stacks guide).

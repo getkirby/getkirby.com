@@ -4,8 +4,8 @@
 	"type": "project",
 	"homepage": "https://getkirby.com",
 	"require": {
-		"php": ">=8.2.0",
-		"getkirby/cms": "^4.0"
+		"php": ">=8.3.0",
+		"getkirby/cms": "6.0.0-beta.2"
 	},
 	"scripts": {
 		"start": [
@@ -16,6 +16,9 @@
 		"test": "@composer --working-dir=site/plugins/site run test"
 	},
 	"config": {
-		"optimize-autoloader": true
+		"optimize-autoloader": true,
+		"allow-plugins": {
+			"getkirby/composer-installer": true
+		}
 	}
 }

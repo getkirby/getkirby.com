@@ -114,19 +114,19 @@ class Chain extends Type
 	/**
 	 * Return the chain as a string
 	 */
-	public function toString(): string
+	public function toString(bool $short = false): string
 	{
 		// Start with class name:
 		// Use the short form if the class has a name (e.g. $kirby, $page),
 		// otherwise use the long form (e.g. \Kirby\Cms\ModelWithContent)
 		$class = $this->class->toPage();
-		$short = $class?->content()->get('name')->isNotEmpty();
+		$named = $class?->content()->get('name')->isNotEmpty();
 
-		if ($short === true) {
+		if ($named === true) {
 			$text = '$' . strtolower($class->name(short: true));
 		}
 
-		$text ??= $this->class->toString();
+		$text ??= $this->class->toString($short);
 
 		// Omit non-class helper flag
 		if ($text === 'Helper') {
@@ -137,7 +137,7 @@ class Chain extends Type
 		if (count($this->methods) > 0) {
 			// Use -> for short form (e.g. $page->title()),
 			// :: for long form (e.g. \Kirby\Cms\ModelWithContent::id())
-			$glue = match ($short) {
+			$glue = match ($named) {
 				true    => '->',
 				default => '::'
 			};

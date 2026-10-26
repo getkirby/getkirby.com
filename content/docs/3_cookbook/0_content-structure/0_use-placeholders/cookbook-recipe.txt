@@ -35,12 +35,12 @@ Today, {{ company }} rules the world. Contact us at {{ phone }}.
 ```
 
 <info>
-If you want to use different start and end characters instead of the curly braces, you can control this using the `$start` and `$end` parameters of the [`Str::template()`](/docs/reference/tools/str/template) method.
+If you want to use different start and end characters instead of the curly braces, you can control this using the `$start` and `$end` parameters of the [`Str::template()`](/docs/reference/objects/toolkit/str/template) method.
 </info>
 
 ## Replacing placeholders in templates
 
-In your templates, you can replace such placeholders on the fly using the [`Str::template()`](/docs/reference/tools/str/template) method:
+In your templates, you can replace such placeholders on the fly using the [`Str::template()`](/docs/reference/objects/toolkit/str/template) method:
 
 ```php
 <?= Str::template($page->text()->kt(), [
@@ -106,19 +106,22 @@ To get an array of options from this field, we create a `toOptions()` (link: doc
 
 <?php
 
-Kirby::plugin('cookbook/placeholders', [
-    'fieldMethods' => [
-        'toOptions' => function($field) {
-            $result = [];
-            foreach ($field->toStructure() as $option) {
-                if ($option->key()->isNotEmpty() && $option->value()->isNotEmpty()) {
-                   $result[$option->key()->value()] = $option->value()->html();
+Kirby::plugin(
+    name: 'cookbook/placeholders',
+    extends: [
+        'fieldMethods' => [
+            'toOptions' => function($field) {
+                $result = [];
+                foreach ($field->toStructure() as $option) {
+                    if ($option->key()->isNotEmpty() && $option->value()->isNotEmpty()) {
+                       $result[$option->key()->value()] = $option->value()->html();
+                    }
                 }
+                return $result;
             }
-            return $result;
-        }
+        ]
     ]
-]);
+);
 ```
 
 We can now get the replacement array from the field above like this:
@@ -149,17 +152,20 @@ Let's put this in our plugin:
 ```php "/site/plugins/placeholders/index.php"
 <?php
 
-Kirby::plugin('cookbook/placeholders', [
-    'fieldMethods' => [
-        'replace' => function ($field, array $placeholders = []) {
+Kirby::plugin(
+    name: 'cookbook/placeholders',
+    extends: [
+        'fieldMethods' => [
+            'replace' => function ($field, array $placeholders = []) {
 
-            // replace the field value
-            $field->value = Str::template($field->value, $placeholders);
+                // replace the field value
+                $field->value = Str::template($field->value, $placeholders);
 
-            return $field;
-        }
+                return $field;
+            }
+        ]
     ]
-]);
+);
 ```
 
 ## Wrapping the replacement code in a hook
@@ -170,13 +176,16 @@ We can automate it even more, though. A hook replaces all the placeholders autom
 ```php "/site/plugins/placeholders/index.php"
 <?php
 
-Kirby::plugin('cookbook/placeholders', [
-    'hooks' => [
-        'kirbytext:before' => function ($text) {
-            return Str::template($text, site()->placeholders()->toOptions());
-        }
+Kirby::plugin(
+    name: 'cookbook/placeholders',
+    extends: [
+        'hooks' => [
+            'kirbytext:before' => function ($text) {
+                return Str::template($text, site()->placeholders()->toOptions());
+            }
+        ]
     ]
-]);
+);
 ```
 
 For cases that don't use `kirbytext()` (layout field, blocks field, writer field etc-), you can apply a `page.render:after` hook instead that replaces your placeholders all over your site in the rendered HTML, independent of the type of field where the placeholder is used:
@@ -184,18 +193,21 @@ For cases that don't use `kirbytext()` (layout field, blocks field, writer field
 ```php "/site/plugins/placeholders/index.php"
 <?php
 
-Kirby::plugin('cookbook/placeholders', [
-    'hooks' => [
-        'page.render:after' => function (string $contentType, string $html) {
-            if ($contentType !== 'html') {
-                return $html;
-            }
+Kirby::plugin(
+    name: 'cookbook/placeholders',
+    extends: [
+        'hooks' => [
+            'page.render:after' => function (string $contentType, string $html) {
+                if ($contentType !== 'html') {
+                    return $html;
+                }
 
-            return Str::template($html, site()->placeholders()->toOptions());
+                return Str::template($html, site()->placeholders()->toOptions());
 
-        },
+            },
+        ]
     ]
-]);
+);
 ```
 
 The `replace()` field method is no longer needed when we use this hook.
@@ -210,59 +222,62 @@ Config options for plugins should always follow the naming convention: `yourName
 ```php "/site/plugins/placeholders/index.php"
 <?php
 
-Kirby::plugin('cookbook/placeholders', [
-    'fieldMethods' => [
-        'replace' => function ($field, array $placeholders = []) {
+Kirby::plugin(
+    name: 'cookbook/placeholders',
+    extends: [
+        'fieldMethods' => [
+            'replace' => function ($field, array $placeholders = []) {
 
-            // replace the field value
-            $field->value = Str::template($field->value, $placeholders);
+                // replace the field value
+                $field->value = Str::template($field->value, $placeholders);
 
-            return $field;
-        },
-        'toOptions' => function($field) {
-            $result = [];
-            foreach ($field->toStructure() as $option) {
-                // use only key/value pairs that are not empty
-                if ($option->key()->isNotEmpty() && $option->value()->isNotEmpty()) {
-                    // check if the block field is set to true and parse KirbyTags
-                    if ($option->block()->toBool() === true) {
-                        $result[$option->key()->value()] = kirbytags($option->value());
-                    } else {
-                        $result[$option->key()->value()] = $option->value()->html();
+                return $field;
+            },
+            'toOptions' => function($field) {
+                $result = [];
+                foreach ($field->toStructure() as $option) {
+                    // use only key/value pairs that are not empty
+                    if ($option->key()->isNotEmpty() && $option->value()->isNotEmpty()) {
+                        // check if the block field is set to true and parse KirbyTags
+                        if ($option->block()->toBool() === true) {
+                            $result[$option->key()->value()] = kirbytags($option->value());
+                        } else {
+                            $result[$option->key()->value()] = $option->value()->html();
+                        }
                     }
                 }
+                return $result;
             }
-            return $result;
-        }
-    ],
-    // Don't use both hooks but only one as required, remove or comment the one you don't need
-    'hooks' => [
-        'kirbytags:before' => function ($text) {
+        ],
+        // Don't use both hooks but only one as required, remove or comment the one you don't need
+        'hooks' => [
+            'kirbytags:before' => function ($text) {
 
-            // set the options from the config as defaults
-            $defaults = option('cookbook.placeholders.replacements', []);
-            $options  = [];
+                // set the options from the config as defaults
+                $defaults = option('cookbook.placeholders.replacements', []);
+                $options  = [];
 
-            // if options from fields are set to true, get options from field
-            if (option('cookbook.placeholders.field')) {
-                $field   = option('cookbook.placeholders.field', 'placeholders');
-                $options = site()->{$field}()->toOptions();
-            }
+                // if options from fields are set to true, get options from field
+                if (option('cookbook.placeholders.field')) {
+                    $field   = option('cookbook.placeholders.field', 'placeholders');
+                    $options = site()->{$field}()->toOptions();
+                }
 
-            // merge defaults and options
-            $options = array_merge($defaults, $options);
+                // merge defaults and options
+                $options = array_merge($defaults, $options);
 
-            return Str::template($text, $options);
-        },
-       'page.render:after' => function (string $contentType, string $html) {
-            if ($contentType !== 'html') {
-                return $html;
-            }
+                return Str::template($text, $options);
+            },
+           'page.render:after' => function (string $contentType, string $html) {
+                if ($contentType !== 'html') {
+                    return $html;
+                }
 
-            return Str::template($html, site()->placeholders()->toOptions());
-        },
+                return Str::template($html, site()->placeholders()->toOptions());
+            },
+        ]
     ]
-]);
+);
 ```
 
 Now, we can control the behavior of the plugin through additional config options:

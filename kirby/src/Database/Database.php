@@ -6,6 +6,7 @@ use Closure;
 use Kirby\Database\Sql\Mysql;
 use Kirby\Database\Sql\Sqlite;
 use Kirby\Exception\InvalidArgumentException;
+use Kirby\Exception\LogicException;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\Collection;
 use Kirby\Toolkit\Obj;
@@ -17,9 +18,6 @@ use Throwable;
 /**
  * A simple database class
  *
- * @package   Kirby Database
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
@@ -140,7 +138,7 @@ class Database
 	/**
 	 * Connects to a database
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function connect(array $params = []): PDO|null
 	{
@@ -174,7 +172,7 @@ class Database
 		// try to connect; `PDO::connect()` returns the driver's
 		// subclass, e.g. `Pdo\Sqlite` with `createFunction()`
 		// TODO: only use `PDO::connect()` once PHP 8.4 is required
-		$connection = PHP_VERSION_ID >= 80400
+		$connection = method_exists(PDO::class, 'connect')
 			? PDO::connect($dsn, $options['user'], $options['password'])
 			: new PDO($dsn, $options['user'], $options['password']);
 		$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -339,11 +337,29 @@ class Database
 			$this->statement->execute();
 
 			$this->affected  = $this->statement->rowCount();
-			$this->lastId    = Str::startsWith($query, 'insert ', true) ? $this->connection->lastInsertId() : null;
 			$this->lastError = null;
+
+			if (Str::startsWith($query, 'insert ', true) === true) {
+				$lastId = $this->connection->lastInsertId();
+
+				if ($lastId === false) {
+					$this->lastId = null;
+				} elseif (is_numeric($lastId) === true) {
+					$this->lastId = (int)$lastId;
+				} else {
+					// @codeCoverageIgnoreStart
+					throw new LogicException(
+						message: 'Database::lastId() only supports integer primary keys, got "' . $lastId . '"'
+					);
+					// @codeCoverageIgnoreEnd
+				}
+			} else {
+				$this->lastId = null;
+			}
 
 			// store the final sql to add it to the trace later
 			$this->lastQuery = $this->statement->queryString;
+
 		} catch (Throwable $e) {
 			// store the error
 			$this->affected  = 0;
@@ -467,6 +483,8 @@ class Database
 
 	/**
 	 * Checks if a table exists in the current database
+	 *
+	 * @throws \PDOException if the tables cannot be listed
 	 */
 	public function validateTable(string $table): bool
 	{
@@ -475,11 +493,12 @@ class Database
 			$sql     = $this->sql()->tables();
 			$results = $this->query($sql['query'], $sql['bindings']);
 
-			if ($results) {
-				$this->tables = $results->pluck('name');
-			} else {
-				return false;
+			// a failed lookup doesn't mean the table is missing
+			if ($this->lastError !== null) {
+				throw $this->lastError;
 			}
+
+			$this->tables = $results->pluck('name');
 		}
 
 		return in_array($table, $this->tables, true) === true;
@@ -487,6 +506,8 @@ class Database
 
 	/**
 	 * Checks if a column exists in a specified table
+	 *
+	 * @throws \PDOException if the tables or columns cannot be listed
 	 */
 	public function validateColumn(string $table, string $column): bool
 	{
@@ -500,11 +521,12 @@ class Database
 			$sql     = $this->sql()->columns($table);
 			$results = $this->query($sql['query'], $sql['bindings']);
 
-			if ($results) {
-				$this->columnWhitelist[$table] = $results->pluck('name');
-			} else {
-				return false;
+			// a failed lookup doesn't mean the column is missing
+			if ($this->lastError !== null) {
+				throw $this->lastError;
 			}
+
+			$this->columnWhitelist[$table] = $results->pluck('name');
 		}
 
 		return in_array($column, $this->columnWhitelist[$table], true) === true;

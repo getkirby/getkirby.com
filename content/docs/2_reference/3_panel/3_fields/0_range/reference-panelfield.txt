@@ -26,10 +26,6 @@ fields:
       before: $
 ```
 
-## Field properties
-
-(field-options: range)
-
 ## `before` & `after` values
 
 The range field can show additional text before or after the input. This is great when you need a price field for example:
@@ -66,3 +62,5 @@ Convert the field value to a float:
 ```
 
 For more field manipulations, check out Kirby's (link: docs/reference/templates/field-methods text: field methods).
+
+(docs: panel-field-update field: range)

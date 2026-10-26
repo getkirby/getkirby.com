@@ -101,9 +101,9 @@ Within the label property, you have access to an array of field properties, here
 ```yaml
 label: "{{ structure.length }}" # to get the number of items in a structure field
 
-label: "{{ gallery.length }} images" # to get the number of images in a gallery files field
+label: "{{ gallery.length }} images" # to get the number of images in a gallery filepicker field
 
-label: "{{ image.0.filename }}" # to get the filename of the first image in the image files field
+label: "{{ image.0.filename }}" # to get the filename of the first image in the image filepicker field
 ```
 ### Editing
 

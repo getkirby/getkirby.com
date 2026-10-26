@@ -19,11 +19,14 @@ They are used for all `Kirby/Filesystem/Asset` objects returned by the `asset()`
 You can extend the set of defined asset methods in a plugin file.
 
 ```php "/site/plugins/asset-methods/index.php"
-Kirby::plugin('my/plugin', [
-    'assetMethods' => [
-         'yourMethodName' => function () {
-            // ...
-        }
+Kirby::plugin(
+    name: 'my/plugin',
+    extends: [
+        'assetMethods' => [
+             'yourMethodName' => function () {
+                // ...
+            }
+        ]
     ]
-]);
+);
 ```

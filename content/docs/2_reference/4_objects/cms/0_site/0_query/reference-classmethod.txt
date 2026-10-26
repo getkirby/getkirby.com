@@ -2,5 +2,5 @@ Examples:
 
 ```php
 <?php
-dump($site->query('site.title', 'Kirby\Cms\Field'));
+dump($site->query('site.title', 'Kirby\Content\Field'));
 ```

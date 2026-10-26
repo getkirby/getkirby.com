@@ -21,10 +21,6 @@ fields:
     type: list
 ```
 
-## Field properties
-
-(field-options: list)
-
 ## Choosing available marks
 
 The list field supports the following marks by default:
@@ -54,3 +50,5 @@ The content of the list field is stored as plain HTML. To render the field in yo
 ```php
 <?= $page->list() ?>
 ```
+
+(docs: panel-field-update field: list)

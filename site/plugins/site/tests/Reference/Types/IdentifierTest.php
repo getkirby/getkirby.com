@@ -9,6 +9,21 @@ use ReferenceClassPage;
 #[CoversClass(Identifier::class)]
 class IdentifierTest extends TestCase
 {
+	public function testExists(): void
+	{
+		$this->assertTrue(Identifier::exists('stdClass'));
+		$this->assertTrue(Identifier::exists('Countable'));
+		$this->assertTrue(Identifier::exists('Kirby\Cms\HasSiblings'));
+		$this->assertTrue(Identifier::exists('Kirby\Cms\App'));
+
+		// the case has to match
+		$this->assertFalse(Identifier::exists('stdclass'));
+		$this->assertFalse(Identifier::exists('Kirby\Cms\app'));
+
+		$this->assertFalse(Identifier::exists('Foo'));
+		$this->assertFalse(Identifier::exists('TValue'));
+	}
+
 	public function testToHtml(): void
 	{
 		// unknown
@@ -64,5 +79,17 @@ class IdentifierTest extends TestCase
 
 		$identifier = new Identifier('$page');
 		$this->assertSame('Kirby\Cms\Page', $identifier->toString());
+	}
+
+	public function testToStringShort(): void
+	{
+		$identifier = new Identifier('\Kirby\Cms\App');
+		$this->assertSame('App', $identifier->toString(short: true));
+
+		$identifier = new Identifier('$page');
+		$this->assertSame('Page', $identifier->toString(short: true));
+
+		$identifier = new Identifier('stdClass');
+		$this->assertSame('stdClass', $identifier->toString(short: true));
 	}
 }

@@ -43,10 +43,13 @@ Let's start with creating a plugin folder `/pdfpreview` in `/site/plugins` and a
 
 use Kirby\Cms\App as Kirby;
 
-Kirby::plugin('cookbook/pdfpreview', [
-  'hooks'       => [],
-  'fileMethods' => [],
-]);
+Kirby::plugin(
+  name: 'cookbook/pdfpreview',
+  extends: [
+    'hooks'       => [],
+    'fileMethods' => [],
+  ]
+);
 ```
 
 ## Extend ImageMagick class
@@ -203,10 +206,13 @@ load([
     'cookbook\\pdfpreview\\pdfpreview' => 'classes/PdfPreview.php'
 ], __DIR__);
 
-Kirby::plugin('cookbook/pdfpreview', [
-  'hooks'       => [],
-  'fileMethods' => [],
-]);
+Kirby::plugin(
+  name: 'cookbook/pdfpreview',
+  extends: [
+    'hooks'       => [],
+    'fileMethods' => [],
+  ]
+);
 ```
 
 We are all set to use the new class.
@@ -230,23 +236,26 @@ load([
     'cookbook\\pdfpreview\\pdfpreview' => 'classes/PdfPreview.php'
 ], __DIR__);
 
-Kirby::plugin('cookbook/pdfpreview', [
-    'hooks' => [
-        'file.create:after' => function ($file) {
-            // only create preview for PDF files
-            if ($file->mime() === 'application/pdf') {
-                $options    = [
-                    'quality'    => 100,
-                    'page'       => 0,
-                    'density'    => 300,
-                ];
-                $darkroom = new PdfPreview();
-                $darkroom->process($file->root(), $options);
+Kirby::plugin(
+    name: 'cookbook/pdfpreview',
+    extends: [
+        'hooks' => [
+            'file.create:after' => function ($file) {
+                // only create preview for PDF files
+                if ($file->mime() === 'application/pdf') {
+                    $options    = [
+                        'quality'    => 100,
+                        'page'       => 0,
+                        'density'    => 300,
+                    ];
+                    $darkroom = new PdfPreview();
+                    $darkroom->process($file->root(), $options);
+                }
             }
-        }
-    ],
-    'fileMethods' => []
-]);
+        ],
+        'fileMethods' => []
+    ]
+);
 ```
 Set the options as required, for the available options see the `default()` method in the `PdfPreview` class.
 
@@ -286,36 +295,39 @@ load([
     'cookbook\\pdfpreview\\pdfpreview' => 'classes/PdfPreview.php'
 ], __DIR__);
 
-Kirby::plugin('cookbook/pdfpreview', [
-    'hooks' => [
-        // …hook code here
-    ],
-    'fileMethods' => [
-        'preview' => function (array $options = [], bool $force = false): File {
-            // only create preview for PDF files
-            if ($this->mime() !== 'application/pdf') {
-                throw new Exception('File is not a PDF file');
+Kirby::plugin(
+    name: 'cookbook/pdfpreview',
+    extends: [
+        'hooks' => [
+            // …hook code here
+        ],
+        'fileMethods' => [
+            'preview' => function (array $options = [], bool $force = false): File {
+                // only create preview for PDF files
+                if ($this->mime() !== 'application/pdf') {
+                    throw new Exception('File is not a PDF file');
+                }
+                // force page
+                $options['page'] ??= 0;
+                $extension   = $options['format'] ?? 'jpg';
+                $previewName = $this->name() . '.' . $extension;
+                $outputPath  = Str::replace($this->root(), '.pdf', '.' . $extension);
+                // only create the file if `$force` is set to true or
+                // it doesn't exist yet or the PDF file is newer than the preview image
+                if ($force === true || !F::exists($outputPath) || (F::modified($outputPath) < $this->modified())) {
+                    // create a new PdfPreview instance
+                    $darkRoom = new PdfPreview();
+                    $darkRoom->process($this->root(), $options);
+                }
+                // return a new File object
+                return new File([
+                    'filename' => $previewName,
+                    'parent'   => $this->parent(),
+                ]);
             }
-            // force page
-            $options['page'] ??= 0;
-            $extension   = $options['format'] ?? 'jpg';
-            $previewName = $this->name() . '.' . $extension;
-            $outputPath  = Str::replace($this->root(), '.pdf', '.' . $extension);
-            // only create the file if `$force` is set to true or
-            // it doesn't exist yet or the PDF file is newer than the preview image
-            if ($force === true || !F::exists($outputPath) || (F::modified($outputPath) < $this->modified())) {
-                // create a new PdfPreview instance
-                $darkRoom = new PdfPreview();
-                $darkRoom->process($this->root(), $options);
-            }
-            // return a new File object
-            return new File([
-                'filename' => $previewName,
-                'parent'   => $this->parent(),
-            ]);
-        }
+        ]
     ]
-]);
+);
 ```
 
 Our `preview()` file method accepts two parameters: an `$options` array and a boolean `$force` which determines if the file should be recreated when the method is called.

@@ -13,7 +13,7 @@ class ReferenceValidatorsPage extends ReferenceSectionPage
 		}
 
 		$children   = [];
-		$validators = array_keys(V::$validators);
+		$validators = $this->getValidators();
 		$pages      = parent::children();
 
 		foreach ($validators as $validator) {
@@ -31,5 +31,37 @@ class ReferenceValidatorsPage extends ReferenceSectionPage
 		}
 
 		return $this->children = Pages::factory($children, $this);
+	}
+
+	/**
+	 * Returns the names of all default validators
+	 */
+	protected function getValidators(): array
+	{
+		$reflection = new ReflectionClass(V::class);
+		$validators = [];
+		$methods    = $reflection->getMethods(
+			ReflectionMethod::IS_PUBLIC | ReflectionMethod::IS_STATIC
+		);
+
+		foreach ($methods as $method) {
+			if ($method->getDeclaringClass()->getName() !== V::class) {
+				continue;
+			}
+
+			if ((string)$method->getReturnType() !== 'bool') {
+				continue;
+			}
+
+			if (($method->getParameters()[0] ?? null)?->getName() !== 'value') {
+				continue;
+			}
+
+			$validators[] = $method->getName();
+		}
+
+		sort($validators);
+
+		return $validators;
 	}
 }

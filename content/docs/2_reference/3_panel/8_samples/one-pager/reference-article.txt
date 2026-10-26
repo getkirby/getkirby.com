@@ -18,10 +18,10 @@ This blueprint samples show how to setup a simple one pager using subpages for t
 title: One Pager
 icon: 📔
 
-sections:
+fields:
   parts:
     label: Parts
-    type: pages
+    type: pagelist
     status: all
     info: "{{ page.intendedTemplate }}"
     image: false
@@ -66,9 +66,9 @@ fields:
 title: Hero slider section
 icon: image
 
-sections:
+fields:
   images:
-    type: files
+    type: filelist
     template: pager-hero
     layout: cards
     info: "{{ file.caption }}"

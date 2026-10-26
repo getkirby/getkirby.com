@@ -17,13 +17,13 @@ karbon_last_updated: 2026-10-13
 karbon_disclosures:
 
 - doc_type: sustainability-page
-	url: https://getkirby.com/sustainability
-	title: Sustainability Page
+  url: https://getkirby.com/sustainability
+  title: Sustainability Page
 ----
 
 karbon_services:
 
 - domain: hetzner.com
-	service_type: hosting-provider
+  service_type: hosting-provider
 - domain: keycdn.com
-	service_type: content-delivery-network
+  service_type: content-delivery-network

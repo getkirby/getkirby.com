@@ -9,25 +9,28 @@ This can be used to dynamically register additional extensions based on a config
 ```php
 <?php
 
-Kirby::plugin('superwoman/superplugin', [
-    'hooks' => [
-        'system.loadPlugins:after' => function () {
-            // access any Kirby object using kirby(), site() or page()
-            $uri = site()->content()->blogPage();
+Kirby::plugin(
+    name: 'superwoman/superplugin',
+    extends: [
+        'hooks' => [
+            'system.loadPlugins:after' => function () {
+                // access any Kirby object using kirby(), site() or page()
+                $uri = site()->content()->blogPage();
 
-            // register additional extensions like you would
-            // directly in the Kirby::plugin() call
-            kirby()->extend([
-                'routes' => [
-                    [
-                        'pattern' => $uri,
-                        'action'  => function () {
-                            // ...
-                        }
+                // register additional extensions like you would
+                // directly in the Kirby::plugin() call
+                kirby()->extend([
+                    'routes' => [
+                        [
+                            'pattern' => $uri,
+                            'action'  => function () {
+                                // ...
+                            }
+                        ]
                     ]
-                ]
-            ], kirby()->plugin('superwoman/superplugin'));
-        }
+                ], kirby()->plugin('superwoman/superplugin'));
+            }
+        ]
     ]
-]);
+);
 ```
