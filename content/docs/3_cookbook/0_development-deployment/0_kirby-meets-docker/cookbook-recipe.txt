@@ -325,7 +325,7 @@ We can inspect the image with
 docker image inspect docker-starterkit
 ```
 
-The output of this command will provide us with quite a bit of information about the image. The information that interests us at the moment is the number of layers. The exact number of layers depends on the base image, but the last 4 layers are the ones we added to the base image with the four `RUN` commands in our Dockerfile.
+The output of this command will provide us with quite a bit of information about the image. The information that interests us at the moment is the number of layers. The exact number of layers depends on the base image, but the last four layers are the ones we added to the base image with the four `RUN` commands in our Dockerfile.
 
 Every content change we make to the image adds a new layer.
 
