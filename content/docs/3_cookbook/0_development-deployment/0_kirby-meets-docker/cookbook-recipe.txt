@@ -35,14 +35,14 @@ On a side note: Many services and tools like CI/CD pipelines today rely on Docke
 
 ## Prerequisites
 
-- Docker and Docker Compose must be installed on your computer (see below where to go for instructions)
+- Docker must be installed on your computer (see below where to go for instructions). Docker Compose is part of Docker Desktop; on Linux it is installed as the `docker-compose-plugin` package
 - You are willing to enter a few commands on the command line
 - Basic familiarity with Linux and shell scripting is helpful for easier understanding but not required to follow along
 - A text/code editor, e.g. VS Code or similar
 
 ## Disclaimer
 
-This recipe has been tested on macOS Big Sur and Ubuntu 20.04.
+This recipe was originally tested on macOS Big Sur and Ubuntu 20.04. The examples were last re-tested in November 2026 on macOS with Docker 29 and Docker Compose v5.
 
 ## What is Docker?
 
@@ -57,12 +57,12 @@ In this recipe, containerizing an application will mean that we take the Starter
 Before we can start, you will have to install the Docker Engine on your computer. We won't be going into this in this recipe, because you can follow the official documentation, which you can find here for your OS:
 
 - (link: https://docs.docker.com/engine/install/ text: Linux)
-- (link: https://docs.docker.com/docker-for-mac/install/ text: macOS)
-- (link: https://docs.docker.com/docker-for-windows/install/ text: Windows)
+- (link: https://docs.docker.com/desktop/setup/install/mac-install/ text: macOS)
+- (link: https://docs.docker.com/desktop/setup/install/windows-install/ text: Windows)
 
 Or if you prefer video instructions, head down to the list of resources at the end of this recipe.
 
-You will also have to install (link: https://docs.docker.com/compose/install/ text: Docker Compose), because it greatly facilitates running multiple containers with different services, and we will of course have examples of using Docker Compose in this recipe.
+You will also need (link: https://docs.docker.com/compose/install/ text: Docker Compose), because it greatly facilitates running multiple containers with different services, and we will of course have examples of using Docker Compose in this recipe. Docker Desktop for macOS and Windows already includes it; on Linux, install the `docker-compose-plugin` package alongside the engine.
 
 ## Warm up
 
@@ -79,13 +79,16 @@ This will output the installed Docker version.
 With…
 
 ```bash
-docker-compose -v
+docker compose version
 ```
 
 …we get the currently installed Docker Compose version.
 
+<info>
+Older tutorials use a standalone `docker-compose` command (with a hyphen). Since Compose v2, Compose is a plugin of the `docker` command, so we use `docker compose` throughout this recipe.
+</info>
 
-Perfect! With `docker` and `docker-compose` you have learned the two basic commands that will guide us through the rest of this recipe.
+Perfect! With `docker` and `docker compose` you have learned the two basic commands that will guide us through the rest of this recipe.
 
 ## Docker Hub
 
@@ -106,7 +109,7 @@ Let's use one of the images available on Docker Hub to quickly spin up Kirby's S
 Create a new folder somewhere in your file system, e.g. `~/docker-example-1` (where `~` stands for your user folder), and inside that newly created folder create a file called `Dockerfile` (exactly like this: with a capital D and no extension).
 
 ```Dockerfile "~/docker-example-1/Dockerfile"
-FROM webdevops/php-apache-dev:8.1
+FROM webdevops/php-apache-dev:8.3
 RUN apt-get update && apt-get install -y git
 RUN git clone --depth 1 https://github.com/getkirby/starterkit.git /app
 ```
@@ -114,10 +117,10 @@ RUN git clone --depth 1 https://github.com/getkirby/starterkit.git /app
 A Dockerfile is a simple text file with instructions that tell Docker which steps to perform to create a Docker image. In most cases you will start from an existing Docker image (i.e. some Linux distribution). This is done using the `FROM` keyword that always goes on the first line of the Dockerfile. In our example:
 
 ```Dockerfile
-FROM webdevops/php-apache-dev:8.1
+FROM webdevops/php-apache-dev:8.3
 ```
 
-As mentioned above, this image has everything we need to run Kirby (and a lot of stuff we don't need). `webdevops/php-apache-dev` refers to the namespace and repo on Docker Hub, and `8.1` is the tag of the image we want to use in this example. Just on a side note, there are many different variations of this image available with different PHP versions etc.
+As mentioned above, this image has everything we need to run Kirby (and a lot of stuff we don't need). `webdevops/php-apache-dev` refers to the namespace and repo on Docker Hub, and `8.3` is the tag of the image we want to use in this example. Just on a side note, there are many different variations of this image available with different PHP versions etc. Make sure to pick a PHP version that is (link: docs/guide/quickstart#requirements text: supported by your Kirby version); the current Starterkit requires PHP 8.2 or newer.
 
 In the next line, we use
 
@@ -147,7 +150,7 @@ docker build -t docker-starterkit .
 
 This command builds an image from the Dockerfile in the current path with the repo name `docker-starterkit`. Don't forget the dot at the end, it provides the context where the code (in this case only the Dockerfile itself) is located, i.e. the current directory.
 
-When we run this command, Docker will download the specified image `webdevops/php-apache-dev:8.1` from Docker Hub if it doesn't exist locally yet. In future iterations the local copy of the image will be used.
+When we run this command, Docker will download the specified image `webdevops/php-apache-dev:8.3` from Docker Hub if it doesn't exist locally yet. In future iterations the local copy of the image will be used.
 
 Let's learn another command. With…
 
@@ -216,7 +219,7 @@ For our first example, we used an unofficial (yet well documented) image from Do
 Let's change the Dockerfile a bit by running one more command that changes the file ownership for the app folder:
 
 ```Docker "~/docker-example-1/Dockerfile"
-FROM webdevops/php-apache-dev:8.1
+FROM webdevops/php-apache-dev:8.3
 RUN apt-get update && apt-get install -y git
 RUN git clone --depth 1 https://github.com/getkirby/starterkit.git /app
 RUN chown -R application:application /app/
@@ -254,40 +257,20 @@ or the running container:
 docker container inspect mycontainer
 ```
 
-This will output a lot of information about the container, the part that interests us can be found in the `ENV` section down where it say `APPLICATION_USER` etc.:
+This will output a lot of information about the container, the part that interests us can be found in the `Env` section where it says `APPLICATION_USER`, `APPLICATION_PATH` and `WEB_DOCUMENT_ROOT` (abbreviated here):
 
 ```bash
 "Env": [
-      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
-      "PHP_INI_DIR=/usr/local/etc/php",
-      "PHP_EXTRA_CONFIGURE_ARGS=--enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --disable-cgi",
-      "PHP_CFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
-      "PHP_CPPFLAGS=-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64",
-      "PHP_LDFLAGS=-Wl,-O1 -pie",
-      "GPG_KEYS=1729F83938DA44E27BA0F4D3DBDB397470D12172 BFDDD28642824F8118EF77909B67A5C12229118F",
-      "PHP_VERSION=8.1.3",
-      "PHP_URL=https://www.php.net/distributions/php-8.1.3.tar.xz",
-      "PHP_ASC_URL=https://www.php.net/distributions/php-8.1.3.tar.xz.asc",
-      "PHP_SHA256=c9816aa9745a9695672951eaff3a35ca5eddcb9cacf87a4f04b9fb1169010251",
-      "TERM=xterm",
-      "LANG=C.UTF-8",
-      "LC_ALL=C.UTF-8",
-      "DOCKER_CONF_HOME=/opt/docker/",
-      "LOG_STDOUT=",
-      "LOG_STDERR=",
+      …
       "APPLICATION_USER=application",
       "APPLICATION_GROUP=application",
       "APPLICATION_PATH=/app",
       "APPLICATION_UID=1000",
       "APPLICATION_GID=1000",
-      "PHP_SENDMAIL_PATH=/usr/sbin/sendmail -t -i",
-      "COMPOSER_VERSION=2",
+      …
       "WEB_DOCUMENT_ROOT=/app",
       "WEB_DOCUMENT_INDEX=index.php",
-      "WEB_ALIAS_DOMAIN=*.vm",
-      "WEB_PHP_TIMEOUT=600",
-      "WEB_PHP_SOCKET=127.0.0.1:9000",
-      "WEB_NO_CACHE_PATTERN=\\.(css|js|gif|png|jpg|svg|json|xml)$"
+      …
   ],
 ```
 
@@ -342,7 +325,7 @@ We can inspect the image with
 docker image inspect docker-starterkit
 ```
 
-The output of this command will provide us with quite a bit of information about the image. The information that interests us at the moment is the number of layers. The new image now contains 23 layers, 3 of which we added to the base image with the three `RUN` commands in our Dockerfile.
+The output of this command will provide us with quite a bit of information about the image. The information that interests us at the moment is the number of layers. The exact number of layers depends on the base image, but the last four layers are the ones we added to the base image with the four `RUN` commands in our Dockerfile.
 
 Every content change we make to the image adds a new layer.
 
@@ -367,20 +350,18 @@ In a new folder, e.g. `~/docker-example-2` create a new `Dockerfile`. This time,
 ### Dockerfile
 
 ```Dockerfile "~/docker-example-2/Dockerfile"
-# Use latest offical ubuntu image
-FROM ubuntu:latest
+# Use the official Ubuntu 24.04 LTS image. We pin a release instead of using
+# `latest`, because `latest` moves to a new Ubuntu (and PHP) version every two years
+FROM ubuntu:24.04
 
-# Set timezone environment variable
-ENV TZ=Europe/Berlin
-
-# Set geographic area using above variable
-# This is necessary, otherwise building the image doesn't work
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-
-# Remove annoying messages during package installation
+# Prevent apt from asking interactive questions (e.g. for tzdata) during the build
 ARG DEBIAN_FRONTEND=noninteractive
 
-# Install packages: web server Apache, PHP and extensions
+# Set the container's timezone
+ENV TZ=Europe/Berlin
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+# Install packages: web server Apache, PHP and the extensions Kirby needs
 RUN apt-get update && apt-get install --no-install-recommends -y \
   apache2 \
   apache2-utils \
@@ -389,10 +370,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   php \
   libapache2-mod-php \
   php-curl \
-  php-dom \
   php-gd \
   php-intl \
-  php-json \
   php-mbstring \
   php-xml \
   php-zip && \
@@ -420,7 +399,7 @@ EXPOSE 80
 CMD [ "/usr/sbin/apache2ctl", "-DFOREGROUND" ]
 ```
 
-Some of this you will recognize from the first exercise, keywords like `FROM` and `RUN`. All other explanations are in the comments. You find a list of the most important Dockerfile keywords (link: #list-of-dockerfile-keywords text: at the end of this recipe).
+Some of this you will recognize from the first exercise, keywords like `FROM` and `RUN`. All other explanations are in the comments. Note that we pin a specific Ubuntu LTS release instead of using the `latest` tag: `latest` moves to a new Ubuntu release (and with it a new PHP version) every two years, which goes against our goal of a reproducible environment. You find a list of the most important Dockerfile keywords (link: #list-of-dockerfile-keywords text: at the end of this recipe).
 
 This time, we not only install Git, but also an Apache web server and PHP with some extensions.
 
@@ -508,31 +487,26 @@ Then copy the `default.conf` file from the last example into the new folder.
 Next to the `starterkit` folder, create a new Dockerfile. Our Dockerfile looks slightly different than before. This time, we don't need to install Git in the container, and we remove the steps that cloned the Starterkit and the commands that changed the files and directories ownership. With that done, our Dockerfile now looks like this:
 
 ```Dockerfile "~/docker-example-3/Dockerfile"
-# Use latest offical ubuntu image
-FROM ubuntu:latest
+# Use the official Ubuntu 24.04 LTS image (see example 2)
+FROM ubuntu:24.04
 
-# Set timezone
-ENV TZ=Europe/Berlin
-
-# Set geographic area using above variable
-# This is necessary, otherwise building the image doesn't work
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-
-# Remove annoying messages during package installation
+# Prevent apt from asking interactive questions (e.g. for tzdata) during the build
 ARG DEBIAN_FRONTEND=noninteractive
 
+# Set the container's timezone
+ENV TZ=Europe/Berlin
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 # Install packages: web server & PHP plus extensions
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install --no-install-recommends -y \
   apache2 \
   apache2-utils \
   ca-certificates \
   php \
   libapache2-mod-php \
   php-curl \
-  php-dom \
   php-gd \
   php-intl \
-  php-json \
   php-mbstring \
   php-xml \
   php-zip && \
@@ -568,7 +542,7 @@ There are several ways to tackle this problem, the easiest of which is probably 
 To get the UID of our local user we run the command `id -u` in our shell. On my Ubuntu computer I will get `1001` for the UID and this value will go into the command:
 
 ```Dockerfile
-# Change web server's IDs to match local user, replace with your local user and group IDs
+# Change web server's user ID to match local user, replace with your local user ID
 RUN usermod --uid 1001 www-data
 ```
 
@@ -615,7 +589,7 @@ with
 
 ```Dockerfile
 COPY entrypoint.sh /usr/local/bin/
-ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 ```
 
 You already know the `COPY` command we used to copy files into the image, but the `ENTRYPOINT` command is new. Similar to the `CMD` command we got to know earlier, an `ENTRYPOINT` allows you to define commands that are executed at runtime of the container.
@@ -631,7 +605,9 @@ Our `entrypoint.sh` file is a little executable script which we have to create n
 
 set -e -u
 
-[[ $USERID ]] && usermod --uid "${USERID}" www-data
+if [[ -n "${USERID:-}" ]]; then
+  usermod --uid "${USERID}" www-data
+fi
 
 exec "$@"
 ```
@@ -642,7 +618,11 @@ When you have created this file, head back to your terminal and make it executab
 chmod +x entrypoint.sh
 ```
 
-What will this script do? It will change the UID of the `www-data` user in the container to the value of the host user (our local user) by picking up the environment variable that we pass to the container upon start-up.
+What will this script do? It will change the UID of the `www-data` user in the container to the value of the host user (our local user) by picking up the environment variable that we pass to the container upon start-up. Finally, `exec "$@"` runs whatever command was passed to the container, i.e. the `CMD` from our Dockerfile.
+
+<info>
+The `${USERID:-}` syntax matters here: because the script runs with `set -u`, referencing an unset variable would abort the script, and with it the container. The `:-` provides an empty default, so the container also starts when no `USERID` is passed.
+</info>
 
 Passing environment variables from the host to the container can also be done in various ways, here we will utilize a file which contains the variable and its value. To accomplish this, we can use the same commands as above to find out the value for our local user, but this time we will create a file which contains this value as environment variable in `var=value` format:
 
@@ -688,16 +668,15 @@ As we have seen in the last example, the `docker run` command is getting more co
 
 With (link: https://docs.docker.com/compose/ text: Docker Compose) we can define and run multi-container applications.
 
-Using Docker Compose gives us the advantage to start and stop multiple containers with a single command, to define dependencies between such containers, to define the network in which these containers run and more, all in a single `.yml` file that contains a few simple commands.
+Using Docker Compose gives us the advantage to start and stop multiple containers with a single command, to define dependencies between such containers, to define the network in which these containers run and more, all in a single `.yaml` file that contains a few simple commands.
 
 For example, if you were to use a CMS that required a database, you would start a web server in one container, and a MySQL database in a second container and maybe also phpMyAdmin in a third. Or you could spin up a tool like (link: https://github.com/axllent/mailpit text: MailPit) in a container that would catch emails sent from forms for local testing. And this last option is exactly what we want to do here.
 
-### Create docker-compose.yml file
+### Create compose.yaml file
 
-Let's start with a single service, the web server, and just rebuild what we have done so far. Create a file called `docker-compose.yml` with the following code:
+Let's start with a single service, the web server, and just rebuild what we have done so far. Create a file called `compose.yaml` with the following code:
 
-```yaml "~/docker-example-4/docker-compose.yml"
-version: '3'
+```yaml "~/docker-example-4/compose.yaml"
 services:
   webserver:
     build: .
@@ -711,11 +690,13 @@ services:
       - ./id.env
 ```
 
-### `docker-compose.yml` explained
+### `compose.yaml` explained
 
-A `docker-compose.yml` file always starts with the Docker Compose version number. The current minor version at the time of writing this recipe is 3.8.
+The first top level keyword in a `compose.yaml` file is `services`, which is followed by an indented list of named services. The names of these services are arbitrary, but of course it makes sense to give them names that indicate their purpose. In the file above, we currently have only one service called `webserver`.
 
-After that, the next top level keyword is `services`, which is followed by an indented list of named services. The names of these services are arbitrary, but of course it makes sense to give them names that indicate their purpose. In the file above, we currently have only one service called `webserver`.
+<info>
+Older Compose files start with a `version:` line. This key is obsolete in the Compose specification and current versions of Docker Compose print a warning if it is present, so we leave it out.
+</info>
 
 Each service container can either be created from an existing image using the `image` keyword, or from a Dockerfile using the `build` keyword, as in our example. The dot indicates that we want to use the Dockerfile contained in the current path. Here the additional `image` keyword defines the name of our image (`docker-starterkit`).
 
@@ -727,31 +708,42 @@ With `volumes`, we mount our local `starterkit` folder into the web root of the 
 
 And with `env_file`, we pass the environment variables via the `id.env` file like before.
 
-You can find more information about the Docker Compose file syntax in the (link: https://docs.docker.com/compose/compose-file/ text: Docker Compose file reference).
+You can find more information about the Docker Compose file syntax in the (link: https://docs.docker.com/reference/compose-file/ text: Docker Compose file reference).
 
 As you may have noticed, we did not use the full path to the starterkit folder (or the command substitution `pwd`) like before. Docker Compose is able to expand relative paths and environment variables by its own. Let's verify this with
 
 ```bash
-docker-compose config
+docker compose config
 ```
 
-This will output the contents of the `docker-compose.yml` file with the expanded file paths and environment variables:
+This will output the contents of the `compose.yaml` file in its normalized form, with the expanded file paths and environment variables:
 
 ```yaml
+name: docker-example-4
 services:
   webserver:
     build:
-      context: /Users/sonja/dockerstuff/docker-example-3
+      context: /Users/sonja/dockerstuff/docker-example-4
+      dockerfile: Dockerfile
     container_name: webserver
     environment:
-      USERID: '1001'
+      USERID: "1001"
     image: docker-starterkit
+    networks:
+      default: null
     ports:
-    - published: 80
-      target: 80
+      - mode: ingress
+        target: 80
+        published: "80"
+        protocol: tcp
     volumes:
-    - /Users/sonja/dockerstuff/docker-example-3/starterkit:/var/www/html:rw
-version: '3'
+      - type: bind
+        source: /Users/sonja/dockerstuff/docker-example-4/starterkit
+        target: /var/www/html
+        bind: {}
+networks:
+  default:
+    name: docker-example-4_default
 ```
 
 We also need all the other files from `docker-example-3`, which you can just copy into the new folder.
@@ -763,7 +755,7 @@ docker-example-4/
   starterkit/
   default.conf
   Dockerfile
-  docker-compose.yml
+  compose.yaml
   entrypoint.sh
   id.env
 ```
@@ -775,7 +767,7 @@ That was a lot of new stuff, but we are finally in a position to start this whol
 In a terminal, in the `docker-example-4` folder, run the command
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 This will try to start up the container. The `-d` parameter means that the service runs in detached mode in the background.
@@ -785,25 +777,24 @@ Now try and visit `http://localhost` in your browser and celebrate if everything
 When you are done poking around, stop and remove the container again with:
 
 ```bash
-docker-compose down
+docker compose down
 ```
 
-Note that unlike `docker stop`, `docker-compose down` not only stops but also removes the container. You can verify this with `docker ps -a`.
+Note that unlike `docker stop`, `docker compose down` not only stops but also removes the container. You can verify this with `docker ps -a`.
 
 We've come a long way by now. As our last exercise with Docker, let's add another service that we can then use together with Kirby to test sending emails from forms, for example.
 
 
 ### Add MailPit service
 
-MailPit is a tool that intercepts outgoing mail, see our (link: docs/cookbook/forms/using-mailpit-for-email-testing text: MailPit recipe). All that we have to change to make this work is the `docker-compose.yml` file:
+MailPit is a tool that intercepts outgoing mail, see our (link: docs/cookbook/forms/using-mailpit-for-email-testing text: MailPit recipe). All that we have to change to make this work is the `compose.yaml` file:
 
-```yaml
-version: '3'
+```yaml "~/docker-example-4/compose.yaml"
 services:
   webserver:
     build: .
     image: docker-starterkit
-    container_name: kirbyserver
+    container_name: webserver
     ports:
       - "80:80"
     volumes:
@@ -811,23 +802,26 @@ services:
     env_file:
       - ./id.env
   mailpit:
-      container_name: mailpit
-      image: axllent/mailpit:latest
-      restart: unless-stopped
-      hostname: mailpit
-      volumes:
-        - ./data:/data
-      ports:
-        - "1025:1025"
-        - "8025:8025"
+    image: axllent/mailpit:latest
+    container_name: mailpit
+    restart: unless-stopped
+    environment:
+      MP_DATABASE: /data/mailpit.db
+    volumes:
+      - ./data:/data
+    ports:
+      - "1025:1025"
+      - "8025:8025"
 ```
 
-We give the `mailpit` service an alias with `hostname: mailpit`, so that we can use this name when setting the email transport configuration for Kirby in the next step.
+Docker Compose puts all services of a project on a shared network, on which each container is reachable under its service name. We can therefore use `mailpit` as the SMTP host when setting the email transport configuration for Kirby in the next step.
+
+The `MP_DATABASE` environment variable tells MailPit to store its mail in the mounted `./data` folder, so that the inbox survives a restart of the container. Without it, MailPit only keeps mail in memory and the volume would never be used.
 
 When we now start up the containers again with…
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 …Docker will pull the latest MailPit image and start up both containers.
@@ -851,7 +845,7 @@ In our config file, we need to add the following (link: docs/reference/system/op
 'email' => [
   'transport' => [
     'type' => 'smtp',
-    // use the hostname defined in the docker compose file
+    // the service name defined in the compose file
     'host' => 'mailpit',
     // the ports needs to be the port inside the container,
     // i.e. 1025 no matter what you use locally
@@ -872,12 +866,12 @@ Instead of setting up a form, we simply add a route that tries to send an email 
         kirby()->email([
           'from' => 'welcome@supercompany.com',
           'to'   => [
-            'someone@gmail.com',
-            'numbertwo@gmail.com'
+            'someone@example.com',
+            'numbertwo@example.com'
           ],
           'subject' => 'Welcome!',
           'body' => 'It\'s super to have you with us',
-        ]);;
+        ]);
       } catch (Exception $e) {
           return new Kirby\Http\Response($e->getMessage(), 'text/plain');
       }
@@ -935,7 +929,7 @@ Once the changes are saved, the image rebuilt and a new container started, you s
 | VOLUME | Creates a mount point with the specified name and marks it as holding externally mounted volumes from native host or other containers |
 | WORKDIR | Sets the working directory for any RUN, CMD, ENTRYPOINT, COPY and ADD instructions that follow it in the Dockerfile |
 
-More in the (link: https://docs.docker.com/engine/reference/builder/ text: Dockerfile reference).
+More in the (link: https://docs.docker.com/reference/dockerfile/ text: Dockerfile reference).
 
 ## Docker commands used in this recipe
 
@@ -946,6 +940,10 @@ More in the (link: https://docs.docker.com/engine/reference/builder/ text: Docke
 - `docker images`: Shows all available images
 - `docker rmi <imagename/id>`: Removes the given image(s)
 - `docker inspect <image_or_container-name>`: Inspects an image or container
+- `docker rm <container>`: Removes the given container(s)
+- `docker exec -it <container> <command>`: Runs a command (e.g. an interactive shell) in a running container
+- `docker compose up -d`: Builds (if necessary) and starts all services of a Compose project in the background
+- `docker compose down`: Stops and removes the containers of a Compose project
 
 ## Where to go from here
 
