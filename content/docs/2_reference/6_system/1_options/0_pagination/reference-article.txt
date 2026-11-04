@@ -1,0 +1,45 @@
+Intro: Options for collection pagination
+
+----
+
+Text:
+
+## Global pagination limit
+
+By default, the global pagination limit is 20. You can set a different global limit in your config …
+
+```php "/site/config/config.php"
+return [
+  'pagination' => [
+		'limit' => 50
+	]
+];
+```
+
+## Global pagination variable
+
+`page` is being used globally as URL parameter to set the current page. You can change this to something else and your URLs will change accordingly:
+
+```php "/site/config/config.php"
+return [
+  'pagination' => [
+		'variable' => 'pagina'
+	]
+];
+```
+
+Example URL: `https://example.com/blog/pagina:2`
+
+## Global pagination method
+
+If you don’t like Kirby’s custom pagination parameter style in the URL path, you can switch to classic queries instead:
+
+```php "/site/config/config.php"
+return [
+  'pagination' => [
+		'method' => 'query'
+	]
+];
+```
+
+Example URL: `https://example.com/blog/?page=2`
