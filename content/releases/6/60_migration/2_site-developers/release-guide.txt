@@ -2,7 +2,7 @@ Title: For site developers
 
 ----
 
-Intro: Everything you need to move a Kirby 5 site to Kirby 6 beta.2: what breaks, how to spot it and what to change, with before and after code for every step.
+Intro: Everything you need to move a Kirby 5 site to Kirby 6 beta.3: what breaks, how to spot it and what to change, with before and after code for every step.
 
 ----
 
@@ -11,7 +11,7 @@ Text:
 ## Before you start
 
 <warning>
-Kirby 6 beta.2 is not ready for production. Make a backup and test the update on a copy of your site, including the `content` folder.
+Kirby 6 beta.3 is not ready for production. Make a backup and test the update on a copy of your site, including the `content` folder.
 </warning>
 
 This guide will navigate you through the main breaking changes that can affect a site, sorted by where you'll run into it: requirements, config, blueprints, templates, content, queries, users and permissions, the Panel and custom PHP code. At the end, you'll find (link: #how-to-perform-the-update text: how to perform the update) and a (link: #checklist text: checklist) to work through.
@@ -395,6 +395,20 @@ The `style` option of the `video` KirbyTag has been removed to protect against s
 }
 ```
 
+### Custom KirbyTags: `$tag->option()` removed
+
+`$tag->option()` and `$tag->options` no longer exist in KirbyTags. Read config options from the Kirby object instead:
+
+```php
+// Kirby 5
+$tag->option('thumbs.quality');
+
+// Kirby 6
+$tag->kirby()->option('thumbs.quality');
+```
+
+If you call `Kirby\Text\KirbyTags::parse()` yourself, its third argument is `$debug` instead of an `$options` array: `KirbyTags::parse($text, $data, debug: true)`.
+
 ## Queries
 
 ### The new query runner is always on
@@ -460,6 +474,12 @@ throw new InvalidArgumentException(
 
 The default validators like `email`, `url` or `date` are now regular methods of `Kirby\Toolkit\V`. A custom validator with the same name as a core validator is ignored.
 
+### Logging in only works with email addresses
+
+Logging in with a password, a code or a password reset only accepts the user's email address. The same goes for the username of API basic auth. User IDs and UUIDs are no longer accepted, so check your login forms and API clients.
+
+`$kirby->user()`, `$kirby->users()->find()` and `$kirby->users()->findByKey()` still work with IDs, email addresses and UUIDs. To look up a user only by their email address, use the new `$kirby->users()->findByEmail()`.
+
 ### Frontend login forms
 
 If your site has its own login forms in the frontend, check them:
@@ -511,7 +531,7 @@ return [
 
 If you customize the Panel with `panel.css`, check your selectors and CSS properties:
 
-- **Removed CSS properties:** the deprecated Kirby 3 properties are gone, e.g. `--color-red` (use `--color-red-600`), `--color-background` (use `--panel-color-back`), `--color-text-light` (use `--color-text-dimmed`), `--font-size-small` (use `--text-sm`) or `--spacing-10` (use `2.5rem`).
+- **Removed CSS properties:** the deprecated Kirby 3 properties are gone, e.g. `--color-red` (use `--color-red-600`), `--color-background` (use `--panel-color-back`), `--color-text-light` (use `--color-text-dimmed`), `--font-size-small` (use `--text-sm`) or `--spacing-10` (use `2.5rem`). Newer deprecated properties have been removed as well: `--container`, `--field-input-padding`, `--field-input-height`, `--field-input-line-height` and `--field-input-font-size` (use `--input-padding`, `--input-height`, `--input-leading` and `--input-font-size`), `--bg-pattern` (use `--pattern`) as well as `--theme`, `--theme-light` and `--theme-bg` (use `--theme-color-700` and `--theme-color-500`).
 - **Sections** are now fields. Classes like `.k-pages-section` or `.k-files-section` no longer exist.
 - **Picker fields** use their full name in their class: `.k-pagepicker-field`, `.k-filepicker-field` and `.k-userpicker-field`.
 - **The `data-overlay` attribute** is no longer set. Use `:has(.k-overlay[open])` instead.
@@ -612,7 +632,7 @@ The deprecated collection methods `current()`, `next()`, `prev()`, `key()`, `rew
 
 ## How to perform the update
 
-Once your site code and plugins are ready, update Kirby itself. For beta.2, use the exact version `6.0.0-beta.2`, as described on the (link: releases/6/migration#install-beta-2 text: migration overview). Otherwise, our general update instructions apply:
+Once your site code and plugins are ready, update Kirby itself. For beta.3, use the exact version `6.0.0-beta.3`, as described on the (link: releases/6/migration#install-beta-3 text: migration overview). Otherwise, our general update instructions apply:
 
 - (link: docs/guide/install-guide/installation-via-download#updating-your-installation text: Update via download)
 - (link: docs/guide/install-guide/composer#updating-kirby text: Update via Composer)
@@ -655,12 +675,14 @@ Print this list or copy it into your project notes.
 - No functions named `push()`, `endpush()` or `stack()`
 - No template data named `$slot` or `$slots`
 - No `style` option in `video` KirbyTags
+- Custom KirbyTags use `$tag->kirby()->option()` instead of `$tag->option()`
 - `$language->isLast()` checked
 - `Uuid::for()` only with objects
 - No `current()`, `next()`, `prev()`, `key()`, `rewind()` or `valid()` calls on collections
 - Exceptions thrown with named arguments
 - Custom validators don't use core names
 - Frontend login forms use `authenticate()` and `$status->state()`
+- Login forms and API basic auth clients use email addresses, not user IDs or UUIDs
 - `user.changeTotp` hooks replaced with `user.changeSecret`
 - Optional: `$model->permissions()` replaced with `$model->guards()`
 

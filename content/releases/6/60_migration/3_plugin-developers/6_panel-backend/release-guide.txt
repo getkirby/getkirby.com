@@ -756,6 +756,9 @@ class MyPageViewController extends PageViewController
 | `$model->panel()->versions()` | `ModelViewController::versions()` |
 | `$model->panel()->view()` | `ModelViewController::load()` |
 | `$page->panel()->dropdown()`, `$file->panel()->dropdown()`, `$user->panel()->dropdown()` | `PageSettingsDropdownController`, `FileSettingsDropdownController`, `UserSettingsDropdownController` |
+| `$model->panel()->pickerData()` | `::item()` of `ModelPickerDialogController`, `FilePickerDialogController`, `PagePickerDialogController` or `UserPickerDialogController` |
+
+The deprecated `dropdownOption()` methods have been removed. Use the `Kirby\Panel\Ui\Item\FileItem`, `PageItem` and `UserItem` classes instead, or the `ModelItem` classes for the site and other models.
 
 `ModelViewController` is the base class of `SiteViewController`, `PageViewController`, `FileViewController`, `UserViewController` and their variants in `Kirby\Panel\Controller\View`, e.g. `PageViewController::factory('blog')` or `new PageViewController($page)`.
 
