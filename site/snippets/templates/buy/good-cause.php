@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var array $causes
+ */
+?>
 <style>
 @media (max-width: 40rem) {
 	.causes li:not(:first-child) {
@@ -25,24 +30,15 @@
 	</div>
 	<div>
 		<ul class="columns causes" style="--columns: 3; --gap: var(--spacing-12);">
-			<?php foreach (collection('cases/causes')->shuffle()->limit(6) as $case): ?>
+			<?php foreach ($causes as $case): ?>
 				<li>
-					<a href="<?= $case->link()->toUrl() ?>">
+					<a href="<?= $case['link'] ?>">
 						<figure>
 							<span class="block shadow-2xl mb-3" style="--aspect-ratio: 3/4">
-								<?= img($image = $case->image(), [
-									'alt' => $image->alt()->or('Screenshot of the ' . $case->title() . ' website'),
-									'src' => [
-										'width' => 300
-									],
-									'srcset' => [
-										400,
-										800,
-									]
-								]) ?>
+								<img src="<?= $case['cover'] ?>" alt="Screenshot of the <?= $case['title'] ?> website">
 							</span>
 							<figcaption class="text-sm">
-								<?= $case->title() ?>
+								<?= $case['title'] ?>
 							</figcaption>
 						</figure>
 					</a>
