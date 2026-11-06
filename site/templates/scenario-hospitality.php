@@ -86,7 +86,12 @@ snippet('templates/features/section', [
 
 <?php snippet('templates/scenarios/cases', [
 	'title' => 'Trusted by hosts world&#8209;wide',
-	'cases' => $kirby->collection('cases/hospitality'),
+	'cases' => showcase(
+		category: 'hospitality',
+		featured: true,
+		limit: 8,
+		shuffle: true
+	),
 ]) ?>
 
 <?php snippet('templates/scenarios/brands', [
