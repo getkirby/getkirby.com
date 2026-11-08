@@ -58,7 +58,7 @@ The following cache drivers are available:
 | ApcuCache | `apcu` | Driver for Apcu cache |
 | MemCached | `memcached` | Driver for Memcached cache server |
 | MemoryCache | `memory` | Driver for caching the current request in memory |
-| RedisCache | `redis` | Driver for Redis cache (since v5) |
+| RedisCache | `redis` | Driver for Redis cache |
 | NullCache | | Dummy Cache Driver (does not do any caching) |
 
 You can also set a registered custom cache driver here. Check out the plugin reference (link: docs/reference/plugins/extensions/cache-drivers text: how to create a custom cache driver).
