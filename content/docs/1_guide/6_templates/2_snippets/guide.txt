@@ -40,8 +40,6 @@ Snippet                     | In your template
 
 <info>
 If you want to organize snippets in subfolders, you can do so. In that case, you have to pass the path to the snippet to the snippet function:
-</info>
-
 
 Snippet                            | In your template
 -                                  | -
