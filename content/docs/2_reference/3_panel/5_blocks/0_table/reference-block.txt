@@ -78,4 +78,4 @@ if ($rows->isNotEmpty()):
 <?php endif; ?>
 ```
 
-If you don’t like the default preview, you can of course (link: docs/reference/panel/fields/blocks#preview-plugins text: create your own preview as well).
+If you don’t like the default preview, you can of course (link: docs/reference/plugins/extensions/blocks text: create your own preview as well).

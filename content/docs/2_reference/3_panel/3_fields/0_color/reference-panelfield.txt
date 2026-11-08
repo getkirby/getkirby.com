@@ -68,7 +68,7 @@ color:
 
 (image: color-field-options.png)
 
-If you name the colors, their name is shown in the Panel as well.
+If you name the colors, their name is shown in the Panel as well. Write each color as key and its name as value:
 
 ```yaml
 color:

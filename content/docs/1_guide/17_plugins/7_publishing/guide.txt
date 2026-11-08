@@ -73,7 +73,7 @@ Keep the `version` field in your `composer.json` in step with the tag. Users who
 
 ## Kirby versions support
 
-Your plugin should declare, which Kirby versions it does support. Our (link: https://plugins.getkirby.com text: plugin directory) works this out from your repository, so you never submit it by hand. It reads your `composer.json` once per release, which means the answer can differ between e.g. your 2.x and your 3.x releases.
+Your plugin should declare which Kirby versions it supports. Our (link: https://plugins.getkirby.com text: plugin directory) works this out from your repository, so you never submit it by hand. It reads your `composer.json` once per release, which means the answer can differ between e.g. your 2.x and your 3.x releases.
 
 ### In your `composer.json`
 
@@ -147,7 +147,7 @@ The directory refreshes when it next crawls your repository. If what it shows do
 
 ## Surviving the next Kirby major release
 
-Kirby tries often to deprecate functionality before it removes. When you use something that is on its way out, Kirby raises a PHP deprecation warning, which is visible while `debug` is on:
+Kirby usually deprecates functionality before it removes it. When you use something that is on its way out, Kirby raises a PHP deprecation warning, which is visible while `debug` is on:
 
 ```php "/site/config/config.php"
 return [
@@ -155,7 +155,9 @@ return [
 ];
 ```
 
-Run your plugin against a Kirby installation in debug mode before you release. A deprecation warning today is a fatal error two majors from now.
+In the Panel, deprecated components, props and helpers log a warning starting with `Deprecated:` in the browser console.
+
+Run your plugin against a Kirby installation in debug mode, with the browser console open, before you release. A deprecation warning today is a fatal error two majors from now.
 
 When a new Kirby major is released, work through its (link: docs/guide/updates text: upgrade guide) with your plugin the way you would with a site. If you have to drop support for an older Kirby, do it in a major release of your plugin and say so in the `README`, so users on the old version keep getting the old one from Composer.
 

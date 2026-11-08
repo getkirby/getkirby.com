@@ -4,7 +4,7 @@ Title: Changelog
 
 Text:
 
-This is the full changelog for **Kirby 6.0.0-beta.2**. In addition to all the features on the (link: releases/6 text: Kirby 6 release page), there are many more enhancements, breaking changes and deprecations in the fine print.
+This is the full changelog for **Kirby 6.0.0-beta.3**. In addition to all the features on the (link: releases/6 text: Kirby 6 release page), there are many more enhancements, breaking changes and deprecations in the fine print.
 
 Kirby 6 is still in beta. This changelog will be updated with every pre-release until the final 6.0.0 release. If you are upgrading an existing project, start with our (link: releases/6/migration text: migration guides).
 
@@ -95,6 +95,7 @@ Enhancements:
 - `Kirby\Toolkit\Date::optional()` accepts `DateTimeInterface` objects and UNIX timestamps
 - A field option with the wrong type in a blueprint shows a clear error message, e.g. `Field "title": The option "required" must be of type bool` [#8616](https://github.com/getkirby/kirby/pull/8616)
 - New `Kirby\Cms\Language::isLastLanguage()` method to check if a language is the only remaining one (the previous meaning of `isLast()`) [#8582](https://github.com/getkirby/kirby/pull/8582)
+- New `$users->findByEmail()` method to find a user only by email address [#8757](https://github.com/getkirby/kirby/pull/8757)
 
 ## For plugin developers
 
@@ -264,6 +265,7 @@ Security:
 - Panel components escape plain strings and only render HTML that has been marked as trusted (`Kirby\Toolkit\HtmlString`), e.g. in `<k-item>`, `<k-text>`, `<k-box>` and `<k-tags>`. The block pasteboard, block selector and installation view no longer use `v-html` at all. [#8344](https://github.com/getkirby/kirby/pull/8344) [#8348](https://github.com/getkirby/kirby/pull/8348)
 - Hardened security of `Kirby\Session\Session` (thx [@XananasX7](https://github.com/XananasX7))
 - The Panel checks the CSRF token for all its routes but views: dialogs, drawers, dropdowns, searches and request routes [#8659](https://github.com/getkirby/kirby/pull/8659)
+- Updated Symfony YAML library
 
 ----
 
@@ -320,6 +322,12 @@ Bugfixes:
   - `Kirby\Toolkit\Str::template()`: empty placeholders like `{}` or `{{ }}` stay as they are instead of failing with "Array to string conversion" [#8577](https://github.com/getkirby/kirby/pull/8577)
 - Field class names that contain `Field` in the middle, e.g. `FieldWithDialogsField`, no longer lose that part in their type [#8622](https://github.com/getkirby/kirby/pull/8622)
 - `Kirby\Cms\LazyCollection::data()` loads all elements before returning them, e.g. `$kirby->users()->data()` no longer returns an empty array [#8635](https://github.com/getkirby/kirby/pull/8635)
+- `Kirby\Toolkit\A::keyBy()` always plucks string keys, even if they are also names of PHP functions (e.g. `key`, `count` or `date`) [#8715](https://github.com/getkirby/kirby/pull/8715)
+- `Kirby\Data\Txt::encode()` no longer rounds integers with more than 14 digits
+- `Kirby\Toolkit\V::date()` with a `null` operator now checks the date on its own
+- `Kirby\Toolkit\V::input()` keeps `%` in validation messages
+- `Kirby\Toolkit\V::maxLength()` and `Kirby\Toolkit\V::minLength()` no longer trigger a PHP deprecation for `null` values
+- Reserved slugs (`api`, `assets`, `media`, `panel`) are also blocked when Kirby is installed in a subfolder [#8746](https://github.com/getkirby/kirby/pull/8746)
 
 ## Panel
 
@@ -341,6 +349,15 @@ Bugfixes:
 - The "Split" option is no longer missing from the block options on first render [#8447](https://github.com/getkirby/kirby/pull/8447)
 - A table column with `value: "0"` renders `0` instead of falling back to the field value [#8439](https://github.com/getkirby/kirby/pull/8439)
 - Sorting no longer breaks when a collection becomes sortable while the drag library is still loading [#8482](https://github.com/getkirby/kirby/pull/8482)
+- The move dialog no longer greys out the site as a target for top-level pages (`Kirby\Cms\Page::isMovableTo()` returned `false`)
+- `false` in a structure field's `columns` now hides the column instead of showing it with default settings. A string in a field's `columns` sets the column label, e.g. `title: Headline`.
+
+  ```yaml
+  columns:
+    title: Headline   # label shorthand
+    text: false       # hide this column
+    date: true        # default column
+  ```
 
 ----
 
@@ -370,6 +387,15 @@ Breaking:
 - `Kirby\Cms\Language::isLast()` checks the language's position in the languages collection, like `isLast()` for other models. Use the new `Kirby\Cms\Language::isLastLanguage()` to check if it is the only remaining language. [#8582](https://github.com/getkirby/kirby/pull/8582)
 - `Kirby\Filesystem\Dir::index()` no longer accepts `null` for the `$ignore` argument. Pass an empty array instead, an array of absolute paths, or `false` to disable the `Kirby\Filesystem\Dir::$ignore` list. [#8635](https://github.com/getkirby/kirby/pull/8635)
 - `Kirby\Http\Router::find()` no longer accepts `null` for the `$ignore` argument. Pass an empty array instead. [#8635](https://github.com/getkirby/kirby/pull/8635)
+- `Kirby\Toolkit\A::fill()` and `Kirby\Toolkit\A::keyBy()` no longer call strings as callables. Use a closure instead. [#8715](https://github.com/getkirby/kirby/pull/8715)
+- `Kirby\Cache\Cache::enabled()` is abstract. Custom cache drivers that extend `Kirby\Cache\Cache` directly must implement `enabled(): bool`. [#8734](https://github.com/getkirby/kirby/pull/8734)
+- Removed `Kirby\Toolkit\Component` [#8735](https://github.com/getkirby/kirby/pull/8735)
+- `Kirby\Cms\Responder::json()` now has the native return type `static` instead of `static|string`.
+- Removed the deprecated `$options` argument from `new Kirby\Text\KirbyTag()`, `Kirby\Text\KirbyTag::parse()` and `Kirby\Text\KirbyTags::parse()`. Pass `debug: true` to `Kirby\Text\KirbyTags::parse()` instead. `$debug` is now its third argument.
+- Removed deprecated methods
+  - `Kirby\Cms\Responder::markVolatileHeader()`. Use `$responder->volatileHeaders()->mark($name, $values)` instead.
+  - `Kirby\Text\KirbyTag::option()` and `Kirby\Text\KirbyTag::$options`. Use `$tag->kirby()->option()` instead.
+  - `Kirby\Email\Body::clone()` and `Kirby\Email\Email::clone()`
 
 ### Collections
 
@@ -441,7 +467,8 @@ Breaking:
 ### Permissions
 
 - Several i18n error keys and strings have changed [#8364](https://github.com/getkirby/kirby/pull/8364)
-- `Kirby\Cms\Permissions::for()` allows `null` as default [#8369](https://github.com/getkirby/kirby/pull/8369)
+- `Kirby\Cms\Permissions::for()` allows `null` as `$default` argument [#8369](https://github.com/getkirby/kirby/pull/8369)
+- `Kirby\Cms\Permissions::for()` requires a `$category` string, does not allow `null`.
 - Removed `Kirby\Cms\ModelPermissions::canFromCache()`. Use `$model->guards()->isAvailable()` instead. [#8481](https://github.com/getkirby/kirby/pull/8481)
 
 ### Forms
@@ -458,6 +485,7 @@ Breaking:
 - The model and siblings of a field are passed to the constructor as `model` and `siblings` arguments and can't be changed afterwards. There are no `setModel()` and `setSiblings()` methods. An initial value can be passed as `value` argument and is filled after all other props are set. [#8620](https://github.com/getkirby/kirby/pull/8620) [#8621](https://github.com/getkirby/kirby/pull/8621)
 - `files`, `pages` and `users` are no longer registered field types. They still work in blueprints and are mapped to `filepicker`, `pagepicker` and `userpicker`. Code that looks up a field class in `Kirby\Form\Field::$types` must use the new names. [#8622](https://github.com/getkirby/kirby/pull/8622)
 - Fields define their API routes in `Kirby\Form\Field::api()`, not in a `routes()` method
+- `Kirby\Form\Validations::boolean()`, `::date()`, `::email()`, `::max()`, `::maxlength()`, `::min()`, `::minlength()`, `::option()`, `::options()`, `::pattern()`, `::required()`, `::time()` and `::url()` now return `void` instead of `true`. They still throw an `InvalidArgumentException` when validation fails.
 - Removed `Kirby\Cms\Picker`, `Kirby\Cms\PagePicker`, `Kirby\Cms\FilePicker` and `Kirby\Cms\UserPicker`. Use `Kirby\Panel\Controller\Dialog\ModelPickerDialogController`, `Kirby\Panel\Controller\Dialog\PagePickerDialogController`, `Kirby\Panel\Controller\Dialog\FilePickerDialogController` and `Kirby\Panel\Controller\Dialog\UserPickerDialogController` instead. [#8395](https://github.com/getkirby/kirby/pull/8395)
 
 **Form class**
@@ -591,6 +619,7 @@ Sections have been replaced by fields (see "Sections become fields" above). Blue
 - Removed deprecated components
   - `<k-bubble>`, `<k-bubbles>` and `<k-bubbles-field-preview>`. Use `<k-tag>`, `<k-tags>` and `<k-tags-field-preview>` instead. [#7533](https://github.com/getkirby/kirby/pull/7533)
   - `<k-settings-view-button>` and `<k-status-view-button>`
+  - `<k-writer>`. Use `<k-writer-input>` instead.
 - Changes in components
   - Radio input does not support the `reset` option anymore. Use the toggles input instead. [#7385](https://github.com/getkirby/kirby/pull/7385)
   - `<k-panel-menu>` requires its props to be passed explicitly instead of using `$panel.menu` itself. [#7381](https://github.com/getkirby/kirby/pull/7381)
@@ -605,6 +634,8 @@ Sections have been replaced by fields (see "Sections become fields" above). Blue
   - `<k-progress>`: the `<progress>` element is now wrapped in a `<label>` [#8330](https://github.com/getkirby/kirby/pull/8330)
   - The `filepicker`, `pagepicker` and `userpicker` fields use their full name in CSS classes: `.k-filepicker-field`, `.k-pagepicker-field`, `.k-userpicker-field`
   - `image`, `gallery` and `video` block previews receive the file UUID instead of full file item data
+  - `<k-textarea-input>`: removed the deprecated `restoreSelectionCallback()`. Use `restoreSelection()` instead.
+  - `<k-writer-input>`: removed the deprecated `createMarksFromPanelPlugins()`, `createNodesFromPanelPlugins()` and `filterExtensions()`. Use `$helper.writer.availableMarksFromPlugins()`, `$helper.writer.availableNodesFromPlugins()` and `$helper.writer.filterExtensions()` instead.
 - View changes
   - Preview view: `versionId` parameter has been renamed to `mode` in view controller, buttons and Vue components [#7795](https://github.com/getkirby/kirby/pull/7795)
   - `k-login-view` and components have been refactored with breaking changes [#7840](https://github.com/getkirby/kirby/pull/7840)
@@ -668,6 +699,18 @@ Sections have been replaced by fields (see "Sections become fields" above). Blue
 | `--spacing-10`             | `2.5rem`                                |
 | `--spacing-20`             | `5rem`                                  |
 
+- Removed further deprecated CSS properties:
+
+| Removed                                  | Use instead                                 |
+| ---------------------------------------- | ------------------------------------------- |
+| `--container`                            | –                                           |
+| `--field-input-padding`                  | `--input-padding`                           |
+| `--field-input-height`                   | `--input-height`                            |
+| `--field-input-line-height`              | `--input-leading`                           |
+| `--field-input-font-size`                | `--input-font-size`                         |
+| `--bg-pattern`                           | `--pattern`                                 |
+| `--theme`, `--theme-light`, `--theme-bg` | `--theme-color-700` and `--theme-color-500` |
+
 ### Backend
 
 Moved and replaced classes and methods:
@@ -712,6 +755,10 @@ Moved and replaced classes and methods:
   - `fileResponse()`/`toFiles()`, `pageResponse()`/`toPages()` and `userResponse()`/`toUsers()` of the former `files`, `pages` and `users` field definitions. Use `Kirby\Form\Field\ModelPickerField::toItem()` and `Kirby\Form\Field\ModelPickerField::toFormValue()` instead. [#7528](https://github.com/getkirby/kirby/pull/7528)
   - `Kirby\Panel\Plugins::url()`. Use `Kirby\Panel\Plugins::css()` for the plugin stylesheet URLs and `Kirby\Panel\Plugins::js()` for the plugin script URLs. [#8603](https://github.com/getkirby/kirby/pull/8603)
   - `Kirby\Panel\Plugins::files()`, `Kirby\Panel\Plugins::modified()`, `Kirby\Panel\Plugins::read()` and the `Kirby\Panel\Plugins::$files` property. The new `Kirby\Panel\Plugins::resolve()` serves each plugin's stylesheet and script on its own. [#8603](https://github.com/getkirby/kirby/pull/8603)
+  - `Kirby\Panel\File::dropdownOption()`. Use `Kirby\Panel\Ui\Item\FileItem` instead.
+  - `Kirby\Panel\Page::dropdownOption()`. Use `Kirby\Panel\Ui\Item\PageItem` instead.
+  - `Kirby\Panel\User::dropdownOption()`. Use `Kirby\Panel\Ui\Item\UserItem` instead.
+  - `Kirby\Panel\Site::dropdownOption()` and `Kirby\Panel\Model::dropdownOption()`. Use the `Kirby\Panel\Ui\Item\ModelItem` classes instead.
 - Changed methods
   - `Kirby\Panel\Controller\Dialog\PageCreateDialogController` is initiated with a parent model (page/site) and the available blueprints [#7466](https://github.com/getkirby/kirby/pull/7466) [#8449](https://github.com/getkirby/kirby/pull/8449)
   - `Kirby\Panel\Panel` and `Kirby\Panel\Home` and their methods are non-static. Instead of `Kirby\Panel\Panel::router($path)`, use `$panel->router()?->call($path)`. [#7394](https://github.com/getkirby/kirby/pull/7394) [#7407](https://github.com/getkirby/kirby/pull/7407) [#7409](https://github.com/getkirby/kirby/pull/7409)
@@ -735,6 +782,7 @@ Moved and replaced classes and methods:
 - Removed `<k-login-form>`, `<k-login-code-form>` and the deprecated aliases `<k-login>` and `<k-login-code>` [#8045](https://github.com/getkirby/kirby/pull/8045)
 - The Panel login routes are multi-step now: `login/method/...` and `login/challenge/...`
 - The TOTP enable/disable dialogs (`Kirby\Panel\UserTotpEnableDialog`, `Kirby\Panel\UserTotpDisableDialog` and `<k-totp-dialog>`) have been replaced by `Kirby\Panel\Controller\Drawer\UserTotpDrawerController` and `<k-user-totp-drawer>` [#7445](https://github.com/getkirby/kirby/pull/7445)
+- Logging in (password, code, password reset and API basic auth) only accepts the user's email address. User IDs and UUIDs are no longer accepted. [#8757](https://github.com/getkirby/kirby/pull/8757)
 
 ----
 
@@ -818,6 +866,10 @@ Deprecated classes, methods, components and options keep working for now, but wi
 | `Kirby\Panel\Model::props()`          | `Kirby\Panel\Controller\View\ModelViewController::props()`                                                              |
 | `Kirby\Panel\Model::versions()`       | `Kirby\Panel\Controller\View\ModelViewController::versions()`                                                           |
 | `Kirby\Panel\Model::view()`           | `Kirby\Panel\Controller\View\ModelViewController::load()`                                                               |
+| `Kirby\Panel\Model::pickerData()`     | `Kirby\Panel\Controller\Dialog\ModelPickerDialogController::item()`                                                     |
+| `Kirby\Panel\File::pickerData()`      | `Kirby\Panel\Controller\Dialog\FilePickerDialogController::item()`                                                      |
+| `Kirby\Panel\Page::pickerData()`      | `Kirby\Panel\Controller\Dialog\PagePickerDialogController::item()`                                                      |
+| `Kirby\Panel\User::pickerData()`      | `Kirby\Panel\Controller\Dialog\UserPickerDialogController::item()`                                                      |
 | Global `pages/create` dialog endpoint | `create` dialog endpoint of a `pagelist` field                                                                          |
 
 ----
@@ -967,9 +1019,11 @@ Housekeeping:
 - The Panel code is formatted with Oxfmt instead of Prettier [#8592](https://github.com/getkirby/kirby/pull/8592)
 - Panel templates can be type-checked against all core components [#8593](https://github.com/getkirby/kirby/pull/8593)
 - Panel browser support is defined in one place: `panel/.browserslistrc` [#8450](https://github.com/getkirby/kirby/pull/8450)
+- Started using [Kirby PHP CS ruleset](https://github.com/getkirby/php-cs) for our PHP code style
 - Simplified PHP class docblocks [#7944](https://github.com/getkirby/kirby/pull/7944) and added docblocks to frontend files [#8220](https://github.com/getkirby/kirby/pull/8220)
   - Docblocks use short class names where the class has been imported via `use` [#8338](https://github.com/getkirby/kirby/pull/8338)
   - Started to remove types from docblocks that only repeat the native PHP type hints [#8250](https://github.com/getkirby/kirby/pull/8250)
+  - More precise parameter and return types, including generics, across many Toolkit classes
 
 ----
 

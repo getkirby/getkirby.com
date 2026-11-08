@@ -18,7 +18,7 @@ Your plugin needs a Git repository of its own, separate from the project you bui
 
 Host it wherever you like. GitHub, GitLab, Codeberg and a server of your own all work. What your users need is a URL they can clone and maybe somewhere to report bugs.
 
-GitHub is the most common choice for Kirby plugins, and two of the directory's conveniences are built around it: release info come from (link: docs/guide/plugins/publishing#declaring-which-kirby-versions-you-support__one-answer-per-release-line text: GitHub releases) and (link: docs/guide/plugins/publishing#declaring-which-kirby-versions-you-support__github-topics-as-a-fallback text: repository topics) can stand in for a missing `composer.json` constraint. Host elsewhere and you declare the same things in the `composer.json`, which the directory reads either way.
+GitHub is the most common choice for Kirby plugins, and two of the directory's conveniences are built around it: release info comes from (link: docs/guide/plugins/publishing#kirby-versions-support__support-per-release text: GitHub releases) and (link: docs/guide/plugins/publishing#kirby-versions-support__in-your-composer-json text: repository topics) can stand in for a missing `composer.json` constraint. Host elsewhere and you declare the same things in the `composer.json`, which the directory reads either way.
 
 ## The `composer.json`
 
@@ -51,7 +51,7 @@ A `composer.json` describes your plugin: what it is called, who wrote it, which 
 - `name` is what your users type after `composer require`. It is not the name you register with `Kirby::plugin()`, and by convention the two differ: `superwoman/kirby-anchor` as the package, `superwoman/anchor` as the plugin.
 - `description`, `license` and `authors` are what people see before they decide to install. Packagist shows them in search results, Kirby shows them in the Panel's system view. (link: docs/guide/plugins/licensing text: Licensing) covers what belongs in `license`.
 - `version` is the number your users see in the Panel and the one Kirby's update check compares against, so keep it in step with your Git tag. Composer will warn you about setting it by hand and reads the real version from its own metadata for Composer installs, but ZIP and submodule users have nothing else to go on. Passing `version` to `Kirby::plugin()` works as well and takes precedence over this field.
-- `extra.kirby.compatible` tells your users, and our plugin directory, which Kirby versions this release supports. Composer ignores `extra` when it resolves dependencies, so saying so costs your users nothing. (link: docs/guide/plugins/publishing#declaring-which-kirby-versions-you-support text: Declaring which Kirby versions you support) covers it in full.
+- `extra.kirby.compatible` tells your users, and our plugin directory, which Kirby versions this release supports. Composer ignores `extra` when it resolves dependencies, so saying so costs your users nothing. (link: docs/guide/plugins/publishing#kirby-versions-support text: Kirby versions support) covers it in full.
 
 ### Where Composer puts your plugin
 

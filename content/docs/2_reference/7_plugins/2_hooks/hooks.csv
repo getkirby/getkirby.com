@@ -51,7 +51,7 @@ site.changeTitle:after,"Kirby\Cms\Site $newSite, Kirby\Cms\Site $oldSite",trigge
 site.changeTitle:before,"Kirby\Cms\Site $site, string $title, ?string $languageCode = null",trigger,
 site.update:after,"Kirby\Cms\Site $newSite, Kirby\Cms\Site $oldSite",trigger,
 site.update:before,"Kirby\Cms\Site $site, array $values, array $strings",trigger,
-system.exception,"\Throwable $exception",trigger,
+system.exception,"Throwable $exception, bool $isLogged",apply,$isLogged
 system.loadPlugins:after,"",trigger,
 user.changeEmail:after,"Kirby\Cms\User $newUser, Kirby\Cms\User $oldUser",trigger,
 user.changeEmail:before,"Kirby\Cms\User $user, string $email",trigger,

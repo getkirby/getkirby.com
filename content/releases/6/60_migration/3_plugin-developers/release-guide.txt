@@ -20,7 +20,7 @@ Find your plugin type below and follow the links. Most plugins combine several t
 - **Section plugins:** Custom sections are no longer supported. Port them to fields: (link: #custom-sections text: what changes), (link: releases/6/migration/plugin-developers/sections text: Porting custom sections to fields).
 - **Panel UI plugins** (areas, views, dialogs, drawers, dropdowns, searches, view buttons): Your closures keep working. Static `Kirby\Panel\Panel` methods, a few area options, the "Fiber" naming and some core patterns have changed. Rebuild your Vue code for Vue 3 (see (link: #panel-frontend text: Panel frontend)). Read the (link: #panel-backend text: Panel backend summary) and (link: releases/6/migration/plugin-developers/panel-backend text: Panel backend: areas, controllers & UI classes).
 - **Block plugins:** Rebuild your preview components for Vue 3. Check your (link: #blueprints-shipped-with-your-plugin text: block blueprints) for presets and sections. The `image`, `gallery` and `video` block previews receive the file UUID now instead of the full file data.
-- **KirbyTag, hook, method and route plugins** (PHP only): Usually the quickest to migrate. Check (link: #php-8-3-and-stricter-types text: PHP 8.3), (link: #field-methods text: field methods) and (link: #exceptions text: exceptions). These plugins can often support Kirby 5 and 6 from one codebase.
+- **KirbyTag, hook, method and route plugins** (PHP only): Usually the quickest to migrate. Check (link: #php-8-3-and-stricter-types text: PHP 8.3), (link: #kirbytags text: KirbyTags), (link: #field-methods text: field methods) and (link: #exceptions text: exceptions). These plugins can often support Kirby 5 and 6 from one codebase.
 - **Auth plugins** (custom challenges, custom login UI): Custom challenges must be rewritten based on `Kirby\Auth\Challenge`, the `login` Panel extension is gone. See (link: #auth-plugins text: Auth plugins) and (link: releases/6/migration/plugin-developers/auth text: Custom auth methods & challenges).
 - **Plugins that extend or call core classes** (page models, custom collections, `Form`, `Blueprint`, Panel classes): Check the (link: #moved-and-renamed-classes text: moved classes), (link: #php-8-3-and-stricter-types text: typed class constants), (link: releases/6/migration/site-developers#custom-code-using-core-classes__collections text: removed collection methods), (link: #permissions-become-guards text: guards) and (link: #panel-backend text: Panel backend).
 
@@ -46,7 +46,7 @@ The bigger topics have their own guides:
 - (link: releases/6/migration/plugin-developers/panel-backend text: Panel backend: areas, controllers & UI classes): controller classes and UI objects for views, dialogs, drawers and more, with a complete Panel area in its Kirby 5 and Kirby 6 version
 
 <info>
-Some of the new APIs, especially the Panel controller classes, are still marked as `@unstable` in beta.2 and may change until the final release.
+Some of the new APIs, especially the Panel controller classes, are still marked as `@unstable` in beta.3 and may change until the final release.
 </info>
 
 ## Declaring Kirby 6 support
@@ -72,7 +72,7 @@ Declare the Kirby versions your plugin supports in `extra.kirby.compatible`.  Ou
 }
 ```
 
-If one version of your plugin supports both majors, use `"^5.0 || ^6.0"` and keep your PHP constraint wide enough for Kirby 5 (PHP 8.2). A constraint like `^6.0` also matches pre-releases such as `6.0.0-beta.2`.
+If one version of your plugin supports both majors, use `"^5.0 || ^6.0"` and keep your PHP constraint wide enough for Kirby 5 (PHP 8.2). A constraint like `^6.0` also matches pre-releases such as `6.0.0-beta.3`.
 
 All details are in our guide on (link: docs/guide/plugins/publishing#kirby-versions-support text: declaring which Kirby versions you support).
 
@@ -105,11 +105,13 @@ Kirby 6 requires PHP 8.3, 8.4 or 8.5. PHP 8.2 is no longer supported. Update the
 
 When you extend core classes, compare your property and method signatures with the Kirby 6 source to ensure you are using the same type hints. The full tables of changes are in the changelog: (link: releases/6/changelog#breaking-changes__core__changed-return-types text: changed return types), (link: releases/6/changelog#breaking-changes__core__changed-exceptions text: changed exceptions) and (link: releases/6/changelog#breaking-changes__core__methods-that-newly-throw text: methods that newly throw).
 
+Custom cache drivers that extend `Kirby\Cache\Cache` directly must implement `enabled(): bool`, which is abstract now.
+
 ## Moved and renamed classes
 
-Several classes have moved into new namespaces. Some old names still resolve through a deprecated class alias in beta.2, others are gone:
+Several classes have moved into new namespaces. Some old names still resolve through a deprecated class alias in beta.3, others are gone:
 
-| Kirby 5 | Kirby 6 | Old name in beta.2 |
+| Kirby 5 | Kirby 6 | Old name in beta.3 |
 | - | - | - |
 | `Kirby\Cms\Blueprint`, `Kirby\Cms\PageBlueprint`, `Kirby\Cms\SiteBlueprint`, `Kirby\Cms\FileBlueprint`, `Kirby\Cms\UserBlueprint` | `Kirby\Blueprint\Blueprint`, `Kirby\Blueprint\PageBlueprint` … | deprecated alias |
 | `Kirby\Cms\Auth` | `Kirby\Auth\Auth` | deprecated alias |
@@ -122,6 +124,7 @@ Several classes have moved into new namespaces. Some old names still resolve thr
 | `Kirby\Form\FieldClass`, `Kirby\Form\Mixin\Value` | `Kirby\Form\Field`, `Kirby\Form\Field\ValueField` | removed |
 | `Kirby\Cms\Picker`, `PagePicker`, `FilePicker`, `UserPicker` | `Kirby\Panel\Controller\Dialog\ModelPickerDialogController`, `PagePickerDialogController`, `FilePickerDialogController`, `UserPickerDialogController` | removed |
 | `Kirby\Blueprint\Section`, `Kirby\Cms\Section` | – | removed |
+| `Kirby\Toolkit\Component` | – | removed |
 | `Kirby\Panel\Ui\Buttons\*`, `Kirby\Panel\Ui\FilePreviews\*` | `Kirby\Panel\Ui\Button\*`, `Kirby\Panel\Ui\FilePreview\*` | partly aliased, see (link: #panel-backend text: Panel backend) |
 
 ### Blueprint classes
@@ -158,6 +161,20 @@ $session = $kirby->sessions()->find($token);
 ```
 
 All deprecated session methods are listed in the (link: releases/6/changelog#deprecated__core__sessions text: changelog).
+
+## KirbyTags
+
+`$tag->option()` and `$tag->options` have been removed. Read config options from the Kirby object, which also works in Kirby 5:
+
+```php
+// Kirby 5
+$tag->option('thumbs.quality');
+
+// Kirby 5 and 6
+$tag->kirby()->option('thumbs.quality');
+```
+
+`new Kirby\Text\KirbyTag()` and `Kirby\Text\KirbyTag::parse()` no longer accept an `$options` argument. The third argument of `Kirby\Text\KirbyTags::parse()` is `$debug` now: `KirbyTags::parse($text, $data, debug: true)`.
 
 ## Field methods
 
@@ -201,7 +218,7 @@ Also see (link: releases/6/changelog#breaking-changes__core__changed-exceptions 
 
 ## Permissions become guards
 
-Kirby 6 introduces (link: releases/6/guards text: guards): one place that answers whether an action is possible, allowed for the current user and valid for the given input. `$model->permissions()`, the permission classes behind it and the `*Rules` classes are deprecated, but keep working in beta.2:
+Kirby 6 introduces (link: releases/6/guards text: guards): one place that answers whether an action is possible, allowed for the current user and valid for the given input. `$model->permissions()`, the permission classes behind it and the `*Rules` classes are deprecated, but keep working in beta.3:
 
 ```php
 // Kirby 5 (deprecated in Kirby 6)

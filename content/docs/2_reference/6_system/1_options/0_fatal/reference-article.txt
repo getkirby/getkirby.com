@@ -4,12 +4,14 @@ Intro: Custom fatal view that is shown if there's a PHP error
 
 Text:
 
-The fatal option takes a closure as value.
+When (link: docs/reference/system/options/debug text: debug mode) is off, Kirby shows a short error page for PHP errors and uncaught exceptions. You can replace it with your own view.
 
-```php
+The fatal option takes a closure as value. It receives the `$kirby` instance and the `$exception`:
+
+```php "/site/config/config.php"
 return [
-  'fatal' => function($kirby, $exception) {
-    include $kirby->root('templates') . '/fatal.php';
-  }
+	'fatal' => function ($kirby, $exception) {
+		include $kirby->root('templates') . '/fatal.php';
+	}
 ];
 ```

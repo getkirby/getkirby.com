@@ -1,35 +1,51 @@
-Intro: Sets the editor for the debugger
+Intro: Sets the code editor for links in error messages
 
 ----
 
 Text:
 
-When your debug mode is enabled, you can set your editor to quickly open the file in which the error appeared.
+When your debug mode is enabled, you can set your code editor to quickly open the file in which the error appeared:
 
-(video: error.mp4)
-
-```php
+```php "/site/config/config.php"
 return [
 	'debug'  => true,
 	'editor' => 'vscode'
 ];
 ```
 
-The following editors are supported:
+On the Whoops error page of your site, a click on the file opens it at the right line in your editor:
 
-| shortcut | Editor |
+(video: error.mp4)
+
+## Supported editors
+
+| Shortcut | Editor |
 | - | - |
-| `emacs`| Emacs |
-| `idea`| IDEA |
-| `macvim`| MacVim |
-| `phpstorm`| PhpStorm |
-| `sublime`| Sublime Text |
-| `textmate`| Textmate |
-| `xdebug`| xdebug |
-| `vscode`| VSCode |
-| `atom`| Atom |
-| `espresso`| Espresso |
-| `netbeans`| Netbeans |
+| `antigravity` | Antigravity |
+| `atom` | Atom |
+| `cursor` | Cursor |
+| `emacs` | Emacs |
+| `espresso` | Espresso |
+| `fleet` | Fleet |
+| `idea` | IntelliJ IDEA |
+| `kiro` | Kiro |
+| `macvim` | MacVim |
+| `neovim` | Neovim |
+| `netbeans` | NetBeans |
+| `nova` | Nova |
+| `phpstorm` | PhpStorm |
+| `sublime` | Sublime Text |
+| `textmate` | TextMate |
+| `trae` | Trae |
+| `vscode` | Visual Studio Code |
+| `vscodium` | VSCodium |
+| `windsurf` | Windsurf |
+| `xdebug` | The link format from the `xdebug.file_link_format` setting of Xdebug |
+| `zed` | Zed |
+
+<info>
+`xdebug` is only available if `xdebug.file_link_format` is set in your `php.ini`.
+</info>
 
 <alert>
 Make sure to disable `debug` mode in production! Displaying PHP errors on a public server can be a serious security risk:
@@ -41,4 +57,3 @@ In a production environment, always log errors to your PHP error logs.
 </alert>
 
 (link: docs/reference/system/options/debug text: Learn more about the debug mode …)
-

@@ -12,22 +12,22 @@ For more complex fields like URL, email, files, pages or users, we provide speci
 If you create your own (link: docs/reference/plugins/extensions/fields text: field plugins), you might want to optimize the preview of such fields in the structure table as well. This can be done with custom field preview components in your plugin.
 
 ```js "/site/plugins/demo/index.js"
-panel.plugin('demo/plugin', {
-  fields: {
-	  myfield: {
-		  ...
-	  }
-  },
-  components: {
-    'k-myfield-field-preview': {
-      props: {
-        value: String,
-        column: Object,
-        field: Object
-      },
-      template: '<p>Your preview code goes here</p>'
-    }
-  }
+window.panel.plugin("demo/plugin", {
+	fields: {
+		myfield: {
+			// …
+		}
+	},
+	components: {
+		"k-myfield-field-preview": {
+			props: {
+				value: String,
+				column: Object,
+				field: Object
+			},
+			template: "<p>Your preview code goes here</p>"
+		}
+	}
 });
 ```
 
@@ -36,7 +36,7 @@ panel.plugin('demo/plugin', {
 The important part here is that you get the naming of the component right. Otherwise the structure field cannot find your preview component:
 
 ```js
-"k-${yourFieldName}-field-preview"
+`k-${yourFieldName}-field-preview`
 ```
 
 ## Props
@@ -48,5 +48,34 @@ The preview component automatically receives the following props:
 | `value` | mixed | The current value that has been entered in the form |
 | `column` | Object | The optional column definition from the blueprint |
 | `field` | Object | The field definition from the blueprint |
+| `row` | Object | All values of the current row |
+| `disabled` | Boolean | Whether the field is disabled |
 
 You don't necessarily have to register them all. Register the ones you need for your preview. It's fine if you only need the value.
+
+## Changing the value
+
+A preview can also change the value, like the preview of the toggle field does. Declare the `input` event in `emits` and emit the new value:
+
+```js "/site/plugins/demo/index.js"
+window.panel.plugin("demo/plugin", {
+	components: {
+		"k-myfield-field-preview": {
+			props: {
+				disabled: Boolean,
+				value: Boolean
+			},
+			emits: ["input"],
+			template: `
+				<k-toggle-input
+					:disabled="disabled"
+					:value="value"
+					@input="$emit('input', $event)"
+				/>
+			`
+		}
+	}
+});
+```
+
+Kirby listens to the `input` event and stores the new value in the row.

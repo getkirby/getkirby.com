@@ -77,9 +77,9 @@ You can also use (link: docs/guide/languages/custom-language-variables text: cus
 ```yaml
 options:
   architecture:
-    *: category.architecture
+    "*": category.architecture
   photography:
-    *: category.photography
+    "*": category.photography
 ```
 
 ## Text of headline, info or help text

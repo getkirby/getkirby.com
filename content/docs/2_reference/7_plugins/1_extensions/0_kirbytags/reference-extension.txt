@@ -233,4 +233,4 @@ Kirby::plugin(
 
 ## Reusing parts of existing KirbyTags
 
-You can also (link: docs/cookbook/extensions/extending-kirbytags text: reuse parts of the original KirbyTag) in your custom tags.
+You can also (link: docs/quicktips/extending-kirbytags text: reuse parts of the original KirbyTag) in your custom tags.

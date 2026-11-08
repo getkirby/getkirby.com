@@ -1,0 +1,27 @@
+Details:
+
+## When is the hook triggered
+
+The hook is triggered for every exception and PHP error that reaches Kirby's error handler, whether (link: docs/reference/system/options/debug text: debug mode) is on or not. By default, Kirby writes the exception to the PHP error log afterwards.
+
+## Example
+
+Return `false` to keep an exception out of the PHP error log, e.g. because you send it to an error tracking service instead:
+
+```php "/site/config/config.php"
+<?php
+
+return [
+	'hooks' => [
+		'system.exception' => function (Throwable $exception, bool $isLogged) {
+			// send the exception to your error tracking service
+			// …
+
+			// skip the PHP error log
+			return false;
+		}
+	]
+];
+```
+
+Return `$isLogged` to keep the default.
