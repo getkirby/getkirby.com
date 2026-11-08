@@ -2,4 +2,4 @@ Title: video
 
 ----
 
-Intro: A Youtube or Vimeo video embed
+Intro: A YouTube or Vimeo video embed or a video file
