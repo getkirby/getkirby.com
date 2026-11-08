@@ -36,19 +36,23 @@ Besides adding more CSS selectors, we are also using data attributes to allow fo
 | `.k-panel[data-translation]` | for the current Panel UI/user language |
 | `.k-panel[data-role]` | for current user role |
 | `.k-panel[data-user]` | for current user ID |
+| `.k-panel[data-theme]` | for the current Panel theme (`light` or `dark`) |
 | `.k-page-view[data-id]` | for page ID |
 | `.k-page-view[data-template]` | for page's intended template |
 | `.k-file-view[data-id]` | for file ID |
 | `.k-file-view[data-template]` | for file's template |
 | `.k-user-view[data-id]` | for user ID |
+| `.k-user-view[data-template]` | for user's role |
 | `.k-site-view[data-id]` | for site ID (/) |
 | `.k-site-view[data-template]` | for site's template (site) |
+| `.k-page-view[data-locked="true"]`, `.k-file-view[data-locked="true"]`, `.k-site-view[data-locked="true"]` and `.k-user-view[data-locked="true"]` | if the content is locked by another user |
 | `.k-languages-dropdown` | for content translation language dropdown |
 | `.k-view-buttons .k-view-button` | for the buttons in the header of model views |
-| `.k-pagelist-field .k-item[data-id]`, `.k-pagelist-field .k-item[data-status]` and `.k-pagelist-field .k-item[data-template]` | |
-| `.k-filelist-field .k-item[data-id]` and `.k-filelist-field .k-item[data-template]` | |
-
-
+| `.k-field-name-{name}` | for a field by its name in the blueprint, e.g. `.k-field-name-title` |
+| `.k-field-type-{type}` | for all fields of a type, e.g. `.k-field-type-pagelist` |
+| `.k-field-type-pagelist .k-item[data-id]`, `.k-field-type-pagelist .k-item[data-status]` and `.k-field-type-pagelist .k-item[data-template]` | for the pages in a `pagelist` field |
+| `.k-field-type-filelist .k-item[data-id]` and `.k-field-type-filelist .k-item[data-template]` | for the files in a `filelist` field |
+| `.k-overlay[open]` | for an open dialog or drawer, e.g. `.k-panel:has(.k-overlay[open])` while one is open |
 
 ## CSS properties
 
@@ -63,3 +67,21 @@ You can overwrite our default properties in your custom `panel.css`:
 ```
 
 (link: https://lab.getkirby.com/public/lab/basics/design/colors text: Get to know all CSS properties ›)
+
+### Light and dark theme
+
+The Panel comes with a light and a dark theme. Many color properties are defined with the CSS `light-dark()` function, which picks the first value for the light theme and the second value for the dark theme. Use the same function for your own values, so that they work in both themes:
+
+```css "assets/panel.css"
+:root {
+  --panel-color-back: light-dark(#f5f2ec, #1c1b19);
+}
+```
+
+To style something for one theme only, check the `data-theme` attribute:
+
+```css "assets/panel.css"
+.k-panel[data-theme="dark"] .k-topbar {
+  border-bottom: 1px solid var(--color-gray-700);
+}
+```
