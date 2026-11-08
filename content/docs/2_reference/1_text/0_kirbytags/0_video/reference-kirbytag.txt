@@ -10,21 +10,21 @@ Text:
 
 | Attribute | Description | Default |
 |---- | ---- | ---- |
-| autoplay | The autoplay which is added to video element (only for local and remote videos) | `false` |
+| autoplay | Whether the video starts playing automatically (only for local and remote videos) | `false` |
 | caption | The caption | `null` |
-| controls | The controls which is added to video element (only for local and remote videos) | `true` |
-| class | The class which is added to iframe and video elements | `video` |
-| disablepictureinpicture | Whether the picture-in-picture feature is disabled for the video element | `false` |
+| controls | Whether the browser shows its video controls (only for local and remote videos) | `true` |
+| class | The class which is added to the figure element | `video` |
+| disablepictureinpicture | Whether the picture-in-picture feature is disabled for the video element (only for local and remote videos) | `false` |
 | height | The height that is added to iframe and video elements | `null` |
-| loop | The loop which is added to video element (only for local and remote videos) | `true` |
-| muted | The muted which is added to video element (only for local and remote videos) | `true` |
-| playsinline | Mobile browsers, will play the video right where it is instead of opening it in fullscreen | `false` |
-| poster | The poster attribute specifies an image to be shown while the video is downloading (only for local and remote videos) | `true` |
+| loop | Whether the video starts over again when it reaches the end (only for local and remote videos) | `false` |
+| muted | Whether the audio of the video is muted (only for local and remote videos) | value of `autoplay` |
+| playsinline | Mobile browsers will play the video right where it is instead of opening it in fullscreen (only for local and remote videos) | value of `autoplay` |
+| poster | An image to be shown while the video is downloading, as filename or URL (only for local and remote videos) | `null` |
 | preload | The option that the video should be loaded when the page loads (only for local and remote videos) | `null` |
-| style | The style that is added to iframe and video elements | `null` |
+| style | The style that is added to the figure element | `null` |
 | width | The width that is added to iframe and video elements | `null` |
 
-<info>The `autoplay`, `controls`, `loop`, `muted`, `poster`, `preload` attributes are *not* supported by video providers such as YouTube and Vimeo.</info>
+<info>The `autoplay`, `controls`, `disablepictureinpicture`, `loop`, `muted`, `playsinline`, `poster` and `preload` attributes are *not* supported by video providers such as YouTube and Vimeo.</info>
 
 ### Attribute defaults from config
 
@@ -72,7 +72,7 @@ Embedded Vimeo video by video URL:
 
 ### Local and remote videos
 
-You can now embed videos from the local or from remote servers.
+You can also embed video files of your site or from remote servers.
 
 ```kirbytext
 # local
@@ -83,7 +83,7 @@ You can now embed videos from the local or from remote servers.
 ```
 
 <info>
-The video will be muted automatically if `autoplay` is enabled and `muted` is not defined. To start autoplay with sound, use it as in the following example:
+If `autoplay` is enabled, the video is muted and plays inline unless you set `muted` or `playsinline` yourself. To start autoplay with sound, use it as in the following example:
 
 ```kirbytext
 (\video: local-video.mp4 autoplay: true muted: false)
@@ -106,13 +106,21 @@ The video will be muted automatically if `autoplay` is enabled and `muted` is no
 
 ### Custom CSS class
 
+The class is added to the `<figure>` element that wraps the video. Use it to style single videos in your CSS. Your class replaces the default `video` class, so add `video` as well if your styles rely on it:
+
 ```kirbytext
-(\video: http://youtu.be/lLuc6rtWkrM class: myvideo)
+(\video: http://youtu.be/lLuc6rtWkrM class: video video-narrow)
 ```
 
-### New attributes
+```css "/assets/css/site.css"
+.video-narrow {
+  max-width: 30rem;
+}
+```
 
-The video tag supports some attributes of the HTML `<video>` element: `autoplay`, `controls`, `loop`, `muted`, `poster`, `preload`
+### Video attributes
+
+For local and remote videos, the video tag supports some attributes of the HTML `<video>` element: `autoplay`, `controls`, `disablepictureinpicture`, `loop`, `muted`, `playsinline`, `poster`, `preload`
 
 ```kirbytext
 (\video: local-video.mp4 autoplay: true)
