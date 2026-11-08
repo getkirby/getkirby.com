@@ -8,39 +8,44 @@ Text:
 
 ```php "Site area"
 return [
-    'label' => 'Site',
-    ...
-    'dialogs' => ...
-    'views' => ...
-    // set the default search type
-    'search' => 'pages',
-    // define new search endpoints
-    'searches' => [
-        'pages' => [
-					'label'  => 'Pages',
-					'icon'   => 'page',
-					'query'  => function (string|null $query, int $limit, int $page) {
-            $pages = site()->search($query)->paginate($limit, $page);
+	'label'   => 'Site',
+	// …
+	'dialogs' => [
+		// …
+	],
+	'views'   => [
+		// …
+	],
+	// set the default search type
+	'search'   => 'pages',
+	// define new search endpoints
+	'searches' => [
+		'pages' => [
+			'label' => 'Pages',
+			'icon'  => 'page',
+			'query' => function (string|null $query, int $limit, int $page) {
+				$pages = site()->search($query)->paginate($limit, $page);
 
-            return [
-							'results' => $pages->values(fn ($page) => [
-								'image' => $page->panel()->image(),
-								'text' => Escape::html($page->title()->value()),
-								'link' => $page->panel()->url(true),
-								'info' => Escape::html($page->id()),
-								'uuid' => $page->uuid()?->toString(),
-							]),
-							'pagination' => $pages->pagination()->toArray()
-						];
-        }
-    ]
+				return [
+					'results' => $pages->values(fn ($page) => [
+						'image' => $page->panel()->image(),
+						'text'  => Escape::html($page->title()->value()),
+						'link'  => $page->panel()->url(true),
+						'info'  => Escape::html($page->id()),
+						'uuid'  => $page->uuid()?->toString(),
+					]),
+					'pagination' => $pages->pagination()->toArray()
+				];
+			}
+		]
+	]
 ];
 ```
 
-In Vue, the search can then be executed like this:
+In Vue, the search can then be executed like this. It returns an object with the `results` and the `pagination`:
 
 ```js
-const results = await this.$search('pages');
+const { results, pagination } = await this.$panel.search('pages', query);
 ```
 
 ## Search results
@@ -64,7 +69,7 @@ That's all it takes to create your own search index for your own plugins:
 Kirby::plugin('your-plugin/todos', [
     'areas' => [
         'todos' => [
-            ...
+            // …
             'searches' => [
                 'todos' => [
                     'label' => 'Todos',
@@ -75,7 +80,7 @@ Kirby::plugin('your-plugin/todos', [
 
                         foreach ($todos as $todo) {
                             $results[] = [
-                                'image' => [ // optional image settings ],
+                                'image' => [], // optional image settings
                                 'text'  => $todo->text(),
                                 'link'  => '/todos/' . $todo->id(),
                                 'info'  => 'Get it done!'
@@ -96,7 +101,7 @@ The search will automatically appear in the search dialog, but can also be run m
 
 ```js
 const query = 'Searchy search';
-const todos = await this.$search('todos', query);
+const { results } = await this.$panel.search('todos', query);
 ```
 
 
