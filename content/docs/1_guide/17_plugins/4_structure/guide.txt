@@ -83,7 +83,7 @@ Kirby ships with (method: Kirby\Filesystem\F::loadClasses text: `F::loadClasses(
 use Superwoman\Anchor\Anchor;
 
 F::loadClasses([
-	'superwoman\\anchor\\anchor' => 'src/Anchor.php'
+	'Superwoman\\Anchor\\Anchor' => 'src/Anchor.php'
 ], __DIR__);
 
 Kirby::plugin(
@@ -105,7 +105,7 @@ Kirby::plugin(
 The second argument is the base directory the paths are relative to, which is why `__DIR__` is passed.
 
 <info>
-The keys of the class map are lowercased. The autoloader normalizes class names before it looks them up, so an uppercase key would never match.
+Class names are matched case-insensitively. The autoloader lowercases the keys of the class map and every class name it looks up, so you can write the keys exactly like the class names in your code.
 </info>
 
 ## Kirby's autoloader or Composer

@@ -8,7 +8,7 @@ Intro: Every Kirby plugin starts as a folder with a single PHP file in it. This 
 
 Text:
 
-You do not need Composer, npm or any other tool on the command line to get started with a Kirby plugin. A text editor and a Kirby installation are enough. The later pages of this chapter add build tooling and packaging, but none of it is required to write a working plugin. Follow along as we o from a basic plugin to a more elaborate setup.
+You do not need Composer, npm or any other tool on the command line to get started with a Kirby plugin. A text editor and a Kirby installation are enough. The later pages of this chapter add build tooling and packaging, but none of it is required to write a working plugin. Follow along as we go from a basic plugin to a more elaborate setup.
 
 ## What you will build
 
