@@ -6,6 +6,48 @@ Text:
 
 Kirby reads blueprints and the YAML in your content files, e.g. of structure or object fields, with the [Symfony YAML](https://symfony.com/doc/current/components/yaml.html) parser. It closely follows the YAML specification. Some notations that more forgiving parsers accept are errors, e.g. tabs for indentation or unquoted values that start with `@`.
 
+## Writing valid YAML
+
+If Kirby cannot parse a YAML file, it shows an error message with the line of the first problem, e.g.:
+
+```
+The reserved indicator "@" cannot start a plain scalar; you need to quote the scalar at line 4 (near "placeholder: @yourhandle").
+```
+
+Watch out for these cases in your blueprints:
+
+- Wrap values in quotes if they start with a character that has a special meaning in YAML, e.g. `@`, `%`, `` ` ``, `[` or `{`. This includes query templates like `"{{ page.title }}"`.
+- Use single quotes for values with backslashes, e.g. regular expressions. Inside double quotes, a backslash starts an escape sequence.
+- Quote the entire value if it starts with a quoted part, e.g. `label: '"Hello" world'`.
+- Indent with spaces only.
+- Don't define the same key twice on the same level.
+
+```yaml "/site/blueprints/pages/article.yml"
+fields:
+  twitter:
+    type: text
+    placeholder: "@yourhandle"
+  discount:
+    type: number
+    after: "%"
+  title:
+    type: text
+    label: "[Draft] Title"
+  byline:
+    type: info
+    text: "{{ page.title }} by {{ page.author }}"
+  zip:
+    type: text
+    pattern: '^\d{5}$'
+```
+
+Some unquoted values have a type of their own:
+
+- Only `true` and `false` are booleans. `yes`, `no`, `on` and `off` are strings, which count as `true` for options that expect a boolean: `required: no` makes a field required.
+- Unquoted dates like `2024-01-01` or `2024-01-01 10:30:00` are converted to Unix timestamps. Quote dates to keep them as strings, e.g. `min: "2024-01-01"`.
+
+## Spyc parser
+
 If your blueprints or content can't be read by Symfony YAML yet, you can switch to the older Spyc parser in the meantime:
 
 ```php "/site/config/config.php"
