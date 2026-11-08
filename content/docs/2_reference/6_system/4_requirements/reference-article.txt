@@ -34,6 +34,8 @@ define('KIRBY_PHP_VERSION_CHECK', false);
 
 (docs: requirements/php-extensions-required)
 
+When you install the Panel, Kirby checks that all required extensions are available. If one is missing, the installation view lists it and you cannot create the first account. On a public server, the system view in the Panel shows a warning if a required extension goes missing later.
+
 ### Recommended Extensions
 
 - PHP `exif` extension for support for EXIF information from images
@@ -55,6 +57,8 @@ define('KIRBY_PHP_VERSION_CHECK', false);
 ## Browsers for the Panel
 
 (docs: requirements/browsers)
+
+The Panel follows Baseline "widely available": it only relies on web platform features that have been available in all major browsers for at least 30 months. Editors with an older browser see a page that names the browser versions the Panel needs.
 
 ## PHP Version Support History
 
