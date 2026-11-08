@@ -7,17 +7,17 @@ Text:
 You can add your custom (link: docs/reference/panel/fields/textarea text: textarea) button in a plugin via the `textareaButtons` extension:
 
 ```js "site/plugins/your-plugin/index.js"
-panel.plugin("getkirby/custom-textarea-buttons", {
-  textareaButtons: {
-    highlight: {
-      label: "Highlight",
-      icon: "wand",
-      click: function () {
-        this.command("toggle", "<mark>", "</mark>")
-      },
-      shortcut: "m",
-    },
-  }
+window.panel.plugin("getkirby/custom-textarea-buttons", {
+	textareaButtons: {
+		highlight: {
+			label: "Highlight",
+			icon: "wand",
+			click: function () {
+				this.command("toggle", "<mark>", "</mark>");
+			},
+			shortcut: "m"
+		}
+	}
 });
 ```
 
@@ -35,45 +35,48 @@ The following commands are supported:
 
 | Command name | Description | Arguments |
 |-|-|-|
-| `dialog` | Opens a dialog component | `string` dialog name |
-| `insert` | Inserts the given text at the current selection | `string` `func` text |
-| `prepend` | Prepends the given text to the current selection | `string` `func` text |
-| `toggle` | Toggles wrapping of the current selection | `string` `func` before,<br>`string` `func` after (optional) |
+| `dialog` | Opens the `k-toolbar-{name}-dialog` component and inserts the text it submits | `string` name of the dialog |
+| `file` | Opens the file picker of the field and inserts the selected files | |
+| `insert` | Inserts the given text at the current selection | `string` or `function` text |
+| `prepend` | Prepends the given text to the current selection | `string` text |
+| `toggle` | Toggles wrapping of the current selection | `string` before,<br>`string` after (optional) |
 | `upload` | Opens the file upload dialog | |
-| `wrap` | Wraps the current selection with the given text | `string` `func` before,<br>`string` `func` after (optional) |
+| `wrap` | Wraps the current selection with the given text | `string` before,<br>`string` after (optional) |
 
-All arguments that can be a callback function themselves, will be called with two parameters:
-- `input` reference to textarea input Vue component
-- `selection` currently selected text
+If you pass a function to `insert`, it will be called with two parameters and has to return the text to insert:
 
-For example, the default ordered list button triggers the following command
+- `input`: the textarea element
+- `selection`: the currently selected text
+
+For example, the default ordered list button triggers the following command:
 
 ```js
 this.command("insert", (input, selection) =>
-  selection
-    .split("\n")
-    .map((line, index) => index + 1 + ". " + line)
-    .join("\n")
-)
+	selection
+		.split("\n")
+		.map((line, index) => index + 1 + ". " + line)
+		.join("\n")
+);
 ```
 
 ### Button label translation
-You can translate the button label by defining it in the label getter. The getter ensures that the translation is already loaded when the label is rendered:
+
+You can translate the button label by defining it in the label getter. Your plugin's `index.js` runs before the Panel has started, so `window.panel.t()` isn't available yet. The getter is only called when the label is rendered, at which point the translation is available:
 
 ```js "site/plugins/your-plugin/index.js"
-panel.plugin("getkirby/custom-textarea-buttons", {
-  textareaButtons: {
-    highlight: {
-      get label() {
-        return panel.$t("highlight");
-      },
-      icon: "wand",
-      click: function () {
-        this.command("toggle", "<mark>", "</mark>")
-      },
-      shortcut: "m",
-    },
-  }
+window.panel.plugin("getkirby/custom-textarea-buttons", {
+	textareaButtons: {
+		highlight: {
+			get label() {
+				return window.panel.t("highlight");
+			},
+			icon: "wand",
+			click: function () {
+				this.command("toggle", "<mark>", "</mark>");
+			},
+			shortcut: "m"
+		}
+	}
 });
 ```
 
