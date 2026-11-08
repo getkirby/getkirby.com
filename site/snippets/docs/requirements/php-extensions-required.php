@@ -1,4 +1,4 @@
-- Either the `gd` extension or `ImageMagick` (see below)
+- Either the `gd` or the `imagick` extension (see below)
 <?php
 
 // required extensions as checked by the Kirby core

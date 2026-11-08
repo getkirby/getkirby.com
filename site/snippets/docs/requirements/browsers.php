@@ -21,7 +21,7 @@ foreach ($kirby->panel()->browsers() as $browser => $version) {
 }
 
 ?>
-Kirby does not modify the output of your site's templates and thus has no effect on the browser requirements for your site's frontend. However, the Panel is built on modern browser features and has a couple browser requirements which need to be met by your site's editors
+Kirby does not modify the output of your site's templates and thus has no effect on the browser requirements for your site's frontend. However, the Panel is built on modern browser features and has a couple browser requirements which need to be met by your site's editors.
 
 <div class="table">
 	<table>
