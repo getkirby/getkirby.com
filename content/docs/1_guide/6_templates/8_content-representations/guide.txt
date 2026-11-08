@@ -44,7 +44,7 @@ That means, a content representation is always a variant of the standard templat
 
 ## Representation types
 
-In most cases, you don't have to send a content type header manually, Kirby will do this for you based on the representation type (based on extension and/or content). If you use some custom extension, Kirby will assume a default content type of `text/html`. In case you want to set a specific content type, you can do this with (link: docs/guide/templates/basics#setting-response-types text: response types), for example:
+In most cases, you don't have to send a content type header manually, Kirby will do this for you based on the representation type (based on extension and/or content). If you use some custom extension, Kirby will assume a default content type of `text/html`. In case you want to set a specific content type, you can do this with (link: docs/guide/templates/basics#response-types text: response types), for example:
 
 ```php
 <?php
@@ -74,7 +74,9 @@ The built-in PHP server has issues with dots in paths, unless they are part of a
 
 ## Representation controllers
 
-You can also have dedicated controllers for each of your representations. If you create a controller with the name `default.json.php`, it will be used for the JSON representation of the default template. If no dedicated representation controller exists, the standard controller (`default.php` or `site.php`) will be used instead (if available).
+You can also have dedicated controllers for each of your representations. If you create a controller with the name `default.json.php`, it will be used for the JSON representation of the default template. If no dedicated representation controller exists, the standard controller (`default.php`) will be used instead (if available).
+
+The same goes for the (link: docs/guide/templates/controllers#general-site-controller text: general site controller): a `site.json.php` controller provides the default data for all JSON representations. Without it, Kirby uses `site.php`.
 
 ## Representations in plugins
 
