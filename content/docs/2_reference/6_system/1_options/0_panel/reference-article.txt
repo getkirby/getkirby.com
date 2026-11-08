@@ -113,9 +113,9 @@ You can customise both the default search type selected when opening the Panel s
 return [
   'panel' => [
     'search' => [
-			'type'  => 'files'
-			'limit' => 5
-		]
+      'type'  => 'files',
+      'limit' => 5
+    ]
   ]
 ];
 ```
@@ -162,6 +162,48 @@ return [
 ];
 ```
 
+### Drag texts
+
+You can define custom callback functions (`pageDragText` or `fileDragText`) for the text that gets inserted when dragging a page or a file on a textarea. The file callback receives the file object and its URL, the page callback receives the page object. Return `null` to fall back to the default text:
+
+```php
+return [
+  'panel' => [
+    'kirbytext' => [
+      'fileDragText' => function(\Kirby\Cms\File $file, $url) {
+        if ($file->extension() === 'jpg') {
+          return sprintf('(\screenshot: %s)', $url);
+        }
+
+        if ($file->type() === 'video') {
+          return sprintf('(\video: %s loop: true)', $url);
+        }
+
+        return null;
+      },
+      'pageDragText' => function (\Kirby\Cms\Page $page) {
+        return sprintf('Check out this great page: %s', $page->url());
+      },
+    ],
+  ],
+];
+```
+
+If you use Markdown (`'kirbytext' => false`), define the callbacks in a `markdown` array instead:
+
+```php
+return [
+  'panel' => [
+    'kirbytext' => false,
+    'markdown'  => [
+      'pageDragText' => function (\Kirby\Cms\Page $page) {
+        return sprintf('[%s](%s)', $page->title(), $page->url());
+      },
+    ],
+  ],
+];
+```
+
 ## Custom Panel CSS
 
 We have made the design of the Panel as usable, beautiful and reduced as possible so that you or your clients can fully concentrate on creating content. However, if you want to spice it up a little or adjust to your or your clients branding, you can do that with your own custom stylesheet file. Add it to your `config.php` file like this:
@@ -173,6 +215,8 @@ return [
   ]
 ];
 ```
+
+You can also pass an array of several stylesheets. Each entry can be a path relative to the index folder or an absolute URL.
 
 <info>
 If you have multiple environments like staging, production etc., you can use different stylesheets per environment (link: docs/guide/configuration#multi-environment-setup text: in your domain-specific config files). Shared styles can be imported into each domain-specific stylesheet with an import statement:
@@ -202,6 +246,8 @@ return [
 ];
 ```
 
+Kirby loads custom Panel scripts as JavaScript modules. Like `panel.css`, the option also accepts an array of several scripts or absolute URLs.
+
 ## Custom Panel Favicon
 
 To offer a full white-label solution for your customers, you can even set a custom favicon for the Panel. From a simple implementation…
@@ -214,8 +260,7 @@ return [
 ];
 ```
 
-…to full control over all formats:
-
+…to full control over all formats. Each icon is an array of attributes for a `<link>` tag, with the URL of the icon in `href`. You can add further attributes like `sizes` or `media`, e.g. for icons for the dark theme of the operating system:
 
 ```php "/site/config/config.php"
 return [
@@ -235,38 +280,19 @@ return [
         'rel'  => 'icon',
         'type' => 'image/png',
         'href' => 'assets/favicon.png',
+      ],
+      [
+        'rel'   => 'icon',
+        'type'  => 'image/png',
+        'href'  => 'assets/favicon-dark.png',
+        'media' => '(prefers-color-scheme: dark)',
       ]
     ]
   ]
 ];
 ```
 
-### Drag texts
-
-You can define custom callback functions (`pageDragText` or `fileDragText`) for the text that gets inserted when dragging a page or a file on a textarea, e.g.
-
-```php
-return [
-  'panel' => [
-    'kirbytext' => [
-      'fileDragText' => function(\Kirby\Cms\File $file, $url) {
-        if ($file->extension() === 'jpg') {
-          return sprintf('(\screenshot: %s)', $url);
-        }
-
-        if ($file->type() === 'video') {
-          return sprintf('(\video: %s loop: true)', $url);
-        }
-
-        return null;
-      },
-      'pageDragText' => function (\Kirby\Cms\Page $page) {
-        return sprintf('Check out this great page: %s', $page->url());
-      },
-    ],
-  ],
-];
-```
+A favicon string is added as `shortcut icon` with the MIME type of the file.
 
 ## Allow frame embedding
 
