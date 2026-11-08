@@ -156,4 +156,4 @@ Use the move dialog to pick a new parent page for your page. Kirby will make sur
 
 To do so, select "Settings" > "Move page". In the move dialog, select the parent you want to move the page to. Unavailable parents are greyed out. When done, confirm with the "Move" button. By default, Kirby adds "copy" to title and slug.
 
-(image: move-pages.png)
+(image: move-page.png)
