@@ -21,3 +21,22 @@ The cookie key should be a long string of random characters.
 </info>
 
 You can read more about the security impact of this option in the (link: docs/guide/security#set-secure-random-values-for-the-content-salt-and-cookie-key text: security guide).
+
+## Cookie defaults
+
+Kirby signs each cookie value with an HMAC-SHA256 signature based on the cookie key. When you read a cookie with (link: docs/reference/objects/http/cookie/get text: `Cookie::get()`), Kirby verifies the signature and returns `null` for cookies whose value has been modified.
+
+Cookies set with (link: docs/reference/objects/http/cookie/set text: `Cookie::set()`) get these attributes by default:
+
+| Attribute | Default |
+| - | - |
+| `HttpOnly` | always |
+| `SameSite` | `Lax` |
+| `Secure` | on HTTPS requests |
+| `Path` | `/` |
+
+Kirby's session cookie uses the same `HttpOnly`, `SameSite` and `Secure` attributes. With the `Secure` attribute, browsers only send the cookie over encrypted connections. If a cookie that you set on an HTTPS page must also be readable on plain HTTP pages, turn the attribute off for this cookie:
+
+```php
+Cookie::set('name', 'value', ['secure' => false]);
+```

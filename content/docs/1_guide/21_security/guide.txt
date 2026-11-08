@@ -89,6 +89,8 @@ Especially for the Panel, an encrypted connection between your browser and your 
 
 If you do not use HTTPS, your login information and all other data will be submitted in plain text to the server and can be intercepted.
 
+On HTTPS requests, Kirby sets its cookies, including the session cookie, with the `Secure` attribute. Browsers then only send these cookies over encrypted connections. Learn more about the (link: docs/reference/system/options/cookie#cookie-defaults text: cookie defaults).
+
 ### Use the latest stable PHP version
 
 Many providers unfortunately still offer very old PHP versions which are no longer maintained. Do yourself and your site a favor and always **update to the latest stable PHP version** that is supported by your Kirby version. This comes with additional security and often performance benefits. If your provider does not provide a new and stable PHP version, it's a good sign to switch to a better provider.
@@ -220,9 +222,7 @@ The Panel also has a built-in **brute-force protection** for the Panel login. It
 Kirby internally relies on the following values:
 
 - The (link: docs/reference/system/options/content#salt-for-drafts-and-media-files text: `content.salt` option) is used to generate secure preview and media URLs that should not be guessable by external visitors.
-- The (link: docs/reference/system/options/cookie#cookie-key text: `cookie.key` option) is used to sign (or authenticate) cookie values to prevent easy tampering with cookie values set by the backend.
-
-The `cookie.key` option was added in Kirby 5.4.5 and 4.9.4. In previous releases, the cookie key needed to be set via the `Kirby\Http\Cookie::$key` property.
+- The (link: docs/reference/system/options/cookie#cookie-key text: `cookie.key` option) is used to sign (or authenticate) cookie values with an HMAC-SHA256 signature to prevent easy tampering with cookie values set by the backend.
 
 Kirby cannot set secure defaults for these options. This is because there is no install step during which Kirby could generate and persist random values and because config files are typically kept in version control and cannot be written by the system without causing merge conflicts.
 
