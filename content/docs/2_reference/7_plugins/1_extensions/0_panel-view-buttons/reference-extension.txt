@@ -8,7 +8,7 @@ Since: 5.0.0
 
 Text:
 
-Kirby allows your plugin to add custom view buttons to most views of the Panel views (e.g. page, site, file, user, language). These buttons can be added alongside the default buttons, such as the preview button or settings dropdown button.
+Kirby allows your plugin to add custom view buttons to most views of the Panel (e.g. page, site, file, user, language). These buttons can be added alongside the default buttons, such as the preview button or settings dropdown button.
 
 (image: buttons.png)
 
@@ -24,9 +24,10 @@ Kirby::plugin('custom/buttons', [
         'buttons' => [
           'analytics' => function () {
             return [
-              'icon'     => 'chart',
-              'text'     => 'Analytics',
-              'dropdown' => 'my/analytics/dropdown/route'
+              'icon'    => 'chart',
+              'text'    => 'Analytics',
+              // path of a Panel dropdown or an array of options
+              'options' => 'my/analytics/dropdown/route'
             ];
           }
         ]
@@ -36,7 +37,7 @@ Kirby::plugin('custom/buttons', [
 ]);
 ```
 
-Buttons are defined the same way as in the (link: docs/reference/system/options/panel/panel-view-buttons text: `panel.viewButtons` config option), incl. available button attributes or query support.
+Buttons are defined the same way as in the (link: docs/reference/system/options/panel/panel-view-buttons text: `panel.viewButtons` config option), incl. available button attributes or query support. With `options`, the button opens a dropdown with the options of a (link: docs/reference/plugins/extensions/panel-dropdowns text: Panel dropdown) or with an array of options. With `dialog` or `drawer`, it opens a (link: docs/reference/plugins/extensions/panel-dialogs text: dialog) or (link: docs/reference/plugins/extensions/panel-drawers text: drawer).
 
 Buttons you add via your plugin extension can then be referenced (link: docs/reference/panel/blueprints/page#view-buttons text: in a blueprint) or the (link: docs/reference/system/options/panel/panel-view-buttons#referencing-buttons text: config option).
 
@@ -46,7 +47,7 @@ Buttons you add via your plugin extension can then be referenced (link: docs/ref
 You can either return an array with the options or a `Kirby\Panel\Ui\Buttons\ViewButton` object. Especially when working on complex buttons, it can make sense to create your custom PHP class extending the (class: Kirby\Panel\Ui\Buttons\ViewButton text: ViewButton) class to power your button:
 
 ```php "site/plugins/your-plugin/index.php"
-class AnalyticsViewButton extends Kirby\Panel\Ui\Button\ViewButton
+class AnalyticsViewButton extends Kirby\Panel\Ui\Buttons\ViewButton
 {
 	// …
 }
@@ -69,7 +70,7 @@ Kirby::plugin('custom/buttons', [
 For some buttons, the context in which the button is displayed might be relevant. You can (link: docs/reference/system/options/panel/panel-view-buttons#using-the-current-context__access-current-object text: access relevant objects passed as arguments to the callback function):
 
 ```php "site/plugins/your-plugin/index.php"
-'analytics' => fn (Kirby\Cms\Page $page) {
+'analytics' => function (Kirby\Cms\Page $page) {
   return new AnalyticsViewButton($page);
 }
 ```
@@ -114,7 +115,7 @@ There are different ways, how you can specify your custom Vue component to be us
 
 1. Kirby will use the button name from your blueprint/config to look up a potential component. For a button named `applause`, Kirby will look if a `k-applause-view-button` is available.
 
-2. You can explicitly specify what component to use. When you use the array notation, provide it as follows
+2. You can explicitly specify what component to use. When you use the array notation, provide it as follows:
 
 ```php
 return [

@@ -77,9 +77,9 @@ return [
       'site' => [
         'preview',
         'analytics' => [
-          'icon'     => 'chart',
-          'text'     => 'Analytics',
-          'dropdown' => 'https://my-analytics.com/{{ page.uuid.id }}'
+          'icon' => 'chart',
+          'text' => 'Analytics',
+          'link' => 'https://my-analytics.com/{{ page.uuid.id }}'
         ]
       ]
     ]
