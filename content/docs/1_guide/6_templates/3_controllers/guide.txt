@@ -57,6 +57,12 @@ return function () {
 ```
 In this case the `$foo` and `$bar` variables will be available in the corresponding template.
 
+<since v="6.0.0">
+## Reserved variable names
+
+Kirby renders templates like (link: docs/guide/templates/snippets text: snippets), so every template receives the `$slot` and `$slots` variables. Don't use these names for your own template variables: if a controller returns a `slot` or `slots` key, Kirby throws an exception. The same applies to the data you pass to (link: #arguments-from-page-render-in-route text: `$page->render()`).
+</since>
+
 ## Accessing Kirby objects in your controller
 
 Like in templates, you can access the (Class: Kirby\Cms\Site text: $site), (Class: Kirby\Cms\Page text: $page), (Class: Kirby\Cms\Pages text: $pages) and (Class: Kirby\Cms\App text: $kirby) objects by loading them as arguments to the anonymous function. Kirby will magically inject the right objects for you:

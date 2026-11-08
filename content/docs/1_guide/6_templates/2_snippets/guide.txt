@@ -154,6 +154,8 @@ Snippets always receive the following variables from Kirby:
 | `$slots` | `Kirby\Template\Slots`     | Collection of all slots                     |
 
 You can read more about the slots feature below.
+
+Both names are reserved: you can't pass your own variables named `$slot` or `$slots` to a snippet or a (link: docs/guide/templates/controllers#reserved-variable-names text: template).
 </info>
 
 ### Real life example: list of blog articles
