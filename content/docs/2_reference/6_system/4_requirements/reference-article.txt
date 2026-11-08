@@ -41,12 +41,15 @@ define('KIRBY_PHP_VERSION_CHECK', false);
 - PHP `exif` extension for support for EXIF information from images
 - PHP `fileinfo` extension for improved MIME type detection for files
 - PHP `intl` extension for the (link: docs/reference/system/options/date#date-handler__intl text: `intl` date handler) (support for international dates) and localized number formatting
+- PHP `sodium` extension for more robust session handling and the (link: docs/reference/objects/toolkit/symmetric-crypto text: `SymmetricCrypto` class)
 
 ### Optional Extensions
 
-- (link: https://imagemagick.org/ text: ImageMagick) (`convert` binary) if you want to use the (link: docs/reference/system/options/thumbs#thumbs-driver text: `im` thumbs driver). Note that the PHP `exec()` method must be enabled on your server in this case as well.
+- PHP `imagick` extension for the (link: docs/reference/system/options/thumbs#thumbs-driver text: `imagick` thumbs driver)
+- (link: https://imagemagick.org/ text: ImageMagick) (`convert` binary) if you want to use the deprecated (link: docs/reference/system/options/thumbs#thumbs-driver text: `im` thumbs driver). Note that the PHP `exec()` method must be enabled on your server in this case as well.
 - PHP `apcu` extension for the Apcu cache driver
 - PHP `memcached` extension for the Memcached cache driver
+- PHP `redis` extension for the Redis cache driver
 - PHP `PDO` extension for connecting to databases
 - PHP `zip` extension for ZIP archive file functions
 - PHP `zlib` extension for sanitization and validation of `.svgz` files
