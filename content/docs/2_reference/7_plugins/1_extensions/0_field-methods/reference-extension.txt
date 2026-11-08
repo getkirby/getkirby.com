@@ -91,10 +91,10 @@ When you directly return the modified value, further chaining is not possible.
 **Example**
 
 ```php
-<?= $page->title()->quotes()->lower() ?>
+<?= $page->title()->quote()->lower() ?>
 <!-- will throw an error -->
 
-<?= $page->title()->quotes() ?>
+<?= $page->title()->quote() ?>
 <!-- will work fine -->
 ```
 
