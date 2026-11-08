@@ -12,7 +12,7 @@ Or using a wildcard to change the default for all roles:
 ```yaml
 options:
   update:
-    *: false
+    "*": false
     editor: true
 ```
 
@@ -22,9 +22,9 @@ Controlling accessibility for roles.
 # Page is not accessible and not visible for all roles except admins.
 options:
   access:
-    *: false
+    "*": false
     admin: true
   list:
-    *: false
+    "*": false
     admin: true
 ```
