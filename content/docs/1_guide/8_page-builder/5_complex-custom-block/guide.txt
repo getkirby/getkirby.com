@@ -315,17 +315,27 @@ panel.plugin("cookbook/audio-block", {
 
 Not really what we want to end up with, but easy, right?
 
-Let's replace this with an audio tag and the title from our block (we leave the other fields for later to prevent being too repetitive):
+Let's replace this with an audio tag and the title from our block (we leave the other fields for later to prevent being too repetitive).
+
+The `source` filepicker field doesn't store the file itself but a reference to it: `content.source` is an array of file UUIDs like `file://3hQfX8JLNb2X1Erc`. To get the URL of the audio file, we fetch the file from Kirby's API with `this.$panel.api.files.get()` when the preview is created:
 
 ```js "/site/plugins/audio-block/index.js"
 panel.plugin("cookbook/audio-block", {
   blocks: {
     audio: {
+      data() {
+        return {
+          file: null
+        };
+      },
+      async created() {
+        this.file = await this.$panel.api.files.get(null, this.content.source[0]);
+      },
       template: `
         <div>
           <h1>{{ content.title }}</h1>
-          <audio controls>
-            <source :src="content.source[0].url" type="audio/mpeg">
+          <audio v-if="file" controls>
+            <source :src="file.url" type="audio/mpeg">
           </audio>
         </div>
       `
@@ -334,27 +344,40 @@ panel.plugin("cookbook/audio-block", {
 });
 ```
 
-We have access to the fields through `content`, so we can get the title with `content.title`. The `content.source` filepicker field returns an array of file objects, so we can fetch the first one with the index `0` and the URL from the `url` property.
+We have access to the fields through `content`, so we can get the title with `content.title`. The file we get back from the API contains all the information we need, among them the `url` for the `src` attribute. Until the API has answered, `file` is still `null`, so we only render the audio element once we have the file.
 
 Now listen to this! We have a simple audio tag preview with a title (provided that we selected a file before).
 
-But hold on! If we tried to add an audio block now in the Panel, we will run into an error. Try it out. Why's that? Because we haven't made sure that we actually have a file. Let's change this with a computed method to pass to the `src` attribute:
+But hold on! If we tried to add an audio block now in the Panel, we will run into an error. Try it out. Why's that? Because we haven't made sure that we actually have a file before we ask the API for it. And if we select another file in the drawer, the preview won't notice, because we only fetch the file once. Let's fix both with a computed `source` property and a watcher:
 
 ```js "/site/plugins/audio-block/index.js"
 panel.plugin("cookbook/audio-block", {
   blocks: {
     audio: {
+      data() {
+        return {
+          file: null
+        };
+      },
       computed: {
         source() {
-          return this.content.source[0] || {};
+          return this.content.source[0];
+        }
+      },
+      watch: {
+        source: {
+          async handler(source) {
+            this.file = source ? await this.$panel.api.files.get(null, source) : null;
+          },
+          immediate: true
         }
       },
       template: `
         <div>
-          <div v-if="source.url">
+          <div v-if="file">
             <h1>{{ content.title }}</h1>
-            <audio controls>
-              <source :src="source.url" type="audio/mpeg">
+            <audio :key="file.url" controls>
+              <source :src="file.url" :type="file.mime">
             </audio>
           </div>
           <div v-else>No audio selected</div>
@@ -365,7 +388,13 @@ panel.plugin("cookbook/audio-block", {
 });
 ```
 
-The computed `source` method checks if the file exists and returns an empty object otherwise. In the template we can now use the `v-if`/`v-else` directive to render either the audio element or a message that no audio file was selected if the URL is missing in that object.
+The computed `source` property returns the UUID of the selected file, or `undefined` if no file is selected.
+
+Watchers are a fantastic concept in Vue.js to react on changes in your component. In this case, we watch the `source` property: whenever the selected file changes, the handler fetches the new file from the API, or resets `file` to `null` if there is none. With `immediate: true` we tell the watcher to also run once when the component has been created, so we no longer need the `created` method.
+
+In the template we can now use the `v-if`/`v-else` directives to render either the audio element or a message that no audio file was selected. The `:key` attribute makes sure that Vue recreates the audio element when the file changes, because browsers don't reload an audio element when only the `src` of its `source` tag changes.
+
+Since the file we get from the API also contains its mime type, we no longer have to hard-code `audio/mpeg` either and use `file.mime` for the `type` attribute instead. This comes in handy as soon as you want to allow other audio formats than `.mp3` or provide multiple formats for the same audio file.
 
 (image: audio-block-with-audio-tag.png)
 
@@ -416,10 +445,10 @@ Create an `Audio.vue` file in `/src/components`. Then let's start by recreating 
 ```html "/site/plugins/audio-block/src/components/Audio.vue"
 <template>
   <div>
-    <div v-if="source.url">
+    <div v-if="file">
       <h1>{{ content.title }}</h1>
-      <audio controls>
-        <source :src="source.url" type="audio/mpeg">
+      <audio :key="file.url" controls>
+        <source :src="file.url" :type="file.mime">
       </audio>
     </div>
     <div v-else>No audio selected</div>
@@ -428,9 +457,22 @@ Create an `Audio.vue` file in `/src/components`. Then let's start by recreating 
 
 <script>
 export default {
+  data() {
+    return {
+      file: null
+    };
+  },
   computed: {
     source() {
-      return this.content.source[0] || {};
+      return this.content.source[0];
+    }
+  },
+  watch: {
+    source: {
+      async handler(source) {
+        this.file = source ? await this.$panel.api.files.get(null, source) : null;
+      },
+      immediate: true
     }
   }
 };
@@ -461,7 +503,7 @@ As our first refinement step, we wrap the current HTML in a `k-block-figure` com
 ```html "/site/plugins/audio-block/src/components/Audio.vue"
 <template>
   <k-block-figure
-    :is-empty="!source.url"
+    :is-empty="!source"
     empty-icon="audio-file"
     empty-text="No file selected yet …"
     @open="open"
@@ -471,8 +513,8 @@ As our first refinement step, we wrap the current HTML in a `k-block-figure` com
       <h1>{{ content.title }}</h1>
       <h2>{{ content.subtitle }}</h2>
       <div v-html="content.description"></div>
-      <audio controls>
-        <source :src="source.url" type="audio/mpeg">
+      <audio v-if="file" :key="file.url" controls>
+        <source :src="file.url" :type="file.mime">
       </audio>
     </div>
   </k-block-figure>
@@ -480,7 +522,7 @@ As our first refinement step, we wrap the current HTML in a `k-block-figure` com
 ```
 (image: audio-block-empty.png)
 
-We also add some missing pieces, i.e. the subtitle and the description.
+We also add some missing pieces, i.e. the subtitle and the description. Since the file is fetched from the API asynchronously, we only render the audio element once we have it.
 
 Note how we use the `v-html` directive to render the contents of the descriptions field, which is a writer field that contains HTML. If we would try to render it without this directive, all HTML tags would be shown as plain text.
 
@@ -490,28 +532,27 @@ Note how we use the `v-html` directive to render the contents of the description
 
 ### Adding the poster and some styling
 
-For the poster that is stored in the `poster` field, we take advantage of Kirby's `k-aspect-ratio` Vue component to display a square image.
+For the poster that is stored in the `poster` field, we take advantage of Kirby's `k-image-frame` Vue component to display a square image. Just like the `source` field, the `poster` field only contains the UUID of the selected image. We can pass it to the `file` prop of the frame, and the component will fetch the image from the API itself.
 
 ```html
-<k-aspect-ratio class="k-block-type-audio-poster" ratio="1/1" cover="true">
-  <img
-    v-if="poster.url"
-    :src="poster.url"
-    alt=""
-  >
-</k-aspect-ratio>
+<k-image-frame
+  :cover="true"
+  :file="poster"
+  class="k-block-type-audio-poster"
+  ratio="1/1"
+/>
 ```
 
 We use a hard-coded ratio and set the `cover` attribute to `true`, but this can of course be made configurable from the blueprint.
 
-We haven't defined the `posterUrl` method yet, which does the same as the `source` method for the audio.
+We haven't defined the `poster` property yet, which returns the UUID of the selected image, just like the `source` property does for the audio file.
 
 Here is the complete code for this step with some added styling:
 
 ```html "/site/plugins/audio-block/src/components/Audio.vue"
 <template>
   <k-block-figure
-    :is-empty="!source.url"
+    :is-empty="!source"
     empty-icon="audio-file"
     empty-text="No file selected yet …"
     @open="open"
@@ -519,17 +560,12 @@ Here is the complete code for this step with some added styling:
   >
     <div class="k-block-type-audio-wrapper">
       <div>
-        <k-aspect-ratio
+        <k-image-frame
+          :cover="true"
+          :file="poster"
           class="k-block-type-audio-poster"
-          cover="true"
           ratio="1/1"
-        >
-          <img
-            v-if="poster.url"
-            :src="poster.url"
-            alt=""
-          >
-        </k-aspect-ratio>
+        />
       </div>
       <div>
         <h1 class="k-block-type-audio-title">
@@ -539,8 +575,8 @@ Here is the complete code for this step with some added styling:
           {{ content.subtitle }}
         </h2>
         <div class="k-block-type-audio-description" v-html="content.description"></div>
-        <audio class="k-block-type-audio-element" controls>
-          <source :src="source.url" type="audio/mpeg">
+        <audio v-if="file" :key="file.url" class="k-block-type-audio-element" controls>
+          <source :src="file.url" :type="file.mime">
         </audio>
       </div>
     </div>
@@ -549,12 +585,25 @@ Here is the complete code for this step with some added styling:
 
 <script>
 export default {
+  data() {
+    return {
+      file: null
+    };
+  },
   computed: {
     poster() {
-      return this.content.poster[0] || {};
+      return this.content.poster[0];
     },
     source() {
-      return this.content.source[0] || {};
+      return this.content.source[0];
+    }
+  },
+  watch: {
+    source: {
+      async handler(source) {
+        this.file = source ? await this.$panel.api.files.get(null, source) : null;
+      },
+      immediate: true
     }
   }
 };
@@ -595,123 +644,11 @@ export default {
 It starts to look like what we anticipated at the beginning:
 
 (image: audio-block-almost-there.png)
-### Side quest: Getting the mime type through the API
-
-If you look closely, you will notice that we hard-coded the mime-type of the audio file all this time, because we don't have access to the mime type of the file through `content.source[0]`. In our example it doesn't really matter much because we limited the uploadable file types to `.mp3` files. But once we want to allow multiple files types or want to provide multiple file formats for the same audio file, we better find out how to get at the file object (who knows, maybe you need exactly that piece of information in one of your next custom blocks).
-
-Long story short, Kirby's API to the rescue. In this case, we need access to the endpoint `api/pages/:id/files/:filename`.
-
-To this purpose, let's fetch more information about the file in a watch method.
-
-```js
-//...
-data() {
-  return {
-    mime: null
-  };
-},
-watch: {
-  "source.link": {
-    handler(link) {
-      if (link) {
-        this.$api.get(link).then(file => {
-          this.mime = file.mime;
-        });
-      }
-    },
-    immediate: true
-  }
-},
-// ...
-```
-
-Watch methods are a fantastic concept in Vue.js to react on changes in your component. In this case, we watch for any changes to the link key of our source object. Isn't it fantastic that we can even watch nested keys with the dot syntax?
-
-Whenever the source file changes, the handler method will run and fetch information about the file from the API with `this.$api.get(link)`. With `immediate: true` we can tell the watch method to be called for the first time when the component has been created.
-
-Once we get back the file from the API, we put the mime type into our new mime property, which we've defined in the component's data method. This will make it available in our template.
-
-New status of our code:
-
-```html "/site/plugins/audio-block/src/components/Audio.vue"
-<template>
-  <k-block-figure
-    :is-empty="!source.url"
-    empty-icon="audio-file"
-    empty-text="No file selected yet …"
-    @open="open"
-    @update="update"
-  >
-    <div class="k-block-type-audio-wrapper">
-      <div>
-        <k-aspect-ratio
-          class="k-block-type-audio-poster"
-          cover="true"
-          ratio="1/1"
-        >
-          <img
-            v-if="poster.url"
-            :src="poster.url"
-            alt=""
-          >
-        </k-aspect-ratio>
-      </div>
-      <div>
-        <h1 class="k-block-type-audio-title">
-          {{ content.title }}
-        </h1>
-        <h2 class="k-block-type-audio-subtitle">
-          {{ content.subtitle }}
-        </h2>
-        <div class="k-block-type-audio-description" v-html="content.description"></div>
-        <audio class="k-block-type-audio-element" controls>
-          <source :src="source.url" :type="mime">
-        </audio>
-      </div>
-    </div>
-  </k-block-figure>
-</template>
-
-<script>
-export default {
-  data() {
-    return {
-      mime: null
-    };
-  },
-  computed: {
-    poster() {
-      return this.content.poster[0] || {};
-    },
-    source() {
-      return this.content.source[0] || {};
-    }
-  },
-  watch: {
-    "source.link": {
-      handler(link) {
-        if (link) {
-          this.$api.get(link).then(file => {
-            this.mime = file.mime;
-          });
-        }
-      },
-      immediate: true
-    }
-  },
-};
-</script>
-
-<!-- styles here (see above ) -->
-```
-
-Congratulations. Side quest completed! 👏
-
 ### Making the text fields editable
 
 Ok, that was a lot of stuff. But we are not ready yet. As promised in the intro, we want to make the headlines and the description editable.
 
-To do this, we will replace all text instances with `k-writer` components:
+To do this, we will replace all text instances with `k-writer-input` components:
 
 So instead of the `h1` element
 
@@ -722,7 +659,7 @@ So instead of the `h1` element
 We use
 
 ```html
-<k-writer
+<k-writer-input
   :inline="true"
   :marks="false"
   :placeholder="field('title').placeholder"
@@ -732,7 +669,7 @@ We use
 />
 ```
 
-The writer component is a simple WYSIWYG editor for inline styles (bold, italic, etc.) With an enabled `inline` option, we will tell the editor to insert `<br>` instead of paragraphs for line breaks. With the `marks` option, we can activate or deactivate particular inline styles. We don't need them here. We could also use a simple input field instead, but the writer will adapt its size to the content and will also work better for the description field.
+The writer input component is a simple WYSIWYG editor for inline styles (bold, italic, etc.) With an enabled `inline` option, we will tell the editor to insert `<br>` instead of paragraphs for line breaks. With the `marks` option, we can activate or deactivate particular inline styles. We don't need them here. We could also use a simple input field instead, but the writer will adapt its size to the content and will also work better for the description field.
 
 Another speciality of a block preview component is the built-in `field` method. We can use it to access blueprint settings for fields in our drawer. This is super handy to get field properties for our WYSIWYG preview. In this case, we get the placeholders from the blueprint: `field('title').placeholder`
 
@@ -741,7 +678,7 @@ If we repeat this procedure for every field, we end up with our final result:
 ```html "/site/plugins/audio-block/src/components/Audio.vue"
 <template>
   <k-block-figure
-    :is-empty="!source.url"
+    :is-empty="!source"
     empty-icon="audio-file"
     empty-text="No file selected yet …"
     @open="open"
@@ -749,20 +686,15 @@ If we repeat this procedure for every field, we end up with our final result:
   >
     <div class="k-block-type-audio-wrapper">
       <div>
-        <k-aspect-ratio
+        <k-image-frame
+          :cover="true"
+          :file="poster"
           class="k-block-type-audio-poster"
-          cover="true"
           ratio="1/1"
-        >
-          <img
-            v-if="poster.url"
-            :src="poster.url"
-            alt=""
-          >
-        </k-aspect-ratio>
+        />
       </div>
       <div @dblclick.stop>
-        <k-writer
+        <k-writer-input
           :inline="true"
           :marks="false"
           :placeholder="field('title').placeholder"
@@ -770,7 +702,7 @@ If we repeat this procedure for every field, we end up with our final result:
           class="k-block-type-audio-title"
           @input="update({ title: $event })"
         />
-        <k-writer
+        <k-writer-input
           :inline="true"
           :marks="false"
           :placeholder="field('subtitle').placeholder"
@@ -778,7 +710,7 @@ If we repeat this procedure for every field, we end up with our final result:
           class="k-block-type-audio-subtitle"
           @input="update({ subtitle: $event })"
         />
-        <k-writer
+        <k-writer-input
           :inline="true"
           :marks="false"
           :placeholder="field('description').placeholder"
@@ -786,8 +718,8 @@ If we repeat this procedure for every field, we end up with our final result:
           class="k-block-type-audio-description"
           @input="update({ description: $event })"
         />
-        <audio class="k-block-type-audio-element" controls>
-          <source :src="source.url" :type="mime">
+        <audio v-if="file" :key="file.url" class="k-block-type-audio-element" controls>
+          <source :src="file.url" :type="file.mime">
         </audio>
       </div>
     </div>
@@ -798,25 +730,21 @@ If we repeat this procedure for every field, we end up with our final result:
 export default {
   data() {
     return {
-      mime: null
+      file: null
     };
   },
   computed: {
     poster() {
-      return this.content.poster[0] || {};
+      return this.content.poster[0];
     },
     source() {
-      return this.content.source[0] || {};
+      return this.content.source[0];
     }
   },
   watch: {
-    "source.link": {
-      handler (link) {
-        if (link) {
-          this.$api.get(link).then(file => {
-            this.mime = file.mime;
-          });
-        }
+    source: {
+      async handler(source) {
+        this.file = source ? await this.$panel.api.files.get(null, source) : null;
       },
       immediate: true
     }
@@ -839,6 +767,7 @@ export default {
 .k-block-type-audio-title,
 .k-block-type-audio-subtitle {
   font-size: 1.5rem;
+  line-height: 1.25;
 }
 .k-block-type-audio-title {
   font-weight: 600;
@@ -854,8 +783,15 @@ export default {
   margin-top: 2rem;
   height: 2rem;
 }
+.k-block-type-audio-wrapper .ProseMirror,
+.k-block-type-audio-wrapper .k-writer-input[data-placeholder][data-empty="true"]::before {
+  padding: 0;
+  line-height: inherit;
+}
 </style>
 ```
+
+The writer inputs come with the padding and line height of regular Panel inputs, both for the text and for the placeholder. The last rule in our styles resets them, so that the editable texts look just like the static headlines from the previous step.
 
 Note that we ignored the audio settings like controls and autoplay for the preview because they are not relevant here. If you want to change that, you should know enough by now to adapt all settings to your liking.
 
@@ -867,7 +803,7 @@ You also might have noticed this line:
 
 The `<k-block-figure>` component has a built-in handler to open the block drawer on double-click. This is cool, but it's not ideal for writer components. I.e. you might want to double-click to select some text. With `@dblclick.stop` we can prevent the double-click event from bubbling up. The drawer will not open when we double-click on one of the writers.
 
-You should definitely check out the docs for (link: https://vuejs.org/v2/guide/events.html text: Vue’s awesome event handling shortcuts) for more tricks like this.
+You should definitely check out the docs for (link: https://vuejs.org/guide/essentials/event-handling.html text: Vue’s awesome event handling shortcuts) for more tricks like this.
 
 
 ## End result
