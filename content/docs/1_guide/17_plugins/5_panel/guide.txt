@@ -28,22 +28,34 @@ Kirby loads `index.php`, `index.js` and `index.css` from the plugin root. Nothin
 
 ## The PHP half
 
-Registering a (link: docs/reference/plugins/extensions/fields text: field type) looks like any other extension. Anything you put under `computed` is handed to the Vue component as a prop:
+Every (link: docs/reference/plugins/extensions/fields text: field type) is a PHP class. Our field only shows something and never stores a value, so it extends Kirby's `DisplayField` class, which already brings the `label` and `help` options. Anything you return from its `props()` method is handed to the Vue component as a prop. The class is then registered like any other extension:
 
 ```php "/site/plugins/anchor/index.php"
+<?php
+
+namespace Superwoman\Anchor;
+
+use Kirby\Cms\App as Kirby;
+use Kirby\Form\Field\DisplayField;
+
+class AnchorField extends DisplayField
+{
+	// everything returned here is handed to the
+	// `k-anchor-field` Vue component as a prop
+	public function props(): array
+	{
+		return [
+			...parent::props(),
+			'anchor' => $this->model()->anchor()
+		];
+	}
+}
+
 Kirby::plugin(
 	name: 'superwoman/anchor',
 	extends: [
 		'fields' => [
-			'anchor' => [
-				// everything that is computed here is handed to the
-				// `k-anchor-field` Vue component as a prop
-				'computed' => [
-					'anchor' => function (): string {
-						return $this->model()->anchor();
-					}
-				]
-			]
+			'anchor' => AnchorField::class
 		]
 	]
 );
