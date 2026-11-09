@@ -11,7 +11,7 @@ Text:
 
 The most simple setup of a blueprint is a form with just a few fields. For this setup, you can add fields using the `fields` keyword, then add your fields underneath with proper indentation:
 
-(image: fields.png)
+(image: fields.svg)
 
 ```yaml
 title: My blueprint
@@ -35,7 +35,7 @@ The `fields` keyword works on the top blueprint level like in the example above,
 
 Not every field collects content. Some display what is already there, and they are written exactly like any other field:
 
-(image: stacked-fields.png alt: Outline of stacked fields in a single column layout)
+(image: stacked-fields.svg alt: Outline of stacked fields in a single column layout)
 
 Here are some examples:
 
@@ -98,7 +98,7 @@ fields:
 
 ## Columns
 
-(image: columns.png)
+(image: columns.svg)
 
 A single stacked column like the above can sometimes be useful, in many cases you will, however, want to give more structure to your layout. That's where `columns` come into play.
 
@@ -305,7 +305,7 @@ columns:
 
 ## Adapt all to your needs
 
-(image: columns-complex.png)
+(image: columns-complex.svg)
 
 Kirby gives you the flexibility to set up the (glossary: Panel) so that it adapts to the needs of every single page/template. Use the layout possibilities to create the structure that works best for you:
 
@@ -349,7 +349,7 @@ If this isn't yet enough ways and space for you to structure your fields, move o
 
 When your blueprints get more complex, splitting up your view into multiple tabs helps to keep them organized. Tabs are basically wrappers around regular blueprint layouts. Check out (link: #columns text: how to create layouts) before you get started with tabs.
 
-(image: tabs.png)
+(image: tabs.svg)
 
 Like the blueprint itself, a tab can contain
 
