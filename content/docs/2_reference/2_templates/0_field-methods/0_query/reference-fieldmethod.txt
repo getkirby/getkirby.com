@@ -1,3 +1,13 @@
+Text:
+
+<warning>
+The field value runs as a query with full access to Kirby's PHP API. Only use this method with fields that you would trust to contain PHP code. Never use it with content that comes from site visitors or with fields that Panel users with limited permissions can edit.
+</warning>
+
+(link: docs/guide/blueprints/query-language#only-run-trusted-queries text: Learn more about trusted queries ›)
+
+----
+
 Examples:
 
 Assuming your text field value is `site.find('notes')` this query will return the `notes` page. With the `expect` parameter, you can optionally define the expected return type, in this case a `Kirby\Cms\Page` object.

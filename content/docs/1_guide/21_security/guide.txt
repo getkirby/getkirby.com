@@ -279,6 +279,12 @@ You can find more about (link: docs/reference#validators text: Kirby's input val
 - `$user->update()`
 - `$file->update()`
 
+### Never run queries from user input
+
+The (link: docs/guide/blueprints/query-language text: query language) can call any public method of Kirby's PHP API, including methods that change or delete data. A query can even switch to the almighty `kirby` user to skip all permission checks. Never pass user input to methods that run queries, like `Str::template()`, `$page->toString()` or `$field->replace()`. This also applies to content fields that visitors or editors you don't fully trust can change.
+
+(link: docs/guide/blueprints/query-language#only-run-trusted-queries text: Learn which methods run queries ›)
+
 ### Filter and sanitize properties of virtual content
 
 With (link: docs/guide/virtual-content text: virtual content), it is possible to construct page, file and user objects on the fly based on dynamic or external data. This system allows for very flexible and advanced setups and enables integrations between the Kirby core and custom code.

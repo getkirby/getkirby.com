@@ -147,6 +147,31 @@ info: "{< page.myMethodWithHTML >}"
 ```
 
 
+## Only run trusted queries
+
+A query can call any public method on the objects it can reach, starting from `kirby`, `site`, `page`, `user` and the other entry points. This includes methods that change or delete data, e.g. `page.delete(true)` or `user.changeRole("admin")`.
+
+Permission checks will not stop such a query. With `kirby.impersonate("kirby")`, a query can switch to the almighty `kirby` user for the rest of the request. After that, all methods run without any permission checks.
+
+Treat queries like PHP code: only run queries that you or the developers of your site wrote, e.g. in blueprints, config files or plugins. **Never run queries that contain or are built from user input.** This includes data from the request (query parameters, form submissions), content created by site visitors and data from external sources.
+
+The following methods run the queries contained in a string:
+
+- `$field->query()`
+- `$field->replace()`
+- `$site->query()`, `$page->query()`, `$file->query()`, `$user->query()`
+- `$site->toString()`, `$page->toString()`, `$file->toString()`, `$user->toString()` and their `toSafeString()` variants
+- `Str::query()`, `Str::template()` and `Str::safeTemplate()`
+
+<warning>
+`toSafeString()` and `Str::safeTemplate()` only escape the query results for HTML output. They don't restrict which queries can run.
+</warning>
+
+### Queries in content
+
+`$field->query()` and `$field->replace()` run queries stored in a content field, and so does `$page->toString()` if you pass it a field value. Everyone who can edit this field can then run any query, including Panel users with limited permissions. Only use these methods with fields that you would trust to contain PHP code. Never use them with content that comes from site visitors, e.g. from a frontend form.
+
+
 ## Advanced query syntax
 
 Queries can include arrays and nested method calls:
