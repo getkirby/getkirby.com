@@ -11,6 +11,12 @@ class CookbookRecipePage extends DefaultPage
 
 	public function isNew(): bool
 	{
+		// Archived docs are a static snapshot,
+		// in which "new" would never expire
+		if (isArchived() === true) {
+			return false;
+		}
+
 		return $this->published()->toDate('U') > (time() - 4500000);
 	}
 

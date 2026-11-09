@@ -52,7 +52,7 @@
 					🇪🇺 Made in Europe
 				</p>
 			</div>
-			<?php if ($kirby->option('archived') === true): ?>
+			<?php if (isArchived() === true): ?>
 			<div class="max-w-xs">
 				<p class="font-bold mb-1">Archived Docs</p>
 				<p class="mb-6">
@@ -62,12 +62,12 @@
 				<ul class="footer-menu-2">
 					<?php snippet('layouts/menu-items', [
 						'items' => [
-							'Security' => '/security',
-							'Privacy'  => '/privacy',
-							'License'  => '/license',
-							'Presskit' => '/press',
-							'Team'     => '/team',
-							'Contact'  => '/contact',
+							'Security' => 'https://getkirby.com/security',
+							'Privacy'  => 'https://getkirby.com/privacy',
+							'License'  => 'https://getkirby.com/license',
+							'Presskit' => 'https://getkirby.com/press',
+							'Team'     => 'https://getkirby.com/team',
+							'Contact'  => 'https://getkirby.com/contact',
 						]
 					]) ?>
 				</ul>
