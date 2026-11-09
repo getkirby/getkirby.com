@@ -16,7 +16,7 @@ class SiteMeta
 		$robots .= 'Allow: /' . PHP_EOL;
 
 		// Archived docs are not indexed (see `PageMeta::robots()`)
-		if (App::instance()->option('archived') !== true) {
+		if (isArchived() === false) {
 			$robots .= 'Sitemap: ' . url('sitemap.xml');
 		}
 

@@ -6,7 +6,7 @@
 $sale = new Kirby\Buy\Sale();
 ?>
 
-<?php if ($page->id() !== 'buy' && $sale->isActive() === true && $kirby->option('archived') !== true): ?>
+<?php if ($page->id() !== 'buy' && $sale->isActive() === true && isArchived() === false): ?>
 <aside class="banner text-sm rounded shadow-lg">
 	<a href="<?= url('buy') ?>"><?= $sale->text() ?></a>
 </aside>

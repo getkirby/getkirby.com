@@ -242,7 +242,7 @@ class Thumbnail
 
 		// Archived docs are served as static snapshot
 		// without auto-generated images
-		if ($page->kirby()->option('archived') === true) {
+		if (isArchived() === true) {
 			return null;
 		}
 

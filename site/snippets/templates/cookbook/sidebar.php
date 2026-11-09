@@ -24,7 +24,7 @@
 					<?= icon('list-bullet') ?> All recipes
 				</a>
 			</li>
-			<?php if ($kirby->option('archived') !== true): ?>
+			<?php if (isArchived() === false): ?>
 			<li>
 				<button class="search-button" type="button" data-area="cookbook">
 					<?= icon('search') ?> Search

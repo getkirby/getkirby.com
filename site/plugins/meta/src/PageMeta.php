@@ -93,7 +93,7 @@ class PageMeta
 	public function opensearch(): string
 	{
 		// Archived docs are served as static snapshot without search
-		if ($this->page->kirby()->option('archived') === true) {
+		if (isArchived() === true) {
 			return '';
 		}
 
@@ -118,7 +118,7 @@ class PageMeta
 
 		// Archived docs should not compete with
 		// the current docs in search results
-		if ($this->page->kirby()->option('archived') === true) {
+		if (isArchived() === true) {
 			$robots = new Field($this->page, 'robots', 'noindex');
 		}
 

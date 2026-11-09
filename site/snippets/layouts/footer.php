@@ -52,7 +52,7 @@
 					🇪🇺 Made in Europe
 				</p>
 			</div>
-			<?php if ($kirby->option('archived') === true): ?>
+			<?php if (isArchived() === true): ?>
 			<div class="max-w-xs">
 				<p class="font-bold mb-1">Archived Docs</p>
 				<p class="mb-6">

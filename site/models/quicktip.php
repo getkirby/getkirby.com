@@ -13,7 +13,7 @@ class QuicktipPage extends DefaultPage
 	{
 		// Archived docs are a static snapshot,
 		// in which "new" would never expire
-		if ($this->kirby()->option('archived') === true) {
+		if (isArchived() === true) {
 			return false;
 		}
 

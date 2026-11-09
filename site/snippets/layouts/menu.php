@@ -9,7 +9,7 @@
 		<?= icon('menu') ?>
 	</label>
 	<nav aria-label="Main menu">
-		<?php if ($kirby->option('archived') === true): ?>
+		<?php if (isArchived() === true): ?>
 		<ul class="menu-1">
 			<li class="has-submenu">
 				<a href="<?= page('docs/guide')->menuUrl() ?>">Archived Docs</a>

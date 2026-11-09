@@ -8,7 +8,7 @@ $area ??= 'all';
 $areas  = $kirby->option('search.areas')($kirby);
 ?>
 
-<?php if ($kirby->option('archived') !== true): ?>
+<?php if (isArchived() === false): ?>
 <div class="search">
 	<button
 		class="search-button"

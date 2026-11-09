@@ -40,7 +40,7 @@ use Kirby\Http\Uri;
 					<?= icon('list-bullet') ?> All quicktips
 				</a>
 			</li>
-			<?php if ($kirby->option('archived') !== true): ?>
+			<?php if (isArchived() === false): ?>
 			<li>
 				<button class="search-button" type="button" data-area="cookbook">
 					<?= icon('search') ?> Search
