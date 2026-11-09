@@ -187,6 +187,7 @@ To wrap this up, we need to adjust our CSS file a bit to make it work with the i
     cursor: pointer;
     font: inherit;
     text-align: center;
+    width: auto;
 }
 .k-block-type-button input:focus {
     outline: 0;
@@ -226,6 +227,7 @@ export default {
     cursor: pointer;
     font: inherit;
     text-align: center;
+    width: auto;
 }
 .k-block-type-button input:focus {
     outline: 0;
