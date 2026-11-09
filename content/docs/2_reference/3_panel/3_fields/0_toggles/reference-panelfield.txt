@@ -36,7 +36,7 @@ Toggles can be defined with simple values or value & text options. They are a gr
 fields:
   alignment:
     type: toggles
-    label: Icons & Labels
+    label: Labels
     options:
       - left
       - center
