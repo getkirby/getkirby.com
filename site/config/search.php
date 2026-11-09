@@ -12,7 +12,7 @@ return [
 			'cookbook'  => 'Cookbook'
 		];
 
-		if ($kirby->option('archived', false) !== true) {
+		if (isArchived() === false) {
 			$areas['kosmos'] = 'Kosmos';
 			$areas['plugin'] = 'Plugins';
 		}

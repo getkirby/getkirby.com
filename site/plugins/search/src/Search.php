@@ -27,7 +27,7 @@ abstract class Search
 
 	public static function instance(): static
 	{
-		$class = match (App::instance()->option('archived', false)) {
+		$class = match (isArchived()) {
 			true  => LoupeSearch::class,
 			false => AlgoliaSearch::class
 		};

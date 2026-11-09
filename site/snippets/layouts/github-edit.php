@@ -4,7 +4,7 @@
  * @var Kirby\Cms\Page $page
  */
 ?>
-<?php if ($kirby->option('archived') !== true): ?>
+<?php if (isArchived() === false): ?>
 	<hr class="hr mb-6">
 
 	<p class="prose text-sm mb-6 max-w-xs">

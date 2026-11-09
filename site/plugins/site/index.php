@@ -7,6 +7,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/helpers/html.php';
 require_once __DIR__ . '/helpers/markdown.php';
 require_once __DIR__ . '/helpers/reference.php';
+require_once __DIR__ . '/helpers/site.php';
 
 // make default page model and reference page models available for extension
 // TODO: Remove when https://github.com/getkirby/kirby/issues/5968 is implemented
