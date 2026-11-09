@@ -182,6 +182,7 @@ title: Photos
 
 fields:
   files:
+    type: filelist
     layout: cards
     size: medium
     image:
@@ -202,90 +203,7 @@ pages:
     - photos # Add virtual files blueprint
 ```
 
-If you now visit the page in the Panel, the file cards will be there, but oh, no file previews!
-
-Why’s that? It worked on the frontend, after all? The reason why the images don’t work in the Panel (yet) is that the Panel uses thumbs for the previews, but Kirby cannot create thumbs from those virtual files.
-
-For the moment, we therefore have to tell Kirby that we want to use the original file instead of a thumb.
-
-### File::version component
-
-A `file::version` component allows us to define what Kirby should deliver when a thumb is requested. This component needs to either return a `File` object or a `Kirby\Cms\FileVersion` object. Here, we therefore return the original file instead of a thumb if the file template name is `virtual-file`, otherwise we let the the native component do its job.
-
-Put the following code into a separate file (see filepath) and then register it in `index.php`:
-
-```php "/site/plugins/virtual-files/components/file-version.php"
-<?php
-
-use Kirby\Cms\App as Kirby;
-use Kirby\Cms\File;
-
-return function (Kirby $kirby, File $file, array $options = [])
-{
-  static $original;
-
-  if ($file->template() === 'virtual-file') {
-    return $file;
-  }
-
-  // if static $original is null, get the original component
-  if ($original === null) {
-    $original = $kirby->nativeComponent('file::version');
-  }
-
-  // and return it with the given options
-  return $original($kirby, $file, $options);
-};
-```
-
-#### Modified `index.php`
-
-```php "/site/plugins/virtual-files/index.php"
-<?php
-
-use Kirby\Cms\App as Kirby;
-
-require __DIR__ . '/models/photos.php';
-
-Kirby::plugin(
-  name: 'cookbook/virtual-files',
-  extends: [
-    'blueprints' => [
-      'files/virtual-file'  => __DIR__ . '/blueprints/files/virtual-file.yml',
-      'pages/photos'        => __DIR__ . '/blueprints/pages/photos.yml',
-    ],
-    'pageModels' => [
-      'photos'              => 'PhotosPage',
-    ],
-    'templates'  => [
-      'photos'              => __DIR__ . '/templates/photos.php',
-    ],
-    'components' => [
-      'file::version'       => include __DIR__ . '/components/file-version.php',
-    ],
-  ]
-);
-```
-
-The file structure in the plugins folder should now look like this:
-
-```filesystem
-virtual-files/
-  blueprints/
-    files/
-      virtual-file.yml
-    pages/
-      photos.yml
-  components/
-    file-version.php
-  models/
-    photos.php
-  templates/
-    photos.php
-  index.php
-```
-
-If we head back into the Panel, the file previews will finally be rendered.
+If you now visit the page in the Panel, the file cards will be there, including previews of the virtual files. Since Kirby cannot create thumbs from files that don’t exist on disk, it uses the original files for the previews instead.
 
 In a real world project, the files would probably come from a database or an API. Let’s see how we can do that using the Unsplash API as an example.
 
@@ -391,15 +309,11 @@ And with this, we have arrived at the end of our first implementation option. Ti
 
 ## Option 2: Extending the file class
 
-While the first option above works well for a simple setup, we might end up with complex logic in the `file::version` component if we wanted to include files from different sources, use different file sizes for images, or do other crazy stuff.
+While the first option above works well for a simple setup, it quickly reaches its limits if we wanted to include files from different sources, use different file sizes for images, or do other crazy stuff.
 
 We will be much more flexible if we use a custom file class that extends the `Kirby\Cms\File` class, instead. Such a setup will not only give us the opportunity to update file metadata in a database directly from the Panel, add additional properties to our files, and a lot more if we wanted to do that, but also use different file models for different page types.
 
 Let’s start refactoring our code…
-
-### Unregister the `file::version` component
-
-Since we don’t need the `file::version` component for this second example anymore, remove or comment the correspoding code in `index.php`, so that it looks like the very first version above.
 
 ### Add file class
 
@@ -418,36 +332,32 @@ class VirtualFile extends File
     return $this->url;
   }
 
-  public function thumb($options = null)
+  public function thumb(array|string|null $options = null): static
   {
     return $this;
   }
 
   /**
-   * The following methods are not relevant here and only mentioned for completeness sake;
-   * they are needed if you have a use case where you actually want to delete files via the Panel
-   * or update meta data in a database etc.
+   * The following method is not relevant here and only mentioned for completeness' sake;
+   * it is needed if you have a use case where you actually want to delete files via the Panel.
    */
-  public function delete(bool $force = false): bool
+  public function delete(): bool
   {
     // code to delete file
-  }
-
-  public function writeContent(array $data, string $languageCode = null): bool
-  {
-    // code to write meta data
   }
 }
 ```
 
 Since we can now overwrite all `File` class methods or add new properties and methods as needed, you probably get an idea of the powerful potential of this approach.
 
+If you want to read or write the metadata of your virtual files somewhere else, e.g. in a database, use a custom (link: docs/reference/plugins/components/storage text: content storage handler) instead of overwriting methods of the file class.
+
 ### Modify `index.php`
 
 In our `index.php`, we now have to require this file:
 
 
-```php "/site/plugins/photos/index.php"
+```php "/site/plugins/virtual-files/index.php"
 <?php
 
 use Kirby\Cms\App as Kirby;
@@ -538,7 +448,7 @@ Let’s leverage this possibility to create thumbs for our images by modifiying 
 In our example above, the `thumb()` method simply returned the file object. Now we can modify the method to instead return an instance of the same class, but with a modified URL if supported options are passed in the options array.
 
 ```php "/site/plugins/virtual-files/models/virtual-file.php"
-public function thumb($options = null): FileVersion
+public function thumb(array|string|null $options = null): static
 {
   $query          = null;
   $options['w']   = $options['width'] ?? $options['w'] ?? null;
@@ -613,7 +523,6 @@ And since we are at it, we might as well add some methods to retrieve the `width
 <?php
 
 use Kirby\Cms\File;
-use Kirby\Cms\FileVersion;
 use Kirby\Image\Dimensions;
 
 class VirtualFile extends File
