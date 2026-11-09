@@ -86,8 +86,12 @@ snippet('templates/features/section', [
 
 <?php snippet('templates/scenarios/cases', [
 	'title' => 'Trusted by artists of all traits',
-	'cases' => $kirby->collection('cases/art'),
-	'limit' => 8
+	'cases' => showcase(
+		category: 'art',
+		featured: true,
+		limit: 8,
+		shuffle: true
+	),
 ]) ?>
 
 <?php snippet('templates/scenarios/brands', [
