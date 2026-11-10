@@ -9,54 +9,54 @@ Subtitle: Details that deliver
 Features:
 -
   icon: markdown
-	headline: Content negotiation
-	text: Serve the Markdown or JSON representation of a page based on the Accept header of the request, no file extension in the URL needed.
-	link: "/releases/6/more-details#content-negotiation"
+  headline: Content negotiation
+  text: Serve the Markdown or JSON representation of a page based on the Accept header of the request, no file extension in the URL needed.
+  link: "/releases/6/more-details#content-negotiation"
 -
   icon: code
-	headline: Smarter queries
-	text: Kirby queries support logical not and negative values, and several parsing bugs have been fixed.
-	link: "/releases/6/more-details#smarter-queries"
+  headline: Smarter queries
+  text: Kirby queries support logical not and negative values, and several parsing bugs have been fixed.
+  link: "/releases/6/more-details#smarter-queries"
 -
   icon: calendar
-	headline: Date formats with text
-	text: Add your own words to the display format of date and time fields and see an example as placeholder.
-	link: "/releases/6/more-details#date-formats-with-text"
+  headline: Date formats with text
+  text: Add your own words to the display format of date and time fields and see an example as placeholder.
+  link: "/releases/6/more-details#date-formats-with-text"
 -
   icon: keyboard
-	headline: Easier date input
-	text: Date fields read your input in their own format and understand month names in English and the Panel language.
-	link: "/releases/6/more-details#easier-date-input"
+  headline: Easier date input
+  text: Date fields read your input in their own format and understand month names in English and the Panel language.
+  link: "/releases/6/more-details#easier-date-input"
 -
   icon: upload
-	headline: Upload in the file picker
-	text: Drop files onto the file picker dialog to upload and select them in one go.
-	link: "/releases/6/more-details#upload-in-the-file-picker"
+  headline: Upload in the file picker
+  text: Drop files onto the file picker dialog to upload and select them in one go.
+  link: "/releases/6/more-details#upload-in-the-file-picker"
 -
   icon: edit-line
-	headline: Unsaved changes at a glance
-	text: Field labels are highlighted as long as the field has unsaved changes.
-	link: "/releases/6/more-details#unsaved-changes-at-a-glance"
+  headline: Unsaved changes at a glance
+  text: Field labels are highlighted as long as the field has unsaved changes.
+  link: "/releases/6/more-details#unsaved-changes-at-a-glance"
 -
   icon: copy
-	headline: Copy from disabled fields
-	text: Select and copy the values of disabled fields.
-	link: "/releases/6/more-details#copy-from-disabled-fields"
+  headline: Copy from disabled fields
+  text: Select and copy the values of disabled fields.
+  link: "/releases/6/more-details#copy-from-disabled-fields"
 -
   icon: image
-	headline: Sharper image block previews
-	text: Image and gallery blocks load properly sized thumbnails that respect the ratio and crop settings of the block.
-	link: "/releases/6/more-details#sharper-image-block-previews"
+  headline: Sharper image block previews
+  text: Image and gallery blocks load properly sized thumbnails that respect the ratio and crop settings of the block.
+  link: "/releases/6/more-details#sharper-image-block-previews"
 -
   icon: file
-	headline: More MIME types
-	text: Kirby knows more file types, from WebAssembly to WebVTT subtitles and web app manifests.
-	link: "/releases/6/more-details#more-mime-types"
+  headline: More MIME types
+  text: Kirby knows more file types, from WebAssembly to WebVTT subtitles and web app manifests.
+  link: "/releases/6/more-details#more-mime-types"
 -
   icon: plugin
-	headline: Disable core Panel features
-	text: Plugins can remove any core dialog, drawer, dropdown, search, request or view of a Panel area.
-	link: "/releases/6/more-details#disable-core-panel-features"
+  headline: Disable core Panel features
+  text: Plugins can remove any core dialog, drawer, dropdown, search, request or view of a Panel area.
+  link: "/releases/6/more-details#disable-core-panel-features"
 
 ----
 
@@ -104,7 +104,7 @@ fields:
     text: "{{ !page.isListed ? 'Not visible on your site yet' : 'Live on your site' }}"
 ```
 
-More examples: `!user.isAdmin ? "guest" : "admin"`, `-page.price` or `-(1 + 2)`.
+More examples: `!user.isAdmin ? "guest" : "admin"`, `-page.price` or `-(1 + 2)`. Read more about all operators in the (link: docs/guide/blueprints/query-language#advanced-query-syntax__operators text: query language guide).
 
 ## Date formats with text
 

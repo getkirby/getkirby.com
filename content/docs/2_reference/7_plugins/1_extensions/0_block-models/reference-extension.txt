@@ -22,11 +22,14 @@ class HeadingBlock extends Block
     }
 }
 
-Kirby::plugin('my/blockModels', [
-    'blockModels' => [
-        'heading' => HeadingBlock::class
+Kirby::plugin(
+    name: 'my/blockModels',
+    extends: [
+        'blockModels' => [
+            'heading' => HeadingBlock::class
+        ]
     ]
-]);
+);
 ```
 
 You may also load your model class from a different file. Be aware you have to add the file to the classloader manually:
@@ -46,11 +49,14 @@ load([
     'HeadingBlock' => __DIR__ . '/models/heading.php'
 ]);
 
-Kirby::plugin('my/blockModels', [
-    'blockModels' => [
-        'heading' => HeadingBlock::class
+Kirby::plugin(
+    name: 'my/blockModels',
+    extends: [
+        'blockModels' => [
+            'heading' => HeadingBlock::class
+        ]
     ]
-]);
+);
 ```
 
 ## Overwriting the default block class
@@ -68,11 +74,14 @@ class DefaultBlock extends Block
     }
 }
 
-Kirby::plugin('my/blockModels', [
-    'blockModels' => [
-        'default' => DefaultBlock::class,
+Kirby::plugin(
+    name: 'my/blockModels',
+    extends: [
+        'blockModels' => [
+            'default' => DefaultBlock::class,
+        ]
     ]
-]);
+);
 ```
 
 

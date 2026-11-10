@@ -21,7 +21,7 @@ class Throws extends Iterator
 			return null;
 		}
 
-		$throws = A::map($throws, fn ($tag) => Exception::factory($tag));
+		$throws = A::map($throws, fn ($tag) => Exception::factory($tag, $reflection));
 		return new static($throws);
 	}
 }

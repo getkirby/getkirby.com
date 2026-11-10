@@ -4,6 +4,7 @@ namespace Kirby\Reference\Reflectable;
 
 use Kirby\Cms\App;
 use Kirby\Reference\Reflectable\Tags\Deprecated;
+use Kirby\Reference\Reflectable\Tags\See;
 use Kirby\Reference\Reflectable\Tags\Since;
 use Kirby\Reference\Reflectable\Tags\Throws;
 use PHPStan\PhpDocParser\Ast\PhpDoc\PhpDocTextNode;
@@ -89,9 +90,9 @@ abstract class Reflectable
 	 * Returns the `@see` tag value which references
 	 * another entity to refer to for more information
 	 */
-	public function see(): string|null
+	public function see(): See|null
 	{
-		return $this->doc()->getTagByName('@see')?->value;
+		return See::factory($this);
 	}
 
 	/**

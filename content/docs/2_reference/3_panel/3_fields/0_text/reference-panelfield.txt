@@ -23,10 +23,6 @@ fields:
     type: text
 ```
 
-## Field properties
-
-(field-options: text)
-
 (docs: panel-field-max-and-min field: text)
 
 ## How to use in templates/snippets
@@ -58,3 +54,5 @@ With fallback text if field is empty:
 ```
 
 For more field manipulations, check out Kirby's (link: docs/reference/templates/field-methods text: field methods).
+
+(docs: panel-field-update field: text)

@@ -10,10 +10,6 @@ Text:
 
 (image: link.png)
 
-## Field properties
-
-(field-options: link)
-
 ## Example
 
 ```yaml
@@ -76,6 +72,8 @@ Use the `toUrl()` method to convert any type of link to a valid URL:
 ```php
 <a href="<?= $page->link()->toUrl() ?>"><?= $page->link() ?></a>
 ```
+
+(docs: panel-field-update field: link)
 
 ## Adding target, link text etc.
 

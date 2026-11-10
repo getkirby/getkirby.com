@@ -12,9 +12,6 @@ use Stringable;
 /**
  * Global response configuration
  *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
@@ -170,7 +167,7 @@ class Responder implements Stringable
 	 * @since 3.5.5
 	 *
 	 * @param int|string|null $expires Timestamp, number of minutes or time string to parse
-	 * @param bool $override If `true`, the already defined timestamp will be overridden
+	 * @param $override If `true`, the already defined timestamp will be overridden
 	 * @return int|null|$this
 	 */
 	public function expires($expires = null, bool $override = false): static|int|null
@@ -190,6 +187,7 @@ class Responder implements Stringable
 		if (is_int($expires) === true && $expires < 1000000000) {
 			// number of minutes
 			$expires = time() + ($expires * 60);
+
 		} elseif (is_int($expires) !== true) {
 			// time string
 			$parsedExpires = strtotime($expires);
@@ -218,7 +216,7 @@ class Responder implements Stringable
 	/**
 	 * Setter and getter for the status code
 	 *
-	 * @return int|null|$this
+	 * @return ($code is null ? int|null : static)
 	 */
 	public function code(int|null $code = null): static|int|null
 	{
@@ -250,11 +248,14 @@ class Responder implements Stringable
 	 * Setter and getter for a single header
 	 *
 	 * @param string|false|null $value
-	 * @param bool $lazy If `true`, an existing header value is not overridden
-	 * @return string|null|$this
+	 * @param $lazy If `true`, an existing header value is not overridden
+	 * @return ($value is null ? string|null : static)
 	 */
-	public function header(string $key, $value = null, bool $lazy = false): static|string|null
-	{
+	public function header(
+		string $key,
+		$value = null,
+		bool $lazy = false
+	): static|string|null {
 		if ($value === null) {
 			return $this->headers()[$key] ?? null;
 		}
@@ -275,13 +276,13 @@ class Responder implements Stringable
 	/**
 	 * Setter and getter for all headers
 	 *
-	 * @return array|$this
+	 * @return ($headers is null ? array : static)
 	 */
 	public function headers(array|null $headers = null): static|array
 	{
 		if ($headers === null) {
 			$injectedHeaders = [];
-			$isPrivate = static::isPrivate($this->usesAuth(), $this->usesCookies());
+			$isPrivate       = static::isPrivate($this->usesAuth(), $this->usesCookies());
 
 			if ($isPrivate === true) {
 				// never ever cache private responses
@@ -290,6 +291,7 @@ class Responder implements Stringable
 
 			// inject CORS headers if enabled
 			$corsHeaders = Cors::headers();
+
 			if ($corsHeaders !== []) {
 				$injectedHeaders = [...$injectedHeaders, ...$corsHeaders];
 			}
@@ -309,9 +311,11 @@ class Responder implements Stringable
 
 				// merge Vary from CORS if present
 				if (isset($injectedHeaders['Vary']) === true) {
-					// split CORS Vary into individual values to avoid duplication
-					$corsVaryValues = array_map('trim', explode(',', $injectedHeaders['Vary']));
-					$vary = [...$vary, ...$corsVaryValues];
+					// split CORS Vary into individual values
+					// to avoid duplication
+					$corsVaryValues = explode(',', $injectedHeaders['Vary']);
+					$corsVaryValues = array_map(trim(...), $corsVaryValues);
+					array_push($vary, ...$corsVaryValues);
 				}
 
 				if ($vary !== []) {
@@ -331,12 +335,12 @@ class Responder implements Stringable
 	/**
 	 * Shortcut to configure a json response
 	 *
-	 * @return string|$this
+	 * @return $this
 	 */
-	public function json(array|null $json = null): static|string
+	public function json(array|null $json = null): static
 	{
 		if ($json !== null) {
-			$this->body(json_encode($json));
+			$this->body(json_encode($json, JSON_THROW_ON_ERROR));
 		}
 
 		return $this->type('application/json');
@@ -417,7 +421,7 @@ class Responder implements Stringable
 	/**
 	 * Setter and getter for the content type
 	 *
-	 * @return string|null|$this
+	 * @return ($type is null ? string|null : static)
 	 */
 	public function type(string|null $type = null): static|string|null
 	{
@@ -460,18 +464,6 @@ class Responder implements Stringable
 	}
 
 	/**
-	 * Marks headers (or header parts) as request-dependent, so they
-	 * can be subtracted before caching a response snapshot
-	 *
-	 * @since 5.2.0
-	 * @deprecated 5.3.0 Use `::volatileHeaders()->mark($name, $values)` instead. Will be removed in Kirby 6.
-	 */
-	public function markVolatileHeader(string $name, array|null $values = null): void
-	{
-		$this->volatileHeaders()->mark($name, $values);
-	}
-
-	/**
 	 * Setter and getter for the volatile headers manager
 	 * @since 5.3.0
 	 */
@@ -486,6 +478,7 @@ class Responder implements Stringable
 		}
 
 		$volatileHeaders = new VolatileHeaders();
+
 		foreach ($headers as $name => $values) {
 			$volatileHeaders->mark($name, $values);
 		}

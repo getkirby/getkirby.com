@@ -8,9 +8,6 @@ use Kirby\Exception\Exception;
 /**
  * Basic pagination handling
  *
- * @package   Kirby Toolkit
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
@@ -47,14 +44,11 @@ class Pagination
 		$this->setPage($props['page'] ?? null);
 		$this->setTotal($props['total'] ?? 0);
 
-		// ensure that page is set to something, otherwise
-		// generate "default page" based on other params
-		$this->page ??= $this->firstPage();
-
 		// allow a page value of 1 even if there are no pages;
 		// otherwise the exception will get thrown for this pretty common case
 		$min = $this->firstPage();
 		$max = $this->pages();
+
 		if ($this->page === 1 && $max === 0) {
 			$this->page = 0;
 		}
@@ -121,18 +115,18 @@ class Pagination
 			$params['limit'] = $a;
 		}
 
-		// add the total count from the collection
 		$params['total'] = $collection->count();
 
 		// remove null values to make later merges work properly
 		$params = array_filter($params);
 
-		// create the pagination instance
 		return new static($params);
 	}
 
 	/**
 	 * Getter for the current page
+	 *
+	 * @return non-negative-int
 	 */
 	public function page(): int
 	{
@@ -141,6 +135,8 @@ class Pagination
 
 	/**
 	 * Getter for the total number of items
+	 *
+	 * @return non-negative-int
 	 */
 	public function total(): int
 	{
@@ -149,6 +145,8 @@ class Pagination
 
 	/**
 	 * Getter for the number of items per page
+	 *
+	 * @return positive-int
 	 */
 	public function limit(): int
 	{
@@ -157,6 +155,8 @@ class Pagination
 
 	/**
 	 * Returns the index of the first item on the page
+	 *
+	 * @return positive-int
 	 */
 	public function start(): int
 	{
@@ -166,6 +166,8 @@ class Pagination
 
 	/**
 	 * Returns the index of the last item on the page
+	 *
+	 * @return non-negative-int
 	 */
 	public function end(): int
 	{
@@ -175,6 +177,8 @@ class Pagination
 
 	/**
 	 * Returns the total number of pages
+	 *
+	 * @return non-negative-int
 	 */
 	public function pages(): int
 	{
@@ -187,6 +191,8 @@ class Pagination
 
 	/**
 	 * Returns the first page
+	 *
+	 * @return 0|1
 	 */
 	public function firstPage(): int
 	{
@@ -195,6 +201,8 @@ class Pagination
 
 	/**
 	 * Returns the last page
+	 *
+	 * @return non-negative-int
 	 */
 	public function lastPage(): int
 	{
@@ -203,6 +211,8 @@ class Pagination
 
 	/**
 	 * Returns the offset (i.e. for db queries)
+	 *
+	 * @return non-negative-int
 	 */
 	public function offset(): int
 	{
@@ -259,6 +269,8 @@ class Pagination
 
 	/**
 	 * Returns the next page
+	 *
+	 * @return positive-int|null
 	 */
 	public function nextPage(): int|null
 	{
@@ -283,6 +295,7 @@ class Pagination
 
 	/**
 	 * Creates a range of page numbers for Google-like pagination
+	 * @return non-empty-list<int>
 	 */
 	public function range(int $range = 5): array
 	{
@@ -292,11 +305,12 @@ class Pagination
 		$end   = $pages;
 
 		if ($pages <= $range) {
+			/** @var non-empty-list<int> */
 			return range($start, $end);
 		}
 
 		$middle = (int)floor($range / 2);
-		$start  = $page - $middle + ($range % 2 === 0);
+		$start  = $page - $middle + ($range % 2 === 0 ? 1 : 0);
 		$end    = $start + $range - 1;
 
 		if ($start <= 0) {
@@ -309,11 +323,14 @@ class Pagination
 			$end   = $pages;
 		}
 
+		/** @var non-empty-list<int> */
 		return range($start, $end);
 	}
 
 	/**
 	 * Returns the first page of the created range
+	 *
+	 * @return non-negative-int
 	 */
 	public function rangeStart(int $range = 5): int
 	{
@@ -322,6 +339,8 @@ class Pagination
 
 	/**
 	 * Returns the last page of the created range
+	 *
+	 * @return non-negative-int
 	 */
 	public function rangeEnd(int $range = 5): int
 	{
@@ -366,13 +385,12 @@ class Pagination
 	/**
 	 * Sets the current page
 	 *
-	 * @param int|string|null $page Int or int in string form;
-	 *                              automatically determined if null
+	 * @param $page Int or int in string form;
+	 *             automatically determined if null
 	 * @return $this
 	 */
 	protected function setPage(int|string|null $page = null): static
 	{
-		// if $page is null, it is set to a default in the setProperties() method
 		if ($page !== null) {
 			if (is_numeric($page) !== true || $page < 0) {
 				throw new Exception(

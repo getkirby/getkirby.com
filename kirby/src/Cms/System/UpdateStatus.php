@@ -13,13 +13,10 @@ use Kirby\Toolkit\Str;
 
 /**
  * Checks for updates and affected vulnerabilities
- * @since 3.8.0
  *
- * @package   Kirby Cms
- * @author    Lukas Bestle <lukas@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
+ * @since     3.8.0
  */
 class UpdateStatus
 {
@@ -46,13 +43,13 @@ class UpdateStatus
 	protected bool|null $noVulns = null;
 
 	// caches
-	protected array $messages;
-	protected array $targetData;
-	protected array|bool $versionEntry;
-	protected array $vulnerabilities;
+	protected array|null $messages = null;
+	protected array|null $targetData = null;
+	protected array|false|null $versionEntry = null;
+	protected array|null $vulnerabilities = null;
 
 	/**
-	 * @param array|null $data Custom override for the getkirby.com update data
+	 * @param $data Custom override for the getkirby.com update data
 	 */
 	public function __construct(
 		App|Plugin $package,
@@ -343,7 +340,7 @@ class UpdateStatus
 	 * Compares a version against a Composer version constraint
 	 * and returns whether the constraint is satisfied
 	 *
-	 * @param string $reason Suffix for error messages
+	 * @param $reason Suffix for error messages
 	 */
 	protected function checkConstraint(string $version, string $constraint, string $reason): bool
 	{
@@ -364,9 +361,9 @@ class UpdateStatus
 	 * for each value by one or multiple version filters;
 	 * values that don't contain the filter keys are removed
 	 *
-	 * @param array $array Array that contains associative arrays
-	 * @param array $filters Associative array `field => version`
-	 * @param string $reason Suffix for error messages
+	 * @param $array Array that contains associative arrays
+	 * @param $filters Associative array `field => version`
+	 * @param $reason Suffix for error messages
 	 */
 	protected function filterArrayByVersion(array $array, array $filters, string $reason): array
 	{

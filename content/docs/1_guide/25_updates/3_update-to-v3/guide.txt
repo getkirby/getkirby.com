@@ -132,8 +132,8 @@ Before you run any page update scripts or update pages via the Panel, make sure 
 
 The old subpage and file settings are no longer compatible with Kirby 3. Files are now added via files sections, subpages via pages sections, and files get their own blueprints with meta data:
 
-- (link: docs/reference/panel/sections/pages text: Pages sections)
-- (link: docs/reference/panel/sections/files text: Files sections)
+- (link: docs/reference/panel/fields/pagelist text: Pages sections)
+- (link: docs/reference/panel/fields/filelist text: Files sections)
 - (link: docs/guide/content/files text: File meta data)
 
 The fields will work as before but you might want to restructure them to leverage the (link: docs/guide/blueprints/layout text: new layout features) sections, columns and tabs that give you much more control over the look of forms in the Panel.
@@ -203,9 +203,9 @@ The option to make a field readonly (`readonly: true`)  has been replaced with t
 
 The following field types no longer exist and have to be replaced:
 
-- `user` field &rarr; (link: docs/reference/panel/fields/users text: `users` field)
-- `page` field &rarr; (link: docs/reference/panel/fields/pages text: `pages` field)
-- `image` field &rarr; (link: docs/reference/panel/fields/files text: `files` field)
+- `user` field &rarr; (link: docs/reference/panel/fields/userpicker text: `users` field)
+- `page` field &rarr; (link: docs/reference/panel/fields/pagepicker text: `pages` field)
+- `image` field &rarr; (link: docs/reference/panel/fields/filepicker text: `files` field)
 - `checkbox` field &rarr; (link: docs/reference/panel/fields/toggle text: `toggle` field)
 - `datetime` field &rarr; (link: docs/reference/panel/fields/date text: `date` field) with `time` option
 
@@ -215,7 +215,7 @@ When moving from the old `user`, `page` and `image` fields to the Kirby 3 `users
 
 ### Dashboard and widgets
 
-The Kirby 2 Dashboard no longer exists in Kirby 3. With the Dashboard, Panel widgets are gone. Widgets can be replaced with (link: docs/reference/plugins/extensions/sections text: custom Panel sections).
+The Kirby 2 Dashboard no longer exists in Kirby 3. With the Dashboard, Panel widgets are gone. Widgets can be replaced with (link: docs/reference/plugins/extensions/fields text: custom Panel sections).
 
 ## Configuration
 
@@ -307,7 +307,7 @@ In your route, you can also pass all arguments explicitly to the `->render()` me
 
 ### Page status
 
-Filter methods like `visible()`, `invisible()` and related pages methods have been replaced with (link: docs/reference/objects/pages/listed text: `listed`)/(link: docs/reference/objects/pages/unlisted text: `unlisted`)/(link: docs/reference/objects/pages/published text: `published`) and related methods.
+Filter methods like `visible()`, `invisible()` and related pages methods have been replaced with (link: docs/reference/objects/cms/pages/listed text: `listed`)/(link: docs/reference/objects/cms/pages/unlisted text: `unlisted`)/(link: docs/reference/objects/cms/pages/published text: `published`) and related methods.
 
 ### KirbyText pre/post filters
 
@@ -415,12 +415,12 @@ The toolkit has been completely rewritten, new methods have been added, others r
 | Toolkit class  |  Replacement |
 |---|---|
 | `Bitmask` | <code></code>  |
-| `Brick`  | (link: docs/reference/tools/html text: `Kirby\Toolkit\Html`)  |
+| `Brick`  | (link: docs/reference/objects/cms/html text: `Kirby\Toolkit\Html`)  |
 | `C` | <code></code> |
 | `Cache`  | `Kirby\Cache`  |
-| `Cookie`  | (link: docs/reference/tools/cookie text: `Kirby\Http\Cookie`)  |
+| `Cookie`  | (link: docs/reference/objects/http/cookie text: `Kirby\Http\Cookie`)  |
 | `Crypt`  | <code></code> |
-| `Data`  | (link: docs/reference/tools/data text: `Kirby\Data`)  |
+| `Data`  | (link: docs/reference/objects/data/data text: `Kirby\Data`)  |
 | `Database`  | `Kirby\Database`  |
 | `Db`  | `Kirby\Database\Db`  |
 | `Detect` | `Kirby\CMS\System` |
@@ -431,18 +431,18 @@ The toolkit has been completely rewritten, new methods have been added, others r
 | `ErrorReporting`  | `Kirby\Exception`  |
 | `Exif`  | `Kirby\Image\Exif`  |
 | `Folder`  | <code></code> |
-| `Header` | (link: docs/reference/tools/header text: `Kirby\Http\Header`) |
+| `Header` | (link: docs/reference/objects/http/header text: `Kirby\Http\Header`) |
 | `I`  | `Kirby\Toolkit\Iterator` |
 | `L`  | `Kirby\Toolkit\I18n`  |
 | `Media`  | `Kirby\Image`  |
 | `Password`  | <code></code> |
-| `R`  | (link: docs/reference/objects/request text: `Kirby\Http\Request`)  |
+| `R`  | (link: docs/reference/objects/http/request text: `Kirby\Http\Request`)  |
 | `Redirect`  | `Kirby\Http\Response\Redirect`  |
 | `Remote`  | `Kirby\Http\Remote`  |
 | `Response`  | `Kirby\Http\Response`  |
 | `Router`  | `Kirby\Http\Router`  |
 | `S`  | `Kirby\Session`  |
-| `Server`  | (link: docs/reference/tools/server text: `Kirby\Http\Server`)  |
+| `Server`  | `Kirby\Http\Server`  |
 | `Sql`  | `Kirby\Database\Sql`  |
 | `System`  | <code></code>  |
 | `Thumb`  | `Kirby\Image`  |
@@ -451,7 +451,7 @@ The toolkit has been completely rewritten, new methods have been added, others r
 | `Upload`  | `Kirby\Api`  |
 | `Url`  | `Kirby\Http\Url`  |
 | `Visitor`  | `Kirby\Http\Visitor`  |
-| `YAML`  | (link: docs/reference/tools/data text: `Kirby\Data\Yaml`)  |
+| `YAML`  | (link: docs/reference/objects/data/data text: `Kirby\Data\Yaml`)  |
 
 The Toolkit classes are now in the  `Kirby\Toolkit` namespace.
 

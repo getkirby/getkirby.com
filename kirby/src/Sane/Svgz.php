@@ -6,23 +6,20 @@ use Kirby\Exception\InvalidArgumentException;
 
 /**
  * Sane handler for gzip-compressed SVGZ files
- * @since 3.5.4
  *
- * @package   Kirby Sane
- * @author    Lukas Bestle <lukas@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
+ * @since     3.5.4
  */
 class Svgz extends Svg
 {
 	/**
 	 * Sanitizes the given string
 	 *
-	 * @param bool $isExternal Whether the string is from an external file
-	 *                         that may be accessed directly
+	 * @param $isExternal Whether the string is from an external file
+	 *                   that may be accessed directly
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the file couldn't be parsed or recompressed
+	 * @throws InvalidArgumentException If the file couldn't be parsed or recompressed
 	 */
 	public static function sanitize(
 		string $string,
@@ -42,11 +39,11 @@ class Svgz extends Svg
 	/**
 	 * Validates file contents
 	 *
-	 * @param bool $isExternal Whether the string is from an external file
-	 *                         that may be accessed directly
+	 * @param $isExternal Whether the string is from an external file
+	 *                   that may be accessed directly
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the file couldn't be parsed
-	 * @throws \Kirby\Exception\InvalidArgumentException If the file didn't pass validation
+	 * @throws InvalidArgumentException If the file couldn't be parsed
+	 * @throws InvalidArgumentException If the file didn't pass validation
 	 */
 	public static function validate(
 		string $string,

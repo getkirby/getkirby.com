@@ -7,21 +7,18 @@ use Kirby\Toolkit\Str;
 /**
  * Represents a single layout column with
  * multiple blocks
- * @since 3.5.0
  *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
+ * @since     3.5.0
  *
- * @extends \Kirby\Cms\Item<\Kirby\Cms\LayoutColumns>
+ * @extends Item<LayoutColumns>
  */
 class LayoutColumn extends Item
 {
 	use HasMethods;
 
-	public const ITEMS_CLASS = LayoutColumns::class;
+	public const string ITEMS_CLASS = LayoutColumns::class;
 
 	protected Blocks $blocks;
 	protected string $width;
@@ -50,12 +47,14 @@ class LayoutColumn extends Item
 		if ($this->hasMethod($method) === true) {
 			return $this->callMethod($method, $args);
 		}
+
+		return null;
 	}
 
 	/**
 	 * Returns the blocks collection
 	 *
-	 * @param bool $includeHidden Sets whether to include hidden blocks
+	 * @param $includeHidden Sets whether to include hidden blocks
 	 */
 	public function blocks(bool $includeHidden = false): Blocks
 	{
@@ -96,7 +95,7 @@ class LayoutColumn extends Item
 		$a = $fraction[0] ?? 1;
 		$b = $fraction[1] ?? 1;
 
-		return $columns * $a / $b;
+		return (int)($columns * $a / $b);
 	}
 
 	/**

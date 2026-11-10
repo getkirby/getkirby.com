@@ -4,50 +4,123 @@ Title: Info
 
 Intro:
 
-A plain HTML field for user instructions
+Static text, help and info boxes for your editors
 
 ----
 
 Text:
 
-The info field is a great way to provide inline help or information for your users. You can put any kind of text in this field and it will be displayed as plain text. For better formatting you can use (glossary: Markdown) and (glossary: KirbyText).
+The `info` field is for any kind of static text you want to place in a (glossary: Panel) layout: general information, help, warnings and other guidance for your editors. It stores nothing in the content file.
 
-(image: info.png)
+(image: info-default.png)
 
 ## Example
 
 ```yaml
+title: Gallery
+
 fields:
   info:
-    label: Info
     type: info
+    label: Info
     text: |
-      Dear editor,
-
-      each project should have a **cover.jpg**, which will be displayed in the project overview. You should also make sure to fill in all fields correctly.
-
-      In love,
-      Your admin
+      Please double-check the licenses and sources
+      of all images before you upload them to the gallery.
 ```
 
-## Field properties
+## Shortcuts
 
-(field-options: info)
+For a field that is only used once per blueprint, you can use a shortcut. In its most basic form, an `info` field consists of the field type as name and the `text` property:
 
-## Using `KirbyText`
+```yaml
+fields:
+  info:
+    text: Some text
+```
 
-In addition to markdown, you can use `KirbyText` in your info text, even including images:
+Keep in mind that the same field name can only be used once per blueprint.
+
+## Label
+
+The label is displayed above the text. Pass a simple headline as a string, or provide translations for multiple languages if you have an international editing team.
+
+### Single language
+
+```yaml
+label: This is some very important information
+```
+
+### Multiple languages
+
+```yaml
+label:
+  en: Attention
+  de: Achtung
+  es: Attencion
+```
+
+### Placeholders
+
+You can inject information from the current page into the label with template placeholders, using our (link: docs/guide/blueprints/query-language text: query language):
+
+```yaml
+label: "{{ page.title }} Information"
+```
+
+## Text
+
+The text can be a simple string, Markdown, KirbyText or HTML. Like the label, it can be translated, and it can query content from elsewhere.
+
+### Single language
+
+```yaml
+text: Info
+```
+
+### Multiple languages
+
+```yaml
+text:
+  en: This is some very important information
+  de: Das ist eine wichtige Mitteilung
+```
+
+### Multi-line text
+
+For multi-line text with paragraphs, use the YAML block syntax:
+
+```yaml
+text: |
+  Dear Edith,
+
+  this is some multi line text with paragraphs.
+
+  Cheers,
+  A. Dmin
+```
+
+### Using KirbyText
+
+In addition to Markdown, you can use KirbyText in your text, even including images:
 
 ```yaml
 info:
   text: "Check out the &lpar;link: help text: help pages) for details"
 ```
 
+### Text queries
+
+```yaml
+text: "{{ kirby.page('somepage').text()->kt() }}"
+text: "{{ site.index.count }}"
+text: "{{ site.index.images.count }}"
+```
+
 ## Themes
 
-The info field is displayed as a blue info box. You can switch the theme with the `theme` option, to match the importance or meaning of the information.
+By default the field is displayed as a blue info box. Switch the theme with the `theme` option to match the importance or meaning of the information.
 
-### Available themes
+The following themes are available:
 
 - `info` (default)
 - `positive`
@@ -60,26 +133,51 @@ The info field is displayed as a blue info box. You can switch the theme with th
 - `code`
 - `empty`
 
-```yaml
-fields:
-  info:
-    label: Info
-    type: info
-    theme: negative
-    text: This is a very important page type. Please double-check your content before publishing.
-```
+### negative
 
 (image: info-negative.png)
 
+```yaml
+title: Gallery
+
+fields:
+  info:
+    type: info
+    label: Attention
+    theme: negative
+    text: |
+      Please double-check the licenses and sources
+      of all images before you upload them to the gallery.
+```
+
+### positive
+
+(image: info-positive.png)
+
+```yaml
+title: Gallery
+
+fields:
+  info:
+    type: info
+    label: Wohooww
+    theme: positive
+    text: |
+      Just upload whatever you want. We get sued anyway.
+```
+
 ### Disable theming
 
-You can disable the infobox theme entirely to show neutral text.
+You can disable the infobox theme entirely to show neutral text:
 
 ```yaml
 fields:
   info:
-    label: Info
     type: info
+    label: Info
     theme: none
-    text: This is a very neutral message.
+    text: |
+      This is a very neutral message
 ```
+
+(docs: fields/conditional-fields)

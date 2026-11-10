@@ -18,7 +18,7 @@ Text:
 
 Being able to query the blueprints that define the Panel layout gives you endless possibilities for control structures in your front-end––from simple field queries to building your front-end forms.
 
-This recipe introduces you to the Blueprint class and its convenient methods. If you want to dig deeper, checkout the source code of the `Kirby\Cms\Blueprint` class.
+This recipe introduces you to the Blueprint class and its convenient methods. If you want to dig deeper, check out the source code of the `Kirby\Blueprint\Blueprint` class.
 
 Every setting of a blueprint is available via the `blueprint()` method. It is available for the Site object, for Page, Image, and User objects.
 
@@ -74,15 +74,15 @@ dump($model);
 
 With a page blueprint, this will return the Page object.
 
-## Get a section by name
+## Get a field by name
 
 
 ```php
-$section = $page->blueprint()->section('images');
-dump($section);
+$field = $page->blueprint()->field('images');
+dump($field);
 ```
 
-This returns a `Kirby\Cms\Section` object, which you can further query.
+This returns the field's props as an array.
 
 ## Custom blueprint options
 

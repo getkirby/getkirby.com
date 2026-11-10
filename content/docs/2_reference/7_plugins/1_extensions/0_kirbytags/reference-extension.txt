@@ -21,15 +21,18 @@ You can create and use a tag like `(wikipedia:)` in text fields. For this to wor
 ```php "/site/plugins/your-plugin/index.php"
 <?php
 
-Kirby::plugin('your/plugin', [
-	'tags' => [
-		'wikipedia' => [
-			'html' => function($tag) {
-				return '<a href="http://wikipedia.org">Wikipedia</a>';
-			}
+Kirby::plugin(
+	name: 'your/plugin',
+	extends: [
+		'tags' => [
+			'wikipedia' => [
+				'html' => function($tag) {
+					return '<a href="http://wikipedia.org">Wikipedia</a>';
+				}
+			]
 		]
 	]
-]);
+);
 ```
 
 <info>
@@ -49,11 +52,14 @@ If your tag output is messed up, please check if your returned HTML code contain
 ```php "/site/plugins/your-plugin/index.php"
 <?php
 
-Kirby::plugin('your/plugin', [
-	'tags' => [
-		'wikipedia' => require_once __DIR__ . '/tags/wikipedia.php'
+Kirby::plugin(
+	name: 'your/plugin',
+	extends: [
+		'tags' => [
+			'wikipedia' => require_once __DIR__ . '/tags/wikipedia.php'
+		]
 	]
-]);
+);
 ```
 
 And then in `/tags/wikipedia.php`
@@ -75,18 +81,21 @@ You can override Kirby's default KirbyTags by creating a plugin with the same Ki
 ```php "/site/plugins/your-plugin/index.php"
 <?php
 
-Kirby::plugin('your/plugin', [
-    'tags' => [
-        'image' => [
-            'attr' => [
-                // list of attributes
-            ],
-            'html' => function($tag) {
-                // your code here
-            }
+Kirby::plugin(
+    name: 'your/plugin',
+    extends: [
+        'tags' => [
+            'image' => [
+                'attr' => [
+                    // list of attributes
+                ],
+                'html' => function($tag) {
+                    // your code here
+                }
+            ]
         ]
     ]
-]);
+);
 ```
 
 ## Adding attributes
@@ -96,18 +105,21 @@ If you want to add attributes (e.g. `(wikipedia: class: my-class)`), you can add
 ```php
 <?php
 
-Kirby::plugin('your/plugin', [
-  'tags' => [
-    'wikipedia' => [
-      'attr' => [
-        'class'
-      ],
-      'html' => function($tag) {
-        return '<a class="' . $tag->class . '" href="http://wikipedia.org">Wikipedia</a>';
-      }
+Kirby::plugin(
+  name: 'your/plugin',
+  extends: [
+    'tags' => [
+      'wikipedia' => [
+        'attr' => [
+          'class'
+        ],
+        'html' => function($tag) {
+          return '<a class="' . $tag->class . '" href="http://wikipedia.org">Wikipedia</a>';
+        }
+      ]
     ]
   ]
-]);
+);
 ```
 
 ## Accessing attributes and Kirby objects
@@ -176,20 +188,23 @@ In addition to your own KirbyTag plugins, you can also hook into the KirbyTags p
 ```php "/site/plugins/your-plugin/index.php"
 <?php
 
-Kirby::plugin('your/plugin', [
-	'hooks' => [
-		'kirbytags:before' => function ($text, array $data = [], array $options = []) {
+Kirby::plugin(
+	name: 'your/plugin',
+	extends: [
+		'hooks' => [
+			'kirbytags:before' => function ($text, array $data = [], array $options = []) {
 
-			// KirbyTags have not been parsed
+				// KirbyTags have not been parsed
 
-			$text = preg_replace_callback('/some-regex/', function () {
-				// whatever you want to replace
-			}, $text);
+				$text = preg_replace_callback('/some-regex/', function () {
+					// whatever you want to replace
+				}, $text);
 
-			return $text;
-		}
+				return $text;
+			}
+		]
 	]
-]);
+);
 ```
 
 ### `kirbytags:after`
@@ -197,20 +212,23 @@ Kirby::plugin('your/plugin', [
 ```php "/site/plugins/your-plugin/index.php"
 <?php
 
-Kirby::plugin('your/plugin', [
-	'hooks' => [
-		'kirbytags:after' => function ($text, array $data = [], array $options = []) {
+Kirby::plugin(
+	name: 'your/plugin',
+	extends: [
+		'hooks' => [
+			'kirbytags:after' => function ($text, array $data = [], array $options = []) {
 
-			// KirbyTags have already been parsed
+				// KirbyTags have already been parsed
 
-			$text = preg_replace_callback('/some-regex/', function () {
-				// whatever you want to replace
-			}, $text);
+				$text = preg_replace_callback('/some-regex/', function () {
+					// whatever you want to replace
+				}, $text);
 
-			return $text;
-		}
+				return $text;
+			}
+		]
 	]
-]);
+);
 ```
 
 ## Reusing parts of existing KirbyTags

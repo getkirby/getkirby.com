@@ -30,83 +30,86 @@ Plugins can create their own Panel areas. Areas can be just a single view or rea
 Areas are defined in a callback function that receives the `$kirby` instance and must return their configuration as an array
 
 ```php
-Kirby::plugin('yourname/todos', [
-  'areas' => [
-    'todos' => function ($kirby) {
-      return [
-        // label for the menu and the breadcrumb
-        'label' => 'Todos',
+Kirby::plugin(
+  name: 'yourname/todos',
+  extends: [
+    'areas' => [
+      'todos' => function ($kirby) {
+        return [
+          // label for the menu and the breadcrumb
+          'label' => 'Todos',
 
-        // icon for the menu and breadcrumb
-        'icon' => 'check',
+          // icon for the menu and breadcrumb
+          'icon' => 'check',
 
-        // optional replacement for the breadcrumb label
-        'breadcrumbLabel' => function () {
-          return '12 Todos';
-        },
+          // optional replacement for the breadcrumb label
+          'breadcrumbLabel' => function () {
+            return '12 Todos';
+          },
 
-        // show / hide from the menu
-        'menu' => true,
+          // show / hide from the menu
+          'menu' => true,
 
-        // link to the main area view (can also be an absolute URL)
-        'link' => 'todos',
+          // link to the main area view (can also be an absolute URL)
+          'link' => 'todos',
 
-        // optional; to open the link in a new tab
-        'target' => '_blank',
+          // optional; to open the link in a new tab
+          'target' => '_blank',
 
-        // views
-        'views' => [
-          [
-            // the Panel patterns must not start with 'panel/',
-            // the `panel` slug is automatically prepended.
-            'pattern' => 'todos',
-            'action'  => function () {
+          // views
+          'views' => [
+            [
+              // the Panel patterns must not start with 'panel/',
+              // the `panel` slug is automatically prepended.
+              'pattern' => 'todos',
+              'action'  => function () {
 
-              // view routes return a simple array,
-              // which will be injected into our Vue app;
-              // the array can control the loaded Vue component,
-              // props for the component and settings for the current view
-              // (like breadcrumb, title, active search type etc.)
+                // view routes return a simple array,
+                // which will be injected into our Vue app;
+                // the array can control the loaded Vue component,
+                // props for the component and settings for the current view
+                // (like breadcrumb, title, active search type etc.)
 
-              return [
-                // the Vue component can be defined in the
-                // `index.js` of your plugin
-                'component' => 'k-todos-view',
+                return [
+                  // the Vue component can be defined in the
+                  // `index.js` of your plugin
+                  'component' => 'k-todos-view',
 
-                // the document title for the current view
-                'title' => 'Todos',
+                  // the document title for the current view
+                  'title' => 'Todos',
 
-                // the breadcrumb can be just an array or a callback
-                // function for more complex breadcrumb logic
-                'breadcrumb' => function () {
-                  // each item in the breadcrumb array
-                  // has a label and a link attribute
-                  return [
-                    [
-                      'label' => 'Buy some milk',
-                      'link'  => '/todos/123'
-                    ]
-                  ];
-                },
+                  // the breadcrumb can be just an array or a callback
+                  // function for more complex breadcrumb logic
+                  'breadcrumb' => function () {
+                    // each item in the breadcrumb array
+                    // has a label and a link attribute
+                    return [
+                      [
+                        'label' => 'Buy some milk',
+                        'link'  => '/todos/123'
+                      ]
+                    ];
+                  },
 
-                // props will be directly available in the
-                // Vue component. It's a super convenient way
-                // to send backend data to the Panel
-                'props' => [
-                  'todos' => [...]
-                ],
+                  // props will be directly available in the
+                  // Vue component. It's a super convenient way
+                  // to send backend data to the Panel
+                  'props' => [
+                    'todos' => [...]
+                  ],
 
-                // we can preset the search type with the
-                // search attribute
-                'search' => 'pages'
-              ];
-            }
+                  // we can preset the search type with the
+                  // search attribute
+                  'search' => 'pages'
+                ];
+              }
+            ]
           ]
-        ]
-      ];
-    }
+        ];
+      }
+    ]
   ]
-]);
+);
 ```
 
 ```js
@@ -139,42 +142,48 @@ If the area is by default hidden from the menu, it can still be added via the (l
 You probably want to translate elements like labels, titles, breadcrumbs or other parts of the interface at some point. This can be done by using Kirby's `t()` method:
 
 ```php
-Kirby::plugin('your/plugin', [
-    'translations' => [
-        'en' => [
-            'todo' => 'Todo',
+Kirby::plugin(
+    name: 'your/plugin',
+    extends: [
+        'translations' => [
+            'en' => [
+                'todo' => 'Todo',
+            ],
+            'de' => [
+                'todo' => 'Aufgabe',
+            ]
         ],
-        'de' => [
-            'todo' => 'Aufgabe',
+        'areas' => [
+            'todos' => function () {
+                return [
+                    'label' => t('todo'),
+                    ...
+                ];
+            }
         ]
-    ],
-    'areas' => [
-        'todos' => function () {
-            return [
-                'label' => t('todo'),
-                ...
-            ];
-        }
     ]
-]);
+);
 ```
 
 Defining translations is the most solid way to do this, but sometimes you just need a quick way to offer two or three translations for your users in an internal plugin. You can also define translations as an array for such a case:
 
 ```php
-Kirby::plugin('your/plugin', [
-    'areas' => [
-        'todos' => function () {
-            return [
-                'label' => t([
-                  'en' => 'Todo',
-                  'de' => 'Aufgabe'
-                ]),
-                ...
-            ];
-        }
+Kirby::plugin(
+    name: 'your/plugin',
+    extends: [
+        'areas' => [
+            'todos' => function () {
+                return [
+                    'label' => t([
+                      'en' => 'Todo',
+                      'de' => 'Aufgabe'
+                    ]),
+                    ...
+                ];
+            }
+        ]
     ]
-]);
+);
 ```
 
 ## Extending areas
@@ -190,21 +199,24 @@ We will focus on views on this page. For guides on how to extend dialogs, dropdo
 In this example, we will create an entirely new users view. The users view is part of the users area.
 
 ```php
-Kirby::plugin('custom/users', [
-  'areas' => [
-    'users' => function () {
-      return [
-        'views' => [
-          'users' => [
-            'action' => function () {
-              // your custom users view setup
-            }
+Kirby::plugin(
+  name: 'custom/users',
+  extends: [
+    'areas' => [
+      'users' => function () {
+        return [
+          'views' => [
+            'users' => [
+              'action' => function () {
+                // your custom users view setup
+              }
+            ]
           ]
-        ]
-      ];
-    }
+        ];
+      }
+    ]
   ]
-]);
+);
 ```
 
 It's important to only replace the part of the area definition that should be changed. The rest will still be loaded from the core.
@@ -216,57 +228,60 @@ There are two ways to move forward now:
 You might be happy with the way the view looks, but you want to customize the data that's being shown in the view. In this case, you don't need to replace everything. You can only send modified props to the view.
 
 ```php
-Kirby::plugin('custom/users', [
-  'areas' => [
-    'users' => function () {
-      return [
-        'views' => [
-          'users' => [
-            'action' => function () {
-              return [
-                'component' => 'k-users-view',
-                'props' => [
-                  // the active role in the filter menu
-                  'role' => [
-                    'id'    => 'admin',
-                    'title' => 'Admin'
-                  ],
-                  // all available roles for the filter menu
-                  'roles' => [
-                    ['id' => 'admin', 'title' => 'Admin'],
-                    ['id' => 'editor', 'title' => 'Editor'],
-                  ],
-                  // all users to be displayed
-                  'users' => [
-                    'data' => [
-                      [
-                        'id'    => 'user-a',
-                        'image' => [
-                          'src'   => '/path/to/image.jpg',
-                          'cover' => true,
-                          'ratio' => '1/1',
-                          'back'  => 'black'
-                        ],
-                        'info' => 'Admin',
-                        'link' => '/users/user-a',
-                        'text' => 'Armin Admin'
-                      ]
+Kirby::plugin(
+  name: 'custom/users',
+  extends: [
+    'areas' => [
+      'users' => function () {
+        return [
+          'views' => [
+            'users' => [
+              'action' => function () {
+                return [
+                  'component' => 'k-users-view',
+                  'props' => [
+                    // the active role in the filter menu
+                    'role' => [
+                      'id'    => 'admin',
+                      'title' => 'Admin'
                     ],
-                    'pagination' => [
-                      'page'  => 1,
-                      'total' => 100,
-                      'limit' => 20
+                    // all available roles for the filter menu
+                    'roles' => [
+                      ['id' => 'admin', 'title' => 'Admin'],
+                      ['id' => 'editor', 'title' => 'Editor'],
+                    ],
+                    // all users to be displayed
+                    'users' => [
+                      'data' => [
+                        [
+                          'id'    => 'user-a',
+                          'image' => [
+                            'src'   => '/path/to/image.jpg',
+                            'cover' => true,
+                            'ratio' => '1/1',
+                            'back'  => 'black'
+                          ],
+                          'info' => 'Admin',
+                          'link' => '/users/user-a',
+                          'text' => 'Armin Admin'
+                        ]
+                      ],
+                      'pagination' => [
+                        'page'  => 1,
+                        'total' => 100,
+                        'limit' => 20
+                      ]
                     ]
                   ]
-                ]
-              ];
-            }
+                ];
+              }
+            ]
           ]
-        ]
-      ];
-    }
+        ];
+      }
+    ]
   ]
-]);
+);
 ```
 
 In the example above, we are showing the anatomy of what's being sent to the `k-users-view` component. The component will then take that data and display it as usual. As you can see, it's super easy to manipulate the result array and send your custom user data, custom role filters or whatever you want to do.
@@ -313,32 +328,35 @@ In this example, the list of users is just a basic unordered list, but of course
 The backend part of your overwritten view is now sending exactly what your component needs. If you find out that you want to send your users in alphabetical groups or every user object should also contain the Mastodon follower count, go for it.
 
 ```php
-Kirby::plugin('custom/users', [
-  'areas' => [
-    'users' => function () {
-      return [
-        'views' => [
-          'users' => [
-            'action' => function () {
-              return [
-                'component' => 'k-users-view',
-                'props' => [
-                  'users' => [
-                    ['username' => 'Marge'],
-                    ['username' => 'Lisa'],
-                    ['username' => 'Bart'],
-                    ['username' => 'Homer'],
-                    ['username' => 'Maggie'],
+Kirby::plugin(
+  name: 'custom/users',
+  extends: [
+    'areas' => [
+      'users' => function () {
+        return [
+          'views' => [
+            'users' => [
+              'action' => function () {
+                return [
+                  'component' => 'k-users-view',
+                  'props' => [
+                    'users' => [
+                      ['username' => 'Marge'],
+                      ['username' => 'Lisa'],
+                      ['username' => 'Bart'],
+                      ['username' => 'Homer'],
+                      ['username' => 'Maggie'],
+                    ]
                   ]
-                ]
-              ];
-            }
+                ];
+              }
+            ]
           ]
-        ]
-      ];
-    }
+        ];
+      }
+    ]
   ]
-]);
+);
 ```
 
 ## Core views

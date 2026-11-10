@@ -154,7 +154,7 @@ return function ($kirby, $page) {
     // if the form has been submitted…
     if ($kirby->request()->is('POST') && get('register')) {
 
-        // check the honeypot and exit if is has been filled in
+        // check the honeypot and exit if it has been filled in
         if (empty(get('website')) === false) {
             go($page->url());
         }
@@ -334,7 +334,7 @@ fields:
     buttons: false
 ```
 
-In the `event.yml` blueprint, we list all registrations of an event in a pages section. Since registrations are drafts, we set the section's `status` option to `draft`:
+In the `event.yml` blueprint, we list all registrations of an event in a `pagelist` field. Since registrations are drafts, we set the field's `status` option to `draft`:
 
 ```yaml "/site/blueprints/pages/event.yml"
 title: Event
@@ -351,17 +351,14 @@ columns:
 
   sidebar:
     width: 1/3
-    sections:
-      meta:
-        type: fields
-        fields:
-          date:
-            type: date
-            required: true
+    fields:
+      date:
+        type: date
+        required: true
 
       registrations:
-        type: pages
-        headline: Registrations
+        type: pagelist
+        label: Registrations
         template: registration
         status: draft
         create: false
@@ -402,31 +399,34 @@ In the plugin, we replace the `name` and `event` placeholders in the text with t
 use Kirby\Cms\App as Kirby;
 use Kirby\Toolkit\Str;
 
-Kirby::plugin('eventkit/event', [
-    'hooks' => [
-        'kirbytags:after' => function (string|null $text, array $data, array $options) {
-            // only touch texts that contain our placeholders
-            if ($text === null || Str::contains($text, '{{') === false) {
-                return $text;
-            }
-
-            $session = kirby()->session();
-
-            if ($location = $session->get('referer')) {
-                if ($page = page(urldecode($location))) {
-                    $title = $page->title()->escape();
+Kirby::plugin(
+    name: 'eventkit/event',
+    extends: [
+        'hooks' => [
+            'kirbytags:after' => function (string|null $text, array $data, array $options) {
+                // only touch texts that contain our placeholders
+                if ($text === null || Str::contains($text, '{{') === false) {
+                    return $text;
                 }
-            }
 
-            return Str::template($text, [
-                'event' => $title ?? '',
-                'name'  => $session->get('regName') ?? ''
-            ]);
-        }
-    ],
-]);
+                $session = kirby()->session();
+
+                if ($location = $session->get('referer')) {
+                    if ($page = page(urldecode($location))) {
+                        $title = $page->title()->escape();
+                    }
+                }
+
+                return Str::template($text, [
+                    'event' => $title ?? '',
+                    'name'  => $session->get('regName') ?? ''
+                ]);
+            }
+        ],
+    ]
+);
 ```
 
 ## Download example
 
-For a working example, download the (file: eventkit.zip text: demo "Eventkit").
+For a working example, download the (file: eventkit.zip text: demo "Eventkit"). Kirby itself is not included: install it with `composer install` or (link: docs/guide/install-guide/installation-via-download#updating-your-installation text: add the `kirby` folder from a download). The README of the kit has all the steps.

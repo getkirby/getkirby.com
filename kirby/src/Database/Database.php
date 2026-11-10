@@ -6,6 +6,7 @@ use Closure;
 use Kirby\Database\Sql\Mysql;
 use Kirby\Database\Sql\Sqlite;
 use Kirby\Exception\InvalidArgumentException;
+use Kirby\Exception\LogicException;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\Collection;
 use Kirby\Toolkit\Obj;
@@ -17,9 +18,6 @@ use Throwable;
 /**
  * A simple database class
  *
- * @package   Kirby Database
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
@@ -32,6 +30,8 @@ class Database
 
 	/**
 	 * Whitelist for column names
+	 *
+	 * @var array<string, list<string>>
 	 */
 	protected array $columnWhitelist = [];
 
@@ -42,6 +42,8 @@ class Database
 
 	/**
 	 * A global array of started connections
+	 *
+	 * @var array<string, Database>
 	 */
 	public static array $connections = [];
 
@@ -49,7 +51,6 @@ class Database
 	 * Database name
 	 */
 	protected string $database;
-
 	protected string $dsn;
 
 	/**
@@ -94,11 +95,15 @@ class Database
 
 	/**
 	 * List of existing tables in the database
+	 *
+	 * @var array<int, string>|null
 	 */
 	protected array|null $tables = null;
 
 	/**
 	 * An array with all queries which are being made
+	 *
+	 * @var list<array>
 	 */
 	protected array $trace = [];
 
@@ -107,6 +112,11 @@ class Database
 	 */
 	protected string $type;
 
+	/**
+	 * Available database types with their Sql class and DSN builder
+	 *
+	 * @var array<string, array{sql: class-string<Sql>, dsn: Closure(array): string}>
+	 */
 	public static array $types = [];
 
 	/**
@@ -131,6 +141,8 @@ class Database
 
 	/**
 	 * Returns all started instances
+	 *
+	 * @return array<string, Database>
 	 */
 	public static function instances(): array
 	{
@@ -140,7 +152,7 @@ class Database
 	/**
 	 * Connects to a database
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function connect(array $params = []): PDO|null
 	{
@@ -174,7 +186,7 @@ class Database
 		// try to connect; `PDO::connect()` returns the driver's
 		// subclass, e.g. `Pdo\Sqlite` with `createFunction()`
 		// TODO: only use `PDO::connect()` once PHP 8.4 is required
-		$connection = PHP_VERSION_ID >= 80400
+		$connection = method_exists(PDO::class, 'connect')
 			? PDO::connect($dsn, $options['user'], $options['password'])
 			: new PDO($dsn, $options['user'], $options['password']);
 		$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -194,10 +206,8 @@ class Database
 		$this->dsn        = $dsn;
 		$this->connection = $connection;
 
-		// store the connection
 		static::$connections[$this->id] = $this;
 
-		// return the connection
 		return $this->connection;
 	}
 
@@ -248,6 +258,8 @@ class Database
 	/**
 	 * Adds a value to the db trace and also
 	 * returns the entire trace if nothing is specified
+	 *
+	 * @return list<array>
 	 */
 	public function trace(array|null $data = null): array
 	{
@@ -323,7 +335,7 @@ class Database
 			// bind parameters to statement
 			foreach ($bindings as $parameter => $value) {
 				// positional parameters start at 1
-				if (is_int($parameter)) {
+				if (is_int($parameter) === true) {
 					$parameter++;
 				}
 
@@ -336,14 +348,33 @@ class Database
 
 				$this->statement->bindValue($parameter, $value, $type);
 			}
+
 			$this->statement->execute();
 
 			$this->affected  = $this->statement->rowCount();
-			$this->lastId    = Str::startsWith($query, 'insert ', true) ? $this->connection->lastInsertId() : null;
 			$this->lastError = null;
+
+			if (Str::startsWith($query, 'insert ', true) === true) {
+				$lastId = $this->connection->lastInsertId();
+
+				if ($lastId === false) {
+					$this->lastId = null;
+				} elseif (is_numeric($lastId) === true) {
+					$this->lastId = (int)$lastId;
+				} else {
+					// @codeCoverageIgnoreStart
+					throw new LogicException(
+						message: 'Database::lastId() only supports integer primary keys, got "' . $lastId . '"'
+					);
+					// @codeCoverageIgnoreEnd
+				}
+			} else {
+				$this->lastId = null;
+			}
 
 			// store the final sql to add it to the trace later
 			$this->lastQuery = $this->statement->queryString;
+
 		} catch (Throwable $e) {
 			// store the error
 			$this->affected  = 0;
@@ -467,6 +498,8 @@ class Database
 
 	/**
 	 * Checks if a table exists in the current database
+	 *
+	 * @throws \PDOException if the tables cannot be listed
 	 */
 	public function validateTable(string $table): bool
 	{
@@ -475,11 +508,12 @@ class Database
 			$sql     = $this->sql()->tables();
 			$results = $this->query($sql['query'], $sql['bindings']);
 
-			if ($results) {
-				$this->tables = $results->pluck('name');
-			} else {
-				return false;
+			// a failed lookup doesn't mean the table is missing
+			if ($this->lastError !== null) {
+				throw $this->lastError;
 			}
+
+			$this->tables = $results->pluck('name');
 		}
 
 		return in_array($table, $this->tables, true) === true;
@@ -487,6 +521,8 @@ class Database
 
 	/**
 	 * Checks if a column exists in a specified table
+	 *
+	 * @throws \PDOException if the tables or columns cannot be listed
 	 */
 	public function validateColumn(string $table, string $column): bool
 	{
@@ -500,11 +536,12 @@ class Database
 			$sql     = $this->sql()->columns($table);
 			$results = $this->query($sql['query'], $sql['bindings']);
 
-			if ($results) {
-				$this->columnWhitelist[$table] = $results->pluck('name');
-			} else {
-				return false;
+			// a failed lookup doesn't mean the column is missing
+			if ($this->lastError !== null) {
+				throw $this->lastError;
 			}
+
+			$this->columnWhitelist[$table] = $results->pluck('name');
 		}
 
 		return in_array($column, $this->columnWhitelist[$table], true) === true;
@@ -540,12 +577,14 @@ class Database
 	public function dropTable(string $table): bool
 	{
 		$sql = $this->sql()->dropTable($table);
+
 		if ($this->execute($sql['query'], $sql['bindings']) !== true) {
 			return false;
 		}
 
 		// update cache
 		$key = array_search($table, $this->tables ?? []);
+
 		if ($key !== false) {
 			unset($this->tables[$key]);
 		}

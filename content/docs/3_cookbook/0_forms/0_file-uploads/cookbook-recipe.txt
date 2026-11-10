@@ -231,7 +231,7 @@ If a duplicate is found, we add an error message for the current file and contin
 
 ### Creating the file
 
-If all went well so far, we try to upload and create the file in a `try - catch` block using Kirby's [`$page->createFile()`](/docs/reference/objects/page/create-file) method.
+If all went well so far, we try to upload and create the file in a `try - catch` block using Kirby's [`$page->createFile()`](/docs/reference/objects/cms/page/create-file) method.
 
 ```php
 try {
@@ -247,7 +247,7 @@ try {
   $success = 'Your file upload was successful';
 ```
 
-The [`$page->createFile()`](/docs/reference/objects/page/create-file) method requires the `source` attribute, all other parameters are optional. However, we use the `template` option here to assign the file blueprint we created earlier. It does all the checking for the allowed mime types and sizes for us.
+The [`$page->createFile()`](/docs/reference/objects/cms/page/create-file) method requires the `source` attribute, all other parameters are optional. However, we use the `template` option here to assign the file blueprint we created earlier. It does all the checking for the allowed mime types and sizes for us.
 
 To obfuscate the file name, we add a prefix to the original filename. Kirby automatically takes care of converting the filename to a safe name. Prefixing the filename makes it hard for the user to guess the filename and opening the file in the browser after upload. This makes it much harder for users to upload a malicious file and call it directly afterwards since the exact name will not be known to them.
 
@@ -261,7 +261,7 @@ As an additonal security measure, we can prohibit access to the `storage` page u
 
 ### Catching additional errors
 
-If the [`$page->createFile()`](/docs/reference/objects/page/create-file) method encounters any errors or rule violations, it will throw an error. By wrapping our code in a `try - catch` block, we make sure to get the error message and add it to our alerts array:
+If the [`$page->createFile()`](/docs/reference/objects/cms/page/create-file) method encounters any errors or rule violations, it will throw an error. By wrapping our code in a `try - catch` block, we make sure to get the error message and add it to our alerts array:
 
 ```php
 } catch (Exception $e) {

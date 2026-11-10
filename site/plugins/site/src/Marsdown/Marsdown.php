@@ -435,7 +435,7 @@ class Marsdown extends ParsedownExtra
 		// keep any other code with pipes (e.g. `foo(Bar|Baz $a): Bar|Foo`)
 		// together as a single code tag
 		$type = match ($this->isTypeUnion($text)) {
-			true  => Types::factory($text),
+			true  => Types::fromString($text),
 			false => Type::factory($text)
 		};
 

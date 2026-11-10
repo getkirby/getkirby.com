@@ -13,14 +13,10 @@ use Kirby\Toolkit\Str;
 
 /**
  * Sane handler for SVG files
- * @since 3.5.4
  *
- * @package   Kirby Sane
- * @author    Bastian Allgeier <bastian@getkirby.com>,
- *            Lukas Bestle <lukas@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
+ * @since     3.5.4
  */
 class Svg extends Xml
 {
@@ -34,6 +30,8 @@ class Svg extends Xml
 
 	/**
 	 * Global list of allowed attribute prefixes
+	 *
+	 * @var list<string>
 	 */
 	public static array $allowedAttrPrefixes = [
 		'aria-',
@@ -42,6 +40,8 @@ class Svg extends Xml
 
 	/**
 	 * Global list of allowed attributes
+	 *
+	 * @var list<string>
 	 */
 	public static array $allowedAttrs = [
 		// core attributes
@@ -265,11 +265,15 @@ class Svg extends Xml
 
 	/**
 	 * Allowed hostnames for HTTP(S) URLs
+	 *
+	 * @var list<string>|true
 	 */
 	public static array|true $allowedDomains = [];
 
 	/**
 	 * Associative array of all allowed namespace URIs
+	 *
+	 * @var array<string, string>
 	 */
 	public static array $allowedNamespaces = [
 		''      => 'http://www.w3.org/2000/svg',
@@ -282,6 +286,8 @@ class Svg extends Xml
 	 * for this tag, `true` to allow any attribute from the
 	 * `allowedAttrs` list or `false` to allow the tag without
 	 * any attributes
+	 *
+	 * @var array<string, list<string>|bool>
 	 */
 	public static array $allowedTags = [
 		'a' => true,
@@ -358,6 +364,8 @@ class Svg extends Xml
 	 *
 	 * IMPORTANT: Use lower-case names here because
 	 * of the case-insensitive matching
+	 *
+	 * @var list<string>
 	 */
 	public static array $disallowedTags = [
 		'animate',
@@ -389,19 +397,19 @@ class Svg extends Xml
 	 * Custom callback for additional attribute sanitization
 	 * @internal
 	 *
-	 * @return array Array with exception objects for each modification
+	 * @return list<InvalidArgumentException> Exceptions for each modification
 	 */
 	public static function sanitizeAttr(DOMAttr $attr, array $options): array
 	{
 		$element = $attr->ownerElement;
 		$name    = $attr->name;
 		$value   = Url::normalize($attr->value);
-		$errors = [];
+		$errors  = [];
 
 		// block nested <use> elements ("Billion Laughs" DoS attack)
 		if (
 			$element->localName === 'use' &&
-			Str::contains($name, 'href') !== false &&
+			Str::contains($name, 'href') === true &&
 			Str::startsWith($value, '#') === true
 		) {
 			// find the target (used element)
@@ -415,8 +423,8 @@ class Svg extends Xml
 				$target->getElementsByTagName('use')->count() > 0
 			) {
 				$errors[] = new InvalidArgumentException(
-					'Nested "use" elements are not allowed' .
-					' (used in line ' . $element->getLineNo() . ')'
+					message: 'Nested "use" elements are not allowed' .
+						' (used in line ' . $element->getLineNo() . ')'
 				);
 				$element->removeAttributeNode($attr);
 			}
@@ -429,7 +437,7 @@ class Svg extends Xml
 	 * Custom callback for additional element sanitization
 	 * @internal
 	 *
-	 * @return array Array with exception objects for each modification
+	 * @return list<InvalidArgumentException> Exception objects for each modification
 	 */
 	public static function sanitizeElement(
 		DOMElement $element,
@@ -442,8 +450,8 @@ class Svg extends Xml
 			foreach (Dom::extractUrls($element->textContent) as $url) {
 				if (Dom::isAllowedUrl($url, $options) !== true) {
 					$errors[] = new InvalidArgumentException(
-						'The URL is not allowed in the "style" element' .
-						' (around line ' . $element->getLineNo() . ')'
+						message: 'The URL is not allowed in the "style" element' .
+							' (around line ' . $element->getLineNo() . ')'
 					);
 					Dom::remove($element);
 				}
@@ -470,8 +478,9 @@ class Svg extends Xml
 	 * Returns the sanitization options for the handler
 	 * @internal
 	 *
-	 * @param bool $isExternal Whether the string is from an external file
-	 *                         that may be accessed directly
+	 * @param $isExternal Whether the string is from an external file
+	 *                   that may be accessed directly
+	 * @return array<string, mixed>
 	 */
 	public static function options(bool $isExternal): array
 	{
@@ -488,7 +497,7 @@ class Svg extends Xml
 	/**
 	 * Parses the given string into a `Toolkit\Dom` object
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the file couldn't be parsed
+	 * @throws InvalidArgumentException If the file couldn't be parsed
 	 */
 	protected static function parse(string $string): Dom
 	{

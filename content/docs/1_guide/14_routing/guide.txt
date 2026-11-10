@@ -64,34 +64,40 @@ return [
 ### In a plugin
 
 ```php
-Kirby::plugin('your/plugin', [
-  'routes' => [
-    [
-      'pattern' => 'my/awesome/url',
-      'action'  => function () {
-        // do something here
-        // when the URL matches the pattern above
-      }
+Kirby::plugin(
+  name: 'your/plugin',
+  extends: [
+    'routes' => [
+      [
+        'pattern' => 'my/awesome/url',
+        'action'  => function () {
+          // do something here
+          // when the URL matches the pattern above
+        }
+      ]
     ]
   ]
-]);
+);
 ```
 
 You can also define your route definition as a callback, which gives you more control, e.g. to access information from inside Kirby in your patterns (in this example to use a Kirby option as part of the pattern):
 
 ```php
-Kirby::plugin('your/plugin', [
-  'routes' => function ($kirby) {
-      return [
-          [
-              'pattern' => 'something/' . $kirby->option('something'),
-              'action' => function () {
-                // ...
-              }
-          ]
-      ];
-  }
-]);
+Kirby::plugin(
+  name: 'your/plugin',
+  extends: [
+    'routes' => function ($kirby) {
+        return [
+            [
+                'pattern' => 'something/' . $kirby->option('something'),
+                'action' => function () {
+                  // ...
+                }
+            ]
+        ];
+    }
+  ]
+);
 ```
 
 ## Patterns

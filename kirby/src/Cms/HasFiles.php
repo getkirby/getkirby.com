@@ -8,9 +8,6 @@ use Kirby\Uuid\Uuid;
 /**
  * HasFiles
  *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
@@ -40,7 +37,7 @@ trait HasFiles
 	/**
 	 * Creates a new file
 	 *
-	 * @param bool $move If set to `true`, the source will be deleted
+	 * @param $move If set to `true`, the source will be deleted
 	 */
 	#[BlockCollectionAccess]
 	public function createFile(array $props, bool $move = false): File
@@ -75,7 +72,7 @@ trait HasFiles
 
 		// find by global UUID
 		if (Uuid::is($filename, 'file') === true) {
-			return Uuid::for($filename, $this->$in())->model();
+			return Uuid::from($filename, context: $this->$in())->model();
 		}
 
 		if (str_contains($filename, '/') === true) {

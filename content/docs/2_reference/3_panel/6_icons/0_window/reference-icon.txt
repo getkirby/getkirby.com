@@ -1,5 +1,1 @@
-Since: 5.0.0
-
-----
-
 Keywords: application, interface, screen, browser

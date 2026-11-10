@@ -164,7 +164,7 @@ To obtain the required permissions for certain actions, you can  authenticate as
 
 ### Authentication
 
-Users can log in through the (glossary: Panel) login page or a custom login form. To learn more about how to log in a user programmatically, read the reference for (link: docs/reference/objects/user/login text: $user->login()).
+Users can log in through the (glossary: Panel) login page or a custom login form. To learn more about how to log in a user programmatically, read the reference for (link: docs/reference/objects/cms/user/login text: $user->login()).
 
 ### Impersonate
 

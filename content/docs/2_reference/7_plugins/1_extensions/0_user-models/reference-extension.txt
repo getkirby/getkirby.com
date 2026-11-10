@@ -16,11 +16,14 @@ class EditorUser extends User
     }
 }
 
-Kirby::plugin('my/plugin', [
-    'userModels' => [
-        'editor' => EditorUser::class
-    ],
-]);
+Kirby::plugin(
+    name: 'my/plugin',
+    extends: [
+        'userModels' => [
+            'editor' => EditorUser::class
+        ],
+    ]
+);
 ```
 
 In user models you can define your own methods for a user role, or even override standard user methods.

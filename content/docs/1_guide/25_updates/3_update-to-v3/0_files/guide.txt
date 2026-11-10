@@ -12,7 +12,7 @@ Text:
 Things can always go wrong. Always make a backup of your content folder/Kirby installation before starting out on this journey.
 </info>
 
-Kirby 2 only had a single upload section for files in the sidebar and it wasn’t possible to assign different types of metadata fields to different types of files. Kirby 3 changes this completely by replacing this fixed single upload section with files sections. Each page blueprint can define as many (link: docs/reference/panel/sections/files text: files sections) as the data structure requires. And each of these sections can use different (link: docs/reference/panel/blueprints/file text: file blueprints) that define the Panel setup for files and the fields available for these files.
+Kirby 2 only had a single upload section for files in the sidebar and it wasn’t possible to assign different types of metadata fields to different types of files. Kirby 3 changes this completely by replacing this fixed single upload section with files sections. Each page blueprint can define as many (link: docs/reference/panel/fields/filelist text: files sections) as the data structure requires. And each of these sections can use different (link: docs/reference/panel/blueprints/file text: file blueprints) that define the Panel setup for files and the fields available for these files.
 
 This new way of dealing with files gives you much more flexibility but it also means that you have to adapt some things when migrating a Kirby 2 site, because you can no longer define the meta data fields in the page blueprint.
 

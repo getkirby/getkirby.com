@@ -18,13 +18,16 @@ File methods are registered with the `fileMethods` extension.
 You can extend the set of defined file methods very easily in a plugin file.
 
 ```php "/site/plugins/file-methods/index.php"
-Kirby::plugin('my/plugin', [
-    'fileMethods' => [
-        'download' => function () {
-            return '<a download href="' . $this->url() . '">' . $this->filename() . '</a>';
-        }
+Kirby::plugin(
+    name: 'my/plugin',
+    extends: [
+        'fileMethods' => [
+            'download' => function () {
+                return '<a download href="' . $this->url() . '">' . $this->filename() . '</a>';
+            }
+        ]
     ]
-]);
+);
 ```
 
 This example shows the basic architecture of a file method. You define the method name with the key for the `fileMethods` extension array. `$this` in the callback function refers to the `$file` object.
@@ -40,11 +43,14 @@ In some cases it might be helpful to be able to pass arguments to the method:
 The definition for such a method with arguments is very simple:
 
 ```php
-Kirby::plugin('my/plugin', [
-    'fileMethods' => [
-        'download' => function ($text = null) {
-            return '<a download href="' . $this->url() . '">' . $text ?? $this->filename() . '</a>';
-        }
+Kirby::plugin(
+    name: 'my/plugin',
+    extends: [
+        'fileMethods' => [
+            'download' => function ($text = null) {
+                return '<a download href="' . $this->url() . '">' . $text ?? $this->filename() . '</a>';
+            }
+        ]
     ]
-]);
+);
 ```

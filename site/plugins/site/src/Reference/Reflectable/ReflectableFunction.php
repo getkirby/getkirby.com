@@ -30,15 +30,17 @@ class ReflectableFunction extends Reflectable
 
 	/**
 	 * Returns the string representation of the function call
-	 * incl. all parameters and return type
+	 * incl. all parameters and return type; with short class
+	 * names, as the parameters and return type sections
+	 * list the full ones
 	 */
 	public function call(): string
 	{
-		$parameters = $this->parameters()->toString();
+		$parameters = $this->parameters()->toString(short: true);
 		$call       = $this->name() . '(' . $parameters . ')';
 
 		if ($returns = $this->returns()) {
-			$call .= ': ' . $returns->types()->toString();
+			$call .= ': ' . $returns->types()->toString(short: true);
 		}
 
 		return $call;

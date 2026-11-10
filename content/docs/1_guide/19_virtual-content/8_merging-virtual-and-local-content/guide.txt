@@ -221,9 +221,9 @@ To be able to see all content in the Panel, we add two blueprints, `animals.yml`
 ```yaml "/site/blueprints/pages/animals.yml"
 title: Animals
 
-sections:
+fields:
   pages:
-    type: pages
+    type: pagelist
     template: animal
 ```
 
@@ -252,9 +252,9 @@ columns:
         type: url
   sidebar:
     width: 1/3
-    sections:
+    fields:
       files:
-        type: files
+        type: filelist
 
 
 

@@ -44,13 +44,16 @@ Inside the `/plugins` folder, create a new folder called `/file-component` and a
 // import App class
 use Kirby\Cms\App as Kirby;
 
-Kirby::plugin('cookbook/file-component', [
-  'components' => [
-    'file::url' => function (Kirby $kirby, $file) {
-        return $kirby->url() . '/content/' . $file->parent()->diruri() . '/' . $file->filename();
-    },
+Kirby::plugin(
+  name: 'cookbook/file-component',
+  extends: [
+    'components' => [
+      'file::url' => function (Kirby $kirby, $file) {
+          return $kirby->url() . '/content/' . $file->parent()->diruri() . '/' . $file->filename();
+      },
+    ]
   ]
-]);
+);
 ```
 
 Before we can test this, we have to do one additional step. The default `.htaccess` file included with Kirby's Starter- and PlainKits blocks direct access to the `content` folder with this line:
@@ -73,20 +76,23 @@ You can also decide to serve only parts of your files from the `/content` folder
 // import App class
 use Kirby\Cms\App as Kirby;
 
-Kirby::plugin('cookbook/file-component', [
-  'components' => [
-    'file::url' => function (Kirby $kirby, $file) {
-        // serve videos from content folder
-        if ($file->type() === 'video') {
-            return $kirby->url() . '/content/' . $file->parent()->diruri() . '/' . $file->filename();
-        // while all other files are served from the media folder
-        } else {
-            return $file->mediaUrl();
-        }
+Kirby::plugin(
+  name: 'cookbook/file-component',
+  extends: [
+    'components' => [
+      'file::url' => function (Kirby $kirby, $file) {
+          // serve videos from content folder
+          if ($file->type() === 'video') {
+              return $kirby->url() . '/content/' . $file->parent()->diruri() . '/' . $file->filename();
+          // while all other files are served from the media folder
+          } else {
+              return $file->mediaUrl();
+          }
 
-    },
+      },
+    ]
   ]
-]);
+);
 ```
 In the example, we serve only video files from the `/content` folder while all other files are still copied to the `/media` folder.
 

@@ -10,9 +10,6 @@ use Kirby\Toolkit\Str;
 /**
  * File System Cache Driver
  *
- * @package   Kirby Cache
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
@@ -26,9 +23,7 @@ class FileCache extends Cache
 	/**
 	 * Sets all parameters which are needed for the file cache
 	 *
-	 * @param array $options 'root' (required)
-	 *                       'prefix' (default: none)
-	 *                       'extension' (file extension for cache files, default: none)
+	 * @param array{root: string, prefix?: string|null, extension?: string|null, ...} $options
 	 */
 	public function __construct(array $options)
 	{
@@ -51,8 +46,7 @@ class FileCache extends Cache
 	}
 
 	/**
-	 * Returns whether the cache is ready to
-	 * store values
+	 * Returns whether the cache is ready to store values
 	 */
 	public function enabled(): bool
 	{
@@ -74,7 +68,8 @@ class FileCache extends Cache
 	{
 		// strip out invalid characters in each path segment
 		// split by slash or backslash
-		$keyParts = [];
+		$parts = [];
+
 		foreach (preg_split('#([\/\\\\])#', $key, 0, PREG_SPLIT_DELIM_CAPTURE) as $part) {
 			switch ($part) {
 				case '/':
@@ -84,13 +79,13 @@ class FileCache extends Cache
 				case '\\':
 					// backslashes get their own marker in the path
 					// to differentiate the cache key from one with forward slashes
-					$keyParts[] = '_backslash';
+					$parts[] = '_backslash';
 					break;
 
 				case '':
 					// empty part means two slashes in a row;
 					// special marker like for backslashes
-					$keyParts[] = '_empty';
+					$parts[] = '_empty';
 					break;
 
 				default:
@@ -99,16 +94,16 @@ class FileCache extends Cache
 					// underscores are *not* safe to guarantee uniqueness
 					// as they are used in the special cases
 					if (preg_match('/^[a-zA-Z0-9-]+$/', $part) === 1) {
-						$keyParts[] = $part;
+						$parts[] = $part;
 					} else {
-						$keyParts[] = Str::slug($part) . '_' . sha1($part);
+						$parts[] = Str::slug($part) . '_' . sha1($part);
 					}
 			}
 		}
 
-		$file = $this->root . '/' . implode('/', $keyParts);
+		$file = $this->root . '/' . implode('/', $parts);
 
-		if (isset($this->options['extension'])) {
+		if (isset($this->options['extension']) === true) {
 			return $file . '.' . $this->options['extension'];
 		}
 
@@ -126,9 +121,9 @@ class FileCache extends Cache
 	 */
 	public function set(string $key, $value, int $minutes = 0): bool
 	{
-		$file = $this->file($key);
-
-		return F::write($file, (new Value($value, $minutes))->toJson());
+		$file  = $this->file($key);
+		$value = new Value($value, $minutes);
+		return F::write($file, $value->toJson());
 	}
 
 	/**
@@ -137,10 +132,13 @@ class FileCache extends Cache
 	 */
 	public function retrieve(string $key): Value|null
 	{
-		$file  = $this->file($key);
-		$value = F::read($file);
+		$file = $this->file($key);
 
-		return $value ? Value::fromJson($value) : null;
+		if ($value = F::read($file)) {
+			return Value::fromJson($value);
+		}
+
+		return null;
 	}
 
 	/**
@@ -186,7 +184,10 @@ class FileCache extends Cache
 			$dir = rtrim($dir, '/\/');
 
 			// checks all directory segments until reaching the root directory
-			while (Str::startsWith($dir, $this->root()) === true && $dir !== $this->root()) {
+			while (
+				Str::startsWith($dir, $this->root()) === true &&
+				$dir !== $this->root()
+			) {
 				$files = scandir($dir);
 
 				if ($files === false) {
@@ -199,7 +200,8 @@ class FileCache extends Cache
 					// continue with the next level up
 					$dir = dirname($dir);
 				} else {
-					// no need to continue with the next level up as `$dir` was not deleted
+					// no need to continue with the next level up
+					// as `$dir` was not deleted
 					break;
 				}
 			}

@@ -2,7 +2,7 @@ Title: Related articles
 
 ----
 
-Description: Build relations between articles using YAML content and the pages field.
+Description: Build relations between articles using YAML content and the pagepicker field.
 
 ----
 
@@ -19,7 +19,7 @@ Tags: collections, relations
 
 Text:
 
-With **(glossary: yaml text: YAML) content** and the **pages field** you can easily link information on your site with other sources in Kirby. All examples below are based on the (link: docs/guide/installation#installation text: Starterkit).
+With **(glossary: yaml text: YAML) content** and the **pagepicker field** you can easily link information on your site with other sources in Kirby. All examples below are based on the (link: docs/guide/installation#installation text: Starterkit).
 
 ## In your content files
 
@@ -69,13 +69,13 @@ We use the field method (method: $field::toPages text: ->toPages()) to convert t
 
 ## In the Panel
 
-If you use the (glossary: panel), you have to add the `related` field to your (glossary: blueprint text: blueprint). The **(link: docs/reference/panel/fields/pages text: pages field)** offers a great way to select one or more related articles.
+If you use the (glossary: panel), you have to add the `related` field to your (glossary: blueprint text: blueprint). The **(link: docs/reference/panel/fields/pagepicker text: pagepicker field)** offers a great way to select one or more related articles.
 
 
 ```yaml "/site/blueprints/pages/note.yml"
   related:
     label: Related articles
-    type: pages
+    type: pagepicker
     query: page.siblings(false)
 ```
 

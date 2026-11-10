@@ -62,8 +62,6 @@ Let's check if we successfully added the plugin: Open the `site.yml` blueprint a
 
 ```yaml "kirbyplugins/site/blueprints/site.yml"
 title: Site
-preset: pages
-unlisted: true
 fields:
   foo:
     type: link

@@ -727,7 +727,7 @@ panel.plugin("acme/rating", {
 
 `inheritAttrs: false` keeps all props your component doesn't declare (like `saveable`, `when` or `width`) from ending up as HTML attributes.
 
-<!-- SCREENSHOT: the rating field in a page view, with four of five stars selected and the "Average of all siblings" line below -->
+(image: rating-field.png)
 
 
 ### The blueprint

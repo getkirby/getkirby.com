@@ -1,7 +1,6 @@
 <?php
 
 return function ($site) {
-
 	$cases = $site
 		->find('love')
 		->children()

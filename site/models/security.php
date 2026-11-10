@@ -109,7 +109,7 @@ class SecurityPage extends DefaultPage
 				'initialRelease'     => $initialRelease,
 				'endOfActiveSupport' => $nextRelease,
 				'endOfLife'          => date('Y-m-d', strtotime($initialRelease . ' + 3 years')),
-				'latest'             => page('releases/' . $major)->latestRelease()
+				'latest'             => page('releases/' . $major)?->latestRelease()
 			];
 		}
 

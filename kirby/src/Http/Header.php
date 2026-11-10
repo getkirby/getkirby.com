@@ -8,15 +8,16 @@ use Kirby\Filesystem\F;
  * The Header class provides methods
  * for sending HTTP headers.
  *
- * @package   Kirby Http
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
 class Header
 {
-	// configuration
+	/**
+	 * Known status codes with their messages
+	 *
+	 * @var array<string, string>
+	 */
 	public static array $codes = [
 		// successful
 		'_200' => 'OK',
@@ -121,8 +122,8 @@ class Header
 	 * and send a custom status code and message, use a $code string formatted
 	 * as 3 digits followed by a space and a message, e.g. '999 Custom Status'.
 	 *
-	 * @param int|string|null $code The HTTP status code
-	 * @param bool $send If set to false the header will be returned instead
+	 * @param $code The HTTP status code
+	 * @param $send If set to false the header will be returned instead
 	 * @return string|void
 	 * @psalm-return ($send is false ? string : void)
 	 */
@@ -154,7 +155,6 @@ class Header
 			return $header;
 		}
 
-		// try to send the header
 		header($header);
 	}
 
@@ -283,7 +283,7 @@ class Header
 	/**
 	 * Sends download headers for anything that is downloadable
 	 *
-	 * @param array $params Check out the defaults array for available parameters
+	 * @param $params Check out the defaults array for available parameters
 	 */
 	public static function download(array $params = []): void
 	{

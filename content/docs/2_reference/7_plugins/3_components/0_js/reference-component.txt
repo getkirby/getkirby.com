@@ -5,13 +5,16 @@ Title: JavaScript URLs
 Text:
 
 ```php "/site/plugins/js-helper/index.php"
-Kirby::plugin('my/js', [
-  'components' => [
-    'js' => function (Kirby $kirby, string $url, $options = null): string {
-      // create fingerprint for cache busting
-      $fingerprint = md5_file($url);
-      return $url . '?' . $fingerprint;
-    }
+Kirby::plugin(
+  name: 'my/js',
+  extends: [
+    'components' => [
+      'js' => function (Kirby $kirby, string $url, $options = null): string {
+        // create fingerprint for cache busting
+        $fingerprint = md5_file($url);
+        return $url . '?' . $fingerprint;
+      }
+    ]
   ]
-]);
+);
 ```

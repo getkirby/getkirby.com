@@ -1,0 +1,11 @@
+Title: /users/:id/fields/:name
+----
+Info: GET
+----
+Intro: Retrieve a user field
+----
+Text:
+----
+Example:
+----
+Response:

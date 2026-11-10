@@ -216,7 +216,7 @@ The same methods outlined above are not only available for pages, but also for c
 
 More methods in the Reference
 
-- (link: docs/reference/objects/pages text: `$pages` methods)
-- (link: docs/reference/objects/files text: `$files` methods)
-- (link: docs/reference/objects/users text: `$users` methods)
+- (link: docs/reference/objects/cms/pages text: `$pages` methods)
+- (link: docs/reference/objects/cms/files text: `$files` methods)
+- (link: docs/reference/objects/cms/users text: `$users` methods)
 

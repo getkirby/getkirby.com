@@ -10,9 +10,6 @@ use Kirby\Exception\LogicException;
  * blueprint and wraps a couple useful methods
  * around it to check for available permissions.
  *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
@@ -93,13 +90,12 @@ class Permissions
 			'update'         => true
 		]
 	];
-
 	protected array $actions;
 
 	/**
 	 * Permissions constructor
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct(array|bool|null $settings = [])
 	{
@@ -155,22 +151,13 @@ class Permissions
 	}
 
 	/**
-	 * @todo Replace first param with `string $category` in v6
+	 * @return ($default is null ? bool|null : bool)
 	 */
 	public function for(
-		string|null $category = null,
+		string $category,
 		string|null $action = null,
-		bool $default = false
-	): bool {
-		if (is_null($category) === true) {
-			Helpers::deprecated(
-				'Passing `$category = null` to `Permissions::for()` is not supported',
-				'permissions-for-category-null'
-			);
-
-			return $default;
-		}
-
+		bool|null $default = false
+	): bool|null {
 		if ($this->has($category, $action) === false) {
 			return $default;
 		}

@@ -2,14 +2,15 @@
 
 namespace Kirby\Reference\Types;
 
-use Kirby\Cms\Html;
 use Kirby\Reference\Reflectable\Reflectable;
 use Kirby\Toolkit\A;
-use Kirby\Toolkit\Str;
+use PHPStan\PhpDocParser\Ast\Type\ConditionalTypeForParameterNode;
+use PHPStan\PhpDocParser\Ast\Type\ConditionalTypeNode;
+use PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode;
+use PHPStan\PhpDocParser\Ast\Type\NullableTypeNode;
 use PHPStan\PhpDocParser\Ast\Type\TypeNode;
 use PHPStan\PhpDocParser\Ast\Type\UnionTypeNode;
 use ReflectionType;
-use ReflectionUnionType;
 
 /**
  * Collection of types which can represent
@@ -35,64 +36,94 @@ class Types
 	}
 
 	/**
-	 * Create a new Types instance from either a PHP reflection type,
-	 * a PHPStan type node or a simple string.
+	 * Returns the members of a union type, incl. both
+	 * branches of a conditional type like `($a is true ? int : string)`
 	 *
-	 * A context can be provided to resolve type templates.
+	 * @return array<TypeNode>
 	 */
-	public static function factory(
-		ReflectionType|TypeNode|string|null $types = null,
+	public static function flatten(TypeNode $node): array
+	{
+		return match (true) {
+			$node instanceof UnionTypeNode
+				=> array_merge(...A::map($node->types, static::flatten(...))),
+			$node instanceof NullableTypeNode
+				=> [...static::flatten($node->type), new IdentifierTypeNode('null')],
+			$node instanceof ConditionalTypeNode,
+			$node instanceof ConditionalTypeForParameterNode
+				=> [...static::flatten($node->if), ...static::flatten($node->else)],
+			default
+			=> [$node]
+		};
+	}
+
+	/**
+	 * Creates the types from a doc block type,
+	 * a native PHP type hint or a string of types
+	 */
+	public static function from(
+		TypeNode|ReflectionType|string|null $type,
 		Reflectable|null $reflectable = null
 	): static {
-		$types ??= [];
+		return match (true) {
+			$type instanceof TypeNode       => static::fromNode($type, $reflectable),
+			$type instanceof ReflectionType => static::fromReflection($type, $reflectable),
+			is_string($type)                => static::fromString($type, $reflectable),
+			default                         => new static([], $reflectable)
+		};
+	}
 
-		// Handle simple strings first;
-		// expect a pipe-separated list of exact types
-		if (is_string($types) === true) {
-			$types = static::split($types);
-			return new static(
-				types: A::map(
-					$types,
-					fn ($type) => Type::factory($type, $reflectable)
-				)
-			);
-		}
-
-		if ($types instanceof ReflectionUnionType) {
-			$types = $types->getTypes();
-		} elseif ($types instanceof UnionTypeNode) {
-			$types = $types->types;
-		}
-
-		// Ensure types is an array
-		$types = A::wrap($types);
-
-		// If there is a nullable type, add it
-		if (static::needsNull($types) === true) {
-			$types[] = 'null';
-		}
-
-		// Remove the optional `?` from the type strings
-		$types = A::map($types, fn ($type) => ltrim($type, '?'));
-
-		// Resolve type templates if a context is provided
+	/**
+	 * Creates the types from a doc block type, with all
+	 * templates and class names resolved in the context
+	 */
+	public static function fromNode(
+		TypeNode $node,
+		Reflectable|null $reflectable = null
+	): static {
 		if ($reflectable !== null) {
-			$context = Context::factory($reflectable);
-			$types   = A::map(
-				$types,
-				fn ($type) => Str::split($context->resolve($type), '|')
-			);
-			$types = array_merge(...$types);
+			$node = Context::factory($reflectable)?->resolveNode($node) ?? $node;
 		}
 
-		// Create a new Type instance for each type string
-		$types = array_unique($types);
-		$types = A::map(
-			$types,
-			fn ($type) => Type::factory($type, $reflectable)
-		);
+		$types = A::map(static::flatten($node), static::print(...));
+		$types = array_values(array_unique($types));
 
-		return new static($types, $reflectable);
+		return new static(
+			types: A::map(
+				$types,
+				fn ($type) => Type::factory($type, $reflectable)
+			),
+			reflectable: $reflectable
+		);
+	}
+
+	/**
+	 * Creates the types from a native PHP type hint
+	 */
+	public static function fromReflection(
+		ReflectionType $type,
+		Reflectable|null $reflectable = null
+	): static {
+		// `?string` is short for `string|null`
+		$types = preg_replace('/^\?(.+)$/', '$1|null', (string)$type);
+
+		return static::fromString($types, $reflectable);
+	}
+
+	/**
+	 * Creates the types from a string of types,
+	 * e.g. `string|int` or `array<string|int, mixed>|null`
+	 */
+	public static function fromString(
+		string $types,
+		Reflectable|null $reflectable = null
+	): static {
+		return new static(
+			types: A::map(
+				static::split($types),
+				fn ($type) => Type::factory($type, $reflectable)
+			),
+			reflectable: $reflectable
+		);
 	}
 
 	/**
@@ -101,28 +132,6 @@ class Types
 	public function has(string $needle): bool
 	{
 		return A::some($this->types, fn (Type $type) => $type->is($needle));
-	}
-
-	/**
-	 * Check if the types require to add a null type
-	 */
-	protected static function needsNull(array $types): bool
-	{
-		$needsNull = false;
-
-		foreach ($types as $type) {
-			// If there is a mixed type, we don't need to add null
-			if ((string)$type === 'mixed') {
-				return false;
-			}
-
-			// If the type allows null, we need to add it
-			if (method_exists($type, 'allowsNull') && $type->allowsNull()) {
-				$needsNull = true;
-			}
-		}
-
-		return $needsNull ?? false;
 	}
 
 	/**
@@ -137,6 +146,21 @@ class Types
 			),
 			reflectable: $this->reflectable
 		);
+	}
+
+	/**
+	 * Converts a type node to a compact string,
+	 * e.g. `list<int|string>` instead of `list<(int | string)>`
+	 */
+	public static function print(TypeNode $node): string
+	{
+		$type = (string)$node;
+
+		// remove the brackets around unions of simple
+		// types, unless they are needed for an array (`(int|string)[]`)
+		$type = preg_replace('/\(([\w\\\\-]+(?: \| [\w\\\\-]+)+)\)(?!\[)/', '$1', $type);
+
+		return str_replace(' | ', '|', $type);
 	}
 
 	/**
@@ -248,10 +272,10 @@ class Types
 	/**
 	 * Convert the types to a string
 	 */
-	public function toString(): string
+	public function toString(bool $short = false): string
 	{
 		// Get string representation for each type
-		$types = A::map($this->types, fn (Type $type) => $type->toString());
+		$types = A::map($this->types, fn (Type $type) => $type->toString($short));
 
 		// Remove duplicates
 		$types = array_unique($types);

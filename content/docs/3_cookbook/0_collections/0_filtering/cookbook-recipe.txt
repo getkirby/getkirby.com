@@ -270,9 +270,9 @@ $events = page('events')
   );
 
 ```
-## Filtering by the `pages`, `files` or `users` field
+## Filtering by the `pagepicker`, `filepicker` or `userpicker` field
 
-The (link: docs/reference/panel/fields/pages text: `pages`), (link: docs/reference/panel/fields/files text: `files`) and (link: docs/reference/panel/fields/users text: `users`) fields store one or multiple entries in `yaml` format. Using the simple `filterBy()` method is therefore not useful to filter a collection by these field types and we have to use the [`filter()`](/docs/reference/objects/pages/filter) method.
+The (link: docs/reference/panel/fields/pagepicker text: `pagepicker`), (link: docs/reference/panel/fields/filepicker text: `filepicker`) and (link: docs/reference/panel/fields/userpicker text: `userpicker`) fields store one or multiple entries in `yaml` format. Using the simple `filterBy()` method is therefore not useful to filter a collection by these field types and we have to use the [`filter()`](/docs/reference/objects/cms/pages/filter) method.
 
 Let's first understand what these fields store in the content files:
 
@@ -280,7 +280,7 @@ By default, every selected page, file or user is referenced by its UUID. You can
 
 ```yaml
 related:
-  type: pages
+  type: pagepicker
   store: id
 ```
 
@@ -290,7 +290,7 @@ The `toPages()`, `toFiles()` and `toUsers()` field methods used in the following
 
 ### Examples
 
-#### Filter by `pages` field
+#### Filter by `pagepicker` field
 
 For example, fetch all pages in a collection that reference the current page (or any other page) in the `related` field:
 
@@ -300,7 +300,7 @@ $page->children()->filter(function($child) use($page) {
 });
 ```
 
-#### Filter by `files` field
+#### Filter by `filepicker` field
 
 For example, fetch all pages in a collection that reference a given file in the `pictures` field:
 
@@ -311,7 +311,7 @@ $page->children()->filter(function($child) use($file){
 });
 ```
 
-#### Filter by `users` field
+#### Filter by `userpicker` field
 
 For example, fetch all pages in a collection that reference the current user in the `authors`field:
 

@@ -15,22 +15,40 @@ use Kirby\Toolkit\Dom;
  * HTML parser to extract the best possible blocks
  * from any kind of HTML document
  *
- * @package   Kirby Parsley
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  * @since     3.5.0
  */
 class Parsley
 {
+	/**
+	 * @var array<int, array>
+	 */
 	protected array $blocks = [];
 	protected DOMDocument $doc;
 	protected Dom $dom;
+
+	/**
+	 * Inline nodes that are collected for the next block
+	 *
+	 * @var list<DOMNode>
+	 */
 	protected array $inline = [];
+
+	/**
+	 * @var list<array>
+	 */
 	protected array $marks = [];
+
+	/**
+	 * @var array<string, array>
+	 */
 	protected array $nodes = [];
 	protected Schema $schema;
+
+	/**
+	 * @var list<string>
+	 */
 	protected array $skip = [];
 
 	public static bool $useXmlExtension = true;
@@ -74,6 +92,8 @@ class Parsley
 
 	/**
 	 * Returns all detected blocks
+	 *
+	 * @return list<array>
 	 */
 	public function blocks(): array
 	{
@@ -82,6 +102,8 @@ class Parsley
 
 	/**
 	 * Load all node rules from the schema
+	 *
+	 * @return array<string, array>
 	 */
 	public function createNodeRules(array $nodes): array
 	{
@@ -105,7 +127,7 @@ class Parsley
 		foreach ($element->childNodes as $childNode) {
 			if (
 				$this->isBlock($childNode) === true ||
-				$this->containsBlock($childNode)
+				$this->containsBlock($childNode) === true
 			) {
 				return true;
 			}
@@ -151,11 +173,8 @@ class Parsley
 	 */
 	public function fallback(Element|string $element): array|null
 	{
-		if ($fallback = $this->schema->fallback($element)) {
-			return $fallback;
-		}
-
-		return null;
+		$fallback = $this->schema->fallback($element);
+		return $fallback !== [] ? $fallback : null;
 	}
 
 	/**
@@ -241,25 +260,21 @@ class Parsley
 
 		$this->endInlineBlock();
 
-
 		// known block nodes
 		if ($this->isBlock($element) === true) {
-			/**
-			 * @var DOMElement $element
-			 */
+			/** @var DOMElement $element */
 			if ($parser = $this->nodes[$element->tagName]['parse'] ?? null) {
 				if ($result = $parser(new Element($element, $this->marks))) {
 					$this->blocks[] = $result;
 				}
 			}
+
 			return true;
 		}
 
 		// has only unknown children (div, etc.)
 		if ($this->containsBlock($element) === false) {
-			/**
-			 * @var DOMElement $element
-			 */
+			/** @var DOMElement $element */
 			if (in_array($element->tagName, $this->skip, true) === true) {
 				return false;
 			}

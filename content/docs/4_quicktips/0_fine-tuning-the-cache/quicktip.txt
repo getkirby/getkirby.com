@@ -26,7 +26,7 @@ However, we can use this callback to make excluding pages from the cache much mo
 
 ## Using a blueprint option
 
-As already mentioned in our the (link: docs/cookbook/extensions/subpage-builder text: subpage builder recipe), we can use custom options in our (glossary: blueprint text: blueprints), which we can then query via the [`$page->blueprint()`](/docs/reference/objects/page/blueprint) method.
+As already mentioned in our the (link: docs/cookbook/extensions/subpage-builder text: subpage builder recipe), we can use custom options in our (glossary: blueprint text: blueprints), which we can then query via the [`$page->blueprint()`](/docs/reference/objects/cms/page/blueprint) method.
 
 ### Page blueprint
 

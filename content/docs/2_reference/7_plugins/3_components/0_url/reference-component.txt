@@ -5,12 +5,15 @@ Title: URLs
 Text:
 
 ```php "/site/plugins/urls/index.php"
-Kirby::plugin('my/urls', [
-  'components' => [
-    'url' => function (Kirby $kirby, string|null $path = null, array|string|null $options = null): string {
-        $original = $kirby->nativeComponent('url');
-        return $original($kirby, $path, $options);
-    }
+Kirby::plugin(
+  name: 'my/urls',
+  extends: [
+    'components' => [
+      'url' => function (Kirby $kirby, string|null $path = null, array|string|null $options = null): string {
+          $original = $kirby->nativeComponent('url');
+          return $original($kirby, $path, $options);
+      }
+    ]
   ]
-]);
+);
 ```

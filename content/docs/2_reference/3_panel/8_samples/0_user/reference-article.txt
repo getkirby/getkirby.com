@@ -58,28 +58,25 @@ columns:
 ```yaml "/site/blueprints/users/default.yml"
 title: User
 
-sections:
-  meta:
-    type: fields
-    fields:
-      website:
-        label: Website
-        type: url
-        width: 1/3
-      fediverse:
-        label: Fediverse URL
-        type: url
-        icon: mastodon
-        placeholder: https://example.com/@username
-        width: 1/3
-      bluesky:
-        label: Bluesky
-        type: text
-        icon: bluesky
-        placeholder: username
-        width: 1/3
+fields:
+  website:
+    label: Website
+    type: url
+    width: 1/3
+  fediverse:
+    label: Fediverse URL
+    type: url
+    icon: mastodon
+    placeholder: https://example.com/@username
+    width: 1/3
+  bluesky:
+    label: Bluesky
+    type: text
+    icon: bluesky
+    placeholder: username
+    width: 1/3
   documents:
-    type: files
+    type: filelist
     empty: "No documents yet"
     layout: cards
 ```

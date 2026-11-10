@@ -21,15 +21,18 @@ Pages methods are registered with the `pagesMethods` extension.
 You can extend the set of defined pages methods very easily in a plugin file.
 
 ```php "/site/plugins/pages-methods/index.php"
-Kirby::plugin('my/pagesMethods', [
-    'pagesMethods' => [
-        'listAll' => function () {
-            foreach($this as $page) {
-                echo '- ' . $page->title() . '<br>';
+Kirby::plugin(
+    name: 'my/pagesMethods',
+    extends: [
+        'pagesMethods' => [
+            'listAll' => function () {
+                foreach($this as $page) {
+                    echo '- ' . $page->title() . '<br>';
+                }
             }
-        }
+        ]
     ]
-]);
+);
 ```
 
 This example shows the basic architecture of a pages method. You define the method name with the key for the `pagesMethods` array. `$this` in the callback function is the `$pages` collection.
@@ -45,12 +48,15 @@ In some cases it might be helpful to be able to pass arguments to the method:
 The definition for such a method with arguments is very simple:
 
 ```php
-Kirby::plugin('my/plugin', [
-    'pagesMethods' => [
-        'withGame' => function ($game) {
-            return $this->filterBy('game', $game);
-        }
+Kirby::plugin(
+    name: 'my/plugin',
+    extends: [
+        'pagesMethods' => [
+            'withGame' => function ($game) {
+                return $this->filterBy('game', $game);
+            }
+        ]
     ]
-]);
+);
 ```
 

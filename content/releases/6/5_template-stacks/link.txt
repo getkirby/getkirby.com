@@ -1,0 +1,58 @@
+Title: Template stacks
+
+----
+
+Subtitle: Push output and render it anywhere
+
+----
+
+Teaser:
+
+Snippets and templates can push output onto a named stack and render that stack somewhere else, e.g. collect the CSS of all your block snippets in the `<head>`.
+
+Pushing and rendering don't depend on each other, so their order doesn't matter.
+
+----
+
+Header:
+
+```php "site/snippets/header.php"
+<head>
+  <?php stack('head') ?>
+</head>
+```
+
+----
+
+Body:
+
+```php "site/templates/custom.php"
+<?php push('head') ?>
+  <?= css('assets/css/custom.css') ?>
+<?php endpush() ?>
+
+<h1><?= $page->title() ?></h1>
+
+<!-- the main code for the template -->
+
+<?php push('footer') ?>
+  <?= js('assets/js/custom.js') ?>
+<?php endpush() ?>
+```
+
+----
+
+Footer:
+
+```php "site/snippets/footer.php"
+  <?php stack('footer') ?>
+</body>
+```
+
+----
+
+Link: /docs/guide/templates/stacks
+
+----
+
+Category: features

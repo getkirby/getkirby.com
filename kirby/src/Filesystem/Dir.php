@@ -21,9 +21,6 @@ use Throwable;
  * and converting the results into
  * children, files and other page stuff.
  *
- * @package   Kirby Filesystem
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
@@ -31,6 +28,8 @@ class Dir
 {
 	/**
 	 * Ignore when scanning directories
+	 *
+	 * @var list<string>
 	 */
 	public static array $ignore = [
 		'.',
@@ -43,15 +42,14 @@ class Dir
 		'Thumb.db',
 		'@eaDir'
 	];
-
 	public static string $numSeparator = '_';
 
 	/**
 	 * Copy the directory to a new destination
 	 *
-	 * @param array|false $ignore List of full paths to skip during copying
-	 *                            or `false` to copy all files, including
-	 *                            those listed in `Dir::$ignore`
+	 * @param $ignore List of full paths to skip during copying
+	 *               or `false` to copy all files, including
+	 *               those listed in `Dir::$ignore`
 	 */
 	public static function copy(
 		string $dir,
@@ -95,6 +93,8 @@ class Dir
 
 	/**
 	 * Get all subdirectories
+	 *
+	 * @return list<string>
 	 */
 	public static function dirs(
 		string $dir,
@@ -102,10 +102,10 @@ class Dir
 		bool $absolute = false
 	): array {
 		$scan   = static::read($dir, $ignore, true);
-		$result = array_values(array_filter($scan, 'is_dir'));
+		$result = array_values(array_filter($scan, is_dir(...)));
 
 		if ($absolute !== true) {
-			$result = array_map('basename', $result);
+			$result = array_map(basename(...), $result);
 		}
 
 		return $result;
@@ -126,6 +126,8 @@ class Dir
 
 	/**
 	 * Get all files
+	 *
+	 * @return list<string>
 	 */
 	public static function files(
 		string $dir,
@@ -133,10 +135,10 @@ class Dir
 		bool $absolute = false
 	): array {
 		$scan   = static::read($dir, $ignore, true);
-		$result = array_values(array_filter($scan, 'is_file'));
+		$result = array_values(array_filter($scan, is_file(...)));
 
 		if ($absolute !== true) {
-			$result = array_map('basename', $result);
+			$result = array_map(basename(...), $result);
 		}
 
 		return $result;
@@ -145,15 +147,14 @@ class Dir
 	/**
 	 * Read the directory and all subdirectories
 	 *
-	 * @todo Remove support for `$ignore = null` in v6
-	 * @param array|false|null $ignore Array of absolute file paths;
-	 *                                 `false` to disable `Dir::$ignore` list
-	 *                                 (passing null is deprecated)
+	 * @param $ignore Array of absolute file paths;
+	 *               `false` to disable `Dir::$ignore` list
+	 * @return list<string>
 	 */
 	public static function index(
 		string $dir,
 		bool $recursive = false,
-		array|false|null $ignore = [],
+		array|false $ignore = [],
 		string|null $path = null
 	): array {
 		$result = [];
@@ -260,14 +261,15 @@ class Dir
 	/**
 	 * Creates a new directory
 	 *
-	 * @param string $dir The path for the new directory
-	 * @param bool $recursive Create all parent directories, which don't exist
+	 * @param $recursive Create all parent directories, which don't exist
 	 * @return bool True: the dir has been created, false: creating failed
-	 * @throws \Exception If a file with the provided path already exists or the parent directory is not writable
+	 * @throws Exception If a file with the provided path already exists or the parent directory is not writable
 	 */
-	public static function make(string $dir, bool $recursive = true): bool
-	{
-		if (empty($dir) === true) {
+	public static function make(
+		string $dir,
+		bool $recursive = true
+	): bool {
+		if ($dir === '') {
 			return false;
 		}
 
@@ -302,26 +304,27 @@ class Dir
 	 * Recursively check when the dir and all
 	 * subfolders have been modified for the last time.
 	 *
-	 * @param string $dir The path of the directory
 	 * @param 'date'|'intl'|'strftime'|null $handler Custom date handler or `null`
 	 *                                               for the globally configured one
+	 * @return ($format is null ? int : string|false)
 	 */
 	public static function modified(
 		string $dir,
 		string|null $format = null,
 		string|null $handler = null
-	): int|string {
+	): int|string|false {
 		$modified = filemtime($dir);
 		$items    = static::read($dir);
 
 		foreach ($items as $item) {
-			$newModified = match (is_file($dir . '/' . $item)) {
-				true  => filemtime($dir . '/' . $item),
-				false => static::modified($dir . '/' . $item)
+			$root = $dir . '/' . $item;
+			$time = match (is_file($root)) {
+				true  => filemtime($root),
+				false => static::modified($root)
 			};
 
-			if ($newModified > $modified) {
-				$modified = $newModified;
+			if ($time > $modified) {
+				$modified = $time;
 			}
 		}
 
@@ -331,8 +334,8 @@ class Dir
 	/**
 	 * Moves a directory to a new location
 	 *
-	 * @param string $old The current path of the directory
-	 * @param string $new The desired path where the dir should be moved to
+	 * @param $old The current path of the directory
+	 * @param $new The desired path where the dir should be moved to
 	 * @return bool true: the directory has been moved, false: moving failed
 	 */
 	public static function move(string $old, string $new): bool
@@ -355,10 +358,9 @@ class Dir
 	/**
 	 * Returns a nicely formatted size of all the contents of the folder
 	 *
-	 * @param string $dir The path of the directory
-	 * @param string|false|null $locale Locale for number formatting,
-	 *                                  `null` for the current locale,
-	 *                                  `false` to disable number formatting
+	 * @param $locale Locale for number formatting,
+	 *               `null` for the current locale,
+	 *               `false` to disable number formatting
 	 */
 	public static function niceSize(
 		string $dir,
@@ -371,10 +373,9 @@ class Dir
 	 * Reads all files from a directory and returns them as an array.
 	 * It skips unwanted invisible stuff.
 	 *
-	 * @param string $dir The path of directory
-	 * @param array $ignore Optional array with filenames, which should be ignored
-	 * @param bool $absolute If true, the full path for each item will be returned
-	 * @return array An array of filenames
+	 * @param $ignore Optional array with filenames, which should be ignored
+	 * @param $absolute If true, the full path for each item will be returned
+	 * @return list<string> An array of filenames
 	 */
 	public static function read(
 		string $dir,
@@ -390,11 +391,11 @@ class Dir
 		$ignore   = [...$ignore, '.', '..'];
 
 		// scan for all files and dirs
-		$result = array_values((array)array_diff(scandir($dir), $ignore));
+		$result = array_values(array_diff(scandir($dir), $ignore));
 
 		// add absolute paths
 		if ($absolute === true) {
-			$result = array_map(fn ($item) => $dir . '/' . $item, $result);
+			$result = array_map(fn (string $item) => $dir . '/' . $item, $result);
 		}
 
 		return $result;
@@ -422,14 +423,11 @@ class Dir
 			// require a path separator boundary so that
 			// a sibling directory sharing the same name prefix
 			// (e.g. `/site2` for the parent `/site`)
-			// cannot pass the containment check
+			// cannot pass the containment check; the parent
+			// directory itself is not considered to be within itself
 			$parent = rtrim($parent, '/\\');
 
-			// TODO: Tighten to only allow **inside** $parent in v6
-			if (
-				$realpath !== $parent &&
-				str_starts_with($realpath, $parent . DIRECTORY_SEPARATOR) === false
-			) {
+			if (str_starts_with($realpath, $parent . DIRECTORY_SEPARATOR) === false) {
 				throw new Exception('The directory is not within the parent directory');
 			}
 		}
@@ -485,6 +483,7 @@ class Dir
 			} catch (Throwable) {
 				// ignore
 			}
+
 			return true;
 		}
 
@@ -533,12 +532,12 @@ class Dir
 	 */
 	protected static function removeRecursive(string $dir): void
 	{
-		foreach (scandir($dir) as $childName) {
-			if (in_array($childName, ['.', '..'], true) === true) {
+		foreach (scandir($dir) as $name) {
+			if (in_array($name, ['.', '..'], true) === true) {
 				continue;
 			}
 
-			$child = $dir . '/' . $childName;
+			$child = $dir . '/' . $name;
 
 			if (is_dir($child) === true && is_link($child) === false) {
 				static::removeRecursive($child);
@@ -556,8 +555,7 @@ class Dir
 	/**
 	 * Gets the size of the directory
 	 *
-	 * @param string $dir The path of the directory
-	 * @param bool $recursive Include all subfolders and their files
+	 * @param $recursive Include all subfolders and their files
 	 */
 	public static function size(string $dir, bool $recursive = true): int|false
 	{

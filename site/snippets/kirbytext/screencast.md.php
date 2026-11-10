@@ -6,7 +6,9 @@
  * @var string $url
  */
 
-echo markdownHeading($title, 2);
+if ($title) {
+	echo markdownHeading($title, 2);
+}
 
 if ($text) {
 	echo $text . markdownBreak();

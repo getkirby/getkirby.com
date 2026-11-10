@@ -10,9 +10,6 @@ use Countable;
  * `$slots->heading()` and accessing a non-existing
  * slot will simply return null.
  *
- * @package   Kirby Template
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
@@ -20,6 +17,8 @@ class Slots implements Countable
 {
 	/**
 	 * Creates a new slots collection
+	 *
+	 * @param array<string, Slot> $slots
 	 */
 	public function __construct(
 		protected array $slots
@@ -33,6 +32,15 @@ class Slots implements Countable
 	public function __get(string $name): Slot|null
 	{
 		return $this->slots[$name] ?? null;
+	}
+
+	/**
+	 * Checks if a slot has been defined;
+	 * e.g. `isset($slots->heading)`
+	 */
+	public function __isset(string $name): bool
+	{
+		return isset($this->slots[$name]);
 	}
 
 	/**

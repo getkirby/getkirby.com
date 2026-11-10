@@ -17,9 +17,6 @@ use Kirby\Toolkit\Html;
  * Extends the `Kirby\Filesystem\File` class with
  * those image-specific methods.
  *
- * @package   Kirby Image
- * @author    Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
@@ -36,7 +33,6 @@ class Image extends File
 		'png',
 		'webp'
 	];
-
 	public static array $viewableTypes = [
 		'avif',
 		'jpg',

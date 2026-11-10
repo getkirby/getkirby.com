@@ -7,9 +7,6 @@ use Kirby\Toolkit\Str;
 /**
  * HasChildren
  *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  */
@@ -159,7 +156,7 @@ trait HasChildren
 	/**
 	 * Creates a flat child index
 	 *
-	 * @param bool $drafts If set to `true`, draft children are included
+	 * @param $drafts If set to `true`, draft children are included
 	 */
 	public function index(bool $drafts = false): Pages
 	{

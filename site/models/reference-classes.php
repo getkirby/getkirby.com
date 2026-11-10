@@ -85,11 +85,9 @@ class ReferenceClassesPage extends ReferenceSectionPage
 			$dir   .= Str::lower(Str::after($root, $src));
 			$dir   .= '/0_' . $slug;
 
-			try {
-				$content = Data::read($dir . '/reference-class.txt');
-			} catch (Throwable) {
-				$content = [];
-			}
+			// most classes don't have their own content file
+			$file    = $dir . '/reference-class.txt';
+			$content = is_file($file) === true ? Data::read($file) : [];
 
 			$children[] = [
 				'slug'     => $slug,

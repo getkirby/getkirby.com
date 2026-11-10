@@ -93,4 +93,17 @@ return [
 		'pattern' => 'docs/guide/plugins/best-practices',
 		'action'  => fn () => go('docs/guide/plugins/publishing')
 	],
+
+	// Kirby 6: picker fields were renamed, sections became list fields
+	[
+		'pattern' => 'docs/reference/panel/(fields|sections)/(files|pages|users)',
+		'action'  => function (string $group, string $type) {
+			$suffix = $group === 'fields' ? 'picker' : 'list';
+			go('docs/reference/panel/fields/' . rtrim($type, 's') . $suffix);
+		}
+	],
+	[
+		'pattern' => 'docs/cookbook/(:any)/first-panel-section',
+		'action'  => fn () => go('docs/cookbook/panel/first-panel-field#fields-without-a-value')
+	],
 ];

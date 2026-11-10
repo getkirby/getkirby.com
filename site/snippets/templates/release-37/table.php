@@ -39,7 +39,7 @@
 		<div class="release-text-box" style="grid-area: box1">
 			<h3>At a glance</h3>
 			<div class="prose">
-				With the brand new <a href="/docs/reference/panel/sections/pages#layout__table-layout">table layout</a> for pages and files sections, you get a great overview of our content. Customize the columns you want to show to present exactly the data you&nbsp;need.
+				With the brand new <a href="/docs/reference/panel/fields/pagelist#layout__table-layout">table layout</a> for pages and files sections, you get a great overview of our content. Customize the columns you want to show to present exactly the data you&nbsp;need.
 			</div>
 		</div>
 		<div class="release-code-box" style="grid-area: box2">

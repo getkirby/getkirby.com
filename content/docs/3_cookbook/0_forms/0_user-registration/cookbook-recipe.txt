@@ -482,13 +482,16 @@ We create a site method that allows us to fetch the referrer value from the sess
 
 ```php "/site/plugins/site-method/index.php
 <?php
-Kirby::plugin('cookbook/site-method', [
-    'siteMethods' => [
-        'loginReferrer' => function () {
-            return kirby()->session()->pull('login.referrer') ?? '/';
-        }
+Kirby::plugin(
+    name: 'cookbook/site-method',
+    extends: [
+        'siteMethods' => [
+            'loginReferrer' => function () {
+                return kirby()->session()->pull('login.referrer') ?? '/';
+            }
+        ]
     ]
-]);
+);
 ```
 If a value is stored in the session, we return this value, otherwise we redirect to the home page.
 

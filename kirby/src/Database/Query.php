@@ -13,15 +13,12 @@ use Kirby\Toolkit\Str;
  * The query builder is used by the Database class
  * to build SQL queries with a fluent API
  *
- * @package   Kirby Database
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
 class Query
 {
-	public const ERROR_INVALID_QUERY_METHOD = 0;
+	public const int ERROR_INVALID_QUERY_METHOD = 0;
 
 	/**
 	 * The object which should be fetched for each row
@@ -36,6 +33,8 @@ class Query
 
 	/**
 	 * An array of bindings for the final query
+	 *
+	 * @var array<string|int, mixed>
 	 */
 	protected array $bindings = [];
 
@@ -46,6 +45,8 @@ class Query
 
 	/**
 	 * An array with additional join parameters
+	 *
+	 * @var list<array{table: string, on: string, type: string}>|null
 	 */
 	protected array|null $join = null;
 
@@ -105,7 +106,7 @@ class Query
 	protected bool $debug = false;
 
 	/**
-	 * @param string $table name of the table, which should be queried
+	 * @param $table Name of the table, which should be queried
 	 */
 	public function __construct(
 		protected Database $database,
@@ -203,7 +204,7 @@ class Query
 	 * Sets the name of the table, which should be queried
 	 *
 	 * @return $this
-	 * @throws \Kirby\Exception\InvalidArgumentException if the table does not exist
+	 * @throws InvalidArgumentException if the table does not exist
 	 */
 	public function table(string $table): static
 	{
@@ -232,7 +233,7 @@ class Query
 	 * Sets the columns, which should be selected from the table
 	 * By default all columns will be selected
 	 *
-	 * @param array|string|null $select Pass either a string of columns or an array
+	 * @param $select Pass either a string of columns or an array
 	 * @return $this
 	 */
 	public function select(array|string|null $select): static
@@ -244,9 +245,9 @@ class Query
 	/**
 	 * Adds a new join clause to the query
 	 *
-	 * @param string $table Name of the table, which should be joined
-	 * @param string $on The on clause for this join
-	 * @param string $type The join type. Uses an inner join by default
+	 * @param $table Name of the table, which should be joined
+	 * @param $on The on clause for this join
+	 * @param $type The join type. Uses an inner join by default
 	 * @return $this
 	 */
 	public function join(
@@ -254,21 +255,20 @@ class Query
 		string $on,
 		string $type = 'JOIN'
 	): static {
-		$join = [
+		$this->join[] = [
 			'table' => $table,
 			'on'    => $on,
 			'type'  => $type
 		];
 
-		$this->join[] = $join;
 		return $this;
 	}
 
 	/**
 	 * Shortcut for creating a left join clause
 	 *
-	 * @param string $table Name of the table, which should be joined
-	 * @param string $on The on clause for this join
+	 * @param $table Name of the table, which should be joined
+	 * @param $on The on clause for this join
 	 * @return $this
 	 */
 	public function leftJoin(string $table, string $on): static
@@ -279,8 +279,8 @@ class Query
 	/**
 	 * Shortcut for creating a right join clause
 	 *
-	 * @param string $table Name of the table, which should be joined
-	 * @param string $on The on clause for this join
+	 * @param $table Name of the table, which should be joined
+	 * @param $on The on clause for this join
 	 * @return $this
 	 */
 	public function rightJoin(string $table, string $on): static
@@ -303,7 +303,7 @@ class Query
 	/**
 	 * Sets the values which should be used for the update or insert clause
 	 *
-	 * @param mixed $values Can either be a string or an array of values
+	 * @param $values Can either be a string or an array of values
 	 * @return $this
 	 */
 	public function values($values = []): static
@@ -311,6 +311,7 @@ class Query
 		if ($values !== null) {
 			$this->values = $values;
 		}
+
 		return $this;
 	}
 
@@ -320,7 +321,7 @@ class Query
 	 * by not passing an argument.
 	 *
 	 * @return array|$this
-	 * @psalm-return ($bindings is array ? $this : array)
+	 * @psalm-return ($bindings is array ? static : array)
 	 */
 	public function bindings(array|null $bindings = null): array|static
 	{
@@ -410,7 +411,7 @@ class Query
 	 *
 	 * @return $this
 	 */
-	public function order(string|null $order = null)
+	public function order(string|null $order = null): static
 	{
 		$this->order = $order;
 		return $this;
@@ -442,8 +443,9 @@ class Query
 	 * Builds the different types of SQL queries
 	 * This uses the SQL class to build stuff.
 	 *
-	 * @param string $type (select, update, insert)
-	 * @return array The final query
+	 * @param $type `select`, `update`, `insert` or `delete`
+	 * @return array{query: string, bindings: array}
+	 * @throws InvalidArgumentException If the query type is invalid
 	 */
 	public function build(string $type): array
 	{
@@ -479,7 +481,9 @@ class Query
 				'where'    => $this->where,
 				'bindings' => $this->bindings
 			]),
-			default => null
+			default => throw new InvalidArgumentException(
+				'Invalid query type: ' . $type
+			)
 		};
 	}
 
@@ -558,7 +562,7 @@ class Query
 	 * Builds an aggregation query.
 	 * This is used by all the aggregation methods above
 	 *
-	 * @param int $default An optional default value, which should be returned if the query fails
+	 * @param $default An optional default value, which should be returned if the query fails
 	 */
 	public function aggregate(
 		string $method,
@@ -574,8 +578,8 @@ class Query
 			$column = $sql->columnName($this->table, $column);
 		}
 
-		$fetch  = $this->fetch;
-		$row    = $this->select($method . '(' . $column . ') as aggregation')->fetch(Obj::class)->first();
+		$fetch = $this->fetch;
+		$row   = $this->select($method . '(' . $column . ') as aggregation')->fetch(Obj::class)->first();
 
 		if ($this->debug === true) {
 			return $row;
@@ -600,7 +604,7 @@ class Query
 			];
 		}
 
-		if ($this->debug) {
+		if ($this->debug === true) {
 			return [
 				'query'    => $sql['query'],
 				'bindings' => $this->bindings(),
@@ -608,10 +612,7 @@ class Query
 			];
 		}
 
-		if ($this->fail) {
-			$this->database->fail();
-		}
-
+		$fail   = $this->fail;
 		$result = $this->database->query(
 			$sql['query'],
 			$sql['bindings'],
@@ -619,6 +620,13 @@ class Query
 		);
 
 		$this->reset();
+
+		// throw for this query only, the database keeps its own mode
+		$error = $this->database->lastError();
+
+		if ($fail === true && $error !== null) {
+			throw $error;
+		}
 
 		return $result;
 	}
@@ -643,13 +651,17 @@ class Query
 			];
 		}
 
-		if ($this->fail) {
-			$this->database->fail();
-		}
-
+		$fail   = $this->fail;
 		$result = $this->database->execute($sql['query'], $sql['bindings']);
 
 		$this->reset();
+
+		// throw for this query only, the database keeps its own mode
+		$error = $this->database->lastError();
+
+		if ($fail === true && $error !== null) {
+			throw $error;
+		}
 
 		return $result;
 	}
@@ -685,7 +697,7 @@ class Query
 	/**
 	 * Automatically adds pagination to a query
 	 *
-	 * @param int $limit The number of rows, which should be returned for each page
+	 * @param $limit The number of rows, which should be returned for each page
 	 * @return object Collection iterator with attached pagination object
 	 */
 	public function page(int $page, int $limit): object
@@ -714,7 +726,7 @@ class Query
 		$this->iterator($iterator);
 
 		// return debug information if debug mode is active
-		if ($this->debug) {
+		if ($this->debug === true) {
 			$collection['totalcount'] = $count;
 			return $collection;
 		}
@@ -792,7 +804,7 @@ class Query
 	/**
 	 * Fires an insert query
 	 *
-	 * @param mixed $values You can pass values here or set them with ->values() before
+	 * @param $values You can pass values here or set them with ->values() before
 	 * @return mixed Returns the last inserted id on success or false.
 	 */
 	public function insert($values = null)
@@ -811,8 +823,8 @@ class Query
 	/**
 	 * Fires an update query
 	 *
-	 * @param mixed $values You can pass values here or set them with ->values() before
-	 * @param mixed $where You can pass a where clause here or set it with ->where() before
+	 * @param $values You can pass values here or set them with ->values() before
+	 * @param $where You can pass a where clause here or set it with ->where() before
 	 */
 	public function update($values = null, $where = null): bool
 	{
@@ -824,7 +836,7 @@ class Query
 	/**
 	 * Fires a delete query
 	 *
-	 * @param mixed $where You can pass a where clause here or set it with ->where() before
+	 * @param $where You can pass a where clause here or set it with ->where() before
 	 */
 	public function delete($where = null): bool
 	{
@@ -838,7 +850,7 @@ class Query
 	 */
 	public function __call(string $method, array $arguments = [])
 	{
-		if (preg_match('!^findBy([a-z]+)!i', $method, $match)) {
+		if (preg_match('!^findBy([a-z]+)!i', $method, $match) === 1) {
 			$column = Str::lower($match[1]);
 			return $this->findBy($column, $arguments[0]);
 		}
@@ -852,14 +864,14 @@ class Query
 	/**
 	 * Builder for where and having clauses
 	 *
-	 * @param array $args Arguments, see where() description
-	 * @param mixed $current Current value (like $this->where)
+	 * @param $args Arguments, see where() description
+	 * @param $current Current value (like $this->where)
 	 */
 	protected function filterQuery(
 		array $args,
-		$current,
+		string|null $current,
 		string $mode = 'AND'
-	) {
+	): string|null {
 		$result = '';
 
 		switch (count($args)) {

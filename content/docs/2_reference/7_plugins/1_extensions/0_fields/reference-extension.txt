@@ -19,186 +19,413 @@ Text:
 
 Our Kirby panel is built with (glossary: vue) and speaks to our (link: docs/guide/api text: REST API). Your field plugin needs to consist out of **three parts**:
 
-- PHP code for the REST API: `index.php`
+- A PHP class for the backend, registered in your plugin's `index.php`
 - Vue code for the panel: `index.js`
 - Optional CSS: `index.css`
 
-## PHP definition
+Every Panel field is a PHP class. Blueprint options become typed properties with the `#[Prop]` attribute, and anything costly is resolved lazily in a getter. Your field gets real types and real inheritance, and it is built from the same parts as the core fields.
 
-Let's start with a PHP plugin file.
+## Pick a base class
 
-```php "/site/plugins/hello/index.php"
-Kirby::plugin('yourname/hello', [
-    'fields' => [
-        'hello' => [
-            // the field code goes here
-        ]
-    ]
-]);
-```
+Start with the base class that matches what your field does. They all live in the `Kirby\Form\Field` namespace:
 
-The array key `hello` sets the field type that can later be used in your blueprints.
+| Base class | Use it for | Blueprint options it adds | Core examples |
+|---|---|---|---|
+| `DisplayField` | Fields that show something but store nothing | `help`, `label` | `headline`, `info`, `stats`, `buttons` |
+| `ValueField` | Fields that hold a value but offer no input for it | – | `hidden` |
+| `InputField` | Everything editors fill in | `autofocus`, `default`, `disabled`, `help`, `label`, `required`, `translate` | `number`, `toggle`, `structure`, `blocks` |
 
-### Properties
+Most custom fields extend `InputField` or `DisplayField`. For more specialized fields, Kirby has further abstract base classes you can build on. They all extend `InputField`:
 
-Fields can have many options in your blueprint, such as a label, a default value, placeholders, etc. Those property values from the blueprint will be sent to the field via the REST API and the Vue component can work with them to display the field accordingly.
+| Base class | Use it for | Blueprint options it adds | Core examples |
+|---|---|---|---|
+| `StringField` | String values | `maxlength`, `minlength`, `placeholder`, `spellcheck` | `text`, `writer` |
+| `OptionField` | One value from `options` | `options` | `select` |
+| `OptionsField` | Several values from `options` | `max`, `min`, `options` | `checkboxes` |
+| `DateTimeField` | Dates and times | `after`, `before`, `display`, `format`, `icon`, `max`, `min`, `step` | `date`, `time` |
 
-Properties are defined with the `props` array
+To build on top of a core field, extend its concrete class, e.g. `Kirby\Form\Field\TextField`. See (link: #extending-a-core-field text: Extending a core field) below.
 
-```php
-Kirby::plugin('yourname/hello', [
-    'fields' => [
-        'hello' => [
-            'props' => [
-                'message' => function ($message) {
-                    return $message;
-                }
-            ]
-        ]
-    ]
-]);
-```
+The base class also decides whether your field stores anything: `Field::hasValue()` is final and returns `true` for every subclass of `ValueField`.
 
-A property is always a combination of a key (the property name) and a function (the property setter).
+### Mixins
 
-The property definition above instructs the REST API to process the value from the blueprint:
+Many props that core fields share are available as traits in `Kirby\Form\Mixin`, e.g. `After`, `Before`, `EmptyState`, `Icon`, `Max`, `Min`, `Options` or `Placeholder`. Each trait brings the property with its docblock and `#[Prop]` attribute, as well as its getter. Using the trait is all it takes:
 
-```yaml "Blueprint"
-hello:
-  type: hello
-  message: Hello world
-```
+```php "/site/plugins/my-field/classes/MyField.php"
+<?php
 
-```js "API response"
-hello: {
-  message: "Hello world"
+namespace Acme\MyField;
+
+use Kirby\Form\Field\InputField;
+use Kirby\Form\Mixin;
+
+class MyField extends InputField
+{
+	use Mixin\Icon;
+
+	protected string $value = '';
 }
 ```
 
-**Required properties**
+Your field now accepts the `icon` option in blueprints and sends it to your Vue component.
 
-```php
-'props' => [
-    'message' => function ($message) {
-        return $message;
-    }
-]
-```
-**Optional properties**
+## Registering a field
 
-```php
-'props' => [
-    'message' => function ($message = null) {
-        return $message;
-    }
-]
-```
-**Default values**
+Register the class in the `index.php` of your plugin. The key is the field type for your blueprints, the value is the class name.
 
-```php
-'props' => [
-    'message' => function ($message = 'The default message') {
-        return $message;
-    }
-]
-```
+```php "/site/plugins/rating/index.php"
+<?php
 
-**Type hinting**
+use Acme\Rating\RatingField;
 
-```php
-'props' => [
-    'message' => function (string $message) {
-        return $message;
-    }
-]
-```
+load([
+	'Acme\Rating\RatingField' => 'classes/RatingField.php'
+], __DIR__);
 
-**Translated values**
-
-```php
-'props' => [
-    'message' => function ($message = null) {
-        return I18n::translate($message);
-    }
-]
-```
-
-**Modified properties**
-
-```php
-'props' => [
-    'message' => function (string $message) {
-        return 'Message: ' . $message;
-    }
-]
-```
-### Computed values
-
-If you need to pass additional values to the field, that are not defined by properties in the blueprint, you can use computed values.
-
-```php
-Kirby::plugin('yourname/hello', [
-    'fields' => [
-        'hello' => [
-            'props' => [
-                'message' => function (string $message) {
-                    return $message;
-                },
-                'username' => function (string $username) {
-                    return $username;
-                }
-            ],
-            'computed' => [
-                'sentence' => function () {
-                    return $this->username . ' said ' . $this->message;
-                }
-            ]
-        ]
-    ]
+Kirby::plugin('acme/rating', [
+	'fields' => [
+		'rating' => RatingField::class
+	]
 ]);
 ```
 
-```yaml "Blueprint"
-hello:
-    type: hello
-    message: Hello world
-    username: Peter
+Kirby only needs the class when a blueprint actually uses the field type, so any autoloader works. For simple plugins, the `load()` helper shown above is enough. If your plugin is installed with Composer, a PSR-4 `autoload` entry in its `composer.json` does the job as well.
+
+The key you register the field with is its type. Kirby sends it to the Panel as `type` prop, so it also decides which Vue component renders the field: `rating` → `<k-rating-field>`. This also lets you register an existing class under a new name, e.g. to render a core field with your own component:
+
+```php "/site/plugins/notes/index.php"
+Kirby::plugin('acme/notes', [
+	'fields' => [
+		'note' => Kirby\Form\Field\InfoField::class
+	]
+]);
 ```
 
-```js "API Response"
-hello: {
-    message: "Hello world",
-    username: "Peter",
-    sentence: "Peter said Hello world"
-  }
-```
+The field reports `note` as its type and the Panel renders it with your `<k-note-field>` component.
 
-### API endpoints
+## Props
 
-You can set up custom API endpoints for your field, if needed, by adding an `api` entry with a callback function that returns an array of endpoint definitions:
+### Blueprint options are properties with `#[Prop]`
 
-```php
-'api' => function() {
-  return [
-    [
-      'pattern' => '/say-hello',
-      'action' => function () {
-        return [
-          'message' => 'Hello, World!'
-        ];
-      }
-    ]
-  ];
+Each option of your field is a typed property with the `Kirby\Reflection\Attributes\Prop` attribute. The default value of the property is the default of the option, and its docblock describes the option:
+
+```php "/site/plugins/rating/classes/RatingField.php"
+<?php
+
+namespace Acme\Rating;
+
+use Kirby\Form\Field\InputField;
+use Kirby\Reflection\Attributes\Prop;
+
+class RatingField extends InputField
+{
+	/**
+	 * Number of stars
+	 */
+	#[Prop]
+	protected int $max = 5;
+
+	protected int $value = 0;
 }
 ```
 
-With the route defined on the backend, you can now access it in the Panel with the `$api` helper methods:
+Properties without the attribute, like `$value`, are not options and can't be set from a blueprint.
+
+When Kirby creates a field from a blueprint, it passes all options of the field to its constructor:
+
+```yaml "/site/blueprints/pages/review.yml"
+fields:
+  rating:
+    type: rating
+    label: Rating
+    max: 10
+```
+
+```php
+// what Kirby does for you
+$field = new RatingField(
+	model:    $page,
+	siblings: $fields,
+	label:    'Rating',
+	max:      10,
+	name:     'rating',
+	type:     'rating',
+	value:    '7'
+);
+```
+
+The constructor of `Kirby\Form\Field` stores every option that has a matching `#[Prop]` property:
+
+- Options without a matching property are ignored.
+- `null` keeps the default of the property. That's why every prop needs a default, even if it's just `= null`.
+- Associative arrays are merged into the default of the property. Lists replace it.
+- An option with the wrong type stops with a clear error message, e.g. `Field "rating": The option "max" must be of type int`.
+
+The value is filled last, after all other options have been stored (more on that below).
+
+### Your own constructor
+
+Your field doesn't need a constructor to accept options. If you still need one, e.g. to inject a service, accept all other options as `mixed ...$args` and pass them on to the parent constructor.
+
+```php
+class MapField extends InputField
+{
+	public function __construct(
+		protected MapService $service = new MapService(),
+		mixed ...$args
+	) {
+		parent::__construct(...$args);
+	}
+}
+```
+
+### Store props as passed, resolve them in getters
+
+Kirby stores each option as it was passed and the getter does the work: defaults, translations, query templates. This keeps the original values accessible and makes creating a field cheap. This matters, because Kirby creates field objects for every form, every save and every `$page->update()` call.
+
+- **Defaults live on the property**: `protected int $max = 5;`. The default is used whenever the option is missing or `null`.
+- **Translations and templates are resolved in the getter**:
+
+```php
+/**
+ * Text shown as long as nothing has been rated
+ */
+#[Prop]
+protected array|string|null $empty = null;
+
+public function empty(): string|null
+{
+	// translates `{ en: …, de: … }` arrays and
+	// resolves `{{ page.title }}` placeholders
+	return $this->stringTemplateI18n($this->empty);
+}
+```
+
+A few helpers are available on every field: `$this->i18n()` translates an option, `$this->stringTemplate()` resolves query templates and `$this->stringTemplateI18n()` does both. Getters can rely on `$this->model()`, `$this->kirby()`, `$this->name()` and `$this->siblings()`.
+
+If a prop should render as HTML in the Panel, return a `Kirby\Toolkit\HtmlString` from the getter, like the core `help()` does. Plain strings are escaped. Learn more in (link: releases/6/migration/plugin-developers/trusted-html text: Trusted HTML).
+
+If an option has to be converted or normalized before it's stored, name a setter in the attribute. The setter receives the value and stores it. It can be protected and the types of its parameter are the types the option accepts. The core date and time fields use this for their `step` option:
+
+```php
+#[Prop(setter: 'setStep')]
+protected array $step = [];
+
+protected function setStep(array|int|string $step): void
+{
+	$this->step = Date::stepConfig($step, $this->step);
+}
+```
+
+Use setters sparingly. In most cases, the getter is the better place for this kind of work.
+
+### Sending props to the Panel
+
+All `#[Prop]` properties are sent to your Vue component automatically. Kirby reads each value through the public method with the same name as the property, e.g. `max()` for `$max`. Without such a method, the property value is sent as it is.
+
+The attribute controls how a prop is set, exported and documented:
+
+| Attribute | Effect |
+|---|---|
+| `#[Prop(export: false)]` | Keeps the option in the backend, e.g. if only `toStoredValue()` needs it |
+| `#[Prop(export: 'name')]` | Sends the option to the Panel under a different name |
+| `#[Prop(getter: 'isLarge')]` | Reads the value through another method, which can also be protected |
+| `#[Prop(setter: 'setStep')]` | Passes the value through this method when it's set |
+| `#[Prop(computed: true)]` | Documents that the final value is computed at runtime |
+| `#[Prop(default: 'auto')]` | Documents a default value that the property itself can't hold |
+
+Override `props()` only to add values that aren't options. Merge them with the props of the parent class:
+
+```php
+public function props(): array
+{
+	return [
+		...parent::props(),
+		'total' => $this->entries()->count()
+	];
+}
+```
+
+Two things are *not* part of the props:
+
+- **The value.** The Panel gets all values of the view separately. Your component receives its value as the `value` prop anyway.
+- **The default value.** It's only included where Kirby needs it, e.g. for new structure entries.
+
+### Defaults from the config
+
+Override `::config()` to read additional options from Kirby's config. Options from the blueprint take precedence:
+
+```php
+public function config(): array
+{
+	return $this->kirby()->option('acme.rating', []);
+}
+```
+
+```php "/site/config/config.php"
+return [
+	'acme.rating' => [
+		'icon' => 'heart'
+	]
+];
+```
+
+### Model and siblings
+
+The model (page, file, user or site) and the sibling fields are passed to the constructor as `model` and `siblings`. They are set before all other options, so `config()` and setters can already use `$this->model()`.
+
+### Creating fields in PHP
+
+To create a field yourself, resolve the class of a field type with `Field::resolve()` and pass the options as named arguments:
+
+```php
+use Kirby\Form\Field;
+
+$class = Field::resolve('rating');
+$field = new $class(
+	model: $page,
+	name:  'rating',
+	max:   10,
+	value: 7
+);
+```
+
+## Values
+
+Fields with a value extend `ValueField` (usually through `InputField`) and **must declare a typed `$value` property with a default**. That default is the field's empty value.
+
+```php
+protected int $value = 0;
+```
+
+The value passes through a few methods, which you can override:
+
+| Method | Called when | Default behavior |
+|---|---|---|
+| `fill(mixed $value)` | The form is filled with stored content (strings from the content file) or with values from PHP | Sets `$this->value`, or the empty value for `null` |
+| `submit(mixed $value)` | Editors submit the form in the Panel, or `$page->update()` is called | Calls `fill()` |
+| `toFormValue()` | The Panel needs the value for the `value` prop of your component | Returns `$this->value` |
+| `toStoredValue()` | The value is written to the content file | Returns `toFormValue()` |
+| `isEmptyValue(mixed $value)` | Kirby checks whether the field is empty, e.g. for `required` or to apply the `default` | `null`, `''` and `[]` are empty |
+
+A typical save in the Panel goes like this: Kirby fills the form with the stored content, submits the editor's input on top and writes `toStoredValues()` to the content file. So `fill()` should cope with both: the string from the content file and the typed value from the Panel.
+
+## Validation
+
+`InputField` brings validation. `required` is checked automatically, everything else goes into `::validations()`. Its array can contain the names of predefined validations from `Kirby\Form\Validations` (`boolean`, `date`, `email`, `max`, `maxlength`, `min`, `minlength`, `option`, `options`, `pattern`, `time`, `url`), as well as closures with a key of your choice. Closures are bound to the field and receive the current form value. Throw any exception to report an error:
+
+```php
+protected function validations(): array
+{
+	return [
+		'rating' => function (int $value): void {
+			if ($value < 0 || $value > $this->max()) {
+				throw new InvalidArgumentException(
+					message: 'Please pick between 1 and ' . $this->max() . ' stars'
+				);
+			}
+		}
+	];
+}
+```
+
+## API routes
+
+API routes go into `::api()`. The routes are mounted below the field, e.g. at `/api/pages/blog+my-article/fields/rating/average`. `$this` inside an action is the API object, so either capture the field beforehand or use `$this->field()`:
+
+```php
+public function api(): array
+{
+	$field = $this;
+
+	return [
+		[
+			'pattern' => 'average',
+			'method'  => 'GET',
+			'action'  => fn () => [
+				'average' => $field->average()
+			]
+		]
+	];
+}
+```
+
+In your Vue component, the `endpoints.field` prop holds the path to the field. It's set for fields in model views and for fields nested in `structure` and `object` fields:
 
 ```js
-const response = await this.$api.get('/pages/blog+article-a/fields/fieldName/say-hello');
+const response = await this.$api.get(this.endpoints.field + "/average");
 ```
 
-Note how the API pattern of your custom endpoint is prefixed by the path to the specific page it's used on as well as `/fields/` and the field name it is included in.
+## Dialogs and drawers
+
+Override `dialogs()` and `drawers()` to add Panel dialogs or drawers to your field. Each entry is either a closure that returns the dialog (or a dialog controller), or an array with `load` and `submit` handlers:
+
+```php
+use Kirby\Panel\Ui\Dialog\TextDialog;
+
+public function dialogs(): array
+{
+	return [
+		'explain' => fn () => new TextDialog(
+			text: 'Rate the article from 1 to ' . $this->max() . ' stars.'
+		),
+		'reset' => [
+			'load'   => fn () => [
+				'component' => 'k-remove-dialog',
+				'props'     => ['text' => 'Do you really want to reset the rating?']
+			],
+			'submit' => fn () => true
+		]
+	];
+}
+```
+
+Open them from your component with the field endpoint:
+
+```js
+this.$panel.dialog.open(this.endpoints.field + "/explain");
+```
+
+The Panel UI classes like `TextDialog` and the dialog controllers are covered in (link: releases/6/migration/plugin-developers/panel-backend text: Panel backend).
+
+## Fields with subfields
+
+Fields that hold their own set of fields, like `structure`, `object` or `entries`, implement the `Kirby\Form\Interface\ProvidesNestedForm` interface. It requires a single `form(): Form` method. The `Kirby\Form\Mixin\Fields` trait implements it for you, together with a `$fields` property and a `fields()` getter that returns the subfield props for the Panel. Kirby uses the interface to find nested fields by their path, e.g. `$form->field('address+city')`. API routes and dialogs of subfields (e.g. the picker dialog of a `pagepicker` inside your field) depend on that lookup.
+
+If your field stores a single object, extending `ObjectField` is often all you need:
+
+```php "/site/plugins/address/classes/AddressField.php"
+<?php
+
+namespace Acme\Address;
+
+use Kirby\Form\Field\ObjectField;
+
+class AddressField extends ObjectField
+{
+	protected array $fields = [
+		'street' => ['type' => 'text'],
+		'zip'    => ['type' => 'text', 'width' => '1/3'],
+		'city'   => ['type' => 'text', 'width' => '2/3'],
+	];
+}
+```
+
+For a field written from scratch, implement the interface and use the trait:
+
+```php
+use Kirby\Form\Field\InputField;
+use Kirby\Form\Interface\ProvidesNestedForm;
+use Kirby\Form\Mixin;
+
+class MyNestedField extends InputField implements ProvidesNestedForm
+{
+	use Mixin\Fields;
+
+	// …
+}
+```
 
 ## Vue component
 
@@ -211,7 +438,6 @@ panel.plugin('your/plugin', {
   fields: {
     hello: {
       // your field code goes here.
-      // very similar to the backend!
     }
   }
 });
@@ -223,7 +449,7 @@ Though we have added some wrapper code, the field object is just a normal Vue co
 
 ### Field properties
 
-Our Vue component needs to define all the properties it wants to work with as well. This is not only true for the properties but also for the computed values defined in the (link: #php-definition text: PHP field definition).
+Our Vue component needs to define all the properties it wants to work with as well. Kirby sends all `#[Prop]` properties of your (link: #props text: PHP class) as well as the values you add in `props()`.
 
 ```js
 panel.plugin('your/plugin', {
@@ -241,7 +467,7 @@ panel.plugin('your/plugin', {
 
 The `template` options defines the HTML output of your field. (link: docs/reference/plugins/ui text: UI kit components) can help you to create your field.
 
-```php
+```js
 panel.plugin("your/plugin", {
   fields: {
     hello: {
@@ -260,24 +486,44 @@ If you need additional CSS for your field plugin, you can create an optional `in
 
 Please make sure to check for our (link: docs/reference/plugins/ui text: UI kit components) and available styles before you implement your own CSS rules for something that already exists.
 
-## Your first field plugin: Hello world!
+## Your first field: Hello world!
+
+### PHP class
+
+```php "/site/plugins/your-plugin/classes/HelloField.php"
+<?php
+
+namespace YourPlugin;
+
+use Kirby\Form\Field\DisplayField;
+use Kirby\Reflection\Attributes\Prop;
+
+class HelloField extends DisplayField
+{
+	#[Prop]
+	protected string|null $message = null;
+}
+```
 
 ### PHP definition
 
 ```php "/site/plugins/your-plugin/index.php"
 <?php
 
-Kirby::plugin('your/plugin', [
-    'fields' => [
-        'hello' => [
-            'props' => [
-                'message' => function (string $message) {
-                    return $message;
-                }
-            ]
-        ]
-    ]
-]);
+use YourPlugin\HelloField;
+
+load([
+	'YourPlugin\HelloField' => 'classes/HelloField.php'
+], __DIR__);
+
+Kirby::plugin(
+	name: 'your/plugin',
+	extends: [
+		'fields' => [
+			'hello' => HelloField::class
+		]
+	]
+);
 ```
 
 ### Vue component
@@ -308,77 +554,363 @@ fields:
 
 (image: field.png)
 
+## Your second field: a rating field
+
+Here is a complete custom field: a star rating with a configurable number of stars, an empty-state text, validation, a custom storage format and an API route that returns the average rating of all sibling pages.
+
+### The class
+
+```php "/site/plugins/rating/classes/RatingField.php"
+<?php
+
+namespace Acme\Rating;
+
+use Kirby\Cms\Page;
+use Kirby\Exception\InvalidArgumentException;
+use Kirby\Form\Field\InputField;
+use Kirby\Reflection\Attributes\Prop;
+
+class RatingField extends InputField
+{
+	/**
+	 * Text shown as long as nothing has been rated
+	 */
+	#[Prop]
+	protected array|string|null $empty = null;
+
+	/**
+	 * Icon for each star
+	 */
+	#[Prop]
+	protected string $icon = 'star';
+
+	/**
+	 * Number of stars
+	 */
+	#[Prop]
+	protected int $max = 5;
+
+	/**
+	 * `0` means "not rated yet". The default of the
+	 * typed `$value` property is the field's empty value.
+	 */
+	protected int $value = 0;
+
+	public function api(): array
+	{
+		$field = $this;
+
+		return [
+			[
+				'pattern' => 'average',
+				'method'  => 'GET',
+				'action'  => fn () => [
+					'average' => $field->average()
+				]
+			]
+		];
+	}
+
+	/**
+	 * Average rating of all sibling pages
+	 */
+	public function average(): float|null
+	{
+		$model = $this->model();
+
+		if ($model instanceof Page === false) {
+			return null;
+		}
+
+		$ratings = [];
+
+		foreach ($model->siblings(false) as $sibling) {
+			$rating = $sibling->content()->get($this->name())->toInt();
+
+			if ($rating > 0) {
+				$ratings[] = $rating;
+			}
+		}
+
+		if ($ratings === []) {
+			return null;
+		}
+
+		return round(array_sum($ratings) / count($ratings), 1);
+	}
+
+	public function empty(): string|null
+	{
+		// translates `{ en: …, de: … }` arrays and
+		// resolves `{{ page.title }}` placeholders
+		return $this->stringTemplateI18n($this->empty);
+	}
+
+	public function fill(mixed $value): static
+	{
+		// content files store strings, the Panel sends numbers
+		return parent::fill(
+			value: is_numeric($value) ? (int)$value : 0
+		);
+	}
+
+	public function isEmptyValue(mixed $value = null): bool
+	{
+		// `required: true` must also catch `0`
+		return empty($value);
+	}
+
+	public function max(): int
+	{
+		return $this->max;
+	}
+
+	public function toStoredValue(): int|null
+	{
+		// keep unrated pages free of `Rating: 0`
+		return $this->value > 0 ? $this->value : null;
+	}
+
+	protected function validations(): array
+	{
+		return [
+			'rating' => function (int $value): void {
+				if ($value < 0 || $value > $this->max()) {
+					throw new InvalidArgumentException(
+						message: 'Please pick between 1 and ' . $this->max() . ' stars'
+					);
+				}
+			}
+		];
+	}
+}
+```
+
+A few things to note:
+
+- There's no constructor and no `props()` method. Kirby stores the options and sends `empty`, `icon` and `max` to the Panel on its own.
+- `icon` doesn't even need a getter. Without one, Kirby sends the property value as it is.
+- `label`, `help`, `required`, `disabled`, `default`, `width`, `when` and all other common options are inherited from `InputField`.
+- `average()` is only called by the API route. Expensive work belongs in methods like this one, not in the getters of props, which run every time the Panel loads the field.
+
+### Registering the field
+
+```php "/site/plugins/rating/index.php"
+<?php
+
+use Acme\Rating\RatingField;
+
+load([
+	'Acme\Rating\RatingField' => 'classes/RatingField.php'
+], __DIR__);
+
+Kirby::plugin('acme/rating', [
+	'fields' => [
+		'rating' => RatingField::class
+	]
+]);
+```
+
+### The Vue component
+
+Your component receives the value as `value` prop and reports changes with an `input` event. Compile it for Vue 3 and declare the event in `emits`. Learn more in (link: releases/6/migration/plugin-developers/vue-3 text: Vue 3 for Panel plugins).
+
+```html "/site/plugins/rating/src/components/RatingField.vue"
+<template>
+	<k-field v-bind="$props" class="k-rating-field">
+		<div class="k-rating-field-stars">
+			<k-button
+				v-for="star in max"
+				:key="star"
+				:disabled="disabled"
+				:icon="icon"
+				:theme="star <= value ? 'yellow-icon' : null"
+				:title="star + ' / ' + max"
+				@click="select(star)"
+			/>
+		</div>
+
+		<p v-if="value === 0 && empty" class="k-help">{{ empty }}</p>
+		<p v-if="average" class="k-help">Average of all siblings: {{ average }}</p>
+	</k-field>
+</template>
+
+<script>
+export default {
+	inheritAttrs: false,
+	props: {
+		// from InputField
+		disabled: Boolean,
+		help: String,
+		label: String,
+		name: String,
+		required: Boolean,
+		type: String,
+		// from RatingField
+		empty: String,
+		icon: String,
+		max: Number,
+		// added by the Panel
+		endpoints: Object,
+		hasDiff: Boolean,
+		value: {
+			type: Number,
+			default: 0
+		}
+	},
+	emits: ["input"],
+	data() {
+		return {
+			average: null
+		};
+	},
+	async created() {
+		// fields in dialogs have no endpoints
+		if (this.endpoints) {
+			const response = await this.$api.get(this.endpoints.field + "/average");
+			this.average = response.average;
+		}
+	},
+	methods: {
+		select(star) {
+			// clicking the current rating again resets it
+			this.$emit("input", star === this.value ? 0 : star);
+		}
+	}
+};
+</script>
+
+<style>
+.k-rating-field-stars {
+	display: flex;
+}
+</style>
+```
+
+```js "/site/plugins/rating/src/index.js"
+import RatingField from "./components/RatingField.vue";
+
+panel.plugin("acme/rating", {
+	fields: {
+		rating: RatingField
+	}
+});
+```
+
+`inheritAttrs: false` keeps all props your component doesn't declare (like `saveable`, `when` or `width`) from ending up as HTML attributes.
+
+(image: rating-field.png)
+
+### The blueprint
+
+In a blueprint, the field is used like any other field:
+
+```yaml "/site/blueprints/pages/article.yml"
+fields:
+  rating:
+    type: rating
+    label: Rating
+    max: 5
+    required: true
+    empty:
+      en: "{{ page.title }} has not been rated yet"
+      de: Noch nicht bewertet
+```
+
 ## Kirby UI Kit
 
 It's a good idea as a next step to check out our (link: docs/reference/plugins/ui text: UI component library). All of our components can be used in your field plugin. You should always try that first before implementing your own interface elements.
 
-## Extending existing fields
+## Extending a core field
 
-Instead of creating a new field from scratch, you can reuse existing fields.
+Instead of creating a new field from scratch, you can build on a core field by extending its PHP class. Here's a field for social media handles that builds on the text field, uses another default icon, strips a leading `@` and adds a `lowercase` option.
 
-### Extending the backend
-
-```php "/site/plugins/your-plugin/index.php"
+```php "/site/plugins/handle/classes/HandleField.php"
 <?php
 
-Kirby::plugin('your/plugin', [
-    'fields' => [
-        'hello' => [
-            'extends' => 'text'
-        ]
-    ]
+namespace Acme\Handle;
+
+use Kirby\Form\Field\TextField;
+use Kirby\Reflection\Attributes\Prop;
+use Kirby\Toolkit\Str;
+
+class HandleField extends TextField
+{
+	// new default for an inherited prop
+	protected string|null $icon = 'user';
+
+	/**
+	 * Stores the handle in lowercase
+	 */
+	#[Prop(export: false)]
+	protected bool $lowercase = true;
+
+	public function fill(mixed $value): static
+	{
+		// `@getkirby` → `getkirby`
+		return parent::fill(
+			value: ltrim((string)$value, '@')
+		);
+	}
+
+	public function lowercase(): bool
+	{
+		return $this->lowercase;
+	}
+
+	public function toStoredValue(): string
+	{
+		$value = parent::toStoredValue();
+
+		return $this->lowercase() ? Str::lower($value) : $value;
+	}
+}
+```
+
+```php "/site/plugins/handle/index.php"
+<?php
+
+use Acme\Handle\HandleField;
+
+load([
+	'Acme\Handle\HandleField' => 'classes/HandleField.php'
+], __DIR__);
+
+Kirby::plugin('acme/handle', [
+	'fields' => [
+		'handle' => HandleField::class
+	]
 ]);
 ```
 
-This custom field will inherit the entire backend code of the text field.
+`lowercase` only matters when saving, so `export: false` keeps it out of the props for the Panel. All options of the text field (`counter`, `pattern`, `placeholder`, …) are inherited.
 
-You can now start replacing parts of the field implementation or add your own props and methods.
+The field is registered as `handle`, so the Panel needs a `k-handle-field` component. If you don't need your own, extend the core component:
 
-```php "/site/plugins/your-plugin/index.php"
-<?php
-
-Kirby::plugin('your/plugin', [
-    'fields' => [
-        'hello' => [
-            'extends' => 'text',
-            'props' => [
-                'myNewProp' => function (string $myNewProp = null) {
-                    return $myNewProp;
-                }
-            ]
-        ]
-    ]
-]);
-```
-
-### Extending the frontend
-
-```php "/site/plugins/your-plugin/index.js"
-panel.plugin("your/plugin", {
-  fields: {
-    hello: {
-      extends: "k-text-field"
-    }
-  }
+```js "/site/plugins/handle/index.js"
+panel.plugin("acme/handle", {
+	fields: {
+		handle: {
+			extends: "k-text-field"
+		}
+	}
 });
 ```
 
-For the frontend you have to specify, which Vue component should be extended. You can find all available field components in our (link: docs/reference/plugins/ui text: UI Kit docs).
+This is using Vue's native component extensions. You can now overwrite and add component logic. You can find all available field components in our (link: docs/reference/plugins/ui text: UI Kit docs).
 
-This is using Vue's native component extensions. You can now overwrite and add component logic.
-
-```php "/site/plugins/your-plugin/index.js"
-panel.plugin("your/plugin", {
-  fields: {
-    hello: {
-      extends: "k-text-field",
-      methods: {
-        myCustomMethod() {
-          // do something here
-        }
-      }
-    }
-  }
+```js "/site/plugins/handle/index.js"
+panel.plugin("acme/handle", {
+	fields: {
+		handle: {
+			extends: "k-text-field",
+			methods: {
+				myCustomMethod() {
+					// do something here
+				}
+			}
+		}
+	}
 });
 ```
 
@@ -387,3 +919,5 @@ panel.plugin("your/plugin", {
 Check out the following cookbook recipe to learn more:
 
 (link: docs/cookbook/extensions/first-panel-field text: My first Panel field)
+
+If you are porting a field from Kirby 5, our guide on (link: releases/6/migration/plugin-developers/fields text: custom fields as PHP classes) walks you through all changes.

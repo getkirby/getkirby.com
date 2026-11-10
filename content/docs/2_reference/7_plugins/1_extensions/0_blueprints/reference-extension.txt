@@ -15,11 +15,14 @@ Blueprints are registered with the `blueprints` extension.
 The `blueprints` extension accepts  an array of key/value pairs, where the key is the name of the blueprint and the value the path to the file in your plugin folder.
 
 ```php "/site/plugins/your-plugin/index.php"
-Kirby::plugin('your/plugin', [
-	'blueprints' => [
-		'pages/blog' => __DIR__ . '/blueprints/blog.yml'
+Kirby::plugin(
+	name: 'your/plugin',
+	extends: [
+		'blueprints' => [
+			'pages/blog' => __DIR__ . '/blueprints/blog.yml'
+		]
 	]
-]);
+);
 ```
 
 <info>The blueprint key must start with 'pages/...', 'users/...', etc. to activate the designated locations.</info>
@@ -29,16 +32,19 @@ Kirby::plugin('your/plugin', [
 Alternatively, you can also pass the blueprint definition as an array instead of a file:
 
 ```php
-Kirby::plugin('your/plugin', [
-	'blueprints' => [
-		'pages/blog' => [
-			'title'    => 'Blog',
-			'sections' => [
-				// ...
+Kirby::plugin(
+	name: 'your/plugin',
+	extends: [
+		'blueprints' => [
+			'pages/blog' => [
+				'title'  => 'Blog',
+				'fields' => [
+					// ...
+				]
 			]
 		]
 	]
-]);
+);
 ```
 
 ## Callback definition
@@ -48,20 +54,23 @@ Plugins can now define dynamic blueprints based on config settings, content and 
 ```php
 <?php
 
-Kirby::plugin('my/blueprint', [
-    'blueprints' => [
-        'pages/blog' => function ($kirby) {
-            return [
-                'title' => 'Blog',
-                'sections' => [
-                    'articles' => [
-                        'type'     => 'pages',
-                        'template' => 'article',
-                        'limit'    => $kirby->option('blog.article.limit')
+Kirby::plugin(
+    name: 'my/blueprint',
+    extends: [
+        'blueprints' => [
+            'pages/blog' => function ($kirby) {
+                return [
+                    'title' => 'Blog',
+                    'fields' => [
+                        'articles' => [
+                            'type'     => 'pagelist',
+                            'template' => 'article',
+                            'limit'    => $kirby->option('blog.article.limit')
+                        ]
                     ]
-                ]
-            ];
-        }
+                ];
+            }
+        ]
     ]
-]);
+);
 ```

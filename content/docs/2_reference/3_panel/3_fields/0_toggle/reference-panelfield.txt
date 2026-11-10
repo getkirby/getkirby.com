@@ -24,10 +24,6 @@ fields:
       - "yes"
 ```
 
-## Field properties
-
-(field-options: toggle)
-
 ## Simple toggle field translated
 
 ```yaml
@@ -51,10 +47,6 @@ fields:
         - Nope
         - Yay
 ```
-
-<info>
-Note: The values `No` and `Yes` will not work out of the box as the YAML parser will interpret them as booleans. You need to quote them as `"No"` and `"Yes"`.
-</info>
 
 ### Translated text
 
@@ -105,3 +97,4 @@ if ($page->toggle()->toBool() === true) {
 }
 ```
 
+(docs: panel-field-update field: toggle)

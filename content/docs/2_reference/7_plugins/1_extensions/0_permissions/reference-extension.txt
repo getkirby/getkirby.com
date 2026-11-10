@@ -11,11 +11,14 @@ If you want to make the permissions for different actions of your plugin configu
 If your plugin registers a Panel area, it automatically gets an `access.<areaId>` permission. You do not need the `permissions` extension for that.
 
 ```php "/site/plugins/todos/index.php"
-Kirby::plugin('my/todos', [
-    'areas' => [
-        'todos' => fn () => [ /* ... */ ]
+Kirby::plugin(
+    name: 'my/todos',
+    extends: [
+        'areas' => [
+            'todos' => fn () => [ /* ... */ ]
+        ]
     ]
-]);
+);
 ```
 
 ```yaml "/site/blueprints/users/editor.yml"
@@ -31,13 +34,16 @@ Use the `permissions` extension only for actions inside your plugin (create, del
 Each available action needs to be set with the default permission value. The default value is used if the user's role does not specify the permissions for that action.
 
 ```php "/site/plugins/permissions/index.php"
-Kirby::plugin('my/permissionPlugin', [
-    'permissions' => [
-        'access' => true,
-        'create' => true,
-        'delete' => false
+Kirby::plugin(
+    name: 'my/permissionPlugin',
+    extends: [
+        'permissions' => [
+            'access' => true,
+            'create' => true,
+            'delete' => false
+        ]
     ]
-]);
+);
 ```
 
 <info>

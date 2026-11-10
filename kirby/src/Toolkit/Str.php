@@ -16,9 +16,6 @@ use Throwable;
  * of handy methods for string
  * handling and manipulation.
  *
- * @package   Kirby Toolkit
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
@@ -145,7 +142,7 @@ class Str
 			foreach ($parts as $param) {
 				$param = static::split($param, '=');
 
-				if (A::get($param, 0) === 'q' && empty($param[1]) === false) {
+				if (A::get($param, 0) === 'q' && isset($param[1]) === true) {
 					$quality = $param[1];
 				}
 			}
@@ -153,7 +150,6 @@ class Str
 			$items[$quality][] = $value;
 		}
 
-		// sort items by quality
 		krsort($items);
 
 		$result = [];
@@ -172,6 +168,8 @@ class Str
 
 	/**
 	 * Returns the rest of the string after the given substring or character
+	 *
+	 * @param non-empty-string $needle
 	 */
 	public static function after(
 		string $string,
@@ -244,7 +242,6 @@ class Str
 			}
 		}
 
-		// single-pass per-character replacement via the flat map
 		$string = strtr($string, $strtr);
 
 		return preg_replace('/[^\x09\x0A\x0D\x20-\x7E]/', '', $string);
@@ -252,6 +249,8 @@ class Str
 
 	/**
 	 * Returns the beginning of a string before the given substring or character
+	 *
+	 * @param non-empty-string $needle
 	 */
 	public static function before(
 		string $string,
@@ -289,6 +288,9 @@ class Str
 
 	/**
 	 * Returns everything between two strings from the first occurrence of a given string
+	 *
+	 * @param non-empty-string $start
+	 * @param non-empty-string $end
 	 */
 	public static function between(
 		string $string,
@@ -301,7 +303,7 @@ class Str
 	/**
 	 * Converts a string to camel case
 	 *
-	 * @param string $value The string to convert
+	 * @param $value The string to convert
 	 */
 	public static function camel(string|null $value): string
 	{
@@ -312,7 +314,7 @@ class Str
 	 * Converts a camel-case string to kebab-case
 	 * @since 4.0.0
 	 *
-	 * @param string $value The string to convert
+	 * @param $value The string to convert
 	 */
 	public static function camelToKebab(string|null $value): string
 	{
@@ -343,38 +345,34 @@ class Str
 	 * Convert timestamp to date string
 	 * according to locale settings
 	 *
-	 * @param 'date'|'intl'|'strftime'|null $handler Custom date handler or `null`
-	 *                                               for the globally configured one
+	 * @param 'date'|'intl'|'strftime'|null $handler Date handler, `null` for the configured one
+	 * @return ($format is null ? int : string|false)
 	 */
 	public static function date(
 		int|null $time,
 		string|IntlDateFormatter|null $format = null,
 		string|null $handler = null
 	): string|int|false {
+		$time ??= time();
+
 		if (is_null($format) === true) {
 			return $time;
 		}
 
-		// $format is an IntlDateFormatter instance
 		if ($format instanceof IntlDateFormatter) {
-			return $format->format($time ?? time());
+			return $format->format($time);
 		}
 
 		// automatically determine the handler from global configuration
 		// if an app instance is already running; otherwise fall back to
 		// `date` for backwards-compatibility
 		if ($handler === null) {
-			$handler = App::instance(null, true)?->option('date.handler') ?? 'date';
+			$handler = App::instance(lazy: true)?->option('date.handler') ?? 'date';
 		}
 
-		// `intl` handler
 		if ($handler === 'intl') {
 			$datetime = new DateTime();
-
-			if ($time !== null) {
-				$datetime->setTimestamp($time);
-			}
-
+			$datetime->setTimestamp($time);
 			return IntlDateFormatter::formatObject($datetime, $format);
 		}
 
@@ -393,21 +391,29 @@ class Str
 
 	/**
 	 * Converts a string to a different encoding
+	 *
+	 * @throws InvalidArgumentException when conversion failed
 	 */
 	public static function convert(
 		string $string,
 		string $targetEncoding,
 		string|null $sourceEncoding = null
 	): string {
-		// detect the source encoding if not passed as third argument
 		$sourceEncoding ??= static::encoding($string);
 
-		// no need to convert if the target encoding is the same
 		if (strtolower($sourceEncoding) === strtolower($targetEncoding)) {
 			return $string;
 		}
 
-		return iconv($sourceEncoding, $targetEncoding, $string);
+		$result = @iconv($sourceEncoding, $targetEncoding, $string);
+
+		if ($result === false) {
+			throw new InvalidArgumentException(
+				message: 'Could not convert string "' . $string . '" from "' . $sourceEncoding . '" to "' . $targetEncoding . '"'
+			);
+		}
+
+		return $result;
 	}
 
 	/**
@@ -432,6 +438,8 @@ class Str
 
 	/**
 	 * Tries to detect the string encoding
+	 *
+	 * @return non-empty-string
 	 */
 	public static function encoding(string $string): string
 	{
@@ -439,7 +447,7 @@ class Str
 			$string,
 			'UTF-8, ISO-8859-1, windows-1251',
 			true
-		);
+		) ?: 'UTF-8';
 	}
 
 	/**
@@ -469,9 +477,8 @@ class Str
 	 * Escape string for context specific output
 	 * @since 3.7.0
 	 *
-	 * @param string $string Untrusted data
-	 * @param string $context Location of output (`html`, `attr`, `js`, `css`, `url` or `xml`)
-	 * @return string Escaped data
+	 * @param $string Untrusted data
+	 * @param 'html'|'attr'|'js'|'css'|'url'|'xml' $context Location of output
 	 */
 	public static function esc(
 		string $string,
@@ -489,11 +496,9 @@ class Str
 	 * It removes all html tags first and then cuts the string
 	 * according to the specified number of chars.
 	 *
-	 * @param string $string The string to be shortened
-	 * @param int $chars The final number of characters the string should have
-	 * @param bool $strip True: remove the HTML tags from the string first
-	 * @param string $rep The element, which should be added if the string is too long. Ellipsis is the default.
-	 * @return string The shortened string
+	 * @param $chars The final number of characters the string should have
+	 * @param $strip True: remove the HTML tags from the string first
+	 * @param $rep The element, which should be added if the string is too long
 	 */
 	public static function excerpt(
 		string $string,
@@ -510,14 +515,10 @@ class Str
 			// add space after closing tag if there's a word character directly after it
 			$string = preg_replace('#</([^>]+)>(\w)#', '</${1}> ${2}', $string);
 
-			// in strip mode, we always return plain text
 			$string = strip_tags($string);
 		}
 
-		// replace line breaks with spaces
 		$string = str_replace(PHP_EOL, ' ', trim($string));
-
-		// remove double spaces
 		$string = preg_replace('![ ]{2,}!', ' ', $string);
 
 		if ($chars === 0) {
@@ -543,21 +544,23 @@ class Str
 	/**
 	 * Convert the value to a float with a decimal
 	 * point, no matter what the locale setting is
+	 *
+	 * @return numeric-string|null
 	 */
-	public static function float(string|int|float|null $value): string
+	public static function float(string|int|float|null $value): string|null
 	{
-		// make sure $value is not null
 		$value ??= '';
+		$value   = str_replace(',', '.', (string)$value);
 
-		// turn the value into a string
-		$value = (string)$value;
+		if (is_numeric($value) === false) {
+			return null;
+		}
 
 		// Convert exponential to decimal, 1e-8 as 0.00000001
 		if (str_contains(strtolower($value), 'e') === true) {
 			$value = rtrim(sprintf('%.16f', (float)$value), '0');
 		}
 
-		$value   = str_replace(',', '.', $value);
 		$decimal = strrchr($value, '.');
 		$decimal = match ($decimal) {
 			false   => 0,
@@ -569,6 +572,8 @@ class Str
 
 	/**
 	 * Returns the rest of the string starting from the given character
+	 *
+	 * @param non-empty-string $needle
 	 */
 	public static function from(
 		string $string,
@@ -585,11 +590,12 @@ class Str
 	}
 
 	/**
-	 * Adds `-1` to a string or increments the ending number to allow `-2`, `-3`, etc.
+	 * Adds `-1` to a string or increments the ending number
+	 * to allow `-2`, `-3`, etc.
 	 * @since 3.7.0
 	 *
-	 * @param string $string The string to increment
-	 * @param int $first Starting number
+	 * @param $first Starting number
+	 * @return non-empty-string
 	 */
 	public static function increment(
 		string $string,
@@ -599,11 +605,9 @@ class Str
 		preg_match('/(.+)' . preg_quote($separator, '/') . '([0-9]+)$/', $string, $matches);
 
 		if (isset($matches[2]) === true) {
-			// increment the existing ending number
 			return $matches[1] . $separator . ((int)$matches[2] + 1);
 		}
 
-		// append a new ending number
 		return $string . $separator . $first;
 	}
 
@@ -638,7 +642,6 @@ class Str
 	 */
 	public static function label(string $value): string
 	{
-		// replace punctuation with spaces
 		$value = str_replace(['_', '-', '.'], ' ', $value);
 
 		// add a space before every uppercase character by matching
@@ -648,21 +651,17 @@ class Str
 		// add a space before every first number
 		$value = preg_replace('/([^\d])(\d)/', '$1 $2', $value);
 
-		// remove duplicate spaces
 		$value = preg_replace('/[\s]{2,}+/', ' ', $value);
-
-		// trim leading or trailing spaces
 		$value = trim($value);
-
-		// convert the entire string into lowercase
 		$value = static::lower($value);
 
-		// turn the first character into uppercase
 		return static::ucfirst($value);
 	}
 
 	/**
 	 * A UTF-8 safe version of strlen()
+	 *
+	 * @return non-negative-int
 	 */
 	public static function length(string|null $string): int
 	{
@@ -695,11 +694,8 @@ class Str
 	/**
 	 * Match string against a regular expression and return matches
 	 *
-	 * @param string $string The string to match
-	 * @param string $pattern The regular expression
-	 * @param int $flags Optional flags for PHP `preg_match()`
-	 * @param int $offset Positional offset in the string to start the search
-	 * @return array|null The matches or null if no match was found
+	 * @param $flags Optional flags for PHP `preg_match()`
+	 * @return ($flags is 0 ? non-empty-array<string|int, string> : non-empty-array<string|int, mixed>)|null
 	 */
 	public static function match(
 		string $string,
@@ -717,11 +713,7 @@ class Str
 	/**
 	 * Check whether a string matches a regular expression
 	 *
-	 * @param string $string The string to match
-	 * @param string $pattern The regular expression
-	 * @param int $flags Optional flags for PHP `preg_match()`
-	 * @param int $offset Positional offset in the string to start the search
-	 * @return bool True if the string matches the pattern
+	 * @param $flags Optional flags for PHP `preg_match()`
 	 */
 	public static function matches(
 		string $string,
@@ -735,11 +727,8 @@ class Str
 	/**
 	 * Match string against a regular expression and return all matches
 	 *
-	 * @param string $string The string to match
-	 * @param string $pattern The regular expression
-	 * @param int $flags Optional flags for PHP `preg_match_all()`
-	 * @param int $offset Positional offset in the string to start the search
-	 * @return array|null The matches or null if no match was found
+	 * @param $flags Optional flags for PHP `preg_match_all()`
+	 * @return ($flags is 0 ? non-empty-array<string|int, non-empty-list<string>> : non-empty-array<string|int, mixed>)|null
 	 */
 	public static function matchAll(
 		string $string,
@@ -756,6 +745,9 @@ class Str
 
 	/**
 	 * Get a character pool with various possible combinations
+	 *
+	 * @param string|array<string> $type
+	 * @return ($array is true ? list<string> : string)
 	 */
 	public static function pool(
 		string|array $type,
@@ -772,10 +764,10 @@ class Str
 				'alphalower' => range('a', 'z'),
 				'alphaupper' => range('A', 'Z'),
 				'alpha'      => static::pool(['alphaLower', 'alphaUpper']),
-				'num'        => range(0, 9),
+				'num'        => str_split('0123456789'),
 				'alphanum'   => static::pool(['alpha', 'num']),
-				'base32'     => [...static::pool('alphaUpper'), ...range(2, 7)],
-				'base32hex'  => [...range(0, 9), ...range('A', 'V')],
+				'base32'     => [...static::pool('alphaUpper'), ...str_split('234567')],
+				'base32hex'  => [...static::pool('num'), ...range('A', 'V')],
 				default      => []
 			};
 		}
@@ -787,7 +779,8 @@ class Str
 	 * Returns the position of a needle in a string
 	 * if it can be found
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException for empty $needle
+	 * @return non-negative-int|false
+	 * @throws InvalidArgumentException for empty $needle
 	 */
 	public static function position(
 		string|null $string,
@@ -811,6 +804,8 @@ class Str
 	/**
 	 * Runs a string query.
 	 * Check out the Query class for more information.
+	 *
+	 * @param array<string, mixed> $data
 	 */
 	public static function query(string $query, array $data = [])
 	{
@@ -820,8 +815,7 @@ class Str
 	/**
 	 * Generates a random string that may be used for cryptographic purposes
 	 *
-	 * @param int $length The length of the random string
-	 * @param string $type Pool type (type of allowed characters)
+	 * @param $type Pool type (type of allowed characters)
 	 */
 	public static function random(
 		int|null $length = null,
@@ -832,6 +826,7 @@ class Str
 
 		// catch invalid pools
 		if (!$pool) {
+			// TODO: throw here to make problem and return type clearer
 			return false;
 		}
 
@@ -839,14 +834,15 @@ class Str
 		// *not* in the pool of allowed characters
 		$regex = '/[^' . $pool . ']/';
 
-		// collect characters until we have our required length
-		$result = '';
+		$result    = '';
+		$remaining = $length;
 
-		while (($currentLength = strlen($result)) < $length) {
-			$missing = $length - $currentLength;
-			$bytes   = random_bytes($missing);
-			$allowed = preg_replace($regex, '', base64_encode($bytes));
-			$result .= substr($allowed, 0, $missing);
+		while ($remaining > 0) {
+			$bytes      = random_bytes($remaining);
+			$allowed    = preg_replace($regex, '', base64_encode($bytes));
+			$chunk      = substr($allowed, 0, $remaining);
+			$result    .= $chunk;
+			$remaining -= strlen($chunk);
 		}
 
 		return $result;
@@ -856,15 +852,11 @@ class Str
 	 * Replaces all or some occurrences of the search string with the replacement string
 	 * Extension of the str_replace() function in PHP with an additional $limit parameter
 	 *
-	 * @param string|array|Collection $string String being replaced on (haystack); can be an array of multiple subject strings
-	 * @param string|array|Collection $search Value being searched for (needle)
-	 * @param string|array|Collection $replace Value to replace matches with
-	 * @param int|array $limit Maximum possible replacements for each search value;
-	 *                         multiple limits for each search value are supported;
-	 *                         defaults to no limit
-	 * @return string|array String with replaced values;
-	 *                      if $string is an array, array of strings
-	 * @psalm-return ($string is array ? array : string)
+	 * @param $string String being replaced on (haystack); can be an array of multiple subject strings
+	 * @param string|array<string>|Collection $search
+	 * @param string|array<string>|Collection $replace
+	 * @param int|array<int> $limit Maximum replacements for each search value, `-1` for no limit
+	 * @return ($string is array ? array : string)
 	 */
 	public static function replace(
 		string|array|Collection $string,
@@ -872,7 +864,6 @@ class Str
 		string|array|Collection $replace,
 		int|array $limit = -1
 	): string|array {
-		// convert Kirby collections to arrays
 		if ($string instanceof Collection) {
 			$string = $string->toArray();
 		}
@@ -890,12 +881,10 @@ class Str
 			return str_replace($search, $replace, $string);
 		}
 
-		// if the limit is zero, the result will be no replacements at all
 		if ($limit === 0) {
 			return $string;
 		}
 
-		// multiple subjects are run separately through this method
 		if (is_array($string) === true) {
 			$result = [];
 
@@ -906,12 +895,10 @@ class Str
 			return $result;
 		}
 
-		// build an array of replacements
 		// we don't use an associative array because otherwise you couldn't
 		// replace the same string with different replacements
 		$replacements = static::replacements($search, $replace, $limit);
 
-		// run the string and the replacement array through the replacer
 		return static::replaceReplacements($string, $replacements);
 	}
 
@@ -919,13 +906,10 @@ class Str
 	 * Generates a replacement array out of dynamic input data
 	 * Used for Str::replace()
 	 *
-	 * @param string|array $search Value being searched for (needle)
-	 * @param string|array $replace Value to replace matches with
-	 * @param int|array $limit Maximum possible replacements for each search value;
-	 *                         multiple limits for each search value are supported;
-	 *                         defaults to no limit
-	 * @return array List of replacement arrays, each with a
-	 *               'search', 'replace' and 'limit' attribute
+	 * @param string|array<string> $search
+	 * @param string|array<string> $replace
+	 * @param int|array<int> $limit Maximum replacements for each search value, `-1` for no limit
+	 * @return list<array{search: string, replace: string, limit: int}>
 	 */
 	public static function replacements(
 		string|array $search,
@@ -972,9 +956,7 @@ class Str
 	 * Takes a replacement array and processes the replacements
 	 * Used for Str::replace()
 	 *
-	 * @param string $string String being replaced on (haystack)
-	 * @param array $replacements Replacement array from Str::replacements()
-	 * @return string String with replaced values
+	 * @param list<array{search: string, replace: string, limit: int}> $replacements
 	 */
 	public static function replaceReplacements(
 		string $string,
@@ -1000,7 +982,6 @@ class Str
 			}
 
 			if ($replacement['limit'] > 0) {
-				// limit given, only replace for as many times per replacement
 				$position = -1;
 
 				for ($i = 0; $i < $replacement['limit']; $i++) {
@@ -1017,10 +998,9 @@ class Str
 							$position,
 							strlen($replacement['search'])
 						);
-						// adapt $pos to the now changed offset
+						// adapt $position to the now changed offset
 						$position = $position + strlen($replacement['replace']) - strlen($replacement['search']);
 					} else {
-						// no more match in the string
 						break;
 					}
 				}
@@ -1050,16 +1030,16 @@ class Str
 	 * and escapes HTML in the results in `{{ }}` placeholders
 	 * while leaving HTML special characters untouched in `{< >}` placeholders
 	 *
+	 * Options:
+	 * - `fallback`: if a token does not have any matches
+	 * - `callback`: to handle each matching result (escaping is applied
+	 *   after the callback); receives the result as a string, the query,
+	 *   the data and the raw result
+	 *
 	 * @since 3.6.0
 	 *
-	 * @param string|null $string The string with placeholders
-	 * @param array $data Associative array with placeholders as
-	 *                    keys and replacements as values.
-	 *                    Supports query syntax.
-	 * @param array $options An options array that contains:
-	 *                       - fallback: if a token does not have any matches
-	 *                       - callback: to be able to handle each matching result (escaping is applied after the callback)
-	 *
+	 * @param array<string, mixed> $data Placeholders as keys and replacements as values; supports query syntax
+	 * @param array{fallback?: string|null, callback?: Closure|null} $options
 	 * @return string The filled-in and partially escaped string
 	 */
 	public static function safeTemplate(
@@ -1074,13 +1054,14 @@ class Str
 			$callback = null;
 		}
 
-		// replace and escape
+		$hasUnescaped = str_contains($string ?? '', '{<');
+
 		$string = static::template($string, $data, [
 			'start'    => '{{',
 			'end'      => '}}',
-			'callback' => function ($result, $query, $data) use ($callback) {
+			'callback' => function ($result, $query, $data, $value) use ($callback) {
 				if ($callback !== null) {
-					$result = $callback($result, $query, $data);
+					$result = $callback($result, $query, $data, $value);
 				}
 
 				return Escape::html($result);
@@ -1088,13 +1069,14 @@ class Str
 			'fallback' => $fallback
 		]);
 
-		// replace unescaped (specifically marked placeholders)
-		$string = static::template($string, $data, [
-			'start'    => '{<',
-			'end'      => '>}',
-			'callback' => $callback,
-			'fallback' => $fallback
-		]);
+		if ($hasUnescaped === true) {
+			$string = static::template($string, $data, [
+				'start'    => '{<',
+				'end'      => '>}',
+				'callback' => $callback,
+				'fallback' => $fallback
+			]);
+		}
 
 		return $string;
 	}
@@ -1110,12 +1092,10 @@ class Str
 	 * // output: This i####
 	 * ```
 	 *
-	 * @param string $string The string to be shortened
-	 * @param int $length Final number of characters
-	 *                    the string (excl. appendix) should have
-	 * @param string $appendix The element, which should be added if the
-	 *                         string is too long. Ellipsis is the default.
-	 * @return string The shortened string
+	 * @param $length Final number of characters the string
+	 *               (excl. appendix) should have
+	 * @param $appendix The element, which should be added if the
+	 *                 string is too long
 	 */
 	public static function short(
 		string|null $string,
@@ -1145,9 +1125,7 @@ class Str
 	 * @copyright Original Copyright (c) 2017, Antal Áron
 	 * @license https://github.com/antalaron/mb-similar-text/blob/master/LICENSE MIT License
 	 *
-	 * @param bool $caseInsensitive If `true`, strings are compared case-insensitively
-	 * @return array matches: Number of matching chars in both strings
-	 *               percent: Similarity in percent
+	 * @return array{matches: non-negative-int, percent: float}
 	 */
 	public static function similarity(
 		string $first,
@@ -1159,7 +1137,6 @@ class Str
 			$second = static::lower($second);
 		}
 
-		// identical inputs always score 100 %
 		if ($first === $second) {
 			$length = static::length($first);
 
@@ -1189,6 +1166,10 @@ class Str
 	/**
 	 * Calculates the similarity between two character arrays
 	 * @since 5.5.0
+	 *
+	 * @param list<string> $first
+	 * @param list<string> $second
+	 * @return array{matches: non-negative-int, percent: float}
 	 */
 	protected static function similarityFromChars(
 		array $first,
@@ -1215,8 +1196,6 @@ class Str
 						// nothing to do
 					}
 
-					// record the longest match seen so far and its
-					// starting positions in both inputs
 					if ($l > $max) {
 						$max  = $l;
 						$pos1 = $p;
@@ -1258,12 +1237,10 @@ class Str
 	/**
 	 * Convert a string to a safe version to be used in a URL
 	 *
-	 * @param string $string The unsafe string
-	 * @param string $separator To be used instead of space and
-	 *                          other non-word characters.
-	 * @param string $allowed List of all allowed characters (regex)
-	 * @param int $maxlength The maximum length of the slug
-	 * @return string The safe string
+	 * @param $separator To be used instead of space and
+	 *                  other non-word characters.
+	 * @param $allowed List of all allowed characters (regex)
+	 * @param non-negative-int|false $maxlength
 	 */
 	public static function slug(
 		string|null $string,
@@ -1278,7 +1255,6 @@ class Str
 		$string = static::lower($string);
 		$string = static::ascii($string);
 
-		// replace spaces with simple dashes
 		$string = preg_replace(
 			'![^' . $allowed . ']!i',
 			$separator,
@@ -1286,7 +1262,6 @@ class Str
 		);
 
 		if (strlen($separator) > 0) {
-			// remove double separators
 			$string = preg_replace(
 				'![' . preg_quote($separator) . ']{2,}!',
 				$separator,
@@ -1297,14 +1272,16 @@ class Str
 		// replace slashes with dashes
 		$string = str_replace('/', $separator, $string);
 
-		// trim leading and trailing non-word-chars
+		// trim leading non-word-chars
 		$string = preg_replace('!^[^a-z0-9]+!', '', $string);
-		$string = preg_replace('![^a-z0-9]+$!', '', $string);
 
 		// cut the string after the given maxlength
 		if ($maxlength !== false) {
 			$string = static::short($string, $maxlength, '');
 		}
+
+		// after the cut, so that it can't leave a trailing separator
+		$string = preg_replace('![^a-z0-9]+$!', '', $string);
 
 		return $string;
 	}
@@ -1332,10 +1309,9 @@ class Str
 	 * and it has a built-in way to skip values
 	 * which are too short.
 	 *
-	 * @param string|array|null $string The string to split
-	 * @param string $separator The string to split by
-	 * @param int $length The min length of values.
-	 * @return array An array of found values
+	 * @param non-empty-string $separator
+	 * @param $length The min length of values.
+	 * @return ($string is array ? array : list<non-empty-string>)
 	 */
 	public static function split(
 		string|array|null $string,
@@ -1346,10 +1322,7 @@ class Str
 			return $string;
 		}
 
-		// make sure $string is string
-		$string ??= '';
-
-		$parts = explode($separator, $string);
+		$parts = explode($separator, (string)$string);
 		$out   = [];
 
 		foreach ($parts as $p) {
@@ -1391,7 +1364,7 @@ class Str
 	 * Converts a string to studly caps case
 	 * @since 3.7.0
 	 *
-	 * @param string $value The string to convert
+	 * @param $value The string to convert
 	 */
 	public static function studly(string|null $value): string
 	{
@@ -1414,21 +1387,20 @@ class Str
 	/**
 	 * Replaces placeholders in string with values from the data array
 	 *
+	 * Options:
+	 * - `fallback`: if a token does not have any matches
+	 * - `callback`: to handle each matching result; receives the result
+	 *   as a string, the query, the data and the raw result
+	 * - `start`: start placeholder
+	 * - `end`: end placeholder
+	 *
 	 * ```php
 	 * echo Str::template('From {{ b }} to {{ a }}', ['a' => 'there', 'b' => 'here']);
 	 * // output: From here to there
 	 * ```
 	 *
-	 * @param string|null $string The string with placeholders
-	 * @param array $data Associative array with placeholders as
-	 *                    keys and replacements as values.
-	 *                    Supports query syntax.
-	 * @param array $options An options array that contains:
-	 *                       - fallback: if a token does not have any matches
-	 *                       - callback: to be able to handle each matching result
-	 *                       - start: start placeholder
-	 *                       - end: end placeholder
-	 * @return string The filled-in string
+	 * @param array<string, mixed> $data Placeholders as keys and replacements as values; supports query syntax
+	 * @param array{fallback?: string|null, callback?: Closure|null, start?: string, end?: string} $options
 	 */
 	public static function template(
 		string|null $string,
@@ -1444,7 +1416,6 @@ class Str
 			$callback = null;
 		}
 
-		// make sure $string is string
 		$string ??= '';
 
 		return preg_replace_callback(
@@ -1452,18 +1423,24 @@ class Str
 			function (array $match) use ($data, $fallback, $callback) {
 				$query = trim($match[1]);
 
+				// empty placeholders like `{}` are no queries
+				if ($query === '') {
+					return $match[0];
+				}
+
 				try {
 					$result = Query::factory($query)->resolve($data);
 				} catch (Throwable) {
 					$result = null;
 				}
 
-				// if we don't have a result, use the fallback if given
 				$result ??= $fallback;
 
-				// callback on result if given
+				// callback on result if given, with the raw result
+				// on top, so that values that look the same once
+				// cast to a string can still be told apart
 				if ($callback !== null) {
-					$callback = $callback((string)$result, $query, $data);
+					$callback = $callback((string)$result, $query, $data, $result);
 
 					if ($result !== null || $callback !== '') {
 						// the empty string came just from string casting,
@@ -1502,6 +1479,8 @@ class Str
 
 	/**
 	 * Convert the string to the given type
+	 *
+	 * @param $type Type name or a value of the target type
 	 */
 	public static function toType($string, $type)
 	{
@@ -1557,8 +1536,8 @@ class Str
 	 * Removes all html tags and encoded chars from a string
 	 *
 	 * ```php
-	 * echo str::unhtml('some <em>crazy</em> stuff');
-	 * // output: some uber crazy stuff
+	 * echo Str::unhtml('some &uuml;ber <em>crazy</em> stuff');
+	 * // output: some über crazy stuff
 	 * ```
 	 */
 	public static function unhtml(string|null $string): string
@@ -1568,6 +1547,8 @@ class Str
 
 	/**
 	 * Returns the beginning of a string until the given character
+	 *
+	 * @param non-empty-string $needle
 	 */
 	public static function until(
 		string $string,
@@ -1584,7 +1565,7 @@ class Str
 	}
 
 	/**
-	 * A UTF-8 safe version of strotoupper()
+	 * A UTF-8 safe version of strtoupper()
 	 */
 	public static function upper(string|null $string): string
 	{
@@ -1595,6 +1576,8 @@ class Str
 	 * Creates a compliant v4 UUID
 	 * Taken from: https://github.com/symfony/polyfill
 	 * @since 3.7.0
+	 *
+	 * @return non-empty-string
 	 */
 	public static function uuid(): string
 	{
@@ -1626,7 +1609,6 @@ class Str
 	 */
 	public static function widont(string|null $string): string
 	{
-		// make sure $string is string
 		$string ??= '';
 
 		// Replace space between last word and punctuation
@@ -1649,9 +1631,7 @@ class Str
 	 * Wraps the string with the given string(s)
 	 * @since 3.7.0
 	 *
-	 * @param string $string String to wrap
-	 * @param string $before String to prepend
-	 * @param string|null $after String to append (if different from `$before`)
+	 * @param $after String to append (if different from `$before`)
 	 */
 	public static function wrap(
 		string $string,

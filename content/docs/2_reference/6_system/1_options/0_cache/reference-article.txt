@@ -58,7 +58,7 @@ The following cache drivers are available:
 | ApcuCache | `apcu` | Driver for Apcu cache |
 | MemCached | `memcached` | Driver for Memcached cache server |
 | MemoryCache | `memory` | Driver for caching the current request in memory |
-| RedisCache | `redis` | Driver for Redis cache (since v5) |
+| RedisCache | `redis` | Driver for Redis cache |
 | NullCache | | Dummy Cache Driver (does not do any caching) |
 
 You can also set a registered custom cache driver here. Check out the plugin reference (link: docs/reference/plugins/extensions/cache-drivers text: how to create a custom cache driver).
@@ -69,7 +69,6 @@ Make sure the selected cache driver is enabled on/supported by your server.
 
 ### Cache driver specific options
 
-<since v="5.0.0">
 ### Redis
 
 Redis supports multiple logical databases per Redis instance. If you store multiple caches in Redis, it is strongly recommended to choose a unique `database` number for each. This ensures that each cache gets its own independent namespace and can be flushed independently. You can read more about the concept of Redis databases in the [Redis documentation for the `SELECT` command](https://redis.io/docs/latest/commands/select/).
@@ -84,7 +83,6 @@ Redis supports multiple logical databases per Redis instance. If you store multi
 	'database' => 0 // optional, but recommended for multiple caches
 ]
 ```
-</since>
 
 ## Options for other cache types
 

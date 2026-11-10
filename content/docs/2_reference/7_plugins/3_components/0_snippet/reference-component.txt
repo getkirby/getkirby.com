@@ -7,11 +7,14 @@ Text:
 ```php "/site/plugins/snippet-engine/index.php"
 use Kirby\Template\Snippet;
 
-Kirby::plugin('my/snippet', [
-    'components' => [
-        'snippet' => function (Kirby $kirby, string $name, array $data = [], bool $slots = false): Snippet|string {
-            return YourSnippetLoader::factory($name, $data, $slots);
-        }
+Kirby::plugin(
+    name: 'my/snippet',
+    extends: [
+        'components' => [
+            'snippet' => function (Kirby $kirby, string $name, array $data = [], bool $slots = false): Snippet|string {
+                return YourSnippetLoader::factory($name, $data, $slots);
+            }
+        ]
     ]
-]);
+);
 ```

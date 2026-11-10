@@ -89,6 +89,8 @@ Especially for the Panel, an encrypted connection between your browser and your 
 
 If you do not use HTTPS, your login information and all other data will be submitted in plain text to the server and can be intercepted.
 
+On HTTPS requests, Kirby sets its cookies, including the session cookie, with the `Secure` attribute. Browsers then only send these cookies over encrypted connections. Learn more about the (link: docs/reference/system/options/cookie#cookie-defaults text: cookie defaults).
+
 ### Use the latest stable PHP version
 
 Many providers unfortunately still offer very old PHP versions which are no longer maintained. Do yourself and your site a favor and always **update to the latest stable PHP version** that is supported by your Kirby version. This comes with additional security and often performance benefits. If your provider does not provide a new and stable PHP version, it's a good sign to switch to a better provider.
@@ -207,9 +209,7 @@ We are working on our own dedicated docs on secure file permissions, but you can
 
 Kirby logs errors to the PHP error log by default. This allows you to debug issues without having to enable the debug mode.
 
-However you should make sure that sensitive information like passwords is not included in logs. If you are using PHP 8.2 or newer, Kirby handles this automatically for you using PHP's `SensitiveParameter` feature.
-
-On older PHP versions, we recommend to disable parameter output in your logs by setting PHP's `zend.exception_ignore_args` option to `1` in your `php.ini`. But keep in mind that this will remove all parameter values from your logs, not just sensitive ones.
+However you should make sure that sensitive information like passwords is not included in logs. Kirby handles this automatically for you using PHP's `SensitiveParameter` feature.
 
 ## Use good passwords
 
@@ -222,27 +222,13 @@ The Panel also has a built-in **brute-force protection** for the Panel login. It
 Kirby internally relies on the following values:
 
 - The (link: docs/reference/system/options/content#salt-for-drafts-and-media-files text: `content.salt` option) is used to generate secure preview and media URLs that should not be guessable by external visitors.
-- The (link: docs/reference/system/options/cookie#cookie-key text: `cookie.key` option) is used to sign (or authenticate) cookie values to prevent easy tampering with cookie values set by the backend.
-
-<since v="5.4.4">
-The `cookie.key` option was added in Kirby 5.4.5 and 4.9.4. In previous releases, the cookie key needed to be set via the `Kirby\Http\Cookie::$key` property.
-</since>
+- The (link: docs/reference/system/options/cookie#cookie-key text: `cookie.key` option) is used to sign (or authenticate) cookie values with an HMAC-SHA256 signature to prevent easy tampering with cookie values set by the backend.
 
 Kirby cannot set secure defaults for these options. This is because there is no install step during which Kirby could generate and persist random values and because config files are typically kept in version control and cannot be written by the system without causing merge conflicts.
 
 Without secure random values for these options, attackers can access media files and previews of drafts and changes without authorization.
 
 **We therefore recommend to set the `content.salt` and `cookie.key` options to long random strings for all of your sites.**
-
-## Disable the Vue template compiler
-
-We are in the active process of migrating the Kirby Panel to Vue 3 (with the plan to ship Vue 3 in Kirby 6.0). Until this process is complete, sites with increased security requirements should use the Vue 2 runtime version, which omits the vulnerable Vue template compiler.
-
-In its default configuration, Kirby enables the template compiler, as it is needed for all Panel plugins that have not been precompiled. It is also used for the examples in the Panel lab environment.
-
-<since v="4.7">
-Kirby 4.7 introduces a new `panel.vue.compiler` option that can be set to `false` to disable the template compiler and switch to the Vue 2 runtime version. We recommend to set this option to `false` if your site and the installed plugins do not rely on the Vue template compiler. Should you require the template compiler and are not affected by its [known vulnerabilities](https://www.herodevs.com/vulnerability-directory?framework=Vue+2), you can set the option to `true` to make the warning in the Panel go away. Do this at your own risk!
-</since>
 
 ## Secure data in Git repositories
 

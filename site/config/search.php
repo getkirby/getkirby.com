@@ -92,8 +92,6 @@ return [
 		'reference-icons',
 		'reference-kirbytag',
 		'reference-kirbytags',
-		'reference-panelsection',
-		'reference-panelsections',
 		'reference-root',
 		'reference-roots',
 		'reference-section',

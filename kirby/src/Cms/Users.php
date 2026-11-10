@@ -6,6 +6,7 @@ use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\LogicException;
 use Kirby\Filesystem\Dir;
 use Kirby\Filesystem\F;
+use Kirby\Guards\UserValidators;
 use Kirby\Toolkit\Str;
 use Kirby\Toolkit\V;
 use Kirby\Uuid\HasUuids;
@@ -16,14 +17,11 @@ use Kirby\Uuid\HasUuids;
  * all collections, you can filter, modify,
  * convert or check the users collection.
  *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  *
- * @template TUser of \Kirby\Cms\User
- * @extends \Kirby\Cms\LazyCollection<TUser>
+ * @template TValue of User
+ * @extends LazyCollection<TValue>
  */
 class Users extends LazyCollection
 {
@@ -32,10 +30,10 @@ class Users extends LazyCollection
 	/**
 	 * Creates a new Collection with the given objects
 	 *
-	 * @param iterable<TUser> $objects
-	 * @param string|null $root Directory to dynamically load user
-	 *                          objects from during hydration
-	 * @param array $inject Props to inject into hydrated user objects
+	 * @param iterable<TValue> $objects
+	 * @param $root Directory to dynamically load user
+	 *             objects from during hydration
+	 * @param $inject Props to inject into hydrated user objects
 	 */
 	public function __construct(
 		iterable $objects = [],
@@ -61,9 +59,9 @@ class Users extends LazyCollection
 	 * an entire second collection to the
 	 * current collection
 	 *
-	 * @param \Kirby\Cms\Users<TUser>|TUser|string $object
+	 * @param Users<TValue>|TValue|string $object
 	 * @return $this
-	 * @throws \Kirby\Exception\InvalidArgumentException When no `User` or `Users` object or an ID of an existing user is passed
+	 * @throws InvalidArgumentException When no `User` or `Users` object or an ID of an existing user is passed
 	 */
 	public function add($object): static
 	{
@@ -127,9 +125,23 @@ class Users extends LazyCollection
 	}
 
 	/**
+	 * Finds a user in the collection by email address only
+	 * @since 6.0.0
+	 * @return TValue|null
+	 */
+	public function findByEmail(string $email): User|null
+	{
+		if (V::email($email) === false) {
+			return null;
+		}
+
+		return parent::findBy('email', Str::lower($email));
+	}
+
+	/**
 	 * Finds a user in the collection by ID or email address
 	 * @internal Use `$users->find()` instead
-	 * @return TUser|null
+	 * @return TValue|null
 	 */
 	public function findByKey(string $key): User|null
 	{
@@ -162,7 +174,7 @@ class Users extends LazyCollection
 
 		// ensure the user ID only contains safe characters
 		// to prevent path traversal into subfolders
-		if (V::match($key, UserRules::ID_PATTERN) !== true) {
+		if (V::match($key, UserValidators::ID_PATTERN) !== true) {
 			return null;
 		}
 
@@ -181,6 +193,7 @@ class Users extends LazyCollection
 		}
 
 		// create user model based on role
+		/** @var TValue $user */
 		$user = User::factory([
 			'id'          => $key,
 			'model'       => $credentials['role'] ?? null,
@@ -236,6 +249,7 @@ class Users extends LazyCollection
 
 	/**
 	 * Shortcut for `$users->filter('role', 'admin')`
+	 * @return static<TValue>
 	 */
 	public function role(string $role): static
 	{

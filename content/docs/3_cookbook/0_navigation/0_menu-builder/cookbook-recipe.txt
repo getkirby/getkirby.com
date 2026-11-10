@@ -32,11 +32,11 @@ In this recipe we assume that these menus are created in `site.yml`, so that we 
 
 ## Independent single level custom menu
 
-The easiest way to create a custom menu from existing pages is the use of a (link: docs/reference/panel/fields/pages text: pages field):
+The easiest way to create a custom menu from existing pages is the use of a (link: docs/reference/panel/fields/pagepicker text: pagepicker field):
 
 ```yaml
 mainMenu:
-  type: pages
+  type: pagepicker
   label: Main menu pages
 ```
 
@@ -71,7 +71,7 @@ menus:
       type: text
       label: Menu headline
     menuItems:
-      type: pages
+      type: pagepicker
       label: Menu item
 ```
 
@@ -146,22 +146,22 @@ menu:
   type: structure
   fields:
     mainMenu:
-      type: pages
+      type: pagepicker
       label: Mainmenu item
       max: 1
     hasSubmenu:
       type: toggle
       text: Include a submenu?
     subMenu:
-      type: pages
+      type: pagepicker
       label: Submenu items
       when:
         hasSubmenu: true
 ```
 
-The structure field has a pages field for the first level of menu items, and a second conditional pages field for the submenu items that is only shown to editors if they set the `hasSubmenu` toggle field to `true`. The toggle field is not absolutely necessary but helps to keep the form concise.
+The structure field has a pagepicker field for the first level of menu items, and a second conditional pagepicker field for the submenu items that is only shown to editors if they set the `hasSubmenu` toggle field to `true`. The toggle field is not absolutely necessary but helps to keep the form concise.
 
-The `mainMenu` pages field is limited to `max: 1` pages, whereas the `subMenu` field can have multiple subpages.
+The `mainMenu` pagepicker field is limited to `max: 1` pages, whereas the `subMenu` field can have multiple subpages.
 
 We can now render this menu in the template like this:
 

@@ -23,13 +23,9 @@ fields:
     type: textarea
 ```
 
-## Field properties
-
-(field-options: textarea)
-
 ## Sizes
 
-In some section layouts, a small textarea looks lost. The `size` option sets an initial default height for empty textareas before auto-sizing kicks in. Available sizes:
+In some layouts, a small textarea looks lost. The `size` option sets an initial default height for empty textareas before auto-sizing kicks in. Available sizes:
 
 - `small`
 - `medium`
@@ -146,3 +142,4 @@ However, there might be situations, where you want to parse KirbyTags, but not r
 
 For more field manipulations, check out Kirby's (link: docs/reference/templates/field-methods text: field methods).
 
+(docs: panel-field-update field: textarea)

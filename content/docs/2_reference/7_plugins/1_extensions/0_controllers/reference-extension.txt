@@ -15,15 +15,18 @@ Controllers are registered with the `controllers` extension.
 The `controllers` extension accepts an array of controllers where the key is the name of the associated template and the value a callback function that returns an array of variables for your template.
 
 ```php "/site/plugins/your-plugin/index.php"
-Kirby::plugin('your/plugin', [
-    'controllers' => [
-        'blog' => function ($page) {
-            return [
-                'articles' => $page->children()->listed()
-            ];
-        }
+Kirby::plugin(
+    name: 'your/plugin',
+    extends: [
+        'controllers' => [
+            'blog' => function ($page) {
+                return [
+                    'articles' => $page->children()->listed()
+                ];
+            }
+        ]
     ]
-]);
+);
 ```
 
 You can now use the `$articles` variable in your blog template.
@@ -34,11 +37,14 @@ You can now use the `$articles` variable in your blog template.
 Alternatively, you can require a file. The required file would be a (link: docs/guide/templates/controllers text: controller) with a  function that returns an array of variables for your template.
 
 ```php
-Kirby::plugin('your/plugin', [
-    'controllers' => [
-        'blog' => require 'some/file.php'
+Kirby::plugin(
+    name: 'your/plugin',
+    extends: [
+        'controllers' => [
+            'blog' => require 'some/file.php'
+        ]
     ]
-]);
+);
 ```
 
 ## Usage in templates

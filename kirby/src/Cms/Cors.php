@@ -9,9 +9,6 @@ use Kirby\Toolkit\Str;
  * Handles CORS (Cross-Origin Resource Sharing)
  * headers for HTTP responses
  *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
  * @copyright Bastian Allgeier
  * @license   https://getkirby.com/license
  * @since     5.2.0
@@ -49,7 +46,7 @@ class Cors
 	/**
 	 * Returns CORS headers based on configuration
 	 *
-	 * @param bool $preflight Whether this is a preflight request
+	 * @param $preflight Whether this is a preflight request
 	 */
 	public static function headers(bool $preflight = false): array
 	{
@@ -59,7 +56,7 @@ class Cors
 	/**
 	 * Converts the CORS configuration to an array of headers
 	 *
-	 * @param bool $preflight Whether this is a preflight request
+	 * @param $preflight Whether this is a preflight request
 	 */
 	public function toArray(bool $preflight = false): array
 	{
@@ -111,8 +108,8 @@ class Cors
 	/**
 	 * Matches the request origin against an array of allowed origins
 	 *
-	 * @param array $configOrigin Array of allowed origins
-	 * @param string $requestOrigin Origin from the request header
+	 * @param $configOrigin Array of allowed origins
+	 * @param $requestOrigin Origin from the request header
 	 */
 	protected function matchOriginFromArray(array $configOrigin, string $requestOrigin): string|null
 	{
@@ -128,8 +125,8 @@ class Cors
 	/**
 	 * Adds the Vary header for cache control
 	 *
-	 * @param array $headers Headers array (passed by reference)
-	 * @param string $allowOrigin Allowed origin value
+	 * @param $headers Headers array (passed by reference)
+	 * @param $allowOrigin Allowed origin value
 	 */
 	protected function addVaryHeader(array &$headers, string $allowOrigin): void
 	{
@@ -142,8 +139,8 @@ class Cors
 	/**
 	 * Adds the credentials header if configured
 	 *
-	 * @param array $headers Headers array (passed by reference)
-	 * @param string $allowOrigin Allowed origin value
+	 * @param $headers Headers array (passed by reference)
+	 * @param $allowOrigin Allowed origin value
 	 */
 	protected function addCredentialsHeader(array &$headers, string $allowOrigin): void
 	{
@@ -164,7 +161,7 @@ class Cors
 	/**
 	 * Adds headers to expose custom headers to the client
 	 *
-	 * @param array $headers Headers array (passed by reference)
+	 * @param $headers Headers array (passed by reference)
 	 */
 	protected function addExposeHeaders(array &$headers): void
 	{
@@ -180,7 +177,7 @@ class Cors
 	/**
 	 * Adds preflight-specific headers
 	 *
-	 * @param array $headers Headers array (passed by reference)
+	 * @param $headers Headers array (passed by reference)
 	 */
 	protected function addPreflightHeaders(array &$headers): void
 	{
@@ -205,7 +202,7 @@ class Cors
 	/**
 	 * Adds headers to allow custom request headers
 	 *
-	 * @param array $headers Headers array (passed by reference)
+	 * @param $headers Headers array (passed by reference)
 	 */
 	protected function addAllowHeaders(array &$headers): void
 	{

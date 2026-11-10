@@ -49,7 +49,7 @@ $parameters    ??= [];
 				</td>
 				<td><?= $parameter->types()->toHtml(fallback: 'mixed') ?></td>
 
-				<td data-label="Default:">
+				<td class="default" data-label="Default:">
 					<?php $default = $parameter->default() ?>
 					<?php if ($default !== null): ?>
 					<code><?= $default ?></code>

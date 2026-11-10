@@ -48,16 +48,19 @@ Let's start with a new plugin folder called `programmable-blueprints` in `/site/
 
 use Kirby\Cms\App as Kirby;
 
-Kirby::plugin('cookbook/programmable-blueprints', [
-    'blueprints' => [
-        // here we will add the blueprints
+Kirby::plugin(
+    name: 'cookbook/programmable-blueprints',
+    extends: [
+        'blueprints' => [
+            // here we will add the blueprints
+        ]
     ]
-]);
+);
 ```
 
 ## Load different blueprints per user
 
-With programmable blueprints it is now much easier to load different blueprints per user or user role, which is for example useful if you want to hide fields/sections/tabs from certain users/roles.
+With programmable blueprints it is now much easier to load different blueprints per user or user role, which is for example useful if you want to hide fields and tabs from certain users/roles.
 
 Let's assume we had multiple (link: docs/guide/users/roles text: user roles), e.g. the default `admin` role and other roles like `editor` etc., and we wanted to provide a different `site.yml` blueprints for each role.
 
@@ -72,17 +75,20 @@ Then we register a `site` blueprint and assign the two files to use conditionall
 
 use Kirby\Cms\App as Kirby;
 
-Kirby::plugin('cookbook/programmable-blueprints', [
-    'blueprints' => [
-        'site' => function () {
-            if (($user = kirby()->user()) && $user->isAdmin()) {
-                return Data::read(__DIR__ . '/blueprints/site.admin.yml');
-            } else {
-                return Data::read(__DIR__ . '/blueprints/site.editor.yml');
-            }
-        },
+Kirby::plugin(
+    name: 'cookbook/programmable-blueprints',
+    extends: [
+        'blueprints' => [
+            'site' => function () {
+                if (($user = kirby()->user()) && $user->isAdmin()) {
+                    return Data::read(__DIR__ . '/blueprints/site.admin.yml');
+                } else {
+                    return Data::read(__DIR__ . '/blueprints/site.editor.yml');
+                }
+            },
+        ]
     ]
-]);
+);
 ```
 We use `Data::read()` to read the `yaml` files into an array.
 
@@ -98,9 +104,9 @@ tabs:
     label: Page Overview
     columns:
       - width: 1/2
-        sections:
+        fields:
           albums:
-            type: pages
+            type: pagelist
             label: Photography
             parent: kirby.page("photography")
             size: small
@@ -113,9 +119,9 @@ tabs:
               cover: true
               ratio: 3/2
       - width: 1/2
-        sections:
+        fields:
           notes:
-            type: pages
+            type: pagelist
             label: Notes
             parent: kirby.page("notes")
             info: "{{ page.published }}"
@@ -127,7 +133,7 @@ tabs:
               cover: true
             ratio: 3/2
           pages:
-            type: pages
+            type: pagelist
             create: default
             templates:
               - about
@@ -136,21 +142,18 @@ tabs:
   settings:
     label: Settings
     icon: gear
-    sections:
-      fields:
-        type: fields
-        fields:
-          metaTitle:
-            label: Meta Title
-            type: text
-          metaDesc:
-            label: Meta Description
-            type: text
-          ogImg:
-            label: Open Graph Image
-            type: files
-            query: site.images
-          ## ... more fields
+    fields:
+      metaTitle:
+        label: Meta Title
+        type: text
+      metaDesc:
+        label: Meta Description
+        type: text
+      ogImg:
+        label: Open Graph Image
+        type: filepicker
+        query: site.images
+      ## ... more fields
 ```
 
 In the `site.editor.yml` file, we don't need tabs and only include the pages overview without the meta data settings:
@@ -161,9 +164,9 @@ title: Site
 
 columns:
   - width: 1/2
-    sections:
+    fields:
       albums:
-        type: pages
+        type: pagelist
         label: Photography
         parent: kirby.page("photography")
         size: small
@@ -174,9 +177,9 @@ columns:
         image: icon
 
   - width: 1/2
-    sections:
+    fields:
       notes:
-        type: pages
+        type: pagelist
         label: Notes
         parent: kirby.page("notes")
         info: "{{ page.published }}"
@@ -188,7 +191,7 @@ columns:
           cover: true
         ratio: 3/2
       pages:
-        type: pages
+        type: pagelist
         create: default
         templates:
           - about
@@ -198,9 +201,9 @@ columns:
 
 To check if everything works, delete the `site.yml` file from `/site/blueprints`. Then log in as `admin`. Create a new `editor` user role as outlined (link: docs/guide/users/roles#creating-your-own-roles text: in the docs), create a new user with this role and log in with this user. You should now see the simplified site view.
 
-## Page blueprint with filtered pages sections
+## Page blueprint with filtered page lists
 
-A typical situation that has come up multiple times in support are dynamic numbers of pages sections that filter pages by category. Since the number of categories is usually not set in stone from the outset but new categories might be added any time, we cannot possibly set up all sections in advance. In such a use case, being able to create those sections dynamically is a big plus.
+A typical situation that has come up multiple times in support are dynamic numbers of `pagelist` fields that filter pages by category. Since the number of categories is usually not set in stone from the outset but new categories might be added any time, we cannot possibly set up all of them in advance. In such a use case, being able to create those fields dynamically is a big plus.
 
 
 For this example we register a pages blueprint called `notes` in our `index.php` and include the `notes.php` file which we have yet to create.
@@ -210,13 +213,16 @@ For this example we register a pages blueprint called `notes` in our `index.php`
 
 use Kirby\Cms\App as Kirby;
 
-Kirby::plugin('cookbook/programmable-blueprints', [
-    'blueprints' => [
-        'pages/notes' => function ($kirby) {
-            return include __DIR__ . '/blueprints/pages/notes.php';
-        },
+Kirby::plugin(
+    name: 'cookbook/programmable-blueprints',
+    extends: [
+        'blueprints' => [
+            'pages/notes' => function ($kirby) {
+                return include __DIR__ . '/blueprints/pages/notes.php';
+            },
+        ]
     ]
-]);
+);
 ```
 
 Now create a new subfolder `pages` in the `/blueprints` folder, and inside the `pages` folder the `notes.php` file with the following code:
@@ -225,12 +231,12 @@ Now create a new subfolder `pages` in the `/blueprints` folder, and inside the `
 ```php "/site/plugins/programmable-blueprints/blueprints/pages/notes.php"
 <?php
 
-$sections = [];
+$fields = [];
 if ($page = page('notes')) {
-    // create a new section array for each unique tag plucked from the children pages
+    // create a new field array for each unique tag plucked from the children pages
     foreach ($page->children()->pluck('tags', ',', true) as $tag) {
-        $sections['section_' . $tag] = [
-            'type'  => 'pages',
+        $fields['list_' . $tag] = [
+            'type'  => 'pagelist',
             'label' => 'Pages with tag ' . $tag,
             // note the required quotes around the `$tag` variable
             'query' => "page.children.filterBy('tags', '". $tag . "', ',')",
@@ -248,17 +254,17 @@ $yaml = [
     'columns' => [
         'sidebar' => [
             'width'    => '1/3',
-            'sections' => [
+            'fields' => [
               'drafts' => [
-                'type'     => 'pages',
-                'label' => 'Drafts',
+                'type'     => 'pagelist',
+                'label'    => 'Drafts',
                 'status'   => 'drafts',
                 ]
             ],
         ],
         'main' => [
             'width'    => '2/3',
-            'sections' => $sections, // dynamically generated sections from above
+            'fields' => $fields, // dynamically generated fields from above
         ]
     ]
 ];
@@ -268,9 +274,9 @@ return $yaml;
 
 To use this blueprint, remove the original `/site/blueprints/pages/notes.yml` file.
 
-As a result, we will end up with as many sections as we have tags (and in this example, there will be only one page per section, because all tags are only used once). For the screenshot I've reassigned the tags, so that the result looks less silly:
+As a result, we will end up with as many fields as we have tags (and in this example, there will be only one page per field, because all tags are only used once). For the screenshot I've reassigned the tags, so that the result looks less silly:
 
-(image: filtered-sections.png)
+(image: filtered-fields.png)
 
 <info>
 Note that we have set `changeSlug` to `false`, because the blueprint would stop working if the page was renamed. If you want to keep the option to change the slug, you can work with a page ID that doesn't change instead.
@@ -279,7 +285,7 @@ Note that we have set `changeSlug` to `false`, because the blueprint would stop 
 
 ## Field group with dynamic fields
 
-The same kind of logic will work for dynamic fields, for example if you wanted to create a number of pages fields where users can select one (or more) pages from each parent.
+The same kind of logic will work for dynamic fields, for example if you wanted to create a number of pagepicker fields where users can select one (or more) pages from each parent.
 
 Again, we first register the new blueprint:
 
@@ -288,16 +294,19 @@ Again, we first register the new blueprint:
 
 use Kirby\Cms\App as Kirby;
 
-Kirby::plugin('cookbook/programmable-blueprints', [
-    'blueprints' => [
-        'pages/notes'        => function($kirby) {
-            return include __DIR__ . '/blueprints/pages/notes.php';
-        },
-        'fields/multifields' => function($kirby) {
-            return include __DIR__ . '/blueprints/fields/multifields.php';
-        }
-    ],
-]);
+Kirby::plugin(
+    name: 'cookbook/programmable-blueprints',
+    extends: [
+        'blueprints' => [
+            'pages/notes'        => function($kirby) {
+                return include __DIR__ . '/blueprints/pages/notes.php';
+            },
+            'fields/multifields' => function($kirby) {
+                return include __DIR__ . '/blueprints/fields/multifields.php';
+            }
+        ],
+    ]
+);
 ```
 
 And then create a fieldgroup called `multiselects` in the given path:
@@ -310,7 +319,7 @@ $fields = [];
 foreach (site()->children()->filterBy('template', 'in', ['notes', 'photography']) as $page) {
     $fields[$page->slug()] = [
         'label' => $page->title()->value(),
-        'type'  => 'pages',
+        'type'  => 'pagepicker',
         'query' => 'site.find("' . $page->slug() . '").children',
         'min'   => 1,
         'max'   => 1,
@@ -326,10 +335,7 @@ return [
 In a page/user/file blueprint, we can now use this field group like this:
 
 ```yaml
-fields:
-  type: fields
-  fields:
-    extends: fields/multifields
+extends: fields/multifields
 ```
 
 (image: dynamic-fields.png)
@@ -367,20 +373,23 @@ Let's register a new field blueprint in our `index.php`:
 
 ```php "/site/plugins/programmable-blueprints/index.php"
 
-Kirby::plugin('cookbook/programmable-blueprints', [
-    'blueprints' => [
-        'pages/notes'        => function($kirby) {
-            return include __DIR__ . '/blueprints/pages/notes.php';
-        },
-        'fields/multifields' => function($kirby) {
-            return include __DIR__ . '/blueprints/fields/multifields.php';
-        },
-        'fields/category' => function($kirby) {
-            return include __DIR__ . '/blueprints/fields/category.php';
-        },
+Kirby::plugin(
+    name: 'cookbook/programmable-blueprints',
+    extends: [
+        'blueprints' => [
+            'pages/notes'        => function($kirby) {
+                return include __DIR__ . '/blueprints/pages/notes.php';
+            },
+            'fields/multifields' => function($kirby) {
+                return include __DIR__ . '/blueprints/fields/multifields.php';
+            },
+            'fields/category' => function($kirby) {
+                return include __DIR__ . '/blueprints/fields/category.php';
+            },
 
-    ],
-]);
+        ],
+    ]
+);
 
 ```
 
@@ -413,36 +422,39 @@ fields:
     extends: fields/category
 ```
 
-## Assigning filtered blueprints to sections
+## Assigning filtered blueprints to a page list
 
-When you want to assign allowed templates to a pages section, you have to list them out one by one. Not with our programmatic approach.
+When you want to assign allowed templates to a `pagelist` field, you have to list them out one by one. Not with our programmatic approach.
 
-For this example, we register a new section blueprint:
+For this example, we register a new field blueprint:
 
 ```php "/site/plugins/programmable-blueprints/index.php"
 
-Kirby::plugin('cookbook/programmable-blueprints', [
-    'blueprints' => [
-        'pages/notes'        => function($kirby) {
-            return include __DIR__ . '/blueprints/pages/notes.php';
-        },
-        'fields/multifields' => function($kirby) {
-            return include __DIR__ . '/blueprints/fields/multifields.php';
-        },
-        'fields/categories' => function($kirby) {
-            return include __DIR__ . '/blueprints/fields/categories.php';
-        },
-        'sections/notes'      => function($kirby) {
-            return include __DIR__ . '/blueprints/sections/notes.php';
-        },
-    ],
-]);
+Kirby::plugin(
+    name: 'cookbook/programmable-blueprints',
+    extends: [
+        'blueprints' => [
+            'pages/notes'        => function($kirby) {
+                return include __DIR__ . '/blueprints/pages/notes.php';
+            },
+            'fields/multifields' => function($kirby) {
+                return include __DIR__ . '/blueprints/fields/multifields.php';
+            },
+            'fields/categories' => function($kirby) {
+                return include __DIR__ . '/blueprints/fields/categories.php';
+            },
+            'fields/notes'       => function($kirby) {
+                return include __DIR__ . '/blueprints/fields/notes.php';
+            },
+        ],
+    ]
+);
 
 ```
 
-And create `/blueprints/sections/notes.php` with the following code:
+And create `/blueprints/fields/notes.php` with the following code:
 
-```php "/site/plugins/programmable-blueprints/blueprints/sections/notes.php"
+```php "/site/plugins/programmable-blueprints/blueprints/fields/notes.php"
 <?php
 
 $blueprints = kirby()->blueprints();
@@ -452,7 +464,7 @@ $blueprints = array_filter(
 );
 
 return [
-    'type'      => 'pages',
+    'type'      => 'pagelist',
     'parent'    => "kirby.page('notes')",
     'label'     => 'Notepages',
     'info'      => '{{ page.files.count }}',
@@ -460,24 +472,24 @@ return [
 ];
 ```
 
-First we fetch all registered page blueprints into `$blueprints` and then remove all the unwanted ones from the array. The remaining blueprints we assign to the section's `templates` prop.
+First we fetch all registered page blueprints into `$blueprints` and then remove all the unwanted ones from the array. The remaining blueprints we assign to the field's `templates` prop.
 
-We can now reuse this section in our templates like normal.
+We can now reuse this field in our templates like normal.
 
 ```yaml "/site/blueprints/pages/notes.yml'
 Title: Notes
 
 #...
 
-sections:
+fields:
 
   drafts:
-    extends: sections/notes
+    extends: fields/notes
   listed:
-    extends: sections/notes
+    extends: fields/notes
 ```
 
-If we need the same set of blueprints for multiple sections, we can return the filtered set from its own blueprint and include it in our PHP pages/sections blueprints:
+If we need the same set of blueprints for multiple fields, we can return the filtered set from its own blueprint and include it in our PHP page and field blueprints:
 
 From `blueprints.php` we now only return an array of blueprints:
 
@@ -491,11 +503,11 @@ return array_filter(
 );
 ```
 
-And load this array for example in the `notes.php` section:
+And load this array for example in `notes.php`:
 
-```php "/site/plugins/programmable-blueprints/blueprints/sections/notes.php"
+```php "/site/plugins/programmable-blueprints/blueprints/fields/notes.php"
 return [
-    'type'      => 'pages',
+    'type'      => 'pagelist',
     'parent'    => "kirby.page('notes')",
     'label'     => 'Notepages',
     'info'      => '{{ page.files.count }}',
@@ -517,25 +529,28 @@ In this last example, we register a (link: docs/guide/blueprints/tabs text: tab 
 
 use Kirby\Cms\App as Kirby;
 
-Kirby::plugin('cookbook/programmable-blueprints', [
-    'blueprints' => [
-        'pages/notes'        => function($kirby) {
-            return include __DIR__ . '/blueprints/pages/notes.php';
-        },
-        'fields/multifields' => function($kirby) {
-            return include __DIR__ . '/blueprints/fields/multifields.php';
-        },
-        'fields/categories' => function($kirby) {
-            return include __DIR__ . '/blueprints/fields/categories.php';
-        },
-        'sections/notes'      => function($kirby) {
-            return include __DIR__ . '/blueprints/sections/notes.php';
-        },
-        'tabs/meta'           => function($kirby) {
-            return include __DIR__ . '/blueprints/tabs/meta.php';
-        },
-    ],
-]);
+Kirby::plugin(
+    name: 'cookbook/programmable-blueprints',
+    extends: [
+        'blueprints' => [
+            'pages/notes'        => function($kirby) {
+                return include __DIR__ . '/blueprints/pages/notes.php';
+            },
+            'fields/multifields' => function($kirby) {
+                return include __DIR__ . '/blueprints/fields/multifields.php';
+            },
+            'fields/categories' => function($kirby) {
+                return include __DIR__ . '/blueprints/fields/categories.php';
+            },
+            'fields/notes'       => function($kirby) {
+                return include __DIR__ . '/blueprints/fields/notes.php';
+            },
+            'tabs/meta'           => function($kirby) {
+                return include __DIR__ . '/blueprints/tabs/meta.php';
+            },
+        ],
+    ]
+);
 ```
 
 Let's assume we already had a basic `yml` blueprint that we wanted to extend programmatically.
@@ -547,33 +562,30 @@ This is our basic blueprint, which we put into the `blueprints/tabs` folder for 
 label: Meta
 icon: search
 
-sections:
-  basicMeta:
-    type: fields
-    fields:
-      metaHeadline:
-        label: Basic Meta Information
-        type: headline
-        numbered: false
-      metaTitle:
-        label: Title (Override)
-        type: text
-      metaDescription:
-        label: Description
-        type: text
-      metaCanonicalUrl:
-        label: Canonical URL
-        type: url
-      metaAuthor:
-        label: Author/s
-        type: text
-      metaImage:
-        label: Image
-        type: files
-        multiple: false
-      metaPhoneNumber:
-        label: Phone Number
-        type: text
+fields:
+  metaHeadline:
+    label: Basic Meta Information
+    type: headline
+    numbered: false
+  metaTitle:
+    label: Title (Override)
+    type: text
+  metaDescription:
+    label: Description
+    type: text
+  metaCanonicalUrl:
+    label: Canonical URL
+    type: url
+  metaAuthor:
+    label: Author/s
+    type: text
+  metaImage:
+    label: Image
+    type: filepicker
+    multiple: false
+  metaPhoneNumber:
+    label: Phone Number
+    type: text
 ```
 
 How can we extend this via PHP? In the same folder, let's create the `meta.php` file we already registered above, and add the following code:
@@ -586,8 +598,8 @@ use Kirby\Data\Data;
 
 $basicBlueprint = Data::read(__DIR__ . '/seo-basic.yml', 'yaml');
 $basicBlueprint['label'] = 'SEO';
-$fields = $basicBlueprint['sections']['basicMeta']['fields'];
-$basicBlueprint['sections']['basicMeta']['fields'] = array_merge($fields, [
+$fields = $basicBlueprint['fields']['basicMeta']['fields'];
+$basicBlueprint['fields']['basicMeta']['fields'] = array_merge($fields, [
     'mastodonHandle' => [
         'label' => 'Mastodon handle',
         'type' => 'text',
@@ -599,7 +611,7 @@ return $basicBlueprint;
 
 First, we read the file we want to extend into an array with `Data::read()`.
 
-Then we change the tab label and add a new field in the `basicMeta` section by merging the original fields array with the new `mastodonHandle` field.
+Then we change the tab label and add a new field in the `basicMeta` group by merging the original fields array with the new `mastodonHandle` field.
 
 We can now add this tab in our page blueprints:
 

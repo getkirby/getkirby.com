@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1200" width="1920" height="1200">
+	<rect width="1920" height="1200" fill="#fff"/>
+	<g fill="none" stroke="#c6cfd8" stroke-width="3">
+		<!-- frame -->
+		<rect x="1.5" y="1.5" width="1917" height="1197"/>
+		<!-- columns -->
+		<g stroke-dasharray="12 8">
+			<rect x="48" y="48" width="1824" height="448"/>
+			<rect x="48" y="544" width="888" height="608"/>
+			<rect x="984" y="544" width="888" height="608"/>
+		</g>
+		<!-- fields -->
+		<rect x="96" y="152" width="1728" height="296"/>
+		<rect x="96" y="648" width="792" height="200"/>
+		<rect x="96" y="896" width="792" height="208"/>
+		<rect x="1032" y="648" width="792" height="456"/>
+	</g>
+	<g fill="#2b3442" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="34">
+		<text x="96" y="108">Column (1/1)</text>
+		<text x="96" y="604">Column (1/2)</text>
+		<text x="1032" y="604">Column (1/2)</text>
+		<text x="145" y="212">Field</text>
+		<text x="145" y="708">Field</text>
+		<text x="145" y="956">Field</text>
+		<text x="1081" y="708">Field</text>
+	</g>
+</svg>

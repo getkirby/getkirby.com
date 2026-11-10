@@ -21,8 +21,8 @@ class ParametersTest extends TestCase
 		$this->assertSame(0, $parameters->count());
 
 		$parameters = new Parameters([
-			new Parameter('a', Types::factory('mixed')),
-			new Parameter('b', Types::factory('mixed')),
+			new Parameter('a', Types::fromString('mixed')),
+			new Parameter('b', Types::fromString('mixed')),
 		]);
 		$this->assertSame(2, $parameters->count());
 	}
@@ -33,7 +33,7 @@ class ParametersTest extends TestCase
 		$parameters  = Parameters::factory($reflectable);
 		$this->assertInstanceOf(Parameters::class, $parameters);
 		$this->assertSame(5, $parameters->count());
-		$this->assertSame('string $a, string $b = \'bar\', string|null $c = null, $d = null, mixed $e', $parameters->toString());
+		$this->assertSame('string $a, string $b = \'bar\', string|null $c = null, mixed $d = null, mixed $e', $parameters->toString());
 
 
 		$reflectable = new ReflectableFunction('parametersWithDescriptions');
@@ -43,11 +43,22 @@ class ParametersTest extends TestCase
 		$this->assertSame('mixed $a', $parameters->toString());
 		$this->assertTrue($parameters->hasDescriptions());
 
+		// a typeless `@param $name Description` keeps its description
+		// and falls back to the native type hint
+		$reflectable = new ReflectableFunction('parametersTypeless');
+		$parameters  = Parameters::factory($reflectable);
+		$this->assertInstanceOf(Parameters::class, $parameters);
+		$this->assertSame(2, $parameters->count());
+		$this->assertSame('string $a, int ...$rest', $parameters->toString());
+		$this->assertTrue($parameters->hasDescriptions());
+		$this->assertSame('Something', $parameters->data[0]->description());
+		$this->assertSame('The rest', $parameters->data[1]->description());
+
 		$reflectable = new ReflectableFunction('parametersVariadic');
 		$parameters  = Parameters::factory($reflectable);
 		$this->assertInstanceOf(Parameters::class, $parameters);
 		$this->assertSame(1, $parameters->count());
-		$this->assertSame('...$args', $parameters->toString());
+		$this->assertSame('mixed ...$args', $parameters->toString());
 
 		$reflectable = new ReflectableFunction('parametersVariadicWithDocBlock');
 		$parameters  = Parameters::factory($reflectable);
@@ -62,14 +73,14 @@ class ParametersTest extends TestCase
 		$this->assertFalse($parameters->hasDescriptions());
 
 		$parameters = new Parameters([
-			new Parameter('a', Types::factory('mixed')),
-			new Parameter('b', Types::factory('mixed')),
+			new Parameter('a', Types::fromString('mixed')),
+			new Parameter('b', Types::fromString('mixed')),
 		]);
 		$this->assertFalse($parameters->hasDescriptions());
 
 		$parameters = new Parameters([
-			new Parameter('a', Types::factory('mixed'), description: 'Something'),
-			new Parameter('b', Types::factory('mixed')),
+			new Parameter('a', Types::fromString('mixed'), description: 'Something'),
+			new Parameter('b', Types::fromString('mixed')),
 		]);
 		$this->assertTrue($parameters->hasDescriptions());
 	}
@@ -77,8 +88,8 @@ class ParametersTest extends TestCase
 	public function testNot(): void
 	{
 		$parameters = new Parameters([
-			new Parameter('a', Types::factory('mixed')),
-			new Parameter('b', Types::factory('mixed')),
+			new Parameter('a', Types::fromString('mixed')),
+			new Parameter('b', Types::fromString('mixed')),
 		]);
 
 		$this->assertSame(2, $parameters->count());
@@ -92,8 +103,8 @@ class ParametersTest extends TestCase
 		$this->assertCount(0, $parameters);
 
 		$parameters = new Parameters([
-			new Parameter('a', Types::factory('mixed')),
-			new Parameter('b', Types::factory('mixed')),
+			new Parameter('a', Types::fromString('mixed')),
+			new Parameter('b', Types::fromString('mixed')),
 		]);
 		$this->assertCount(2, $parameters);
 		$this->assertInstanceOf(Parameter::class, $parameters->data[0]);
@@ -104,8 +115,8 @@ class ParametersTest extends TestCase
 	public function testToString(): void
 	{
 		$parameters = new Parameters([
-			new Parameter('a', Types::factory('string'), default: '"foo"'),
-			new Parameter('b', Types::factory('mixed')),
+			new Parameter('a', Types::fromString('string'), default: '"foo"'),
+			new Parameter('b', Types::fromString('mixed')),
 		]);
 		$this->assertSame('string $a = "foo", mixed $b', $parameters->toString());
 	}
