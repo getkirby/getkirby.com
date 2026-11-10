@@ -35,10 +35,10 @@ return [
   'name' => 'English',
   'url' => '/',
   'translations' => [
-    'change' => 'Change',
-    'confirm' => 'OK',
-    'copy' => 'Copy',
-    'create' => 'Create'
+    'contact.name' => 'Name',
+    'contact.email' => 'Email',
+    'contact.message' => 'Message',
+    'contact.submit' => 'Send'
   ]
 ];
 ```
@@ -53,10 +53,10 @@ return [
   'locale' => 'de_DE',
   'name' => 'Deutsch',
   'translations' => [
-    'change' => 'Ändern',
-    'confirm' => 'OK',
-    'copy' => 'Kopieren',
-    'create' => 'Erstellen'
+    'contact.name' => 'Name',
+    'contact.email' => 'E-Mail',
+    'contact.message' => 'Nachricht',
+    'contact.submit' => 'Senden'
   ]
 ];
 ```
@@ -74,21 +74,39 @@ Language variables that you add in other languages than the default language wil
 
 If you stored your language variables in separate files as described in (link: docs/quicktips/language-variables text: this cookbook recipe) they will be read by the Panel, but then moved to the language definition files.
 
-**Core translation variables and translation variables from plugins are ignored and cannot be overwritten via the Panel.**
+## Overwriting Kirby's own translations
+
+<since v="5.6.0">
+Language variables cannot overwrite Kirby's own translation strings or translations registered by plugins. Such keys are ignored, no matter if they are stored in the language definition files or added via the Panel. Some of Kirby's own strings are rendered as HTML in the Panel, so they must not be editable by Panel users.
+</since>
+
+To overwrite one of Kirby's own translation strings, register it with the (link: docs/reference/plugins/extensions/translations text: `translations` extension) in a plugin instead:
+
+```php "/site/plugins/your-plugin/index.php"
+<?php
+
+Kirby::plugin('your/plugin', [
+  'translations' => [
+    'de' => [
+      'page.status.listed.description' => 'Die Seite ist veröffentlicht'
+    ]
+  ]
+]);
+```
 
 ## Using language variables in your template
 
 Those translated variables can be fetched in your template, plugins or snippets with the `t()` helper:
 
 ```php
-<input type="submit" value="<?= t('change') ?>" />
+<input type="submit" value="<?= t('contact.submit') ?>" />
 ```
 
 You can provide a fallback if the language variable is not defined:
 
 
 ```php
-<input type="submit" value="<?= t('change', 'Change') ?>" />
+<input type="submit" value="<?= t('contact.submit', 'Send') ?>" />
 ```
 
 ## More information
