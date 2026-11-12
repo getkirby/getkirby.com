@@ -16,7 +16,7 @@ return function (App $kirby, Page $page) {
 		$peopleNum    = max(1, min(4, (int)$people));
 		$renew        = get('renew');
 		$data         = [
-			'plan'       => get('plan') ?? 'certified',
+			'plan'       => get('plan') === 'regular' ? 'regular' : 'certified',
 			'title'      => get('businessName'),
 			'business'   => get('businessType'),
 			'location'   => get('location'),
