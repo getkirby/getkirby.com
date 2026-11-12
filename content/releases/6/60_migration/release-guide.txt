@@ -2,7 +2,7 @@ Title: Migration guides
 
 ----
 
-Intro: Kirby 6 beta.3 is ready for testing. Here's how to try it safely, what your server and browsers need and which guide fits your role.
+Intro: Kirby 6 beta.4 is ready for testing. Here's how to try it safely, what your server and browsers need and which guide fits your role.
 
 ----
 
@@ -11,7 +11,7 @@ Text:
 ## This is a beta
 
 <warning>
-**Don't use Kirby 6 beta.3 in production.** Make a backup of your site and test the beta on a copy, either locally or on a staging server.
+**Don't use Kirby 6 beta.4 in production.** Make a backup of your site and test the beta on a copy, either locally or on a staging server.
 </warning>
 
 Kirby 6 is a major release. The beta is meant to give you a head start: try it with your sites and plugins, find out what needs to change and tell us what breaks. Tweaks and even breaking changes can still change between the beta releases and the final release of Kirby 6 to get all ready and in place.
@@ -36,7 +36,7 @@ For everyone who maintains a plugin or custom Panel extensions: Vue 3, custom fi
 
 ### PHP
 
-Kirby 6 requires **PHP 8.3, 8.4 or 8.5**. Support for PHP 8.2 has been removed.
+Kirby 6 requires **PHP 8.3, 8.4, 8.5 or 8.6**. Support for PHP 8.2 has been removed.
 
 You can check your PHP version in the system view of the Panel. If your server runs an older version, switch to a newer one before you update Kirby. Kirby 5 already runs on PHP 8.3, 8.4 and 8.5, so you can change the PHP version first while your site still runs on Kirby 5 and update Kirby afterwards.
 
@@ -79,15 +79,15 @@ If you just want a first test drive, we've migrated our two kits for you to play
 
 ### Starterkit
 
-- Release: https://github.com/getkirby/starterkit/releases/tag/6.0.0-beta.3
-- Download: (link: https://github.com/getkirby/starterkit/archive/refs/tags/6.0.0-beta.3.zip text: starterkit-6.0.0-beta.3.zip)
+- Release: https://github.com/getkirby/starterkit/releases/tag/6.0.0-beta.4
+- Download: (link: https://github.com/getkirby/starterkit/archive/refs/tags/6.0.0-beta.4.zip text: starterkit-6.0.0-beta.4.zip)
 
 ### Plainkit
 
-- Release: https://github.com/getkirby/plainkit/releases/tag/6.0.0-beta.3
-- Download: (link: https://github.com/getkirby/plainkit/archive/refs/tags/6.0.0-beta.3.zip text: plainkit-6.0.0-beta.3.zip)
+- Release: https://github.com/getkirby/plainkit/releases/tag/6.0.0-beta.4
+- Download: (link: https://github.com/getkirby/plainkit/archive/refs/tags/6.0.0-beta.4.zip text: plainkit-6.0.0-beta.4.zip)
 
-## Install beta.3
+## Install beta.4
 
 Work on a copy of your site. Then pick the way you usually install Kirby:
 
@@ -95,14 +95,14 @@ Work on a copy of your site. Then pick the way you usually install Kirby:
 
 === Download
 
-Download the `6.0.0-beta.3` release from [GitHub](https://github.com/getkirby/kirby/releases), unpack it and replace your `kirby` folder with it. Rename the unpacked folder to `kirby` if needed.
+Download the `6.0.0-beta.4` release from [GitHub](https://github.com/getkirby/kirby/releases), unpack it and replace your `kirby` folder with it. Rename the unpacked folder to `kirby` if needed.
 
 === Composer
 
 Require the exact beta version:
 
 ```bash
-composer require getkirby/cms:6.0.0-beta.3
+composer require getkirby/cms:6.0.0-beta.4
 ```
 
 Or set the version in your `composer.json` and run `composer update getkirby/cms`:
@@ -110,7 +110,7 @@ Or set the version in your `composer.json` and run `composer update getkirby/cms
 ```js "/composer.json"
 {
   "require": {
-    "getkirby/cms": "6.0.0-beta.3"
+    "getkirby/cms": "6.0.0-beta.4"
   }
 }
 ```
@@ -124,16 +124,16 @@ If Kirby is a Git submodule in your project:
 ```bash
 cd kirby
 git fetch --tags
-git checkout 6.0.0-beta.3
+git checkout 6.0.0-beta.4
 cd ..
 git add kirby
-git commit -m "Try Kirby 6.0.0-beta.3"
+git commit -m "Try Kirby 6.0.0-beta.4"
 ```
 
 === Kirby CLI
 
 ```bash
-kirby upgrade 6.0.0-beta.3
+kirby upgrade 6.0.0-beta.4
 ```
 
 The CLI asks you to confirm the major version upgrade.
@@ -165,7 +165,7 @@ Test your site after every step. If something breaks, you know which update caus
 
 Found a bug or something that doesn't work like it did in Kirby 5? Please report it on GitHub: [github.com/getkirby/kirby/issues](https://github.com/getkirby/kirby/issues).
 
-Please mention that you're testing `6.0.0-beta.3` and include:
+Please mention that you're testing `6.0.0-beta.4` and include:
 
 - your PHP version and, for Panel issues, your browser and its version
 - the steps to reproduce the problem

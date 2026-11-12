@@ -22,7 +22,7 @@ Find your plugin type below and follow the links. Most plugins combine several t
 - **Block plugins:** Rebuild your preview components for Vue 3. Check your (link: #blueprints-shipped-with-your-plugin text: block blueprints) for presets and sections. The `image`, `gallery` and `video` block previews receive the file UUID now instead of the full file data.
 - **KirbyTag, hook, method and route plugins** (PHP only): Usually the quickest to migrate. Check (link: #php-8-3-and-stricter-types text: PHP 8.3), (link: #kirbytags text: KirbyTags), (link: #field-methods text: field methods) and (link: #exceptions text: exceptions). These plugins can often support Kirby 5 and 6 from one codebase.
 - **Auth plugins** (custom challenges, custom login UI): Custom challenges must be rewritten based on `Kirby\Auth\Challenge`, the `login` Panel extension is gone. See (link: #auth-plugins text: Auth plugins) and (link: releases/6/migration/plugin-developers/auth text: Custom auth methods & challenges).
-- **Plugins that extend or call core classes** (page models, custom collections, `Form`, `Blueprint`, Panel classes): Check the (link: #moved-and-renamed-classes text: moved classes), (link: #php-8-3-and-stricter-types text: typed class constants), (link: releases/6/migration/site-developers#custom-code-using-core-classes__collections text: removed collection methods), (link: #permissions-become-guards text: guards) and (link: #panel-backend text: Panel backend).
+- **Plugins that extend or call core classes** (page models, custom collections, `Form`, `Blueprint`, Panel classes): Check the (link: #moved-and-renamed-classes text: moved classes), (link: #removed-content-and-inventory-methods text: removed content methods), (link: #php-8-3-and-stricter-types text: typed class constants), (link: releases/6/migration/site-developers#custom-code-using-core-classes__collections text: removed collection methods), (link: #permissions-become-guards text: guards) and (link: #panel-backend text: Panel backend).
 
 ## First example migrations
 
@@ -46,7 +46,7 @@ The bigger topics have their own guides:
 - (link: releases/6/migration/plugin-developers/panel-backend text: Panel backend: areas, controllers & UI classes): controller classes and UI objects for views, dialogs, drawers and more, with a complete Panel area in its Kirby 5 and Kirby 6 version
 
 <info>
-Some of the new APIs, especially the Panel controller classes, are still marked as `@unstable` in beta.3 and may change until the final release.
+Some of the new APIs, especially the Panel controller classes, are still marked as `@unstable` in beta.4 and may change until the final release.
 </info>
 
 ## Declaring Kirby 6 support
@@ -61,7 +61,7 @@ Declare the Kirby versions your plugin supports in `extra.kirby.compatible`.  Ou
 	"type": "kirby-plugin",
 	"version": "2.0.0",
 	"require": {
-		"php": "~8.3.0 || ~8.4.0 || ~8.5.0",
+		"php": "~8.3.0 || ~8.4.0 || ~8.5.0 || ~8.6.0",
 		"getkirby/composer-installer": "^1.2"
 	},
 	"extra": {
@@ -72,7 +72,7 @@ Declare the Kirby versions your plugin supports in `extra.kirby.compatible`.  Ou
 }
 ```
 
-If one version of your plugin supports both majors, use `"^5.0 || ^6.0"` and keep your PHP constraint wide enough for Kirby 5 (PHP 8.2). A constraint like `^6.0` also matches pre-releases such as `6.0.0-beta.3`.
+If one version of your plugin supports both majors, use `"^5.0 || ^6.0"` and keep your PHP constraint wide enough for Kirby 5 (PHP 8.2). A constraint like `^6.0` also matches pre-releases such as `6.0.0-beta.4`.
 
 All details are in our guide on (link: docs/guide/plugins/publishing#kirby-versions-support text: declaring which Kirby versions you support).
 
@@ -99,7 +99,7 @@ if (version_compare(Kirby::version(), '6.0.0', '>=') === true) {
 
 ## PHP 8.3 and stricter types
 
-Kirby 6 requires PHP 8.3, 8.4 or 8.5. PHP 8.2 is no longer supported. Update the `php` constraint in your `composer.json` and your CI matrix.
+Kirby 6 requires PHP 8.3, 8.4, 8.5 or 8.6. PHP 8.2 is no longer supported. Update the `php` constraint in your `composer.json` and your CI matrix.
 
 ### Signatures and return types
 
@@ -109,9 +109,9 @@ Custom cache drivers that extend `Kirby\Cache\Cache` directly must implement `en
 
 ## Moved and renamed classes
 
-Several classes have moved into new namespaces. Some old names still resolve through a deprecated class alias in beta.3, others are gone:
+Several classes have moved into new namespaces. Some old names still resolve through a deprecated class alias in beta.4, others are gone:
 
-| Kirby 5 | Kirby 6 | Old name in beta.3 |
+| Kirby 5 | Kirby 6 | Old name in beta.4 |
 | - | - | - |
 | `Kirby\Cms\Blueprint`, `Kirby\Cms\PageBlueprint`, `Kirby\Cms\SiteBlueprint`, `Kirby\Cms\FileBlueprint`, `Kirby\Cms\UserBlueprint` | `Kirby\Blueprint\Blueprint`, `Kirby\Blueprint\PageBlueprint` … | deprecated alias |
 | `Kirby\Cms\Auth` | `Kirby\Auth\Auth` | deprecated alias |
@@ -161,6 +161,40 @@ $session = $kirby->sessions()->find($token);
 ```
 
 All deprecated session methods are listed in the (link: releases/6/changelog#deprecated__core__sessions text: changelog).
+
+## Removed content and inventory methods
+
+Methods that were deprecated in Kirby 5 have been removed. Except for `Inventory::$numSeparator`, their replacements already exist in Kirby 5, so you can switch now and support both versions:
+
+| Kirby 5 | Kirby 6 |
+| - | - |
+| `$model->readContent()` | `$model->version()->read()` |
+| `$model->writeContent()` | `$model->version()->save()` |
+| `$model->saveContent()`, `$model->saveTranslation()` | `$model->save()` |
+| `$model->createDefaultContent()` | `$model->createContent()` |
+| `$model->isLocked()` | `$model->lock()->isLocked()` |
+| `$translation->update()` | `$model->version()->update()` |
+| `$translation->isDefault()` | `$translation->language()->isDefault()` |
+| `$translation->parent()` | `$translation->model()` |
+| `$translation->contentFile()` | – |
+| `Kirby\Http\Url::to()` | `Kirby\Cms\Url::to()` or the `url()` helper |
+| `$page->updateParentCollections()` | `Kirby\Cms\ModelState::update()` |
+| `Kirby\Filesystem\Dir::inventory()` | `Kirby\Cms\Inventory::for()` |
+| `Kirby\Filesystem\Dir::$numSeparator` | `Kirby\Cms\Inventory::$numSeparator` |
+
+Static calls to `Kirby\Http\Url` that are neither a method nor a property of `Kirby\Http\Uri` throw a `Kirby\Exception\BadMethodCallException` instead of returning `null`.
+
+`$page->inventory()`, `$site->inventory()` and `$user->inventory()` return a `Kirby\Cms\Inventory` object instead of an array:
+
+```php
+// Kirby 5
+$children = $page->inventory()['children'];
+
+// Kirby 6
+$children = $page->inventory()->children();
+```
+
+If you extend `Kirby\Cms\Inventory`, note that `child()` and `template()` are no longer static. `child()` takes `$item` and `$models`, `template()` is public and takes no arguments.
 
 ## KirbyTags
 
@@ -218,7 +252,7 @@ Also see (link: releases/6/changelog#breaking-changes__core__changed-exceptions 
 
 ## Permissions become guards
 
-Kirby 6 introduces (link: releases/6/guards text: guards): one place that answers whether an action is possible, allowed for the current user and valid for the given input. `$model->permissions()`, the permission classes behind it and the `*Rules` classes are deprecated, but keep working in beta.3:
+Kirby 6 introduces (link: releases/6/guards text: guards): one place that answers whether an action is possible, allowed for the current user and valid for the given input. `$model->permissions()`, the permission classes behind it and the `*Rules` classes are deprecated, but keep working in beta.4:
 
 ```php
 // Kirby 5 (deprecated in Kirby 6)
@@ -324,7 +358,7 @@ More in (link: releases/6/blueprints text: Simpler blueprints).
 The auth system has moved to the new `Kirby\Auth` namespace and was rebuilt around auth methods and auth challenges:
 
 - **Custom challenges** must be rewritten based on the instance-based `Kirby\Auth\Challenge` class. They are still registered with the `authChallenges` extension and need a `form()` for the Panel login.
-- **Custom login methods** are new: register them with the `authMethods` extension. Registered methods and challenges must also be enabled in the `auth.methods` and `auth.challenges` options, and their registry key must match the class's `type()`.
+- **Custom login methods** are new: register them with the `authMethods` extension. Registered methods and challenges must also be enabled in the `auth.methods` and `auth.challenges` options. Kirby passes the registry key to the class as its type, so one class can be registered under several types, each with its own options.
 - **Custom login UI:** The `login` extension type of `panel.plugin()` has been removed. Register your form as a regular component and return it from the `form()` method of your method or challenge. `<k-login-form>`, `<k-login-code-form>` and `<k-login>` have been removed. `<k-login-code>` is now a different component, a code input for the new login forms.
 - **Status and return values:** `$kirby->auth()->status()` returns a `Kirby\Auth\Status` object with a different API than `Kirby\Cms\Auth\Status`. `Auth::validatePassword()` and `Auth::verifyChallenge()` return `Kirby\Cms\User|null`. `Kirby\Cms\Find::user()` throws a `Kirby\Exception\UserNotFoundException`.
 

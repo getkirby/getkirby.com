@@ -11,7 +11,7 @@
 	<div class="container">
 		<?php snippet('layouts/topbar', [
 			'icon'   => '🧪',
-			'title'  => 'Kirby 6 Beta 3 is out!',
+			'title'  => 'Kirby 6 Beta 4 is out!',
 			'button' => 'Try it',
 			'link'   => '/releases/6',
 			'active' => $page->is('releases/6')

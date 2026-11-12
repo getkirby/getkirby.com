@@ -2,7 +2,7 @@ Title: For site developers
 
 ----
 
-Intro: Everything you need to move a Kirby 5 site to Kirby 6 beta.3: what breaks, how to spot it and what to change, with before and after code for every step.
+Intro: Everything you need to move a Kirby 5 site to Kirby 6 beta.4: what breaks, how to spot it and what to change, with before and after code for every step.
 
 ----
 
@@ -11,7 +11,7 @@ Text:
 ## Before you start
 
 <warning>
-Kirby 6 beta.3 is not ready for production. Make a backup and test the update on a copy of your site, including the `content` folder.
+Kirby 6 beta.4 is not ready for production. Make a backup and test the update on a copy of your site, including the `content` folder.
 </warning>
 
 This guide will navigate you through the main breaking changes that can affect a site, sorted by where you'll run into it: requirements, config, blueprints, templates, content, queries, users and permissions, the Panel and custom PHP code. At the end, you'll find (link: #how-to-perform-the-update text: how to perform the update) and a (link: #checklist text: checklist) to work through.
@@ -32,7 +32,7 @@ return [
 
 ## Requirements
 
-### PHP 8.3, 8.4 or 8.5
+### PHP 8.3, 8.4, 8.5 or 8.6
 
 Kirby 6 needs PHP 8.3 or newer. PHP 8.2 is no longer supported.
 
@@ -630,9 +630,28 @@ Most code uses `$kirby->session()`, which works like before. If you work with th
 
 The deprecated collection methods `current()`, `next()`, `prev()`, `key()`, `rewind()` and `valid()` have been removed. Calls to them don't throw an error but return `null`, so search your code for them. Use `foreach`, `first()`, `last()` or `nth()` instead. `$page->next()`, `$page->prev()` and similar methods of a single page, file or user are not affected.
 
+### Removed content methods
+
+Methods that were deprecated in Kirby 5 have been removed. If your page models, controllers or other custom code call them, switch to their replacements:
+
+| Kirby 5 | Kirby 6 |
+| - | - |
+| `$model->readContent()` | `$model->version()->read()` |
+| `$model->writeContent()` | `$model->version()->save()` |
+| `$model->saveContent()`, `$model->saveTranslation()` | `$model->save()` |
+| `$model->createDefaultContent()` | `$model->createContent()` |
+| `$model->isLocked()` | `$model->lock()->isLocked()` |
+| `$translation->update()` | `$model->version()->update()` |
+| `$translation->isDefault()` | `$translation->language()->isDefault()` |
+| `$translation->parent()` | `$translation->model()` |
+| `$translation->contentFile()` | – |
+| `Kirby\Http\Url::to()` | `Kirby\Cms\Url::to()` or the `url()` helper |
+
+`Url::to()` without a namespace, e.g. in templates, uses `Kirby\Cms\Url` and keeps working.
+
 ## How to perform the update
 
-Once your site code and plugins are ready, update Kirby itself. For beta.3, use the exact version `6.0.0-beta.3`, as described on the (link: releases/6/migration#install-beta-3 text: migration overview). Otherwise, our general update instructions apply:
+Once your site code and plugins are ready, update Kirby itself. For beta.4, use the exact version `6.0.0-beta.4`, as described on the (link: releases/6/migration#install-beta-4 text: migration overview). Otherwise, our general update instructions apply:
 
 - (link: docs/guide/install-guide/installation-via-download#updating-your-installation text: Update via download)
 - (link: docs/guide/install-guide/composer#updating-kirby text: Update via Composer)
@@ -649,7 +668,7 @@ Print this list or copy it into your project notes.
 
 - Backup made, test copy set up, debug mode on
 - Site runs on the latest Kirby 5 release without deprecation warnings
-- PHP 8.3, 8.4 or 8.5 on the server
+- PHP 8.3, 8.4, 8.5 or 8.6 on the server
 - Plugins: Kirby 6 versions available
 
 **Config**
@@ -679,6 +698,7 @@ Print this list or copy it into your project notes.
 - `$language->isLast()` checked
 - `Uuid::for()` only with objects
 - No `current()`, `next()`, `prev()`, `key()`, `rewind()` or `valid()` calls on collections
+- No calls to removed content methods like `$page->readContent()` or `$page->isLocked()`
 - Exceptions thrown with named arguments
 - Custom validators don't use core names
 - Frontend login forms use `authenticate()` and `$status->state()`

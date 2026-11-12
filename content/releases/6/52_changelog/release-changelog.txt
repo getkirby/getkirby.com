@@ -4,7 +4,7 @@ Title: Changelog
 
 Text:
 
-This is the full changelog for **Kirby 6.0.0-beta.3**. In addition to all the features on the (link: releases/6 text: Kirby 6 release page), there are many more enhancements, breaking changes and deprecations in the fine print.
+This is the full changelog for **Kirby 6.0.0-beta.4**. In addition to all the features on the (link: releases/6 text: Kirby 6 release page), there are many more enhancements, breaking changes and deprecations in the fine print.
 
 Kirby 6 is still in beta. This changelog will be updated with every pre-release until the final 6.0.0 release. If you are upgrading an existing project, start with our (link: releases/6/migration text: migration guides).
 
@@ -45,6 +45,7 @@ Enhancements:
 
 ## For site developers
 
+- Support for PHP 8.6 [#8781](https://github.com/getkirby/kirby/pull/8781)
 - Improved IDE autocompletion for field methods [#7082](https://github.com/getkirby/kirby/pull/7082)
 - Panel only shows missing blueprint info when debug mode is active https://feedback.getkirby.com/392
 - On installation, all required PHP extensions are checked and installation is blocked if one is missing. The Panel system view shows an alert if a required PHP extension is missing. [#7812](https://github.com/getkirby/kirby/pull/7812)
@@ -96,6 +97,7 @@ Enhancements:
 - A field option with the wrong type in a blueprint shows a clear error message, e.g. `Field "title": The option "required" must be of type bool` [#8616](https://github.com/getkirby/kirby/pull/8616)
 - New `Kirby\Cms\Language::isLastLanguage()` method to check if a language is the only remaining one (the previous meaning of `isLast()`) [#8582](https://github.com/getkirby/kirby/pull/8582)
 - New `$users->findByEmail()` method to find a user only by email address [#8757](https://github.com/getkirby/kirby/pull/8757)
+- `auth.challenges` accepts options per type, like `auth.methods`
 
 ## For plugin developers
 
@@ -142,6 +144,9 @@ Enhancements:
 - `Kirby\Cms\Files::delete()` and `Kirby\Cms\Pages::delete()` accept UUIDs and still only delete items in the collection [#8315](https://github.com/getkirby/kirby/pull/8315)
 - New `Kirby\Blueprint\Tab` and `Kirby\Blueprint\Tabs` classes to work with tabs and their props in blueprints [#8449](https://github.com/getkirby/kirby/pull/8449)
 - New `Kirby\Auth\Service\Webauthn` class [#8245](https://github.com/getkirby/kirby/pull/8245)
+- Auth methods and challenges can be registered under several types, e.g. one LDAP login method per directory
+- New `Kirby\Auth\Method::label()`, `Kirby\Auth\Challenge::label()`, `Kirby\Auth\Challenge::options()` and `Kirby\Auth\Challenges::config()`
+- Auth methods that throw any exception from their constructor or `isEnabled()` are left out. With the default `'auth.debug' => 'log'`, the exception is written to the PHP error log. With `debug` enabled, the exception is thrown.
 - Updated `Kirby\Toolkit\Html::$inlineList` and `Kirby\Toolkit\Html::$voidList` [#8286](https://github.com/getkirby/kirby/pull/8286)
 
 ### Frontend
@@ -215,7 +220,6 @@ Enhancements:
 
 - New `panel.act()` method to act on the `message`, `event`, `redirect` and `reload` keys of a response, e.g. `await panel.act(await panel.post("shop/sync"))` [#8660](https://github.com/getkirby/kirby/pull/8660)
 - `<k-tag>` supports color themes (`positive`, `negative`, `notice`, `warning`, `info`) as tinted tags [#8662](https://github.com/getkirby/kirby/pull/8662)
-- Plugin components that extend a lazy-loaded component, e.g. `extends: "k-writer-input"`, become lazy themselves [#8657](https://github.com/getkirby/kirby/pull/8657)
 
 ### Backend
 
@@ -277,6 +281,11 @@ Performance:
 - Block fieldsets no longer build their forms upfront. Saving a page with a `blocks` field is faster when the blueprint registers more block types than the content uses. [#8391](https://github.com/getkirby/kirby/pull/8391)
 - Constructor parameter names are resolved once per class instead of once per reflection [#8390](https://github.com/getkirby/kirby/pull/8390)
 - `Kirby\Exception\Exception` and its subclasses resolve their code and message lazily [#8459](https://github.com/getkirby/kirby/pull/8459)
+- Pages and Panel views with JPEG, PNG or WebP thumbnails render faster, up to 6× with large originals like phone photos
+- Pages with many children load faster when (many) page models are registered: each child is checked against the models most common among its siblings first (thx [@ovenum](https://github.com/ovenum)) [#8640](https://github.com/getkirby/kirby/pull/8640)
+- HTML attributes are built several times faster, which speeds up pages with many links, images and KirbyTags (about 20% on text-heavy pages) [#8800](https://github.com/getkirby/kirby/pull/8800)
+- Reading page content, e.g. `$page->title()` or `$pages->template()`, and `$page->files()` no longer needs to resolve the children of the page directory (thx [@leobardimpact](https://github.com/leobardimpact)) [#8643](https://github.com/getkirby/kirby/issues/8643)
+- Pages with long blocks fields render faster, about 2× with 100 blocks and 3× with 200 blocks [#8799](https://github.com/getkirby/kirby/pull/8799)
 
 ## Panel
 
@@ -286,7 +295,6 @@ Performance:
 - `pagelist` and `filelist` fields with `layout: table` load faster. Their performance only depends on the number of displayed columns, no longer on the size of the blueprint. [#8439](https://github.com/getkirby/kirby/pull/8439)
 - Requests for model item preview data are batched: components that ask for a file or page in the same tick share a single request instead of firing one each [#8341](https://github.com/getkirby/kirby/pull/8341)
 - `panel.content.diff()` is computed once per change instead of on every call [#8340](https://github.com/getkirby/kirby/pull/8340)
-- ProseMirror is no longer part of the initial Panel bundle but imported when needed [#8342](https://github.com/getkirby/kirby/pull/8342)
 - The icon sprite is no longer inlined into every Panel document [#8445](https://github.com/getkirby/kirby/pull/8445)
 - Browsers cache each plugin script and stylesheet until the file changes [#8603](https://github.com/getkirby/kirby/pull/8603)
 
@@ -359,6 +367,10 @@ Bugfixes:
     date: true        # default column
   ```
 
+- `$helper.upload()` rejects and calls its `error` callback on a network error instead of never settling. It rejects with an `AbortError` when its abort signal fires, instead of never settling. (thx [@johannschopplich](https://github.com/johannschopplich)) [#8770](https://github.com/getkirby/kirby/pull/8770) [#8774](https://github.com/getkirby/kirby/pull/8774)
+- `panel.api.site.update()` updates the site instead of failing with a missing route (thx [@johannschopplich](https://github.com/johannschopplich)) [#8771](https://github.com/getkirby/kirby/pull/8771)
+- `$helper.string.hasEmoji()` no longer counts digits, `#` and `*` as emoji, so `<k-icon>` no longer mistakes icon types like `plugin.icon-2` for one (thx [@johannschopplich](https://github.com/johannschopplich)) [#8773](https://github.com/getkirby/kirby/pull/8773)
+
 ----
 
 Breaking:
@@ -367,7 +379,7 @@ Breaking:
 
 ### General
 
-- Removed support for PHP 8.2. Use PHP 8.3, 8.4 or 8.5 instead. [#7372](https://github.com/getkirby/kirby/pull/7372)
+- Removed support for PHP 8.2. Use PHP 8.3, 8.4, 8.5 or 8.6 instead. [#7372](https://github.com/getkirby/kirby/pull/7372)
 - Changed the default YAML handler to Symfony YAML which sometimes enforces a stricter syntax than our previous Spyc handler. You can switch back to Spyc with the config option `'yaml.handler' => 'spyc'` [#7530](https://github.com/getkirby/kirby/pull/7530)
 - New global helper functions `push()`, `endpush()` and `stack()` can collide with functions of the same name in your code [#7867](https://github.com/getkirby/kirby/pull/7867)
 - Template data must not include variables named `$slot` or `$slots`. [#7599](https://github.com/getkirby/kirby/pull/7599)
@@ -396,6 +408,23 @@ Breaking:
   - `Kirby\Cms\Responder::markVolatileHeader()`. Use `$responder->volatileHeaders()->mark($name, $values)` instead.
   - `Kirby\Text\KirbyTag::option()` and `Kirby\Text\KirbyTag::$options`. Use `$tag->kirby()->option()` instead.
   - `Kirby\Email\Body::clone()` and `Kirby\Email\Email::clone()`
+  - `Kirby\Cms\ModelWithContent::createDefaultContent()`. Use `Kirby\Cms\ModelWithContent::createContent()` instead.
+  - `Kirby\Cms\ModelWithContent::isLocked()`. Use `$model->lock()->isLocked()` instead.
+  - `Kirby\Cms\ModelWithContent::readContent()`. Use `$model->version()->read()` instead.
+  - `Kirby\Cms\ModelWithContent::writeContent()`. Use `$model->version()->save()` instead.
+  - `Kirby\Cms\ModelWithContent::saveContent()` and `Kirby\Cms\ModelWithContent::saveTranslation()`. Use `Kirby\Cms\ModelWithContent::save()` instead.
+  - `Kirby\Cms\Page::updateParentCollections()`. Use `Kirby\Cms\ModelState::update()` instead.
+  - `Kirby\Content\Translation::contentFile()`, without replacement
+  - `Kirby\Content\Translation::isDefault()`. Use `$translation->language()->isDefault()` instead.
+  - `Kirby\Content\Translation::parent()`. Use `Kirby\Content\Translation::model()` instead.
+  - `Kirby\Content\Translation::update()`. Use `$model->version()->update()` instead.
+  - `Kirby\Http\Url::to()`. Use `Kirby\Cms\Url::to()` or the `url()` helper instead.
+  - `Kirby\Filesystem\Dir::inventory()`. Use `Kirby\Cms\Inventory::for()` instead.
+- Removed the `model-content-file` and `translation-methods` keys from `Kirby\Cms\Helpers::$deprecations`
+- `Kirby\Http\Url` throws a `Kirby\Exception\BadMethodCallException` for static calls that are neither a method nor a property of `Kirby\Http\Uri`, instead of returning `null`
+- `Kirby\Cms\Page::inventory()`, `Kirby\Cms\Site::inventory()` and `Kirby\Cms\User::inventory()` return a `Kirby\Cms\Inventory` object. Use `Kirby\Cms\Inventory::children()`, `Kirby\Cms\Inventory::files()` and `Kirby\Cms\Inventory::template()` instead of the array keys.
+- `Kirby\Cms\Inventory::child()` and `Kirby\Cms\Inventory::template()` are no longer static. `Kirby\Cms\Inventory::child()` takes `$item` and `$models`, and `Kirby\Cms\Inventory::template()` is public and takes no arguments. Subclasses that override or call them need to be updated.
+- Removed `Kirby\Filesystem\Dir::$numSeparator`. Use `Kirby\Cms\Inventory::$numSeparator` instead.
 
 ### Collections
 
@@ -636,6 +665,7 @@ Sections have been replaced by fields (see "Sections become fields" above). Blue
   - `image`, `gallery` and `video` block previews receive the file UUID instead of full file item data
   - `<k-textarea-input>`: removed the deprecated `restoreSelectionCallback()`. Use `restoreSelection()` instead.
   - `<k-writer-input>`: removed the deprecated `createMarksFromPanelPlugins()`, `createNodesFromPanelPlugins()` and `filterExtensions()`. Use `$helper.writer.availableMarksFromPlugins()`, `$helper.writer.availableNodesFromPlugins()` and `$helper.writer.filterExtensions()` instead.
+  - Writer: the editor's `drop` event passes one object instead of four arguments: `this.editor.on("drop", ({ view, event, slice, moved }) => {})` [#8780](https://github.com/getkirby/kirby/pull/8780)
 - View changes
   - Preview view: `versionId` parameter has been renamed to `mode` in view controller, buttons and Vue components [#7795](https://github.com/getkirby/kirby/pull/7795)
   - `k-login-view` and components have been refactored with breaking changes [#7840](https://github.com/getkirby/kirby/pull/7840)
@@ -647,7 +677,6 @@ Sections have been replaced by fields (see "Sections become fields" above). Blue
 - Helpers
   - Removed `$helper.isVueComponent()` [#7518](https://github.com/getkirby/kirby/pull/7518)
   - Removed `$helper.link.preview()`. Use `<k-pages-field-preview>` or `<k-files-field-preview>` to render a model preview, or `$helper.items("items/pages", id)` / `$helper.items("items/files", id)` if you need the raw data. [#7725](https://github.com/getkirby/kirby/pull/7725) [#8341](https://github.com/getkirby/kirby/pull/8341)
-  - `$helper.string.sanitizeHTML()` is asynchronous now [#8342](https://github.com/getkirby/kirby/pull/8342)
   - Removed `$library.dayjs.merge()`
 - Removed deprecated `panel.dialog.openComponent()` method [#7518](https://github.com/getkirby/kirby/pull/7518)
 - Removed `panel.dialog.successEvents()`, `panel.dialog.successNotification()` and `panel.dialog.successRedirect()`, as well as the same methods on `panel.drawer`. Use `panel.act()` instead. [#8660](https://github.com/getkirby/kirby/pull/8660)
@@ -981,7 +1010,7 @@ Shared behavior has been extracted into reusable mixins, such as:
   - New auth methods: `Kirby\Auth\Methods`, `Kirby\Auth\Method`, `Kirby\Auth\Method\BasicAuthMethod`, `Kirby\Auth\Method\CodeMethod`, `Kirby\Auth\Method\PasswordMethod`, `Kirby\Auth\Method\PasswordResetMethod` and `Kirby\Auth\Method\WebauthnMethod`
   - New auth challenges: `Kirby\Auth\Challenges`, `Kirby\Auth\Challenge`, `Kirby\Auth\Challenge\EmailChallenge`, `Kirby\Auth\Challenge\TotpChallenge` and `Kirby\Auth\Challenge\WebauthnChallenge`
   - New exceptions: `Kirby\Auth\Exception\ChallengeTimeoutException`, `Kirby\Auth\Exception\LoginNotPermittedException`, `Kirby\Auth\Exception\RateLimitException` and `Kirby\Exception\UserNotFoundException`
-- Auth challenges have been changed from static classes to instance-based objects
+- Auth methods and challenges have been changed from static classes to instance-based objects. They receive the type they are registered with and their options from the `auth.methods` or `auth.challenges` config.
 - Panel login decomposed from two fixed forms into small composable components and a thin `LoginView.vue` shell driven by the backend.
 - New `Kirby\Cms\User::changeSecret()` / `Kirby\Cms\UserRules::changeSecret()` generalise the old TOTP-specific secret writing.
 - New Panel routes: `/login/(type)/(name)`, e.g. `/login/method/password` [#8045](https://github.com/getkirby/kirby/pull/8045)
@@ -1024,6 +1053,10 @@ Housekeeping:
   - Docblocks use short class names where the class has been imported via `use` [#8338](https://github.com/getkirby/kirby/pull/8338)
   - Started to remove types from docblocks that only repeat the native PHP type hints [#8250](https://github.com/getkirby/kirby/pull/8250)
   - More precise parameter and return types, including generics, across many Toolkit classes
+- New unit tests for `k-structure-field`'s value watcher and selection handling
+- New unit tests for updated and removed listeners in the `preserveListeners` mixin
+- Updated JS and PHP dependencies
+- Kirby's Composer dependencies allow patch and minor updates, so Composer installs get upstream security fixes without waiting for a Kirby release [#8789](https://github.com/getkirby/kirby/pull/8789)
 
 ----
 
