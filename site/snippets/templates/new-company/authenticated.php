@@ -12,7 +12,7 @@
 		<?php if ($email): ?>
 			<a href="<?= option('hub.url') ?>" class="form-account h6 mb-3 flex items-center">
 				<strong class="mr-3">Account</strong>
-				<figure class="mr-3"><?= icon('mail') ?></figure> <?= $email ?>
+				<figure class="mr-3"><?= icon('mail') ?></figure> <?= esc($email) ?>
 			</a>
 		<?php endif ?>
 	</header>
