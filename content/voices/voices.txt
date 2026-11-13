@@ -1,1 +1,7 @@
 Title: What others say about Kirby
+
+----
+
+Thumbnail:
+  -
+  lead: Community

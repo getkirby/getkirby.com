@@ -1,2 +1,7 @@
 Title: The buzz
 
+----
+
+Thumbnail:
+  -
+  lead: Resources

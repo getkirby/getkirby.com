@@ -2,6 +2,12 @@ Title: Sustainability
 
 ----
 
+Thumbnail:
+  -
+  lead: Kirby
+
+----
+
 Description:
 
 ----

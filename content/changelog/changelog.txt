@@ -1,5 +1,11 @@
 Title: Breaking changes
 
 ----
+
+Thumbnail:
+  -
+  lead: Releases
+
+----
 Text:
 
