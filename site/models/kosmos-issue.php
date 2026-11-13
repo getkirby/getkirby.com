@@ -15,7 +15,7 @@ class KosmosIssuePage extends DefaultPage
 			'thumbnail' => [
 				'lead'  => 'Kirby Kosmos',
 				'title' => 'Episode ' . $this->uid(),
-				'image' => $this->image()
+				'image' => $this->cover()
 			],
 			'changefreq' => 'never'
 		];

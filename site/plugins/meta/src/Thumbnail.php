@@ -7,8 +7,10 @@ use Kirby\Cms\App;
 use Kirby\Cms\File;
 use Kirby\Cms\Page;
 use Kirby\Filesystem\F;
+use Kirby\Http\Remote;
 use Kirby\Http\Response;
 use Kirby\Toolkit\Str;
+use Throwable;
 
 /**
  * Creates a dynamic OpenGraph thumbnail for a page with Typst
@@ -132,7 +134,8 @@ class Thumbnail
 	}
 
 	/**
-	 * Image path relative to the index root
+	 * Image path relative to the index root;
+	 * remote images get cached locally for Typst
 	 */
 	protected function imagePath(): string|null
 	{
@@ -147,10 +150,29 @@ class Thumbnail
 			return null;
 		}
 
-		$index = App::instance()->root('index');
+		$kirby = App::instance();
+		$index = $kirby->root('index');
 		$root  = $this->image->root();
 
-		if (is_file($root) === false || str_starts_with($root, $index . '/') === false) {
+		if (is_file($root) === false) {
+			$root = static::cache() . '/remote/' . sha1($this->image->url()) . '.' . $extension;
+
+			if (is_file($root) === false) {
+				try {
+					$response = Remote::get($this->image->url());
+				} catch (Throwable) {
+					return null;
+				}
+
+				if ($response->code() !== 200) {
+					return null;
+				}
+
+				F::write($root, $response->content());
+			}
+		}
+
+		if (str_starts_with($root, $index . '/') === false) {
 			return null;
 		}
 
