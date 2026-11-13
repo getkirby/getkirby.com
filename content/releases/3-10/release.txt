@@ -6,7 +6,7 @@ Subtitle:
 ----
 Version: 3.10
 ----
-ogimage: opengraph.png
+ogimage: kirby-3-10.png
 ----
 Cover: - kirby-3-10.png
 ----
