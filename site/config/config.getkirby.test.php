@@ -30,4 +30,6 @@ return [
 
 	],
 	'kosmosApi' => 'http://kosmos.test/kosmos.json',
+	// PHP-FPM doesn't see the shell's PATH
+	'kirby.meta.typst' => '/opt/homebrew/bin/typst',
 ];

@@ -2,13 +2,16 @@
 
 namespace Kirby\Meta;
 
-use GdImage;
+use Exception;
+use Kirby\Cms\App;
 use Kirby\Cms\File;
 use Kirby\Cms\Page;
+use Kirby\Filesystem\F;
 use Kirby\Http\Response;
+use Kirby\Toolkit\Str;
 
 /**
- * Creates a dynamic OpenGraph thumbnail for a page
+ * Creates a dynamic OpenGraph thumbnail for a page with Typst
  *
  * @author    Nico Hoffmann <nico@getkirby.com>
  * @link      https://getkirby.com
@@ -16,31 +19,11 @@ use Kirby\Http\Response;
  */
 class Thumbnail
 {
-	public const PATTERNS = [
-		'abyss',
-		'beach',
-		'blobs',
-		'darkness',
-		'deepsea',
-		'lagoon',
-		'lava',
-		'pinkblue',
-		'purple',
-		'rainforest',
-		'sea',
-		'sky',
-		'space',
-		'turmoil',
-		'viscera'
-	];
+	public const TEMPLATE = __DIR__ . '/templates/opengraph.typ';
 
-	protected GdImage $canvas;
-	protected int $height = 630;
 	protected File|null $image;
 	protected string $lead;
-	protected int $offset = 50;
 	protected string $title;
-	protected int $width  = 1200;
 
 	public function __construct(
 		protected string $id
@@ -49,124 +32,9 @@ class Thumbnail
 		$this->data();
 	}
 
-	protected function addBackground(): void
+	protected static function cache(): string
 	{
-		$this->addPattern();
-		$this->addFrame();
-	}
-
-	protected function addFrame(): void
-	{
-		$radius = 20;
-		$white  = imagecolorallocate($this->canvas, 255, 255, 255);
-
-		// Filling rectangles
-		imagefilledrectangle(
-			$this->canvas,
-			$this->offset + $radius,
-			$this->offset,
-			$this->width - $this->offset - $radius,
-			$this->height - ($this->hasImage() ? 0 : $this->offset),
-			$white
-		);
-		imagefilledrectangle(
-			$this->canvas,
-			$this->offset,
-			$this->offset + $radius,
-			$this->offset + $radius - 1,
-			$this->height - ($this->hasImage() ? 0 : $this->offset + $radius),
-			$white
-		);
-		imagefilledrectangle(
-			$this->canvas,
-			$this->width - $this->offset - $radius + 1,
-			$this->offset + $radius,
-			$this->width - $this->offset,
-			$this->height - ($this->hasImage() ? 0 : $this->offset + $radius),
-			$white
-		);
-
-		// Corners
-		imagefilledarc(
-			$this->canvas,
-			$this->offset + $radius - 1,
-			$this->offset + $radius - 1,
-			$radius * 2,
-			$radius * 2,
-			180,
-			270,
-			$white,
-			IMG_ARC_PIE
-		);
-		imagefilledarc(
-			$this->canvas,
-			$this->width - $this->offset - $radius + 1,
-			$this->offset + $radius - 1,
-			$radius * 2,
-			$radius * 2,
-			270,
-			360,
-			$white,
-			IMG_ARC_PIE
-		);
-
-		if ($this->hasImage() === false) {
-			imagefilledarc(
-				$this->canvas,
-				$this->offset + $radius - 1,
-				$this->height - $this->offset - $radius + 1,
-				$radius * 2,
-				$radius * 2,
-				90,
-				180,
-				$white,
-				IMG_ARC_PIE
-			);
-			imagefilledarc(
-				$this->canvas,
-				$this->width - $this->offset - $radius + 1,
-				$this->height - $this->offset - $radius + 1,
-				$radius * 2,
-				$radius * 2,
-				360,
-				90,
-				$white,
-				IMG_ARC_PIE
-			);
-		}
-	}
-
-	protected function addPattern(): void
-	{
-		$seed    = abs(crc32($this->id));
-		$pattern = static::PATTERNS[$seed % count(static::PATTERNS)];
-		$root    = dirname(__DIR__, 4) . '/assets/patterns';
-		$pattern = imagecreatefromjpeg($root . '/' . $pattern . '.jpg');
-		$width   = imagesx($this->canvas);
-		$height  = imagesy($this->canvas);
-
-		// pattern
-		imagecopy(
-			$this->canvas,
-			$pattern,
-			0,
-			0,
-			$seed % (imagesx($pattern) - $width),
-			$seed % (imagesy($pattern) - $height),
-			$width,
-			$height
-		);
-
-		// dark overlay
-		imagefilledrectangle(
-			$this->canvas,
-			0,
-			0,
-			$width,
-			$height,
-			// semi-transparent black
-			imagecolorallocatealpha($this->canvas, 0, 0, 0, 100)
-		);
+		return App::instance()->root('cache') . '/opengraph';
 	}
 
 	protected function data(): void
@@ -210,8 +78,9 @@ class Thumbnail
 			}
 		}
 
-		$this->lead  = static::removeEmoji($data['lead'] ?? $page->metaLead(null, 'The CMS'));
-		$this->title = static::removeEmoji($data['title'] ?? $page->title());
+		// Some virtual pages have HTML in their titles
+		$this->lead  = static::removeEmoji(Str::unhtml($data['lead'] ?? $page->metaLead(null, 'The CMS')));
+		$this->title = static::removeEmoji(Str::unhtml($data['title'] ?? $page->title()));
 		$this->image = $data['image'] ?? null;
 	}
 
@@ -263,11 +132,80 @@ class Thumbnail
 	}
 
 	/**
+	 * Image path relative to the index root
+	 */
+	protected function imagePath(): string|null
+	{
+		if ($this->hasImage() === false) {
+			return null;
+		}
+
+		// formats Typst can read
+		$extension = strtolower($this->image->extension());
+
+		if (in_array($extension, ['gif', 'jpeg', 'jpg', 'png', 'svg', 'webp'], true) === false) {
+			return null;
+		}
+
+		$index = App::instance()->root('index');
+		$root  = $this->image->root();
+
+		if (is_file($root) === false || str_starts_with($root, $index . '/') === false) {
+			return null;
+		}
+
+		return substr($root, strlen($index));
+	}
+
+	/**
+	 * Inputs for the Typst template
+	 */
+	protected function inputs(): array
+	{
+		$inputs = [
+			'lead'  => $this->lead,
+			'title' => $this->title,
+			// picks the background pattern
+			'seed'  => abs(crc32($this->id)),
+		];
+
+		if ($image = $this->imagePath()) {
+			$inputs['image'] = $image;
+		}
+
+		return $inputs;
+	}
+
+	/**
 	 * Returns page for which the thumbnail should be generated
 	 */
 	public function page(): Page|null
 	{
 		return page($this->id);
+	}
+
+	/**
+	 * Rendered PNG, cached until inputs or template change
+	 */
+	protected function png(): string
+	{
+		$inputs = $this->inputs();
+		$image  = App::instance()->root('index') . ($inputs['image'] ?? '');
+		$key    = sha1(json_encode([
+			$inputs,
+			md5_file(static::TEMPLATE),
+			is_file($image) ? filemtime($image) : null
+		]));
+		$file   = static::cache() . '/' . $key . '.png';
+
+		if (is_file($file) === true) {
+			return F::read($file);
+		}
+
+		$png = $this->render($inputs);
+		F::write($file, $png);
+
+		return $png;
 	}
 
 	protected static function removeEmoji(string $string): string
@@ -281,6 +219,52 @@ class Thumbnail
 	}
 
 	/**
+	 * Renders the PNG with the Typst CLI
+	 */
+	protected function render(array $inputs): string
+	{
+		$kirby   = App::instance();
+		$command = [
+			$kirby->option('kirby.meta.typst', 'typst'),
+			'compile',
+			'--root', $kirby->root('index'),
+			'--font-path', __DIR__ . '/assets',
+			'--ignore-system-fonts',
+			'--format', 'png',
+			'--ppi', '72',
+		];
+
+		foreach ($inputs as $key => $value) {
+			$command[] = '--input';
+			$command[] = $key . '=' . $value;
+		}
+
+		$command[] = static::TEMPLATE;
+		$command[] = '-';
+
+		$process = proc_open(
+			$command,
+			[1 => ['pipe', 'w'], 2 => ['pipe', 'w']],
+			$pipes
+		);
+
+		if ($process === false) {
+			throw new Exception('Could not start Typst');
+		}
+
+		$png    = stream_get_contents($pipes[1]);
+		$errors = stream_get_contents($pipes[2]);
+		fclose($pipes[1]);
+		fclose($pipes[2]);
+
+		if (proc_close($process) !== 0) {
+			throw new Exception('Typst could not render the OpenGraph image: ' . $errors);
+		}
+
+		return $png;
+	}
+
+	/**
 	 * Generates the thumnail and returns it as Response
 	 */
 	public function response(): Response|null
@@ -289,97 +273,6 @@ class Thumbnail
 			return new Response('Page not found', 'text/plain', 404);
 		}
 
-		// Create canvas
-		$this->canvas = imagecreatetruecolor($this->width, $this->height);
-
-		// Define colors and fonts
-		$black = imagecolorallocate($this->canvas, 0, 0, 0);
-		$gray  = imagecolorallocate($this->canvas, 153, 153, 153);
-		$sans  = __DIR__ . '/assets/Inter-Regular.otf';
-		$bold  = __DIR__ . '/assets/Inter-Bold.otf';
-		$logo  = imagecreatefrompng(__DIR__ . '/assets/logo.png');
-
-		$this->addBackground();
-
-		$margin  = $y = $this->offset * 2;
-
-		// Lead text
-		[$x, $y] = imagettftext(
-			$this->canvas,
-			$size = 32,
-			0,
-			$margin,
-			$y += $size,
-			$gray,
-			$sans,
-			$this->lead
-		);
-
-		$length = strlen($this->title);
-		$size   = $length < 24 ? 62 : 54;
-		$title  = wordwrap($this->title, $size > 60 ? 17 : 22, "\n");
-
-		[$x, $y] = imagefttext(
-			$this->canvas,
-			$size,
-			0,
-			$margin - 5,
-			$y += $size + 35,
-			$black,
-			$bold,
-			$title,
-			['linespacing' => .915]
-		);
-
-		$y += $this->offset;
-
-		if ($this->hasImage()) {
-			$ch = curl_init();
-			curl_setopt($ch, CURLOPT_URL, url($this->image->url()));
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-			$data = curl_exec($ch);
-			curl_close($ch);
-			$image = imagecreatefromstring($data);
-
-			// Set size (auto with max-width)
-			$max = $this->width - (5 * $this->offset) - imagesx($logo);
-			$w   = min(imagesx($image), $max);
-			$h   = (imagesy($image) / imagesx($image)) * $w;
-
-			imagecopyresampled(
-				$this->canvas,
-				$image,
-				$margin,
-				$y,
-				0,
-				0,
-				(int)$w,
-				(int)$h,
-				imagesx($image),
-				imagesy($image)
-			);
-		}
-
-		// Logo
-		imagecopyresampled(
-			$this->canvas,
-			$logo,
-			$this->width - $margin - imagesx($logo),
-			$this->height - ($this->hasImage() ? $this->offset : $margin) - imagesy($logo),
-			0,
-			0,
-			imagesx($logo),
-			imagesy($logo),
-			imagesx($logo),
-			imagesy($logo)
-		);
-
-		// Render
-		ob_start();
-		imagepng($this->canvas);
-		$body = ob_get_clean();
-		imagedestroy($this->canvas);
-
-		return new Response($body, 'image/png');
+		return new Response($this->png(), 'image/png');
 	}
 }
