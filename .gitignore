@@ -13,6 +13,7 @@ Icon
 !/media/index.html
 /node_modules/
 /site/config/buy.ppp.php
+/snapshot
 
 # Editors
 # ---------------
