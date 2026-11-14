@@ -2,6 +2,12 @@ Title: Contact
 
 ----
 
+Thumbnail:
+  -
+  lead: Kirby
+
+----
+
 Description: Information about how to reach us, copyright information and disclaimer.
 
 ----

@@ -2,6 +2,12 @@ Title: New EULA: Summary of changes
 
 ----
 
+Thumbnail:
+  -
+  lead: License / March 21, 2023
+
+----
+
 Intro:
 
 On March 21, 2023, we made minor edits to our license agreement (EULA) based on community feedback we received in the last months.

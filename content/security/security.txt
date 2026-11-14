@@ -2,6 +2,12 @@ Title: Security Policy
 
 ----
 
+Thumbnail:
+  -
+  lead: Kirby
+
+----
+
 Text:
 
 ## Supported Versions

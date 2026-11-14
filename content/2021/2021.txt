@@ -2,6 +2,13 @@ Title: 2021
 
 ----
 
+Thumbnail:
+  -
+  lead: December 2021
+  title: The state of Kirby
+
+----
+
 Text:
 
 ----

@@ -2,6 +2,12 @@ Title: New EULA: Summary of changes
 
 ----
 
+Thumbnail:
+  -
+  lead: License / March 15, 2022
+
+----
+
 Intro:
 
 On March 15, 2022, we switched to our (link: new-company text: new team company). In this switch, we needed to update the license agreement (EULA) and used the opportunity to incorporate feedback we received in the previous months.
