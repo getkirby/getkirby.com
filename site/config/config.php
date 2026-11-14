@@ -29,5 +29,5 @@ return [
 		'uuid'    => false
 	],
 	'kosmosApi'  => 'https://kosmos.getkirby.com/kosmos.json',
-	'kirby.meta.typst' => '/snap/bin/typst',
+	'kirby.meta.typst' => '/usr/local/bin/typst',
 ];
