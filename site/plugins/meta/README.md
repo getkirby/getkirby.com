@@ -20,7 +20,7 @@ Each key is read from the page's content file, then from the `metadata()` method
 
 A page uses its `ogimage`, else its `opengraph.png` file, else a generated image at `/{page}/opengraph.png`.
 
-The generated image is rendered from `src/templates/opengraph.typ` with [Typst](https://typst.app) and cached in `site/cache/opengraph`. It shows a lead (default: breadcrumb of parent titles, or "The CMS"), the title and an optional page image:
+The generated image is rendered from `src/templates/opengraph.typ` with [Typst](https://typst.app) and cached in `site/cache/{host}/kirby/meta`. It shows a lead (default: breadcrumb of parent titles, or "The CMS"), the title and an optional page image:
 
 ```yaml
 Thumbnail: screenshot.png

@@ -13,6 +13,8 @@ load([
 
 App::plugin('kirby/meta', [
 	'options' => [
+		// rendered OpenGraph images
+		'cache' => true,
 		// Typst CLI binary
 		'typst' => 'typst'
 	],

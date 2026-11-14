@@ -36,7 +36,7 @@ class Thumbnail
 
 	protected static function cache(): string
 	{
-		return App::instance()->root('cache') . '/opengraph';
+		return App::instance()->cache('kirby.meta')->root();
 	}
 
 	protected function data(): void
