@@ -24,21 +24,6 @@ return [
 		'action'  => fn () => 'did:plc:saf6ox5ysclcv6ic44xd6rsz'
 	],
 	[
-		'pattern' => 'hooks/clean',
-		'method'  => 'GET|POST',
-		'action'  => function () {
-			$key = option('keys.hooks');
-
-			if (empty($key) === false && get('key') === $key) {
-				kirby()->cache('diffs')->flush();
-				kirby()->cache('pages')->flush();
-				kirby()->cache('reference')->flush();
-			}
-
-			go();
-		}
-	],
-	[
 		'pattern' => 'brands/(:all?)',
 		'action' => function () {
 			go('/');

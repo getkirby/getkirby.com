@@ -12,7 +12,6 @@ return [
 	],
 	'fastmail' => '',
 	'github'   => '',
-	'hooks'    => '',
 	'hub'      => '',
 	'keycdn'   => '',
 	'paddle'   => [
