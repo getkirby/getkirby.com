@@ -24,7 +24,7 @@ The login screen has been rebuilt. You log in just like before, with a few addit
 - **More than one way to log in:** if your site offers several ways to log in, the other options are listed below the form, e.g. "Login with passkey" or "Forgot your password?".
 - **Switch your second factor:** if you're asked for a second step, e.g. a code from your authenticator app, you can switch to another method you have set up, e.g. a code via email, without starting over.
 
-Read more about the (link: releases/6/authentication#new-login-view text: new login view).
+Read more about the (link: docs/guide/authentication/login-methods#the-login-view text: new login view).
 
 ## Your security settings
 
@@ -41,7 +41,7 @@ The security drawer shows your email address and password, and the second factor
 - **Authenticator app:** use one-time codes from an app on your phone as a second factor.
 - **Code via email:** receive a one-time code by email as a second factor.
 
-Read more about (link: releases/6/authentication#security-drawer text: the security drawer).
+Read more about (link: docs/guide/authentication/2fa#the-security-drawer text: the security drawer).
 
 ### Passkeys
 
@@ -61,7 +61,7 @@ From then on, the Panel asks you for this second factor every time you log in wi
 
 If your site requires two-factor authentication for everybody, nothing changes for you: users who haven't set up a passkey or an authenticator app get a code via email.
 
-Read more about (link: releases/6/authentication#two-factor-authentication text: two-factor authentication for every user).
+Read more about (link: docs/guide/authentication/2fa#two-factor-authentication text: two-factor authentication for every user).
 
 ## Editing content
 

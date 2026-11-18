@@ -207,7 +207,7 @@ The `auth` options mostly work like before, with a few changes:
 - **`auth.challenges`** defaults to `['webauthn', 'totp', 'email']` now (Kirby 5: `['totp', 'email']`). If you set the option in your config, add `webauthn` to let users use passkeys as second factor.
 - HTTP Basic auth (`api.basicAuth`) can't complete a second step. Users who have set up a second factor can no longer authenticate with Basic auth. Use dedicated API users without a second factor.
 
-To offer passkeys as login method, add `webauthn` to `auth.methods`. Passkeys need HTTPS, except on `localhost`, and are bound to the host of your site URL: passkeys from your staging domain won't work on your production domain. All details are in the (link: releases/6/authentication#passkeys text: authentication guide).
+To offer passkeys as login method, add `webauthn` to `auth.methods`. Passkeys need HTTPS, except on `localhost`, and are bound to the host of your site URL: passkeys from your staging domain won't work on your production domain. All details are in the (link: docs/guide/authentication/2fa#passkeys text: authentication guide).
 
 ## Blueprints
 
