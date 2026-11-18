@@ -194,6 +194,27 @@ But you can also overwrite and extend our (link: #default-areas text: core areas
 
 We will focus on views on this page. For guides on how to extend dialogs, dropdowns or searches, please check out the dedicated pages on those parts.
 
+### Removing core definitions
+
+To remove a core dialog, drawer, dropdown, request, search or view from an area, set its definition to `false`. For example, to remove the file search:
+
+```php "/site/plugins/no-file-search/index.php"
+<?php
+
+Kirby::plugin(
+  name: 'acme/no-file-search',
+  extends: [
+    'areas' => [
+      'site' => [
+        'searches' => [
+          'files' => false
+        ]
+      ]
+    ]
+  ]
+);
+```
+
 ### Example: how to replace the users view
 
 In this example, we will create an entirely new users view. The users view is part of the users area.
