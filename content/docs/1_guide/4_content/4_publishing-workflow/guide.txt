@@ -13,6 +13,8 @@ Text:
 
 When you edit pages, files or user accounts in the Panel, you will see our "unsaved changes" form controls show up on the top of the view that allow you to either save or discard these changes.
 
+The labels of fields with unsaved changes are highlighted, so you can see at a glance what you've changed before you save.
+
 Get more details about the changes for the current page, file or user, by accessing the info dropdown next to the form controls:
 
 (image: changes-info-dropdown.png)
