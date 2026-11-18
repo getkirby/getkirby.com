@@ -54,12 +54,14 @@ If you need even more detailed control over which pages are cached or ignored, y
 ```php
 <?php
 
+use Kirby\Content\VersionId;
+
 class ProjectPage extends Page
 {
-  public function isCacheable(): bool
+  public function isCacheable(VersionId|null $versionId = null): bool
   {
     // run the core checks
-    if (parent::isCacheable() === false) {
+    if (parent::isCacheable($versionId) === false) {
       return false;
     }
 

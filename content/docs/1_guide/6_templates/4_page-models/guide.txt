@@ -121,7 +121,7 @@ A simple unintrusive example is to sort all images differently by default:
 <?php
 
 class ProjectPage extends Page {
-  public function images() {
+  public function images(): Files {
     return parent::images()->sortBy('sort', 'ASC');
   }
 }
