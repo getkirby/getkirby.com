@@ -34,9 +34,28 @@ class SecurityPage extends DefaultPage
 					default => $advisory['cvss']
 				};
 
+				$affected = [];
+				$fixed    = [];
+
+				foreach ($advisory['vulnerabilities'] as $vulnerability) {
+					$range = $vulnerability['vulnerable_version_range'];
+
+					// older advisories list OR-ed versions and hyphen ranges
+					// instead of GitHub's AND-ed constraints with operators
+					if (preg_match('/(^|,)\s*\d/', $range) === 1) {
+						$range = Str::replace($range, [', ', '-'], [' || ', ' - ']);
+					}
+
+					$affected[] = $range;
+
+					if (is_string($vulnerability['patched_versions']) === true) {
+						$fixed[] = $vulnerability['patched_versions'];
+					}
+				}
+
 				$incidents[] = [
-					'affected'    => Str::replace($advisory['vulnerabilities'][0]['vulnerable_version_range'], [', ', '-'], [' || ', ' - ']),
-					'fixed'       => $advisory['vulnerabilities'][0]['patched_versions'],
+					'affected'    => implode(' || ', $affected),
+					'fixed'       => implode(', ', $fixed),
 					'description' => $advisory['summary'],
 					'link'        => $advisory['html_url'],
 					'severity'    => $advisory['severity'],
