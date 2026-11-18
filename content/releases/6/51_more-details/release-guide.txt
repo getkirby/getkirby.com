@@ -13,6 +13,11 @@ Features:
   text: Serve the Markdown or JSON representation of a page based on the Accept header of the request, no file extension in the URL needed.
   link: "/releases/6/more-details#content-negotiation"
 -
+  icon: box
+  headline: Objects as field values
+  text: Pass files, pages, users, blocks or dates to `$model->update()` and each field stores them in its own format.
+  link: "/releases/6/more-details#objects-as-field-values"
+-
   icon: code
   headline: Smarter queries
   text: Kirby queries support logical not and negative values, and several parsing bugs have been fixed.
@@ -52,6 +57,11 @@ Features:
   headline: More MIME types
   text: Kirby knows more file types, from WebAssembly to WebVTT subtitles and web app manifests.
   link: "/releases/6/more-details#more-mime-types"
+-
+  icon: import
+  headline: Drop files on dialogs
+  text: Any dialog or drawer becomes a drop zone for files as soon as it has a `drop` listener.
+  link: "/releases/6/more-details#drop-files-on-dialogs"
 -
   icon: plugin
   headline: Disable core Panel features
@@ -148,6 +158,32 @@ During installation, Kirby checks all required PHP extensions and blocks the ins
 ## More MIME types
 
 Kirby knows the MIME types of more file extensions: `7z`, `aac`, `apng`, `atom`, `epub`, `ods`, `oga`, `rar`, `svgz`, `vtt`, `wasm`, `weba` and `webmanifest`. `ico` and `psd` also map to their registered types now.
+
+## Drop files on dialogs
+
+Dialogs and drawers come with a drop zone. It turns on as soon as a `drop` listener is attached to `<k-dialog>` or `<k-drawer>`, and the listener receives the dropped files. The file picker uses it for its uploads, and your own dialogs can do the same, e.g. to hand the files to the Panel's upload dialog:
+
+```vue "/site/plugins/acme-import/src/components/ImportDialog.vue"
+<template>
+  <k-dialog @drop="onDrop">
+    <k-text>Drop a CSV file here to import it.</k-text>
+  </k-dialog>
+</template>
+
+<script>
+export default {
+  methods: {
+    onDrop(files) {
+      this.$panel.upload.open(files, {
+        url: this.$panel.urls.api + "/acme/import",
+        accept: ".csv",
+        multiple: false
+      });
+    }
+  }
+};
+</script>
+```
 
 ## Disable core Panel features
 
