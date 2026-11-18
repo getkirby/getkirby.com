@@ -337,7 +337,7 @@ If your plugin registers blueprints (pages, files, blocks, …), check them for 
 - **YAML:** Kirby 6 parses YAML with Symfony YAML, which is stricter than the old Spyc parser in a few places. Test the YAML blueprints your plugin registers with Kirby 6 and fix the (link: docs/guide/updates/update-to-v6/site-developers#yaml-symfony-is-the-new-default-parser text: common YAML issues).
 - **Option fields:** Move `api` and `query` options into `options` (see above). The `text => value` notation for `color` field options has been removed, use `value => text`.
 
-More in (link: releases/6/blueprints text: Simpler blueprints).
+More in the (link: docs/guide/updates/update-to-v6/site-developers#blueprints text: guide for site developers).
 
 ## Auth plugins
 

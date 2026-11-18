@@ -12,7 +12,7 @@ Text:
 
 Sections and fields used to be two parallel worlds with their own plugin extensions, API routes, Vue mixins and blueprint syntax. In Kirby 6, fields fully replace sections. A field that doesn't store anything (a `DisplayField`) covers everything a section was used for. And as a field, it also gets `when` conditions, a `width` and its place in the same blueprint structure as all other fields.
 
-For the core sections, nothing needs to happen right away: Kirby converts `pages`, `files`, `info` and `stats` sections into the `pagelist`, `filelist`, `info` and `stats` fields, and unwraps `fields` sections into their fields. Read more about the conversion and the new fields in (link: releases/6/blueprints text: Blueprints).
+For the core sections, nothing needs to happen right away: Kirby converts `pages`, `files`, `info` and `stats` sections into the `pagelist`, `filelist`, `info` and `stats` fields, and unwraps `fields` sections into their fields. Read more about the conversion and the new fields in the (link: docs/guide/updates/update-to-v6/site-developers#blueprints__sections-become-fields text: guide for site developers).
 
 Custom sections are not converted. You will need act and convert your section into a field. See the (link: releases/6/changelog#breaking-changes__sections text: full list of breaking changes for sections).
 

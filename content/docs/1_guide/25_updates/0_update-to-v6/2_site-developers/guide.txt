@@ -211,7 +211,7 @@ To offer passkeys as login method, add `webauthn` to `auth.methods`. Passkeys ne
 
 ## Blueprints
 
-Blueprints have changed a lot in Kirby 6, but most existing blueprints keep working without changes. The (link: releases/6/blueprints text: blueprints guide) explains everything in detail.
+Blueprints have changed a lot in Kirby 6, but most existing blueprints keep working without changes. The (link: docs/guide/blueprints/layout text: layout guide) shows how they are structured now.
 
 ### Sections become fields
 
@@ -252,7 +252,7 @@ columns:
 | `type: stats` | `type: stats` |
 | `type: fields` | unwrapped into the surrounding `fields` |
 
-The `template` option of lists is called `blueprints` now; the old name still works. The `section` field, which embedded a section in a form, is gone: use the field directly.
+Page lists use `blueprints` instead of `templates` or `template`, file lists use `blueprint` instead of `template`; the old names still work. The `section` field, which embedded a section in a form, is gone: use the field directly. The `rawvalues` option of the `pages` and `files` sections is gone as well; the new table layout doesn't need it.
 
 A blueprint is now always tabs, then columns, then fields. You don't have to write all three levels: loose fields are wrapped in one full-width column and loose columns in one tab, so the short forms you already use keep working.
 
@@ -262,7 +262,7 @@ You don't need to rewrite working blueprints right away. The automatic conversio
 
 **Custom sections from plugins** are no longer supported. Kirby shows an error box ("Invalid section type") in their place. Update the plugin to a version for Kirby 6.
 
-When you rewrite blueprints, keep in mind that `type: pages`, `type: files` and `type: users` in a `fields` list are the (deprecated) names of our picker fields, not lists. Use `pagelist` and `filelist` for lists. Read the full details in the (link: releases/6/blueprints#sections-become-fields text: blueprints guide).
+When you rewrite blueprints, keep in mind that `type: pages`, `type: files` and `type: users` in a `fields` list are the (deprecated) names of our picker fields, not lists. Use `pagelist` and `filelist` for lists.
 
 ### Blueprint presets
 
@@ -356,7 +356,7 @@ country:
     url: "{{ site.url }}/countries.json"
 ```
 
-The shorthand with a query string, e.g. `options: site.children`, works like before. Read more in the (link: releases/6/blueprints#option-fields text: blueprints guide).
+The shorthand with a query string, e.g. `options: site.children`, works like before. Read more in the (link: docs/reference/panel/fields/select#dynamic-options text: field reference).
 
 ### Option fields keep invalid values
 
@@ -612,7 +612,7 @@ These classes have been removed without an alias:
 | Removed | Use instead |
 | - | - |
 | `Kirby\Session\AutoSession` | `Kirby\Session\Sessions` |
-| `Kirby\Cms\Section` | fields, see (link: releases/6/blueprints text: blueprints) |
+| `Kirby\Cms\Section` | fields, see (link: #blueprints__sections-become-fields text: Sections become fields) |
 | `Kirby\Cms\Picker`, `PagePicker`, `FilePicker`, `UserPicker` | the picker dialog controllers in `Kirby\Panel\Controller\Dialog` |
 | `Kirby\Form\FieldClass` | `Kirby\Form\Field`, see the (link: docs/guide/updates/update-to-v6/plugin-developers text: guide for plugin developers) |
 
