@@ -10,7 +10,7 @@
  */
 
 $update   = '(method: $page->update)';
-$callback = '(link: docs/reference/objects/cms/page/update#updating-a-field-by-callback text: pass a callback)';
+$callback = '(link: docs/reference/objects/cms/page/update#examples__updating-a-field-by-callback text: pass a callback)';
 
 $picker = fn (string $type, string $name, string $example, string $ids, string $item) => [
 	'name'   => $name,
