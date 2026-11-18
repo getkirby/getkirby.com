@@ -73,9 +73,9 @@ The Panel in Kirby 6 needs browsers released from roughly mid-2024 onwards. We f
 
 Your website itself is not affected: these requirements only apply to the Panel.
 
-## First test drive
+## Try Kirby 6 with a kit
 
-If you just want a first test drive, we've migrated our two kits for you to play around with:
+To get to know Kirby 6 before you update a site, start with one of our kits:
 
 ### Starterkit
 
