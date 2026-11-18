@@ -34,7 +34,7 @@ fields:
   gallery:
     label: Gallery
     type: filelist
-    template: gallery
+    blueprint: gallery
 ```
 ## Shortcuts
 
@@ -54,7 +54,7 @@ fields:
 
   files:
     label: My Files
-    template: cover
+    blueprint: cover
 ```
 Keep in mind that the same field name can only be used once per blueprint.
 
@@ -262,7 +262,7 @@ info: "{{ file.dimensions }}"
 ```
 ## Restricting uploads to certain file types
 
-If you want to restrict what types of files can be uploaded to the field, assign a file template using the `template` property. In your file template, set the `accept` option. See the docs about (link: docs/reference/panel/blueprints/file#accept text: file blueprints).
+If you want to restrict what types of files can be uploaded to the field, assign a file blueprint with the `blueprint` option. In that file blueprint, set the `accept` option. See the docs about (link: docs/reference/panel/blueprints/file#accept text: file blueprints).
 
 By default, Kirby supports (link: docs/guide/files/files#supported-file-types text: the following files types).
 
@@ -316,21 +316,23 @@ images:
   type: filelist
   label: Images
   query: page.images
-  template: image
+  blueprint: image
 documents:
   type: filelist
   label: Documents
   query: page.documents
-  template: document
+  blueprint: document
 ```
 
-### Template
+### Blueprint
 
-You can define which template each file in the list must have. This `template` option will also be applied to any new file that gets uploaded. Blueprints for file templates can be setup in `/site/blueprints/files`.
+You can define which blueprint each file in the list must have. This `blueprint` option will also be applied to any new file that gets uploaded. File blueprints can be set up in `/site/blueprints/files`.
 
 ```yaml
-template: cover
+blueprint: cover
 ```
+
+In Kirby 5, this option was called `template`. The old name still works.
 
 In combination with the `query` property, use the `uploads` option to set the file blueprint that will be assigned at upload.
 
@@ -416,15 +418,15 @@ fields:
 
 Through a field, you upload files to a page, either the current page or another parent page. Contrary to a filepicker field, the file does not become part of the content, i.e. it is not referenced in the content file.
 
-If you assign a file template to a particular field, you can filter by this template when fetching files in the frontend.
+If you assign a file blueprint to a particular field, you can filter by its name when fetching files in the frontend.
 
-Assuming a `filelist` field like the following which uploads images to the current page and assigns a template called `gallery`:
+Assuming a `filelist` field like the following which uploads images to the current page and assigns a blueprint called `gallery`:
 
 ```yaml
 fields:
   gallery:
     type: filelist
-    template: gallery
+    blueprint: gallery
 ```
 
 You can then fetch those files in the frontend like this:

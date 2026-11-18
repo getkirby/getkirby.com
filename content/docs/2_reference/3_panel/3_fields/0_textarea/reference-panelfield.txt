@@ -98,7 +98,7 @@ textarea:
       cover: true
   uploads:
     parent: site.find("media")
-    template: textarea-upload
+    blueprint: textarea-upload
 ```
 
 You can also deactivate file uploads:
