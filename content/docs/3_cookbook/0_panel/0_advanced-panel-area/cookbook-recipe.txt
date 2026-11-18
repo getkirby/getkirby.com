@@ -1197,7 +1197,7 @@ return [
 ];
 ```
 
-The Panel escapes plain strings in the text of a dialog, so a product title can never inject any HTML. Since we want the `<strong>` tag to be rendered, we mark the text as trusted HTML with `HtmlString::translate()`, which escapes the values that it fills in. Read more about it in our guide on (link: releases/6/migration/plugin-developers/trusted-html text: trusted HTML in the Panel).
+The Panel escapes plain strings in the text of a dialog, so a product title can never inject any HTML. Since we want the `<strong>` tag to be rendered, we mark the text as trusted HTML with `HtmlString::translate()`, which escapes the values that it fills in. Read more about it in our guide on (link: docs/guide/updates/update-to-v6/plugin-developers/trusted-html text: trusted HTML in the Panel).
 
 ## Refactoring time
 

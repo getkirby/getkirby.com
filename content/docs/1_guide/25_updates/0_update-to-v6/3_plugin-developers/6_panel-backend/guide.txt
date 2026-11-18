@@ -84,7 +84,7 @@ An area like this one from Kirby 5 runs in Kirby 6 without changes:
 ]
 ```
 
-There are only two things to watch out for: plain strings in props like a dialog's `text` are escaped now (see (link: releases/6/migration/plugin-developers/trusted-html text: Trusted HTML)), and errors are handled differently (see (link: releases/6/error-handling#for-plugin-developers text: Better errors in the Panel)).
+There are only two things to watch out for: plain strings in props like a dialog's `text` are escaped now (see (link: docs/guide/updates/update-to-v6/plugin-developers/trusted-html text: Trusted HTML)), and errors are handled differently (see (link: releases/6/error-handling#for-plugin-developers text: Better errors in the Panel)).
 
 ## Controller classes
 
@@ -595,7 +595,7 @@ window.panel.plugin("acme/todos", {
 });
 ```
 
-If you compile your components with a build tool, you need a Vue 3 build for Kirby 6. See (link: releases/6/migration/plugin-developers/vue-3 text: Vue 3 for Panel plugins).
+If you compile your components with a build tool, you need a Vue 3 build for Kirby 6. See (link: docs/guide/updates/update-to-v6/plugin-developers/vue-3 text: Vue 3 for Panel plugins).
 
 ### What you gain
 

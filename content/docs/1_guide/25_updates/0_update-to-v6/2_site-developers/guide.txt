@@ -16,7 +16,7 @@ Make a backup and test the update on a copy of your site, including the `content
 
 This guide will navigate you through the main breaking changes that can affect a site, sorted by where you'll run into it: requirements, config, blueprints, templates, content, queries, users and permissions, the Panel and custom PHP code. At the end, you'll find (link: #how-to-perform-the-update text: how to perform the update) and a (link: #checklist text: checklist) to work through.
 
-Topics for plugin developers, like Vue 3, custom fields as PHP classes or the Panel backend, have their own (link: releases/6/migration/plugin-developers text: guide for plugin developers). For all details, see the (link: releases/6/changelog#breaking-changes text: breaking changes) and (link: releases/6/changelog#deprecated text: deprecations) in the changelog.
+Topics for plugin developers, like Vue 3, custom fields as PHP classes or the Panel backend, have their own (link: docs/guide/updates/update-to-v6/plugin-developers text: guide for plugin developers). For all details, see the (link: releases/6/changelog#breaking-changes text: breaking changes) and (link: releases/6/changelog#deprecated text: deprecations) in the changelog.
 
 Before you update:
 
@@ -40,7 +40,7 @@ Kirby 6 needs PHP 8.3 or newer. PHP 8.2 is no longer supported.
 
 Plugins that add anything to the Panel have to be rebuilt for Vue 3. Plugins that register custom sections or define custom fields as arrays need updates as well.
 
-Update to a Kirby 6 version of each plugin. If there is none yet, ask the plugin author. For your own plugins, follow the (link: releases/6/migration/plugin-developers text: guide for plugin developers).
+Update to a Kirby 6 version of each plugin. If there is none yet, ask the plugin author. For your own plugins, follow the (link: docs/guide/updates/update-to-v6/plugin-developers text: guide for plugin developers).
 
 ## YAML: Symfony is the new default parser
 
@@ -550,7 +550,7 @@ Verify the code with `$kirby->auth()->verifyChallenge($code)` like before. `logi
 
 ### Custom auth challenges and the `changeTotp` hooks
 
-Custom auth challenges have to be rewritten based on the new `Kirby\Auth\Challenge` class. Read more about (link: releases/6/migration/plugin-developers/auth text: custom auth methods and challenges).
+Custom auth challenges have to be rewritten based on the new `Kirby\Auth\Challenge` class. Read more about (link: docs/guide/updates/update-to-v6/plugin-developers/auth text: custom auth methods and challenges).
 
 `$user->changeTotp()` is deprecated in favor of `$user->changeSecret('totp', $secret)`. As a consequence, the `user.changeTotp:before` and `user.changeTotp:after` hooks no longer run. Use `user.changeSecret:before` and `user.changeSecret:after` instead. The `$secret` argument of the `before` hook tells you which secret changes, e.g. `totp`:
 
@@ -578,7 +578,7 @@ If you customize the Panel with `panel.css`, check your selectors and CSS proper
 
 ### Panel plugins and custom Panel code
 
-Kirby 6 runs the Panel on Vue 3. Plugins compiled for Vue 2 have to be rebuilt. Custom sections, custom fields defined as arrays, custom Panel areas and dialogs, and Panel login plugins have changed as well. All of this is covered in the (link: releases/6/migration/plugin-developers text: guide for plugin developers).
+Kirby 6 runs the Panel on Vue 3. Plugins compiled for Vue 2 have to be rebuilt. Custom sections, custom fields defined as arrays, custom Panel areas and dialogs, and Panel login plugins have changed as well. All of this is covered in the (link: docs/guide/updates/update-to-v6/plugin-developers text: guide for plugin developers).
 
 ## Custom code using core classes
 
@@ -610,7 +610,7 @@ These classes have been removed without an alias:
 | `Kirby\Session\AutoSession` | `Kirby\Session\Sessions` |
 | `Kirby\Cms\Section` | fields, see (link: releases/6/blueprints text: blueprints) |
 | `Kirby\Cms\Picker`, `PagePicker`, `FilePicker`, `UserPicker` | the picker dialog controllers in `Kirby\Panel\Controller\Dialog` |
-| `Kirby\Form\FieldClass` | `Kirby\Form\Field`, see the (link: releases/6/migration/plugin-developers text: guide for plugin developers) |
+| `Kirby\Form\FieldClass` | `Kirby\Form\Field`, see the (link: docs/guide/updates/update-to-v6/plugin-developers text: guide for plugin developers) |
 
 ### Forms
 
@@ -690,14 +690,14 @@ Methods that were deprecated in Kirby 5 have been removed. If your page models, 
 
 ## How to perform the update
 
-Once your site code and plugins are ready, update Kirby itself. The (link: releases/6/migration#how-to-perform-the-update text: migration overview) shows how to switch to Kirby 6 with each install method. All details are in our general update instructions:
+Once your site code and plugins are ready, update Kirby itself. The (link: docs/guide/updates/update-to-v6#how-to-perform-the-update text: migration overview) shows how to switch to Kirby 6 with each install method. All details are in our general update instructions:
 
 - (link: docs/guide/install-guide/installation-via-download#updating-your-installation text: Update via download)
 - (link: docs/guide/install-guide/composer#updating-kirby text: Update via Composer)
 - (link: docs/guide/install-guide/git#updating-kirby text: Update via Git)
 - (link: docs/guide/install-guide/cli#updating-via-the-cli text: Update via Kirby CLI)
 
-If you find a bug, please (link: releases/6/migration#report-issues text: report it).
+If you find a bug, please (link: docs/guide/updates/update-to-v6#report-issues text: report it).
 
 ## Checklist
 

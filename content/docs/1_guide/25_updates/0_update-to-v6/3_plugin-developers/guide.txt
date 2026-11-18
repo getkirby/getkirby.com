@@ -10,19 +10,19 @@ Text:
 
 Kirby 6 is a major release with breaking changes. For most plugins, a handful of them matter: the Panel now runs on Vue 3, custom fields are PHP classes, sections are gone and the Panel backend has been rebuilt from static helpers into objects and controller classes.
 
-The complete list is in the (link: releases/6/changelog#breaking-changes text: changelog). If you also maintain sites, the (link: releases/6/migration/site-developers text: guide for site developers) covers the project side.
+The complete list is in the (link: releases/6/changelog#breaking-changes text: changelog). If you also maintain sites, the (link: docs/guide/updates/update-to-v6/site-developers text: guide for site developers) covers the project side.
 
 ## Start here
 
 Find your plugin type below and follow the links. Most plugins combine several types, e.g. a field plugin with a Panel component and a KirbyTag.
 
-- **Field plugins:** Array-based field definitions are gone. Rewrite the PHP side as a (link: #custom-fields text: class) based on `Kirby\Form\Field` and rebuild the Vue component for Vue 3. Deep dives: (link: releases/6/migration/plugin-developers/fields text: Custom fields as PHP classes), (link: releases/6/migration/plugin-developers/vue-3 text: Vue 3 for Panel plugins).
-- **Section plugins:** Custom sections are no longer supported. Port them to fields: (link: #custom-sections text: what changes), (link: releases/6/migration/plugin-developers/sections text: Porting custom sections to fields).
-- **Panel UI plugins** (areas, views, dialogs, drawers, dropdowns, searches, view buttons): Your closures keep working. Static `Kirby\Panel\Panel` methods, a few area options, the "Fiber" naming and some core patterns have changed. Rebuild your Vue code for Vue 3 (see (link: #panel-frontend text: Panel frontend)). Read the (link: #panel-backend text: Panel backend summary) and (link: releases/6/migration/plugin-developers/panel-backend text: Panel backend: areas, controllers & UI classes).
+- **Field plugins:** Array-based field definitions are gone. Rewrite the PHP side as a (link: #custom-fields text: class) based on `Kirby\Form\Field` and rebuild the Vue component for Vue 3. Deep dives: (link: docs/guide/updates/update-to-v6/plugin-developers/fields text: Custom fields as PHP classes), (link: docs/guide/updates/update-to-v6/plugin-developers/vue-3 text: Vue 3 for Panel plugins).
+- **Section plugins:** Custom sections are no longer supported. Port them to fields: (link: #custom-sections text: what changes), (link: docs/guide/updates/update-to-v6/plugin-developers/sections text: Porting custom sections to fields).
+- **Panel UI plugins** (areas, views, dialogs, drawers, dropdowns, searches, view buttons): Your closures keep working. Static `Kirby\Panel\Panel` methods, a few area options, the "Fiber" naming and some core patterns have changed. Rebuild your Vue code for Vue 3 (see (link: #panel-frontend text: Panel frontend)). Read the (link: #panel-backend text: Panel backend summary) and (link: docs/guide/updates/update-to-v6/plugin-developers/panel-backend text: Panel backend: areas, controllers & UI classes).
 - **Block plugins:** Rebuild your preview components for Vue 3. Check your (link: #blueprints-shipped-with-your-plugin text: block blueprints) for presets and sections. The `image`, `gallery` and `video` block previews receive the file UUID now instead of the full file data.
 - **KirbyTag, hook, method and route plugins** (PHP only): Usually the quickest to migrate. Check (link: #php-8-3-and-stricter-types text: PHP 8.3), (link: #kirbytags text: KirbyTags), (link: #field-methods text: field methods) and (link: #exceptions text: exceptions). These plugins can often support Kirby 5 and 6 from one codebase.
-- **Auth plugins** (custom challenges, custom login UI): Custom challenges must be rewritten based on `Kirby\Auth\Challenge`, the `login` Panel extension is gone. See (link: #auth-plugins text: Auth plugins) and (link: releases/6/migration/plugin-developers/auth text: Custom auth methods & challenges).
-- **Plugins that extend or call core classes** (page models, custom collections, `Form`, `Blueprint`, Panel classes): Check the (link: #moved-and-renamed-classes text: moved classes), (link: #removed-content-and-inventory-methods text: removed content methods), (link: #php-8-3-and-stricter-types text: typed class constants), (link: releases/6/migration/site-developers#custom-code-using-core-classes__collections text: removed collection methods), (link: #permissions-become-guards text: guards) and (link: #panel-backend text: Panel backend).
+- **Auth plugins** (custom challenges, custom login UI): Custom challenges must be rewritten based on `Kirby\Auth\Challenge`, the `login` Panel extension is gone. See (link: #auth-plugins text: Auth plugins) and (link: docs/guide/updates/update-to-v6/plugin-developers/auth text: Custom auth methods & challenges).
+- **Plugins that extend or call core classes** (page models, custom collections, `Form`, `Blueprint`, Panel classes): Check the (link: #moved-and-renamed-classes text: moved classes), (link: #removed-content-and-inventory-methods text: removed content methods), (link: #php-8-3-and-stricter-types text: typed class constants), (link: docs/guide/updates/update-to-v6/site-developers#custom-code-using-core-classes__collections text: removed collection methods), (link: #permissions-become-guards text: guards) and (link: #panel-backend text: Panel backend).
 
 ## First example migrations
 
@@ -38,12 +38,12 @@ We've started migrating a first few popular plugins to get a feel for the effort
 
 The bigger topics have their own guides:
 
-- (link: releases/6/migration/plugin-developers/vue-3 text: Vue 3 for Panel plugins): how Kirby loads your plugin now, the build setup with kirbyup 4, the Vue changes that matter for Kirby plugins and all other breaking changes in the Panel frontend
-- (link: releases/6/migration/plugin-developers/fields text: Custom fields as PHP classes): base classes, props, values, validation and API routes, with a Kirby 5 field ported step by step
-- (link: releases/6/migration/plugin-developers/sections text: Porting custom sections to fields): turn your section into a field that also supports `when` conditions and `width`
-- (link: releases/6/migration/plugin-developers/trusted-html text: Trusted HTML in the Panel): mark the HTML your plugin produces with `Kirby\Toolkit\HtmlString`, `$h()`, `$th()` and `v-safe-html`
-- (link: releases/6/migration/plugin-developers/auth text: Custom auth methods & challenges): bring your own login method or second factor, with a form in the Panel login view and an entry in the security drawer
-- (link: releases/6/migration/plugin-developers/panel-backend text: Panel backend: areas, controllers & UI classes): controller classes and UI objects for views, dialogs, drawers and more, with a complete Panel area in its Kirby 5 and Kirby 6 version
+- (link: docs/guide/updates/update-to-v6/plugin-developers/vue-3 text: Vue 3 for Panel plugins): how Kirby loads your plugin now, the build setup with kirbyup 4, the Vue changes that matter for Kirby plugins and all other breaking changes in the Panel frontend
+- (link: docs/guide/updates/update-to-v6/plugin-developers/fields text: Custom fields as PHP classes): base classes, props, values, validation and API routes, with a Kirby 5 field ported step by step
+- (link: docs/guide/updates/update-to-v6/plugin-developers/sections text: Porting custom sections to fields): turn your section into a field that also supports `when` conditions and `width`
+- (link: docs/guide/updates/update-to-v6/plugin-developers/trusted-html text: Trusted HTML in the Panel): mark the HTML your plugin produces with `Kirby\Toolkit\HtmlString`, `$h()`, `$th()` and `v-safe-html`
+- (link: docs/guide/updates/update-to-v6/plugin-developers/auth text: Custom auth methods & challenges): bring your own login method or second factor, with a form in the Panel login view and an entry in the security drawer
+- (link: docs/guide/updates/update-to-v6/plugin-developers/panel-backend text: Panel backend: areas, controllers & UI classes): controller classes and UI objects for views, dialogs, drawers and more, with a complete Panel area in its Kirby 5 and Kirby 6 version
 
 ## Declaring Kirby 6 support
 
@@ -304,7 +304,7 @@ Options are typed properties with the `#[Prop]` attribute. A redeclared property
 
 The field type sent to the Panel, and thus the Vue component, is the name you register the field with: `handle` → `<k-handle-field>`.
 
-All of this is covered step by step in (link: releases/6/migration/plugin-developers/fields text: Custom fields as PHP classes).
+All of this is covered step by step in (link: docs/guide/updates/update-to-v6/plugin-developers/fields text: Custom fields as PHP classes).
 
 ### Using forms in PHP
 
@@ -335,7 +335,7 @@ Sections have been replaced by fields. The core `pages`, `files`, `info`, `stats
 - On the frontend, `<k-sections>`, all section components and the `section` mixin are gone. The `section.loaded` event is now `field.loaded`.
 - Sections and fields share one namespace in a blueprint now. A section and a field with the same name collide.
 
-Most custom sections become a field based on `Kirby\Form\Field\DisplayField`, which supports `when` conditions and `width` for free. The porting guide walks you through it: (link: releases/6/migration/plugin-developers/sections text: Porting custom sections to fields).
+Most custom sections become a field based on `Kirby\Form\Field\DisplayField`, which supports `when` conditions and `width` for free. The porting guide walks you through it: (link: docs/guide/updates/update-to-v6/plugin-developers/sections text: Porting custom sections to fields).
 
 ## Blueprints shipped with your plugin
 
@@ -344,7 +344,7 @@ If your plugin registers blueprints (pages, files, blocks, …), check them for 
 - **Presets:** `preset: page`, `preset: pages` and `preset: files` have been removed. Define the layout directly, e.g. with `pagelist` and `filelist` fields.
 - **Sections:** `pages` and `files` sections keep working, but are converted into `pagelist` and `filelist` fields. Use the fields directly if your plugin is Kirby 6 only.
 - **Picker fields:** `type: pages`, `files` and `users` are deprecated aliases of `pagepicker`, `filepicker` and `userpicker`. They only work in blueprints. In PHP, e.g. in `Field::resolve()` or in field definitions for `new Form()`, use the full names.
-- **YAML:** Kirby 6 parses YAML with Symfony YAML, which is stricter than the old Spyc parser in a few places. Test the YAML blueprints your plugin registers with Kirby 6 and fix the (link: releases/6/migration/site-developers#yaml-symfony-is-the-new-default-parser text: common YAML issues).
+- **YAML:** Kirby 6 parses YAML with Symfony YAML, which is stricter than the old Spyc parser in a few places. Test the YAML blueprints your plugin registers with Kirby 6 and fix the (link: docs/guide/updates/update-to-v6/site-developers#yaml-symfony-is-the-new-default-parser text: common YAML issues).
 - **Option fields:** Move `api` and `query` options into `options` (see above). The `text => value` notation for `color` field options has been removed, use `value => text`.
 
 More in (link: releases/6/blueprints text: Simpler blueprints).
@@ -358,17 +358,17 @@ The auth system has moved to the new `Kirby\Auth` namespace and was rebuilt arou
 - **Custom login UI:** The `login` extension type of `window.panel.plugin()` has been removed. Register your form as a regular component and return it from the `form()` method of your method or challenge. `<k-login-form>`, `<k-login-code-form>` and `<k-login>` have been removed. `<k-login-code>` is now a different component, a code input for the new login forms.
 - **Status and return values:** `$kirby->auth()->status()` returns a `Kirby\Auth\Status` object with a different API than `Kirby\Cms\Auth\Status`. `Auth::validatePassword()` and `Auth::verifyChallenge()` return `Kirby\Cms\User|null`. `Kirby\Cms\Find::user()` throws a `Kirby\Exception\UserNotFoundException`.
 
-The full walkthrough is in (link: releases/6/migration/plugin-developers/auth text: Custom auth methods & challenges).
+The full walkthrough is in (link: docs/guide/updates/update-to-v6/plugin-developers/auth text: Custom auth methods & challenges).
 
 ## Panel frontend
 
 The Panel runs on Vue 3. Every plugin with an `index.js` must be checked, and every bundle built for Vue 2 must be rebuilt:
 
-- **Rebuild:** Single file components compiled for Vue 2 don't run in Kirby 6, and Vue 3 builds don't run in Kirby 5. Kirby 6 plugins are built with kirbyup 4. The quickest way to try it is `npx kirbyup@next src/index.js` in your plugin folder, see (link: releases/6/migration/plugin-developers/vue-3#build-tooling__kirbyup-4 text: build tooling).
+- **Rebuild:** Single file components compiled for Vue 2 don't run in Kirby 6, and Vue 3 builds don't run in Kirby 5. Kirby 6 plugins are built with kirbyup 4. The quickest way to try it is `npx kirbyup@next src/index.js` in your plugin folder, see (link: docs/guide/updates/update-to-v6/plugin-developers/vue-3#build-tooling__kirbyup-4 text: build tooling).
 - **No global `Vue`:** `window.Vue` no longer exists. Import what you need from `"vue"`, which the Panel provides through an import map.
-- **Vue 2 habits:** `$listeners`, `this.$set()`, `v-model` with `value`/`input` on Kirby components and Vue plugins registered via `use` (which receive the app instead of the Vue constructor) need small changes. See (link: releases/6/migration/plugin-developers/vue-3#vue-2-vue-3-in-kirby-plugins text: Vue 2 → Vue 3 in Kirby plugins).
-- **Renamed and removed components and helpers:** The full list: (link: releases/6/migration/plugin-developers/vue-3#other-breaking-changes-in-the-panel-frontend text: other breaking changes in the Panel frontend).
-- **Trusted HTML:** `<k-item>`, `<k-text>`, `<k-box>`, `<k-tag>`, `<k-tags>` and the `text` of dialogs and drawers escape plain strings now. Mark your HTML as trusted with `$h()` in Vue, or with `Kirby\Toolkit\HtmlString`, `HtmlString::translate()` or `$model->toSafeHtmlString()` in PHP. See (link: releases/6/migration/plugin-developers/trusted-html#my-plugin-shows-html-as-text-how-do-i-fix-it text: My plugin shows HTML as text).
+- **Vue 2 habits:** `$listeners`, `this.$set()`, `v-model` with `value`/`input` on Kirby components and Vue plugins registered via `use` (which receive the app instead of the Vue constructor) need small changes. See (link: docs/guide/updates/update-to-v6/plugin-developers/vue-3#vue-2-vue-3-in-kirby-plugins text: Vue 2 → Vue 3 in Kirby plugins).
+- **Renamed and removed components and helpers:** The full list: (link: docs/guide/updates/update-to-v6/plugin-developers/vue-3#other-breaking-changes-in-the-panel-frontend text: other breaking changes in the Panel frontend).
+- **Trusted HTML:** `<k-item>`, `<k-text>`, `<k-box>`, `<k-tag>`, `<k-tags>` and the `text` of dialogs and drawers escape plain strings now. Mark your HTML as trusted with `$h()` in Vue, or with `Kirby\Toolkit\HtmlString`, `HtmlString::translate()` or `$model->toSafeHtmlString()` in PHP. See (link: docs/guide/updates/update-to-v6/plugin-developers/trusted-html#my-plugin-shows-html-as-text-how-do-i-fix-it text: My plugin shows HTML as text).
 - **CSRF token:** Dialogs, drawers, dropdowns, searches and request routes check the CSRF token now. `window.panel.get()`, `window.panel.post()` and `window.panel.request()` send it for you. If you call these routes with your own `fetch()`, send the token in the `X-CSRF` header (`window.panel.system.csrf`).
 - **No more "Fiber":** `window.fiber` is now `window.panelState`, the `X-Fiber*` headers are `X-Panel`, `X-Panel-Globals` and `X-Panel-Referrer`, and state keys lose their `$` prefix:
 
@@ -380,7 +380,7 @@ this.$reload({ globals: ["$system", "$translation"] });
 this.$panel.reload({ globals: ["system", "translation"] });
 ```
 
-Everything is explained with before/after examples in (link: releases/6/migration/plugin-developers/vue-3 text: Vue 3 for Panel plugins).
+Everything is explained with before/after examples in (link: docs/guide/updates/update-to-v6/plugin-developers/vue-3 text: Vue 3 for Panel plugins).
 
 ## Panel backend
 
@@ -410,4 +410,4 @@ $kirby->panel()->isStateRequest();
 
 **Moved classes and methods:** `Kirby\Panel\View`, `Dialog`, `Drawer`, `Dropdown`, `Json`, `Request`, `Search` and `Document` have moved to `Kirby\Panel\Response\*`, the dialog classes and field dialogs to controllers, and the view buttons to `Kirby\Panel\Ui\Button\*`. Several `Kirby\Panel\Model` methods (e.g. `$page->panel()->view()` and `->props()`) are deprecated in favor of `Kirby\Panel\Controller\View\ModelViewController`, and `$page->panel()->dropdown()` (also for files and users) in favor of the `*SettingsDropdownController` classes.
 
-The (link: releases/6/migration/plugin-developers/panel-backend text: Panel backend deep dive) has all details, the full mapping table, the new controller classes and a complete before/after example of a Panel area.
+The (link: docs/guide/updates/update-to-v6/plugin-developers/panel-backend text: Panel backend deep dive) has all details, the full mapping table, the new controller classes and a complete before/after example of a Panel area.

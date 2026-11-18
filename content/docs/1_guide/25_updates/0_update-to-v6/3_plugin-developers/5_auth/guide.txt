@@ -219,7 +219,7 @@ window.panel.plugin("acme/auth", {
 });
 ```
 
-Building Panel plugins with Vue 3 is explained in (link: releases/6/migration/plugin-developers/vue-3 text: Vue 3 for Panel plugins).
+Building Panel plugins with Vue 3 is explained in (link: docs/guide/updates/update-to-v6/plugin-developers/vue-3 text: Vue 3 for Panel plugins).
 
 ## Auth challenges
 
@@ -324,7 +324,7 @@ The button opens a dialog or drawer that your plugin registers itself. `$user->p
 - `users` area: `users/(:any)/security/challenge/sms`
 - `account` area: `(account)/security/challenge/sms`
 
-Both patterns pass the user ID (or `account`) to your route, and `Kirby\Cms\Find::user($id)` returns the right user for either. Read (link: releases/6/migration/plugin-developers/panel-backend text: Panel backend: areas, controllers & UI classes) for how to define dialogs and drawers in Kirby 6.
+Both patterns pass the user ID (or `account`) to your route, and `Kirby\Cms\Find::user($id)` returns the right user for either. Read (link: docs/guide/updates/update-to-v6/plugin-developers/panel-backend text: Panel backend: areas, controllers & UI classes) for how to define dialogs and drawers in Kirby 6.
 
 Without a `settings()` method, your method or challenge works at login, but doesn't show up in the security drawer.
 
@@ -448,7 +448,7 @@ class SmsChallenge extends Challenge
 }
 ```
 
-With `isAvailable()` as above, every user with a phone number is asked for an SMS code after their password. Make the `2fa` mode opt-in as described in (link: releases/6/migration/plugin-developers/auth#auth-challenges__availability-means-set-up text: Availability means "set up") if that's not what you want.
+With `isAvailable()` as above, every user with a phone number is asked for an SMS code after their password. Make the `2fa` mode opt-in as described in (link: docs/guide/updates/update-to-v6/plugin-developers/auth#auth-challenges__availability-means-set-up text: Availability means "set up") if that's not what you want.
 
 ```php "/site/plugins/acme-auth/index.php"
 Kirby::plugin('acme/auth', [
@@ -541,4 +541,4 @@ $user = $kirby->auth()->guard(
 
 Use it in every custom method or route that checks credentials, so attackers can't tell why an attempt failed or brute-force your method. Before a method's `authenticate()` runs, Kirby already rejects IP addresses that are blocked.
 
-Find all other changes to the auth system in the (link: releases/6/changelog#breaking-changes__auth text: changelog) and the (link: releases/6/migration/plugin-developers text: migration guide for plugin developers).
+Find all other changes to the auth system in the (link: releases/6/changelog#breaking-changes__auth text: changelog) and the (link: docs/guide/updates/update-to-v6/plugin-developers text: migration guide for plugin developers).

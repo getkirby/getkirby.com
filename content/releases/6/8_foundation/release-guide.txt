@@ -66,23 +66,23 @@ Kirby 6 supports PHP 8.3, 8.4, 8.5 and 8.6. We have dropped support for PHP 8.2,
 
 A newer PHP baseline lets us use the language features of the last releases throughout the code base.  When you install Kirby 6, it checks that all required PHP extensions are available and stops the installation if one is missing. The system view in the Panel warns you if a required extension goes missing later.
 
-**For site developers**, switch your server to PHP 8.3 or newer before you update. Kirby 5 already supports these versions, so you can change PHP first. All requirements are listed in the (link: releases/6/migration#requirements text: migration overview).
+**For site developers**, switch your server to PHP 8.3 or newer before you update. Kirby 5 already supports these versions, so you can change PHP first. All requirements are listed in the (link: docs/guide/updates/update-to-v6#requirements text: migration overview).
 
 ## A cleaner core
 
 Kirby 6 is the result of a large refactoring of the core. Many parts that had grown over the years have been rebuilt as small, focused classes that are easier to understand, test and extend:
 
-- **Panel controllers:** new in Kirby 6, every core view, dialog, drawer, dropdown, search and request of the Panel is handled by its own controller class instead of a closure in a big config array. Plugins can use the same approach: pass a controller class as `action` of a Panel route and build on the base classes like `Kirby\Panel\Controller\DialogController`. Closures keep working. (link: releases/6/migration/plugin-developers/panel-backend text: Learn more …)
+- **Panel controllers:** new in Kirby 6, every core view, dialog, drawer, dropdown, search and request of the Panel is handled by its own controller class instead of a closure in a big config array. Plugins can use the same approach: pass a controller class as `action` of a Panel route and build on the base classes like `Kirby\Panel\Controller\DialogController`. Closures keep working. (link: docs/guide/updates/update-to-v6/plugin-developers/panel-backend text: Learn more …)
 - **Panel backend:** the Panel itself is no longer a collection of static helpers. Areas, access checks and routing are objects now, and dialogs, drawers and views can be returned as UI objects like `Kirby\Panel\Ui\Dialog\FormDialog`.
-- **Form fields:** every core field type is a PHP class that declares its options once as properties with the `#[Prop]` attribute, built on a few shared base classes and mixins. (link: releases/6/migration/plugin-developers/fields text: Learn more …)
-- **Authentication:** the new `Kirby\Auth` namespace splits login methods and second factors into their own classes. This is what makes (link: releases/6/authentication text: passkeys) and custom auth plugins possible. (link: releases/6/migration/plugin-developers/auth text: Learn more …)
+- **Form fields:** every core field type is a PHP class that declares its options once as properties with the `#[Prop]` attribute, built on a few shared base classes and mixins. (link: docs/guide/updates/update-to-v6/plugin-developers/fields text: Learn more …)
+- **Authentication:** the new `Kirby\Auth` namespace splits login methods and second factors into their own classes. This is what makes (link: releases/6/authentication text: passkeys) and custom auth plugins possible. (link: docs/guide/updates/update-to-v6/plugin-developers/auth text: Learn more …)
 - **Blueprints:** blueprint classes moved into the `Kirby\Blueprint` namespace, and all normalization happens in one place.
 - **Permissions:** (link: releases/6/guards text: Guards) bring abilities, permissions and validators together in one API.
 - **Sessions:** the session package has been streamlined with dedicated classes for tokens, cookies and headers.
 
 **For editors and site developers**, little of this is visible directly. It's the groundwork for many of the new features in Kirby 6 and for the ones to come.
 
-**For plugin developers**, some core classes have moved or changed. Start with the (link: releases/6/migration/plugin-developers text: migration guide for plugin developers).
+**For plugin developers**, some core classes have moved or changed. Start with the (link: docs/guide/updates/update-to-v6/plugin-developers text: migration guide for plugin developers).
 
 ## Vue 3
 
@@ -90,7 +90,7 @@ The Panel is a Vue application. Kirby 5 was built on Vue 2, which reached its en
 
 **For site developers**, check your Panel plugins before you upgrade. Plugins that add anything to the Panel interface, e.g. custom fields, blocks or views, must be rebuilt for Vue 3 by their developers. Plugins that only add PHP functionality are not affected by this change.
 
-**For plugin developers**, the (link: releases/6/migration/plugin-developers/vue-3 text: Vue 3 guide for Panel plugins) explains the new build setup with `kirbyup 4`, the Vue changes that matter for Kirby plugins and all other breaking changes in the Panel frontend.
+**For plugin developers**, the (link: docs/guide/updates/update-to-v6/plugin-developers/vue-3 text: Vue 3 guide for Panel plugins) explains the new build setup with `kirbyup 4`, the Vue changes that matter for Kirby plugins and all other breaking changes in the Panel frontend.
 
 ## TypeScript
 
@@ -106,7 +106,7 @@ Kirby 6 reverses this. These components now escape plain strings and only render
 
 **For editors and site developers**, nothing changes. HTML from your blueprints, e.g. in `help` texts or in `text` and `info` templates of page and file lists, is marked as trusted by Kirby and renders as before.
 
-**For plugin developers**, HTML that your plugin passes to Panel components shows up as visible tags until you mark it as trusted. (link: releases/6/migration/plugin-developers/trusted-html text: Trusted HTML in the Panel) explains how, in PHP and in Vue.
+**For plugin developers**, HTML that your plugin passes to Panel components shows up as visible tags until you mark it as trusted. (link: docs/guide/updates/update-to-v6/plugin-developers/trusted-html text: Trusted HTML in the Panel) explains how, in PHP and in Vue.
 
 ## Safer cookies and sessions
 
@@ -175,8 +175,8 @@ Our own tooling got an upgrade as well, which helps us ship with fewer bugs:
 
 ## Next steps
 
-- (link: releases/6/migration text: Migration guides): everything you need to upgrade a site or a plugin to Kirby 6
-- (link: releases/6/migration/plugin-developers text: For plugin developers): the plugin migration guide with deep dives into Vue 3, field classes, trusted HTML, auth plugins and the Panel backend
+- (link: docs/guide/updates/update-to-v6 text: Migration guides): everything you need to upgrade a site or a plugin to Kirby 6
+- (link: docs/guide/updates/update-to-v6/plugin-developers text: For plugin developers): the plugin migration guide with deep dives into Vue 3, field classes, trusted HTML, auth plugins and the Panel backend
 
 ----
 

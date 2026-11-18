@@ -6,7 +6,7 @@ Text:
 
 This is the full changelog for **Kirby 6.0.0**. In addition to all the features on the (link: releases/6 text: Kirby 6 release page), there are many more enhancements, breaking changes and deprecations in the fine print.
 
-If you are upgrading an existing project, start with our (link: releases/6/migration text: migration guides).
+If you are upgrading an existing project, start with our (link: docs/guide/updates/update-to-v6 text: migration guides).
 
 ----
 

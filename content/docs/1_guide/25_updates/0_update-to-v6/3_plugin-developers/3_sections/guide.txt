@@ -115,7 +115,7 @@ window.panel.plugin("acme/backlinks", {
 
 ### The Kirby 6 field class
 
-A section stores nothing, so the field extends `Kirby\Form\Field\DisplayField`. It already brings `label` and `help` (both translatable), as well as `name`, `when` and `width`. The rest follows the same rules as for any other custom field, see (link: releases/6/migration/plugin-developers/fields text: Custom fields as PHP classes) for the details.
+A section stores nothing, so the field extends `Kirby\Form\Field\DisplayField`. It already brings `label` and `help` (both translatable), as well as `name`, `when` and `width`. The rest follows the same rules as for any other custom field, see (link: docs/guide/updates/update-to-v6/plugin-developers/fields text: Custom fields as PHP classes) for the details.
 
 ```php "/site/plugins/backlinks/classes/BacklinksField.php"
 <?php
@@ -332,7 +332,7 @@ window.panel.plugin("acme/backlinks", {
 });
 ```
 
-The component is compiled for Vue 3 now. Learn more in (link: releases/6/migration/plugin-developers/vue-3 text: Vue 3 for Panel plugins).
+The component is compiled for Vue 3 now. Learn more in (link: docs/guide/updates/update-to-v6/plugin-developers/vue-3 text: Vue 3 for Panel plugins).
 
 ## Updating blueprints
 

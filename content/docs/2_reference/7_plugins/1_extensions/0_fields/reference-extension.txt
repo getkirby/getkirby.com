@@ -204,7 +204,7 @@ public function empty(): string|null
 
 A few helpers are available on every field: `$this->i18n()` translates an option, `$this->stringTemplate()` resolves query templates and `$this->stringTemplateI18n()` does both. Getters can rely on `$this->model()`, `$this->kirby()`, `$this->name()` and `$this->siblings()`.
 
-If a prop should render as HTML in the Panel, return a `Kirby\Toolkit\HtmlString` from the getter, like the core `help()` does. Plain strings are escaped. Learn more in (link: releases/6/migration/plugin-developers/trusted-html text: Trusted HTML).
+If a prop should render as HTML in the Panel, return a `Kirby\Toolkit\HtmlString` from the getter, like the core `help()` does. Plain strings are escaped. Learn more in (link: docs/guide/updates/update-to-v6/plugin-developers/trusted-html text: Trusted HTML).
 
 If an option has to be converted or normalized before it's stored, name a setter in the attribute. The setter receives the value and stores it. It can be protected and the types of its parameter are the types the option accepts. The core date and time fields use this for their `step` option:
 
@@ -387,7 +387,7 @@ Open them from your component with the field endpoint:
 this.$panel.dialog.open(this.endpoints.field + "/explain");
 ```
 
-The Panel UI classes like `TextDialog` and the dialog controllers are covered in (link: releases/6/migration/plugin-developers/panel-backend text: Panel backend).
+The Panel UI classes like `TextDialog` and the dialog controllers are covered in (link: docs/guide/updates/update-to-v6/plugin-developers/panel-backend text: Panel backend).
 
 ## Fields with subfields
 
@@ -713,7 +713,7 @@ Kirby::plugin('acme/rating', [
 
 ### The Vue component
 
-Your component receives the value as `value` prop and reports changes with an `input` event. Compile it for Vue 3 and declare the event in `emits`. Learn more in (link: releases/6/migration/plugin-developers/vue-3 text: Vue 3 for Panel plugins).
+Your component receives the value as `value` prop and reports changes with an `input` event. Compile it for Vue 3 and declare the event in `emits`. Learn more in (link: docs/guide/updates/update-to-v6/plugin-developers/vue-3 text: Vue 3 for Panel plugins).
 
 ```html "/site/plugins/rating/src/components/RatingField.vue"
 <template>
@@ -920,4 +920,4 @@ Check out the following cookbook recipe to learn more:
 
 (link: docs/cookbook/extensions/first-panel-field text: My first Panel field)
 
-If you are porting a field from Kirby 5, our guide on (link: releases/6/migration/plugin-developers/fields text: custom fields as PHP classes) walks you through all changes.
+If you are porting a field from Kirby 5, our guide on (link: docs/guide/updates/update-to-v6/plugin-developers/fields text: custom fields as PHP classes) walks you through all changes.

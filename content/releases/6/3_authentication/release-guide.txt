@@ -191,7 +191,7 @@ Open your account (or, as an admin, any user) in the Panel, click the settings b
 - **Sign in methods** lists the account's email address and the enabled login methods from `auth.methods`: password, login via code and passkeys.
 - **Two-factor methods** lists the second factors enabled in `auth.challenges`: passkeys, authenticator app and code via email.
 
-Custom login methods and second factors from plugins can add their own entries, so users set them up in the same place as the core ones. Learn how in (link: releases/6/migration/plugin-developers/auth#entries-in-the-security-drawer text: Custom auth methods & challenges).
+Custom login methods and second factors from plugins can add their own entries, so users set them up in the same place as the core ones. Learn how in (link: docs/guide/updates/update-to-v6/plugin-developers/auth#entries-in-the-security-drawer text: Custom auth methods & challenges).
 
 ## New login view
 
@@ -200,7 +200,7 @@ The Panel login view has been rebuilt. Each step has its own URL: `/panel/login/
 - **Method picker:** all other enabled login methods are listed below the form, e.g. "Login with passkey" or "Forgot your password?".
 - **Challenge switcher:** during the second step, users can switch to any other second factor available to them, without starting over.
 
-Plugins can bring their own login methods and second factors, each with their own form in this view. Read more in (link: releases/6/migration/plugin-developers/auth text: Custom auth methods & challenges).
+Plugins can bring their own login methods and second factors, each with their own form in this view. Read more in (link: docs/guide/updates/update-to-v6/plugin-developers/auth text: Custom auth methods & challenges).
 
 ----
 

@@ -3,19 +3,19 @@ $guides = [
 	[
 		'title' => 'For editors',
 		'text'  => 'What changes in your daily work with the Panel and what to tell your team.',
-		'link'  => 'releases/6/migration/editors',
+		'link'  => 'docs/guide/updates/update-to-v6/editors',
 		'icon'  => 'edit'
 	],
 	[
 		'title' => 'For site developers',
 		'text'  => 'Requirements, breaking changes and step-by-step instructions to upgrade your site.',
-		'link'  => 'releases/6/migration/site-developers',
+		'link'  => 'docs/guide/updates/update-to-v6/site-developers',
 		'icon'  => 'code'
 	],
 	[
 		'title' => 'For plugin developers',
 		'text'  => 'Vue 3, fields as PHP classes and everything else to get your plugin ready.',
-		'link'  => 'releases/6/migration/plugin-developers',
+		'link'  => 'docs/guide/updates/update-to-v6/plugin-developers',
 		'icon'  => 'plugin'
 	],
 ];
@@ -60,7 +60,7 @@ $guides = [
 
 	<div class="prose max-w-2xl mb-6">
 		<?= kirbytext(
-			'Before you start, read the (link: releases/6/migration text: migration overview) for requirements and how to perform the update. ' .
+			'Before you start, read the (link: docs/guide/updates/update-to-v6 text: migration overview) for requirements and how to perform the update. ' .
 			'If you are not updating from Kirby 5 but an older version, please perform each major update step by step. ' .
 			'Refer to the changelogs of (link: releases/4 text: v4) and (link: releases/5 text: v5) for details.'
 		) ?>

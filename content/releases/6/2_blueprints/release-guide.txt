@@ -166,7 +166,7 @@ Existing blueprints keep working in Kirby 6 and are converted on the fly.
 
 ### What doesn't convert
 
-**Custom sections from plugins** are no longer supported. Check if the plugin offers a Kirby 6 version with a field instead. If you maintain such a plugin, read (link: releases/6/migration/plugin-developers/sections text: porting custom sections to fields).
+**Custom sections from plugins** are no longer supported. Check if the plugin offers a Kirby 6 version with a field instead. If you maintain such a plugin, read (link: docs/guide/updates/update-to-v6/plugin-developers/sections text: porting custom sections to fields).
 
 **PHP code that reads blueprints** has to be adapted. `$blueprint->sections()` and `$blueprint->section()` have been removed. Use `$blueprint->fields()` and `$blueprint->field('name')` instead.
 

@@ -23,13 +23,13 @@ Two things to keep in mind while testing:
 
 ## Which guide is for you?
 
-#### (link: releases/6/migration/editors text: For editors →)
+#### (link: docs/guide/updates/update-to-v6/editors text: For editors →)
 For everyone who works in the Panel: what changes in daily use, from the new login screen to passkeys, two-factor authentication and the live preview, plus what to tell your team before the switch.
 
-#### (link: releases/6/migration/site-developers text: For site developers →)
+#### (link: docs/guide/updates/update-to-v6/site-developers text: For site developers →)
 The complete guide for everyone who builds and maintains Kirby sites: requirements, config options, blueprints, templates, content, queries, users and permissions, step by step with before and after code.
 
-#### (link: releases/6/migration/plugin-developers text: For plugin developers →)
+#### (link: docs/guide/updates/update-to-v6/plugin-developers text: For plugin developers →)
 For everyone who maintains a plugin or custom Panel extensions: Vue 3, custom fields as PHP classes, sections, the Panel backend and the new auth extensions.
 
 ## Requirements
@@ -159,7 +159,7 @@ Update one major version at a time. Each step has its own changes and deprecatio
 3. **From Kirby 4:** follow the guide to (link: docs/guide/updates/update-to-v5 text: update to Kirby 5) and read the (link: releases/5/changelog text: Kirby 5 changelog).
 4. **Update to the latest Kirby 5 release.** Turn on debug mode and fix all deprecation warnings you see. Code that is deprecated in Kirby 5 is often removed in Kirby 6.
 5. **Switch to PHP 8.3 or newer** while your site still runs on Kirby 5.
-6. **Update to Kirby 6** and follow the (link: releases/6/migration/site-developers text: guide for site developers).
+6. **Update to Kirby 6** and follow the (link: docs/guide/updates/update-to-v6/site-developers text: guide for site developers).
 
 Test your site after every step. If something breaks, you know which update caused it.
 
