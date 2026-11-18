@@ -136,6 +136,8 @@ image: false
 
 By default, the filepicker field allows you to upload files. You can define the `Add` button behavior with the `uploads` option: When clicking on the `Add` button, you can either select a file and/or upload a file (which is then automatically selected).
 
+You can also drop files from your computer onto the open file picker dialog. They are uploaded and selected right away.
+
 ### Prevent uploading
 
 You can alternatively set the `uploads` property to `false` to prevent any file uploads:
