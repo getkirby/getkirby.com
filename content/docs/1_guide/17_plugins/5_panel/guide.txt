@@ -169,7 +169,7 @@ The two `index.js` files are not a mistake. `src/index.js` is the source you edi
 
 ## Building with `kirbyup`
 
-Single file components cannot run in the browser as they are. We use (link: https://github.com/johannschopplich/kirbyup text: kirbyup) to compile them. It is built for Kirby Panel plugins and needs no configuration.
+Single file components cannot run in the browser as they are. We use (link: https://github.com/johannschopplich/kirbyup text: kirbyup) to compile them. It is built for Kirby Panel plugins and needs no configuration. kirbyup 4 requires Node.js 24 or newer.
 
 You do not have to install `kirbyup`. The commands below fetch it on first use, which may take a moment:
 
@@ -178,8 +178,7 @@ You do not have to install `kirbyup`. The commands below fetch it on first use, 
   "name": "anchor",
   "private": true,
   "scripts": {
-    "dev": "npx -y kirbyup src/index.js --watch",
-    "serve": "npx -y kirbyup serve src/index.js",
+    "dev": "npx -y kirbyup dev src/index.js",
     "build": "npx -y kirbyup src/index.js"
   }
 }
@@ -187,9 +186,20 @@ You do not have to install `kirbyup`. The commands below fetch it on first use, 
 
 Run the commands from your plugin folder:
 
-- `npm run dev` compiles `src/index.js` into `index.js` and `index.css` and recompiles on every change. Reload the Panel to see the result.
-- `npm run serve` does the same, but reloads the Panel for you whenever you save. Pass extra options after `--`, for example `npm run serve -- --port 1234`.
-- `npm run build` creates the minified files you ship.
+- `npm run dev` starts a development server and updates the Panel whenever you save. Pass extra options after `--`, for example `npm run dev -- --port 1234`.
+- `npm run build` compiles `src/index.js` into the minified `index.js` and `index.css` that you ship.
+
+## How Kirby loads your plugin
+
+The Panel provides Vue through an import map. Import what you need from `vue` and you get the exact Vue instance that the Panel uses:
+
+```js
+import { computed, ref } from "vue";
+```
+
+Never bundle your own copy of Vue: the Panel cannot render components that were compiled against a second Vue runtime.
+
+If a plugin has an `index.dev.js` file next to its `index.js`, Kirby loads `index.dev.js` instead. kirbyup's development server uses this file to connect the Panel to it. As long as any plugin has an `index.dev.js`, the Panel also loads the development build of Vue, so that the Vue devtools and Vue's warnings work. Never ship an `index.dev.js` with a release.
 
 ## Commit the build
 
@@ -204,7 +214,7 @@ Run `npm run build` before you tag a release and commit the result. What belongs
 /node_modules
 
 # kirbyup temp development entry
-/index.dev.mjs
+/index.dev.js
 ```
 
 ## What to build next
