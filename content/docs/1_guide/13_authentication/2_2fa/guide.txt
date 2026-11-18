@@ -17,6 +17,8 @@ Users can use passkeys in two ways:
 - **As login method:** With the (link: docs/reference/system/options/auth#login-methods__passkeys text: `webauthn` login method) enabled, users don't type an email address. The browser opens its passkey prompt right away, the user picks one of their passkeys for your site and unlocks it, and Kirby identifies the account from the passkey itself.
 - **As second factor:** Users log in with email and password and then confirm with one of their passkeys. This works without any configuration.
 
+Passkeys need HTTPS, except on `localhost`, and are bound to the host of your site URL: passkeys registered on a staging domain don't work on your production domain.
+
 ### Managing passkeys
 
 Users manage their passkeys in the (link: #the-security-drawer text: security drawer) of their account: *Security › Passkeys*. They can give each new passkey a name, e.g. "Work laptop" or "YubiKey". Users have to be logged in to register their first passkey, and nobody can register a passkey for someone else.
