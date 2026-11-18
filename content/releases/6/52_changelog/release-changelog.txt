@@ -17,7 +17,7 @@ Features:
 - **(link: releases/6/blueprints text: Simpler blueprints):** define fields once at the root of a blueprint and reference them in your layout. Sections become fields: new `pagelist` and `filelist` fields replace the `pages` and `files` sections.
 - **(link: releases/6/buttons-field text: Buttons field):** a new field to open links, dialogs or drawers from a blueprint
 - **(link: releases/6/guards text: Guards):** one place that answers whether an action is possible, allowed and valid
-- **(link: releases/6/more-details#content-negotiation text: Content negotiation):** content representations can be requested via the `Accept` header
+- **(link: docs/guide/templates/content-representations#content-negotiation text: Content negotiation):** content representations can be requested via the `Accept` header
 - **(link: releases/6/template-stacks text: Template stacks):** push output from any snippet and render it anywhere else in your templates
 - **(link: releases/6/error-handling text: Better error handling):** new error dialogs, stack traces in debug mode and blocked actions that explain themselves
 - **(link: releases/6/foundation text: A modern foundation):** a modern PHP baseline, a restructured core and a Panel built on Vue 3, TypeScript and trusted HTML
