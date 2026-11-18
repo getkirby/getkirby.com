@@ -4,9 +4,9 @@ Title: Changelog
 
 Text:
 
-This is the full changelog for **Kirby 6.0.0-beta.4**. In addition to all the features on the (link: releases/6 text: Kirby 6 release page), there are many more enhancements, breaking changes and deprecations in the fine print.
+This is the full changelog for **Kirby 6.0.0-rc.1**. In addition to all the features on the (link: releases/6 text: Kirby 6 release page), there are many more enhancements, breaking changes and deprecations in the fine print.
 
-Kirby 6 is still in beta. This changelog will be updated with every pre-release until the final 6.0.0 release. If you are upgrading an existing project, start with our (link: releases/6/migration text: migration guides).
+Kirby 6 is a release candidate. This changelog will be updated with every pre-release until the final 6.0.0 release. If you are upgrading an existing project, start with our (link: releases/6/migration text: migration guides).
 
 ----
 
@@ -42,6 +42,7 @@ Enhancements:
 - The loading spinner in the topbar only shows up after a short delay, so it no longer flashes for quick requests [#8331](https://github.com/getkirby/kirby/pull/8331)
 - The "browser not supported" page names the browser versions the Panel needs [#8450](https://github.com/getkirby/kirby/pull/8450)
 - Pages, files and users fields keep entries whose page, file or user doesn't exist (anymore) and show their stored ID with an alert icon [#8663](https://github.com/getkirby/kirby/pull/8663)
+- Search results in files lists and the file picker are sorted by relevance, like pages and users
 
 ## For site developers
 
@@ -98,6 +99,9 @@ Enhancements:
 - New `Kirby\Cms\Language::isLastLanguage()` method to check if a language is the only remaining one (the previous meaning of `isLast()`) [#8582](https://github.com/getkirby/kirby/pull/8582)
 - New `$users->findByEmail()` method to find a user only by email address [#8757](https://github.com/getkirby/kirby/pull/8757)
 - `auth.challenges` accepts options per type, like `auth.methods`
+- New `blueprints` option for the `pagelist` field: a blueprint, a list of blueprints or `except` with blueprints to exclude
+- New `blueprint` option for the `filelist` field and the `uploads` option of fields
+- New `inherit` argument for `Kirby\Cms\Responder::redirect()`, `Kirby\Cms\Response::redirect()`, `Kirby\Http\Response::redirect()`, `Kirby\Http\Response::go()`, `Kirby\Cms\Page::go()` and the `go()` helper. It keeps the query and params of the current request; the target's own query and params win.
 
 ## For plugin developers
 
@@ -143,6 +147,7 @@ Enhancements:
 - New `Kirby\Form\Field::error()` factory to create an error field in place of a field that failed [#8443](https://github.com/getkirby/kirby/pull/8443)
 - `Kirby\Cms\Files::delete()` and `Kirby\Cms\Pages::delete()` accept UUIDs and still only delete items in the collection [#8315](https://github.com/getkirby/kirby/pull/8315)
 - New `Kirby\Blueprint\Tab` and `Kirby\Blueprint\Tabs` classes to work with tabs and their props in blueprints [#8449](https://github.com/getkirby/kirby/pull/8449)
+- New `Kirby\Form\Interface\ProvidesAcceptedPageBlueprints` and `Kirby\Form\Interface\ProvidesAcceptedFileBlueprints` interfaces, collected by the new `Kirby\Blueprint\Blueprint::acceptedPageBlueprints()` and `Kirby\Blueprint\Blueprint::acceptedFileBlueprints()`. Fields implementing `ProvidesAcceptedPageBlueprints::hasPageBlueprint()` also decide which pages can be moved into their model.
 - New `Kirby\Auth\Service\Webauthn` class [#8245](https://github.com/getkirby/kirby/pull/8245)
 - Auth methods and challenges can be registered under several types, e.g. one LDAP login method per directory
 - New `Kirby\Auth\Method::label()`, `Kirby\Auth\Challenge::label()`, `Kirby\Auth\Challenge::options()` and `Kirby\Auth\Challenges::config()`
@@ -270,6 +275,7 @@ Security:
 - Hardened security of `Kirby\Session\Session` (thx [@XananasX7](https://github.com/XananasX7))
 - The Panel checks the CSRF token for all its routes but views: dialogs, drawers, dropdowns, searches and request routes [#8659](https://github.com/getkirby/kirby/pull/8659)
 - Updated Symfony YAML library
+- All security fixes from [Kirby 5.6.4](https://github.com/getkirby/kirby/releases/tag/5.6.4)
 
 ----
 
@@ -336,6 +342,12 @@ Bugfixes:
 - `Kirby\Toolkit\V::input()` keeps `%` in validation messages
 - `Kirby\Toolkit\V::maxLength()` and `Kirby\Toolkit\V::minLength()` no longer trigger a PHP deprecation for `null` values
 - Reserved slugs (`api`, `assets`, `media`, `panel`) are also blocked when Kirby is installed in a subfolder [#8746](https://github.com/getkirby/kirby/pull/8746)
+- `Kirby\Blueprint\Blueprint::acceptedFileBlueprints()` resolves the `uploads.parent` query of fields instead of comparing it with the model id
+- `create: false` no longer adds the list's blueprints to `Kirby\Cms\ModelWithContent::blueprints()`
+- Moving a page checks each `pagelist` field of the new parent, also in nested forms: a field without restriction accepts every page, and excluded blueprints are rejected
+- Redirects to the language URL, from `/home`, from page UUID permalinks and from `page.html` keep the query and params of the request [#7603](https://github.com/getkirby/kirby/issues/7603)
+- `Kirby\Http\Uri::toString()`: params on a relative root URL no longer produce a protocol-relative `//page:2` URL
+- `Kirby\Http\Uri::inherit()` keeps the Uri's own query, params and fragment; the parent only adds missing ones
 
 ## Panel
 
@@ -370,6 +382,10 @@ Bugfixes:
 - `$helper.upload()` rejects and calls its `error` callback on a network error instead of never settling. It rejects with an `AbortError` when its abort signal fires, instead of never settling. (thx [@johannschopplich](https://github.com/johannschopplich)) [#8770](https://github.com/getkirby/kirby/pull/8770) [#8774](https://github.com/getkirby/kirby/pull/8774)
 - `panel.api.site.update()` updates the site instead of failing with a missing route (thx [@johannschopplich](https://github.com/johannschopplich)) [#8771](https://github.com/getkirby/kirby/pull/8771)
 - `$helper.string.hasEmoji()` no longer counts digits, `#` and `*` as emoji, so `<k-icon>` no longer mistakes icon types like `plugin.icon-2` for one (thx [@johannschopplich](https://github.com/johannschopplich)) [#8773](https://github.com/getkirby/kirby/pull/8773)
+- `pagelist` field: `create: true` offers the blueprints of the list instead of a blueprint named `1`
+- Field buttons (e.g. of the `pagelist` and `structure` fields) stay on the right when the field has `label: false` [#8805](https://github.com/getkirby/kirby/issues/8805)
+- Time and date fields: the times dropdown button has a translated title and accessible name [#8821](https://github.com/getkirby/kirby/issues/8821)
+- System view: the license status column of the plugins table has a translated label [#8830](https://github.com/getkirby/kirby/issues/8830)
 
 ----
 
@@ -549,6 +565,8 @@ Breaking:
 - `Kirby\Form\Field\NumberField::toNumber()` and `Kirby\Form\Field\RangeField::toNumber()` return `null` instead of an empty string for empty values
 - The text field no longer sets the `spellcheck` attribute by default
 - The `filepicker`, `pagepicker` and `userpicker` fields only exchange UUIDs/IDs with the backend and their picker dialog, instead of full item objects with display data
+- `Kirby\Form\Field\FileListField` and `Kirby\Panel\Collector\FilesCollector` keep the order of a custom `query`. Add `.sorted` to the query for the manual order, e.g. `page.images.sorted`
+- `Kirby\Cms\Fieldset::fields()` and `Kirby\Cms\Fieldset::tabs()` return the field props as defined in the blueprint. The rendered props for the Panel are only part of `Kirby\Cms\Fieldset::toArray()`. This also applies to `Kirby\Form\Field\BlocksField::fields()`.
 
 ### Blueprints
 
@@ -796,6 +814,9 @@ Moved and replaced classes and methods:
   - `Kirby\Panel\Ui\Button\ViewButtons::view()` accepts a `Kirby\Panel\Controller\View\ModelViewController` as `$view` argument, instead of a `Kirby\Panel\Model` [#7480](https://github.com/getkirby/kirby/pull/7480)
   - `Kirby\Panel\Ui\Button\VersionsButton::__construct()`: the `$versionId` parameter has been renamed to `$mode` [#7548](https://github.com/getkirby/kirby/pull/7548)
   - `Kirby\Panel\Assets::icons()` returns the URL of the icon sprite instead of its markup [#8445](https://github.com/getkirby/kirby/pull/8445)
+  - `Kirby\Panel\Collector\PagesCollector`: the `templates` and `templatesIgnore` arguments have been replaced by `blueprints: ['only' => […], 'except' => […]]`
+  - `Kirby\Panel\Collector\FilesCollector`: the `template` argument has been renamed to `blueprint`
+  - `Kirby\Panel\Ui\Upload`: the `template` argument has been renamed to `blueprint`
 - Registering field dialogs or drawers without a closure throws an exception [#7512](https://github.com/getkirby/kirby/pull/7512)
 
 ## Auth
@@ -835,6 +856,7 @@ Deprecated classes, methods, components and options keep working for now, but wi
 | `Kirby\Cms\PageRules`, `Kirby\Cms\FileRules`, `Kirby\Cms\UserRules`, `Kirby\Cms\SiteRules`, `Kirby\Cms\LanguageRules` | `$model->guards()`                                                                      |
 | `$model->permissions()` and the permission classes behind it                                                          | `$model->guards()`                                                                      |
 | `Kirby\Field\FieldOptions`                                                                                            | `Kirby\Form\FieldOptions`                                                               |
+| `Kirby\Blueprint\Blueprint::acceptedFileTemplates()`                                                                  | `Kirby\Blueprint\Blueprint::acceptedFileBlueprints()`                                   |
 
 ### Auth
 
