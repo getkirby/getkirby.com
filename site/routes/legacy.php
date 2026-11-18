@@ -106,4 +106,29 @@ return [
 		'pattern' => 'docs/cookbook/(:any)/first-panel-section',
 		'action'  => fn () => go('docs/cookbook/panel/first-panel-field#fields-without-a-value')
 	],
+
+	// October 2026: reference shortlinks use their full menu path as slug
+	// (e.g. `objects/objects-cms-page`), redirect the old short slugs
+	// (e.g. `objects/page`, `objects/session-data`)
+	[
+		'pattern' => 'docs/reference/(objects|tools)/(:any)',
+		'action'  => function (string $section, string $slug) {
+			$parent = page('docs/reference/' . $section);
+
+			if ($parent !== null && $parent->find($slug) === null) {
+				foreach ($parent->menu()->yaml() as $path) {
+					$old = [
+						basename($path),
+						basename(dirname($path)) . '-' . basename($path)
+					];
+
+					if (in_array($slug, $old, true) === true) {
+						go('docs/reference/' . $path);
+					}
+				}
+			}
+
+			$this->next();
+		}
+	],
 ];
