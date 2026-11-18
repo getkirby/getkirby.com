@@ -2,23 +2,23 @@ Title: Migration guides
 
 ----
 
-Intro: Kirby 6 rc.1 is ready for testing. Here's how to try it safely, what your server and browsers need and which guide fits your role.
+Intro: Ready for Kirby 6? Here's how to update safely, what your server and browsers need and which guide fits your role.
 
 ----
 
 Text:
 
-## This is a release candidate
+## Before you start
 
 <warning>
-**Don't use Kirby 6 rc.1 in production.** Make a backup of your site and test the release candidate on a copy, either locally or on a staging server.
+**Make a backup of your site** and test the update on a copy first, either locally or on a staging server.
 </warning>
 
-Kirby 6 is a major release. The release candidate is meant to give you a head start: try it with your sites and plugins, find out what needs to change and tell us what breaks.
+Kirby 6 is a major release. Try it with your sites and plugins first and find out what needs to change before you update your live site.
 
 Two things to keep in mind while testing:
 
-- Work on a copy of your site, including the `content` folder. Kirby 6 writes some content slightly differently, e.g. YAML in structure fields, so don't sync content from your test copy back to your live site.
+- Work on a copy of your site, including the `content` folder. Kirby 6 writes some content slightly differently, e.g. YAML in structure fields, so don't sync content from your test copy back to a live site that still runs Kirby 5.
 - Turn on (link: docs/reference/system/options/debug text: debug mode) on your test copy. Kirby 6 is stricter in a few places and the error messages tell you exactly what to fix.
 
 ## Which guide is for you?
@@ -79,15 +79,15 @@ If you just want a first test drive, we've migrated our two kits for you to play
 
 ### Starterkit
 
-- Release: https://github.com/getkirby/starterkit/releases/tag/6.0.0-rc.1
-- Download: (link: https://github.com/getkirby/starterkit/archive/refs/tags/6.0.0-rc.1.zip text: starterkit-6.0.0-rc.1.zip)
+- Release: https://github.com/getkirby/starterkit/releases/tag/6.0.0
+- Download: (link: https://github.com/getkirby/starterkit/archive/refs/tags/6.0.0.zip text: starterkit-6.0.0.zip)
 
 ### Plainkit
 
-- Release: https://github.com/getkirby/plainkit/releases/tag/6.0.0-rc.1
-- Download: (link: https://github.com/getkirby/plainkit/archive/refs/tags/6.0.0-rc.1.zip text: plainkit-6.0.0-rc.1.zip)
+- Release: https://github.com/getkirby/plainkit/releases/tag/6.0.0
+- Download: (link: https://github.com/getkirby/plainkit/archive/refs/tags/6.0.0.zip text: plainkit-6.0.0.zip)
 
-## Install rc.1
+## How to perform the update
 
 Work on a copy of your site. Then pick the way you usually install Kirby:
 
@@ -95,14 +95,14 @@ Work on a copy of your site. Then pick the way you usually install Kirby:
 
 === Download
 
-Download the `6.0.0-rc.1` release from [GitHub](https://github.com/getkirby/kirby/releases), unpack it and replace your `kirby` folder with it. Rename the unpacked folder to `kirby` if needed.
+Download the latest Kirby 6 release from [GitHub](https://github.com/getkirby/kirby/releases), unpack it and replace your `kirby` folder with it. Rename the unpacked folder to `kirby` if needed.
 
 === Composer
 
-Require the exact release candidate version:
+Require the new major version:
 
 ```bash
-composer require getkirby/cms:6.0.0-rc.1
+composer require getkirby/cms:^6.0
 ```
 
 Or set the version in your `composer.json` and run `composer update getkirby/cms`:
@@ -110,12 +110,12 @@ Or set the version in your `composer.json` and run `composer update getkirby/cms
 ```js "/composer.json"
 {
   "require": {
-    "getkirby/cms": "6.0.0-rc.1"
+    "getkirby/cms": "^6.0"
   }
 }
 ```
 
-Composer installs a pre-release only if you ask for it explicitly like this. A constraint like `^6.0` won't pick up the release candidate.
+A constraint like `^5.0` never installs Kirby 6, so `composer update` alone keeps your site on Kirby 5.
 
 === Git submodule
 
@@ -123,17 +123,19 @@ If Kirby is a Git submodule in your project:
 
 ```bash
 cd kirby
-git fetch --tags
-git checkout 6.0.0-rc.1
+git checkout main
+git pull
 cd ..
 git add kirby
-git commit -m "Try Kirby 6.0.0-rc.1"
+git commit -m "Update to Kirby 6"
 ```
+
+The `main` branch always contains the latest stable release.
 
 === Kirby CLI
 
 ```bash
-kirby upgrade 6.0.0-rc.1
+kirby upgrade
 ```
 
 The CLI asks you to confirm the major version upgrade.
@@ -142,11 +144,11 @@ The CLI asks you to confirm the major version upgrade.
 
 ## Licensing
 
-Kirby 6 is a **free upgrade** for everyone with a valid Kirby Basic or Enterprise license.
+Kirby 6 is a **free upgrade** for everyone with a valid Kirby Basic or Enterprise license. Your license is detected automatically, there's nothing else you need to do.
 
 If you have an older license, e.g. for Kirby 3, you can upgrade it in our (link: https://hub.getkirby.com text: license hub).
 
-You don't need a paid license to try Kirby 6. You can activate your test installation with a free development license in the Panel's system view instead. All details are in our (link: license#free-licenses__usage-for-a-development-installation text: license terms).
+You don't need a paid license to test the update on a copy of your site. You can activate your test installation with a free development license in the Panel's system view instead. All details are in our (link: license#free-licenses__usage-for-a-development-installation text: license terms).
 
 ## Coming from Kirby 4 or older
 
@@ -165,14 +167,14 @@ Test your site after every step. If something breaks, you know which update caus
 
 Found a bug or something that doesn't work like it did in Kirby 5? Please report it on GitHub: [github.com/getkirby/kirby/issues](https://github.com/getkirby/kirby/issues).
 
-Please mention that you're testing `6.0.0-rc.1` and include:
+Please mention which Kirby version you're using and include:
 
 - your PHP version and, for Panel issues, your browser and its version
 - the steps to reproduce the problem
 - the full error message, ideally with debug mode turned on
 - the relevant parts of your blueprint, template or config
 
-Before you report a problem, check the (link: releases/6/changelog text: changelog) and the migration guides: it might be an intended change. If you're unsure whether something is a bug, report it anyway. That's exactly what the release candidate is for.
+Before you report a problem, check the (link: releases/6/changelog text: changelog) and the migration guides: it might be an intended change. If you're unsure whether something is a bug, report it anyway.
 
 ----
 
