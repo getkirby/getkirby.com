@@ -42,11 +42,12 @@ The available options are:
 | `password` | Login with email and password (default) |
 | `code` | Passwordless login with just the email address and a code |
 | `password-reset` | Password reset via a code |
+| `webauthn` | Login with a passkey |
 
-You can read more about the options in the (link: docs/guide/authentication/login-methods#available-methods text: guide). The options can be combined like in the following examples.
+You can read more about the options in the (link: docs/guide/authentication/login-methods#available-login-methods text: guide). The options can be combined like in the following examples. The login view opens with the first method in the list and offers the others as alternatives.
 
 <info>
-All login methods except the default `password` method need a working email transport configuration. Otherwise verification emails cannot be sent. Find out more about **(link: /docs/reference/system/options/email#email-transport text: how to configure your email transport)**.
+The `code` and `password-reset` methods and second factors via email need a working email transport configuration. Otherwise verification emails cannot be sent. Find out more about **(link: /docs/reference/system/options/email#email-transport text: how to configure your email transport)**.
 </info>
 
 ### Login via code
@@ -67,7 +68,7 @@ return [
 
 ### Login via code & login via password
 
-You can also combine login via code and login via password. The `password-reset` method is then no longer available.
+You can also combine login via code and login via password. The `code` and `password-reset` methods can't be enabled together.
 
 **The first method in the array will be the default login method.**
 
@@ -99,17 +100,27 @@ return [
 
 (image: password-reset.png)
 
-### Two-step or two-factor authentication
+### Passkeys
 
-To enable two-step/two-factor authentication for your logins, you can pass the `2fa` option to the `password` method in an array.
+To let users log in with a (link: docs/guide/authentication/2fa text: passkey), add the `webauthn` method. Put it first to make passkeys the default:
 
-The default `2fa` mode will ask users for their email and password first and then send a verification email with an additional code that they have to enter afterwards to verify their login.
+```php "/site/config/config.php"
+<?php
 
-This is a two-step authentication as it relies on the password to the email account being secure. If you want even more security, you can use (link: docs/reference/plugins/extensions/auth-challenges text: auth challenge plugins) for challenges like TOTP, SMS or hardware tokens. The login flow is the same, but the additional login code then gets verified by the plugin.
+return [
+    'auth' => [
+        'methods' => ['webauthn', 'password']
+    ]
+];
+```
 
-Two-factor/two-step authentication is *not* compatible with the `code` or `password-reset` options as logging in via just a code would circumvent the added `2fa` security.
+Keep `password` or `code` enabled next to `webauthn`: users have to be logged in to register their first passkey.
 
-```php
+### Two-factor authentication
+
+Users who have set up a (link: docs/guide/authentication/2fa text: second factor) are asked for it after their password. To require a second factor from every user, set the `2fa` option of the `password` method. Users who haven't set up a passkey or authenticator app then get a code via email.
+
+```php "/site/config/config.php"
 <?php
 
 return [
@@ -121,11 +132,13 @@ return [
 ];
 ```
 
+With `'2fa' => true`, the `code` and `password-reset` methods can't be enabled, because they would let users skip the second factor.
+
 (image: 2fa.png)
 
 ## Authentication challenges
 
-Once the user requests a login code or a password reset code, an authentication challenge is created. Kirby by default ships with an email challenge where the code is sent via email. Additional challenges can be added by (link: docs/reference/plugins/extensions/auth-challenges text: auth challenge plugins).
+Whenever a login needs a code or a second factor, Kirby creates an authentication challenge. Kirby comes with three challenges: `webauthn` (passkeys), `totp` (authenticator app) and `email` (code via email). Additional challenges can be added by (link: docs/reference/plugins/extensions/auth-challenges text: auth challenge plugins).
 
 The challenges can be configured with the following options:
 
@@ -169,12 +182,12 @@ return [
 ```
 
 <info>
-If you want to customize the emails even more, take a look how to (link: docs/guide/authentication/login-methods#email-templates text: customize the email templates) in the guide. Note also that this configuration is also used for the password-reset emails.
+If you want to customize the emails even more, take a look how to (link: docs/guide/authentication/login-methods#customize-email-text text: customize the email templates) in the guide. Note also that this configuration is also used for the password-reset emails.
 </info>
 
-### Challenge priority
+### Enabled challenges
 
-If multiple auth challenges are installed, you can define the priority of the challenges, i.e. which challenges are tried in which order:
+By default, all three core challenges are enabled. The `challenges` option sets which challenges are enabled and in which order Kirby tries them:
 
 ```php
 <?php
@@ -186,11 +199,96 @@ return [
 ];
 ```
 
-A challenge will be skipped if it isn't available in general or for the user who tries to log in (e.g. a TOTP challenge needs a prior registration, an SMS challenge needs the mobile number etc.).
+To turn off a challenge, leave it out of the list.
 
-The `email` challenge is always available as it doesn't need additional configuration (only in some cases the SMTP options). It is also enabled by default if no custom priorities are defined.
+A challenge is skipped if it isn't available for the user who tries to log in. As a second factor, each challenge needs to be set up by the user first, including codes via email. For login codes, password resets and when every user must use a second factor, the `email` challenge is always available.
 
-If none of the configured challenges is available, Kirby will "fake" the last configured challenge to avoid leaking security-relevant information (e.g. whether the user exists). In debug mode, there will be a clear error message instead.
+If none of the enabled challenges is available, the login stays pending without telling the user, so that attackers can't find out whether a user exists. With `auth.debug` set to `true`, you get the actual error instead.
+
+## Password policy
+
+By default, passwords must be at least 8 characters long. With the `passwords` option, you define your own policy. It applies to all passwords that are set in the Panel or with `$user->changePassword()`.
+
+```php "/site/config/config.php"
+<?php
+
+return [
+    'auth' => [
+        'passwords' => [
+            'minlength' => 12,
+            'uppercase' => true,
+            'lowercase' => true,
+            'digits'    => 2,
+            'symbols'   => true
+        ]
+    ]
+];
+```
+
+| Rule | Description |
+| --- | --- |
+| `minlength` | Minimum number of characters. Values below 8 have no effect: 8 is always the absolute minimum. |
+| `maxlength` | Maximum number of characters. 1000 is always the absolute maximum. |
+| `lowercase` | Require lowercase letters (or how many) |
+| `uppercase` | Require uppercase letters (or how many) |
+| `digits` | Require digits (or how many) |
+| `symbols` | Require symbols (any character that is neither a letter nor a digit) |
+
+### Regular expression or callback
+
+For anything else, pass a regular expression or a callback as `rules`. Add a `hint` for the Panel and optionally a custom `error`. Both can be translated:
+
+```php "/site/config/config.php"
+<?php
+
+return [
+    'auth' => [
+        'passwords' => [
+            'rules' => '/^(?=.*\d).{16,}$/',
+            'hint'  => [
+                'en' => 'At least 16 characters, including a digit',
+                'de' => 'Mindestens 16 Zeichen, davon eine Ziffer'
+            ],
+            'error' => [
+                'en' => 'This password is too weak',
+                'de' => 'Dieses Passwort ist zu schwach'
+            ]
+        ]
+    ]
+];
+```
+
+```php "/site/config/config.php"
+<?php
+
+return [
+    'auth' => [
+        'passwords' => [
+            'rules' => function (string $password): bool {
+                return str_contains(strtolower($password), 'kirby') === false;
+            },
+            'hint' => 'Please don’t use “kirby” in your password'
+        ]
+    ]
+];
+```
+
+### Using the policy in your own code
+
+You can reuse the same policy in your own forms, e.g. a frontend registration form:
+
+```php
+use Kirby\Exception\InvalidArgumentException;
+
+try {
+    $kirby->auth()->passwords()->validate($password);
+} catch (InvalidArgumentException $e) {
+    $error = $e->getMessage();
+}
+
+// describe the policy next to your password field
+$hint = $kirby->auth()->passwords()->hint();
+```
 
 ## Auth debugging
 
