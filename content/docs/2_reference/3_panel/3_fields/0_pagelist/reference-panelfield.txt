@@ -36,13 +36,13 @@ fields:
     label: Drafts
     type: pagelist
     status: draft
-    templates: product
+    blueprints: product
 
   published:
     label: Published Products
     type: pagelist
     status: listed
-    templates: product
+    blueprints: product
 ```
 
 (screencast: https://www.youtube.com/watch?v=rVcg4SlAh-A poster: youtube-pagelist.jpg title: A closer look at `pagelist` fields text: Show subpages as cards or list, add additional info for each page, control the card design – there are hardly any limits.)
@@ -324,13 +324,13 @@ videoPosts:
   type: pagelist
   label: Video posts
   query: page.childrenAndDrafts.filterBy('category', 'video')
-  template: article
+  blueprints: article
 
 otherPosts:
   type: pagelist
   label: Other posts
   query: page.childrenAndDrafts.filterBy('category', '!=', 'video')
-  template: article
+  blueprints: article
 ```
 The query option cannot only be used in the context of a single page, but you can also query the complete site index if that makes sense, for example in `site.yml`:
 
@@ -359,24 +359,36 @@ status: draft
 
 Note that an "Add" button for new pages will only be available if you use either `status: draft` or `status: all`.
 
-### Templates
+### Blueprints
 
-You can define a list of templates that will be available when adding new pages to the field. It  will also be used to filter pages to be contained in the list.
+The `blueprints` option filters the list by page blueprint. The same blueprints are available when adding new pages to the field.
 
-#### Single template
+#### Single blueprint
 ```yaml
-template: article
+blueprints: article
 ```
 
-#### Multiple templates
+#### Multiple blueprints
 ```yaml
-templates:
+blueprints:
   - project
   - article
 ```
 
+#### All blueprints except some
+```yaml
+blueprints:
+  except:
+    - error
+    - home
+```
+
+The list then shows pages with any other blueprint, and new pages can be added with any other blueprint.
+
+In Kirby 5, this option was called `templates` (or `template`), and `templatesIgnore` excluded blueprints. The old names still work.
+
 <info>
-If only one template is available when [adding a new page](#add-button), the template select will be hidden in the dialog (except when the [`debug` option](/docs/reference/system/options/debug) is active).
+If only one blueprint is available when [adding a new page](#add-button), the template select will be hidden in the dialog (except when the [`debug` option](/docs/reference/system/options/debug) is active).
 </info>
 
 ## "Add" button
