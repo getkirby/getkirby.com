@@ -943,6 +943,33 @@ class MyNestedField extends InputField implements ProvidesNestedForm
 }
 ```
 
+## Accepted page and file blueprints
+
+Fields can tell Kirby which page and file blueprints they accept by implementing the new `Kirby\Form\Interface\ProvidesAcceptedPageBlueprints` and `Kirby\Form\Interface\ProvidesAcceptedFileBlueprints` interfaces. `Kirby\Blueprint\Blueprint::acceptedPageBlueprints()` and `Kirby\Blueprint\Blueprint::acceptedFileBlueprints()` collect them from all fields of a blueprint.
+
+A custom field whose uploads show up in the "Change template" dialog:
+
+```php "/site/plugins/gallery/classes/GalleryField.php"
+<?php
+
+namespace Acme\Gallery;
+
+use Kirby\Form\Field\InputField;
+use Kirby\Form\Interface\ProvidesAcceptedFileBlueprints;
+
+class GalleryField extends InputField implements ProvidesAcceptedFileBlueprints
+{
+	public function acceptedFileBlueprints(): array
+	{
+		return ['gallery-image'];
+	}
+}
+```
+
+Fields using the `Kirby\Form\Mixin\Upload` mixin get `acceptedFileBlueprints()` from the mixin and only need the `implements`.
+
+Fields implementing `ProvidesAcceptedPageBlueprints::hasPageBlueprint()` also decide which pages can be moved into their model.
+
 ## Removed and renamed
 
 All removed and renamed classes, methods and options for fields are listed in the changelog under (link: releases/6/changelog#breaking-changes__core__forms text: breaking changes for forms).

@@ -4,7 +4,7 @@ Subtitle: Brookesia
 ----
 Version: 3.9
 ----
-ogimage: opengraph.png
+ogimage: kirby-3-9.png
 ----
 Cover: - kirby-3-9.png
 ----

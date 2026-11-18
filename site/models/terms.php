@@ -21,4 +21,18 @@ class TermsPage extends DefaultPage
 	{
 		return $this->latestVersion()?->url() ?? $this->url();
 	}
+
+	public function metadata(): array
+	{
+		// only versions, which are named by date
+		if ($this->parent()?->intendedTemplate()->name() !== 'terms') {
+			return [];
+		}
+
+		return [
+			'thumbnail' => [
+				'lead' => 'License / ' . date('F j, Y', strtotime($this->slug()))
+			]
+		];
+	}
 }

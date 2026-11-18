@@ -115,7 +115,7 @@ return [
 					'vat_street'        => $street,
 				]));
 			} catch (Throwable $e) {
-				die($e->getMessage() . '<br>Please contact us: support@getkirby.com');
+				die(esc($e->getMessage()) . '<br>Please contact us: support@getkirby.com');
 			}
 		},
 	],
@@ -142,7 +142,7 @@ return [
 				header('Cache-Control: no-store');
 				go($product->checkout('buy', compact('prices', 'passthrough')));
 			} catch (Throwable $e) {
-				die($e->getMessage() . '<br>Please contact us: support@getkirby.com');
+				die(esc($e->getMessage()) . '<br>Please contact us: support@getkirby.com');
 			}
 		},
 	],
@@ -172,7 +172,7 @@ return [
 
 				go($product->checkout('buy', compact('prices', 'quantity', 'passthrough')));
 			} catch (Throwable $e) {
-				die($e->getMessage() . '<br>Please contact us: support@getkirby.com');
+				die(esc($e->getMessage()) . '<br>Please contact us: support@getkirby.com');
 			}
 		}
 	],
@@ -198,7 +198,7 @@ return [
 				header('Cache-Control: no-store');
 				go($product->checkout('buy', compact('prices', 'quantity', 'passthrough')));
 			} catch (Throwable $e) {
-				die($e->getMessage() . '<br>Please contact us: support@getkirby.com');
+				die(esc($e->getMessage()) . '<br>Please contact us: support@getkirby.com');
 			}
 		}
 	]

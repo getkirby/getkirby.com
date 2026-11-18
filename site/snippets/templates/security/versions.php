@@ -6,7 +6,7 @@
 $minDate = new DateTime('January 1 - 3 years');
 $maxDate = new DateTime('January 1 + 4 years');
 
-$filteredVersions = $versions->flip()->filterBy('endOfLife', 'date >=', date('Y-m-d', $minDate->getTimestamp()));
+$filteredVersions = $versions->filterBy('endOfLife', 'date >=', date('Y-m-d', $minDate->getTimestamp()));
 
 /**
  * Converts an input date (or the current time) into a timestamp

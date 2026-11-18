@@ -21,10 +21,10 @@ return [
   'locale' => 'de_DE',
   'name' => 'Deutsch',
   'translations' => [
-    'change' => 'Ändern',
-    'confirm' => 'OK',
-    'copy' => 'Kopieren',
-    'create' => 'Erstellen'
+    'contact.name' => 'Name',
+    'contact.email' => 'E-Mail',
+    'contact.message' => 'Nachricht',
+    'contact.submit' => 'Senden'
   ]
 ];
 ```
@@ -49,10 +49,10 @@ return [
 And then in `/vars/de.yml`, define your variables:
 
 ```yaml "/site/languages/vars/de.yml"
-change: Ändern
-confirm: OK
-copy: Kopieren
-create: Erstellen
+contact.name: Name
+contact.email: E-Mail
+contact.message: Nachricht
+contact.submit: Senden
 ```
 
 Or, you can use a function that returns the variables array:

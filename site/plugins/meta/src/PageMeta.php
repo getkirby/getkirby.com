@@ -162,6 +162,9 @@ class PageMeta
 		if ($thumbnail = $this->thumbnail()) {
 			$og['og:image'] = url($thumbnail->url());
 
+			// Large preview instead of a small thumbnail
+			$meta['twitter:card'] = 'summary_large_image';
+
 			if ($thumbnail->alt()->isNotEmpty()) {
 				$og['og:image:alt'] = $thumbnail->alt()->value();
 			}

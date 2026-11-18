@@ -30,4 +30,5 @@ return [
 
 	],
 	'kosmosApi' => 'http://kosmos.test/kosmos.json',
+	'kirby.meta.typst' => '/opt/homebrew/bin/typst',
 ];

@@ -1,3 +1,13 @@
+Text:
+
+<warning>
+All placeholders in the field value run as queries with full access to Kirby's PHP API, not only the ones you pass with `$data`. Only use this method with fields that you would trust to contain PHP code. Never use it with content that comes from site visitors or with fields that Panel users with limited permissions can edit.
+</warning>
+
+(link: docs/guide/blueprints/query-language#only-run-trusted-queries text: Learn more about trusted queries ›)
+
+----
+
 Examples:
 
 Given the field contains string templates, use this method to replace them with values:

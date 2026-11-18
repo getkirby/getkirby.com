@@ -1,3 +1,13 @@
+Text:
+
+<warning>
+Queries have full access to Kirby's PHP API, including methods that change or delete data. Never pass user input to this method.
+</warning>
+
+(link: docs/guide/blueprints/query-language#only-run-trusted-queries text: Learn more about trusted queries ›)
+
+----
+
 Examples:
 
 ```php

@@ -1,2 +1,7 @@
 Title: Themes
 
+----
+
+Thumbnail:
+  -
+  lead: Resources

@@ -2,6 +2,12 @@ Title: Press
 
 ----
 
+Thumbnail:
+  -
+  lead: Kirby
+
+----
+
 Description: Download logos and screenshots for use in digital and print media.
 
 ----

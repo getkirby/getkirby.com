@@ -25,4 +25,4 @@ They trust Kirby to run their main website and documentation for many years.
 Thumbnail:
   -
   title: "Case study: Tower"
-  image: app.png
+  image: tower.png

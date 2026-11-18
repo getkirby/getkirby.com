@@ -64,5 +64,5 @@ CODE;
 <since v="5.5.0">
 ### Debugging
 
-Bugs in your blog snippets will throw an exception in debug mode, but will otherwise be swallowed.
+Bugs in your block snippets will throw an exception in debug mode, but will otherwise be swallowed.
 </since>

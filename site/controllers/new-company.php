@@ -33,10 +33,17 @@ function customerVerify(
 		'hasNewsletter' => $hasNewsletter
 	];
 
-	$query    = http_build_query($data);
-	$checksum = hash_hmac('sha256', $query, option('keys.hub'));
+	$key = option('keys.hub');
 
-	if ($email && $hash && $hash === $checksum) {
+	// without a key, anyone could sign their own links
+	if (empty($key) === true) {
+		return false;
+	}
+
+	$query    = http_build_query($data);
+	$checksum = hash_hmac('sha256', $query, $key);
+
+	if ($email && $hash && hash_equals($checksum, $hash) === true) {
 		return true;
 	}
 
