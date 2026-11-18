@@ -66,7 +66,7 @@ These shortcuts can be extended with other field properties as needed, for examp
 ```yaml
 fields:
 
-  pages:
+  pagelist:
     label: Main Pages
     status: all
 ```

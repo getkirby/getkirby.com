@@ -57,7 +57,7 @@ These shortcuts can be extended with other field properties as needed, for examp
 ```yaml
 fields:
 
-  files:
+  filelist:
     label: My Files
     blueprint: cover
 ```
