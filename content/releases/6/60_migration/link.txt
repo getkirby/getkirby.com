@@ -1,0 +1,9 @@
+Title: Migration guides
+
+----
+
+Link: /docs/guide/updates/update-to-v6
+
+----
+
+Category: migration

@@ -10,32 +10,6 @@ $groups = [
 ];
 
 $menu = $release->children()->listed()->group('category');
-
-// returns the menu entries of a group as [page, label] pairs
-$entries = function (string $key) use ($menu): array {
-	$entries = [];
-
-	foreach ($menu->get($key) ?? [] as $item) {
-		if ($key === 'migration') {
-			$entries[] = [$item, 'Overview'];
-
-			foreach ($item->children()->listed() as $guide) {
-				$entries[] = [$guide, $guide->title()];
-			}
-
-			continue;
-		}
-
-		$entries[] = [$item, $item->title()];
-	}
-
-	return $entries;
-};
-
-// the overview of the migration group must not show its guides as submenu
-$hasSubmenu = fn ($item, string $key) =>
-	$item->hasListedChildren() &&
-	($key !== 'migration' || $item->category()->value() !== 'migration');
 ?>
 <nav class="sidebar" aria-labelledby="sidebar-title">
 	<header class="sidebar-header mb-12">
@@ -53,9 +27,9 @@ $hasSubmenu = fn ($item, string $key) =>
 				<option disabled selected>Select a page …</option>
 				<?php foreach ($groups as $key => $label): ?>
 				<optgroup label="<?= $label ?>">
-					<?php foreach ($entries($key) as [$item, $text]): ?>
-					<option value="<?= $item->url() ?>"><?= $text ?></option>
-					<?php if ($hasSubmenu($item, $key)): ?>
+					<?php foreach ($menu->get($key) ?? [] as $item): ?>
+					<option value="<?= $item->url() ?>"><?= $item->title() ?></option>
+					<?php if ($item->hasListedChildren()): ?>
 					<?php foreach ($item->children()->listed() as $subItem): ?>
 					<option value="<?= $subItem->url() ?>">&nbsp;&nbsp;&nbsp;<?= $subItem->title() ?></option>
 					<?php endforeach ?>
@@ -71,12 +45,12 @@ $hasSubmenu = fn ($item, string $key) =>
 	<section class="sidebar-group">
 		<h2><?= $label ?></h2>
 		<ul class="sidebar-menu-1 mb-6">
-			<?php foreach ($entries($key) as [$item, $text]): ?>
+			<?php foreach ($menu->get($key) ?? [] as $item): ?>
 			<li data-id="<?= $item->id() ?>">
-				<?php if ($hasSubmenu($item, $key)): ?>
+				<?php if ($item->hasListedChildren()): ?>
 				<details class="details" <?= $item->isOpen() ? 'open' : '' ?>>
 					<summary>
-						<a <?= ariaCurrent($item->isActive(hasSubmenu: true), 'page') ?> href="<?= $item->menuUrl() ?>"><?= $text ?></a>
+						<a <?= ariaCurrent($item->isActive(hasSubmenu: true), 'page') ?> href="<?= $item->menuUrl() ?>"><?= $item->title() ?></a>
 					</summary>
 
 					<ul class="sidebar-menu-2">
@@ -88,7 +62,7 @@ $hasSubmenu = fn ($item, string $key) =>
 					</ul>
 				</details>
 				<?php else: ?>
-				<a <?= ariaCurrent($item->isActive(), 'page') ?> href="<?= $item->menuUrl() ?>"><?= $text ?></a>
+				<a <?= ariaCurrent($item->isActive(), 'page') ?> href="<?= $item->menuUrl() ?>"><?= $item->title() ?></a>
 				<?php endif ?>
 			</li>
 			<?php endforeach ?>
