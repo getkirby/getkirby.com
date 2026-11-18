@@ -217,6 +217,41 @@ Run `npm run build` before you tag a release and commit the result. What belongs
 /index.dev.js
 ```
 
+## Trusted HTML
+
+Panel components escape plain strings. HTML only renders if it has been marked as trusted where it was created. Only mark HTML that you have built yourself and where every piece of user content has been escaped.
+
+In PHP, wrap the HTML in an `HtmlString` object:
+
+```php
+use Kirby\Toolkit\HtmlString;
+
+$text = new HtmlString('Created by <strong>Kirby</strong>');
+
+// translates the key and escapes every value that is filled in
+$text = HtmlString::translate('my.plugin.delete.confirm', [
+	'title' => $page->title()->value()
+]);
+
+// escapes the query results, keeps the HTML of the template
+$text = $page->toSafeHtmlString('<strong>{{ page.title }}</strong>');
+```
+
+In your Vue components, `this.$h(html)` marks a string as trusted HTML, and `this.$th(key, data)` translates a key, marks the translation as trusted HTML and escapes every value that is filled in. The `v-safe-html` directive renders trusted HTML and escapes any other string:
+
+```html
+<!-- escaped -->
+<p v-safe-html="value"></p>
+
+<!-- rendered as HTML -->
+<p v-safe-html="$h(value)"></p>
+
+<!-- translation rendered as HTML, filled-in values escaped -->
+<p v-safe-html="$th('my.plugin.hint', { name })"></p>
+```
+
+The same goes for core components that show text, e.g. `<k-text :text="$h(value)" />`: the `text` and `info` of items and options, the texts of dialogs and drawers and the `help` of fields.
+
 ## What to build next
 
 The (link: docs/reference/plugins/extensions text: reference) lists every Panel extension type. Our cookbook walks through the most common ones in detail:
