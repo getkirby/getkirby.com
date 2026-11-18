@@ -2,145 +2,176 @@ Title: Update to Kirby 6
 
 ----
 
-Intro: Learn how to upgrade a Kirby 5 project to Kirby 6, whose biggest change for blueprints is that sections have become fields.
+Intro: Ready for Kirby 6? Here's how to update safely, what your server and browsers need and which guide fits your role.
 
 ----
 
 Text:
 
-<warning>
-Make a backup of your site before upgrading, as always.
-</warning>
-
-This page focuses on the biggest change for blueprints. For everything else, from requirements to step-by-step instructions, follow the (link: releases/6/migration text: Kirby 6 migration guides) for editors, site developers and plugin developers.
-
-## Sections are now fields
-
-Kirby had two kinds of building block inside a blueprint. Fields collected content, sections displayed things around it, and each needed its own extension type, its own registry and its own set of props that happened to overlap.
-
-In Kirby 6, there is only one: **fields**. Everything a section used to do, a field does now.
-
-```yaml "Kirby 5"
-columns:
-  main:
-    width: 2/3
-    sections:
-      fields:
-        type: fields
-        fields:
-          text:
-            type: textarea
-      subpages:
-        type: pages
-        template: article
-```
-
-```yaml "Kirby 6"
-columns:
-  main:
-    width: 2/3
-    fields:
-      text:
-        type: textarea
-      subpages:
-        type: pagelist
-        blueprints: article
-```
-
-Two things happened here. The `sections` key is gone, and the `pages` section became a `pagelist` field. The `fields` section disappeared entirely, because it only ever existed to nest fields inside a section — with sections gone, the fields sit directly in the column. The `template` option of the list is called `blueprints` now; the old name still works.
-
-<info>
-Your existing blueprints keep working. Kirby 6 normalizes a `sections` key into fields when it reads a blueprint, using exactly the mapping below. It is a compatibility shortcut rather than a supported way of writing new blueprints, so migrate when you touch a blueprint anyway.
-</info>
-
-### What each section became
-
-| Kirby 5 section | Kirby 6 field |
-| - | - |
-| `type: files` | `type: filelist` |
-| `type: pages` | `type: pagelist` |
-| `type: info` | `type: info` |
-| `type: stats` | `type: stats` |
-| `type: fields` | unwrapped into the surrounding `fields` |
-
-`info` and `stats` keep their names, because a field of each already existed and the two have been merged.
-
-### Some fields were renamed too
-
-Because sections and fields now share one namespace, three field types that named a model had to make room for their list counterparts:
-
-| Kirby 5 field | Kirby 6 field |
-| - | - |
-| `type: files` | `type: filepicker` |
-| `type: pages` | `type: pagepicker` |
-| `type: users` | `type: userpicker` |
+## Before you start
 
 <warning>
-The old names still work in Kirby 6, but they are deprecated and will be removed in a future major release. Search your blueprints for all three and switch to the new names.
-
-The names are worth reading carefully, because `pages` was ambiguous in Kirby 5 and is now split in two: a **`pagepicker`** lets an editor select pages as content, and a **`pagelist`** displays the children of the current page. The same distinction applies to `filepicker` and `filelist`.
+**Make a backup of your site** and test the update on a copy first, either locally or on a staging server.
 </warning>
 
-### The `section` field is gone
+Kirby 6 is a major release. Try it with your sites and plugins first and find out what needs to change before you update your live site.
 
-The `section` field type, which embedded a section inside a form, no longer has anything to embed. Use the field directly.
+Two things to keep in mind while testing:
 
-## Name collisions
+- Work on a copy of your site, including the `content` folder. Kirby 6 writes some content slightly differently, e.g. YAML in structure fields, so don't sync content from your test copy back to a live site that still runs Kirby 5.
+- Turn on (link: docs/reference/system/options/debug text: debug mode) on your test copy. Kirby 6 is stricter in a few places and the error messages tell you exactly what to fix.
 
-Sections and fields used to have separate namespaces, so a blueprint could have a section and a field with the same name. In Kirby 6 they share one namespace.
+## Which guide is for you?
 
-If two entries end up with the same name, Kirby replaces the second one with a visible error field in the Panel rather than failing silently:
+#### (link: releases/6/migration/editors text: For editors →)
+For everyone who works in the Panel: what changes in daily use, from the new login screen to passkeys, two-factor authentication and the live preview, plus what to tell your team before the switch.
 
-> The field **"notes"** already exists in your blueprint
+#### (link: releases/6/migration/site-developers text: For site developers →)
+The complete guide for everyone who builds and maintains Kirby sites: requirements, config options, blueprints, templates, content, queries, users and permissions, step by step with before and after code.
 
-This is the most likely thing to break in a large blueprint that mixed both. Rename one of the two.
+#### (link: releases/6/migration/plugin-developers text: For plugin developers →)
+For everyone who maintains a plugin or custom Panel extensions: Vue 3, custom fields as PHP classes, sections, the Panel backend and the new auth extensions.
 
-## Blueprint structure
+## Requirements
 
-A blueprint is now consistently tabs, then columns, then fields:
+### PHP
 
-```filesystem
-tabs/
-  columns/
-    fields/
+Kirby 6 requires **PHP 8.3, 8.4, 8.5 or 8.6**. Support for PHP 8.2 has been removed.
+
+You can check your PHP version in the system view of the Panel. If your server runs an older version, switch to a newer one before you update Kirby. Kirby 5 already runs on PHP 8.3, 8.4 and 8.5, so you can change the PHP version first while your site still runs on Kirby 5 and update Kirby afterwards.
+
+### Browsers for the Panel
+
+The Panel in Kirby 6 needs browsers released from roughly mid-2024 onwards. We follow [Baseline "widely available"](https://web.dev/baseline): the Panel relies on web platform features that have been available in all major browsers for at least 2.5 years.
+
+<div class="table">
+    <table>
+        <tr>
+            <th>Desktop</th>
+            <th>Mobile</th>
+        </tr>
+        <tr>
+            <td class="prose">
+                <ul>
+                    <li>Chrome 124+</li>
+                    <li>Edge 124+</li>
+                    <li>Firefox 125+</li>
+                    <li>Safari 17.5+</li>
+                    <li>Opera 110+</li>
+                </ul>
+            </td>
+            <td class="prose">
+                <ul>
+                    <li>Safari on iOS 17.5+</li>
+                    <li>Chrome for Android 124+</li>
+                    <li>Android Browser 124+</li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+</div>
+
+Your website itself is not affected: these requirements only apply to the Panel.
+
+## First test drive
+
+If you just want a first test drive, we've migrated our two kits for you to play around with:
+
+### Starterkit
+
+- Release: https://github.com/getkirby/starterkit/releases/tag/6.0.0
+- Download: (link: https://github.com/getkirby/starterkit/archive/refs/tags/6.0.0.zip text: starterkit-6.0.0.zip)
+
+### Plainkit
+
+- Release: https://github.com/getkirby/plainkit/releases/tag/6.0.0
+- Download: (link: https://github.com/getkirby/plainkit/archive/refs/tags/6.0.0.zip text: plainkit-6.0.0.zip)
+
+## How to perform the update
+
+Work on a copy of your site. Then pick the way you usually install Kirby:
+
+(tabs…)
+
+=== Download
+
+Download the latest Kirby 6 release from [GitHub](https://github.com/getkirby/kirby/releases), unpack it and replace your `kirby` folder with it. Rename the unpacked folder to `kirby` if needed.
+
+=== Composer
+
+Require the new major version:
+
+```bash
+composer require getkirby/cms:^6.0
 ```
 
-You do not have to write all three levels. Loose fields are wrapped in a single full-width column, and loose columns are wrapped in a single tab, so the short forms you already use keep working:
+Or set the version in your `composer.json` and run `composer update getkirby/cms`:
 
-```yaml
-fields:
-  text:
-    type: textarea
+```js "/composer.json"
+{
+  "require": {
+    "getkirby/cms": "^6.0"
+  }
+}
 ```
 
-## Custom sections in plugins
+A constraint like `^5.0` never installs Kirby 6, so `composer update` alone keeps your site on Kirby 5.
 
-The `sections` plugin extension no longer exists. A custom section becomes a (link: docs/reference/plugins/extensions/fields text: custom field): a PHP class that computes its props, registered by its class name, and a Vue component that renders them.
+=== Git submodule
 
-```php "Kirby 5"
-Kirby::plugin(
-	name: 'superwoman/superplugin',
-	extends: [
-		'sections' => [
-			'anchor' => [...]
-		]
-	]
-);
+If Kirby is a Git submodule in your project:
+
+```bash
+cd kirby
+git checkout main
+git pull
+cd ..
+git add kirby
+git commit -m "Update to Kirby 6"
 ```
 
-```php "Kirby 6"
-Kirby::plugin(
-	name: 'superwoman/superplugin',
-	extends: [
-		'fields' => [
-			'anchor' => AnchorField::class
-		]
-	]
-);
+The `main` branch always contains the latest stable release.
+
+=== Kirby CLI
+
+```bash
+kirby upgrade
 ```
 
-On the JavaScript side, `window.panel.plugin()` takes the component under `fields` instead of `sections`, and the component name Kirby looks for changes from `k-anchor-section` to `k-anchor-field`. Learn how to port a section step by step in (link: releases/6/migration/plugin-developers/sections text: From custom sections to fields).
+The CLI asks you to confirm the major version upgrade.
 
-<info>
-A section that only displayed something and never collected a value is still a valid field. Fields are not required to store content: base your class on `Kirby\Form\Field\DisplayField`, like the `info` and `headline` fields.
-</info>
+(…tabs)
+
+## Licensing
+
+Kirby 6 is a **free upgrade** for everyone with a valid Kirby Basic or Enterprise license. Your license is detected automatically, there's nothing else you need to do.
+
+If you have an older license, e.g. for Kirby 3, you can upgrade it in our (link: https://hub.getkirby.com text: license hub).
+
+You don't need a paid license to test the update on a copy of your site. You can activate your test installation with a free development license in the Panel's system view instead. All details are in our (link: license#free-licenses__usage-for-a-development-installation text: license terms).
+
+## Coming from Kirby 4 or older
+
+Update one major version at a time. Each step has its own changes and deprecations, and the Kirby 5 guides and changelogs explain what changed in between.
+
+1. **Make a backup** of your entire site.
+2. **From Kirby 3 or older:** follow the guide to (link: docs/guide/updates/update-to-v4 text: update to Kirby 4) and check that everything works.
+3. **From Kirby 4:** follow the guide to (link: docs/guide/updates/update-to-v5 text: update to Kirby 5) and read the (link: releases/5/changelog text: Kirby 5 changelog).
+4. **Update to the latest Kirby 5 release.** Turn on debug mode and fix all deprecation warnings you see. Code that is deprecated in Kirby 5 is often removed in Kirby 6.
+5. **Switch to PHP 8.3 or newer** while your site still runs on Kirby 5.
+6. **Update to Kirby 6** and follow the (link: releases/6/migration/site-developers text: guide for site developers).
+
+Test your site after every step. If something breaks, you know which update caused it.
+
+## Report issues
+
+Found a bug or something that doesn't work like it did in Kirby 5? Please report it on GitHub: [github.com/getkirby/kirby/issues](https://github.com/getkirby/kirby/issues).
+
+Please mention which Kirby version you're using and include:
+
+- your PHP version and, for Panel issues, your browser and its version
+- the steps to reproduce the problem
+- the full error message, ideally with debug mode turned on
+- the relevant parts of your blueprint, template or config
+
+Before you report a problem, check the (link: releases/6/changelog text: changelog) and the migration guides: it might be an intended change. If you're unsure whether something is a bug, report it anyway.

@@ -215,9 +215,48 @@ Blueprints have changed a lot in Kirby 6, but most existing blueprints keep work
 
 ### Sections become fields
 
-All sections are now fields: `pages` sections become `pagelist` fields, `files` sections become `filelist` fields, `info` and `stats` sections become `info` and `stats` fields. Kirby converts your existing sections automatically when it loads a blueprint. The section name becomes the field name, `headline` becomes `label`, and the fields of a `fields` section are placed directly in the column or tab.
+All sections are now fields, and Kirby converts your existing sections automatically when it loads a blueprint. The section name becomes the field name, `headline` becomes `label`, and the fields of a `fields` section are placed directly in the column or tab.
 
-You don't need to rewrite working blueprints. There are two cases where the automatic conversion can't help:
+```yaml "Kirby 5"
+columns:
+  main:
+    width: 2/3
+    sections:
+      fields:
+        type: fields
+        fields:
+          text:
+            type: textarea
+      subpages:
+        type: pages
+        template: article
+```
+
+```yaml "Kirby 6"
+columns:
+  main:
+    width: 2/3
+    fields:
+      text:
+        type: textarea
+      subpages:
+        type: pagelist
+        blueprints: article
+```
+
+| Kirby 5 section | Kirby 6 field |
+| - | - |
+| `type: files` | `type: filelist` |
+| `type: pages` | `type: pagelist` |
+| `type: info` | `type: info` |
+| `type: stats` | `type: stats` |
+| `type: fields` | unwrapped into the surrounding `fields` |
+
+The `template` option of lists is called `blueprints` now; the old name still works. The `section` field, which embedded a section in a form, is gone: use the field directly.
+
+A blueprint is now always tabs, then columns, then fields. You don't have to write all three levels: loose fields are wrapped in one full-width column and loose columns in one tab, so the short forms you already use keep working.
+
+You don't need to rewrite working blueprints right away. The automatic conversion is a compatibility shortcut, so switch to fields whenever you edit a blueprint anyway. There are two cases where the automatic conversion can't help:
 
 **Sections and fields now share one namespace.** In Kirby 5, a section could have the same name as a field, and two tabs could have a section with the same name. In Kirby 6, the second one turns into an error box: "The field "gallery" already exists in your blueprint". Names are compared case-insensitively.
 
