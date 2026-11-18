@@ -146,6 +146,8 @@ tabs:
 
 Both blueprints result in the same layout in the Panel. Kirby 6 still understands the Kirby 5 version, so you don't have to rewrite blueprints that work.
 
+Read more in the (link: docs/guide/blueprints/layout#define-fields-once-place-them-anywhere text: layout guide).
+
 
 ## Sections become fields
 
@@ -164,114 +166,15 @@ Like sections before, the `pagelist`, `filelist`, `info` and `stats` fields don'
 
 Existing blueprints keep working in Kirby 6 and are converted on the fly.
 
-### What doesn't convert
-
-**Custom sections from plugins** are no longer supported. Check if the plugin offers a Kirby 6 version with a field instead. If you maintain such a plugin, read (link: docs/guide/updates/update-to-v6/plugin-developers/sections text: porting custom sections to fields).
-
-**PHP code that reads blueprints** has to be adapted. `$blueprint->sections()` and `$blueprint->section()` have been removed. Use `$blueprint->fields()` and `$blueprint->field('name')` instead.
-
-**The `rawvalues` option** of the Kirby 5 pages and files sections is gone. It was a workaround for slow tables, which the new table layout no longer needs.
-
-See the full list in the (link: releases/6/changelog#breaking-changes__sections text: changelog).
-
-### Rewriting a blueprint by hand
-
-There's no need to rewrite working blueprints right away. If you want to, these are the steps:
-
-1. Replace `sections:` with `fields:`.
-2. Remove the wrapper of every `fields` section and move its fields one level up.
-3. Change `type: pages` to `type: pagelist` and `type: files` to `type: filelist`.
-4. Rename `headline` to `label`.
-5. Rename `templates` (or `template`) to `blueprints` in page lists and `template` to `blueprint` in file lists. The old names still work.
-
-**Kirby 5**
-
-```yaml "/site/blueprints/pages/album.yml"
-title: Album
-
-columns:
-  - width: 2/3
-    sections:
-      content:
-        type: fields
-        fields:
-          text:
-            type: textarea
-      gallery:
-        type: files
-        headline: Gallery
-        template: image
-        layout: cards
-  - width: 1/3
-    sections:
-      notes:
-        type: info
-        headline: Notes
-        text: The gallery is shown in the order of this list.
-      subpages:
-        type: pages
-        headline: Subpages
-        status: listed
-```
-
-**Kirby 6**
-
-```yaml "/site/blueprints/pages/album.yml"
-title: Album
-
-columns:
-  - width: 2/3
-    fields:
-      text:
-        type: textarea
-      gallery:
-        label: Gallery
-        type: filelist
-        blueprint: image
-        layout: cards
-  - width: 1/3
-    fields:
-      notes:
-        label: Notes
-        type: info
-        text: The gallery is shown in the order of this list.
-      subpages:
-        label: Subpages
-        type: pagelist
-        status: listed
-```
+The (link: docs/guide/updates/update-to-v6/site-developers#blueprints__sections-become-fields text: guide for site developers) explains what the automatic conversion can't handle and how to rewrite a blueprint by hand.
 
 ## Blueprint presets have been removed
 
-The `preset: page`, `preset: pages` and `preset: files` blueprint presets have been removed. They were a shortcut for simple layouts. With root-level fields and the new list fields, writing out the full blueprint is just as short and much easier to adjust later.
+The `preset: page`, `preset: pages` and `preset: files` blueprint presets have been removed. They were a shortcut for simple layouts. With root-level fields and the new list fields, writing out the full blueprint is just as short and much easier to adjust later. See the (link: docs/guide/updates/update-to-v6/site-developers#blueprints__blueprint-presets text: guide for site developers) for details.
 
 ## Option fields
 
-The `checkboxes`, `color`, `multiselect`, `radio`, `select`, `tags` and `toggles` fields have been rebuilt. These fields no longer remove values that don't match any of their options when the content is loaded or saved.
-
-### Queries and APIs go into `options`
-
-The separate `query` and `api` options have been removed. Define the query or API call directly in the `options` option instead.
-
-```yaml
-author:
-  type: select
-  options:
-    type: query
-    query: kirby.users
-    text: "{{ user.name }}"
-    value: "{{ user.email }}"
-
-country:
-  type: select
-  options:
-    type: api
-    url: https://example.com/countries.json
-    text: "{{ item.name }}"
-    value: "{{ item.code }}"
-```
-
-The short form `options: page.children` with a query as string still works.
+The `checkboxes`, `color`, `multiselect`, `radio`, `select`, `tags` and `toggles` fields have been rebuilt. Queries and API calls now go directly into their `options` option, and values that don't match any of the options are no longer removed. Read more about (link: docs/reference/panel/fields/select#dynamic-options text: dynamic options) and the (link: docs/guide/updates/update-to-v6/site-developers#blueprints__option-fields-query-and-api-move-into-options text: changes for site developers).
 
 ## Faster blueprints
 
