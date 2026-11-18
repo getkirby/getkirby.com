@@ -491,7 +491,7 @@ Kirby 6 introduces guards: one place that answers whether an action on a site, p
 | `$page->permissions()->toArray()` | `$page->guards()->availability()` |
 | `PageRules::changeTitle($page, $title)` | `$page->guards()->ensureExecutable('changeTitle', $title)` |
 
-Your role permissions and the `options` in your blueprints work like before. Read more about (link: releases/6/guards text: guards).
+Your role permissions and the `options` in your blueprints work like before. Read more about (link: docs/guide/users/guards text: guards).
 
 ### Throwing Kirby exceptions with an array
 

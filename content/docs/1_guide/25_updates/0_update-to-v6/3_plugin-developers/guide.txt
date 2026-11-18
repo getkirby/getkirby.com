@@ -238,7 +238,7 @@ Also see (link: releases/6/changelog#breaking-changes__core__changed-exceptions 
 
 ## Permissions become guards
 
-Kirby 6 introduces (link: releases/6/guards text: guards): one place that answers whether an action is possible, allowed for the current user and valid for the given input. `$model->permissions()`, the permission classes behind it and the `*Rules` classes are deprecated, but keep working for now:
+Kirby 6 introduces (link: docs/guide/users/guards text: guards): one place that answers whether an action is possible, allowed for the current user and valid for the given input. `$model->permissions()`, the permission classes behind it and the `*Rules` classes are deprecated, but keep working for now:
 
 ```php
 // Kirby 5 (deprecated in Kirby 6)
