@@ -36,6 +36,11 @@ fields:
     type: filelist
     blueprint: gallery
 ```
+
+<info>
+<p>A <code>filelist</code> stores nothing in the content file. It displays the files that already exist, so there is no value to fetch from it in your templates.</p>
+</info>
+
 ## Shortcuts
 
 For simple lists that are only used once per blueprint, you can use shortcuts. In its most basic form, a `filelist` field consists of the field type as name, and  `true` as its value.

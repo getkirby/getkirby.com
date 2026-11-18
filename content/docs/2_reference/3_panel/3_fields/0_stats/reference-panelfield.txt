@@ -43,6 +43,10 @@ fields:
         info: n/a
 ```
 
+<info>
+<p>A <code>stats</code> field stores nothing in the content file. It only displays the reports you define.</p>
+</info>
+
 ## Shortcuts
 
 For a field that is only used once per blueprint, you can use a shortcut. In its most basic form, a `stats` field consists of the field type as name and the `reports` property with the information you want to show.
