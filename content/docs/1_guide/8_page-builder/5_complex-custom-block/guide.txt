@@ -182,7 +182,7 @@ fields:
 
 ## Snippet for the frontend
 
-Inside the block snippet, you have access to the full `$block` (link: docs/reference/objects/blocktext: Block object) with all kinds of properties and methods, and of course to the fields we defined for the block in the block blueprint.
+Inside the block snippet, you have access to the full `$block` (link: docs/reference/objects/cms/block text: Block object) with all kinds of properties and methods, and of course to the fields we defined for the block in the block blueprint.
 
 ```php "/site/plugins/audio-block/snippets/blocks/audio.php"
 <?php if ($file = $block->source()->toFile()): ?>
