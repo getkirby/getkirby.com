@@ -12,7 +12,7 @@ If you are upgrading an existing project, start with our (link: releases/6/migra
 
 Features:
 
-- **(link: releases/6/preview-view text: Preview view):** work on your content right next to a live preview of your page, synced across browser windows and viewport sizes
+- **(link: releases/6/live-editor text: Live editor):** work on your content right next to a live preview of your page, synced across browser windows and viewport sizes
 - **(link: releases/6/authentication text: Passkeys & two-factor for everyone):** log in with passkeys, let every user set up their own second factor and define a password policy
 - **(link: releases/6/blueprints text: Simpler blueprints):** define fields once at the root of a blueprint and reference them in your layout. Sections become fields: new `pagelist` and `filelist` fields replace the `pages` and `files` sections.
 - **(link: releases/6/buttons-field text: Buttons field):** a new field to open links, dialogs or drawers from a blueprint
