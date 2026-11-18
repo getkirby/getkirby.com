@@ -4,9 +4,9 @@ Title: Changelog
 
 Text:
 
-This is the full changelog for **Kirby 6.0.0-rc.1**. In addition to all the features on the (link: releases/6 text: Kirby 6 release page), there are many more enhancements, breaking changes and deprecations in the fine print.
+This is the full changelog for **Kirby 6.0.0**. In addition to all the features on the (link: releases/6 text: Kirby 6 release page), there are many more enhancements, breaking changes and deprecations in the fine print.
 
-Kirby 6 is a release candidate. This changelog will be updated with every pre-release until the final 6.0.0 release. If you are upgrading an existing project, start with our (link: releases/6/migration text: migration guides).
+If you are upgrading an existing project, start with our (link: releases/6/migration text: migration guides).
 
 ----
 
