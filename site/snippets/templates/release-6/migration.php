@@ -60,7 +60,7 @@ $guides = [
 
 	<div class="prose max-w-2xl mb-6">
 		<?= kirbytext(
-			'Before you start, read the (link: releases/6/migration text: migration overview) for requirements and how to install the beta. ' .
+			'Before you start, read the (link: releases/6/migration text: migration overview) for requirements and how to perform the update. ' .
 			'If you are not updating from Kirby 5 but an older version, please perform each major update step by step. ' .
 			'Refer to the changelogs of (link: releases/4 text: v4) and (link: releases/5 text: v5) for details.'
 		) ?>
