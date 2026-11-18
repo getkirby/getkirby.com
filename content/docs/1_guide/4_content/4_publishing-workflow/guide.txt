@@ -26,13 +26,6 @@ All changes by everyone in the team - not just the current editor - are listed i
 (image: changes-dialog.png)
 
 
-### Preview your changes
-
-Even though they aren't saved/published, you can take a look at how your page would look like with your unsaved changes. Click on the preview button at the top right of the Panel and a view opens that allows you to preview your current page, the page with the unsaved changes as well as compare them side by side:
-
-(video: changes.mp4)
-
-
 ### Content locking
 
 Kirby automatically locks pages that are currently being edited by another user in the Panel, making working in teams a lot safer. If you open a page that is edited by another user, you are informed about the editing user and cannot overwrite their changes.
@@ -43,6 +36,25 @@ If the editing user doesn't make any new changes within some time, the page will
 
 You can deactivate content locking via the (link: docs/reference/system/options/content#content-locking text: `content.locking` config option) in your `site/config/config.php`.
 
+
+## Live editor
+
+The preview button at the top of a page opens the live editor: the rendered page on the left, the page's form with all its tabs on the right. The preview always shows your changed version and reloads automatically as you type.
+
+(video: live-preview.mp4 poster: live-preview-poster.jpg controls: true preload: metadata)
+
+The preview view has four modes:
+
+- **Live editor:** the changed version next to the form
+- **Compare versions:** the latest and the changed version side by side, optionally with synced scroll positions
+- **Latest version:** only the latest published version
+- **Changed version:** only the changed version
+
+Links in the preview work like on your site. When you follow a link to another page, the form switches to that page as well. Links to other domains and into the Panel open in a new tab, and a click on the page title in the header lets you jump to any other page. To look at one page while editing another, pin the preview: the preview and the form then navigate independently until you unpin it.
+
+To use a second screen, open the preview in its own browser tab with the button in the header. The form then takes up the full width of the main window, and both stay in sync.
+
+Buttons in the header show your page in different viewport widths. You can define your own sizes with the (link: docs/reference/system/options/panel#preview-sizes text: `panel.preview.sizes` option).
 
 ## Page states
 Kirby's page states give you full control over your publishing workflow. This allows you to define access to content, to filter content by status criteria and much more.
