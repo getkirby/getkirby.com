@@ -23,6 +23,18 @@ try {
 
 ```
 
+### Objects as values
+
+Each field of the user's blueprint converts Kirby objects and collections into the format it stores:
+
+```php
+$kirby->user('bastian@example.com')->update([
+  'favorites'  => $site->index()->listed()->limit(5),
+  'colleagues' => $kirby->users()->role('editor'),
+  'birthday'   => new DateTime('1985-03-14'),
+]);
+```
+
 <info>
 This method only updates the content in the `user.txt` file. To update the user email or the user name, use the `$user->changeEmail()` or `$user->changeName()` methods.
 </info>

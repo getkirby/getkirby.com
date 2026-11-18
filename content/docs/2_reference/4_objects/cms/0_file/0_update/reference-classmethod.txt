@@ -28,6 +28,18 @@ if ($file = $page->file('myimage.jpg')) {
 }
 ```
 
+## Objects as values
+
+Each field of the file's blueprint converts Kirby objects and collections into the format it stores:
+
+```php
+$newFile = $file->update([
+  'photographer' => $kirby->user('bastian@example.com'),
+  'related'      => $file->siblings()->images()->limit(3),
+  'date'         => new DateTime(),
+]);
+```
+
 ## Multi-language installation
 
 In a multi-language installation, you can pass the language of the meta data you want to update as a second argument:
