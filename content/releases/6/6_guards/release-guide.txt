@@ -51,7 +51,7 @@ Whether an action can run depends on three questions. Guards answer each of them
 
 **Abilities** protect the system logic and apply to everyone, even the almighty `kirby` user. The home page and the error page cannot be deleted or moved, the last admin cannot be demoted and an unlisted page cannot be sorted.
 
-**Permissions** come from your blueprints and user roles. Kirby resolves them in a fixed order (see below).
+**Permissions** come from your blueprints and user roles. Kirby resolves them in a (link: docs/guide/users/permissions#how-permissions-are-resolved text: fixed order).
 
 **Validators** check the input of an action, e.g. whether a new slug is valid and not taken yet or whether a page that you want to delete still has children.
 
@@ -133,59 +133,11 @@ $deletable = $page->children()->filter(
 );
 ```
 
-## How permissions are resolved
-
-The permission layer looks for a rule in this order and stops at the first one it finds:
-
-1. **The model's blueprint**: the `options` of the page, file, user or site blueprint, either for everyone or per role
-2. **The user's role**: the `permissions` in the role blueprint
-3. **The default**: `false`, unless you pass a different `$default` to `isAvailable()` or `ensureAvailable()`
-
-Two users are special: users with the `nobody` role are never allowed to do anything, and the `kirby` user is always allowed. Abilities still apply to both.
-
-```yaml "/site/blueprints/pages/legal.yml"
-options:
-  delete: false
-  changeSlug:
-    admin: true
-    "*": false
-```
-
-With this blueprint, nobody can delete a legal page and only admins can change its slug, no matter what the role blueprints say. A rule in the blueprint wins over the role. This order hasn't changed since Kirby 5.
-
-The default only matters for actions without any rule. All core actions have a rule in the role defaults, so they always resolve to a definite answer.
-
 ## Migrating from Kirby 5
 
-### `$model->permissions()` is deprecated
+`$model->permissions()` and the `Kirby\Cms\*Rules` classes are deprecated and pass their work on to the guards. The guides for (link: docs/guide/updates/update-to-v6/site-developers#users-permissions-and-login__model-permissions-is-deprecated-use-guards text: site developers) and (link: docs/guide/updates/update-to-v6/plugin-developers#permissions-become-guards text: plugin developers) show how to switch.
 
-The permission classes keep working for now and pass their work on to the guards. Switch to `$model->guards()`:
-
-```php
-// Kirby 5
-$page->permissions()->can('delete');
-$page->permissions()->cannot('delete');
-$page->permissions()->toArray();
-
-// Kirby 6
-$page->guards()->isAvailable('delete');
-$page->guards()->isAvailable('delete') === false;
-$page->guards()->availability();
-```
-
-### Rules classes are deprecated
-
-`Kirby\Cms\PageRules`, `Kirby\Cms\FileRules`, `Kirby\Cms\UserRules`, `Kirby\Cms\SiteRules` and `Kirby\Cms\LanguageRules` still exist, but only call the guards now:
-
-```php
-// Kirby 5
-PageRules::changeTitle($page, $title);
-
-// Kirby 6
-$page->guards()->ensureExecutable('changeTitle', $title);
-```
-
-(link: releases/6/changelog#breaking-changes__core__permissions text: All permission-related breaking changes …)
+Read more in the (link: docs/guide/users/guards text: guards guide).
 
 ----
 
