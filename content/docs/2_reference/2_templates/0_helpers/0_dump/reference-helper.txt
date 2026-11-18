@@ -3,7 +3,7 @@ Examples:
 ```php
 dump($kirby->users());
 
-$tags = $page->tags()->pluck(',');
+$tags = $page->tags()->split(',');
 dump($tags);
 ```
 
