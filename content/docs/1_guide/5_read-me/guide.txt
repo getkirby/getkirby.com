@@ -141,7 +141,7 @@ dump($result); //float(36.5)
 If a method returns an `array`, you can loop through the elements of the arrayâ€¦
 
 ```php
-<?php $contentArray = $page->readContent(); ?>
+<?php $contentArray = $page->content()->toArray(); ?>
 <dl>
 <?php foreach ($contentArray as $fieldName => $value): ?>
   <dt><?= $fieldName ?></dt>
@@ -154,7 +154,7 @@ If a method returns an `array`, you can loop through the elements of the arrayâ€
 
 ```php
 <?php
-$contentArray = $page->readContent();
+$contentArray = $page->content()->toArray();
 dump($contentArray);
 ```
 
