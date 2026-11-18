@@ -15,7 +15,7 @@ A short heads-up saves you a few support questions:
 - **Everybody has to log in again once.** Kirby 6 protects login cookies with a stronger method and no longer accepts the old ones. After the update, every user sees the login screen, even if they ticked "Keep me logged in" before.
 - **Check your browser.** The Panel needs a browser from roughly mid-2024 or newer: Chrome or Edge 124, Firefox 125, Safari 17.5 (also on iPhone and iPad) or newer. If a browser is too old, the Panel shows a page that names the versions it needs. Updating the browser is all it takes.
 - **The menu for your password has moved.** "Change password" is now part of the new **Security** settings of your account (see below).
-- **It's a release candidate.** Until the final Kirby 6 release, your developer will test it on a copy of your site, not on your live site. Changes you make in the test copy won't show up on the live site.
+- **Testing comes first.** Your developer will usually test the update on a copy of your site before it goes live. Changes you make in the test copy won't show up on the live site.
 
 ## Logging in
 
