@@ -70,7 +70,7 @@ Phpsupport:
 
 -
   kirby: ^6.0.0
-  php: 8.5, 8.4, 8.3
+  php: 8.6, 8.5, 8.4, 8.3
   recommended: 8.4
 -
   kirby: ^5.2.1
