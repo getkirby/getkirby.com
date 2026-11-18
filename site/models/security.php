@@ -115,14 +115,47 @@ class SecurityPage extends DefaultPage
 
 		// determine current status for each version
 		foreach ($versions as $constraint => $version) {
-			$versions[$constraint]['status'] = match (true) {
-				time() > strtotime($version['endOfLife']) => 'end-of-life',
-				$version['endOfActiveSupport'] !== null   => 'security-support',
-				default                                   => 'active-support'
-			};
+			$versions[$constraint]['status'] = $this->kirbyVersionStatus($version);
 		}
 
 		return array_reverse($versions, true);
+	}
+
+	/**
+	 * Merges the entries of all minor versions of a
+	 * major version into one entry for display
+	 */
+	protected function kirbyVersionsByMajor(): array
+	{
+		$majors = [];
+
+		foreach ($this->kirbyVersions() as $constraint => $version) {
+			$major = strtok($constraint, '.');
+
+			if (isset($majors[$major]) === false) {
+				$majors[$major] = [...$version, 'shortName' => 'v' . $major];
+				continue;
+			}
+
+			$merged = $majors[$major];
+
+			$merged['initialRelease'] = min($merged['initialRelease'], $version['initialRelease']);
+			$merged['endOfLife']      = max($merged['endOfLife'], $version['endOfLife']);
+
+			// a single actively supported minor version
+			// keeps the whole major version active
+			if ($merged['endOfActiveSupport'] !== null) {
+				$merged['endOfActiveSupport'] = match ($version['endOfActiveSupport']) {
+					null    => null,
+					default => max($merged['endOfActiveSupport'], $version['endOfActiveSupport'])
+				};
+			}
+
+			$merged['status'] = $this->kirbyVersionStatus($merged);
+			$majors[$major]   = $merged;
+		}
+
+		return $majors;
 	}
 
 	public function kirbyVersionsForUpdateCheck(): array
@@ -161,8 +194,17 @@ class SecurityPage extends DefaultPage
 	public function kirbyVersionsTable()
 	{
 		return snippet('templates/security/versions', [
-			'versions' => new Collection($this->kirbyVersions())
+			'versions' => new Collection($this->kirbyVersionsByMajor())
 		], true);
+	}
+
+	protected function kirbyVersionStatus(array $version): string
+	{
+		return match (true) {
+			time() > strtotime($version['endOfLife']) => 'end-of-life',
+			$version['endOfActiveSupport'] !== null   => 'security-support',
+			default                                   => 'active-support'
+		};
 	}
 
 	public function messages(): array
