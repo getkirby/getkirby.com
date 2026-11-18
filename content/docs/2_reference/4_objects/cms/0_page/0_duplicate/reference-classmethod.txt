@@ -23,4 +23,4 @@ $duplicate = $page->duplicate(
 );
 ```
 
-Duplicates are always created as draft pages.
+Duplicates are always created as draft pages. Unsaved changes of the original page are not taken over.
