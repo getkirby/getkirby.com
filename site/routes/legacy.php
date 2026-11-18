@@ -114,12 +114,11 @@ return [
 		'action'  => fn () => go('docs/cookbook/panel/first-panel-field#fields-without-a-value')
 	],
 	[
-		'pattern' => 'docs/reference/panel/sections',
-		'action'  => fn () => go('docs/guide/updates/update-to-v6#sections-are-now-fields')
-	],
-	[
-		'pattern' => 'docs/reference/panel/sections/fields',
-		'action'  => fn () => go('docs/guide/updates/update-to-v6#sections-are-now-fields__what-each-section-became')
+		'pattern' => [
+			'docs/reference/panel/sections',
+			'docs/reference/panel/sections/fields'
+		],
+		'action'  => fn () => go('docs/guide/updates/update-to-v6/site-developers#blueprints__sections-become-fields')
 	],
 	[
 		'pattern' => 'docs/reference/panel/sections/(info|stats)',
@@ -127,7 +126,15 @@ return [
 	],
 	[
 		'pattern' => 'docs/reference/plugins/extensions/sections',
-		'action'  => fn () => go('docs/guide/updates/update-to-v6#custom-sections-in-plugins')
+		'action'  => fn () => go('docs/guide/updates/update-to-v6/plugin-developers/sections')
+	],
+	[
+		'pattern' => [
+			'docs/guide/blueprints/presets',
+			'docs/reference/panel/presets',
+			'docs/reference/panel/presets/(files|page|pages)'
+		],
+		'action'  => fn () => go('docs/guide/updates/update-to-v6/site-developers#blueprints__blueprint-presets')
 	],
 	[
 		'pattern' => 'docs/reference/api/(pages|site|users)/files-section',
@@ -136,6 +143,13 @@ return [
 	[
 		'pattern' => 'docs/reference/api/(site|users)/section',
 		'action'  => fn (string $model) => go('docs/reference/api/' . $model . '/field')
+	],
+
+	// Kirby 6: the migration guides moved from the release page
+	// into the update guide
+	[
+		'pattern' => 'releases/6/migration/(:all?)',
+		'action'  => fn (string $path = '') => go(rtrim('docs/guide/updates/update-to-v6/' . $path, '/'))
 	],
 
 	// Kirby 6: renamed classes and field methods
