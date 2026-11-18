@@ -61,6 +61,13 @@ return [
 		'action'  => fn () => go('releases/5')
 	],
 
+	// August 2026: internal `Field` methods are only documented
+	// on the `Field` class, no longer as field methods
+	[
+		'pattern' => 'docs/reference/templates/field-methods/(exists|model|parent|to-array|to-string)',
+		'action'  => fn (string $method) => go('docs/reference/objects/content/field/' . $method)
+	],
+
 	// September 2026: restructured plugin chapter
 	[
 		'pattern' => 'docs/guide/plugins/installing-plugins',
@@ -94,7 +101,7 @@ return [
 		'action'  => fn () => go('docs/guide/plugins/publishing')
 	],
 
-	// Kirby 6: picker fields were renamed, sections became list fields
+	// Kirby 6: picker fields were renamed, sections became fields
 	[
 		'pattern' => 'docs/reference/panel/(fields|sections)/(files|pages|users)',
 		'action'  => function (string $group, string $type) {
@@ -105,6 +112,40 @@ return [
 	[
 		'pattern' => 'docs/cookbook/(:any)/first-panel-section',
 		'action'  => fn () => go('docs/cookbook/panel/first-panel-field#fields-without-a-value')
+	],
+	[
+		'pattern' => 'docs/reference/panel/sections',
+		'action'  => fn () => go('docs/guide/updates/update-to-v6#sections-are-now-fields')
+	],
+	[
+		'pattern' => 'docs/reference/panel/sections/fields',
+		'action'  => fn () => go('docs/guide/updates/update-to-v6#sections-are-now-fields__what-each-section-became')
+	],
+	[
+		'pattern' => 'docs/reference/panel/sections/(info|stats)',
+		'action'  => fn (string $type) => go('docs/reference/panel/fields/' . $type)
+	],
+	[
+		'pattern' => 'docs/reference/plugins/extensions/sections',
+		'action'  => fn () => go('docs/guide/updates/update-to-v6#custom-sections-in-plugins')
+	],
+	[
+		'pattern' => 'docs/reference/api/(pages|site|users)/files-section',
+		'action'  => fn (string $model) => go('docs/reference/api/' . $model . '/files-field')
+	],
+	[
+		'pattern' => 'docs/reference/api/(site|users)/section',
+		'action'  => fn (string $model) => go('docs/reference/api/' . $model . '/field')
+	],
+
+	// Kirby 6: renamed classes and field methods
+	[
+		'pattern' => 'docs/reference/objects/session/session-data',
+		'action'  => fn () => go('docs/reference/objects/session/data')
+	],
+	[
+		'pattern' => 'docs/reference/templates/field-methods/kirbytextinline',
+		'action'  => fn () => go('docs/reference/templates/field-methods/kirbytext-inline')
 	],
 
 	// October 2026: reference shortlinks use their full menu path as slug
