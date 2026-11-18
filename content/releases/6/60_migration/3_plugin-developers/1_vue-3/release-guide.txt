@@ -60,7 +60,7 @@ npx kirbyup@next dev src/index.js
 
 ### TypeScript types
 
-Large parts of the Panel are written in TypeScript now, including `this.$panel` and all its modules (see (link: releases/6/foundation#typescript text: A modern foundation)). In rc.1, Kirby doesn't publish these types as an npm package yet. The community packages (link: https://github.com/johannschopplich/kirby-types text: `kirby-types`) and (link: https://github.com/johannschopplich/kirbyuse text: `kirbyuse`) provide types for Panel plugins. Their Kirby 6 versions are available under the `next` tag.
+Large parts of the Panel are written in TypeScript now, including `this.$panel` and all its modules (see (link: releases/6/foundation#typescript text: A modern foundation)). Kirby doesn't publish these types as an npm package yet. The community packages (link: https://github.com/johannschopplich/kirby-types text: `kirby-types`) and (link: https://github.com/johannschopplich/kirbyuse text: `kirbyuse`) provide types for Panel plugins. Their Kirby 6 versions are available under the `next` tag.
 
 ## Vue 2 → Vue 3 in Kirby plugins
 
