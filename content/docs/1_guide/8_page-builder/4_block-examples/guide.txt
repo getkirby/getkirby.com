@@ -69,7 +69,7 @@ Kirby::plugin(
 The preview templates for the blocks go into the `index.js` file:
 
 ```js "/site/plugins/block-factory/index.js"
-panel.plugin("cookbook/block-factory", {
+window.panel.plugin("cookbook/block-factory", {
   blocks: {
     awesomeblock: `
       <div @click="open">
@@ -146,7 +146,7 @@ fields:
 ### Simple preview
 
 ```js "/site/plugins/block-factory/index.js"
-panel.plugin("cookbook/block-factory", {
+window.panel.plugin("cookbook/block-factory", {
   blocks: {
     box: {
       template: `
@@ -171,7 +171,7 @@ panel.plugin("cookbook/block-factory", {
 For the editable plugin, we replace `<div v-html="content.text"></div>`, with a `k-writer-input` component:
 
 ```js
-panel.plugin("cookbook/block-factory", {
+window.panel.plugin("cookbook/block-factory", {
    blocks: {
     box: {
       computed: {
@@ -234,7 +234,7 @@ fields:
 ### Simple preview
 
 ```js "/site/plugins/block-factory/index.js"
-panel.plugin("cookbook/block-factory", {
+window.panel.plugin("cookbook/block-factory", {
   blocks: {
     accordion: `
       <div>
@@ -258,7 +258,7 @@ panel.plugin("cookbook/block-factory", {
 The editable version of the accordion preview is similar to the box block preview, with the difference that we now use to `k-writer-input` components for the `summary` and `details` fields.
 
 ```js "/site/plugins/block-factory/index.js"
-panel.plugin("cookbook/block-factory", {
+window.panel.plugin("cookbook/block-factory", {
   blocks: {
     accordion: {
       computed: {
@@ -349,7 +349,7 @@ fields:
 In this simple preview, we loop through the structure field items using the `v-for` directive and simply output each item.
 
 ```js "/site/plugins/block-factory/index.js"
-panel.plugin("cookbook/block-factory", {
+window.panel.plugin("cookbook/block-factory", {
   blocks: {
     faq: `
       <div @dblclick="open">
@@ -372,7 +372,7 @@ panel.plugin("cookbook/block-factory", {
 For the editable preview, we need a custom method to update the items in the structure field, which we do with the `updateItem()` method.
 
 ```js "/site/plugins/block-factory/index.js"
-panel.plugin("cookbook/block-factory", {
+window.panel.plugin("cookbook/block-factory", {
   blocks: {
     faq: {
       computed: {
@@ -483,7 +483,7 @@ fields:
 The simple preview for our alternative version is not very different from the example with the structure field, but differs in the way we call the values of the individual items, i.e. `item.content.details` vs. `item.details` in the previous example.
 
 ```js "/site/plugins/block-factory/index.js"
-panel.plugin("cookbook/block-factory", {
+window.panel.plugin("cookbook/block-factory", {
   blocks: {
     faq2: `
       <div @dblclick="open">
@@ -511,7 +511,7 @@ panel.plugin("cookbook/block-factory", {
 Let's see how we can build an editable version of this variant. If you look closely, the only difference here is the syntax how we fetch and update the block items.
 
 ```js "/site/plugins/block-factory/index.js"
-panel.plugin("cookbook/block-factory", {
+window.panel.plugin("cookbook/block-factory", {
   blocks: {
     faq2: {
       computed: {
@@ -666,7 +666,7 @@ However, the logic here is a bit more complicated, because we have to retrieve s
 The most notable thing here are the `watch` methods which let us react on changes in the component. In this case, we watch for any changes to the `cardType` and `pageId` values, and depending on these values change the `text` property. Also, if the card type is of type `page`, we fetch the content of the text field via Kirby's API.
 
 ```js "/site/plugins/block-factory/index.js"
-panel.plugin("cookbook/block-factory", {
+window.panel.plugin("cookbook/block-factory", {
   blocks: {
    card: {
       data() {
@@ -808,7 +808,7 @@ fields:
 ### Preview
 
 ```js "/site/plugins/block-factory/index.js"
-panel.plugin("cookbook/block-factory", {
+window.panel.plugin("cookbook/block-factory", {
   blocks: {
     testimonial: {
       computed: {

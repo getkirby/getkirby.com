@@ -82,7 +82,7 @@ Next, we create a new folder called `/src` in the `doifield` folder, and in the 
 In `index.js` we also have to register the new field like in `index.php`, but here using JavaScript syntax:
 
 ```js "/site/plugins/doifield/src/index.js"
-panel.plugin("pluginauthor/doi", {
+window.panel.plugin("pluginauthor/doi", {
   fields: {
     doi: {
       // here goes the code for the field
@@ -94,7 +94,7 @@ panel.plugin("pluginauthor/doi", {
 To make the field work without errors, we also have to add a `template` property. Let's start with something really basic.
 
 ```js "/site/plugins/doifield/src/index.js"
-panel.plugin("pluginauthor/doi", {
+window.panel.plugin("pluginauthor/doi", {
   fields: {
     doi: {
       template: "<p>Hello</p>"
@@ -175,7 +175,7 @@ In `/src/index.js`, we import this new component, assign the component to the `d
 ```js "/site/plugins/doifield/src/index.js"
 import DoiField from "./components/fields/DoiField.vue";
 
-panel.plugin("pluginauthor/doi", {
+window.panel.plugin("pluginauthor/doi", {
   fields: {
     doi: DoiField
   }
@@ -611,7 +611,7 @@ In the `src/index.js` of the plugin, we register the component for the `links` f
 ```js "/site/plugins/linksfield/src/index.js"
 import LinksField from "./components/fields/LinksField.vue";
 
-panel.plugin("pluginauthor/links", {
+window.panel.plugin("pluginauthor/links", {
   fields: {
     links: LinksField
   }

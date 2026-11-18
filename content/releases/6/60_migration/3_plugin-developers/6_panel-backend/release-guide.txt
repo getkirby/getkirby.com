@@ -568,7 +568,7 @@ class TodoDropdownController extends DropdownController
 The Vue component for the view is the same in both versions. It passes the dropdown URL as `options` to each item, so the Panel loads the options from the dropdown route when the dropdown opens:
 
 ```js "/site/plugins/todos/index.js"
-panel.plugin("acme/todos", {
+window.panel.plugin("acme/todos", {
 	components: {
 		"k-todos-view": {
 			props: {

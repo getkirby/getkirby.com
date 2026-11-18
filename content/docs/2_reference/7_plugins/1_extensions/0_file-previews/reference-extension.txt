@@ -71,7 +71,7 @@ You could provide additional information to your Vue component by extending the 
 We use the `<k-file-preview-frame>` component as wrapper for our actual 3D model, which adds a pattern background.
 
 ```js
-panel.plugin("getkirby/custom-file-preview", {
+window.panel.plugin("getkirby/custom-file-preview", {
   components: {
     "k-glb-file-preview": {
       template: `

@@ -182,7 +182,7 @@ Kirby::plugin(
 The `index.js` file handles the previews inside the Panel. We define a template for `faq` and `faqItem`.
 
 ```js "/site/plugins/faq-block/index.js"
-panel.plugin('your-project/faq-block', {
+window.panel.plugin('your-project/faq-block', {
   blocks: {
     faq: {
       template: `

@@ -7,7 +7,7 @@ Text:
 The created plugin type for the Panel runs plugin code directly after the Vue instance has been loaded and gives access to the instance. You can use this to add additional routes, register additional global events and more.
 
 ```js
-panel.plugin("my/plugin", {
+window.panel.plugin("my/plugin", {
   created(Vue) {
     // work with the newly created Vue instance here.   
   }

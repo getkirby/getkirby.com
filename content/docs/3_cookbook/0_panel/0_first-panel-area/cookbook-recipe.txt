@@ -127,7 +127,7 @@ Next, we create a new folder called `/src` inside our `moviereviews` folder. Ins
 ```js "/site/plugins/moviereviews/src/index.js"
 import MovieReviews from "./components/MovieReviews.vue";
 
-panel.plugin("cookbook/moviereviews", {
+window.panel.plugin("cookbook/moviereviews", {
   components: {
     moviereviews: MovieReviews,
   },

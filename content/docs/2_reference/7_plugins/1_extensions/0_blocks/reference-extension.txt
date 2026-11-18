@@ -61,7 +61,7 @@ Kirby::plugin(
 The `index.js` file is the place to register your Vue component for the Panel and create the template for your block. You can write it in simple vanilla JS, or you can go for a full-blown setup with build process to work with Vue single-file-components. We keep it simple for this example.
 
 ```js "/site/plugins/button/index.js"
-panel.plugin("your-project/button-block", {
+window.panel.plugin("your-project/button-block", {
   blocks: {
     button: `
       <button type="button" @click="open">
@@ -119,7 +119,7 @@ If you want to go one step further, you can turn your button block into a tiny W
 ### Extending your index.js
 
 ```js "/site/plugins/button/index.js"
-panel.plugin("your-project/button-block", {
+window.panel.plugin("your-project/button-block", {
   blocks: {
     button: `
       <input
@@ -154,7 +154,7 @@ The Blocks field will take care of the rest.
 When your preview gets more complex, you probably need computed values or methods that are normally available in Vue components. The examples above just focused on the template code, but you can extend this to a full Vue component:
 
 ```js "/site/plugins/button/index.js"
-panel.plugin("your-project/button-block", {
+window.panel.plugin("your-project/button-block", {
   blocks: {
     button: {
       computed: {
@@ -239,7 +239,7 @@ export default {
 ```js "/site/plugins/button/src/index.js"
 import Button from "./components/Button.vue";
 
-panel.plugin("your-project/button-block", {
+window.panel.plugin("your-project/button-block", {
   blocks: {
     button: Button
   }

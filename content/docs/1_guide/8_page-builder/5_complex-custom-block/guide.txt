@@ -298,7 +298,7 @@ We can surely do better. In the next step, we are going to change this and creat
 We can start very basic with an `index.js` **next to the main `index.php` file**:
 
 ```js "/site/plugins/audio-block/index.js"
-panel.plugin("cookbook/audio-block", {
+window.panel.plugin("cookbook/audio-block", {
   blocks: {
     audio: {
       template: `
@@ -320,7 +320,7 @@ Let's replace this with an audio tag and the title from our block (we leave the 
 The `source` filepicker field doesn't store the file itself but a reference to it: `content.source` is an array of file UUIDs like `file://3hQfX8JLNb2X1Erc`. To get the URL of the audio file, we fetch the file from Kirby's API with `this.$panel.api.files.get()` when the preview is created:
 
 ```js "/site/plugins/audio-block/index.js"
-panel.plugin("cookbook/audio-block", {
+window.panel.plugin("cookbook/audio-block", {
   blocks: {
     audio: {
       data() {
@@ -351,7 +351,7 @@ Now listen to this! We have a simple audio tag preview with a title (provided th
 But hold on! If we tried to add an audio block now in the Panel, we will run into an error. Try it out. Why's that? Because we haven't made sure that we actually have a file before we ask the API for it. And if we select another file in the drawer, the preview won't notice, because we only fetch the file once. Let's fix both with a computed `source` property and a watcher:
 
 ```js "/site/plugins/audio-block/index.js"
-panel.plugin("cookbook/audio-block", {
+window.panel.plugin("cookbook/audio-block", {
   blocks: {
     audio: {
       data() {
@@ -430,7 +430,7 @@ Back to our `index.js`, where we import the yet to create `Audio.vue` component 
 ```js "/site/plugins/audio-block/src/index.js"
 import Audio from './components/Audio.vue';
 
-panel.plugin("cookbook/audio-block", {
+window.panel.plugin("cookbook/audio-block", {
   blocks: {
     audio: Audio
   }

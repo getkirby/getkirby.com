@@ -211,7 +211,7 @@ export default {
 import LoginAccessKeyMethodForm from "./components/LoginAccessKeyMethodForm.vue";
 import LoginSmsChallengeForm from "./components/LoginSmsChallengeForm.vue";
 
-panel.plugin("acme/auth", {
+window.panel.plugin("acme/auth", {
   components: {
     "k-login-access-key-method-form": LoginAccessKeyMethodForm,
     "k-login-sms-challenge-form": LoginSmsChallengeForm
@@ -519,7 +519,7 @@ If you don't need the phone number in the form, `<k-login-code type="sms" :value
 
 ## Replacing the login form
 
-In Kirby 5, a plugin could replace the whole login form with the `login` extension of `panel.plugin()`. This extension has been removed in Kirby 6, together with the `<k-login-form>` and `<k-login-code-form>` components and the deprecated aliases `<k-login>` and `<k-login-code>`.
+In Kirby 5, a plugin could replace the whole login form with the `login` extension of `window.panel.plugin()`. This extension has been removed in Kirby 6, together with the `<k-login-form>` and `<k-login-code-form>` components and the deprecated aliases `<k-login>` and `<k-login-code>`.
 
 Write an auth method instead and return your form from its `form()` method. Your method then appears next to the core methods, and site developers decide in `auth.methods` whether it's the only one, the first one or an alternative.
 

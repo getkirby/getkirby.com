@@ -190,7 +190,7 @@ export default {
 becomes
 
 ```js
-panel.plugin("me/myblock", {
+window.panel.plugin("me/myblock", {
   blocks: {
     myBlock: {
       computed: {...},
@@ -204,7 +204,7 @@ panel.plugin("me/myblock", {
 Translated to our `audio-block` example:
 
 ```js "/site/plugins/audio-block/index.js"
-panel.plugin('cookbook/audio-block', {
+window.panel.plugin('cookbook/audio-block', {
   blocks: {
     audio: {
       data() {
@@ -248,7 +248,7 @@ Everything in the `<template>` part of our example above goes into the `template
 becomes
 
 ```js
-panel.plugin("me/myblock", {
+window.panel.plugin("me/myblock", {
   blocks: {
     myBlock: {
       methods: {...},
@@ -375,7 +375,7 @@ For the real-life example:
 That's it. Just in case, here is the complete `index.js` file again:
 
 ```js "/site/plugins/audio-block/index.js"
-panel.plugin('cookbook/audio-block', {
+window.panel.plugin('cookbook/audio-block', {
   blocks: {
     audio: {
       data() {

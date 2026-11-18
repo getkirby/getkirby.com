@@ -84,7 +84,7 @@ Kirby::plugin('acme/backlinks', [
 ```
 
 ```js "/site/plugins/backlinks/index.js"
-panel.plugin("acme/backlinks", {
+window.panel.plugin("acme/backlinks", {
 	sections: {
 		backlinks: {
 			data() {
@@ -325,7 +325,7 @@ export default {
 ```js "/site/plugins/backlinks/src/index.js"
 import BacklinksField from "./components/BacklinksField.vue";
 
-panel.plugin("acme/backlinks", {
+window.panel.plugin("acme/backlinks", {
 	fields: {
 		backlinks: BacklinksField
 	}

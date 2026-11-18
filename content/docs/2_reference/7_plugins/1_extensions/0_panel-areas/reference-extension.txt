@@ -113,7 +113,7 @@ Kirby::plugin(
 ```
 
 ```js
-panel.plugin('yourname/todos', {
+window.panel.plugin('yourname/todos', {
   components: {
     'k-todos-view': {
       props: {
@@ -298,7 +298,7 @@ This is a very simplified example to show the basic concept. In your plugin, you
 In the index.js you can overwrite the Vue component that renders the users view:
 
 ```js
-panel.plugin('custom/users', {
+window.panel.plugin('custom/users', {
   components: {
     'k-users-view': {
       props: {

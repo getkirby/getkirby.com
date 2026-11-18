@@ -828,7 +828,7 @@ Moved and replaced classes and methods:
 - Removed `Kirby\Cms\Auth::ipHash()`. Use `$visitor->ip(hash: true)` instead.
 - Auth session format changed: `kirby.challenge.code` → `kirby.challenge.data`. In-flight challenges across the Kirby upgrade won't verify.
 - Removed the translation strings `login.code.label.login` and `login.code.label.password-reset`
-- Removed the `login` extension type of `panel.plugin()` (`panel.plugins.login`). Register your custom login UI as a normal `component` instead and reference it in the `Kirby\Auth\Method::form()` or `Kirby\Auth\Challenge::form()` method of your custom auth method or challenge. [#8045](https://github.com/getkirby/kirby/pull/8045)
+- Removed the `login` extension type of `window.panel.plugin()` (`window.panel.plugins.login`). Register your custom login UI as a normal `component` instead and reference it in the `Kirby\Auth\Method::form()` or `Kirby\Auth\Challenge::form()` method of your custom auth method or challenge. [#8045](https://github.com/getkirby/kirby/pull/8045)
 - Removed `<k-login-form>`, `<k-login-code-form>` and the deprecated aliases `<k-login>` and `<k-login-code>` [#8045](https://github.com/getkirby/kirby/pull/8045)
 - The Panel login routes are multi-step now: `login/method/...` and `login/challenge/...`
 - The TOTP enable/disable dialogs (`Kirby\Panel\UserTotpEnableDialog`, `Kirby\Panel\UserTotpDisableDialog` and `<k-totp-dialog>`) have been replaced by `Kirby\Panel\Controller\Drawer\UserTotpDrawerController` and `<k-user-totp-drawer>` [#7445](https://github.com/getkirby/kirby/pull/7445)

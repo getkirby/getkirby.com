@@ -187,7 +187,7 @@ Let's move on to the JS side of stuff. In our `index.js` we register the `k-prod
 ```js "/site/plugins/products/src/index.js"
 import Products from "./components/Products.vue";
 
-panel.plugin("getkirby/products", {
+window.panel.plugin("getkirby/products", {
   components: {
     "k-products-view": Products
   }
@@ -1065,7 +1065,7 @@ As before, we register the component in our `index.js`:
 import Products from "./components/Products.vue";
 import Product from "./components/Product.vue";
 
-panel.plugin("getkirby/products", {
+window.panel.plugin("getkirby/products", {
   components: {
     "k-products-view": Products,
     "k-product-view": Product

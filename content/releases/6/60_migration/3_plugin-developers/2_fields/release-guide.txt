@@ -718,7 +718,7 @@ export default {
 ```js "/site/plugins/rating/src/index.js"
 import RatingField from "./components/RatingField.vue";
 
-panel.plugin("acme/rating", {
+window.panel.plugin("acme/rating", {
 	fields: {
 		rating: RatingField
 	}
@@ -849,7 +849,7 @@ Kirby::plugin('acme/handle', [
 The field is registered as `handle`, so the Panel needs a `k-handle-field` component. If you don't need your own, extend the core component, just like in Kirby 5:
 
 ```js "/site/plugins/handle/index.js"
-panel.plugin("acme/handle", {
+window.panel.plugin("acme/handle", {
 	fields: {
 		handle: {
 			extends: "k-text-field"

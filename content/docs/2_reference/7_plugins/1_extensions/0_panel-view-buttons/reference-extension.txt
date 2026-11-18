@@ -84,7 +84,7 @@ By default, custom view buttons are rendered with the `<k-view-button>` componen
 If you need more interactivity or want to render a more complex UI, you can create your own Vue component:
 
 ```js "site/plugins/your-plugin/index.js"
-panel.plugin("getkirby/custom-view-buttons", {
+window.panel.plugin("getkirby/custom-view-buttons", {
   viewButtons: {
     applause: {
       props: {

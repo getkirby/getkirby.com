@@ -180,7 +180,7 @@ beforeUnmount() {
 
 ### Vue plugins registered via `use`
 
-Vue plugins registered with the `use` extension of `panel.plugin()` now receive the Vue app instead of the Vue constructor:
+Vue plugins registered with the `use` extension of `window.panel.plugin()` now receive the Vue app instead of the Vue constructor:
 
 ```js "/site/plugins/my-plugin/src/index.js"
 // Kirby 5
@@ -209,7 +209,7 @@ window.panel.plugin("my/plugin", {
 | Vue 2 (Kirby 5) | Vue 3 (Kirby 6) |
 | --- | --- |
 | `window.Vue`, `Vue.ref()`, `Vue.computed()` … | `import { ref, computed } from "vue"` |
-| `Vue.extend()`, `new Vue()` | Register components with `panel.plugin()` |
+| `Vue.extend()`, `new Vue()` | Register components with `window.panel.plugin()` |
 | `this.$scopedSlots.default()` | `this.$slots.default()` |
 | `@click.native="…"` | `@click="…"` (the `.native` modifier is gone) |
 | `:title.sync="title"` | `v-model:title="title"` with an `update:title` event |

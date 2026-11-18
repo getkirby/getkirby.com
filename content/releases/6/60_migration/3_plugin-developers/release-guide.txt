@@ -355,7 +355,7 @@ The auth system has moved to the new `Kirby\Auth` namespace and was rebuilt arou
 
 - **Custom challenges** must be rewritten based on the instance-based `Kirby\Auth\Challenge` class. They are still registered with the `authChallenges` extension and need a `form()` for the Panel login.
 - **Custom login methods** are new: register them with the `authMethods` extension. Registered methods and challenges must also be enabled in the `auth.methods` and `auth.challenges` options. Kirby passes the registry key to the class as its type, so one class can be registered under several types, each with its own options.
-- **Custom login UI:** The `login` extension type of `panel.plugin()` has been removed. Register your form as a regular component and return it from the `form()` method of your method or challenge. `<k-login-form>`, `<k-login-code-form>` and `<k-login>` have been removed. `<k-login-code>` is now a different component, a code input for the new login forms.
+- **Custom login UI:** The `login` extension type of `window.panel.plugin()` has been removed. Register your form as a regular component and return it from the `form()` method of your method or challenge. `<k-login-form>`, `<k-login-code-form>` and `<k-login>` have been removed. `<k-login-code>` is now a different component, a code input for the new login forms.
 - **Status and return values:** `$kirby->auth()->status()` returns a `Kirby\Auth\Status` object with a different API than `Kirby\Cms\Auth\Status`. `Auth::validatePassword()` and `Auth::verifyChallenge()` return `Kirby\Cms\User|null`. `Kirby\Cms\Find::user()` throws a `Kirby\Exception\UserNotFoundException`.
 
 The full walkthrough is in (link: releases/6/migration/plugin-developers/auth text: Custom auth methods & challenges).
