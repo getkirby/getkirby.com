@@ -303,7 +303,9 @@ fields:
     type: pages
   author:
     type: users
+```
 
+```yaml "/site/blueprints/pages/article.yml"
 # Kirby 6
 fields:
   cover:
@@ -380,7 +382,9 @@ color:
   options:
     "Red": "#ff0000"
     "Green": "#00ff00"
+```
 
+```yaml "/site/blueprints/pages/article.yml"
 # Kirby 6
 color:
   type: color
