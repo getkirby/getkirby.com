@@ -226,7 +226,7 @@ You can activate the batch delete mode for structure fields by using the `batch`
 ```yaml
 fields:
   structure:
-	  batch: true
+    batch: true
 ```
 
 

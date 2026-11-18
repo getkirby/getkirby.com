@@ -42,7 +42,7 @@ Multiselect fields with a huge amount of options can get a bit less responsive w
 search:
   min: 3
   display: 10
-	info: true
+  info: true
 ```
 
 Now the filtering of options will only begin when at least 3 characters have been typed into the search input. Only up to 10 options will be displayed (you can still reveal all filtered options via an extra click). And the `info` text is included in the search.
