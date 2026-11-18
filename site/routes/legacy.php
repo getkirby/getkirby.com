@@ -152,14 +152,91 @@ return [
 		'action'  => fn (string $path = '') => go(rtrim('docs/guide/updates/update-to-v6/' . $path, '/'))
 	],
 
-	// Kirby 6: renamed classes and field methods
-	[
-		'pattern' => 'docs/reference/objects/session/session-data',
-		'action'  => fn () => go('docs/reference/objects/session/data')
-	],
+	// Kirby 6: renamed field methods, removed or moved classes and methods
 	[
 		'pattern' => 'docs/reference/templates/field-methods/kirbytextinline',
 		'action'  => fn () => go('docs/reference/templates/field-methods/kirbytext-inline')
+	],
+	[
+		'pattern' => 'docs/reference/objects/(:any)/(:any)/(:any?)',
+		'action'  => function (string $namespace, string $class, string $method = '') {
+			// leave content representations like `.md` alone
+			if (str_contains($class . $method, '.') === true) {
+				return $this->next();
+			}
+
+			// the class still exists, but the method was removed
+			if ($page = page('docs/reference/objects/' . $namespace . '/' . $class)) {
+				if ($method !== '' && $page->find($method) === null) {
+					go($page);
+				}
+
+				return $this->next();
+			}
+
+			$key = $namespace . '/' . $class;
+
+			// removed classes without a successor
+			$removed = [
+				'cms/section'       => 'docs/guide/updates/update-to-v6/plugin-developers/sections',
+				'toolkit/component' => 'docs/guide/updates/update-to-v6/site-developers#custom-code-using-core-classes__moved-and-deprecated-classes',
+			];
+
+			if (isset($removed[$key]) === true) {
+				go($removed[$key]);
+			}
+
+			// removed classes with a successor (see the Kirby 6 changelog);
+			// moved classes are found through their deprecated alias
+			$replaced = [
+				'cms-auth/challenge'             => 'Kirby\Auth\Challenge',
+				'cms-auth/email-challenge'       => 'Kirby\Auth\Challenge\EmailChallenge',
+				'cms-auth/totp-challenge'        => 'Kirby\Auth\Challenge\TotpChallenge',
+				'cms/file-picker'                => 'Kirby\Panel\Controller\Dialog\FilePickerDialogController',
+				'cms/page-picker'                => 'Kirby\Panel\Controller\Dialog\PagePickerDialogController',
+				'cms/picker'                     => 'Kirby\Panel\Controller\Dialog\ModelPickerDialogController',
+				'cms/user-picker'                => 'Kirby\Panel\Controller\Dialog\UserPickerDialogController',
+				'form-mixin/value'               => 'Kirby\Form\Field\ValueField',
+				'form/field-class'               => 'Kirby\Form\Field',
+				'panel-controller/page-tree'     => 'Kirby\Panel\Controller\Request\PageTreeRequestController',
+				'panel-controller/search'        => 'Kirby\Panel\Controller\SearchController',
+				'panel-ui-buttons/languages-dropdown' => 'Kirby\Panel\Ui\Button\LanguagesButton',
+				'panel/changes-dialog'           => 'Kirby\Panel\Controller\Dialog\ChangesDialogController',
+				'panel/dialog'                   => 'Kirby\Panel\Response\DialogResponse',
+				'panel/document'                 => 'Kirby\Panel\Response\ViewDocumentResponse',
+				'panel/drawer'                   => 'Kirby\Panel\Response\DrawerResponse',
+				'panel/dropdown'                 => 'Kirby\Panel\Response\DropdownResponse',
+				'panel/json'                     => 'Kirby\Panel\Response\JsonResponse',
+				'panel/page-create-dialog'       => 'Kirby\Panel\Controller\Dialog\PageCreateDialogController',
+				'panel/request'                  => 'Kirby\Panel\Response\RequestResponse',
+				'panel/search'                   => 'Kirby\Panel\Response\SearchResponse',
+				'panel/user-totp-disable-dialog' => 'Kirby\Panel\Controller\Drawer\UserTotpDrawerController',
+				'panel/user-totp-enable-dialog'  => 'Kirby\Panel\Controller\Drawer\UserTotpDrawerController',
+				'panel/view'                     => 'Kirby\Panel\Response\ViewResponse',
+				'query/argument'                 => 'Kirby\Query\Query',
+				'query/arguments'                => 'Kirby\Query\Query',
+				'query/expression'               => 'Kirby\Query\Query',
+				'query/segment'                  => 'Kirby\Query\Query',
+				'query/segments'                 => 'Kirby\Query\Query',
+				'session/auto-session'           => 'Kirby\Session\Sessions',
+			];
+
+			$name = $replaced[$key] ?? 'Kirby\\' . implode('\\', array_map('ucfirst', explode('-', $namespace))) . '\\' . Kirby\Toolkit\Str::studly($class);
+
+			if (
+				class_exists($name) === true ||
+				interface_exists($name) === true ||
+				trait_exists($name) === true
+			) {
+				$name = (new ReflectionClass($name))->getName();
+
+				if ($page = ReferenceClassPage::findByName($name)) {
+					go(($method !== '' ? $page->find($method) : null) ?? $page);
+				}
+			}
+
+			return $this->next();
+		}
 	],
 
 	// October 2026: reference shortlinks use their full menu path as slug
