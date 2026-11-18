@@ -1023,7 +1023,7 @@ Shared behavior has been extracted into reusable mixins, such as:
 - Migrated `preserveDataAttrs` and `preserveListeners` to TypeScript [#8118](https://github.com/getkirby/kirby/pull/8118)
 - Migrated the Editor to TypeScript [#8101](https://github.com/getkirby/kirby/pull/8101) [#8102](https://github.com/getkirby/kirby/pull/8102) [#8105](https://github.com/getkirby/kirby/pull/8105) [#8106](https://github.com/getkirby/kirby/pull/8106) [#8107](https://github.com/getkirby/kirby/pull/8107) [#8108](https://github.com/getkirby/kirby/pull/8108) [#8110](https://github.com/getkirby/kirby/pull/8110) [#8111](https://github.com/getkirby/kirby/pull/8111) [#8112](https://github.com/getkirby/kirby/pull/8112) [#8114](https://github.com/getkirby/kirby/pull/8114)
 - Migrated `$helper.writer` to TypeScript [#8321](https://github.com/getkirby/kirby/pull/8321)
-- `window.panel.system.csrf` and `window.panel.csrf.title` are always strings now (empty strings when not set) [#8119](https://github.com/getkirby/kirby/pull/8119)
+- `window.panel.system.csrf` and `window.panel.system.title` are always strings now (empty strings when not set) [#8119](https://github.com/getkirby/kirby/pull/8119)
 
 ## Auth
 
