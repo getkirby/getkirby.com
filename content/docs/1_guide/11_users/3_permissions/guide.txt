@@ -141,6 +141,30 @@ options:
     manager: true
 ```
 
+## How permissions are resolved
+
+Kirby looks for a permission rule in this order and stops at the first one it finds:
+
+1. **The model's blueprint:** the `options` of the page, file, user or site blueprint, either for everyone or per role
+2. **The user's role:** the `permissions` in the role blueprint
+3. **The default:** `false`
+
+Users with the `nobody` role are never allowed to do anything, and the `kirby` user is always allowed.
+
+```yaml "/site/blueprints/pages/legal.yml"
+options:
+  delete: false
+  changeSlug:
+    admin: true
+    "*": false
+```
+
+With this blueprint, nobody can delete a legal page and only admins can change its slug, no matter what the role blueprints say.
+
+## Checking permissions in your code
+
+Kirby checks permissions whenever an action runs. To check them yourself, e.g. to show an edit link only to users who may edit a page, use (link: docs/guide/users/guards text: guards).
+
 ## Controlling permissions with hooks
 
 If the blueprint-based permission settings are too limiting for your project, you can get more flexibility by creating your own permission checks with `before` hooks for various actions.
