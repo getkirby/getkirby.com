@@ -57,7 +57,7 @@ Each type of route in an area accepts these keys:
 | `searches` | `label`, `icon` | `query` | `query` closure or `action`: closure or controller class |
 | `requests` | `pattern`, `method`, `auth` | `action` | `action`: closure or controller class |
 
-Request routes accept `GET` and `POST` requests by default. All routes but views check the CSRF token, which `panel.get()`, `panel.post()` and `panel.request()` send automatically.
+Request routes accept `GET` and `POST` requests by default. All routes but views check the CSRF token, which `window.panel.get()`, `window.panel.post()` and `window.panel.request()` send automatically.
 
 ### Closures keep working
 
