@@ -60,7 +60,7 @@ Your permissions are grouped under a category named after the plugin, with the s
 title: Editor
 permissions:
   my.permissionPlugin:
-    *: false
+    "*": false
     access: true
 ```
 

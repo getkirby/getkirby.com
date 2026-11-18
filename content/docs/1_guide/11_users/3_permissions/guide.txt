@@ -59,9 +59,11 @@ For permission types with many actions with the same setting, you can use the `*
 
 ```yaml
 user:
-  *: false
+  "*": false
   changeName: true
 ```
+
+Keep the quotes around `*`: without them, YAML reads it as an alias and the blueprint can't be loaded.
 
 The `*` wildcard only controls the permissions you can find in the full list above. It is the same as setting all available permissions (except those that are overridden explicitly by another rule) manually.
 
@@ -110,7 +112,7 @@ You can also use a wildcard to change the default for all roles and then assign 
 ```yaml
 options:
   update:
-    *: false
+    "*": false
     editor: true
 ```
 
@@ -124,10 +126,10 @@ In the context of user roles, there are two users to keep in mind: The acting us
 options:
   # only allow admin users to change admin emails and passwords
   changeEmail:
-    *: false
+    "*": false
     admin: true
   changePassword:
-    *: false
+    "*": false
     admin: true
 ```
 
@@ -135,7 +137,7 @@ options:
 options:
   # only allow managers to delete editors
   delete:
-    *: false
+    "*": false
     manager: true
 ```
 
