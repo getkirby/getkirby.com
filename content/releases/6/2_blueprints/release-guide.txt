@@ -32,7 +32,7 @@ fields:
     type: filepicker
   articles:
     type: pagelist
-    templates: article
+    blueprints: article
     layout: table
     search: true
 
@@ -109,7 +109,7 @@ fields:
   articles:
     label: Articles
     type: pagelist
-    template: article
+    blueprints: article
     layout: table
   cover:
     type: filepicker
@@ -182,6 +182,7 @@ There's no need to rewrite working blueprints right away. If you want to, these 
 2. Remove the wrapper of every `fields` section and move its fields one level up.
 3. Change `type: pages` to `type: pagelist` and `type: files` to `type: filelist`.
 4. Rename `headline` to `label`.
+5. Rename `templates` (or `template`) to `blueprints` in page lists and `template` to `blueprint` in file lists. The old names still work.
 
 **Kirby 5**
 
@@ -226,7 +227,7 @@ columns:
       gallery:
         label: Gallery
         type: filelist
-        template: image
+        blueprint: image
         layout: cards
   - width: 1/3
     fields:
