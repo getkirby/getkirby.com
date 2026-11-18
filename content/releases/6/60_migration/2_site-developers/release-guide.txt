@@ -238,17 +238,17 @@ fields:
     label: Drafts
     type: pagelist
     status: drafts
-    templates: article
+    blueprints: article
   unlisted:
     label: Unlisted
     type: pagelist
     status: unlisted
-    templates: article
+    blueprints: article
   listed:
     label: Published
     type: pagelist
     status: listed
-    templates: article
+    blueprints: article
 ```
 
 ### Picker fields
