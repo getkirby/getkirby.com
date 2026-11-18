@@ -84,7 +84,7 @@ An area like this one from Kirby 5 runs in Kirby 6 without changes:
 ]
 ```
 
-There are only two things to watch out for: plain strings in props like a dialog's `text` are escaped now (see (link: docs/guide/updates/update-to-v6/plugin-developers/trusted-html text: Trusted HTML)), and errors are handled differently (see (link: releases/6/error-handling#for-plugin-developers text: Better errors in the Panel)).
+There are only two things to watch out for: plain strings in props like a dialog's `text` are escaped now (see (link: docs/guide/updates/update-to-v6/plugin-developers/trusted-html text: Trusted HTML)), and errors are handled differently (see (link: docs/guide/troubleshooting/debugging#errors-in-the-panel text: Errors in the Panel)).
 
 ## Controller classes
 

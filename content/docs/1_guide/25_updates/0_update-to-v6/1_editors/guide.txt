@@ -89,7 +89,7 @@ Kirby 6 is built to tell you why the Panel can't do something:
 - If a field can't be loaded, e.g. because of a setup problem, the Panel shows an error in place of that field instead of breaking the whole page.
 - When fields contain invalid values, e.g. when you try to publish a page, the Panel lists the problems in a clearer dialog.
 
-Read more about (link: releases/6/error-handling text: better errors in the Panel).
+Read more about (link: docs/guide/troubleshooting/debugging#errors-in-the-panel text: errors in the Panel).
 
 ### Upload files right in the file picker
 
