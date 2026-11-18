@@ -52,7 +52,7 @@ The preview view has four modes:
 
 Links in the preview work like on your site. When you follow a link to another page, the form switches to that page as well. Links to other domains and into the Panel open in a new tab, and a click on the page title in the header lets you jump to any other page. To look at one page while editing another, pin the preview: the preview and the form then navigate independently until you unpin it.
 
-To use a second screen, open the preview in its own browser tab with the button in the header. The form then takes up the full width of the main window, and both stay in sync.
+To use a second screen, open the preview in its own browser tab with the button in the header and drag the tab to its own window. The form then takes up the full width of the main window. The preview still reloads when you change content in the form, navigating in either window takes the other one along, and pinning works there as well. Close the tab to bring the preview back to the main window.
 
 Buttons in the header show your page in different viewport widths. You can define your own sizes with the (link: docs/reference/system/options/panel#preview-sizes text: `panel.preview.sizes` option).
 
