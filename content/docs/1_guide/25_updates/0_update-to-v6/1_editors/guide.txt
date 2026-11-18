@@ -69,7 +69,7 @@ Read more about (link: releases/6/authentication#two-factor-authentication text:
 
 The preview button in the header of a page now opens the **live editor**: the page as it will look on your site on one side, the fields on the other. Your changes show up in the preview while you type. You can even move the preview to a second window or check it in different screen sizes.
 
-Read more about the (link: releases/6/live-editor text: live editor).
+Read more about the (link: docs/guide/content/publishing-workflow#live-editor text: live editor).
 
 ### Unsaved changes are highlighted
 
