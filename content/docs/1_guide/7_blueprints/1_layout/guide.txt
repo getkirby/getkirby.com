@@ -439,3 +439,53 @@ tabs:
         type: text
 ```
 
+
+## Define fields once, place them anywhere
+
+In a blueprint with tabs or columns, you can define all fields at the root level and only list their names in the layout. Moving a field to another column or tab becomes a one-line change.
+
+```yaml "/site/blueprints/pages/blog.yml"
+title: Blog
+
+fields:
+  intro:
+    type: textarea
+  articles:
+    label: Articles
+    type: pagelist
+    blueprints: article
+    layout: table
+  cover:
+    type: filepicker
+    max: 1
+  gallery:
+    label: Gallery
+    type: filelist
+    layout: cards
+  seoTitle:
+    label: SEO title
+    type: text
+  seoDescription:
+    label: SEO description
+    type: textarea
+
+tabs:
+  content:
+    label: Content
+    columns:
+      - width: 2/3
+        fields:
+          - intro
+          - articles
+      - width: 1/3
+        fields:
+          - cover
+          - gallery
+  seo:
+    label: SEO
+    fields:
+      - seoTitle
+      - seoDescription
+```
+
+Only the fields you list in the layout are shown. If a name doesn't match any field at the root level, the Panel shows an error in its place.
