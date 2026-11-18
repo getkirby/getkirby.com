@@ -9,10 +9,10 @@ Intro: Learn how to upgrade a Kirby 5 project to Kirby 6, whose biggest change f
 Text:
 
 <warning>
-Kirby 6 is still in development. This page describes the changes as they currently stand and may change before the release.
-
 Make a backup of your site before upgrading, as always.
 </warning>
+
+This page focuses on the biggest change for blueprints. For everything else, from requirements to step-by-step instructions, follow the (link: releases/6/migration text: Kirby 6 migration guides) for editors, site developers and plugin developers.
 
 ## Sections are now fields
 
@@ -44,10 +44,10 @@ columns:
         type: textarea
       subpages:
         type: pagelist
-        template: article
+        blueprints: article
 ```
 
-Two things happened here. The `sections` key is gone, and the `pages` section became a `pagelist` field. The `fields` section disappeared entirely, because it only ever existed to nest fields inside a section — with sections gone, the fields sit directly in the column.
+Two things happened here. The `sections` key is gone, and the `pages` section became a `pagelist` field. The `fields` section disappeared entirely, because it only ever existed to nest fields inside a section — with sections gone, the fields sit directly in the column. The `template` option of the list is called `blueprints` now; the old name still works.
 
 <info>
 Your existing blueprints keep working. Kirby 6 normalizes a `sections` key into fields when it reads a blueprint, using exactly the mapping below. It is a compatibility shortcut rather than a supported way of writing new blueprints, so migrate when you touch a blueprint anyway.
