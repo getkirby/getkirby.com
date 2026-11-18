@@ -19,19 +19,19 @@ fields:
         required: true
         options:
           web-page:
-            *: karbon.options.doc_type.web-page
+            "*": karbon.options.doc_type.web-page
           annual-report:
-            *: karbon.options.doc_type.annual-report
+            "*": karbon.options.doc_type.annual-report
           sustainability-page:
-            *: karbon.options.doc_type.sustainability-page
+            "*": karbon.options.doc_type.sustainability-page
           certificate:
-            *: karbon.options.doc_type.certificate
+            "*": karbon.options.doc_type.certificate
           csrd-report:
-            *: karbon.options.doc_type.csrd-report
+            "*": karbon.options.doc_type.csrd-report
           ai-model-card:
-            *: karbon.options.doc_type.ai-model-card
+            "*": karbon.options.doc_type.ai-model-card
           other:
-            *: karbon.options.doc_type.other
+            "*": karbon.options.doc_type.other
       url:
         label: karbon.fields.disclosures.url.label
         type: url
