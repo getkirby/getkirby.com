@@ -48,7 +48,7 @@ Highlights:
 -
   icon: bolt
   headline: Faster Kirby
-  text: Less code on first load, batched requests, fewer re-renders while you type and less work on the server.
+  text: Pages render faster and the Panel loads and reacts quicker, especially with large blueprints and long forms.
   link: "/releases/6/foundation#performance"
 -
   icon: globe
