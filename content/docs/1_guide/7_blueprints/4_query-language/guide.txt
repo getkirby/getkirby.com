@@ -247,7 +247,13 @@ The function is called for each child page and keeps those for which it returns 
 
 ### When a query fails
 
-If Kirby can't resolve a query, e.g. because of a typo or a method that doesn't exist, the Panel doesn't show an error. Options and lists from the query stay empty and string templates leave out the result of the query. If a query doesn't return what you expect, try its parts step by step, e.g. `page.children` before `page.children.listed.first`.
+If Kirby can't resolve a query, e.g. because of a typo or a method that doesn't exist, what you see depends on where the query is used:
+
+- Fields with options from a query show an error box instead of the field.
+- `pagelist` and `filelist` fields show an error box if their `parent` can't be found. A broken `query` leaves the list empty.
+- String templates leave out the result of the query.
+
+If a query doesn't return what you expect, try its parts step by step, e.g. `page.children` before `page.children.listed.first`.
 
 
 
