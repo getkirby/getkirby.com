@@ -673,82 +673,79 @@ $text     = $cardType === 'manual' ? $block->text() : ($page ? $page->text() : '
 
 This time, we will only use a single preview option, because card content can come from two sources, so making it inline editable doesn't make that much sense.
 
-However, the logic here is a bit more complicated, because we have to retrieve some content via the API.
+However, the logic here is a bit more complicated: the `page` and `image` fields only store UUIDs, so the preview has to load everything else.
 
-The most notable thing here are the `watch` methods which let us react on changes in the component. In this case, we watch for any changes to the `cardType` and `pageId` values, and depending on these values change the `text` property. Also, if the card type is of type `page`, we fetch the content of the text field via Kirby's API.
+- For the image of a manual card, `k-image-frame` does that for us. We pass the UUID to its `file` prop and it loads the image itself.
+- For a page card, a watcher reacts to the selected page. `this.$helper.items()` loads the page the way the Panel shows it in a list: with its title, already escaped as HTML, and its image, which we pass to the `src` and `srcset` props of `k-image-frame`. The text of the page comes from Kirby's API via `this.$panel.api.pages.get()`.
+
+Heading and text are writer fields, so we render them with `v-safe-html` like in the (link: #custom-flavored-boxes__simple-preview text: box preview).
 
 ```js "/site/plugins/block-factory/index.js"
 window.panel.plugin("cookbook/block-factory", {
   blocks: {
-   card: {
+    card: {
       data() {
         return {
-          text: "No text value"
+          linkedPage: null
         };
       },
       computed: {
-        cardType() {
-          return this.content.cardtype;
-        },
         heading() {
-          return (this.cardType === 'manual') ? this.content.heading : this.page.text;
+          return this.isPage ? this.linkedPage?.heading : this.content.heading;
         },
-        image() {
-          if (this.cardType === 'manual') {
-            return this.content.image[0] || {};
-          } else {
-            return this.page.image || {}
-          }
+        isPage() {
+          return this.content.cardtype === "page";
         },
-        pageId() {
-          return this.page ? this.page.id : '';
+        pageUuid() {
+          return this.isPage ? this.content.page[0] : null;
         },
-        page() {
-            return this.content.page[0] || {};
-        },
+        text() {
+          return this.isPage ? this.linkedPage?.text : this.content.text;
+        }
       },
       watch: {
-        "cardType": {
-          handler (value) {
-           if (value === 'page' && this.pageId) {
-            this.$api.get('pages/' + this.pageId.replaceAll('/', '+')).then(page => {
-              this.text = page.content.text.replace(/(<([^>]+)>)/gi, "") || this.text;
-            });
-           } else if (value === 'manual') {
-             this.text = this.content.text || this.text;
-           }
-
-          },
-          immediate: true
-        },
-        "page": {
-          handler (value) {
-           if (this.cardType === 'page' && this.pageId) {
-            this.$api.get('pages/' + this.pageId.replaceAll('/', '+')).then(page => {
-              this.text = page.content.text.replace(/(<([^>]+)>)/gi, "") || this.text;
-            });
-           } else if (value === 'manual') {
-             this.text = this.content.text || this.text;
-           }
+        pageUuid: {
+          async handler(uuid) {
+            this.linkedPage = uuid ? await this.loadPage(uuid) : null;
           },
           immediate: true
         }
       },
+      methods: {
+        async loadPage(uuid) {
+          const [page, item] = await Promise.all([
+            this.$panel.api.pages.get(uuid, { select: "content" }),
+            this.$helper.items("items/pages", uuid, {
+              layout: "auto",
+              image: JSON.stringify({ ratio: "1/1", cover: true })
+            })
+          ]);
+
+          return {
+            heading: item?.text,
+            image: item?.image,
+            text: page.content.text
+          };
+        }
+      },
       template: `
         <div @dblclick="open">
-          <k-aspect-ratio
+          <k-image-frame
+            :cover="true"
+            :file="isPage ? null : content.image[0]"
+            :src="linkedPage?.image?.src"
+            :srcset="linkedPage?.image?.srcset"
             class="k-block-type-card-image"
-            cover="true"
             ratio="1/1"
-          >
-            <img
-              v-if="image.url"
-              :src="image.url"
-              alt=""
-            >
-          </k-aspect-ratio>
-          <h2 class="k-block-type-card-heading">{{ heading }}</h2>
-          <div class="k-block-type-card-text">{{ text }}</div>
+          />
+          <h2
+            class="k-block-type-card-heading"
+            v-safe-html="$h($helper.string.sanitizeHTML(heading))"
+          ></h2>
+          <div
+            class="k-block-type-card-text"
+            v-safe-html="$h($helper.string.sanitizeHTML(text, { nodes: true }))"
+          ></div>
         </div>
       `
     },
