@@ -223,6 +223,8 @@ page.price.toFloat + page.vat.toFloat
 `AND` and `OR` have to be written in uppercase. A `-` is always the minus operator, so `page.num-1` subtracts 1 from the sorting number of the page. Kirby reads fields with a dash in their name, e.g. `My-field:` in a content file, as `my_field`, so you can access them with `page.my_field`.
 
 <since v="6.0.0">
+`AND`/`&&` bind tighter than `OR`/`||`, so `a || b && c` is read as `a || (b && c)`. Use parentheses to group them differently.
+
 Use `!` to negate a value and `-` in front of a value to make it negative:
 
 ```txt

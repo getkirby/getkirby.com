@@ -47,17 +47,19 @@ Features:
   headline: Copy from disabled fields
   text: Select and copy the values of disabled fields.
 -
-  icon: image
-  headline: Sharper image block previews
-  text: Image and gallery blocks load properly sized thumbnails that respect the ratio and crop settings of the block.
+  icon: status-unlisted
+  headline: Custom page statuses
+  text: Give each page status its own icon or emoji and color theme for the status button, page lists and the status dialog.
+  link: "/docs/reference/panel/blueprints/page#statuses__icons-and-themes"
 -
   icon: file
   headline: More MIME types
   text: Kirby knows more file types, from WebAssembly to WebVTT subtitles and web app manifests.
 -
-  icon: import
-  headline: Drop files on dialogs
-  text: Any dialog or drawer becomes a drop zone for files as soon as it has a `drop` listener.
+  icon: list-bullet
+  headline: Enums from fields
+  text: Turn a field value into a case of your own backed enum with `$field->toEnum()`.
+  link: "/docs/reference/templates/field-methods/to-enum"
 -
   icon: plugin
   headline: Disable core Panel features
