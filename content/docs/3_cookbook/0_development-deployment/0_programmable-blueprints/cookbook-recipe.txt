@@ -521,7 +521,7 @@ We don't have to register `options/blueprints.php`, because we cannot use it lik
 
 ## Tabs
 
-In this last example, we register a (link: docs/guide/blueprints/tabs text: tab blueprint).
+In this last example, we register a (link: docs/guide/blueprints/extending-blueprints#extending-tabs text: tab blueprint).
 
 
 ```php "/site/plugins/programmable-blueprints/index.php"
