@@ -482,7 +482,7 @@ window.panel.plugin("your/plugin", {
 
 ## CSS styles
 
-If you need additional CSS for your field plugin, you can create an optional `index.css`. Kirby will automatically concatenate and load this in combination with the other plugins' CSS files.
+If you need additional CSS for your field plugin, you can create an optional `index.css` next to your plugin's `index.js`. Kirby loads it in the Panel automatically.
 
 Please make sure to check for our (link: docs/reference/plugins/ui text: UI kit components) and available styles before you implement your own CSS rules for something that already exists.
 
