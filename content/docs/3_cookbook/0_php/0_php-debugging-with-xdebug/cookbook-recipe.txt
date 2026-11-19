@@ -219,25 +219,25 @@ We make the following changes in the Starterkit:
 - In `site/models/note.php` remove or comment out the `cover()` function
 - Change `/site/snippets/note.php` like this:
 
-    ```php
-    <article class="note-excerpt">
-    <a href="<?= $note->url() ?>">
-        <header>
-        <figure class="img" style="--w: 16; --h:9">
-            <?= $note->cover()->toFile()->crop(320, 180) ?>
-        </figure>
+  ```php
+  <article class="note-excerpt">
+  <a href="<?= $note->url() ?>">
+      <header>
+      <figure class="img" style="--w: 16; --h:9">
+          <?= $note->cover()->toFile()->crop(320, 180) ?>
+      </figure>
 
-        <h2 class="note-excerpt-title"><?= $note->title() ?></h2>
-        <time class="note-excerpt-date" datetime="<?= $note->published('c') ?>"><?= $note->published() ?></time>
-        </header>
-        <?php if (($excerpt ?? true) !== false): ?>
-        <div class="note-excerpt-text">
-        <?= $note->text()->toBlocks()->excerpt(280) ?>
-        </div>
-        <?php endif ?>
-    </a>
-    </article>
-    ```
+      <h2 class="note-excerpt-title"><?= $note->title() ?></h2>
+      <time class="note-excerpt-date" datetime="<?= $note->published('c') ?>"><?= $note->published() ?></time>
+      </header>
+      <?php if (($excerpt ?? true) !== false): ?>
+      <div class="note-excerpt-text">
+      <?= $note->text()->toBlocks()->excerpt(280) ?>
+      </div>
+      <?php endif ?>
+  </a>
+  </article>
+  ```
 
 What do we do here? We call `toFile()` on the cover field to try and create a file object from the field value, and then call the `crop()` method on the result.
 

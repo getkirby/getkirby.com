@@ -187,9 +187,9 @@ The second return type is basically returned if you don't pass an argument and t
 
 In any case, you can follow the return type links to find out what methods you can call on the return type. In most cases, you will probably use the `url()` method:
 
- ```php
- <?= $file->thumb()->url() ?>
- ```
+```php
+<?= $file->thumb()->url() ?>
+```
 
 ### Void
 

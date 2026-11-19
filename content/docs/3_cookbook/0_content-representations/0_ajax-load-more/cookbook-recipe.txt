@@ -64,18 +64,18 @@ The photography page uses the `photography.php` (glossary: template text: templa
 As a first step, let's move the `<li>` element from the template into a separate (glossary: snippet text: snippet) called `project.php`…
 
 ```php "/site/snippets/project.php"
-  <li class="column" style="--columns: 3">
-    <a href="<?= $project->url() ?>">
-      <figure>
-        <span class="img" style="--w:4;--h:5">
-          <?= ($cover = $project->cover()) ? $cover->crop(400, 500) : null ?>
-        </span>
-        <figcaption class="img-caption">
-          <?= $project->title()->html() ?>
-        </figcaption>
-      </figure>
-    </a>
-  </li>
+<li class="column" style="--columns: 3">
+  <a href="<?= $project->url() ?>">
+    <figure>
+      <span class="img" style="--w:4;--h:5">
+        <?= ($cover = $project->cover()) ? $cover->crop(400, 500) : null ?>
+      </span>
+      <figcaption class="img-caption">
+        <?= $project->title()->html() ?>
+      </figcaption>
+    </figure>
+  </a>
+</li>
 ```
 
 … and replace this element with the newly created snippet in the template:

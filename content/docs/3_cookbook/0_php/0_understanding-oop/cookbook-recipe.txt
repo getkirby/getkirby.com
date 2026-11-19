@@ -392,12 +392,12 @@ Some properties never change once a book exists, like its ISBN. For those, PHP h
 Let's add the ISBN as a third constructor parameter. It's optional, so it gets `null` as default value:
 
 ```php "/book/Book.php"
-	public function __construct(
-		protected string $title,
-		protected string $author,
-		public readonly string|null $isbn = null
-	) {
-	}
+public function __construct(
+	protected string $title,
+	protected string $author,
+	public readonly string|null $isbn = null
+) {
+}
 ```
 
 Now we can pass the ISBN when we create a book and read it like a variable:

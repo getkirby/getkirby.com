@@ -502,7 +502,7 @@ In our template, we can now call the `thumb()` method with any supported paramet
 As already mentioned, if you don’t want to use these more complex thumb options, the simple `crop()` or `resize()` methods will do as well:
 
 ```php
- <li><?= $file->crop(500, 500)?></li>
+<li><?= $file->crop(500, 500)?></li>
 ```
 
 <info>

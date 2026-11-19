@@ -16,12 +16,12 @@ By default, the password reset feature is not activated in Kirby. To activate it
 
 1. Configure the (link: docs/reference/system/options/auth#login-methods text: `auth.methods` config option). In this array, you need to add `password-reset` as method, e.g.
 
-	```php "site/config/config.php"
-	return [
-		'auth' => [
-			'methods' => ['password', 'password-reset']
-		]
-	];
-	```
+   ```php "site/config/config.php"
+   return [
+       'auth' => [
+           'methods' => ['password', 'password-reset']
+       ]
+   ];
+   ```
 
 2. The password reset method needs a working email transport configuration. Without it, verification emails cannot be sent. Find out more about (link: docs/guide/emails#transport-configuration text: how to configure your email transport).

@@ -55,9 +55,9 @@ If you already have a existing Kirby project (Starterkit or your own project), y
 1. Open a shell window and navigate into your project directory with the `cd` command.
 2. Before you can spin up a new DDEV project, initialize the DDEV environment with the `ddev config` command. In the project directory run:
 
-    ```bash
-    ddev config --php-version=8.3 --omit-containers=db
-    ```
+   ```bash
+   ddev config --php-version=8.3 --omit-containers=db
+   ```
 
     You can run `ddev config` without any options, in that case the default config settings are used. Here, however, we tell DDEV
       * that we want to use PHP 8.3 (which is the most current actively supported PHP version at the time of writing). If you want to run on another version, adapt this flag accordingly.
@@ -68,9 +68,9 @@ If you already have a existing Kirby project (Starterkit or your own project), y
 
 3. Next, run
 
-    ```bash
-    ddev start
-    ```
+   ```bash
+   ddev start
+   ```
 
    DDEV now creates the configured containers. When done, you will see a success message like:
 
@@ -83,9 +83,9 @@ If you already have a existing Kirby project (Starterkit or your own project), y
 
 4. And that's it, your site is now accessible at `https://<foldername>.ddev.site` in your browser, where `<foldername>` refers to the folder in which you ran the above commands. Launch the site with:
 
-    ```bach
-    ddev launch
-    ```
+   ```bash
+   ddev launch
+   ```
 
 That was quick, right?
 

@@ -287,7 +287,7 @@ The `products` prop is an object, because our JSON file stores the products by t
 The last table column contains the (link: https://lab.getkirby.com/public/lab/docs/k-options-dropdown text: options dropdown) for the edit and delete buttons).
 
 ```html
-  <k-options-dropdown :options="'products/' + id" />
+<k-options-dropdown :options="'products/' + id" />
 ```
 
 ## Compile and check

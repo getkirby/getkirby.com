@@ -21,7 +21,7 @@ If you want to serve a landing page or your blog on its own domain or a subdomai
 
 
 ```php "/index.php"
- <?php
+<?php
 
 require __DIR__ . '/kirby/bootstrap.php';
 

@@ -94,18 +94,18 @@ $kirby = new Kirby([
 ## In the filesystem
 
 ```filesystem
-  kirby/
-  my-site.com/
-    content/
-    media/
-    site/
-    assets/
-  my-shop.com/
-    content/
-    media/
-    site/
-    assets/
-  index.php
+kirby/
+my-site.com/
+  content/
+  media/
+  site/
+  assets/
+my-shop.com/
+  content/
+  media/
+  site/
+  assets/
+index.php
 ```
 
 ## Licenses for your multi-site

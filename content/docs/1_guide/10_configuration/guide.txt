@@ -101,7 +101,7 @@ $kirby->option('someOtherSetting');
 Or with the `option` helper:
 
 ```php
-  option('someOtherSetting');
+option('someOtherSetting');
 ```
 
 You can use dot notation to access nested config options:
