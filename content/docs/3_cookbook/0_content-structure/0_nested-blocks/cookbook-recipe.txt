@@ -233,6 +233,7 @@ The `.css` file is optional and can be used to style the preview for the block (
 .faq {
   padding: 1.5rem;
   background: #fef3c7;
+  color: #451a03;
 }
 .faq h2 {
   font-size: 1.8em;
