@@ -262,24 +262,34 @@ class Marsdown extends ParsedownExtra
 		return $Block;
 	}
 
+	/**
+	 * Parse groups: `(columns…)` with `++++` separators
+	 * or `(tabs…)` with `=== Title` separators
+	 */
 	protected function blockGroups(array $Line, array|null $Block = null)
 	{
-		if (preg_match('!^\((columns|tabs)…\)$!', $Line['text'], $matches)) {
-			return [
-				'group' => [
-					'type' => $matches[1],
-					'html' => null
-				]
-			];
+		if (preg_match('!^\((columns|tabs)…\)$!', rtrim($Line['text']), $matches) !== 1) {
+			return null;
 		}
+
+		return [
+			'group' => [
+				'type'  => $matches[1],
+				'depth' => 0,
+				'parts' => [['title' => null, 'text' => '']]
+			]
+		];
 	}
 
 	protected function blockGroupsColumnsComplete(array $Block): array
 	{
-		$columns = A::map(
-			Str::split($Block['group']['html'] ?? '', '++++'),
-			fn ($column) => $this->nested($column)
-		);
+		$columns = [];
+
+		foreach ($Block['group']['parts'] as $part) {
+			if (trim($part['text']) !== '') {
+				$columns[] = $this->nested($part['text']);
+			}
+		}
 
 		return [
 			...$Block,
@@ -310,39 +320,56 @@ class Marsdown extends ParsedownExtra
 			return;
 		}
 
-		if (preg_match('!^\(…(columns|tabs)\)$!', $Line['text'])) {
-			return [
-				...$Block,
-				'complete' => true
-			];
-		}
+		$text = rtrim($Line['text']);
+		$last = array_key_last($Block['group']['parts']);
 
 		if (isset($Block['interrupted']) === true) {
-			$Block['group']['html'] .= "\n";
+			$Block['group']['parts'][$last]['text'] .= str_repeat("\n", $Block['interrupted']);
 			unset($Block['interrupted']);
 		}
 
-		$Block['group']['html'] .= "\n" . $Line['body'];
+		if (preg_match('!^\(…(columns|tabs)\)$!', $text) === 1) {
+			// end of this group, unless it closes a nested group
+			if ($Block['group']['depth'] === 0) {
+				$Block['complete'] = true;
+				return $Block;
+			}
+
+			$Block['group']['depth']--;
+		} elseif (preg_match('!^\((columns|tabs)…\)$!', $text) === 1) {
+			$Block['group']['depth']++;
+		} elseif ($Block['group']['depth'] === 0) {
+			// separators only count on their own line
+			// and not inside of nested groups
+			$title = match ($Block['group']['type']) {
+				'columns' => $text === '++++' ? '' : null,
+				'tabs'    => str_starts_with($text, '=== ') ? trim(substr($text, 4)) : null
+			};
+
+			if ($title !== null) {
+				$Block['group']['parts'][] = ['title' => $title, 'text' => ''];
+				return $Block;
+			}
+		}
+
+		$Block['group']['parts'][$last]['text'] .= "\n" . $Line['body'];
 
 		return $Block;
 	}
 
 	protected function blockGroupsTabsComplete(array $Block): array
 	{
-		$html = $Block['group']['html'] ?? '';
-
-		preg_match_all('!=== (.*)!', $html, $titles);
-		$contents = preg_split('!=== .*!', $html);
-		$tabs     = array_map(
-			fn ($content, $title) => [
-				'title' => $title,
-				'html'  => $this->nested($content)
-			],
-			array_slice($contents, 1),
-			$titles[1]
+		// content before the first tab title is ignored
+		$tabs = A::map(
+			array_slice($Block['group']['parts'], 1),
+			fn ($part) => [
+				'title' => $part['title'],
+				'html'  => $this->nested($part['text'])
+			]
 		);
 
-		$id = Str::random(3);
+		// stable id across renders
+		$id = hash('crc32b', json_encode($tabs));
 
 		return [
 			...$Block,

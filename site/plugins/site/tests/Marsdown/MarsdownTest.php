@@ -125,6 +125,20 @@ class MarsdownTest extends TestCase
 		$this->assertStringEndsWith("</div>\n<p>After</p>", $html);
 	}
 
+	public function testColumnsInColumns(): void
+	{
+		$html = $this->parse("(columns…)\n(columns…)\nA\n++++\nB\n(…columns)  \n++++\nC\n(…columns)  ");
+		$this->assertSame(2, substr_count($html, '<div class="columns"'));
+		$this->assertMatchesRegularExpression('/^<div class="columns"[^>]*>\s*<div>\s*<div class="columns"[^>]*>\s*<div>\s*<p>A<\/p>\s*<\/div>\s*<div>\s*<p>B<\/p>\s*<\/div>\s*<\/div>\s*<\/div>\s*<div>\s*<p>C<\/p>\s*<\/div>\s*<\/div>$/', $html);
+	}
+
+	public function testColumnsSeparatorOnOwnLine(): void
+	{
+		$html = $this->parse("(columns…)\nUse ++++ to separate\n++++\nRight\n(…columns)");
+		$this->assertStringContainsString('<p>Use ++++ to separate</p>', $html);
+		$this->assertStringContainsString('<p>Right</p>', $html);
+	}
+
 	public function testDefinitionsWithHeadingsAndBoxes(): void
 	{
 		$this->assertSame(
@@ -396,5 +410,33 @@ class MarsdownTest extends TestCase
 		$this->assertMatchesRegularExpression('/role="tabpanel"\s*>\s*<p>foo<\/p><\/div>/', $html);
 		$this->assertMatchesRegularExpression('/role="tabpanel"\s*>\s*<p>bar<\/p><\/div>/', $html);
 		$this->assertStringContainsString('<script type="module">', $html);
+	}
+
+	public function testTabsId(): void
+	{
+		// same content, same id
+		$a = $this->parse("(tabs…)\n=== PHP\nfoo\n(…tabs)");
+		$b = $this->parse("(tabs…)\n=== PHP\nfoo\n(…tabs)");
+		$c = $this->parse("(tabs…)\n=== PHP\nbar\n(…tabs)");
+
+		$this->assertSame($a, $b);
+		$this->assertNotSame($a, $c);
+	}
+
+	public function testTabsWithColumns(): void
+	{
+		$html = $this->parse("(tabs…)\n=== A\n(columns…)\nLeft\n++++\nRight\n(…columns)\nStill A\n=== B\nB\n(…tabs)\n\nAfter");
+		$this->assertSame(2, substr_count($html, 'role="tabpanel"'));
+		$this->assertMatchesRegularExpression('/role="tabpanel"\s*>\s*<div class="columns"[^>]*>.*<p>Left<\/p>.*<p>Right<\/p>.*<\/div>\s*<p>Still A<\/p><\/div>/s', $html);
+		$this->assertMatchesRegularExpression('/role="tabpanel"\s*>\s*<p>B<\/p><\/div>/', $html);
+		$this->assertStringEndsWith("</script>\n</div>\n<p>After</p>", $html);
+	}
+
+	public function testTabsWithStrictComparisonInCode(): void
+	{
+		$html = $this->parse("(tabs…)\n=== PHP\n```php\nif (\$a === 'b') {\n\n\n}\n```\n=== JS\n```js\nif (a === b) {}\n```\n(…tabs)");
+		$this->assertSame(2, substr_count($html, 'role="tab"'));
+		$this->assertStringContainsString("<code class=\"language-php\">if (\$a === 'b') {\n\n\n}</code>", $html);
+		$this->assertStringContainsString('<code class="language-js">if (a === b) {}</code>', $html);
 	}
 }
