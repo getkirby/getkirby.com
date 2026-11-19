@@ -19,7 +19,6 @@ return function (Page $page, string|null $tag = null) {
 		});
 	}
 
-
 	return [
 		'quicktips' => $quicktips,
 		'tags'      => $tags,

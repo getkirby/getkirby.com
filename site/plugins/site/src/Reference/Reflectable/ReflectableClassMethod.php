@@ -14,15 +14,15 @@ use Reflector;
 class ReflectableClassMethod extends ReflectableFunction
 {
 	/**
-	 * @var ReflectionMethod
-	 */
-	public Reflector $reflection;
-
-	/**
 	 * Names of the alias methods per class,
 	 * keyed by the method they point to
 	 */
 	protected static array $aliases = [];
+
+	/**
+	 * @var ReflectionMethod
+	 */
+	public Reflector $reflection;
 
 	public function __construct(
 		public string $class,

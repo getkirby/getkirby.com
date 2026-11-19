@@ -1,12 +1,9 @@
-<?php
-/**
+<?=/**
  * @var string|null $area
  * @var Kirby\Cms\Pagination|null $pagination
  * @var string $query
  * @var Kirby\Search\Results|array $results
- */
-
-echo json([
+ */ json([
 	'query'      => $query,
 	'area'       => $area,
 	'results'    => $results ?? [],

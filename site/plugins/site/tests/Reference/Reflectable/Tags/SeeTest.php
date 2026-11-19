@@ -10,16 +10,16 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(See::class)]
 class SeeTest extends TestCase
 {
+	public function setUp(): void
+	{
+		require_once __DIR__ . '/fixtures/see.php';
+	}
+
 	protected function see(string $method): See|null
 	{
 		return See::factory(
 			new ReflectableClassMethod('TestSee\Vixen', $method)
 		);
-	}
-
-	public function setUp(): void
-	{
-		require_once __DIR__ . '/fixtures/see.php';
 	}
 
 	public function testFactoryForFunction(): void

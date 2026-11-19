@@ -5,6 +5,13 @@ use Kirby\Template\Template;
 
 class ReferenceUrlPage extends ReferenceArticlePage
 {
+	public function setup(): Field
+	{
+		return $this->parent()->custom()->value(function ($value) {
+			return str_replace('{{ url }}', $this->slug(), $value);
+		});
+	}
+
 	public function example(): Field
 	{
 		return parent::example()->value(
@@ -19,13 +26,6 @@ class ReferenceUrlPage extends ReferenceArticlePage
 				'lead'  => 'Reference / URL'
 			]
 		]);
-	}
-
-	public function setup(): Field
-	{
-		return $this->parent()->custom()->value(function ($value) {
-			return str_replace('{{ url }}', $this->slug(), $value);
-		});
 	}
 
 	public function template(): Template

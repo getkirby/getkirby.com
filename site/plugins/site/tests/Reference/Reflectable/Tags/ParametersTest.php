@@ -35,7 +35,6 @@ class ParametersTest extends TestCase
 		$this->assertSame(5, $parameters->count());
 		$this->assertSame('string $a, string $b = \'bar\', string|null $c = null, mixed $d = null, mixed $e', $parameters->toString());
 
-
 		$reflectable = new ReflectableFunction('parametersWithDescriptions');
 		$parameters  = Parameters::factory($reflectable);
 		$this->assertInstanceOf(Parameters::class, $parameters);

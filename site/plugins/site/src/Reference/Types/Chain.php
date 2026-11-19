@@ -24,7 +24,7 @@ class Chain extends Type
 	public function __construct(
 		public string $type
 	) {
-		//:: or -> separating class and methods
+		// :: or -> separating class and methods
 		$chain         = preg_split('/' . self::SEPARATORS . '/', $type);
 		$this->class   = new Identifier(array_shift($chain));
 		$this->methods = $chain;

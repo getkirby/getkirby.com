@@ -12,15 +12,15 @@ use Reflector;
 class ReflectableClass extends Reflectable
 {
 	/**
-	 * @var ReflectionClass
-	 */
-	public Reflector $reflection;
-
-	/**
 	 * Shared instances, as each method of a class
 	 * checks the class doc block as well
 	 */
 	protected static array $instances = [];
+
+	/**
+	 * @var ReflectionClass
+	 */
+	public Reflector $reflection;
 
 	public function __construct(
 		public string $name

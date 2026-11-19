@@ -141,7 +141,6 @@ $tags['image'] = [
 				return '![' . ($tag->caption ?? $file->caption()->or($tag->alt)) . '](' . $file->url() . ')';
 			}
 
-
 			return snippet('kirbytext/image', [
 				'file'    => $file,
 				'alt'     => $tag->alt,

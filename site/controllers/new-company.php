@@ -50,7 +50,6 @@ function customerVerify(
 	return false;
 }
 
-
 return function (Page $page) {
 	$email         = (string)get('email');
 	$hash          = (string)get('hash');
