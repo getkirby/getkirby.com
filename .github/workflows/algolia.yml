@@ -16,25 +16,34 @@ on:
       - site/plugins/**
       - scripts/algolia-index
 
+# a new run cancels the one it supersedes
+concurrency:
+  group: algolia
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
 jobs:
   algolia:
     name: Update Algolia index
-    runs-on: ubuntu-latest
+
+    runs-on: ubuntu-24.04
+    # usually takes about two minutes
+    timeout-minutes: 30
 
     steps:
-      - name: Cancel previous workflow runs
-        uses: styfle/cancel-workflow-action@01ce38bf961b4e243a6342cbade0dbc8ba3f0432 # pin@v0
-
       - name: Checkout
-        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # pin@v3
+        uses: getkirby/actions/checkout@07e658b7eb1254cafc0baf94a2d241e810658176 # 0.3.0
 
-      - name: Setup PHP environment
-        uses: shivammathur/setup-php@7fdd3ece872ec7ec4c098ae5ab7637d5e0a96067 # pin@v2
+      # vendor/ and kirby/ are committed, so there is nothing to install
+      - name: Setup PHP
+        uses: getkirby/actions/php@07e658b7eb1254cafc0baf94a2d241e810658176 # 0.3.0
         with:
-          php-version: "8.3"
+          version: "8.4"
           extensions: mbstring, intl
-          coverage: none
-          ini-values: memory_limit=-1
+          ini: memory_limit=-1
+          dependencies: none
 
       - name: Update the Algolia index
         run: scripts/algolia-index

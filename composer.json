@@ -12,8 +12,8 @@
 			"Composer\\Config::disableProcessTimeout",
 			"@php -S localhost:8181 kirby/router.php"
 		],
-		"fix": "cpx getkirby/php-cs:^0.2 fix",
-		"test": "@composer --working-dir=site/plugins/site run test"
+		"fix": "cpx getkirby/php-cs:0.3.0 fix",
+		"test": "@composer --working-dir=site/plugins/site run test --"
 	},
 	"config": {
 		"optimize-autoloader": true,
