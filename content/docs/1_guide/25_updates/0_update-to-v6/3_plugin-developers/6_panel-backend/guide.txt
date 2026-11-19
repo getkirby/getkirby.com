@@ -110,70 +110,7 @@ The class must extend the base controller for the route type:
 | `searches` | `Kirby\Panel\Controller\SearchController` |
 | `requests` | `Kirby\Panel\Controller\RequestController` |
 
-### How a controller is created
-
-When the route is called, Kirby creates the controller with the arguments from the route pattern. If the class has a static `factory()` method, Kirby calls it, otherwise the constructor:
-
-```php
-class TodoUpdateDialogController extends DialogController
-{
-	public function __construct(
-		public string $id,
-		public array $todo
-	) {
-		parent::__construct();
-	}
-
-	// called with the (:any) part of `todos/(:any)/update`
-	public static function factory(string $id): static
-	{
-		return new static(id: $id, todo: todo($id));
-	}
-}
-```
-
-The factory is the place to turn the URL arguments into the objects your controller works with, like the core controllers do with `Find::page($id)`. The constructor then only takes ready-made objects, which makes the controller easy to test.
-
-You can also create the controller yourself in a closure, e.g. to pass extra arguments:
-
-```php
-'action' => fn (string $id) => new TodoUpdateDialogController(
-	id: $id,
-	todo: todo($id)
-)
-```
-
-### `load()` and `submit()`
-
-Every controller implements `::load()`, which returns what the route sends to the Panel. Dialog and drawer controllers also handle the form submission in `::submit()`. The base class returns `true` there, which closes the dialog successfully.
-
-### Search controllers
-
-Search controllers get the search query, limit and page from the request in their `::factory()` method. Implement `::load()` and use the properties:
-
-```php
-use Kirby\Panel\Controller\SearchController;
-
-class TodosSearchController extends SearchController
-{
-	public function load(): array
-	{
-		$results = [];
-
-		foreach (todos() as $id => $todo) {
-			if (str_contains($todo['text'], $this->query) === true) {
-				$results[] = [
-					'text' => $todo['text'],
-					'link' => '/todos',
-					'icon' => 'check'
-				];
-			}
-		}
-
-		return $results;
-	}
-}
-```
+The reference explains how Kirby creates controllers, `load()` and `submit()` and each route type in detail: (link: docs/reference/plugins/extensions/panel-areas#area-definition__view-objects-and-controllers text: views), (link: docs/reference/plugins/extensions/panel-dialogs#controller-classes text: dialogs), (link: docs/reference/plugins/extensions/panel-drawers#controller-classes text: drawers), (link: docs/reference/plugins/extensions/panel-dropdowns#controller-classes text: dropdowns), (link: docs/reference/plugins/extensions/panel-search#controller-classes text: searches) and (link: docs/reference/plugins/extensions/panel-requests#controller-classes text: requests).
 
 ## UI objects
 
@@ -197,24 +134,7 @@ return new View(
 );
 ```
 
-A `RemoveDialog` comes with a trash icon and the negative theme for its submit button. Text, remove and form dialogs default to the `medium` size. The `text` of these dialogs is escaped unless it is trusted HTML. Use `$this->i18nHtml()` to insert user content into HTML safely:
-
-```php
-return new RemoveDialog(
-	text: $this->i18nHtml(
-		'Do you really want to delete <strong>{text}</strong>?',
-		['text' => $this->todo['text']]
-	)
-);
-```
-
-### Submit results
-
-`::submit()` returns the same results as the `submit` closures in Kirby 5:
-
-- `true` closes the dialog or drawer.
-- An array can trigger an event (`'event' => 'todo.update'`) and/or redirect to another Panel URL (`'redirect' => 'todos'`). New in Kirby 6: `'reload' => false` skips the reload of the current view.
-- An exception shows an error. To redirect from anywhere, call `Panel::go('todos')`.
+The dialog and drawer objects, their defaults and the results of `submit()` (new: `'reload' => false` skips the reload of the current view) are explained in the reference for (link: docs/reference/plugins/extensions/panel-dialogs text: dialogs) and (link: docs/reference/plugins/extensions/panel-drawers text: drawers).
 
 ## Complete example: a Panel area in Kirby 5 and 6
 
@@ -611,19 +531,7 @@ Plugins can still extend the core areas. Kirby merges your definition into the c
 
 ### Removing core definitions
 
-Set any core view, dialog, drawer, dropdown, search, request or view button to `false` to remove it:
-
-```php "/site/plugins/no-file-search/index.php"
-Kirby::plugin('acme/no-file-search', [
-	'areas' => [
-		'site' => [
-			'searches' => [
-				'files' => false
-			]
-		]
-	]
-]);
-```
+Set any core view, dialog, drawer, dropdown, search or request to `false` to remove it, see (link: docs/reference/plugins/extensions/panel-areas#extending-areas__removing-core-definitions text: Removing core definitions).
 
 ### Overriding core routes
 
