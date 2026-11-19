@@ -185,10 +185,27 @@ class MarsdownTest extends TestCase
 		$parser = new Marsdown();
 		$parser->text("## Foo\n\ntext");
 
+		// no prefix from the h2 of the previous document
 		$this->assertSame(
 			'<h3 id="__bar"><a href="#__bar" tabindex="-1">Bar</a></h3>',
 			$parser->text('### Bar')
 		);
+
+		// not counted as a duplicate of the previous document
+		$this->assertSame(
+			'<h2 id="foo"><a href="#foo" tabindex="-1">Foo</a></h2>',
+			$parser->text('## Foo')
+		);
+	}
+
+	public function testHeadingIdsAreUnique(): void
+	{
+		$html = $this->parse("## Options\n\n### Example\n\n## Options\n\n### Example\n\n<info>\n## Options\n</info>");
+		$this->assertSame(1, substr_count($html, '<h2 id="options">'));
+		$this->assertSame(1, substr_count($html, '<h3 id="options__example">'));
+		$this->assertSame(1, substr_count($html, '<h2 id="options-2">'));
+		$this->assertSame(1, substr_count($html, '<h3 id="options-2__example">'));
+		$this->assertSame(1, substr_count($html, '<h2 id="options-3">'));
 	}
 
 	public function testHeadingIdsInNestedContent(): void
@@ -205,6 +222,22 @@ class MarsdownTest extends TestCase
 		$this->assertSame(
 			"<h1>One</h1>\n<h4>Four</h4>",
 			$this->parse("# One\n\n#### Four")
+		);
+	}
+
+	public function testHeadingWithCustomId(): void
+	{
+		$this->assertSame(
+			'<h2 id="custom" class="big"><a href="#custom" tabindex="-1">Foo</a></h2>' . "\n" .
+			'<h3 id="custom__bar"><a href="#custom__bar" tabindex="-1">Bar</a></h3>' . "\n" .
+			'<h2 id="custom-2"><a href="#custom-2" tabindex="-1">Custom</a></h2>',
+			$this->parse("## Foo {#custom .big}\n\n### Bar\n\n## Custom")
+		);
+
+		// custom ids don't get the id prefix
+		$this->assertSame(
+			'<h2 id="custom"><a href="#custom" tabindex="-1">Foo</a></h2>',
+			$this->parse('## Foo {#custom}', ['idPrefix' => 'v5'])
 		);
 	}
 

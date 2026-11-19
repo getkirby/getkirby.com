@@ -12,7 +12,12 @@ use ParsedownExtra;
 class Marsdown extends ParsedownExtra
 {
 	/**
-	 * Slug of the last h2 heading, used to prefix h3 ids
+	 * Heading ids used in the document so far
+	 */
+	protected array $ids = [];
+
+	/**
+	 * Id of the last h2 heading, used to prefix h3 ids
 	 */
 	protected string|null $lastH2 = null;
 
@@ -367,22 +372,19 @@ class Marsdown extends ParsedownExtra
 			return $Block;
 		}
 
-		// slug from the plain text of the heading, without
-		// a leading number (e.g. `### 1. First step`) to keep
-		// existing ids; using `line()` as `text()` would
-		// reset the link definitions of the document
-		$text  = preg_replace('/^\d+[.)] +/', '', $Block['element']['handler']['argument']);
-		$slug  = Str::slug(Str::unhtml($this->line($text)));
+		// custom ids (`## Heading {#id}`) are used as they are
+		$attrs = $Block['element']['attributes'] ?? [];
+		$id    = $attrs['id'] ?? $this->headingId($level, $Block['element']['handler']['argument']);
 		$state = $this->root ?? $this;
 
+		$state->ids[$id] = true;
+
 		if ($level === 'h2') {
-			$state->lastH2 = $slug;
-		} else {
-			$slug = $state->lastH2 . '__' . $slug;
+			$state->lastH2 = $id;
 		}
 
-		if (isset($this->options['idPrefix'])) {
-			$slug = $this->options['idPrefix'] . '__' . $slug;
+		if (isset($attrs['id']) === false && isset($this->options['idPrefix']) === true) {
+			$id = $this->options['idPrefix'] . '__' . $id;
 		}
 
 		return [
@@ -390,14 +392,15 @@ class Marsdown extends ParsedownExtra
 			'element' => [
 				'name' => $level,
 				'attributes' => [
-					'id' => $slug
+					...$attrs,
+					'id' => $id
 				],
 				'element' => [
 					'name' => 'a',
 					'handler' => $Block['element']['handler'],
 					'nonNestables' => ['Url', 'Link'],
 					'attributes' => [
-						'href'     => '#' . $slug,
+						'href'     => '#' . $id,
 						'tabindex' => '-1'
 					]
 				]
@@ -417,6 +420,35 @@ class Marsdown extends ParsedownExtra
 		];
 
 		return $Block;
+	}
+
+	/**
+	 * Creates an id for a h2 or h3 heading from its text,
+	 * unique within the document; h3 ids are prefixed
+	 * with the id of the last h2
+	 */
+	protected function headingId(string $level, string $text): string
+	{
+		$state = $this->root ?? $this;
+
+		// slug from the plain text of the heading, without
+		// a leading number (e.g. `### 1. First step`) to keep
+		// existing ids; using `line()` as `text()` would
+		// reset the link definitions of the document
+		$text = preg_replace('/^\d+[.)] +/', '', $text);
+		$slug = Str::slug(Str::unhtml($this->line($text)));
+
+		if ($level === 'h3') {
+			$slug = $state->lastH2 . '__' . $slug;
+		}
+
+		$id = $slug;
+
+		for ($n = 2; isset($state->ids[$id]) === true; $n++) {
+			$id = $slug . '-' . $n;
+		}
+
+		return $id;
 	}
 
 	/**
@@ -514,6 +546,7 @@ class Marsdown extends ParsedownExtra
 		// every document starts with a clean state;
 		// nested content shares the state of its root
 		if ($this->root === null) {
+			$this->ids    = [];
 			$this->lastH2 = null;
 		}
 
