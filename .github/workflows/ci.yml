@@ -1,0 +1,60 @@
+# Runs the tests and checks the code style
+
+name: CI
+on:
+  # long-lived branches only, so a pull request doesn't run twice
+  push:
+    branches: [main, feat/v6]
+  pull_request:
+
+# a new push cancels the runs it supersedes
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+# a job that needs more asks for it
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    name: Tests
+
+    runs-on: &runner ubuntu-24.04
+    timeout-minutes: &timeout 10
+
+    steps:
+      - &checkout
+        name: Checkout
+        uses: getkirby/actions/checkout@e27f4dff8102d3f51e08f0608f27decf59a90ce8 # 0.3.1
+
+      # vendor/ and kirby/ are committed, so there is nothing to install
+      - &php
+        name: Setup PHP
+        uses: getkirby/actions/php@e27f4dff8102d3f51e08f0608f27decf59a90ce8 # 0.3.1
+        with:
+          version: "8.4"
+          extensions: mbstring, intl
+          dependencies: none
+
+      - name: Run PHP unit tests
+        uses: getkirby/actions/phpunit@e27f4dff8102d3f51e08f0608f27decf59a90ce8 # 0.3.1
+
+  style:
+    name: Code style
+
+    runs-on: *runner
+    timeout-minutes: *timeout
+    permissions:
+      contents: read
+      # posts the fixes as suggestions on pull requests
+      pull-requests: write
+
+    steps:
+      - *checkout
+      - *php
+
+      - name: Check PHP code style
+        uses: getkirby/actions/php-cs@e27f4dff8102d3f51e08f0608f27decf59a90ce8 # 0.3.1
+        with:
+          suggestions: true

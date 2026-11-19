@@ -1,0 +1,103 @@
+Title: Guards
+
+----
+
+Intro: Guards answer whether an action can run: whether it's possible at all, whether the current user is allowed to run it and whether the input is valid.
+
+----
+
+Text:
+
+## Three layers
+
+| Layer | Question | Example |
+| - | - | - |
+| Abilities | Is the action possible at all? | The home page can never be deleted. |
+| Permissions | Is the current user allowed to run it? | Editors must not change slugs. |
+| Validators | Is the given input valid? | A title must not be empty. |
+
+**Abilities** protect the system logic and apply to everyone, even the `kirby` user: the home page and the error page cannot be deleted or moved, the last admin cannot be demoted and an unlisted page cannot be sorted.
+
+**Permissions** come from your blueprints and user roles. Learn (link: docs/guide/users/permissions#how-permissions-are-resolved text: how Kirby resolves them).
+
+**Validators** check the input of an action, e.g. whether a new slug is valid and not taken yet or whether a page that you want to delete still has children.
+
+Pages, files, users, the site and languages each have their guards: (method: $page->guards()), (method: $file->guards()), (method: $user->guards()), (method: $site->guards()) and (method: Kirby\Cms\Language::guards() text: $language->guards()).
+
+## Available or executable?
+
+```php
+// abilities and permissions, no input needed
+$page->guards()->isAvailable('delete');     // returns bool
+$page->guards()->ensureAvailable('delete'); // throws
+
+// abilities, permissions and validators for the given input
+$page->guards()->isExecutable('changeTitle', $title);     // returns bool
+$page->guards()->ensureExecutable('changeTitle', $title); // throws
+```
+
+Use **available** when there's no input yet, e.g. to decide whether to show a button. Use **executable** right before you run an action, with the same arguments that you would pass to the action itself.
+
+The `is…` methods return a boolean. The `ensure…` methods throw an exception with a message that explains what blocks the action.
+
+Guards always check against the logged-in user. If nobody is logged in, they check against an anonymous user with the `nobody` role, which isn't allowed to do anything that requires a permission.
+
+For an action without any permission rule, `isAvailable()` and `ensureAvailable()` fall back to `false`. Pass `true` as second argument to change that default. All core actions have a rule in the default role permissions, so they always resolve to a definite answer.
+
+## In templates
+
+Show an edit link on the frontend, but only to users who may edit the page:
+
+```php "/site/templates/article.php"
+<?php if ($page->guards()->isAvailable('update')): ?>
+<a href="<?= $page->panel()->url() ?>">Edit this page</a>
+<?php endif ?>
+```
+
+Visitors who aren't logged in never see the link.
+
+## In controllers and plugins
+
+Kirby's actions run their guards automatically. `$page->changeTitle($title)` throws an exception if the title is empty or the user isn't allowed to change it. You don't need to check first.
+
+Guards become useful when you need the answer before anything happens. For example, when you delete several pages at once: if you just loop through them, the third deletion could fail after the first two pages are already gone. With guards, you check all of them first and only start deleting when every page can go:
+
+```php "/site/controllers/events.php"
+<?php
+
+use Kirby\Exception\Exception;
+
+return function ($kirby, $page) {
+	$error = null;
+
+	if ($kirby->request()->is('POST') === true) {
+		$expired = $page->children()->filterBy('date', 'date <', 'today');
+
+		try {
+			// make sure every page can be deleted …
+			foreach ($expired as $event) {
+				$event->guards()->ensureExecutable('delete');
+			}
+
+			// … before deleting the first one
+			foreach ($expired as $event) {
+				$event->delete();
+			}
+		} catch (Exception $e) {
+			$error = $e->getMessage();
+		}
+	}
+
+	return compact('error');
+};
+```
+
+All exceptions from the guards extend `Kirby\Exception\Exception` and come with a translated message that you can show to the user.
+
+To filter a collection to the pages that the current user could delete right now:
+
+```php
+$deletable = $page->children()->filter(
+	fn ($child) => $child->guards()->isExecutable('delete')
+);
+```

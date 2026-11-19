@@ -50,7 +50,10 @@ For starters, the `index.php` file will do nothing but tell Kirby that the plugi
 ```php "/site/plugins/button/index.php"
 <?php
 
-Kirby::plugin('your-project/button-block', []);
+Kirby::plugin(
+  name: 'your-project/button-block',
+  extends: []
+);
 ```
 
 ### index.js
@@ -58,7 +61,7 @@ Kirby::plugin('your-project/button-block', []);
 The `index.js` file is the place to register your Vue component for the Panel and create the template for your block. You can write it in simple vanilla JS, or you can go for a full-blown setup with build process to work with Vue single-file-components. We keep it simple for this example.
 
 ```js "/site/plugins/button/index.js"
-panel.plugin("your-project/button-block", {
+window.panel.plugin("your-project/button-block", {
   blocks: {
     button: `
       <button type="button" @click="open">
@@ -91,7 +94,7 @@ We can finally polish our preview with a little bit of CSS.
 }
 .k-block-type-button button:empty::after {
     content: "Button text …";
-    color: var(--color-text-light);
+    color: var(--color-text-dimmed);
 }
 .k-block-type-button button:focus {
     outline: 0;
@@ -116,7 +119,7 @@ If you want to go one step further, you can turn your button block into a tiny W
 ### Extending your index.js
 
 ```js "/site/plugins/button/index.js"
-panel.plugin("your-project/button-block", {
+window.panel.plugin("your-project/button-block", {
   blocks: {
     button: `
       <input
@@ -151,7 +154,7 @@ The Blocks field will take care of the rest.
 When your preview gets more complex, you probably need computed values or methods that are normally available in Vue components. The examples above just focused on the template code, but you can extend this to a full Vue component:
 
 ```js "/site/plugins/button/index.js"
-panel.plugin("your-project/button-block", {
+window.panel.plugin("your-project/button-block", {
   blocks: {
     button: {
       computed: {
@@ -184,6 +187,7 @@ To wrap this up, we need to adjust our CSS file a bit to make it work with the i
     cursor: pointer;
     font: inherit;
     text-align: center;
+    width: auto;
 }
 .k-block-type-button input:focus {
     outline: 0;
@@ -223,6 +227,7 @@ export default {
     cursor: pointer;
     font: inherit;
     text-align: center;
+    width: auto;
 }
 .k-block-type-button input:focus {
     outline: 0;
@@ -234,7 +239,7 @@ export default {
 ```js "/site/plugins/button/src/index.js"
 import Button from "./components/Button.vue";
 
-panel.plugin("your-project/button-block", {
+window.panel.plugin("your-project/button-block", {
   blocks: {
     button: Button
   }
@@ -291,14 +296,17 @@ As a first step, register the custom snippet and blueprint in the index.php of y
 ```php "/site/plugins/button/index.php"
 <?php
 
-Kirby::plugin('your-project/button-block', [
-  'blueprints' => [
-    'blocks/button' => __DIR__ . '/blueprints/blocks/button.yml'
-  ],
-  'snippets' => [
-    'blocks/button' => __DIR__ . '/snippets/blocks/button.php'
+Kirby::plugin(
+  name: 'your-project/button-block',
+  extends: [
+    'blueprints' => [
+      'blocks/button' => __DIR__ . '/blueprints/blocks/button.yml'
+    ],
+    'snippets' => [
+      'blocks/button' => __DIR__ . '/snippets/blocks/button.php'
+    ]
   ]
-]);
+);
 ```
 
 Then, add the blueprint definition and the snippet code in their respective files:

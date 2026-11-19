@@ -163,29 +163,26 @@ load([
 
 With this in place, we are ready to replace the `Site` object in the above-mentioned two methods with our `CustomSite` class.
 
-```php "/site/plugins/extend-core-classes/classes/CustomSite.php"
+```php "/site/plugins/extend-core-classes/classes/CustomKirby.php"
 <?php
 
 namespace cookbook\core;
 
 // import classes
 use Kirby\Cms\App as Kirby;
+use Kirby\Cms\Site;
 use cookbook\core\CustomSite;
 
 class CustomKirby extends Kirby
 {
     /**
      * Sets a custom Site object
-     *
-     * @param Site|array|null $site
-     * @return $this
      */
-    protected function setSite($site = null)
+    public function setSite(Site|array|null $site = null): static
     {
         if (is_array($site) === true) {
-            $site = new CustomSite($site + [ // instantiate new custom site model here
-                'kirby' => $this
-            ]);
+            // instantiate the custom site model here
+            $site = new CustomSite($site);
         }
 
         $this->site = $site;
@@ -194,15 +191,12 @@ class CustomKirby extends Kirby
 
     /**
      * Initializes and returns the (custom) Site object
-     *
-     * @return \Kirby\Cms\Site
      */
-    public function site()
+    public function site(): Site
     {
-        return $this->site = $this->site ?? new CustomSite([
+        return $this->site ??= new CustomSite([
             'errorPageId' => $this->options['error'] ?? 'error',
             'homePageId'  => $this->options['home']  ?? 'home',
-            'kirby'       => $this,
             'url'         => $this->url('index'),
         ]);
     }
@@ -237,7 +231,8 @@ class CustomSite extends Site
     /**
      * Add virtual children to existing children
      */
-    public function children() {
+    public function children(): Pages
+    {
         // get existing children
         $children = parent::children();
 

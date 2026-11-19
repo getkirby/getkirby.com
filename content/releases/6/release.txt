@@ -2,7 +2,7 @@ title: Kirby 6
 
 ----
 
-Subtitle: Release Candidate
+Subtitle:
 
 ----
 
@@ -10,19 +10,11 @@ Version: 6
 
 ----
 
-Prerelease: rc.2
+Prerelease:
 
 ----
 
-Trylink: https://github.com/getkirby/kirby/releases/tag/6.0.0-rc.2
-
-----
-
-ogimage:
-
-----
-
-Description: Kirby 6.0.0-rc.2: passkeys, simpler blueprints with fields only, a live preview view, guards, template stacks and a Vue 3 Panel. Release notes, migration guides and changelog.
+Description: Kirby 6 brings passkeys, simpler blueprints with fields only, a live editor, guards, template stacks and a Vue 3 Panel.
 
 ----
 

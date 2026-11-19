@@ -4,20 +4,20 @@ Title: Changelog
 
 Text:
 
-This is the full changelog for **Kirby 6.0.0-rc.2**. In addition to all the features on the (link: releases/6 text: Kirby 6 release page), there are many more enhancements, breaking changes and deprecations in the fine print.
+This is the full changelog for **Kirby 6.0.0**. In addition to all the features on the (link: releases/6 text: Kirby 6 release page), there are many more enhancements, breaking changes and deprecations in the fine print.
 
-Kirby 6 is a release candidate. This changelog will be updated with every pre-release until the final 6.0.0 release. If you are upgrading an existing project, start with our (link: releases/6/migration text: migration guides).
+If you are upgrading an existing project, start with our (link: docs/guide/updates/update-to-v6 text: migration guides).
 
 ----
 
 Features:
 
-- **(link: releases/6/preview-view text: Preview view):** work on your content right next to a live preview of your page, synced across browser windows and viewport sizes
+- **(link: releases/6/live-editor text: Live editor):** work on your content right next to a live preview of your page, synced across browser windows and viewport sizes
 - **(link: releases/6/authentication text: Passkeys & two-factor for everyone):** log in with passkeys, let every user set up their own second factor and define a password policy
 - **(link: releases/6/blueprints text: Simpler blueprints):** define fields once at the root of a blueprint and reference them in your layout. Sections become fields: new `pagelist` and `filelist` fields replace the `pages` and `files` sections.
 - **(link: releases/6/buttons-field text: Buttons field):** a new field to open links, dialogs or drawers from a blueprint
 - **(link: releases/6/guards text: Guards):** one place that answers whether an action is possible, allowed and valid
-- **(link: releases/6/more-details#content-negotiation text: Content negotiation):** content representations can be requested via the `Accept` header
+- **(link: docs/guide/templates/content-representations#content-negotiation text: Content negotiation):** content representations can be requested via the `Accept` header
 - **(link: releases/6/template-stacks text: Template stacks):** push output from any snippet and render it anywhere else in your templates
 - **(link: releases/6/error-handling text: Better error handling):** new error dialogs, stack traces in debug mode and blocked actions that explain themselves
 - **(link: releases/6/foundation text: A modern foundation):** a modern PHP baseline, a restructured core and a Panel built on Vue 3, TypeScript and trusted HTML
@@ -208,7 +208,7 @@ Enhancements:
 - New `<k-collapsible>` component that can wrap a list of elements with a default and fallback slot and provide the necessary data how many elements fit in the current container width to render the element as a responsive list of visible and hidden elements (the latter represented by the fallback slot content). [#7901](https://github.com/getkirby/kirby/pull/7901)
 - New `<k-model-form>` component [#8449](https://github.com/getkirby/kirby/pull/8449)
 - New `RequestError.dialog()` method to create all props for the request error dialog according to the details from the error object. [#7782](https://github.com/getkirby/kirby/pull/7782)
-- All errors are now converted to Error objects in `panel.notification.error()` [#7782](https://github.com/getkirby/kirby/pull/7782)
+- All errors are now converted to Error objects in `window.panel.notification.error()` [#7782](https://github.com/getkirby/kirby/pull/7782)
 - New `this.$panel.observers` JS module
 - The Panel URL is available inside the Panel as `this.$panel.urls.panel` [#7800](https://github.com/getkirby/kirby/pull/7800)
 - New Vue components for login forms: `<k-login-password-method-form>`, `<k-login-code-method-form>`, `<k-login-password-reset-method-form>`, `<k-login-email-challenge-form>`, `<k-login-totp-challenge-form>`
@@ -253,15 +253,15 @@ Enhancements:
 - `<k-image-frame>` loads images lazily and decodes them asynchronously. Lazy-loaded images use `sizes="auto"` if no `sizes` are specified. Set `:lazy="false"` for images that are visible right away, e.g. an avatar in the header. [#8341](https://github.com/getkirby/kirby/pull/8341) [#8438](https://github.com/getkirby/kirby/pull/8438)
 - New `$library.dayjs.parse(input, { pattern, strict, type })` to parse user input against a display pattern [#8328](https://github.com/getkirby/kirby/pull/8328)
 - `$library.dayjs()` follows the locale of the current Panel language [#8327](https://github.com/getkirby/kirby/pull/8327)
-- `panel.request()` has a new `external` option to send plain requests to third-party URLs, without the CSRF token and other Panel headers [#8658](https://github.com/getkirby/kirby/pull/8658)
+- `window.panel.request()` has a new `external` option to send plain requests to third-party URLs, without the CSRF token and other Panel headers [#8658](https://github.com/getkirby/kirby/pull/8658)
 
   ```js
-  const { response } = await panel.request("https://api.example.com/items", {
+  const { response } = await window.panel.request("https://api.example.com/items", {
   	external: true
   });
   ```
 
-- New `panel.act()` method to act on the `message`, `event`, `redirect` and `reload` keys of a response, e.g. `await panel.act(await panel.post("shop/sync"))` [#8660](https://github.com/getkirby/kirby/pull/8660)
+- New `window.panel.act()` method to act on the `message`, `event`, `redirect` and `reload` keys of a response, e.g. `await window.panel.act(await window.panel.post("shop/sync"))` [#8660](https://github.com/getkirby/kirby/pull/8660)
 - `<k-tag>` supports color themes (`positive`, `negative`, `notice`, `warning`, `info`) as tinted tags [#8662](https://github.com/getkirby/kirby/pull/8662)
 - `<k-choice-input>` has a new `theme` prop to color its icon
 
@@ -339,7 +339,7 @@ Performance:
 - The blocks field only renders the toolbar of the selected block instead of one hidden toolbar per block [#8447](https://github.com/getkirby/kirby/pull/8447)
 - `pagelist` and `filelist` fields with `layout: table` load faster. Their performance only depends on the number of displayed columns, no longer on the size of the blueprint. [#8439](https://github.com/getkirby/kirby/pull/8439)
 - Requests for model item preview data are batched: components that ask for a file or page in the same tick share a single request instead of firing one each [#8341](https://github.com/getkirby/kirby/pull/8341)
-- `panel.content.diff()` is computed once per change instead of on every call [#8340](https://github.com/getkirby/kirby/pull/8340)
+- `window.panel.content.diff()` is computed once per change instead of on every call [#8340](https://github.com/getkirby/kirby/pull/8340)
 - The icon sprite is no longer inlined into every Panel document [#8445](https://github.com/getkirby/kirby/pull/8445)
 - Browsers cache each plugin script and stylesheet until the file changes [#8603](https://github.com/getkirby/kirby/pull/8603)
 
@@ -448,7 +448,7 @@ Bugfixes:
   ```
 
 - `$helper.upload()` rejects and calls its `error` callback on a network error instead of never settling. It rejects with an `AbortError` when its abort signal fires, instead of never settling. (thx [@johannschopplich](https://github.com/johannschopplich)) [#8770](https://github.com/getkirby/kirby/pull/8770) [#8774](https://github.com/getkirby/kirby/pull/8774)
-- `panel.api.site.update()` updates the site instead of failing with a missing route (thx [@johannschopplich](https://github.com/johannschopplich)) [#8771](https://github.com/getkirby/kirby/pull/8771)
+- `window.panel.api.site.update()` updates the site instead of failing with a missing route (thx [@johannschopplich](https://github.com/johannschopplich)) [#8771](https://github.com/getkirby/kirby/pull/8771)
 - `$helper.string.hasEmoji()` no longer counts digits, `#` and `*` as emoji, so `<k-icon>` no longer mistakes icon types like `plugin.icon-2` for one (thx [@johannschopplich](https://github.com/johannschopplich)) [#8773](https://github.com/getkirby/kirby/pull/8773)
 - `pagelist` field: `create: true` offers the blueprints of the list instead of a blueprint named `1`
 - Field buttons (e.g. of the `pagelist` and `structure` fields) stay on the right when the field has `label: false` [#8805](https://github.com/getkirby/kirby/issues/8805)
@@ -720,7 +720,7 @@ Sections have been replaced by fields (see "Sections become fields" above). Blue
 - Removed `Kirby\Blueprint\Section`, the `Kirby\Cms\Section` alias, `Kirby\Blueprint\Blueprint::section()`, `Kirby\Blueprint\Blueprint::sections()` and `Kirby\Api\Api::sectionApi()`
 - Removed all `…/sections/(:any)` and `…/sections/(:any)/(:all?)` API routes for the site, pages, users and their files
 - Removed all section dialog and drawer routes and their Panel controller classes
-- The blueprints API endpoints (`/api/site/blueprints`, `/api/pages/(:any)/blueprints` and `/api/users/(:any)/blueprints`) accept a `field` query parameter instead of `section`. The `section` argument of `panel.api.pages.blueprints()` and `panel.api.users.blueprints()` has been renamed to `field` as well.
+- The blueprints API endpoints (`/api/site/blueprints`, `/api/pages/(:any)/blueprints` and `/api/users/(:any)/blueprints`) accept a `field` query parameter instead of `section`. The `section` argument of `window.panel.api.pages.blueprints()` and `window.panel.api.users.blueprints()` has been renamed to `field` as well.
 - Removed components: `<k-sections>`, `<k-fields-section>`, `<k-files-section>`, `<k-info-section>`, `<k-models-section>`, `<k-pages-section>` and `<k-stats-section>`, as well as the `k-section-field` adapter and the `section` plugin mixin. Use `<k-model-form>` instead of `<k-sections>` and `<k-fields-section>`.
 - The `endpoints` object of field components no longer contains a `section` endpoint
 - The `section.loaded` event has been replaced by `field.loaded`, emitted by `pagelist` and `filelist` fields [#8415](https://github.com/getkirby/kirby/pull/8415)
@@ -777,14 +777,14 @@ Sections have been replaced by fields (see "Sections become fields" above). Blue
   - The `window.fiber` global has been replaced with `window.panelState`
   - The `X-Fiber` namespace in request headers has been replaced with `X-Panel`
   - Keys aren't prefixed with `$` anymore in request responses. Use without prefix. This also affects Panel plugins reloading the Panel by defining only specific keys to be reloaded. [#7365](https://github.com/getkirby/kirby/pull/7365)
-  - Plugins that call Panel dialogs, drawers, dropdowns, searches or request routes with their own `fetch()` have to send the CSRF token in the `X-CSRF` header (`panel.system.csrf`). `panel.get()`, `panel.post()` and `panel.request()` already send it. [#8659](https://github.com/getkirby/kirby/pull/8659)
+  - Plugins that call Panel dialogs, drawers, dropdowns, searches or request routes with their own `fetch()` have to send the CSRF token in the `X-CSRF` header (`window.panel.system.csrf`). `window.panel.get()`, `window.panel.post()` and `window.panel.request()` already send it. [#8659](https://github.com/getkirby/kirby/pull/8659)
 - Helpers
   - Removed `$helper.isVueComponent()` [#7518](https://github.com/getkirby/kirby/pull/7518)
   - Removed `$helper.link.preview()`. Use `<k-pages-field-preview>` or `<k-files-field-preview>` to render a model preview, or `$helper.items("items/pages", id)` / `$helper.items("items/files", id)` if you need the raw data. [#7725](https://github.com/getkirby/kirby/pull/7725) [#8341](https://github.com/getkirby/kirby/pull/8341)
   - Removed `$library.dayjs.merge()`
-- Removed deprecated `panel.dialog.openComponent()` method [#7518](https://github.com/getkirby/kirby/pull/7518)
-- Removed `panel.dialog.successEvents()`, `panel.dialog.successNotification()` and `panel.dialog.successRedirect()`, as well as the same methods on `panel.drawer`. Use `panel.act()` instead. [#8660](https://github.com/getkirby/kirby/pull/8660)
-- `panel.notification.error()` no longer resolves nested errors in the state. Always throw Exceptions instead to create first-level error responses. [#7782](https://github.com/getkirby/kirby/pull/7782)
+- Removed deprecated `window.panel.dialog.openComponent()` method [#7518](https://github.com/getkirby/kirby/pull/7518)
+- Removed `window.panel.dialog.successEvents()`, `window.panel.dialog.successNotification()` and `window.panel.dialog.successRedirect()`, as well as the same methods on `window.panel.drawer`. Use `window.panel.act()` instead. [#8660](https://github.com/getkirby/kirby/pull/8660)
+- `window.panel.notification.error()` no longer resolves nested errors in the state. Always throw Exceptions instead to create first-level error responses. [#7782](https://github.com/getkirby/kirby/pull/7782)
 
 - Removed deprecated v3 CSS properties [#7825](https://github.com/getkirby/kirby/pull/7825):
 
@@ -914,7 +914,7 @@ Moved and replaced classes and methods:
 - Removed `Kirby\Cms\Auth::ipHash()`. Use `$visitor->ip(hash: true)` instead.
 - Auth session format changed: `kirby.challenge.code` → `kirby.challenge.data`. In-flight challenges across the Kirby upgrade won't verify.
 - Removed the translation strings `login.code.label.login` and `login.code.label.password-reset`
-- Removed the `login` extension type of `panel.plugin()` (`panel.plugins.login`). Register your custom login UI as a normal `component` instead and reference it in the `Kirby\Auth\Method::form()` or `Kirby\Auth\Challenge::form()` method of your custom auth method or challenge. [#8045](https://github.com/getkirby/kirby/pull/8045)
+- Removed the `login` extension type of `window.panel.plugin()` (`window.panel.plugins.login`). Register your custom login UI as a normal `component` instead and reference it in the `Kirby\Auth\Method::form()` or `Kirby\Auth\Challenge::form()` method of your custom auth method or challenge. [#8045](https://github.com/getkirby/kirby/pull/8045)
 - Removed `<k-login-form>`, `<k-login-code-form>` and the deprecated aliases `<k-login>` and `<k-login-code>` [#8045](https://github.com/getkirby/kirby/pull/8045)
 - The Panel login routes are multi-step now: `login/method/...` and `login/challenge/...`
 - The TOTP enable/disable dialogs (`Kirby\Panel\UserTotpEnableDialog`, `Kirby\Panel\UserTotpDisableDialog` and `<k-totp-dialog>`) have been replaced by `Kirby\Panel\Controller\Drawer\UserTotpDrawerController` and `<k-user-totp-drawer>` [#7445](https://github.com/getkirby/kirby/pull/7445)
@@ -1111,7 +1111,7 @@ Shared behavior has been extracted into reusable mixins, such as:
 - Migrated `preserveDataAttrs` and `preserveListeners` to TypeScript [#8118](https://github.com/getkirby/kirby/pull/8118)
 - Migrated the Editor to TypeScript [#8101](https://github.com/getkirby/kirby/pull/8101) [#8102](https://github.com/getkirby/kirby/pull/8102) [#8105](https://github.com/getkirby/kirby/pull/8105) [#8106](https://github.com/getkirby/kirby/pull/8106) [#8107](https://github.com/getkirby/kirby/pull/8107) [#8108](https://github.com/getkirby/kirby/pull/8108) [#8110](https://github.com/getkirby/kirby/pull/8110) [#8111](https://github.com/getkirby/kirby/pull/8111) [#8112](https://github.com/getkirby/kirby/pull/8112) [#8114](https://github.com/getkirby/kirby/pull/8114)
 - Migrated `$helper.writer` to TypeScript [#8321](https://github.com/getkirby/kirby/pull/8321)
-- `panel.system.csrf` and `panel.csrf.title` are always strings now (empty strings when not set) [#8119](https://github.com/getkirby/kirby/pull/8119)
+- `window.panel.system.csrf` and `window.panel.system.title` are always strings now (empty strings when not set) [#8119](https://github.com/getkirby/kirby/pull/8119)
 
 ## Auth
 

@@ -32,6 +32,21 @@ $newPage = $page->update([
 ]);
 ```
 
+### Objects as values
+
+Each field of the page's blueprint converts Kirby objects and collections into the format it stores:
+
+```php
+$newPage = $page->update([
+  'cover'   => $file,
+  'related' => $page->siblings()->listed(),
+  'authors' => $kirby->users()->role('editor'),
+  'text'    => $page->text()->toBlocks(),
+  'gallery' => $other->gallery(),
+  'date'    => new DateTime(),
+]);
+```
+
 ## Multi-language site
 Use the optional `$lang` parameter to specify the language you want to update.
 

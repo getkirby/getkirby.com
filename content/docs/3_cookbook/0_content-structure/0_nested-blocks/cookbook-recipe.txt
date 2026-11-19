@@ -162,16 +162,19 @@ In the `index.php` file we register our blueprints and output snippets, respecti
 ```php "/site/plugins/faq-block/index.php"
 <?php
 
-Kirby::plugin('your-project/faq-block', [
-    'blueprints' => [
-        'blocks/faq'      => __DIR__ . '/blueprints/blocks/faq.yml',
-        'blocks/faqItem'  => __DIR__ . '/blueprints/blocks/faqItem.yml'
-    ],
-    'snippets'   => [
-        'blocks/faq'      => __DIR__ . '/snippets/blocks/faq.php',
-        'blocks/faqItem'  => __DIR__ . '/snippets/blocks/faqItem.php'
+Kirby::plugin(
+    name: 'your-project/faq-block',
+    extends: [
+        'blueprints' => [
+            'blocks/faq'      => __DIR__ . '/blueprints/blocks/faq.yml',
+            'blocks/faqItem'  => __DIR__ . '/blueprints/blocks/faqItem.yml'
+        ],
+        'snippets'   => [
+            'blocks/faq'      => __DIR__ . '/snippets/blocks/faq.php',
+            'blocks/faqItem'  => __DIR__ . '/snippets/blocks/faqItem.php'
+        ]
     ]
-]);
+);
 ```
 
 ### `index.js`
@@ -179,16 +182,16 @@ Kirby::plugin('your-project/faq-block', [
 The `index.js` file handles the previews inside the Panel. We define a template for `faq` and `faqItem`.
 
 ```js "/site/plugins/faq-block/index.js"
-panel.plugin('your-project/faq-block', {
+window.panel.plugin('your-project/faq-block', {
   blocks: {
     faq: {
       template: `
         <div @dblclick="open" class="faq">
           <h2>{{ content.headline }}</h2>
-          <div v-html="content.text"></div>
-          <dl v-for="item in content.blocks">
-            <dt v-html="item.content.question"></dt>
-            <dd v-html="item.content.answer"></dt>
+          <div v-safe-html="$h($helper.string.sanitizeHTML(content.text, { nodes: true }))"></div>
+          <dl v-for="item in content.blocks" :key="item.id">
+            <dt>{{ item.content.question }}</dt>
+            <dd v-safe-html="$h($helper.string.sanitizeHTML(item.content.answer, { nodes: true }))"></dd>
           </dl>
         </div>
       `
@@ -204,11 +207,11 @@ panel.plugin('your-project/faq-block', {
             </k-input>
           </strong>
           <p>
-            <k-writer
+            <k-writer-input
               v-bind="field('answer')"
               :value="content.answer"
               @input="update({ answer: $event })">
-            </k-writer>
+            </k-writer-input>
           </p>
         </div>
       `
@@ -230,6 +233,7 @@ The `.css` file is optional and can be used to style the preview for the block (
 .faq {
   padding: 1.5rem;
   background: #fef3c7;
+  color: #451a03;
 }
 .faq h2 {
   font-size: 1.8em;

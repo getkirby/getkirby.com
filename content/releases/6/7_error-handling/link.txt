@@ -1,0 +1,19 @@
+Title: Better errors in the Panel
+
+----
+
+Subtitle: Errors that help you fix them
+
+----
+
+Teaser:
+
+When something goes wrong in the Panel, Kirby 6 tells you what happened and where. New error dialogs show the failed request, the exception and its stack trace in debug mode, and can open the file right in your code editor. Validation problems are listed per field, and a single broken field no longer takes down the whole view.
+
+----
+
+Link: /docs/guide/troubleshooting/debugging#errors-in-the-panel
+
+----
+
+Category: features

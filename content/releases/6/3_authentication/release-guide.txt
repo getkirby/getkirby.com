@@ -78,34 +78,11 @@ So far, two-factor authentication was all or nothing: with `'2fa' => true`, ever
 
 From then on, Kirby asks this user for the second factor after their password.
 
-### `2fa` option
-
-The `auth.methods.password.2fa` config option has changed:
-
-| `2fa` setting | Kirby 5 | Kirby 6 |
-| --- | --- | --- |
-| not set | Nobody is asked for a second factor. Users can't set up an authenticator app. | Users who have set up a second factor are asked for it. Everybody else logs in with their password only. |
-| `true` | Every user is asked for a second factor: the authenticator app code if set up, otherwise a code via email. | Every user is asked for a second factor. Users who haven't set up a passkey or authenticator app get a code via email. |
-
-To require a second factor from every user:
-
-```php "/site/config/config.php"
-return [
-    'auth' => [
-        'methods' => [
-            'password' => ['2fa' => true]
-        ]
-    ]
-];
-```
-
-As before, the `code` and `password-reset` login methods can't be combined with `'2fa' => true`, because they would let users skip the second factor.
+To still require a second factor from every user, set the (link: docs/reference/system/options/auth#login-methods__two-factor-authentication text: `2fa` option). Users who haven't set up a passkey or authenticator app then get a code via email.
 
 ## Password policy
 
 By default, Kirby only requires passwords to be at least 8 characters long. With the new `auth.passwords` option, you define your own policy.
-
-### Preset rules
 
 ```php "/site/config/config.php"
 return [
@@ -121,66 +98,7 @@ return [
 ];
 ```
 
-| Rule | Description |
-| --- | --- |
-| `minlength` | Minimum number of characters. Values below 8 have no effect: 8 is always the absolute minimum. |
-| `maxlength` | Maximum number of characters. 1000 is always the absolute maximum. |
-| `lowercase` | Require lowercase letters (or how many) |
-| `uppercase` | Require uppercase letters (or how many) |
-| `digits` | Require digits (or how many) |
-| `symbols` | Require symbols (any character that is neither a letter nor a digit) |
-
-### Regular expression or callback
-
-For anything else, pass a regular expression or a callback as `rules`. Add a `hint` for the Panel and optionally a custom `error`.
-
-```php "/site/config/config.php"
-return [
-    'auth' => [
-        'passwords' => [
-            'rules' => '/^(?=.*\d).{16,}$/',
-            'hint'  => [
-                'en' => 'At least 16 characters, including a digit',
-                'de' => 'Mindestens 16 Zeichen, davon eine Ziffer'
-            ],
-            'error' => [
-                'en' => 'This password is too weak',
-                'de' => 'Dieses Passwort ist zu schwach'
-            ]
-        ]
-    ]
-];
-```
-
-```php "/site/config/config.php"
-return [
-    'auth' => [
-        'passwords' => [
-            'rules' => function (string $password): bool {
-                return str_contains(strtolower($password), 'kirby') === false;
-            },
-            'hint' => 'Please don’t use “kirby” in your password'
-        ]
-    ]
-];
-```
-
-### Use the policy for your own code
-
-You can reuse the same policy in your own forms, e.g. a frontend registration form:
-
-```php
-use Kirby\Exception\InvalidArgumentException;
-
-try {
-    $kirby->auth()->passwords()->validate($password);
-} catch (InvalidArgumentException $e) {
-    $error = $e->getMessage();
-}
-
-// describe the policy next to your password field
-$hint = $kirby->auth()->passwords()->hint();
-```
+The (link: docs/reference/system/options/auth#password-policy text: password policy options) also cover regular expressions, callbacks and how to use the policy in your own forms.
 
 ## Security drawer
 
@@ -191,7 +109,7 @@ Open your account (or, as an admin, any user) in the Panel, click the settings b
 - **Sign in methods** lists the account's email address and the enabled login methods from `auth.methods`: password, login via code and passkeys.
 - **Two-factor methods** lists the second factors enabled in `auth.challenges`: passkeys, authenticator app and code via email.
 
-Custom login methods and second factors from plugins can add their own entries, so users set them up in the same place as the core ones. Learn how in (link: releases/6/migration/plugin-developers/auth#entries-in-the-security-drawer text: Custom auth methods & challenges).
+Custom login methods and second factors from plugins can add their own entries, so users set them up in the same place as the core ones. Learn how in (link: docs/reference/plugins/extensions/auth-methods#entries-in-the-security-drawer text: the auth methods reference).
 
 ## New login view
 
@@ -200,7 +118,9 @@ The Panel login view has been rebuilt. Each step has its own URL: `/panel/login/
 - **Method picker:** all other enabled login methods are listed below the form, e.g. "Login with passkey" or "Forgot your password?".
 - **Challenge switcher:** during the second step, users can switch to any other second factor available to them, without starting over.
 
-Plugins can bring their own login methods and second factors, each with their own form in this view. Read more in (link: releases/6/migration/plugin-developers/auth text: Custom auth methods & challenges).
+Plugins can bring their own login methods and second factors, each with their own form in this view. Read more in the (link: docs/reference/plugins/extensions/auth-methods#the-login-view text: auth methods reference).
+
+Read more in the guides on (link: docs/guide/authentication/2fa text: passkeys and two-factor authentication) and (link: docs/guide/authentication/login-methods text: login methods).
 
 ----
 

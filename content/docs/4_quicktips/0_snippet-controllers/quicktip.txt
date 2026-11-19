@@ -98,18 +98,21 @@ class SnippetWithController extends Snippet
   }
 }
 
-App::plugin('getkirby/snippet-controllers', [
-  'components' => [
-    'snippet' => function (
-      App $kirby,
-      string|array|null $name,
-      array $data = [],
-      bool $slots = false
-    ): Snippet|string {
-      return SnippetWithController::factory($name, $data, $slots);
-    },
+App::plugin(
+  name: 'getkirby/snippet-controllers',
+  extends: [
+    'components' => [
+      'snippet' => function (
+        App $kirby,
+        string|array|null $name,
+        array $data = [],
+        bool $slots = false
+      ): Snippet|string {
+        return SnippetWithController::factory($name, $data, $slots);
+      },
+    ]
   ]
-]);
+);
 ```
 
 <warning>

@@ -22,7 +22,7 @@ Tags: files
 
 Text:
 
-Updating (link: docs/guide/content/files#adding-meta-data-to-your-files text: file metadata), and particularly the template that is stored for a file, is a task that comes up ever so often. Because you forgot to assign a file template in the first place or because you later changed your mind and want to assign a different template to some file types or whatever.
+Updating (link: docs/guide/files#adding-meta-data-to-your-files text: file metadata), and particularly the template that is stored for a file, is a task that comes up ever so often. Because you forgot to assign a file template in the first place or because you later changed your mind and want to assign a different template to some file types or whatever.
 
 Since the file template assigned to a file is stored in the file metadata file (i.e. the text file that is created for each uploaded file), this is what we have to update when we want to newly assign or change the file template or any other metadata.
 
@@ -102,29 +102,32 @@ In a plugin, lets create a new files method that takes a data array as argument 
 
 ```php "/site/plugins/update-metadata/index.php"
 <?php
-Kirby::plugin('cookbook/update-metadata', [
-  'filesMethods' => [
-    'update' => function (array $data) {
-      $messages = [];
-      $kirby    = kirby();
-      foreach ($this as $file) {
-        try {
-          if ($kirby->multilang() === true) {
-            $languages = $kirby->languages();
-            foreach ($languages as $language) {
-              $newFile = $file->update($data, $language->code());
+Kirby::plugin(
+  name: 'cookbook/update-metadata',
+  extends: [
+    'filesMethods' => [
+      'update' => function (array $data) {
+        $messages = [];
+        $kirby    = kirby();
+        foreach ($this as $file) {
+          try {
+            if ($kirby->multilang() === true) {
+              $languages = $kirby->languages();
+              foreach ($languages as $language) {
+                $newFile = $file->update($data, $language->code());
+              }
+            } else {
+              $newFile = $file->update($data);
             }
-          } else {
-            $newFile = $file->update($data);
+          } catch (Exception $e) {
+            $messages[] = $file->filename() . ' could not be updated (' . $e->getMessage() . ')';
           }
-        } catch (Exception $e) {
-          $messages[] = $file->filename() . ' could not be updated (' . $e->getMessage() . ')';
         }
+        return $messages;
       }
-      return $messages;
-    }
-  ],
-]);
+    ],
+  ]
+);
 ```
 
 We can then call this method on a collection of files anywhere like this:
@@ -148,4 +151,3 @@ Of course, you can filter your files collection by extension, type, parent or wh
 ## Related recipes
 
 - (link: docs/cookbook/extensions/content-file-cleanup text: Cleaning up content files)
-- (link: docs/cookbook/setup/migrate-files text: Migrate file metadata)

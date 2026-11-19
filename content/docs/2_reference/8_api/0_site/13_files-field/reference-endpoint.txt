@@ -1,0 +1,5 @@
+Title: /site/files/:filename/fields/:name
+----
+Info: GET
+----
+Intro: Retrieve a file field

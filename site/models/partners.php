@@ -81,7 +81,7 @@ class PartnersPage extends DefaultPage
 			return static::$subpages;
 		}
 
-		return static::$subpages = Pages::factory($this->inventory()['children'], $this);
+		return static::$subpages = Pages::factory($this->inventory()->children(), $this);
 	}
 
 	/**

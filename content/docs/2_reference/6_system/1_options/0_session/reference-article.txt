@@ -35,7 +35,7 @@ If you tick the "keep me logged in" checkbox in the Panel, you get a "long" sess
 
 ## `timeout`
 
-The duration options above define the absolute session expiry. Like in Kirby 2, there is also an additional activity timeout: If the session wasn't seen for this time, the session also becomes invalid.
+The duration options above define the absolute session expiry. There is also an additional activity timeout: If the session wasn't seen for this time, the session also becomes invalid.
 
 <info>
 If you leave a Panel window open, the session never expires, even without clicking on anything.
@@ -45,7 +45,6 @@ If you leave a Panel window open, the session never expires, even without clicki
 
 The name of the session cookie
 
-<since v="5.1.0">
 ## `cookieDomain`
 
 The topmost-level domain on which the session cookie should be sent.
@@ -55,7 +54,6 @@ You can read more about the behavior of the `domain` attribute for cookies in th
 
 Note that setting the `cookieDomain` option disables Kirby setting the `path` attribute to the cookie (relevant in subfolder setups).
 </info>
-</since>
 
 ## `gcInterval`
 

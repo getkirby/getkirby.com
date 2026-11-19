@@ -30,7 +30,7 @@ fields:
     type: tags
 ```
 
-This creates a tags field where users can add any tags they want. You can finetune this setup with (link: docs/reference/panel/fields/tags#options text: options), e.g. to limit the number of tags, allow only predefines options etc.
+This creates a tags field where users can add any tags they want. You can finetune this setup with (link: docs/reference/panel/fields/tags#field-options text: options), e.g. to limit the number of tags, allow only predefines options etc.
 
 ## Adding tags to your content
 

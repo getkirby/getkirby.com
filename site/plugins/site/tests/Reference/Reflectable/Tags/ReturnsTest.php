@@ -17,7 +17,7 @@ class ReturnsTest extends TestCase
 
 	public function testDescription(): void
 	{
-		$types       = Types::factory('string');
+		$types       = Types::fromString('string');
 		$reflectable = new Returns($types, 'The answer to life');
 		$this->assertSame('The answer to life', $reflectable->description());
 
@@ -51,58 +51,58 @@ class ReturnsTest extends TestCase
 
 	public function testIsImmutable(): void
 	{
-		$types       = Types::factory('static');
+		$types       = Types::fromString('static');
 		$reflectable = new Returns($types);
 		$this->assertTrue($reflectable->isImmutable());
 
-		$types       = Types::factory('self');
+		$types       = Types::fromString('self');
 		$reflectable = new Returns($types);
 		$this->assertTrue($reflectable->isImmutable());
 
-		$types       = Types::factory('$this');
+		$types       = Types::fromString('$this');
 		$reflectable = new Returns($types);
 		$this->assertFalse($reflectable->isImmutable());
 	}
 
 	public function testIsMutable(): void
 	{
-		$types       = Types::factory('static');
+		$types       = Types::fromString('static');
 		$reflectable = new Returns($types);
 		$this->assertFalse($reflectable->isMutable());
 
-		$types       = Types::factory('self');
+		$types       = Types::fromString('self');
 		$reflectable = new Returns($types);
 		$this->assertFalse($reflectable->isMutable());
 
-		$types       = Types::factory('$this');
+		$types       = Types::fromString('$this');
 		$reflectable = new Returns($types);
 		$this->assertTrue($reflectable->isMutable());
 	}
 
 	public function testIsVoid(): void
 	{
-		$types       = Types::factory('void');
+		$types       = Types::fromString('void');
 		$reflectable = new Returns($types);
 		$this->assertTrue($reflectable->isVoid());
 	}
 
 	public function testToHtml(): void
 	{
-		$types       = Types::factory('string');
+		$types       = Types::fromString('string');
 		$reflectable = new Returns($types);
 		$this->assertSame('<code class="type type-string">string</code>', $reflectable->types()->toHtml());
 	}
 
 	public function testToString(): void
 	{
-		$types       = Types::factory('string');
+		$types       = Types::fromString('string');
 		$reflectable = new Returns($types);
 		$this->assertSame('string', $reflectable->types()->toString());
 	}
 
 	public function testTypes(): void
 	{
-		$types       = Types::factory('string');
+		$types       = Types::fromString('string');
 		$reflectable = new Returns($types);
 		$this->assertInstanceOf(Types::class, $reflectable->types());
 		$this->assertSame($types, $reflectable->types());

@@ -17,6 +17,8 @@ On the Whoops error page of your site, a click on the file opens it at the right
 
 (video: error.mp4)
 
+In the Panel, the (link: docs/guide/troubleshooting/debugging#errors-in-the-panel text: error dialog) of a failed request gets a button that opens the file of the exception at the right line. Each entry of its stack trace links to its file and line as well.
+
 ## Supported editors
 
 | Shortcut | Editor |

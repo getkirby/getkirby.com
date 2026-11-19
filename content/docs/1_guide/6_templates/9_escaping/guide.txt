@@ -75,7 +75,7 @@ Depending on your use-case, one or more of these strategies might be a good fit.
 
 Often the most effective and also easiest solution to prevent XSS on your Kirby site is to use context-sensitive escaping.
 
-For that, we provide the (link: docs/reference/helpers/esc text: `esc()` helper) and the (link: docs/reference/templates/field-methods/escape text: `escape()`/`esc()` field methods).
+For that, we provide the (link: docs/reference/templates/helpers/esc text: `esc()` helper) and the (link: docs/reference/templates/field-methods/escape text: `escape()`/`esc()` field methods).
 
 Let's take our example snippet from above and add escaping to it:
 

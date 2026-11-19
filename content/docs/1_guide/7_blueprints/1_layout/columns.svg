@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1200" width="1920" height="1200">
+	<rect width="1920" height="1200" fill="#fff"/>
+	<g fill="none" stroke="#c6cfd8" stroke-width="3">
+		<!-- frame -->
+		<rect x="1.5" y="1.5" width="1917" height="1197"/>
+		<!-- columns -->
+		<g stroke-dasharray="12 8">
+			<rect x="48" y="48" width="1200" height="1104"/>
+			<rect x="1296" y="48" width="576" height="1104"/>
+		</g>
+		<!-- fields -->
+		<rect x="96" y="152" width="1104" height="152"/>
+		<rect x="96" y="352" width="528" height="152"/>
+		<rect x="672" y="352" width="528" height="152"/>
+		<rect x="96" y="552" width="1104" height="552"/>
+		<rect x="1344" y="152" width="480" height="304"/>
+		<rect x="1344" y="504" width="480" height="600"/>
+	</g>
+	<g fill="#2b3442" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="34">
+		<text x="96" y="108">Column (2/3)</text>
+		<text x="1344" y="108">Column (1/3)</text>
+		<text x="145" y="212">Field</text>
+		<text x="145" y="412">Field</text>
+		<text x="721" y="412">Field</text>
+		<text x="145" y="612">Field</text>
+		<text x="1393" y="212">Field</text>
+		<text x="1393" y="564">Field</text>
+	</g>
+</svg>

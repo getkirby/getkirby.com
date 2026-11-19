@@ -6,6 +6,7 @@ return Kirby\PhpCs\Config::create()->setFinder(
 		->exclude('cache')
 		->exclude('sessions')
 		->exclude('fixtures')
+		->exclude('plugins/kirby-karbon')
 		->notPath('config/keys.php')
 		->in(__DIR__ . '/site')
 		->append([__DIR__ . '/index.php'])

@@ -31,11 +31,14 @@ You then have to register the new cache type with Kirby's plugin wrapper:
 
 ```php
 
-Kirby::plugin('yourname/custom-cache', [
-    'cacheTypes' => [
-        'custom' => CustomCache::class
+Kirby::plugin(
+    name: 'yourname/custom-cache',
+    extends: [
+        'cacheTypes' => [
+            'custom' => CustomCache::class
+        ]
     ]
-]);
+);
 ```
 
 ## Extending the `Cache` class
@@ -53,10 +56,13 @@ As before, you have to register the new cache driver:
 
 ```php
 
-Kirby::plugin('yourname/super-cache', [
-    'cacheTypes' => [
-        'super' => SuperCache::class
+Kirby::plugin(
+    name: 'yourname/super-cache',
+    extends: [
+        'cacheTypes' => [
+            'super' => SuperCache::class
+        ]
     ]
-]);
+);
 ```
 

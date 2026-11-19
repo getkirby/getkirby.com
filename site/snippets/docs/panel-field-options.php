@@ -21,6 +21,16 @@ fields:
 
 The example above will turn all published main pages of the site into options. The title of each page will be used as the text of the option and the page id will be used as the stored value.
 
+If you don't need any other settings, you can also write the query directly as a string:
+
+```yaml
+fields:
+  category:
+    label: Category
+    type: <?= $field . PHP_EOL ?>
+    options: site.children.published
+```
+
 ### A few more examples
 
 ```yaml

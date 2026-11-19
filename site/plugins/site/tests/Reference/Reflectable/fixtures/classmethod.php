@@ -26,3 +26,56 @@ class Fox {
 class ChildFox extends Fox
 {
 }
+class Vixen
+{
+	public function escape()
+	{
+	}
+
+	/**
+	 * @see self::escape()
+	 */
+	public function esc()
+	{
+	}
+
+	/**
+	 * @see self::escape()
+	 */
+	public function escapeHtml()
+	{
+	}
+
+	/**
+	 * @see self::doesNotExist()
+	 */
+	public function escapeUnknown()
+	{
+	}
+}
+
+class Den
+{
+	public function immutable(): static
+	{
+	}
+
+	/**
+	 * @return $this
+	 */
+	public function mutable(): static
+	{
+	}
+
+	public function string(): string
+	{
+	}
+
+	public function untyped()
+	{
+	}
+
+	public function void(): void
+	{
+	}
+}

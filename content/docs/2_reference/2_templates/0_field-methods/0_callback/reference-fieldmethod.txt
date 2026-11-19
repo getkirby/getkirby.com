@@ -1,8 +1,0 @@
-Examples:
-
-```php
-echo $page->title()->callback(function ($field) {
-  $field->value = 'Title: ' . $field->value;
-  return $field;
-});
-```

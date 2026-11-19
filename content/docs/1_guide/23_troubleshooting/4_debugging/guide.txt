@@ -34,6 +34,17 @@ Make sure to disable `debug` mode in production! Displaying PHP errors on a publ
 In a production environment, always log errors to your PHP error logs.
 </alert>
 
+## Errors in the Panel
+
+When a request in the Panel fails, a dialog shows the error message and the request: path, query, HTTP method and status code. In debug mode, it adds the exception with its class, file and line, any additional details and the full stack trace.
+
+(image: request-error-dialog.png alt: Request error dialog with the error message, the request, the exception and the stack trace)
+
+File paths are shortened to placeholders like `{kirby}`, `{site}` or `{index}`, so that error responses don't expose the folder structure of your server. With the (link: docs/reference/system/options/editor text: `editor` option), you can open the file of the exception and each entry of the stack trace right at the line in your code editor.
+
+When changes can't be saved because some fields are invalid, a dialog lists every issue, grouped by field:
+
+(image: validation-error-dialog.png alt: Validation error dialog listing the issues of three fields)
 
 ## var_dump
 

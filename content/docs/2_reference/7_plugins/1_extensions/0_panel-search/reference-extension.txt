@@ -4,180 +4,143 @@ Title: Panel search
 
 Text:
 
-(link: docs/reference/plugins/extensions/panel-areas text: Panel areas) also allow you to add your own search type to the Panel - next to pages, files and users - or even to overwrite these existing search implementations.
+(link: docs/reference/plugins/extensions/panel-areas text: Panel areas) also allow you to add your own search type to the Panel – next to pages, files and users – or even to overwrite these existing search implementations.
 
-```php "Site area"
-return [
-	'label'   => 'Site',
-	// …
-	'dialogs' => [
-		// …
-	],
-	'views'   => [
-		// …
-	],
-	// set the default search type
-	'search'   => 'pages',
-	// define new search endpoints
-	'searches' => [
-		'pages' => [
-			'label' => 'Pages',
-			'icon'  => 'page',
-			'query' => function (string|null $query, int $limit, int $page) {
-				$pages = site()->search($query)->paginate($limit, $page);
+## Search definition
 
-				return [
-					'results' => $pages->values(fn ($page) => [
-						'image' => $page->panel()->image(),
-						'text'  => Escape::html($page->title()->value()),
-						'link'  => $page->panel()->url(true),
-						'info'  => Escape::html($page->id()),
-						'uuid'  => $page->uuid()?->toString(),
-					]),
-					'pagination' => $pages->pagination()->toArray()
-				];
-			}
-		]
-	]
-];
+Searches are defined as a part of areas, with a `label`, an `icon` and a `query` handler. The handler receives the search query, the number of results per page and the current page, and returns the results:
+
+```php "/site/plugins/todos/index.php"
+<?php
+
+Kirby::plugin(
+  name: 'your-plugin/todos',
+  extends: [
+    'areas' => [
+      'todos' => fn () => [
+        // ... other code for the custom Panel area
+        'searches' => [
+          'todos' => [
+            'label' => 'Todos',
+            'icon'  => 'check',
+            'query' => function (string $query, int $limit, int $page) {
+              $results = [];
+
+              foreach (todos() as $id => $todo) {
+                if (str_contains($todo['text'], $query) === true) {
+                  $results[] = [
+                    'text' => $todo['text'],
+                    'link' => '/todos',
+                    'info' => 'Get it done!'
+                  ];
+                }
+              }
+
+              return $results;
+            }
+          ]
+        ]
+      ]
+    ]
+  ]
+);
 ```
 
-In Vue, the search can then be executed like this. It returns an object with the `results` and the `pagination`:
+The search automatically appears in the search dialog of the Panel. With the `search` option of the area, you can define which search type is preselected there, e.g. `'search' => 'todos'`.
+
+You can also run a search from your Vue components:
 
 ```js
-const { results, pagination } = await this.$panel.search('pages', query);
+const { results } = await this.$panel.search("todos", "Searchy search");
 ```
 
 ## Search results
 
-A Panel search extension returns results as a simple array with parameters for each item:
+A search returns its results as an array with these parameters for each item:
 
 | Parameter | Type | Description |
 | - | - | - |
 | `image` | `array` | Optional image settings |
-| `icon` | `string` | The name of the option icon |
+| `icon` | `string` | The name of the result icon |
 | `info` | `string` | Optional info text on the right |
-| `link` | `string` | The url/path which will be visited on click |
+| `link` | `string` | The URL or path which will be visited on click |
 | `text` | `string` | The label for the search result |
 | `uuid` | `string` | The UUID of the search result |
 
-## Custom search type
+`text` and `info` are escaped unless they are (link: docs/guide/plugins/panel#trusted-html text: trusted HTML). To paginate the results, return an array with the `results` and the `pagination` of your collection instead, e.g. `'pagination' => $collection->pagination()->toArray()`.
 
-That's all it takes to create your own search index for your own plugins:
+## Controller classes
+
+Instead of a `query` closure, you can handle a search with a controller class. Pass its class name as `action`. The class extends `Kirby\Panel\Controller\SearchController`, which takes the query, limit and page from the request and provides them as `$this->query`, `$this->limit` and `$this->page`:
+
+```php "/site/plugins/todos/classes/TodosSearchController.php"
+<?php
+
+use Kirby\Panel\Controller\SearchController;
+
+class TodosSearchController extends SearchController
+{
+  public function load(): array
+  {
+    $results = [];
+
+    foreach (todos() as $id => $todo) {
+      if (str_contains($todo['text'], $this->query) === true) {
+        $results[] = [
+          'text' => $todo['text'],
+          'link' => '/todos',
+          'icon' => 'check'
+        ];
+      }
+    }
+
+    return $results;
+  }
+}
+```
 
 ```php
-Kirby::plugin('your-plugin/todos', [
-    'areas' => [
-        'todos' => [
-            // …
-            'searches' => [
-                'todos' => [
-                    'label' => 'Todos',
-                    'icon'  => 'check',
-                    'query' => function (string|null $query, int $limit, int $page) {
-                        // search for $todos here.
-                        $results = [];
-
-                        foreach ($todos as $todo) {
-                            $results[] = [
-                                'image' => [], // optional image settings
-                                'text'  => $todo->text(),
-                                'link'  => '/todos/' . $todo->id(),
-                                'info'  => 'Get it done!'
-                            ];
-                        }
-
-                        return $results;
-                    }
-                ]
-            ]
-        ]
-    ]
-]);
+'searches' => [
+  'todos' => [
+    'label'  => 'Todos',
+    'icon'   => 'check',
+    'action' => TodosSearchController::class
+  ]
+]
 ```
-
-
-The search will automatically appear in the search dialog, but can also be run manually from your Vue components with …
-
-```js
-const query = 'Searchy search';
-const { results } = await this.$panel.search('todos', query);
-```
-
 
 ## Extending default search types
 
-You don't like the way the pages search works? Maybe you already have your data in Elastic search or Algolia and you want to use a real search server instead? No problem. It's now super easy to extend and overwrite our core searches.
+You don't like the way the pages search works? Maybe you already have your data in Elasticsearch or Algolia and you want to use a real search server instead? You can override the core searches with your own `action`:
 
-```php
+```php "/site/plugins/search/index.php"
 <?php
 
-Kirby::plugin('example/search', [
-  'areas' => [
-    // extending a core search
-    'site' => function ($kirby) {
-      return [
+use Kirby\Panel\Controller\Search\PagesSearchController;
+
+Kirby::plugin(
+  name: 'example/search',
+  extends: [
+    'areas' => [
+      'site' => fn () => [
         'searches' => [
           'pages' => [
-            'query' => function (string|null $query, int $limit, int $page) {
-              // run your own search here ...
-
-              // example result
-              return [
-                [
-                  'image' => [
-                    'src'   => 'https://source.unsplash.com/random',
-                    'cover' => true,
-                    'back'  => 'white'
-                  ],
-                  'text'  => 'Test Result',
-                  'link'  => '/site',
-                  'info'  => 'test info'
-                ]
-              ];
-            }
-          ]
-        ]
-      ];
-    },
-  ]
-]);
-```
-
-### Reusing core code
-
-When you plan to extend a search, you might want to fall back to Kirby's core behaviour in some cases. This can be done by loading the core code:
-
-```php
-<?php
-
-Kirby::plugin('example/search', [
-  'areas' => [
-    // extending a core search
-    'site' => function ($kirby) {
-      return [
-        'searches' => [
-          'pages' => [
-            'query' => function (string|null $query, int $limit, int $page) use ($kirby) {
-
-              if ($kirby->user()->isAdmin()) {
-                // return super secret search results for the admin
+            'action' => function (string $query, int $limit, int $page) {
+              if (kirby()->user()->isAdmin() === true) {
+                // run your own search for admins here …
               }
 
-              return $kirby->core()->area('site')['searches']['pages']['query']($query, $limit, $page);
+              // fall back to the core search
+              return (new PagesSearchController($query, $limit, $page))->load();
             }
           ]
         ]
-      ];
-    },
+      ]
+    ]
   ]
-]);
+);
 ```
 
-## Core searches
+The core searches are handled by controller classes, so a `query` closure for a core search has no effect. To remove a core search, set it to `false`.
 
-Area | Search name
-- | -
-`site` | `pages`
-`site` | `files`
-`users` | `users`
+You find all core searches in the area definitions in (link: https://github.com/getkirby/kirby/tree/main/config/areas text: `/kirby/config/areas`) and their controllers in (link: https://github.com/getkirby/kirby/tree/main/src/Panel/Controller/Search text: `/kirby/src/Panel/Controller/Search`).

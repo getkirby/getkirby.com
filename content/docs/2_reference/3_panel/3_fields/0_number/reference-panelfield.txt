@@ -23,10 +23,6 @@ fields:
     type: number
 ```
 
-## Field properties
-
-(field-options: number)
-
 ## Decimals
 
 Decimals can be used by adding the `step` option.
@@ -78,3 +74,5 @@ For floating value, use the `toFloat()` method:
 ```php
 <?= $page->numberfield()->toFloat() ?>
 ```
+
+(docs: panel-field-update field: number)

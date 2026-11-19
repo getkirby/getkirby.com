@@ -65,30 +65,9 @@ Buttons in the header let you check your page in different viewport widths. Size
 | `medium` | `tablet` | `820px` |
 | `large` | `display` | `1440px` |
 
-Define your own sizes with the new `panel.preview.sizes` option:
+Define your own sizes with the new (link: docs/reference/system/options/panel#preview-sizes text: `panel.preview.sizes` option).
 
-```php "/site/config/config.php"
-return [
-	'panel' => [
-		'preview' => [
-			'sizes' => [
-				'phone' => [
-					'icon'  => 'mobile',
-					'width' => '375px'
-				],
-				'tablet' => [
-					'icon'  => 'tablet',
-					'width' => '768px'
-				],
-				'desktop' => [
-					'icon'  => 'display',
-					'width' => '1280px'
-				]
-			]
-		]
-	]
-];
-```
+Read more about the live editor in the (link: docs/guide/content/publishing-workflow#live-editor text: publishing workflow guide).
 
 ----
 

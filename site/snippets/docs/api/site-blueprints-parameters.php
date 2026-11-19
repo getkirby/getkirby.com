@@ -1,3 +1,3 @@
 | Parameter | Example | Description |
 | - | - | - |
-| `section` | `?section=gallery` | List blueprints for this section. |
+| `field` | `?field=gallery` | List blueprints for this field. |

@@ -72,6 +72,30 @@ It is still possible to create pages that contain a dot in their URL. If you alr
 
 The built-in PHP server has issues with dots in paths, unless they are part of a filename, and will throw an error. For this reason, you may have to explore other local development solutions when working with content representations.
 
+<since v="6.0.0">
+## Content negotiation
+
+A representation can also be requested from the regular URL of a page, without the extension. The `Accept` header of the request tells Kirby which format the client wants. Let's say you have a Markdown representation for your articles:
+
+```php "/site/templates/article.md.php"
+# <?= $page->title() ?>
+
+<?= $page->text() ?>
+```
+
+A request with `text/markdown` in its `Accept` header gets this representation instead of the HTML page:
+
+```bash
+curl -H "Accept: text/markdown" https://example.com/blog/my-article
+```
+
+This is handy for tools and AI agents that ask for Markdown. It works for any representation with an extension that Kirby knows a MIME type for, e.g. `application/json` for `article.json.php`.
+
+Kirby checks the MIME types of the `Accept` header in the order of their priority. As soon as a type matches HTML, including wildcards like `text/*` or `*/*`, Kirby renders the regular HTML page. That's why browsers, which ask for HTML first, still get the HTML page. If a page doesn't have a representation for any of the accepted types, Kirby renders the HTML page as well.
+
+When Kirby picks a representation based on the `Accept` header, it adds a `Vary: Accept` header to the response, so that caches don't mix up the representation with the HTML page.
+</since>
+
 ## Representation controllers
 
 You can also have dedicated controllers for each of your representations. If you create a controller with the name `default.json.php`, it will be used for the JSON representation of the default template. If no dedicated representation controller exists, the standard controller (`default.php`) will be used instead (if available).
@@ -85,11 +109,14 @@ You can create content representations in plugins by defining a template with th
 ```php "/site/plugins/feed/index.php"
 <?php
 
-Kirby::plugin('your/feed', [
-    'templates' => [
-        'notes.rss' => __DIR__ . '/templates/notes.rss.php'
-    ],
-]);
+Kirby::plugin(
+    name: 'your/feed',
+    extends: [
+        'templates' => [
+            'notes.rss' => __DIR__ . '/templates/notes.rss.php'
+        ],
+    ]
+);
 ```
 
 If you need a matching controller, you can create one via a plugin as well:
@@ -97,16 +124,19 @@ If you need a matching controller, you can create one via a plugin as well:
 ```php "/site/plugins/feed/index.php"
 <?php
 
-Kirby::plugin('your/feed', [
-    'templates' => [
-        'notes.rss' => __DIR__ . '/templates/notes.rss.php'
-    ],
-    'controllers' => [
-        'notes.rss' => function () {
-            // put your controller code here
-        }
+Kirby::plugin(
+    name: 'your/feed',
+    extends: [
+        'templates' => [
+            'notes.rss' => __DIR__ . '/templates/notes.rss.php'
+        ],
+        'controllers' => [
+            'notes.rss' => function () {
+                // put your controller code here
+            }
+        ]
     ]
-]);
+);
 ```
 
 Controllers and templates from plugins get overridden automatically if they exist in the `templates` or `controllers` directories. You can use this behavior to provide default setups in a plugin and still give the option to overwrite them individually if needed.

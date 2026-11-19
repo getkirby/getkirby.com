@@ -9,47 +9,47 @@ Subtitle: Details that deliver
 Features:
 -
   icon: globe
-	headline: Site controller
-	text: Define a global controller for your site that gets merged into all page-specific controllers. Great for shared data.
-	link: "/releases/5/more-details#site-controller"
+  headline: Site controller
+  text: Define a global controller for your site that gets merged into all page-specific controllers. Great for shared data.
+  link: "/releases/5/more-details#site-controller"
 -
   icon: calendar
-	headline: Choose first day of week
-	text: Set Sunday to be the first day of the week in the Panel dropdown calendar – a much requested featured for all our international users.
-	link: "/releases/5/more-details#first-day-of-the-week"
+  headline: Choose first day of week
+  text: Set Sunday to be the first day of the week in the Panel dropdown calendar – a much requested featured for all our international users.
+  link: "/releases/5/more-details#first-day-of-the-week"
 -
   icon: database
-	headline: Redis cache
-	text: >
-		A brand-new cache driver for one of the most used cache types: connect to your Redis server out of the box.
-	link: "/releases/5/more-details#redis-cache-driver"
+  headline: Redis cache
+  text: >
+    A brand-new cache driver for one of the most used cache types: connect to your Redis server out of the box.
+  link: "/releases/5/more-details#redis-cache-driver"
 -
   icon: lock
-	headline: `files.sort` permission
-	text: A new dedicated user permission to control who can change the sort order of files.
+  headline: "`files.sort` permission"
+  text: A new dedicated user permission to control who can change the sort order of files.
 -
   icon: plugin
-	headline: Alter page/file/user in a hook
-	text: Most page/file/user action hooks now allow you to return a modified object, supporting consecutive hooks to apply multiple changes that don't overwrite each other.
+  headline: Alter page/file/user in a hook
+  text: Most page/file/user action hooks now allow you to return a modified object, supporting consecutive hooks to apply multiple changes that don't overwrite each other.
 -
   icon: save
-	headline: Improved UUID handling
-	text: When duplicating pages, references to files or children pages that were also duplicated are now updated correctly.
-	link: "/releases/5/more-details#improved-uuid-handling"
+  headline: Improved UUID handling
+  text: When duplicating pages, references to files or children pages that were also duplicated are now updated correctly.
+  link: "/releases/5/more-details#improved-uuid-handling"
 -
   icon: menu
-	headline: Improved IDE support
-	text: Your editor now understands Kirby a whole lot better, enabling it to make smarter autocomplete suggestions and provide type hints for collections.
-	link: "/releases/5/more-details#improved-ide-support"
+  headline: Improved IDE support
+  text: Your editor now understands Kirby a whole lot better, enabling it to make smarter autocomplete suggestions and provide type hints for collections.
+  link: "/releases/5/more-details#improved-ide-support"
 -
   icon: image
-	headline: Improved rotation detection
-	text: Thumbnails work better with photos from smartphones, adapting to the EXIF rotation data.
+  headline: Improved rotation detection
+  text: Thumbnails work better with photos from smartphones, adapting to the EXIF rotation data.
 -
   icon: fingerprint
-	headline: Improved Panel input validation
-	text: Panel inputs are now built on top of native HTML form validation instead of third-party libraries.
-	link: "/releases/5/more-details#improved-panel-input-validation"
+  headline: Improved Panel input validation
+  text: Panel inputs are now built on top of native HTML form validation instead of third-party libraries.
+  link: "/releases/5/more-details#improved-panel-input-validation"
 
 ----
 

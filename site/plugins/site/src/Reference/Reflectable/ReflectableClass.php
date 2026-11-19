@@ -12,6 +12,12 @@ use Reflector;
 class ReflectableClass extends Reflectable
 {
 	/**
+	 * Shared instances, as each method of a class
+	 * checks the class doc block as well
+	 */
+	protected static array $instances = [];
+
+	/**
 	 * @var ReflectionClass
 	 */
 	public Reflector $reflection;
@@ -36,6 +42,14 @@ class ReflectableClass extends Reflectable
 		}
 
 		return ucfirst($alias);
+	}
+
+	/**
+	 * Returns the shared instance for the class
+	 */
+	public static function for(string $name): static
+	{
+		return static::$instances[$name] ??= new static($name);
 	}
 
 	/**

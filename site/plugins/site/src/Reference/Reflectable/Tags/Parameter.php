@@ -2,9 +2,11 @@
 
 namespace Kirby\Reference\Reflectable\Tags;
 
+use Kirby\Reference\Reflectable\Doc;
 use Kirby\Reference\Reflectable\Reflectable;
 use Kirby\Reference\Types\Types;
 use PHPStan\PhpDocParser\Ast\PhpDoc\ParamTagValueNode;
+use PHPStan\PhpDocParser\Ast\PhpDoc\TypelessParamTagValueNode;
 use ReflectionParameter;
 
 /**
@@ -42,20 +44,24 @@ class Parameter
 
 	public static function factory(
 		ReflectionParameter|null $parameter = null,
-		ParamTagValueNode|null $doc = null,
+		ParamTagValueNode|TypelessParamTagValueNode|null $doc = null,
 		Reflectable|null $context = null
 	): static {
 		$name    = $parameter?->getName();
 		$name  ??= ltrim($doc?->parameterName, '$');
-		$types   = $doc?->type;
+		// a typeless `@param $name Description` carries no type,
+		// so the native type hint is used instead
+		$types   = $doc instanceof ParamTagValueNode ? $doc->type : null;
 		$types ??= $parameter?->getType();
-		$types   = Types::factory($types, $context);
+		// a parameter without any type at all accepts anything
+		$types ??= 'mixed';
+		$types   = Types::from($types, $context);
 
 		return new static(
 			name:        $name,
 			types:       $types,
 			default:     static::factoryDefault($parameter),
-			description: $doc?->description,
+			description: Doc::singleLine($doc?->description),
 			isRequired:  $parameter?->isOptional() !== true &&
 						 $types->has('null') !== true,
 			isVariadic:  $parameter?->isVariadic() ?? $doc?->isVariadic
@@ -82,23 +88,47 @@ class Parameter
 			return null;
 		}
 
-		// get the default value and clean it up
-		$default = $parameter->getDefaultValue();
+		return static::formatDefault($parameter->getDefaultValue());
+	}
 
-		if (is_object($default)) {
-			$default = 'new ' . $default::class . '()';
-		} else {
-			$default = var_export($default, true);
+	/**
+	 * Turns a default value into its readable string representation
+	 */
+	public static function formatDefault(mixed $default = null): string
+	{
+		if (is_object($default) === true) {
+			return 'new ' . $default::class . '()';
 		}
 
-		$default = str_replace('NULL', 'null', $default);
-		$default = str_replace('array (' . PHP_EOL . ')', '[ ]', $default);
-
-		if ($default === null || $default === 'null') {
-			return 'null';
+		if (is_array($default) === true) {
+			return static::formatDefaultArray($default);
 		}
 
-		return $default;
+		return str_replace('NULL', 'null', var_export($default, true));
+	}
+
+	/**
+	 * Turns an array default into a compact single-line
+	 * short array syntax, e.g. `['size' => 1, 'unit' => 'day']`,
+	 * as `var_export()` would be far too verbose for a table cell
+	 */
+	protected static function formatDefaultArray(array $default): string
+	{
+		$isList = array_is_list($default);
+		$items  = [];
+
+		foreach ($default as $key => $value) {
+			$item = static::formatDefault($value);
+
+			// the keys of a plain list add no information
+			if ($isList === false) {
+				$item = static::formatDefault($key) . ' => ' . $item;
+			}
+
+			$items[] = $item;
+		}
+
+		return '[' . implode(', ', $items) . ']';
 	}
 
 	/**
@@ -144,12 +174,12 @@ class Parameter
 	 * Returns the string representation of the parameter
 	 * with the types, the name and the default value
 	 */
-	public function toString(): string
+	public function toString(bool $short = false): string
 	{
 		$string = $this->name();
 
 		// combine the types and the name
-		$string = trim($this->types->toString() . ' ' . $string);
+		$string = trim($this->types->toString($short) . ' ' . $string);
 
 		// if there is a default value, add it
 		if ($this->default !== null) {

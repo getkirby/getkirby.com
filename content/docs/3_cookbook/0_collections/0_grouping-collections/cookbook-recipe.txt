@@ -16,7 +16,7 @@ Tags: collections, grouping
 
 Text:
 
-Often, we want to group pages or files by various criteria, for example, print a list of blog posts grouped by year, group upcoming events by month, a list of authors by character in the alphabeth, a set of images by photographer and so on. With Kirby's [`groupBy()`](/docs/reference/objects/pages/group-by) and [`group($callback`)](/docs/reference/objects/pages/group) methods, this is pretty easy.
+Often, we want to group pages or files by various criteria, for example, print a list of blog posts grouped by year, group upcoming events by month, a list of authors by character in the alphabeth, a set of images by photographer and so on. With Kirby's [`groupBy()`](/docs/reference/objects/cms/pages/group-by) and [`group($callback`)](/docs/reference/objects/cms/pages/group) methods, this is pretty easy.
 
 Let's look at some examples to fuel your imagination.
 

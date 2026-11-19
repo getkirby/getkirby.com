@@ -1,0 +1,1 @@
+Deprecated: 6.0.0|Use (method: Kirby\Cms\Language::guards() text: $language->guards()) instead.

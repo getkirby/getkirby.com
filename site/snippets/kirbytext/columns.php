@@ -1,10 +1,12 @@
 <?php
 /**
- * @var array $columns
+ * @var array|null $html Rendered content of each column (from Marsdown)
+ * @var array|null $text KirbyText content of each column, used without `$html`
  */
+$html ??= array_map(fn ($column) => kirbytext($column), $text ?? []);
 ?>
-<?php foreach ($columns as $column): ?>
+<?php foreach ($html as $column): ?>
 	<div>
-		<?= kt($column) ?>
+		<?= $column ?>
 	</div>
 <?php endforeach ?>

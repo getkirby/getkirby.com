@@ -59,9 +59,11 @@ For permission types with many actions with the same setting, you can use the `*
 
 ```yaml
 user:
-  *: false
+  "*": false
   changeName: true
 ```
+
+Keep the quotes around `*`: without them, YAML reads it as an alias and the blueprint can't be loaded.
 
 The `*` wildcard only controls the permissions you can find in the full list above. It is the same as setting all available permissions (except those that are overridden explicitly by another rule) manually.
 
@@ -110,7 +112,7 @@ You can also use a wildcard to change the default for all roles and then assign 
 ```yaml
 options:
   update:
-    *: false
+    "*": false
     editor: true
 ```
 
@@ -124,10 +126,10 @@ In the context of user roles, there are two users to keep in mind: The acting us
 options:
   # only allow admin users to change admin emails and passwords
   changeEmail:
-    *: false
+    "*": false
     admin: true
   changePassword:
-    *: false
+    "*": false
     admin: true
 ```
 
@@ -135,9 +137,33 @@ options:
 options:
   # only allow managers to delete editors
   delete:
-    *: false
+    "*": false
     manager: true
 ```
+
+## How permissions are resolved
+
+Kirby looks for a permission rule in this order and stops at the first one it finds:
+
+1. **The model's blueprint:** the `options` of the page, file, user or site blueprint, either for everyone or per role
+2. **The user's role:** the `permissions` in the role blueprint
+3. **The default:** `false`
+
+Users with the `nobody` role are never allowed to do anything, and the `kirby` user is always allowed.
+
+```yaml "/site/blueprints/pages/legal.yml"
+options:
+  delete: false
+  changeSlug:
+    admin: true
+    "*": false
+```
+
+With this blueprint, nobody can delete a legal page and only admins can change its slug, no matter what the role blueprints say.
+
+## Checking permissions in your code
+
+Kirby checks permissions whenever an action runs. To check them yourself, e.g. to show an edit link only to users who may edit a page, use (link: docs/guide/users/guards text: guards).
 
 ## Controlling permissions with hooks
 
@@ -164,11 +190,11 @@ To obtain the required permissions for certain actions, you can  authenticate as
 
 ### Authentication
 
-Users can log in through the (glossary: Panel) login page or a custom login form. To learn more about how to log in a user programmatically, read the reference for (link: docs/reference/objects/user/login text: $user->login()).
+Users can log in through the (glossary: Panel) login page or a custom login form. To learn more about how to log in a user programmatically, read the reference for (link: docs/reference/objects/cms/user/login text: $user->login()).
 
 ### Impersonate
 
-One way to go without authentication is to (link: docs/reference/objects/kirby/impersonate text: impersonate) an existing user or the special `kirby` super user, which has full permissions:
+One way to go without authentication is to (link: docs/reference/objects/cms/app/impersonate text: impersonate) an existing user or the special `kirby` super user, which has full permissions:
 
 ```php
 <?php

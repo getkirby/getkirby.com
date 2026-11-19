@@ -47,7 +47,7 @@ In a production environment, always log errors to your PHP error logs.
 
 Usually, production servers should be configured to not display errors on the screen but log them to a log file. However, if we forget to disable our config settings in our production environment, these server settings will be overwritten.
 
-To avoid that, we can (link: docs/guide/configuration#multi-enviroment-setup text: use domain specific config.php files). Always set
+To avoid that, we can (link: docs/guide/configuration#multi-environment-setup text: use domain specific config.php files). Always set
 
 ```php "/site/config/config.php"
 return [

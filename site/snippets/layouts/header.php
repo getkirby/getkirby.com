@@ -10,9 +10,9 @@
 <?php if (isArchived() === false && $kirby->option('topbar') === true): ?>
 	<div class="container">
 		<?php snippet('layouts/topbar', [
-			'icon'   => '🧪',
-			'title'  => 'Kirby 6 RC 2 is out!',
-			'button' => 'Try it',
+			'icon'   => '🎉',
+			'title'  => 'Kirby 6 is here!',
+			'button' => 'Learn more',
 			'link'   => '/releases/6',
 			'active' => $page->is('releases/6')
 		]) ?>

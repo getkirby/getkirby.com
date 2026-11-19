@@ -68,6 +68,8 @@ Field content is accessible in your templates via the field's name:
 ```
 The methods that are chained to the name of the field are field methods that allow you to modify the field content in multiple ways. You can find a full list of available field methods in the (link: docs/reference/templates/field-methods text: Reference).
 
+If you call a field method that doesn't exist, e.g. because of a typo or a missing plugin, Kirby throws a `Kirby\Exception\BadMethodCallException`.
+
 <info>
 Some technical background: Fields are part of the (link: docs/reference/objects/content/content text: Content object) which is returned when calling `$page->content()`, so the longer, standard way of accessing a field would be:
 

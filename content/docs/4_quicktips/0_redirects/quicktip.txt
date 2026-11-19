@@ -66,9 +66,9 @@ To make these pages editable in the Panel, add a `/site/blueprints/pages/link.ym
 title: Link
 
 fields:
-	link:
-	  label: Link URL
-	  type: url
+  link:
+    label: Link URL
+    type: url
 ```
 <info>
 Make sure to allow creating pages with this blueprint in the `site.yml` blueprint.

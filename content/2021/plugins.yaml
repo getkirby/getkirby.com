@@ -4,8 +4,7 @@
 - plugins/beebmx/db
 - plugins/beebmx/env
 - plugins/benediktengel/google-calendar
-- >
-  plugins/blankogmbh/git-commit-and-push-content
+- plugins/blankogmbh/git-commit-and-push-content
 - plugins/bnomei/cloudconvert
 - plugins/bnomei/content-security-policy
 - plugins/bnomei/dotenv
@@ -30,8 +29,7 @@
 - plugins/bvdputte/queue
 - plugins/cre8ivclick/formbuilder
 - plugins/cre8ivclick/sitemapper
-- >
-  plugins/d4l-data4life/static-site-generator
+- plugins/d4l-data4life/static-site-generator
 - plugins/datamints/kirby-plugin_ldap
 - plugins/diesdasdigital/imgix
 - plugins/diesdasdigital/metaknight
@@ -43,8 +41,7 @@
 - plugins/flokosiol/focus
 - plugins/floriankarsten/vipsthumbnail
 - plugins/flupe/cas
-- >
-  plugins/gearsdigital/enhanced-toolbar-link-dialog
+- plugins/gearsdigital/enhanced-toolbar-link-dialog
 - plugins/gearsdigital/reporter
 - plugins/getkirby/editor
 - plugins/getkirby/geo
@@ -64,8 +61,7 @@
 - plugins/hashandsalt/yasumi
 - plugins/jbeyerstedt/download
 - plugins/jbeyerstedt/quote
-- >
-  plugins/johannschopplich/blurry-placeholder
+- plugins/johannschopplich/blurry-placeholder
 - plugins/kerli81/secured-pages
 - plugins/kx550/arena-tag
 - plugins/kx550/fathom
@@ -126,8 +122,7 @@
 - plugins/sylvainjule/color-extractor
 - plugins/sylvainjule/color-palette
 - plugins/sylvainjule/footnotes
-- >
-  plugins/sylvainjule/illustrated-checkboxes
+- plugins/sylvainjule/illustrated-checkboxes
 - plugins/sylvainjule/illustrated-radio
 - plugins/sylvainjule/locator
 - plugins/sylvainjule/markdown-field
@@ -141,8 +136,7 @@
 - plugins/texnixe/similar
 - plugins/texnixe/spreadsheet
 - plugins/thathoff/oauth
-- >
-  plugins/thestreamable/clear-cloudflare-cache
+- plugins/thestreamable/clear-cloudflare-cache
 - plugins/timoetting/builder
 - plugins/tristanbg/shopify
 - plugins/wagnerwagner/merx

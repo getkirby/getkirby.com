@@ -42,9 +42,9 @@ In order to be able to change user roles, you have to (link: docs/guide/users/ro
 
 ## Change user password
 
-Passwords must be at least 8 characters long. Make them as strong as possible! We recommend 32+ characters, highly random passwords and a password manager to keep track of them.
+Users change their password in the (link: docs/guide/authentication/2fa#the-security-drawer text: security drawer) of their account: *Security › Password*.
 
-(image: change-password.png)
+By default, passwords must be at least 8 characters long. You can set your own (link: docs/reference/system/options/auth#password-policy text: password policy). Make passwords as strong as possible! We recommend 32+ characters, highly random passwords and a password manager to keep track of them.
 
 ## Change user language
 

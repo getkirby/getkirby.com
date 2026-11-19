@@ -20,7 +20,7 @@ Tags: automation, hook
 
 Text:
 
-If you want to auto-create a given set of subpages every time you create a particular page, you can achieve this with a `page.create:after` hook. To make it more versatile, you can define a custom blueprint setting that leverages Kirby's new `$page->blueprint()` method. We will take you step by step through an example based on the (link: docs/guide/installation#installation text: Starterkit).
+If you want to auto-create a given set of subpages every time you create a particular page, you can achieve this with a `page.create:after` hook. To make it more versatile, you can define a custom blueprint setting that leverages Kirby's new `$page->blueprint()` method. We will take you step by step through an example based on the (link: docs/guide/install-guide text: Starterkit).
 
 Let's say every time you create a new `note` page (in the Panel or programmatically), you want to create two subpages: `gallery` and `info`.
 
@@ -51,35 +51,31 @@ columns:
         size: large
 
   - width: 1/3
-    sections:
+    fields:
       subpages:
-        type: pages
+        type: pagelist
         templates:
           - gallery
           - info
-      meta:
-        type: fields
-        fields:
-          date:
-            type: date
-            time: true
-            default: now
-          author:
-            type: users
-          tags: true
-          gallery:
-            type: pages
-            query: site.find("photography").children
-            multiple: false
-            info: "{{ page.images.count }} image(s)"
-            empty: "No gallery selected"
-            image:
-              cover: true
-            help: Place the {{ gallery }} tag anywhere in your text to add the selected gallery
-
+      date:
+        type: date
+        time: true
+        default: now
+      author:
+        type: userpicker
+      tags: true
+      gallery:
+        type: pagepicker
+        query: site.find("photography").children
+        multiple: false
+        info: "{{ page.images.count }} image(s)"
+        empty: "No gallery selected"
+        image:
+          cover: true
+        help: Place the {{ gallery }} tag anywhere in your text to add the selected gallery
 ```
 
-As you can see above, we also added a pages section for the subpages.
+As you can see above, we also added a `pagelist` field for the subpages.
 
 ## The hook
 Now we need a (link: docs/reference/plugins/extensions/hooks text: hook) that is called each time a page is created.

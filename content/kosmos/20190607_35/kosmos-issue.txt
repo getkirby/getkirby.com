@@ -35,7 +35,7 @@ We published release candidate 2 yesterday, and we need your help with testing i
 
 # A starter kit for Panel plugins
 
-Bastian created a [Pluginkit for Panel plugins](https://getkirby.com/docs/guide/plugins/plugin-setup-panel) along with some documentation to get you started with Panel plugins more easily.
+Bastian created a [Pluginkit for Panel plugins](https://getkirby.com/docs/guide/plugins/panel) along with some documentation to get you started with Panel plugins more easily.
 
 ## Kirby in the Wild
 

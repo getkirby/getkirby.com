@@ -85,8 +85,6 @@ return function (App $kirby, Page $page) {
 				);
 			}
 
-
-
 			// submit form values to the partner hub
 			$response = Remote::post(option('partners.signupUrl'), [
 				'data' => json_encode([

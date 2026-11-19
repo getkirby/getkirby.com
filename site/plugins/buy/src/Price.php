@@ -54,7 +54,8 @@ class Price
 	 * Converts a price from EUR to the given currency
 	 * and rounds it to the nearest pretty price
 	 *
-	 * @param $charm Whether prices will end in 5/9 (when true) or 0/5 (when false)
+	 * @param $charm Whether prices will end in 5/9 (when true)
+	 *              or 0/5 (when false)
 	 * @param $adjust Whether to perform PPP adjustment to the generated price
 	 */
 	public function convert(int $price, bool $charm = true, bool $adjust = false): int

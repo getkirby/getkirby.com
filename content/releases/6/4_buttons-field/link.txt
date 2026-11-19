@@ -1,0 +1,19 @@
+Title: Buttons field
+
+----
+
+Subtitle: Actions right inside your forms
+
+----
+
+Teaser:
+
+The new `buttons` field adds a list of buttons to any blueprint. Each button opens a link, a Panel dialog or a drawer, so editors find shortcuts and custom actions exactly where they work on the content.
+
+----
+
+Link: /docs/reference/panel/fields/buttons
+
+----
+
+Category: features

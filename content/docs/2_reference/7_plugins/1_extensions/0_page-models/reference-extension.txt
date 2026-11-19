@@ -19,11 +19,14 @@ class BlogPage extends Page
 	// your custom page methods
 }
 
-Kirby::plugin('my/pageModels', [
-	'pageModels' => [
-		'blog' => BlogPage::class
+Kirby::plugin(
+	name: 'my/pageModels',
+	extends: [
+		'pageModels' => [
+			'blog' => BlogPage::class
+		]
 	]
-]);
+);
 ```
 
 In a real world example, you would usually put the class in a separate file, e.g. `/models/BlogPage.php` in your plugin folder:
@@ -47,11 +50,14 @@ load([
     'BlogPage' => 'models/BlogPage.php',
 ], __DIR__);
 
-Kirby::plugin('my/pageModels', [
-	'pageModels' => [
-		'blog' => BlogPage::class
+Kirby::plugin(
+	name: 'my/pageModels',
+	extends: [
+		'pageModels' => [
+			'blog' => BlogPage::class
+		]
 	]
-]);
+);
 ```
 
 For details on how to use page models, see (link:docs/guide/templates/page-models text: our guide on page models).

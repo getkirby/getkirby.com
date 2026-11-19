@@ -11,21 +11,24 @@ Collection filters are registered with the `collectionFilters` extension.
  The `collectionFilters` extension accepts an array of collection filters where the key is the name of the filter and the value a callback function that returns the filtered collection.
 
 ```php "/site/plugins/your-plugin/index.php"
-Kirby::plugin('your/plugin', [
-    'collectionFilters' => [
-        'datebefore' => function ($collection, $field, $test, $split = false) {
-            foreach ($collection->data as $key => $item ) {
-                $datetime = $collection->getAttribute($item, $field, $split, $test);
-                if (!$datetime || strtotime($datetime) < strtotime($test) ) {
-                    continue;
+Kirby::plugin(
+    name: 'your/plugin',
+    extends: [
+        'collectionFilters' => [
+            'datebefore' => function ($collection, $field, $test, $split = false) {
+                foreach ($collection->data as $key => $item ) {
+                    $datetime = $collection->getAttribute($item, $field, $split, $test);
+                    if (!$datetime || strtotime($datetime) < strtotime($test) ) {
+                        continue;
+                    }
+                    unset($collection->$key);
                 }
-                unset($collection->$key);
-            }
 
-            return $collection;
-        }
+                return $collection;
+            }
+        ]
     ]
-]);
+);
 ```
 
 ## Usage in templates

@@ -1,0 +1,75 @@
+Title: And so much more
+
+----
+
+Subtitle: Details that deliver
+
+----
+
+Features:
+-
+  icon: markdown
+  headline: Content negotiation
+  text: Serve the Markdown or JSON representation of a page based on the Accept header of the request, no file extension in the URL needed.
+  link: "/docs/guide/templates/content-representations#content-negotiation"
+-
+  icon: box
+  headline: Objects as field values
+  text: Pass files, pages, users, blocks or dates to `$model->update()` and each field stores them in its own format.
+  link: "/docs/reference/objects/cms/page/update#examples__objects-as-values"
+-
+  icon: code
+  headline: Smarter queries
+  text: Kirby queries support logical not and negative values, and several parsing bugs have been fixed.
+  link: "/docs/guide/blueprints/query-language#advanced-query-syntax__operators"
+-
+  icon: calendar
+  headline: Date formats with text
+  text: Add your own words to the display format of date and time fields and see an example as placeholder.
+  link: "/docs/reference/panel/fields/date#display-format"
+-
+  icon: keyboard
+  headline: Easier date input
+  text: Date fields read your input in their own format and understand month names in English and the Panel language.
+  link: "/docs/reference/panel/fields/date#display-format"
+-
+  icon: upload
+  headline: Upload in the file picker
+  text: Drop files onto the file picker dialog to upload and select them in one go.
+  link: "/docs/reference/panel/fields/filepicker#upload-options"
+-
+  icon: edit-line
+  headline: Unsaved changes at a glance
+  text: Field labels are highlighted as long as the field has unsaved changes.
+  link: "/docs/guide/content/publishing-workflow#unsaved-changes"
+-
+  icon: copy
+  headline: Copy from disabled fields
+  text: Select and copy the values of disabled fields.
+-
+  icon: status-unlisted
+  headline: Custom page statuses
+  text: Give each page status its own icon or emoji and color theme for the status button, page lists and the status dialog.
+  link: "/docs/reference/panel/blueprints/page#statuses__icons-and-themes"
+-
+  icon: file
+  headline: More MIME types
+  text: Kirby knows more file types, from WebAssembly to WebVTT subtitles and web app manifests.
+-
+  icon: list-bullet
+  headline: Enums from fields
+  text: Turn a field value into a case of your own backed enum with `$field->toEnum()`.
+  link: "/docs/reference/templates/field-methods/to-enum"
+-
+  icon: plugin
+  headline: Disable core Panel features
+  text: Plugins can remove any core dialog, drawer, dropdown, search, request or view of a Panel area.
+  link: "/docs/reference/plugins/extensions/panel-areas#extending-areas__removing-core-definitions"
+
+----
+
+Link: /releases/6#more-details
+
+----
+
+Category: changes

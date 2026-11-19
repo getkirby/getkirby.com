@@ -27,7 +27,7 @@ return [
 ```
 
 <warning>
-Using the [root URL for the default language](#language-specific-urls) will disable automatic language detection.
+Using the [root URL for the default language](/docs/guide/languages#language-specific-urls) will disable automatic language detection.
 </warning>
 
 ## Disable language variable editing in Panel

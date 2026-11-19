@@ -60,7 +60,7 @@ With a few lines of CSS, we are now going to change the appearance of the whole 
 
 :root {
   --color-gray-900: #182D31;
-  --color-background: #F3F3F4;
+  --panel-color-back: #F3F3F4;
 }
 
 .k-tabs {

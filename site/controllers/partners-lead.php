@@ -13,7 +13,6 @@ V::$validators['nospam'] = function ($value) {
 	return true;
 };
 
-
 return function (App $kirby, Page $page) {
 	// submitted form
 	if ($kirby->request()->is('POST') === true) {

@@ -4,18 +4,21 @@
 	"type": "project",
 	"homepage": "https://getkirby.com",
 	"require": {
-		"php": ">=8.2.0",
-		"getkirby/cms": "^4.0"
+		"php": ">=8.3.0",
+		"getkirby/cms": "6.0.0-rc.2"
 	},
 	"scripts": {
 		"start": [
 			"Composer\\Config::disableProcessTimeout",
 			"@php -S localhost:8181 kirby/router.php"
 		],
-		"fix": "cpx getkirby/php-cs:^0.2 fix",
-		"test": "@composer --working-dir=site/plugins/site run test"
+		"fix": "cpx getkirby/php-cs:0.3.0 fix",
+		"test": "@composer --working-dir=site/plugins/site run test --"
 	},
 	"config": {
-		"optimize-autoloader": true
+		"optimize-autoloader": true,
+		"allow-plugins": {
+			"getkirby/composer-installer": true
+		}
 	}
 }

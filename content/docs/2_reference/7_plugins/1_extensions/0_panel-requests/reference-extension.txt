@@ -1,0 +1,74 @@
+Title: Panel requests
+
+----
+
+Text:
+
+Request routes send data to your Panel components and receive data from them, e.g. to load items on demand or to save a change without a dialog. They are defined as part of your (link: docs/reference/plugins/extensions/panel-areas text: Panel area extension) and answer with JSON.
+
+## Request definition
+
+```php "/site/plugins/todos/index.php"
+<?php
+
+Kirby::plugin(
+  name: 'yourname/todos',
+  extends: [
+    'areas' => [
+      'todos' => fn () => [
+        // ... other code for the custom Panel area
+        'requests' => [
+          'todo.toggle' => [
+            'pattern' => 'todos/(:any)/toggle',
+            'method'  => 'POST',
+            'action'  => function (string $id) {
+              $done = kirby()->request()->get('done');
+              // save the todo
+              return ['done' => $done];
+            }
+          ]
+        ]
+      ]
+    ]
+  ]
+);
+```
+
+A request route takes these options:
+
+| Option | Description |
+| - | - |
+| `pattern` | The route below `/panel/`. Placeholders are passed to the `action` as arguments. |
+| `method` | The HTTP method(s), by default both `GET` and `POST` |
+| `auth` | Whether the user needs access to the area, default: `true` |
+| `action` | A closure or controller class that handles the request |
+
+The `action` returns an array, which the Panel receives as JSON. An exception sends an error instead.
+
+## Calling a request from the Panel
+
+Use `$panel.get()` and `$panel.post()` in your Vue components. They return the JSON response:
+
+```js
+const todo = await this.$panel.get("todos/123");
+
+await this.$panel.post("todos/123/toggle", { done: true });
+```
+
+Request routes check the CSRF token of the Panel. `$panel.get()`, `$panel.post()` and `$panel.request()` send it automatically.
+
+## Controller classes
+
+Instead of a closure, you can pass a controller class as `action`. The class extends `Kirby\Panel\Controller\RequestController`, and its `load()` method returns the response. Like (link: docs/reference/plugins/extensions/panel-dialogs#controller-classes text: dialog controllers), Kirby creates it with a static `factory()` method, if there is one, or the constructor, and passes the placeholders of the route pattern:
+
+```php
+'requests' => [
+  'todo.toggle' => [
+    'pattern' => 'todos/(:any)/toggle',
+    'method'  => 'POST',
+    'action'  => TodoToggleRequestController::class
+  ]
+]
+```
+
+You find the core request routes in the area definitions in (link: https://github.com/getkirby/kirby/tree/main/config/areas text: `/kirby/config/areas`) and their controllers in (link: https://github.com/getkirby/kirby/tree/main/src/Panel/Controller/Request text: `/kirby/src/Panel/Controller/Request`).

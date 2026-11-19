@@ -1,0 +1,29 @@
+Since: 6.0.0
+
+----
+
+Examples:
+
+Wrap output in `push()` and (helper: endpush) to add it to a stack. It is rendered wherever you call (helper: stack) with the same name, no matter whether that happens before or after the push:
+
+```php "/site/snippets/blocks/gallery.php"
+<?php push('head') ?>
+<link rel="stylesheet" href="<?= url('assets/css/gallery.css') ?>">
+<?php endpush() ?>
+```
+
+For short content, pass it as second argument:
+
+```php
+<?php push('head', '<meta name="robots" content="noindex">') ?>
+```
+
+## Push only once
+
+With `unique: true`, identical content is only added once, even if the snippet is rendered several times:
+
+```php
+<?php push('head', css('assets/css/gallery.css'), unique: true) ?>
+```
+
+Read more in the (link: docs/guide/templates/stacks text: template stacks guide).

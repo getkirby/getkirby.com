@@ -22,7 +22,7 @@
 	color: var(--color-gray-800);
 	padding: var(--spacing-6);
 }
-.v6-more-details :where(li, a) {
+.v6-more-details :where(li, li > a) {
 	display: flex;
 	flex-direction: column;
 	gap: var(--spacing-3);
@@ -48,8 +48,13 @@
     <?= icon($feature->icon()) ?>
     <h3><?= $feature->headline()->kti() ?></h3>
     <p>
+		<?php if ($link): ?>
+		<?php /* Links (e.g. auto-linked `$field->method()`) can't nest in the card's link */ ?>
+		<?= strip_tags($feature->text()->kti(), ['code', 'em', 'strong']) ?>
+		&rarr;
+		<?php else: ?>
 		<?= $feature->text()->kti() ?>
-		<?= e($link, '&rarr;') ?>
+		<?php endif ?>
 	</p>
 
 	<?php if ($link): ?>

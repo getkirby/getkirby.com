@@ -13,14 +13,17 @@ Text:
 Options are registered with the `options` extension. The extension accepts an array of options with their default values. The default values will be used if the options are not overwritten in the site config.
 
 ```php
-Kirby::plugin('yourname/yourplugin', [
-    'options' => [
-        'option' => 'some-value',
-        'another-option' => [
-            'with-a-nested-option' => 'and values'
+Kirby::plugin(
+    name: 'yourname/yourplugin',
+    extends: [
+        'options' => [
+            'option' => 'some-value',
+            'another-option' => [
+                'with-a-nested-option' => 'and values'
+            ]
         ]
     ]
-]);
+);
 ```
 
 ## Setting custom options in the site config

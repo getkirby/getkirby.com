@@ -99,7 +99,7 @@ Visit our [showcase](https://getkirby.com/love) for more great examples of Kirby
 
 ## Kirby docs
 
-We added a new ["Best practices" chapter](https://getkirby.com/docs/guide/plugins/best-practices) to our plugin documentation with a collection of tips to keep in mind when developing your plugins. Feel free to contribute your ideas via GitHub issues or PRs.
+We added a new ["Best practices" chapter](https://getkirby.com/docs/guide/plugins/publishing) to our plugin documentation with a collection of tips to keep in mind when developing your plugins. Feel free to contribute your ideas via GitHub issues or PRs.
 
 ## Productivity
 

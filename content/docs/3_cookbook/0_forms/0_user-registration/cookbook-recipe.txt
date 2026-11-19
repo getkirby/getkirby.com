@@ -302,7 +302,7 @@ The `login.php` controller is a bit more complex because depending on which fiel
 ```php "/site/controllers/login.php"
 <?php
 
-use Kirby\Cms\Auth\Status;
+use Kirby\Auth\State;
 use Kirby\Exception\PermissionException;
 use Kirby\Toolkit\V;
 
@@ -313,7 +313,7 @@ return function ($kirby) {
     $status = $kirby->auth()->status();
 
     // user is already logged in, send them elsewhere
-    if ($status->status() === 'active') {
+    if ($status->is(State::Active)) {
         go('home');
     }
 
@@ -348,11 +348,9 @@ return function ($kirby) {
                     }
                 } catch (Exception $e) {
                     $error = $e->getMessage();
-                    // set new status object with inactive status
-                    $status = new Status([
-                        'kirby' => $kirby,
-                        'status' => 'inactive'
-                    ]);
+                    // a wrong code can be retried until the challenge
+                    // times out, so we get the current status again
+                    $status = $kirby->auth()->status();
                 }
             }
 
@@ -364,7 +362,7 @@ return function ($kirby) {
     return [
         'email'  => $email ?? '',
         'error'  => $error,
-        'status' => $status->status(),
+        'status' => $status->state()->value,
     ];
 };
 ```
@@ -425,7 +423,7 @@ To this purpose, we extend the navigation item in the header snippet as follows:
 
 And additionally, add a logout route in your `config`:
 
-```php "/site/config/config.php
+```php "/site/config/config.php"
 return [
     // …other settings
     'routes' => [
@@ -480,15 +478,18 @@ The first step is to add the current page id as parameter to the navigation link
 
 We create a site method that allows us to fetch the referrer value from the session, so that we can easily retrieve that value in our code. for this purpose, we create a little plugin in the `/plugins` folder.
 
-```php "/site/plugins/site-method/index.php
+```php "/site/plugins/site-method/index.php"
 <?php
-Kirby::plugin('cookbook/site-method', [
-    'siteMethods' => [
-        'loginReferrer' => function () {
-            return kirby()->session()->pull('login.referrer') ?? '/';
-        }
+Kirby::plugin(
+    name: 'cookbook/site-method',
+    extends: [
+        'siteMethods' => [
+            'loginReferrer' => function () {
+                return kirby()->session()->pull('login.referrer') ?? '/';
+            }
+        ]
     ]
-]);
+);
 ```
 If a value is stored in the session, we return this value, otherwise we redirect to the home page.
 
@@ -566,4 +567,4 @@ That was it. Happy coding!
 - (link: docs/guide/authentication/frontend-login text: Frontend login)
 - (link: docs/guide/authentication/password-reset-form text: Password reset)
 - (link: docs/cookbook/security/access-restriction text: Restricting access to your site)
-- (link: docs/cookbook/forms/using-mailhog-for-email-testing text: Using MailHog for local email testing)
+- (link: docs/cookbook/development-deployment/using-mailpit-for-email-testing text: Using Mailpit for local email testing)

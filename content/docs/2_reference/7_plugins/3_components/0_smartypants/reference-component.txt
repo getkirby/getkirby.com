@@ -5,11 +5,14 @@ Title: SmartyPants parser
 Text:
 
 ```php "/site/plugins/smartypants-parser/index.php"
-Kirby::plugin('my/smartypants', [
-	'components' => [
-		'smartypants' => function (Kirby $kirby, string $text = null, array $options = []) {
-			return YourSmartyPantsParser::parse($text);
-		}
+Kirby::plugin(
+	name: 'my/smartypants',
+	extends: [
+		'components' => [
+			'smartypants' => function (Kirby $kirby, string $text = null, array $options = []) {
+				return YourSmartyPantsParser::parse($text);
+			}
+		]
 	]
-]);
+);
 ```

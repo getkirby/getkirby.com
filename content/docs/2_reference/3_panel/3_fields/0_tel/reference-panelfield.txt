@@ -23,10 +23,6 @@ fields:
     type: tel
 ```
 
-## Field properties
-
-(field-options: tel)
-
 ## How to use in templates/snippets
 
 Just printing the phone number:
@@ -47,3 +43,5 @@ Generating an `a` tag for the phone number:
   <dd><?= Html::tel($page->phone()) ?></dd>
 <?php endif ?>
 ```
+
+(docs: panel-field-update field: tel)

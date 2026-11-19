@@ -85,7 +85,7 @@ This is only recommended if you really find yourself converting 90% of your file
 
 ## Thumbs driver
 
-Kirby comes with drivers for GD Lib (`gd`) and Imagick (`imagick`, since v5.1.0), which can be used out of the box. The default thumbs driver is `gd`.
+Kirby comes with drivers for GD Lib (`gd`) and Imagick (`imagick`), which can be used out of the box. The default thumbs driver is `gd`.
 
 You can also define your own custom thumbs drivers.
 
@@ -101,7 +101,6 @@ return [
 The old ImageMagick (`im`) driver has been deprecated and will be removed in a future major release. Use the `imagick` driver instead.
 </warning>
 
-<since v="5.1.0">
 ### Additional options for the Imagick driver
 
 #### `interlace`
@@ -144,7 +143,6 @@ return [
   ]
 ];
 ```
-</since>
 
 ### Additional options for the ImageMagick driver
 

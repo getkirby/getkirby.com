@@ -21,6 +21,12 @@
 	-webkit-overflow-scrolling: touch;
 }
 
+/* with caption: inside a code figure */
+.code > .filesystem {
+	margin-top: 0;
+	border-radius: 0 0 var(--rounded) var(--rounded);
+}
+
 .filesystem details {
 	padding-right: var(--spacing-4);
 	width: min-content;

@@ -1,0 +1,38 @@
+Since: 6.0.0
+
+----
+
+Text:
+
+The `toEnum()` method converts the value of a field into a case of a (link: https://www.php.net/manual/en/language.enumerations.backed.php text: backed enum). If the field is empty or its value doesn't match any case, it returns `null`.
+
+----
+
+Examples:
+
+### Enum
+
+```php "/site/plugins/categories/index.php"
+<?php
+
+enum Category: string
+{
+	case News  = 'news';
+	case Event = 'event';
+
+	public function hasDate(): bool
+	{
+		return $this === self::Event;
+	}
+}
+```
+
+### Template
+
+```php "/site/templates/article.php"
+<?php $category = $page->category()->toEnum(Category::class) ?>
+
+<?php if ($category?->hasDate() === true): ?>
+<time><?= $page->date()->toDate('d.m.Y') ?></time>
+<?php endif ?>
+```

@@ -1,0 +1,217 @@
+Title: Custom auth methods & challenges
+
+----
+
+Intro: Kirby 6 rebuilt authentication around two extension points: auth methods start a login, auth challenges confirm it. Both are now instance-based PHP classes that bring their own form for the Panel login view.
+
+----
+
+Text:
+
+## Methods and challenges
+
+A login in Kirby 6 has up to two steps:
+
+1. An **auth method** starts the login. It either logs the user in directly or creates a challenge. The core login methods are `password`, `code` and `webauthn` (passkeys).
+2. An **auth challenge** confirms the login, e.g. with a one-time code or a passkey. The core challenges are `email`, `totp` and `webauthn`. Challenges are used as second factor after a password, for passwordless logins with the `code` method and for password resets.
+
+Plugins can add both. Kirby 5 already had the `authChallenges` extension, Kirby 6 adds `authMethods` and replaces the static challenge class with a new base class that brings its own form for the Panel login view.
+
+The reference explains both in detail: (link: docs/reference/plugins/extensions/auth-methods text: auth methods), including the login view, entries in the security drawer and rate limiting with `Auth::guard()`, and (link: docs/reference/plugins/extensions/auth-challenges text: auth challenges).
+
+## Migrating a Kirby 5 challenge
+
+A custom challenge for Kirby 5 extends `Kirby\Cms\Auth\Challenge`. This class no longer exists, so the plugin breaks with a "class not found" error until you update it. Here is an SMS challenge before and after.
+
+### Before: Kirby 5
+
+```php "/site/plugins/acme-auth/classes/SmsChallenge.php"
+<?php
+
+namespace Acme\Auth;
+
+use Kirby\Cms\Auth\Challenge;
+use Kirby\Cms\User;
+use Kirby\Toolkit\Str;
+
+class SmsChallenge extends Challenge
+{
+    public static function isAvailable(User $user, string $mode): bool
+    {
+        return $user->content()->get('phone')->isNotEmpty();
+    }
+
+    public static function create(User $user, array $options): string
+    {
+        $code = Str::random(6, 'num');
+
+        // your SMS provider's client
+        Gateway::send(
+            $user->content()->get('phone')->value(),
+            'Your login code: ' . $code
+        );
+
+        // Kirby hashed the returned code and stored it in the session
+        return $code;
+    }
+
+    // no verify(): the base class compared the input
+    // with the hashed code from the session
+}
+```
+
+```php "/site/plugins/acme-auth/index.php"
+Kirby::plugin('acme/auth', [
+    'authChallenges' => [
+        'sms' => Acme\Auth\SmsChallenge::class
+    ],
+    'translations' => [
+        'en' => [
+            'login.code.placeholder.sms' => '000000',
+            'login.code.text.sms'        => 'We sent a code to your phone.'
+        ]
+    ]
+]);
+```
+
+### After: Kirby 6
+
+```php "/site/plugins/acme-auth/classes/SmsChallenge.php"
+<?php
+
+namespace Acme\Auth;
+
+use Kirby\Auth\Challenge;
+use Kirby\Auth\Pending;
+use Kirby\Panel\Ui\Component;
+use Kirby\Toolkit\Str;
+use SensitiveParameter;
+
+class SmsChallenge extends Challenge
+{
+    public function isAvailable(): bool
+    {
+        return $this->user->content()->get('phone')->isNotEmpty();
+    }
+
+    public function create(): Pending
+    {
+        $code  = Str::random(6, 'num');
+        $phone = $this->user->content()->get('phone')->value();
+
+        // your SMS provider's client
+        Gateway::send($phone, 'Your login code: ' . $code);
+
+        return new Pending(
+            public: '•••• ' . substr($phone, -4),
+            secret: password_hash($code, PASSWORD_DEFAULT)
+        );
+    }
+
+    public function form(Pending $pending): Component
+    {
+        return new Component(
+            component: 'k-login-sms-challenge-form',
+            submit:    $this->submit(),
+            phone:     $pending->public(),
+            user:      $this->user->email(),
+        );
+    }
+
+    public function icon(): string
+    {
+        return 'mobile';
+    }
+
+    public function verify(
+        #[SensitiveParameter]
+        mixed $input,
+        Pending $data
+    ): bool {
+        $hash = $data->secret();
+
+        if (is_string($input) === false || is_string($hash) === false) {
+            return false;
+        }
+
+        return password_verify(str_replace(' ', '', $input), $hash);
+    }
+}
+```
+
+With `isAvailable()` as above, every user with a phone number is asked for an SMS code after their password. Make the `2fa` mode opt-in as described in (link: docs/reference/plugins/extensions/auth-challenges#the-challenge-class__availability-means-set-up text: Availability means "set up") if that's not what you want.
+
+```php "/site/plugins/acme-auth/index.php"
+Kirby::plugin('acme/auth', [
+    'authChallenges' => [
+        'sms' => Acme\Auth\SmsChallenge::class
+    ],
+    'translations' => [
+        'en' => [
+            'login.challenge.sms.label'  => 'Code via SMS',
+            'login.code.label.sms'       => 'Code from SMS',
+            'login.code.placeholder.sms' => '000000',
+            'login.code.text.sms'        => 'We sent a code to { phone }.'
+        ]
+    ]
+]);
+```
+
+Kirby 5 rendered the same generic code form for every challenge. In Kirby 6, the challenge brings its own:
+
+```html "/site/plugins/acme-auth/src/components/LoginSmsChallengeForm.vue"
+<template>
+  <form class="k-login-form" @submit.prevent="onSubmit">
+    <k-user-info :user="user" />
+
+    <k-text-field
+      :autofocus="true"
+      :counter="false"
+      :help="$t('login.code.text.sms', { phone })"
+      :label="$t('login.code.label.sms')"
+      :placeholder="$t('login.code.placeholder.sms')"
+      :required="true"
+      :value="code"
+      autocomplete="one-time-code"
+      icon="unlock"
+      name="code"
+      @input="code = $event"
+    />
+
+    <k-login-footer :back="true">
+      <k-login-submit :icon="submit.icon" :label="submit.label" />
+    </k-login-footer>
+  </form>
+</template>
+
+<script>
+export default {
+  props: {
+    phone: String,
+    submit: Object,
+    user: String
+  },
+  emits: ["submit"],
+  data() {
+    return {
+      code: ""
+    };
+  },
+  methods: {
+    onSubmit() {
+      this.$emit("submit", { code: this.code });
+    }
+  }
+};
+</script>
+```
+
+If you don't need the phone number in the form, `<k-login-code type="sms" :value="code" @input="code = $event" />` replaces the whole `<k-text-field>`.
+
+## Replacing the login form
+
+In Kirby 5, a plugin could replace the whole login form with the `login` extension of `window.panel.plugin()`. This extension has been removed in Kirby 6, together with the `<k-login-form>` and `<k-login-code-form>` components and the deprecated aliases `<k-login>` and `<k-login-code>`.
+
+Write an auth method instead and return your form from its `form()` method. Your method then appears next to the core methods, and site developers decide in `auth.methods` whether it's the only one, the first one or an alternative.
+
+Find all other changes to the auth system in the (link: releases/6/changelog#breaking-changes__auth text: changelog) and the (link: docs/guide/updates/update-to-v6/plugin-developers text: migration guide for plugin developers).

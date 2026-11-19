@@ -70,7 +70,7 @@ A recipe many have been waiting for: Moritz Stückler explains [how to create a 
 
 Christian Fickinger contributed a recipe about [how to create nested blocks](https://getkirby.com/docs/cookbook/content-structure/nested-blocks), using the example of a FAQ section with question/answer blocks.
 
-Did you know you cannot just have virtual pages in a Kirby installation, but also virtual files? Learn how with our new [Virtual Files recipe](https://getkirby.com/docs/cookbook/extensions/virtual-files).
+Did you know you cannot just have virtual pages in a Kirby installation, but also virtual files? Learn how with our new [Virtual Files recipe](https://getkirby.com/docs/guide/virtual-content/virtual-files).
 
 
 (columns…)

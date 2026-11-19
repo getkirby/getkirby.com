@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1200" width="1920" height="1200">
+	<rect width="1920" height="1200" fill="#fff"/>
+	<g fill="none" stroke="#c6cfd8" stroke-width="3">
+		<!-- frame -->
+		<rect x="1.5" y="1.5" width="1917" height="1197"/>
+		<!-- tabs -->
+		<path d="M192 1.5V96H1918.5M384 1.5V96M576 1.5V96"/>
+		<!-- columns -->
+		<g stroke-dasharray="12 8">
+			<rect x="48" y="144" width="1200" height="1008"/>
+			<rect x="1296" y="144" width="576" height="1008"/>
+		</g>
+		<!-- fields -->
+		<rect x="96" y="248" width="1104" height="152"/>
+		<rect x="96" y="448" width="528" height="152"/>
+		<rect x="672" y="448" width="528" height="152"/>
+		<rect x="96" y="648" width="1104" height="456"/>
+		<rect x="1344" y="248" width="480" height="304"/>
+		<rect x="1344" y="600" width="480" height="504"/>
+	</g>
+	<g fill="#2b3442" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="34">
+		<g text-anchor="middle">
+			<text x="96" y="60">Tab 1</text>
+			<text x="288" y="60">Tab 2</text>
+			<text x="480" y="60">Tab 3</text>
+		</g>
+		<text x="96" y="204">Column (2/3)</text>
+		<text x="1344" y="204">Column (1/3)</text>
+		<text x="145" y="308">Field</text>
+		<text x="145" y="508">Field</text>
+		<text x="721" y="508">Field</text>
+		<text x="145" y="708">Field</text>
+		<text x="1393" y="308">Field</text>
+		<text x="1393" y="660">Field</text>
+	</g>
+</svg>

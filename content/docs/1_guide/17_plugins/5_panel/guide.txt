@@ -28,22 +28,34 @@ Kirby loads `index.php`, `index.js` and `index.css` from the plugin root. Nothin
 
 ## The PHP half
 
-Registering a (link: docs/reference/plugins/extensions/fields text: field type) looks like any other extension. Anything you put under `computed` is handed to the Vue component as a prop:
+Every (link: docs/reference/plugins/extensions/fields text: field type) is a PHP class. Our field only shows something and never stores a value, so it extends Kirby's `DisplayField` class, which already brings the `label` and `help` options. Anything you return from its `props()` method is handed to the Vue component as a prop. The class is then registered like any other extension:
 
 ```php "/site/plugins/anchor/index.php"
+<?php
+
+namespace Superwoman\Anchor;
+
+use Kirby\Cms\App as Kirby;
+use Kirby\Form\Field\DisplayField;
+
+class AnchorField extends DisplayField
+{
+	// everything returned here is handed to the
+	// `k-anchor-field` Vue component as a prop
+	public function props(): array
+	{
+		return [
+			...parent::props(),
+			'anchor' => $this->model()->anchor()
+		];
+	}
+}
+
 Kirby::plugin(
 	name: 'superwoman/anchor',
 	extends: [
 		'fields' => [
-			'anchor' => [
-				// everything that is computed here is handed to the
-				// `k-anchor-field` Vue component as a prop
-				'computed' => [
-					'anchor' => function (): string {
-						return $this->model()->anchor();
-					}
-				]
-			]
+			'anchor' => AnchorField::class
 		]
 	]
 );
@@ -157,7 +169,7 @@ The two `index.js` files are not a mistake. `src/index.js` is the source you edi
 
 ## Building with `kirbyup`
 
-Single file components cannot run in the browser as they are. We use (link: https://github.com/johannschopplich/kirbyup text: kirbyup) to compile them. It is built for Kirby Panel plugins and needs no configuration.
+Single file components cannot run in the browser as they are. We use (link: https://github.com/johannschopplich/kirbyup text: kirbyup) to compile them. It is built for Kirby Panel plugins and needs no configuration. kirbyup 4 requires Node.js 24 or newer.
 
 You do not have to install `kirbyup`. The commands below fetch it on first use, which may take a moment:
 
@@ -166,8 +178,7 @@ You do not have to install `kirbyup`. The commands below fetch it on first use, 
   "name": "anchor",
   "private": true,
   "scripts": {
-    "dev": "npx -y kirbyup src/index.js --watch",
-    "serve": "npx -y kirbyup serve src/index.js",
+    "dev": "npx -y kirbyup dev src/index.js",
     "build": "npx -y kirbyup src/index.js"
   }
 }
@@ -175,9 +186,20 @@ You do not have to install `kirbyup`. The commands below fetch it on first use, 
 
 Run the commands from your plugin folder:
 
-- `npm run dev` compiles `src/index.js` into `index.js` and `index.css` and recompiles on every change. Reload the Panel to see the result.
-- `npm run serve` does the same, but reloads the Panel for you whenever you save. Pass extra options after `--`, for example `npm run serve -- --port 1234`.
-- `npm run build` creates the minified files you ship.
+- `npm run dev` starts a development server and updates the Panel whenever you save. Pass extra options after `--`, for example `npm run dev -- --port 1234`.
+- `npm run build` compiles `src/index.js` into the minified `index.js` and `index.css` that you ship.
+
+## How Kirby loads your plugin
+
+The Panel provides Vue through an import map. Import what you need from `vue` and you get the exact Vue instance that the Panel uses:
+
+```js
+import { computed, ref } from "vue";
+```
+
+Never bundle your own copy of Vue: the Panel cannot render components that were compiled against a second Vue runtime.
+
+If a plugin has an `index.dev.js` file next to its `index.js`, Kirby loads `index.dev.js` instead. kirbyup's development server uses this file to connect the Panel to it. As long as any plugin has an `index.dev.js`, the Panel also loads the development build of Vue, so that the Vue devtools and Vue's warnings work. Never ship an `index.dev.js` with a release.
 
 ## Commit the build
 
@@ -192,13 +214,47 @@ Run `npm run build` before you tag a release and commit the result. What belongs
 /node_modules
 
 # kirbyup temp development entry
-/index.dev.mjs
+/index.dev.js
 ```
+
+## Trusted HTML
+
+Panel components escape plain strings. HTML only renders if it has been marked as trusted where it was created. Only mark HTML that you have built yourself and where every piece of user content has been escaped.
+
+In PHP, wrap the HTML in an `HtmlString` object:
+
+```php
+use Kirby\Toolkit\HtmlString;
+
+$text = new HtmlString('Created by <strong>Kirby</strong>');
+
+// translates the key and escapes every value that is filled in
+$text = HtmlString::translate('my.plugin.delete.confirm', [
+	'title' => $page->title()->value()
+]);
+
+// escapes the query results, keeps the HTML of the template
+$text = $page->toSafeHtmlString('<strong>{{ page.title }}</strong>');
+```
+
+In your Vue components, `this.$h(html)` marks a string as trusted HTML, and `this.$th(key, data)` translates a key, marks the translation as trusted HTML and escapes every value that is filled in. The `v-safe-html` directive renders trusted HTML and escapes any other string:
+
+```html
+<!-- escaped -->
+<p v-safe-html="value"></p>
+
+<!-- rendered as HTML -->
+<p v-safe-html="$h(value)"></p>
+
+<!-- translation rendered as HTML, filled-in values escaped -->
+<p v-safe-html="$th('my.plugin.hint', { name })"></p>
+```
+
+The same goes for core components that show text, e.g. `<k-text :text="$h(value)" />`: the `text` and `info` of items and options, the texts of dialogs and drawers and the `help` of fields.
 
 ## What to build next
 
 The (link: docs/reference/plugins/extensions text: reference) lists every Panel extension type. Our cookbook walks through the most common ones in detail:
 
 - (link: docs/cookbook/panel/first-panel-field text: Your first Panel field)
-- (link: docs/cookbook/panel/first-panel-section text: Your first Panel section)
 - (link: docs/cookbook/panel/first-panel-area text: Your first Panel area)

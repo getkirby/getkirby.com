@@ -2,10 +2,6 @@ Intro: Configure CORS headers for cross-origin requests
 
 ----
 
-Since: 5.2.0
-
-----
-
 Text:
 
 CORS (Cross-Origin Resource Sharing) is a browser security mechanism that controls whether JavaScript running on one origin (domain) can make requests to another origin. Without CORS, browsers block cross-origin requests even if the server would otherwise respond. You likely need to configure CORS if:

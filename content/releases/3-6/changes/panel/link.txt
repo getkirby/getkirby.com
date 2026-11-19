@@ -5,7 +5,7 @@ Features:
 
 #### Interface
 
-- **Cardlets**: While lists are great for dense information and cards are fantastic if you want to highlight visual content, there's often a gray zone in between. The new `cardlets` layout option gives you nice visual previews while your text content is still representend decently. Use them in (link: docs/reference/panel/sections/pages#__cardlets-layout text: pages) and (link: docs/reference/panel/sections/files#__cardlets-layout text: files) sections as well as (link: docs/reference/panel/fields/pages text: pages), (link: docs/reference/panel/fields/files text: files) and (link: docs/reference/panel/fields/users text: users) fields.
+- **Cardlets**: While lists are great for dense information and cards are fantastic if you want to highlight visual content, there's often a gray zone in between. The new `cardlets` layout option gives you nice visual previews while your text content is still representend decently. Use them in (link: docs/reference/panel/fields/pagelist#__cardlets-layout text: pages) and (link: docs/reference/panel/fields/filelist#__cardlets-layout text: files) sections as well as (link: docs/reference/panel/fields/pagepicker text: pages), (link: docs/reference/panel/fields/filepicker text: files) and (link: docs/reference/panel/fields/userpicker text: users) fields.
 - **(link: #icons text: New icons)** by popular demand ((link: docs/reference/panel/icons text: full list))
 - Set your **(link: docs/reference/system/options/panel#custom-panel-favicon text: own favicon(s)) for the Panel** – the last step to a full white-label solution.
 

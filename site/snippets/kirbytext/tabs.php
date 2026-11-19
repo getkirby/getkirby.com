@@ -1,7 +1,8 @@
 <?php
 /**
  * @var string $id
- * @var array $tabs
+ * @var array $tabs Each tab with a `title` and either rendered
+ *            `html` (from Marsdown) or KirbyText `text`
  */
 ?>
 <nav role="tablist">
@@ -25,7 +26,7 @@
 	id="tabs-<?= $id ?>-<?= $key ?>"
 	role="tabpanel"
 >
-	<?= $tab['content'] ?>
+	<?= $tab['html'] ?? kirbytext($tab['text'] ?? null) ?>
 </div>
 <?php endforeach ?>
 

@@ -75,6 +75,8 @@ return [
 
 When Basic auth is activated, you must send an `Authorization` header with every request.
 
+Basic auth checks the email address and password of the user. It can't ask for a (link: docs/guide/authentication/2fa text: second factor), so it doesn't work for users who have set one up or if a second factor is required for every user. Use a dedicated API user without a second factor instead.
+
 <info>
 Basic auth is **only available over HTTPS** to avoid that the credentials are sent over the wire unencrypted with every request. This restriction can be disabled via (link: docs/reference/system/options/api#allow-insecure-requests text: the `allowInsecure` option).
 </info>

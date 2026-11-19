@@ -193,7 +193,7 @@ If all went well, we try to send the email in a `try - catch` block. If that was
 
 ## The email templates
 
-In our [`$kirby->email()` method](/docs/reference/objects/kirby/email) above, we have defined a template we want to use to send the email. In this example, we use a template called `email`, which is stored in `/site/templates/emails`.
+In our [`$kirby->email()` method](/docs/reference/objects/cms/app/email) above, we have defined a template we want to use to send the email. In this example, we use a template called `email`, which is stored in `/site/templates/emails`.
 
 We can use both, a plain text template and an HTML version. You can read more about this in the (link: docs/guide/emails text: email guide).
 

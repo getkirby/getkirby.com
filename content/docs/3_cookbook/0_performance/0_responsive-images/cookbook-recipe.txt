@@ -505,7 +505,7 @@ With Kirby's built-in thumb methods, we cannot create a close portrait of a pers
 
 ## What about KirbyTags and blocks?
 
-So far, we have looked at how to deal with images that we control in our templates/snippets. But we can of course do the same for images used in the `image` and `gallery` blocks or the `image` KirbyTag. For the blocks, we would override the respective (link: docs/reference/panel/fields/blocks#block-snippets text: block snippets), and the `image` KirbyTag we can (link: docs/reference/plugins/extensions/kirbytags#overriding-default-kirbytags text: overwrite in a plugin).
+So far, we have looked at how to deal with images that we control in our templates/snippets. But we can of course do the same for images used in the `image` and `gallery` blocks or the `image` KirbyTag. For the blocks, we would override the respective (link: docs/guide/page-builder/customizing-core-blocks#example-extending-the-heading-block__block-snippets text: block snippets), and the `image` KirbyTag we can (link: docs/reference/plugins/extensions/kirbytags#overriding-default-kirbytags text: overwrite in a plugin).
 
 
 ## A note on appropriate `srcset` sizes

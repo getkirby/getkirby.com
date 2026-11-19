@@ -5,5 +5,3 @@ Info: POST
 Auth: site.update
 ----
 Intro: Publish unsaved changes for page
-----
-Since: 5.0.0

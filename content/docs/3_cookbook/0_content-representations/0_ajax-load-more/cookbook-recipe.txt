@@ -64,18 +64,18 @@ The photography page uses the `photography.php` (glossary: template text: templa
 As a first step, let's move the `<li>` element from the template into a separate (glossary: snippet text: snippet) called `project.php`…
 
 ```php "/site/snippets/project.php"
-  <li class="column" style="--columns: 3">
-    <a href="<?= $project->url() ?>">
-      <figure>
-        <span class="img" style="--w:4;--h:5">
-          <?= ($cover = $project->cover()) ? $cover->crop(400, 500) : null ?>
-        </span>
-        <figcaption class="img-caption">
-          <?= $project->title()->html() ?>
-        </figcaption>
-      </figure>
-    </a>
-  </li>
+<li class="column" style="--columns: 3">
+  <a href="<?= $project->url() ?>">
+    <figure>
+      <span class="img" style="--w:4;--h:5">
+        <?= ($cover = $project->cover()) ? $cover->crop(400, 500) : null ?>
+      </span>
+      <figcaption class="img-caption">
+        <?= $project->title()->html() ?>
+      </figcaption>
+    </figure>
+  </a>
+</li>
 ```
 
 … and replace this element with the newly created snippet in the template:
@@ -206,7 +206,7 @@ Before we can get to our last missing piece, the JavaScript, we have to modify t
 
 ## Javascript
 
-Finally, our last step. Add the following script in `assets/js/templates/photography.js`. By adding this script to this location, we make sure that it is only loaded for the `photography.php` template. And because the footer already has the (link: docs/reference/templates/helpers/js#example__autoloading-template-specific-script-files text: `@auto` parameter) to auto-load all template specific JS files, we don't have to require it specifically.
+Finally, our last step. Add the following script in `assets/js/templates/photography.js`. By adding this script to this location, we make sure that it is only loaded for the `photography.php` template. And because the footer already has the (link: docs/reference/templates/helpers/js#examples__autoloading-template-specific-script-files text: `@auto` parameter) to auto-load all template specific JS files, we don't have to require it specifically.
 
 <info>
 If you put the script file into another location, make sure to load it in the footer.

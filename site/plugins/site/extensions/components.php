@@ -6,26 +6,23 @@ use Kirby\Marsdown\Marsdown;
 return [
 	/**
 	 * Use our custom Marsdown parser
+	 * (a fresh one for each text, as it keeps
+	 * per-document state like the heading ids)
 	 */
 	'markdown' => function (
 		App $kirby,
 		string|null $text = null,
 		array $options = []
 	) {
-		static $parser;
-		static $config;
+		$parser = new Marsdown($options);
 
-		// if the config options have changed or the component is called for the first time,
-		// (re-)initialize the parser object
-		if ($config !== $options) {
-			$parser = new Marsdown($options);
-			$config = $options;
-		}
-
+		// silenced like in Kirby's own markdown component,
+		// so that a notice from Parsedown cannot take down a page
+		// (the tests use Marsdown directly and fail on any warning)
 		if (($options['inline'] ?? false) === true) {
-			return @$parser->line($text);
+			return @$parser->line($text ?? '');
 		}
 
-		return @$parser->text($text);
+		return @$parser->text($text ?? '');
 	},
 ];

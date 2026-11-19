@@ -54,12 +54,14 @@ If you need even more detailed control over which pages are cached or ignored, y
 ```php
 <?php
 
+use Kirby\Content\VersionId;
+
 class ProjectPage extends Page
 {
-  public function isCacheable(): bool
+  public function isCacheable(VersionId|null $versionId = null): bool
   {
     // run the core checks
-    if (parent::isCacheable() === false) {
+    if (parent::isCacheable($versionId) === false) {
       return false;
     }
 
@@ -191,11 +193,14 @@ The getter will now return `null` after the 30 minutes expired.
 Plugins can have their own namespaced caches by defining them in their options:
 
 ```php
-Kirby::plugin('superwoman/superplugin', [
-  'options' => [
-    'cache' => true
+Kirby::plugin(
+  name: 'superwoman/superplugin',
+  extends: [
+    'options' => [
+      'cache' => true
+    ]
   ]
-]);
+);
 ```
 This plugin cache instance will be available at:
 
@@ -206,11 +211,14 @@ $kirby->cache('superwoman.superplugin');
 But you can even have multiple cache instances per plugin:
 
 ```php
-Kirby::plugin('superwoman/superplugin', [
-  'options' => [
-    'cache.api' => true
+Kirby::plugin(
+  name: 'superwoman/superplugin',
+  extends: [
+    'options' => [
+      'cache.api' => true
+    ]
   ]
-]);
+);
 ```
 
 Following the same concept, you can access it like this:

@@ -9,13 +9,16 @@ class CustomTemplate extends Kirby\Cms\Template {
 
 }
 
-Kirby::plugin('my/template', [
-    'components' => [
-        'template' => function (Kirby $kirby, string $name, string $contentType = null) {
-            return new CustomTemplate($name, $contentType);
-        }
+Kirby::plugin(
+    name: 'my/template',
+    extends: [
+        'components' => [
+            'template' => function (Kirby $kirby, string $name, string $contentType = null) {
+                return new CustomTemplate($name, $contentType);
+            }
+        ]
     ]
-]);
+);
 ```
 
 <info>

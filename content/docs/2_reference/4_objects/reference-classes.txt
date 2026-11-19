@@ -21,4 +21,4 @@ Menu:
 - objects/cms/languages
 - objects/cms/pagination
 - objects/http/request
-- objects/session/session-data
+- objects/session/data

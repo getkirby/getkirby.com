@@ -54,26 +54,26 @@ Thanks to virtual pages in Kirby, we can, and that with little more code than wh
 
 ## Gallery parent page
 
-Let's start with creating a blueprint for our new gallery overview page with a files section to which we can upload the images and assign a files blueprint.
+Let's start with creating a blueprint for our new gallery overview page with a `filelist` field to which we can upload the images and assign a files blueprint.
 
 ```yaml "/site/blueprints/pages/gallery.yml"
 title: Gallery
 
-sections:
+fields:
   files:
     label: Gallery
-    type: files
+    type: filelist
     layout: cards
     size: medium
     template: gallery-image
 ```
 
-In our `site.yml`, we have to adapt the `pages` section and add the `gallery` template as a new template option. We also change the  `create` option, so that this part of the blueprint now looks like this:
+In our `site.yml`, we have to adapt the `pagelist` field and add the `gallery` template as a new template option. We also change the  `create` option, so that this part of the blueprint now looks like this:
 
 ```yaml "/site/blueprints/site.yml"
 #...
 pages:
-  type: pages
+  type: pagelist
   create: gallery # we want to create a new page with this template
   templates:
     - about
@@ -355,7 +355,7 @@ There's only one thing left to do…
 
 ## File component
 
-At this point, when we update a file's metadata, we cannot preview the resulting page like a normal page. If we click on the `Open` button in the file view, we are just redirected to the file. We could now add a pages section to our `gallery.yml` together with a blueprint for the subpages and extend the model, but that would only complicate matters without really adding any advantages.
+At this point, when we update a file's metadata, we cannot preview the resulting page like a normal page. If we click on the `Open` button in the file view, we are just redirected to the file. We could now add a `pagelist` field to our `gallery.yml` together with a blueprint for the subpages and extend the model, but that would only complicate matters without really adding any advantages.
 
 Instead, we can use a (link: docs/reference/plugins/components/file-urls text: `file::url`) component that changes the file URL depending on the request header. In this case, we want to modify the URL only if the visitor wants a JSON response.
 
@@ -367,17 +367,20 @@ Inside the `/plugins` folder, create a folder `virtual-gallery` with the followi
 
 ```php "/site/plugins/file-component/index.php"
 <?php
-Kirby::plugin('cookbook/virtual-gallery', [
-  'components' => [
-    'file::url' => function (Kirby $kirby, $file) {
-      if ($kirby->visitor()->prefersJson() && $file->parent()->slug() === 'gallery') {
-          return $kirby->url() . '/' . $file->parent()->slug() . '/' . $file->name();
-      }
+Kirby::plugin(
+  name: 'cookbook/virtual-gallery',
+  extends: [
+    'components' => [
+      'file::url' => function (Kirby $kirby, $file) {
+        if ($kirby->visitor()->prefersJson() && $file->parent()->slug() === 'gallery') {
+            return $kirby->url() . '/' . $file->parent()->slug() . '/' . $file->name();
+        }
 
-      return $file->mediaUrl();
-    }
+        return $file->mediaUrl();
+      }
+    ]
   ]
-]);
+);
 ```
 
 ## Final result
@@ -414,30 +417,33 @@ use Kirby\Cms\App as Kirby;
 require __DIR__ . '/models/Gallery.php';
 require __DIR__ . '/models/GalleryImage.php';
 
-Kirby::plugin('cookbook/virtual-gallery', [
-  'blueprints' => [
-    'pages/gallery'       => __DIR__ . '/blueprints/pages/gallery.yml',
-    'pages/gallery-image' => __DIR__ . '/blueprints/pages/gallery-image.yml',
-    'files/gallery-image' => __DIR__ . '/blueprints/files/gallery-image.yml',
-  ],
-  'pageModels' => [
-    'gallery'       => 'GalleryPage',
-    'gallery-image' => 'GalleryImagePage',
-  ],
-  'templates' => [
-    'gallery'       => __DIR__ . '/templates/gallery.php',
-    'gallery-image' => __DIR__ . '/templates/gallery-image.php',
-  ],
-  'components' => [
-    'file::url' => function (Kirby $kirby, $file) {
-      if ($kirby->visitor()->prefersJson() && $file->parent()->slug() === 'gallery') {
-          return $kirby->url() . '/' . $file->parent()->slug() . '/' . $file->name();
-      }
+Kirby::plugin(
+  name: 'cookbook/virtual-gallery',
+  extends: [
+    'blueprints' => [
+      'pages/gallery'       => __DIR__ . '/blueprints/pages/gallery.yml',
+      'pages/gallery-image' => __DIR__ . '/blueprints/pages/gallery-image.yml',
+      'files/gallery-image' => __DIR__ . '/blueprints/files/gallery-image.yml',
+    ],
+    'pageModels' => [
+      'gallery'       => 'GalleryPage',
+      'gallery-image' => 'GalleryImagePage',
+    ],
+    'templates' => [
+      'gallery'       => __DIR__ . '/templates/gallery.php',
+      'gallery-image' => __DIR__ . '/templates/gallery-image.php',
+    ],
+    'components' => [
+      'file::url' => function (Kirby $kirby, $file) {
+        if ($kirby->visitor()->prefersJson() && $file->parent()->slug() === 'gallery') {
+            return $kirby->url() . '/' . $file->parent()->slug() . '/' . $file->name();
+        }
 
-      return $file->mediaUrl();
-    }
+        return $file->mediaUrl();
+      }
+    ]
   ]
-]);
+);
 ```
 
 ### `gallery.yml` page blueprint
@@ -445,10 +451,10 @@ Kirby::plugin('cookbook/virtual-gallery', [
 ```yaml "/site/plugins/virtual-gallery/blueprints/pages/gallery.yml"
 title: Gallery
 
-sections:
+fields:
   files:
     label: Gallery images
-    type: files
+    type: filelist
     layout: cards
     size: medium
     template: gallery-image

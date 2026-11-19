@@ -18,3 +18,16 @@ try {
 
 }
 ```
+
+### Objects as values
+
+Each field of the site's blueprint converts Kirby objects and collections into the format it stores:
+
+```php
+$site->update([
+  'logo'     => $site->image('logo.svg'),
+  'featured' => $site->children()->listed()->limit(3),
+  'editors'  => $kirby->users()->role('editor'),
+  'launch'   => new DateTime(),
+]);
+```

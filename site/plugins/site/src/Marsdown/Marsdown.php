@@ -2,7 +2,6 @@
 
 namespace Kirby\Marsdown;
 
-use DomDocument;
 use Kirby\Reference\Types\Type;
 use Kirby\Reference\Types\Types;
 use Kirby\Toolkit\A;
@@ -11,13 +10,24 @@ use ParsedownExtra;
 
 class Marsdown extends ParsedownExtra
 {
-	protected $lastH2;
+	/**
+	 * Heading ids used in the document so far
+	 */
+	protected array $ids = [];
 
 	/**
-	 * Extend Parsedown's constructor
+	 * Id of the last h2 heading, used to prefix h3 ids
 	 */
-	public function __construct(protected array $options = [])
-	{
+	protected string|null $lastH2 = null;
+
+	/**
+	 * @param $root Root parser of the document, if this
+	 *             parser renders nested content (boxes, columns, tabs)
+	 */
+	public function __construct(
+		protected array $options = [],
+		protected Marsdown|null $root = null
+	) {
 		parent::__construct();
 
 		// register the new box type
@@ -28,34 +38,32 @@ class Marsdown extends ParsedownExtra
 	}
 
 	/**
-	 * Parse Kirby's text boxes
+	 * Parse Kirby's text boxes, e.g. `<info>…</info>`
+	 * or `<since v="5.0.0">…</since>`
 	 */
 	protected function blockBox(array $Line, array|null $Block = null)
 	{
-		if (preg_match('!<(success|info|warning|alert|since)(.*?)>!', $Line['text'], $matches)) {
-
-			$type  = strtolower($matches[1]);
-			$Block = [
-				'box' => [
-					'type'  => $type,
-					'html'  => null,
-					'attrs' => $this->parseAttributes($matches[2])
-				],
-			];
-
-			// if the block is just across a single line
-			if (preg_match('!</' . $type . '>$!', $Line['text'])) {
-				$html = $Line['body'];
-				$html = preg_replace('!^<' . $type . '.*?>(.*)</' . $type . '>$!', '$1', $html);
-
-				$Block['complete']    = true;
-				$Block['box']['html'] = $html;
-			}
-
-			return $Block;
+		if (preg_match('!^<(success|info|warning|alert|since)(\s[^>]*)?>(.*)$!', $Line['text'], $matches) !== 1) {
+			return null;
 		}
 
-		return null;
+		$type  = $matches[1];
+		$text  = rtrim($matches[3]);
+		$Block = [
+			'box' => [
+				'type'  => $type,
+				'html'  => $text,
+				'attrs' => $this->parseAttributes($matches[2])
+			],
+		];
+
+		// single-line box
+		if (str_ends_with($text, '</' . $type . '>') === true) {
+			$Block['complete']    = true;
+			$Block['box']['html'] = substr($text, 0, -strlen('</' . $type . '>'));
+		}
+
+		return $Block;
 	}
 
 	/**
@@ -69,10 +77,11 @@ class Marsdown extends ParsedownExtra
 
 		if ($type === 'since') {
 			return [
+				...$Block,
 				'element' => [
 					'name' => 'details',
 					'rawHtml' => snippet('kirbytext/since', [
-						'text'    => $text,
+						'html'    => $this->nested($text),
 						'label'   => $attrs['label'] ?? null,
 						'version' => $attrs['v'] ?? null
 					], true),
@@ -85,11 +94,12 @@ class Marsdown extends ParsedownExtra
 		}
 
 		return [
+			...$Block,
 			'element' => [
 				'name' => 'div',
 				'rawHtml' => snippet('kirbytext/box', [
-					'type'  => $type,
-					'text'  => $text,
+					'type' => $type,
+					'html' => $this->nested($text),
 				], true),
 				'attributes' => [
 					'class' => 'box box--' . $type
@@ -107,7 +117,7 @@ class Marsdown extends ParsedownExtra
 			return;
 		}
 
-		if ($Line['text'] === '</' . $Block['box']['type'] . '>') {
+		if (rtrim($Line['text']) === '</' . $Block['box']['type'] . '>') {
 			$Block['complete'] = true;
 			return $Block;
 		}
@@ -123,152 +133,105 @@ class Marsdown extends ParsedownExtra
 	}
 
 	/**
-	 * An extended version of Parsedown’s codeblock handler,
-	 * offering the possibility of adding a caption (e.g. filename)
-	 * to codeblocks.
+	 * Fenced code blocks with an optional quoted
+	 * caption, e.g. ```php "site/config/config.php"
 	 */
 	protected function blockFencedCode($Line)
 	{
-		$marker = $Line['text'][0];
+		$caption = null;
 
-		// Match opener
-		$openerLength = strspn($Line['text'], $marker);
-
-		if ($openerLength < 3) {
-			return;
+		// separate the caption, so that Parsedown only gets
+		// the language as info string (tolerating a missing
+		// closing quote, so that typos stay visible)
+		if (preg_match('!^([`~]{3,}\s*\S*)\s+"([^"]*)"?\s*$!', $Line['text'], $matches) === 1) {
+			$Line['text'] = $matches[1];
+			$caption      = $matches[2] !== '' ? $matches[2] : null;
 		}
 
-		$infostring = trim(str_replace("\t", ' ', substr($Line['text'], $openerLength)), ' ');
+		$Block = parent::blockFencedCode($Line);
 
-		if (
-			strpos($infostring, ' ') === false &&
-			strpos($infostring, '`') !== false
-		) {
-			// abort parsing of block, if code block does not
-			// have a caption, but language string contains
-			// a backtick to match the behavior of vanilla
-			// Parsedown.
-			return;
-		}
-
-		$infostring = explode(' ', $infostring, 2);
-		$language   = $infostring[0];
-
-		if (count($infostring) === 2) {
-			// Block with caption
-			$caption  = $infostring[1];
-			$openChar = $caption[0];
-
-			if ($openChar === '"') {
-				$captionLength = strlen($caption);
-				$lastChar      = $caption[$captionLength - 1];
-
-				if ($lastChar === $openChar) {
-					// Remove quotes surrounding caption
-					$caption = substr($caption, 1, $captionLength - 2);
-				}
-			} else {
-				// If caption was not wrapped in quotes,
-				// just drop it.
-				$caption = '';
-			}
-		} else {
-			// Block without caption
-			$caption = '';
-		}
-
-		// Compose the code block
-		$Element = [
-			'name' => 'code',
-			'text' => '',
-		];
-
-		if ($language !== '') {
-			$Element['attributes'] = [
-				'class' => "language-{$language}"
-			];
-		}
-
-		return [
-			'char'         => $marker,
-			'caption'      => $caption,
-			'openerLength' => $openerLength,
-			'language'     => $language,
-			'element' => [
-				'name'    => 'pre',
-				'element' => $Element
-			],
-		];
-	}
-
-	/**
-	 * Extended version of the final block handler, which
-	 * adds support for filysystem code blocks, which
-	 */
-	protected function blockFencedCodeComplete($Block)
-	{
-		switch ($Block['language']) {
-			case 'filesystem':
-				$Block['element'] = [
-					'name'       => !empty($Block['caption']) ? 'div' : 'figure',
-					'attributes' => ['class' => 'filesystem'],
-					'rawHtml'    => FileSystem::parse($Block['element']['element']['text']),
-				];
-				break;
-			case 'kirbycontent':
-				$Block['element']['element']['text'] = str_replace(["\r\n", "\r"], "\n", $Block['element']['element']['text']);
-				break;
-			default:
-				$text = $Block['element']['element']['text'];
-				$text = str_replace(['&lpar;', '&rpar;', '(\\'], ['(', ')', '('], $text);
-				$Block['element']['element']['text'] = trim($text);
-		}
-
-		if ($Block['language'] !== 'filesystem') {
-
-			if (empty($Block['caption']) === true) {
-				$elements = [$Block['element']];
-			} else {
-				$elements = [
-					[
-						'name' => 'figcaption',
-						'text' => htmlspecialchars($Block['caption']),
-					],
-					$Block['element']
-				];
-			}
-
-			$Block['element'] = [
-				'name' => 'figure',
-				'attributes' => [
-					'class' => 'code',
-				],
-				'element' => [
-					'elements' => $elements
-				],
-			];
+		if ($Block !== null) {
+			$Block['caption']  = $caption;
+			$Block['language'] = strtok(substr($Line['text'], $Block['openerLength']), " \t") ?: null;
 		}
 
 		return $Block;
 	}
 
+	/**
+	 * Wraps code blocks in a figure with optional caption
+	 * and renders `filesystem` blocks as file tree
+	 */
+	protected function blockFencedCodeComplete($Block)
+	{
+		$code = rtrim(ltrim($Block['element']['element']['text'], "\n"));
+
+		if ($Block['language'] === 'filesystem') {
+			$element = [
+				'name'       => 'figure',
+				'attributes' => ['class' => 'filesystem'],
+				'rawHtml'    => FileSystem::parse($code),
+			];
+
+			// without caption, the tree is the figure itself
+			if ($Block['caption'] === null) {
+				$Block['element'] = $element;
+				return $Block;
+			}
+
+			$element['name'] = 'div';
+		} else {
+			// unescape KirbyTags in code examples, e.g. `(\link: …)`
+			$element = $Block['element'];
+			$element['element']['text'] = str_replace(['&lpar;', '&rpar;', '(\\'], ['(', ')', '('], $code);
+		}
+
+		$elements = [$element];
+
+		if ($Block['caption'] !== null) {
+			array_unshift($elements, ['name' => 'figcaption', 'text' => $Block['caption']]);
+		}
+
+		$Block['element'] = [
+			'name'       => 'figure',
+			'attributes' => ['class' => 'code'],
+			'elements'   => $elements
+		];
+
+		return $Block;
+	}
+
+	/**
+	 * Parse groups: `(columns…)` with `++++` separators
+	 * or `(tabs…)` with `=== Title` separators
+	 */
 	protected function blockGroups(array $Line, array|null $Block = null)
 	{
-		if (preg_match('!^\((columns|tabs)…\)$!', $Line['text'], $matches)) {
-			return [
-				'group' => [
-					'type' => $matches[1],
-					'html' => null
-				]
-			];
+		if (preg_match('!^\((columns|tabs)…\)$!', rtrim($Line['text']), $matches) !== 1) {
+			return null;
 		}
+
+		return [
+			'group' => [
+				'type'  => $matches[1],
+				'depth' => 0,
+				'parts' => [['title' => null, 'text' => '']]
+			]
+		];
 	}
 
 	protected function blockGroupsColumnsComplete(array $Block): array
 	{
-		$columns = Str::split($Block['group']['html'], '++++');
+		$columns = [];
+
+		foreach ($Block['group']['parts'] as $part) {
+			if (trim($part['text']) !== '') {
+				$columns[] = $this->nested($part['text']);
+			}
+		}
 
 		return [
+			...$Block,
 			'element' => [
 				'name' => 'div',
 				'attributes' => [
@@ -276,7 +239,7 @@ class Marsdown extends ParsedownExtra
 					'style' => '--columns: 2; --gap: 3rem'
 				],
 				'rawHtml' => snippet('kirbytext/columns', [
-					'columns' => $columns
+					'html' => $columns
 				], true),
 			]
 		];
@@ -296,39 +259,59 @@ class Marsdown extends ParsedownExtra
 			return;
 		}
 
-		if (preg_match('!^\(…(columns|tabs)\)$!', $Line['text'])) {
-			return [
-				...$Block,
-				'complete' => true
-			];
-		}
+		$text = rtrim($Line['text']);
+		$last = array_key_last($Block['group']['parts']);
 
 		if (isset($Block['interrupted']) === true) {
-			$Block['group']['html'] .= "\n";
+			$Block['group']['parts'][$last]['text'] .= str_repeat("\n", $Block['interrupted']);
 			unset($Block['interrupted']);
 		}
 
-		$Block['group']['html'] .= "\n" . $Line['body'];
+		if (preg_match('!^\(…(columns|tabs)\)$!', $text) === 1) {
+			// end of this group, unless it closes a nested group
+			if ($Block['group']['depth'] === 0) {
+				$Block['complete'] = true;
+				return $Block;
+			}
+
+			$Block['group']['depth']--;
+		} elseif (preg_match('!^\((columns|tabs)…\)$!', $text) === 1) {
+			$Block['group']['depth']++;
+		} elseif ($Block['group']['depth'] === 0) {
+			// separators only count on their own line
+			// and not inside of nested groups
+			$title = match ($Block['group']['type']) {
+				'columns' => $text === '++++' ? '' : null,
+				'tabs'    => str_starts_with($text, '=== ') ? trim(substr($text, 4)) : null
+			};
+
+			if ($title !== null) {
+				$Block['group']['parts'][] = ['title' => $title, 'text' => ''];
+				return $Block;
+			}
+		}
+
+		$Block['group']['parts'][$last]['text'] .= "\n" . $Line['body'];
 
 		return $Block;
 	}
 
 	protected function blockGroupsTabsComplete(array $Block): array
 	{
-		preg_match_all('!=== (.*)!', $Block['group']['html'], $titles);
-		$contents = preg_split('!=== .*!', $Block['group']['html']);
-		$tabs     = array_map(
-			fn ($content, $title) => [
-				'title'   => $title,
-				'content' => kirbytext($content)
-			],
-			array_slice($contents, 1),
-			$titles[1]
+		// content before the first tab title is ignored
+		$tabs = A::map(
+			array_slice($Block['group']['parts'], 1),
+			fn ($part) => [
+				'title' => $part['title'],
+				'html'  => $this->nested($part['text'])
+			]
 		);
 
-		$id = Str::random(3);
+		// stable id across renders
+		$id = hash('crc32b', json_encode($tabs));
 
 		return [
+			...$Block,
 			'element' => [
 				'name' => 'div',
 				'attributes' => [
@@ -346,42 +329,42 @@ class Marsdown extends ParsedownExtra
 	protected function blockHeader($Line)
 	{
 		$Block = parent::blockHeader($Line);
+		$level = $Block['element']['name'] ?? null;
 
-		if (!$Block) {
-			return;
+		// only h2 and h3 headings get ids and anchor links
+		if ($level !== 'h2' && $level !== 'h3') {
+			return $Block;
 		}
 
-		$slug  = Str::slug(Str::unhtml($this->text($Block['element']['handler']['argument'])));
-		$level = $Block['element']['name'];
+		// custom ids (`## Heading {#id}`) are used as they are
+		$attrs = $Block['element']['attributes'] ?? [];
+		$id    = $attrs['id'] ?? $this->headingId($level, $Block['element']['handler']['argument']);
+		$state = $this->root ?? $this;
 
-		switch ($level) {
-			case 'h2':
-				$this->lastH2 = $slug;
-				break;
-			case 'h3':
-				$slug = $this->lastH2 . '__' . $slug;
-				break;
-			default:
-				return $Block;
-				break;
+		$state->ids[$id] = true;
+
+		if ($level === 'h2') {
+			$state->lastH2 = $id;
 		}
 
-		if (isset($this->options['idPrefix'])) {
-			$slug = $this->options['idPrefix'] . '__' . $slug;
+		if (isset($attrs['id']) === false && isset($this->options['idPrefix']) === true) {
+			$id = $this->options['idPrefix'] . '__' . $id;
 		}
 
 		return [
+			...$Block,
 			'element' => [
 				'name' => $level,
 				'attributes' => [
-					'id' => $slug
+					...$attrs,
+					'id' => $id
 				],
 				'element' => [
 					'name' => 'a',
 					'handler' => $Block['element']['handler'],
 					'nonNestables' => ['Url', 'Link'],
 					'attributes' => [
-						'href'     => '#' . $slug,
+						'href'     => '#' . $id,
 						'tabindex' => '-1'
 					]
 				]
@@ -394,17 +377,42 @@ class Marsdown extends ParsedownExtra
 	 */
 	protected function blockTableComplete($Block)
 	{
-		$Block = [
-			'element' => [
-				'name' => 'div',
-				'attributes' => [
-					'class' => 'table',
-				],
-				'elements' => [$Block['element']],
-			],
+		$Block['element'] = [
+			'name'       => 'div',
+			'attributes' => ['class' => 'table'],
+			'elements'   => [$Block['element']],
 		];
 
 		return $Block;
+	}
+
+	/**
+	 * Creates an id for a h2 or h3 heading from its text,
+	 * unique within the document; h3 ids are prefixed
+	 * with the id of the last h2
+	 */
+	protected function headingId(string $level, string $text): string
+	{
+		$state = $this->root ?? $this;
+
+		// slug from the plain text of the heading, without
+		// a leading number (e.g. `### 1. First step`) to keep
+		// existing ids; using `line()` as `text()` would
+		// reset the link definitions of the document
+		$text = preg_replace('/^\d+[.)] +/', '', $text);
+		$slug = Str::slug(Str::unhtml($this->line($text)));
+
+		if ($level === 'h3') {
+			$slug = $state->lastH2 . '__' . $slug;
+		}
+
+		$id = $slug;
+
+		for ($n = 2; isset($state->ids[$id]) === true; $n++) {
+			$id = $slug . '-' . $n;
+		}
+
+		return $id;
 	}
 
 	/**
@@ -434,8 +442,8 @@ class Marsdown extends ParsedownExtra
 		// Only split into multiple types for unions (e.g. `string|int`),
 		// keep any other code with pipes (e.g. `foo(Bar|Baz $a): Bar|Foo`)
 		// together as a single code tag
-		$type = match ($this->isTypeUnion($text)) {
-			true  => Types::factory($text),
+		$type = match (Types::isUnion($text)) {
+			true  => Types::fromString($text),
 			false => Type::factory($text)
 		};
 
@@ -454,33 +462,43 @@ class Marsdown extends ParsedownExtra
 	}
 
 	/**
-	 * Checks if the inline code is a union of types
+	 * Parses the content of boxes, columns and tabs with
+	 * a separate parser, so that it does not reset the
+	 * definitions of the outer document
 	 */
-	protected function isTypeUnion(string $text): bool
+	protected function nested(string $text): string
 	{
-		$types = Types::split($text);
-
-		// no empty types or whitespace around the pipes
-		if (implode('|', $types) !== $text) {
-			return false;
-		}
-
-		// each type must be a single token, only allowing
-		// whitespace nested in brackets, e.g. `array<string, mixed>`
-		return A::every(
-			$types,
-			fn ($type) => count(Types::split($type, ' ')) === 1
-		);
+		return (new static($this->options, $this->root ?? $this))->text($text);
 	}
 
+	/**
+	 * Parses quoted HTML attributes, e.g. `v="5.0.0" label='%s'`
+	 */
 	protected function parseAttributes(string $input): array
 	{
-		$dom = new DomDocument();
-		$dom->loadHtml('<html ' . $input . '/>');
+		preg_match_all('!([\w-]+)=(["\'])(.*?)\2!', $input, $matches, PREG_SET_ORDER);
+
 		$attributes = [];
-		foreach ($dom->documentElement->attributes as $name => $attr) {
-			$attributes[$name] = $attr->value;
+
+		foreach ($matches as [, $name, , $value]) {
+			$attributes[strtolower($name)] = html_entity_decode($value);
 		}
+
 		return $attributes;
+	}
+
+	/**
+	 * Parses a document
+	 */
+	public function text($text): string
+	{
+		// every document starts with a clean state;
+		// nested content shares the state of its root
+		if ($this->root === null) {
+			$this->ids    = [];
+			$this->lastH2 = null;
+		}
+
+		return parent::text($text);
 	}
 }

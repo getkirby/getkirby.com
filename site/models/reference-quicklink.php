@@ -33,8 +33,10 @@ class ReferenceQuickLinkPage extends DefaultPage
 						'template' => 'separator',
 						'num'      => 0
 					],
+					// the full path keeps the slug unique next to
+					// sibling pages (e.g. the namespaces of the classes)
 					default => [
-						'slug'     => basename($menu),
+						'slug'     => Str::slug($menu),
 						'model'    => 'reference-quicklink',
 						'template' => 'reference-quicklink',
 						'num'      => 0,

@@ -179,6 +179,6 @@ Exports could be automated whenever the default content has changed or a new pag
 
 The import could also be triggered via a webhook, if supported by your translation service. You can create custom webhooks for your site with our (link: docs/guide/routing text: router). The JSON does not necessarily have to come from a file. It could also be sent in the payload of such a hook or be fetched from the translation service API.
 
-The command line is not very user-friendly for everyone. A (link: docs/reference/plugins/extensions/sections text: small section plugin) could be included in the panel to offer upload- and download buttons for translations.
+The command line is not very user-friendly for everyone. A (link: docs/reference/plugins/extensions/fields text: small field plugin) could be included in the panel to offer upload- and download buttons for translations.
 
 There are a lot of options to customize this and build the perfect solution for your project.

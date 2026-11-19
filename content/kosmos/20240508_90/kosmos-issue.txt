@@ -39,7 +39,7 @@ Start into the holidays with our special deal: From today until July 2nd, 2024, 
 ## Kirby 5 alpha
 
 
-(image: cover.png link: https://getkirby.com/buzz/v5-alpha)
+(image: cover.png link: https://getkirby.com/releases/5)
 
 Today we are sharing the very first alpha version of our new major version, Kirby 5 with you. As an alpha, this version is **far from complete** yet, so **things will still change**, and we will also **add new features** until the release at the end of this year.
 
@@ -60,7 +60,7 @@ The most notable change is a dark mode for the Panel, a feature requested by man
 *   \`site\` controller data will now always be merged as default data with data from page template specific controllers
 *   …
 
-Check out our [blog article](https://getkirby.com/buzz/v5-alpha) which summarizes all current features, enhancement, and breaking changes.
+Check out our [blog article](https://getkirby.com/releases/5) which summarizes all current features, enhancement, and breaking changes.
 
 And [download](https://github.com/getkirby/kirby/archive/refs/tags/5.0.0-alpha.1.zip) the Kirby 5 alpha for testing and playing around.
 

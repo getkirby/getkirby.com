@@ -5,6 +5,15 @@ use Kirby\Template\Template;
 
 class ReferenceRootPage extends ReferenceArticlePage
 {
+	public function setup(): Field
+	{
+		$title = parent::title();
+
+		return $this->parent()->custom()->value(function ($value) use ($title) {
+			return str_replace('{{ root }}', $title, $value);
+		});
+	}
+
 	public function example(): Field
 	{
 		return parent::example()->value(
@@ -19,15 +28,6 @@ class ReferenceRootPage extends ReferenceArticlePage
 				'lead'  => 'Reference / Roots'
 			]
 		]);
-	}
-
-	public function setup(): Field
-	{
-		$title = parent::title();
-
-		return $this->parent()->custom()->value(function ($value) use ($title) {
-			return str_replace('{{ root }}', $title, $value);
-		});
 	}
 
 	public function template(): Template

@@ -75,7 +75,6 @@ $password = 'topsecret';
 $data     = [
 	'slug'     => Str::slug(Str::random(10, 'alpha')),
 	'template' => 'note',
-	'model'    => 'note',
 	'isDraft'  => false,
 	'content'  => [
 		'title' => Str::random(40, 'alpha'),

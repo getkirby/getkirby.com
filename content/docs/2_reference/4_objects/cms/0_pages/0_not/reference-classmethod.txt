@@ -2,7 +2,7 @@ Text:
 
 ## Example
 
-Note that you have to pass the full [`id`](/docs/reference/objects/page/id) as parameter:
+Note that you have to pass the full [`id`](/docs/reference/objects/cms/page/id) as parameter:
 
 ```php
 <h2>All pages except project-b</h2>

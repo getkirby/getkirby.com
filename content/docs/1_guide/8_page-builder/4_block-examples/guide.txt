@@ -37,28 +37,31 @@ The `index.php` file is the place where we register the blueprints and snippets 
 
 ```php "/site/plugins/block-factory/index.php"
 <?php
-Kirby::plugin('cookbook/block-factory', [
-  'blueprints' => [
-    'blocks/awesomeblock' => __DIR__ . '/blueprints/blocks/awesomeblock.yml',
-    // more blueprints
-  ],
-  'snippets' => [
-    'blocks/awesomeblock' => __DIR__ . '/snippets/blocks/awesomeblock.php',
-    // more snippets
-  ],
-  'translations' => [
-    'en' => [
-      'field.blocks.awesomeblock.name' => 'My awesome block',
-      // more block names
+Kirby::plugin(
+  name: 'cookbook/block-factory',
+  extends: [
+    'blueprints' => [
+      'blocks/awesomeblock' => __DIR__ . '/blueprints/blocks/awesomeblock.yml',
+      // more blueprints
     ],
-    'de' => [
-       'field.blocks.awesomeblock.name' => 'Mein Superblock',
-      // more block names
+    'snippets' => [
+      'blocks/awesomeblock' => __DIR__ . '/snippets/blocks/awesomeblock.php',
+      // more snippets
+    ],
+    'translations' => [
+      'en' => [
+        'field.blocks.awesomeblock.name' => 'My awesome block',
+        // more block names
+      ],
+      'de' => [
+         'field.blocks.awesomeblock.name' => 'Mein Superblock',
+        // more block names
 
-    ],
-    // more languages
+      ],
+      // more languages
+    ]
   ]
-]);
+);
 ```
 
 ### Register templates
@@ -66,7 +69,7 @@ Kirby::plugin('cookbook/block-factory', [
 The preview templates for the blocks go into the `index.js` file:
 
 ```js "/site/plugins/block-factory/index.js"
-panel.plugin("cookbook/block-factory", {
+window.panel.plugin("cookbook/block-factory", {
   blocks: {
     awesomeblock: `
       <div @click="open">
@@ -143,19 +146,21 @@ fields:
 ### Simple preview
 
 ```js "/site/plugins/block-factory/index.js"
-panel.plugin("cookbook/block-factory", {
+window.panel.plugin("cookbook/block-factory", {
   blocks: {
     box: {
       template: `
         <div :class="'k-block-type-box box-' + content.boxtype" @dblclick="open">
-            <div v-if="content.text" v-html="content.text"></div>
-            <div v-else>No content yet</div>
-            <k-icon
-              v-if="content.boxtype !== 'neutral'"
-              class="k-block-type-box-icon"
-              :type="content.boxtype"
-            />
-          </div>
+          <div
+            v-if="content.text"
+            v-safe-html="$h($helper.string.sanitizeHTML(content.text, { nodes: true }))"
+          ></div>
+          <div v-else>No content yet</div>
+          <k-icon
+            v-if="content.boxtype !== 'neutral'"
+            class="k-block-type-box-icon"
+            :type="content.boxtype"
+          />
         </div>
       `
     }
@@ -163,12 +168,14 @@ panel.plugin("cookbook/block-factory", {
 });
 ```
 
+A writer field stores HTML. To show it in the preview, `$helper.string.sanitizeHTML()` first removes everything the writer field wouldn't create. `nodes: true` keeps paragraphs, lists and headings; without it, only inline formatting like bold or links is kept. `$h()` then marks the result as trusted HTML, which the `v-safe-html` directive renders. A plain string would be escaped and show the tags as text.
+
 ### Editable preview
 
-For the editable plugin, we replace `<div v-html="content.text"></div>`, with a `k-writer-input` component:
+For the editable plugin, we replace the `<div>` with the text by a `k-writer-input` component:
 
 ```js
-panel.plugin("cookbook/block-factory", {
+window.panel.plugin("cookbook/block-factory", {
    blocks: {
     box: {
       computed: {
@@ -231,14 +238,17 @@ fields:
 ### Simple preview
 
 ```js "/site/plugins/block-factory/index.js"
-panel.plugin("cookbook/block-factory", {
+window.panel.plugin("cookbook/block-factory", {
   blocks: {
     accordion: `
       <div>
         <div v-if="content.summary">
           <details>
-            <summary>{{ content.summary }}</summary>
-            <div v-if="content.details" v-html="content.details"></div>
+            <summary v-safe-html="$h($helper.string.sanitizeHTML(content.summary))"></summary>
+            <div
+              v-if="content.details"
+              v-safe-html="$h($helper.string.sanitizeHTML(content.details, { nodes: true }))"
+            ></div>
           </details>
         </div>
         <div v-else>
@@ -255,7 +265,7 @@ panel.plugin("cookbook/block-factory", {
 The editable version of the accordion preview is similar to the box block preview, with the difference that we now use to `k-writer-input` components for the `summary` and `details` fields.
 
 ```js "/site/plugins/block-factory/index.js"
-panel.plugin("cookbook/block-factory", {
+window.panel.plugin("cookbook/block-factory", {
   blocks: {
     accordion: {
       computed: {
@@ -346,15 +356,18 @@ fields:
 In this simple preview, we loop through the structure field items using the `v-for` directive and simply output each item.
 
 ```js "/site/plugins/block-factory/index.js"
-panel.plugin("cookbook/block-factory", {
+window.panel.plugin("cookbook/block-factory", {
   blocks: {
     faq: `
       <div @dblclick="open">
-        <h2 class="k-block-type-faq-heading" v-html="content.headline"></h2>
+        <h2
+          class="k-block-type-faq-heading"
+          v-safe-html="$h($helper.string.sanitizeHTML(content.heading))"
+        ></h2>
         <div v-if="content.faq.length">
           <details v-for="(item, index) in content.faq" class="k-block-type-faq-item" :key="index">
-            <summary>{{ index + item.question }}</summary>
-            <div v-html="item.answer"></div>
+            <summary v-safe-html="$h($helper.string.sanitizeHTML(item.question))"></summary>
+            <div v-safe-html="$h($helper.string.sanitizeHTML(item.answer, { nodes: true }))"></div>
           </details>
         </div>
         <div v-else>No questions yet</div>
@@ -369,7 +382,7 @@ panel.plugin("cookbook/block-factory", {
 For the editable preview, we need a custom method to update the items in the structure field, which we do with the `updateItem()` method.
 
 ```js "/site/plugins/block-factory/index.js"
-panel.plugin("cookbook/block-factory", {
+window.panel.plugin("cookbook/block-factory", {
   blocks: {
     faq: {
       computed: {
@@ -477,23 +490,25 @@ fields:
 
 ### Simple preview
 
-The simple preview for our alternative version is not very different from the example with the structure field, but differs in the way we call the values of the individual items, i.e. `item.content.details` vs. `item.details` in the previous example.
+The simple preview for our alternative version is not very different from the example with the structure field, but differs in the way we call the values of the individual items, i.e. `item.content.details` vs. `item.answer` in the previous example.
 
 ```js "/site/plugins/block-factory/index.js"
-panel.plugin("cookbook/block-factory", {
+window.panel.plugin("cookbook/block-factory", {
   blocks: {
     faq2: `
       <div @dblclick="open">
-        <h2 class="k-block-type-faq-heading" v-html="content.heading"></h2>
+        <h2
+          class="k-block-type-faq-heading"
+          v-safe-html="$h($helper.string.sanitizeHTML(content.heading))"
+        ></h2>
         <div v-if="content.faq.length">
           <details
             class="k-block-type-faq-item"
             v-for="(item, index) in content.faq"
             :key="index"
           >
-            <summary v-html="item.content.summary"></summary>
-              <div v-html="item.content.details"></div>
-            </div>
+            <summary v-safe-html="$h($helper.string.sanitizeHTML(item.content.summary))"></summary>
+            <div v-safe-html="$h($helper.string.sanitizeHTML(item.content.details, { nodes: true }))"></div>
           </details>
         </div>
         <div v-else>No items yet</div>
@@ -508,7 +523,7 @@ panel.plugin("cookbook/block-factory", {
 Let's see how we can build an editable version of this variant. If you look closely, the only difference here is the syntax how we fetch and update the block items.
 
 ```js "/site/plugins/block-factory/index.js"
-panel.plugin("cookbook/block-factory", {
+window.panel.plugin("cookbook/block-factory", {
   blocks: {
     faq2: {
       computed: {
@@ -593,7 +608,7 @@ fields:
       page: Create card from page
       manual: Create manual card
   page:
-    type: pages
+    type: pagepicker
     max: 1
     query: kirby.page('photography').children.listed
     when:
@@ -604,7 +619,7 @@ fields:
       cardType: manual
   image:
     label: Image
-    type: files
+    type: filepicker
     uploads: image
     when:
       cardType: manual
@@ -658,82 +673,79 @@ $text     = $cardType === 'manual' ? $block->text() : ($page ? $page->text() : '
 
 This time, we will only use a single preview option, because card content can come from two sources, so making it inline editable doesn't make that much sense.
 
-However, the logic here is a bit more complicated, because we have to retrieve some content via the API.
+However, the logic here is a bit more complicated: the `page` and `image` fields only store UUIDs, so the preview has to load everything else.
 
-The most notable thing here are the `watch` methods which let us react on changes in the component. In this case, we watch for any changes to the `cardType` and `pageId` values, and depending on these values change the `text` property. Also, if the card type is of type `page`, we fetch the content of the text field via Kirby's API.
+- For the image of a manual card, `k-image-frame` does that for us. We pass the UUID to its `file` prop and it loads the image itself.
+- For a page card, a watcher reacts to the selected page. `this.$helper.items()` loads the page the way the Panel shows it in a list: with its title, already escaped as HTML, and its image, which we pass to the `src` and `srcset` props of `k-image-frame`. The text of the page comes from Kirby's API via `this.$panel.api.pages.get()`.
+
+Heading and text are writer fields, so we render them with `v-safe-html` like in the (link: #custom-flavored-boxes__simple-preview text: box preview).
 
 ```js "/site/plugins/block-factory/index.js"
-panel.plugin("cookbook/block-factory", {
+window.panel.plugin("cookbook/block-factory", {
   blocks: {
-   card: {
+    card: {
       data() {
         return {
-          text: "No text value"
+          linkedPage: null
         };
       },
       computed: {
-        cardType() {
-          return this.content.cardtype;
-        },
         heading() {
-          return (this.cardType === 'manual') ? this.content.heading : this.page.text;
+          return this.isPage ? this.linkedPage?.heading : this.content.heading;
         },
-        image() {
-          if (this.cardType === 'manual') {
-            return this.content.image[0] || {};
-          } else {
-            return this.page.image || {}
-          }
+        isPage() {
+          return this.content.cardtype === "page";
         },
-        pageId() {
-          return this.page ? this.page.id : '';
+        pageUuid() {
+          return this.isPage ? this.content.page[0] : null;
         },
-        page() {
-            return this.content.page[0] || {};
-        },
+        text() {
+          return this.isPage ? this.linkedPage?.text : this.content.text;
+        }
       },
       watch: {
-        "cardType": {
-          handler (value) {
-           if (value === 'page' && this.pageId) {
-            this.$api.get('pages/' + this.pageId.replaceAll('/', '+')).then(page => {
-              this.text = page.content.text.replace(/(<([^>]+)>)/gi, "") || this.text;
-            });
-           } else if (value === 'manual') {
-             this.text = this.content.text || this.text;
-           }
-
-          },
-          immediate: true
-        },
-        "page": {
-          handler (value) {
-           if (this.cardType === 'page' && this.pageId) {
-            this.$api.get('pages/' + this.pageId.replaceAll('/', '+')).then(page => {
-              this.text = page.content.text.replace(/(<([^>]+)>)/gi, "") || this.text;
-            });
-           } else if (value === 'manual') {
-             this.text = this.content.text || this.text;
-           }
+        pageUuid: {
+          async handler(uuid) {
+            this.linkedPage = uuid ? await this.loadPage(uuid) : null;
           },
           immediate: true
         }
       },
+      methods: {
+        async loadPage(uuid) {
+          const [page, item] = await Promise.all([
+            this.$panel.api.pages.get(uuid, { select: "content" }),
+            this.$helper.items("items/pages", uuid, {
+              layout: "auto",
+              image: JSON.stringify({ ratio: "1/1", cover: true })
+            })
+          ]);
+
+          return {
+            heading: item?.text,
+            image: item?.image,
+            text: page.content.text
+          };
+        }
+      },
       template: `
         <div @dblclick="open">
-          <k-aspect-ratio
+          <k-image-frame
+            :cover="true"
+            :file="isPage ? null : content.image[0]"
+            :src="linkedPage?.image?.src"
+            :srcset="linkedPage?.image?.srcset"
             class="k-block-type-card-image"
-            cover="true"
             ratio="1/1"
-          >
-            <img
-              v-if="image.url"
-              :src="image.url"
-              alt=""
-            >
-          </k-aspect-ratio>
-          <h2 class="k-block-type-card-heading">{{ heading }}</h2>
-          <div class="k-block-type-card-text">{{ text }}</div>
+          />
+          <h2
+            class="k-block-type-card-heading"
+            v-safe-html="$h($helper.string.sanitizeHTML(heading))"
+          ></h2>
+          <div
+            class="k-block-type-card-text"
+            v-safe-html="$h($helper.string.sanitizeHTML(text, { nodes: true }))"
+          ></div>
         </div>
       `
     },
@@ -759,7 +771,7 @@ fields:
     inline: false
   image:
     label: Company logo or portrait
-    type: files
+    type: filepicker
     layout: list
     max: 1
   name:
@@ -805,13 +817,10 @@ fields:
 ### Preview
 
 ```js "/site/plugins/block-factory/index.js"
-panel.plugin("cookbook/block-factory", {
+window.panel.plugin("cookbook/block-factory", {
   blocks: {
     testimonial: {
       computed: {
-        image() {
-          return this.content.image[0] || {};
-        },
         bio() {
           return [this.content.jobposition, this.content.company].filter(el => {
             return el != null && el != '';
@@ -833,13 +842,14 @@ panel.plugin("cookbook/block-factory", {
           />
           <footer>
             <figure class="k-block-type-testimonial-voice">
-              <img
-                v-if="image.url"
-                :src="image.url"
-                width="48px"
-                height="48px"
+              <k-image-frame
+                v-if="content.image.length"
                 :alt="'Photo of ' + content.name"
-              >
+                :cover="true"
+                :file="content.image[0]"
+                class="k-block-type-testimonial-image"
+                ratio="1/1"
+              />
               <figcaption>
                 {{content.name }}<br>
                 {{ bio }}
@@ -860,34 +870,37 @@ Here is the complete `index.php` with all registered blueprints and examples int
 ```php "/site/plugins/block-factory/index.php"
 
 <?php
-Kirby::plugin('cookbook/block-factory', [
-  'blueprints' => [
-    'blocks/accordion'   => __DIR__ . '/blueprints/blocks/accordion.yml',
-    'blocks/box'         => __DIR__ . '/blueprints/blocks/box.yml',
-    'blocks/card'        => __DIR__ . '/blueprints/blocks/card.yml',
-    'blocks/faq'         => __DIR__ . '/blueprints/blocks/faq.yml',
-    'blocks/faq2'        => __DIR__ . '/blueprints/blocks/faq2.yml',
-    'blocks/testimonial' => __DIR__ . '/blueprints/blocks/testimonial.yml',
-  ],
-  'snippets' => [
-    'blocks/accordion'   => __DIR__ . '/snippets/blocks/accordion.php',
-    'blocks/box'         => __DIR__ . '/snippets/blocks/box.php',
-    'blocks/card'        => __DIR__ . '/snippets/blocks/card.php',
-    'blocks/faq'         => __DIR__ . '/snippets/blocks/faq.php',
-    'blocks/faq2'        => __DIR__ . '/snippets/blocks/faq2.php',
-    'blocks/testimonial' => __DIR__ . '/snippets/blocks/testimonial.php',
-  ],
-  'translations' => [
-    'en' => [
-      'field.blocks.accordion.name'   => 'Accordion block',
-      'field.blocks.box.name'         => 'Textbox block',
-      'field.blocks.card.name'        => 'Card',
-      'field.blocks.faq.name'         => 'FAQ Section Version 1',
-      'field.blocks.faq2.name'        => 'FAQ Section Version 2',
-      'field.blocks.testimonial.name' => 'Testimonial',
-    ]
-  ],
-]);
+Kirby::plugin(
+  name: 'cookbook/block-factory',
+  extends: [
+    'blueprints' => [
+      'blocks/accordion'   => __DIR__ . '/blueprints/blocks/accordion.yml',
+      'blocks/box'         => __DIR__ . '/blueprints/blocks/box.yml',
+      'blocks/card'        => __DIR__ . '/blueprints/blocks/card.yml',
+      'blocks/faq'         => __DIR__ . '/blueprints/blocks/faq.yml',
+      'blocks/faq2'        => __DIR__ . '/blueprints/blocks/faq2.yml',
+      'blocks/testimonial' => __DIR__ . '/blueprints/blocks/testimonial.yml',
+    ],
+    'snippets' => [
+      'blocks/accordion'   => __DIR__ . '/snippets/blocks/accordion.php',
+      'blocks/box'         => __DIR__ . '/snippets/blocks/box.php',
+      'blocks/card'        => __DIR__ . '/snippets/blocks/card.php',
+      'blocks/faq'         => __DIR__ . '/snippets/blocks/faq.php',
+      'blocks/faq2'        => __DIR__ . '/snippets/blocks/faq2.php',
+      'blocks/testimonial' => __DIR__ . '/snippets/blocks/testimonial.php',
+    ],
+    'translations' => [
+      'en' => [
+        'field.blocks.accordion.name'   => 'Accordion block',
+        'field.blocks.box.name'         => 'Textbox block',
+        'field.blocks.card.name'        => 'Card',
+        'field.blocks.faq.name'         => 'FAQ Section Version 1',
+        'field.blocks.faq2.name'        => 'FAQ Section Version 2',
+        'field.blocks.testimonial.name' => 'Testimonial',
+      ]
+    ],
+  ]
+);
 ```
 
 ## Stylesheet
@@ -975,7 +988,8 @@ details summary .k-writer-input {
   align-items: center;
 }
 
-.k-block-type-testimonial-voice img {
+.k-block-type-testimonial-image {
+  width: 48px;
   margin-right: 10px;
 }
 

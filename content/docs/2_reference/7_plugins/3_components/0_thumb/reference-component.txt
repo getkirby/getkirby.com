@@ -7,13 +7,16 @@ Text:
 If you are not happy with our built-in thumb generators, you can create your own.
 
 ```php "/site/plugins/thumbs/index.php"
-Kirby::plugin('my/thumbs', [
-	'components' => [
-		'thumb' => function (App $kirby, string $src, string $dst, array $options) {
-			$rootToThumb = myThumbGenerator($src, $dst, $options);
+Kirby::plugin(
+	name: 'my/thumbs',
+	extends: [
+		'components' => [
+			'thumb' => function (App $kirby, string $src, string $dst, array $options) {
+				$rootToThumb = myThumbGenerator($src, $dst, $options);
 
-			return $rootToThumb;
-		}
+				return $rootToThumb;
+			}
+		]
 	]
-]);
+);
 ```

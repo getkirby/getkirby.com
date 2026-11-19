@@ -88,7 +88,7 @@ If you use a sorting scheme other than default sorting by number, i.e. automatic
 
 ## Statuses
 
-With the `status` option, you define the page statuses you want to allow for the page. You can also change their label and description. This option gives you a lot of flexibility how you want to use page status in your website.
+With the `status` option, you define the page statuses you want to allow for the page. You can also change their label, description, icon and theme. This option gives you a lot of flexibility how you want to use page status in your website.
 
 <info>The `draft` status of a page can not be removed or disabled – only its label and description can be changed.</info>
 
@@ -114,6 +114,40 @@ status:
     label: Published
     text: The article is online and listed in the blog
 ```
+
+<since v="6.0.0">
+### Icons and themes
+
+Each status can have its own `icon` and `theme`. The icon can be one of our (link: docs/reference/panel/icons text: own icons) or an emoji. The theme is a color theme, e.g. `positive`, `negative`, `notice`, `info` or a color like `purple`. The Panel uses both for the status button in the page view, in `pagelist` fields and in the change status dialog.
+
+```yaml
+status:
+  draft:
+    label: Idea
+    icon: 💡
+  unlisted:
+    label: In review
+    text: Waiting for an editor
+    icon: preview
+    theme: purple
+  listed:
+    label: Published
+    icon: globe
+    theme: positive
+```
+
+(image: status-pagelist.png)
+
+(image: status-dialog.png)
+
+A status without its own `icon` or `theme` keeps its default:
+
+| Status | Icon | Theme |
+| - | - | - |
+| `draft` | `status-draft` | `negative` |
+| `unlisted` | `status-unlisted` | `info` |
+| `listed` | `status-listed` | `positive` |
+</since>
 
 ## Page creation dialog
 
@@ -168,23 +202,26 @@ And in a plugin, define the method
 ```php "/site/plugins/custom-methods/index.php"
 <?php
 
-Kirby::plugin('getkirby/custom-methods', [
-  'siteMethods' => [
-    'time' => function() {
-      return time();
-    }
+Kirby::plugin(
+  name: 'getkirby/custom-methods',
+  extends: [
+    'siteMethods' => [
+      'time' => function() {
+        return time();
+      }
+    ]
   ]
-]);
+);
 
 ```
 If title and slug are generated automatically, and no custom fields are defined for the page creation dialog, the dialog will be skipped and the page is created immediately.
 
 ### Supported field types
 
-Currently, the list of supported field types in the dialog is limited to checkboxes, date, email, info, line, link, list, number, multiselect, radio, range, select, slug, tags, tel, text, toggles, time, url. Custom field types are disabled by default. To enable them, add your field type name to:
+Currently, the list of supported field types in the dialog is limited to checkboxes, date, email, info, line, link, list, number, multiselect, radio, range, select, slug, tags, tel, text, toggle, toggles, time, url. Custom field types are disabled by default. To enable them, add your field type name to:
 
 ```php
-Kirby\Panel\PageCreateDialog::$fieldTypes[] = 'yourFieldType'
+Kirby\Panel\Controller\Dialog\PageCreateDialogController::$fieldTypes[] = 'yourFieldType'
 ```
 
 
@@ -232,7 +269,7 @@ icon: 📚
 
 ## `image` options
 
-The (preview) `image` blueprint option defines how any page with this blueprint will be presented, e.g. in a pages section:
+The (preview) `image` blueprint option defines how any page with this blueprint will be presented, e.g. in a `pagelist` field:
 
 ```yaml "site/blueprints/pages/note.yml"
 image: page.cover.toFile

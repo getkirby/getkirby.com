@@ -20,7 +20,7 @@ You can run multiple sites via the same Kirby setup. This can help you maintain 
 
 ## Custom folder and URL setup
 
-A multi-site setup extends Kirby’s features to define your (link: docs/guide/configuration#custom-folder-setup text: custom folder setup) and (link: docs/guide/configuration#custom-url-setup text: custom URL setup).
+A multi-site setup extends Kirby’s features to define your (link: docs/guide/configuration/custom-folder-setup text: custom folder setup) and (link: docs/guide/configuration/custom-url-setup text: custom URL setup).
 
 ## Setting up your multisite
 
@@ -94,18 +94,18 @@ $kirby = new Kirby([
 ## In the filesystem
 
 ```filesystem
-  kirby/
-  my-site.com/
-    content/
-    media/
-    site/
-    assets/
-  my-shop.com/
-    content/
-    media/
-    site/
-    assets/
-  index.php
+kirby/
+my-site.com/
+  content/
+  media/
+  site/
+  assets/
+my-shop.com/
+  content/
+  media/
+  site/
+  assets/
+index.php
 ```
 
 ## Licenses for your multi-site

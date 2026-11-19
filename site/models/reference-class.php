@@ -69,16 +69,8 @@ class ReferenceClassPage extends ReferenceSectionPage
 		);
 	}
 
-	public static function findByName(
-		string $class,
-		bool $aliases = false
-	): static|null {
-		$class = ltrim($class, '\\');
-
-		if ($aliases === true) {
-			$class = ReferenceClassAliasesPage::resolve($class);
-		}
-
+	protected static function findByClassName(string $class): static|null
+	{
 		// don't even start to look if the class does not exist in Kirby
 		if (class_exists($class) === false) {
 			return null;
@@ -102,6 +94,26 @@ class ReferenceClassPage extends ReferenceSectionPage
 		}
 
 		return null;
+	}
+
+	public static function findByName(
+		string $class,
+		bool $aliases = false
+	): static|null {
+		$class = ltrim($class, '\\');
+
+		if ($aliases === true) {
+			$class = ReferenceClassAliasesPage::resolve($class);
+		}
+
+		// types render the same classes over and over again
+		static $pages = [];
+
+		if (array_key_exists($class, $pages) === true) {
+			return $pages[$class];
+		}
+
+		return $pages[$class] = static::findByClassName($class);
 	}
 
 	public function metadata(): array
@@ -138,7 +150,7 @@ class ReferenceClassPage extends ReferenceSectionPage
 			throw new Exception('Content file of "' . $this->id() . '" needs to define a "class" field');
 		}
 
-		return $this->reflection = new ReflectableClass($class);
+		return $this->reflection = ReflectableClass::for($class);
 	}
 
 	public function searchbyline(): Field
