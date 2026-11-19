@@ -4,12 +4,16 @@ Title: Panel Created
 
 Text:
 
-The created plugin type for the Panel runs plugin code directly after the Vue instance has been loaded and gives access to the instance. You can use this to add additional routes, register additional global events and more.
+The `created` extension runs your code once when the Panel starts, right after its root component has been created and before the first view is rendered. Your function receives that root component, so you can reach `$panel` through it (or through `window.panel`), e.g. to listen to Panel events:
 
 ```js
 window.panel.plugin("my/plugin", {
-  created(Vue) {
-    // work with the newly created Vue instance here.   
+  created(app) {
+    app.$panel.events.on("model.update", () => {
+      // e.g. after content has been saved
+    });
   }
 });
 ```
+
+If your function throws an error, the Panel shows it and keeps loading.
