@@ -821,9 +821,6 @@ window.panel.plugin("cookbook/block-factory", {
   blocks: {
     testimonial: {
       computed: {
-        image() {
-          return this.content.image[0] || {};
-        },
         bio() {
           return [this.content.jobposition, this.content.company].filter(el => {
             return el != null && el != '';
@@ -845,13 +842,14 @@ window.panel.plugin("cookbook/block-factory", {
           />
           <footer>
             <figure class="k-block-type-testimonial-voice">
-              <img
-                v-if="image.url"
-                :src="image.url"
-                width="48px"
-                height="48px"
+              <k-image-frame
+                v-if="content.image.length"
                 :alt="'Photo of ' + content.name"
-              >
+                :cover="true"
+                :file="content.image[0]"
+                class="k-block-type-testimonial-image"
+                ratio="1/1"
+              />
               <figcaption>
                 {{content.name }}<br>
                 {{ bio }}
@@ -990,7 +988,8 @@ details summary .k-writer-input {
   align-items: center;
 }
 
-.k-block-type-testimonial-voice img {
+.k-block-type-testimonial-image {
+  width: 48px;
   margin-right: 10px;
 }
 
