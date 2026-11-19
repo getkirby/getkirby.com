@@ -109,6 +109,20 @@ class TypesTest extends TestCase
 		$this->assertFalse($types->has('static'));
 	}
 
+	public function testIsUnion(): void
+	{
+		$this->assertTrue(Types::isUnion('string|int'));
+		$this->assertTrue(Types::isUnion('Kirby\Cms\Page|null'));
+		$this->assertTrue(Types::isUnion('array<string|int, mixed>|null'));
+
+		$this->assertFalse(Types::isUnion('string'));
+		$this->assertFalse(Types::isUnion('array<string|int>'));
+		$this->assertFalse(Types::isUnion('foo(Bar|Baz $a): Bar|Foo'));
+		$this->assertFalse(Types::isUnion('a | b'));
+		$this->assertFalse(Types::isUnion('string|'));
+		$this->assertFalse(Types::isUnion('|string'));
+	}
+
 	public function testNot(): void
 	{
 		$types = new Types([

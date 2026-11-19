@@ -135,6 +135,33 @@ class Types
 	}
 
 	/**
+	 * Checks if a string is a union of types, e.g. `string|int`,
+	 * but not other code with pipes, e.g. `foo(Bar|Baz $a): Bar|Foo`
+	 */
+	public static function isUnion(string $types): bool
+	{
+		// most strings have no pipe at all
+		if (str_contains($types, '|') === false) {
+			return false;
+		}
+
+		$parts = static::split($types);
+
+		// at least two types, no empty types
+		// and no whitespace around the pipes
+		if (count($parts) < 2 || implode('|', $parts) !== $types) {
+			return false;
+		}
+
+		// each type must be a single token, only allowing
+		// whitespace nested in brackets, e.g. `array<string, mixed>`
+		return A::every(
+			$parts,
+			fn ($part) => count(static::split($part, ' ')) === 1
+		);
+	}
+
+	/**
 	 * Remove a type from the collection
 	 */
 	public function not(string $type): static

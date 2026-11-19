@@ -442,7 +442,7 @@ class Marsdown extends ParsedownExtra
 		// Only split into multiple types for unions (e.g. `string|int`),
 		// keep any other code with pipes (e.g. `foo(Bar|Baz $a): Bar|Foo`)
 		// together as a single code tag
-		$type = match ($this->isTypeUnion($text)) {
+		$type = match (Types::isUnion($text)) {
 			true  => Types::fromString($text),
 			false => Type::factory($text)
 		};
@@ -459,31 +459,6 @@ class Marsdown extends ParsedownExtra
 				)
 			]
 		];
-	}
-
-	/**
-	 * Checks if the inline code is a union of types
-	 */
-	protected function isTypeUnion(string $text): bool
-	{
-		// most inline code has no pipe at all
-		if (str_contains($text, '|') === false) {
-			return false;
-		}
-
-		$types = Types::split($text);
-
-		// no empty types or whitespace around the pipes
-		if (implode('|', $types) !== $text) {
-			return false;
-		}
-
-		// each type must be a single token, only allowing
-		// whitespace nested in brackets, e.g. `array<string, mixed>`
-		return A::every(
-			$types,
-			fn ($type) => count(Types::split($type, ' ')) === 1
-		);
 	}
 
 	/**
