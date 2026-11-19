@@ -188,10 +188,10 @@ window.panel.plugin('your-project/faq-block', {
       template: `
         <div @dblclick="open" class="faq">
           <h2>{{ content.headline }}</h2>
-          <div v-html="content.text"></div>
-          <dl v-for="item in content.blocks">
-            <dt v-html="item.content.question"></dt>
-            <dd v-html="item.content.answer"></dt>
+          <div v-safe-html="$h($helper.string.sanitizeHTML(content.text, { nodes: true }))"></div>
+          <dl v-for="item in content.blocks" :key="item.id">
+            <dt>{{ item.content.question }}</dt>
+            <dd v-safe-html="$h($helper.string.sanitizeHTML(item.content.answer, { nodes: true }))"></dd>
           </dl>
         </div>
       `
@@ -207,11 +207,11 @@ window.panel.plugin('your-project/faq-block', {
             </k-input>
           </strong>
           <p>
-            <k-writer
+            <k-writer-input
               v-bind="field('answer')"
               :value="content.answer"
               @input="update({ answer: $event })">
-            </k-writer>
+            </k-writer-input>
           </p>
         </div>
       `
