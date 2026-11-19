@@ -3,10 +3,17 @@
  * @var Kirby\Cms\Site $site
  * @var Kirby\Cms\Pages $docs
  */
+
+$major    = (int)Kirby::version();
+$previous = option('versions')[$major - 1] ?? null;
 ?>
 # <?= $site->title() ?> Docs
 
-> The official Kirby CMS documentation for <?= $site->title() ?>, covering Guides, Reference, Cookbook and Quicktips.
+> The official Kirby CMS documentation for Kirby <?= $major ?>, covering Guides, Reference, Cookbook and Quicktips.
+<?php if ($previous): ?>
+
+The docs for Kirby <?= $major - 1 ?> are archived at <?= $previous['link'] ?>.
+<?php endif ?>
 
 <?php snippet('templates/llms/guide', ['docs' => $docs->find('guide')]) ?>
 ****
