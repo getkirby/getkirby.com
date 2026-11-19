@@ -144,6 +144,7 @@ $tags['image'] = [
 
 			return snippet('kirbytext/image', [
 				'file'    => $file,
+				'alt'     => $tag->alt,
 				'class'   => $tag->class,
 				'link'    => empty($tag->link) ? null : ($tag->link === 'self' ? $file->url() : $tag->link),
 				'caption' => $tag->caption ?? $file->caption()->value()
