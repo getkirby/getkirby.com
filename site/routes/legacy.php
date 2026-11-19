@@ -115,6 +115,7 @@ return [
 	],
 	[
 		'pattern' => [
+			'docs/glossary/section',
 			'docs/reference/panel/sections',
 			'docs/reference/panel/sections/fields'
 		],
