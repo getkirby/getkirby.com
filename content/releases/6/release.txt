@@ -14,7 +14,7 @@ Prerelease:
 
 ----
 
-Description: Kirby 6 brings passkeys, simpler blueprints with fields only, a live editor, guards, template stacks and a Vue 3 Panel. Release notes, migration guides and changelog.
+Description: Kirby 6 brings passkeys, simpler blueprints with fields only, a live editor, guards, template stacks and a Vue 3 Panel.
 
 ----
 
