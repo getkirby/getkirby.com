@@ -4,7 +4,7 @@ Title: Changelog
 
 Text:
 
-This is the full changelog for **Kirby 6.0.0-rc.1**. In addition to all the features on the (link: releases/6 text: Kirby 6 release page), there are many more enhancements, breaking changes and deprecations in the fine print.
+This is the full changelog for **Kirby 6.0.0-rc.2**. In addition to all the features on the (link: releases/6 text: Kirby 6 release page), there are many more enhancements, breaking changes and deprecations in the fine print.
 
 Kirby 6 is a release candidate. This changelog will be updated with every pre-release until the final 6.0.0 release. If you are upgrading an existing project, start with our (link: releases/6/migration text: migration guides).
 
@@ -102,6 +102,44 @@ Enhancements:
 - New `blueprints` option for the `pagelist` field: a blueprint, a list of blueprints or `except` with blueprints to exclude
 - New `blueprint` option for the `filelist` field and the `uploads` option of fields
 - New `inherit` argument for `Kirby\Cms\Responder::redirect()`, `Kirby\Cms\Response::redirect()`, `Kirby\Http\Response::redirect()`, `Kirby\Http\Response::go()`, `Kirby\Cms\Page::go()` and the `go()` helper. It keeps the query and params of the current request; the target's own query and params win.
+- Page blueprints: each status can define a custom `icon` (icon name or emoji) and `theme`. They are used for the status button, `pagelist` fields and the change status dialog. [#8551](https://github.com/getkirby/kirby/pull/8551)
+
+  ```yaml
+  status:
+    draft:
+      label: Idea
+      icon: 💡
+    unlisted:
+      label: In review
+      text: Waiting for an editor
+      icon: preview
+      theme: purple
+    listed:
+      label: Published
+      icon: globe
+      theme: positive
+  ```
+
+- New `$field->toEnum()` method to convert a field value into a case of the given backed enum. It returns `null` for an empty field or a value without matching case. [#8556](https://github.com/getkirby/kirby/pull/8556)
+
+  ```php
+  enum Category: string
+  {
+  	case News  = 'news';
+  	case Event = 'event';
+
+  	public function hasDate(): bool
+  	{
+  		return $this === self::Event;
+  	}
+  }
+
+  $category = $page->category()->toEnum(Category::class);
+
+  if ($category?->hasDate() === true) {
+  	// …
+  }
+  ```
 
 ## For plugin developers
 
@@ -225,6 +263,7 @@ Enhancements:
 
 - New `panel.act()` method to act on the `message`, `event`, `redirect` and `reload` keys of a response, e.g. `await panel.act(await panel.post("shop/sync"))` [#8660](https://github.com/getkirby/kirby/pull/8660)
 - `<k-tag>` supports color themes (`positive`, `negative`, `notice`, `warning`, `info`) as tinted tags [#8662](https://github.com/getkirby/kirby/pull/8662)
+- `<k-choice-input>` has a new `theme` prop to color its icon
 
 ### Backend
 
@@ -334,6 +373,7 @@ Bugfixes:
   - Changes to `Kirby\Query\Query::$entries` (e.g. from plugins) also reach queries that were resolved before [#8579](https://github.com/getkirby/kirby/pull/8579)
   - `{{ 0 }}` resolves to `0` instead of the data array [#8577](https://github.com/getkirby/kirby/pull/8577)
   - `Kirby\Toolkit\Str::template()`: empty placeholders like `{}` or `{{ }}` stay as they are instead of failing with "Array to string conversion" [#8577](https://github.com/getkirby/kirby/pull/8577)
+  - `&&`/`AND` bind tighter than `||`/`OR`, e.g. `a || b && c` is `a || (b && c)` [#8574](https://github.com/getkirby/kirby/pull/8574)
 - Field class names that contain `Field` in the middle, e.g. `FieldWithDialogsField`, no longer lose that part in their type [#8622](https://github.com/getkirby/kirby/pull/8622)
 - `Kirby\Cms\LazyCollection::data()` loads all elements before returning them, e.g. `$kirby->users()->data()` no longer returns an empty array [#8635](https://github.com/getkirby/kirby/pull/8635)
 - `Kirby\Toolkit\A::keyBy()` always plucks string keys, even if they are also names of PHP functions (e.g. `key`, `count` or `date`) [#8715](https://github.com/getkirby/kirby/pull/8715)
@@ -348,6 +388,34 @@ Bugfixes:
 - Redirects to the language URL, from `/home`, from page UUID permalinks and from `page.html` keep the query and params of the request [#7603](https://github.com/getkirby/kirby/issues/7603)
 - `Kirby\Http\Uri::toString()`: params on a relative root URL no longer produce a protocol-relative `//page:2` URL
 - `Kirby\Http\Uri::inherit()` keeps the Uri's own query, params and fragment; the parent only adds missing ones
+- `Kirby\Http\Uri::setFragment()` and `Kirby\Http\Uri::inherit()` no longer drop a fragment of `0`
+- An impersonation started inside a model hook (e.g. `page.update:after`) no longer carries over to the rest of the request [#8549](https://github.com/getkirby/kirby/pull/8549)
+- Whitespace before `<?php` in config or plugin files throws an error also when output buffering is enabled, instead of breaking images [#8091](https://github.com/getkirby/kirby/issues/8091)
+- `Kirby\Toolkit\Totp` throws a `Kirby\Exception\InvalidArgumentException` for invalid Base32 secrets in `force` mode instead of quietly using a wrong key [#8581](https://github.com/getkirby/kirby/pull/8581)
+- `Kirby\Database\Query::fail()` only affects the query it is called on [#8677](https://github.com/getkirby/kirby/pull/8677)
+- `Kirby\Database\Database::validateTable()` and `Kirby\Database\Database::validateColumn()` throw the original database error when they can't load the list of tables or columns [#8677](https://github.com/getkirby/kirby/pull/8677)
+- `Kirby\Database\Sql::selected()` no longer applies a qualified column's table (e.g. `test.id`) to the unqualified columns after it
+- `Kirby\Toolkit\Str::pool()` always returns an array of strings or one string with all characters, never an array of integers [#8712](https://github.com/getkirby/kirby/pull/8712)
+- `Kirby\Toolkit\Str::accepted()` treats `q=0` as the lowest quality instead of `1` [#8714](https://github.com/getkirby/kirby/pull/8714)
+- `Kirby\Toolkit\Str::slug()` no longer leaves a trailing separator when the slug is cut at `$maxlength` [#8714](https://github.com/getkirby/kirby/pull/8714)
+- `Kirby\Toolkit\A::random()` keeps integer keys when `$shuffle` is `true` [#8714](https://github.com/getkirby/kirby/pull/8714)
+- `Kirby\Toolkit\Html::video()` embeds video files whose URL mentions YouTube or Vimeo (e.g. `/videos/youtube-intro.mp4`) instead of returning `null`
+- `Kirby\Toolkit\Html::gist()` encodes the file name in the script URL, so names with spaces, `&` or `#` load the right file
+- `Kirby\Filesystem\F::range()` returns an empty string instead of throwing an error when there is nothing to read
+- `Kirby\Filesystem\F::type()` detects short filenames like `a.js` and bare extensions of any length like `mdown` [#8728](https://github.com/getkirby/kirby/pull/8728)
+- Reading a file with `Kirby\Filesystem\F::read()` right after it was replaced no longer fails on certain filesystems [#8719](https://github.com/getkirby/kirby/pull/8719)
+- An upload fails with an error when its sanitized file cannot be written [#8718](https://github.com/getkirby/kirby/pull/8718)
+- `isset($slots->heading)` returns `true` for defined slots in `Kirby\Template\Slots`
+- Pasted HTML with several code blocks keeps the language of each block (`Kirby\Parsley\Schema\Blocks::pre()`)
+- `Kirby\Parsley\Element::query()` and `Kirby\Parsley\Element::find()` return `null` for an invalid XPath query instead of throwing a `TypeError`, and `Kirby\Parsley\Element::filter()` returns `[]`
+- Blocks and layout field validation errors name the type of the invalid block, not of an earlier block of a different type
+- `Kirby\Cms\Items::factory()` (blocks, layouts, structure) keeps the `parent` and `field` params for empty items. The `parent()` of an empty blocks field is the page now, not the site.
+- Registered blocks methods are stored under `blocksMethods` in `$kirby->extensions()` instead of overwriting the registered `blockMethods`
+- `$collection->group()` groups by `'0'`, `0` and empty strings instead of throwing an exception
+- `Kirby\Cms\PageRules::changeStatusToListed()` no longer throws a `TypeError` when called without a position
+- `Kirby\Text\KirbyTags::parse()` returns the text unchanged instead of throwing a `TypeError` when the regex fails
+- Languages whose `locale` array defines neither `LC_ALL` nor `LC_CTYPE` no longer throw an error and use the slug rules of their language code
+- `Kirby\Option\Options` accepts options with a `null` value
 
 ## Panel
 
@@ -386,6 +454,24 @@ Bugfixes:
 - Field buttons (e.g. of the `pagelist` and `structure` fields) stay on the right when the field has `label: false` [#8805](https://github.com/getkirby/kirby/issues/8805)
 - Time and date fields: the times dropdown button has a translated title and accessible name [#8821](https://github.com/getkirby/kirby/issues/8821)
 - System view: the license status column of the plugins table has a translated label [#8830](https://github.com/getkirby/kirby/issues/8830)
+- Status icons in `pagelist` fields show the custom status label from the blueprint in their tooltip [#7043](https://github.com/getkirby/kirby/issues/7043)
+- The change status dialog no longer shows an `[unknown]` option when the page's status isn't defined in its blueprint [#8838](https://github.com/getkirby/kirby/issues/8838)
+- Deleting, renaming or moving a page, file or user from its own view no longer causes a failed unlock request in the browser console. Unlocking a model that no longer exists succeeds silently. [#8845](https://github.com/getkirby/kirby/pull/8845)
+- Files, pages and users fields remove a deleted file, page or user from their value [#8834](https://github.com/getkirby/kirby/issues/8834)
+- Deleting a file no longer stores unchanged values of files fields [#8834](https://github.com/getkirby/kirby/issues/8834)
+- Info, gap and line fields no longer render unknown props as HTML attributes [#8844](https://github.com/getkirby/kirby/pull/8844)
+- System view: the update status cell of the plugins table no longer renders unknown props as HTML attributes [#8844](https://github.com/getkirby/kirby/pull/8844)
+- Range field: `required`, `min` and `max` errors show as soon as the field loads [#8825](https://github.com/getkirby/kirby/issues/8825)
+- URL field: an invalid URL is marked invalid as soon as the field loads, not only after editing it [#8846](https://github.com/getkirby/kirby/pull/8846)
+- Color field: Ctrl+S converts the typed color to the field's format, like Cmd+S and Enter [#8848](https://github.com/getkirby/kirby/pull/8848)
+- Writer field: a `minlength`/`maxlength` error goes away when the value changes from outside, e.g. after discarding changes [#8849](https://github.com/getkirby/kirby/pull/8849)
+- Date field: `time: { times: false }` hides the times dropdown [#8822](https://github.com/getkirby/kirby/issues/8822)
+- Time field previews show a value that isn't a full ISO time (e.g. `09:05`) as is instead of nothing [#8851](https://github.com/getkirby/kirby/pull/8851)
+- Blocks field: pasting into a field that already has more blocks than `max` adds no blocks [#8850](https://github.com/getkirby/kirby/pull/8850)
+- Blocks field: focusing the field without a block selects the first block [#8853](https://github.com/getkirby/kirby/pull/8853)
+- Slug field: the path preview no longer ends in `undefined` when the slug is empty [#8855](https://github.com/getkirby/kirby/pull/8855)
+- Languages view: language names can be opened in a new tab [#8831](https://github.com/getkirby/kirby/issues/8831)
+- Stats that open a dialog or drawer are buttons instead of links with an empty `href` [#8831](https://github.com/getkirby/kirby/issues/8831)
 
 ----
 
@@ -943,6 +1029,8 @@ Refactored:
 - Query package: switched from `private` to `protected` methods; fixed the types of the `Kirby\Query\Query::filterQuery()` param and return value [#8464](https://github.com/getkirby/kirby/pull/8464)
 - New `Kirby\Reflection\Props` class and `#[Kirby\Reflection\Attributes\Prop]` attribute to describe, set and export the props of a class [#8457](https://github.com/getkirby/kirby/pull/8457) [#8615](https://github.com/getkirby/kirby/pull/8615)
 - PHP type hints have been added to all class constants [#7536](https://github.com/getkirby/kirby/pull/7536)
+- `http_build_query()` gets an array everywhere to avoid deprecation issues in PHP 8.6 [#8558](https://github.com/getkirby/kirby/pull/8558)
+- Simplified the cache ID of `Kirby\Content\MemoryStorage` [#8559](https://github.com/getkirby/kirby/pull/8559)
 
 ## Forms
 
@@ -1071,6 +1159,7 @@ Housekeeping:
 - Panel templates can be type-checked against all core components [#8593](https://github.com/getkirby/kirby/pull/8593)
 - Panel browser support is defined in one place: `panel/.browserslistrc` [#8450](https://github.com/getkirby/kirby/pull/8450)
 - Started using [Kirby PHP CS ruleset](https://github.com/getkirby/php-cs) for our PHP code style
+  - Methods and properties are sorted alphabetically by a new PHP CS Fixer rule [#8466](https://github.com/getkirby/kirby/pull/8466)
 - Simplified PHP class docblocks [#7944](https://github.com/getkirby/kirby/pull/7944) and added docblocks to frontend files [#8220](https://github.com/getkirby/kirby/pull/8220)
   - Docblocks use short class names where the class has been imported via `use` [#8338](https://github.com/getkirby/kirby/pull/8338)
   - Started to remove types from docblocks that only repeat the native PHP type hints [#8250](https://github.com/getkirby/kirby/pull/8250)

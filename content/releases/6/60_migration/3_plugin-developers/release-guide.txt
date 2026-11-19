@@ -68,7 +68,7 @@ Declare the Kirby versions your plugin supports in `extra.kirby.compatible`.  Ou
 }
 ```
 
-If one version of your plugin supports both majors, use `"^5.0 || ^6.0"` and keep your PHP constraint wide enough for Kirby 5 (PHP 8.2). A constraint like `^6.0` also matches pre-releases such as `6.0.0-rc.1`.
+If one version of your plugin supports both majors, use `"^5.0 || ^6.0"` and keep your PHP constraint wide enough for Kirby 5 (PHP 8.2). A constraint like `^6.0` also matches pre-releases such as `6.0.0-rc.2`.
 
 All details are in our guide on (link: docs/guide/plugins/publishing#kirby-versions-support text: declaring which Kirby versions you support).
 
@@ -105,9 +105,9 @@ Custom cache drivers that extend `Kirby\Cache\Cache` directly must implement `en
 
 ## Moved and renamed classes
 
-Several classes have moved into new namespaces. Some old names still resolve through a deprecated class alias in rc.1, others are gone:
+Several classes have moved into new namespaces. Some old names still resolve through a deprecated class alias in rc.2, others are gone:
 
-| Kirby 5 | Kirby 6 | Old name in rc.1 |
+| Kirby 5 | Kirby 6 | Old name in rc.2 |
 | - | - | - |
 | `Kirby\Cms\Blueprint`, `Kirby\Cms\PageBlueprint`, `Kirby\Cms\SiteBlueprint`, `Kirby\Cms\FileBlueprint`, `Kirby\Cms\UserBlueprint` | `Kirby\Blueprint\Blueprint`, `Kirby\Blueprint\PageBlueprint` … | deprecated alias |
 | `Kirby\Cms\Auth` | `Kirby\Auth\Auth` | deprecated alias |
@@ -248,7 +248,7 @@ Also see (link: releases/6/changelog#breaking-changes__core__changed-exceptions 
 
 ## Permissions become guards
 
-Kirby 6 introduces (link: releases/6/guards text: guards): one place that answers whether an action is possible, allowed for the current user and valid for the given input. `$model->permissions()`, the permission classes behind it and the `*Rules` classes are deprecated, but keep working in rc.1:
+Kirby 6 introduces (link: releases/6/guards text: guards): one place that answers whether an action is possible, allowed for the current user and valid for the given input. `$model->permissions()`, the permission classes behind it and the `*Rules` classes are deprecated, but keep working in rc.2:
 
 ```php
 // Kirby 5 (deprecated in Kirby 6)

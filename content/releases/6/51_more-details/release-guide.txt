@@ -9,54 +9,64 @@ Subtitle: Details that deliver
 Features:
 -
   icon: markdown
-	headline: Content negotiation
-	text: Serve the Markdown or JSON representation of a page based on the Accept header of the request, no file extension in the URL needed.
-	link: "/releases/6/more-details#content-negotiation"
+  headline: Content negotiation
+  text: Serve the Markdown or JSON representation of a page based on the Accept header of the request, no file extension in the URL needed.
+  link: "/releases/6/more-details#content-negotiation"
+-
+  icon: box
+  headline: Objects as field values
+  text: Pass files, pages, users, blocks or dates to `$model->update()` and each field stores them in its own format.
+  link: "/releases/6/more-details#objects-as-field-values"
 -
   icon: code
-	headline: Smarter queries
-	text: Kirby queries support logical not and negative values, and several parsing bugs have been fixed.
-	link: "/releases/6/more-details#smarter-queries"
+  headline: Smarter queries
+  text: Kirby queries support logical not and negative values, and several parsing bugs have been fixed.
+  link: "/releases/6/more-details#smarter-queries"
 -
   icon: calendar
-	headline: Date formats with text
-	text: Add your own words to the display format of date and time fields and see an example as placeholder.
-	link: "/releases/6/more-details#date-formats-with-text"
+  headline: Date formats with text
+  text: Add your own words to the display format of date and time fields and see an example as placeholder.
+  link: "/releases/6/more-details#date-formats-with-text"
 -
   icon: keyboard
-	headline: Easier date input
-	text: Date fields read your input in their own format and understand month names in English and the Panel language.
-	link: "/releases/6/more-details#easier-date-input"
+  headline: Easier date input
+  text: Date fields read your input in their own format and understand month names in English and the Panel language.
+  link: "/releases/6/more-details#easier-date-input"
 -
   icon: upload
-	headline: Upload in the file picker
-	text: Drop files onto the file picker dialog to upload and select them in one go.
-	link: "/releases/6/more-details#upload-in-the-file-picker"
+  headline: Upload in the file picker
+  text: Drop files onto the file picker dialog to upload and select them in one go.
+  link: "/releases/6/more-details#upload-in-the-file-picker"
 -
   icon: edit-line
-	headline: Unsaved changes at a glance
-	text: Field labels are highlighted as long as the field has unsaved changes.
-	link: "/releases/6/more-details#unsaved-changes-at-a-glance"
+  headline: Unsaved changes at a glance
+  text: Field labels are highlighted as long as the field has unsaved changes.
+  link: "/releases/6/more-details#unsaved-changes-at-a-glance"
 -
   icon: copy
-	headline: Copy from disabled fields
-	text: Select and copy the values of disabled fields.
-	link: "/releases/6/more-details#copy-from-disabled-fields"
+  headline: Copy from disabled fields
+  text: Select and copy the values of disabled fields.
+  link: "/releases/6/more-details#copy-from-disabled-fields"
 -
-  icon: image
-	headline: Sharper image block previews
-	text: Image and gallery blocks load properly sized thumbnails that respect the ratio and crop settings of the block.
-	link: "/releases/6/more-details#sharper-image-block-previews"
+  icon: status-unlisted
+  headline: Custom page statuses
+  text: Give each page status its own icon or emoji and color theme for the status button, page lists and the status dialog.
+  link: "/releases/6/more-details#custom-page-statuses"
 -
   icon: file
-	headline: More MIME types
-	text: Kirby knows more file types, from WebAssembly to WebVTT subtitles and web app manifests.
-	link: "/releases/6/more-details#more-mime-types"
+  headline: More MIME types
+  text: Kirby knows more file types, from WebAssembly to WebVTT subtitles and web app manifests.
+  link: "/releases/6/more-details#more-mime-types"
+-
+  icon: list-bullet
+  headline: Enums from fields
+  text: Turn a field value into a case of your own backed enum with `$field->toEnum()`.
+  link: "/releases/6/more-details#enums-from-fields"
 -
   icon: plugin
-	headline: Disable core Panel features
-	text: Plugins can remove any core dialog, drawer, dropdown, search, request or view of a Panel area.
-	link: "/releases/6/more-details#disable-core-panel-features"
+  headline: Disable core Panel features
+  text: Plugins can remove any core dialog, drawer, dropdown, search, request or view of a Panel area.
+  link: "/releases/6/more-details#disable-core-panel-features"
 
 ----
 
@@ -137,6 +147,34 @@ Field labels are highlighted as long as a field has unsaved changes. In long for
 
 Disabled fields still can't be edited, but you can select and copy their values now.
 
+## Custom page statuses
+
+Each status in a page blueprint can have its own `icon` and `theme`. The icon can be the name of any Panel icon or an emoji. The Panel uses both for the status button in the page view, in `pagelist` fields and in the change status dialog:
+
+```yaml "/site/blueprints/pages/article.yml"
+status:
+  draft:
+    label: Idea
+    icon: 💡
+  unlisted:
+    label: In review
+    text: Waiting for an editor
+    icon: preview
+    theme: purple
+  listed:
+    label: Published
+    icon: globe
+    theme: positive
+```
+
+(image: status-pagelist.png)
+
+The change status dialog shows the icon of each status in its theme next to the label:
+
+(image: status-dialog.png)
+
+Statuses without their own `icon` or `theme` keep the defaults.
+
 ## Sharper image block previews
 
 The previews of `image` and `gallery` blocks load properly sized thumbnails that respect the ratio and crop settings of the block.
@@ -148,6 +186,33 @@ During installation, Kirby checks all required PHP extensions and blocks the ins
 ## More MIME types
 
 Kirby knows the MIME types of more file extensions: `7z`, `aac`, `apng`, `atom`, `epub`, `ods`, `oga`, `rar`, `svgz`, `vtt`, `wasm`, `weba` and `webmanifest`. `ico` and `psd` also map to their registered types now.
+
+## Enums from fields
+
+The new `$field->toEnum()` method converts the value of a field into a case of a backed enum. The allowed values and the logic that belongs to them live in one place:
+
+```php
+enum Category: string
+{
+	case News  = 'news';
+	case Event = 'event';
+
+	public function hasDate(): bool
+	{
+		return $this === self::Event;
+	}
+}
+```
+
+```php "/site/templates/article.php"
+<?php $category = $page->category()->toEnum(Category::class) ?>
+
+<?php if ($category?->hasDate() === true): ?>
+<time><?= $page->date()->toDate('d.m.Y') ?></time>
+<?php endif ?>
+```
+
+If the field is empty or its value doesn't match any case, `toEnum()` returns `null`.
 
 ## Disable core Panel features
 
