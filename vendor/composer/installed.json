@@ -398,17 +398,17 @@
         },
         {
             "name": "getkirby/cms",
-            "version": "6.0.0-rc.1",
-            "version_normalized": "6.0.0.0-RC1",
+            "version": "6.0.0-rc.2",
+            "version_normalized": "6.0.0.0-RC2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getkirby/kirby.git",
-                "reference": "1695b6515af9b441267136bcb4ccc416572e768e"
+                "reference": "1c6ed93bbd3eb95bac104994789d8e041e2b18ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getkirby/kirby/zipball/1695b6515af9b441267136bcb4ccc416572e768e",
-                "reference": "1695b6515af9b441267136bcb4ccc416572e768e",
+                "url": "https://api.github.com/repos/getkirby/kirby/zipball/1c6ed93bbd3eb95bac104994789d8e041e2b18ab",
+                "reference": "1c6ed93bbd3eb95bac104994789d8e041e2b18ab",
                 "shasum": ""
             },
             "require": {
@@ -452,8 +452,8 @@
                 "ext-zip": "Support for ZIP archive file functions",
                 "ext-zlib": "Sanitization and validation for svgz files"
             },
-            "time": "2026-11-18T09:02:03+00:00",
-            "published-time": "2026-11-18T09:19:06+00:00",
+            "time": "2026-11-19T13:36:33+00:00",
+            "published-time": "2026-11-19T13:46:58+00:00",
             "type": "kirby-cms",
             "installation-source": "dist",
             "autoload": {
