@@ -153,6 +153,13 @@ return [
 		'action'  => fn (string $path = '') => go(rtrim('docs/guide/updates/update-to-v6/' . $path, '/'))
 	],
 
+	// Kirby 6: the content-locking guide for virtual pages
+	// described the removed `ContentLock` class
+	[
+		'pattern' => 'docs/guide/virtual-content/content-locking',
+		'action'  => fn () => go('docs/guide/virtual-content')
+	],
+
 	// Kirby 6: renamed field methods, removed or moved classes and methods
 	[
 		'pattern' => 'docs/reference/templates/field-methods/kirbytextinline',
