@@ -72,10 +72,10 @@ A newer PHP baseline lets us use the language features of the last releases thro
 
 Kirby 6 is the result of a large refactoring of the core. Many parts that had grown over the years have been rebuilt as small, focused classes that are easier to understand, test and extend:
 
-- **Panel controllers:** new in Kirby 6, every core view, dialog, drawer, dropdown, search and request of the Panel is handled by its own controller class instead of a closure in a big config array. Plugins can use the same approach: pass a controller class as `action` of a Panel route and build on the base classes like `Kirby\Panel\Controller\DialogController`. Closures keep working. (link: docs/guide/updates/update-to-v6/plugin-developers/panel-backend text: Learn more …)
+- **Panel controllers:** new in Kirby 6, every core view, dialog, drawer, dropdown, search and request of the Panel is handled by its own controller class instead of a closure in a big config array. Plugins can use the same approach: pass a controller class as `action` of a Panel route and build on the base classes like `Kirby\Panel\Controller\DialogController`. Closures keep working. (link: docs/reference/plugins/extensions/panel-dialogs#controller-classes text: Learn more …)
 - **Panel backend:** the Panel itself is no longer a collection of static helpers. Areas, access checks and routing are objects now, and dialogs, drawers and views can be returned as UI objects like `Kirby\Panel\Ui\Dialog\FormDialog`.
-- **Form fields:** every core field type is a PHP class that declares its options once as properties with the `#[Prop]` attribute, built on a few shared base classes and mixins. (link: docs/guide/updates/update-to-v6/plugin-developers/fields text: Learn more …)
-- **Authentication:** the new `Kirby\Auth` namespace splits login methods and second factors into their own classes. This is what makes (link: releases/6/authentication text: passkeys) and custom auth plugins possible. (link: docs/guide/updates/update-to-v6/plugin-developers/auth text: Learn more …)
+- **Form fields:** every core field type is a PHP class that declares its options once as properties with the `#[Prop]` attribute, built on a few shared base classes and mixins. (link: docs/reference/plugins/extensions/fields text: Learn more …)
+- **Authentication:** the new `Kirby\Auth` namespace splits login methods and second factors into their own classes. This is what makes (link: releases/6/authentication text: passkeys) and custom auth plugins possible. (link: docs/reference/plugins/extensions/auth-methods text: Learn more …)
 - **Blueprints:** blueprint classes moved into the `Kirby\Blueprint` namespace, and all normalization happens in one place.
 - **Permissions:** (link: releases/6/guards text: Guards) bring abilities, permissions and validators together in one API.
 - **Sessions:** the session package has been streamlined with dedicated classes for tokens, cookies and headers.
@@ -161,7 +161,7 @@ Kirby 6 raises the browser requirements of the Panel:
 
 These are browsers released from roughly mid-2024 onwards. We follow Baseline "widely available": the Panel only relies on web platform features that have been available in every major browser for at least 2.5 years. This allows us to use modern CSS like `light-dark()` and `:has()` without polyfills.
 
-Editors with an older browser are redirected to a page that names the browser versions the Panel needs.
+Editors with an older browser are redirected to a page that names the browser versions the Panel needs. All requirements are listed in the (link: docs/reference/system/requirements text: requirements reference).
 
 ## Under the hood
 
@@ -177,6 +177,8 @@ Our own tooling got an upgrade as well, which helps us ship with fewer bugs:
 
 - (link: docs/guide/updates/update-to-v6 text: Migration guides): everything you need to upgrade a site or a plugin to Kirby 6
 - (link: docs/guide/updates/update-to-v6/plugin-developers text: For plugin developers): the plugin migration guide with deep dives into Vue 3, field classes, trusted HTML, auth plugins and the Panel backend
+- (link: docs/guide/plugins/panel text: Panel plugins): how to build Panel plugins for Kirby 6
+- (link: docs/reference/plugins/extensions text: Extensions reference): all plugin extensions, from fields to Panel areas and auth methods
 
 ----
 
