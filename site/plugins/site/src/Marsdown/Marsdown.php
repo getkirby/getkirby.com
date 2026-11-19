@@ -466,6 +466,11 @@ class Marsdown extends ParsedownExtra
 	 */
 	protected function isTypeUnion(string $text): bool
 	{
+		// most inline code has no pipe at all
+		if (str_contains($text, '|') === false) {
+			return false;
+		}
+
 		$types = Types::split($text);
 
 		// no empty types or whitespace around the pipes
