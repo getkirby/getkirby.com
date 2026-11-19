@@ -133,131 +133,70 @@ class Marsdown extends ParsedownExtra
 	}
 
 	/**
-	 * An extended version of Parsedown’s codeblock handler,
-	 * offering the possibility of adding a caption (e.g. filename)
-	 * to codeblocks.
+	 * Fenced code blocks with an optional quoted
+	 * caption, e.g. ```php "site/config/config.php"
 	 */
 	protected function blockFencedCode($Line)
 	{
-		$marker = $Line['text'][0];
+		$caption = null;
 
-		// Match opener
-		$openerLength = strspn($Line['text'], $marker);
-
-		if ($openerLength < 3) {
-			return;
+		// separate the caption, so that Parsedown only gets
+		// the language as info string (tolerating a missing
+		// closing quote, so that typos stay visible)
+		if (preg_match('!^([`~]{3,}\s*\S*)\s+"([^"]*)"?\s*$!', $Line['text'], $matches) === 1) {
+			$Line['text'] = $matches[1];
+			$caption      = $matches[2] !== '' ? $matches[2] : null;
 		}
 
-		$infostring = trim(str_replace("\t", ' ', substr($Line['text'], $openerLength)), ' ');
+		$Block = parent::blockFencedCode($Line);
 
-		if (
-			strpos($infostring, ' ') === false &&
-			strpos($infostring, '`') !== false
-		) {
-			// abort parsing of block, if code block does not
-			// have a caption, but language string contains
-			// a backtick to match the behavior of vanilla
-			// Parsedown.
-			return;
+		if ($Block !== null) {
+			$Block['caption']  = $caption;
+			$Block['language'] = strtok(substr($Line['text'], $Block['openerLength']), " \t") ?: null;
 		}
 
-		$infostring = explode(' ', $infostring, 2);
-		$language   = $infostring[0];
-
-		if (count($infostring) === 2) {
-			// Block with caption
-			$caption  = $infostring[1];
-			$openChar = $caption[0];
-
-			if ($openChar === '"') {
-				$captionLength = strlen($caption);
-				$lastChar      = $caption[$captionLength - 1];
-
-				if ($lastChar === $openChar) {
-					// Remove quotes surrounding caption
-					$caption = substr($caption, 1, $captionLength - 2);
-				}
-			} else {
-				// If caption was not wrapped in quotes,
-				// just drop it.
-				$caption = '';
-			}
-		} else {
-			// Block without caption
-			$caption = '';
-		}
-
-		// Compose the code block
-		$Element = [
-			'name' => 'code',
-			'text' => '',
-		];
-
-		if ($language !== '') {
-			$Element['attributes'] = [
-				'class' => "language-{$language}"
-			];
-		}
-
-		return [
-			'char'         => $marker,
-			'caption'      => $caption,
-			'openerLength' => $openerLength,
-			'language'     => $language,
-			'element' => [
-				'name'    => 'pre',
-				'element' => $Element
-			],
-		];
+		return $Block;
 	}
 
 	/**
-	 * Extended version of the final block handler, which
-	 * adds support for filysystem code blocks, which
+	 * Wraps code blocks in a figure with optional caption
+	 * and renders `filesystem` blocks as file tree
 	 */
 	protected function blockFencedCodeComplete($Block)
 	{
-		switch ($Block['language']) {
-			case 'filesystem':
-				$Block['element'] = [
-					'name'       => !empty($Block['caption']) ? 'div' : 'figure',
-					'attributes' => ['class' => 'filesystem'],
-					'rawHtml'    => FileSystem::parse($Block['element']['element']['text']),
-				];
-				break;
-			case 'kirbycontent':
-				$Block['element']['element']['text'] = str_replace(["\r\n", "\r"], "\n", $Block['element']['element']['text']);
-				break;
-			default:
-				$text = $Block['element']['element']['text'];
-				$text = str_replace(['&lpar;', '&rpar;', '(\\'], ['(', ')', '('], $text);
-				$Block['element']['element']['text'] = trim($text);
-		}
+		$code = rtrim(ltrim($Block['element']['element']['text'], "\n"));
 
-		if ($Block['language'] !== 'filesystem') {
+		if ($Block['language'] === 'filesystem') {
+			$element = [
+				'name'       => 'figure',
+				'attributes' => ['class' => 'filesystem'],
+				'rawHtml'    => FileSystem::parse($code),
+			];
 
-			if (empty($Block['caption']) === true) {
-				$elements = [$Block['element']];
-			} else {
-				$elements = [
-					[
-						'name' => 'figcaption',
-						'text' => htmlspecialchars($Block['caption']),
-					],
-					$Block['element']
-				];
+			// without caption, the tree is the figure itself
+			if ($Block['caption'] === null) {
+				$Block['element'] = $element;
+				return $Block;
 			}
 
-			$Block['element'] = [
-				'name' => 'figure',
-				'attributes' => [
-					'class' => 'code',
-				],
-				'element' => [
-					'elements' => $elements
-				],
-			];
+			$element['name'] = 'div';
+		} else {
+			// unescape KirbyTags in code examples, e.g. `(\link: …)`
+			$element = $Block['element'];
+			$element['element']['text'] = str_replace(['&lpar;', '&rpar;', '(\\'], ['(', ')', '('], $code);
 		}
+
+		$elements = [$element];
+
+		if ($Block['caption'] !== null) {
+			array_unshift($elements, ['name' => 'figcaption', 'text' => $Block['caption']]);
+		}
+
+		$Block['element'] = [
+			'name'       => 'figure',
+			'attributes' => ['class' => 'code'],
+			'elements'   => $elements
+		];
 
 		return $Block;
 	}

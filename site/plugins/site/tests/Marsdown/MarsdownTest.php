@@ -159,11 +159,27 @@ class MarsdownTest extends TestCase
 		);
 	}
 
+	public function testFencedCodeKeepsFirstLineIndentation(): void
+	{
+		$this->assertSame(
+			"<figure class=\"code\">\n<pre><code class=\"language-yaml\">  fields:\n    text: true</code></pre>\n</figure>",
+			$this->parse("```yaml\n  fields:\n    text: true\n\n```")
+		);
+	}
+
 	public function testFencedCodeKeepsInnerIndentation(): void
 	{
 		$this->assertSame(
 			"<figure class=\"code\">\n<pre><code class=\"language-yaml\">fields:\n  text: true</code></pre>\n</figure>",
 			$this->parse("```yaml\nfields:\n  text: true\n```")
+		);
+	}
+
+	public function testFencedCodeKirbyContent(): void
+	{
+		$this->assertSame(
+			"<figure class=\"code\">\n<pre><code class=\"language-kirbycontent\">Text: (link: x)</code></pre>\n</figure>",
+			$this->parse("```kirbycontent\nText: (\\link: x)\n```")
 		);
 	}
 
@@ -183,11 +199,35 @@ class MarsdownTest extends TestCase
 		);
 	}
 
+	public function testFencedCodeWithCaptionEscaped(): void
+	{
+		$this->assertSame(
+			"<figure class=\"code\">\n<figcaption>a &amp; b &lt;c&gt;</figcaption>\n<pre><code class=\"language-php\">x</code></pre>\n</figure>",
+			$this->parse("```php \"a & b <c>\"\nx\n```")
+		);
+	}
+
+	public function testFencedCodeWithCaptionMissingClosingQuote(): void
+	{
+		$this->assertSame(
+			"<figure class=\"code\">\n<figcaption>site/config.php</figcaption>\n<pre><code class=\"language-php\">x</code></pre>\n</figure>",
+			$this->parse("```php \"site/config.php\nx\n```")
+		);
+	}
+
 	public function testFencedCodeWithoutLanguage(): void
 	{
 		$this->assertSame(
 			"<figure class=\"code\">\n<pre><code>plain</code></pre>\n</figure>",
 			$this->parse("```\nplain\n```")
+		);
+	}
+
+	public function testFencedCodeWithTildes(): void
+	{
+		$this->assertSame(
+			"<figure class=\"code\">\n<figcaption>cap</figcaption>\n<pre><code class=\"language-php\">x</code></pre>\n</figure>",
+			$this->parse("~~~php \"cap\"\nx\n~~~")
 		);
 	}
 
@@ -207,6 +247,14 @@ class MarsdownTest extends TestCase
 		$this->assertStringContainsString('data-type="folder-expanded"', $html);
 		$this->assertStringContainsString('>home.txt</span>', $html);
 		$this->assertStringEndsWith('</ul></figure>', $html);
+	}
+
+	public function testFilesystemWithCaption(): void
+	{
+		$html = $this->parse("```filesystem \"/site\"\nplugins/\n```");
+		$this->assertStringStartsWith("<figure class=\"code\">\n<figcaption>/site</figcaption>\n<div class=\"filesystem\"><ul><li>", $html);
+		$this->assertStringContainsString('data-type="folder-collapsed"', $html);
+		$this->assertStringEndsWith("</ul></div>\n</figure>", $html);
 	}
 
 	public function testHeadingH2(): void

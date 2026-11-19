@@ -3,8 +3,12 @@
 namespace Kirby\Marsdown;
 
 use Kirby\Filesystem\F;
-use Kirby\Toolkit\Str;
 
+/**
+ * Renders an indented list of files and folders
+ * (two spaces per level, folders end with `/`)
+ * as file tree
+ */
 class FileSystem
 {
 	/**
@@ -32,7 +36,6 @@ class FileSystem
 		}
 
 		$extension = F::extension($filename);
-		$icon      = F::type($filename);
 
 		foreach (static::$types as $type => $extensions) {
 			if (
@@ -44,36 +47,31 @@ class FileSystem
 					in_array($extension, $extensions)
 				)
 			) {
-				$icon = $type;
-				break;
+				return $type;
 			}
 		}
 
-		return $icon ?? 'file';
+		return F::type($filename) ?? 'file';
 	}
 
-	public static function parse(mixed $text): string
+	public static function parse(string $text): string
 	{
 		return static::renderBlock(static::parseBlock($text));
 	}
 
-	// Source: http://stackoverflow.com/a/8882181
+	/**
+	 * Converts the indented lines into a nested array
+	 * @see http://stackoverflow.com/a/8882181
+	 */
 	protected static function parseBlock(string $text): array
 	{
-		$text        = trim($text);
-		$indentation = '  ';
-
 		$result = [];
 		$path   = [];
 
-		foreach (preg_split("$\n+$", $text) as $line) {
-			// get depth and label
-			$depth = 0;
-
-			while (substr($line, 0, strlen($indentation)) === $indentation) {
-				$depth += 1;
-				$line = substr($line, strlen($indentation));
-			}
+		foreach (preg_split('/\n+/', trim($text)) as $line) {
+			// two spaces per level
+			$depth = intdiv(strspn($line, ' '), 2);
+			$line  = substr($line, $depth * 2);
 
 			// truncate path if needed
 			while ($depth < count($path)) {
@@ -86,7 +84,7 @@ class FileSystem
 			// traverse path and add label to result
 			$parent = &$result;
 
-			foreach ($path as $depth => $key) {
+			foreach ($path as $key) {
 				if (isset($parent[$key]) === false) {
 					$parent[$line] = [];
 					break;
@@ -96,50 +94,37 @@ class FileSystem
 			}
 		}
 
-		// return
 		return $result;
 	}
 
-	protected static function renderBlock(
-		array $files,
-		int $level = 0
-	): string {
+	protected static function renderBlock(array $files): string
+	{
 		$html = '<ul>';
 
-		foreach ($files as $filename => $children) {
-			$hasChildren = count($children) > 0;
-			$isFolder    = Str::endsWith($filename, '/');
-			$icon        = static::getIconByFilename($filename);
+		foreach ($files as $name => $children) {
+			$name = (string)$name;
 
-			$html .= '<li>';
-
-			if ($isFolder) {
-				$filename = preg_replace('/\/$/', '', $filename);
-				$icon     = match($hasChildren) {
-					true  => 'folder-expanded',
-					false => 'folder-collapsed',
-				};
-
-				if ($hasChildren) {
-					$html .= '<details open>';
-					$html .= '<summary>';
-					$html .= static::renderLabel($filename, $icon);
-					$html .= '</summary>';
-					$html .= static::renderBlock($children, $level + 1);
-					$html .= '</details>';
-					continue;
-				}
+			// files and empty folders
+			if (str_ends_with($name, '/') === false) {
+				$html .= '<li>' . static::renderLabel($name, static::getIconByFilename($name)) . '</li>';
+				continue;
 			}
 
-			$html .= static::renderLabel($filename, $icon);
-			$html .= '</li>';
+			$name = substr($name, 0, -1);
 
+			if ($children === []) {
+				$html .= '<li>' . static::renderLabel($name, 'folder-collapsed') . '</li>';
+				continue;
+			}
+
+			$html .= '<li><details open><summary>';
+			$html .= static::renderLabel($name, 'folder-expanded');
+			$html .= '</summary>';
+			$html .= static::renderBlock($children);
+			$html .= '</details></li>';
 		}
 
-		$html .= '</ul>';
-
-		return $html;
-
+		return $html . '</ul>';
 	}
 
 	protected static function renderLabel(
@@ -152,46 +137,6 @@ class FileSystem
 			$html .= icon($type);
 		}
 
-		$html .= $name;
-		$html .= '</span>';
-
-		return $html;
+		return $html . htmlspecialchars($name) . '</span>';
 	}
 }
-
-// ```filesystem
-// content/
-//   1-projects/
-//     project-a/
-//       .git
-//       .gitattributes
-//       archive.zip
-//       css.css
-//       file.unknown
-//       font.eot
-//       font.otf
-//       font.ttf
-//       font.woff
-//       font.woff2
-//       html.html
-//       image-1.jpg
-//       image-2.jpg
-//       image-3.jpg
-//       js.js
-//       json.json
-//       markdown.md
-//       markdown.mdown
-//       php.php
-//       project-data.xls
-//       project-info.pdf
-//       project.txt
-//       readme.md
-//       LICENSE
-//       some-audio.mp3
-//       some-video.mp4
-//       xml.xml
-//       yaml.yml
-//     project-b/
-//       ...
-//   2-about/
-// ```

@@ -39,9 +39,9 @@ class FileSystemTest extends TestCase
 				'<li><details open><summary>[folder-expanded]content</summary><ul>' .
 					'<li><details open><summary>[folder-expanded]1_projects</summary><ul>' .
 						'<li>[text]project.txt</li>' .
-					'</ul></details>' .
+					'</ul></details></li>' .
 					'<li>[text]site.txt</li>' .
-				'</ul></details>' .
+				'</ul></details></li>' .
 				'<li>[folder-collapsed]site</li>' .
 			'</ul>',
 			$this->structure($html)
@@ -53,7 +53,17 @@ class FileSystemTest extends TestCase
 		$html = FileSystem::parse("content/\n  ...\n  …");
 
 		$this->assertSame(
-			'<ul><li><details open><summary>[folder-expanded]content</summary><ul><li>[]...</li><li>[]…</li></ul></details></ul>',
+			'<ul><li><details open><summary>[folder-expanded]content</summary><ul><li>[]...</li><li>[]…</li></ul></details></li></ul>',
+			$this->structure($html)
+		);
+	}
+
+	public function testParseEscapesNames(): void
+	{
+		$html = FileSystem::parse("<b>/\n  a&b.txt");
+
+		$this->assertSame(
+			'<ul><li><details open><summary>[folder-expanded]&lt;b&gt;</summary><ul><li>[text]a&amp;b.txt</li></ul></details></li></ul>',
 			$this->structure($html)
 		);
 	}
