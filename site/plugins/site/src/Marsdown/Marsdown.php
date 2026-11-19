@@ -2,7 +2,6 @@
 
 namespace Kirby\Marsdown;
 
-use DomDocument;
 use Kirby\Reference\Types\Type;
 use Kirby\Reference\Types\Types;
 use Kirby\Toolkit\A;
@@ -39,33 +38,32 @@ class Marsdown extends ParsedownExtra
 	}
 
 	/**
-	 * Parse Kirby's text boxes
+	 * Parse Kirby's text boxes, e.g. `<info>…</info>`
+	 * or `<since v="5.0.0">…</since>`
 	 */
 	protected function blockBox(array $Line, array|null $Block = null)
 	{
-		if (preg_match('!<(success|info|warning|alert|since)(.*?)>!', $Line['text'], $matches)) {
-
-			$type  = strtolower($matches[1]);
-			$Block = [
-				'box' => [
-					'type'  => $type,
-					'html'  => null,
-					'attrs' => $this->parseAttributes($matches[2])
-				],
-			];
-
-			// if the block is just across a single line
-			if (preg_match('!</' . $type . '>$!', $Line['text'])) {
-				$html = preg_replace('!^<' . $type . '.*?>(.*)</' . $type . '>$!', '$1', $Line['text']);
-
-				$Block['complete']    = true;
-				$Block['box']['html'] = $html;
-			}
-
-			return $Block;
+		if (preg_match('!^<(success|info|warning|alert|since)(\s[^>]*)?>(.*)$!', $Line['text'], $matches) !== 1) {
+			return null;
 		}
 
-		return null;
+		$type  = $matches[1];
+		$text  = rtrim($matches[3]);
+		$Block = [
+			'box' => [
+				'type'  => $type,
+				'html'  => $text,
+				'attrs' => $this->parseAttributes($matches[2])
+			],
+		];
+
+		// single-line box
+		if (str_ends_with($text, '</' . $type . '>') === true) {
+			$Block['complete']    = true;
+			$Block['box']['html'] = substr($text, 0, -strlen('</' . $type . '>'));
+		}
+
+		return $Block;
 	}
 
 	/**
@@ -119,7 +117,7 @@ class Marsdown extends ParsedownExtra
 			return;
 		}
 
-		if ($Line['text'] === '</' . $Block['box']['type'] . '>') {
+		if (rtrim($Line['text']) === '</' . $Block['box']['type'] . '>') {
 			$Block['complete'] = true;
 			return $Block;
 		}
@@ -527,14 +525,19 @@ class Marsdown extends ParsedownExtra
 		return (new static($this->options, $this->root ?? $this))->text($text);
 	}
 
+	/**
+	 * Parses quoted HTML attributes, e.g. `v="5.0.0" label='%s'`
+	 */
 	protected function parseAttributes(string $input): array
 	{
-		$dom = new DomDocument();
-		$dom->loadHtml('<html ' . $input . '/>');
+		preg_match_all('!([\w-]+)=(["\'])(.*?)\2!', $input, $matches, PREG_SET_ORDER);
+
 		$attributes = [];
-		foreach ($dom->documentElement->attributes as $name => $attr) {
-			$attributes[$name] = $attr->value;
+
+		foreach ($matches as [, $name, , $value]) {
+			$attributes[strtolower($name)] = html_entity_decode($value);
 		}
+
 		return $attributes;
 	}
 

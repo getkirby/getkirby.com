@@ -22,6 +22,17 @@ class MarsdownTest extends TestCase
 		$this->assertStringEndsWith('</div>', $html);
 	}
 
+	public function testBoxClosingTagWithTrailingWhitespace(): void
+	{
+		$html = $this->parse("<info>\nBox\n</info>  \n\nAfter");
+		$this->assertStringContainsString('<p>Box</p>', $html);
+		$this->assertStringEndsWith("</div>\n<p>After</p>", $html);
+
+		$html = $this->parse("<info>Box</info>  \nAfter");
+		$this->assertStringContainsString('<p>Box</p>', $html);
+		$this->assertStringEndsWith("</div>\n<p>After</p>", $html);
+	}
+
 	public function testBoxFollowedByText(): void
 	{
 		$html = $this->parse("<info>\nBox\n</info>\n\nAfter");
@@ -38,6 +49,21 @@ class MarsdownTest extends TestCase
 		$html = $this->parse('  <info>Hi</info>');
 		$this->assertStringStartsWith('<div class="box box--info">', $html);
 		$this->assertStringContainsString('<p>Hi</p>', $html);
+	}
+
+	public function testBoxOnlyAtLineStart(): void
+	{
+		// other tags starting with a box name
+		$this->assertSame(
+			'<information-panel>Hi</information-panel>',
+			$this->parse('<information-panel>Hi</information-panel>')
+		);
+
+		// box tag later in the line
+		$this->assertSame(
+			'<p><span>see</span> <info>Hi</info></p>',
+			$this->parse('<span>see</span> <info>Hi</info>')
+		);
 	}
 
 	public function testBoxSingleLine(): void
@@ -71,6 +97,12 @@ class MarsdownTest extends TestCase
 
 		$html = $this->parse("<info>\n(link: https://getkirby.com)\n</info>");
 		$this->assertStringContainsString('<p>(link: <a href="https://getkirby.com">https://getkirby.com</a>)</p>', $html);
+	}
+
+	public function testBoxWithTextInOpeningLine(): void
+	{
+		$html = $this->parse("<info>First line\nSecond line\n</info>");
+		$this->assertStringContainsString("<p>First line<br />\nSecond line</p>", $html);
 	}
 
 	public function testBreaks(): void
@@ -315,6 +347,12 @@ class MarsdownTest extends TestCase
 		$html = $this->parse("<since v=\"4.0.0\" label=\"Kirby %s\">\nNew thing\n</since>");
 		$this->assertStringContainsString('Since <a href="https://github.com/getkirby/kirby/releases/tag/4.0.0">Kirby 4.0.0</a>', $html);
 		$this->assertStringContainsString('<p>New thing</p>', $html);
+	}
+
+	public function testSinceWithSingleQuotes(): void
+	{
+		$html = $this->parse("<since v='4.0.0'>New thing</since>");
+		$this->assertStringContainsString('Since <a href="https://github.com/getkirby/kirby/releases/tag/4.0.0">4.0.0</a>', $html);
 	}
 
 	public function testSnippetsWithKirbyText(): void
