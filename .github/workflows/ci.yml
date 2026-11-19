@@ -26,19 +26,19 @@ jobs:
     steps:
       - &checkout
         name: Checkout
-        uses: getkirby/actions/checkout@07e658b7eb1254cafc0baf94a2d241e810658176 # 0.3.0
+        uses: getkirby/actions/checkout@e27f4dff8102d3f51e08f0608f27decf59a90ce8 # 0.3.1
 
       # vendor/ and kirby/ are committed, so there is nothing to install
       - &php
         name: Setup PHP
-        uses: getkirby/actions/php@07e658b7eb1254cafc0baf94a2d241e810658176 # 0.3.0
+        uses: getkirby/actions/php@e27f4dff8102d3f51e08f0608f27decf59a90ce8 # 0.3.1
         with:
           version: "8.4"
           extensions: mbstring, intl
           dependencies: none
 
       - name: Run PHP unit tests
-        uses: getkirby/actions/phpunit@07e658b7eb1254cafc0baf94a2d241e810658176 # 0.3.0
+        uses: getkirby/actions/phpunit@e27f4dff8102d3f51e08f0608f27decf59a90ce8 # 0.3.1
 
   style:
     name: Code style
@@ -55,6 +55,6 @@ jobs:
       - *php
 
       - name: Check PHP code style
-        uses: getkirby/actions/php-cs@07e658b7eb1254cafc0baf94a2d241e810658176 # 0.3.0
+        uses: getkirby/actions/php-cs@e27f4dff8102d3f51e08f0608f27decf59a90ce8 # 0.3.1
         with:
           suggestions: true
