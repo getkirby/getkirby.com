@@ -194,7 +194,7 @@ Users can log in through the (glossary: Panel) login page or a custom login form
 
 ### Impersonate
 
-One way to go without authentication is to (link: docs/reference/objects/kirby/impersonate text: impersonate) an existing user or the special `kirby` super user, which has full permissions:
+One way to go without authentication is to (link: docs/reference/objects/cms/app/impersonate text: impersonate) an existing user or the special `kirby` super user, which has full permissions:
 
 ```php
 <?php

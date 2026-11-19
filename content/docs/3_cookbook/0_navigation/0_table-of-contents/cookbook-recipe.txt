@@ -23,7 +23,7 @@ A Table of Contents (ToC) gives readers a quick overview of the contents of a pa
 ## Prerequisites
 Being familiar with (link: docs/guide/plugins/basics text: registering extensions in Kirby) and a basic understanding of PHP will be useful.
 
-To follow along, (link: docs/guide/quickstart#download-and-installation text: install a Kirby Starterkit), create a `/site/plugins/toc` folder with an `index.php` inside and add some headlines in a textarea field, for example in one of the subpages of the `/content/notes` page.
+To follow along, (link: docs/guide/quickstart#installing-kirby text: install a Kirby Starterkit), create a `/site/plugins/toc` folder with an `index.php` inside and add some headlines in a textarea field, for example in one of the subpages of the `/content/notes` page.
 
 <info>
 Note that the techniques described here only work for fields that are rendered using the `kirbytext()` method, usually a `textarea` field (or plugin fields derived from this), not with the (link: https://github.com/getkirby/editor/ text: Editor).

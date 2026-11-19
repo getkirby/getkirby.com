@@ -40,7 +40,7 @@ PHP version support has changed since Kirby 3 was originally released. Because o
 
 ### No Kirby CLI support
 
-The Kirby CLI is no longer compatible with Kirby 3. Kirby and extensions can instead be installed (link: docs/guide/installation text: manually), with (link: docs/guide/install-guide/git text: Git) or with (link: docs/guide/install-guide/composer text: Composer).
+The Kirby CLI is no longer compatible with Kirby 3. Kirby and extensions can instead be installed (link: docs/guide/install-guide text: manually), with (link: docs/guide/install-guide/git text: Git) or with (link: docs/guide/install-guide/composer text: Composer).
 
 
 ## Folder and file structure
@@ -108,7 +108,7 @@ Kirby 3 requires a license file instead of the K2 config setting. The license fi
 
 ### Custom folder setup
 
-The (link: docs/guide/configuration#custom-folder-setup text: custom folder setup) is no longer done in `site.php` but in your `index.php`.
+The (link: docs/guide/configuration/custom-folder-setup text: custom folder setup) is no longer done in `site.php` but in your `index.php`.
 
 ## Panel
 
@@ -425,7 +425,7 @@ The toolkit has been completely rewritten, new methods have been added, others r
 | `Db`  | `Kirby\Database\Db`  |
 | `Detect` | `Kirby\CMS\System` |
 | `Dimensions`  | `Kirby\Image\Dimensions`  |
-| `Email`  | (link: docs/reference/@#email text: `Kirby\Email`) |
+| `Email`  | (link: docs/reference/objects/email/email text: `Kirby\Email`) |
 | `Embed`   |  (link: docs/reference/templates/helpers text: YouTube, Vimeo and Gist helpers) |
 | `Error`  | `Kirby\Exception`  |
 | `ErrorReporting`  | `Kirby\Exception`  |

@@ -96,7 +96,7 @@ You can also take a look at the (link: https://github.com/getkirby/kirby/blob/ma
 
 ## Using custom marks/nodes in your fields
 
-Learn how to (link: docs/reference/panel/fields/writer#choosing-available-marks text: activate your custom mark or node). This also works for blocks, when you extend or overwrite e.g. the (link: docs/reference/panel/blocks/text#default-files__blueprint text: text blocks' blueprint) to add the right options to the block's text field (which is a writer type field by default).
+Learn how to (link: docs/reference/panel/fields/writer#marks text: activate your custom mark or node). This also works for blocks, when you extend or overwrite e.g. the (link: docs/reference/panel/blocks/text#default-files__blueprint text: text blocks' blueprint) to add the right options to the block's text field (which is a writer type field by default).
 
 ## Troubleshooting
 

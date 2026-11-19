@@ -12,7 +12,7 @@ Kirby's (link: docs/reference/panel/fields/blocks text: blocks field) comes with
 
 ## Prerequisites
 
-- A Kirby (link: docs/guide/quickstart#download-and-installation text: Plainkit or Starterkit) for testing
+- A Kirby (link: docs/guide/quickstart#installing-kirby text: Plainkit or Starterkit) for testing
 - A code editor
 - Basic understanding (link: docs/guide/plugins/basics text: how to create plugins in Kirby)
 - For the single file approach, Node 14+ and (link: https://github.com/johannschopplich/kirbyup text: kirbyup). But don't worry, we also show you how to build this block without such a build process (see link below).

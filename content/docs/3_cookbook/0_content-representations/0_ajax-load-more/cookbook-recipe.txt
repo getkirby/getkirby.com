@@ -206,7 +206,7 @@ Before we can get to our last missing piece, the JavaScript, we have to modify t
 
 ## Javascript
 
-Finally, our last step. Add the following script in `assets/js/templates/photography.js`. By adding this script to this location, we make sure that it is only loaded for the `photography.php` template. And because the footer already has the (link: docs/reference/templates/helpers/js#example__autoloading-template-specific-script-files text: `@auto` parameter) to auto-load all template specific JS files, we don't have to require it specifically.
+Finally, our last step. Add the following script in `assets/js/templates/photography.js`. By adding this script to this location, we make sure that it is only loaded for the `photography.php` template. And because the footer already has the (link: docs/reference/templates/helpers/js#examples__autoloading-template-specific-script-files text: `@auto` parameter) to auto-load all template specific JS files, we don't have to require it specifically.
 
 <info>
 If you put the script file into another location, make sure to load it in the footer.

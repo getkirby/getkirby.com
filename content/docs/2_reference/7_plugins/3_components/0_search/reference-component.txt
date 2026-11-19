@@ -7,7 +7,7 @@ Text:
 If you are not happy with our built-in search for collections, you can create your own.
 
 <info>
-Keep in mind that the search component will be used for all searches of collections (e.g. pages, users, fields) that use the [`->search()`](/docs/reference/@/classes/cms/collection/search) method.
+Keep in mind that the search component will be used for all searches of collections (e.g. pages, users, fields) that use the [`->search()`](/docs/reference/objects/cms/collection/search) method.
 </info>
 
 

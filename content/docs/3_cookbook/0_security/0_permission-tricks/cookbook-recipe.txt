@@ -37,7 +37,7 @@ This implementation gives you absolute freedom, and you are not even limited to 
 
 ### How does it work
 
-This method leverages (link: docs/guide/configuration#custom-folder-setup text: Kirby's custom folder setup feature).
+This method leverages (link: docs/guide/configuration/custom-folder-setup text: Kirby's custom folder setup feature).
 
 ```php "index.php"
 

@@ -50,7 +50,7 @@ But let's go through these general steps in a little more detail and see how we 
 (tabs…)
 === Existing project
 
-If you already have a existing Kirby project (Starterkit or your own project), you can use that. Note that if you have a public folder setup, the configuration is a bit different, see (link: #public-folder-setup text: Public folder setup).
+If you already have a existing Kirby project (Starterkit or your own project), you can use that. Note that if you have a public folder setup, the configuration is a bit different, see the *Public folder setup* tab below.
 
 1. Open a shell window and navigate into your project directory with the `cd` command.
 2. Before you can spin up a new DDEV project, initialize the DDEV environment with the `ddev config` command. In the project directory run:

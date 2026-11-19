@@ -17,7 +17,7 @@ Kirby 2 only had a single upload section for files in the sidebar and it wasn’
 This new way of dealing with files gives you much more flexibility but it also means that you have to adapt some things when migrating a Kirby 2 site, because you can no longer define the meta data fields in the page blueprint.
 
 <info>
-This recipe assumes that your content folder has already been updated with the new folder numbers as explained in the (link: docs/cookbook/migration/sites#folder-and-file-structure text: main migration guide).
+This recipe assumes that your content folder has already been updated with the new folder numbers as explained in the (link: docs/guide/updates/update-to-v3 text: main migration guide).
 </info>
 
 These are the basic steps to migrate your metadata fields to Kirby 3:

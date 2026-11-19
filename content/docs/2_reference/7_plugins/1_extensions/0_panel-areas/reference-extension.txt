@@ -173,7 +173,7 @@ This option can also be a closure:
 'menu' => function ($areas, $permissions, $current): bool|array
 ```
 
-If the area is by default hidden from the menu, it can still be added via the (link: docs/reference/system/options/panel#panel-menu-make-your-own text: `panel.menu` config option). Vice-versa any Panel area that is visible by default, won't show up if a `panel.menu` config has been set that does not include the area.
+If the area is by default hidden from the menu, it can still be added via the (link: docs/reference/system/options/panel#panel-menu text: `panel.menu` config option). Vice-versa any Panel area that is visible by default, won't show up if a `panel.menu` config has been set that does not include the area.
 
 ## Translating labels, titles, etc.
 

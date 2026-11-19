@@ -2,7 +2,7 @@ Title: Site methods
 
 ----
 
-Read: docs/guide/templates/php-api#site
+Read: docs/guide/templates/php-api#key-objects
 
 ----
 

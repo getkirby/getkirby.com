@@ -567,4 +567,4 @@ That was it. Happy coding!
 - (link: docs/guide/authentication/frontend-login text: Frontend login)
 - (link: docs/guide/authentication/password-reset-form text: Password reset)
 - (link: docs/cookbook/security/access-restriction text: Restricting access to your site)
-- (link: docs/cookbook/forms/using-mailhog-for-email-testing text: Using MailHog for local email testing)
+- (link: docs/cookbook/development-deployment/using-mailpit-for-email-testing text: Using Mailpit for local email testing)

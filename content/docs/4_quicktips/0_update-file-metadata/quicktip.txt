@@ -22,7 +22,7 @@ Tags: files
 
 Text:
 
-Updating (link: docs/guide/content/files#adding-meta-data-to-your-files text: file metadata), and particularly the template that is stored for a file, is a task that comes up ever so often. Because you forgot to assign a file template in the first place or because you later changed your mind and want to assign a different template to some file types or whatever.
+Updating (link: docs/guide/files#adding-meta-data-to-your-files text: file metadata), and particularly the template that is stored for a file, is a task that comes up ever so often. Because you forgot to assign a file template in the first place or because you later changed your mind and want to assign a different template to some file types or whatever.
 
 Since the file template assigned to a file is stored in the file metadata file (i.e. the text file that is created for each uploaded file), this is what we have to update when we want to newly assign or change the file template or any other metadata.
 
@@ -151,4 +151,3 @@ Of course, you can filter your files collection by extension, type, parent or wh
 ## Related recipes
 
 - (link: docs/cookbook/extensions/content-file-cleanup text: Cleaning up content files)
-- (link: docs/cookbook/setup/migrate-files text: Migrate file metadata)

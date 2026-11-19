@@ -44,7 +44,7 @@ Kirby::plugin(
 
 ## Usage in templates
 
-Once defined, you can use the collection in your templates using the [`collection()` helper](../helpers/collection).
+Once defined, you can use the collection in your templates using the [`collection()` helper](/docs/reference/templates/helpers/collection).
 
 ```php "/site/templates/blog.php"
 <?php foreach (collection('articles') as $article): ?>

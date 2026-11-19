@@ -430,7 +430,7 @@ if (empty($alerts) === true) {
 
 ## The email templates
 
-In our [`$kirby->email()` method](/docs/reference/objects/kirby/email) above, we defined a template we want to use to send the email. In this example, we use a template called `email`, which is stored in `/site/templates/emails`.
+In our [`$kirby->email()` method](/docs/reference/objects/cms/app/email) above, we defined a template we want to use to send the email. In this example, we use a template called `email`, which is stored in `/site/templates/emails`.
 
 We can use both a plain text template and/or an HTML version. You can read more about this in the (link: docs/guide/emails text: email guide).
 

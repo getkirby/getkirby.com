@@ -268,7 +268,7 @@ clients with the role clients
 ## Remarks
 Note that this recipe only provides a basic example to give you an idea how to handle access restrictions. You can extend this into a powerful user area, with (link: docs/cookbook/forms/user-registration text: user sign-up), password reset, etc.
 
-The login form only covers users who log in with their email address and password. Users who have set up a second factor in the Panel, or all users if you require a second factor with the (link: docs/reference/system/options/auth#login-methods__two-step-or-two-factor-authentication text: `2fa` option), can't log in with it. For them, the form needs a second step to enter the code, see (link: docs/guide/authentication/frontend-login text: frontend login).
+The login form only covers users who log in with their email address and password. Users who have set up a second factor in the Panel, or all users if you require a second factor with the (link: docs/reference/system/options/auth#login-methods__two-factor-authentication text: `2fa` option), can't log in with it. For them, the form needs a second step to enter the code, see (link: docs/guide/authentication/frontend-login text: frontend login).
 
 <warning>
 The process described here doesn’t prevent access to your assets (images, video, documents etc., which will still be accessible to anyone who guesses the URL to these files). Learn how to protect them in the (link: docs/cookbook/security/files-firewall text: files firewall) recipe.

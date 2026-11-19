@@ -101,7 +101,7 @@ Kirby 4 contains some features out of the box that were previously provided by p
 - (link: docs/reference/panel/fields/link text: Link field)
 - (link: docs/reference/panel/fields/color text: Color field)
 - (link: docs/guide/content/publishing-workflow#moving-pages text: Moving pages in the Panel)
-- (link: docs/reference/panel/blueprints/file#optimize-uploaded-images text: Optimize images on upload)
+- (link: docs/reference/panel/blueprints/file#optimize-uploaded-images-create text: Optimize images on upload)
 - (link: docs/guide/files/files#setting-a-focus-point text: Setting an image focus point)
 - (link: docs/reference/plugins/extensions/blocks#quick-and-easy-fields-preview text: Fields preview for blocks)
 - (link: docs/reference/panel/blueprints/page#page-creation-dialog text: Custom fields in the page create dialog)
