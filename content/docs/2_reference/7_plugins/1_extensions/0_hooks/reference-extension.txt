@@ -32,7 +32,7 @@ An `after` hook is triggered right after the action was executed. Some typical u
 - …
 
 <info>
-Hooks can execute code, but you can't return anything from them or redirect anywhere. If you try to, an error is thrown in the Panel.
+Many hooks let you replace a value by returning it, e.g. the page that `page.update:before` works with or the page that `$page->update()` returns after `page.update:after`. Return nothing to keep the value as it is. The example on each hook's page shows what you can return. You can't redirect from a hook. If you try to, an error is thrown in the Panel.
 </info>
 
 ## Available events
