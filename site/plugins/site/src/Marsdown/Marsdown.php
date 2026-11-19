@@ -11,13 +11,19 @@ use ParsedownExtra;
 
 class Marsdown extends ParsedownExtra
 {
-	protected $lastH2;
+	/**
+	 * Slug of the last h2 heading, used to prefix h3 ids
+	 */
+	protected string|null $lastH2 = null;
 
 	/**
-	 * Extend Parsedown's constructor
+	 * @param $root Root parser of the document, if this
+	 *             parser renders nested content (boxes, columns, tabs)
 	 */
-	public function __construct(protected array $options = [])
-	{
+	public function __construct(
+		protected array $options = [],
+		protected Marsdown|null $root = null
+	) {
 		parent::__construct();
 
 		// register the new box type
@@ -45,8 +51,7 @@ class Marsdown extends ParsedownExtra
 
 			// if the block is just across a single line
 			if (preg_match('!</' . $type . '>$!', $Line['text'])) {
-				$html = $Line['body'];
-				$html = preg_replace('!^<' . $type . '.*?>(.*)</' . $type . '>$!', '$1', $html);
+				$html = preg_replace('!^<' . $type . '.*?>(.*)</' . $type . '>$!', '$1', $Line['text']);
 
 				$Block['complete']    = true;
 				$Block['box']['html'] = $html;
@@ -69,10 +74,11 @@ class Marsdown extends ParsedownExtra
 
 		if ($type === 'since') {
 			return [
+				...$Block,
 				'element' => [
 					'name' => 'details',
 					'rawHtml' => snippet('kirbytext/since', [
-						'text'    => $text,
+						'html'    => $this->nested($text),
 						'label'   => $attrs['label'] ?? null,
 						'version' => $attrs['v'] ?? null
 					], true),
@@ -85,11 +91,12 @@ class Marsdown extends ParsedownExtra
 		}
 
 		return [
+			...$Block,
 			'element' => [
 				'name' => 'div',
 				'rawHtml' => snippet('kirbytext/box', [
-					'type'  => $type,
-					'text'  => $text,
+					'type' => $type,
+					'html' => $this->nested($text),
 				], true),
 				'attributes' => [
 					'class' => 'box box--' . $type
@@ -266,9 +273,13 @@ class Marsdown extends ParsedownExtra
 
 	protected function blockGroupsColumnsComplete(array $Block): array
 	{
-		$columns = Str::split($Block['group']['html'], '++++');
+		$columns = A::map(
+			Str::split($Block['group']['html'] ?? '', '++++'),
+			fn ($column) => $this->nested($column)
+		);
 
 		return [
+			...$Block,
 			'element' => [
 				'name' => 'div',
 				'attributes' => [
@@ -276,7 +287,7 @@ class Marsdown extends ParsedownExtra
 					'style' => '--columns: 2; --gap: 3rem'
 				],
 				'rawHtml' => snippet('kirbytext/columns', [
-					'columns' => $columns
+					'html' => $columns
 				], true),
 			]
 		];
@@ -315,12 +326,14 @@ class Marsdown extends ParsedownExtra
 
 	protected function blockGroupsTabsComplete(array $Block): array
 	{
-		preg_match_all('!=== (.*)!', $Block['group']['html'], $titles);
-		$contents = preg_split('!=== .*!', $Block['group']['html']);
+		$html = $Block['group']['html'] ?? '';
+
+		preg_match_all('!=== (.*)!', $html, $titles);
+		$contents = preg_split('!=== .*!', $html);
 		$tabs     = array_map(
 			fn ($content, $title) => [
-				'title'   => $title,
-				'content' => kirbytext($content)
+				'title' => $title,
+				'html'  => $this->nested($content)
 			],
 			array_slice($contents, 1),
 			$titles[1]
@@ -329,6 +342,7 @@ class Marsdown extends ParsedownExtra
 		$id = Str::random(3);
 
 		return [
+			...$Block,
 			'element' => [
 				'name' => 'div',
 				'attributes' => [
@@ -346,24 +360,25 @@ class Marsdown extends ParsedownExtra
 	protected function blockHeader($Line)
 	{
 		$Block = parent::blockHeader($Line);
+		$level = $Block['element']['name'] ?? null;
 
-		if (!$Block) {
-			return;
+		// only h2 and h3 headings get ids and anchor links
+		if ($level !== 'h2' && $level !== 'h3') {
+			return $Block;
 		}
 
-		$slug  = Str::slug(Str::unhtml($this->text($Block['element']['handler']['argument'])));
-		$level = $Block['element']['name'];
+		// slug from the plain text of the heading, without
+		// a leading number (e.g. `### 1. First step`) to keep
+		// existing ids; using `line()` as `text()` would
+		// reset the link definitions of the document
+		$text  = preg_replace('/^\d+[.)] +/', '', $Block['element']['handler']['argument']);
+		$slug  = Str::slug(Str::unhtml($this->line($text)));
+		$state = $this->root ?? $this;
 
-		switch ($level) {
-			case 'h2':
-				$this->lastH2 = $slug;
-				break;
-			case 'h3':
-				$slug = $this->lastH2 . '__' . $slug;
-				break;
-			default:
-				return $Block;
-				break;
+		if ($level === 'h2') {
+			$state->lastH2 = $slug;
+		} else {
+			$slug = $state->lastH2 . '__' . $slug;
 		}
 
 		if (isset($this->options['idPrefix'])) {
@@ -371,6 +386,7 @@ class Marsdown extends ParsedownExtra
 		}
 
 		return [
+			...$Block,
 			'element' => [
 				'name' => $level,
 				'attributes' => [
@@ -394,14 +410,10 @@ class Marsdown extends ParsedownExtra
 	 */
 	protected function blockTableComplete($Block)
 	{
-		$Block = [
-			'element' => [
-				'name' => 'div',
-				'attributes' => [
-					'class' => 'table',
-				],
-				'elements' => [$Block['element']],
-			],
+		$Block['element'] = [
+			'name'       => 'div',
+			'attributes' => ['class' => 'table'],
+			'elements'   => [$Block['element']],
 		];
 
 		return $Block;
@@ -473,6 +485,16 @@ class Marsdown extends ParsedownExtra
 		);
 	}
 
+	/**
+	 * Parses the content of boxes, columns and tabs with
+	 * a separate parser, so that it does not reset the
+	 * definitions of the outer document
+	 */
+	protected function nested(string $text): string
+	{
+		return (new static($this->options, $this->root ?? $this))->text($text);
+	}
+
 	protected function parseAttributes(string $input): array
 	{
 		$dom = new DomDocument();
@@ -482,5 +504,19 @@ class Marsdown extends ParsedownExtra
 			$attributes[$name] = $attr->value;
 		}
 		return $attributes;
+	}
+
+	/**
+	 * Parses a document
+	 */
+	public function text($text): string
+	{
+		// every document starts with a clean state;
+		// nested content shares the state of its root
+		if ($this->root === null) {
+			$this->lastH2 = null;
+		}
+
+		return parent::text($text);
 	}
 }
