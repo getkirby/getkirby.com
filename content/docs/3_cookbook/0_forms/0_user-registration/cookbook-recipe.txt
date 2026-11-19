@@ -302,7 +302,7 @@ The `login.php` controller is a bit more complex because depending on which fiel
 ```php "/site/controllers/login.php"
 <?php
 
-use Kirby\Cms\Auth\Status;
+use Kirby\Auth\State;
 use Kirby\Exception\PermissionException;
 use Kirby\Toolkit\V;
 
@@ -313,7 +313,7 @@ return function ($kirby) {
     $status = $kirby->auth()->status();
 
     // user is already logged in, send them elsewhere
-    if ($status->status() === 'active') {
+    if ($status->is(State::Active)) {
         go('home');
     }
 
@@ -348,11 +348,9 @@ return function ($kirby) {
                     }
                 } catch (Exception $e) {
                     $error = $e->getMessage();
-                    // set new status object with inactive status
-                    $status = new Status([
-                        'kirby' => $kirby,
-                        'status' => 'inactive'
-                    ]);
+                    // a wrong code can be retried until the challenge
+                    // times out, so we get the current status again
+                    $status = $kirby->auth()->status();
                 }
             }
 
@@ -364,7 +362,7 @@ return function ($kirby) {
     return [
         'email'  => $email ?? '',
         'error'  => $error,
-        'status' => $status->status(),
+        'status' => $status->state()->value,
     ];
 };
 ```
