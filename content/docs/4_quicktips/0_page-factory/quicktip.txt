@@ -48,7 +48,7 @@ Here is an example for a `bookmark` type of page as child of a `bookmarks` paren
 title: Bookmark
 
 create:
-  title: "{{ page.date.toDate('Y-m-d }}" # create title from date
+  title: "{{ page.date.toDate('Y-m-d') }}" # create title from date
   slug: "{{ page.link.slug }}"           # create slug from link
   status: listed                         # publish directly
   redirect: false                        # stay where you are

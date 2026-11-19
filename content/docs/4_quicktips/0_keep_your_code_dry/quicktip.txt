@@ -16,7 +16,7 @@ We define a variable in our controller and pass it to the template:
 <?php
 
 return function($page) {
-  $articles = $page->articles()->listed();
+  $articles = $page->children()->listed();
   return [
     'articles' => $articles,
   ];
@@ -27,7 +27,7 @@ And then in the template:
 
 ```php "/site/templates/blog.php"
 <?php
-foreach($page->articles()->listed() as $article) {
+foreach($page->children()->listed() as $article) {
   echo $article->title();
 }
 ?>
@@ -43,7 +43,7 @@ Furthermore, this often results in unexpected behaviour. Consider this example:
 <?php
 
 return function($page) {
-  $articles = $page->articles()->listed();
+  $articles = $page->children()->listed();
   if ($tag = param('tag')) {
     $articles = $articles->filter('tags', $tag, ',');
   }
@@ -57,7 +57,7 @@ If we now use the same template code as in the example above, we will probably b
 
 Our template should therefore look like this:
 
-```php "/site/temlates/blog.php"
+```php "/site/templates/blog.php"
 <?php
 foreach($articles as $article) {
   echo $article->title();
