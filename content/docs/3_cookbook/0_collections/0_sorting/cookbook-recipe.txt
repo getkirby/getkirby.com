@@ -109,7 +109,7 @@ The same sorting methods outlined above can also be used with structure field en
 
 An example: Suppose we have defined a structure field with three fields in our events blueprint:
 
-```yaml "/site/blueprints/pages/events.yml
+```yaml "/site/blueprints/pages/events.yml"
 fields:
   events:
     label: events

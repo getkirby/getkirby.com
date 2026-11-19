@@ -476,7 +476,7 @@ First we fetch all registered page blueprints into `$blueprints` and then remove
 
 We can now reuse this field in our templates like normal.
 
-```yaml "/site/blueprints/pages/notes.yml'
+```yaml "/site/blueprints/pages/notes.yml"
 Title: Notes
 
 #...

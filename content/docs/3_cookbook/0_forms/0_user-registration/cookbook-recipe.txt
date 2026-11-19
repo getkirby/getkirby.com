@@ -423,7 +423,7 @@ To this purpose, we extend the navigation item in the header snippet as follows:
 
 And additionally, add a logout route in your `config`:
 
-```php "/site/config/config.php
+```php "/site/config/config.php"
 return [
     // …other settings
     'routes' => [
@@ -478,7 +478,7 @@ The first step is to add the current page id as parameter to the navigation link
 
 We create a site method that allows us to fetch the referrer value from the session, so that we can easily retrieve that value in our code. for this purpose, we create a little plugin in the `/plugins` folder.
 
-```php "/site/plugins/site-method/index.php
+```php "/site/plugins/site-method/index.php"
 <?php
 Kirby::plugin(
     name: 'cookbook/site-method',
