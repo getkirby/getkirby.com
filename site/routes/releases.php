@@ -20,6 +20,10 @@ return [
 			$page = page('releases/' . $major . '/' . $path) ??
 			(($p = page('releases/' . $major . '-0/' . $path)) ? go($p) : null);
 
+			if ($page === null) {
+				return null;
+			}
+
 			$page->kirby()->response()->type('md');
 
 			return $page->render([], 'md');
