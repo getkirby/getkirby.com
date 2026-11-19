@@ -1,6 +1,8 @@
 <?php
 
 use Kirby\Cms\File;
+use Kirby\Content\Field;
+use Kirby\Filesystem\Asset;
 use Kirby\Icons\Icon;
 use Kirby\Reference\Types\Type;
 use Kirby\Toolkit\Html;
@@ -41,7 +43,12 @@ function img($file, array $props = [])
 		$file = image($file);
 	}
 
-	if (!$file) {
+	// fields that reference a file, e.g. `$page->cover()`
+	if ($file instanceof Field) {
+		$file = $file->toFile();
+	}
+
+	if ($file instanceof File === false && $file instanceof Asset === false) {
 		return;
 	}
 
