@@ -270,7 +270,7 @@ The button opens a dialog or drawer that your plugin registers itself. `$user->p
 - `users` area: `users/(:any)/security/challenge/sms`
 - `account` area: `(account)/security/challenge/sms`
 
-Both patterns pass the user ID (or `account`) to your route, and `Kirby\Cms\Find::user($id)` returns the right user for either. Read (link: docs/guide/updates/update-to-v6/plugin-developers/panel-backend text: Panel backend: areas, controllers & UI classes) for how to define dialogs and drawers.
+Both patterns pass the user ID (or `account`) to your route, and `Kirby\Cms\Find::user($id)` returns the right user for either. Read how to define (link: docs/reference/plugins/extensions/panel-dialogs text: dialogs) and (link: docs/reference/plugins/extensions/panel-drawers text: drawers).
 
 Without a `settings()` method, your method or challenge works at login, but doesn't show up in the security drawer.
 
