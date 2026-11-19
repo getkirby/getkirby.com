@@ -512,7 +512,7 @@ As our first refinement step, we wrap the current HTML in a `k-block-figure` com
     <div>
       <h1>{{ content.title }}</h1>
       <h2>{{ content.subtitle }}</h2>
-      <div v-html="content.description"></div>
+      <div v-safe-html="$h($helper.string.sanitizeHTML(content.description))"></div>
       <audio v-if="file" :key="file.url" controls>
         <source :src="file.url" :type="file.mime">
       </audio>
@@ -524,10 +524,10 @@ As our first refinement step, we wrap the current HTML in a `k-block-figure` com
 
 We also add some missing pieces, i.e. the subtitle and the description. Since the file is fetched from the API asynchronously, we only render the audio element once we have it.
 
-Note how we use the `v-html` directive to render the contents of the descriptions field, which is a writer field that contains HTML. If we would try to render it without this directive, all HTML tags would be shown as plain text.
+The description is a writer field and contains HTML. `$helper.string.sanitizeHTML()` removes everything the writer field wouldn't create, `$h()` marks the result as trusted HTML and the `v-safe-html` directive renders it. A plain string would be escaped and show the HTML tags as text.
 
 <info>
-`v-html` should only be used if you trust the HTML that's being entered. Our writer field already sanitizes the HTML so we are fine here.
+Only use `$h()` for HTML you have sanitized or escaped. It tells the Panel the HTML is safe, without checking it.
 </info>
 
 ### Adding the poster and some styling
@@ -574,7 +574,10 @@ Here is the complete code for this step with some added styling:
         <h2 class="k-block-type-audio-subtitle">
           {{ content.subtitle }}
         </h2>
-        <div class="k-block-type-audio-description" v-html="content.description"></div>
+        <div
+          class="k-block-type-audio-description"
+          v-safe-html="$h($helper.string.sanitizeHTML(content.description))"
+        ></div>
         <audio v-if="file" :key="file.url" class="k-block-type-audio-element" controls>
           <source :src="file.url" :type="file.mime">
         </audio>

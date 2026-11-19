@@ -151,14 +151,16 @@ window.panel.plugin("cookbook/block-factory", {
     box: {
       template: `
         <div :class="'k-block-type-box box-' + content.boxtype" @dblclick="open">
-            <div v-if="content.text" v-html="content.text"></div>
-            <div v-else>No content yet</div>
-            <k-icon
-              v-if="content.boxtype !== 'neutral'"
-              class="k-block-type-box-icon"
-              :type="content.boxtype"
-            />
-          </div>
+          <div
+            v-if="content.text"
+            v-safe-html="$h($helper.string.sanitizeHTML(content.text, { nodes: true }))"
+          ></div>
+          <div v-else>No content yet</div>
+          <k-icon
+            v-if="content.boxtype !== 'neutral'"
+            class="k-block-type-box-icon"
+            :type="content.boxtype"
+          />
         </div>
       `
     }
@@ -166,9 +168,11 @@ window.panel.plugin("cookbook/block-factory", {
 });
 ```
 
+A writer field stores HTML. To show it in the preview, `$helper.string.sanitizeHTML()` first removes everything the writer field wouldn't create. `nodes: true` keeps paragraphs, lists and headings; without it, only inline formatting like bold or links is kept. `$h()` then marks the result as trusted HTML, which the `v-safe-html` directive renders. A plain string would be escaped and show the tags as text.
+
 ### Editable preview
 
-For the editable plugin, we replace `<div v-html="content.text"></div>`, with a `k-writer-input` component:
+For the editable plugin, we replace the `<div>` with the text by a `k-writer-input` component:
 
 ```js
 window.panel.plugin("cookbook/block-factory", {
@@ -240,8 +244,11 @@ window.panel.plugin("cookbook/block-factory", {
       <div>
         <div v-if="content.summary">
           <details>
-            <summary>{{ content.summary }}</summary>
-            <div v-if="content.details" v-html="content.details"></div>
+            <summary v-safe-html="$h($helper.string.sanitizeHTML(content.summary))"></summary>
+            <div
+              v-if="content.details"
+              v-safe-html="$h($helper.string.sanitizeHTML(content.details, { nodes: true }))"
+            ></div>
           </details>
         </div>
         <div v-else>
@@ -353,11 +360,14 @@ window.panel.plugin("cookbook/block-factory", {
   blocks: {
     faq: `
       <div @dblclick="open">
-        <h2 class="k-block-type-faq-heading" v-html="content.headline"></h2>
+        <h2
+          class="k-block-type-faq-heading"
+          v-safe-html="$h($helper.string.sanitizeHTML(content.heading))"
+        ></h2>
         <div v-if="content.faq.length">
           <details v-for="(item, index) in content.faq" class="k-block-type-faq-item" :key="index">
-            <summary>{{ index + item.question }}</summary>
-            <div v-html="item.answer"></div>
+            <summary v-safe-html="$h($helper.string.sanitizeHTML(item.question))"></summary>
+            <div v-safe-html="$h($helper.string.sanitizeHTML(item.answer, { nodes: true }))"></div>
           </details>
         </div>
         <div v-else>No questions yet</div>
@@ -480,23 +490,25 @@ fields:
 
 ### Simple preview
 
-The simple preview for our alternative version is not very different from the example with the structure field, but differs in the way we call the values of the individual items, i.e. `item.content.details` vs. `item.details` in the previous example.
+The simple preview for our alternative version is not very different from the example with the structure field, but differs in the way we call the values of the individual items, i.e. `item.content.details` vs. `item.answer` in the previous example.
 
 ```js "/site/plugins/block-factory/index.js"
 window.panel.plugin("cookbook/block-factory", {
   blocks: {
     faq2: `
       <div @dblclick="open">
-        <h2 class="k-block-type-faq-heading" v-html="content.heading"></h2>
+        <h2
+          class="k-block-type-faq-heading"
+          v-safe-html="$h($helper.string.sanitizeHTML(content.heading))"
+        ></h2>
         <div v-if="content.faq.length">
           <details
             class="k-block-type-faq-item"
             v-for="(item, index) in content.faq"
             :key="index"
           >
-            <summary v-html="item.content.summary"></summary>
-              <div v-html="item.content.details"></div>
-            </div>
+            <summary v-safe-html="$h($helper.string.sanitizeHTML(item.content.summary))"></summary>
+            <div v-safe-html="$h($helper.string.sanitizeHTML(item.content.details, { nodes: true }))"></div>
           </details>
         </div>
         <div v-else>No items yet</div>
