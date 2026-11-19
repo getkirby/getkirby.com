@@ -3,248 +3,152 @@ Title: Panel dropdowns
 ----
 Text:
 
-Our action dropdowns for pages, files and users are all loaded on request. This way, we can load and evaluate permissions individually from the API and then disable items in the dropdowns that should not be accessible.
+The Panel loads dropdowns on request. This way, Kirby can evaluate permissions on the backend and disable the options that the current user can't use.
 
+As part of your (link: docs/reference/plugins/extensions/panel-areas text: Panel area extension), you can define your own dropdowns on the backend and use them in your Panel components with a single call, as well as extend or modify the Panel's default dropdowns.
 
-As part of your (link: docs/reference/plugins/extensions/panel-areas text: Panel area extension), you can also define custom dropdowns easily on the backend and use them in your Panel frontend code with a simple single call.
+## Dropdown definition
 
-```html
-<k-button @click="$refs.options.toggle()">Options</k-button>
-<k-dropdown-content
-  ref="options"
-  :options="$dropdown('pages/projects+project-a')"
-/>
-```
+Dropdowns are defined as a part of areas. The key of a dropdown is its name and, unless you set a `pattern`, also its route. The `options` handler returns the list of options:
 
-The backend code for this is very straightforward as well and is defined as part of our areas
+```php "/site/plugins/todos/index.php"
+<?php
 
-```php "Site area"
-return [
-    'label' => 'Site',
-    ...
-    'dialogs' => ...
-    'views' => ...
-    'dropdowns' => [
-        'pages/(:any)' => function (string $id) {
-            $page = Find::page($id);
-
-            return [
-                [
-                    'text' => 'Open',
-                    'icon' => 'preview',
-                    'link' => $page->previewUrl(),
-                ],
-                ...
-                [
-                    'text'   => 'Delete',
-                    'icon'   => 'trash',
-                    'dialog' => 'pages/' . $id . '/delete'
-                ]
-            ];
-        }
-    ]
-];
-```
-
-
-## Option settings
-
-The dropdown definition returns an array of dropdown options. Each option can define a set of parameters to control how the option is displayed and what happens on click.
-
-| Parameter | Type | Description |
-| - | - | - |
-| `click` | `string` | The name of the event that will be triggered on click |
-| `dialog` | `string|array` | Either a single path to a dialog or dialog settings |
-| `disabled` | `bool` | Enable/disable the item |
-| `icon` | `string` | The name of the option icon |
-| `link` | `string` | An optional url/path to create a link instead of a button |
-| `target` | `string` | A link target (i.e. _blank) |
-| `text` | `string` | The label for the option |
-
-
-## Custom dropdowns
-
-Of course, you can create your own dropdowns for your plugins as part of your (link: docs/reference/plugins/extensions/panel-areas text: Panel area extension):
-
-```php
 Kirby::plugin(
-    name: 'your-plugin/todos',
-    extends: [
-        'areas' => [
-            'todos' => function ($kirby) {
-                return [
-                    ...
-                    'dropdowns' => [
-                        'todos/(:any)' => function (string $id) {
-                            // find the $todo here. (i.e. from a database)
-                            return [
-                                [
-                                    'text'   => 'Edit',
-                                    'dialog' => 'todos/' . $id . '/edit',
-                                    'icon'   => 'edit'
-                                ],
-                                [
-                                    'text'   => 'Duplicate',
-                                    'dialog' => 'todos/' . $id . '/duplicate',
-                                    'icon'   => 'copy'
-                                ],
-                                [
-                                    'text'   => 'Delete',
-                                    'dialog' => 'todos/' . $id . '/delete',
-                                    'icon'   => 'trash'
-                                ]
-                            ];
-                        }
-                    ]
-                ];
+  name: 'yourname/todos',
+  extends: [
+    'areas' => [
+      'todos' => fn () => [
+        // ... other code for the custom Panel area
+        'dropdowns' => [
+          'todo' => [
+            'pattern' => 'todos/(:any)',
+            'options' => function (string $id) {
+              return [
+                [
+                  'text'   => 'Edit',
+                  'icon'   => 'edit',
+                  'dialog' => 'todos/' . $id . '/update'
+                ],
+                [
+                  'text'   => 'Duplicate',
+                  'icon'   => 'copy',
+                  'dialog' => 'todos/' . $id . '/duplicate'
+                ],
+                '-',
+                [
+                  'text'   => 'Delete',
+                  'icon'   => 'trash',
+                  'dialog' => 'todos/' . $id . '/delete'
+                ]
+              ];
             }
+          ]
         ]
+      ]
     ]
+  ]
 );
 ```
 
-Your dropdown options can then be loaded in your Vue code like this:
+A `-` adds a separator between options. Placeholders in the pattern are passed to `options` as arguments.
+
+Load the options in your Vue component with the `$dropdown()` helper and the route of the dropdown:
 
 ```html
 <k-button icon="cog" @click="$refs.options.toggle()">Options</k-button>
-<k-dropdown-content ref="options" :options="$dropdown('todos/the-todo-id')" />
+<k-dropdown ref="options" :options="$dropdown('todos/the-todo-id')" />
+```
+
+## Option settings
+
+Each option can define a set of parameters to control how the option is displayed and what happens on click:
+
+| Parameter | Type | Description |
+| - | - | - |
+| `click` | `string|array` | The name of the event that will be triggered on click |
+| `dialog` | `string|array` | Either a single path to a dialog or dialog settings |
+| `disabled` | `bool` | Enable/disable the option |
+| `icon` | `string` | The name of the option icon |
+| `link` | `string` | An optional URL or path to create a link instead of a button |
+| `target` | `string` | A link target, e.g. `_blank` |
+| `text` | `string` | The label for the option |
+| `theme` | `string` | A theme for the option, e.g. `negative` |
+
+### Listen for dropdown events
+
+When you add an option to a dropdown that isn't rendered by your own component, you can't listen to its events directly. Pass a global event as `click` instead:
+
+```php
+[
+  'icon'  => 'share',
+  'text'  => 'Publish on Netlify',
+  'click' => [
+    'global'  => 'myEvent',
+    'payload' => [...]
+  ]
+]
+```
+
+And listen to the event with the Panel's event bus:
+
+```js
+this.$panel.events.on("myEvent", (payload) => {...});
+```
+
+## Controller classes
+
+Instead of an `options` closure, you can handle a dropdown with a controller class. Pass its class name as `action`. The class extends `Kirby\Panel\Controller\DropdownController`, and its `load()` method returns the options. Like (link: docs/reference/plugins/extensions/panel-dialogs#controller-classes text: dialog controllers), Kirby creates it with a static `factory()` method, if there is one, or the constructor, and passes the placeholders of the route pattern:
+
+```php "/site/plugins/todos/index.php"
+'dropdowns' => [
+  'todo' => [
+    'pattern' => 'todos/(:any)',
+    'action'  => TodoDropdownController::class
+  ]
+]
 ```
 
 ## Extending dropdowns
 
-Pages, files and users have dynamic option dropdowns. Those dropdowns show all the available options like changing titles, sorting pages, deleting stuff, etc.
+Pages, files and users have dynamic option dropdowns. Those dropdowns show all the available options like changing titles, sorting pages, deleting stuff, etc. You can extend or modify them to add options, remove options or change what's shown.
 
-Those dropdowns can be extended or modified to add additional options, remove options or simply change what's normally shown.
+Kirby merges your definition into the core definition. Define your override as an array with `options` (or `action`), so that the pattern of the core dropdown is kept. To fall back to the core options, call the core controller:
 
-```php
+```php "/site/plugins/netlify/index.php"
 <?php
+
+use Kirby\Panel\Controller\Dropdown\PageSettingsDropdownController;
 
 Kirby::plugin(
   name: 'example/dropdown',
   extends: [
     'areas' => [
-      'site' => function ($kirby) {
-        return [
-          'dropdowns' => [
-            'page' => function (string $id) {
+      'site' => fn () => [
+        'dropdowns' => [
+          'page' => [
+            'options' => function (string $id) {
+              // load the core options
+              $options = PageSettingsDropdownController::factory($id)->load();
 
-              // find the right page for the dropdown
-              $page = Find::page($id);
-
-              // load the core dropdown definition
-              $dropdown = $page->panel()->dropdown();
-
-              // append a separator
-              $dropdown[] = '-';
-
-              // append a new option
-              $dropdown[] = [
+              // append a separator and a new option
+              $options[] = '-';
+              $options[] = [
                 'icon'   => 'share',
                 'text'   => 'Publish on Netlify',
                 'dialog' => 'publish'
               ];
 
-              return $dropdown;
+              return $options;
             }
           ]
-        ];
-      },
+        ]
+      ]
     ]
   ]
 );
 ```
 
-#### Listen for dropdown event
+To remove a core dropdown, set it to `false`.
 
-When you need to react to your added dropdown entry, there is no direct way that you could listen for the event on the Vue dropdown component, since you don't have access to it. Instead, you can pass the `click` handler in the following way:
-
-```php
-$dropdown[] = [
-	'icon'  => 'share',
-	'text'  => 'Publish on Netlify',
-	'click' => [
-		'global'  => 'myEvent',
-		'payload' => [...]
-	]
-];
-```
-
-With this you can listen for your event globally:
-
-
-```js
-this.$events.on("myEvent", (payload) => {...});
-```
-
-### Reusing core code
-
-When you plan to extend a dropdown, you might want to fall back to Kirby's core behaviour in some cases. This can be done by loading the core code:
-
-```php
-<?php
-
-Kirby::plugin(
-  name: 'example/dropdown',
-  extends: [
-    'areas' => [
-      'site' => function ($kirby) {
-        return [
-          'dropdowns' => [
-            'page' => function (string $id) use ($kirby) {
-
-              // find the right page for the dropdown
-              $page = Find::page($id);
-
-              if ($page->id() === 'blog') {
-                  // return a custom dropdown
-              }
-
-              return $kirby->core()->area('site')['dropdowns']['page']['options']($id);
-            }
-          ]
-        ];
-      },
-    ]
-  ]
-);
-```
-
-The core models (page, user and file) all have a separate `$model->panel()->dropdown()` method for their own dropdown. While the code above is the correct way to load core code for any part of an area, you can simplify this for dropdowns by reusing the dropdown method.
-
-```php
-<?php
-
-Kirby::plugin(
-  name: 'example/dropdown',
-  extends: [
-    'areas' => [
-      'site' => function ($kirby) {
-        return [
-          'dropdowns' => [
-            'page' => function (string $id) {
-              // find the right page for the dropdown
-              $page = Find::page($id);
-
-              if ($page->id() === 'blog') {
-                  // return a custom dropdown
-              }
-
-              return $page->panel()->dropdown();
-            }
-          ]
-        ];
-      },
-    ]
-  ]
-);
-```
-
-## Core dropdowns
-
-Area | Dropdown name
-- | -
-`site` | `page`
-`site` | `page.file`
-`site` | `site.file`
-`users` | `user`
-`users` | `user.file`
+You find the names of all core dropdowns in the area definitions in (link: https://github.com/getkirby/kirby/tree/main/config/areas text: `/kirby/config/areas`) and their controllers in (link: https://github.com/getkirby/kirby/tree/main/src/Panel/Controller/Dropdown text: `/kirby/src/Panel/Controller/Dropdown`).
