@@ -224,12 +224,6 @@ Kirby::plugin('acme/history', [
 ]);
 ```
 
-## Coming soon: Send a request
-
-<info>
-We are planning to let buttons send off a request to the backend directly, e.g. to trigger an action or a custom endpoint with a single click, without opening a dialog first. This isn't part of rc.2 yet.
-</info>
-
 ## Buttons from a query
 
 Instead of a list, `buttons` also accepts a query. It has to return an array of button definitions. This lets you build buttons in PHP, e.g. in a page model:

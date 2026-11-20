@@ -68,7 +68,7 @@ Declare the Kirby versions your plugin supports in `extra.kirby.compatible`.  Ou
 }
 ```
 
-If one version of your plugin supports both majors, use `"^5.0 || ^6.0"` and keep your PHP constraint wide enough for Kirby 5 (PHP 8.2). A constraint like `^6.0` also matches pre-releases such as `6.0.0-rc.2`.
+If one version of your plugin supports both majors, use `"^5.0 || ^6.0"` and keep your PHP constraint wide enough for Kirby 5 (PHP 8.2). A constraint like `^6.0` also matches pre-releases such as `6.0.0-rc.3`.
 
 All details are in our guide on (link: docs/guide/plugins/publishing#kirby-versions-support text: declaring which Kirby versions you support).
 
@@ -105,9 +105,9 @@ Custom cache drivers that extend `Kirby\Cache\Cache` directly must implement `en
 
 ## Moved and renamed classes
 
-Several classes have moved into new namespaces. Some old names still resolve through a deprecated class alias in rc.2, others are gone:
+Several classes have moved into new namespaces. Some old names still resolve through a deprecated class alias in rc.3, others are gone:
 
-| Kirby 5 | Kirby 6 | Old name in rc.2 |
+| Kirby 5 | Kirby 6 | Old name in rc.3 |
 | - | - | - |
 | `Kirby\Cms\Blueprint`, `Kirby\Cms\PageBlueprint`, `Kirby\Cms\SiteBlueprint`, `Kirby\Cms\FileBlueprint`, `Kirby\Cms\UserBlueprint` | `Kirby\Blueprint\Blueprint`, `Kirby\Blueprint\PageBlueprint` … | deprecated alias |
 | `Kirby\Cms\Auth` | `Kirby\Auth\Auth` | deprecated alias |
@@ -224,6 +224,7 @@ What has changed:
 
 - **Unknown methods throw:** Calling a field method that doesn't exist throws a `Kirby\Exception\BadMethodCallException`. In Kirby 5, `$page->tilte()->doSomething()` silently returned the field. Check your code for typos and for methods from plugins that may not be installed.
 - **Core methods can't be replaced:** A custom field method with the name of a core method (e.g. `upper` or `toDate`) is ignored now. The core method always wins. Give your method its own name.
+- **Methods are bound to the field:** Like page, file, site and user methods, custom field methods are bound to the field. Static closures (`static fn`), first-class callables (`Foo::bar(...)`) and array callables (`[Foo::class, 'bar']`) no longer work. Register a regular closure instead, e.g. `'shout' => fn ($field) => Foo::shout($field)`.
 - **Aliases are methods:** `Kirby\Content\Field::$aliases`, `Kirby\Cms\Core::fieldMethods()` and `Kirby\Cms\Core::fieldMethodsAliases()` have been removed. The short aliases (`kt()`, `bool()`, `int()` …) keep working as regular methods.
 
 ## Exceptions
@@ -248,7 +249,7 @@ Also see (link: releases/6/changelog#breaking-changes__core__changed-exceptions 
 
 ## Permissions become guards
 
-Kirby 6 introduces (link: releases/6/guards text: guards): one place that answers whether an action is possible, allowed for the current user and valid for the given input. `$model->permissions()`, the permission classes behind it and the `*Rules` classes are deprecated, but keep working in rc.2:
+Kirby 6 introduces (link: releases/6/guards text: guards): one place that answers whether an action is possible, allowed for the current user and valid for the given input. `$model->permissions()`, the permission classes behind it and the `*Rules` classes are deprecated, but keep working in rc.3:
 
 ```php
 // Kirby 5 (deprecated in Kirby 6)

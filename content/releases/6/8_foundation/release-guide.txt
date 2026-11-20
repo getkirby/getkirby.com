@@ -96,7 +96,7 @@ The Panel is a Vue application. Kirby 5 was built on Vue 2, which reached its en
 
 Under the hood, we have migrated `this.$panel`, all its modules, our libraries and helpers to TypeScript: dialogs, drawers, dropdowns, notifications, requests, uploads, the content module and more.
 
-TypeScript catches many mistakes before they reach a release and makes the code more robust, safer to change and often easier to understand. Nothing changes in how you use these APIs, and Kirby's source now documents the exact signature of every method of `this.$panel`. In rc.2, the types are not published as a separate npm package yet, but we plan to release them for plugin developers as well.
+TypeScript catches many mistakes before they reach a release and makes the code more robust, safer to change and often easier to understand. Nothing changes in how you use these APIs, and Kirby's source now documents the exact signature of every method of `this.$panel`. In rc.3, the types are not published as a separate npm package yet, but we plan to release them for plugin developers as well.
 
 ## Trusted HTML
 
