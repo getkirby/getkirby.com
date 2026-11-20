@@ -101,6 +101,7 @@ Enhancements:
 - `auth.challenges` accepts options per type, like `auth.methods`
 - New `blueprints` option for the `pagelist` field: a blueprint, a list of blueprints or `except` with blueprints to exclude
 - New `blueprint` option for the `filelist` field and the `uploads` option of fields
+- The `query` of the `filelist` field can return a site, page or user, like the `filepicker` field. The field then lists the files of that model, e.g. `query: page.parent`. [#8918](https://github.com/getkirby/kirby/pull/8918)
 - New `inherit` argument for `Kirby\Cms\Responder::redirect()`, `Kirby\Cms\Response::redirect()`, `Kirby\Http\Response::redirect()`, `Kirby\Http\Response::go()`, `Kirby\Cms\Page::go()` and the `go()` helper. It keeps the query and params of the current request; the target's own query and params win.
 - Page blueprints: each status can define a custom `icon` (icon name or emoji) and `theme`. They are used for the status button, `pagelist` fields and the change status dialog. [#8551](https://github.com/getkirby/kirby/pull/8551)
 
@@ -528,6 +529,7 @@ Breaking:
   - `Kirby\Http\Url::to()`. Use `Kirby\Cms\Url::to()` or the `url()` helper instead.
   - `Kirby\Filesystem\Dir::inventory()`. Use `Kirby\Cms\Inventory::for()` instead.
 - Removed the `model-content-file` and `translation-methods` keys from `Kirby\Cms\Helpers::$deprecations`
+- Old `.lock` files from Kirby 3 and 4 are no longer read or cleaned up. Delete them from your content folders and your Git repository. [#8628](https://github.com/getkirby/kirby/pull/8628) [#8911](https://github.com/getkirby/kirby/pull/8911)
 - `Kirby\Http\Url` throws a `Kirby\Exception\BadMethodCallException` for static calls that are neither a method nor a property of `Kirby\Http\Uri`, instead of returning `null`
 - `Kirby\Cms\Page::inventory()`, `Kirby\Cms\Site::inventory()` and `Kirby\Cms\User::inventory()` return a `Kirby\Cms\Inventory` object. Use `Kirby\Cms\Inventory::children()`, `Kirby\Cms\Inventory::files()` and `Kirby\Cms\Inventory::template()` instead of the array keys.
 - `Kirby\Cms\Inventory::child()` and `Kirby\Cms\Inventory::template()` are no longer static. `Kirby\Cms\Inventory::child()` takes `$item` and `$models`, and `Kirby\Cms\Inventory::template()` is public and takes no arguments. Subclasses that override or call them need to be updated.

@@ -116,6 +116,19 @@ fields:
 
 More examples: `!user.isAdmin ? "guest" : "admin"`, `-page.price` or `-(1 + 2)`.
 
+The `query` of `filepicker` and `filelist` fields can return a site, page or user. The field then lists the files of that model:
+
+```yaml "/site/blueprints/pages/article.yml"
+fields:
+  cover:
+    type: filepicker
+    # all of these list the files of the returned model
+    query: page.parent
+    # query: site
+    # query: site.find("photography/trees")
+    # query: kirby.user("editor")
+```
+
 ## Date formats with text
 
 The `display` format of date and time fields supports text in square brackets, which is printed as it is:

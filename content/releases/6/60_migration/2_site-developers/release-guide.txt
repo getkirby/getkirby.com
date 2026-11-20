@@ -409,6 +409,16 @@ $tag->kirby()->option('thumbs.quality');
 
 If you call `Kirby\Text\KirbyTags::parse()` yourself, its third argument is `$debug` instead of an `$options` array: `KirbyTags::parse($text, $data, debug: true)`.
 
+## Content
+
+### Old `.lock` files
+
+Kirby 3 and 4 stored content locks in `.lock` files inside your content folders. Kirby 5 still read them, but Kirby 6 no longer supports them and doesn't clean them up for you either. Delete all leftover `.lock` files from your `content` folder and, if your content is under version control, remove them from your Git repository:
+
+```bash
+find content -name ".lock" -type f -delete
+```
+
 ## Queries
 
 ### The new query runner is always on
@@ -699,6 +709,7 @@ Print this list or copy it into your project notes.
 - `Uuid::for()` only with objects
 - No `current()`, `next()`, `prev()`, `key()`, `rewind()` or `valid()` calls on collections
 - No calls to removed content methods like `$page->readContent()` or `$page->isLocked()`
+- Old `.lock` files deleted from the `content` folder and the Git repository
 - Exceptions thrown with named arguments
 - Custom validators don't use core names
 - Frontend login forms use `authenticate()` and `$status->state()`
