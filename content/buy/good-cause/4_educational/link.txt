@@ -12,9 +12,16 @@ Type: discounted
 
 Text:
 
-Universities and accredited educational institutions are eligible for a 50% discount when using Kirby for internal projects and applications. If the institution/organization qualifies for Kirby Basic, we also offer discounts for selected public sites.
+We provide discounts for educational projects as well as selected internal projects and applications of educational organizations.
+
+This applies to universities, schools and accredited educational institutions.
 
 Research projects are eligible only if they lack sufficient funding and operate under Open Access rules (or equivalent). Please let us know about the project and your funding situation.
+
+<info>
+Note that we *cannot* provide discounts for general public sites such as marketing/PR/informational/operational websites of a school, university or faculty.
+</info>
+
 ----
 
 Subject: Discounted license for education/research
