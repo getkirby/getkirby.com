@@ -329,6 +329,8 @@ documents:
   blueprint: document
 ```
 
+If the query returns a site, page or user, the field lists the files of that model, e.g. `query: page.parent`.
+
 ### Blueprint
 
 You can define which blueprint each file in the list must have. This `blueprint` option will also be applied to any new file that gets uploaded. File blueprints can be set up in `/site/blueprints/files`.

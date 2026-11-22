@@ -77,6 +77,14 @@ You can use all file types available in Kirby here (`images`, `documents`, `vide
 
 ### Querying files from other pages
 
+If the query returns a site, page or user, the field lists the files of that model:
+
+```yaml
+gallery:
+  type: filepicker
+  query: page.parent
+```
+
 You can get as complex as you like, e.g. get all images from all children of the `photography` page that use the `cover` template:
 
 ```yaml

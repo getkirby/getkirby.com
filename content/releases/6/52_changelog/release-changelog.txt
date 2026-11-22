@@ -101,6 +101,7 @@ Enhancements:
 - `auth.challenges` accepts options per type, like `auth.methods`
 - New `blueprints` option for the `pagelist` field: a blueprint, a list of blueprints or `except` with blueprints to exclude
 - New `blueprint` option for the `filelist` field and the `uploads` option of fields
+- The `query` of the `filelist` field can return a site, page or user, like the `filepicker` field. The field then lists the files of that model, e.g. `query: page.parent`. [#8918](https://github.com/getkirby/kirby/pull/8918)
 - New `inherit` argument for `Kirby\Cms\Responder::redirect()`, `Kirby\Cms\Response::redirect()`, `Kirby\Http\Response::redirect()`, `Kirby\Http\Response::go()`, `Kirby\Cms\Page::go()` and the `go()` helper. It keeps the query and params of the current request; the target's own query and params win.
 - Page blueprints: each status can define a custom `icon` (icon name or emoji) and `theme`. They are used for the status button, `pagelist` fields and the change status dialog. [#8551](https://github.com/getkirby/kirby/pull/8551)
 
@@ -416,6 +417,7 @@ Bugfixes:
 - `Kirby\Text\KirbyTags::parse()` returns the text unchanged instead of throwing a `TypeError` when the regex fails
 - Languages whose `locale` array defines neither `LC_ALL` nor `LC_CTYPE` no longer throw an error and use the slug rules of their language code
 - `Kirby\Option\Options` accepts options with a `null` value
+- Looking up a page or file by the UUID `0` (e.g. `page('page://0')`, `site()->find('@0')`, `kirby()->file('file://0')`) returns `null` instead of throwing an error [#8872](https://github.com/getkirby/kirby/issues/8872)
 
 ## Panel
 
@@ -472,6 +474,10 @@ Bugfixes:
 - Slug field: the path preview no longer ends in `undefined` when the slug is empty [#8855](https://github.com/getkirby/kirby/pull/8855)
 - Languages view: language names can be opened in a new tab [#8831](https://github.com/getkirby/kirby/issues/8831)
 - Stats that open a dialog or drawer are buttons instead of links with an empty `href` [#8831](https://github.com/getkirby/kirby/issues/8831)
+- Dropdown search fields have no divider below them when there are no options (thx [@medienbaecker](https://github.com/medienbaecker)) [#8902](https://github.com/getkirby/kirby/pull/8902)
+- Dropdowns no longer show the pointer cursor of the field they belong to (thx [@medienbaecker](https://github.com/medienbaecker)) [#8902](https://github.com/getkirby/kirby/pull/8902)
+- Tags field: after cancelling a tag replace, the add dropdown no longer says "Replace with" (thx [@medienbaecker](https://github.com/medienbaecker)) [#8901](https://github.com/getkirby/kirby/pull/8901)
+- Tags field: the add button shows on hover (thx [@medienbaecker](https://github.com/medienbaecker)) [#8900](https://github.com/getkirby/kirby/pull/8900)
 
 ----
 
@@ -523,6 +529,7 @@ Breaking:
   - `Kirby\Http\Url::to()`. Use `Kirby\Cms\Url::to()` or the `url()` helper instead.
   - `Kirby\Filesystem\Dir::inventory()`. Use `Kirby\Cms\Inventory::for()` instead.
 - Removed the `model-content-file` and `translation-methods` keys from `Kirby\Cms\Helpers::$deprecations`
+- Old `.lock` files from Kirby 3 and 4 are no longer read or cleaned up. Delete them from your content folders and your Git repository. [#8628](https://github.com/getkirby/kirby/pull/8628) [#8911](https://github.com/getkirby/kirby/pull/8911)
 - `Kirby\Http\Url` throws a `Kirby\Exception\BadMethodCallException` for static calls that are neither a method nor a property of `Kirby\Http\Uri`, instead of returning `null`
 - `Kirby\Cms\Page::inventory()`, `Kirby\Cms\Site::inventory()` and `Kirby\Cms\User::inventory()` return a `Kirby\Cms\Inventory` object. Use `Kirby\Cms\Inventory::children()`, `Kirby\Cms\Inventory::files()` and `Kirby\Cms\Inventory::template()` instead of the array keys.
 - `Kirby\Cms\Inventory::child()` and `Kirby\Cms\Inventory::template()` are no longer static. `Kirby\Cms\Inventory::child()` takes `$item` and `$models`, and `Kirby\Cms\Inventory::template()` is public and takes no arguments. Subclasses that override or call them need to be updated.
@@ -570,6 +577,7 @@ Breaking:
 
 - Calling non-existing field methods throws a `Kirby\Exception\BadMethodCallException`. [#7082](https://github.com/getkirby/kirby/pull/7082)
 - Removed `Kirby\Content\Field::$aliases`, `Kirby\Cms\Core::fieldMethods()` and `Kirby\Cms\Core::fieldMethodsAliases()`. [#7082](https://github.com/getkirby/kirby/pull/7082)
+- Custom field methods are bound to the field, like page, file, site and user methods. Static closures (`static fn`), first-class callables (`Foo::bar(...)`) and array callables (`[Foo::class, 'bar']`) no longer work as field methods. Register a regular closure instead, e.g. `'shout' => fn ($field) => Foo::shout($field)`.
 
 ### UUIDs
 
@@ -943,6 +951,7 @@ Deprecated classes, methods, components and options keep working for now, but wi
 | `$model->permissions()` and the permission classes behind it                                                          | `$model->guards()`                                                                      |
 | `Kirby\Field\FieldOptions`                                                                                            | `Kirby\Form\FieldOptions`                                                               |
 | `Kirby\Blueprint\Blueprint::acceptedFileTemplates()`                                                                  | `Kirby\Blueprint\Blueprint::acceptedFileBlueprints()`                                   |
+| `Kirby\Content\Lock::legacy()`, `Kirby\Content\Lock::legacyFile()`, `Kirby\Content\Lock::isLegacy()`                  | – (old `.lock` files are no longer read and can be safely deleted)                      |
 
 ### Auth
 

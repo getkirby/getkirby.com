@@ -214,6 +214,7 @@ What has changed:
 
 - **Unknown methods throw:** Calling a field method that doesn't exist throws a `Kirby\Exception\BadMethodCallException`. In Kirby 5, `$page->tilte()->doSomething()` silently returned the field. Check your code for typos and for methods from plugins that may not be installed.
 - **Core methods can't be replaced:** A custom field method with the name of a core method (e.g. `upper` or `toDate`) is ignored now. The core method always wins. Give your method its own name.
+- **Methods are bound to the field:** Like page, file, site and user methods, custom field methods are bound to the field. Static closures (`static fn`), first-class callables (`Foo::bar(...)`) and array callables (`[Foo::class, 'bar']`) no longer work. Register a regular closure instead, e.g. `'shout' => fn ($field) => Foo::shout($field)`.
 - **Aliases are methods:** `Kirby\Content\Field::$aliases`, `Kirby\Cms\Core::fieldMethods()` and `Kirby\Cms\Core::fieldMethodsAliases()` have been removed. The short aliases (`kt()`, `bool()`, `int()` …) keep working as regular methods.
 
 ## Exceptions
