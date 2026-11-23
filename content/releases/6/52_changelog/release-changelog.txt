@@ -478,6 +478,9 @@ Bugfixes:
 - Dropdowns no longer show the pointer cursor of the field they belong to (thx [@medienbaecker](https://github.com/medienbaecker)) [#8902](https://github.com/getkirby/kirby/pull/8902)
 - Tags field: after cancelling a tag replace, the add dropdown no longer says "Replace with" (thx [@medienbaecker](https://github.com/medienbaecker)) [#8901](https://github.com/getkirby/kirby/pull/8901)
 - Tags field: the add button shows on hover (thx [@medienbaecker](https://github.com/medienbaecker)) [#8900](https://github.com/getkirby/kirby/pull/8900)
+- The changes dialog lists unsaved changes of the site [#8833](https://github.com/getkirby/kirby/issues/8833)
+- Dragging a page in a list that contains unsortable pages moves the dragged page to the right position, instead of moving a different page or failing with "The page cannot be sorted" [#8839](https://github.com/getkirby/kirby/issues/8839)
+- Toggles field: added the missing space between emoji icons and text [#8922](https://github.com/getkirby/kirby/issues/8922)
 
 ----
 
@@ -661,6 +664,7 @@ Breaking:
 - The `filepicker`, `pagepicker` and `userpicker` fields only exchange UUIDs/IDs with the backend and their picker dialog, instead of full item objects with display data
 - `Kirby\Form\Field\FileListField` and `Kirby\Panel\Collector\FilesCollector` keep the order of a custom `query`. Add `.sorted` to the query for the manual order, e.g. `page.images.sorted`
 - `Kirby\Cms\Fieldset::fields()` and `Kirby\Cms\Fieldset::tabs()` return the field props as defined in the blueprint. The rendered props for the Panel are only part of `Kirby\Cms\Fieldset::toArray()`. This also applies to `Kirby\Form\Field\BlocksField::fields()`.
+- Content stored under the name of a field without a value (e.g. an `info` field) is kept when saving or changing the template. In Kirby 5, it was removed. If you relied on this to clean up old content, remove those keys explicitly, e.g. with `$page->update(['caption' => null])`. [#8930](https://github.com/getkirby/kirby/pull/8930)
 
 ### Blueprints
 
