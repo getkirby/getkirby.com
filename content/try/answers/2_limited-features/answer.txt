@@ -1,5 +1,0 @@
-Title: Does the trial mode have all features?
-----
-Text:
-
-Yes, there are no hidden or disabled features during the trial. You get a fully functional Kirby installation.

@@ -1,9 +1,0 @@
-Title: Behind Kirby
-
-----
-
-Thumbnail:
-  -
-  lead: Team
-
-----

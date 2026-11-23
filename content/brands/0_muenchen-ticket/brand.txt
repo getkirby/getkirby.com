@@ -1,8 +1,0 @@
-Title: München Ticket
-
-----
-
-Tag: event
-----
-
-Height: 2.75rem

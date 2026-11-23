@@ -1,9 +1,0 @@
-Title: Open Broadcaster Software (OBS)
-
-----
-
-Featured: true
-
-----
-
-Height: 5rem

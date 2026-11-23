@@ -1,5 +1,0 @@
-Title: Where can I find out more about the license terms?
-----
-Text:
-
-You can find detailed information about licensing Kirby in the (link: license text: license terms). Feel free to (email: support@getkirby.com text: get in touch) with any open questions.

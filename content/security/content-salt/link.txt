@@ -1,5 +1,0 @@
-Title: Unchanged `content.salt` default
-
-----
-
-Link: docs/guide/security#set-secure-random-values-for-the-content-salt-and-cookie-key

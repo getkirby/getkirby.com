@@ -1,9 +1,0 @@
-Title: What happens when the 3 years of updates are over?
-----
-Text:
-
-When you reach the end of your license's update period, you have two options:
-
-1. You can use the latest version of Kirby released within the last three years for as long as you like, free of charge. You will only need to upgrade your licence and go with option 2 if you want to use newer releases with new features and improvements.
-2. You can buy an upgrade of your license, adding additional years of feature updates. This will not happen automatically though. We leave it up to you to decide. **Upgrades for three more years are currently <span v-text="locale.currencySign + amountDisplay(locale.prices.basic.upgrade)">€(buy-price: basic price: upgrade)</span> (excl. VAT) for Kirby Basic and <span v-text="locale.currencySign + amountDisplay(locale.prices.enterprise.upgrade)">€(buy-price: enterprise price: upgrade)</span> (excl. VAT) for Kirby Enterprise.**
-

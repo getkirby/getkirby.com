@@ -1,9 +1,0 @@
-Title: Monte Carlo Gallery
-
-----
-
-Tag: art
-
-----
-
-Height: 3.5rem

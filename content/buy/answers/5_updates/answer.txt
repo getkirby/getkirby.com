@@ -1,7 +1,0 @@
-Title: What about updates?
-----
-Text:
-
-We include 3 years of free updates in your license. You get all new features and improvements from all major Kirby versions released during this time. All you need to do is to keep your Kirby installation up to date.
-
-The 3 years start as soon as you launch your site and activate your license.

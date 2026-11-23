@@ -1,9 +1,0 @@
-Title: University of Sydney
-
-----
-
-Tag: edu
-
-----
-
-Height: 3rem

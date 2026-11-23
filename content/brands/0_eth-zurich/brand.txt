@@ -1,9 +1,0 @@
-Title: ETH Zürich
-
-----
-
-Tag: edu
-
-----
-
-Height: 2rem

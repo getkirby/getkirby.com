@@ -1,9 +1,0 @@
-Title: Partners
-
-----
-
-Ogtitle: Find a Kirby partner
-
-----
-
-Description: Our curated partners know Kirby inside out and have a wide range of experience in web development. Find trusted developers from all over the world and rest assured that there is always someone you can turn to.

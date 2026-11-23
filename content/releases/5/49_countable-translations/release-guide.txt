@@ -1,9 +1,0 @@
-Title: Countable Translations
-
-----
-
-Text: 
-
-When translating language variables in our Language view in the Panel, you can now translate plurals of your strings with a brand new, intuitive interface.
-
-(image: language-variables.png)

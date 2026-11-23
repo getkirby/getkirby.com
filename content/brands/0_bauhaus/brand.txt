@@ -1,5 +1,0 @@
-Title: Bauhaus
-
-----
-
-Featured: true

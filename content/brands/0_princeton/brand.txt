@@ -1,9 +1,0 @@
-Title: Princeton University
-
-----
-
-Tag: edu
-
-----
-
-Height: 3rem

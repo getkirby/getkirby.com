@@ -1,5 +1,0 @@
-Title: Can I try Kirby first?
-----
-Text:
-
-Yes. It's important for us that you are confident with your choice before you purchase a license. There are (link: /try text: two ways to try Kirby): Explore our **online demo**, created instantly for you. Or **install Kirby locally or on a test server** and take it for a ride. You may also work on your project locally as much as you like. Once your project is ready, buy a license and you're set for launch.

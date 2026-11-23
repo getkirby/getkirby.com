@@ -1,9 +1,0 @@
-Title: The New School
-
-----
-
-Tag: edu
-
-----
-
-Height: 3.25rem

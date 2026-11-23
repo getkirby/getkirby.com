@@ -1,9 +1,0 @@
-Title: Tchibo
-
-----
-
-Featured: true
-
-----
-
-Height: 3.25rem

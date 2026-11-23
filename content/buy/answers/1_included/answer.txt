@@ -1,5 +1,0 @@
-Title: What do I get?
-----
-Text:
-
-A Kirby license allows you to run a single installation on a single domain. Kirby is a self-hosted CMS. You have to bring your own hosting and domain on which you will run Kirby. The license is a one-time payment, there is no subscription, no yearly or monthly fees. See the (link: license text: license terms).

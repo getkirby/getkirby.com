@@ -1,9 +1,0 @@
-Title: University of California
-
-----
-
-Tag: edu
-
-----
-
-Height: 4.75rem

@@ -1,5 +1,0 @@
-Caption:
-
-**Custom layouts**
-
-Define your own layouts and let editors combine them in a truly modular way. Sorting layouts and rearranging blocks via drag & drop is a dream.

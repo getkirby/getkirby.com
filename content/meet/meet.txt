@@ -1,8 +1,0 @@
-Title: Get together
-
-----
-
-Description: Connect with other Kirby developers around the world or meet face-to-face at a local meetup.
-
-----
-

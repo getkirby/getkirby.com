@@ -1,9 +1,0 @@
-Title: Makita
-
-----
-
-Featured: true
-
-----
-
-Height: 2.75rem

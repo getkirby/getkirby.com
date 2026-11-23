@@ -1,9 +1,0 @@
-Title: Harvard University
-
-----
-
-Featured: true
-
-----
-
-Tag: edu

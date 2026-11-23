@@ -1,9 +1,0 @@
-Title: How do you handle partnership payments and invoices?
-----
-Text:
-
-All partnership purchases are handled by (link: https://paddle.com/ text: Paddle). They currently support all major credit cards, PayPal, Apple Pay and Purchase Order.
-
-You will get an invoice from Paddle. They are specialized in managing purchases including tax collection and invoicing for each country. You can customize your invoice yourself to fit your requirements.
-
-If you have questions or complaints about invoices, please let us know at <support@getkirby.com>.

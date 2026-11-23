@@ -1,5 +1,0 @@
-Title: HTTPS
-
-----
-
-Link: docs/guide/security#secure-your-server__use-and-enforce-https

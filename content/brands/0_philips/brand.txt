@@ -1,9 +1,0 @@
-Title: Philips
-
-----
-
-Featured: true
-
-----
-
-Height: 2rem
