@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "43b1a35def87d4d9ac27785851f878e1",
+    "content-hash": "632bef3d3162e5478c3f799d215339dc",
     "packages": [
         {
             "name": "christian-riesen/base32",
@@ -63,8 +63,7 @@
                 "issues": "https://github.com/ChristianRiesen/base32/issues",
                 "source": "https://github.com/ChristianRiesen/base32/tree/2.0.1"
             },
-            "time": "2026-07-11T21:00:30+00:00",
-            "published-time": "2026-07-11T21:10:14+00:00"
+            "time": "2026-07-11T21:00:30+00:00"
         },
         {
             "name": "claviska/simpleimage",
@@ -117,8 +116,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-10-23T20:35:49+00:00",
-            "published-time": "2026-10-23T20:37:59+00:00"
+            "time": "2026-10-23T20:35:49+00:00"
         },
         {
             "name": "composer/semver",
@@ -195,8 +193,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-10-29T09:13:34+00:00",
-            "published-time": "2026-10-29T09:14:11+00:00"
+            "time": "2026-10-29T09:13:34+00:00"
         },
         {
             "name": "erusev/parsedown",
@@ -252,8 +249,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-02-16T11:41:01+00:00",
-            "published-time": "2026-02-16T12:37:29+00:00"
+            "time": "2026-02-16T11:41:01+00:00"
         },
         {
             "name": "erusev/parsedown-extra",
@@ -314,8 +310,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-02-16T13:06:37+00:00",
-            "published-time": "2026-02-16T13:08:29+00:00"
+            "time": "2026-02-16T13:06:37+00:00"
         },
         {
             "name": "filp/whoops",
@@ -386,21 +381,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-11-09T23:30:17+00:00",
-            "published-time": "2026-11-09T23:32:45+00:00"
+            "time": "2026-11-09T23:30:17+00:00"
         },
         {
             "name": "getkirby/cms",
-            "version": "6.0.0-rc.2",
+            "version": "6.0.0-rc.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getkirby/kirby.git",
-                "reference": "1c6ed93bbd3eb95bac104994789d8e041e2b18ab"
+                "reference": "d194f65a102614a00d622ef688aafc1997b86cbd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getkirby/kirby/zipball/1c6ed93bbd3eb95bac104994789d8e041e2b18ab",
-                "reference": "1c6ed93bbd3eb95bac104994789d8e041e2b18ab",
+                "url": "https://api.github.com/repos/getkirby/kirby/zipball/d194f65a102614a00d622ef688aafc1997b86cbd",
+                "reference": "d194f65a102614a00d622ef688aafc1997b86cbd",
                 "shasum": ""
             },
             "require": {
@@ -487,8 +481,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2026-11-19T13:36:33+00:00",
-            "published-time": "2026-11-19T13:46:58+00:00"
+            "time": "2026-11-20T15:47:57+00:00"
         },
         {
             "name": "getkirby/composer-installer",
@@ -535,8 +528,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2020-12-28T12:54:39+00:00",
-            "published-time": "2020-12-28T15:05:43+00:00"
+            "time": "2020-12-28T12:54:39+00:00"
         },
         {
             "name": "laminas/laminas-escaper",
@@ -597,8 +589,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2026-11-10T12:33:38+00:00",
-            "published-time": "2026-11-10T12:34:26+00:00"
+            "time": "2026-11-10T12:33:38+00:00"
         },
         {
             "name": "lbuchs/webauthn",
@@ -643,8 +634,7 @@
                 "issues": "https://github.com/lbuchs/WebAuthn/issues",
                 "source": "https://github.com/lbuchs/WebAuthn/tree/v2.2.0"
             },
-            "time": "2024-07-04T07:17:40+00:00",
-            "published-time": "2024-07-04T11:09:04+00:00"
+            "time": "2024-07-04T07:17:40+00:00"
         },
         {
             "name": "league/color-extractor",
@@ -705,8 +695,7 @@
                 "issues": "https://github.com/thephpleague/color-extractor/issues",
                 "source": "https://github.com/thephpleague/color-extractor/tree/0.4.0"
             },
-            "time": "2022-09-24T15:57:16+00:00",
-            "published-time": "2022-09-25T11:27:12+00:00"
+            "time": "2022-09-24T15:57:16+00:00"
         },
         {
             "name": "michelf/php-smartypants",
@@ -760,8 +749,7 @@
                 "issues": "https://github.com/michelf/php-smartypants/issues",
                 "source": "https://github.com/michelf/php-smartypants/tree/1.8.1"
             },
-            "time": "2016-12-13T01:01:17+00:00",
-            "published-time": "2016-12-13T01:09:21+00:00"
+            "time": "2016-12-13T01:01:17+00:00"
         },
         {
             "name": "phpmailer/phpmailer",
@@ -843,8 +831,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-11-07T15:15:17+00:00",
-            "published-time": "2026-11-07T15:16:54+00:00"
+            "time": "2026-11-07T15:15:17+00:00"
         },
         {
             "name": "psr/log",
@@ -894,8 +881,7 @@
             "support": {
                 "source": "https://github.com/php-fig/log/tree/3.0.2"
             },
-            "time": "2024-09-11T13:17:53+00:00",
-            "published-time": "2024-09-11T13:21:14+00:00"
+            "time": "2024-09-11T13:17:53+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -966,8 +952,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-09-16T14:15:10+00:00",
-            "published-time": "2026-11-04T11:25:34+00:00"
+            "time": "2026-09-16T14:15:10+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -1050,8 +1035,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-10T16:19:22+00:00",
-            "published-time": "2026-04-26T14:44:50+00:00"
+            "time": "2026-04-10T16:19:22+00:00"
         },
         {
             "name": "symfony/polyfill-intl-idn",
@@ -1138,8 +1122,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-09-23T14:40:04+00:00",
-            "published-time": "2026-09-30T10:23:39+00:00"
+            "time": "2026-09-23T14:40:04+00:00"
         },
         {
             "name": "symfony/polyfill-intl-normalizer",
@@ -1224,8 +1207,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-09-23T22:02:09+00:00",
-            "published-time": "2026-09-30T10:23:47+00:00"
+            "time": "2026-09-23T22:02:09+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -1310,8 +1292,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-10-28T09:35:49+00:00",
-            "published-time": "2026-10-28T10:07:45+00:00"
+            "time": "2026-10-28T09:35:49+00:00"
         },
         {
             "name": "symfony/yaml",
@@ -1387,8 +1368,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-11-04T08:27:22+00:00",
-            "published-time": "2026-11-04T11:28:41+00:00"
+            "time": "2026-11-04T08:27:22+00:00"
         }
     ],
     "packages-dev": [],
@@ -1400,8 +1380,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=8.3.0"
+        "php": "~8.5.0"
     },
     "platform-dev": {},
-    "plugin-api-version": "2.11.0"
+    "plugin-api-version": "2.9.0"
 }

@@ -350,7 +350,6 @@
                 "whoops/soap": "Formats errors as SOAP responses"
             },
             "time": "2026-11-09T23:30:17+00:00",
-            "published-time": "2026-11-09T23:32:45+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -398,17 +397,17 @@
         },
         {
             "name": "getkirby/cms",
-            "version": "6.0.0-rc.2",
-            "version_normalized": "6.0.0.0-RC2",
+            "version": "6.0.0-rc.3",
+            "version_normalized": "6.0.0.0-RC3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getkirby/kirby.git",
-                "reference": "1c6ed93bbd3eb95bac104994789d8e041e2b18ab"
+                "reference": "d194f65a102614a00d622ef688aafc1997b86cbd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getkirby/kirby/zipball/1c6ed93bbd3eb95bac104994789d8e041e2b18ab",
-                "reference": "1c6ed93bbd3eb95bac104994789d8e041e2b18ab",
+                "url": "https://api.github.com/repos/getkirby/kirby/zipball/d194f65a102614a00d622ef688aafc1997b86cbd",
+                "reference": "d194f65a102614a00d622ef688aafc1997b86cbd",
                 "shasum": ""
             },
             "require": {
@@ -452,8 +451,7 @@
                 "ext-zip": "Support for ZIP archive file functions",
                 "ext-zlib": "Sanitization and validation for svgz files"
             },
-            "time": "2026-11-19T13:36:33+00:00",
-            "published-time": "2026-11-19T13:46:58+00:00",
+            "time": "2026-11-20T15:47:57+00:00",
             "type": "kirby-cms",
             "installation-source": "dist",
             "autoload": {
@@ -522,7 +520,6 @@
                 "composer/composer": "^1.8 || ^2.0"
             },
             "time": "2020-12-28T12:54:39+00:00",
-            "published-time": "2020-12-28T15:05:43+00:00",
             "type": "composer-plugin",
             "extra": {
                 "class": "Kirby\\ComposerInstaller\\Plugin"
@@ -582,7 +579,6 @@
                 "vimeo/psalm": "^6.13.1"
             },
             "time": "2026-11-10T12:33:38+00:00",
-            "published-time": "2026-11-10T12:34:26+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -829,7 +825,6 @@
                 "thenetworg/oauth2-azure": "Needed for Microsoft XOAUTH2 authentication"
             },
             "time": "2026-11-07T15:15:17+00:00",
-            "published-time": "2026-11-07T15:16:54+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {

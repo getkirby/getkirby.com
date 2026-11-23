@@ -4,8 +4,8 @@
 	"type": "project",
 	"homepage": "https://getkirby.com",
 	"require": {
-		"php": ">=8.3.0",
-		"getkirby/cms": "6.0.0-rc.2"
+		"php": "~8.5.0",
+		"getkirby/cms": "6.0.0-rc.3"
 	},
 	"scripts": {
 		"start": [
