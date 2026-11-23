@@ -20,9 +20,9 @@ function img($file, array $props = [])
         return;
     }
 
-    // ImageMagick bloats animated images when resizing them,
-    // so they are always shown in their original size
-    $animated = str_contains(file_get_contents($file->root(), false, null, 0, 64), 'ANIM');
+    // resizing animated GIFs bloats them (ImageMagick) or drops all
+    // but the first frame (GD), so GIFs are always shown in their original size
+    $animated = $file->extension() === 'gif';
 
     if (empty($props['src']) === true || $animated === true) {
         $src = $file->url();
