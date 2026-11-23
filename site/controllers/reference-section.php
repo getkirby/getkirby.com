@@ -1,13 +1,10 @@
 <?php
 
 return function ($page) {
-    
-    if ($advanced = get('advanced')) {
-        Cookie::set('getkirby$advanced', $advanced);
-    }
-        
+    // static snapshot: always list all items,
+    // no cookie-based "Most used" filter
     return [
-        'entries' => $page->children()->referenced()
-    ];       
+        'entries' => $page->children()->listed()
+    ];
 };
         
