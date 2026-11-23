@@ -258,7 +258,7 @@ A blueprint is now always tabs, then columns, then fields. You don't have to wri
 
 You don't need to rewrite working blueprints right away. The automatic conversion is a compatibility shortcut, so switch to fields whenever you edit a blueprint anyway. There are two cases where the automatic conversion can't help:
 
-**Sections and fields now share one namespace.** In Kirby 5, a section could have the same name as a field, and two tabs could have a section with the same name. In Kirby 6, the second one turns into an error box: "The field "gallery" already exists in your blueprint". Names are compared case-insensitively.
+**Sections and fields now share one namespace.** In Kirby 5, a section could have the same name as a field, and two tabs could have a section with the same name. In Kirby 6, the second one turns into an error box: "The field "gallery" already exists in your blueprint". Names are compared case-insensitively. Your content is safe: whatever is stored under the clashing name is kept when the page is saved or its template is changed.
 
 **Custom sections from plugins** are no longer supported. Kirby shows an error box ("Invalid section type") in their place. Update the plugin to a version for Kirby 6.
 
