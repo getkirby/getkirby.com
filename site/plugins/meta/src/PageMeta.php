@@ -197,12 +197,9 @@ class PageMeta {
             return $this->metadata['ogimage'];
         }
 
-        // Otherwise go with auto-generated image
-        return new File([
-            'parent'   => $this->page,
-            'filename' => 'og:image',
-            'url'      => '/' . $this->page->id() . '/opengraph.png'
-        ]);
+        // archived docs are a static snapshot:
+        // no auto-generated images
+        return null;
     }
 
     public static function renderThumbnail(string $id)
