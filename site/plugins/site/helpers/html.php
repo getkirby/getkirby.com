@@ -26,12 +26,16 @@ function img($file, array $props = [])
 		return;
 	}
 
-	$src = match (empty($props['src'])) {
+	// resizing animated GIFs bloats them (ImageMagick) or drops all
+	// but the first frame (GD), so GIFs are always shown in their original size
+	$animated = $file->extension() === 'gif';
+
+	$src = match (empty($props['src']) || $animated) {
 		true    => $file->url(),
 		default => $file->thumb($props['src'])->url()
 	};
 
-	$srcset = match (empty($props['srcset'])) {
+	$srcset = match (empty($props['srcset']) || $animated) {
 		true    => null,
 		default => $file->srcset($props['srcset'])
 	};
@@ -51,7 +55,7 @@ function img($file, array $props = [])
 	]) . '>';
 
 	if (empty($props['lightbox']) === false && $props['lightbox'] !== false) {
-		return Html::a($file->resize(1800, 1800)->url(), [$img], [
+		return Html::a($animated ? $file->url() : $file->resize(1800, 1800)->url(), [$img], [
 			'class'         => 'block',
 			'style'         => '--aspect-ratio: ' . $file->width() . '/' . $file->height(),
 			'data-lightbox' => $props['lightbox']

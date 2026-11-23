@@ -5,7 +5,7 @@ Description: Kirby 2 has reached its **end of life** on Jan&nbsp;1,&nbsp;2021 an
 
 ----
 
-Src: https://k2.getkirby.com
+Src: https://v2.getkirby.com
 
 ----
 
