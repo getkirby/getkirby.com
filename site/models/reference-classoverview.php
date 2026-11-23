@@ -13,8 +13,7 @@ class ReferenceClassOverviewPage extends LinkPage
 	{
 		$current = $this->site()->page()->id();
 		$ignore  = [
-			...page('docs/reference/objects')->menu()->yaml(),
-			...page('docs/reference/tools')->menu()->yaml(),
+			...ReferenceClassesPage::featured(),
 			'docs/reference/objects/aliases'
 		];
 

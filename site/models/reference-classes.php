@@ -134,14 +134,24 @@ class ReferenceClassesPage extends ReferenceSectionPage
 		];
 	}
 
-	public static function isFeatured(string $page): bool
+	/**
+	 * Returns the paths of all featured classes from the
+	 * objects and tools menus (memoized, as this gets called
+	 * for every class page, e.g. when generating the sitemap)
+	 */
+	public static function featured(): array
 	{
-		$ids = [
+		static $featured = null;
+
+		return $featured ??= [
 			...page('docs/reference/objects')->menu()->yaml(),
 			...page('docs/reference/tools')->menu()->yaml()
 		];
+	}
 
-		foreach ($ids as $id) {
+	public static function isFeatured(string $page): bool
+	{
+		foreach (static::featured() as $id) {
 			if (Str::endsWith($page, $id)) {
 				return true;
 			}
