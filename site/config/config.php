@@ -3,6 +3,7 @@
 return [
 	'api'        => false,
 	'archived'   => true,
+	'noindex'    => true,
 	'home'       => 'docs',
 	'buy'        => require __DIR__ . '/buy.php',
 	'categories' => require __DIR__ . '/categories.php',

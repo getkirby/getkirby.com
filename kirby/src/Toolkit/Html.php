@@ -350,6 +350,10 @@ class Html extends Xml
 		string|array|null $text = null,
 		array $attr = []
 	): string {
+		if (Url::hasDangerousScheme($href) === true) {
+			$href = '';
+		}
+
 		$attr = array_merge(['href' => $href], $attr);
 
 		if (empty($text) === true) {
