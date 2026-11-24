@@ -8,11 +8,13 @@ Kirby reads blueprints and the YAML in your content files, e.g. of structure or 
 
 ## Writing valid YAML
 
-If Kirby cannot parse a YAML file, it shows an error message with the line of the first problem, e.g.:
+If Kirby cannot parse a YAML file, the error message tells you the line of the first problem, e.g.:
 
 ```
 The reserved indicator "@" cannot start a plain scalar; you need to quote the scalar at line 4 (near "placeholder: @yourhandle").
 ```
+
+Page and file blueprints with a YAML error silently fall back to the default blueprint. If the fields of a page or file are suddenly gone, check its blueprint.
 
 Watch out for these cases in your blueprints:
 

@@ -74,7 +74,7 @@ fields:
     pattern: "^\d{5}$"               # \d isn't a valid escape in double quotes
 ```
 
-Kirby stops at the first problem with an error message that tells you the line, e.g.:
+Page and file blueprints with a YAML error silently fall back to the default blueprint. If the fields of a page or file are suddenly gone, check its blueprint. Where Kirby shows the error, it tells you the line of the first problem, e.g.:
 
 ```
 The reserved indicator "@" cannot start a plain scalar; you need to quote the scalar at line 4 (near "placeholder: @yourhandle").
