@@ -186,7 +186,7 @@ Enhancements:
 - New `Kirby\Form\Field::error()` factory to create an error field in place of a field that failed [#8443](https://github.com/getkirby/kirby/pull/8443)
 - `Kirby\Cms\Files::delete()` and `Kirby\Cms\Pages::delete()` accept UUIDs and still only delete items in the collection [#8315](https://github.com/getkirby/kirby/pull/8315)
 - New `Kirby\Blueprint\Tab` and `Kirby\Blueprint\Tabs` classes to work with tabs and their props in blueprints [#8449](https://github.com/getkirby/kirby/pull/8449)
-- New `Kirby\Form\Interface\ProvidesAcceptedPageBlueprints` and `Kirby\Form\Interface\ProvidesAcceptedFileBlueprints` interfaces, collected by the new `Kirby\Blueprint\Blueprint::acceptedPageBlueprints()` and `Kirby\Blueprint\Blueprint::acceptedFileBlueprints()`. Fields implementing `ProvidesAcceptedPageBlueprints::hasPageBlueprint()` also decide which pages can be moved into their model.
+- New `Kirby\Form\Interface\ProvidesAcceptedPageBlueprints` and `Kirby\Form\Interface\ProvidesAcceptedFileBlueprints` interfaces, collected by the new `Kirby\Blueprint\AcceptRules::pageBlueprints()` and `Kirby\Blueprint\AcceptRules::fileBlueprints()`. Fields implementing `ProvidesAcceptedPageBlueprints::hasPageBlueprint()` also decide which pages can be moved into their model.
 - New `Kirby\Auth\Service\Webauthn` class [#8245](https://github.com/getkirby/kirby/pull/8245)
 - Auth methods and challenges can be registered under several types, e.g. one LDAP login method per directory
 - New `Kirby\Auth\Method::label()`, `Kirby\Auth\Challenge::label()`, `Kirby\Auth\Challenge::options()` and `Kirby\Auth\Challenges::config()`
@@ -383,7 +383,7 @@ Bugfixes:
 - `Kirby\Toolkit\V::input()` keeps `%` in validation messages
 - `Kirby\Toolkit\V::maxLength()` and `Kirby\Toolkit\V::minLength()` no longer trigger a PHP deprecation for `null` values
 - Reserved slugs (`api`, `assets`, `media`, `panel`) are also blocked when Kirby is installed in a subfolder [#8746](https://github.com/getkirby/kirby/pull/8746)
-- `Kirby\Blueprint\Blueprint::acceptedFileBlueprints()` resolves the `uploads.parent` query of fields instead of comparing it with the model id
+- `Kirby\Blueprint\Blueprint::acceptedFileTemplates()` resolves the `uploads.parent` query of fields instead of comparing it with the model id
 - `create: false` no longer adds the list's blueprints to `Kirby\Cms\ModelWithContent::blueprints()`
 - Moving a page checks each `pagelist` field of the new parent, also in nested forms: a field without restriction accepts every page, and excluded blueprints are rejected
 - Redirects to the language URL, from `/home`, from page UUID permalinks and from `page.html` keep the query and params of the request [#7603](https://github.com/getkirby/kirby/issues/7603)
@@ -954,7 +954,7 @@ Deprecated classes, methods, components and options keep working for now, but wi
 | `Kirby\Cms\PageRules`, `Kirby\Cms\FileRules`, `Kirby\Cms\UserRules`, `Kirby\Cms\SiteRules`, `Kirby\Cms\LanguageRules` | `$model->guards()`                                                                      |
 | `$model->permissions()` and the permission classes behind it                                                          | `$model->guards()`                                                                      |
 | `Kirby\Field\FieldOptions`                                                                                            | `Kirby\Form\FieldOptions`                                                               |
-| `Kirby\Blueprint\Blueprint::acceptedFileTemplates()`                                                                  | `Kirby\Blueprint\Blueprint::acceptedFileBlueprints()`                                   |
+| `Kirby\Blueprint\Blueprint::acceptedFileTemplates()`                                                                  | `Kirby\Blueprint\Blueprint::acceptRules()->fileBlueprints()`                            |
 | `Kirby\Content\Lock::legacy()`, `Kirby\Content\Lock::legacyFile()`, `Kirby\Content\Lock::isLegacy()`                  | – (old `.lock` files are no longer read and can be safely deleted)                      |
 | Unregistered permissions in role blueprints                                                                           | (link: docs/reference/plugins/extensions/permissions text: `permissions` extension)     |
 | `root` and `info` inside the `extends` array of `Kirby::plugin()`                                                     | Named `root` and `info` arguments                                                       |
