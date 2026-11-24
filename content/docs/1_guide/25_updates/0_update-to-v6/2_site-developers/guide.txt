@@ -503,6 +503,16 @@ Kirby 6 introduces guards: one place that answers whether an action on a site, p
 
 Your role permissions and the `options` in your blueprints work like before. Read more about (link: docs/guide/users/guards text: guards).
 
+### Unknown permissions in role blueprints
+
+A role blueprint that sets a permission Kirby doesn't know, e.g. a typo like `pages.chnageTitle` or a custom permission that no plugin registers, now triggers a deprecation warning:
+
+```
+Setting undefined permission "pages.chnageTitle" is deprecated and will be ignored in a future version.
+```
+
+Kirby 5 had this warning switched off. With (link: docs/reference/system/options/debug text: debug mode) enabled, Kirby shows it as an error page, e.g. in the Panel. Fix typos in your permission names and register custom permissions with the (link: docs/reference/plugins/extensions/permissions text: `permissions` extension).
+
 ### Throwing Kirby exceptions with an array
 
 Kirby exceptions no longer accept a single array argument. Use named arguments. This already works in Kirby 5, so you can change it before you update.
