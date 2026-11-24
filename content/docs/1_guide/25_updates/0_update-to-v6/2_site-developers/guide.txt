@@ -144,6 +144,7 @@ return [
 ```
 
 We will provide a Kirby CLI command in a future release that helps you migrate your blueprints and content to Symfony YAML.
+The Kirby CLI command is now available for migrating your blueprints and contents to Symfony YAML. https://github.com/getkirby/cli/releases/tag/2.1.0
 
 ## Config options
 
