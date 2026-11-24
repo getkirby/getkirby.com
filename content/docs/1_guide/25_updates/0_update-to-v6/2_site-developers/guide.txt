@@ -74,7 +74,13 @@ fields:
     pattern: "^\d{5}$"               # \d isn't a valid escape in double quotes
 ```
 
-Kirby stops at the first problem with an error message that tells you the line, e.g.:
+How a YAML error in a blueprint shows up depends on the blueprint:
+
+- **Page and file blueprints:** Kirby doesn't show an error. It silently uses the default blueprint instead, so the Panel shows the page or file without your fields.
+- **`site.yml`:** The Panel fails with `Kirby\Cms\Site::blueprint(): Return value must be of type Kirby\Blueprint\SiteBlueprint, null returned`.
+- **User blueprints:** Kirby throws the YAML error whenever it loads the user roles, e.g. on login.
+
+If a view suddenly shows no fields or the default layout, check its blueprint and the blueprints it extends. Where Kirby shows the YAML error, it tells you the line of the first problem, e.g.:
 
 ```
 The reserved indicator "@" cannot start a plain scalar; you need to quote the scalar at line 4 (near "placeholder: @yourhandle").
