@@ -103,7 +103,8 @@ class SmsChallenge extends Challenge
         Gateway::send($phone, 'Your login code: ' . $code);
 
         return new Pending(
-            public: '•••• ' . substr($phone, -4),
+            // only show the number once the password has been checked
+            public: $this->mode === '2fa' ? '•••• ' . substr($phone, -4) : null,
             secret: password_hash($code, PASSWORD_DEFAULT)
         );
     }
@@ -139,6 +140,8 @@ class SmsChallenge extends Challenge
 }
 ```
 
+`public` is sent to the browser before the login is complete. In the `login` and `password-reset` modes, nobody has entered a password yet, so the challenge only sends the masked phone number in the `2fa` mode. Otherwise, anyone who types in the user's email address could see it.
+
 With `isAvailable()` as above, every user with a phone number is asked for an SMS code after their password. Make the `2fa` mode opt-in as described in (link: docs/reference/plugins/extensions/auth-challenges#the-challenge-class__availability-means-set-up text: Availability means "set up") if that's not what you want.
 
 ```php "/site/plugins/acme-auth/index.php"
@@ -151,7 +154,8 @@ Kirby::plugin('acme/auth', [
             'login.challenge.sms.label'  => 'Code via SMS',
             'login.code.label.sms'       => 'Code from SMS',
             'login.code.placeholder.sms' => '000000',
-            'login.code.text.sms'        => 'We sent a code to { phone }.'
+            'login.code.text.sms'        => 'We sent a code to your phone.',
+            'login.code.text.sms.number' => 'We sent a code to { phone }.'
         ]
     ]
 ]);
@@ -167,7 +171,7 @@ Kirby 5 rendered the same generic code form for every challenge. In Kirby 6, the
     <k-text-field
       :autofocus="true"
       :counter="false"
-      :help="$t('login.code.text.sms', { phone })"
+      :help="phone ? $t('login.code.text.sms.number', { phone }) : $t('login.code.text.sms')"
       :label="$t('login.code.label.sms')"
       :placeholder="$t('login.code.placeholder.sms')"
       :required="true"
