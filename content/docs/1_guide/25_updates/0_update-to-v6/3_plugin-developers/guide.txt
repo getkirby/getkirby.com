@@ -18,7 +18,7 @@ Find your plugin type below and follow the links. Most plugins combine several t
 
 - **Field plugins:** Array-based field definitions are gone. Rewrite the PHP side as a (link: #custom-fields text: class) based on `Kirby\Form\Field` and rebuild the Vue component for Vue 3. Deep dives: (link: docs/guide/updates/update-to-v6/plugin-developers/fields text: Custom fields as PHP classes), (link: docs/guide/updates/update-to-v6/plugin-developers/vue-3 text: Vue 3 for Panel plugins).
 - **Section plugins:** Custom sections are no longer supported. Port them to fields: (link: #custom-sections text: what changes), (link: docs/guide/updates/update-to-v6/plugin-developers/sections text: Porting custom sections to fields).
-- **Panel UI plugins** (areas, views, dialogs, drawers, dropdowns, searches, view buttons): Your closures keep working. Static `Kirby\Panel\Panel` methods, a few area options, the "Fiber" naming and some core patterns have changed. Rebuild your Vue code for Vue 3 (see (link: #panel-frontend text: Panel frontend)). Read the (link: #panel-backend text: Panel backend summary) and (link: docs/guide/updates/update-to-v6/plugin-developers/panel-backend text: Panel backend: areas, controllers & UI classes).
+- **Panel UI plugins** (areas, views, dialogs, drawers, dropdowns, searches, view buttons): Your closures keep working, but `when` and `menu` closures receive objects now. Static `Kirby\Panel\Panel` methods, a few area options, the "Fiber" naming and some core patterns have changed. Rebuild your Vue code for Vue 3 (see (link: #panel-frontend text: Panel frontend)). Read the (link: #panel-backend text: Panel backend summary) and (link: docs/guide/updates/update-to-v6/plugin-developers/panel-backend text: Panel backend: areas, controllers & UI classes).
 - **Block plugins:** Rebuild your preview components for Vue 3. Check your (link: #blueprints-shipped-with-your-plugin text: block blueprints) for presets and sections. The `image`, `gallery` and `video` block previews receive the file UUID now instead of the full file data.
 - **KirbyTag, hook, method and route plugins** (PHP only): Usually the quickest to migrate. Check (link: #php-8-3-and-stricter-types text: PHP 8.3), (link: #kirbytags text: KirbyTags), (link: #field-methods text: field methods) and (link: #exceptions text: exceptions). These plugins can often support Kirby 5 and 6 from one codebase.
 - **Auth plugins** (custom challenges, custom login UI): Custom challenges must be rewritten based on `Kirby\Auth\Challenge`, the `login` Panel extension is gone. See (link: #auth-plugins text: Auth plugins) and (link: docs/guide/updates/update-to-v6/plugin-developers/auth text: Custom auth methods & challenges).
@@ -69,7 +69,7 @@ Whether your plugin can support Kirby 5 and 6 at the same time depends on what i
 | Your plugin contains … | One codebase for Kirby 5 and 6? |
 | - | - |
 | PHP only: KirbyTags, hooks, page/field methods, routes, snippets, blueprints | Usually yes. Use APIs that exist in both versions (see the tips in each section below). |
-| Panel areas, dialogs, dropdowns etc. defined with closures | Yes. Closures returning arrays work in both. Controller classes and UI objects are Kirby 6 only. |
+| Panel areas, dialogs, dropdowns etc. defined with closures | Yes. Closures returning arrays work in both, but `when` and `menu` closures receive objects in Kirby 6. Controller classes and UI objects are Kirby 6 only. |
 | Vue components compiled with a build tool (single file components) | No. Vue 2 and Vue 3 builds are not interchangeable. |
 | Custom fields or sections | No. The PHP side has changed completely. |
 
@@ -376,6 +376,8 @@ Everything is explained with before/after examples in (link: docs/guide/updates/
 ## Panel backend
 
 The `Kirby\Panel` namespace has been rebuilt from static helpers into objects, and all core views, dialogs, drawers, dropdowns, searches and requests are controller classes now. Your area definitions with closures keep working. These are the changes most likely to break a plugin:
+
+**`when` and `menu` closures:** The `when` closure of a view receives a `Kirby\Panel\Area` object instead of an array, the `menu` closure of an area a `Kirby\Panel\Areas` collection. A `when` closure that expects an array breaks the whole Panel. Use `$area->id()` and `$areas->get('site')` instead (see (link: docs/guide/updates/update-to-v6/plugin-developers/panel-backend#defining-an-area__when-and-menu-closures text: `when` and `menu` closures)).
 
 **Static `Panel` methods:** `Kirby\Panel\Panel` and `Kirby\Panel\Home` are no longer static. Use the Panel object from `$kirby->panel()`:
 

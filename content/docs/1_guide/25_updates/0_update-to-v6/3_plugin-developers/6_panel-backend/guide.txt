@@ -84,7 +84,21 @@ An area like this one from Kirby 5 runs in Kirby 6 without changes:
 ]
 ```
 
-There are only two things to watch out for: plain strings in props like a dialog's `text` are escaped now (see (link: docs/guide/updates/update-to-v6/plugin-developers/trusted-html text: Trusted HTML)), and errors are handled differently (see (link: docs/guide/troubleshooting/debugging#errors-in-the-panel text: Errors in the Panel)).
+There are only three things to watch out for: plain strings in props like a dialog's `text` are escaped now (see (link: docs/guide/updates/update-to-v6/plugin-developers/trusted-html text: Trusted HTML)), errors are handled differently (see (link: docs/guide/troubleshooting/debugging#errors-in-the-panel text: Errors in the Panel)), and the `when` and `menu` closures receive objects instead of arrays.
+
+### `when` and `menu` closures
+
+The `when` closure of a view receives the area as `Kirby\Panel\Area` object. Kirby 5 passed an array. Kirby calls `when` while it builds the Panel routes, so a closure that still expects an array breaks the whole Panel, not just your view:
+
+```php "/site/plugins/todos/index.php"
+// Kirby 5
+'when' => fn (array $view, array $area) => $area['id'] === 'todos'
+
+// Kirby 6
+'when' => fn (array $view, Kirby\Panel\Area $area) => $area->id() === 'todos'
+```
+
+The `menu` closure of an area receives all areas as `Kirby\Panel\Areas` collection instead of an array. Use `$areas->get('site')` instead of `$areas['site']`.
 
 ## Controller classes
 
