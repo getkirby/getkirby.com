@@ -184,6 +184,12 @@ Spyc is deprecated in Kirby 6.
 
 ## Config options
 
+### Whitespace or a BOM before `<?php`
+
+Kirby 6 stops with the error `Disallowed output, possible accidental whitespace?` if your `config.php`, `env.php`, the `index.php` of a plugin or a page model outputs anything while Kirby loads it, e.g. an empty line or a byte order mark (BOM) before the opening `<?php` tag.
+
+Kirby 5 only noticed this output when it had already been sent to the browser. On servers with output buffering, these files worked. Remove everything before `<?php` and save the files as UTF-8 without BOM.
+
 ### `query.runner` and `panel.vue.compiler` are gone
 
 Remove these options from your config:
