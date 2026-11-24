@@ -671,7 +671,7 @@ Breaking:
 - Removed blueprint presets (`preset: page`, `preset: pages`, `preset: files`). Define the layout directly with fields like `pagelist` and `filelist` instead. [#8386](https://github.com/getkirby/kirby/pull/8386)
 - `Kirby\Blueprint\Blueprint::factory()` requires the `$model` as first argument. Some blueprint props are translated lazily, so prefer `Kirby\Blueprint\Blueprint::factory()` over `Kirby\Blueprint\Blueprint::load()`.
 - `Kirby\Blueprint\Blueprint::tab()` returns a `Kirby\Blueprint\Tab` object and `Kirby\Blueprint\Blueprint::tabs()` returns a `Kirby\Blueprint\Tabs` collection. The normalized tabs no longer contain their link, which is built by the `Kirby\Blueprint\Tab` class instead. [#8449](https://github.com/getkirby/kirby/pull/8449)
-- The `$inSection` argument of `Kirby\Blueprint\AcceptRules::fileTemplates()`, `Kirby\Blueprint\Blueprint::acceptedFileTemplates()` and `Kirby\Cms\File::blueprints()` has been renamed to `$inField` [#8406](https://github.com/getkirby/kirby/pull/8406)
+- The `$inSection` argument of `Kirby\Blueprint\Blueprint::acceptedFileTemplates()` and `Kirby\Cms\File::blueprints()` has been renamed to `$inField` [#8406](https://github.com/getkirby/kirby/pull/8406)
 - Removed the `Kirby\Blueprint\Blueprint::$fileTemplates` property and the protected methods `Kirby\Blueprint\Blueprint::acceptedFileTemplatesFromFields()`, `Kirby\Blueprint\Blueprint::acceptedFileTemplatesFromFieldsets()` and `Kirby\Blueprint\Blueprint::acceptedFileTemplatesFromFieldUploads()` [#7829](https://github.com/getkirby/kirby/pull/7829)
 
 ### Changed return types
