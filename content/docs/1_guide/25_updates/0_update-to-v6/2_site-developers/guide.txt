@@ -131,11 +131,42 @@ fields:
     min: "2024-01-01"
 ```
 
+### Content written by Kirby 5
+
+Your content files are affected as well. Kirby 5 stored the YAML of structure, object, entries and picker fields without quotes in many places:
+
+```yaml "/content/events/events.txt"
+Events:
+
+-
+  date: 2024-03-15
+  handle: @kirby
+```
+
+Symfony YAML reads this content differently:
+
+- **Unquoted dates become timestamps.** `$item->date()->toDate('d.m.Y')` no longer returns `15.03.2024`, but a date in the year 0800. The Panel converts the timestamp to the timezone of your server: depending on the timezone, the date shifts by a day and saving the page writes the shifted date to your content file.
+- **Values starting with `@`, a backtick or `|` can't be read at all.** The Panel can't load the form of the page anymore and `$page->events()->toStructure()` throws an exception.
+
+<warning>
+If your site has content in structure, object or entries fields, migrate it before anyone edits pages in the Panel. Otherwise, the Panel can write wrong values to your content files.
+</warning>
+
+### Migrating with the Kirby CLI
+
+The `migrate:to:symfony-yaml` command of the (link: https://github.com/getkirby/cli text: Kirby CLI) (2.1.0 or newer) checks your blueprints and converts the YAML in your content files. Start with a dry run:
+
+```bash
+kirby migrate:to:symfony-yaml --dry-run
+```
+
+It lists the blueprints and content files that need changes. Fix the listed blueprints by hand, e.g. by putting the values in quotes. Then make a backup of your content and run the command without `--dry-run` to convert it. You can already run it with Kirby 5 to check your blueprints before you update.
+
+The command only converts content while Kirby reads YAML with Symfony YAML. If you have switched back to Spyc, it only lists the content files: once your blueprints are ready, remove the `yaml.handler` option and run the command again right away, before anyone edits pages in the Panel.
+
 ### Switching back to Spyc
 
-Your content files can be affected as well: Kirby 5 stored the YAML of structure, object, entries and picker fields without quotes in many places. Symfony YAML reads some of these values differently, e.g. dates become timestamps and values starting with `@` make the whole field unreadable.
-
-If you run into problems with Symfony YAML, in your blueprints or your content, you can switch back to Spyc with the `yaml.handler` option:
+If you can't migrate right away, you can switch back to Spyc with the `yaml.handler` option:
 
 ```php "/site/config/config.php"
 return [
@@ -143,7 +174,7 @@ return [
 ];
 ```
 
-We will provide a Kirby CLI command in a future release that helps you migrate your blueprints and content to Symfony YAML.
+Spyc is deprecated in Kirby 6.
 
 ## Config options
 
@@ -740,6 +771,7 @@ Print this list or copy it into your project notes.
 **Blueprints**
 
 - No YAML errors: special values quoted, no tabs, no duplicate keys
+- Content converted with `kirby migrate:to:symfony-yaml` before editing in the Panel
 - No error boxes for duplicate names or custom sections
 - `preset:` replaced
 - `options: query` and `options: api` moved into `options`
