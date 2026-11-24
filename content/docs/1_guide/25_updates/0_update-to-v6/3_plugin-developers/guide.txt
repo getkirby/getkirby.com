@@ -62,6 +62,29 @@ If one version of your plugin supports both majors, use `"^5.0 || ^6.0"` and kee
 
 All details are in our guide on (link: docs/guide/plugins/publishing#kirby-versions-support text: declaring which Kirby versions you support).
 
+### Registering your plugin
+
+Passing `root` or `info` inside the `extends` array of `Kirby::plugin()` is deprecated. Kirby 6 shows a deprecation warning for it, and with (link: docs/reference/system/options/debug text: debug mode) enabled, an error page. Pass both as named arguments instead, which works in Kirby 5 and 6:
+
+```php "/site/plugins/todos/index.php"
+// deprecated
+Kirby::plugin('acme/todos', [
+	'root'  => __DIR__,
+	'areas' => [/* … */]
+]);
+
+// Kirby 5 and 6
+Kirby::plugin(
+	name: 'acme/todos',
+	extends: [
+		'areas' => [/* … */]
+	],
+	root: __DIR__
+);
+```
+
+The same applies to custom permissions: if a role blueprint sets a permission your plugin uses, register it with the (link: docs/reference/plugins/extensions/permissions text: `permissions` extension). Unknown permissions trigger a deprecation warning in Kirby 6 as well.
+
 ### One codebase or a new major version?
 
 Whether your plugin can support Kirby 5 and 6 at the same time depends on what it contains:
