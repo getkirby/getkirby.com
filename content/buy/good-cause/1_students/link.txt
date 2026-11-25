@@ -13,9 +13,13 @@ Type: free
 
 Text:
 
-Students can receive a free Kirby license upon verification of their school/college/university domain email address or student ID card.
+Students can receive a free Kirby license upon verification of their educational email address or student ID card.
 
 The license must *not* be used for anything other than personal and/or university/student projects.
+
+<info>
+Please send us an email from your school/college/university domain email address or attach a photo of your student ID card or enrollment certificate (one proof is enough). If you prefer to keep the license under a personal email address, feel free to add it. Otherwise we will assign the license to the email address you are writing from.
+</info>
 
 ----
 
