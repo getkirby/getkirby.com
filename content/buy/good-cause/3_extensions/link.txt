@@ -14,6 +14,10 @@ Text:
 
 We provide free licenses for sites showcasing a Kirby extension (plugin or theme).
 
+<info>
+This only applies to demo sites that show the extension in action. The site must *not* contain any actual content.
+</info>
+
 ----
 
 Subject: Free license for a plugin/theme site

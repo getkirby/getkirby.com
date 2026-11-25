@@ -12,10 +12,14 @@ Type: discounted
 
 Text:
 
-Non-profit organizations can apply for a free license or discount, depending on their business model. Please let us know about the project and your funding situation.
+Non-profit organizations can apply for a free license or discount, depending on their business model.
+
+Please let us know about the goals of the project and your funding situation (such as the rough yearly budget and sources of income). Without this information we will *not* be able to process your request.
 
 <info>
-Our good cause license program does *not* apply to religious organizations, churches or political parties.
+Our good cause license program does *not* apply to religious organizations, churches or political parties. We also reserve the right to decline a discount in particular cases.
+
+Our free or discounted licenses are aimed at organizations and projects that cannot afford purchasing a license. Please consider if the license fees pose a real burden for your project or if you could still support Kirby's active continued development by purchasing a license.
 </info>
 
 ----
