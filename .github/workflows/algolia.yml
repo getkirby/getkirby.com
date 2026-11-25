@@ -40,7 +40,7 @@ jobs:
       - name: Setup PHP
         uses: getkirby/actions/php@e27f4dff8102d3f51e08f0608f27decf59a90ce8 # 0.3.1
         with:
-          version: "8.4"
+          version: "8.5"
           extensions: mbstring, intl
           ini: memory_limit=-1
           dependencies: none
