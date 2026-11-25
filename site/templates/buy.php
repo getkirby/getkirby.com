@@ -1,6 +1,7 @@
 <?php
 /**
  * @var Kirby\Buy\Product $basic
+ * @var array $causes
  * @var array $discountsReversed
  * @var Kirby\Buy\Product $enterprise
  * @var string $revenueLimit
@@ -137,7 +138,7 @@ article[data-loading] .price[data-sale] {
 		<?php snippet('templates/buy/volume-discounts') ?>
 	</div>
 
-	<?php snippet('templates/buy/good-cause') ?>
+	<?php snippet('templates/buy/good-cause', ['causes' => $causes]) ?>
 	<?php snippet('templates/buy/faq') ?>
 
 	<footer class="h2">

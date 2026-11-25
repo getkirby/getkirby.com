@@ -86,7 +86,12 @@ snippet('templates/features/section', [
 
 <?php snippet('templates/scenarios/cases', [
 	'title' => 'Trusted by events of all sizes',
-	'cases' => $kirby->collection('cases/events'),
+	'cases' => showcase(
+		category: 'events',
+		featured: true,
+		limit: 8,
+		shuffle: true
+	),
 	'limit' => 8
 ]) ?>
 

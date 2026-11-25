@@ -22,8 +22,15 @@ return function (Page $page) {
 		$versionIncluded = 'Kirby ' . $nextVersion . ' included';
 	}
 
+	$causes = showcase(
+		category: 'society',
+		shuffle: true,
+		limit: 9
+	);
+
 	return [
 		'basic'             => Product::Basic,
+		'causes'            => $causes,
 		'discounts'         => $discounts,
 		'discountsReversed' => $discountsReversed,
 		'donation'          => option('buy.donation'),

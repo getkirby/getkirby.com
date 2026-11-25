@@ -9,7 +9,7 @@
 <section id="cases" class="mb-42">
 	<h2 class="h2 mb-12"><?= $title ?></h2>
 	<?php snippet('templates/cases/cases', [
-		'cases'   => $cases->shuffle()->limit($limit ?? 12),
+		'cases'   => $cases,
 		'columns' => $columns ?? 4
 	]) ?>
 </section>
