@@ -954,14 +954,22 @@ A custom field whose uploads show up in the "Change template" dialog:
 
 namespace Acme\Gallery;
 
+use Kirby\Data\Data;
 use Kirby\Form\Field\InputField;
 use Kirby\Form\Interface\ProvidesAcceptedFileBlueprints;
 
 class GalleryField extends InputField implements ProvidesAcceptedFileBlueprints
 {
+	protected array $value = [];
+
 	public function acceptedFileBlueprints(): array
 	{
 		return ['gallery-image'];
+	}
+
+	public function fill(mixed $value): static
+	{
+		return parent::fill(value: Data::decode($value, 'yaml'));
 	}
 }
 ```
