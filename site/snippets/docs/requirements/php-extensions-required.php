@@ -2,6 +2,6 @@
 <?php
 
 // required extensions as checked by the Kirby core
-foreach (array_keys($kirby->system()->extensions()) as $extension) {
+foreach (array_keys(kirby()->system()->extensions()) as $extension) {
 	echo '- `' . $extension . '`' . PHP_EOL;
 }
