@@ -18,14 +18,18 @@ if (php_sapi_name() !== 'cli') {
 ini_set('memory_limit', '2048M');
 define('KIRBY_HELPER_VIDEO', false);
 
+// resolve the project root without `..` segments, otherwise
+// Kirby rejects the generated thumb roots as path traversal
+$root = dirname(__DIR__);
+
 // load Kirby
-require __DIR__ . '/../kirby/bootstrap.php';
+require $root . '/kirby/bootstrap.php';
 
 $props = [
   'roots' => [
-      'index'   => __DIR__ . '/..',
-      'content' => __DIR__ . '/../content',
-      'site'    => __DIR__ . '/../site',
+      'index'   => $root,
+      'content' => $root . '/content',
+      'site'    => $root . '/site',
   ],
 ];
 

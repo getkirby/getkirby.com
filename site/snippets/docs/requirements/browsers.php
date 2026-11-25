@@ -15,7 +15,7 @@ $names = [
 
 $lists = ['desktop' => [], 'mobile' => []];
 
-foreach ($kirby->panel()->browsers() as $browser => $version) {
+foreach (kirby()->panel()->browsers() as $browser => $version) {
 	[$type, $name] = $names[$browser] ?? ['desktop', $browser];
 	$lists[$type][] = $name . ' ' . $version . '+';
 }
