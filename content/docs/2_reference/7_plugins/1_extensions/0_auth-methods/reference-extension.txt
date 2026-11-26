@@ -86,6 +86,10 @@ A method has two ways to finish:
 - **Log the user in** with `$user->loginPasswordless()` and return the user.
 - **Create a challenge** with `$this->auth->createChallenge()` and return the `Status` it gives you. The Panel then shows the challenge form. This is what the core `code` method does.
 
+<warning>
+Kirby doesn't add two-factor authentication to your method. Only the core `password` method asks for a second factor after the password. If your method logs users in directly, check whether the user needs a second factor and create a `2fa` challenge instead, like the (link: #example-log-in-with-an-access-key text: example below) does. Otherwise, your method lets users skip their second factor.
+</warning>
+
 If your method throws an exception in its constructor or in `isEnabled()`, Kirby leaves it out, so a broken method doesn't lock everybody out. With the default `'auth.debug' => 'log'`, the exception is written to the PHP error log. With `debug` enabled, the exception is thrown instead.
 
 If you override the constructor of a method or challenge, accept all arguments of the parent constructor and pass them on, as Kirby passes them as named arguments. The constructor must not throw or have side effects: Kirby also creates methods and challenges just to check whether they are enabled or available.
@@ -101,6 +105,7 @@ namespace Acme\Auth;
 
 use Kirby\Auth\Exception\LoginNotPermittedException;
 use Kirby\Auth\Method;
+use Kirby\Auth\Status;
 use Kirby\Cms\User;
 use Kirby\Exception\PermissionException;
 use Kirby\Panel\Ui\Component;
@@ -113,7 +118,7 @@ class AccessKeyMethod extends Method
     #[SensitiveParameter]
     string|null $password = null,
     bool $long = false
-  ): User {
+  ): User|Status {
     return $this->auth->guard(
       // no email: the rate limit only applies to the IP address
       email: null,
@@ -128,6 +133,19 @@ class AccessKeyMethod extends Method
           password_verify($secret, $hash) === false
         ) {
           throw new PermissionException(message: 'Invalid access key');
+        }
+
+        // ask for the second factor if the site requires one
+        // or the user has set one up
+        if (
+          $this->auth->methods()->hasAnyRequiring2FA() === true ||
+          $this->auth->challenges()->hasAvailable($user, '2fa') === true
+        ) {
+          return $this->auth->createChallenge(
+            email: $user->email(),
+            long:  $long,
+            mode:  '2fa'
+          );
         }
 
         $user->loginPasswordless([
@@ -154,6 +172,8 @@ class AccessKeyMethod extends Method
   }
 }
 ```
+
+Users who have set up a second factor have to confirm the login with it. If any method in `auth.methods` requires a second factor, e.g. `'password' => ['2fa' => true]`, every user has to.
 
 How users get their key is up to your plugin, e.g. a drawer linked from `settings()` that stores a hash in the user's secrets with `$user->changeSecret('accessKey', password_hash($secret, PASSWORD_DEFAULT))`.
 
